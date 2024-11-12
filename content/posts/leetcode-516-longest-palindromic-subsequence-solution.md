@@ -51,5 +51,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/516.md" >}}
 ---
 {{< youtube v6Ous7ofbMs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #518: Coin Change II](https://grid47.xyz/posts/leetcode-518-coin-change-ii-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #518: Coin Change II](https://grid47.xyz/posts/leetcode-518-coin-change-ii-solution/) |
 | --- |

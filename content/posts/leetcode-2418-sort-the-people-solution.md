@@ -43,5 +43,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2418.md" >}}
 ---
 {{< youtube Zv_gXqqslbw >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2419: Longest Subarray With Maximum Bitwise AND](https://grid47.xyz/posts/leetcode-2419-longest-subarray-with-maximum-bitwise-and-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2419: Longest Subarray With Maximum Bitwise AND](https://grid47.xyz/posts/leetcode-2419-longest-subarray-with-maximum-bitwise-and-solution/) |
 | --- |

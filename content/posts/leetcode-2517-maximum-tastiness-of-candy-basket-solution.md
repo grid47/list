@@ -63,5 +63,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2517.md" >}}
 ---
 {{< youtube mEZRRvBqSB0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2520: Count the Digits That Divide a Number](https://grid47.xyz/posts/leetcode-2520-count-the-digits-that-divide-a-number-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2520: Count the Digits That Divide a Number](https://grid47.xyz/posts/leetcode-2520-count-the-digits-that-divide-a-number-solution/) |
 | --- |

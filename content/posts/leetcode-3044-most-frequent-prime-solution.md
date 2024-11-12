@@ -64,5 +64,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3044.md" >}}
 ---
 {{< youtube vyLo_FMR3IU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #3046: Split the Array](https://grid47.xyz/posts/leetcode-3046-split-the-array-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #3046: Split the Array](https://grid47.xyz/posts/leetcode-3046-split-the-array-solution/) |
 | --- |

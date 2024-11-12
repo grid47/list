@@ -93,5 +93,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2965.md" >}}
 ---
 {{< youtube 6r-PQyoHHoQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2966: Divide Array Into Arrays With Max Difference](https://grid47.xyz/posts/leetcode-2966-divide-array-into-arrays-with-max-difference-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2966: Divide Array Into Arrays With Max Difference](https://grid47.xyz/posts/leetcode-2966-divide-array-into-arrays-with-max-difference-solution/) |
 | --- |

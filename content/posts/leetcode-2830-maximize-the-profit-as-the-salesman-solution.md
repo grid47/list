@@ -69,5 +69,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2830.md" >}}
 ---
 {{< youtube lrZM1nLXcmc >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2831: Find the Longest Equal Subarray](https://grid47.xyz/posts/leetcode-2831-find-the-longest-equal-subarray-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2831: Find the Longest Equal Subarray](https://grid47.xyz/posts/leetcode-2831-find-the-longest-equal-subarray-solution/) |
 | --- |

@@ -36,5 +36,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3168.md" >}}
 ---
 {{< youtube -VAEXKFWfXo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #3169: Count Days Without Meetings](https://grid47.xyz/posts/leetcode-3169-count-days-without-meetings-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #3169: Count Days Without Meetings](https://grid47.xyz/posts/leetcode-3169-count-days-without-meetings-solution/) |
 | --- |

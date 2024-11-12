@@ -58,5 +58,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2816.md" >}}
 ---
 {{< youtube UmqNCKUeIy4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2817: Minimum Absolute Difference Between Elements With Constraint](https://grid47.xyz/posts/leetcode-2817-minimum-absolute-difference-between-elements-with-constraint-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2817: Minimum Absolute Difference Between Elements With Constraint](https://grid47.xyz/posts/leetcode-2817-minimum-absolute-difference-between-elements-with-constraint-solution/) |
 | --- |

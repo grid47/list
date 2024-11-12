@@ -85,5 +85,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2054.md" >}}
 ---
 {{< youtube eC62DF5PW6E >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2055: Plates Between Candles](https://grid47.xyz/posts/leetcode-2055-plates-between-candles-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2055: Plates Between Candles](https://grid47.xyz/posts/leetcode-2055-plates-between-candles-solution/) |
 | --- |

@@ -43,5 +43,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/860.md" >}}
 ---
 {{< youtube mSVAw0AUZgA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #861: Score After Flipping Matrix](https://grid47.xyz/posts/leetcode-861-score-after-flipping-matrix-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #861: Score After Flipping Matrix](https://grid47.xyz/posts/leetcode-861-score-after-flipping-matrix-solution/) |
 | --- |

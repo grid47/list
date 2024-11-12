@@ -39,5 +39,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/532.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #535: Encode and Decode TinyURL](https://grid47.xyz/posts/leetcode-535-encode-and-decode-tinyurl-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #535: Encode and Decode TinyURL](https://grid47.xyz/posts/leetcode-535-encode-and-decode-tinyurl-solution/) |
 | --- |

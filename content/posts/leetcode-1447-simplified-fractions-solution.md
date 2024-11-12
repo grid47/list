@@ -44,5 +44,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1447.md" >}}
 ---
 {{< youtube xAPYdvSkcF8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1448: Count Good Nodes in Binary Tree](https://grid47.xyz/posts/leetcode-1448-count-good-nodes-in-binary-tree-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1448: Count Good Nodes in Binary Tree](https://grid47.xyz/posts/leetcode-1448-count-good-nodes-in-binary-tree-solution/) |
 | --- |

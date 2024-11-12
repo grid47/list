@@ -55,5 +55,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2456.md" >}}
 ---
 {{< youtube 2xvkEXjtmWE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2457: Minimum Addition to Make Integer Beautiful](https://grid47.xyz/posts/leetcode-2457-minimum-addition-to-make-integer-beautiful-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2457: Minimum Addition to Make Integer Beautiful](https://grid47.xyz/posts/leetcode-2457-minimum-addition-to-make-integer-beautiful-solution/) |
 | --- |

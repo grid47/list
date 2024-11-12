@@ -52,5 +52,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1705.md" >}}
 ---
 {{< youtube 1vRYTJqaZ8s >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1706: Where Will the Ball Fall](https://grid47.xyz/posts/leetcode-1706-where-will-the-ball-fall-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1706: Where Will the Ball Fall](https://grid47.xyz/posts/leetcode-1706-where-will-the-ball-fall-solution/) |
 | --- |

@@ -53,5 +53,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/572.md" >}}
 ---
 {{< youtube Qk7_vGWUMMQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #576: Out of Boundary Paths](https://grid47.xyz/posts/leetcode-576-out-of-boundary-paths-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #576: Out of Boundary Paths](https://grid47.xyz/posts/leetcode-576-out-of-boundary-paths-solution/) |
 | --- |

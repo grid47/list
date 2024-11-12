@@ -47,5 +47,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1042.md" >}}
 ---
 {{< youtube 63xMlAAvEnA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1043: Partition Array for Maximum Sum](https://grid47.xyz/posts/leetcode-1043-partition-array-for-maximum-sum-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1043: Partition Array for Maximum Sum](https://grid47.xyz/posts/leetcode-1043-partition-array-for-maximum-sum-solution/) |
 | --- |

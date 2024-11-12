@@ -47,5 +47,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2682.md" >}}
 ---
 {{< youtube bNZuwqt1pg0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2683: Neighboring Bitwise XOR](https://grid47.xyz/posts/leetcode-2683-neighboring-bitwise-xor-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2683: Neighboring Bitwise XOR](https://grid47.xyz/posts/leetcode-2683-neighboring-bitwise-xor-solution/) |
 | --- |

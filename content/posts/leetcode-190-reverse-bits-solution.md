@@ -44,5 +44,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/190.md" >}}
 ---
 {{< youtube epFf0wlbng0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #191: Number of 1 Bits](https://grid47.xyz/posts/leetcode-191-number-of-1-bits-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #191: Number of 1 Bits](https://grid47.xyz/posts/leetcode-191-number-of-1-bits-solution/) |
 | --- |

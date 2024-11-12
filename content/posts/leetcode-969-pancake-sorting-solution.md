@@ -47,5 +47,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/969.md" >}}
 ---
 {{< youtube O8YUmSwQ2WU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #970: Powerful Integers](https://grid47.xyz/posts/leetcode-970-powerful-integers-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #970: Powerful Integers](https://grid47.xyz/posts/leetcode-970-powerful-integers-solution/) |
 | --- |

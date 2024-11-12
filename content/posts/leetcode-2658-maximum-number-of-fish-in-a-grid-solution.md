@@ -55,5 +55,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2658.md" >}}
 ---
 {{< youtube qn2ABHbRNnQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2660: Determine the Winner of a Bowling Game](https://grid47.xyz/posts/leetcode-2660-determine-the-winner-of-a-bowling-game-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2660: Determine the Winner of a Bowling Game](https://grid47.xyz/posts/leetcode-2660-determine-the-winner-of-a-bowling-game-solution/) |
 | --- |

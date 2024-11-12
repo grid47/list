@@ -59,5 +59,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1834.md" >}}
 ---
 {{< youtube RR1n-d4oYqE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1837: Sum of Digits in Base K](https://grid47.xyz/posts/leetcode-1837-sum-of-digits-in-base-k-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1837: Sum of Digits in Base K](https://grid47.xyz/posts/leetcode-1837-sum-of-digits-in-base-k-solution/) |
 | --- |

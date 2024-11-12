@@ -45,5 +45,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/670.md" >}}
 ---
 {{< youtube arecn8VuQL0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #672: Bulb Switcher II](https://grid47.xyz/posts/leetcode-672-bulb-switcher-ii-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #672: Bulb Switcher II](https://grid47.xyz/posts/leetcode-672-bulb-switcher-ii-solution/) |
 | --- |

@@ -60,5 +60,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/529.md" >}}
 ---
 {{< youtube zPmuqLKPbE8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #530: Minimum Absolute Difference in BST](https://grid47.xyz/posts/leetcode-530-minimum-absolute-difference-in-bst-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #530: Minimum Absolute Difference in BST](https://grid47.xyz/posts/leetcode-530-minimum-absolute-difference-in-bst-solution/) |
 | --- |

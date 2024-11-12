@@ -42,5 +42,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1122.md" >}}
 ---
 {{< youtube OPvcR1e4lfg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1123: Lowest Common Ancestor of Deepest Leaves](https://grid47.xyz/posts/leetcode-1123-lowest-common-ancestor-of-deepest-leaves-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1123: Lowest Common Ancestor of Deepest Leaves](https://grid47.xyz/posts/leetcode-1123-lowest-common-ancestor-of-deepest-leaves-solution/) |
 | --- |

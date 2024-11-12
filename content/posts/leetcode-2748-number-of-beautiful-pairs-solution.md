@@ -40,5 +40,5 @@ int countBeautifulPairs(vector<int>& nums) {
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2748.md" >}}
 ---
 {{< youtube mjceDBNh7vg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2750: Ways to Split Array Into Good Subarrays](https://grid47.xyz/posts/leetcode-2750-ways-to-split-array-into-good-subarrays-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2750: Ways to Split Array Into Good Subarrays](https://grid47.xyz/posts/leetcode-2750-ways-to-split-array-into-good-subarrays-solution/) |
 | --- |

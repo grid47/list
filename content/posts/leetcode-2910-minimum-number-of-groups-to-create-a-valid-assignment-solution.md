@@ -51,5 +51,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2910.md" >}}
 ---
 {{< youtube -upnA7dVDU0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2913: Subarrays Distinct Element Sum of Squares I](https://grid47.xyz/posts/leetcode-2913-subarrays-distinct-element-sum-of-squares-i-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2913: Subarrays Distinct Element Sum of Squares I](https://grid47.xyz/posts/leetcode-2913-subarrays-distinct-element-sum-of-squares-i-solution/) |
 | --- |

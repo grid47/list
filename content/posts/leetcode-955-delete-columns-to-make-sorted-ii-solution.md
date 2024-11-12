@@ -46,5 +46,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/955.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #957: Prison Cells After N Days](https://grid47.xyz/posts/leetcode-957-prison-cells-after-n-days-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #957: Prison Cells After N Days](https://grid47.xyz/posts/leetcode-957-prison-cells-after-n-days-solution/) |
 | --- |

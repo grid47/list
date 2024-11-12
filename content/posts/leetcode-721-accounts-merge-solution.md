@@ -63,5 +63,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/721.md" >}}
 ---
 {{< youtube otzKJY8YhRg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #722: Remove Comments](https://grid47.xyz/posts/leetcode-722-remove-comments-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #722: Remove Comments](https://grid47.xyz/posts/leetcode-722-remove-comments-solution/) |
 | --- |

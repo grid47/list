@@ -53,5 +53,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2917.md" >}}
 ---
 {{< youtube jNPKX6McyCg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2918: Minimum Equal Sum of Two Arrays After Replacing Zeros](https://grid47.xyz/posts/leetcode-2918-minimum-equal-sum-of-two-arrays-after-replacing-zeros-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2918: Minimum Equal Sum of Two Arrays After Replacing Zeros](https://grid47.xyz/posts/leetcode-2918-minimum-equal-sum-of-two-arrays-after-replacing-zeros-solution/) |
 | --- |

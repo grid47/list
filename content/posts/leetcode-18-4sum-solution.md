@@ -64,5 +64,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/18.md" >}}
 ---
 {{< youtube EYeR-_1NRlQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #19: Remove Nth Node From End of List](https://grid47.xyz/posts/leetcode-19-remove-nth-node-from-end-of-list-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #19: Remove Nth Node From End of List](https://grid47.xyz/posts/leetcode-19-remove-nth-node-from-end-of-list-solution/) |
 | --- |

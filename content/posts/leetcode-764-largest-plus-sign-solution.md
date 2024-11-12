@@ -50,5 +50,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/764.md" >}}
 ---
 {{< youtube dOSQVrCtO9w >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #767: Reorganize String](https://grid47.xyz/posts/leetcode-767-reorganize-string-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #767: Reorganize String](https://grid47.xyz/posts/leetcode-767-reorganize-string-solution/) |
 | --- |

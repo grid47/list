@@ -48,5 +48,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/66.md" >}}
 ---
 {{< youtube tDjI08W1I7g >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #67: Add Binary](https://grid47.xyz/posts/leetcode-67-add-binary-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #67: Add Binary](https://grid47.xyz/posts/leetcode-67-add-binary-solution/) |
 | --- |

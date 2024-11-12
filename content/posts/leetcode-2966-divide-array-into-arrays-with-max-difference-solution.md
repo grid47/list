@@ -48,5 +48,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2966.md" >}}
 ---
 {{< youtube XleOio1oJeo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2971: Find Polygon With the Largest Perimeter](https://grid47.xyz/posts/leetcode-2971-find-polygon-with-the-largest-perimeter-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2971: Find Polygon With the Largest Perimeter](https://grid47.xyz/posts/leetcode-2971-find-polygon-with-the-largest-perimeter-solution/) |
 | --- |

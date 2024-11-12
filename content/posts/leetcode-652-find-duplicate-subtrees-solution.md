@@ -58,5 +58,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/652.md" >}}
 ---
 {{< youtube kn0Z5_qPPzY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #654: Maximum Binary Tree](https://grid47.xyz/posts/leetcode-654-maximum-binary-tree-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #654: Maximum Binary Tree](https://grid47.xyz/posts/leetcode-654-maximum-binary-tree-solution/) |
 | --- |

@@ -45,5 +45,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/365.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #368: Largest Divisible Subset](https://grid47.xyz/posts/leetcode-368-largest-divisible-subset-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #368: Largest Divisible Subset](https://grid47.xyz/posts/leetcode-368-largest-divisible-subset-solution/) |
 | --- |

@@ -37,5 +37,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2826.md" >}}
 ---
 {{< youtube Q3wrIhMmpfA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2828: Check if a String Is an Acronym of Words](https://grid47.xyz/posts/leetcode-2828-check-if-a-string-is-an-acronym-of-words-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2828: Check if a String Is an Acronym of Words](https://grid47.xyz/posts/leetcode-2828-check-if-a-string-is-an-acronym-of-words-solution/) |
 | --- |

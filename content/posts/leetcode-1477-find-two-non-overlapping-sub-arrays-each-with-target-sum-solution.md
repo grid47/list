@@ -50,5 +50,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1477.md" >}}
 ---
 {{< youtube uV_JsPPLK9o >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1480: Running Sum of 1d Array](https://grid47.xyz/posts/leetcode-1480-running-sum-of-1d-array-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1480: Running Sum of 1d Array](https://grid47.xyz/posts/leetcode-1480-running-sum-of-1d-array-solution/) |
 | --- |

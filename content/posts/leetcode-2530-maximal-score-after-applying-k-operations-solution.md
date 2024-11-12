@@ -44,5 +44,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2530.md" >}}
 ---
 {{< youtube nsOipmYbRlc >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2531: Make Number of Distinct Characters Equal](https://grid47.xyz/posts/leetcode-2531-make-number-of-distinct-characters-equal-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2531: Make Number of Distinct Characters Equal](https://grid47.xyz/posts/leetcode-2531-make-number-of-distinct-characters-equal-solution/) |
 | --- |

@@ -62,5 +62,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/210.md" >}}
 ---
 {{< youtube 2cpihwDznaw >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #211: Design Add and Search Words Data Structure](https://grid47.xyz/posts/leetcode-211-design-add-and-search-words-data-structure-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #211: Design Add and Search Words Data Structure](https://grid47.xyz/posts/leetcode-211-design-add-and-search-words-data-structure-solution/) |
 | --- |

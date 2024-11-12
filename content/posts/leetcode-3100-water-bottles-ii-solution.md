@@ -49,5 +49,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3100.md" >}}
 ---
 {{< youtube Ll_mTkG1rEc >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #3101: Count Alternating Subarrays](https://grid47.xyz/posts/leetcode-3101-count-alternating-subarrays-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #3101: Count Alternating Subarrays](https://grid47.xyz/posts/leetcode-3101-count-alternating-subarrays-solution/) |
 | --- |

@@ -45,5 +45,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2080.md" >}}
 ---
 {{< youtube 1gZinwGx3lk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2086: Minimum Number of Food Buckets to Feed the Hamsters](https://grid47.xyz/posts/leetcode-2086-minimum-number-of-food-buckets-to-feed-the-hamsters-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2086: Minimum Number of Food Buckets to Feed the Hamsters](https://grid47.xyz/posts/leetcode-2086-minimum-number-of-food-buckets-to-feed-the-hamsters-solution/) |
 | --- |

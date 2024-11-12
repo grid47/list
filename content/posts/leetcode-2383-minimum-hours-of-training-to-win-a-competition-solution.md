@@ -49,5 +49,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2383.md" >}}
 ---
 {{< youtube ueU_i8H3-9g >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2384: Largest Palindromic Number](https://grid47.xyz/posts/leetcode-2384-largest-palindromic-number-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2384: Largest Palindromic Number](https://grid47.xyz/posts/leetcode-2384-largest-palindromic-number-solution/) |
 | --- |

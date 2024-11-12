@@ -48,5 +48,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/931.md" >}}
 ---
 {{< youtube b_F3mz9l-uQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #934: Shortest Bridge](https://grid47.xyz/posts/leetcode-934-shortest-bridge-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #934: Shortest Bridge](https://grid47.xyz/posts/leetcode-934-shortest-bridge-solution/) |
 | --- |

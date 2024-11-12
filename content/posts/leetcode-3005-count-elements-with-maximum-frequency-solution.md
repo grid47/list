@@ -46,5 +46,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3005.md" >}}
 ---
 {{< youtube ydihp-cBFqw >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #3026: Maximum Good Subarray Sum](https://grid47.xyz/posts/leetcode-3026-maximum-good-subarray-sum-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #3026: Maximum Good Subarray Sum](https://grid47.xyz/posts/leetcode-3026-maximum-good-subarray-sum-solution/) |
 | --- |

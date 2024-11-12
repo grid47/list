@@ -64,5 +64,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/508.md" >}}
 ---
 {{< youtube CvmRmzBQhu8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #509: Fibonacci Number](https://grid47.xyz/posts/leetcode-509-fibonacci-number-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #509: Fibonacci Number](https://grid47.xyz/posts/leetcode-509-fibonacci-number-solution/) |
 | --- |

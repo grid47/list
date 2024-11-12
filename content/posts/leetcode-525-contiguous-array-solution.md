@@ -48,5 +48,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/525.md" >}}
 ---
 {{< youtube 3dRoRxipjhY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #528: Random Pick with Weight](https://grid47.xyz/posts/leetcode-528-random-pick-with-weight-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #528: Random Pick with Weight](https://grid47.xyz/posts/leetcode-528-random-pick-with-weight-solution/) |
 | --- |

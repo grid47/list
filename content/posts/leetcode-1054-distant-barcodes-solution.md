@@ -41,5 +41,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1054.md" >}}
 ---
 {{< youtube MlgCCJ7MfKQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1061: Lexicographically Smallest Equivalent String](https://grid47.xyz/posts/leetcode-1061-lexicographically-smallest-equivalent-string-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1061: Lexicographically Smallest Equivalent String](https://grid47.xyz/posts/leetcode-1061-lexicographically-smallest-equivalent-string-solution/) |
 | --- |

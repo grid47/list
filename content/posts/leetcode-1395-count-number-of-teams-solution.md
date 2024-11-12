@@ -57,5 +57,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1395.md" >}}
 ---
 {{< youtube zONHzIqCr-o >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1396: Design Underground System](https://grid47.xyz/posts/leetcode-1396-design-underground-system-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1396: Design Underground System](https://grid47.xyz/posts/leetcode-1396-design-underground-system-solution/) |
 | --- |

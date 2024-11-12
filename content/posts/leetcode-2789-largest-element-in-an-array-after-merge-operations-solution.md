@@ -46,5 +46,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2789.md" >}}
 ---
 {{< youtube wbXDrozEtOs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2798: Number of Employees Who Met the Target](https://grid47.xyz/posts/leetcode-2798-number-of-employees-who-met-the-target-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2798: Number of Employees Who Met the Target](https://grid47.xyz/posts/leetcode-2798-number-of-employees-who-met-the-target-solution/) |
 | --- |

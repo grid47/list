@@ -43,5 +43,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1768.md" >}}
 ---
 {{< youtube oFuFTMu2Tgg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1769: Minimum Number of Operations to Move All Balls to Each Box](https://grid47.xyz/posts/leetcode-1769-minimum-number-of-operations-to-move-all-balls-to-each-box-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1769: Minimum Number of Operations to Move All Balls to Each Box](https://grid47.xyz/posts/leetcode-1769-minimum-number-of-operations-to-move-all-balls-to-each-box-solution/) |
 | --- |

@@ -38,5 +38,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2938.md" >}}
 ---
 {{< youtube -VVN0FI0KFo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2942: Find Words Containing Character](https://grid47.xyz/posts/leetcode-2942-find-words-containing-character-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2942: Find Words Containing Character](https://grid47.xyz/posts/leetcode-2942-find-words-containing-character-solution/) |
 | --- |

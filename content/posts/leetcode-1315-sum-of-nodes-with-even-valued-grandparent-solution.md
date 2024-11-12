@@ -47,5 +47,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1315.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1318: Minimum Flips to Make a OR b Equal to c](https://grid47.xyz/posts/leetcode-1318-minimum-flips-to-make-a-or-b-equal-to-c-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1318: Minimum Flips to Make a OR b Equal to c](https://grid47.xyz/posts/leetcode-1318-minimum-flips-to-make-a-or-b-equal-to-c-solution/) |
 | --- |

@@ -51,5 +51,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/581.md" >}}
 ---
 {{< youtube NzVaNmqPaSo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #583: Delete Operation for Two Strings](https://grid47.xyz/posts/leetcode-583-delete-operation-for-two-strings-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #583: Delete Operation for Two Strings](https://grid47.xyz/posts/leetcode-583-delete-operation-for-two-strings-solution/) |
 | --- |

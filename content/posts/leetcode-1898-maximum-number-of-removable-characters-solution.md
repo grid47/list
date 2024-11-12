@@ -61,5 +61,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1898.md" >}}
 ---
 {{< youtube NMP3nRPyX5g >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1899: Merge Triplets to Form Target Triplet](https://grid47.xyz/posts/leetcode-1899-merge-triplets-to-form-target-triplet-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1899: Merge Triplets to Form Target Triplet](https://grid47.xyz/posts/leetcode-1899-merge-triplets-to-form-target-triplet-solution/) |
 | --- |

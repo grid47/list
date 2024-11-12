@@ -41,5 +41,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1680.md" >}}
 ---
 {{< youtube 1ZtYzuWUFwA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1684: Count the Number of Consistent Strings](https://grid47.xyz/posts/leetcode-1684-count-the-number-of-consistent-strings-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1684: Count the Number of Consistent Strings](https://grid47.xyz/posts/leetcode-1684-count-the-number-of-consistent-strings-solution/) |
 | --- |

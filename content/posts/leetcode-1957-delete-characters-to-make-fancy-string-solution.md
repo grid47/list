@@ -36,5 +36,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1957.md" >}}
 ---
 {{< youtube wdve85GSjO8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1958: Check if Move is Legal](https://grid47.xyz/posts/leetcode-1958-check-if-move-is-legal-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1958: Check if Move is Legal](https://grid47.xyz/posts/leetcode-1958-check-if-move-is-legal-solution/) |
 | --- |

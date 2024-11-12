@@ -49,5 +49,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1306.md" >}}
 ---
 {{< youtube 9oUhzPLmLZQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1310: XOR Queries of a Subarray](https://grid47.xyz/posts/leetcode-1310-xor-queries-of-a-subarray-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1310: XOR Queries of a Subarray](https://grid47.xyz/posts/leetcode-1310-xor-queries-of-a-subarray-solution/) |
 | --- |

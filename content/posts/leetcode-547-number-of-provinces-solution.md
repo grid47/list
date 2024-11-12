@@ -65,5 +65,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/547.md" >}}
 ---
 {{< youtube p5Ocm71wB0E >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #553: Optimal Division](https://grid47.xyz/posts/leetcode-553-optimal-division-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #553: Optimal Division](https://grid47.xyz/posts/leetcode-553-optimal-division-solution/) |
 | --- |

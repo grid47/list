@@ -41,5 +41,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1846.md" >}}
 ---
 {{< youtube o_hVl8IXuIE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1848: Minimum Distance to the Target Element](https://grid47.xyz/posts/leetcode-1848-minimum-distance-to-the-target-element-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1848: Minimum Distance to the Target Element](https://grid47.xyz/posts/leetcode-1848-minimum-distance-to-the-target-element-solution/) |
 | --- |

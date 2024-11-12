@@ -55,5 +55,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2522.md" >}}
 ---
 {{< youtube XQh9V8PEIiI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2523: Closest Prime Numbers in Range](https://grid47.xyz/posts/leetcode-2523-closest-prime-numbers-in-range-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2523: Closest Prime Numbers in Range](https://grid47.xyz/posts/leetcode-2523-closest-prime-numbers-in-range-solution/) |
 | --- |

@@ -50,5 +50,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/983.md" >}}
 ---
 {{< youtube akXV67u1pTg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #984: String Without AAA or BBB](https://grid47.xyz/posts/leetcode-984-string-without-aaa-or-bbb-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #984: String Without AAA or BBB](https://grid47.xyz/posts/leetcode-984-string-without-aaa-or-bbb-solution/) |
 | --- |

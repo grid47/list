@@ -35,5 +35,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2259.md" >}}
 ---
 {{< youtube cinEIxOL0E8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2260: Minimum Consecutive Cards to Pick Up](https://grid47.xyz/posts/leetcode-2260-minimum-consecutive-cards-to-pick-up-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2260: Minimum Consecutive Cards to Pick Up](https://grid47.xyz/posts/leetcode-2260-minimum-consecutive-cards-to-pick-up-solution/) |
 | --- |

@@ -42,5 +42,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/893.md" >}}
 ---
 {{< youtube tbtXPKkA2Zw >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #894: All Possible Full Binary Trees](https://grid47.xyz/posts/leetcode-894-all-possible-full-binary-trees-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #894: All Possible Full Binary Trees](https://grid47.xyz/posts/leetcode-894-all-possible-full-binary-trees-solution/) |
 | --- |

@@ -43,5 +43,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2909.md" >}}
 ---
 {{< youtube PU5YZP1-uVA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2910: Minimum Number of Groups to Create a Valid Assignment](https://grid47.xyz/posts/leetcode-2910-minimum-number-of-groups-to-create-a-valid-assignment-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2910: Minimum Number of Groups to Create a Valid Assignment](https://grid47.xyz/posts/leetcode-2910-minimum-number-of-groups-to-create-a-valid-assignment-solution/) |
 | --- |

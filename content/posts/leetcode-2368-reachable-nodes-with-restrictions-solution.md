@@ -55,5 +55,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2368.md" >}}
 ---
 {{< youtube XMF3HhULMbM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2369: Check if There is a Valid Partition For The Array](https://grid47.xyz/posts/leetcode-2369-check-if-there-is-a-valid-partition-for-the-array-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2369: Check if There is a Valid Partition For The Array](https://grid47.xyz/posts/leetcode-2369-check-if-there-is-a-valid-partition-for-the-array-solution/) |
 | --- |

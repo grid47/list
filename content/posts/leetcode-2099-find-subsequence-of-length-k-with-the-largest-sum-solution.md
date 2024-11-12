@@ -41,5 +41,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2099.md" >}}
 ---
 {{< youtube QXvaOym_Awk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2100: Find Good Days to Rob the Bank](https://grid47.xyz/posts/leetcode-2100-find-good-days-to-rob-the-bank-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2100: Find Good Days to Rob the Bank](https://grid47.xyz/posts/leetcode-2100-find-good-days-to-rob-the-bank-solution/) |
 | --- |

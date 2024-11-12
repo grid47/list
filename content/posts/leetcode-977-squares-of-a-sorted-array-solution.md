@@ -40,5 +40,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/977.md" >}}
 ---
 {{< youtube z0InhrjK3es >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #978: Longest Turbulent Subarray](https://grid47.xyz/posts/leetcode-978-longest-turbulent-subarray-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #978: Longest Turbulent Subarray](https://grid47.xyz/posts/leetcode-978-longest-turbulent-subarray-solution/) |
 | --- |

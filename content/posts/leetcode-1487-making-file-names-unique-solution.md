@@ -47,5 +47,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1487.md" >}}
 ---
 {{< youtube B9hKZonstN0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1488: Avoid Flood in The City](https://grid47.xyz/posts/leetcode-1488-avoid-flood-in-the-city-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1488: Avoid Flood in The City](https://grid47.xyz/posts/leetcode-1488-avoid-flood-in-the-city-solution/) |
 | --- |

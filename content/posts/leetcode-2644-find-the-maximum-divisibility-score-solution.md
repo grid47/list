@@ -58,5 +58,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2644.md" >}}
 ---
 {{< youtube Aqhrp1nYMqo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2645: Minimum Additions to Make Valid String](https://grid47.xyz/posts/leetcode-2645-minimum-additions-to-make-valid-string-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2645: Minimum Additions to Make Valid String](https://grid47.xyz/posts/leetcode-2645-minimum-additions-to-make-valid-string-solution/) |
 | --- |

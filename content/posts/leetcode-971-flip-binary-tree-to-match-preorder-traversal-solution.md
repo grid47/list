@@ -55,5 +55,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/971.md" >}}
 ---
 {{< youtube 6L25Q-42OXA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #973: K Closest Points to Origin](https://grid47.xyz/posts/leetcode-973-k-closest-points-to-origin-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #973: K Closest Points to Origin](https://grid47.xyz/posts/leetcode-973-k-closest-points-to-origin-solution/) |
 | --- |

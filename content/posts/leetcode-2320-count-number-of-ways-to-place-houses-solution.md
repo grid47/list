@@ -54,5 +54,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2320.md" >}}
 ---
 {{< youtube 9K92zYtgjrk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2325: Decode the Message](https://grid47.xyz/posts/leetcode-2325-decode-the-message-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2325: Decode the Message](https://grid47.xyz/posts/leetcode-2325-decode-the-message-solution/) |
 | --- |

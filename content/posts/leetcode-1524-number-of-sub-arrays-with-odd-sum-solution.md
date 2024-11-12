@@ -44,5 +44,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1524.md" >}}
 ---
 {{< youtube B5affGy4mCs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1525: Number of Good Ways to Split a String](https://grid47.xyz/posts/leetcode-1525-number-of-good-ways-to-split-a-string-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1525: Number of Good Ways to Split a String](https://grid47.xyz/posts/leetcode-1525-number-of-good-ways-to-split-a-string-solution/) |
 | --- |

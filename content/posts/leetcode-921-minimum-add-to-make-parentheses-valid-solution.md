@@ -46,5 +46,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/921.md" >}}
 ---
 {{< youtube EPr9X0Y3vmo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #925: Long Pressed Name](https://grid47.xyz/posts/leetcode-925-long-pressed-name-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #925: Long Pressed Name](https://grid47.xyz/posts/leetcode-925-long-pressed-name-solution/) |
 | --- |

@@ -57,5 +57,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/840.md" >}}
 ---
 {{< youtube FV52wWrivNc >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #841: Keys and Rooms](https://grid47.xyz/posts/leetcode-841-keys-and-rooms-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #841: Keys and Rooms](https://grid47.xyz/posts/leetcode-841-keys-and-rooms-solution/) |
 | --- |

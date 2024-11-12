@@ -49,5 +49,5 @@ for(int i = 0; i < 3 && (it + i) != A.end(); i++) {
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1268.md" >}}
 ---
 {{< youtube PLNDfB0Vg9Y >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1276: Number of Burgers with No Waste of Ingredients](https://grid47.xyz/posts/leetcode-1276-number-of-burgers-with-no-waste-of-ingredients-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1276: Number of Burgers with No Waste of Ingredients](https://grid47.xyz/posts/leetcode-1276-number-of-burgers-with-no-waste-of-ingredients-solution/) |
 | --- |

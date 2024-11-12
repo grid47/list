@@ -43,5 +43,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/481.md" >}}
 ---
 {{< youtube -iFDu2kaCpY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #486: Predict the Winner](https://grid47.xyz/posts/leetcode-486-predict-the-winner-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #486: Predict the Winner](https://grid47.xyz/posts/leetcode-486-predict-the-winner-solution/) |
 | --- |

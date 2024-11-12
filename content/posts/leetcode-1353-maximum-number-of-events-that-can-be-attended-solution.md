@@ -56,5 +56,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1353.md" >}}
 ---
 {{< youtube EKZhEN9P2-I >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1356: Sort Integers by The Number of 1 Bits](https://grid47.xyz/posts/leetcode-1356-sort-integers-by-the-number-of-1-bits-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1356: Sort Integers by The Number of 1 Bits](https://grid47.xyz/posts/leetcode-1356-sort-integers-by-the-number-of-1-bits-solution/) |
 | --- |

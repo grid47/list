@@ -61,5 +61,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/97.md" >}}
 ---
 {{< youtube 3Rw3p9LrgvE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #98: Validate Binary Search Tree](https://grid47.xyz/posts/leetcode-98-validate-binary-search-tree-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #98: Validate Binary Search Tree](https://grid47.xyz/posts/leetcode-98-validate-binary-search-tree-solution/) |
 | --- |

@@ -38,5 +38,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2470.md" >}}
 ---
 {{< youtube xT-O9YJrwh4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2471: Minimum Number of Operations to Sort a Binary Tree by Level](https://grid47.xyz/posts/leetcode-2471-minimum-number-of-operations-to-sort-a-binary-tree-by-level-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2471: Minimum Number of Operations to Sort a Binary Tree by Level](https://grid47.xyz/posts/leetcode-2471-minimum-number-of-operations-to-sort-a-binary-tree-by-level-solution/) |
 | --- |

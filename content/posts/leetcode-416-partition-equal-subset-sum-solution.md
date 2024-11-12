@@ -68,5 +68,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/416.md" >}}
 ---
 {{< youtube ZFuagJEpeEU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #417: Pacific Atlantic Water Flow](https://grid47.xyz/posts/leetcode-417-pacific-atlantic-water-flow-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #417: Pacific Atlantic Water Flow](https://grid47.xyz/posts/leetcode-417-pacific-atlantic-water-flow-solution/) |
 | --- |

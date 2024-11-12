@@ -52,5 +52,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/99.md" >}}
 ---
 {{< youtube bJBwOMPhe6Y >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #100: Same Tree](https://grid47.xyz/posts/leetcode-100-same-tree-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #100: Same Tree](https://grid47.xyz/posts/leetcode-100-same-tree-solution/) |
 | --- |

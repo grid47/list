@@ -37,5 +37,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2165.md" >}}
 ---
 {{< youtube fe3yn96MAoI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2166: Design Bitset](https://grid47.xyz/posts/leetcode-2166-design-bitset-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2166: Design Bitset](https://grid47.xyz/posts/leetcode-2166-design-bitset-solution/) |
 | --- |

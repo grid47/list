@@ -36,5 +36,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1920.md" >}}
 ---
 {{< youtube LoUAGs8fqB0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1921: Eliminate Maximum Number of Monsters](https://grid47.xyz/posts/leetcode-1921-eliminate-maximum-number-of-monsters-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1921: Eliminate Maximum Number of Monsters](https://grid47.xyz/posts/leetcode-1921-eliminate-maximum-number-of-monsters-solution/) |
 | --- |

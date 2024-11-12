@@ -50,5 +50,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/383.md" >}}
 ---
 {{< youtube i3bvxJyUB40 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #384: Shuffle an Array](https://grid47.xyz/posts/leetcode-384-shuffle-an-array-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #384: Shuffle an Array](https://grid47.xyz/posts/leetcode-384-shuffle-an-array-solution/) |
 | --- |

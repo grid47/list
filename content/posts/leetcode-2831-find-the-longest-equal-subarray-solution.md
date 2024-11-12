@@ -60,5 +60,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2831.md" >}}
 ---
 {{< youtube UFCF01O7Yxk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2833: Furthest Point From Origin](https://grid47.xyz/posts/leetcode-2833-furthest-point-from-origin-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2833: Furthest Point From Origin](https://grid47.xyz/posts/leetcode-2833-furthest-point-from-origin-solution/) |
 | --- |

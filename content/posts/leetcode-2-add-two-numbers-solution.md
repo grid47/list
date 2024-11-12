@@ -61,5 +61,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2.md" >}}
 ---
 {{< youtube wgFPrzTjm7s >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #3: Longest Substring Without Repeating Characters](https://grid47.xyz/posts/leetcode-3-longest-substring-without-repeating-characters-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #3: Longest Substring Without Repeating Characters](https://grid47.xyz/posts/leetcode-3-longest-substring-without-repeating-characters-solution/) |
 | --- |

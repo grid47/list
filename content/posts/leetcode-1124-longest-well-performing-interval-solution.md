@@ -49,5 +49,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1124.md" >}}
 ---
 {{< youtube 1Cu21ILZBx8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1129: Shortest Path with Alternating Colors](https://grid47.xyz/posts/leetcode-1129-shortest-path-with-alternating-colors-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1129: Shortest Path with Alternating Colors](https://grid47.xyz/posts/leetcode-1129-shortest-path-with-alternating-colors-solution/) |
 | --- |

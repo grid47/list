@@ -59,5 +59,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/109.md" >}}
 ---
 {{< youtube 0E8Xxu6LV9o >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #110: Balanced Binary Tree](https://grid47.xyz/posts/leetcode-110-balanced-binary-tree-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #110: Balanced Binary Tree](https://grid47.xyz/posts/leetcode-110-balanced-binary-tree-solution/) |
 | --- |

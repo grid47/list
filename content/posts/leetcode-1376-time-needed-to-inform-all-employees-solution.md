@@ -46,5 +46,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1376.md" >}}
 ---
 {{< youtube d0xAcl58SXg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1379: Find a Corresponding Node of a Binary Tree in a Clone of That Tree](https://grid47.xyz/posts/leetcode-1379-find-a-corresponding-node-of-a-binary-tree-in-a-clone-of-that-tree-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1379: Find a Corresponding Node of a Binary Tree in a Clone of That Tree](https://grid47.xyz/posts/leetcode-1379-find-a-corresponding-node-of-a-binary-tree-in-a-clone-of-that-tree-solution/) |
 | --- |

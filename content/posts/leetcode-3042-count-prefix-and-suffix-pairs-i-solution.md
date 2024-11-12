@@ -59,5 +59,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3042.md" >}}
 ---
 {{< youtube wDPL8oM9rO8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #3043: Find the Length of the Longest Common Prefix](https://grid47.xyz/posts/leetcode-3043-find-the-length-of-the-longest-common-prefix-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #3043: Find the Length of the Longest Common Prefix](https://grid47.xyz/posts/leetcode-3043-find-the-length-of-the-longest-common-prefix-solution/) |
 | --- |

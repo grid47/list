@@ -42,5 +42,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1624.md" >}}
 ---
 {{< youtube rfjeFs3JuYM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1625: Lexicographically Smallest String After Applying Operations](https://grid47.xyz/posts/leetcode-1625-lexicographically-smallest-string-after-applying-operations-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1625: Lexicographically Smallest String After Applying Operations](https://grid47.xyz/posts/leetcode-1625-lexicographically-smallest-string-after-applying-operations-solution/) |
 | --- |

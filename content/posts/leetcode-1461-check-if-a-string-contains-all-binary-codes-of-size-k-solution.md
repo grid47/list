@@ -47,5 +47,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1461.md" >}}
 ---
 {{< youtube qU32rTy_kOM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1462: Course Schedule IV](https://grid47.xyz/posts/leetcode-1462-course-schedule-iv-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1462: Course Schedule IV](https://grid47.xyz/posts/leetcode-1462-course-schedule-iv-solution/) |
 | --- |

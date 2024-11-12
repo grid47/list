@@ -44,5 +44,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1160.md" >}}
 ---
 {{< youtube riRpJLMdrXs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1161: Maximum Level Sum of a Binary Tree](https://grid47.xyz/posts/leetcode-1161-maximum-level-sum-of-a-binary-tree-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1161: Maximum Level Sum of a Binary Tree](https://grid47.xyz/posts/leetcode-1161-maximum-level-sum-of-a-binary-tree-solution/) |
 | --- |

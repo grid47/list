@@ -59,5 +59,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/36.md" >}}
 ---
 {{< youtube TjFXEUCMqI8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #38: Count and Say](https://grid47.xyz/posts/leetcode-38-count-and-say-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #38: Count and Say](https://grid47.xyz/posts/leetcode-38-count-and-say-solution/) |
 | --- |

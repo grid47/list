@@ -81,5 +81,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2685.md" >}}
 ---
 {{< youtube J43LjwWYch4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2696: Minimum String Length After Removing Substrings](https://grid47.xyz/posts/leetcode-2696-minimum-string-length-after-removing-substrings-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2696: Minimum String Length After Removing Substrings](https://grid47.xyz/posts/leetcode-2696-minimum-string-length-after-removing-substrings-solution/) |
 | --- |

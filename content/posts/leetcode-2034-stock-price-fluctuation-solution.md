@@ -67,5 +67,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2034.md" >}}
 ---
 {{< youtube iJqGjXpqdYo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2037: Minimum Number of Moves to Seat Everyone](https://grid47.xyz/posts/leetcode-2037-minimum-number-of-moves-to-seat-everyone-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2037: Minimum Number of Moves to Seat Everyone](https://grid47.xyz/posts/leetcode-2037-minimum-number-of-moves-to-seat-everyone-solution/) |
 | --- |

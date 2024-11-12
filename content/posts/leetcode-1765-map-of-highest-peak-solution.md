@@ -62,5 +62,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1765.md" >}}
 ---
 {{< youtube 0BNHd7a_ozc >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1768: Merge Strings Alternately](https://grid47.xyz/posts/leetcode-1768-merge-strings-alternately-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1768: Merge Strings Alternately](https://grid47.xyz/posts/leetcode-1768-merge-strings-alternately-solution/) |
 | --- |

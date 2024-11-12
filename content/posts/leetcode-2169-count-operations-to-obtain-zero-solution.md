@@ -40,5 +40,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2169.md" >}}
 ---
 {{< youtube yPqe3KshvVo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2170: Minimum Operations to Make the Array Alternating](https://grid47.xyz/posts/leetcode-2170-minimum-operations-to-make-the-array-alternating-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2170: Minimum Operations to Make the Array Alternating](https://grid47.xyz/posts/leetcode-2170-minimum-operations-to-make-the-array-alternating-solution/) |
 | --- |

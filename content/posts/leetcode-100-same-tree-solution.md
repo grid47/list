@@ -55,5 +55,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/100.md" >}}
 ---
 {{< youtube jK6XXYezw2g >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #102: Binary Tree Level Order Traversal](https://grid47.xyz/posts/leetcode-102-binary-tree-level-order-traversal-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #102: Binary Tree Level Order Traversal](https://grid47.xyz/posts/leetcode-102-binary-tree-level-order-traversal-solution/) |
 | --- |

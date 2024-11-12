@@ -38,5 +38,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2919.md" >}}
 ---
 {{< youtube 2T14Nl0I69A >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2923: Find Champion I](https://grid47.xyz/posts/leetcode-2923-find-champion-i-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2923: Find Champion I](https://grid47.xyz/posts/leetcode-2923-find-champion-i-solution/) |
 | --- |

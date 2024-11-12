@@ -47,5 +47,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/419.md" >}}
 ---
 {{< youtube gKhvVHd8ihI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #421: Maximum XOR of Two Numbers in an Array](https://grid47.xyz/posts/leetcode-421-maximum-xor-of-two-numbers-in-an-array-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #421: Maximum XOR of Two Numbers in an Array](https://grid47.xyz/posts/leetcode-421-maximum-xor-of-two-numbers-in-an-array-solution/) |
 | --- |

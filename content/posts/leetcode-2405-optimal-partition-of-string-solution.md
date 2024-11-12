@@ -48,5 +48,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2405.md" >}}
 ---
 {{< youtube 1Zx7gEznzfI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2406: Divide Intervals Into Minimum Number of Groups](https://grid47.xyz/posts/leetcode-2406-divide-intervals-into-minimum-number-of-groups-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2406: Divide Intervals Into Minimum Number of Groups](https://grid47.xyz/posts/leetcode-2406-divide-intervals-into-minimum-number-of-groups-solution/) |
 | --- |

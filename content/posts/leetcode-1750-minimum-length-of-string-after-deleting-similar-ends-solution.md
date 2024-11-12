@@ -41,5 +41,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1750.md" >}}
 ---
 {{< youtube 318hrWVr_5U >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1752: Check if Array Is Sorted and Rotated](https://grid47.xyz/posts/leetcode-1752-check-if-array-is-sorted-and-rotated-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1752: Check if Array Is Sorted and Rotated](https://grid47.xyz/posts/leetcode-1752-check-if-array-is-sorted-and-rotated-solution/) |
 | --- |

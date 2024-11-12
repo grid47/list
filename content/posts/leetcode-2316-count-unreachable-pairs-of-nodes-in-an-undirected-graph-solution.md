@@ -62,5 +62,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2316.md" >}}
 ---
 {{< youtube 2FIK7F0Qs38 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2317: Maximum XOR After Operations ](https://grid47.xyz/posts/leetcode-2317-maximum-xor-after-operations-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2317: Maximum XOR After Operations ](https://grid47.xyz/posts/leetcode-2317-maximum-xor-after-operations-solution/) |
 | --- |

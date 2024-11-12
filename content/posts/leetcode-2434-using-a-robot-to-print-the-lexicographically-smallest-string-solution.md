@@ -55,5 +55,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2434.md" >}}
 ---
 {{< youtube -8gRuQFSuX8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2437: Number of Valid Clock Times](https://grid47.xyz/posts/leetcode-2437-number-of-valid-clock-times-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2437: Number of Valid Clock Times](https://grid47.xyz/posts/leetcode-2437-number-of-valid-clock-times-solution/) |
 | --- |

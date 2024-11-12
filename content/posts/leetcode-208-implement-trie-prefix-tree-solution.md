@@ -87,5 +87,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/208.md" >}}
 ---
 {{< youtube rJRTji53Ggk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #209: Minimum Size Subarray Sum](https://grid47.xyz/posts/leetcode-209-minimum-size-subarray-sum-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #209: Minimum Size Subarray Sum](https://grid47.xyz/posts/leetcode-209-minimum-size-subarray-sum-solution/) |
 | --- |

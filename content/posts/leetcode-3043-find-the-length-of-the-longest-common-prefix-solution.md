@@ -68,5 +68,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3043.md" >}}
 ---
 {{< youtube 06dIUJwdHlQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #3044: Most Frequent Prime](https://grid47.xyz/posts/leetcode-3044-most-frequent-prime-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #3044: Most Frequent Prime](https://grid47.xyz/posts/leetcode-3044-most-frequent-prime-solution/) |
 | --- |

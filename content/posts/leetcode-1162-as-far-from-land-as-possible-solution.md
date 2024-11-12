@@ -57,5 +57,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1162.md" >}}
 ---
 {{< youtube fjxb1hQfrZk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1170: Compare Strings by Frequency of the Smallest Character](https://grid47.xyz/posts/leetcode-1170-compare-strings-by-frequency-of-the-smallest-character-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1170: Compare Strings by Frequency of the Smallest Character](https://grid47.xyz/posts/leetcode-1170-compare-strings-by-frequency-of-the-smallest-character-solution/) |
 | --- |

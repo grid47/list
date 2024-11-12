@@ -31,5 +31,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2651.md" >}}
 ---
 {{< youtube 8a04uEm1FlE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2652: Sum Multiples](https://grid47.xyz/posts/leetcode-2652-sum-multiples-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2652: Sum Multiples](https://grid47.xyz/posts/leetcode-2652-sum-multiples-solution/) |
 | --- |

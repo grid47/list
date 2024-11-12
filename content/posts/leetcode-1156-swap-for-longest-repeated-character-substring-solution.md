@@ -47,5 +47,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1156.md" >}}
 ---
 {{< youtube 0kfkOm4b-8I >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1160: Find Words That Can Be Formed by Characters](https://grid47.xyz/posts/leetcode-1160-find-words-that-can-be-formed-by-characters-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1160: Find Words That Can Be Formed by Characters](https://grid47.xyz/posts/leetcode-1160-find-words-that-can-be-formed-by-characters-solution/) |
 | --- |

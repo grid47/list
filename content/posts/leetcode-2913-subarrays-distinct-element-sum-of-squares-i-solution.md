@@ -44,5 +44,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2913.md" >}}
 ---
 {{< youtube vBSxcFdwcQU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2914: Minimum Number of Changes to Make Binary String Beautiful](https://grid47.xyz/posts/leetcode-2914-minimum-number-of-changes-to-make-binary-string-beautiful-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2914: Minimum Number of Changes to Make Binary String Beautiful](https://grid47.xyz/posts/leetcode-2914-minimum-number-of-changes-to-make-binary-string-beautiful-solution/) |
 | --- |

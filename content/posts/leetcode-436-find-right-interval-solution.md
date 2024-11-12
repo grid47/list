@@ -52,5 +52,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/436.md" >}}
 ---
 {{< youtube VEBbumHmps8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #437: Path Sum III](https://grid47.xyz/posts/leetcode-437-path-sum-iii-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #437: Path Sum III](https://grid47.xyz/posts/leetcode-437-path-sum-iii-solution/) |
 | --- |

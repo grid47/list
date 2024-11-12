@@ -54,5 +54,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/777.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #779: K-th Symbol in Grammar](https://grid47.xyz/posts/leetcode-779-k-th-symbol-in-grammar-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #779: K-th Symbol in Grammar](https://grid47.xyz/posts/leetcode-779-k-th-symbol-in-grammar-solution/) |
 | --- |

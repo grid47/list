@@ -62,5 +62,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1482.md" >}}
 ---
 {{< youtube C43I3Q0JLB0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1487: Making File Names Unique](https://grid47.xyz/posts/leetcode-1487-making-file-names-unique-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1487: Making File Names Unique](https://grid47.xyz/posts/leetcode-1487-making-file-names-unique-solution/) |
 | --- |

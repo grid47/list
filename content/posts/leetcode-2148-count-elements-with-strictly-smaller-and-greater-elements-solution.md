@@ -46,5 +46,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2148.md" >}}
 ---
 {{< youtube V3SamYLfPtg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2149: Rearrange Array Elements by Sign](https://grid47.xyz/posts/leetcode-2149-rearrange-array-elements-by-sign-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2149: Rearrange Array Elements by Sign](https://grid47.xyz/posts/leetcode-2149-rearrange-array-elements-by-sign-solution/) |
 | --- |

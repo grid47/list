@@ -43,5 +43,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2149.md" >}}
 ---
 {{< youtube SoPmcGzz9-E >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2150: Find All Lonely Numbers in the Array](https://grid47.xyz/posts/leetcode-2150-find-all-lonely-numbers-in-the-array-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2150: Find All Lonely Numbers in the Array](https://grid47.xyz/posts/leetcode-2150-find-all-lonely-numbers-in-the-array-solution/) |
 | --- |

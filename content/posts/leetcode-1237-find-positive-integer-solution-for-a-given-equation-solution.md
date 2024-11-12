@@ -64,5 +64,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1237.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1238: Circular Permutation in Binary Representation](https://grid47.xyz/posts/leetcode-1238-circular-permutation-in-binary-representation-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1238: Circular Permutation in Binary Representation](https://grid47.xyz/posts/leetcode-1238-circular-permutation-in-binary-representation-solution/) |
 | --- |

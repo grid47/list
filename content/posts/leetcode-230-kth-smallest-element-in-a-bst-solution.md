@@ -65,5 +65,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/230.md" >}}
 ---
 {{< youtube PwjF3RO9djY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #231: Power of Two](https://grid47.xyz/posts/leetcode-231-power-of-two-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #231: Power of Two](https://grid47.xyz/posts/leetcode-231-power-of-two-solution/) |
 | --- |

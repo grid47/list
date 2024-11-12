@@ -44,5 +44,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1040.md" >}}
 ---
 {{< youtube 4Xhq2NDbA-I >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1042: Flower Planting With No Adjacent](https://grid47.xyz/posts/leetcode-1042-flower-planting-with-no-adjacent-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1042: Flower Planting With No Adjacent](https://grid47.xyz/posts/leetcode-1042-flower-planting-with-no-adjacent-solution/) |
 | --- |

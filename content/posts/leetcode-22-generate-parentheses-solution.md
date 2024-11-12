@@ -56,5 +56,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/22.md" >}}
 ---
 {{< youtube 7aSAbqCWhwE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #24: Swap Nodes in Pairs](https://grid47.xyz/posts/leetcode-24-swap-nodes-in-pairs-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #24: Swap Nodes in Pairs](https://grid47.xyz/posts/leetcode-24-swap-nodes-in-pairs-solution/) |
 | --- |

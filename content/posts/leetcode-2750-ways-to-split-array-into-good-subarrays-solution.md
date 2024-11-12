@@ -45,5 +45,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2750.md" >}}
 ---
 {{< youtube T8f9ppAJHbY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2760: Longest Even Odd Subarray With Threshold](https://grid47.xyz/posts/leetcode-2760-longest-even-odd-subarray-with-threshold-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2760: Longest Even Odd Subarray With Threshold](https://grid47.xyz/posts/leetcode-2760-longest-even-odd-subarray-with-threshold-solution/) |
 | --- |

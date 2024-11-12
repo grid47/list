@@ -37,5 +37,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1218.md" >}}
 ---
 {{< youtube NpQ-ZKBNCa8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1219: Path with Maximum Gold](https://grid47.xyz/posts/leetcode-1219-path-with-maximum-gold-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1219: Path with Maximum Gold](https://grid47.xyz/posts/leetcode-1219-path-with-maximum-gold-solution/) |
 | --- |

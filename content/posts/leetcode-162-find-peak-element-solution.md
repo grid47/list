@@ -54,5 +54,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/162.md" >}}
 ---
 {{< youtube 31foR5tJapQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #167: Two Sum II - Input Array Is Sorted](https://grid47.xyz/posts/leetcode-167-two-sum-ii-input-array-is-sorted-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #167: Two Sum II - Input Array Is Sorted](https://grid47.xyz/posts/leetcode-167-two-sum-ii-input-array-is-sorted-solution/) |
 | --- |

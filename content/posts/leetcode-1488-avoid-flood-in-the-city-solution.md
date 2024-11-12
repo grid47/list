@@ -59,5 +59,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1488.md" >}}
 ---
 {{< youtube EcvhHoFaDoU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1491: Average Salary Excluding the Minimum and Maximum Salary](https://grid47.xyz/posts/leetcode-1491-average-salary-excluding-the-minimum-and-maximum-salary-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1491: Average Salary Excluding the Minimum and Maximum Salary](https://grid47.xyz/posts/leetcode-1491-average-salary-excluding-the-minimum-and-maximum-salary-solution/) |
 | --- |

@@ -44,5 +44,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1690.md" >}}
 ---
 {{< youtube cOGliK5brbQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1694: Reformat Phone Number](https://grid47.xyz/posts/leetcode-1694-reformat-phone-number-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1694: Reformat Phone Number](https://grid47.xyz/posts/leetcode-1694-reformat-phone-number-solution/) |
 | --- |

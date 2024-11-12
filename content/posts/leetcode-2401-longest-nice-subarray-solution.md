@@ -39,5 +39,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2401.md" >}}
 ---
 {{< youtube DJYpUQy3iME >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2404: Most Frequent Even Element](https://grid47.xyz/posts/leetcode-2404-most-frequent-even-element-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2404: Most Frequent Even Element](https://grid47.xyz/posts/leetcode-2404-most-frequent-even-element-solution/) |
 | --- |

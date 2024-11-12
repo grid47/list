@@ -66,5 +66,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/73.md" >}}
 ---
 {{< youtube T41rL0L3Pnw >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #74: Search a 2D Matrix](https://grid47.xyz/posts/leetcode-74-search-a-2d-matrix-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #74: Search a 2D Matrix](https://grid47.xyz/posts/leetcode-74-search-a-2d-matrix-solution/) |
 | --- |

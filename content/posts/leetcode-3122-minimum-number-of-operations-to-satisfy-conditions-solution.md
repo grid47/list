@@ -59,5 +59,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3122.md" >}}
 ---
 {{< youtube LLDe54TfbMs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #3127: Make a Square with the Same Color](https://grid47.xyz/posts/leetcode-3127-make-a-square-with-the-same-color-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #3127: Make a Square with the Same Color](https://grid47.xyz/posts/leetcode-3127-make-a-square-with-the-same-color-solution/) |
 | --- |

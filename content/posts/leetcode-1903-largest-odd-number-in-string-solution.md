@@ -36,5 +36,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1903.md" >}}
 ---
 {{< youtube IIt_ARZzclY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1904: The Number of Full Rounds You Have Played](https://grid47.xyz/posts/leetcode-1904-the-number-of-full-rounds-you-have-played-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1904: The Number of Full Rounds You Have Played](https://grid47.xyz/posts/leetcode-1904-the-number-of-full-rounds-you-have-played-solution/) |
 | --- |

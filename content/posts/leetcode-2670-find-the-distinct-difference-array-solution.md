@@ -44,5 +44,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2670.md" >}}
 ---
 {{< youtube ikDNBcVaq6Y >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2672: Number of Adjacent Elements With the Same Color](https://grid47.xyz/posts/leetcode-2672-number-of-adjacent-elements-with-the-same-color-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2672: Number of Adjacent Elements With the Same Color](https://grid47.xyz/posts/leetcode-2672-number-of-adjacent-elements-with-the-same-color-solution/) |
 | --- |

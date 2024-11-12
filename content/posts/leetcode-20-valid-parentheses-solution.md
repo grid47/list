@@ -50,5 +50,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/20.md" >}}
 ---
 {{< youtube WTzjTskDFMg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #21: Merge Two Sorted Lists](https://grid47.xyz/posts/leetcode-21-merge-two-sorted-lists-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #21: Merge Two Sorted Lists](https://grid47.xyz/posts/leetcode-21-merge-two-sorted-lists-solution/) |
 | --- |

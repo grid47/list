@@ -40,5 +40,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2500.md" >}}
 ---
 {{< youtube xWRu1KHVAIo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2501: Longest Square Streak in an Array](https://grid47.xyz/posts/leetcode-2501-longest-square-streak-in-an-array-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2501: Longest Square Streak in an Array](https://grid47.xyz/posts/leetcode-2501-longest-square-streak-in-an-array-solution/) |
 | --- |

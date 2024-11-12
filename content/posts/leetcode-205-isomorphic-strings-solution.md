@@ -55,5 +55,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/205.md" >}}
 ---
 {{< youtube WIJcGWvzu24 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #206: Reverse Linked List](https://grid47.xyz/posts/leetcode-206-reverse-linked-list-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #206: Reverse Linked List](https://grid47.xyz/posts/leetcode-206-reverse-linked-list-solution/) |
 | --- |

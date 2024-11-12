@@ -69,5 +69,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/107.md" >}}
 ---
 {{< youtube 6e4pmYyr_1o >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #109: Convert Sorted List to Binary Search Tree](https://grid47.xyz/posts/leetcode-109-convert-sorted-list-to-binary-search-tree-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #109: Convert Sorted List to Binary Search Tree](https://grid47.xyz/posts/leetcode-109-convert-sorted-list-to-binary-search-tree-solution/) |
 | --- |

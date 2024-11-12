@@ -48,5 +48,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2477.md" >}}
 ---
 {{< youtube I3lnDUIzIG4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2481: Minimum Cuts to Divide a Circle](https://grid47.xyz/posts/leetcode-2481-minimum-cuts-to-divide-a-circle-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2481: Minimum Cuts to Divide a Circle](https://grid47.xyz/posts/leetcode-2481-minimum-cuts-to-divide-a-circle-solution/) |
 | --- |

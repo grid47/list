@@ -45,5 +45,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1694.md" >}}
 ---
 {{< youtube U8EwUjwKYFg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1695: Maximum Erasure Value](https://grid47.xyz/posts/leetcode-1695-maximum-erasure-value-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1695: Maximum Erasure Value](https://grid47.xyz/posts/leetcode-1695-maximum-erasure-value-solution/) |
 | --- |

@@ -57,5 +57,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2359.md" >}}
 ---
 {{< youtube AZA8orksO4w >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2363: Merge Similar Items](https://grid47.xyz/posts/leetcode-2363-merge-similar-items-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2363: Merge Similar Items](https://grid47.xyz/posts/leetcode-2363-merge-similar-items-solution/) |
 | --- |

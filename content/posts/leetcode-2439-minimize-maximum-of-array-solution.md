@@ -36,5 +36,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2439.md" >}}
 ---
 {{< youtube AeHMvcKuR0Y >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2441: Largest Positive Integer That Exists With Its Negative](https://grid47.xyz/posts/leetcode-2441-largest-positive-integer-that-exists-with-its-negative-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2441: Largest Positive Integer That Exists With Its Negative](https://grid47.xyz/posts/leetcode-2441-largest-positive-integer-that-exists-with-its-negative-solution/) |
 | --- |

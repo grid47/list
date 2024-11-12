@@ -52,5 +52,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/958.md" >}}
 ---
 {{< youtube 9Jhtrwxp9ME >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #959: Regions Cut By Slashes](https://grid47.xyz/posts/leetcode-959-regions-cut-by-slashes-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #959: Regions Cut By Slashes](https://grid47.xyz/posts/leetcode-959-regions-cut-by-slashes-solution/) |
 | --- |

@@ -36,5 +36,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2527.md" >}}
 ---
 {{< youtube V12dkKaSdnw >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2529: Maximum Count of Positive Integer and Negative Integer](https://grid47.xyz/posts/leetcode-2529-maximum-count-of-positive-integer-and-negative-integer-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2529: Maximum Count of Positive Integer and Negative Integer](https://grid47.xyz/posts/leetcode-2529-maximum-count-of-positive-integer-and-negative-integer-solution/) |
 | --- |

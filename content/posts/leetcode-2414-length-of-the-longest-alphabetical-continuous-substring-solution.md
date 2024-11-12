@@ -38,5 +38,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2414.md" >}}
 ---
 {{< youtube TBVr58ynqsI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2415: Reverse Odd Levels of Binary Tree](https://grid47.xyz/posts/leetcode-2415-reverse-odd-levels-of-binary-tree-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2415: Reverse Odd Levels of Binary Tree](https://grid47.xyz/posts/leetcode-2415-reverse-odd-levels-of-binary-tree-solution/) |
 | --- |

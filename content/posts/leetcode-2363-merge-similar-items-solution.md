@@ -54,5 +54,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2363.md" >}}
 ---
 {{< youtube KjqRqf4KZxE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2364: Count Number of Bad Pairs](https://grid47.xyz/posts/leetcode-2364-count-number-of-bad-pairs-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2364: Count Number of Bad Pairs](https://grid47.xyz/posts/leetcode-2364-count-number-of-bad-pairs-solution/) |
 | --- |

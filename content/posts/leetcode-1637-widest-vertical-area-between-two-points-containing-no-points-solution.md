@@ -37,5 +37,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1637.md" >}}
 ---
 {{< youtube 6XnvNCTyJP4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1638: Count Substrings That Differ by One Character](https://grid47.xyz/posts/leetcode-1638-count-substrings-that-differ-by-one-character-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1638: Count Substrings That Differ by One Character](https://grid47.xyz/posts/leetcode-1638-count-substrings-that-differ-by-one-character-solution/) |
 | --- |

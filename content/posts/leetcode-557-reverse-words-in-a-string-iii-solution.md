@@ -42,5 +42,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/557.md" >}}
 ---
 {{< youtube _I57bpDMWnY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #560: Subarray Sum Equals K](https://grid47.xyz/posts/leetcode-560-subarray-sum-equals-k-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #560: Subarray Sum Equals K](https://grid47.xyz/posts/leetcode-560-subarray-sum-equals-k-solution/) |
 | --- |

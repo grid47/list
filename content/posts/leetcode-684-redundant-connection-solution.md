@@ -65,5 +65,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/684.md" >}}
 ---
 {{< youtube FXWRE67PLL0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #686: Repeated String Match](https://grid47.xyz/posts/leetcode-686-repeated-string-match-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #686: Repeated String Match](https://grid47.xyz/posts/leetcode-686-repeated-string-match-solution/) |
 | --- |

@@ -59,5 +59,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1686.md" >}}
 ---
 {{< youtube D5uS2MXRhfk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1688: Count of Matches in Tournament](https://grid47.xyz/posts/leetcode-1688-count-of-matches-in-tournament-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1688: Count of Matches in Tournament](https://grid47.xyz/posts/leetcode-1688-count-of-matches-in-tournament-solution/) |
 | --- |

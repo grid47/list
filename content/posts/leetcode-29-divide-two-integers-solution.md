@@ -56,5 +56,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/29.md" >}}
 ---
 {{< youtube LzcSE7-m6vY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #31: Next Permutation](https://grid47.xyz/posts/leetcode-31-next-permutation-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #31: Next Permutation](https://grid47.xyz/posts/leetcode-31-next-permutation-solution/) |
 | --- |

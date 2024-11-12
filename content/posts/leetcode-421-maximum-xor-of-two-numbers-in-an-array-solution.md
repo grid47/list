@@ -75,5 +75,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/421.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #423: Reconstruct Original Digits from English](https://grid47.xyz/posts/leetcode-423-reconstruct-original-digits-from-english-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #423: Reconstruct Original Digits from English](https://grid47.xyz/posts/leetcode-423-reconstruct-original-digits-from-english-solution/) |
 | --- |

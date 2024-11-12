@@ -44,5 +44,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1535.md" >}}
 ---
 {{< youtube v6On1TQfMTU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1536: Minimum Swaps to Arrange a Binary Grid](https://grid47.xyz/posts/leetcode-1536-minimum-swaps-to-arrange-a-binary-grid-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1536: Minimum Swaps to Arrange a Binary Grid](https://grid47.xyz/posts/leetcode-1536-minimum-swaps-to-arrange-a-binary-grid-solution/) |
 | --- |

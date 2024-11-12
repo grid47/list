@@ -43,5 +43,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2592.md" >}}
 ---
 {{< youtube p1njSkWtg2U >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2593: Find Score of an Array After Marking All Elements](https://grid47.xyz/posts/leetcode-2593-find-score-of-an-array-after-marking-all-elements-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2593: Find Score of an Array After Marking All Elements](https://grid47.xyz/posts/leetcode-2593-find-score-of-an-array-after-marking-all-elements-solution/) |
 | --- |

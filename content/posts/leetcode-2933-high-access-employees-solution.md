@@ -71,5 +71,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2933.md" >}}
 ---
 {{< youtube r4DlEjNCYE0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2934: Minimum Operations to Maximize Last Elements in Arrays](https://grid47.xyz/posts/leetcode-2934-minimum-operations-to-maximize-last-elements-in-arrays-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2934: Minimum Operations to Maximize Last Elements in Arrays](https://grid47.xyz/posts/leetcode-2934-minimum-operations-to-maximize-last-elements-in-arrays-solution/) |
 | --- |

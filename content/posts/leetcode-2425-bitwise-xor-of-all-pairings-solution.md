@@ -54,5 +54,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2425.md" >}}
 ---
 {{< youtube mFFtmUdq2jI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2427: Number of Common Factors](https://grid47.xyz/posts/leetcode-2427-number-of-common-factors-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2427: Number of Common Factors](https://grid47.xyz/posts/leetcode-2427-number-of-common-factors-solution/) |
 | --- |

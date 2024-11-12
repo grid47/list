@@ -46,5 +46,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2457.md" >}}
 ---
 {{< youtube NoGK4582ey8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2460: Apply Operations to an Array](https://grid47.xyz/posts/leetcode-2460-apply-operations-to-an-array-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2460: Apply Operations to an Array](https://grid47.xyz/posts/leetcode-2460-apply-operations-to-an-array-solution/) |
 | --- |

@@ -62,5 +62,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1319.md" >}}
 ---
 {{< youtube vyXBp3S6-y4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1325: Delete Leaves With a Given Value](https://grid47.xyz/posts/leetcode-1325-delete-leaves-with-a-given-value-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1325: Delete Leaves With a Given Value](https://grid47.xyz/posts/leetcode-1325-delete-leaves-with-a-given-value-solution/) |
 | --- |

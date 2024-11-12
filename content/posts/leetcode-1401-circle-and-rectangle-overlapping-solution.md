@@ -37,5 +37,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1401.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1404: Number of Steps to Reduce a Number in Binary Representation to One](https://grid47.xyz/posts/leetcode-1404-number-of-steps-to-reduce-a-number-in-binary-representation-to-one-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1404: Number of Steps to Reduce a Number in Binary Representation to One](https://grid47.xyz/posts/leetcode-1404-number-of-steps-to-reduce-a-number-in-binary-representation-to-one-solution/) |
 | --- |

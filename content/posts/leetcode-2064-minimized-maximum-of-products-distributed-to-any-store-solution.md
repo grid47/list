@@ -71,5 +71,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2064.md" >}}
 ---
 {{< youtube J6D5xPSlGHY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2068: Check Whether Two Strings are Almost Equivalent](https://grid47.xyz/posts/leetcode-2068-check-whether-two-strings-are-almost-equivalent-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2068: Check Whether Two Strings are Almost Equivalent](https://grid47.xyz/posts/leetcode-2068-check-whether-two-strings-are-almost-equivalent-solution/) |
 | --- |

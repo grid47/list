@@ -60,5 +60,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1367.md" >}}
 ---
 {{< youtube OaA9MgG00AE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1371: Find the Longest Substring Containing Vowels in Even Counts](https://grid47.xyz/posts/leetcode-1371-find-the-longest-substring-containing-vowels-in-even-counts-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1371: Find the Longest Substring Containing Vowels in Even Counts](https://grid47.xyz/posts/leetcode-1371-find-the-longest-substring-containing-vowels-in-even-counts-solution/) |
 | --- |

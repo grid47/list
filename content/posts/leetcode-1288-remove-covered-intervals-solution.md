@@ -42,5 +42,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1288.md" >}}
 ---
 {{< youtube nhAsMabiVkM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1292: Maximum Side Length of a Square with Sum Less than or Equal to Threshold](https://grid47.xyz/posts/leetcode-1292-maximum-side-length-of-a-square-with-sum-less-than-or-equal-to-threshold-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1292: Maximum Side Length of a Square with Sum Less than or Equal to Threshold](https://grid47.xyz/posts/leetcode-1292-maximum-side-length-of-a-square-with-sum-less-than-or-equal-to-threshold-solution/) |
 | --- |

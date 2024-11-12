@@ -52,5 +52,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/537.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #538: Convert BST to Greater Tree](https://grid47.xyz/posts/leetcode-538-convert-bst-to-greater-tree-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #538: Convert BST to Greater Tree](https://grid47.xyz/posts/leetcode-538-convert-bst-to-greater-tree-solution/) |
 | --- |

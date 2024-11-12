@@ -56,5 +56,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1110.md" >}}
 ---
 {{< youtube UhKu0q1yXHY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1111: Maximum Nesting Depth of Two Valid Parentheses Strings](https://grid47.xyz/posts/leetcode-1111-maximum-nesting-depth-of-two-valid-parentheses-strings-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1111: Maximum Nesting Depth of Two Valid Parentheses Strings](https://grid47.xyz/posts/leetcode-1111-maximum-nesting-depth-of-two-valid-parentheses-strings-solution/) |
 | --- |

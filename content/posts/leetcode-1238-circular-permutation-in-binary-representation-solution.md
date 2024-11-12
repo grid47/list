@@ -34,5 +34,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1238.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1239: Maximum Length of a Concatenated String with Unique Characters](https://grid47.xyz/posts/leetcode-1239-maximum-length-of-a-concatenated-string-with-unique-characters-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1239: Maximum Length of a Concatenated String with Unique Characters](https://grid47.xyz/posts/leetcode-1239-maximum-length-of-a-concatenated-string-with-unique-characters-solution/) |
 | --- |

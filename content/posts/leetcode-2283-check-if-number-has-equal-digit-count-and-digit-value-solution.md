@@ -37,5 +37,5 @@ bool digitCount(string num) {
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2283.md" >}}
 ---
 {{< youtube kv0O7p0pRvI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2284: Sender With Largest Word Count](https://grid47.xyz/posts/leetcode-2284-sender-with-largest-word-count-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2284: Sender With Largest Word Count](https://grid47.xyz/posts/leetcode-2284-sender-with-largest-word-count-solution/) |
 | --- |

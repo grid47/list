@@ -39,5 +39,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2432.md" >}}
 ---
 {{< youtube BxVwXRLZlhk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2433: Find The Original Array of Prefix Xor](https://grid47.xyz/posts/leetcode-2433-find-the-original-array-of-prefix-xor-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2433: Find The Original Array of Prefix Xor](https://grid47.xyz/posts/leetcode-2433-find-the-original-array-of-prefix-xor-solution/) |
 | --- |

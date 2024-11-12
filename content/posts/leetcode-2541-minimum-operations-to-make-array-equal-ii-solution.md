@@ -49,5 +49,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2541.md" >}}
 ---
 {{< youtube k9jEPl5tC0s >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2542: Maximum Subsequence Score](https://grid47.xyz/posts/leetcode-2542-maximum-subsequence-score-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2542: Maximum Subsequence Score](https://grid47.xyz/posts/leetcode-2542-maximum-subsequence-score-solution/) |
 | --- |

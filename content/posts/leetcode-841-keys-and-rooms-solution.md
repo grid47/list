@@ -46,5 +46,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/841.md" >}}
 ---
 {{< youtube i89fYz8JX7U >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #842: Split Array into Fibonacci Sequence](https://grid47.xyz/posts/leetcode-842-split-array-into-fibonacci-sequence-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #842: Split Array into Fibonacci Sequence](https://grid47.xyz/posts/leetcode-842-split-array-into-fibonacci-sequence-solution/) |
 | --- |

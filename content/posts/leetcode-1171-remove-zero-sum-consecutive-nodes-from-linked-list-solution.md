@@ -60,5 +60,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1171.md" >}}
 ---
 {{< youtube xZRozZEjizg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1177: Can Make Palindrome from Substring](https://grid47.xyz/posts/leetcode-1177-can-make-palindrome-from-substring-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1177: Can Make Palindrome from Substring](https://grid47.xyz/posts/leetcode-1177-can-make-palindrome-from-substring-solution/) |
 | --- |

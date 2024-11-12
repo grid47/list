@@ -42,5 +42,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2731.md" >}}
 ---
 {{< youtube L86PHNze5RM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2733: Neither Minimum nor Maximum](https://grid47.xyz/posts/leetcode-2733-neither-minimum-nor-maximum-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2733: Neither Minimum nor Maximum](https://grid47.xyz/posts/leetcode-2733-neither-minimum-nor-maximum-solution/) |
 | --- |

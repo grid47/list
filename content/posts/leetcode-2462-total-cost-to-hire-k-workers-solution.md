@@ -75,5 +75,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2462.md" >}}
 ---
 {{< youtube 4hb3bZS1o1o >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2465: Number of Distinct Averages](https://grid47.xyz/posts/leetcode-2465-number-of-distinct-averages-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2465: Number of Distinct Averages](https://grid47.xyz/posts/leetcode-2465-number-of-distinct-averages-solution/) |
 | --- |

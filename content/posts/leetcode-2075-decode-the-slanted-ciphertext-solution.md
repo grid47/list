@@ -49,5 +49,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2075.md" >}}
 ---
 {{< youtube vFxVjspTM-0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2079: Watering Plants](https://grid47.xyz/posts/leetcode-2079-watering-plants-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2079: Watering Plants](https://grid47.xyz/posts/leetcode-2079-watering-plants-solution/) |
 | --- |

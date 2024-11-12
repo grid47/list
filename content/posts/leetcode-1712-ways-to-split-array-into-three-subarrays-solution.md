@@ -47,5 +47,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1712.md" >}}
 ---
 {{< youtube u5GIK6GaNWk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1716: Calculate Money in Leetcode Bank](https://grid47.xyz/posts/leetcode-1716-calculate-money-in-leetcode-bank-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1716: Calculate Money in Leetcode Bank](https://grid47.xyz/posts/leetcode-1716-calculate-money-in-leetcode-bank-solution/) |
 | --- |

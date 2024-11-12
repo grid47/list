@@ -43,5 +43,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2587.md" >}}
 ---
 {{< youtube N3qkc7zT_a0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2588: Count the Number of Beautiful Subarrays](https://grid47.xyz/posts/leetcode-2588-count-the-number-of-beautiful-subarrays-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2588: Count the Number of Beautiful Subarrays](https://grid47.xyz/posts/leetcode-2588-count-the-number-of-beautiful-subarrays-solution/) |
 | --- |

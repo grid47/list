@@ -51,5 +51,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2788.md" >}}
 ---
 {{< youtube DdjLhSeodGs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2789: Largest Element in an Array after Merge Operations](https://grid47.xyz/posts/leetcode-2789-largest-element-in-an-array-after-merge-operations-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2789: Largest Element in an Array after Merge Operations](https://grid47.xyz/posts/leetcode-2789-largest-element-in-an-array-after-merge-operations-solution/) |
 | --- |

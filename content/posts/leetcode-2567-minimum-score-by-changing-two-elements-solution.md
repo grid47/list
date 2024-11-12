@@ -37,5 +37,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2567.md" >}}
 ---
 {{< youtube MPtncVNtKW0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2568: Minimum Impossible OR](https://grid47.xyz/posts/leetcode-2568-minimum-impossible-or-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2568: Minimum Impossible OR](https://grid47.xyz/posts/leetcode-2568-minimum-impossible-or-solution/) |
 | --- |

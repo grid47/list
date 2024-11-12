@@ -52,5 +52,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1621.md" >}}
 ---
 {{< youtube Zl-atHgL8QY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1624: Largest Substring Between Two Equal Characters](https://grid47.xyz/posts/leetcode-1624-largest-substring-between-two-equal-characters-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1624: Largest Substring Between Two Equal Characters](https://grid47.xyz/posts/leetcode-1624-largest-substring-between-two-equal-characters-solution/) |
 | --- |

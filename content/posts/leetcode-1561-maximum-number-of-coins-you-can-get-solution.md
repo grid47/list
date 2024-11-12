@@ -83,5 +83,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1561.md" >}}
 ---
 {{< youtube hPe9Z3TiUrA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1562: Find Latest Group of Size M](https://grid47.xyz/posts/leetcode-1562-find-latest-group-of-size-m-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1562: Find Latest Group of Size M](https://grid47.xyz/posts/leetcode-1562-find-latest-group-of-size-m-solution/) |
 | --- |

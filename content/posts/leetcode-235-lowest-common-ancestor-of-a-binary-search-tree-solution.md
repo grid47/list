@@ -53,5 +53,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/235.md" >}}
 ---
 {{< youtube ML6vGnziUaI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #236: Lowest Common Ancestor of a Binary Tree](https://grid47.xyz/posts/leetcode-236-lowest-common-ancestor-of-a-binary-tree-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #236: Lowest Common Ancestor of a Binary Tree](https://grid47.xyz/posts/leetcode-236-lowest-common-ancestor-of-a-binary-tree-solution/) |
 | --- |

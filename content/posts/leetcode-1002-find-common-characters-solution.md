@@ -45,5 +45,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1002.md" >}}
 ---
 {{< youtube QEESBA2Q_88 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1003: Check If Word Is Valid After Substitutions](https://grid47.xyz/posts/leetcode-1003-check-if-word-is-valid-after-substitutions-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1003: Check If Word Is Valid After Substitutions](https://grid47.xyz/posts/leetcode-1003-check-if-word-is-valid-after-substitutions-solution/) |
 | --- |

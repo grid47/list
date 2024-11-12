@@ -42,5 +42,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2559.md" >}}
 ---
 {{< youtube hTXRevcm3kI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2560: House Robber IV](https://grid47.xyz/posts/leetcode-2560-house-robber-iv-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2560: House Robber IV](https://grid47.xyz/posts/leetcode-2560-house-robber-iv-solution/) |
 | --- |

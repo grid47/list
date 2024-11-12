@@ -38,5 +38,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/567.md" >}}
 ---
 {{< youtube quSfR-uwkZU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #572: Subtree of Another Tree](https://grid47.xyz/posts/leetcode-572-subtree-of-another-tree-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #572: Subtree of Another Tree](https://grid47.xyz/posts/leetcode-572-subtree-of-another-tree-solution/) |
 | --- |

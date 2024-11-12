@@ -51,5 +51,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2250.md" >}}
 ---
 {{< youtube uCTmN3j2hVU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2255: Count Prefixes of a Given String](https://grid47.xyz/posts/leetcode-2255-count-prefixes-of-a-given-string-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2255: Count Prefixes of a Given String](https://grid47.xyz/posts/leetcode-2255-count-prefixes-of-a-given-string-solution/) |
 | --- |

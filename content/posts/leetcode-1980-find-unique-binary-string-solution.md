@@ -35,5 +35,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1980.md" >}}
 ---
 {{< youtube aHqn4Dynd1k >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1981: Minimize the Difference Between Target and Chosen Elements](https://grid47.xyz/posts/leetcode-1981-minimize-the-difference-between-target-and-chosen-elements-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1981: Minimize the Difference Between Target and Chosen Elements](https://grid47.xyz/posts/leetcode-1981-minimize-the-difference-between-target-and-chosen-elements-solution/) |
 | --- |

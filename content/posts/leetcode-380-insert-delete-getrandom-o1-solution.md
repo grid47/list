@@ -67,5 +67,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/380.md" >}}
 ---
 {{< youtube j4KwhBziOpg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #382: Linked List Random Node](https://grid47.xyz/posts/leetcode-382-linked-list-random-node-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #382: Linked List Random Node](https://grid47.xyz/posts/leetcode-382-linked-list-random-node-solution/) |
 | --- |

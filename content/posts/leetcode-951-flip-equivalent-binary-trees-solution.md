@@ -48,5 +48,5 @@ flipEquiv(root1->left, root2->right) && flipEquiv(root1->right, root2->left));
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/951.md" >}}
 ---
 {{< youtube izRDc1il9Pk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #954: Array of Doubled Pairs](https://grid47.xyz/posts/leetcode-954-array-of-doubled-pairs-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #954: Array of Doubled Pairs](https://grid47.xyz/posts/leetcode-954-array-of-doubled-pairs-solution/) |
 | --- |

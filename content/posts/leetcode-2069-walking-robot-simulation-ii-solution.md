@@ -78,5 +78,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2069.md" >}}
 ---
 {{< youtube 10111CfY7GQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2070: Most Beautiful Item for Each Query](https://grid47.xyz/posts/leetcode-2070-most-beautiful-item-for-each-query-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2070: Most Beautiful Item for Each Query](https://grid47.xyz/posts/leetcode-2070-most-beautiful-item-for-each-query-solution/) |
 | --- |

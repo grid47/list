@@ -36,5 +36,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2871.md" >}}
 ---
 {{< youtube xgzsBxfu8Ew >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2873: Maximum Value of an Ordered Triplet I](https://grid47.xyz/posts/leetcode-2873-maximum-value-of-an-ordered-triplet-i-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2873: Maximum Value of an Ordered Triplet I](https://grid47.xyz/posts/leetcode-2873-maximum-value-of-an-ordered-triplet-i-solution/) |
 | --- |

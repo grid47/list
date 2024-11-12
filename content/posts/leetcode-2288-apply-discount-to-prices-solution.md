@@ -55,5 +55,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2288.md" >}}
 ---
 {{< youtube 7W1Wzpfa1tg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2293: Min Max Game](https://grid47.xyz/posts/leetcode-2293-min-max-game-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2293: Min Max Game](https://grid47.xyz/posts/leetcode-2293-min-max-game-solution/) |
 | --- |

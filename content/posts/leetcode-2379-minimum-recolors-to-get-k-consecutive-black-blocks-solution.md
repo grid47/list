@@ -38,5 +38,5 @@ int minimumRecolors(string blocks, int k) {
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2379.md" >}}
 ---
 {{< youtube RRmSKRsT9tg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2380: Time Needed to Rearrange a Binary String](https://grid47.xyz/posts/leetcode-2380-time-needed-to-rearrange-a-binary-string-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2380: Time Needed to Rearrange a Binary String](https://grid47.xyz/posts/leetcode-2380-time-needed-to-rearrange-a-binary-string-solution/) |
 | --- |

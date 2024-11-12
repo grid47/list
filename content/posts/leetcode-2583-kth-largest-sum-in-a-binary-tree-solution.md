@@ -60,5 +60,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2583.md" >}}
 ---
 {{< youtube Sh-IqBIg9dU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2586: Count the Number of Vowel Strings in Range](https://grid47.xyz/posts/leetcode-2586-count-the-number-of-vowel-strings-in-range-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2586: Count the Number of Vowel Strings in Range](https://grid47.xyz/posts/leetcode-2586-count-the-number-of-vowel-strings-in-range-solution/) |
 | --- |

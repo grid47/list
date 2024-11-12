@@ -60,5 +60,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2476.md" >}}
 ---
 {{< youtube KFYvX7u-Hs8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2477: Minimum Fuel Cost to Report to the Capital](https://grid47.xyz/posts/leetcode-2477-minimum-fuel-cost-to-report-to-the-capital-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2477: Minimum Fuel Cost to Report to the Capital](https://grid47.xyz/posts/leetcode-2477-minimum-fuel-cost-to-report-to-the-capital-solution/) |
 | --- |

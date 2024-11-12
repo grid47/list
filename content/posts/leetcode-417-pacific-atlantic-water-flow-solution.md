@@ -70,5 +70,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/417.md" >}}
 ---
 {{< youtube 1HDq998kmio >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #419: Battleships in a Board](https://grid47.xyz/posts/leetcode-419-battleships-in-a-board-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #419: Battleships in a Board](https://grid47.xyz/posts/leetcode-419-battleships-in-a-board-solution/) |
 | --- |

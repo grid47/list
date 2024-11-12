@@ -98,5 +98,5 @@ if(!uf.uni(i, rc[i]))
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1361.md" >}}
 ---
 {{< youtube Mw67DTgUEqk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1362: Closest Divisors](https://grid47.xyz/posts/leetcode-1362-closest-divisors-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1362: Closest Divisors](https://grid47.xyz/posts/leetcode-1362-closest-divisors-solution/) |
 | --- |

@@ -63,5 +63,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1276.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1277: Count Square Submatrices with All Ones](https://grid47.xyz/posts/leetcode-1277-count-square-submatrices-with-all-ones-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1277: Count Square Submatrices with All Ones](https://grid47.xyz/posts/leetcode-1277-count-square-submatrices-with-all-ones-solution/) |
 | --- |

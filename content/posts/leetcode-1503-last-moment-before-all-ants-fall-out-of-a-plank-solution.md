@@ -39,5 +39,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1503.md" >}}
 ---
 {{< youtube tl0akFR9IXQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1504: Count Submatrices With All Ones](https://grid47.xyz/posts/leetcode-1504-count-submatrices-with-all-ones-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1504: Count Submatrices With All Ones](https://grid47.xyz/posts/leetcode-1504-count-submatrices-with-all-ones-solution/) |
 | --- |

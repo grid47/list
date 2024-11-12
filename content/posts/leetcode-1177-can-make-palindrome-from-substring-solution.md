@@ -51,5 +51,5 @@ int cnt = __builtin_popcount(pt[v[1]+1] ^ pt[v[0]]);
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1177.md" >}}
 ---
 {{< youtube tCr-y-1P2J8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1186: Maximum Subarray Sum with One Deletion](https://grid47.xyz/posts/leetcode-1186-maximum-subarray-sum-with-one-deletion-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1186: Maximum Subarray Sum with One Deletion](https://grid47.xyz/posts/leetcode-1186-maximum-subarray-sum-with-one-deletion-solution/) |
 | --- |

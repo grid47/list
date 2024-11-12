@@ -53,5 +53,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1727.md" >}}
 ---
 {{< youtube NYyIVuSCfOA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1732: Find the Highest Altitude](https://grid47.xyz/posts/leetcode-1732-find-the-highest-altitude-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1732: Find the Highest Altitude](https://grid47.xyz/posts/leetcode-1732-find-the-highest-altitude-solution/) |
 | --- |

@@ -39,5 +39,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1529.md" >}}
 ---
 {{< youtube qaAFcG4ORqM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1530: Number of Good Leaf Nodes Pairs](https://grid47.xyz/posts/leetcode-1530-number-of-good-leaf-nodes-pairs-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1530: Number of Good Leaf Nodes Pairs](https://grid47.xyz/posts/leetcode-1530-number-of-good-leaf-nodes-pairs-solution/) |
 | --- |

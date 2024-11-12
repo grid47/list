@@ -47,5 +47,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2526.md" >}}
 ---
 {{< youtube 3VXPkJ8bInY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2527: Find Xor-Beauty of Array](https://grid47.xyz/posts/leetcode-2527-find-xor-beauty-of-array-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2527: Find Xor-Beauty of Array](https://grid47.xyz/posts/leetcode-2527-find-xor-beauty-of-array-solution/) |
 | --- |

@@ -57,5 +57,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1657.md" >}}
 ---
 {{< youtube -jXQK-UeChU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1658: Minimum Operations to Reduce X to Zero](https://grid47.xyz/posts/leetcode-1658-minimum-operations-to-reduce-x-to-zero-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1658: Minimum Operations to Reduce X to Zero](https://grid47.xyz/posts/leetcode-1658-minimum-operations-to-reduce-x-to-zero-solution/) |
 | --- |

@@ -71,5 +71,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1625.md" >}}
 ---
 {{< youtube S_WnsW5cdgI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1626: Best Team With No Conflicts](https://grid47.xyz/posts/leetcode-1626-best-team-with-no-conflicts-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1626: Best Team With No Conflicts](https://grid47.xyz/posts/leetcode-1626-best-team-with-no-conflicts-solution/) |
 | --- |

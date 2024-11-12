@@ -47,5 +47,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1678.md" >}}
 ---
 {{< youtube l-w3i4_PNUw >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1680: Concatenation of Consecutive Binary Numbers](https://grid47.xyz/posts/leetcode-1680-concatenation-of-consecutive-binary-numbers-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1680: Concatenation of Consecutive Binary Numbers](https://grid47.xyz/posts/leetcode-1680-concatenation-of-consecutive-binary-numbers-solution/) |
 | --- |

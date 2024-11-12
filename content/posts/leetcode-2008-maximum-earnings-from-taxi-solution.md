@@ -72,5 +72,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2008.md" >}}
 ---
 {{< youtube QoAuE1v2vxA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2011: Final Value of Variable After Performing Operations](https://grid47.xyz/posts/leetcode-2011-final-value-of-variable-after-performing-operations-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2011: Final Value of Variable After Performing Operations](https://grid47.xyz/posts/leetcode-2011-final-value-of-variable-after-performing-operations-solution/) |
 | --- |

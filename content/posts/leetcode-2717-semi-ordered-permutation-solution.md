@@ -34,5 +34,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2717.md" >}}
 ---
 {{< youtube u4bKt4MBHUU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2718: Sum of Matrix After Queries](https://grid47.xyz/posts/leetcode-2718-sum-of-matrix-after-queries-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2718: Sum of Matrix After Queries](https://grid47.xyz/posts/leetcode-2718-sum-of-matrix-after-queries-solution/) |
 | --- |

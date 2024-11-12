@@ -60,5 +60,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2513.md" >}}
 ---
 {{< youtube g6L-jnW2n_4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2515: Shortest Distance to Target String in a Circular Array](https://grid47.xyz/posts/leetcode-2515-shortest-distance-to-target-string-in-a-circular-array-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2515: Shortest Distance to Target String in a Circular Array](https://grid47.xyz/posts/leetcode-2515-shortest-distance-to-target-string-in-a-circular-array-solution/) |
 | --- |

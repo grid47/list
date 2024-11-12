@@ -48,5 +48,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1465.md" >}}
 ---
 {{< youtube koGHcwtIaLY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1466: Reorder Routes to Make All Paths Lead to the City Zero](https://grid47.xyz/posts/leetcode-1466-reorder-routes-to-make-all-paths-lead-to-the-city-zero-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1466: Reorder Routes to Make All Paths Lead to the City Zero](https://grid47.xyz/posts/leetcode-1466-reorder-routes-to-make-all-paths-lead-to-the-city-zero-solution/) |
 | --- |

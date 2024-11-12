@@ -45,5 +45,5 @@ vector<int> getGoodIndices(vector<vector<int>>& v, int target) {
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2961.md" >}}
 ---
 {{< youtube I0NpbqgISas >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2962: Count Subarrays Where Max Element Appears at Least K Times](https://grid47.xyz/posts/leetcode-2962-count-subarrays-where-max-element-appears-at-least-k-times-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2962: Count Subarrays Where Max Element Appears at Least K Times](https://grid47.xyz/posts/leetcode-2962-count-subarrays-where-max-element-appears-at-least-k-times-solution/) |
 | --- |

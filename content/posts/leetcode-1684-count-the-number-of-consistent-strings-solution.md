@@ -40,5 +40,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1684.md" >}}
 ---
 {{< youtube CFa2TgIHMN0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1685: Sum of Absolute Differences in a Sorted Array](https://grid47.xyz/posts/leetcode-1685-sum-of-absolute-differences-in-a-sorted-array-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1685: Sum of Absolute Differences in a Sorted Array](https://grid47.xyz/posts/leetcode-1685-sum-of-absolute-differences-in-a-sorted-array-solution/) |
 | --- |

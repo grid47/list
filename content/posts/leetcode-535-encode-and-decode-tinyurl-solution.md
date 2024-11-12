@@ -56,5 +56,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/535.md" >}}
 ---
 {{< youtube VyBOaboQLGc >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #537: Complex Number Multiplication](https://grid47.xyz/posts/leetcode-537-complex-number-multiplication-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #537: Complex Number Multiplication](https://grid47.xyz/posts/leetcode-537-complex-number-multiplication-solution/) |
 | --- |

@@ -38,5 +38,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/868.md" >}}
 ---
 {{< youtube I5pfHLmrBrA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #869: Reordered Power of 2](https://grid47.xyz/posts/leetcode-869-reordered-power-of-2-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #869: Reordered Power of 2](https://grid47.xyz/posts/leetcode-869-reordered-power-of-2-solution/) |
 | --- |

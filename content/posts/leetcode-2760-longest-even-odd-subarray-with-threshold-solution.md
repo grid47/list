@@ -41,5 +41,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2760.md" >}}
 ---
 {{< youtube _XNaJUXSh04 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2761: Prime Pairs With Target Sum](https://grid47.xyz/posts/leetcode-2761-prime-pairs-with-target-sum-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2761: Prime Pairs With Target Sum](https://grid47.xyz/posts/leetcode-2761-prime-pairs-with-target-sum-solution/) |
 | --- |

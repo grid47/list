@@ -49,5 +49,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/963.md" >}}
 ---
 {{< youtube FcWK8CJReUo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #966: Vowel Spellchecker](https://grid47.xyz/posts/leetcode-966-vowel-spellchecker-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #966: Vowel Spellchecker](https://grid47.xyz/posts/leetcode-966-vowel-spellchecker-solution/) |
 | --- |

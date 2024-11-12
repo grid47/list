@@ -53,5 +53,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/539.md" >}}
 ---
 {{< youtube LVBDzeUmNIQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #540: Single Element in a Sorted Array](https://grid47.xyz/posts/leetcode-540-single-element-in-a-sorted-array-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #540: Single Element in a Sorted Array](https://grid47.xyz/posts/leetcode-540-single-element-in-a-sorted-array-solution/) |
 | --- |

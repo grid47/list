@@ -37,5 +37,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/925.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #926: Flip String to Monotone Increasing](https://grid47.xyz/posts/leetcode-926-flip-string-to-monotone-increasing-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #926: Flip String to Monotone Increasing](https://grid47.xyz/posts/leetcode-926-flip-string-to-monotone-increasing-solution/) |
 | --- |

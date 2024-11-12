@@ -48,5 +48,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/74.md" >}}
 ---
 {{< youtube x-dYOtIudzc >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #75: Sort Colors](https://grid47.xyz/posts/leetcode-75-sort-colors-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #75: Sort Colors](https://grid47.xyz/posts/leetcode-75-sort-colors-solution/) |
 | --- |

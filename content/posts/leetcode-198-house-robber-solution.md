@@ -46,5 +46,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/198.md" >}}
 ---
 {{< youtube UVNgW5nSoiU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #199: Binary Tree Right Side View](https://grid47.xyz/posts/leetcode-199-binary-tree-right-side-view-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #199: Binary Tree Right Side View](https://grid47.xyz/posts/leetcode-199-binary-tree-right-side-view-solution/) |
 | --- |

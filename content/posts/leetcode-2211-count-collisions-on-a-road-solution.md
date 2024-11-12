@@ -44,5 +44,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2211.md" >}}
 ---
 {{< youtube Cy_E7rABX_U >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2212: Maximum Points in an Archery Competition](https://grid47.xyz/posts/leetcode-2212-maximum-points-in-an-archery-competition-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2212: Maximum Points in an Archery Competition](https://grid47.xyz/posts/leetcode-2212-maximum-points-in-an-archery-competition-solution/) |
 | --- |

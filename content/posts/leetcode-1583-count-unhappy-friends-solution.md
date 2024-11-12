@@ -61,5 +61,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1583.md" >}}
 ---
 {{< youtube GpJUwhzx258 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1584: Min Cost to Connect All Points](https://grid47.xyz/posts/leetcode-1584-min-cost-to-connect-all-points-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1584: Min Cost to Connect All Points](https://grid47.xyz/posts/leetcode-1584-min-cost-to-connect-all-points-solution/) |
 | --- |

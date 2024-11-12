@@ -38,5 +38,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1491.md" >}}
 ---
 {{< youtube hTEVGYRGLsQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1492: The kth Factor of n](https://grid47.xyz/posts/leetcode-1492-the-kth-factor-of-n-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1492: The kth Factor of n](https://grid47.xyz/posts/leetcode-1492-the-kth-factor-of-n-solution/) |
 | --- |

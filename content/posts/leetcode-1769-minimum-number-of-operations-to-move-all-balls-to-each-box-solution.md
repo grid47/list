@@ -42,5 +42,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1769.md" >}}
 ---
 {{< youtube R8geTAz_yk8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1773: Count Items Matching a Rule](https://grid47.xyz/posts/leetcode-1773-count-items-matching-a-rule-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1773: Count Items Matching a Rule](https://grid47.xyz/posts/leetcode-1773-count-items-matching-a-rule-solution/) |
 | --- |

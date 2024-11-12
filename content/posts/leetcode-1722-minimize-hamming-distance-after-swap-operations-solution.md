@@ -78,5 +78,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1722.md" >}}
 ---
 {{< youtube G1vTpGA9Gkc >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1725: Number Of Rectangles That Can Form The Largest Square](https://grid47.xyz/posts/leetcode-1725-number-of-rectangles-that-can-form-the-largest-square-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1725: Number Of Rectangles That Can Form The Largest Square](https://grid47.xyz/posts/leetcode-1725-number-of-rectangles-that-can-form-the-largest-square-solution/) |
 | --- |

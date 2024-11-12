@@ -38,5 +38,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/724.md" >}}
 ---
 {{< youtube u89i60lYx8U >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #725: Split Linked List in Parts](https://grid47.xyz/posts/leetcode-725-split-linked-list-in-parts-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #725: Split Linked List in Parts](https://grid47.xyz/posts/leetcode-725-split-linked-list-in-parts-solution/) |
 | --- |

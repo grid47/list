@@ -38,5 +38,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2956.md" >}}
 ---
 {{< youtube jb1IbKe3bPE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2957: Remove Adjacent Almost-Equal Characters](https://grid47.xyz/posts/leetcode-2957-remove-adjacent-almost-equal-characters-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2957: Remove Adjacent Almost-Equal Characters](https://grid47.xyz/posts/leetcode-2957-remove-adjacent-almost-equal-characters-solution/) |
 | --- |

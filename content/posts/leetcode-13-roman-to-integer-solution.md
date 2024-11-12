@@ -64,5 +64,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/13.md" >}}
 ---
 {{< youtube 3jdxYj3DD98 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #15: 3Sum](https://grid47.xyz/posts/leetcode-15-3sum-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #15: 3Sum](https://grid47.xyz/posts/leetcode-15-3sum-solution/) |
 | --- |

@@ -43,5 +43,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1464.md" >}}
 ---
 {{< youtube XJ1pYgzimYo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1465: Maximum Area of a Piece of Cake After Horizontal and Vertical Cuts](https://grid47.xyz/posts/leetcode-1465-maximum-area-of-a-piece-of-cake-after-horizontal-and-vertical-cuts-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1465: Maximum Area of a Piece of Cake After Horizontal and Vertical Cuts](https://grid47.xyz/posts/leetcode-1465-maximum-area-of-a-piece-of-cake-after-horizontal-and-vertical-cuts-solution/) |
 | --- |

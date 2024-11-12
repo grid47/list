@@ -31,5 +31,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2235.md" >}}
 ---
 {{< youtube Qubhoqoks6I >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2236: Root Equals Sum of Children](https://grid47.xyz/posts/leetcode-2236-root-equals-sum-of-children-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2236: Root Equals Sum of Children](https://grid47.xyz/posts/leetcode-2236-root-equals-sum-of-children-solution/) |
 | --- |

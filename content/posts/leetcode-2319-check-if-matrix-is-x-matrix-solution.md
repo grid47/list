@@ -40,5 +40,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2319.md" >}}
 ---
 {{< youtube l7O_4za547A >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2320: Count Number of Ways to Place Houses](https://grid47.xyz/posts/leetcode-2320-count-number-of-ways-to-place-houses-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2320: Count Number of Ways to Place Houses](https://grid47.xyz/posts/leetcode-2320-count-number-of-ways-to-place-houses-solution/) |
 | --- |

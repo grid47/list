@@ -44,5 +44,5 @@ vector<string> insert(int id, string value) {
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1656.md" >}}
 ---
 {{< youtube lL7_8Eg1Q1s >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1657: Determine if Two Strings Are Close](https://grid47.xyz/posts/leetcode-1657-determine-if-two-strings-are-close-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1657: Determine if Two Strings Are Close](https://grid47.xyz/posts/leetcode-1657-determine-if-two-strings-are-close-solution/) |
 | --- |

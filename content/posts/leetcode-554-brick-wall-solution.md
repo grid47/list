@@ -42,5 +42,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/554.md" >}}
 ---
 {{< youtube Kkmv2h48ekw >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #556: Next Greater Element III](https://grid47.xyz/posts/leetcode-556-next-greater-element-iii-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #556: Next Greater Element III](https://grid47.xyz/posts/leetcode-556-next-greater-element-iii-solution/) |
 | --- |

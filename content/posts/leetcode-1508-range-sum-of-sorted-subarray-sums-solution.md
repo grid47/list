@@ -49,5 +49,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1508.md" >}}
 ---
 {{< youtube 7XTGlO6b16A >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1509: Minimum Difference Between Largest and Smallest Value in Three Moves](https://grid47.xyz/posts/leetcode-1509-minimum-difference-between-largest-and-smallest-value-in-three-moves-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1509: Minimum Difference Between Largest and Smallest Value in Three Moves](https://grid47.xyz/posts/leetcode-1509-minimum-difference-between-largest-and-smallest-value-in-three-moves-solution/) |
 | --- |

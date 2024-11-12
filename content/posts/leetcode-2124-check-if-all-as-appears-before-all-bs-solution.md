@@ -31,5 +31,5 @@ bool checkString(string s) {
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2124.md" >}}
 ---
 {{< youtube RgzM3HRkdp8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2125: Number of Laser Beams in a Bank](https://grid47.xyz/posts/leetcode-2125-number-of-laser-beams-in-a-bank-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2125: Number of Laser Beams in a Bank](https://grid47.xyz/posts/leetcode-2125-number-of-laser-beams-in-a-bank-solution/) |
 | --- |

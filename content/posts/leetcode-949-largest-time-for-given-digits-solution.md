@@ -36,5 +36,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/949.md" >}}
 ---
 {{< youtube sn6r0ZV_2y4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #950: Reveal Cards In Increasing Order](https://grid47.xyz/posts/leetcode-950-reveal-cards-in-increasing-order-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #950: Reveal Cards In Increasing Order](https://grid47.xyz/posts/leetcode-950-reveal-cards-in-increasing-order-solution/) |
 | --- |

@@ -43,5 +43,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1496.md" >}}
 ---
 {{< youtube VWRJBNP7uH8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1497: Check If Array Pairs Are Divisible by k](https://grid47.xyz/posts/leetcode-1497-check-if-array-pairs-are-divisible-by-k-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1497: Check If Array Pairs Are Divisible by k](https://grid47.xyz/posts/leetcode-1497-check-if-array-pairs-are-divisible-by-k-solution/) |
 | --- |

@@ -47,5 +47,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1046.md" >}}
 ---
 {{< youtube bmcFr1AdiJg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1048: Longest String Chain](https://grid47.xyz/posts/leetcode-1048-longest-string-chain-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1048: Longest String Chain](https://grid47.xyz/posts/leetcode-1048-longest-string-chain-solution/) |
 | --- |

@@ -48,5 +48,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1981.md" >}}
 ---
 {{< youtube cfQFu_VDISI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1984: Minimum Difference Between Highest and Lowest of K Scores](https://grid47.xyz/posts/leetcode-1984-minimum-difference-between-highest-and-lowest-of-k-scores-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1984: Minimum Difference Between Highest and Lowest of K Scores](https://grid47.xyz/posts/leetcode-1984-minimum-difference-between-highest-and-lowest-of-k-scores-solution/) |
 | --- |

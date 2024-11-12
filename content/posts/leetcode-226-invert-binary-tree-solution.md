@@ -54,5 +54,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/226.md" >}}
 ---
 {{< youtube JUyhWTDT2YI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #228: Summary Ranges](https://grid47.xyz/posts/leetcode-228-summary-ranges-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #228: Summary Ranges](https://grid47.xyz/posts/leetcode-228-summary-ranges-solution/) |
 | --- |

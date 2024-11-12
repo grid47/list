@@ -36,5 +36,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2678.md" >}}
 ---
 {{< youtube l6_wwKzFmVo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2679: Sum in a Matrix](https://grid47.xyz/posts/leetcode-2679-sum-in-a-matrix-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2679: Sum in a Matrix](https://grid47.xyz/posts/leetcode-2679-sum-in-a-matrix-solution/) |
 | --- |

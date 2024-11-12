@@ -51,5 +51,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/576.md" >}}
 ---
 {{< youtube Bg5CLRqtNmk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #581: Shortest Unsorted Continuous Subarray](https://grid47.xyz/posts/leetcode-581-shortest-unsorted-continuous-subarray-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #581: Shortest Unsorted Continuous Subarray](https://grid47.xyz/posts/leetcode-581-shortest-unsorted-continuous-subarray-solution/) |
 | --- |

@@ -47,5 +47,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2215.md" >}}
 ---
 {{< youtube oypp_RzI69w >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2216: Minimum Deletions to Make Array Beautiful](https://grid47.xyz/posts/leetcode-2216-minimum-deletions-to-make-array-beautiful-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2216: Minimum Deletions to Make Array Beautiful](https://grid47.xyz/posts/leetcode-2216-minimum-deletions-to-make-array-beautiful-solution/) |
 | --- |

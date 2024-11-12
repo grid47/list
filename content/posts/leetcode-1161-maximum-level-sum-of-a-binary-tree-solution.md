@@ -63,5 +63,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1161.md" >}}
 ---
 {{< youtube v3e5uYmzyxs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1162: As Far from Land as Possible](https://grid47.xyz/posts/leetcode-1162-as-far-from-land-as-possible-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1162: As Far from Land as Possible](https://grid47.xyz/posts/leetcode-1162-as-far-from-land-as-possible-solution/) |
 | --- |

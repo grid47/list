@@ -44,5 +44,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2614.md" >}}
 ---
 {{< youtube PEKRvVTWf4g >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2615: Sum of Distances](https://grid47.xyz/posts/leetcode-2615-sum-of-distances-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2615: Sum of Distances](https://grid47.xyz/posts/leetcode-2615-sum-of-distances-solution/) |
 | --- |

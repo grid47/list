@@ -66,5 +66,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2043.md" >}}
 ---
 {{< youtube ouflA0KmCnI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2044: Count Number of Maximum Bitwise-OR Subsets](https://grid47.xyz/posts/leetcode-2044-count-number-of-maximum-bitwise-or-subsets-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2044: Count Number of Maximum Bitwise-OR Subsets](https://grid47.xyz/posts/leetcode-2044-count-number-of-maximum-bitwise-or-subsets-solution/) |
 | --- |

@@ -52,5 +52,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/7.md" >}}
 ---
 {{< youtube HAgLH58IgJQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #8: String to Integer (atoi)](https://grid47.xyz/posts/leetcode-8-string-to-integer-atoi-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #8: String to Integer (atoi)](https://grid47.xyz/posts/leetcode-8-string-to-integer-atoi-solution/) |
 | --- |

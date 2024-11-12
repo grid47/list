@@ -46,5 +46,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3137.md" >}}
 ---
 {{< youtube iu8AnEQH4U8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #3138: Minimum Length of Anagram Concatenation](https://grid47.xyz/posts/leetcode-3138-minimum-length-of-anagram-concatenation-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #3138: Minimum Length of Anagram Concatenation](https://grid47.xyz/posts/leetcode-3138-minimum-length-of-anagram-concatenation-solution/) |
 | --- |

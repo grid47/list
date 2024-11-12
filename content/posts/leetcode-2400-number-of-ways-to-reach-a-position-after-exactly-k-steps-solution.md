@@ -42,5 +42,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2400.md" >}}
 ---
 {{< youtube gFsI5OR-GfQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2401: Longest Nice Subarray](https://grid47.xyz/posts/leetcode-2401-longest-nice-subarray-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2401: Longest Nice Subarray](https://grid47.xyz/posts/leetcode-2401-longest-nice-subarray-solution/) |
 | --- |

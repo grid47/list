@@ -48,5 +48,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3127.md" >}}
 ---
 {{< youtube 6krFbmlIg94 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #3128: Right Triangles](https://grid47.xyz/posts/leetcode-3128-right-triangles-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #3128: Right Triangles](https://grid47.xyz/posts/leetcode-3128-right-triangles-solution/) |
 | --- |

@@ -45,5 +45,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/469.md" >}}
 ---
 {{< youtube 5xvMeI0R6uY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #474: Ones and Zeroes](https://grid47.xyz/posts/leetcode-474-ones-and-zeroes-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #474: Ones and Zeroes](https://grid47.xyz/posts/leetcode-474-ones-and-zeroes-solution/) |
 | --- |

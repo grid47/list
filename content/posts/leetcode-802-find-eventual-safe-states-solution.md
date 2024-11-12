@@ -57,5 +57,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/802.md" >}}
 ---
 {{< youtube Re_v0j0CRsg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #807: Max Increase to Keep City Skyline](https://grid47.xyz/posts/leetcode-807-max-increase-to-keep-city-skyline-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #807: Max Increase to Keep City Skyline](https://grid47.xyz/posts/leetcode-807-max-increase-to-keep-city-skyline-solution/) |
 | --- |

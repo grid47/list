@@ -38,5 +38,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1668.md" >}}
 ---
 {{< youtube glQm_MZJywk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1669: Merge In Between Linked Lists](https://grid47.xyz/posts/leetcode-1669-merge-in-between-linked-lists-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1669: Merge In Between Linked Lists](https://grid47.xyz/posts/leetcode-1669-merge-in-between-linked-lists-solution/) |
 | --- |

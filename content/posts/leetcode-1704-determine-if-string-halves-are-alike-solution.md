@@ -46,5 +46,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1704.md" >}}
 ---
 {{< youtube n6svsUO6X8g >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1705: Maximum Number of Eaten Apples](https://grid47.xyz/posts/leetcode-1705-maximum-number-of-eaten-apples-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1705: Maximum Number of Eaten Apples](https://grid47.xyz/posts/leetcode-1705-maximum-number-of-eaten-apples-solution/) |
 | --- |

@@ -39,5 +39,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1277.md" >}}
 ---
 {{< youtube PBZCmMugu5Q >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1282: Group the People Given the Group Size They Belong To](https://grid47.xyz/posts/leetcode-1282-group-the-people-given-the-group-size-they-belong-to-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1282: Group the People Given the Group Size They Belong To](https://grid47.xyz/posts/leetcode-1282-group-the-people-given-the-group-size-they-belong-to-solution/) |
 | --- |

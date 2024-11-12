@@ -55,5 +55,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1432.md" >}}
 ---
 {{< youtube sOnpt2zHWfQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1433: Check If a String Can Break Another String](https://grid47.xyz/posts/leetcode-1433-check-if-a-string-can-break-another-string-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1433: Check If a String Can Break Another String](https://grid47.xyz/posts/leetcode-1433-check-if-a-string-can-break-another-string-solution/) |
 | --- |

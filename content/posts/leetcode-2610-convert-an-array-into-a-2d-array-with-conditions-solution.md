@@ -43,5 +43,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2610.md" >}}
 ---
 {{< youtube 9pl1QiaGgmI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2611: Mice and Cheese](https://grid47.xyz/posts/leetcode-2611-mice-and-cheese-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2611: Mice and Cheese](https://grid47.xyz/posts/leetcode-2611-mice-and-cheese-solution/) |
 | --- |

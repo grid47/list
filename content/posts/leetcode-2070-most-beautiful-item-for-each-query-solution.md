@@ -54,5 +54,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2070.md" >}}
 ---
 {{< youtube r1WymhQxLZA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2073: Time Needed to Buy Tickets](https://grid47.xyz/posts/leetcode-2073-time-needed-to-buy-tickets-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2073: Time Needed to Buy Tickets](https://grid47.xyz/posts/leetcode-2073-time-needed-to-buy-tickets-solution/) |
 | --- |

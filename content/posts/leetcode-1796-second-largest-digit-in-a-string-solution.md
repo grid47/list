@@ -46,5 +46,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1796.md" >}}
 ---
 {{< youtube hyQUsjKrq1s >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1797: Design Authentication Manager](https://grid47.xyz/posts/leetcode-1797-design-authentication-manager-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1797: Design Authentication Manager](https://grid47.xyz/posts/leetcode-1797-design-authentication-manager-solution/) |
 | --- |

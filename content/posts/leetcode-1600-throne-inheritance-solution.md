@@ -57,5 +57,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1600.md" >}}
 ---
 {{< youtube VId-YNg9IG0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1603: Design Parking System](https://grid47.xyz/posts/leetcode-1603-design-parking-system-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1603: Design Parking System](https://grid47.xyz/posts/leetcode-1603-design-parking-system-solution/) |
 | --- |

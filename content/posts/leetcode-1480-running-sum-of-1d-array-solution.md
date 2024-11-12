@@ -33,5 +33,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1480.md" >}}
 ---
 {{< youtube qNbwIHhMOr8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1481: Least Number of Unique Integers after K Removals](https://grid47.xyz/posts/leetcode-1481-least-number-of-unique-integers-after-k-removals-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1481: Least Number of Unique Integers after K Removals](https://grid47.xyz/posts/leetcode-1481-least-number-of-unique-integers-after-k-removals-solution/) |
 | --- |

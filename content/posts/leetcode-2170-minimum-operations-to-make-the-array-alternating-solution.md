@@ -45,5 +45,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2170.md" >}}
 ---
 {{< youtube LkSQby_5YMg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2171: Removing Minimum Number of Magic Beans](https://grid47.xyz/posts/leetcode-2171-removing-minimum-number-of-magic-beans-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2171: Removing Minimum Number of Magic Beans](https://grid47.xyz/posts/leetcode-2171-removing-minimum-number-of-magic-beans-solution/) |
 | --- |

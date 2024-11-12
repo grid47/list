@@ -53,5 +53,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2201.md" >}}
 ---
 {{< youtube neXgYvigRcI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2202: Maximize the Topmost Element After K Moves](https://grid47.xyz/posts/leetcode-2202-maximize-the-topmost-element-after-k-moves-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2202: Maximize the Topmost Element After K Moves](https://grid47.xyz/posts/leetcode-2202-maximize-the-topmost-element-after-k-moves-solution/) |
 | --- |

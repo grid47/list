@@ -50,5 +50,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2429.md" >}}
 ---
 {{< youtube mWUMfdloybo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2432: The Employee That Worked on the Longest Task](https://grid47.xyz/posts/leetcode-2432-the-employee-that-worked-on-the-longest-task-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2432: The Employee That Worked on the Longest Task](https://grid47.xyz/posts/leetcode-2432-the-employee-that-worked-on-the-longest-task-solution/) |
 | --- |

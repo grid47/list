@@ -39,5 +39,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2357.md" >}}
 ---
 {{< youtube rtGJycuTSUo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2358: Maximum Number of Groups Entering a Competition](https://grid47.xyz/posts/leetcode-2358-maximum-number-of-groups-entering-a-competition-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2358: Maximum Number of Groups Entering a Competition](https://grid47.xyz/posts/leetcode-2358-maximum-number-of-groups-entering-a-competition-solution/) |
 | --- |

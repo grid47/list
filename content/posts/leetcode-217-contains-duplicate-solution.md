@@ -43,5 +43,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/217.md" >}}
 ---
 {{< youtube SFMCxqSeM94 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #225: Implement Stack using Queues](https://grid47.xyz/posts/leetcode-225-implement-stack-using-queues-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #225: Implement Stack using Queues](https://grid47.xyz/posts/leetcode-225-implement-stack-using-queues-solution/) |
 | --- |

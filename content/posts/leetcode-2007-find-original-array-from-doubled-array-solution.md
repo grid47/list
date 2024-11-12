@@ -73,5 +73,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2007.md" >}}
 ---
 {{< youtube z40B-Mr9_qk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2008: Maximum Earnings From Taxi](https://grid47.xyz/posts/leetcode-2008-maximum-earnings-from-taxi-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2008: Maximum Earnings From Taxi](https://grid47.xyz/posts/leetcode-2008-maximum-earnings-from-taxi-solution/) |
 | --- |

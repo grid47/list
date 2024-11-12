@@ -41,5 +41,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1773.md" >}}
 ---
 {{< youtube FL3vJlSmq7w >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1774: Closest Dessert Cost](https://grid47.xyz/posts/leetcode-1774-closest-dessert-cost-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1774: Closest Dessert Cost](https://grid47.xyz/posts/leetcode-1774-closest-dessert-cost-solution/) |
 | --- |

@@ -50,5 +50,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2271.md" >}}
 ---
 {{< youtube U7fqZr_ZLd4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2273: Find Resultant Array After Removing Anagrams](https://grid47.xyz/posts/leetcode-2273-find-resultant-array-after-removing-anagrams-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2273: Find Resultant Array After Removing Anagrams](https://grid47.xyz/posts/leetcode-2273-find-resultant-array-after-removing-anagrams-solution/) |
 | --- |

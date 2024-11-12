@@ -73,5 +73,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2512.md" >}}
 ---
 {{< youtube -ZE6ZmNU6KQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2513: Minimize the Maximum of Two Arrays](https://grid47.xyz/posts/leetcode-2513-minimize-the-maximum-of-two-arrays-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2513: Minimize the Maximum of Two Arrays](https://grid47.xyz/posts/leetcode-2513-minimize-the-maximum-of-two-arrays-solution/) |
 | --- |

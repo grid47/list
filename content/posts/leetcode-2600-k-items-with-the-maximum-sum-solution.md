@@ -41,5 +41,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2600.md" >}}
 ---
 {{< youtube HmEYKbfjCLA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2601: Prime Subtraction Operation](https://grid47.xyz/posts/leetcode-2601-prime-subtraction-operation-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2601: Prime Subtraction Operation](https://grid47.xyz/posts/leetcode-2601-prime-subtraction-operation-solution/) |
 | --- |

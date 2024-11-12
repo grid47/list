@@ -37,5 +37,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/667.md" >}}
 ---
 {{< youtube A8-_z6gurGc >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #669: Trim a Binary Search Tree](https://grid47.xyz/posts/leetcode-669-trim-a-binary-search-tree-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #669: Trim a Binary Search Tree](https://grid47.xyz/posts/leetcode-669-trim-a-binary-search-tree-solution/) |
 | --- |

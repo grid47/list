@@ -66,5 +66,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2059.md" >}}
 ---
 {{< youtube jrWEsrkfBjg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2063: Vowels of All Substrings](https://grid47.xyz/posts/leetcode-2063-vowels-of-all-substrings-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2063: Vowels of All Substrings](https://grid47.xyz/posts/leetcode-2063-vowels-of-all-substrings-solution/) |
 | --- |

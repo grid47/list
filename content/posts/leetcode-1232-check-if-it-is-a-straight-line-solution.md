@@ -36,5 +36,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1232.md" >}}
 ---
 {{< youtube _tfiTQNZCbs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1233: Remove Sub-Folders from the Filesystem](https://grid47.xyz/posts/leetcode-1233-remove-sub-folders-from-the-filesystem-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1233: Remove Sub-Folders from the Filesystem](https://grid47.xyz/posts/leetcode-1233-remove-sub-folders-from-the-filesystem-solution/) |
 | --- |

@@ -51,5 +51,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/94.md" >}}
 ---
 {{< youtube g_S5WuasWUE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #95: Unique Binary Search Trees II](https://grid47.xyz/posts/leetcode-95-unique-binary-search-trees-ii-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #95: Unique Binary Search Trees II](https://grid47.xyz/posts/leetcode-95-unique-binary-search-trees-ii-solution/) |
 | --- |

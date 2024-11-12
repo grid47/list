@@ -66,5 +66,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2680.md" >}}
 ---
 {{< youtube XiaXIrEHFEY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2682: Find the Losers of the Circular Game](https://grid47.xyz/posts/leetcode-2682-find-the-losers-of-the-circular-game-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2682: Find the Losers of the Circular Game](https://grid47.xyz/posts/leetcode-2682-find-the-losers-of-the-circular-game-solution/) |
 | --- |

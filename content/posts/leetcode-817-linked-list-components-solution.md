@@ -49,5 +49,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/817.md" >}}
 ---
 {{< youtube Vxbd1u86p9c >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #820: Short Encoding of Words](https://grid47.xyz/posts/leetcode-820-short-encoding-of-words-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #820: Short Encoding of Words](https://grid47.xyz/posts/leetcode-820-short-encoding-of-words-solution/) |
 | --- |

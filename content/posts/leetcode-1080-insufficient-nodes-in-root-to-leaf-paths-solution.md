@@ -47,5 +47,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1080.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1081: Smallest Subsequence of Distinct Characters](https://grid47.xyz/posts/leetcode-1081-smallest-subsequence-of-distinct-characters-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1081: Smallest Subsequence of Distinct Characters](https://grid47.xyz/posts/leetcode-1081-smallest-subsequence-of-distinct-characters-solution/) |
 | --- |

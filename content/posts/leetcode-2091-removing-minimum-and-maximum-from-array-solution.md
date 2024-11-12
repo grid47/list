@@ -49,5 +49,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2091.md" >}}
 ---
 {{< youtube OsaRrf_jDn4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2095: Delete the Middle Node of a Linked List](https://grid47.xyz/posts/leetcode-2095-delete-the-middle-node-of-a-linked-list-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2095: Delete the Middle Node of a Linked List](https://grid47.xyz/posts/leetcode-2095-delete-the-middle-node-of-a-linked-list-solution/) |
 | --- |

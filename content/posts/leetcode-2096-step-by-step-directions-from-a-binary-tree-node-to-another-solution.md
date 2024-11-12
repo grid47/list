@@ -46,5 +46,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2096.md" >}}
 ---
 {{< youtube JegJNGcwtFg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2099: Find Subsequence of Length K With the Largest Sum](https://grid47.xyz/posts/leetcode-2099-find-subsequence-of-length-k-with-the-largest-sum-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2099: Find Subsequence of Length K With the Largest Sum](https://grid47.xyz/posts/leetcode-2099-find-subsequence-of-length-k-with-the-largest-sum-solution/) |
 | --- |

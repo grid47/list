@@ -63,5 +63,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/19.md" >}}
 ---
 {{< youtube XVuQxVej6y8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #20: Valid Parentheses](https://grid47.xyz/posts/leetcode-20-valid-parentheses-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #20: Valid Parentheses](https://grid47.xyz/posts/leetcode-20-valid-parentheses-solution/) |
 | --- |

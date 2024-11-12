@@ -41,5 +41,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1991.md" >}}
 ---
 {{< youtube C9PhqirC9vs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1992: Find All Groups of Farmland](https://grid47.xyz/posts/leetcode-1992-find-all-groups-of-farmland-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1992: Find All Groups of Farmland](https://grid47.xyz/posts/leetcode-1992-find-all-groups-of-farmland-solution/) |
 | --- |

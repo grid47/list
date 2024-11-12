@@ -48,5 +48,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2217.md" >}}
 ---
 {{< youtube yHa83HDgTdk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2220: Minimum Bit Flips to Convert Number](https://grid47.xyz/posts/leetcode-2220-minimum-bit-flips-to-convert-number-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2220: Minimum Bit Flips to Convert Number](https://grid47.xyz/posts/leetcode-2220-minimum-bit-flips-to-convert-number-solution/) |
 | --- |

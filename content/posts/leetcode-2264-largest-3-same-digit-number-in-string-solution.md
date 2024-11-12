@@ -35,5 +35,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2264.md" >}}
 ---
 {{< youtube vcrOpJQHsSE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2265: Count Nodes Equal to Average of Subtree](https://grid47.xyz/posts/leetcode-2265-count-nodes-equal-to-average-of-subtree-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2265: Count Nodes Equal to Average of Subtree](https://grid47.xyz/posts/leetcode-2265-count-nodes-equal-to-average-of-subtree-solution/) |
 | --- |

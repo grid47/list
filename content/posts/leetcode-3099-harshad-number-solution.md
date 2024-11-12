@@ -37,5 +37,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3099.md" >}}
 ---
 {{< youtube QplrY0LW62M >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #3100: Water Bottles II](https://grid47.xyz/posts/leetcode-3100-water-bottles-ii-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #3100: Water Bottles II](https://grid47.xyz/posts/leetcode-3100-water-bottles-ii-solution/) |
 | --- |

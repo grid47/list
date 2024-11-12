@@ -42,5 +42,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2944.md" >}}
 ---
 {{< youtube _Zt6ADHF8nE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2946: Matrix Similarity After Cyclic Shifts](https://grid47.xyz/posts/leetcode-2946-matrix-similarity-after-cyclic-shifts-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2946: Matrix Similarity After Cyclic Shifts](https://grid47.xyz/posts/leetcode-2946-matrix-similarity-after-cyclic-shifts-solution/) |
 | --- |

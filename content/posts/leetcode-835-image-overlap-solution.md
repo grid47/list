@@ -46,5 +46,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/835.md" >}}
 ---
 {{< youtube zfjBapE3Y6E >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #836: Rectangle Overlap](https://grid47.xyz/posts/leetcode-836-rectangle-overlap-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #836: Rectangle Overlap](https://grid47.xyz/posts/leetcode-836-rectangle-overlap-solution/) |
 | --- |

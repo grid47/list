@@ -61,5 +61,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1514.md" >}}
 ---
 {{< youtube kPsDTGcrzGM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1519: Number of Nodes in the Sub-Tree With the Same Label](https://grid47.xyz/posts/leetcode-1519-number-of-nodes-in-the-sub-tree-with-the-same-label-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1519: Number of Nodes in the Sub-Tree With the Same Label](https://grid47.xyz/posts/leetcode-1519-number-of-nodes-in-the-sub-tree-with-the-same-label-solution/) |
 | --- |

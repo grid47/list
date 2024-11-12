@@ -73,5 +73,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/990.md" >}}
 ---
 {{< youtube d3MkgeCo8l4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #991: Broken Calculator](https://grid47.xyz/posts/leetcode-991-broken-calculator-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #991: Broken Calculator](https://grid47.xyz/posts/leetcode-991-broken-calculator-solution/) |
 | --- |

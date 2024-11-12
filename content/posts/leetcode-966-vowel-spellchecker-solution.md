@@ -66,5 +66,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/966.md" >}}
 ---
 {{< youtube Twas2VoFXW4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #967: Numbers With Same Consecutive Differences](https://grid47.xyz/posts/leetcode-967-numbers-with-same-consecutive-differences-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #967: Numbers With Same Consecutive Differences](https://grid47.xyz/posts/leetcode-967-numbers-with-same-consecutive-differences-solution/) |
 | --- |

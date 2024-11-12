@@ -37,5 +37,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2154.md" >}}
 ---
 {{< youtube b-6Wf-ZShQQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2155: All Divisions With the Highest Score of a Binary Array](https://grid47.xyz/posts/leetcode-2155-all-divisions-with-the-highest-score-of-a-binary-array-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2155: All Divisions With the Highest Score of a Binary Array](https://grid47.xyz/posts/leetcode-2155-all-divisions-with-the-highest-score-of-a-binary-array-solution/) |
 | --- |

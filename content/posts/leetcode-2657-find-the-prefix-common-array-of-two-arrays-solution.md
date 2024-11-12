@@ -48,5 +48,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2657.md" >}}
 ---
 {{< youtube wpffRfDOBSU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2658: Maximum Number of Fish in a Grid](https://grid47.xyz/posts/leetcode-2658-maximum-number-of-fish-in-a-grid-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2658: Maximum Number of Fish in a Grid](https://grid47.xyz/posts/leetcode-2658-maximum-number-of-fish-in-a-grid-solution/) |
 | --- |

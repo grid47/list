@@ -48,5 +48,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2384.md" >}}
 ---
 {{< youtube IMktz_WlNYo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2385: Amount of Time for Binary Tree to Be Infected](https://grid47.xyz/posts/leetcode-2385-amount-of-time-for-binary-tree-to-be-infected-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2385: Amount of Time for Binary Tree to Be Infected](https://grid47.xyz/posts/leetcode-2385-amount-of-time-for-binary-tree-to-be-infected-solution/) |
 | --- |

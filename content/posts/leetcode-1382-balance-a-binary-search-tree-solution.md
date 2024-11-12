@@ -60,5 +60,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1382.md" >}}
 ---
 {{< youtube 0KGdtzgL9Ec >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1386: Cinema Seat Allocation](https://grid47.xyz/posts/leetcode-1386-cinema-seat-allocation-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1386: Cinema Seat Allocation](https://grid47.xyz/posts/leetcode-1386-cinema-seat-allocation-solution/) |
 | --- |

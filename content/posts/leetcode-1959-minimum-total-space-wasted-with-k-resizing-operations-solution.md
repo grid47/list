@@ -56,5 +56,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1959.md" >}}
 ---
 {{< youtube tz2j-4bP3Kc >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1961: Check If String Is a Prefix of Array](https://grid47.xyz/posts/leetcode-1961-check-if-string-is-a-prefix-of-array-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1961: Check If String Is a Prefix of Array](https://grid47.xyz/posts/leetcode-1961-check-if-string-is-a-prefix-of-array-solution/) |
 | --- |

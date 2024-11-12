@@ -47,5 +47,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/877.md" >}}
 ---
 {{< youtube jGmq8d4cIx0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #880: Decoded String at Index](https://grid47.xyz/posts/leetcode-880-decoded-string-at-index-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #880: Decoded String at Index](https://grid47.xyz/posts/leetcode-880-decoded-string-at-index-solution/) |
 | --- |

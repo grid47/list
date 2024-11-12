@@ -41,5 +41,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2453.md" >}}
 ---
 {{< youtube zhvKbUSFzQ8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2455: Average Value of Even Numbers That Are Divisible by Three](https://grid47.xyz/posts/leetcode-2455-average-value-of-even-numbers-that-are-divisible-by-three-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2455: Average Value of Even Numbers That Are Divisible by Three](https://grid47.xyz/posts/leetcode-2455-average-value-of-even-numbers-that-are-divisible-by-three-solution/) |
 | --- |

@@ -59,5 +59,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1839.md" >}}
 ---
 {{< youtube hhyzRnwYBwA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1844: Replace All Digits with Characters](https://grid47.xyz/posts/leetcode-1844-replace-all-digits-with-characters-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1844: Replace All Digits with Characters](https://grid47.xyz/posts/leetcode-1844-replace-all-digits-with-characters-solution/) |
 | --- |

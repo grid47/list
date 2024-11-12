@@ -52,5 +52,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/756.md" >}}
 ---
 {{< youtube RMkh4P4h7ek >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #762: Prime Number of Set Bits in Binary Representation](https://grid47.xyz/posts/leetcode-762-prime-number-of-set-bits-in-binary-representation-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #762: Prime Number of Set Bits in Binary Representation](https://grid47.xyz/posts/leetcode-762-prime-number-of-set-bits-in-binary-representation-solution/) |
 | --- |

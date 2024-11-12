@@ -39,5 +39,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2962.md" >}}
 ---
 {{< youtube CZ-z1ViskzE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2965: Find Missing and Repeated Values](https://grid47.xyz/posts/leetcode-2965-find-missing-and-repeated-values-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2965: Find Missing and Repeated Values](https://grid47.xyz/posts/leetcode-2965-find-missing-and-repeated-values-solution/) |
 | --- |

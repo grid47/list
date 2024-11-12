@@ -36,5 +36,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2029.md" >}}
 ---
 {{< youtube 7r34JD5ud-c >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2033: Minimum Operations to Make a Uni-Value Grid](https://grid47.xyz/posts/leetcode-2033-minimum-operations-to-make-a-uni-value-grid-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2033: Minimum Operations to Make a Uni-Value Grid](https://grid47.xyz/posts/leetcode-2033-minimum-operations-to-make-a-uni-value-grid-solution/) |
 | --- |

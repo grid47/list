@@ -46,5 +46,5 @@ hash[i] = (hash[i] * 200 + nums[i + sz]) % 1000000007;
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2261.md" >}}
 ---
 {{< youtube BZdbRvIM-js >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2264: Largest 3-Same-Digit Number in String](https://grid47.xyz/posts/leetcode-2264-largest-3-same-digit-number-in-string-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2264: Largest 3-Same-Digit Number in String](https://grid47.xyz/posts/leetcode-2264-largest-3-same-digit-number-in-string-solution/) |
 | --- |

@@ -36,5 +36,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/822.md" >}}
 ---
 {{< youtube K-g8sOWW4F0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #823: Binary Trees With Factors](https://grid47.xyz/posts/leetcode-823-binary-trees-with-factors-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #823: Binary Trees With Factors](https://grid47.xyz/posts/leetcode-823-binary-trees-with-factors-solution/) |
 | --- |

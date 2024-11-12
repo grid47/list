@@ -66,5 +66,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1372.md" >}}
 ---
 {{< youtube hbzdyIlvBKI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1376: Time Needed to Inform All Employees](https://grid47.xyz/posts/leetcode-1376-time-needed-to-inform-all-employees-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1376: Time Needed to Inform All Employees](https://grid47.xyz/posts/leetcode-1376-time-needed-to-inform-all-employees-solution/) |
 | --- |

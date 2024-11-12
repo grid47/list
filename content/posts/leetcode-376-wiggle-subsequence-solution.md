@@ -64,5 +64,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/376.md" >}}
 ---
 {{< youtube IpWoZvKzpug >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #377: Combination Sum IV](https://grid47.xyz/posts/leetcode-377-combination-sum-iv-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #377: Combination Sum IV](https://grid47.xyz/posts/leetcode-377-combination-sum-iv-solution/) |
 | --- |

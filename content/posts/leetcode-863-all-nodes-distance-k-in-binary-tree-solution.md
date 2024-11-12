@@ -75,5 +75,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/863.md" >}}
 ---
 {{< youtube g1R3yEtHT8E >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #865: Smallest Subtree with all the Deepest Nodes](https://grid47.xyz/posts/leetcode-865-smallest-subtree-with-all-the-deepest-nodes-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #865: Smallest Subtree with all the Deepest Nodes](https://grid47.xyz/posts/leetcode-865-smallest-subtree-with-all-the-deepest-nodes-solution/) |
 | --- |

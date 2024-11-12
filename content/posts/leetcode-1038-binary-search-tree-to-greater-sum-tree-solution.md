@@ -46,5 +46,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1038.md" >}}
 ---
 {{< youtube FiGdEA4herM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1039: Minimum Score Triangulation of Polygon](https://grid47.xyz/posts/leetcode-1039-minimum-score-triangulation-of-polygon-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1039: Minimum Score Triangulation of Polygon](https://grid47.xyz/posts/leetcode-1039-minimum-score-triangulation-of-polygon-solution/) |
 | --- |

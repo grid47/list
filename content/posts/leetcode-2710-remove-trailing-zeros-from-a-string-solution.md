@@ -38,5 +38,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2710.md" >}}
 ---
 {{< youtube cY-wxEdhSAY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2711: Difference of Number of Distinct Values on Diagonals](https://grid47.xyz/posts/leetcode-2711-difference-of-number-of-distinct-values-on-diagonals-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2711: Difference of Number of Distinct Values on Diagonals](https://grid47.xyz/posts/leetcode-2711-difference-of-number-of-distinct-values-on-diagonals-solution/) |
 | --- |

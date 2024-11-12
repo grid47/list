@@ -38,5 +38,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3179.md" >}}
 ---
 {{< youtube 4sO18TX7Qzw >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #3190: Find Minimum Operations to Make All Elements Divisible by Three](https://grid47.xyz/posts/leetcode-3190-find-minimum-operations-to-make-all-elements-divisible-by-three-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #3190: Find Minimum Operations to Make All Elements Divisible by Three](https://grid47.xyz/posts/leetcode-3190-find-minimum-operations-to-make-all-elements-divisible-by-three-solution/) |
 | --- |

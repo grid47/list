@@ -48,5 +48,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/27.md" >}}
 ---
 {{< youtube Pcd1ii9P9ZI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #29: Divide Two Integers](https://grid47.xyz/posts/leetcode-29-divide-two-integers-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #29: Divide Two Integers](https://grid47.xyz/posts/leetcode-29-divide-two-integers-solution/) |
 | --- |

@@ -44,5 +44,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2844.md" >}}
 ---
 {{< youtube xFshDEg_Ul4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2845: Count of Interesting Subarrays](https://grid47.xyz/posts/leetcode-2845-count-of-interesting-subarrays-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2845: Count of Interesting Subarrays](https://grid47.xyz/posts/leetcode-2845-count-of-interesting-subarrays-solution/) |
 | --- |

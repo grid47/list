@@ -34,5 +34,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2520.md" >}}
 ---
 {{< youtube 7SHHsS5kPJ8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2521: Distinct Prime Factors of Product of Array](https://grid47.xyz/posts/leetcode-2521-distinct-prime-factors-of-product-of-array-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2521: Distinct Prime Factors of Product of Array](https://grid47.xyz/posts/leetcode-2521-distinct-prime-factors-of-product-of-array-solution/) |
 | --- |

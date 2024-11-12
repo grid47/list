@@ -47,5 +47,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2280.md" >}}
 ---
 {{< youtube EkoNpVUBSVo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2283: Check if Number Has Equal Digit Count and Digit Value](https://grid47.xyz/posts/leetcode-2283-check-if-number-has-equal-digit-count-and-digit-value-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2283: Check if Number Has Equal Digit Count and Digit Value](https://grid47.xyz/posts/leetcode-2283-check-if-number-has-equal-digit-count-and-digit-value-solution/) |
 | --- |

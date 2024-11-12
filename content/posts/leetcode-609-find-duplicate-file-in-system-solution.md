@@ -51,5 +51,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/609.md" >}}
 ---
 {{< youtube 3GP6BA1oXQw >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #611: Valid Triangle Number](https://grid47.xyz/posts/leetcode-611-valid-triangle-number-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #611: Valid Triangle Number](https://grid47.xyz/posts/leetcode-611-valid-triangle-number-solution/) |
 | --- |

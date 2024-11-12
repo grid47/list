@@ -37,5 +37,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1716.md" >}}
 ---
 {{< youtube tKK7gvPCQfs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1717: Maximum Score From Removing Substrings](https://grid47.xyz/posts/leetcode-1717-maximum-score-from-removing-substrings-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1717: Maximum Score From Removing Substrings](https://grid47.xyz/posts/leetcode-1717-maximum-score-from-removing-substrings-solution/) |
 | --- |

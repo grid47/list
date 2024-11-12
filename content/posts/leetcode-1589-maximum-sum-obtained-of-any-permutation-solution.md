@@ -47,5 +47,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1589.md" >}}
 ---
 {{< youtube TyZ_FFGIZgs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1590: Make Sum Divisible by P](https://grid47.xyz/posts/leetcode-1590-make-sum-divisible-by-p-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1590: Make Sum Divisible by P](https://grid47.xyz/posts/leetcode-1590-make-sum-divisible-by-p-solution/) |
 | --- |

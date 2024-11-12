@@ -70,5 +70,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2212.md" >}}
 ---
 {{< youtube nnwNXfYz2mo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2215: Find the Difference of Two Arrays](https://grid47.xyz/posts/leetcode-2215-find-the-difference-of-two-arrays-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2215: Find the Difference of Two Arrays](https://grid47.xyz/posts/leetcode-2215-find-the-difference-of-two-arrays-solution/) |
 | --- |

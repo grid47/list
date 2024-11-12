@@ -51,5 +51,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1749.md" >}}
 ---
 {{< youtube XVVB_ZXsbnI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1750: Minimum Length of String After Deleting Similar Ends](https://grid47.xyz/posts/leetcode-1750-minimum-length-of-string-after-deleting-similar-ends-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1750: Minimum Length of String After Deleting Similar Ends](https://grid47.xyz/posts/leetcode-1750-minimum-length-of-string-after-deleting-similar-ends-solution/) |
 | --- |

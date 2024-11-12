@@ -54,5 +54,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2904.md" >}}
 ---
 {{< youtube FhAuoztsceo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2905: Find Indices With Index and Value Difference II](https://grid47.xyz/posts/leetcode-2905-find-indices-with-index-and-value-difference-ii-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2905: Find Indices With Index and Value Difference II](https://grid47.xyz/posts/leetcode-2905-find-indices-with-index-and-value-difference-ii-solution/) |
 | --- |

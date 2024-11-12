@@ -35,5 +35,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2063.md" >}}
 ---
 {{< youtube yVDIm1IfG2c >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2064: Minimized Maximum of Products Distributed to Any Store](https://grid47.xyz/posts/leetcode-2064-minimized-maximum-of-products-distributed-to-any-store-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2064: Minimized Maximum of Products Distributed to Any Store](https://grid47.xyz/posts/leetcode-2064-minimized-maximum-of-products-distributed-to-any-store-solution/) |
 | --- |

@@ -54,5 +54,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2012.md" >}}
 ---
 {{< youtube pOb_fN_-rzo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2013: Detect Squares](https://grid47.xyz/posts/leetcode-2013-detect-squares-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2013: Detect Squares](https://grid47.xyz/posts/leetcode-2013-detect-squares-solution/) |
 | --- |

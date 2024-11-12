@@ -77,5 +77,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1937.md" >}}
 ---
 {{< youtube ik1y7fz8AOc >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1941: Check if All Characters Have Equal Number of Occurrences](https://grid47.xyz/posts/leetcode-1941-check-if-all-characters-have-equal-number-of-occurrences-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1941: Check if All Characters Have Equal Number of Occurrences](https://grid47.xyz/posts/leetcode-1941-check-if-all-characters-have-equal-number-of-occurrences-solution/) |
 | --- |

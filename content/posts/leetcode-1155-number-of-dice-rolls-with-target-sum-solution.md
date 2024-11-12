@@ -37,5 +37,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1155.md" >}}
 ---
 {{< youtube y1PUOTOr-qU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1156: Swap For Longest Repeated Character Substring](https://grid47.xyz/posts/leetcode-1156-swap-for-longest-repeated-character-substring-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1156: Swap For Longest Repeated Character Substring](https://grid47.xyz/posts/leetcode-1156-swap-for-longest-repeated-character-substring-solution/) |
 | --- |

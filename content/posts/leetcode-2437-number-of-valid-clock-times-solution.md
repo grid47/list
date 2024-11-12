@@ -46,5 +46,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2437.md" >}}
 ---
 {{< youtube LDYuUXRGMzE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2438: Range Product Queries of Powers](https://grid47.xyz/posts/leetcode-2438-range-product-queries-of-powers-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2438: Range Product Queries of Powers](https://grid47.xyz/posts/leetcode-2438-range-product-queries-of-powers-solution/) |
 | --- |

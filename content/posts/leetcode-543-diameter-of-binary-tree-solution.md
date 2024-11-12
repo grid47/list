@@ -52,5 +52,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/543.md" >}}
 ---
 {{< youtube 6lJZ_xj1mEo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #547: Number of Provinces](https://grid47.xyz/posts/leetcode-547-number-of-provinces-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #547: Number of Provinces](https://grid47.xyz/posts/leetcode-547-number-of-provinces-solution/) |
 | --- |

@@ -55,5 +55,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2191.md" >}}
 ---
 {{< youtube rmkF2mxPoZM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2192: All Ancestors of a Node in a Directed Acyclic Graph](https://grid47.xyz/posts/leetcode-2192-all-ancestors-of-a-node-in-a-directed-acyclic-graph-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2192: All Ancestors of a Node in a Directed Acyclic Graph](https://grid47.xyz/posts/leetcode-2192-all-ancestors-of-a-node-in-a-directed-acyclic-graph-solution/) |
 | --- |

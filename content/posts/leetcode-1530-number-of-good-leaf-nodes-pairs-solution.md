@@ -71,5 +71,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1530.md" >}}
 ---
 {{< youtube f_epkBeS1LQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1535: Find the Winner of an Array Game](https://grid47.xyz/posts/leetcode-1535-find-the-winner-of-an-array-game-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1535: Find the Winner of an Array Game](https://grid47.xyz/posts/leetcode-1535-find-the-winner-of-an-array-game-solution/) |
 | --- |

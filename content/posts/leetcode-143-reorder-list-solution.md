@@ -71,5 +71,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/143.md" >}}
 ---
 {{< youtube i3HU4Ur3-uM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #144: Binary Tree Preorder Traversal](https://grid47.xyz/posts/leetcode-144-binary-tree-preorder-traversal-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #144: Binary Tree Preorder Traversal](https://grid47.xyz/posts/leetcode-144-binary-tree-preorder-traversal-solution/) |
 | --- |

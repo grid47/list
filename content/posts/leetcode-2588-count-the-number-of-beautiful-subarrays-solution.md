@@ -41,5 +41,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2588.md" >}}
 ---
 {{< youtube JokGqRfyMPU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2591: Distribute Money to Maximum Children](https://grid47.xyz/posts/leetcode-2591-distribute-money-to-maximum-children-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2591: Distribute Money to Maximum Children](https://grid47.xyz/posts/leetcode-2591-distribute-money-to-maximum-children-solution/) |
 | --- |

@@ -46,5 +46,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/811.md" >}}
 ---
 {{< youtube oe_eXlH5dUM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #813: Largest Sum of Averages](https://grid47.xyz/posts/leetcode-813-largest-sum-of-averages-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #813: Largest Sum of Averages](https://grid47.xyz/posts/leetcode-813-largest-sum-of-averages-solution/) |
 | --- |

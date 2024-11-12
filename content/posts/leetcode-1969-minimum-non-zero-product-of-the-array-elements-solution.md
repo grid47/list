@@ -51,5 +51,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1969.md" >}}
 ---
 {{< youtube 1O57f1H8EyA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1971: Find if Path Exists in Graph](https://grid47.xyz/posts/leetcode-1971-find-if-path-exists-in-graph-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1971: Find if Path Exists in Graph](https://grid47.xyz/posts/leetcode-1971-find-if-path-exists-in-graph-solution/) |
 | --- |

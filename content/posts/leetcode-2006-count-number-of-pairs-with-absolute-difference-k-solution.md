@@ -36,5 +36,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2006.md" >}}
 ---
 {{< youtube noP_AsQlgQc >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2007: Find Original Array From Doubled Array](https://grid47.xyz/posts/leetcode-2007-find-original-array-from-doubled-array-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2007: Find Original Array From Doubled Array](https://grid47.xyz/posts/leetcode-2007-find-original-array-from-doubled-array-solution/) |
 | --- |

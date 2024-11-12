@@ -39,5 +39,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2934.md" >}}
 ---
 {{< youtube 5eDemRe02LM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2937: Make Three Strings Equal](https://grid47.xyz/posts/leetcode-2937-make-three-strings-equal-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2937: Make Three Strings Equal](https://grid47.xyz/posts/leetcode-2937-make-three-strings-equal-solution/) |
 | --- |

@@ -53,5 +53,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/979.md" >}}
 ---
 {{< youtube YfdfIOeV_RU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #981: Time Based Key-Value Store](https://grid47.xyz/posts/leetcode-981-time-based-key-value-store-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #981: Time Based Key-Value Store](https://grid47.xyz/posts/leetcode-981-time-based-key-value-store-solution/) |
 | --- |

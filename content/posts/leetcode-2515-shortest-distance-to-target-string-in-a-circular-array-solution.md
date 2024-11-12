@@ -37,5 +37,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2515.md" >}}
 ---
 {{< youtube yTpRd3yvyz0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2516: Take K of Each Character From Left and Right](https://grid47.xyz/posts/leetcode-2516-take-k-of-each-character-from-left-and-right-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2516: Take K of Each Character From Left and Right](https://grid47.xyz/posts/leetcode-2516-take-k-of-each-character-from-left-and-right-solution/) |
 | --- |

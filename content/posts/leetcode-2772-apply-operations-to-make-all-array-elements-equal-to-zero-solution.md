@@ -40,5 +40,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2772.md" >}}
 ---
 {{< youtube xpjC9rt9xsM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2778: Sum of Squares of Special Elements ](https://grid47.xyz/posts/leetcode-2778-sum-of-squares-of-special-elements-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2778: Sum of Squares of Special Elements ](https://grid47.xyz/posts/leetcode-2778-sum-of-squares-of-special-elements-solution/) |
 | --- |

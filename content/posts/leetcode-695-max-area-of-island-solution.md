@@ -50,5 +50,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/695.md" >}}
 ---
 {{< youtube rowp_Frq_eI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #698: Partition to K Equal Sum Subsets](https://grid47.xyz/posts/leetcode-698-partition-to-k-equal-sum-subsets-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #698: Partition to K Equal Sum Subsets](https://grid47.xyz/posts/leetcode-698-partition-to-k-equal-sum-subsets-solution/) |
 | --- |

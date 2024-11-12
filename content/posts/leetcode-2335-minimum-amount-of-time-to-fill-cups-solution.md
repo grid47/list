@@ -36,5 +36,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2335.md" >}}
 ---
 {{< youtube jcfxf8gjVbE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2336: Smallest Number in Infinite Set](https://grid47.xyz/posts/leetcode-2336-smallest-number-in-infinite-set-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2336: Smallest Number in Infinite Set](https://grid47.xyz/posts/leetcode-2336-smallest-number-in-infinite-set-solution/) |
 | --- |

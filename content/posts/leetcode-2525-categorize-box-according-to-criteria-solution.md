@@ -47,5 +47,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2525.md" >}}
 ---
 {{< youtube dIciftyQXHo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2526: Find Consecutive Integers from a Data Stream](https://grid47.xyz/posts/leetcode-2526-find-consecutive-integers-from-a-data-stream-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2526: Find Consecutive Integers from a Data Stream](https://grid47.xyz/posts/leetcode-2526-find-consecutive-integers-from-a-data-stream-solution/) |
 | --- |

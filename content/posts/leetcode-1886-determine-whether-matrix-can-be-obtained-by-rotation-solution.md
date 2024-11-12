@@ -55,5 +55,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1886.md" >}}
 ---
 {{< youtube vf_nUx64R0E >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1887: Reduction Operations to Make the Array Elements Equal](https://grid47.xyz/posts/leetcode-1887-reduction-operations-to-make-the-array-elements-equal-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1887: Reduction Operations to Make the Array Elements Equal](https://grid47.xyz/posts/leetcode-1887-reduction-operations-to-make-the-array-elements-equal-solution/) |
 | --- |

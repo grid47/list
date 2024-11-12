@@ -51,5 +51,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2654.md" >}}
 ---
 {{< youtube 9LOYxdctbs0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2656: Maximum Sum With Exactly K Elements ](https://grid47.xyz/posts/leetcode-2656-maximum-sum-with-exactly-k-elements-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2656: Maximum Sum With Exactly K Elements ](https://grid47.xyz/posts/leetcode-2656-maximum-sum-with-exactly-k-elements-solution/) |
 | --- |

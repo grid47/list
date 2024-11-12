@@ -45,5 +45,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2829.md" >}}
 ---
 {{< youtube EimziJ7mVdE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2830: Maximize the Profit as the Salesman](https://grid47.xyz/posts/leetcode-2830-maximize-the-profit-as-the-salesman-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2830: Maximize the Profit as the Salesman](https://grid47.xyz/posts/leetcode-2830-maximize-the-profit-as-the-salesman-solution/) |
 | --- |

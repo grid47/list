@@ -49,5 +49,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/386.md" >}}
 ---
 {{< youtube n4YGTbFfU-w >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #387: First Unique Character in a String](https://grid47.xyz/posts/leetcode-387-first-unique-character-in-a-string-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #387: First Unique Character in a String](https://grid47.xyz/posts/leetcode-387-first-unique-character-in-a-string-solution/) |
 | --- |

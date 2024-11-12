@@ -44,5 +44,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2374.md" >}}
 ---
 {{< youtube 1egOQhIT9Gg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2375: Construct Smallest Number From DI String](https://grid47.xyz/posts/leetcode-2375-construct-smallest-number-from-di-string-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2375: Construct Smallest Number From DI String](https://grid47.xyz/posts/leetcode-2375-construct-smallest-number-from-di-string-solution/) |
 | --- |

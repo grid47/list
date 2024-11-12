@@ -35,5 +35,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1754.md" >}}
 ---
 {{< youtube YB-A6OUj98o >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1758: Minimum Changes To Make Alternating Binary String](https://grid47.xyz/posts/leetcode-1758-minimum-changes-to-make-alternating-binary-string-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1758: Minimum Changes To Make Alternating Binary String](https://grid47.xyz/posts/leetcode-1758-minimum-changes-to-make-alternating-binary-string-solution/) |
 | --- |

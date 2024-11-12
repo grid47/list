@@ -44,5 +44,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3138.md" >}}
 ---
 {{< youtube T64iR68Fxng >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #3146: Permutation Difference between Two Strings](https://grid47.xyz/posts/leetcode-3146-permutation-difference-between-two-strings-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #3146: Permutation Difference between Two Strings](https://grid47.xyz/posts/leetcode-3146-permutation-difference-between-two-strings-solution/) |
 | --- |

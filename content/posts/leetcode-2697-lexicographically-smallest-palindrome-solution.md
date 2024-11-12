@@ -40,5 +40,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2697.md" >}}
 ---
 {{< youtube EzAjKrEQLFs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2706: Buy Two Chocolates](https://grid47.xyz/posts/leetcode-2706-buy-two-chocolates-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2706: Buy Two Chocolates](https://grid47.xyz/posts/leetcode-2706-buy-two-chocolates-solution/) |
 | --- |

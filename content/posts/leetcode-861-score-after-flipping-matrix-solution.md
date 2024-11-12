@@ -41,5 +41,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/861.md" >}}
 ---
 {{< youtube FbhzRA5den8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #863: All Nodes Distance K in Binary Tree](https://grid47.xyz/posts/leetcode-863-all-nodes-distance-k-in-binary-tree-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #863: All Nodes Distance K in Binary Tree](https://grid47.xyz/posts/leetcode-863-all-nodes-distance-k-in-binary-tree-solution/) |
 | --- |

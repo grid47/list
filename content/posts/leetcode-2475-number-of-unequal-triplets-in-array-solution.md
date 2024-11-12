@@ -40,5 +40,5 @@ int unequalTriplets(vector<int>& nums) {
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2475.md" >}}
 ---
 {{< youtube AbSMJxiiJpk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2476: Closest Nodes Queries in a Binary Search Tree](https://grid47.xyz/posts/leetcode-2476-closest-nodes-queries-in-a-binary-search-tree-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2476: Closest Nodes Queries in a Binary Search Tree](https://grid47.xyz/posts/leetcode-2476-closest-nodes-queries-in-a-binary-search-tree-solution/) |
 | --- |

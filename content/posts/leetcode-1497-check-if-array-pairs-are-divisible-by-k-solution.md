@@ -40,5 +40,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1497.md" >}}
 ---
 {{< youtube lLEmqIblivA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1498: Number of Subsequences That Satisfy the Given Sum Condition](https://grid47.xyz/posts/leetcode-1498-number-of-subsequences-that-satisfy-the-given-sum-condition-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1498: Number of Subsequences That Satisfy the Given Sum Condition](https://grid47.xyz/posts/leetcode-1498-number-of-subsequences-that-satisfy-the-given-sum-condition-solution/) |
 | --- |

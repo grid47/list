@@ -38,5 +38,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1910.md" >}}
 ---
 {{< youtube d74CJIqw268 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1911: Maximum Alternating Subsequence Sum](https://grid47.xyz/posts/leetcode-1911-maximum-alternating-subsequence-sum-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1911: Maximum Alternating Subsequence Sum](https://grid47.xyz/posts/leetcode-1911-maximum-alternating-subsequence-sum-solution/) |
 | --- |

@@ -41,5 +41,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2134.md" >}}
 ---
 {{< youtube BueoreUIkcE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2135: Count Words Obtained After Adding a Letter](https://grid47.xyz/posts/leetcode-2135-count-words-obtained-after-adding-a-letter-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2135: Count Words Obtained After Adding a Letter](https://grid47.xyz/posts/leetcode-2135-count-words-obtained-after-adding-a-letter-solution/) |
 | --- |

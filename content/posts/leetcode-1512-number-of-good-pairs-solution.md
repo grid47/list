@@ -36,5 +36,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1512.md" >}}
 ---
 {{< youtube BqhDFUo1rjs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1513: Number of Substrings With Only 1s](https://grid47.xyz/posts/leetcode-1513-number-of-substrings-with-only-1s-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1513: Number of Substrings With Only 1s](https://grid47.xyz/posts/leetcode-1513-number-of-substrings-with-only-1s-solution/) |
 | --- |

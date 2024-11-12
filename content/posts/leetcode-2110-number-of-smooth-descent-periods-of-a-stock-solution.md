@@ -40,5 +40,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2110.md" >}}
 ---
 {{< youtube p_hKOwJ7azU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2116: Check if a Parentheses String Can Be Valid](https://grid47.xyz/posts/leetcode-2116-check-if-a-parentheses-string-can-be-valid-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2116: Check if a Parentheses String Can Be Valid](https://grid47.xyz/posts/leetcode-2116-check-if-a-parentheses-string-can-be-valid-solution/) |
 | --- |

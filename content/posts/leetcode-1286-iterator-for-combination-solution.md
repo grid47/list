@@ -72,5 +72,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1286.md" >}}
 ---
 {{< youtube LzYlG_p1-zs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1287: Element Appearing More Than 25% In Sorted Array](https://grid47.xyz/posts/leetcode-1287-element-appearing-more-than-25-in-sorted-array-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1287: Element Appearing More Than 25% In Sorted Array](https://grid47.xyz/posts/leetcode-1287-element-appearing-more-than-25-in-sorted-array-solution/) |
 | --- |

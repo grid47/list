@@ -56,5 +56,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1493.md" >}}
 ---
 {{< youtube PnzvwU4CFg8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1496: Path Crossing](https://grid47.xyz/posts/leetcode-1496-path-crossing-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1496: Path Crossing](https://grid47.xyz/posts/leetcode-1496-path-crossing-solution/) |
 | --- |

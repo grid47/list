@@ -47,5 +47,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2048.md" >}}
 ---
 {{< youtube VLLBGEWCHqs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2049: Count Nodes With the Highest Score](https://grid47.xyz/posts/leetcode-2049-count-nodes-with-the-highest-score-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2049: Count Nodes With the Highest Score](https://grid47.xyz/posts/leetcode-2049-count-nodes-with-the-highest-score-solution/) |
 | --- |

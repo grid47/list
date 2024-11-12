@@ -51,5 +51,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2807.md" >}}
 ---
 {{< youtube SVnSiD95r-0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2808: Minimum Seconds to Equalize a Circular Array](https://grid47.xyz/posts/leetcode-2808-minimum-seconds-to-equalize-a-circular-array-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2808: Minimum Seconds to Equalize a Circular Array](https://grid47.xyz/posts/leetcode-2808-minimum-seconds-to-equalize-a-circular-array-solution/) |
 | --- |

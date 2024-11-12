@@ -70,5 +70,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/698.md" >}}
 ---
 {{< youtube mBk4I0X46oI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #703: Kth Largest Element in a Stream](https://grid47.xyz/posts/leetcode-703-kth-largest-element-in-a-stream-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #703: Kth Largest Element in a Stream](https://grid47.xyz/posts/leetcode-703-kth-largest-element-in-a-stream-solution/) |
 | --- |

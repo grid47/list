@@ -52,5 +52,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1186.md" >}}
 ---
 {{< youtube EWCdm1cKtrA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1190: Reverse Substrings Between Each Pair of Parentheses](https://grid47.xyz/posts/leetcode-1190-reverse-substrings-between-each-pair-of-parentheses-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1190: Reverse Substrings Between Each Pair of Parentheses](https://grid47.xyz/posts/leetcode-1190-reverse-substrings-between-each-pair-of-parentheses-solution/) |
 | --- |

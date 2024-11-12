@@ -43,5 +43,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/786.md" >}}
 ---
 {{< youtube sJdJTXhxqjo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #787: Cheapest Flights Within K Stops](https://grid47.xyz/posts/leetcode-787-cheapest-flights-within-k-stops-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #787: Cheapest Flights Within K Stops](https://grid47.xyz/posts/leetcode-787-cheapest-flights-within-k-stops-solution/) |
 | --- |

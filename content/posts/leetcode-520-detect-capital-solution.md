@@ -36,5 +36,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/520.md" >}}
 ---
 {{< youtube TIJRBKK1gXE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #522: Longest Uncommon Subsequence II](https://grid47.xyz/posts/leetcode-522-longest-uncommon-subsequence-ii-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #522: Longest Uncommon Subsequence II](https://grid47.xyz/posts/leetcode-522-longest-uncommon-subsequence-ii-solution/) |
 | --- |

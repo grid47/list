@@ -62,5 +62,5 @@ long long path(int i, int j, int n, vector<vector<vector<long long>>> &mem) {
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/935.md" >}}
 ---
 {{< youtube vlsUUm_qqsY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #938: Range Sum of BST](https://grid47.xyz/posts/leetcode-938-range-sum-of-bst-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #938: Range Sum of BST](https://grid47.xyz/posts/leetcode-938-range-sum-of-bst-solution/) |
 | --- |

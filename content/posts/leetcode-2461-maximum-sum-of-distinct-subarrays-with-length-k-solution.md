@@ -51,5 +51,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2461.md" >}}
 ---
 {{< youtube o8XmnEBQrLs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2462: Total Cost to Hire K Workers](https://grid47.xyz/posts/leetcode-2462-total-cost-to-hire-k-workers-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2462: Total Cost to Hire K Workers](https://grid47.xyz/posts/leetcode-2462-total-cost-to-hire-k-workers-solution/) |
 | --- |

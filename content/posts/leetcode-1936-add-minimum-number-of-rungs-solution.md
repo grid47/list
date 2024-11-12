@@ -67,5 +67,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1936.md" >}}
 ---
 {{< youtube f_KA5C_13Oc >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1937: Maximum Number of Points with Cost](https://grid47.xyz/posts/leetcode-1937-maximum-number-of-points-with-cost-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1937: Maximum Number of Points with Cost](https://grid47.xyz/posts/leetcode-1937-maximum-number-of-points-with-cost-solution/) |
 | --- |

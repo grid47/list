@@ -42,5 +42,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1343.md" >}}
 ---
 {{< youtube D8B4tKxMTnY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1344: Angle Between Hands of a Clock](https://grid47.xyz/posts/leetcode-1344-angle-between-hands-of-a-clock-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1344: Angle Between Hands of a Clock](https://grid47.xyz/posts/leetcode-1344-angle-between-hands-of-a-clock-solution/) |
 | --- |

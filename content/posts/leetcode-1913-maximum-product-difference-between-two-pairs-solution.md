@@ -65,5 +65,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1913.md" >}}
 ---
 {{< youtube wBPoEm3r3EA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1914: Cyclically Rotating a Grid](https://grid47.xyz/posts/leetcode-1914-cyclically-rotating-a-grid-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1914: Cyclically Rotating a Grid](https://grid47.xyz/posts/leetcode-1914-cyclically-rotating-a-grid-solution/) |
 | --- |

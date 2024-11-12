@@ -55,5 +55,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2483.md" >}}
 ---
 {{< youtube 0d7ShRoOFVE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2485: Find the Pivot Integer](https://grid47.xyz/posts/leetcode-2485-find-the-pivot-integer-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2485: Find the Pivot Integer](https://grid47.xyz/posts/leetcode-2485-find-the-pivot-integer-solution/) |
 | --- |

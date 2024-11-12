@@ -63,5 +63,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2192.md" >}}
 ---
 {{< youtube RdxsvhrTQ0A >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2194: Cells in a Range on an Excel Sheet](https://grid47.xyz/posts/leetcode-2194-cells-in-a-range-on-an-excel-sheet-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2194: Cells in a Range on an Excel Sheet](https://grid47.xyz/posts/leetcode-2194-cells-in-a-range-on-an-excel-sheet-solution/) |
 | --- |

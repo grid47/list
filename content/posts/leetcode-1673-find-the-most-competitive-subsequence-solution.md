@@ -46,5 +46,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1673.md" >}}
 ---
 {{< youtube GBJFxSD3B_s >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1674: Minimum Moves to Make Array Complementary](https://grid47.xyz/posts/leetcode-1674-minimum-moves-to-make-array-complementary-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1674: Minimum Moves to Make Array Complementary](https://grid47.xyz/posts/leetcode-1674-minimum-moves-to-make-array-complementary-solution/) |
 | --- |

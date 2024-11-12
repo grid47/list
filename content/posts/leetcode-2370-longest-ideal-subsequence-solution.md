@@ -37,5 +37,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2370.md" >}}
 ---
 {{< youtube gR1E2oLQYSY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2373: Largest Local Values in a Matrix](https://grid47.xyz/posts/leetcode-2373-largest-local-values-in-a-matrix-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2373: Largest Local Values in a Matrix](https://grid47.xyz/posts/leetcode-2373-largest-local-values-in-a-matrix-solution/) |
 | --- |

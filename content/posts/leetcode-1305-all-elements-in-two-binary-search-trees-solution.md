@@ -65,5 +65,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1305.md" >}}
 ---
 {{< youtube B97Hk1H2x2s >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1306: Jump Game III](https://grid47.xyz/posts/leetcode-1306-jump-game-iii-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1306: Jump Game III](https://grid47.xyz/posts/leetcode-1306-jump-game-iii-solution/) |
 | --- |

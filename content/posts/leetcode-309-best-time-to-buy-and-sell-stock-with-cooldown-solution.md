@@ -56,5 +56,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/309.md" >}}
 ---
 {{< youtube t2Tw5kVkmEY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #310: Minimum Height Trees](https://grid47.xyz/posts/leetcode-310-minimum-height-trees-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #310: Minimum Height Trees](https://grid47.xyz/posts/leetcode-310-minimum-height-trees-solution/) |
 | --- |

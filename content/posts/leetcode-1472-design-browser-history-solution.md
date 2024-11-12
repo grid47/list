@@ -66,5 +66,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1472.md" >}}
 ---
 {{< youtube pvj8WQMPlGY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1476: Subrectangle Queries](https://grid47.xyz/posts/leetcode-1476-subrectangle-queries-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1476: Subrectangle Queries](https://grid47.xyz/posts/leetcode-1476-subrectangle-queries-solution/) |
 | --- |

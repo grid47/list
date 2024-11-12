@@ -62,5 +62,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1146.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1155: Number of Dice Rolls With Target Sum](https://grid47.xyz/posts/leetcode-1155-number-of-dice-rolls-with-target-sum-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1155: Number of Dice Rolls With Target Sum](https://grid47.xyz/posts/leetcode-1155-number-of-dice-rolls-with-target-sum-solution/) |
 | --- |

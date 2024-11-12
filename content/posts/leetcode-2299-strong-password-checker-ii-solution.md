@@ -39,5 +39,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2299.md" >}}
 ---
 {{< youtube 0Rn1Lf0mXOI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2300: Successful Pairs of Spells and Potions](https://grid47.xyz/posts/leetcode-2300-successful-pairs-of-spells-and-potions-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2300: Successful Pairs of Spells and Potions](https://grid47.xyz/posts/leetcode-2300-successful-pairs-of-spells-and-potions-solution/) |
 | --- |

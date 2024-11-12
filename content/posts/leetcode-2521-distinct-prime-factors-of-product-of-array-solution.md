@@ -52,5 +52,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2521.md" >}}
 ---
 {{< youtube HKc9PcSzNic >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2522: Partition String Into Substrings With Values at Most K](https://grid47.xyz/posts/leetcode-2522-partition-string-into-substrings-with-values-at-most-k-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2522: Partition String Into Substrings With Values at Most K](https://grid47.xyz/posts/leetcode-2522-partition-string-into-substrings-with-values-at-most-k-solution/) |
 | --- |

@@ -50,5 +50,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1829.md" >}}
 ---
 {{< youtube AIGDFYa4aWM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1832: Check if the Sentence Is Pangram](https://grid47.xyz/posts/leetcode-1832-check-if-the-sentence-is-pangram-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1832: Check if the Sentence Is Pangram](https://grid47.xyz/posts/leetcode-1832-check-if-the-sentence-is-pangram-solution/) |
 | --- |

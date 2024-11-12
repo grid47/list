@@ -45,5 +45,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1871.md" >}}
 ---
 {{< youtube v1HpZUnQ4Yo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1876: Substrings of Size Three with Distinct Characters](https://grid47.xyz/posts/leetcode-1876-substrings-of-size-three-with-distinct-characters-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1876: Substrings of Size Three with Distinct Characters](https://grid47.xyz/posts/leetcode-1876-substrings-of-size-three-with-distinct-characters-solution/) |
 | --- |

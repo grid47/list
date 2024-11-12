@@ -55,5 +55,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/513.md" >}}
 ---
 {{< youtube u_by_cTsNJA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #515: Find Largest Value in Each Tree Row](https://grid47.xyz/posts/leetcode-515-find-largest-value-in-each-tree-row-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #515: Find Largest Value in Each Tree Row](https://grid47.xyz/posts/leetcode-515-find-largest-value-in-each-tree-row-solution/) |
 | --- |

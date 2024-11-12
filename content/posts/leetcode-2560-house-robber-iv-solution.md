@@ -95,5 +95,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2560.md" >}}
 ---
 {{< youtube BJWTAclDvEA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2562: Find the Array Concatenation Value](https://grid47.xyz/posts/leetcode-2562-find-the-array-concatenation-value-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2562: Find the Array Concatenation Value](https://grid47.xyz/posts/leetcode-2562-find-the-array-concatenation-value-solution/) |
 | --- |

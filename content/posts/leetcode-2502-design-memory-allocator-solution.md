@@ -76,5 +76,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2502.md" >}}
 ---
 {{< youtube ARhX-jazvSY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2506: Count Pairs Of Similar Strings](https://grid47.xyz/posts/leetcode-2506-count-pairs-of-similar-strings-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2506: Count Pairs Of Similar Strings](https://grid47.xyz/posts/leetcode-2506-count-pairs-of-similar-strings-solution/) |
 | --- |

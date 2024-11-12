@@ -44,5 +44,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1961.md" >}}
 ---
 {{< youtube msS6F5DL8gQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1962: Remove Stones to Minimize the Total](https://grid47.xyz/posts/leetcode-1962-remove-stones-to-minimize-the-total-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1962: Remove Stones to Minimize the Total](https://grid47.xyz/posts/leetcode-1962-remove-stones-to-minimize-the-total-solution/) |
 | --- |

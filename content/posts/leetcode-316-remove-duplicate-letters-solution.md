@@ -71,5 +71,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/316.md" >}}
 ---
 {{< youtube HjvMWNHZBNI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #318: Maximum Product of Word Lengths](https://grid47.xyz/posts/leetcode-318-maximum-product-of-word-lengths-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #318: Maximum Product of Word Lengths](https://grid47.xyz/posts/leetcode-318-maximum-product-of-word-lengths-solution/) |
 | --- |

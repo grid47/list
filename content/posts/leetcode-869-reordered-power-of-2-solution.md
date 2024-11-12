@@ -40,5 +40,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/869.md" >}}
 ---
 {{< youtube rJu123dgDy8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #870: Advantage Shuffle](https://grid47.xyz/posts/leetcode-870-advantage-shuffle-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #870: Advantage Shuffle](https://grid47.xyz/posts/leetcode-870-advantage-shuffle-solution/) |
 | --- |

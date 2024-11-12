@@ -43,5 +43,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2683.md" >}}
 ---
 {{< youtube DDQR_mDTTFI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2684: Maximum Number of Moves in a Grid](https://grid47.xyz/posts/leetcode-2684-maximum-number-of-moves-in-a-grid-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2684: Maximum Number of Moves in a Grid](https://grid47.xyz/posts/leetcode-2684-maximum-number-of-moves-in-a-grid-solution/) |
 | --- |

@@ -67,5 +67,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/501.md" >}}
 ---
 {{< youtube cHwafswjTlE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #508: Most Frequent Subtree Sum](https://grid47.xyz/posts/leetcode-508-most-frequent-subtree-sum-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #508: Most Frequent Subtree Sum](https://grid47.xyz/posts/leetcode-508-most-frequent-subtree-sum-solution/) |
 | --- |

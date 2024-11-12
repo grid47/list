@@ -57,5 +57,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2333.md" >}}
 ---
 {{< youtube wp8lV0aP6aU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2335: Minimum Amount of Time to Fill Cups](https://grid47.xyz/posts/leetcode-2335-minimum-amount-of-time-to-fill-cups-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2335: Minimum Amount of Time to Fill Cups](https://grid47.xyz/posts/leetcode-2335-minimum-amount-of-time-to-fill-cups-solution/) |
 | --- |

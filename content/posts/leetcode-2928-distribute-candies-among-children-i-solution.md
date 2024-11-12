@@ -39,5 +39,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2928.md" >}}
 ---
 {{< youtube hVNcZKh8r40 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2932: Maximum Strong Pair XOR I](https://grid47.xyz/posts/leetcode-2932-maximum-strong-pair-xor-i-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2932: Maximum Strong Pair XOR I](https://grid47.xyz/posts/leetcode-2932-maximum-strong-pair-xor-i-solution/) |
 | --- |

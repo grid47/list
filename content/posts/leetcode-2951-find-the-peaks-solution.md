@@ -37,5 +37,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2951.md" >}}
 ---
 {{< youtube zatlKoGhxCQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2952: Minimum Number of Coins to be Added](https://grid47.xyz/posts/leetcode-2952-minimum-number-of-coins-to-be-added-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2952: Minimum Number of Coins to be Added](https://grid47.xyz/posts/leetcode-2952-minimum-number-of-coins-to-be-added-solution/) |
 | --- |

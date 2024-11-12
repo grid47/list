@@ -51,5 +51,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2833.md" >}}
 ---
 {{< youtube XD2LVEXo8j8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2839: Check if Strings Can be Made Equal With Operations I](https://grid47.xyz/posts/leetcode-2839-check-if-strings-can-be-made-equal-with-operations-i-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2839: Check if Strings Can be Made Equal With Operations I](https://grid47.xyz/posts/leetcode-2839-check-if-strings-can-be-made-equal-with-operations-i-solution/) |
 | --- |

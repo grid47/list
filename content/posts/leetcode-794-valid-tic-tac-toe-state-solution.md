@@ -60,5 +60,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/794.md" >}}
 ---
 {{< youtube 5IGbZyPgjP0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #795: Number of Subarrays with Bounded Maximum](https://grid47.xyz/posts/leetcode-795-number-of-subarrays-with-bounded-maximum-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #795: Number of Subarrays with Bounded Maximum](https://grid47.xyz/posts/leetcode-795-number-of-subarrays-with-bounded-maximum-solution/) |
 | --- |

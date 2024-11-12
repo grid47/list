@@ -35,5 +35,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2216.md" >}}
 ---
 {{< youtube VgyrTbLZie8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2217: Find Palindrome With Fixed Length](https://grid47.xyz/posts/leetcode-2217-find-palindrome-with-fixed-length-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2217: Find Palindrome With Fixed Length](https://grid47.xyz/posts/leetcode-2217-find-palindrome-with-fixed-length-solution/) |
 | --- |

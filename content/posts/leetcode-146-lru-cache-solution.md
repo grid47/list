@@ -73,5 +73,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/146.md" >}}
 ---
 {{< youtube 7ABFKPK2hD4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #150: Evaluate Reverse Polish Notation](https://grid47.xyz/posts/leetcode-150-evaluate-reverse-polish-notation-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #150: Evaluate Reverse Polish Notation](https://grid47.xyz/posts/leetcode-150-evaluate-reverse-polish-notation-solution/) |
 | --- |

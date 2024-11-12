@@ -47,5 +47,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1792.md" >}}
 ---
 {{< youtube ZjydWQCVg80 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1796: Second Largest Digit in a String](https://grid47.xyz/posts/leetcode-1796-second-largest-digit-in-a-string-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1796: Second Largest Digit in a String](https://grid47.xyz/posts/leetcode-1796-second-largest-digit-in-a-string-solution/) |
 | --- |

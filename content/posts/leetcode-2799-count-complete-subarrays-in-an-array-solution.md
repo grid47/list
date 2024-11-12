@@ -49,5 +49,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2799.md" >}}
 ---
 {{< youtube 1wXkWZtSD28 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2800: Shortest String That Contains Three Strings](https://grid47.xyz/posts/leetcode-2800-shortest-string-that-contains-three-strings-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2800: Shortest String That Contains Three Strings](https://grid47.xyz/posts/leetcode-2800-shortest-string-that-contains-three-strings-solution/) |
 | --- |

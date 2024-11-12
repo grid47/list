@@ -42,5 +42,5 @@ return true;}
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2840.md" >}}
 ---
 {{< youtube yc9CXLWctOU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2841: Maximum Sum of Almost Unique Subarray](https://grid47.xyz/posts/leetcode-2841-maximum-sum-of-almost-unique-subarray-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2841: Maximum Sum of Almost Unique Subarray](https://grid47.xyz/posts/leetcode-2841-maximum-sum-of-almost-unique-subarray-solution/) |
 | --- |

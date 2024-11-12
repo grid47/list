@@ -64,5 +64,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1914.md" >}}
 ---
 {{< youtube 3dCs1ZHDNjM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1915: Number of Wonderful Substrings](https://grid47.xyz/posts/leetcode-1915-number-of-wonderful-substrings-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1915: Number of Wonderful Substrings](https://grid47.xyz/posts/leetcode-1915-number-of-wonderful-substrings-solution/) |
 | --- |

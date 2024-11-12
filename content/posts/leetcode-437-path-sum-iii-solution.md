@@ -68,5 +68,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/437.md" >}}
 ---
 {{< youtube Vam9gldRapY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #438: Find All Anagrams in a String](https://grid47.xyz/posts/leetcode-438-find-all-anagrams-in-a-string-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #438: Find All Anagrams in a String](https://grid47.xyz/posts/leetcode-438-find-all-anagrams-in-a-string-solution/) |
 | --- |

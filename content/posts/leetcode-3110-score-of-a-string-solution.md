@@ -35,5 +35,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3110.md" >}}
 ---
 {{< youtube imbrLFL20tQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #3120: Count the Number of Special Characters I](https://grid47.xyz/posts/leetcode-3120-count-the-number-of-special-characters-i-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #3120: Count the Number of Special Characters I](https://grid47.xyz/posts/leetcode-3120-count-the-number-of-special-characters-i-solution/) |
 | --- |

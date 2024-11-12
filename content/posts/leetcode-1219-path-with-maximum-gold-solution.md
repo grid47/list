@@ -50,5 +50,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1219.md" >}}
 ---
 {{< youtube I1wllM_pozY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1222: Queens That Can Attack the King](https://grid47.xyz/posts/leetcode-1222-queens-that-can-attack-the-king-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1222: Queens That Can Attack the King](https://grid47.xyz/posts/leetcode-1222-queens-that-can-attack-the-king-solution/) |
 | --- |

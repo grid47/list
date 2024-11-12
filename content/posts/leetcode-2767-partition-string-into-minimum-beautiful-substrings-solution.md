@@ -42,5 +42,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2767.md" >}}
 ---
 {{< youtube xV-TA-TtiAg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2768: Number of Black Blocks](https://grid47.xyz/posts/leetcode-2768-number-of-black-blocks-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2768: Number of Black Blocks](https://grid47.xyz/posts/leetcode-2768-number-of-black-blocks-solution/) |
 | --- |

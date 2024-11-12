@@ -62,5 +62,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/994.md" >}}
 ---
 {{< youtube nAVKrpJ8LUI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #997: Find the Town Judge](https://grid47.xyz/posts/leetcode-997-find-the-town-judge-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #997: Find the Town Judge](https://grid47.xyz/posts/leetcode-997-find-the-town-judge-solution/) |
 | --- |

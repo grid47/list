@@ -61,5 +61,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1226.md" >}}
 ---
 {{< youtube cb6-GZiSaMY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1227: Airplane Seat Assignment Probability](https://grid47.xyz/posts/leetcode-1227-airplane-seat-assignment-probability-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1227: Airplane Seat Assignment Probability](https://grid47.xyz/posts/leetcode-1227-airplane-seat-assignment-probability-solution/) |
 | --- |

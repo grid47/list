@@ -58,5 +58,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2746.md" >}}
 ---
 {{< youtube RxvXIWCooRE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2747: Count Zero Request Servers](https://grid47.xyz/posts/leetcode-2747-count-zero-request-servers-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2747: Count Zero Request Servers](https://grid47.xyz/posts/leetcode-2747-count-zero-request-servers-solution/) |
 | --- |

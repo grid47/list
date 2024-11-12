@@ -56,5 +56,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1985.md" >}}
 ---
 {{< youtube lRCaNiqO3xI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1986: Minimum Number of Work Sessions to Finish the Tasks](https://grid47.xyz/posts/leetcode-1986-minimum-number-of-work-sessions-to-finish-the-tasks-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1986: Minimum Number of Work Sessions to Finish the Tasks](https://grid47.xyz/posts/leetcode-1986-minimum-number-of-work-sessions-to-finish-the-tasks-solution/) |
 | --- |

@@ -55,5 +55,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2028.md" >}}
 ---
 {{< youtube 86yKkaNi3sU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2029: Stone Game IX](https://grid47.xyz/posts/leetcode-2029-stone-game-ix-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2029: Stone Game IX](https://grid47.xyz/posts/leetcode-2029-stone-game-ix-solution/) |
 | --- |

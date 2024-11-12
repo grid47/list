@@ -44,5 +44,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2555.md" >}}
 ---
 {{< youtube trj4pn5uzZ0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2556: Disconnect Path in a Binary Matrix by at Most One Flip](https://grid47.xyz/posts/leetcode-2556-disconnect-path-in-a-binary-matrix-by-at-most-one-flip-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2556: Disconnect Path in a Binary Matrix by at Most One Flip](https://grid47.xyz/posts/leetcode-2556-disconnect-path-in-a-binary-matrix-by-at-most-one-flip-solution/) |
 | --- |

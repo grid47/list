@@ -41,5 +41,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1893.md" >}}
 ---
 {{< youtube hZ7QlMbyaKw >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1898: Maximum Number of Removable Characters](https://grid47.xyz/posts/leetcode-1898-maximum-number-of-removable-characters-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1898: Maximum Number of Removable Characters](https://grid47.xyz/posts/leetcode-1898-maximum-number-of-removable-characters-solution/) |
 | --- |

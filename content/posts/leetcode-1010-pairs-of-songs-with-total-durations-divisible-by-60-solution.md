@@ -37,5 +37,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1010.md" >}}
 ---
 {{< youtube gM5Wu42UTQk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1011: Capacity To Ship Packages Within D Days](https://grid47.xyz/posts/leetcode-1011-capacity-to-ship-packages-within-d-days-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1011: Capacity To Ship Packages Within D Days](https://grid47.xyz/posts/leetcode-1011-capacity-to-ship-packages-within-d-days-solution/) |
 | --- |

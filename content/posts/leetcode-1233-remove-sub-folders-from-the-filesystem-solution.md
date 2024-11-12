@@ -79,5 +79,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1233.md" >}}
 ---
 {{< youtube sFv6T_wLS4k >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1234: Replace the Substring for Balanced String](https://grid47.xyz/posts/leetcode-1234-replace-the-substring-for-balanced-string-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1234: Replace the Substring for Balanced String](https://grid47.xyz/posts/leetcode-1234-replace-the-substring-for-balanced-string-solution/) |
 | --- |

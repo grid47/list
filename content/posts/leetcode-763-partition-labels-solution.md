@@ -44,5 +44,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/763.md" >}}
 ---
 {{< youtube B7m8UmZE-vw >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #764: Largest Plus Sign](https://grid47.xyz/posts/leetcode-764-largest-plus-sign-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #764: Largest Plus Sign](https://grid47.xyz/posts/leetcode-764-largest-plus-sign-solution/) |
 | --- |

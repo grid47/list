@@ -59,5 +59,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/139.md" >}}
 ---
 {{< youtube t0svbzZ1PWM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #141: Linked List Cycle](https://grid47.xyz/posts/leetcode-141-linked-list-cycle-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #141: Linked List Cycle](https://grid47.xyz/posts/leetcode-141-linked-list-cycle-solution/) |
 | --- |

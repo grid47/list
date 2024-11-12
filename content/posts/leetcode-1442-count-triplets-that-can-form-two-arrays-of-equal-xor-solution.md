@@ -41,5 +41,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1442.md" >}}
 ---
 {{< youtube e4Yx9KjqzQ8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1443: Minimum Time to Collect All Apples in a Tree](https://grid47.xyz/posts/leetcode-1443-minimum-time-to-collect-all-apples-in-a-tree-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1443: Minimum Time to Collect All Apples in a Tree](https://grid47.xyz/posts/leetcode-1443-minimum-time-to-collect-all-apples-in-a-tree-solution/) |
 | --- |

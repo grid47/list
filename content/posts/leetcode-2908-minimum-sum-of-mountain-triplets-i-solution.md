@@ -41,5 +41,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2908.md" >}}
 ---
 {{< youtube GegaVi1CeUM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2909: Minimum Sum of Mountain Triplets II](https://grid47.xyz/posts/leetcode-2909-minimum-sum-of-mountain-triplets-ii-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2909: Minimum Sum of Mountain Triplets II](https://grid47.xyz/posts/leetcode-2909-minimum-sum-of-mountain-triplets-ii-solution/) |
 | --- |

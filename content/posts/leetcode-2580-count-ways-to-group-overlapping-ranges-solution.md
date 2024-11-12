@@ -46,5 +46,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2580.md" >}}
 ---
 {{< youtube 5-8-2mDdoGs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2582: Pass the Pillow](https://grid47.xyz/posts/leetcode-2582-pass-the-pillow-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2582: Pass the Pillow](https://grid47.xyz/posts/leetcode-2582-pass-the-pillow-solution/) |
 | --- |

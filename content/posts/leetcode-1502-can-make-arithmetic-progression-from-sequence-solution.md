@@ -50,5 +50,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1502.md" >}}
 ---
 {{< youtube crVb-Fubs0w >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1503: Last Moment Before All Ants Fall Out of a Plank](https://grid47.xyz/posts/leetcode-1503-last-moment-before-all-ants-fall-out-of-a-plank-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1503: Last Moment Before All Ants Fall Out of a Plank](https://grid47.xyz/posts/leetcode-1503-last-moment-before-all-ants-fall-out-of-a-plank-solution/) |
 | --- |

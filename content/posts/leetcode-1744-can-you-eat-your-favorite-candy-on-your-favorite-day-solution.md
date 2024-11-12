@@ -49,5 +49,5 @@ if (mn <= day && day <= mx) {
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1744.md" >}}
 ---
 {{< youtube F4JpJIntzbQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1748: Sum of Unique Elements](https://grid47.xyz/posts/leetcode-1748-sum-of-unique-elements-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1748: Sum of Unique Elements](https://grid47.xyz/posts/leetcode-1748-sum-of-unique-elements-solution/) |
 | --- |

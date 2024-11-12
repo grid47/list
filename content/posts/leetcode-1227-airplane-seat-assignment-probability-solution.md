@@ -32,5 +32,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1227.md" >}}
 ---
 {{< youtube pHgWf79hNoY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1232: Check If It Is a Straight Line](https://grid47.xyz/posts/leetcode-1232-check-if-it-is-a-straight-line-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1232: Check If It Is a Straight Line](https://grid47.xyz/posts/leetcode-1232-check-if-it-is-a-straight-line-solution/) |
 | --- |

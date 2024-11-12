@@ -47,5 +47,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2645.md" >}}
 ---
 {{< youtube 7IAA0sdeACw >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2651: Calculate Delayed Arrival Time](https://grid47.xyz/posts/leetcode-2651-calculate-delayed-arrival-time-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2651: Calculate Delayed Arrival Time](https://grid47.xyz/posts/leetcode-2651-calculate-delayed-arrival-time-solution/) |
 | --- |

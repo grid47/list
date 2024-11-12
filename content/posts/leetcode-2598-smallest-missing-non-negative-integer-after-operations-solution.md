@@ -43,5 +43,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2598.md" >}}
 ---
 {{< youtube NztQwlNn1XA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2600: K Items With the Maximum Sum](https://grid47.xyz/posts/leetcode-2600-k-items-with-the-maximum-sum-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2600: K Items With the Maximum Sum](https://grid47.xyz/posts/leetcode-2600-k-items-with-the-maximum-sum-solution/) |
 | --- |

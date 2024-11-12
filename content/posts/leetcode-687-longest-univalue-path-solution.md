@@ -61,5 +61,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/687.md" >}}
 ---
 {{< youtube ZeBr9JMcjrU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #688: Knight Probability in Chessboard](https://grid47.xyz/posts/leetcode-688-knight-probability-in-chessboard-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #688: Knight Probability in Chessboard](https://grid47.xyz/posts/leetcode-688-knight-probability-in-chessboard-solution/) |
 | --- |

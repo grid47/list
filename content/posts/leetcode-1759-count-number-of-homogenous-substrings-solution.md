@@ -44,5 +44,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1759.md" >}}
 ---
 {{< youtube I3BzhnS9MwA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1760: Minimum Limit of Balls in a Bag](https://grid47.xyz/posts/leetcode-1760-minimum-limit-of-balls-in-a-bag-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1760: Minimum Limit of Balls in a Bag](https://grid47.xyz/posts/leetcode-1760-minimum-limit-of-balls-in-a-bag-solution/) |
 | --- |

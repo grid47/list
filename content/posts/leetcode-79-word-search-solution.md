@@ -75,5 +75,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/79.md" >}}
 ---
 {{< youtube pfiQ_PS1g8E >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #81: Search in Rotated Sorted Array II](https://grid47.xyz/posts/leetcode-81-search-in-rotated-sorted-array-ii-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #81: Search in Rotated Sorted Array II](https://grid47.xyz/posts/leetcode-81-search-in-rotated-sorted-array-ii-solution/) |
 | --- |

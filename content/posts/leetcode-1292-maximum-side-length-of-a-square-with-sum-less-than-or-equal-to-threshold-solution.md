@@ -43,5 +43,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1292.md" >}}
 ---
 {{< youtube 2Y2a9VbqiC4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1296: Divide Array in Sets of K Consecutive Numbers](https://grid47.xyz/posts/leetcode-1296-divide-array-in-sets-of-k-consecutive-numbers-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1296: Divide Array in Sets of K Consecutive Numbers](https://grid47.xyz/posts/leetcode-1296-divide-array-in-sets-of-k-consecutive-numbers-solution/) |
 | --- |

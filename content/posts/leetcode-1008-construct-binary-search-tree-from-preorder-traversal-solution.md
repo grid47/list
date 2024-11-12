@@ -50,5 +50,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1008.md" >}}
 ---
 {{< youtube 30WqiTVp8Kc >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1010: Pairs of Songs With Total Durations Divisible by 60](https://grid47.xyz/posts/leetcode-1010-pairs-of-songs-with-total-durations-divisible-by-60-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1010: Pairs of Songs With Total Durations Divisible by 60](https://grid47.xyz/posts/leetcode-1010-pairs-of-songs-with-total-durations-divisible-by-60-solution/) |
 | --- |

@@ -45,5 +45,5 @@ class Solution {
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2125.md" >}}
 ---
 {{< youtube KLeKv59LAFY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2126: Destroying Asteroids](https://grid47.xyz/posts/leetcode-2126-destroying-asteroids-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2126: Destroying Asteroids](https://grid47.xyz/posts/leetcode-2126-destroying-asteroids-solution/) |
 | --- |

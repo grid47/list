@@ -70,5 +70,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1559.md" >}}
 ---
 {{< youtube eQvsVEt_j8M >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1561: Maximum Number of Coins You Can Get](https://grid47.xyz/posts/leetcode-1561-maximum-number-of-coins-you-can-get-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1561: Maximum Number of Coins You Can Get](https://grid47.xyz/posts/leetcode-1561-maximum-number-of-coins-you-can-get-solution/) |
 | --- |

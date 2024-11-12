@@ -52,5 +52,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2815.md" >}}
 ---
 {{< youtube DUrmIZhrj4o >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2816: Double a Number Represented as a Linked List](https://grid47.xyz/posts/leetcode-2816-double-a-number-represented-as-a-linked-list-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2816: Double a Number Represented as a Linked List](https://grid47.xyz/posts/leetcode-2816-double-a-number-represented-as-a-linked-list-solution/) |
 | --- |

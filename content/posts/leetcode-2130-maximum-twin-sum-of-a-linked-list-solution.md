@@ -70,5 +70,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2130.md" >}}
 ---
 {{< youtube FnKG0uH2PVc >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2131: Longest Palindrome by Concatenating Two Letter Words](https://grid47.xyz/posts/leetcode-2131-longest-palindrome-by-concatenating-two-letter-words-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2131: Longest Palindrome by Concatenating Two Letter Words](https://grid47.xyz/posts/leetcode-2131-longest-palindrome-by-concatenating-two-letter-words-solution/) |
 | --- |

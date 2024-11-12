@@ -48,5 +48,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2095.md" >}}
 ---
 {{< youtube gwel0eQ0MhA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2096: Step-By-Step Directions From a Binary Tree Node to Another](https://grid47.xyz/posts/leetcode-2096-step-by-step-directions-from-a-binary-tree-node-to-another-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2096: Step-By-Step Directions From a Binary Tree Node to Another](https://grid47.xyz/posts/leetcode-2096-step-by-step-directions-from-a-binary-tree-node-to-another-solution/) |
 | --- |

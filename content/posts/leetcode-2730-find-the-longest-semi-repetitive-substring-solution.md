@@ -50,5 +50,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2730.md" >}}
 ---
 {{< youtube x_tHB_M7a_g >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2731: Movement of Robots](https://grid47.xyz/posts/leetcode-2731-movement-of-robots-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2731: Movement of Robots](https://grid47.xyz/posts/leetcode-2731-movement-of-robots-solution/) |
 | --- |

@@ -37,5 +37,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1817.md" >}}
 ---
 {{< youtube pE6qW1KRl4A >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1818: Minimum Absolute Sum Difference](https://grid47.xyz/posts/leetcode-1818-minimum-absolute-sum-difference-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1818: Minimum Absolute Sum Difference](https://grid47.xyz/posts/leetcode-1818-minimum-absolute-sum-difference-solution/) |
 | --- |

@@ -50,5 +50,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/498.md" >}}
 ---
 {{< youtube xio2uEQQPZQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #501: Find Mode in Binary Search Tree](https://grid47.xyz/posts/leetcode-501-find-mode-in-binary-search-tree-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #501: Find Mode in Binary Search Tree](https://grid47.xyz/posts/leetcode-501-find-mode-in-binary-search-tree-solution/) |
 | --- |

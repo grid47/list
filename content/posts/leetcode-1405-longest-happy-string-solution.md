@@ -58,5 +58,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1405.md" >}}
 ---
 {{< youtube 8u-H6O_XQKE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1409: Queries on a Permutation With Key](https://grid47.xyz/posts/leetcode-1409-queries-on-a-permutation-with-key-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1409: Queries on a Permutation With Key](https://grid47.xyz/posts/leetcode-1409-queries-on-a-permutation-with-key-solution/) |
 | --- |

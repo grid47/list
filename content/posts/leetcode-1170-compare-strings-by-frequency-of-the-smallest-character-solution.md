@@ -74,5 +74,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1170.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1171: Remove Zero Sum Consecutive Nodes from Linked List](https://grid47.xyz/posts/leetcode-1171-remove-zero-sum-consecutive-nodes-from-linked-list-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1171: Remove Zero Sum Consecutive Nodes from Linked List](https://grid47.xyz/posts/leetcode-1171-remove-zero-sum-consecutive-nodes-from-linked-list-solution/) |
 | --- |

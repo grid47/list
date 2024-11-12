@@ -43,5 +43,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/740.md" >}}
 ---
 {{< youtube MnbTKT4-KLc >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #743: Network Delay Time](https://grid47.xyz/posts/leetcode-743-network-delay-time-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #743: Network Delay Time](https://grid47.xyz/posts/leetcode-743-network-delay-time-solution/) |
 | --- |

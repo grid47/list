@@ -66,5 +66,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/98.md" >}}
 ---
 {{< youtube s6ATEkipzow >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #99: Recover Binary Search Tree](https://grid47.xyz/posts/leetcode-99-recover-binary-search-tree-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #99: Recover Binary Search Tree](https://grid47.xyz/posts/leetcode-99-recover-binary-search-tree-solution/) |
 | --- |

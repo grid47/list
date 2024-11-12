@@ -83,5 +83,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1786.md" >}}
 ---
 {{< youtube YmufKoAmthE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1790: Check if One String Swap Can Make Strings Equal](https://grid47.xyz/posts/leetcode-1790-check-if-one-string-swap-can-make-strings-equal-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1790: Check if One String Swap Can Make Strings Equal](https://grid47.xyz/posts/leetcode-1790-check-if-one-string-swap-can-make-strings-equal-solution/) |
 | --- |

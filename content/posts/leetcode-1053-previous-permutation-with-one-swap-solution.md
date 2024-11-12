@@ -49,5 +49,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1053.md" >}}
 ---
 {{< youtube x_y3nIsbENM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1054: Distant Barcodes](https://grid47.xyz/posts/leetcode-1054-distant-barcodes-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1054: Distant Barcodes](https://grid47.xyz/posts/leetcode-1054-distant-barcodes-solution/) |
 | --- |

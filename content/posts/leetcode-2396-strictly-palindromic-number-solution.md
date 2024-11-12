@@ -31,5 +31,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2396.md" >}}
 ---
 {{< youtube 37EtWXDucwQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2397: Maximum Rows Covered by Columns](https://grid47.xyz/posts/leetcode-2397-maximum-rows-covered-by-columns-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2397: Maximum Rows Covered by Columns](https://grid47.xyz/posts/leetcode-2397-maximum-rows-covered-by-columns-solution/) |
 | --- |

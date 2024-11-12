@@ -57,5 +57,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/21.md" >}}
 ---
 {{< youtube XIdigk956u0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #22: Generate Parentheses](https://grid47.xyz/posts/leetcode-22-generate-parentheses-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #22: Generate Parentheses](https://grid47.xyz/posts/leetcode-22-generate-parentheses-solution/) |
 | --- |

@@ -40,5 +40,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1438.md" >}}
 ---
 {{< youtube V-ecDfY5xEw >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1441: Build an Array With Stack Operations](https://grid47.xyz/posts/leetcode-1441-build-an-array-with-stack-operations-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1441: Build an Array With Stack Operations](https://grid47.xyz/posts/leetcode-1441-build-an-array-with-stack-operations-solution/) |
 | --- |

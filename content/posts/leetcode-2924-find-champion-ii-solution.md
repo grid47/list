@@ -37,5 +37,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2924.md" >}}
 ---
 {{< youtube axwSqMVQ1x4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2928: Distribute Candies Among Children I](https://grid47.xyz/posts/leetcode-2928-distribute-candies-among-children-i-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2928: Distribute Candies Among Children I](https://grid47.xyz/posts/leetcode-2928-distribute-candies-among-children-i-solution/) |
 | --- |

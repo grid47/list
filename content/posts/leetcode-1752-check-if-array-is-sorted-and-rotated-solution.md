@@ -41,5 +41,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1752.md" >}}
 ---
 {{< youtube uoEJ3FXr56w >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1753: Maximum Score From Removing Stones](https://grid47.xyz/posts/leetcode-1753-maximum-score-from-removing-stones-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1753: Maximum Score From Removing Stones](https://grid47.xyz/posts/leetcode-1753-maximum-score-from-removing-stones-solution/) |
 | --- |

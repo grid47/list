@@ -101,5 +101,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/705.md" >}}
 ---
 {{< youtube VymjPQUXjL8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #707: Design Linked List](https://grid47.xyz/posts/leetcode-707-design-linked-list-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #707: Design Linked List](https://grid47.xyz/posts/leetcode-707-design-linked-list-solution/) |
 | --- |

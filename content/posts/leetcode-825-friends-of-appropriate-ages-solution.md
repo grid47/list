@@ -44,5 +44,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/825.md" >}}
 ---
 {{< youtube 0_4H68f85HQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #826: Most Profit Assigning Work](https://grid47.xyz/posts/leetcode-826-most-profit-assigning-work-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #826: Most Profit Assigning Work](https://grid47.xyz/posts/leetcode-826-most-profit-assigning-work-solution/) |
 | --- |

@@ -45,5 +45,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1525.md" >}}
 ---
 {{< youtube lRVpVUC5mQ4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1529: Minimum Suffix Flips](https://grid47.xyz/posts/leetcode-1529-minimum-suffix-flips-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1529: Minimum Suffix Flips](https://grid47.xyz/posts/leetcode-1529-minimum-suffix-flips-solution/) |
 | --- |

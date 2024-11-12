@@ -47,5 +47,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1915.md" >}}
 ---
 {{< youtube P6i1qj8DMZk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1920: Build Array from Permutation](https://grid47.xyz/posts/leetcode-1920-build-array-from-permutation-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1920: Build Array from Permutation](https://grid47.xyz/posts/leetcode-1920-build-array-from-permutation-solution/) |
 | --- |

@@ -62,5 +62,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1498.md" >}}
 ---
 {{< youtube WZhNEfbGYEo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1502: Can Make Arithmetic Progression From Sequence](https://grid47.xyz/posts/leetcode-1502-can-make-arithmetic-progression-from-sequence-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1502: Can Make Arithmetic Progression From Sequence](https://grid47.xyz/posts/leetcode-1502-can-make-arithmetic-progression-from-sequence-solution/) |
 | --- |

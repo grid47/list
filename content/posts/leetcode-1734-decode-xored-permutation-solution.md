@@ -45,5 +45,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1734.md" >}}
 ---
 {{< youtube uA9lPzogB7Y >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1736: Latest Time by Replacing Hidden Digits](https://grid47.xyz/posts/leetcode-1736-latest-time-by-replacing-hidden-digits-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1736: Latest Time by Replacing Hidden Digits](https://grid47.xyz/posts/leetcode-1736-latest-time-by-replacing-hidden-digits-solution/) |
 | --- |

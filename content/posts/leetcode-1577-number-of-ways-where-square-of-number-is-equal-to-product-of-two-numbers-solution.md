@@ -52,5 +52,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1577.md" >}}
 ---
 {{< youtube ZNAJbQTv3yk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1578: Minimum Time to Make Rope Colorful](https://grid47.xyz/posts/leetcode-1578-minimum-time-to-make-rope-colorful-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1578: Minimum Time to Make Rope Colorful](https://grid47.xyz/posts/leetcode-1578-minimum-time-to-make-rope-colorful-solution/) |
 | --- |

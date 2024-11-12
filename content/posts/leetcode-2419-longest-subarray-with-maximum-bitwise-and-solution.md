@@ -38,5 +38,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2419.md" >}}
 ---
 {{< youtube N8lRlRWA_1Q >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2420: Find All Good Indices](https://grid47.xyz/posts/leetcode-2420-find-all-good-indices-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2420: Find All Good Indices](https://grid47.xyz/posts/leetcode-2420-find-all-good-indices-solution/) |
 | --- |

@@ -95,5 +95,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2146.md" >}}
 ---
 {{< youtube OOBGOENJLYo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2148: Count Elements With Strictly Smaller and Greater Elements ](https://grid47.xyz/posts/leetcode-2148-count-elements-with-strictly-smaller-and-greater-elements-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2148: Count Elements With Strictly Smaller and Greater Elements ](https://grid47.xyz/posts/leetcode-2148-count-elements-with-strictly-smaller-and-greater-elements-solution/) |
 | --- |

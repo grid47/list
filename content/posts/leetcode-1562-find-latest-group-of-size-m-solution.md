@@ -53,5 +53,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1562.md" >}}
 ---
 {{< youtube jUindlyYRuA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1567: Maximum Length of Subarray With Positive Product](https://grid47.xyz/posts/leetcode-1567-maximum-length-of-subarray-with-positive-product-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1567: Maximum Length of Subarray With Positive Product](https://grid47.xyz/posts/leetcode-1567-maximum-length-of-subarray-with-positive-product-solution/) |
 | --- |

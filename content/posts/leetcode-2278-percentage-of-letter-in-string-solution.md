@@ -31,5 +31,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2278.md" >}}
 ---
 {{< youtube aVeeYs2bSzY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2279: Maximum Bags With Full Capacity of Rocks](https://grid47.xyz/posts/leetcode-2279-maximum-bags-with-full-capacity-of-rocks-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2279: Maximum Bags With Full Capacity of Rocks](https://grid47.xyz/posts/leetcode-2279-maximum-bags-with-full-capacity-of-rocks-solution/) |
 | --- |

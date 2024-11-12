@@ -79,5 +79,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2385.md" >}}
 ---
 {{< youtube 3lcaz9lw448 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2389: Longest Subsequence With Limited Sum](https://grid47.xyz/posts/leetcode-2389-longest-subsequence-with-limited-sum-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2389: Longest Subsequence With Limited Sum](https://grid47.xyz/posts/leetcode-2389-longest-subsequence-with-limited-sum-solution/) |
 | --- |

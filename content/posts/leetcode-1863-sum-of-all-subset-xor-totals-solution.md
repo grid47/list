@@ -39,5 +39,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1863.md" >}}
 ---
 {{< youtube LI7YR-bwNYY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1865: Finding Pairs With a Certain Sum](https://grid47.xyz/posts/leetcode-1865-finding-pairs-with-a-certain-sum-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1865: Finding Pairs With a Certain Sum](https://grid47.xyz/posts/leetcode-1865-finding-pairs-with-a-certain-sum-solution/) |
 | --- |

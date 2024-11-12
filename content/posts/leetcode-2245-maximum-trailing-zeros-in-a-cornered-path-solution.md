@@ -65,5 +65,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2245.md" >}}
 ---
 {{< youtube QMRHGd9ftz8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2249: Count Lattice Points Inside a Circle](https://grid47.xyz/posts/leetcode-2249-count-lattice-points-inside-a-circle-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2249: Count Lattice Points Inside a Circle](https://grid47.xyz/posts/leetcode-2249-count-lattice-points-inside-a-circle-solution/) |
 | --- |

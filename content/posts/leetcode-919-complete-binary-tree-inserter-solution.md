@@ -67,5 +67,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/919.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #921: Minimum Add to Make Parentheses Valid](https://grid47.xyz/posts/leetcode-921-minimum-add-to-make-parentheses-valid-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #921: Minimum Add to Make Parentheses Valid](https://grid47.xyz/posts/leetcode-921-minimum-add-to-make-parentheses-valid-solution/) |
 | --- |

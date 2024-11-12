@@ -53,5 +53,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1775.md" >}}
 ---
 {{< youtube n-BwszD77og >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1784: Check if Binary String Has at Most One Segment of Ones](https://grid47.xyz/posts/leetcode-1784-check-if-binary-string-has-at-most-one-segment-of-ones-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1784: Check if Binary String Has at Most One Segment of Ones](https://grid47.xyz/posts/leetcode-1784-check-if-binary-string-has-at-most-one-segment-of-ones-solution/) |
 | --- |

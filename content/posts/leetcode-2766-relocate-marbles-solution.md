@@ -40,5 +40,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2766.md" >}}
 ---
 {{< youtube bH2EmMR5jpU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2767: Partition String Into Minimum Beautiful Substrings](https://grid47.xyz/posts/leetcode-2767-partition-string-into-minimum-beautiful-substrings-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2767: Partition String Into Minimum Beautiful Substrings](https://grid47.xyz/posts/leetcode-2767-partition-string-into-minimum-beautiful-substrings-solution/) |
 | --- |

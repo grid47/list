@@ -41,5 +41,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1828.md" >}}
 ---
 {{< youtube fU4oOBSsVMg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1829: Maximum XOR for Each Query](https://grid47.xyz/posts/leetcode-1829-maximum-xor-for-each-query-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1829: Maximum XOR for Each Query](https://grid47.xyz/posts/leetcode-1829-maximum-xor-for-each-query-solution/) |
 | --- |

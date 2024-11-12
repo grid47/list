@@ -45,5 +45,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1209.md" >}}
 ---
 {{< youtube w6LcypDgC4w >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1218: Longest Arithmetic Subsequence of Given Difference](https://grid47.xyz/posts/leetcode-1218-longest-arithmetic-subsequence-of-given-difference-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1218: Longest Arithmetic Subsequence of Given Difference](https://grid47.xyz/posts/leetcode-1218-longest-arithmetic-subsequence-of-given-difference-solution/) |
 | --- |

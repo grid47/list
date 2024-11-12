@@ -57,5 +57,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2381.md" >}}
 ---
 {{< youtube dWp_egpuwbU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2383: Minimum Hours of Training to Win a Competition](https://grid47.xyz/posts/leetcode-2383-minimum-hours-of-training-to-win-a-competition-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2383: Minimum Hours of Training to Win a Competition](https://grid47.xyz/posts/leetcode-2383-minimum-hours-of-training-to-win-a-competition-solution/) |
 | --- |

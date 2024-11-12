@@ -46,5 +46,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1696.md" >}}
 ---
 {{< youtube dHAsYTvbbj4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1700: Number of Students Unable to Eat Lunch](https://grid47.xyz/posts/leetcode-1700-number-of-students-unable-to-eat-lunch-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1700: Number of Students Unable to Eat Lunch](https://grid47.xyz/posts/leetcode-1700-number-of-students-unable-to-eat-lunch-solution/) |
 | --- |

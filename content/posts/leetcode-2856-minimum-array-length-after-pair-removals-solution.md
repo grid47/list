@@ -50,5 +50,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2856.md" >}}
 ---
 {{< youtube 6IPtNE3fIew >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2857: Count Pairs of Points With Distance k](https://grid47.xyz/posts/leetcode-2857-count-pairs-of-points-with-distance-k-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2857: Count Pairs of Points With Distance k](https://grid47.xyz/posts/leetcode-2857-count-pairs-of-points-with-distance-k-solution/) |
 | --- |

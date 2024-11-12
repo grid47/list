@@ -69,5 +69,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2058.md" >}}
 ---
 {{< youtube UddDgt52h9g >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2059: Minimum Operations to Convert Number](https://grid47.xyz/posts/leetcode-2059-minimum-operations-to-convert-number-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2059: Minimum Operations to Convert Number](https://grid47.xyz/posts/leetcode-2059-minimum-operations-to-convert-number-solution/) |
 | --- |

@@ -48,5 +48,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1763.md" >}}
 ---
 {{< youtube 6WvZrynlCdk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1764: Form Array by Concatenating Subarrays of Another Array](https://grid47.xyz/posts/leetcode-1764-form-array-by-concatenating-subarrays-of-another-array-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1764: Form Array by Concatenating Subarrays of Another Array](https://grid47.xyz/posts/leetcode-1764-form-array-by-concatenating-subarrays-of-another-array-solution/) |
 | --- |

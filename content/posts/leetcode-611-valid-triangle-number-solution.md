@@ -43,5 +43,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/611.md" >}}
 ---
 {{< youtube AZrQMv5ne54 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #617: Merge Two Binary Trees](https://grid47.xyz/posts/leetcode-617-merge-two-binary-trees-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #617: Merge Two Binary Trees](https://grid47.xyz/posts/leetcode-617-merge-two-binary-trees-solution/) |
 | --- |

@@ -52,5 +52,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1457.md" >}}
 ---
 {{< youtube MBsSpQnaFzg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1461: Check If a String Contains All Binary Codes of Size K](https://grid47.xyz/posts/leetcode-1461-check-if-a-string-contains-all-binary-codes-of-size-k-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1461: Check If a String Contains All Binary Codes of Size K](https://grid47.xyz/posts/leetcode-1461-check-if-a-string-contains-all-binary-codes-of-size-k-solution/) |
 | --- |

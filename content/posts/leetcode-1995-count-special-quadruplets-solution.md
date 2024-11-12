@@ -50,5 +50,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1995.md" >}}
 ---
 {{< youtube H06N-OsxpoE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1996: The Number of Weak Characters in the Game](https://grid47.xyz/posts/leetcode-1996-the-number-of-weak-characters-in-the-game-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1996: The Number of Weak Characters in the Game](https://grid47.xyz/posts/leetcode-1996-the-number-of-weak-characters-in-the-game-solution/) |
 | --- |

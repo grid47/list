@@ -43,5 +43,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1208.md" >}}
 ---
 {{< youtube 3lsT1Le526U >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1209: Remove All Adjacent Duplicates in String II](https://grid47.xyz/posts/leetcode-1209-remove-all-adjacent-duplicates-in-string-ii-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1209: Remove All Adjacent Duplicates in String II](https://grid47.xyz/posts/leetcode-1209-remove-all-adjacent-duplicates-in-string-ii-solution/) |
 | --- |

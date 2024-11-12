@@ -57,5 +57,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1007.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1008: Construct Binary Search Tree from Preorder Traversal](https://grid47.xyz/posts/leetcode-1008-construct-binary-search-tree-from-preorder-traversal-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1008: Construct Binary Search Tree from Preorder Traversal](https://grid47.xyz/posts/leetcode-1008-construct-binary-search-tree-from-preorder-traversal-solution/) |
 | --- |

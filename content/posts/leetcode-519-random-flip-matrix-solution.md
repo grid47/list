@@ -55,5 +55,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/519.md" >}}
 ---
 {{< youtube 9JsC0Dg9oX8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #520: Detect Capital](https://grid47.xyz/posts/leetcode-520-detect-capital-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #520: Detect Capital](https://grid47.xyz/posts/leetcode-520-detect-capital-solution/) |
 | --- |

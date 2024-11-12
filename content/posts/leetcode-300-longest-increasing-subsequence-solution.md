@@ -48,5 +48,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/300.md" >}}
 ---
 {{< youtube VZc93A5v1JI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #309: Best Time to Buy and Sell Stock with Cooldown](https://grid47.xyz/posts/leetcode-309-best-time-to-buy-and-sell-stock-with-cooldown-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #309: Best Time to Buy and Sell Stock with Cooldown](https://grid47.xyz/posts/leetcode-309-best-time-to-buy-and-sell-stock-with-cooldown-solution/) |
 | --- |

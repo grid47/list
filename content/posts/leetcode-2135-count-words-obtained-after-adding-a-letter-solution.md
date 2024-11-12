@@ -55,5 +55,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2135.md" >}}
 ---
 {{< youtube Ag3bur1amBs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2138: Divide a String Into Groups of Size k](https://grid47.xyz/posts/leetcode-2138-divide-a-string-into-groups-of-size-k-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2138: Divide a String Into Groups of Size k](https://grid47.xyz/posts/leetcode-2138-divide-a-string-into-groups-of-size-k-solution/) |
 | --- |

@@ -60,5 +60,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/589.md" >}}
 ---
 {{< youtube 2MjVm-hwyxs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #592: Fraction Addition and Subtraction](https://grid47.xyz/posts/leetcode-592-fraction-addition-and-subtraction-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #592: Fraction Addition and Subtraction](https://grid47.xyz/posts/leetcode-592-fraction-addition-and-subtraction-solution/) |
 | --- |

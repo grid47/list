@@ -43,5 +43,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2185.md" >}}
 ---
 {{< youtube 8yMcHvAw2Q8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2186: Minimum Number of Steps to Make Two Strings Anagram II](https://grid47.xyz/posts/leetcode-2186-minimum-number-of-steps-to-make-two-strings-anagram-ii-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2186: Minimum Number of Steps to Make Two Strings Anagram II](https://grid47.xyz/posts/leetcode-2186-minimum-number-of-steps-to-make-two-strings-anagram-ii-solution/) |
 | --- |

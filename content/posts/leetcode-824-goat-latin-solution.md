@@ -43,5 +43,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/824.md" >}}
 ---
 {{< youtube pTLNHVWiQk0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #825: Friends Of Appropriate Ages](https://grid47.xyz/posts/leetcode-825-friends-of-appropriate-ages-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #825: Friends Of Appropriate Ages](https://grid47.xyz/posts/leetcode-825-friends-of-appropriate-ages-solution/) |
 | --- |

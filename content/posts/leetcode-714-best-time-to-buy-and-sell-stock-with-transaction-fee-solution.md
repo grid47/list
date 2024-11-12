@@ -39,5 +39,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/714.md" >}}
 ---
 {{< youtube HLr_OnShK4s >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #718: Maximum Length of Repeated Subarray](https://grid47.xyz/posts/leetcode-718-maximum-length-of-repeated-subarray-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #718: Maximum Length of Repeated Subarray](https://grid47.xyz/posts/leetcode-718-maximum-length-of-repeated-subarray-solution/) |
 | --- |

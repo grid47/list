@@ -36,5 +36,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2433.md" >}}
 ---
 {{< youtube idcT-p_DDrI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2434: Using a Robot to Print the Lexicographically Smallest String](https://grid47.xyz/posts/leetcode-2434-using-a-robot-to-print-the-lexicographically-smallest-string-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2434: Using a Robot to Print the Lexicographically Smallest String](https://grid47.xyz/posts/leetcode-2434-using-a-robot-to-print-the-lexicographically-smallest-string-solution/) |
 | --- |

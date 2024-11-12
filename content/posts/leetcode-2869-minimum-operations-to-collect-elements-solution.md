@@ -35,5 +35,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2869.md" >}}
 ---
 {{< youtube ohl7rEwEI9A >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2870: Minimum Number of Operations to Make Array Empty](https://grid47.xyz/posts/leetcode-2870-minimum-number-of-operations-to-make-array-empty-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2870: Minimum Number of Operations to Make Array Empty](https://grid47.xyz/posts/leetcode-2870-minimum-number-of-operations-to-make-array-empty-solution/) |
 | --- |

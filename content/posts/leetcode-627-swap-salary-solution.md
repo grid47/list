@@ -27,5 +27,5 @@ UPDATE Salary SET sex=IF(sex='m','f','m');
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/627.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #633: Sum of Square Numbers](https://grid47.xyz/posts/leetcode-633-sum-of-square-numbers-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #633: Sum of Square Numbers](https://grid47.xyz/posts/leetcode-633-sum-of-square-numbers-solution/) |
 | --- |

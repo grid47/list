@@ -43,5 +43,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2343.md" >}}
 ---
 {{< youtube E93-thIrUgA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2347: Best Poker Hand](https://grid47.xyz/posts/leetcode-2347-best-poker-hand-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2347: Best Poker Hand](https://grid47.xyz/posts/leetcode-2347-best-poker-hand-solution/) |
 | --- |

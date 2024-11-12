@@ -70,5 +70,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/310.md" >}}
 ---
 {{< youtube wQGQnyv_9hI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #316: Remove Duplicate Letters](https://grid47.xyz/posts/leetcode-316-remove-duplicate-letters-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #316: Remove Duplicate Letters](https://grid47.xyz/posts/leetcode-316-remove-duplicate-letters-solution/) |
 | --- |

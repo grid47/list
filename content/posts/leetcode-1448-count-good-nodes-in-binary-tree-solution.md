@@ -50,5 +50,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1448.md" >}}
 ---
 {{< youtube 2AdOBLcj2wk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1451: Rearrange Words in a Sentence](https://grid47.xyz/posts/leetcode-1451-rearrange-words-in-a-sentence-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1451: Rearrange Words in a Sentence](https://grid47.xyz/posts/leetcode-1451-rearrange-words-in-a-sentence-solution/) |
 | --- |

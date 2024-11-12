@@ -74,5 +74,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2641.md" >}}
 ---
 {{< youtube xvwTd19SncE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2643: Row With Maximum Ones](https://grid47.xyz/posts/leetcode-2643-row-with-maximum-ones-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2643: Row With Maximum Ones](https://grid47.xyz/posts/leetcode-2643-row-with-maximum-ones-solution/) |
 | --- |

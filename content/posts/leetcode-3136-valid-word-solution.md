@@ -51,5 +51,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3136.md" >}}
 ---
 {{< youtube -sU51QkOwLY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #3137: Minimum Number of Operations to Make Word K-Periodic](https://grid47.xyz/posts/leetcode-3137-minimum-number-of-operations-to-make-word-k-periodic-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #3137: Minimum Number of Operations to Make Word K-Periodic](https://grid47.xyz/posts/leetcode-3137-minimum-number-of-operations-to-make-word-k-periodic-solution/) |
 | --- |

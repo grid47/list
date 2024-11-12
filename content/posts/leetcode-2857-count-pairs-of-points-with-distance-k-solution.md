@@ -39,5 +39,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2857.md" >}}
 ---
 {{< youtube Z7hDq-nGzUI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2859: Sum of Values at Indices With K Set Bits](https://grid47.xyz/posts/leetcode-2859-sum-of-values-at-indices-with-k-set-bits-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2859: Sum of Values at Indices With K Set Bits](https://grid47.xyz/posts/leetcode-2859-sum-of-values-at-indices-with-k-set-bits-solution/) |
 | --- |

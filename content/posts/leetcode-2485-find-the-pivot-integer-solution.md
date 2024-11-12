@@ -32,5 +32,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2485.md" >}}
 ---
 {{< youtube Xfw3A8uOdFw >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2486: Append Characters to String to Make Subsequence](https://grid47.xyz/posts/leetcode-2486-append-characters-to-string-to-make-subsequence-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2486: Append Characters to String to Make Subsequence](https://grid47.xyz/posts/leetcode-2486-append-characters-to-string-to-make-subsequence-solution/) |
 | --- |

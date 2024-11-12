@@ -31,5 +31,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2413.md" >}}
 ---
 {{< youtube MTdr8qNSWf8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2414: Length of the Longest Alphabetical Continuous Substring](https://grid47.xyz/posts/leetcode-2414-length-of-the-longest-alphabetical-continuous-substring-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2414: Length of the Longest Alphabetical Continuous Substring](https://grid47.xyz/posts/leetcode-2414-length-of-the-longest-alphabetical-continuous-substring-solution/) |
 | --- |

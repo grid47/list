@@ -38,5 +38,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2452.md" >}}
 ---
 {{< youtube 99KTTNdlKns >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2453: Destroy Sequential Targets](https://grid47.xyz/posts/leetcode-2453-destroy-sequential-targets-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2453: Destroy Sequential Targets](https://grid47.xyz/posts/leetcode-2453-destroy-sequential-targets-solution/) |
 | --- |

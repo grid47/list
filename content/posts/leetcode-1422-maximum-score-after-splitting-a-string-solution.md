@@ -41,5 +41,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1422.md" >}}
 ---
 {{< youtube mc_eSStDrWw >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1423: Maximum Points You Can Obtain from Cards](https://grid47.xyz/posts/leetcode-1423-maximum-points-you-can-obtain-from-cards-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1423: Maximum Points You Can Obtain from Cards](https://grid47.xyz/posts/leetcode-1423-maximum-points-you-can-obtain-from-cards-solution/) |
 | --- |

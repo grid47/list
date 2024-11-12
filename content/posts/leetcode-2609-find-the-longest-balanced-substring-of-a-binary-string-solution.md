@@ -49,5 +49,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2609.md" >}}
 ---
 {{< youtube _nyH2TA95yY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2610: Convert an Array Into a 2D Array With Conditions](https://grid47.xyz/posts/leetcode-2610-convert-an-array-into-a-2d-array-with-conditions-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2610: Convert an Array Into a 2D Array With Conditions](https://grid47.xyz/posts/leetcode-2610-convert-an-array-into-a-2d-array-with-conditions-solution/) |
 | --- |

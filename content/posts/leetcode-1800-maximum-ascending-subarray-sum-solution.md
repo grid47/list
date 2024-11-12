@@ -42,5 +42,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1800.md" >}}
 ---
 {{< youtube uiCLUTepEJA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1801: Number of Orders in the Backlog](https://grid47.xyz/posts/leetcode-1801-number-of-orders-in-the-backlog-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1801: Number of Orders in the Backlog](https://grid47.xyz/posts/leetcode-1801-number-of-orders-in-the-backlog-solution/) |
 | --- |

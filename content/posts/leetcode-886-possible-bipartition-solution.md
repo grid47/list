@@ -72,5 +72,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/886.md" >}}
 ---
 {{< youtube WIJa0GAC9Cg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #889: Construct Binary Tree from Preorder and Postorder Traversal](https://grid47.xyz/posts/leetcode-889-construct-binary-tree-from-preorder-and-postorder-traversal-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #889: Construct Binary Tree from Preorder and Postorder Traversal](https://grid47.xyz/posts/leetcode-889-construct-binary-tree-from-preorder-and-postorder-traversal-solution/) |
 | --- |

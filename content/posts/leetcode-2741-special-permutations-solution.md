@@ -68,5 +68,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2741.md" >}}
 ---
 {{< youtube AxXNOXj1upY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2744: Find Maximum Number of String Pairs](https://grid47.xyz/posts/leetcode-2744-find-maximum-number-of-string-pairs-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2744: Find Maximum Number of String Pairs](https://grid47.xyz/posts/leetcode-2744-find-maximum-number-of-string-pairs-solution/) |
 | --- |

@@ -77,5 +77,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2564.md" >}}
 ---
 {{< youtube 0J1aVGfArWs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2566: Maximum Difference by Remapping a Digit](https://grid47.xyz/posts/leetcode-2566-maximum-difference-by-remapping-a-digit-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2566: Maximum Difference by Remapping a Digit](https://grid47.xyz/posts/leetcode-2566-maximum-difference-by-remapping-a-digit-solution/) |
 | --- |

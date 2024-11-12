@@ -41,5 +41,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1138.md" >}}
 ---
 {{< youtube rk-aB4rEOyU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1139: Largest 1-Bordered Square](https://grid47.xyz/posts/leetcode-1139-largest-1-bordered-square-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1139: Largest 1-Bordered Square](https://grid47.xyz/posts/leetcode-1139-largest-1-bordered-square-solution/) |
 | --- |

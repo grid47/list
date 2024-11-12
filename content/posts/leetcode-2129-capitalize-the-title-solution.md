@@ -40,5 +40,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2129.md" >}}
 ---
 {{< youtube LDlUaEaunY0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2130: Maximum Twin Sum of a Linked List](https://grid47.xyz/posts/leetcode-2130-maximum-twin-sum-of-a-linked-list-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2130: Maximum Twin Sum of a Linked List](https://grid47.xyz/posts/leetcode-2130-maximum-twin-sum-of-a-linked-list-solution/) |
 | --- |

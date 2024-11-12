@@ -35,5 +35,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1848.md" >}}
 ---
 {{< youtube eAA1gS_2QwY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1849: Splitting a String Into Descending Consecutive Values](https://grid47.xyz/posts/leetcode-1849-splitting-a-string-into-descending-consecutive-values-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1849: Splitting a String Into Descending Consecutive Values](https://grid47.xyz/posts/leetcode-1849-splitting-a-string-into-descending-consecutive-values-solution/) |
 | --- |

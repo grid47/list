@@ -73,5 +73,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/725.md" >}}
 ---
 {{< youtube ZITsHLE5mbE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #729: My Calendar I](https://grid47.xyz/posts/leetcode-729-my-calendar-i-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #729: My Calendar I](https://grid47.xyz/posts/leetcode-729-my-calendar-i-solution/) |
 | --- |

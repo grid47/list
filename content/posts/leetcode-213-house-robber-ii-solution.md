@@ -57,5 +57,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/213.md" >}}
 ---
 {{< youtube rWAJCfYYOvM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #215: Kth Largest Element in an Array](https://grid47.xyz/posts/leetcode-215-kth-largest-element-in-an-array-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #215: Kth Largest Element in an Array](https://grid47.xyz/posts/leetcode-215-kth-largest-element-in-an-array-solution/) |
 | --- |

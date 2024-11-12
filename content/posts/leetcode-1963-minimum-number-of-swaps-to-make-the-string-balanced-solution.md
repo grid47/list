@@ -38,5 +38,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1963.md" >}}
 ---
 {{< youtube 3YDBT9ZrfaU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1968: Array With Elements Not Equal to Average of Neighbors](https://grid47.xyz/posts/leetcode-1968-array-with-elements-not-equal-to-average-of-neighbors-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1968: Array With Elements Not Equal to Average of Neighbors](https://grid47.xyz/posts/leetcode-1968-array-with-elements-not-equal-to-average-of-neighbors-solution/) |
 | --- |

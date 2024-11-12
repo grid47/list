@@ -58,5 +58,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/767.md" >}}
 ---
 {{< youtube 2g_b1aYTHeg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #769: Max Chunks To Make Sorted](https://grid47.xyz/posts/leetcode-769-max-chunks-to-make-sorted-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #769: Max Chunks To Make Sorted](https://grid47.xyz/posts/leetcode-769-max-chunks-to-make-sorted-solution/) |
 | --- |

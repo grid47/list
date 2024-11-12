@@ -34,5 +34,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/556.md" >}}
 ---
 {{< youtube -Ehc8QF1eac >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #557: Reverse Words in a String III](https://grid47.xyz/posts/leetcode-557-reverse-words-in-a-string-iii-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #557: Reverse Words in a String III](https://grid47.xyz/posts/leetcode-557-reverse-words-in-a-string-iii-solution/) |
 | --- |

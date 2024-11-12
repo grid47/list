@@ -42,5 +42,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2643.md" >}}
 ---
 {{< youtube yieYsDt7yVM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2644: Find the Maximum Divisibility Score](https://grid47.xyz/posts/leetcode-2644-find-the-maximum-divisibility-score-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2644: Find the Maximum Divisibility Score](https://grid47.xyz/posts/leetcode-2644-find-the-maximum-divisibility-score-solution/) |
 | --- |

@@ -57,5 +57,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/113.md" >}}
 ---
 {{< youtube MwLDG-WNOjM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #114: Flatten Binary Tree to Linked List](https://grid47.xyz/posts/leetcode-114-flatten-binary-tree-to-linked-list-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #114: Flatten Binary Tree to Linked List](https://grid47.xyz/posts/leetcode-114-flatten-binary-tree-to-linked-list-solution/) |
 | --- |

@@ -50,5 +50,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1962.md" >}}
 ---
 {{< youtube lLAvgl2voc4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1963: Minimum Number of Swaps to Make the String Balanced](https://grid47.xyz/posts/leetcode-1963-minimum-number-of-swaps-to-make-the-string-balanced-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1963: Minimum Number of Swaps to Make the String Balanced](https://grid47.xyz/posts/leetcode-1963-minimum-number-of-swaps-to-make-the-string-balanced-solution/) |
 | --- |

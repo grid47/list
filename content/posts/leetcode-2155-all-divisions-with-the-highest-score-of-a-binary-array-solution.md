@@ -58,5 +58,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2155.md" >}}
 ---
 {{< youtube jAn_1AC2VMo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2160: Minimum Sum of Four Digit Number After Splitting Digits](https://grid47.xyz/posts/leetcode-2160-minimum-sum-of-four-digit-number-after-splitting-digits-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2160: Minimum Sum of Four Digit Number After Splitting Digits](https://grid47.xyz/posts/leetcode-2160-minimum-sum-of-four-digit-number-after-splitting-digits-solution/) |
 | --- |

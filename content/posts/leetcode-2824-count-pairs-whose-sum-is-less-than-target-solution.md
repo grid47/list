@@ -37,5 +37,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2824.md" >}}
 ---
 {{< youtube Xe1teNERwSY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2825: Make String a Subsequence Using Cyclic Increments](https://grid47.xyz/posts/leetcode-2825-make-string-a-subsequence-using-cyclic-increments-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2825: Make String a Subsequence Using Cyclic Increments](https://grid47.xyz/posts/leetcode-2825-make-string-a-subsequence-using-cyclic-increments-solution/) |
 | --- |

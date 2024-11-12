@@ -40,5 +40,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2275.md" >}}
 ---
 {{< youtube OyyfVofM_MM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2278: Percentage of Letter in String](https://grid47.xyz/posts/leetcode-2278-percentage-of-letter-in-string-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2278: Percentage of Letter in String](https://grid47.xyz/posts/leetcode-2278-percentage-of-letter-in-string-solution/) |
 | --- |

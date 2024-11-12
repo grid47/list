@@ -42,5 +42,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/885.md" >}}
 ---
 {{< youtube 0qep3f9cqVs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #886: Possible Bipartition](https://grid47.xyz/posts/leetcode-886-possible-bipartition-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #886: Possible Bipartition](https://grid47.xyz/posts/leetcode-886-possible-bipartition-solution/) |
 | --- |

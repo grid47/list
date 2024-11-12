@@ -50,5 +50,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1975.md" >}}
 ---
 {{< youtube Qxyne1oRBm0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1976: Number of Ways to Arrive at Destination](https://grid47.xyz/posts/leetcode-1976-number-of-ways-to-arrive-at-destination-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1976: Number of Ways to Arrive at Destination](https://grid47.xyz/posts/leetcode-1976-number-of-ways-to-arrive-at-destination-solution/) |
 | --- |

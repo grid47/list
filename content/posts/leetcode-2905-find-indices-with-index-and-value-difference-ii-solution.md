@@ -42,5 +42,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2905.md" >}}
 ---
 {{< youtube TZFQMCeNEho >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2906: Construct Product Matrix](https://grid47.xyz/posts/leetcode-2906-construct-product-matrix-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2906: Construct Product Matrix](https://grid47.xyz/posts/leetcode-2906-construct-product-matrix-solution/) |
 | --- |

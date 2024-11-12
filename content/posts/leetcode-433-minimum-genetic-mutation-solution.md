@@ -67,5 +67,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/433.md" >}}
 ---
 {{< youtube XLvyInrFjm4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #435: Non-overlapping Intervals](https://grid47.xyz/posts/leetcode-435-non-overlapping-intervals-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #435: Non-overlapping Intervals](https://grid47.xyz/posts/leetcode-435-non-overlapping-intervals-solution/) |
 | --- |

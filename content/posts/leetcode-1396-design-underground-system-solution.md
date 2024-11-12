@@ -65,5 +65,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1396.md" >}}
 ---
 {{< youtube W5QOLqXskZM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1400: Construct K Palindrome Strings](https://grid47.xyz/posts/leetcode-1400-construct-k-palindrome-strings-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1400: Construct K Palindrome Strings](https://grid47.xyz/posts/leetcode-1400-construct-k-palindrome-strings-solution/) |
 | --- |

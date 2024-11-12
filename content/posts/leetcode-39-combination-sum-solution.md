@@ -55,5 +55,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/39.md" >}}
 ---
 {{< youtube utBw5FbYswk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #40: Combination Sum II](https://grid47.xyz/posts/leetcode-40-combination-sum-ii-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #40: Combination Sum II](https://grid47.xyz/posts/leetcode-40-combination-sum-ii-solution/) |
 | --- |

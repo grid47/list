@@ -102,5 +102,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/427.md" >}}
 ---
 {{< youtube UQ-1sBMV0v4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #429: N-ary Tree Level Order Traversal](https://grid47.xyz/posts/leetcode-429-n-ary-tree-level-order-traversal-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #429: N-ary Tree Level Order Traversal](https://grid47.xyz/posts/leetcode-429-n-ary-tree-level-order-traversal-solution/) |
 | --- |

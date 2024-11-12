@@ -59,5 +59,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/15.md" >}}
 ---
 {{< youtube 8IjCNFIo8YI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #16: 3Sum Closest](https://grid47.xyz/posts/leetcode-16-3sum-closest-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #16: 3Sum Closest](https://grid47.xyz/posts/leetcode-16-3sum-closest-solution/) |
 | --- |

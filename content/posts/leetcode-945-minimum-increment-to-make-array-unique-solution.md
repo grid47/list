@@ -38,5 +38,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/945.md" >}}
 ---
 {{< youtube XPPs2Wj2YSk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #946: Validate Stack Sequences](https://grid47.xyz/posts/leetcode-946-validate-stack-sequences-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #946: Validate Stack Sequences](https://grid47.xyz/posts/leetcode-946-validate-stack-sequences-solution/) |
 | --- |

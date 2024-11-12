@@ -46,5 +46,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2762.md" >}}
 ---
 {{< youtube TDB2fGaYzMg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2765: Longest Alternating Subarray](https://grid47.xyz/posts/leetcode-2765-longest-alternating-subarray-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2765: Longest Alternating Subarray](https://grid47.xyz/posts/leetcode-2765-longest-alternating-subarray-solution/) |
 | --- |

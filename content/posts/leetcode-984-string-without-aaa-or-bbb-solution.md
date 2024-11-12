@@ -37,5 +37,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/984.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #985: Sum of Even Numbers After Queries](https://grid47.xyz/posts/leetcode-985-sum-of-even-numbers-after-queries-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #985: Sum of Even Numbers After Queries](https://grid47.xyz/posts/leetcode-985-sum-of-even-numbers-after-queries-solution/) |
 | --- |

@@ -53,5 +53,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1806.md" >}}
 ---
 {{< youtube MT7Qo0LmoFo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1807: Evaluate the Bracket Pairs of a String](https://grid47.xyz/posts/leetcode-1807-evaluate-the-bracket-pairs-of-a-string-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1807: Evaluate the Bracket Pairs of a String](https://grid47.xyz/posts/leetcode-1807-evaluate-the-bracket-pairs-of-a-string-solution/) |
 | --- |

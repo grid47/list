@@ -40,5 +40,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2640.md" >}}
 ---
 {{< youtube Xp413jTlTNk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2641: Cousins in Binary Tree II](https://grid47.xyz/posts/leetcode-2641-cousins-in-binary-tree-ii-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2641: Cousins in Binary Tree II](https://grid47.xyz/posts/leetcode-2641-cousins-in-binary-tree-ii-solution/) |
 | --- |

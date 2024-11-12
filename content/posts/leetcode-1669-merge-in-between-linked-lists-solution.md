@@ -47,5 +47,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1669.md" >}}
 ---
 {{< youtube pI775VutBxg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1670: Design Front Middle Back Queue](https://grid47.xyz/posts/leetcode-1670-design-front-middle-back-queue-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1670: Design Front Middle Back Queue](https://grid47.xyz/posts/leetcode-1670-design-front-middle-back-queue-solution/) |
 | --- |

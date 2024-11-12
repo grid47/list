@@ -79,5 +79,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2771.md" >}}
 ---
 {{< youtube 2aJYkQsBRbI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2772: Apply Operations to Make All Array Elements Equal to Zero](https://grid47.xyz/posts/leetcode-2772-apply-operations-to-make-all-array-elements-equal-to-zero-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2772: Apply Operations to Make All Array Elements Equal to Zero](https://grid47.xyz/posts/leetcode-2772-apply-operations-to-make-all-array-elements-equal-to-zero-solution/) |
 | --- |

@@ -42,5 +42,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1653.md" >}}
 ---
 {{< youtube WDStNufBUQ8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1656: Design an Ordered Stream](https://grid47.xyz/posts/leetcode-1656-design-an-ordered-stream-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1656: Design an Ordered Stream](https://grid47.xyz/posts/leetcode-1656-design-an-ordered-stream-solution/) |
 | --- |

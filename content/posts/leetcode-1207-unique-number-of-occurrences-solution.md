@@ -48,5 +48,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1207.md" >}}
 ---
 {{< youtube _NYimlZY1PE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1208: Get Equal Substrings Within Budget](https://grid47.xyz/posts/leetcode-1208-get-equal-substrings-within-budget-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1208: Get Equal Substrings Within Budget](https://grid47.xyz/posts/leetcode-1208-get-equal-substrings-within-budget-solution/) |
 | --- |

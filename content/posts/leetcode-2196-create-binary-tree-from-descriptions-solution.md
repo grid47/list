@@ -79,5 +79,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2196.md" >}}
 ---
 {{< youtube yWkrFfqO7NA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2201: Count Artifacts That Can Be Extracted](https://grid47.xyz/posts/leetcode-2201-count-artifacts-that-can-be-extracted-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2201: Count Artifacts That Can Be Extracted](https://grid47.xyz/posts/leetcode-2201-count-artifacts-that-can-be-extracted-solution/) |
 | --- |

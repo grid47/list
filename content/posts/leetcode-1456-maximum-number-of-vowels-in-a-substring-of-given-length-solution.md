@@ -40,5 +40,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1456.md" >}}
 ---
 {{< youtube tal8tKUr6dU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1457: Pseudo-Palindromic Paths in a Binary Tree](https://grid47.xyz/posts/leetcode-1457-pseudo-palindromic-paths-in-a-binary-tree-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1457: Pseudo-Palindromic Paths in a Binary Tree](https://grid47.xyz/posts/leetcode-1457-pseudo-palindromic-paths-in-a-binary-tree-solution/) |
 | --- |

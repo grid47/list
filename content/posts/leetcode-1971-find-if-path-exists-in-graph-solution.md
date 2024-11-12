@@ -53,5 +53,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1971.md" >}}
 ---
 {{< youtube knLFe7hEp3Y >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1974: Minimum Time to Type Word Using Special Typewriter](https://grid47.xyz/posts/leetcode-1974-minimum-time-to-type-word-using-special-typewriter-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1974: Minimum Time to Type Word Using Special Typewriter](https://grid47.xyz/posts/leetcode-1974-minimum-time-to-type-word-using-special-typewriter-solution/) |
 | --- |

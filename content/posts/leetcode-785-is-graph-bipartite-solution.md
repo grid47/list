@@ -68,5 +68,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/785.md" >}}
 ---
 {{< youtube j69Of_2nfRA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #786: K-th Smallest Prime Fraction](https://grid47.xyz/posts/leetcode-786-k-th-smallest-prime-fraction-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #786: K-th Smallest Prime Fraction](https://grid47.xyz/posts/leetcode-786-k-th-smallest-prime-fraction-solution/) |
 | --- |

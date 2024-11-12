@@ -39,5 +39,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2848.md" >}}
 ---
 {{< youtube 86n-e3Zwx34 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2849: Determine if a Cell Is Reachable at a Given Time](https://grid47.xyz/posts/leetcode-2849-determine-if-a-cell-is-reachable-at-a-given-time-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2849: Determine if a Cell Is Reachable at a Given Time](https://grid47.xyz/posts/leetcode-2849-determine-if-a-cell-is-reachable-at-a-given-time-solution/) |
 | --- |

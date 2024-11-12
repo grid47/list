@@ -49,5 +49,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2507.md" >}}
 ---
 {{< youtube Z11zwNKd89I >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2511: Maximum Enemy Forts That Can Be Captured](https://grid47.xyz/posts/leetcode-2511-maximum-enemy-forts-that-can-be-captured-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2511: Maximum Enemy Forts That Can Be Captured](https://grid47.xyz/posts/leetcode-2511-maximum-enemy-forts-that-can-be-captured-solution/) |
 | --- |

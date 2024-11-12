@@ -38,5 +38,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2399.md" >}}
 ---
 {{< youtube uNv8XvliP0o >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2400: Number of Ways to Reach a Position After Exactly k Steps](https://grid47.xyz/posts/leetcode-2400-number-of-ways-to-reach-a-position-after-exactly-k-steps-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2400: Number of Ways to Reach a Position After Exactly k Steps](https://grid47.xyz/posts/leetcode-2400-number-of-ways-to-reach-a-position-after-exactly-k-steps-solution/) |
 | --- |

@@ -58,5 +58,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1471.md" >}}
 ---
 {{< youtube 5Hie-4QPNtI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1472: Design Browser History](https://grid47.xyz/posts/leetcode-1472-design-browser-history-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1472: Design Browser History](https://grid47.xyz/posts/leetcode-1472-design-browser-history-solution/) |
 | --- |

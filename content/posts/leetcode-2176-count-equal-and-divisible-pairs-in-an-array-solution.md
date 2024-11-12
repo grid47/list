@@ -44,5 +44,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2176.md" >}}
 ---
 {{< youtube 25az-hMz2YE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2177: Find Three Consecutive Integers That Sum to a Given Number](https://grid47.xyz/posts/leetcode-2177-find-three-consecutive-integers-that-sum-to-a-given-number-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2177: Find Three Consecutive Integers That Sum to a Given Number](https://grid47.xyz/posts/leetcode-2177-find-three-consecutive-integers-that-sum-to-a-given-number-solution/) |
 | --- |

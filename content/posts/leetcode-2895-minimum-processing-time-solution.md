@@ -47,5 +47,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2895.md" >}}
 ---
 {{< youtube Ju6ArOqNhxM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2899: Last Visited Integers](https://grid47.xyz/posts/leetcode-2899-last-visited-integers-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2899: Last Visited Integers](https://grid47.xyz/posts/leetcode-2899-last-visited-integers-solution/) |
 | --- |

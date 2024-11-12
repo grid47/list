@@ -60,5 +60,5 @@ d[e[0]][e[1]] = d[e[1]][e[0]] = e[2];
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1334.md" >}}
 ---
 {{< youtube --wKPR3ByJc >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1337: The K Weakest Rows in a Matrix](https://grid47.xyz/posts/leetcode-1337-the-k-weakest-rows-in-a-matrix-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1337: The K Weakest Rows in a Matrix](https://grid47.xyz/posts/leetcode-1337-the-k-weakest-rows-in-a-matrix-solution/) |
 | --- |

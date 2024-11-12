@@ -51,5 +51,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1333.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1334: Find the City With the Smallest Number of Neighbors at a Threshold Distance](https://grid47.xyz/posts/leetcode-1334-find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1334: Find the City With the Smallest Number of Neighbors at a Threshold Distance](https://grid47.xyz/posts/leetcode-1334-find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance-solution/) |
 | --- |

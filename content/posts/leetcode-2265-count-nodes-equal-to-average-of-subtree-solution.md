@@ -62,5 +62,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2265.md" >}}
 ---
 {{< youtube yg9A3yLTcsE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2266: Count Number of Texts](https://grid47.xyz/posts/leetcode-2266-count-number-of-texts-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2266: Count Number of Texts](https://grid47.xyz/posts/leetcode-2266-count-number-of-texts-solution/) |
 | --- |

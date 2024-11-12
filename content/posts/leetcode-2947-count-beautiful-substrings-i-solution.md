@@ -41,5 +41,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2947.md" >}}
 ---
 {{< youtube AnuZGQmVPQM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2948: Make Lexicographically Smallest Array by Swapping Elements](https://grid47.xyz/posts/leetcode-2948-make-lexicographically-smallest-array-by-swapping-elements-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2948: Make Lexicographically Smallest Array by Swapping Elements](https://grid47.xyz/posts/leetcode-2948-make-lexicographically-smallest-array-by-swapping-elements-solution/) |
 | --- |

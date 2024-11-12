@@ -62,5 +62,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1415.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1418: Display Table of Food Orders in a Restaurant](https://grid47.xyz/posts/leetcode-1418-display-table-of-food-orders-in-a-restaurant-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1418: Display Table of Food Orders in a Restaurant](https://grid47.xyz/posts/leetcode-1418-display-table-of-food-orders-in-a-restaurant-solution/) |
 | --- |

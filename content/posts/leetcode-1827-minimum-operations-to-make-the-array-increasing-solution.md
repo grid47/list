@@ -38,5 +38,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1827.md" >}}
 ---
 {{< youtube U217V1lFwlk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1828: Queries on Number of Points Inside a Circle](https://grid47.xyz/posts/leetcode-1828-queries-on-number-of-points-inside-a-circle-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1828: Queries on Number of Points Inside a Circle](https://grid47.xyz/posts/leetcode-1828-queries-on-number-of-points-inside-a-circle-solution/) |
 | --- |

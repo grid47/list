@@ -81,5 +81,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2166.md" >}}
 ---
 {{< youtube FWv-b_VITvA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2169: Count Operations to Obtain Zero](https://grid47.xyz/posts/leetcode-2169-count-operations-to-obtain-zero-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2169: Count Operations to Obtain Zero](https://grid47.xyz/posts/leetcode-2169-count-operations-to-obtain-zero-solution/) |
 | --- |

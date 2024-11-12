@@ -56,5 +56,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/538.md" >}}
 ---
 {{< youtube AFDxiYO9XzY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #539: Minimum Time Difference](https://grid47.xyz/posts/leetcode-539-minimum-time-difference-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #539: Minimum Time Difference](https://grid47.xyz/posts/leetcode-539-minimum-time-difference-solution/) |
 | --- |

@@ -34,5 +34,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2811.md" >}}
 ---
 {{< youtube BVkYLy-gzcg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2812: Find the Safest Path in a Grid](https://grid47.xyz/posts/leetcode-2812-find-the-safest-path-in-a-grid-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2812: Find the Safest Path in a Grid](https://grid47.xyz/posts/leetcode-2812-find-the-safest-path-in-a-grid-solution/) |
 | --- |

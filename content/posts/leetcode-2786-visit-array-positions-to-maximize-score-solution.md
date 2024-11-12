@@ -36,5 +36,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2786.md" >}}
 ---
 {{< youtube JtogyeIxGWE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2788: Split Strings by Separator](https://grid47.xyz/posts/leetcode-2788-split-strings-by-separator-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2788: Split Strings by Separator](https://grid47.xyz/posts/leetcode-2788-split-strings-by-separator-solution/) |
 | --- |

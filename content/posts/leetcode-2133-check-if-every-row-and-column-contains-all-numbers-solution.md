@@ -39,5 +39,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2133.md" >}}
 ---
 {{< youtube 6l0_5Weq-3k >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2134: Minimum Swaps to Group All 1's Together II](https://grid47.xyz/posts/leetcode-2134-minimum-swaps-to-group-all-1s-together-ii-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2134: Minimum Swaps to Group All 1's Together II](https://grid47.xyz/posts/leetcode-2134-minimum-swaps-to-group-all-1s-together-ii-solution/) |
 | --- |

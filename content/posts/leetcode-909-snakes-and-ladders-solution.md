@@ -57,5 +57,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/909.md" >}}
 ---
 {{< youtube 6lH4nO3JfLk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #910: Smallest Range II](https://grid47.xyz/posts/leetcode-910-smallest-range-ii-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #910: Smallest Range II](https://grid47.xyz/posts/leetcode-910-smallest-range-ii-solution/) |
 | --- |

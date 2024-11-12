@@ -51,5 +51,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/114.md" >}}
 ---
 {{< youtube rKnD7rLT0lI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #116: Populating Next Right Pointers in Each Node](https://grid47.xyz/posts/leetcode-116-populating-next-right-pointers-in-each-node-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #116: Populating Next Right Pointers in Each Node](https://grid47.xyz/posts/leetcode-116-populating-next-right-pointers-in-each-node-solution/) |
 | --- |

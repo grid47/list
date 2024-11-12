@@ -35,5 +35,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2073.md" >}}
 ---
 {{< youtube cVmS9N6kf2Y >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2075: Decode the Slanted Ciphertext](https://grid47.xyz/posts/leetcode-2075-decode-the-slanted-ciphertext-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2075: Decode the Slanted Ciphertext](https://grid47.xyz/posts/leetcode-2075-decode-the-slanted-ciphertext-solution/) |
 | --- |

@@ -46,5 +46,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2270.md" >}}
 ---
 {{< youtube XdsMrB7WRUw >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2271: Maximum White Tiles Covered by a Carpet](https://grid47.xyz/posts/leetcode-2271-maximum-white-tiles-covered-by-a-carpet-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2271: Maximum White Tiles Covered by a Carpet](https://grid47.xyz/posts/leetcode-2271-maximum-white-tiles-covered-by-a-carpet-solution/) |
 | --- |

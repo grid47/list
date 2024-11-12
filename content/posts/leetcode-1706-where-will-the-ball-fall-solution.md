@@ -45,5 +45,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1706.md" >}}
 ---
 {{< youtube QydaN-AVEAA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1712: Ways to Split Array Into Three Subarrays](https://grid47.xyz/posts/leetcode-1712-ways-to-split-array-into-three-subarrays-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1712: Ways to Split Array Into Three Subarrays](https://grid47.xyz/posts/leetcode-1712-ways-to-split-array-into-three-subarrays-solution/) |
 | --- |

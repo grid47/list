@@ -87,5 +87,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/677.md" >}}
 ---
 {{< youtube GwiKly7UJbQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #678: Valid Parenthesis String](https://grid47.xyz/posts/leetcode-678-valid-parenthesis-string-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #678: Valid Parenthesis String](https://grid47.xyz/posts/leetcode-678-valid-parenthesis-string-solution/) |
 | --- |

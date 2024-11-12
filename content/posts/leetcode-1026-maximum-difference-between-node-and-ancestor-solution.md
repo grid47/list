@@ -49,5 +49,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1026.md" >}}
 ---
 {{< youtube f37BCBHGFGA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1027: Longest Arithmetic Subsequence](https://grid47.xyz/posts/leetcode-1027-longest-arithmetic-subsequence-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1027: Longest Arithmetic Subsequence](https://grid47.xyz/posts/leetcode-1027-longest-arithmetic-subsequence-solution/) |
 | --- |

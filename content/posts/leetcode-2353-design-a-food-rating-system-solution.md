@@ -59,5 +59,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2353.md" >}}
 ---
 {{< youtube Ikp8SgbgbEo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2357: Make Array Zero by Subtracting Equal Amounts](https://grid47.xyz/posts/leetcode-2357-make-array-zero-by-subtracting-equal-amounts-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2357: Make Array Zero by Subtracting Equal Amounts](https://grid47.xyz/posts/leetcode-2357-make-array-zero-by-subtracting-equal-amounts-solution/) |
 | --- |

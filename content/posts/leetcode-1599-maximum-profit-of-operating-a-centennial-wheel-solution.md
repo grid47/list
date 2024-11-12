@@ -62,5 +62,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1599.md" >}}
 ---
 {{< youtube Jn2ELfoSRf0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1600: Throne Inheritance](https://grid47.xyz/posts/leetcode-1600-throne-inheritance-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1600: Throne Inheritance](https://grid47.xyz/posts/leetcode-1600-throne-inheritance-solution/) |
 | --- |

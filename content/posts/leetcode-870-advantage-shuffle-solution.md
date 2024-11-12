@@ -37,5 +37,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/870.md" >}}
 ---
 {{< youtube fY310tCXS_E >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #872: Leaf-Similar Trees](https://grid47.xyz/posts/leetcode-872-leaf-similar-trees-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #872: Leaf-Similar Trees](https://grid47.xyz/posts/leetcode-872-leaf-similar-trees-solution/) |
 | --- |

@@ -39,5 +39,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1911.md" >}}
 ---
 {{< youtube 4v42XOuU1XA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1913: Maximum Product Difference Between Two Pairs](https://grid47.xyz/posts/leetcode-1913-maximum-product-difference-between-two-pairs-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1913: Maximum Product Difference Between Two Pairs](https://grid47.xyz/posts/leetcode-1913-maximum-product-difference-between-two-pairs-solution/) |
 | --- |

@@ -42,5 +42,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2937.md" >}}
 ---
 {{< youtube 7F8GNWVlYgM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2938: Separate Black and White Balls](https://grid47.xyz/posts/leetcode-2938-separate-black-and-white-balls-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2938: Separate Black and White Balls](https://grid47.xyz/posts/leetcode-2938-separate-black-and-white-balls-solution/) |
 | --- |

@@ -48,5 +48,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1658.md" >}}
 ---
 {{< youtube iPqrN6Bb-NI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1662: Check If Two String Arrays are Equivalent](https://grid47.xyz/posts/leetcode-1662-check-if-two-string-arrays-are-equivalent-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1662: Check If Two String Arrays are Equivalent](https://grid47.xyz/posts/leetcode-1662-check-if-two-string-arrays-are-equivalent-solution/) |
 | --- |

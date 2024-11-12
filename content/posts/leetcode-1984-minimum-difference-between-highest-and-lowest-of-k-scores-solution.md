@@ -35,5 +35,5 @@ int minimumDifference(vector<int>& nums, int k) {
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1984.md" >}}
 ---
 {{< youtube JU5XdBZZtlk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1985: Find the Kth Largest Integer in the Array](https://grid47.xyz/posts/leetcode-1985-find-the-kth-largest-integer-in-the-array-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1985: Find the Kth Largest Integer in the Array](https://grid47.xyz/posts/leetcode-1985-find-the-kth-largest-integer-in-the-array-solution/) |
 | --- |

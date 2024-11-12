@@ -48,5 +48,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2266.md" >}}
 ---
 {{< youtube LdM0WLfhF_4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2269: Find the K-Beauty of a Number](https://grid47.xyz/posts/leetcode-2269-find-the-k-beauty-of-a-number-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2269: Find the K-Beauty of a Number](https://grid47.xyz/posts/leetcode-2269-find-the-k-beauty-of-a-number-solution/) |
 | --- |

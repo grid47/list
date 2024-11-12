@@ -60,5 +60,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1942.md" >}}
 ---
 {{< youtube LqhxcaCctCc >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1943: Describe the Painting](https://grid47.xyz/posts/leetcode-1943-describe-the-painting-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1943: Describe the Painting](https://grid47.xyz/posts/leetcode-1943-describe-the-painting-solution/) |
 | --- |

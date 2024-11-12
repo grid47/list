@@ -58,5 +58,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/978.md" >}}
 ---
 {{< youtube V_iHUhR8Dek >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #979: Distribute Coins in Binary Tree](https://grid47.xyz/posts/leetcode-979-distribute-coins-in-binary-tree-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #979: Distribute Coins in Binary Tree](https://grid47.xyz/posts/leetcode-979-distribute-coins-in-binary-tree-solution/) |
 | --- |

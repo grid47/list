@@ -39,5 +39,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2496.md" >}}
 ---
 {{< youtube uGUaazmui2k >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2497: Maximum Star Sum of a Graph](https://grid47.xyz/posts/leetcode-2497-maximum-star-sum-of-a-graph-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2497: Maximum Star Sum of a Graph](https://grid47.xyz/posts/leetcode-2497-maximum-star-sum-of-a-graph-solution/) |
 | --- |

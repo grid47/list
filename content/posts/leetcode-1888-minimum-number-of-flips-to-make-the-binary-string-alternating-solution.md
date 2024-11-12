@@ -50,5 +50,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1888.md" >}}
 ---
 {{< youtube MOeuK6gaC2A >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1893: Check if All the Integers in a Range Are Covered](https://grid47.xyz/posts/leetcode-1893-check-if-all-the-integers-in-a-range-are-covered-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1893: Check if All the Integers in a Range Are Covered](https://grid47.xyz/posts/leetcode-1893-check-if-all-the-integers-in-a-range-are-covered-solution/) |
 | --- |

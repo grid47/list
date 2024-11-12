@@ -54,5 +54,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/792.md" >}}
 ---
 {{< youtube 0zMujz5SYoE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #794: Valid Tic-Tac-Toe State](https://grid47.xyz/posts/leetcode-794-valid-tic-tac-toe-state-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #794: Valid Tic-Tac-Toe State](https://grid47.xyz/posts/leetcode-794-valid-tic-tac-toe-state-solution/) |
 | --- |

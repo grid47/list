@@ -48,5 +48,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1664.md" >}}
 ---
 {{< youtube GS9BQo3-1mg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1668: Maximum Repeating Substring](https://grid47.xyz/posts/leetcode-1668-maximum-repeating-substring-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1668: Maximum Repeating Substring](https://grid47.xyz/posts/leetcode-1668-maximum-repeating-substring-solution/) |
 | --- |

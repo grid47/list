@@ -48,5 +48,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2660.md" >}}
 ---
 {{< youtube UzLjzmjhVqs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2661: First Completely Painted Row or Column](https://grid47.xyz/posts/leetcode-2661-first-completely-painted-row-or-column-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2661: First Completely Painted Row or Column](https://grid47.xyz/posts/leetcode-2661-first-completely-painted-row-or-column-solution/) |
 | --- |

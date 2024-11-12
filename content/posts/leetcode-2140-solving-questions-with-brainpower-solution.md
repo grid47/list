@@ -50,5 +50,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2140.md" >}}
 ---
 {{< youtube yPaLLSEDlX4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2144: Minimum Cost of Buying Candies With Discount](https://grid47.xyz/posts/leetcode-2144-minimum-cost-of-buying-candies-with-discount-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2144: Minimum Cost of Buying Candies With Discount](https://grid47.xyz/posts/leetcode-2144-minimum-cost-of-buying-candies-with-discount-solution/) |
 | --- |

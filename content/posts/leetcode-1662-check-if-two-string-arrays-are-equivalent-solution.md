@@ -40,5 +40,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1662.md" >}}
 ---
 {{< youtube ejBwc2oE7ck >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1663: Smallest String With A Given Numeric Value](https://grid47.xyz/posts/leetcode-1663-smallest-string-with-a-given-numeric-value-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1663: Smallest String With A Given Numeric Value](https://grid47.xyz/posts/leetcode-1663-smallest-string-with-a-given-numeric-value-solution/) |
 | --- |

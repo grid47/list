@@ -50,5 +50,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2411.md" >}}
 ---
 {{< youtube 0xR5bFyo2QA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2413: Smallest Even Multiple](https://grid47.xyz/posts/leetcode-2413-smallest-even-multiple-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2413: Smallest Even Multiple](https://grid47.xyz/posts/leetcode-2413-smallest-even-multiple-solution/) |
 | --- |

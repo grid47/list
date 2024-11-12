@@ -50,5 +50,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1854.md" >}}
 ---
 {{< youtube 2W2yijatcTY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #1855: Maximum Distance Between a Pair of Values](https://grid47.xyz/posts/leetcode-1855-maximum-distance-between-a-pair-of-values-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1855: Maximum Distance Between a Pair of Values](https://grid47.xyz/posts/leetcode-1855-maximum-distance-between-a-pair-of-values-solution/) |
 | --- |

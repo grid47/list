@@ -62,5 +62,5 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2653.md" >}}
 ---
 {{< youtube ovFs2xad0_Y >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Udemy Course](https://grid47.xyz/courses/) / Next : [LeetCode #2654: Minimum Number of Operations to Make All Array Elements Equal to 1](https://grid47.xyz/posts/leetcode-2654-minimum-number-of-operations-to-make-all-array-elements-equal-to-1-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2654: Minimum Number of Operations to Make All Array Elements Equal to 1](https://grid47.xyz/posts/leetcode-2654-minimum-number-of-operations-to-make-all-array-elements-equal-to-1-solution/) |
 | --- |
