@@ -2,7 +2,7 @@
 +++
 authors = ["grid47"]
 title = "Leetcode 1743: Restore the Array From Adjacent Pairs"
-date = "2024-11-01"
+date = "2024-05-16"
 lastmod = "2024-11-06"
 description = "In-depth solution and explanation for Leetcode 1743: Restore the Array From Adjacent Pairs in C++. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis."
 tags = ["Array","Hash Table","Depth-First Search"]
@@ -57,12 +57,8 @@ public:
 {{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1743.md" >}}
 ---
 {{< youtube SGfdp6CFDrA >}}
-| [LeetCode Exercise Compilation](https://grid47.xyz/leetcode/) / Next : [LeetCode #1744: Can You Eat Your Favorite Candy on Your Favorite Day?](https://grid47.xyz/posts/leetcode-1744-can-you-eat-your-favorite-candy-on-your-favorite-day-solution/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / Next : [LeetCode #1744: Can You Eat Your Favorite Candy on Your Favorite Day?](https://grid47.xyz/posts/leetcode-1744-can-you-eat-your-favorite-candy-on-your-favorite-day-solution/) |
 | --- |
-{{< notice info >}}
-| [DP-List](https://grid47.xyz/lists/dp/) | [Graph-List](https://grid47.xyz/lists/graph/) | [Heap-List](https://grid47.xyz/lists/heap/) | [Interval-List](https://grid47.xyz/lists/interval/) | [Linked-List](https://grid47.xyz/lists/ll/) | [Tree](https://grid47.xyz/lists/tree/) |
-{{< /notice >}}
-| |
 {{< notice tip >}}
 Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. [Check out my Momentum Learning course at Udemy! 🚀 ](https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/)
 {{< /notice >}}
