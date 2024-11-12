@@ -11,7 +11,7 @@
 | LeetCode 767 | [Reorganize String](https://grid47.xyz/posts/leetcode-767-reorganize-string-solution/) |
 | LeetCode 973 | [K Closest Points to Origin](https://grid47.xyz/posts/leetcode-973-k-closest-points-to-origin-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/general-discussion/1127238/master-heap-by-solving-23-questions-in-4-patterns-category)
+Credit: LeetCode
 
 ## Top K Pattern
 
@@ -25,7 +25,7 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/general-discussion/11272
 | LeetCode 767 | [Reorganize String](https://grid47.xyz/posts/leetcode-767-reorganize-string-solution/) |
 | LeetCode 973 | [K Closest Points to Origin](https://grid47.xyz/posts/leetcode-973-k-closest-points-to-origin-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)
+Credit: LeetCode
 
 ## Merge Pattern
 
@@ -33,14 +33,14 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/20696
 | --- | --- |
 | LeetCode 378 | [Kth Smallest Element in a Sorted Matrix](https://grid47.xyz/posts/leetcode-378-kth-smallest-element-in-a-sorted-matrix-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)
+Credit: LeetCode
 
 ## Two Heap Pattern
 
 | Q.No. | Question |
 | --- | --- |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)
+Credit: LeetCode
 
 ## Min Pattern
 
@@ -48,5 +48,5 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/20696
 | --- | --- |
 | LeetCode 621 | [Task Scheduler](https://grid47.xyz/posts/leetcode-621-task-scheduler-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)
+Credit: LeetCode
 

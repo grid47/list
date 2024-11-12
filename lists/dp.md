@@ -11,7 +11,7 @@
 | LeetCode 983 | [Minimum Cost For Tickets](https://grid47.xyz/posts/leetcode-983-minimum-cost-for-tickets-solution/) |
 | LeetCode 1049 | [Last Stone Weight II](https://grid47.xyz/posts/leetcode-1049-last-stone-weight-ii-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/general-discussion/458695/dynamic-programming-patterns#Decision-Making)
+Credit: LeetCode
 
 ## Distinct Ways
 
@@ -31,7 +31,7 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/general-discussion/45869
 | LeetCode 935 | [Knight Dialer](https://grid47.xyz/posts/leetcode-935-knight-dialer-solution/) |
 | LeetCode 1155 | [Number of Dice Rolls With Target Sum](https://grid47.xyz/posts/leetcode-1155-number-of-dice-rolls-with-target-sum-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/general-discussion/458695/dynamic-programming-patterns#Decision-Making)
+Credit: LeetCode
 
 ## Merging Intervals
 
@@ -41,7 +41,7 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/general-discussion/45869
 | LeetCode 1039 | [Minimum Score Triangulation of Polygon](https://grid47.xyz/posts/leetcode-1039-minimum-score-triangulation-of-polygon-solution/) |
 | LeetCode 1130 | [Minimum Cost Tree From Leaf Values](https://grid47.xyz/posts/leetcode-1130-minimum-cost-tree-from-leaf-values-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/general-discussion/458695/dynamic-programming-patterns#Decision-Making)
+Credit: LeetCode
 
 ## On Strings
 
@@ -54,7 +54,7 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/general-discussion/45869
 | LeetCode 712 | [Minimum ASCII Delete Sum for Two Strings](https://grid47.xyz/posts/leetcode-712-minimum-ascii-delete-sum-for-two-strings-solution/) |
 | LeetCode 1143 | [Longest Common Subsequence](https://grid47.xyz/posts/leetcode-1143-longest-common-subsequence-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/general-discussion/458695/dynamic-programming-patterns#Decision-Making)
+Credit: LeetCode
 
 ## Decision Making
 
@@ -65,5 +65,5 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/general-discussion/45869
 | LeetCode 309 | [Best Time to Buy and Sell Stock with Cooldown](https://grid47.xyz/posts/leetcode-309-best-time-to-buy-and-sell-stock-with-cooldown-solution/) |
 | LeetCode 714 | [Best Time to Buy and Sell Stock with Transaction Fee](https://grid47.xyz/posts/leetcode-714-best-time-to-buy-and-sell-stock-with-transaction-fee-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/general-discussion/458695/dynamic-programming-patterns#Decision-Making)
+Credit: LeetCode
 

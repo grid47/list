@@ -14,5 +14,5 @@
 | LeetCode 90 | [Subsets II](https://grid47.xyz/posts/leetcode-90-subsets-ii-solution/) |
 | LeetCode 131 | [Palindrome Partitioning](https://grid47.xyz/posts/leetcode-131-palindrome-partitioning-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)
+Credit: LeetCode
 

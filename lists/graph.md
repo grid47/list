@@ -17,7 +17,7 @@
 | LeetCode 1584 | [Min Cost to Connect All Points](https://grid47.xyz/posts/leetcode-1584-min-cost-to-connect-all-points-solution/) |
 | LeetCode 1631 | [Path With Minimum Effort](https://grid47.xyz/posts/leetcode-1631-path-with-minimum-effort-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/study-guide/1326900/graph-algorithms-problems-to-practice)
+Credit: LeetCode
 
 ## Graph
 
@@ -30,14 +30,14 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/study-guide/1326900/grap
 | LeetCode 1631 | [Path With Minimum Effort](https://grid47.xyz/posts/leetcode-1631-path-with-minimum-effort-solution/) |
 | LeetCode 1786 | [Number of Restricted Paths From First to Last Node](https://grid47.xyz/posts/leetcode-1786-number-of-restricted-paths-from-first-to-last-node-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)
+Credit: LeetCode
 
 ## Bridges & Articulation Point
 
 | Q.No. | Question |
 | --- | --- |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)
+Credit: LeetCode
 
 ## DSU
 
@@ -52,5 +52,5 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/20696
 | LeetCode 1202 | [Smallest String With Swaps](https://grid47.xyz/posts/leetcode-1202-smallest-string-with-swaps-solution/) |
 | LeetCode 1319 | [Number of Operations to Make Network Connected](https://grid47.xyz/posts/leetcode-1319-number-of-operations-to-make-network-connected-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)
+Credit: LeetCode
 

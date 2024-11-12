@@ -23,5 +23,5 @@
 | LeetCode 2064 | [Minimized Maximum of Products Distributed to Any Store](https://grid47.xyz/posts/leetcode-2064-minimized-maximum-of-products-distributed-to-any-store-solution/) |
 | LeetCode 2070 | [Most Beautiful Item for Each Query](https://grid47.xyz/posts/leetcode-2070-most-beautiful-item-for-each-query-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)
+Credit: LeetCode
 

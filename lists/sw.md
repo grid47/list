@@ -15,5 +15,5 @@
 | LeetCode 1358 | [Number of Substrings Containing All Three Characters](https://grid47.xyz/posts/leetcode-1358-number-of-substrings-containing-all-three-characters-solution/) |
 | LeetCode 1438 | [Longest Continuous Subarray With Absolute Diff Less Than or Equal to Limit](https://grid47.xyz/posts/leetcode-1438-longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)
+Credit: LeetCode
 

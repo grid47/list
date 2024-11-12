@@ -37,5 +37,5 @@
 | LeetCode 1903 | [Largest Odd Number in String](https://grid47.xyz/posts/leetcode-1903-largest-odd-number-in-string-solution/) |
 | LeetCode 1915 | [Number of Wonderful Substrings](https://grid47.xyz/posts/leetcode-1915-number-of-wonderful-substrings-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)
+Credit: LeetCode
 

@@ -8,5 +8,5 @@
 | LeetCode 855 | [Exam Room](https://grid47.xyz/posts/leetcode-855-exam-room-solution/) |
 | LeetCode 1288 | [Remove Covered Intervals](https://grid47.xyz/posts/leetcode-1288-remove-covered-intervals-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/general-discussion/990277/complete-list-of-all-interval-related-questions)
+Credit: LeetCode
 

@@ -17,5 +17,5 @@
 | LeetCode 1721 | [Swapping Nodes in a Linked List](https://grid47.xyz/posts/leetcode-1721-swapping-nodes-in-a-linked-list-solution/) |
 | LeetCode 1823 | [Find the Winner of the Circular Game](https://grid47.xyz/posts/leetcode-1823-find-the-winner-of-the-circular-game-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/study-guide/1800120/Become-Master-In-Linked-List)
+Credit: LeetCode
 

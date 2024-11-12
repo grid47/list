@@ -32,7 +32,7 @@
 | LeetCode 1457 | [Pseudo-Palindromic Paths in a Binary Tree](https://grid47.xyz/posts/leetcode-1457-pseudo-palindromic-paths-in-a-binary-tree-solution/) |
 | LeetCode 1530 | [Number of Good Leaf Nodes Pairs](https://grid47.xyz/posts/leetcode-1530-number-of-good-leaf-nodes-pairs-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/study-guide/1212004/Binary-Trees-study-guide)
+Credit: LeetCode
 
 ## Tree
 
@@ -91,5 +91,5 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/study-guide/1212004/Bina
 | LeetCode 1530 | [Number of Good Leaf Nodes Pairs](https://grid47.xyz/posts/leetcode-1530-number-of-good-leaf-nodes-pairs-solution/) |
 | LeetCode 1609 | [Even Odd Tree](https://grid47.xyz/posts/leetcode-1609-even-odd-tree-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)
+Credit: LeetCode
 

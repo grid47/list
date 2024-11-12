@@ -19,7 +19,7 @@
 | LeetCode 1850 | [Minimum Adjacent Swaps to Reach the Kth Smallest Number](https://grid47.xyz/posts/leetcode-1850-minimum-adjacent-swaps-to-reach-the-kth-smallest-number-solution/) |
 | LeetCode 1877 | [Minimize Maximum Pair Sum in Array](https://grid47.xyz/posts/leetcode-1877-minimize-maximum-pair-sum-in-array-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)
+Credit: LeetCode
 
 ## Fast-Slow
 
@@ -32,5 +32,5 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/20696
 | LeetCode 287 | [Find the Duplicate Number](https://grid47.xyz/posts/leetcode-287-find-the-duplicate-number-solution/) |
 | LeetCode 457 | [Circular Array Loop](https://grid47.xyz/posts/leetcode-457-circular-array-loop-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)
+Credit: LeetCode
 

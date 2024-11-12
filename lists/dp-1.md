@@ -19,7 +19,7 @@
 | LeetCode 1143 | [Longest Common Subsequence](https://grid47.xyz/posts/leetcode-1143-longest-common-subsequence-solution/) |
 | LeetCode 1186 | [Maximum Subarray Sum with One Deletion](https://grid47.xyz/posts/leetcode-1186-maximum-subarray-sum-with-one-deletion-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)
+Credit: LeetCode
 
 ## Knapsack
 
@@ -31,7 +31,7 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/20696
 | LeetCode 638 | [Shopping Offers](https://grid47.xyz/posts/leetcode-638-shopping-offers-solution/) |
 | LeetCode 1626 | [Best Team With No Conflicts](https://grid47.xyz/posts/leetcode-1626-best-team-with-no-conflicts-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)
+Credit: LeetCode
 
 ## Decision Making
 
@@ -42,7 +42,7 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/20696
 | LeetCode 309 | [Best Time to Buy and Sell Stock with Cooldown](https://grid47.xyz/posts/leetcode-309-best-time-to-buy-and-sell-stock-with-cooldown-solution/) |
 | LeetCode 714 | [Best Time to Buy and Sell Stock with Transaction Fee](https://grid47.xyz/posts/leetcode-714-best-time-to-buy-and-sell-stock-with-transaction-fee-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)
+Credit: LeetCode
 
 ## Distinct Ways
 
@@ -62,7 +62,7 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/20696
 | LeetCode 935 | [Knight Dialer](https://grid47.xyz/posts/leetcode-935-knight-dialer-solution/) |
 | LeetCode 1155 | [Number of Dice Rolls With Target Sum](https://grid47.xyz/posts/leetcode-1155-number-of-dice-rolls-with-target-sum-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)
+Credit: LeetCode
 
 ## Max Min
 
@@ -77,7 +77,7 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/20696
 | LeetCode 983 | [Minimum Cost For Tickets](https://grid47.xyz/posts/leetcode-983-minimum-cost-for-tickets-solution/) |
 | LeetCode 1049 | [Last Stone Weight II](https://grid47.xyz/posts/leetcode-1049-last-stone-weight-ii-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)
+Credit: LeetCode
 
 ## Grid
 
@@ -89,7 +89,7 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/20696
 | LeetCode 1594 | [Maximum Non Negative Product in a Matrix](https://grid47.xyz/posts/leetcode-1594-maximum-non-negative-product-in-a-matrix-solution/) |
 | LeetCode 1706 | [Where Will the Ball Fall](https://grid47.xyz/posts/leetcode-1706-where-will-the-ball-fall-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)
+Credit: LeetCode
 
 ## Math realted
 
@@ -99,7 +99,7 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/20696
 | LeetCode 837 | [New 21 Game](https://grid47.xyz/posts/leetcode-837-new-21-game-solution/) |
 | LeetCode 1227 | [Airplane Seat Assignment Probability](https://grid47.xyz/posts/leetcode-1227-airplane-seat-assignment-probability-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)
+Credit: LeetCode
 
 ## Dp on Strings
 
@@ -113,7 +113,7 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/20696
 | LeetCode 1048 | [Longest String Chain](https://grid47.xyz/posts/leetcode-1048-longest-string-chain-solution/) |
 | LeetCode 1143 | [Longest Common Subsequence](https://grid47.xyz/posts/leetcode-1143-longest-common-subsequence-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)
+Credit: LeetCode
 
 ## Graph/ Tree
 
@@ -125,7 +125,7 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/20696
 | LeetCode 1367 | [Linked List in Binary Tree](https://grid47.xyz/posts/leetcode-1367-linked-list-in-binary-tree-solution/) |
 | LeetCode 1372 | [Longest ZigZag Path in a Binary Tree](https://grid47.xyz/posts/leetcode-1372-longest-zigzag-path-in-a-binary-tree-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)
+Credit: LeetCode
 
 ## Bit Manipulation Dp
 
@@ -133,7 +133,7 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/20696
 | --- | --- |
 | LeetCode 698 | [Partition to K Equal Sum Subsets](https://grid47.xyz/posts/leetcode-698-partition-to-k-equal-sum-subsets-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)
+Credit: LeetCode
 
 ## Interval
 
@@ -148,7 +148,7 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/20696
 | LeetCode 1130 | [Minimum Cost Tree From Leaf Values](https://grid47.xyz/posts/leetcode-1130-minimum-cost-tree-from-leaf-values-solution/) |
 | LeetCode 1690 | [Stone Game VII](https://grid47.xyz/posts/leetcode-1690-stone-game-vii-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)
+Credit: LeetCode
 
 ## Merging Interval
 
@@ -158,7 +158,7 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/20696
 | LeetCode 1039 | [Minimum Score Triangulation of Polygon](https://grid47.xyz/posts/leetcode-1039-minimum-score-triangulation-of-polygon-solution/) |
 | LeetCode 1130 | [Minimum Cost Tree From Leaf Values](https://grid47.xyz/posts/leetcode-1130-minimum-cost-tree-from-leaf-values-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)
+Credit: LeetCode
 
 ## Multi Dimesion
 
@@ -176,12 +176,12 @@ Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/20696
 | LeetCode 1155 | [Number of Dice Rolls With Target Sum](https://grid47.xyz/posts/leetcode-1155-number-of-dice-rolls-with-target-sum-solution/) |
 | LeetCode 1621 | [Number of Sets of K Non-Overlapping Line Segments](https://grid47.xyz/posts/leetcode-1621-number-of-sets-of-k-non-overlapping-line-segments-solution/) |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)
+Credit: LeetCode
 
 ## Digit
 
 | Q.No. | Question |
 | --- | --- |
 
-Credit: [LeetCode Discuss](https://leetcode.com/discuss/interview-question/2069641/the-only-lists-you-need-for-your-interview-preparation)
+Credit: LeetCode
 
