@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/power-of-two/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/231.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/231.webp" 
     alt="A series of glowing numbers doubling, each number expanding into the next power of two."
     caption="Solution to LeetCode 231: Power of Two Problem"
     width="900px"

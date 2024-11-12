@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/sort-characters-by-frequency/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/451.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/451.webp" 
     alt="A string where characters are sorted by frequency, with the most frequent characters glowing brightly."
     caption="Solution to LeetCode 451: Sort Characters By Frequency Problem"
     width="900px"

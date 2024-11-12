@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/pacific-atlantic-water-flow/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/417.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/417.webp" 
     alt="A map with water flowing from both Pacific and Atlantic oceans, gently meeting at highlighted points."
     caption="Solution to LeetCode 417: Pacific Atlantic Water Flow Problem"
     width="900px"

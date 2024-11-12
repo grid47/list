@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/palindrome-partitioning/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/131.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/131.webp" 
     alt="A string being gently split into palindrome segments, with each partition glowing softly."
     caption="Solution to LeetCode 131: Palindrome Partitioning Problem"
     width="900px"

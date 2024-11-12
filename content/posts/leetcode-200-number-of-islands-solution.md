@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/number-of-islands/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/200.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/200.webp" 
     alt="A map of glowing islands floating gently, with the number of islands appearing as a soft count."
     caption="Solution to LeetCode 200: Number of Islands Problem"
     width="900px"

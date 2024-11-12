@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/implement-trie-prefix-tree/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/208.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/208.webp" 
     alt="A tree structure formed from words, with each node glowing softly, symbolizing the prefix search structure."
     caption="Solution to LeetCode 208: Implement Trie (Prefix Tree) Problem"
     width="900px"

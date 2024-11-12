@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/number-of-1-bits/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/191.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/191.webp" 
     alt="A glowing sequence of bits, with 1's gently illuminating and highlighting their presence."
     caption="Solution to LeetCode 191: Number of 1 Bits Problem"
     width="900px"

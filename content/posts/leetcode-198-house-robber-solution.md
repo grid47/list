@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/house-robber/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/198.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/198.webp" 
     alt="A series of houses softly glowing, with the optimal path for robbing illuminating."
     caption="Solution to LeetCode 198: House Robber Problem"
     width="900px"

@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/flatten-nested-list-iterator/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/341.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/341.webp" 
     alt="A nested list unfolding and flattening into a 1D array, with each item softly glowing as it appears."
     caption="Solution to LeetCode 341: Flatten Nested List Iterator Problem"
     width="900px"

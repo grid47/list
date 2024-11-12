@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/153.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/153.webp" 
     alt="A rotating array with a glowing highlight marking the minimum element."
     caption="Solution to LeetCode 153: Find Minimum in Rotated Sorted Array Problem"
     width="900px"

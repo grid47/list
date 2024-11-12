@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/predict-the-winner/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/486.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/486.webp" 
     alt="A glowing sequence where the winner is predicted based on optimal strategies, with each move softly glowing."
     caption="Solution to LeetCode 486: Predict the Winner Problem"
     width="900px"

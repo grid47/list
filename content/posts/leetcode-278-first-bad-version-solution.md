@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/first-bad-version/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/278.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/278.webp" 
     alt="A series of versions, with the first bad one glowing brightly, indicating where the bad version starts."
     caption="Solution to LeetCode 278: First Bad Version Problem"
     width="900px"

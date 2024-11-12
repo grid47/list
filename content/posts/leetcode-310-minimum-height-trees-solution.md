@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/minimum-height-trees/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/310.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/310.webp" 
     alt="A series of tree structures, with each one growing taller or shorter as the minimum height tree is highlighted."
     caption="Solution to LeetCode 310: Minimum Height Trees Problem"
     width="900px"

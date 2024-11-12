@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/total-hamming-distance/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/477.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/477.webp" 
     alt="A sequence of binary strings where the total Hamming distance is calculated, with each distance step gently highlighted"
     caption="Solution to LeetCode 477: Total Hamming Distance Problem"
     width="900px"

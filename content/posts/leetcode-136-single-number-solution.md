@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/single-number/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/136.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/136.webp" 
     alt="A glowing, solitary number standing out in a sequence, signifying its uniqueness."
     caption="Solution to LeetCode 136: Single Number Problem"
     width="900px"

@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/clone-graph/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/133.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/133.webp" 
     alt="A graph with nodes gently duplicating and glowing, forming an identical copy with soft edges."
     caption="Solution to LeetCode 133: Clone Graph Problem"
     width="900px"

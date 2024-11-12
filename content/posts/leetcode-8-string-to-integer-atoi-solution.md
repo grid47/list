@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/string-to-integer-atoi/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/8.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/8.webp" 
     alt="A glowing number forming from abstract text, transforming from letters to digits."
     caption="Solution to LeetCode 8: String to Integer (atoi) Problem"
     width="900px"

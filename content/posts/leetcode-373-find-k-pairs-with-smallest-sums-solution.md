@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/find-k-pairs-with-smallest-sums/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/373.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/373.webp" 
     alt="A series of pairs of numbers, with the smallest sum softly glowing as each pair is tested."
     caption="Solution to LeetCode 373: Find K Pairs with Smallest Sums Problem"
     width="900px"

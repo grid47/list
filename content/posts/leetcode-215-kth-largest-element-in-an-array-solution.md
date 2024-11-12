@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/kth-largest-element-in-an-array/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/215.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/215.webp" 
     alt="An array of glowing elements with the kth largest element glowing brighter than the others."
     caption="Solution to LeetCode 215: Kth Largest Element in an Array Problem"
     width="900px"

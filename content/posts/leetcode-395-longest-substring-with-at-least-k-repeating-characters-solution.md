@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/longest-substring-with-at-least-k-repeating-characters/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/395.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/395.webp" 
     alt="A string with glowing characters highlighting the longest substring with at least K repeating characters."
     caption="Solution to LeetCode 395: Longest Substring with At Least K Repeating Characters Problem"
     width="900px"

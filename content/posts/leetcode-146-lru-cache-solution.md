@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/lru-cache/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/146.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/146.webp" 
     alt="A cache where items are gently shifting in and out, with the most recently used glowing brightly."
     caption="Solution to LeetCode 146: LRU Cache Problem"
     width="900px"

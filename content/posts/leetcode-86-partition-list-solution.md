@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/partition-list/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/86.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/86.webp" 
     alt="A glowing line dividing a list into two perfect sections."
     caption="Solution to LeetCode 86: Partition List Problem"
     width="900px"

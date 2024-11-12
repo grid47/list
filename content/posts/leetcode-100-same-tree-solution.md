@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/same-tree/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/100.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/100.webp" 
     alt="Two trees glowing in harmony, showing perfect symmetry and balance."
     caption="Solution to LeetCode 100: Same Tree Problem"
     width="900px"

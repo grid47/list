@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/design-twitter/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/355.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/355.webp" 
     alt="A sequence of tweets appearing on a glowing timeline, with interactions and retweets softly illuminating."
     caption="Solution to LeetCode 355: Design Twitter Problem"
     width="900px"

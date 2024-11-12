@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/binary-tree-preorder-traversal/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/144.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/144.webp" 
     alt="A tree with nodes glowing sequentially from root to leaf, following a smooth, glowing path."
     caption="Solution to LeetCode 144: Binary Tree Preorder Traversal Problem"
     width="900px"

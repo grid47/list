@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/421.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/421.webp" 
     alt="A glowing sequence of numbers where the XOR result is softly highlighted, showing the maximum possible value."
     caption="Solution to LeetCode 421: Maximum XOR of Two Numbers in an Array Problem"
     width="900px"

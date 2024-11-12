@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/remove-element/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/27.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/27.webp" 
     alt="A soft, radiant element being gently pulled away from a sequence, leaving a streamlined flow."
     caption="Solution to LeetCode 27: Remove Element Problem"
     width="900px"

@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/shuffle-an-array/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/384.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/384.webp" 
     alt="A glowing array where elements shuffle into new positions, gently highlighting the change."
     caption="Solution to LeetCode 384: Shuffle an Array Problem"
     width="900px"

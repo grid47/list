@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/contains-duplicate/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/217.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/217.webp" 
     alt="A set of numbers gently rearranging, with duplicates softly fading out and unique ones glowing."
     caption="Solution to LeetCode 217: Contains Duplicate Problem"
     width="900px"

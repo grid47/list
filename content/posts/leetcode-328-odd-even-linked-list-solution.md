@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/odd-even-linked-list/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/328.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/328.webp" 
     alt="A linked list where odd and even numbered nodes alternate, glowing softly as they form the correct pattern."
     caption="Solution to LeetCode 328: Odd Even Linked List Problem"
     width="900px"

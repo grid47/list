@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/maximum-product-of-word-lengths/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/318.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/318.webp" 
     alt="A set of words with glowing lengths, each word’s length highlighted to show the maximum product of word lengths."
     caption="Solution to LeetCode 318: Maximum Product of Word Lengths Problem"
     width="900px"

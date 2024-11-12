@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/battleships-in-a-board/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/419.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/419.webp" 
     alt="A board game where ships glow softly as they are placed on the grid, each ship highlighted as it is positioned."
     caption="Solution to LeetCode 419: Battleships in a Board Problem"
     width="900px"

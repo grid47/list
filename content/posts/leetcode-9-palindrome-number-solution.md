@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/palindrome-number/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/9.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/9.webp" 
     alt="A number with mirrored halves, radiating a soothing glow as it reflects symmetrically."
     caption="Solution to LeetCode 9: Palindrome Number Problem"
     width="900px"

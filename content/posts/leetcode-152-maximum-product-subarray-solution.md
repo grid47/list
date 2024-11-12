@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/maximum-product-subarray/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/152.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/152.webp" 
     alt="A radiant subarray of numbers, with the product of values glowing brightly as the maximum result."
     caption="Solution to LeetCode 152: Maximum Product Subarray Problem"
     width="900px"

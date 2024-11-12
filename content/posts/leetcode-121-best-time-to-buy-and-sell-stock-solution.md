@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/121.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/121.webp" 
     alt="A soft, glowing chart of stock prices with a smooth line representing the best time to buy and sell."
     caption="Solution to LeetCode 121: Best Time to Buy and Sell Stock Problem"
     width="900px"

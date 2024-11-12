@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/path-sum-iii/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/437.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/437.webp" 
     alt="A tree with nodes lighting up, showing the path sum from a root node to the leaves, highlighting valid paths."
     caption="Solution to LeetCode 437: Path Sum III Problem"
     width="900px"

@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/insert-delete-getrandom-o1/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/380.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/380.webp" 
     alt="A sequence of elements being added or deleted, with each random selection softly highlighted."
     caption="Solution to LeetCode 380: Insert Delete GetRandom O(1) Problem"
     width="900px"

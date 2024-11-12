@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/wiggle-sort-ii/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/324.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/324.webp" 
     alt="A sequence of numbers gently oscillating, with the elements arranged to form a wiggle pattern."
     caption="Solution to LeetCode 324: Wiggle Sort II Problem"
     width="900px"

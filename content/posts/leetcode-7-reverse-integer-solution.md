@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/reverse-integer/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/7.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/7.webp" 
     alt="A swirling, translucent number turning in reverse motion, unfolding in a calming spiral."
     caption="Solution to LeetCode 7: Reverse Integer Problem"
     width="900px"

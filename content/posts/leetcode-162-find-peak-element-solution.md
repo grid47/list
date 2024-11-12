@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/find-peak-element/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/162.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/162.webp" 
     alt="A smooth curve of numbers with the highest point glowing brightly, symbolizing the peak."
     caption="Solution to LeetCode 162: Find Peak Element Problem"
     width="900px"

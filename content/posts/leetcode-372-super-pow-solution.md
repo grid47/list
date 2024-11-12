@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/super-pow/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/372.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/372.webp" 
     alt="A glowing number being raised to a power, with the power operations softly highlighted along the way."
     caption="Solution to LeetCode 372: Super Pow Problem"
     width="900px"

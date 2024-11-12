@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/majority-element/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/169.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/169.webp" 
     alt="A glowing element standing out in a sequence, symbolizing its majority status."
     caption="Solution to LeetCode 169: Majority Element Problem"
     width="900px"

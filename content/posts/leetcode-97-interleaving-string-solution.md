@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/interleaving-string/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/97.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/97.webp" 
     alt="Two glowing strings weaving together in an intricate, peaceful interleaving pattern."
     caption="Solution to LeetCode 97: Interleaving String Problem"
     width="900px"

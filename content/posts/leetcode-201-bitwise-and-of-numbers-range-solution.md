@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/bitwise-and-of-numbers-range/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/201.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/201.webp" 
     alt="A series of overlapping circles, each representing a number, with a soft intersection of glowing bits in the middle."
     caption="Solution to LeetCode 201: Bitwise AND of Numbers Range Problem"
     width="900px"

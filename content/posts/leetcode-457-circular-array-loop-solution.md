@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/circular-array-loop/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/457.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/457.webp" 
     alt="A glowing circular array where elements move in a loop, with each cycle softly illuminated as it repeats."
     caption="Solution to LeetCode 457: Circular Array Loop Problem"
     width="900px"

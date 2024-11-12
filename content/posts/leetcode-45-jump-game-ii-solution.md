@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/jump-game-ii/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/45.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/45.webp" 
     alt="A glowing path with multiple jumping stones, forming an easy, calming journey."
     caption="Solution to LeetCode 45: Jump Game II Problem"
     width="900px"

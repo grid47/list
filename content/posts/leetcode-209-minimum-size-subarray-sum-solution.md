@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/minimum-size-subarray-sum/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/209.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/209.webp" 
     alt="A glowing, shrinking subarray highlighting the smallest sum as it contracts into the minimal size."
     caption="Solution to LeetCode 209: Minimum Size Subarray Sum Problem"
     width="900px"

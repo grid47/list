@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/linked-list-random-node/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/382.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/382.webp" 
     alt="A glowing linked list where the randomly selected node is softly highlighted."
     caption="Solution to LeetCode 382: Linked List Random Node Problem"
     width="900px"

@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/longest-palindromic-substring/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/5.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/5.webp" 
     alt="A mirror reflecting a glowing word, with symmetry and balance radiating outward."
     caption="Solution to LeetCode 5: Longest Palindromic Substring Problem"
     width="900px"

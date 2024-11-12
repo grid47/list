@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/serialize-and-deserialize-bst/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/449.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/449.webp" 
     alt="A binary search tree being serialized and deserialized, with each node softly glowing during the transformation."
     caption="Solution to LeetCode 449: Serialize and Deserialize BST Problem"
     width="900px"

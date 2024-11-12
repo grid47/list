@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/3sum/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/15.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/15.webp" 
     alt="Three circles of light coming together in harmony, overlapping in a gentle glow."
     caption="Solution to LeetCode 15: 3Sum Problem"
     width="900px"

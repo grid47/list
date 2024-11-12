@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/reverse-linked-list/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/206.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/206.webp" 
     alt="A linked list where nodes glow and reverse in position, flowing smoothly backward."
     caption="Solution to LeetCode 206: Reverse Linked List Problem"
     width="900px"

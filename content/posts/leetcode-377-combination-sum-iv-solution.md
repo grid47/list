@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/combination-sum-iv/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/377.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/377.webp" 
     alt="A glowing set of numbers forming different combinations to meet the target sum, each combination softly glowing."
     caption="Solution to LeetCode 377: Combination Sum IV Problem"
     width="900px"

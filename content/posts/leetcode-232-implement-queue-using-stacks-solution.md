@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/implement-queue-using-stacks/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/232.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/232.webp" 
     alt="A series of stacks transforming into a queue, with elements gently flowing between them."
     caption="Solution to LeetCode 232: Implement Queue using Stacks Problem"
     width="900px"

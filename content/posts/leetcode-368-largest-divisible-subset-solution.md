@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/largest-divisible-subset/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/368.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/368.webp" 
     alt="A sequence of numbers with the largest divisible subset glowing, showing the optimal group."
     caption="Solution to LeetCode 368: Largest Divisible Subset Problem"
     width="900px"

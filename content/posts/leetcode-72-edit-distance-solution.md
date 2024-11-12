@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/edit-distance/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/72.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/72.webp" 
     alt="Two strings gently transforming into one another, symbolizing subtle edits."
     caption="Solution to LeetCode 72: Edit Distance Problem"
     width="900px"

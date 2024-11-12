@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/combinations/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/77.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/77.webp" 
     alt="A glowing, radiant combination of elements gently shifting together."
     caption="Solution to LeetCode 77: Combinations Problem"
     width="900px"

@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/flatten-binary-tree-to-linked-list/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/114.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/114.webp" 
     alt="A soft tree smoothly transforming into a linear, glowing list of nodes, symbolizing a flattened structure."
     caption="Solution to LeetCode 114: Flatten Binary Tree to Linked List Problem"
     width="900px"

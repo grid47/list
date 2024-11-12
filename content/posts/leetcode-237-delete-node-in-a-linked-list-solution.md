@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/delete-node-in-a-linked-list/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/237.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/237.webp" 
     alt="A linked list where a node gently fades away, leaving a cleaner structure behind."
     caption="Solution to LeetCode 237: Delete Node in a Linked List Problem"
     width="900px"

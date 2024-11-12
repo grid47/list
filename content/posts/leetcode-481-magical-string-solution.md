@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/magical-string/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/481.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/481.webp" 
     alt="A sequence where the magical string gradually forms, with each step softly glowing as the pattern emerges."
     caption="Solution to LeetCode 481: Magical String Problem"
     width="900px"

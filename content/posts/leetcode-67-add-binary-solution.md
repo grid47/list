@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/add-binary/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/67.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/67.webp" 
     alt="Two radiant binary sequences gently merging into a new, illuminated result."
     caption="Solution to LeetCode 67: Add Binary Problem"
     width="900px"

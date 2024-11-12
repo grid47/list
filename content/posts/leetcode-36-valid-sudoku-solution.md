@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/valid-sudoku/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/36.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/36.webp" 
     alt="A soft grid of numbers and symbols, gently highlighting valid sequences."
     caption="Solution to LeetCode 36: Valid Sudoku Problem"
     width="900px"

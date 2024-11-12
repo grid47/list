@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/letter-combinations-of-a-phone-number/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/17.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/17.webp" 
     alt="A swirling constellation of letters, with gentle connections forming phone number combinations."
     caption="Solution to LeetCode 17: Letter Combinations of a Phone Number Problem"
     width="900px"

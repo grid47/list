@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/reverse-bits/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/190.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/190.webp" 
     alt="A series of bits glowing as they reverse, shifting smoothly from 1 to 0 and back."
     caption="Solution to LeetCode 190: Reverse Bits Problem"
     width="900px"

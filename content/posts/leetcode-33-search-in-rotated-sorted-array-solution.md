@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/search-in-rotated-sorted-array/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/33.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/33.webp" 
     alt="A rotating spiral of light, revealing new paths and points of connection."
     caption="Solution to LeetCode 33: Search in Rotated Sorted Array Problem"
     width="900px"

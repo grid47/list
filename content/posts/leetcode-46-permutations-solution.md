@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/permutations/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/46.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/46.webp" 
     alt="A sequence of shimmering, rotating orbs, rearranging gently in endless variations."
     caption="Solution to LeetCode 46: Permutations Problem"
     width="900px"

@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/counting-bits/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/338.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/338.webp" 
     alt="A glowing sequence of numbers where each bit is counted and highlighted as part of the total."
     caption="Solution to LeetCode 338: Counting Bits Problem"
     width="900px"

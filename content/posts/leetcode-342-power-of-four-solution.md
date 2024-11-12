@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/power-of-four/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/342.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/342.webp" 
     alt="A glowing series of numbers where each number doubles and highlights the powers of four along the way."
     caption="Solution to LeetCode 342: Power of Four Problem"
     width="900px"

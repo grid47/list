@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/random-point-in-non-overlapping-rectangles/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/497.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/497.webp" 
     alt="A series of non-overlapping rectangles where random points are chosen and softly illuminated as they are selected."
     caption="Solution to LeetCode 497: Random Point in Non-overlapping Rectangles Problem"
     width="900px"

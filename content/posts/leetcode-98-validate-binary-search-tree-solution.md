@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/validate-binary-search-tree/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/98.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/98.webp" 
     alt="A glowing tree with balanced nodes, radiating a sense of order and validation."
     caption="Solution to LeetCode 98: Validate Binary Search Tree Problem"
     width="900px"

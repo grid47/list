@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/min-stack/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/155.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/155.webp" 
     alt="A stack where each layer gently illuminates, showing the minimum value glowing at the bottom."
     caption="Solution to LeetCode 155: Min Stack Problem"
     width="900px"

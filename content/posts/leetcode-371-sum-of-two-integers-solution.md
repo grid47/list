@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/sum-of-two-integers/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/371.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/371.webp" 
     alt="A set of two glowing numbers adding up to a sum, with each number and their sum softly illuminated."
     caption="Solution to LeetCode 371: Sum of Two Integers Problem"
     width="900px"

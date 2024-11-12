@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/container-with-most-water/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/11.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/11.webp" 
     alt="A serene water container being filled with calming light, symbolizing capacity and volume."
     caption="Solution to LeetCode 11: Container With Most Water Problem"
     width="900px"

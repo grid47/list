@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/lexicographical-numbers/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/386.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/386.webp" 
     alt="A glowing series of numbers arranged in lexicographical order, highlighting their progression."
     caption="Solution to LeetCode 386: Lexicographical Numbers Problem"
     width="900px"

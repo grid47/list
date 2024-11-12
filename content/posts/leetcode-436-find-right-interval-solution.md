@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/find-right-interval/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/436.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/436.webp" 
     alt="A series of intervals, with each right interval softly lighting up as it is found for each point."
     caption="Solution to LeetCode 436: Find Right Interval Problem"
     width="900px"

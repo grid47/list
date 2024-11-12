@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/binary-tree-inorder-traversal/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/94.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/94.webp" 
     alt="A glowing tree with nodes softly illuminating as the inorder traversal progresses."
     caption="Solution to LeetCode 94: Binary Tree Inorder Traversal Problem"
     width="900px"

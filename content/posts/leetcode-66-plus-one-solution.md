@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/plus-one/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/66.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/66.webp" 
     alt="A glowing number gently increasing by one, signifying growth and positivity."
     caption="Solution to LeetCode 66: Plus One Problem"
     width="900px"

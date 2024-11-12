@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/4sum-ii/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/454.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/454.webp" 
     alt="A sequence of quadruples where each valid sum is softly highlighted to show the results."
     caption="Solution to LeetCode 454: 4Sum II Problem"
     width="900px"

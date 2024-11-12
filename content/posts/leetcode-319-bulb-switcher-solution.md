@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/bulb-switcher/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/319.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/319.webp" 
     alt="A series of glowing bulbs switching on and off, with the final count of switched bulbs softly highlighted."
     caption="Solution to LeetCode 319: Bulb Switcher Problem"
     width="900px"

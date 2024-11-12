@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/309.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/309.webp" 
     alt="A graph of stock prices where the optimal buying and selling points are gently illuminated, with cooldown periods clearly marked"
     caption="Solution to LeetCode 309: Best Time to Buy and Sell Stock with Cooldown Problem"
     width="900px"

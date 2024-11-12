@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/integer-replacement/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/397.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/397.webp" 
     alt="A glowing number transforming step by step into its minimal representation through division or subtraction."
     caption="Solution to LeetCode 397: Integer Replacement Problem"
     width="900px"

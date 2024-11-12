@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/maximum-depth-of-binary-tree/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/104.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/104.webp" 
     alt="A deep, glowing tree with rays of light expanding downwards to symbolize depth."
     caption="Solution to LeetCode 104: Maximum Depth of Binary Tree Problem"
     width="900px"

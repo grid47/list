@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/top-k-frequent-elements/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/347.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/347.webp" 
     alt="A sequence of elements where the most frequent ones glow brightly, showing the top K frequencies."
     caption="Solution to LeetCode 347: Top K Frequent Elements Problem"
     width="900px"

@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/236.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/236.webp" 
     alt="Similar to the previous idea, with paths gently intersecting to show the common ancestor in a non-search tree."
     caption="Solution to LeetCode 236: Lowest Common Ancestor of a Binary Tree Problem"
     width="900px"

@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/decode-ways/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/91.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/91.webp" 
     alt="A glowing key unlocking multiple pathways, symbolizing decoding and transformation."
     caption="Solution to LeetCode 91: Decode Ways Problem"
     width="900px"

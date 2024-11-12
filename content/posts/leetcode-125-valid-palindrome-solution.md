@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/valid-palindrome/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/125.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/125.webp" 
     alt="A string of letters that glow in perfect symmetry, forming a calm and balanced palindrome."
     caption="Solution to LeetCode 125: Valid Palindrome Problem"
     width="900px"

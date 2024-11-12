@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/random-pick-index/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/398.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/398.webp" 
     alt="A series of indices being selected randomly, with each chosen index softly glowing."
     caption="Solution to LeetCode 398: Random Pick Index Problem"
     width="900px"

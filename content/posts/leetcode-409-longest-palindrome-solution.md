@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/longest-palindrome/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/409.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/409.webp" 
     alt="A string where the longest palindrome is highlighted, with characters mirroring in a soft glow."
     caption="Solution to LeetCode 409: Longest Palindrome Problem"
     width="900px"

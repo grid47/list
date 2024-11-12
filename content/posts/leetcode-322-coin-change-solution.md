@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/coin-change/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/322.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/322.webp" 
     alt="A set of coins gradually transforming into the fewest possible number of coins needed to make the change, glowing softly."
     caption="Solution to LeetCode 322: Coin Change Problem"
     width="900px"

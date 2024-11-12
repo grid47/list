@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/valid-parentheses/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/20.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/20.webp" 
     alt="An elegant loop of parentheses, glowing and connected in a balanced, harmonious way."
     caption="Solution to LeetCode 20: Valid Parentheses Problem"
     width="900px"

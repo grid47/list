@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/subsets/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/78.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/78.webp" 
     alt="Multiple floating subsets gently coming together, forming a whole."
     caption="Solution to LeetCode 78: Subsets Problem"
     width="900px"

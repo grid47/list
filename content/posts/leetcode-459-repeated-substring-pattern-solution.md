@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/repeated-substring-pattern/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/459.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/459.webp" 
     alt="A string where repeated substrings softly glow, showing the patterns and repetitions clearly."
     caption="Solution to LeetCode 459: Repeated Substring Pattern Problem"
     width="900px"

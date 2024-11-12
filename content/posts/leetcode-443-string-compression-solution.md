@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/string-compression/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/443.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/443.webp" 
     alt="A string shrinking as characters are compressed, with each compression step softly glowing."
     caption="Solution to LeetCode 443: String Compression Problem"
     width="900px"

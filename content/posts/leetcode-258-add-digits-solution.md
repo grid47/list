@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/add-digits/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/258.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/258.webp" 
     alt="A number gradually breaking down into smaller digits, with each step glowing brighter until a single digit is left."
     caption="Solution to LeetCode 258: Add Digits Problem"
     width="900px"

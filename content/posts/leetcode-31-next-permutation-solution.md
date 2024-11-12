@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/next-permutation/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/31.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/31.webp" 
     alt="A flowing sequence of shapes or words shifting and reshaping into a new, calming formation."
     caption="Solution to LeetCode 31: Next Permutation Problem"
     width="900px"

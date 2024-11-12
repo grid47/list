@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/search-a-2d-matrix/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/74.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/74.webp" 
     alt="A soft, glowing grid with a pinpoint highlighting the search area."
     caption="Solution to LeetCode 74: Search a 2D Matrix Problem"
     width="900px"

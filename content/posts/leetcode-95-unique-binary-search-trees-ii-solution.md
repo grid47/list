@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/unique-binary-search-trees-ii/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/95.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/95.webp" 
     alt="A sequence of elegant trees gently forming in various, unique shapes."
     caption="Solution to LeetCode 95: Unique Binary Search Trees II Problem"
     width="900px"

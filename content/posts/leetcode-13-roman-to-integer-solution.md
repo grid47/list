@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/roman-to-integer/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/13.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/13.webp" 
     alt="Roman numerals transitioning into flowing numbers, visualizing transformation."
     caption="Solution to LeetCode 13: Roman to Integer Problem"
     width="900px"

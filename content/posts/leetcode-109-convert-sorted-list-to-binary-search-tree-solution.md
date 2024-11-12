@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/109.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/109.webp" 
     alt="A flowing list of sorted numbers seamlessly transforming into a calm, glowing binary search tree."
     caption="Solution to LeetCode 109: Convert Sorted List to Binary Search Tree Problem"
     width="900px"

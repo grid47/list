@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/search-insert-position/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/35.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/35.webp" 
     alt="A glowing insertion point in a calm array, gently creating a new position."
     caption="Solution to LeetCode 35: Search Insert Position Problem"
     width="900px"

@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/wiggle-subsequence/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/376.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/376.webp" 
     alt="A sequence of numbers gently moving into a wiggle pattern, each step softly highlighted as they align."
     caption="Solution to LeetCode 376: Wiggle Subsequence Problem"
     width="900px"

@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/sort-colors/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/75.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/75.webp" 
     alt="A radiant sequence of colors gently sorting themselves in a peaceful, fluid motion."
     caption="Solution to LeetCode 75: Sort Colors Problem"
     width="900px"

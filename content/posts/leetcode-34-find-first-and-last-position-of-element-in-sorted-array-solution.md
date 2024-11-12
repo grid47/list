@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/34.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/34.webp" 
     alt="A soft glowing bar where the positions of elements light up in sequence."
     caption="Solution to LeetCode 34: Find First and Last Position of Element in Sorted Array Problem"
     width="900px"

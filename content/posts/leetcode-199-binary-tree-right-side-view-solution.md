@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/binary-tree-right-side-view/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/199.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/199.webp" 
     alt="A glowing tree viewed from the right side, with the rightmost nodes gently illuminating."
     caption="Solution to LeetCode 199: Binary Tree Right Side View Problem"
     width="900px"

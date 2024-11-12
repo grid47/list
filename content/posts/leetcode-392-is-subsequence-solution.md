@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/is-subsequence/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/392.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/392.webp" 
     alt="A sequence of characters gently forming into a subsequence, glowing as each match is found."
     caption="Solution to LeetCode 392: Is Subsequence Problem"
     width="900px"

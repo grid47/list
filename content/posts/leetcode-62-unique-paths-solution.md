@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/unique-paths/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/62.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/62.webp" 
     alt="A gentle, glowing path winding through a serene landscape, showing multiple routes."
     caption="Solution to LeetCode 62: Unique Paths Problem"
     width="900px"

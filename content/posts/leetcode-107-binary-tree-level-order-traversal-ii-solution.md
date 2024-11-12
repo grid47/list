@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/binary-tree-level-order-traversal-ii/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/107.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/107.webp" 
     alt="A tree with soft concentric circles, each level glowing and expanding outward from the center."
     caption="Solution to LeetCode 107: Binary Tree Level Order Traversal II Problem"
     width="900px"

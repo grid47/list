@@ -16,7 +16,7 @@ series = ["Leetcode"]
 
 [`Problem Link`](https://leetcode.com/problems/water-and-jug-problem/description/)
 {{< rmtimg 
-    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/365.jpeg" 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/365.webp" 
     alt="A set of water jugs being filled and emptied, with the optimal solution softly glowing as it reaches the target amount."
     caption="Solution to LeetCode 365: Water and Jug Problem Problem"
     width="900px"
