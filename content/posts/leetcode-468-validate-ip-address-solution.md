@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/validate-ip-address/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/468.jpeg" 
+    alt="A glowing sequence where a valid IP address is formed, each octet softly illuminated as it passes validation."
+    caption="Solution to LeetCode 468: Validate IP Address Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

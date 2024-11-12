@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/n-ary-tree-level-order-traversal/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/429.jpeg" 
+    alt="An N-ary tree with nodes being traversed in level order, with each level softly illuminated as it's visited."
+    caption="Solution to LeetCode 429: N-ary Tree Level Order Traversal Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/non-overlapping-intervals/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/435.jpeg" 
+    alt="A sequence of intervals with non-overlapping sections glowing softly, showing the optimal arrangement."
+    caption="Solution to LeetCode 435: Non-overlapping Intervals Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

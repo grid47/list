@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/construct-quad-tree/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/427.jpeg" 
+    alt="A grid where sections gently form a quad tree, each section glowing as it is constructed."
+    caption="Solution to LeetCode 427: Construct Quad Tree Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

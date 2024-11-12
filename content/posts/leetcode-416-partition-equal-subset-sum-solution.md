@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/partition-equal-subset-sum/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/416.jpeg" 
+    alt="A set of numbers with glowing partitions, showing how they can be divided into equal subsets."
+    caption="Solution to LeetCode 416: Partition Equal Subset Sum Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/unique-substrings-in-wraparound-string/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/467.jpeg" 
+    alt="A glowing string where unique substrings wrap around and light up as they form distinct patterns."
+    caption="Solution to LeetCode 467: Unique Substrings in Wraparound String Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

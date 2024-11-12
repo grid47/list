@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/add-two-numbers-ii/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/445.jpeg" 
+    alt="Two linked lists gently adding their digits, with each addition softly illuminated as it occurs."
+    caption="Solution to LeetCode 445: Add Two Numbers II Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

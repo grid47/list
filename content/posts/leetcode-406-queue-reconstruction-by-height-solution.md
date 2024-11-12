@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/queue-reconstruction-by-height/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/406.jpeg" 
+    alt="A series of people with heights, arranging themselves in a queue with each step glowing as they are positioned."
+    caption="Solution to LeetCode 406: Queue Reconstruction by Height Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

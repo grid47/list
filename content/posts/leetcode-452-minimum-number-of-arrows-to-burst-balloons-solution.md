@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/minimum-number-of-arrows-to-burst-balloons/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/452.jpeg" 
+    alt="A sequence of balloons gently bursting with each arrow, showing the optimal number of arrows needed."
+    caption="Solution to LeetCode 452: Minimum Number of Arrows to Burst Balloons Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

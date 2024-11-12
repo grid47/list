@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/number-of-boomerangs/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/447.jpeg" 
+    alt="A series of points where boomerangs are formed, glowing as each boomerang path is traced."
+    caption="Solution to LeetCode 447: Number of Boomerangs Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

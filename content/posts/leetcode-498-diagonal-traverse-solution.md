@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/diagonal-traverse/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/498.jpeg" 
+    alt="A matrix where elements are traversed diagonally, each element softly glowing as it is visited."
+    caption="Solution to LeetCode 498: Diagonal Traverse Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 
