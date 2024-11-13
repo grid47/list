@@ -217,7 +217,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -257,81 +257,129 @@
 </span></span><span style="display:flex;"><span>            match(r1<span style="color:#f92672">-&gt;</span>right, r2<span style="color:#f92672">-&gt;</span>right);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1219s1hbhb">
+<h2 id="hahahugoshortcode1220s1hbhb">
   
 
   
   <div class="markdown-body">
     <h3 id="problem-statement">
-  Problem Statement
+  Problem Statement:
   <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given the roots of two binary trees, <code>root</code> and <code>subRoot</code>, determine if <code>subRoot</code> is a subtree of <code>root</code>. A subtree of a tree is a tree that consists of a node in the tree and all of its descendants.</p>
+<p>The problem asks us to determine whether a binary tree <code>subRoot</code> is a subtree of another binary tree <code>root</code>. A subtree of a binary tree is a tree that consists of a node in the original tree along with all of its descendants. The task is to check if there exists a node in <code>root</code> such that the subtree rooted at that node is identical to <code>subRoot</code>.</p>
+<p>For example:</p>
+<ul>
+<li><code>root = [3, 4, 5, 1, 2]</code></li>
+<li><code>subRoot = [4, 1, 2]</code></li>
+</ul>
+<p>The function should return <code>true</code> since the subtree rooted at node 4 in <code>root</code> is identical to <code>subRoot</code>.</p>
 <h3 id="approach">
-  Approach
+  Approach:
   <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Tree Traversal</strong>:</p>
-<ul>
-<li>Use a recursive approach to traverse the main tree (<code>root</code>).</li>
-<li>For each node in the main tree, check if it matches the root of the subtree (<code>subRoot</code>).</li>
-</ul>
-</li>
-<li>
-<p><strong>Match Function</strong>:</p>
-<ul>
-<li>Create a helper function <code>match</code> that checks if two trees are identical:
-<ul>
-<li>If both nodes are <code>NULL</code>, they are identical.</li>
-<li>If one is <code>NULL</code> and the other is not, they are not identical.</li>
-<li>If both nodes are not <code>NULL</code>, compare their values and recursively check their left and right children.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Recursive Checking</strong>:</p>
-<ul>
-<li>In the <code>isSubtree</code> function, if the current node matches the subtree, return <code>true</code>.</li>
-<li>If it doesn’t match, recursively check the left and right children of the current node.</li>
-</ul>
-</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>This problem can be solved using a <strong>depth-first search (DFS)</strong> approach. The basic idea is to traverse the tree <code>root</code> and, for each node, check whether the subtree rooted at that node is identical to <code>subRoot</code>. If we find a match, we return <code>true</code>. If no match is found after traversing the entire tree, we return <code>false</code>.</p>
+<p>To check if two trees are identical, we can use a helper function that compares the two trees recursively. If both trees are empty, they are identical. If one is empty and the other is not, they are not identical. If the values of the current nodes are the same, we recursively compare the left and right subtrees.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The <code>isSubtree</code> function starts at the root and calls <code>match</code> to check for equality with <code>subRoot</code>.</li>
-<li>If they match, it returns <code>true</code>. If not, it continues searching in the left and right subtrees.</li>
+<h4 id="step-1-main-function-issubtree">
+  Step 1: Main Function (<code>isSubtree</code>)
+  <a class="heading-link" href="#step-1-main-function-issubtree">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isSubtree</span>(TreeNode<span style="color:#f92672">*</span> root, TreeNode<span style="color:#f92672">*</span> subRoot) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>root) <span style="color:#66d9ef">return</span> false;  <span style="color:#75715e">// If the main tree is empty, return false
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (match(root, subRoot)) <span style="color:#66d9ef">return</span> true;  <span style="color:#75715e">// If the current node matches the subtree, return true
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// Recursively check the left and right children of the current node
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> isSubtree(root<span style="color:#f92672">-&gt;</span>left, subRoot) <span style="color:#f92672">||</span> isSubtree(root<span style="color:#f92672">-&gt;</span>right, subRoot);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The function <code>isSubtree</code> checks whether the subtree <code>subRoot</code> exists in the binary tree <code>root</code>.</li>
+<li>If <code>root</code> is <code>nullptr</code>, it returns <code>false</code>, meaning there&rsquo;s no subtree in an empty tree.</li>
+<li>We then check whether the subtree starting at the current node matches <code>subRoot</code> by calling the helper function <code>match</code>. If it matches, we return <code>true</code>.</li>
+<li>If the current node does not match, we recursively check the left and right subtrees of <code>root</code> to see if <code>subRoot</code> exists in either.</li>
 </ul>
+<h4 id="step-2-helper-function-match">
+  Step 2: Helper Function (<code>match</code>)
+  <a class="heading-link" href="#step-2-helper-function-match">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">match</span>(TreeNode<span style="color:#f92672">*</span> r1, TreeNode<span style="color:#f92672">*</span> r2) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>r1 <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>r2) <span style="color:#66d9ef">return</span> true;  <span style="color:#75715e">// Both nodes are null, so they match
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>r1 <span style="color:#f92672">||</span> <span style="color:#f92672">!</span>r2) <span style="color:#66d9ef">return</span> false;  <span style="color:#75715e">// One of the nodes is null, so they don&#39;t match
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (r1<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">!=</span> r2<span style="color:#f92672">-&gt;</span>val) <span style="color:#66d9ef">return</span> false;  <span style="color:#75715e">// The values of the nodes don&#39;t match
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// Recursively check the left and right children
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> match(r1<span style="color:#f92672">-&gt;</span>left, r2<span style="color:#f92672">-&gt;</span>left) <span style="color:#f92672">&amp;&amp;</span> match(r1<span style="color:#f92672">-&gt;</span>right, r2<span style="color:#f92672">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The function <code>match</code> checks whether two binary trees rooted at <code>r1</code> and <code>r2</code> are identical.</li>
+<li>If both trees are empty (<code>nullptr</code>), they are considered identical.</li>
+<li>If one of the trees is empty but the other is not, they are not identical.</li>
+<li>If the values of the current nodes <code>r1-&gt;val</code> and <code>r2-&gt;val</code> are different, we return <code>false</code> as the trees are not identical.</li>
+<li>If the current nodes match, we recursively check their left and right children to see if the entire trees match.</li>
+</ul>
+<h4 id="step-3-termination">
+  Step 3: Termination
+  <a class="heading-link" href="#step-3-termination">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>After calling <code>isSubtree</code>, the recursion will eventually return <code>true</code> when it finds a subtree in <code>root</code> that matches <code>subRoot</code>. If no such match is found, the function will return <code>false</code> after traversing the entire tree.</p>
 <h3 id="complexity">
-  Complexity
+  Complexity:
   <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(N * M), where N is the number of nodes in <code>root</code> and M is the number of nodes in <code>subRoot</code>. In the worst case, every node of <code>root</code> needs to be compared with every node of <code>subRoot</code>.</li>
-<li><strong>Space Complexity</strong>: O(H), where H is the height of the tree. This accounts for the recursive call stack.</li>
+<li><strong>O(n * m):</strong> In the worst case, we need to check every node in <code>root</code> to see if it matches <code>subRoot</code>. For each node in <code>root</code>, we call the <code>match</code> function to check if the subtree rooted at that node matches <code>subRoot</code>. The time complexity of <code>match</code> is O(m), where <code>m</code> is the number of nodes in <code>subRoot</code> (since we might need to check all the nodes in <code>subRoot</code> for every node in <code>root</code>). Therefore, the overall time complexity is O(n * m), where <code>n</code> is the number of nodes in <code>root</code> and <code>m</code> is the number of nodes in <code>subRoot</code>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(h):</strong> The space complexity is determined by the recursion depth of the DFS traversal. In the worst case, the recursion depth is proportional to the height of the tree, which is O(h), where <code>h</code> is the height of the tree <code>root</code>. In a balanced binary tree, the height is O(log n), but in the worst case (e.g., a skewed tree), the height can be O(n).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently checks if a binary tree <code>subRoot</code> is a subtree of another binary tree <code>root</code> using a depth-first search (DFS) approach. The key idea is to recursively traverse <code>root</code> and compare each node with <code>subRoot</code> using the <code>match</code> helper function. The solution works in O(n * m) time, where <code>n</code> is the size of <code>root</code> and <code>m</code> is the size of <code>subRoot</code>, and it uses O(h) space for the recursion stack, where <code>h</code> is the height of the tree. This approach is optimal for problems involving subtree matching and provides an intuitive and efficient way to solve the problem.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1219s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1220s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

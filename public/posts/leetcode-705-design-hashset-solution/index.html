@@ -217,7 +217,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              7-minute read
             </span>
           </div>
 
@@ -305,117 +305,225 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * obj-&gt;remove(key);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * bool param_3 = obj-&gt;contains(key);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<h2 id="hahahugoshortcode1276s1hbhb">
+<h2 id="hahahugoshortcode1278s1hbhb">
   
 
   
   <div class="markdown-body">
     <h3 id="problem-statement">
-  Problem Statement
+  Problem Statement:
   <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Design a HashSet that supports the following operations:</p>
-<ol>
-<li><code>add(key)</code>: Inserts the value <code>key</code> into the HashSet.</li>
-<li><code>remove(key)</code>: Removes the value <code>key</code> from the HashSet.</li>
-<li><code>contains(key)</code>: Returns <code>true</code> if the value <code>key</code> exists in the HashSet, otherwise returns <code>false</code>.</li>
-</ol>
+<p>The task is to design a data structure called <code>MyHashSet</code> that supports three operations: <code>add(key)</code>, <code>remove(key)</code>, and <code>contains(key)</code> for a given integer key. The goal is to efficiently perform these operations in constant time, on average. The <code>MyHashSet</code> class should be capable of storing unique keys and allow for fast insertion, deletion, and look-up.</p>
 <h3 id="approach">
-  Approach
+  Approach:
   <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>
-<p><strong>Data Structure</strong>: Use an array of linked lists to handle collisions via chaining.</p>
-<ul>
-<li>The array size is predefined (e.g., 10,000).</li>
-<li>Each index of the array points to the head of a linked list containing values that hash to the same index.</li>
-</ul>
-</li>
-<li>
-<p><strong>Hash Function</strong>: Use the modulo operation with the size of the array to determine the index for each key.</p>
-</li>
-</ul>
-<h3 id="operations">
-  Operations
-  <a class="heading-link" href="#operations">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
+<p>The optimal solution for implementing a hash set involves using a <strong>hashing</strong> technique. Hashing allows us to map keys to indices of an array (or list), so we can perform constant-time operations, on average, for <code>add</code>, <code>remove</code>, and <code>contains</code>.</p>
+<p>To achieve this:</p>
 <ol>
-<li>
-<p><strong>Add</strong>:</p>
-<ul>
-<li>Compute the index using <code>key % sz</code>.</li>
-<li>If there is no list at that index, create a new list node.</li>
-<li>Traverse the list to check for duplicates; if not found, add the new node at the end.</li>
-</ul>
-</li>
-<li>
-<p><strong>Remove</strong>:</p>
-<ul>
-<li>Compute the index using <code>key % sz</code>.</li>
-<li>If the list at that index is <code>NULL</code>, do nothing.</li>
-<li>If the head node is the target, move the head pointer to the next node.</li>
-<li>Traverse the list to find the target node and adjust the pointers to remove it.</li>
-</ul>
-</li>
-<li>
-<p><strong>Contains</strong>:</p>
-<ul>
-<li>Compute the index using <code>key % sz</code>.</li>
-<li>Traverse the linked list at that index, returning <code>true</code> if the key is found.</li>
-</ul>
-</li>
+<li>We use an array of size <code>sz</code> (10,000 in this case) to store linked lists.</li>
+<li>Each index of the array corresponds to a hash bucket where the keys are stored.</li>
+<li><strong>Hash Function</strong>: The index of the bucket is determined by the hash of the key (<code>key % sz</code>). This ensures that the keys are uniformly distributed across the array.</li>
+<li><strong>Chaining</strong>: Since multiple keys may map to the same bucket (collision), we use a <strong>linked list</strong> to store all elements that hash to the same index. If a key is already present in the linked list, we avoid adding it again.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>ListNode Class</strong>: Defines a basic linked list node with a value and a pointer to the next node.</li>
-<li><strong>MyHashSet Class</strong>:
-<ul>
-<li>Initializes a vector of <code>ListNode*</code> to serve as buckets for storing linked lists.</li>
-<li>Implements the three main operations (<code>add</code>, <code>remove</code>, and <code>contains</code>) efficiently.</li>
+<h4 id="step-1-define-the-listnode-class">
+  Step 1: Define the ListNode Class
+  <a class="heading-link" href="#step-1-define-the-listnode-class">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// class ListNode {
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//     public:
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//     int val;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//     ListNode* next;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//     ListNode(int val, ListNode* nxt) {
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//         this-&gt;val = val;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//         this-&gt;next = nxt;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//     }
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// };
+</span></span></span></code></pre></div><ul>
+<li>The <code>ListNode</code> class represents an individual node in the linked list. Each node stores an integer <code>val</code> and a pointer <code>next</code> to the next node in the list. This class is used for <strong>chaining</strong> in case of hash collisions.</li>
 </ul>
-</li>
+<h4 id="step-2-define-the-myhashset-class">
+  Step 2: Define the <code>MyHashSet</code> Class
+  <a class="heading-link" href="#step-2-define-the-myhashset-class">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MyHashSet</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> <span style="color:#ae81ff">10000</span>;  <span style="color:#75715e">// Size of the hash table
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    vector<span style="color:#f92672">&lt;</span>ListNode<span style="color:#f92672">*&gt;</span> lst;  <span style="color:#75715e">// Array of ListNode pointers (buckets)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    MyHashSet() {
+</span></span><span style="display:flex;"><span>        lst.resize(sz, NULL);  <span style="color:#75715e">// Initialize the hash set with NULL pointers
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span></code></pre></div><ul>
+<li><code>sz</code> is the size of the hash table (set to 10,000 to ensure an adequate number of buckets).</li>
+<li><code>lst</code> is a vector that stores the linked list heads (buckets) for each hash bucket.</li>
+<li>The constructor initializes the vector <code>lst</code> to have <code>sz</code> elements, all set to <code>NULL</code>.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-3-implement-the-add-function">
+  Step 3: Implement the <code>add</code> Function
+  <a class="heading-link" href="#step-3-implement-the-add-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">add</span>(<span style="color:#66d9ef">int</span> key) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> num <span style="color:#f92672">=</span> key <span style="color:#f92672">%</span> sz;  <span style="color:#75715e">// Hash the key to find the bucket index
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(lst[num] <span style="color:#f92672">==</span> NULL) {
+</span></span><span style="display:flex;"><span>        lst[num] <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ListNode(key, NULL);  <span style="color:#75715e">// Create a new ListNode if bucket is empty
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    ListNode<span style="color:#f92672">*</span> cur <span style="color:#f92672">=</span> lst[num], <span style="color:#f92672">*</span>prv <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(cur) {  <span style="color:#75715e">// Traverse the linked list to check if the key already exists
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(cur<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">==</span> key) <span style="color:#66d9ef">return</span>;  <span style="color:#75715e">// Key is already in the set, no need to add it
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        prv <span style="color:#f92672">=</span> cur;
+</span></span><span style="display:flex;"><span>        cur <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    prv<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ListNode(key, NULL);  <span style="color:#75715e">// Add the key at the end of the linked list
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li><strong>Hashing</strong>: We first hash the key using <code>key % sz</code> to determine the bucket index.</li>
+<li><strong>Empty Bucket</strong>: If the bucket is empty (<code>lst[num] == NULL</code>), a new <code>ListNode</code> is created with the key.</li>
+<li><strong>Check for Duplicates</strong>: If the bucket is not empty, we traverse the linked list to check if the key already exists. If the key is found, we return without adding it.</li>
+<li><strong>Add the Key</strong>: If the key is not found in the linked list, we add a new node containing the key at the end of the list.</li>
+</ul>
+<h4 id="step-4-implement-the-remove-function">
+  Step 4: Implement the <code>remove</code> Function
+  <a class="heading-link" href="#step-4-implement-the-remove-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">remove</span>(<span style="color:#66d9ef">int</span> key) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> num <span style="color:#f92672">=</span> key <span style="color:#f92672">%</span> sz;  <span style="color:#75715e">// Hash the key to find the bucket index
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(lst[num] <span style="color:#f92672">==</span> NULL) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;  <span style="color:#75715e">// Key is not in the set, no need to remove anything
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(lst[num]<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">==</span> key) {  <span style="color:#75715e">// Special case for the first element in the linked list
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> lst[num];
+</span></span><span style="display:flex;"><span>        lst[num] <span style="color:#f92672">=</span> lst[num]<span style="color:#f92672">-&gt;</span>next;  <span style="color:#75715e">// Remove the first node
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        it<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    ListNode<span style="color:#f92672">*</span> cur <span style="color:#f92672">=</span> lst[num]<span style="color:#f92672">-&gt;</span>next, <span style="color:#f92672">*</span>prv <span style="color:#f92672">=</span> lst[num];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(cur) {  <span style="color:#75715e">// Traverse the linked list to find and remove the key
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(cur<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">==</span> key) {
+</span></span><span style="display:flex;"><span>            prv<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>next;  <span style="color:#75715e">// Remove the node by updating the previous node&#39;s next pointer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            cur<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        prv <span style="color:#f92672">=</span> cur;
+</span></span><span style="display:flex;"><span>        cur <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Hashing</strong>: We hash the key to find the correct bucket.</li>
+<li><strong>Empty Bucket</strong>: If the bucket is empty (<code>lst[num] == NULL</code>), the key is not in the set, and no action is taken.</li>
+<li><strong>Special Case for Head Node</strong>: If the first node in the bucket contains the key, we remove it by updating the bucket head (<code>lst[num]</code>).</li>
+<li><strong>Traverse and Remove</strong>: If the key is found in the linked list, we update the previous node’s <code>next</code> pointer to skip the node with the key, effectively removing it from the list.</li>
+</ul>
+<h4 id="step-5-implement-the-contains-function">
+  Step 5: Implement the <code>contains</code> Function
+  <a class="heading-link" href="#step-5-implement-the-contains-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">contains</span>(<span style="color:#66d9ef">int</span> key) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> num <span style="color:#f92672">=</span> key <span style="color:#f92672">%</span> sz;  <span style="color:#75715e">// Hash the key to find the bucket index
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    ListNode<span style="color:#f92672">*</span> cur <span style="color:#f92672">=</span> lst[num];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(cur) {  <span style="color:#75715e">// Traverse the linked list to check if the key exists
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(cur<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">==</span> key) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> true;  <span style="color:#75715e">// The key is found in the set
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>        cur <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> false;  <span style="color:#75715e">// The key is not found in the set
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li><strong>Hashing</strong>: We hash the key to find the correct bucket.</li>
+<li><strong>Traverse</strong>: We traverse the linked list at the corresponding bucket and check if the key is present.</li>
+<li><strong>Return</strong>: If the key is found, return <code>true</code>. Otherwise, return <code>false</code>.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis:
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
 <li>
-<p><strong>Time Complexity</strong>:</p>
+<p><strong>Add Operation (<code>add(key)</code>)</strong>:</p>
 <ul>
-<li><code>add</code>: O(1) on average; O(n) in the worst case (when all keys hash to the same index).</li>
-<li><code>remove</code>: O(1) on average; O(n) in the worst case.</li>
-<li><code>contains</code>: O(1) on average; O(n) in the worst case.</li>
+<li>On average, the time complexity is <strong>O(1)</strong>, because the key is distributed uniformly across buckets, and the linked list at each bucket is expected to be small.</li>
+<li>In the worst case, if all keys hash to the same bucket (very rare), the time complexity could become <strong>O(n)</strong>, where <code>n</code> is the number of elements in the hash set.</li>
 </ul>
 </li>
 <li>
-<p><strong>Space Complexity</strong>: O(n) for storing elements in the hash set.</p>
+<p><strong>Remove Operation (<code>remove(key)</code>)</strong>:</p>
+<ul>
+<li>Similar to the <code>add</code> operation, the time complexity is <strong>O(1)</strong> on average.</li>
+<li>In the worst case, if there are many collisions and a long linked list, the time complexity could become <strong>O(n)</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Contains Operation (<code>contains(key)</code>)</strong>:</p>
+<ul>
+<li>The time complexity is <strong>O(1)</strong> on average for the same reasons as the <code>add</code> and <code>remove</code> operations.</li>
+<li>In the worst case, it could become <strong>O(n)</strong> if there are long chains in a single bucket.</li>
+</ul>
 </li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: The space complexity is <strong>O(n)</strong>, where <code>n</code> is the number of elements in the set, because each element is stored in a linked list.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This implementation of <code>MyHashSet</code> efficiently handles insertion, removal, and lookup operations using a hash table and linked list chaining for collision resolution. The expected time complexity for all operations is <strong>O(1)</strong> on average, making it highly efficient for dynamic sets where elements can be added and removed frequently. The space complexity is <strong>O(n)</strong>, where <code>n</code> is the number of elements in the set, due to the storage of the linked lists. This solution is optimal for managing large sets of unique keys with minimal overhead, and it performs well even as the size of the set grows.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1276s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1278s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

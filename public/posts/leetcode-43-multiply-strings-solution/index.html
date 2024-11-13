@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -216,7 +216,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1149s0hbhb">
+        <h2 id="hahahugoshortcode1147s0hbhb">
   <a href="https://leetcode.com/problems/multiply-strings/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -231,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1149s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1147s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -260,108 +260,178 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1149s2hbhb">
+<h2 id="hahahugoshortcode1147s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-multiplying-two-large-numbers-represented-as-strings">
+  📊 <strong>Multiplying Two Large Numbers Represented as Strings</strong>
+  <a class="heading-link" href="#-multiplying-two-large-numbers-represented-as-strings">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The task is to multiply two non-negative integers represented as strings and return the product also as a string.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>The problem requires multiplying two non-negative integers that are represented as strings. Since the result can be extremely large, it&rsquo;s not feasible to convert the strings to integers directly. We must implement an algorithm that simulates the multiplication of large numbers using their string representations.</p>
+<hr>
+<h3 id="-approach">
+  🚀 <strong>Approach</strong>
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The multiplication will be handled in a way that mirrors how we multiply large numbers by hand, breaking it down into smaller steps:</p>
 <ol>
 <li>
-<p><strong>Edge Case</strong>:</p>
-<ul>
-<li>If either of the input strings is &ldquo;0&rdquo;, return &ldquo;0&rdquo; immediately.</li>
-</ul>
+<p><strong>Check for Zero:</strong><br>
+If either of the input strings is &ldquo;0&rdquo;, return &ldquo;0&rdquo; immediately because the result of any number multiplied by zero is zero.</p>
 </li>
 <li>
-<p><strong>Result Storage</strong>:</p>
-<ul>
-<li>Use a vector <code>res</code> to store the results of the multiplication, with a size equal to the sum of the lengths of the two input strings.</li>
-</ul>
+<p><strong>Initialize a Result Array:</strong><br>
+We create a result array (or vector) <code>res</code> to hold the intermediate results of the multiplication. The maximum possible size of this array will be the sum of the lengths of the two input strings, since multiplying a number with <code>m</code> digits by a number with <code>n</code> digits can produce a result with at most <code>m + n</code> digits.</p>
 </li>
 <li>
-<p><strong>Multiplication Logic</strong>:</p>
-<ul>
-<li>Iterate over each digit of <code>num1</code> and <code>num2</code> in reverse order.</li>
-<li>For each digit pair, multiply the digits and store the result in the appropriate position in <code>res</code>, while handling carries:
-<ul>
-<li>Update the current position and the carry for the next position.</li>
-</ul>
-</li>
-</ul>
+<p><strong>Multiply Digit by Digit:</strong><br>
+We simulate the traditional manual multiplication where we multiply each digit of the first number by each digit of the second number, and store the result at the appropriate position in the result array. For each multiplication, we handle carry-overs as we move through the result array.</p>
 </li>
 <li>
-<p><strong>Building the Result String</strong>:</p>
-<ul>
-<li>Skip any leading zeros in the <code>res</code> vector.</li>
-<li>Convert the remaining digits into a string.</li>
-</ul>
+<p><strong>Normalize the Result Vector:</strong><br>
+After all multiplications, some positions in the result array may contain values larger than 9, which require &ldquo;carry&rdquo; to the next position. This is handled by dividing the value by 10 and adding the quotient to the next position.</p>
+</li>
+<li>
+<p><strong>Convert the Result Array to a String:</strong><br>
+Finally, we convert the result array back into a string, skipping any leading zeros, and return the final result.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<hr>
+<h3 id="-code-breakdown-step-by-step">
+  🖥️ <strong>Code Breakdown (Step-by-Step)</strong>
+  <a class="heading-link" href="#-code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>Start by checking for the &ldquo;0&rdquo; condition.</li>
-<li>Create a result vector <code>res</code> to hold the intermediate multiplication results.</li>
+<h4 id="step-1-handle-special-case-of-zero-multiplication">
+  Step 1: Handle Special Case of Zero Multiplication
+  <a class="heading-link" href="#step-1-handle-special-case-of-zero-multiplication">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (num1 <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;0&#34;</span> <span style="color:#f92672">||</span> num2 <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;0&#34;</span>) <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;0&#34;</span>;
+</span></span></code></pre></div><ul>
+<li>If either input number is &ldquo;0&rdquo;, return &ldquo;0&rdquo; as the product of any number and zero is zero.</li>
 </ul>
-</li>
-<li>
-<p><strong>Nested Loops</strong>:</p>
-<ul>
-<li>The outer loop iterates through <code>num1</code> and the inner loop through <code>num2</code>, performing the multiplication and updating the result vector.</li>
+<h4 id="step-2-initialize-the-result-array">
+  Step 2: Initialize the Result Array
+  <a class="heading-link" href="#step-2-initialize-the-result-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> res(num1.size() <span style="color:#f92672">+</span> num2.size(), <span style="color:#ae81ff">0</span>);
+</span></span></code></pre></div><ul>
+<li>Create a result array <code>res</code> to store the intermediate results. The size of the array is the sum of the lengths of <code>num1</code> and <code>num2</code>, to handle the largest possible product.</li>
 </ul>
-</li>
-<li>
-<p><strong>Handling Carry</strong>:</p>
-<ul>
-<li>Update the current index in the result vector with any overflow from the previous multiplication.</li>
+<h4 id="step-3-perform-the-multiplication">
+  Step 3: Perform the Multiplication
+  <a class="heading-link" href="#step-3-perform-the-multiplication">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> num1.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> num2.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; j<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>        res[i <span style="color:#f92672">+</span> j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+=</span> (num1[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>) <span style="color:#f92672">*</span> (num2[j] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span>        res[i <span style="color:#f92672">+</span> j] <span style="color:#f92672">+=</span> res[i <span style="color:#f92672">+</span> j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">/</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>        res[i <span style="color:#f92672">+</span> j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">%=</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Loop through each digit of <code>num1</code> and <code>num2</code> starting from the least significant digit.</li>
+<li>Multiply the digits and add the result to the appropriate position in the result array <code>res[i + j + 1]</code>.</li>
+<li>Handle the carry-over by updating the next higher position in the result array (<code>res[i + j]</code>).</li>
 </ul>
-</li>
-<li>
-<p><strong>Result Construction</strong>:</p>
-<ul>
-<li>Initialize an index to skip leading zeros and build the final string from the non-zero elements.</li>
+<h4 id="step-4-construct-the-final-result-string">
+  Step 4: Construct the Final Result String
+  <a class="heading-link" href="#step-4-construct-the-final-result-string">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>string ans <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (res[i] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (i <span style="color:#f92672">&lt;</span> res.size()) ans <span style="color:#f92672">+=</span> to_string(res[i<span style="color:#f92672">++</span>]);
+</span></span></code></pre></div><ul>
+<li>After multiplication, skip any leading zeros in the result array by advancing the index <code>i</code>.</li>
+<li>Convert the digits from the result array to a string and append them to <code>ans</code>.</li>
 </ul>
-</li>
-</ol>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-5-return-the-final-result">
+  Step 5: Return the Final Result
+  <a class="heading-link" href="#step-5-return-the-final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>Return the final result as a string, which represents the product of the two input numbers.</li>
+</ul>
+<hr>
+<h3 id="-time-and-space-complexity">
+  🧮 <strong>Time and Space Complexity</strong>
+  <a class="heading-link" href="#-time-and-space-complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(m \times n)), where (m) and (n) are the lengths of <code>num1</code> and <code>num2</code>, respectively, due to the nested iteration.</li>
-<li><strong>Space Complexity</strong>: (O(m + n)) for the result storage, as we store the intermediate results in the vector.</li>
+<li>
+<p><strong>Multiplication Loop:</strong><br>
+The main multiplication loop runs for every pair of digits from <code>num1</code> and <code>num2</code>. Since the outer loop iterates over <code>num1</code> and the inner loop iterates over <code>num2</code>, the time complexity is <code>O(n * m)</code>, where <code>n</code> and <code>m</code> are the lengths of <code>num1</code> and <code>num2</code>, respectively.</p>
+</li>
+<li>
+<p><strong>Final String Construction:</strong><br>
+The final result construction involves processing the result array, which is at most <code>n + m</code> digits long, leading to a time complexity of <code>O(n + m)</code>.</p>
+</li>
+<li>
+<p>Overall, the time complexity is <strong>O(n * m)</strong>.</p>
+</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We use a result array <code>res</code> of size <code>n + m</code> to store the intermediate results. Therefore, the space complexity is <strong>O(n + m)</strong>.</li>
+</ul>
+<hr>
+<h3 id="-conclusion">
+  🏁 <strong>Conclusion</strong>
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently handles the multiplication of two large numbers represented as strings by simulating traditional multiplication. The time complexity is <strong>O(n * m)</strong>, which is optimal for this type of problem, and the space complexity is <strong>O(n + m)</strong> due to the result array.</p>
+<p>By breaking down the problem into smaller steps, including handling carries and building the result string, we ensure the solution works for arbitrarily large inputs. This approach avoids integer overflow and works seamlessly even for large numbers represented as strings.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1149s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1147s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

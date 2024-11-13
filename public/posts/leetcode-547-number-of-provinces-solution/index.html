@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -264,7 +264,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> uf<span style="color:#f92672">-&gt;</span>grp;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1209s1hbhb">
+<h2 id="hahahugoshortcode1210s1hbhb">
   
 
   
@@ -276,7 +276,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given a matrix <code>grid</code> where <code>grid[i][j]</code> is 1 if student <code>i</code> and student <code>j</code> are friends (directly or indirectly), and 0 otherwise. Your task is to find the total number of friend circles. A friend circle is a group of students who are directly or indirectly friends.</p>
+<p>The problem revolves around determining the number of distinct provinces in a given grid of relationships (grid[i][j] = 1 means person <code>i</code> and person <code>j</code> are directly connected). This is a classic problem that can be solved using the Union-Find (also known as Disjoint Set Union, DSU) data structure.</p>
+<p>Given an <code>n x n</code> matrix <code>grid</code>, where each element <code>grid[i][j]</code> is either <code>1</code> (indicating that person <code>i</code> and person <code>j</code> are friends) or <code>0</code> (indicating no direct friendship), our task is to determine how many distinct groups (provinces) exist. A group is formed when there is a way to indirectly or directly connect all people in that group. A province is defined as a group of people who are all connected directly or indirectly.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -284,40 +285,78 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve the problem efficiently, we can leverage the Union-Find (or Disjoint Set Union) data structure, which supports two key operations:</p>
 <ol>
-<li>
-<p><strong>Union-Find Data Structure</strong>:</p>
-<ul>
-<li>Use a Union-Find (also known as Disjoint Set Union, DSU) to manage and group students based on their friendship.</li>
-<li>The Union-Find structure maintains a parent array (<code>par</code>) to track the root of each set, along with a count of groups (<code>grp</code>).</li>
-</ul>
-</li>
-<li>
-<p><strong>Union Operation</strong>:</p>
-<ul>
-<li>For every pair of friends <code>(i, j)</code> found in the grid, perform the union operation to group them together. If they are already in the same group, no action is taken.</li>
-</ul>
-</li>
-<li>
-<p><strong>Find Circle Count</strong>:</p>
-<ul>
-<li>The number of unique parent nodes in the <code>par</code> array after processing all friendships gives the number of friend circles.</li>
-</ul>
-</li>
+<li><strong>Union</strong>: Merging two disjoint sets into one.</li>
+<li><strong>Find</strong>: Finding the representative or the root of the set to which an element belongs.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>By treating each individual person as an element in a set, we can use the Union-Find structure to efficiently track connected individuals. Each time two people (i.e., <code>i</code> and <code>j</code>) are found to be connected (i.e., <code>grid[i][j] = 1</code>), we unify them into the same group. At the end, the number of distinct groups (provinces) will be the number of different sets left.</p>
+<p>The key idea behind using the Union-Find data structure is its efficiency in handling dynamic connectivity queries. The &ldquo;find&rdquo; operation finds the representative (root) of an element&rsquo;s set, and the &ldquo;union&rdquo; operation merges two sets efficiently, keeping track of connections without having to explore the entire matrix repeatedly.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The code consists of two main components: the <code>UnionFind</code> class and the <code>Solution</code> class.</p>
+<h4 id="unionfind-class">
+  <code>UnionFind</code> Class
+  <a class="heading-link" href="#unionfind-class">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>This class implements the Union-Find data structure with path compression and union by rank/size to ensure that the operations are efficient.</p>
+<ol>
+<li>
+<p><strong>Member Variables</strong>:</p>
 <ul>
-<li>The <code>UnionFind</code> class is initialized with the number of students, setting each student as their own parent initially.</li>
-<li>The <code>join</code> function connects two students if they are not already connected and decreases the group count.</li>
-<li>The <code>find</code> function returns the representative (root) of the set containing a student.</li>
-<li>In the <code>findCircleNum</code> method, we iterate through the friendship matrix and join friends using the Union-Find operations, then return the count of distinct groups.</li>
+<li><code>par</code>: A vector of integers where <code>par[i]</code> indicates the parent (or root) of the element <code>i</code>. Initially, every person is their own parent.</li>
+<li><code>grp</code>: An integer to keep track of the number of disjoint sets (provinces) currently in the system. Initially, this is set to <code>n</code>, as each person is their own province.</li>
 </ul>
+</li>
+<li>
+<p><strong>Constructor</strong>:
+The constructor initializes the <code>par</code> vector to represent each person as their own root, i.e., <code>par[i] = i</code> for all <code>i</code> from <code>0</code> to <code>n-1</code>. It also initializes <code>grp</code> to <code>n</code> as initially each person is a separate province.</p>
+</li>
+<li>
+<p><strong><code>join</code> Function</strong>:
+This function connects two people (i.e., merges two sets). It uses the <code>find</code> function to check if both people are already in the same group. If not, it makes one the root of the other, reducing the number of groups (<code>grp--</code>).</p>
+</li>
+<li>
+<p><strong><code>find</code> Function</strong>:
+This function returns the representative (root) of the set that a particular element belongs to. It uses <strong>path compression</strong> to ensure that future queries are faster by flattening the tree structure of sets.</p>
+</li>
+</ol>
+<h4 id="solution-class">
+  <code>Solution</code> Class
+  <a class="heading-link" href="#solution-class">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The <code>Solution</code> class contains the <code>findCircleNum</code> function, which is the main function to solve the problem.</p>
+<ol>
+<li>
+<p><strong>Input</strong>:</p>
+<ul>
+<li>The input is a <code>grid</code>, which is a 2D array where each element <code>grid[i][j] = 1</code> means person <code>i</code> and person <code>j</code> are connected, and <code>0</code> means they are not.</li>
+</ul>
+</li>
+<li>
+<p><strong>Union-Find Initialization</strong>:
+The function first initializes a <code>UnionFind</code> object <code>uf</code> for the given <code>n</code> people (i.e., the size of the grid). This object will help in managing the dynamic connectivity of the individuals.</p>
+</li>
+<li>
+<p><strong>Iterate Over the Grid</strong>:
+The nested loop iterates through every pair <code>(i, j)</code> in the grid. If <code>grid[i][j] = 1</code>, indicating that person <code>i</code> and person <code>j</code> are connected, the <code>join</code> function is called to unite their respective groups. This will ensure that all people who are directly or indirectly connected are part of the same group.</p>
+</li>
+<li>
+<p><strong>Result</strong>:
+After all pairs have been processed, the number of distinct provinces (groups) is stored in <code>uf-&gt;grp</code>, and this value is returned as the result.</p>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -325,15 +364,42 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n^2), where <code>n</code> is the number of students, as we check each pair in the friendship matrix.</li>
-<li><strong>Space Complexity</strong>: O(n), for the Union-Find parent array.</li>
+<li>The <code>find</code> and <code>join</code> operations in Union-Find are typically near constant time, denoted as <strong>O(α(n))</strong>, where <strong>α(n)</strong> is the inverse Ackermann function, which grows very slowly and is almost constant for practical input sizes.</li>
+<li>The code iterates over all pairs <code>(i, j)</code> in the <code>n x n</code> grid, which gives a time complexity of <strong>O(n^2)</strong>.</li>
+<li>Therefore, the overall time complexity is <strong>O(n^2)</strong>, dominated by the grid traversal, with the Union-Find operations being almost constant time.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(n)</strong>, as we need to store the parent array <code>par</code> to keep track of the connected components, and an additional integer <code>grp</code> to store the number of provinces.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution is both time and space efficient for the given problem of finding the number of provinces in a grid of connections. By using the Union-Find data structure with path compression and union by rank, we ensure that even with large inputs, the operations remain nearly constant time. This approach is well-suited for problems involving dynamic connectivity, such as finding connected components in graphs.</p>
+<p>The problem-solving technique applied here, which utilizes the Union-Find structure, is fundamental for scenarios where we need to efficiently handle multiple queries regarding connectedness, such as social network analysis, connectivity in graphs, and dynamic component merging.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1209s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1210s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

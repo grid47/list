@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -216,7 +216,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1224s0hbhb">
+        <h2 id="hahahugoshortcode1226s0hbhb">
   <a href="https://leetcode.com/problems/spiral-matrix-ii/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -231,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1224s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1226s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -264,99 +264,178 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mtx;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1224s2hbhb">
+<h2 id="hahahugoshortcode1226s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-generate-spiral-matrix">
+  🌀 <strong>Generate Spiral Matrix</strong>
+  <a class="heading-link" href="#-generate-spiral-matrix">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a positive integer <code>n</code>, generate an <code>n x n</code> matrix filled with elements from <code>1</code> to <code>n^2</code> in a spiral order.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>The problem requires generating an <code>n x n</code> matrix filled with elements from 1 to <code>n^2</code> in a spiral order, starting from the top-left corner. The matrix should be filled in a clockwise spiral pattern.</p>
+<p>For example, for <code>n = 3</code>, the output should be:</p>
+<pre tabindex="0"><code>[[1, 2, 3],
+ [8, 9, 4],
+ [7, 6, 5]]
+</code></pre><h3 id="-approach">
+  🧠 <strong>Approach</strong>
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this, we simulate the process of filling a matrix in a spiral pattern by traversing the matrix layer by layer. We use four variables representing the boundaries of the matrix: the top row, bottom row, left column, and right column. As we fill the matrix, these boundaries shrink until all elements are placed.</p>
+<p>The filling sequence for each layer is as follows:</p>
 <ol>
-<li>
-<p><strong>Matrix Initialization</strong>:</p>
-<ul>
-<li>Create an <code>n x n</code> matrix filled with zeros.</li>
-</ul>
-</li>
-<li>
-<p><strong>Define Boundaries</strong>:</p>
-<ul>
-<li>Use four variables to define the boundaries of the matrix:
-<ul>
-<li><code>cBgn</code> (column beginning)</li>
-<li><code>cEnd</code> (column end)</li>
-<li><code>rBgn</code> (row beginning)</li>
-<li><code>rEnd</code> (row end)</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Filling the Matrix</strong>:</p>
-<ul>
-<li>Start with a number <code>num</code> initialized to <code>1</code>.</li>
-<li>Use a loop to fill the matrix in a spiral manner until all boundaries are exhausted:
-<ul>
-<li>Fill from left to right along the top row.</li>
-<li>Fill from top to bottom along the right column.</li>
-<li>Fill from right to left along the bottom row (if still within bounds).</li>
-<li>Fill from bottom to top along the left column (if still within bounds).</li>
-</ul>
-</li>
-<li>After filling each side, update the corresponding boundary to narrow the area for the next iteration.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return the Matrix</strong>:</p>
-<ul>
-<li>Once the matrix is completely filled, return it.</li>
-</ul>
-</li>
+<li>Move from left to right across the top row.</li>
+<li>Move from top to bottom along the right column.</li>
+<li>Move from right to left across the bottom row (if rows are still remaining).</li>
+<li>Move from bottom to top along the left column (if columns are still remaining).</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>These steps repeat until the entire matrix is filled.</p>
+<h3 id="-code-breakdown">
+  🔍 <strong>Code Breakdown</strong>
+  <a class="heading-link" href="#-code-breakdown">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Initialization</strong>: The matrix is created and the boundaries are set.</li>
-<li><strong>Spiral Filling</strong>: The while loop continues until all boundaries meet:
-<ul>
-<li>Each side of the square is filled, incrementing <code>num</code> appropriately.</li>
+<h4 id="step-1-initialize-matrix-and-boundaries">
+  Step 1: Initialize Matrix and Boundaries
+  <a class="heading-link" href="#step-1-initialize-matrix-and-boundaries">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> mtx(n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n, <span style="color:#ae81ff">0</span>));
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cBgn <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, cEnd <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, rBgn <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, rEnd <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li><strong><code>mtx</code>:</strong> We initialize a matrix of size <code>n x n</code> with all elements set to <code>0</code>.</li>
+<li><strong>Boundaries:</strong> The variables <code>cBgn</code>, <code>cEnd</code>, <code>rBgn</code>, and <code>rEnd</code> represent the current unfilled region of the matrix, starting from the outermost layer. These boundaries will gradually shrink as we fill the matrix in a spiral order.</li>
 </ul>
-</li>
+<h4 id="step-2-start-filling-the-matrix">
+  Step 2: Start Filling the Matrix
+  <a class="heading-link" href="#step-2-start-filling-the-matrix">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> num <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(cBgn <span style="color:#f92672">&lt;=</span> cEnd <span style="color:#f92672">&amp;&amp;</span> rBgn <span style="color:#f92672">&lt;=</span> rEnd) {
+</span></span></code></pre></div><ul>
+<li><strong><code>num</code>:</strong> This variable starts at 1 and will increment as we fill each cell in the matrix, from 1 to <code>n^2</code>.</li>
+<li>The <code>while</code> loop continues as long as there are rows and columns to fill, i.e., while <code>rBgn &lt;= rEnd</code> and <code>cBgn &lt;= cEnd</code>.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-3-fill-the-top-row">
+  Step 3: Fill the Top Row
+  <a class="heading-link" href="#step-3-fill-the-top-row">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> cBgn; i <span style="color:#f92672">&lt;=</span> cEnd; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    mtx[rBgn][i] <span style="color:#f92672">=</span> num<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>rBgn<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>We fill the top row by moving from left to right (i.e., across columns from <code>cBgn</code> to <code>cEnd</code>). After filling each cell, we increment <code>num</code> and move the top boundary (<code>rBgn</code>) down by one.</li>
+</ul>
+<h4 id="step-4-fill-the-right-column">
+  Step 4: Fill the Right Column
+  <a class="heading-link" href="#step-4-fill-the-right-column">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> rBgn; i <span style="color:#f92672">&lt;=</span> rEnd; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    mtx[i][cEnd] <span style="color:#f92672">=</span> num<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>cEnd<span style="color:#f92672">--</span>;
+</span></span></code></pre></div><ul>
+<li>We then move down the rightmost column (i.e., across rows from <code>rBgn</code> to <code>rEnd</code>), filling each cell with the current value of <code>num</code> and then incrementing <code>num</code>. Afterward, we move the right boundary (<code>cEnd</code>) left by one.</li>
+</ul>
+<h4 id="step-5-fill-the-bottom-row-if-necessary">
+  Step 5: Fill the Bottom Row (if necessary)
+  <a class="heading-link" href="#step-5-fill-the-bottom-row-if-necessary">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(rBgn <span style="color:#f92672">&lt;=</span> rEnd)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> cEnd; i <span style="color:#f92672">&gt;=</span> cBgn; i<span style="color:#f92672">--</span>)
+</span></span><span style="display:flex;"><span>        mtx[rEnd][i] <span style="color:#f92672">=</span> num<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>rEnd<span style="color:#f92672">--</span>;
+</span></span></code></pre></div><ul>
+<li>If there are still rows remaining (<code>rBgn &lt;= rEnd</code>), we traverse the bottom row from right to left (i.e., across columns from <code>cEnd</code> to <code>cBgn</code>), filling each cell with the current value of <code>num</code> and incrementing <code>num</code>. Afterward, we move the bottom boundary (<code>rEnd</code>) up by one.</li>
+</ul>
+<h4 id="step-6-fill-the-left-column-if-necessary">
+  Step 6: Fill the Left Column (if necessary)
+  <a class="heading-link" href="#step-6-fill-the-left-column-if-necessary">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(cBgn <span style="color:#f92672">&lt;=</span> cEnd)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> rEnd; i <span style="color:#f92672">&gt;=</span> rBgn; i<span style="color:#f92672">--</span>)
+</span></span><span style="display:flex;"><span>        mtx[i][cBgn] <span style="color:#f92672">=</span> num<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>cBgn<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>If there are still columns remaining (<code>cBgn &lt;= cEnd</code>), we move up the leftmost column (i.e., across rows from <code>rEnd</code> to <code>rBgn</code>), filling each cell with the current value of <code>num</code> and incrementing <code>num</code>. Afterward, we move the left boundary (<code>cBgn</code>) right by one.</li>
+</ul>
+<h4 id="step-7-return-the-matrix">
+  Step 7: Return the Matrix
+  <a class="heading-link" href="#step-7-return-the-matrix">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> mtx;
+</span></span></code></pre></div><ul>
+<li>After all layers are filled, we return the completed matrix <code>mtx</code> containing the numbers in spiral order.</li>
+</ul>
+<h3 id="-complexity-analysis">
+  📊 <strong>Complexity Analysis</strong>
+  <a class="heading-link" href="#-complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: ( O(n^2) ) since every cell in the matrix is filled once.</li>
-<li><strong>Space Complexity</strong>: ( O(n^2) ) for the matrix itself.</li>
+<li><strong>O(n^2):</strong> The time complexity is O(n^2), where <code>n^2</code> is the number of cells in the <code>n x n</code> matrix. Each cell is visited exactly once during the filling process, so the time complexity is proportional to the total number of elements.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n^2):</strong> The space complexity is O(n^2) because we need to store the matrix. The auxiliary space used by the algorithm (variables and indices) is constant, but the matrix itself takes up O(n^2) space.</li>
+</ul>
+<h3 id="-conclusion">
+  🌟 <strong>Conclusion</strong>
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution to generating a matrix in spiral order uses an intuitive approach of filling the matrix layer by layer. By maintaining boundaries for the rows and columns, we can efficiently traverse the matrix in a clockwise spiral pattern. Both the time and space complexities are O(n^2), which is optimal for matrix-related problems. This solution is straightforward, efficient, and provides the correct result in an easy-to-understand manner.</p>
+<hr>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1224s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1226s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

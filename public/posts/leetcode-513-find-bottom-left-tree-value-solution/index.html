@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -254,7 +254,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1187s1hbhb">
+<h2 id="hahahugoshortcode1196s1hbhb">
   
 
   
@@ -266,7 +266,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a binary tree, find the value of the bottom leftmost node. A node is considered the bottom left if it is the leftmost node in the lowest level of the tree.</p>
+<p>The problem asks us to find the bottom-left value in a binary tree. More specifically, we need to find the leftmost node at the deepest level of the tree. The bottom-left value is the first node encountered when performing a level-order traversal (BFS) from left to right, starting from the deepest level.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -274,68 +274,104 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we will use a <strong>Breadth-First Search (BFS)</strong> approach, which is typically used to traverse a tree level by level. The BFS approach uses a queue to explore all nodes at a given level before moving on to the next level.</p>
+<p>The algorithm follows these key steps:</p>
 <ol>
 <li>
-<p><strong>Level Order Traversal</strong>:</p>
-<ul>
-<li>Utilize a queue to perform a level order traversal (BFS) of the binary tree.</li>
-<li>At each level, keep track of the leftmost node.</li>
-</ul>
+<p><strong>Initialize a Queue</strong>: A queue is used to store the nodes at each level of the tree. We begin by enqueueing the root node of the tree.</p>
 </li>
 <li>
-<p><strong>Iterate Through Levels</strong>:</p>
-<ul>
-<li>For each level, update the result with the front of the queue (the leftmost node).</li>
-<li>Enqueue the children of the current node (left child first, then right child).</li>
-</ul>
+<p><strong>Level-order Traversal</strong>: Process the tree level by level. For each level, we store the leftmost node of that level.</p>
 </li>
 <li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>The last updated result after traversing all levels will be the bottom left value.</li>
-</ul>
+<p><strong>Update the Result</strong>: Each time we process a new level, we update the result with the value of the leftmost node in the current level. Since the BFS explores the tree from left to right, the first node processed at each level will always be the leftmost node.</p>
+</li>
+<li>
+<p><strong>Termination</strong>: The process continues until all levels of the tree are processed. By the end of the BFS, the result will hold the value of the leftmost node at the deepest level of the tree.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Function Definition</strong>:</p>
-<ul>
-<li>The <code>findBottomLeftValue</code> function takes a pointer to the root of the binary tree.</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">findBottomLeftValue</span>(TreeNode<span style="color:#f92672">*</span> root) {
+</span></span><span style="display:flex;"><span>    queue<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*&gt;</span> q;      <span style="color:#75715e">// Initialize a queue to store nodes for BFS
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    q.push(root);            <span style="color:#75715e">// Enqueue the root node
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> q.front()<span style="color:#f92672">-&gt;</span>val; <span style="color:#75715e">// Initialize result with the root&#39;s value
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()) {        <span style="color:#75715e">// Start level-order traversal
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> q.size();     <span style="color:#75715e">// Get the number of nodes at the current level
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        res <span style="color:#f92672">=</span> q.front()<span style="color:#f92672">-&gt;</span>val;  <span style="color:#75715e">// The leftmost node at the current level is the first node in the queue
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(sz<span style="color:#f92672">--</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {      <span style="color:#75715e">// Process all nodes at the current level
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            root <span style="color:#f92672">=</span> q.front();  <span style="color:#75715e">// Get the front node from the queue
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            q.pop();            <span style="color:#75715e">// Dequeue the node
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span>(root<span style="color:#f92672">-&gt;</span>left)  q.push(root<span style="color:#f92672">-&gt;</span>left);   <span style="color:#75715e">// Enqueue left child, if exists
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span>(root<span style="color:#f92672">-&gt;</span>right) q.push(root<span style="color:#f92672">-&gt;</span>right);  <span style="color:#75715e">// Enqueue right child, if exists
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res;                 <span style="color:#75715e">// Return the leftmost value at the deepest level
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><h4 id="step-1-initialize-a-queue">
+  Step 1: Initialize a Queue
+  <a class="heading-link" href="#step-1-initialize-a-queue">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>queue<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*&gt;</span> q;
+</span></span><span style="display:flex;"><span>q.push(root);
+</span></span></code></pre></div><ul>
+<li>A queue <code>q</code> is used to store nodes as they are processed in BFS. Initially, the root of the tree is added to the queue.</li>
 </ul>
-</li>
-<li>
-<p><strong>Queue Initialization</strong>:</p>
-<ul>
-<li>Initialize a queue and push the root node into it.</li>
+<h4 id="step-2-track-leftmost-node">
+  Step 2: Track Leftmost Node
+  <a class="heading-link" href="#step-2-track-leftmost-node">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> q.front()<span style="color:#f92672">-&gt;</span>val;
+</span></span></code></pre></div><ul>
+<li>The variable <code>res</code> will store the leftmost node value at the deepest level. Initially, it is set to the value of the root node.</li>
 </ul>
-</li>
-<li>
-<p><strong>Level Traversal</strong>:</p>
-<ul>
-<li>While the queue is not empty, get the size of the current level.</li>
-<li>Update the result to the value of the first node in the current level.</li>
+<h4 id="step-3-process-the-tree-level-by-level">
+  Step 3: Process the Tree Level by Level
+  <a class="heading-link" href="#step-3-process-the-tree-level-by-level">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> q.size();
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">=</span> q.front()<span style="color:#f92672">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(sz<span style="color:#f92672">--</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        root <span style="color:#f92672">=</span> q.front();
+</span></span><span style="display:flex;"><span>        q.pop();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(root<span style="color:#f92672">-&gt;</span>left)  q.push(root<span style="color:#f92672">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(root<span style="color:#f92672">-&gt;</span>right) q.push(root<span style="color:#f92672">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We use a <code>while</code> loop to process each level of the tree.</li>
+<li>At the start of each level, we update <code>res</code> to store the value of the leftmost node at that level (<code>q.front()-&gt;val</code>).</li>
+<li>We then process each node at the current level. If the node has a left child, it is added to the queue, followed by the right child if it exists.</li>
+<li>This ensures that nodes are processed level by level, and the leftmost node at each level is always processed first.</li>
 </ul>
-</li>
-<li>
-<p><strong>Node Processing</strong>:</p>
-<ul>
-<li>Process all nodes at the current level, enqueueing their left and right children if they exist.</li>
+<h4 id="step-4-return-the-bottom-left-value">
+  Step 4: Return the Bottom-Left Value
+  <a class="heading-link" href="#step-4-return-the-bottom-left-value">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After processing all levels of the tree, the variable <code>res</code> will contain the value of the leftmost node at the deepest level of the tree, which is our desired result.</li>
 </ul>
-</li>
-<li>
-<p><strong>Final Output</strong>:</p>
-<ul>
-<li>Return the result, which holds the bottom left value of the tree.</li>
-</ul>
-</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -343,15 +379,47 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the number of nodes in the tree, as each node is visited once.</li>
-<li><strong>Space Complexity</strong>: O(w), where w is the maximum width of the tree, due to the queue used for level order traversal.</li>
+<li><strong>BFS Traversal</strong>: Each node in the tree is processed exactly once, and each operation inside the loop is constant time (O(1)). Therefore, the overall time complexity is <code>O(N)</code>, where <code>N</code> is the number of nodes in the binary tree.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Queue</strong>: The space complexity is determined by the maximum number of nodes that can be stored in the queue at any given time. In the worst case, this is the number of nodes at the last level of the tree. For a complete binary tree, the maximum number of nodes in the queue will be <code>O(N / 2)</code>, which simplifies to <code>O(N)</code>.</li>
+</ul>
+<p>Thus, the space complexity is <code>O(N)</code> due to the space needed to store the nodes in the queue.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, the <strong>BFS approach</strong> efficiently solves the problem of finding the bottom-left value in a binary tree. By performing a level-order traversal and always tracking the leftmost node at each level, we ensure that the final result corresponds to the leftmost node at the deepest level of the tree.</p>
+<p>This solution has optimal time and space complexity, both of which are linear with respect to the number of nodes in the tree (<code>O(N)</code>), making it suitable for large trees.</p>
+<p>Key Points:</p>
+<ul>
+<li><strong>Time Complexity</strong>: <code>O(N)</code></li>
+<li><strong>Space Complexity</strong>: <code>O(N)</code></li>
+<li><strong>Approach</strong>: Breadth-First Search (BFS) with a queue</li>
 </ul>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1187s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1196s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

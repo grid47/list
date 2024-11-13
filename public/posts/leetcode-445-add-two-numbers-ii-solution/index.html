@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -216,7 +216,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1156s0hbhb">
+        <h2 id="hahahugoshortcode1155s0hbhb">
   <a href="https://leetcode.com/problems/add-two-numbers-ii/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -231,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1156s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1155s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -295,7 +295,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> node;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1156s2hbhb">
+<h2 id="hahahugoshortcode1155s2hbhb">
   
 
   
@@ -307,7 +307,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given two non-empty linked lists representing two non-negative integers. The digits are stored in reverse order, and each of their nodes contains a single digit. Add the two numbers and return it as a linked list.</p>
+<p>The problem asks us to add two numbers that are represented as linked lists. Each node in the linked list represents a single digit of the number, where the digits are stored in reverse order (i.e., the least significant digit comes first). The goal is to add these two numbers and return the sum, also represented as a linked list in reverse order.</p>
+<p>For example:</p>
+<ul>
+<li>Input: <code>l1 = [2,4,3]</code>, <code>l2 = [5,6,4]</code></li>
+<li>Output: <code>[7,0,8]</code></li>
+</ul>
+<p>This is because the numbers represented are <code>342</code> and <code>465</code>, and their sum is <code>807</code>, which is stored in reverse order.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -315,80 +321,119 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we can follow the following steps:</p>
 <ol>
 <li>
-<p><strong>Using Stacks</strong>:</p>
+<p><strong>Use Stacks to Reverse the Linked Lists</strong>:</p>
 <ul>
-<li>Utilize two stacks to store the digits of both linked lists. This helps in reversing the order since the linked list represents numbers in reverse.</li>
+<li>Since the digits are stored in reverse order in the input lists, it makes sense to push each digit onto a stack. The stack allows us to pop the digits in reverse order, so we can simulate adding the numbers from the least significant digit to the most significant digit.</li>
 </ul>
 </li>
 <li>
-<p><strong>Traverse the Lists</strong>:</p>
+<p><strong>Add the Two Numbers Digit by Digit</strong>:</p>
 <ul>
-<li>Traverse both linked lists (<code>l1</code> and <code>l2</code>), pushing each digit onto its respective stack until reaching the end of both lists.</li>
+<li>While there are digits left in either of the input lists, we pop the digits from the stacks, add them, and keep track of any carry from the addition.</li>
+<li>If the sum of the digits exceeds 9, we set a carry for the next addition.</li>
 </ul>
 </li>
 <li>
-<p><strong>Addition Logic</strong>:</p>
+<p><strong>Handle Carry</strong>:</p>
 <ul>
-<li>Initialize a carry variable (<code>cry</code>) to handle sums that exceed 10.</li>
-<li>While either stack is not empty, pop elements from both stacks (if available) and add them along with the carry.</li>
-<li>Create a new node for the result list with the value of the sum modulo 10 (to get the last digit) and set it to point to the previous node (to maintain the reversed order).</li>
+<li>After adding all digits, if there is any remaining carry (i.e., the sum of the last digits is greater than 9), we need to create a new node with the carry as the value.</li>
 </ul>
 </li>
 <li>
-<p><strong>Handling Remaining Carry</strong>:</p>
+<p><strong>Construct the Result Linked List</strong>:</p>
 <ul>
-<li>After processing both stacks, if there’s a remaining carry, create a new node with the carry value.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return the Result</strong>:</p>
-<ul>
-<li>Return the head of the newly formed linked list, which represents the sum.</li>
+<li>Since we need to return the result in reverse order, we can maintain a linked list that is built from the last digit to the first. We start by creating new nodes and linking them together.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Initialization</strong>:</p>
+<h4 id="step-1-push-digits-to-stacks">
+  Step 1: Push Digits to Stacks
+  <a class="heading-link" href="#step-1-push-digits-to-stacks">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>stack<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> s1, s2;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(l1) {
+</span></span><span style="display:flex;"><span>    s1.push(l1<span style="color:#f92672">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>    l1 <span style="color:#f92672">=</span> l1<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(l2) {
+</span></span><span style="display:flex;"><span>    s2.push(l2<span style="color:#f92672">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>    l2 <span style="color:#f92672">=</span> l2<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>First, we initialize two stacks <code>s1</code> and <code>s2</code> to store the digits of <code>l1</code> and <code>l2</code> respectively.</li>
+<li>We iterate over the linked lists <code>l1</code> and <code>l2</code>, pushing the values of each node onto the respective stack until we reach the end of both lists.</li>
+</ul>
+<h4 id="step-2-add-digits-with-carry">
+  Step 2: Add Digits with Carry
+  <a class="heading-link" href="#step-2-add-digits-with-carry">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cry <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>ListNode<span style="color:#f92672">*</span> node <span style="color:#f92672">=</span> NULL, <span style="color:#f92672">*</span>prv <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>s1.empty() <span style="color:#f92672">||</span> <span style="color:#f92672">!</span>s2.empty()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>s1.empty()) {
+</span></span><span style="display:flex;"><span>        cry <span style="color:#f92672">+=</span> s1.top();
+</span></span><span style="display:flex;"><span>        s1.pop();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>s2.empty()) {
+</span></span><span style="display:flex;"><span>        cry <span style="color:#f92672">+=</span> s2.top();
+</span></span><span style="display:flex;"><span>        s2.pop();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    node <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ListNode(cry <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>    node<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> prv;
+</span></span><span style="display:flex;"><span>    prv <span style="color:#f92672">=</span> node;
+</span></span><span style="display:flex;"><span>    cry <span style="color:#f92672">/=</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We initialize a variable <code>cry</code> to keep track of the carry, and pointers <code>node</code> and <code>prv</code> to build the new linked list.</li>
+<li>We enter a loop that continues until both stacks are empty.
 <ul>
-<li>Create two stacks, <code>s1</code> and <code>s2</code>, to store the digits from <code>l1</code> and <code>l2</code>, respectively.</li>
+<li>Inside the loop, we check if the stacks <code>s1</code> and <code>s2</code> are non-empty. If they are, we pop the top element from each stack and add it to <code>cry</code>.</li>
+<li>We create a new node with the value <code>cry % 10</code> (the digit part of the sum) and update the <code>next</code> pointer of this new node to point to the previously created node (to reverse the order).</li>
+<li>After that, we update the carry (<code>cry</code>) to be the integer division of <code>cry</code> by 10, so we can carry over the value if the sum of digits was greater than 9.</li>
 </ul>
 </li>
-<li>
-<p><strong>Filling the Stacks</strong>:</p>
-<ul>
-<li>Use a while loop to fill <code>s1</code> with digits from <code>l1</code> and <code>s2</code> with digits from <code>l2</code>.</li>
 </ul>
-</li>
-<li>
-<p><strong>Adding the Numbers</strong>:</p>
-<ul>
-<li>Create a pointer <code>prv</code> to build the resulting linked list in reverse order.</li>
-<li>Use another while loop to pop digits from both stacks and compute the total sum for each position, updating <code>cry</code> accordingly.</li>
+<h4 id="step-3-handle-remaining-carry">
+  Step 3: Handle Remaining Carry
+  <a class="heading-link" href="#step-3-handle-remaining-carry">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(cry <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    node <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ListNode(cry <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>);
+</span></span><span style="display:flex;"><span>    node<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> prv;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After the loop ends, if there is any leftover carry (<code>cry != 0</code>), we create a new node for it and link it to the result list.</li>
 </ul>
-</li>
-<li>
-<p><strong>Final Carry Check</strong>:</p>
-<ul>
-<li>If there’s any carry left after processing both stacks, create a new node for the carry.</li>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> node;
+</span></span></code></pre></div><ul>
+<li>Finally, we return the head of the newly created linked list, which holds the sum of the two numbers.</li>
 </ul>
-</li>
-<li>
-<p><strong>Returning the Result</strong>:</p>
-<ul>
-<li>The head of the resulting linked list is returned, which represents the sum of the two numbers.</li>
-</ul>
-</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -396,15 +441,49 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(max(m, n)), where <code>m</code> and <code>n</code> are the lengths of the two linked lists, as we traverse both lists once.</li>
-<li><strong>Space Complexity</strong>: O(m + n), since we store all digits in stacks.</li>
+<li><strong>Pushing digits to stacks</strong>: We iterate through the entire length of both input lists (<code>l1</code> and <code>l2</code>), which takes <code>O(n + m)</code> time where <code>n</code> is the length of <code>l1</code> and <code>m</code> is the length of <code>l2</code>.</li>
+<li><strong>Adding digits</strong>: In the second loop, we process the digits from the stacks and add them. Since we process each digit once, this also takes <code>O(n + m)</code> time.</li>
+<li><strong>Overall Time Complexity</strong>: The time complexity is <code>O(n + m)</code>, where <code>n</code> and <code>m</code> are the lengths of the two input lists.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We use two stacks to hold the digits of the input linked lists, which each take <code>O(n)</code> and <code>O(m)</code> space respectively.</li>
+<li>Additionally, we create a new linked list to hold the result, which takes <code>O(n + m)</code> space.</li>
+<li><strong>Overall Space Complexity</strong>: The space complexity is <code>O(n + m)</code> due to the use of the stacks and the result list.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach solves the problem efficiently by:</p>
+<ul>
+<li>Reversing the linked lists using stacks.</li>
+<li>Adding the digits from the least significant to the most significant, while handling carries.</li>
+<li>Constructing the result linked list in the correct order by using a simple iterative process.</li>
+</ul>
+<p>The algorithm is optimal with a time complexity of <code>O(n + m)</code> and space complexity of <code>O(n + m)</code>, making it suitable for large input sizes. The solution is simple, easy to understand, and leverages stack operations to reverse the digit order and handle carries effectively.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1156s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1155s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -245,7 +245,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1338s1hbhb">
+<h2 id="hahahugoshortcode1339s1hbhb">
   
 
   
@@ -257,7 +257,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given a list of domain visit counts in the format <code>&quot;&lt;count&gt; &lt;domain&gt;&quot;</code>, where <code>&lt;count&gt;</code> is the number of visits and <code>&lt;domain&gt;</code> is the domain name. Your task is to return a list of visit counts for each subdomain, including the main domain itself.</p>
+<p>The task involves counting the number of visits to various subdomains from a given list of domain visit counts. Each element in the list contains a domain and the number of times it was visited. The challenge is to break down these domain visits into subdomains and tally the total number of visits to each subdomain. For instance, for a domain &ldquo;sports.yahoo.com&rdquo;, we should also consider visits to &ldquo;yahoo.com&rdquo; and &ldquo;com&rdquo;, and aggregate the visit counts accordingly.</p>
+<p>We are required to return the total visit count for each subdomain in the format: <code>count subdomain</code>. Subdomains include not only the full domain name but also any part of it (e.g., for the domain &ldquo;sports.yahoo.com&rdquo;, the subdomains would include &ldquo;yahoo.com&rdquo;, &ldquo;com&rdquo;).</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -265,67 +266,107 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we need to:</p>
 <ol>
-<li>
-<p><strong>Data Structure</strong>:</p>
-<ul>
-<li>Use an unordered map (<code>count</code>) to store the visit counts for each subdomain.</li>
-</ul>
-</li>
-<li>
-<p><strong>Processing Each Domain</strong>:</p>
-<ul>
-<li>For each entry in <code>cpdomains</code>:
-<ul>
-<li>Split the string into the visit count (<code>n</code>) and the domain name (<code>s</code>).</li>
-<li>For each domain, generate all possible subdomains by traversing the string and updating the counts in the map:
-<ul>
-<li>For example, if the domain is <code>google.com</code>, add counts for <code>com</code>, <code>google.com</code>, and <code>google.com</code> as a whole.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Construct Result</strong>:</p>
-<ul>
-<li>Iterate over the map to construct the result vector containing strings in the format <code>&quot;&lt;count&gt; &lt;subdomain&gt;&quot;</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>Return the vector containing all subdomain visit counts.</li>
-</ul>
-</li>
+<li>Parse each domain visit string to extract the count and domain.</li>
+<li>Split each domain into its respective subdomains.</li>
+<li>Aggregate the visit counts for each subdomain.</li>
+<li>Format the result by returning each subdomain with its total count.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>We can leverage the following approach:</p>
+<ul>
+<li><strong>Use a HashMap</strong>: The problem naturally fits the use of a hash map (<code>unordered_map</code>) to store and accumulate the visit counts for each subdomain.</li>
+<li><strong>String Manipulation</strong>: For each domain, we break it down by iterating through the segments separated by periods (&rsquo;.&rsquo;), counting the visits for the full domain as well as its subdomains.</li>
+<li><strong>Efficiency</strong>: Using a hash map allows us to efficiently store and update the visit counts. Given that we will be processing each domain string and its subdomains only once, the solution is optimal in terms of time complexity.</li>
+</ul>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Class</strong>:
-<ul>
-<li><code>class Solution</code>: Contains methods to count visits to subdomains.
-<ul>
-<li><code>vector&lt;string&gt; subdomainVisits(vector&lt;string&gt;&amp; cpdomains)</code>: Main function to calculate subdomain visit counts.
-<ul>
-<li><strong>Parameters</strong>:
-<ul>
-<li><code>cpdomains</code>: A vector of strings representing the visit counts and domains.</li>
+<h4 id="step-1-declare-a-hashmap-to-track-subdomain-visits">
+  Step 1: Declare a HashMap to Track Subdomain Visits
+  <a class="heading-link" href="#step-1-declare-a-hashmap-to-track-subdomain-visits">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span>string, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> count;
+</span></span></code></pre></div><ul>
+<li>We use an unordered map <code>count</code> to store the number of visits for each subdomain. The key is the subdomain string, and the value is the count of visits.</li>
 </ul>
-</li>
-<li><strong>Returns</strong>: A vector of strings representing the visit counts for each subdomain.</li>
+<h4 id="step-2-parse-the-input-list-of-domain-visits">
+  Step 2: Parse the Input List of Domain Visits
+  <a class="heading-link" href="#step-2-parse-the-input-list-of-domain-visits">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> cp: cpdomains) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> cp.find(<span style="color:#e6db74">&#34; &#34;</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> stoi(cp.substr(<span style="color:#ae81ff">0</span>, i)); <span style="color:#75715e">// Extract the visit count
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    string s <span style="color:#f92672">=</span> cp.substr(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>); <span style="color:#75715e">// Extract the domain part
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>We iterate over each domain visit string in <code>cpdomains</code>.</li>
+<li><code>cp.find(&quot; &quot;)</code> finds the space that separates the visit count from the domain name.</li>
+<li><code>n</code> stores the number of visits, which is extracted by taking the substring before the space and converting it to an integer using <code>stoi</code>.</li>
+<li><code>s</code> contains the domain name, which is extracted from the part of the string after the space.</li>
 </ul>
-</li>
+<h4 id="step-3-split-the-domain-into-subdomains">
+  Step 3: Split the Domain into Subdomains
+  <a class="heading-link" href="#step-3-split-the-domain-into-subdomains">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(s[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;.&#39;</span>)
+</span></span><span style="display:flex;"><span>        count[s.substr(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>)] <span style="color:#f92672">+=</span> n;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>For each domain <code>s</code>, we iterate over its characters and check if the character is a dot (&rsquo;.&rsquo;).</li>
+<li>Every time we encounter a dot, we consider the substring starting from the character after the dot as a subdomain.</li>
+<li>We update the count for this subdomain in the map <code>count</code>, adding the visit count <code>n</code> for each occurrence of a subdomain.</li>
 </ul>
-</li>
+<h4 id="step-4-include-the-full-domain-in-the-count">
+  Step 4: Include the Full Domain in the Count
+  <a class="heading-link" href="#step-4-include-the-full-domain-in-the-count">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>count[s] <span style="color:#f92672">+=</span> n;
+</span></span></code></pre></div><ul>
+<li>After processing all subdomains, we also increment the count for the full domain (<code>s</code>).</li>
 </ul>
-</li>
+<h4 id="step-5-generate-the-result">
+  Step 5: Generate the Result
+  <a class="heading-link" href="#step-5-generate-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> res;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it: count)
+</span></span><span style="display:flex;"><span>    res.push_back(to_string(it.second) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; &#34;</span> <span style="color:#f92672">+</span> it.first);
+</span></span></code></pre></div><ul>
+<li>We create an empty vector <code>res</code> to store the final result.</li>
+<li>We iterate over the entries in <code>count</code> and for each subdomain, we append a string to the result in the format <code>&quot;count subdomain&quot;</code>, where <code>count</code> is the total number of visits and <code>subdomain</code> is the domain.</li>
+<li><code>to_string(it.second)</code> converts the count (an integer) into a string, and <code>it.first</code> is the subdomain.</li>
+</ul>
+<h4 id="step-6-return-the-final-result">
+  Step 6: Return the Final Result
+  <a class="heading-link" href="#step-6-return-the-final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Finally, we return the <code>res</code> vector, which contains the visit counts for all subdomains.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -334,15 +375,59 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(m * k), where <code>m</code> is the number of domains and <code>k</code> is the average length of each domain string since each domain is processed in linear time.</li>
-<li><strong>Space Complexity</strong>: O(n), where <code>n</code> is the number of unique subdomains stored in the map.</li>
+<li><strong>O(n * m)</strong>:
+<ul>
+<li>Here, <code>n</code> is the number of domain visit entries in the <code>cpdomains</code> list, and <code>m</code> is the average length of the domain strings.</li>
+<li>We process each domain string once and perform a substring operation for each segment of the domain (which is bounded by the number of dots in the domain).</li>
+<li>Thus, the time complexity is linear in terms of the number of domain visit entries and the average length of the domain strings.</li>
 </ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(k)</strong>:
+<ul>
+<li>Where <code>k</code> is the number of unique subdomains in the input list.</li>
+<li>We store each subdomain in the hash map <code>count</code>, so the space complexity depends on the number of unique subdomains.</li>
+<li>In the worst case, the space complexity is proportional to the number of distinct subdomains across all domain visit entries.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently counts the visits to each subdomain by leveraging string manipulation and hash maps. By processing each domain string once, breaking it down into subdomains, and aggregating the counts, we ensure that the solution is both time and space efficient.</p>
+<p>The key steps in the algorithm are:</p>
+<ol>
+<li>Extracting the visit count and domain name from each entry.</li>
+<li>Iterating through the domain to identify subdomains and accumulate the visit counts.</li>
+<li>Storing the results in a hash map and then formatting the final output.</li>
+</ol>
+<p>This approach guarantees that the solution runs in linear time with respect to the number of domain entries and their lengths. The use of an unordered map ensures that subdomain visits are counted efficiently, providing an optimal solution for the problem.</p>
+<p>Overall, this solution is well-suited for handling large input sizes due to its simplicity and efficiency. The problem combines the concepts of string manipulation and hash maps, which are common in real-world software engineering tasks such as web analytics and domain tracking.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1338s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1339s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

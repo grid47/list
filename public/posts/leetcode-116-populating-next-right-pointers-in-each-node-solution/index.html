@@ -217,7 +217,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -274,76 +274,168 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-statement-populating-next-right-pointers">
+  🌳 <strong>Problem Statement: Populating Next Right Pointers</strong>
+  <a class="heading-link" href="#-problem-statement-populating-next-right-pointers">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a binary tree, connect all nodes at the same level to the next right node. If there is no next right node, the <code>next</code> pointer should be set to <code>NULL</code>.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>The task is to populate each node&rsquo;s <code>next</code> pointer in a binary tree. The goal is for the <code>next</code> pointer of each node to point to its immediate neighbor to the right on the same level. If there&rsquo;s no neighbor (i.e., it&rsquo;s the rightmost node), the <code>next</code> pointer should be set to <code>NULL</code>.</p>
+<p>For example, for the tree:</p>
+<pre tabindex="0"><code>        1
+       / \
+      2   3
+     / \ / \
+    4  5 6  7
+</code></pre><p>After populating the <code>next</code> pointers, it should look like this:</p>
+<pre tabindex="0"><code>        1 -&gt; NULL
+       / \
+      2 -&gt; 3 -&gt; NULL
+     / \ / \
+    4-&gt;5-&gt;6-&gt;7 -&gt; NULL
+</code></pre><p>Each node now points to its immediate right neighbor. If no neighbor exists, the pointer is set to <code>NULL</code>.</p>
+<hr>
+<h3 id="-approach-breadth-first-search-bfs">
+  🧠 <strong>Approach: Breadth-First Search (BFS)</strong>
+  <a class="heading-link" href="#-approach-breadth-first-search-bfs">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>We can solve this problem using a <strong>breadth-first search (BFS)</strong> approach. BFS helps us process the nodes level by level, and by using a queue, we can easily traverse each level and connect the nodes with the correct <code>next</code> pointers.</p>
+<h4 id="steps-to-solve">
+  <strong>Steps to Solve:</strong>
+  <a class="heading-link" href="#steps-to-solve">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li>Use a breadth-first search (BFS) approach with a queue to traverse the tree level by level.</li>
-<li>For each level:
+<li><strong>Queue Initialization</strong>: Start by adding the root node to a queue. We’ll process each level of the tree one by one.</li>
+<li><strong>Process Nodes Level by Level</strong>:
 <ul>
-<li>Track the current node&rsquo;s <code>next</code> pointer using a variable <code>nextptr</code>.</li>
-<li>Connect each node&rsquo;s <code>next</code> pointer to the previously processed node at the same level.</li>
+<li>For each level, we dequeue the nodes and set their <code>next</code> pointers to the node immediately following them on the same level.</li>
 </ul>
 </li>
-<li>Enqueue the right child before the left child to ensure the <code>next</code> pointers are set correctly for each level.</li>
+<li><strong>Push Children to Queue</strong>: For each node, add its children to the queue to process them in the next level.</li>
+<li><strong>Return the Root</strong>: Once all nodes have been connected with their <code>next</code> pointers, return the modified tree’s root.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<hr>
+<h3 id="-code-walkthrough-step-by-step">
+  🛠️ <strong>Code Walkthrough: Step-by-Step</strong>
+  <a class="heading-link" href="#-code-walkthrough-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="1-function-signature">
+  1. <strong>Function Signature</strong>
+  <a class="heading-link" href="#1-function-signature">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Node<span style="color:#f92672">*</span> connect(Node<span style="color:#f92672">*</span> root)
+</span></span></code></pre></div><p>The function takes the root of the binary tree and returns the root after populating the <code>next</code> pointers.</p>
+<h4 id="2-edge-case-check">
+  2. <strong>Edge Case Check</strong>
+  <a class="heading-link" href="#2-edge-case-check">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>root) <span style="color:#66d9ef">return</span> root;
+</span></span></code></pre></div><p>If the tree is empty (i.e., the root is <code>NULL</code>), there’s nothing to process, so we simply return <code>NULL</code>.</p>
+<h4 id="3-queue-initialization">
+  3. <strong>Queue Initialization</strong>
+  <a class="heading-link" href="#3-queue-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>queue<span style="color:#f92672">&lt;</span>Node<span style="color:#f92672">*&gt;</span> q;
+</span></span><span style="display:flex;"><span>q.push(root);
+</span></span></code></pre></div><p>We initialize a queue to help with the level-order traversal. The root node is the first node to be processed.</p>
+<h4 id="4-level-by-level-processing">
+  4. <strong>Level-by-Level Processing</strong>
+  <a class="heading-link" href="#4-level-by-level-processing">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Node<span style="color:#f92672">*</span> nextptr <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> q.size();
+</span></span><span style="display:flex;"><span>    nextptr <span style="color:#f92672">=</span> NULL;
+</span></span></code></pre></div><p>For each level:</p>
 <ul>
-<li>
-<p><strong><code>connect</code> function</strong>:</p>
+<li>We initialize <code>nextptr</code> to <code>NULL</code> to track the previous node on the current level.</li>
+<li><code>sz</code> represents the number of nodes at the current level (the size of the queue).</li>
+</ul>
+<h4 id="5-process-each-node-in-the-current-level">
+  5. <strong>Process Each Node in the Current Level</strong>
+  <a class="heading-link" href="#5-process-each-node-in-the-current-level">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(sz<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>    Node<span style="color:#f92672">*</span> tmp <span style="color:#f92672">=</span> q.front();
+</span></span><span style="display:flex;"><span>    q.pop();
+</span></span><span style="display:flex;"><span>    tmp<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> nextptr;
+</span></span><span style="display:flex;"><span>    nextptr <span style="color:#f92672">=</span> tmp;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(tmp<span style="color:#f92672">-&gt;</span>right) q.push(tmp<span style="color:#f92672">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(tmp<span style="color:#f92672">-&gt;</span>left) q.push(tmp<span style="color:#f92672">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>For each node at the current level:</p>
 <ul>
-<li><strong>Line 3</strong>: Check if the <code>root</code> is <code>NULL</code>; if so, return <code>root</code>.</li>
-<li><strong>Line 4</strong>: Initialize a queue for BFS and push the <code>root</code>.</li>
-<li><strong>Line 5</strong>: Initialize <code>nextptr</code> to keep track of the current node&rsquo;s <code>next</code>.</li>
+<li><strong>Pop the Node</strong>: We dequeue the front node from the queue (<code>tmp</code>).</li>
+<li><strong>Set the <code>next</code> Pointer</strong>: We set <code>tmp-&gt;next</code> to point to <code>nextptr</code>, which holds the previous node processed at this level.</li>
+<li><strong>Update <code>nextptr</code></strong>: After setting the <code>next</code> pointer, we update <code>nextptr</code> to point to the current node (<code>tmp</code>), so the next node can link to it.</li>
+<li><strong>Push Children</strong>: If <code>tmp</code> has a right child, we push it to the queue first. Then, we push the left child (if present). This order ensures we process nodes from right to left at each level, making it easy to connect the <code>next</code> pointers properly.</li>
 </ul>
-</li>
-<li>
-<p><strong>Line 6-15</strong>: Main BFS loop:</p>
-<ul>
-<li><strong>Line 7</strong>: Get the number of nodes at the current level (<code>sz</code>).</li>
-<li><strong>Line 8</strong>: Reset <code>nextptr</code> for the new level.</li>
-<li><strong>Line 9-12</strong>: For each node in the current level:
-<ul>
-<li>Connect its <code>next</code> pointer to <code>nextptr</code>.</li>
-<li>Update <code>nextptr</code> to the current node.</li>
-<li>Enqueue the right child followed by the left child.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Line 16</strong>: Return the modified tree <code>root</code>.</p>
-</li>
-</ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="6-return-the-modified-root">
+  6. <strong>Return the Modified Root</strong>
+  <a class="heading-link" href="#6-return-the-modified-root">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> root;
+</span></span></code></pre></div><p>Once all nodes have been processed and the <code>next</code> pointers are correctly set, we return the modified root of the tree.</p>
+<hr>
+<h3 id="-time-complexity">
+  ⏱️ <strong>Time Complexity</strong>
+  <a class="heading-link" href="#-time-complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The time complexity is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the tree. Since we process each node once during the BFS traversal and perform constant-time operations (pop, set <code>next</code>, and push) for each node, the total time complexity is proportional to the number of nodes.</p>
 <ul>
-<li><strong>Time Complexity</strong>: (O(N)), where (N) is the number of nodes in the tree, as each node is visited once.</li>
-<li><strong>Space Complexity</strong>: (O(W)), where (W) is the maximum width of the tree, for the queue used in BFS.</li>
+<li><strong>Level-order traversal</strong>: Each node is processed once.</li>
+<li><strong>Queue operations</strong> (push, pop) are constant time, and each is done exactly once for each node.</li>
 </ul>
+<h3 id="-space-complexity">
+  💡 <strong>Space Complexity</strong>
+  <a class="heading-link" href="#-space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The space complexity is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the tree. This is due to the queue storing nodes during the BFS traversal. In the worst case, the queue holds all the nodes at a single level, and since the number of nodes at a level is at most <code>n/2</code>, the space complexity is proportional to the number of nodes.</p>
+<hr>
+<h3 id="-conclusion">
+  🎉 <strong>Conclusion</strong>
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of populating the <code>next</code> pointers in a binary tree using a <strong>breadth-first search (BFS)</strong> approach. The queue helps us traverse each level of the tree and connect the nodes with their neighbors. The <code>nextptr</code> variable ensures that each node is correctly linked to its immediate right neighbor.</p>
+<p>The <strong>time complexity</strong> is <strong>O(n)</strong>, and the <strong>space complexity</strong> is <strong>O(n)</strong>, making this solution optimal for large trees. This approach is ideal when we need to connect nodes across levels in a binary tree.</p>
+<p>By processing each node once and using a queue to manage the levels, we ensure that all nodes are correctly connected in the desired manner.</p>
  
 </div>
   

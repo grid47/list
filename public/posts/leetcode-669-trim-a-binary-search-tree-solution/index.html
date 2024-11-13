@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -263,7 +263,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a binary search tree (BST) and a range [low, high], the goal is to trim the BST so that all values in the tree lie within this range. The trimmed tree should maintain the properties of a BST.</p>
+<p>The problem requires trimming a binary search tree (BST) such that all node values are within a specified range. Specifically, given the root of a BST and two integers <code>low</code> and <code>high</code>, you need to return the root of the tree after removing all nodes that don&rsquo;t satisfy the condition: <code>low &lt;= node-&gt;val &lt;= high</code>.</p>
+<p>A binary search tree is a tree data structure where each node follows the condition that:</p>
+<ol>
+<li>The left subtree of a node contains only nodes with values less than the node’s value.</li>
+<li>The right subtree of a node contains only nodes with values greater than the node’s value.</li>
+</ol>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -271,46 +276,97 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The core idea behind this solution is to traverse the tree recursively and prune nodes whose values are outside the range <code>[low, high]</code>. The pruning process involves adjusting pointers for subtrees that are either too small or too large.</p>
+<h4 id="key-steps">
+  Key Steps:
+  <a class="heading-link" href="#key-steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li>
-<p><strong>Recursive Traversal</strong>:</p>
+<li><strong>Base Case</strong>: If the current node is <code>NULL</code>, simply return <code>NULL</code>. This occurs when the node is outside the tree or when we reach the end of a branch.</li>
+<li><strong>Pruning the Left and Right Subtrees</strong>:
 <ul>
-<li>The function <code>trimBST</code> recursively traverses the tree.</li>
-<li>If the current node&rsquo;s value is less than <code>low</code>, it means all nodes in the left subtree can be discarded. Thus, we recursively call <code>trimBST</code> on the right child.</li>
-<li>If the current node&rsquo;s value is greater than <code>high</code>, we discard all nodes in the right subtree and recursively call <code>trimBST</code> on the left child.</li>
-<li>If the current node&rsquo;s value is within the range [low, high], we trim both the left and right subtrees.</li>
+<li>If the current node&rsquo;s value is less than <code>low</code>, this means the left subtree (and any of its descendants) cannot be part of the valid tree. Therefore, we skip the left subtree and recurse on the right subtree.</li>
+<li>If the current node&rsquo;s value is greater than <code>high</code>, this means the right subtree (and any of its descendants) cannot be part of the valid tree. Therefore, we skip the right subtree and recurse on the left subtree.</li>
 </ul>
 </li>
-<li>
-<p><strong>Base Case</strong>:</p>
-<ul>
-<li>If the current node is <code>NULL</code>, return <code>NULL</code>.</li>
-</ul>
-</li>
+<li><strong>Valid Node</strong>: If the node’s value is within the range, we recursively trim both the left and right subtrees of the node, ensuring all values in the subtrees are also within the specified range.</li>
+<li><strong>Returning the Node</strong>: Once a node has been validated (its value is within the specified range and its subtrees have been pruned), return the node.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>This approach ensures that all nodes outside the range are removed and that the tree structure remains a valid binary search tree.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Input</strong>: The function takes a <code>TreeNode* root</code>, and two integers <code>low</code> and <code>high</code>.</li>
-<li><strong>Conditions</strong>:
-<ul>
-<li>Check if <code>root</code> is <code>NULL</code>. If it is, return <code>NULL</code>.</li>
-<li>If the node&rsquo;s value is less than <code>low</code>, call <code>trimBST</code> on the right subtree.</li>
-<li>If the node&rsquo;s value is greater than <code>high</code>, call <code>trimBST</code> on the left subtree.</li>
+<p>The implementation of this solution in C++ uses a recursive approach to trim the BST. Below is a detailed breakdown of the code.</p>
+<h4 id="1-function-definition-and-base-case">
+  1. <strong>Function Definition and Base Case</strong>
+  <a class="heading-link" href="#1-function-definition-and-base-case">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#f92672">*</span> <span style="color:#a6e22e">trimBST</span>(TreeNode<span style="color:#f92672">*</span> root, <span style="color:#66d9ef">int</span> low, <span style="color:#66d9ef">int</span> high) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(root <span style="color:#f92672">==</span> NULL) <span style="color:#66d9ef">return</span> NULL;
+</span></span></code></pre></div><ul>
+<li>The function <code>trimBST</code> takes three parameters: the root of the BST, and two integers <code>low</code> and <code>high</code> that define the allowed range for node values.</li>
+<li>The first check is for the base case where the <code>root</code> is <code>NULL</code>. If this is the case, we simply return <code>NULL</code> because there are no nodes to process at this point.</li>
 </ul>
-</li>
-<li><strong>Trimming Subtrees</strong>:
-<ul>
-<li>If the node&rsquo;s value is within the range, recursively trim the left and right subtrees.</li>
+<h4 id="2-pruning-nodes-less-than-low">
+  2. <strong>Pruning Nodes Less than <code>low</code></strong>
+  <a class="heading-link" href="#2-pruning-nodes-less-than-low">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(root<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&lt;</span> low) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">trimBST</span>(root<span style="color:#f92672">-&gt;</span>right, low, high);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If the current node’s value is less than <code>low</code>, then all nodes in the left subtree of the current node must also be smaller than <code>low</code> (because it’s a binary search tree). Hence, the left subtree is entirely invalid, and we recursively trim the right subtree by calling <code>trimBST(root-&gt;right, low, high)</code>.</li>
 </ul>
-</li>
-<li><strong>Return</strong>: Finally, return the current node after potentially trimming its subtrees.</li>
-</ol>
+<h4 id="3-pruning-nodes-greater-than-high">
+  3. <strong>Pruning Nodes Greater than <code>high</code></strong>
+  <a class="heading-link" href="#3-pruning-nodes-greater-than-high">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(root<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&gt;</span> high) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> trimBST(root<span style="color:#f92672">-&gt;</span>left, low, high);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If the current node’s value is greater than <code>high</code>, then all nodes in the right subtree of the current node must also be greater than <code>high</code> (because of the BST property). Therefore, we prune the right subtree and recursively call <code>trimBST(root-&gt;left, low, high)</code> to trim the left subtree.</li>
+</ul>
+<h4 id="4-valid-node-within-range">
+  4. <strong>Valid Node within Range</strong>
+  <a class="heading-link" href="#4-valid-node-within-range">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>root<span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">=</span> trimBST(root<span style="color:#f92672">-&gt;</span>left, low, high);
+</span></span><span style="display:flex;"><span>root<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">=</span> trimBST(root<span style="color:#f92672">-&gt;</span>right, low, high);
+</span></span></code></pre></div><ul>
+<li>If the current node’s value is within the allowed range (<code>low &lt;= node-&gt;val &lt;= high</code>), we recursively trim both the left and right subtrees.</li>
+<li>The result of the recursive calls for the left and right subtrees is assigned to <code>root-&gt;left</code> and <code>root-&gt;right</code>, respectively.</li>
+</ul>
+<h4 id="5-return-the-valid-node">
+  5. <strong>Return the Valid Node</strong>
+  <a class="heading-link" href="#5-return-the-valid-node">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> root;
+</span></span></code></pre></div><ul>
+<li>Once the left and right subtrees have been trimmed, the current node is returned as part of the pruned tree.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -318,10 +374,35 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(N), where N is the number of nodes in the tree. In the worst case, we may need to visit all nodes.</li>
-<li><strong>Space Complexity</strong>: O(H), where H is the height of the tree due to the recursive call stack. In the case of a balanced tree, this will be O(log N), and in the case of a skewed tree, it will be O(N).</li>
+<li>The time complexity of the solution is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the binary search tree. In the worst case, we visit every node in the tree exactly once.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(h)</strong>, where <code>h</code> is the height of the tree. This is because we are using recursion, and the maximum depth of recursion depends on the height of the tree. In the case of an unbalanced tree, this could be up to <code>O(n)</code> in the worst case, but for a balanced tree, the space complexity would be <code>O(log n)</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach is a simple yet effective way of trimming a binary search tree based on a specified range. By using recursion, we can traverse the tree and prune it in-place, ensuring that the tree remains a valid binary search tree after the operation. The solution efficiently handles both small and large trees with a time complexity of <strong>O(n)</strong> and space complexity that depends on the tree’s height.</p>
+<p>The algorithm&rsquo;s core idea is to ensure that only nodes with values within the given range <code>[low, high]</code> are retained, and all other nodes are removed, keeping the tree structure valid. The recursive pruning of the left and right subtrees ensures correctness while maintaining the binary search tree properties. This approach is ideal for scenarios where you need to dynamically trim a tree based on variable conditions.</p>
  
 </div>
   

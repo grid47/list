@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -216,7 +216,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1169s0hbhb">
+        <h2 id="hahahugoshortcode1168s0hbhb">
   <a href="https://leetcode.com/problems/convex-polygon/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -231,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1169s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1168s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -249,7 +249,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> result <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1169s2hbhb">
+<h2 id="hahahugoshortcode1168s2hbhb">
   
 
   
@@ -261,7 +261,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given a function <code>rand7()</code> that generates a random integer from 1 to 7. Your task is to implement a function <code>rand10()</code> that generates a random integer from 1 to 10 using only <code>rand7()</code>.</p>
+<p>The problem asks you to implement a function <code>rand10()</code> that generates a random integer in the range 1 to 10 using another function <code>rand7()</code> which generates a random integer in the range 1 to 7. You are not allowed to use additional data structures or libraries and should focus on transforming the behavior of <code>rand7()</code> to produce the desired output.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -269,49 +269,75 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The key idea here is to use the randomness provided by <code>rand7()</code> to simulate a uniform distribution over a range of numbers that can be mapped into the range 1 to 10. Since <code>rand7()</code> produces values between 1 and 7, we will need to use combinations of multiple <code>rand7()</code> calls to create a range that includes 1 to 10 with equal probability.</p>
+<p>The approach revolves around the following steps:</p>
 <ol>
 <li>
-<p><strong>Mapping 1-7 to a Larger Range</strong>:</p>
-<ul>
-<li>To generate numbers in the range 1 to 10, first, we create a range larger than 10 by using two calls to <code>rand7()</code>.</li>
-<li>The expression <code>7 * (rand7() - 1) + (rand7() - 1)</code> generates a random number in the range [0, 48) (since ( 7 \times 6 + 6 = 48 )).</li>
-</ul>
+<p><strong>Generate a number in a larger range</strong>: Using two calls to <code>rand7()</code>, we can generate a number that is in a larger range. Specifically, by combining two <code>rand7()</code> calls, we can produce a range of numbers from 0 to 48 (since <code>7 * 7 = 49</code> and the index starts at 0).</p>
 </li>
 <li>
-<p><strong>Rejecting Out of Range Values</strong>:</p>
-<ul>
-<li>We only want values less than 40, which allows us to map them to the range [1, 10].</li>
-<li>If the generated value is 40 or greater, we discard it and re-generate.</li>
-</ul>
+<p><strong>Rejection Sampling</strong>: We generate numbers from the combined range (0 to 48) and only use those numbers that fall within the desired range (1 to 10). If the number falls outside the range (i.e., between 40 and 48), we discard it and regenerate until we get a valid number.</p>
 </li>
 <li>
-<p><strong>Returning the Final Value</strong>:</p>
-<ul>
-<li>The final step involves returning the result mapped to the range 1 to 10 using <code>(result % 10) + 1</code>.</li>
-</ul>
+<p><strong>Mapping to 1-10</strong>: Once we have a valid number between 0 and 39, we can map it directly to a number between 1 and 10 using modulo arithmetic.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>This approach ensures that each number in the range 1 to 10 is generated with equal probability.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Function Definition</strong>:</p>
+<h4 id="step-1-define-the-result-and-loop-condition">
+  Step 1: Define the Result and Loop Condition
+  <a class="heading-link" href="#step-1-define-the-result-and-loop-condition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> result <span style="color:#f92672">=</span> <span style="color:#ae81ff">40</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(result <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">40</span>) {
+</span></span><span style="display:flex;"><span>    result <span style="color:#f92672">=</span> (<span style="color:#ae81ff">7</span> <span style="color:#f92672">*</span> (rand7() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)) <span style="color:#f92672">+</span> (rand7() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>First, we initialize a variable <code>result</code> with a value of 40. The purpose of this is to ensure that we only continue generating random numbers while the result is greater than or equal to 40. The goal here is to generate numbers in the range from 0 to 48 using two <code>rand7()</code> calls, and then discard any values that fall between 40 and 48 to ensure uniform distribution.</li>
+<li>We then enter a <code>while</code> loop that runs until the <code>result</code> is less than 40. The <code>rand7()</code> function is called twice:
 <ul>
-<li>The function <code>rand10()</code> initializes a variable <code>result</code> to a value outside the acceptable range (40) to enter the while loop.</li>
+<li><code>rand7() - 1</code> produces a number between 0 and 6.</li>
+<li><code>7 * (rand7() - 1)</code> scales the result of the first <code>rand7()</code> call by 7, giving a range of numbers between 0 and 42.</li>
+<li>Adding another <code>(rand7() - 1)</code> shifts the range to produce numbers between 0 and 48.</li>
 </ul>
 </li>
-<li>
-<p><strong>Generating a Valid Result</strong>:</p>
-<ul>
-<li>Inside the loop, the expression generates a new <code>result</code> until it falls below 40. If the value is valid, it computes the final number between 1 and 10.</li>
 </ul>
-</li>
-</ol>
+<h4 id="step-2-check-if-the-result-falls-within-the-desired-range">
+  Step 2: Check if the Result Falls Within the Desired Range
+  <a class="heading-link" href="#step-2-check-if-the-result-falls-within-the-desired-range">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The check <code>if (result &gt;= 40)</code> ensures that we reject any values that are greater than or equal to 40. These values are not evenly divisible by 10, and therefore, they would create bias if included in the final distribution.</p>
+<h4 id="step-3-map-the-result-to-the-desired-range-1-10">
+  Step 3: Map the Result to the Desired Range (1-10)
+  <a class="heading-link" href="#step-3-map-the-result-to-the-desired-range-1-10">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> result <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>Once we have a valid result that falls within the range 0 to 39, we use the modulo operator to map the result to the range 1 to 10. This is achieved by performing <code>result % 10</code>, which gives a remainder between 0 and 9, and then adding 1 to shift the range to 1 to 10.</li>
+</ul>
+<h4 id="step-4-return-the-final-result">
+  Step 4: Return the Final Result
+  <a class="heading-link" href="#step-4-return-the-final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Finally, the computed result is returned as the output of the <code>rand10()</code> function.</p>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -319,15 +345,37 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: O(1) on average since the while loop will only need a few iterations on average due to the probabilistic nature of random number generation.</li>
-<li><strong>Space Complexity</strong>: O(1), as no additional data structures are used.</li>
-</ul>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of the solution depends on how often the <code>while</code> loop executes. Each iteration of the loop generates a number in the range from 0 to 48 using two calls to <code>rand7()</code>. Since the number of valid results is 40 out of 49 possible outcomes, the probability of getting a valid result is <code>40/49</code>.</p>
+<p>Therefore, the expected number of iterations before a valid number is generated is approximately <code>49/40</code>, which is just over 1.22 iterations. Since each iteration involves two calls to <code>rand7()</code>, the overall time complexity is constant on average, i.e., <strong>O(1)</strong>.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(1)</strong> because the function only uses a fixed amount of space, regardless of the input size. The variables <code>result</code> and the temporary variables used in <code>rand7()</code> calls do not grow with the size of the problem.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively transforms the random outputs of <code>rand7()</code> into a uniform distribution of numbers in the range 1 to 10 by leveraging the technique of <strong>rejection sampling</strong> and <strong>modulo arithmetic</strong>. It ensures that each number in the desired range has an equal probability of being chosen, without introducing any bias.</p>
+<p>By using two calls to <code>rand7()</code> and rejecting any values that don&rsquo;t fall within the valid range, this method efficiently produces the desired output with constant time and space complexity. This is an elegant and optimal solution to the problem, with minimal overhead and maximum efficiency.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1169s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1168s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

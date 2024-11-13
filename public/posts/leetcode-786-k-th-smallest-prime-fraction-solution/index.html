@@ -217,7 +217,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -247,7 +247,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>{arr[i], arr[j]};
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1321s1hbhb">
+<h2 id="hahahugoshortcode1320s1hbhb">
   
 
   
@@ -259,7 +259,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a sorted array of prime numbers, find the k-th smallest prime fraction. A prime fraction is defined as the fraction of two prime numbers ( \frac{a}{b} ) where ( a ) and ( b ) are elements from the array, and ( a &lt; b ).</p>
+<p>The task is to find the <strong>k-th smallest fraction</strong> that can be formed by taking two numbers from a sorted array <code>arr</code>. The numerator of the fraction is an element of the array, and the denominator is another element of the array, such that the numerator is less than the denominator. Given a sorted array <code>arr</code> of distinct integers, and an integer <code>k</code>, we are to return the <strong>k-th smallest fraction</strong> from all possible fractions that can be formed.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -267,78 +267,98 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This problem requires us to identify and retrieve the k-th smallest fraction from all possible combinations of elements in the array. A brute-force approach where we generate all possible pairs of fractions and sort them would be inefficient, especially for larger arrays. Instead, we use a <strong>priority queue (min-heap)</strong> approach to efficiently keep track of the smallest fractions.</p>
+<p>The solution works by maintaining a priority queue (min-heap) that stores fractions along with the indices of the array elements involved in forming those fractions. The priority queue allows us to efficiently retrieve the smallest fraction at each step. After retrieving a fraction, the algorithm pushes the next fraction in sequence into the heap, ensuring that we keep track of only the next smallest fractions.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s break down the code step by step to understand how it works:</p>
 <ol>
-<li>
-<p><strong>Priority Queue</strong>:</p>
-<ul>
-<li>Utilize a max-heap (priority queue) to efficiently retrieve the k-th smallest fraction.</li>
-<li>The fractions are stored in the form of pairs: the fraction value and its indices in the array.</li>
-</ul>
-</li>
 <li>
 <p><strong>Initialization</strong>:</p>
 <ul>
-<li>Initially, push fractions of the form ( \frac{arr[i]}{arr[n-1]} ) for all valid ( i ) (where ( arr[n-1] ) is the largest element).</li>
+<li>The function accepts two inputs: a sorted array <code>arr</code> and an integer <code>k</code>.</li>
+<li><code>n</code> is set to the size of the array <code>arr</code>.</li>
+<li>We initialize a <strong>priority queue</strong> (<code>pq</code>) that will hold pairs of the form <code>(fraction value, (numerator index, denominator index))</code>. This queue is used to store fractions and allows us to always retrieve the smallest fraction efficiently.</li>
 </ul>
-</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> arr.size();
+</span></span><span style="display:flex;"><span>priority_queue<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span>, pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>, vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span>, pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;&gt;</span> pq;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Filling the Priority Queue</strong>:</p>
+<ul>
+<li>We loop through the array to create an initial set of fractions where each fraction is formed by dividing the current element (<code>arr[i]</code>) by the last element (<code>arr[n - 1]</code>), ensuring that the fraction is of the form <code>arr[i] / arr[n-1]</code>.</li>
+<li>The priority queue is populated with these fractions, and each fraction is represented by the value of the fraction and the indices <code>(i, n-1)</code>. The priority queue is sorted in descending order, meaning the fraction with the smallest value will always be at the top.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    pq.push(make_pair(<span style="color:#f92672">-</span><span style="color:#ae81ff">1.0</span> <span style="color:#f92672">*</span> arr[i] <span style="color:#f92672">/</span> arr[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>], make_pair(i, n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)));
+</span></span></code></pre></div></li>
 <li>
 <p><strong>Extracting k-th Smallest Fraction</strong>:</p>
 <ul>
-<li>Pop the top fraction from the heap ( k ) times.</li>
-<li>For each fraction popped, if ( j &gt; 0 ), push the fraction ( \frac{arr[i]}{arr[j-1]} ) back into the heap.</li>
-<li>This step ensures that we explore the next possible fraction for the current numerator.</li>
+<li>The main loop runs <code>k</code> times, each time extracting the fraction at the top of the priority queue (the smallest one), and then pushing the next fraction that can be formed by using the numerator at index <code>i</code> and the next possible denominator <code>arr[j-1]</code>, where <code>j</code> is the second element of the pair.</li>
+<li>The pair <code>(i, j)</code> represents the indices of the fraction. After extracting the smallest fraction, we push a new fraction formed by <code>arr[i]</code> and <code>arr[j-1]</code> into the priority queue.</li>
+<li>We continue this until we pop the k-th smallest fraction from the heap.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i, j;        
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(k<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> p <span style="color:#f92672">=</span> pq.top().second; pq.pop();
+</span></span><span style="display:flex;"><span>    i <span style="color:#f92672">=</span> p.first;
+</span></span><span style="display:flex;"><span>    j <span style="color:#f92672">=</span> p.second;
+</span></span><span style="display:flex;"><span>    pq.push(make_pair(<span style="color:#f92672">-</span><span style="color:#ae81ff">1.0</span> <span style="color:#f92672">*</span> arr[i] <span style="color:#f92672">/</span> arr[j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>], make_pair(i, j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Returning the Result</strong>:</p>
+<ul>
+<li>After <code>k</code> iterations, the fraction at the top of the priority queue is the k-th smallest fraction.</li>
+<li>The result is a vector containing the two elements forming the k-th smallest fraction, i.e., the numerator <code>arr[i]</code> and the denominator <code>arr[j]</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>{arr[i], arr[j]};
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The main time complexity comes from maintaining and updating the priority queue. Inserting an element into a priority queue takes <strong>O(log m)</strong> time, where <code>m</code> is the number of elements in the priority queue.</li>
+<li>Initially, we insert <code>n</code> elements into the priority queue (one for each <code>i</code> from <code>0</code> to <code>n-1</code>). After that, we perform <code>k</code> pop and push operations. Each pop and push operation takes <strong>O(log n)</strong> time since there are at most <code>n</code> elements in the priority queue at any given time.</li>
+<li>Therefore, the time complexity is <strong>O(n log n + k log n)</strong>. The <code>n log n</code> term comes from the initial filling of the priority queue, and <code>k log n</code> comes from processing the top <code>k</code> smallest fractions.</li>
 </ul>
 </li>
 <li>
-<p><strong>Return Result</strong>:</p>
+<p><strong>Space Complexity</strong>:</p>
 <ul>
-<li>After processing k fractions, the last popped fraction will be the k-th smallest.</li>
+<li>The space complexity is <strong>O(n)</strong>, as we store at most <code>n</code> elements in the priority queue at any given time. The space required for the output vector is negligible in comparison to the priority queue.</li>
 </ul>
 </li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Class</strong>:
-<ul>
-<li><code>class Solution</code>: Contains the method to find the k-th smallest prime fraction.
-<ul>
-<li><code>vector&lt;int&gt; kthSmallestPrimeFraction(vector&lt;int&gt;&amp; arr, int k)</code>: Main function to find the k-th smallest prime fraction.
-<ul>
-<li><strong>Parameters</strong>:
-<ul>
-<li><code>arr</code>: A sorted vector of prime numbers.</li>
-<li><code>k</code>: The index of the desired smallest fraction.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ul>
-<li><strong>Time Complexity</strong>: O(k log k), due to the heap operations for k extractions and insertions.</li>
-<li><strong>Space Complexity</strong>: O(k), for the storage of the fractions in the heap.</li>
-</ul>
+<p>This solution efficiently finds the <strong>k-th smallest fraction</strong> using a <strong>priority queue (min-heap)</strong>. By leveraging the heap&rsquo;s properties, we can efficiently retrieve the smallest fractions without needing to sort all possible fractions, which makes this approach much more efficient than a brute-force method. The use of the priority queue ensures that we only need to keep track of the smallest fractions, reducing unnecessary computation and making the solution scalable for larger inputs.</p>
+<p>This algorithm is optimal for solving problems involving ordered or sorted data where we need to find specific elements in the sequence, such as the k-th smallest item. It&rsquo;s a perfect example of how data structures like priority queues can help us tackle problems efficiently, even when dealing with large datasets. The approach is both time and space efficient, making it well-suited for practical applications where performance is a priority.</p>
+<p>In summary, this approach provides a clean, optimal solution to the problem by making use of heap properties to keep track of the smallest fractions efficiently, offering a significant performance improvement over naive methods.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1321s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1320s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

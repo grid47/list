@@ -197,7 +197,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -239,77 +239,177 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> memo[k][i][j] <span style="color:#f92672">=</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1268s1hbhb">
+<h2 id="hahahugoshortcode1271s1hbhb">
   
 
   
   <div class="markdown-body">
     <h3 id="problem-statement">
-  Problem Statement
+  Problem Statement:
   <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an n x n chessboard and a knight positioned at <code>(row, col)</code>, the knight can make <code>k</code> moves. Your task is to determine the probability that the knight remains on the chessboard after making all <code>k</code> moves.</p>
+<p>In this problem, we are tasked with finding the probability that a knight, starting from a given position on an <code>n x n</code> chessboard, remains on the board after making exactly <code>k</code> moves. The knight follows the typical movement rules, which means it can move in an &ldquo;L&rdquo; shape: two squares in one direction and one square in a perpendicular direction.</p>
+<p>The objective is to compute the probability that after <code>k</code> moves, the knight stays within the bounds of the board. The problem can be solved using a <strong>dynamic programming (DP)</strong> approach with <strong>memoization</strong> to efficiently calculate the probability of staying on the board after each move.</p>
 <h3 id="approach">
-  Approach
+  Approach:
   <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The solution uses dynamic programming (DP) with memoization to efficiently compute the probability of the knight staying on the board after <code>k</code> moves. The main steps are:</p>
-<ol>
-<li>
-<p><strong>Define the Knight&rsquo;s Moves</strong>: The knight can move in eight possible directions:</p>
+<p>To solve this problem, we use a recursive approach with <strong>memoization</strong> to avoid redundant calculations. The recursion explores all possible moves the knight can make, and at each step, it calculates the probability of staying on the board.</p>
 <ul>
-<li>Two squares in one direction and one square perpendicular.</li>
+<li><strong>Recursive DFS</strong>: We use Depth-First Search (DFS) to explore all possible knight moves recursively.</li>
+<li><strong>Memoization</strong>: The results of previously computed states are cached to avoid redundant calculations, making the solution efficient.</li>
+<li><strong>Knight’s Movement</strong>: From each position, the knight can move to eight possible new positions. For each of these positions, we recursively calculate the probability that the knight stays on the board after the remaining moves.</li>
 </ul>
-</li>
-<li>
-<p><strong>Memoization</strong>: A 3D vector <code>memo</code> is used to store the computed probabilities for the state defined by the number of moves left, the current row, and the current column.</p>
-</li>
-<li>
-<p><strong>Recursive Function</strong>:</p>
-<ul>
-<li><strong>Base Case</strong>: If the knight moves out of bounds (i.e., <code>i</code> or <code>j</code> is less than 0 or greater than or equal to <code>n</code>), the probability is <code>0</code>. If <code>k</code> reaches <code>0</code>, it means the knight is still on the board, so the probability is <code>1</code>.</li>
-<li>The function computes the probability recursively for each of the eight knight moves, summing their contributions, each multiplied by <code>0.125</code> (the probability of moving in any specific direction).</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>: The function <code>knightProbability</code> initializes the memoization structure and calls the recursive function.</p>
-</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="1-class-definition">
+  1. <strong>Class Definition</strong>:
+  <a class="heading-link" href="#1-class-definition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&gt;&gt;</span> memo;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">knightProbability</span>(<span style="color:#66d9ef">int</span> n, <span style="color:#66d9ef">int</span> k, <span style="color:#66d9ef">int</span> row, <span style="color:#66d9ef">int</span> col) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>n <span style="color:#f92672">=</span> n;
+</span></span><span style="display:flex;"><span>        memo.resize(k <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&gt;</span>(n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>(n, <span style="color:#ae81ff">0</span>)));
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dfs(k, row, col);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>The class <code>Solution</code> defines a method to calculate the probability. It first initializes the grid size <code>n</code> and the 3D vector <code>memo</code> that will store the results of subproblems.</p>
 <ul>
-<li>The main function <code>knightProbability</code> initializes necessary variables and the memoization structure.</li>
-<li>The <code>dfs</code> function computes the probability recursively while checking for boundary conditions and memoized results.</li>
-<li>Each possible knight move is calculated and accumulated into the result.</li>
+<li><strong>Parameters</strong>:
+<ul>
+<li><code>n</code>: The size of the chessboard (an <code>n x n</code> grid).</li>
+<li><code>k</code>: The number of moves the knight will make.</li>
+<li><code>row</code> and <code>col</code>: The starting position of the knight on the chessboard.</li>
 </ul>
+</li>
+</ul>
+<p>The <code>memo</code> vector is a 3D matrix where:</p>
+<ul>
+<li>The first dimension represents the number of moves left (<code>k</code>).</li>
+<li>The second and third dimensions represent the rows and columns of the board, respectively.</li>
+</ul>
+<h4 id="2-dfs-function">
+  2. <strong>DFS Function</strong>:
+  <a class="heading-link" href="#2-dfs-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">dfs</span>(<span style="color:#66d9ef">int</span> k, <span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> j <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> i <span style="color:#f92672">&gt;=</span> n <span style="color:#f92672">||</span> j <span style="color:#f92672">&gt;=</span> n) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// If out of bounds, return probability 0.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (k <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// If no moves left, return probability 1 (we are on the board).
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (memo[k][i][j] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> memo[k][i][j];  <span style="color:#75715e">// Return cached result if available.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">double</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>The <code>dfs</code> function is the recursive function that explores the knight&rsquo;s movements.</li>
+<li><strong>Base Cases</strong>:
+<ul>
+<li>If the knight is out of bounds (<code>i &lt; 0 || j &lt; 0 || i &gt;= n || j &gt;= n</code>), it returns <code>0</code> because the knight has left the board.</li>
+<li>If there are no moves left (<code>k == 0</code>), it returns <code>1</code>, meaning the knight is still on the board.</li>
+<li>If the result has already been computed for the current state (<code>memo[k][i][j] != 0</code>), the cached value is returned to save computation time.</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-knights-movement-and-recursive-calls">
+  3. <strong>Knight’s Movement and Recursive Calls</strong>:
+  <a class="heading-link" href="#3-knights-movement-and-recursive-calls">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#75715e">// Recursive calls for all 8 possible knight moves.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        res <span style="color:#f92672">+=</span> <span style="color:#ae81ff">0.125</span> <span style="color:#f92672">*</span> dfs(k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, j <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>);  <span style="color:#75715e">// Move 1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        res <span style="color:#f92672">+=</span> <span style="color:#ae81ff">0.125</span> <span style="color:#f92672">*</span> dfs(k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, j <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>);  <span style="color:#75715e">// Move 2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        res <span style="color:#f92672">+=</span> <span style="color:#ae81ff">0.125</span> <span style="color:#f92672">*</span> dfs(k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, i <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>, j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);  <span style="color:#75715e">// Move 3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        res <span style="color:#f92672">+=</span> <span style="color:#ae81ff">0.125</span> <span style="color:#f92672">*</span> dfs(k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, i <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>, j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);  <span style="color:#75715e">// Move 4
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        res <span style="color:#f92672">+=</span> <span style="color:#ae81ff">0.125</span> <span style="color:#f92672">*</span> dfs(k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, j <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>);  <span style="color:#75715e">// Move 5
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        res <span style="color:#f92672">+=</span> <span style="color:#ae81ff">0.125</span> <span style="color:#f92672">*</span> dfs(k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, j <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>);  <span style="color:#75715e">// Move 6
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        res <span style="color:#f92672">+=</span> <span style="color:#ae81ff">0.125</span> <span style="color:#f92672">*</span> dfs(k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, i <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>, j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);  <span style="color:#75715e">// Move 7
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        res <span style="color:#f92672">+=</span> <span style="color:#ae81ff">0.125</span> <span style="color:#f92672">*</span> dfs(k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, i <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>, j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);  <span style="color:#75715e">// Move 8
+</span></span></span></code></pre></div><ul>
+<li>The knight has 8 possible moves from any position, and the probability of each move is <code>1/8</code> (since the knight is equally likely to move to any of the 8 positions).</li>
+<li>The <code>dfs(k - 1, i + dx, j + dy)</code> represents a recursive call for each possible move, where <code>dx</code> and <code>dy</code> are the changes in the row and column for each of the knight&rsquo;s moves.</li>
+</ul>
+<h4 id="4-memoization">
+  4. <strong>Memoization</strong>:
+  <a class="heading-link" href="#4-memoization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> memo[k][i][j] <span style="color:#f92672">=</span> res;  <span style="color:#75715e">// Store the result in memoization table and return it.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>After calculating the probability for all 8 possible moves, the result is stored in the <code>memo</code> table for the current state (<code>k</code> moves left, position <code>(i, j)</code>).</li>
+<li>The function then returns the computed probability.</li>
+</ul>
+<h4 id="5-main-function-knightprobability">
+  5. <strong>Main Function (<code>knightProbability</code>)</strong>:
+  <a class="heading-link" href="#5-main-function-knightprobability">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The main function is the entry point for calculating the knight&rsquo;s probability. It initializes the <code>memo</code> table and starts the recursive process by calling <code>dfs(k, row, col)</code>.</p>
 <h3 id="complexity">
-  Complexity
+  Complexity:
   <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this approach is <strong>O(k * n * n)</strong>, where:</p>
 <ul>
-<li><strong>Time Complexity</strong>: O(K * N^2), where K is the number of moves and N is the size of the chessboard. Each state <code>(k, i, j)</code> is computed once.</li>
-<li><strong>Space Complexity</strong>: O(K * N^2) due to the memoization storage.</li>
+<li><code>k</code> is the number of moves the knight has to make.</li>
+<li><code>n * n</code> represents the size of the chessboard (since we may need to compute the result for every position on the board).</li>
 </ul>
-<p>This efficient approach allows for calculating the knight&rsquo;s probability of staying on the chessboard after a set number of moves, using recursive exploration with caching to avoid redundant calculations.</p>
+<p>For each of the <code>k</code> moves, we explore 8 possible positions (8 recursive calls), and each of these recursive calls may potentially visit each cell on the board. Memoization ensures that each state is calculated only once, saving time in redundant calls.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(k * n * n)</strong> due to the 3D <code>memo</code> table. The depth of the recursion can be at most <code>k</code>, and at each recursive step, the board state <code>(i, j)</code> is stored for each move count <code>k</code>. Therefore, the overall space used is proportional to <code>k * n * n</code>.</p>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the probability that a knight stays on the board after <code>k</code> moves using a dynamic programming approach with memoization. By leveraging the recursive DFS traversal of all possible moves and storing intermediate results, the algorithm avoids redundant computations, making it efficient even for large values of <code>n</code> and <code>k</code>. The use of memoization ensures that the time complexity is kept manageable, while the space complexity is proportional to the number of states that need to be stored.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1268s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1271s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

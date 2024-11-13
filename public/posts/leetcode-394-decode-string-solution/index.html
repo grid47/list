@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -216,7 +216,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1129s0hbhb">
+        <h2 id="hahahugoshortcode1127s0hbhb">
   <a href="https://leetcode.com/problems/decode-string/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -231,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1129s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1127s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -270,82 +270,170 @@
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1129s2hbhb">
+<h2 id="hahahugoshortcode1127s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-statement">
+  🚀 Problem Statement
+  <a class="heading-link" href="#-problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an encoded string, implement a function to decode it. The encoding format consists of digits followed by a string in brackets. For example, &ldquo;3[a2[c]]&rdquo; decodes to &ldquo;accaccacc&rdquo;.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>We’re tasked with decoding a string that contains encoded substrings in the format of <code>[k[string]]</code>. In this encoding, <code>k</code> is a number that tells us how many times the substring inside the brackets should be repeated. The goal is to decode the string by expanding each encoded pattern into its repeated form.</p>
+<p>For example:</p>
+<ul>
+<li><code>&quot;3[a]2[bc]&quot;</code> becomes <code>&quot;aaabcbc&quot;</code>.</li>
+<li><code>&quot;3[a2[c]]&quot;</code> becomes <code>&quot;accaccacc&quot;</code>.</li>
+</ul>
+<p>Let&rsquo;s break it down and see how we can implement the solution!</p>
+<hr>
+<h3 id="-approach">
+  🧠 Approach
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To tackle this problem, we’ll use a recursive approach that processes the string step by step:</p>
 <ol>
-<li>
-<p><strong>Recursive Decoding</strong>: Use a recursive helper function to decode the string. The main function initializes the process.</p>
-</li>
-<li>
-<p><strong>Iterate Through Characters</strong>: In the recursive function:</p>
-<ul>
-<li><strong>Character Handling</strong>:
-<ul>
-<li>If the character is not a digit, simply append it to the result string.</li>
-<li>If a digit is encountered, it signifies the start of a new encoded section.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Building the Number</strong>: Extract the full number (which may consist of multiple digits) to determine how many times the subsequent string needs to be repeated.</p>
-</li>
-<li>
-<p><strong>Recursive Call for Substring</strong>:</p>
-<ul>
-<li>Skip the opening bracket and recursively call the function to decode the substring until the corresponding closing bracket is found.</li>
-<li>Once the substring is decoded, repeat it <code>n</code> times as specified by the extracted number.</li>
-</ul>
-</li>
-<li>
-<p><strong>End of Decoding</strong>: Continue until the end of the string or until the closing bracket is found.</p>
-</li>
+<li><strong>Iterate through the string</strong>: As we loop through the string, we will decode characters and handle digits that represent repetition counts.</li>
+<li><strong>Digit handling</strong>: When a digit is encountered, it signals that a substring should be repeated <code>k</code> times, where <code>k</code> is the number we find next to the brackets.</li>
+<li><strong>Recursion for nested substrings</strong>: Whenever we encounter a <code>[</code>, it indicates that there’s a nested encoded substring. We need to process that substring recursively before moving on.</li>
+<li><strong>Base case for recursion</strong>: Recursion ends when we encounter a <code>]</code>, signaling the completion of a nested substring.</li>
+<li><strong>Build the string</strong>: We’ll accumulate our result string as we decode each part.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>By using recursion, we can cleanly handle nested substrings and repetition patterns.</p>
+<hr>
+<h3 id="-step-by-step-code-breakdown">
+  🔨 Step-by-Step Code Breakdown
+  <a class="heading-link" href="#-step-by-step-code-breakdown">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The <code>decodeString</code> function initializes the decoding process by calling the <code>decode</code> helper function with the input string and an index variable.</li>
-<li>The <code>decode</code> function handles both the digit parsing and the character concatenation, ensuring that nested encodings are correctly processed by the recursive calls.</li>
+<p>Here’s how the solution works step by step:</p>
+<h4 id="step-1-initialize-the-function">
+  Step 1: Initialize the Function
+  <a class="heading-link" href="#step-1-initialize-the-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#a6e22e">decodeString</span>(string s) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> decode(s, i);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The function <code>decodeString</code> kicks off the decoding process. We initialize an index <code>i</code> to track our position in the string, and call the <code>decode</code> function with the string and index.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-2-recursive-decode-function">
+  Step 2: Recursive Decode Function
+  <a class="heading-link" href="#step-2-recursive-decode-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#a6e22e">decode</span>(string <span style="color:#f92672">&amp;</span>s, <span style="color:#66d9ef">int</span> <span style="color:#f92672">&amp;</span>i) {
+</span></span><span style="display:flex;"><span>    string res <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> s.size() <span style="color:#f92672">&amp;&amp;</span> s[i] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;]&#39;</span>) {
+</span></span></code></pre></div><ul>
+<li>The <code>decode</code> function is where the magic happens! It iterates through the string until it hits a <code>]</code>, which indicates the end of the current substring.</li>
+</ul>
+<h4 id="step-3-handling-regular-characters">
+  Step 3: Handling Regular Characters
+  <a class="heading-link" href="#step-3-handling-regular-characters">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>isdigit(s[i]))
+</span></span><span style="display:flex;"><span>        res <span style="color:#f92672">+=</span> s[i<span style="color:#f92672">++</span>];
+</span></span></code></pre></div><ul>
+<li>If the current character is not a digit (i.e., it&rsquo;s a regular letter), we simply add it to the result string <code>res</code>.</li>
+</ul>
+<h4 id="step-4-handling-digits-repetition-factor">
+  Step 4: Handling Digits (Repetition Factor)
+  <a class="heading-link" href="#step-4-handling-digits-repetition-factor">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> s.size() <span style="color:#f92672">&amp;&amp;</span> isdigit(s[i]))
+</span></span><span style="display:flex;"><span>            n <span style="color:#f92672">=</span> n <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> (s[i<span style="color:#f92672">++</span>] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        string t <span style="color:#f92672">=</span> decode(s, i);
+</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(n<span style="color:#f92672">--&gt;</span> <span style="color:#ae81ff">0</span>) res <span style="color:#f92672">+=</span> t;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>When a digit is found, we calculate the repetition count <code>n</code> by parsing the digits until we encounter a <code>[</code> (opening a substring).</li>
+<li>After determining <code>n</code>, we recursively decode the substring inside the brackets.</li>
+<li>The decoded substring is repeated <code>n</code> times and added to the result.</li>
+</ul>
+<h4 id="step-5-return-the-result">
+  Step 5: Return the Result
+  <a class="heading-link" href="#step-5-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Once the entire string has been processed, we return the decoded result.</li>
+</ul>
+<hr>
+<h3 id="-complexity-analysis">
+  📈 Complexity Analysis
+  <a class="heading-link" href="#-complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the length of the input string, as each character is processed at most a few times due to the recursion.</li>
-<li><strong>Space Complexity</strong>: O(k), where k is the maximum depth of the recursion stack, which corresponds to the number of nested encoded sections.</li>
+<li><strong>Time Complexity</strong>: <code>O(n)</code>, where <code>n</code> is the length of the input string. Each character in the string is processed once. The recursion is efficient, as it only dives deeper into nested substrings and processes them directly.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Space Complexity</strong>: <code>O(n)</code>, because the recursion stack and result string both grow with the size of the input string. In the worst case, all characters could be part of a deeply nested structure, making space usage linear.</li>
+</ul>
+<hr>
+<h3 id="-conclusion">
+  🏁 Conclusion
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution is efficient and elegant for decoding strings with repeated and nested patterns. By using recursion, we’re able to handle both repetition factors and nested substrings in a clean, easy-to-understand way. The solution runs in linear time (<code>O(n)</code>) and uses linear space (<code>O(n)</code>), making it optimal for typical input sizes.</p>
+<p>So go ahead and try it out! 🚀</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1129s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1127s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

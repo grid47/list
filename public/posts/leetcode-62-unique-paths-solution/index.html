@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -216,7 +216,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1233s0hbhb">
+        <h2 id="hahahugoshortcode1234s0hbhb">
   <a href="https://leetcode.com/problems/unique-paths/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -231,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1233s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1234s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -254,87 +254,161 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dp[m <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1233s2hbhb">
+<h2 id="hahahugoshortcode1234s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-unique-paths-in-a-grid">
+  🚶‍♂️ <strong>Unique Paths in a Grid</strong>
+  <a class="heading-link" href="#-unique-paths-in-a-grid">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a <code>m x n</code> grid, you need to find the number of unique paths from the top-left corner to the bottom-right corner, where you can only move either down or right at any point in time.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>The problem is to calculate the total number of unique paths in an <code>m x n</code> grid, where you can only move down or right at each step, starting from the top-left corner <code>(0, 0)</code> and ending at the bottom-right corner <code>(m-1, n-1)</code>.</p>
+<h3 id="-approach">
+  🧠 <strong>Approach</strong>
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This problem is efficiently solved using <strong>dynamic programming (DP)</strong>. We will create a 2D table <code>dp</code> where each cell <code>dp[i][j]</code> represents the number of unique ways to reach cell <code>(i, j)</code> from the starting position <code>(0, 0)</code>.</p>
+<h4 id="key-observations">
+  Key Observations:
+  <a class="heading-link" href="#key-observations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Dynamic Programming Table</strong>:</p>
+<p><strong>Base Cases</strong>:</p>
 <ul>
-<li>Create a 2D vector <code>dp</code> of size <code>m x n</code> where <code>dp[i][j]</code> represents the number of unique paths to reach cell <code>(i, j)</code>.</li>
+<li>For the first row (<code>i = 0</code>), you can only move right, so every cell in the first row has exactly one way to be reached (from the left).</li>
+<li>Similarly, for the first column (<code>j = 0</code>), you can only move down, so every cell in the first column has exactly one way to be reached (from above).</li>
 </ul>
 </li>
 <li>
-<p><strong>Base Case Initialization</strong>:</p>
+<p><strong>DP Transition</strong>:</p>
 <ul>
-<li>Set <code>dp[0][0]</code> to <code>1</code>, as there&rsquo;s one way to be at the starting cell (by starting there).</li>
-<li>Fill the first row and the first column with <code>1</code> since there is only one way to reach any cell in the first row (by moving right) and the first column (by moving down).</li>
-</ul>
-</li>
-<li>
-<p><strong>Filling the DP Table</strong>:</p>
-<ul>
-<li>Use nested loops to fill the DP table:
-<ul>
-<li>For each cell <code>(i, j)</code>, the number of unique paths to that cell is the sum of the paths from the cell directly above <code>(i - 1, j)</code> and the cell directly to the left <code>(i, j - 1)</code>, thus:
+<li>For any other cell <code>(i, j)</code>, the number of ways to reach that cell is the sum of the ways to reach the cell directly above it <code>(i-1, j)</code> and the cell to its left <code>(i, j-1)</code>. This leads to the recurrence relation:
 [
-dp[i][j] = dp[i - 1][j] + dp[i][j - 1]
+dp[i][j] = dp[i-1][j] + dp[i][j-1]
 ]</li>
 </ul>
 </li>
-</ul>
-</li>
-<li>
-<p><strong>Result</strong>:</p>
-<ul>
-<li>The value in <code>dp[m - 1][n - 1]</code> will be the total number of unique paths to reach the bottom-right corner.</li>
-</ul>
-</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="-code-breakdown">
+  🔍 <strong>Code Breakdown</strong>
+  <a class="heading-link" href="#-code-breakdown">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Initialization</strong>: The DP table is initialized with base values.</li>
-<li><strong>Dynamic Filling</strong>: The nested loops populate the DP table based on the defined transition.</li>
+<h4 id="step-1-initialize-dp-table">
+  Step 1: Initialize DP Table
+  <a class="heading-link" href="#step-1-initialize-dp-table">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> dp(m, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> (n, <span style="color:#ae81ff">0</span>));
+</span></span></code></pre></div><ul>
+<li>We initialize a <code>dp</code> table of size <code>m x n</code>, where all cells are initially set to <code>0</code>. This table will store the number of unique paths to each cell.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-2-set-the-starting-point">
+  Step 2: Set the Starting Point
+  <a class="heading-link" href="#step-2-set-the-starting-point">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>dp[<span style="color:#ae81ff">0</span>][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>The starting position <code>(0, 0)</code> is set to <code>1</code>, as there is only one way to be at the starting position (by starting there).</li>
+</ul>
+<h4 id="step-3-initialize-the-first-row-and-first-column">
+  Step 3: Initialize the First Row and First Column
+  <a class="heading-link" href="#step-3-initialize-the-first-row-and-first-column">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    dp[<span style="color:#ae81ff">0</span>][i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    dp[i][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>We set all cells in the first row to <code>1</code> because each cell can only be reached from the cell to its left.</li>
+<li>Similarly, all cells in the first column are set to <code>1</code> because each can only be reached from the cell directly above.</li>
+</ul>
+<h4 id="step-4-fill-the-dp-table">
+  Step 4: Fill the DP Table
+  <a class="heading-link" href="#step-4-fill-the-dp-table">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        dp[i][j] <span style="color:#f92672">=</span> dp[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][j] <span style="color:#f92672">+</span> dp[i][j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span></code></pre></div><ul>
+<li>For cells that are not in the first row or column, the number of unique paths is the sum of the paths from the top (<code>dp[i - 1][j]</code>) and from the left (<code>dp[i][j - 1]</code>).</li>
+</ul>
+<h4 id="step-5-return-the-final-answer">
+  Step 5: Return the Final Answer
+  <a class="heading-link" href="#step-5-return-the-final-answer">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> dp[m <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span></code></pre></div><ul>
+<li>The final answer is stored in <code>dp[m-1][n-1]</code>, which contains the total number of unique paths from the top-left to the bottom-right corner.</li>
+</ul>
+<h3 id="-complexity-analysis">
+  📊 <strong>Complexity Analysis</strong>
+  <a class="heading-link" href="#-complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: ( O(m \times n) ) since every cell in the grid is computed once.</li>
-<li><strong>Space Complexity</strong>: ( O(m \times n) ) for storing the DP table.</li>
+<li><strong>O(m * n):</strong> We iterate through each cell of the <code>m x n</code> grid once. Therefore, the time complexity is proportional to the number of cells in the grid, which is <code>O(m * n)</code>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(m * n):</strong> The <code>dp</code> table requires <code>O(m * n)</code> space to store the number of unique paths for each cell. The space complexity is dominated by the size of the <code>dp</code> table.</li>
+</ul>
+<h3 id="-conclusion">
+  🌟 <strong>Conclusion</strong>
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This dynamic programming approach efficiently calculates the number of unique paths in an <code>m x n</code> grid. By breaking down the problem into overlapping subproblems and building up the solution using a DP table, we ensure an optimal solution with both time and space complexities of <code>O(m * n)</code>. This approach is ideal for solving pathfinding problems in grids of any size.</p>
+<hr>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1233s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1234s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

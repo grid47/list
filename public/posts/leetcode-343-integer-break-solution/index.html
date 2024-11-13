@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -211,7 +211,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1099s0hbhb">
+        <h2 id="hahahugoshortcode1119s0hbhb">
   <a href="https://leetcode.com/problems/integer-break/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -226,7 +226,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1099s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1119s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -246,77 +246,202 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> product;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1099s2hbhb">
+<h2 id="hahahugoshortcode1119s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-statement">
+  🚀 Problem Statement
+  <a class="heading-link" href="#-problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer <code>n</code>, break it into the sum of at least two positive integers such that the product of those integers is maximized. Return the maximum product you can get.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>In this problem, you&rsquo;re tasked with breaking a positive integer <code>n</code> into at least two positive integers such that the product of those integers is maximized. Your goal is to return the maximum product that can be obtained by breaking <code>n</code> into a sum of at least two integers.</p>
+<h4 id="example">
+  Example:
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>For <code>n = 10</code>, the maximum product we can achieve by breaking it into integers is <code>36</code> because <code>10 = 3 + 3 + 4</code>, and <code>3 * 3 * 4 = 36</code>.</li>
+<li>For <code>n = 2</code>, the only valid split is <code>1 + 1</code>, and the product is <code>1</code>.</li>
+</ul>
+<hr>
+<h3 id="-approach">
+  🧠 Approach
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To maximize the product of integers that sum to <code>n</code>, the following observations can be made:</p>
+<p>To solve this problem, we need to break the integer <code>n</code> in such a way that maximizes the product. Here are the insights:</p>
 <ol>
 <li>
-<p><strong>Base Cases</strong>:</p>
+<p><strong>Breaking the number into 3’s maximizes the product</strong>:</p>
 <ul>
-<li>If ( n = 2 ), the only way to break it is ( 1 + 1 ), which gives a product of ( 1 ).</li>
-<li>If ( n = 3 ), the optimal break is ( 1 + 2 ), which gives a product of ( 2 ).</li>
+<li>Breaking the number into as many <code>3</code>s as possible gives the highest product. This is because 3 is the largest number that can be split into smaller parts while still resulting in a higher product.</li>
+<li>For example, splitting <code>5</code> into <code>2 + 3</code> is better than <code>1 + 1 + 1 + 2</code> since <code>2 * 3 &gt; 1 * 1 * 1 * 2</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Using 3&rsquo;s</strong>:</p>
+<p><strong>Special Cases</strong>:</p>
 <ul>
-<li>For ( n &gt; 4 ), breaking ( n ) into as many 3&rsquo;s as possible maximizes the product. This is because multiplying by 3 tends to yield a higher product than using larger numbers.</li>
-<li>Reduce ( n ) by 3 iteratively until it is less than or equal to 4, while accumulating the product.</li>
+<li>When <code>n</code> is equal to <code>2</code> or <code>3</code>, there are very specific, non-redundant ways to break the number:
+<ul>
+<li><code>n = 2</code> can only be split into <code>1 + 1</code>, and the product is <code>1</code>.</li>
+<li><code>n = 3</code> can only be split into <code>1 + 2</code>, and the product is <code>2</code>.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
-<p><strong>Final Calculation</strong>:</p>
+<p><strong>Greedy Approach</strong>:</p>
 <ul>
-<li>After the loop, multiply the remaining ( n ) (which will be ( 1, 2, ) or ( 4 )) to the product.</li>
+<li>Start by maximizing the number of <code>3</code>s you can take from <code>n</code>. Once that’s done, handle the remainder (which will be <code>1</code>, <code>2</code>, or <code>3</code>) to maximize the product.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<hr>
+<h3 id="-step-by-step-code-breakdown">
+  🔨 Step-by-Step Code Breakdown
+  <a class="heading-link" href="#-step-by-step-code-breakdown">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The function first checks for the special cases ( n = 2 ) and ( n = 3 ).</li>
-<li>It then enters a loop where it keeps multiplying by 3 until ( n ) is less than or equal to 4.</li>
-<li>Finally, it multiplies the remaining ( n ) to the product and returns the result.</li>
+<p>Here’s a breakdown of the code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">integerBreak</span>(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Base case: n = 2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">2</span>;  <span style="color:#75715e">// Base case: n = 3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> product <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Variable to store the result
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Step 1: While n is greater than 4, keep subtracting 3 and multiplying the result by 3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">while</span> (n <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">4</span>) {
+</span></span><span style="display:flex;"><span>        product <span style="color:#f92672">*=</span> <span style="color:#ae81ff">3</span>;  <span style="color:#75715e">// Multiply the product by 3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        n <span style="color:#f92672">-=</span> <span style="color:#ae81ff">3</span>;  <span style="color:#75715e">// Subtract 3 from n
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Step 2: Multiply the remaining n with the product
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    product <span style="color:#f92672">*=</span> n;  <span style="color:#75715e">// For the last piece, multiply by the remaining n (which will be 2, 3, or 4)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> product;  <span style="color:#75715e">// Return the final product
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><h4 id="step-1-handle-special-cases">
+  Step 1: Handle Special Cases
+  <a class="heading-link" href="#step-1-handle-special-cases">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (n <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (n <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">2</span>;
+</span></span></code></pre></div><ul>
+<li>If <code>n</code> is 2, the only split is <code>1 + 1</code>, yielding a product of <code>1</code>.</li>
+<li>If <code>n</code> is 3, the best split is <code>1 + 2</code>, yielding a product of <code>2</code>.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-2-use-greedy-approach-for-larger-n">
+  Step 2: Use Greedy Approach for Larger <code>n</code>
+  <a class="heading-link" href="#step-2-use-greedy-approach-for-larger-n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> product <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (n <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">4</span>) {
+</span></span><span style="display:flex;"><span>    product <span style="color:#f92672">*=</span> <span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>    n <span style="color:#f92672">-=</span> <span style="color:#ae81ff">3</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p>While <code>n &gt; 4</code>, subtract <code>3</code> from <code>n</code> and multiply the product by <code>3</code>. This is the greedy approach to maximize the product by using as many <code>3</code>s as possible.</p>
+<p>For example:</p>
+<ul>
+<li>For <code>n = 10</code>, subtract <code>3</code> twice, leaving <code>4</code>. Multiply the product (<code>9 * 4 = 36</code>).</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-handle-the-remainder">
+  Step 3: Handle the Remainder
+  <a class="heading-link" href="#step-3-handle-the-remainder">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>product <span style="color:#f92672">*=</span> n;
+</span></span></code></pre></div><ul>
+<li>When <code>n</code> is reduced to 4 or less, multiply the product by the remaining value of <code>n</code>.</li>
+<li>The remainder will always be one of the following:
+<ul>
+<li>If <code>n = 4</code>, multiply the product by <code>4</code>.</li>
+<li>If <code>n = 3</code>, multiply the product by <code>3</code>.</li>
+<li>If <code>n = 2</code>, multiply the product by <code>2</code>.</li>
+</ul>
+</li>
+</ul>
+<p>For example:</p>
+<ul>
+<li>If <code>n = 10</code>, subtract <code>3</code> twice (product = <code>9</code>), leaving <code>n = 4</code>, so the final product is <code>9 * 4 = 36</code>.</li>
+</ul>
+<hr>
+<h3 id="-complexity-analysis">
+  📈 Complexity Analysis
+  <a class="heading-link" href="#-complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: ( O(n) ) in the worst case for large values of ( n ) (though typically it converges quickly).</li>
-<li><strong>Space Complexity</strong>: ( O(1) ) as no additional space proportional to input size is used.</li>
+<li><strong>O(n)</strong>: The time complexity is proportional to how many times we subtract <code>3</code> from <code>n</code>. In the worst case, we subtract <code>3</code> until <code>n</code> becomes <code>4</code>, which happens roughly <code>n / 3</code> times. So, the time complexity is <strong>O(n)</strong>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: We only use a fixed amount of extra space (the <code>product</code> variable), so the space complexity is constant.</li>
+</ul>
+<hr>
+<h3 id="-conclusion">
+  🏁 Conclusion
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the maximum product by using a greedy approach to break the number <code>n</code> into as many <code>3</code>s as possible. Here&rsquo;s a recap:</p>
+<h4 id="key-points">
+  Key Points:
+  <a class="heading-link" href="#key-points">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Greedy Approach</strong>: Breaking <code>n</code> into as many <code>3</code>s as possible maximizes the product.</li>
+<li><strong>Handling Special Cases</strong>: For <code>n = 2</code> and <code>n = 3</code>, specific splits are handled to ensure correctness.</li>
+<li><strong>Efficiency</strong>: The algorithm runs in linear time, and the space complexity is constant.</li>
+</ul>
+<p>This approach is ideal for problems requiring efficient computation of maximum products, especially when <code>n</code> is large. Keep practicing and you&rsquo;ll master these optimization techniques! 💡💪</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1099s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1119s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

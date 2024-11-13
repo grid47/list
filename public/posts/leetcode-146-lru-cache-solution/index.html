@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              4-minute read
             </span>
           </div>
 
@@ -221,7 +221,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode241s0hbhb">
+        <h2 id="hahahugoshortcode239s0hbhb">
   <a href="https://leetcode.com/problems/lru-cache/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -236,7 +236,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode241s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode239s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -282,117 +282,213 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * int param_1 = obj-&gt;get(key);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * obj-&gt;put(key,value);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<h2 id="hahahugoshortcode241s2hbhb">
+<h2 id="hahahugoshortcode239s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-understanding-lru-cache">
+  📝 <strong>Problem Understanding: LRU Cache</strong>
+  <a class="heading-link" href="#-problem-understanding-lru-cache">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Design a data structure that implements an LRU cache. The cache should support the following operations:</p>
+<p>The <strong>Least Recently Used (LRU) Cache</strong> is a data structure that:</p>
 <ul>
-<li><code>get(key)</code>: Retrieve the value of the key if the key exists in the cache. Otherwise, return -1.</li>
-<li><code>put(key, value)</code>: Update the value of the key if it exists. If the key does not exist, add the key-value pair to the cache. If the cache reaches its capacity, it should invalidate the least recently used item before inserting a new item.</li>
+<li>Stores key-value pairs.</li>
+<li>Retrieves values based on keys.</li>
+<li>Inserts new key-value pairs.</li>
+<li>Evicts the least recently used (LRU) item when the cache exceeds its capacity.</li>
 </ul>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<h4 id="operations">
+  Operations:
+  <a class="heading-link" href="#operations">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h3>
+</h4>
 <ol>
-<li>
-<p><strong>Data Structures</strong>:</p>
-<ul>
-<li>Use a <strong>map</strong> to store the key and an iterator pointing to its position in the list.</li>
-<li>Use a <strong>doubly linked list</strong> (implemented as a list of pairs) to maintain the order of usage. The front of the list represents the most recently used item, and the back represents the least recently used item.</li>
-</ul>
-</li>
-<li>
-<p><strong>Operations</strong>:</p>
-<ul>
-<li><strong>Get</strong>:
-<ul>
-<li>If the key is not found, return -1.</li>
-<li>If the key is found, move the corresponding item to the front of the list (marking it as most recently used) and return its value.</li>
-</ul>
-</li>
-<li><strong>Put</strong>:
-<ul>
-<li>If the key already exists, update its value and move it to the front of the list.</li>
-<li>If the key does not exist, add it to the front of the list.</li>
-<li>If adding the new key-value pair exceeds the cache capacity, remove the least recently used item (back of the list).</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>get(key)</strong>: Retrieves the value associated with <code>key</code> if it exists; otherwise, returns <code>-1</code>.</li>
+<li><strong>put(key, value)</strong>: Inserts a key-value pair. If the key exists, it updates the value and makes the key the most recently used. If the cache exceeds its capacity, it evicts the least recently used key.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="example">
+  <strong>Example</strong>:
+  <a class="heading-link" href="#example">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li>
-<p><strong>Line 1-2</strong>: Define the <code>LRUCache</code> class containing necessary data structures:</p>
-<ul>
-<li><code>mp</code>: A map that associates keys with iterators pointing to their positions in the list.</li>
-<li><code>q</code>: A doubly linked list (using a list of pairs) to store key-value pairs.</li>
-<li><code>cap</code>: An integer representing the cache&rsquo;s capacity.</li>
+<li><strong>Input</strong>: <code>LRUCache(2)</code>, <code>put(1, 1)</code>, <code>put(2, 2)</code>, <code>get(1)</code>, <code>put(3, 3)</code>, <code>get(2)</code>, <code>put(4, 4)</code>, <code>get(1)</code>, <code>get(3)</code>, <code>get(4)</code></li>
+<li><strong>Output</strong>: <code>1, -1, 3, 4</code></li>
 </ul>
-</li>
-<li>
-<p><strong>Line 3-10</strong>: Constructor to initialize the cache with a specified capacity.</p>
-</li>
-<li>
-<p><strong>Line 12-21</strong>: Implement the <code>get</code> function:</p>
-<ul>
-<li>Check if the key exists in the map.</li>
-<li>If not, return -1.</li>
-<li>If it exists, retrieve the iterator, erase the current entry from the list, push it to the front, update the map, and return the value.</li>
-</ul>
-</li>
-<li>
-<p><strong>Line 23-38</strong>: Implement the <code>put</code> function:</p>
-<ul>
-<li>If the key already exists, erase it from the list, push the new value to the front, and update the map.</li>
-<li>If the key does not exist, push it to the front and update the map.</li>
-<li>If the cache exceeds capacity, erase the least recently used item from both the list and the map.</li>
-</ul>
-</li>
-</ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<hr>
+<h3 id="-approach-efficient-lru-cache-implementation">
+  🔧 <strong>Approach: Efficient LRU Cache Implementation</strong>
+  <a class="heading-link" href="#-approach-efficient-lru-cache-implementation">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The key challenge is to efficiently:</p>
 <ul>
-<li>
-<p><strong>Time Complexity</strong>:</p>
-<ul>
-<li><code>get</code>: (O(1)) since both map lookups and list operations are constant time.</li>
-<li><code>put</code>: (O(1)) for the same reasons.</li>
+<li>Access values using keys.</li>
+<li>Track the usage order of keys.</li>
+<li>Evict the least recently used element when the cache exceeds its capacity.</li>
 </ul>
-</li>
-<li>
-<p><strong>Space Complexity</strong>: (O(C)), where (C) is the capacity of the cache, as we store up to (C) key-value pairs.</p>
-</li>
+<h4 id="solution-using-doubly-linked-list--hash-map">
+  <strong>Solution Using Doubly Linked List &amp; Hash Map</strong>:
+  <a class="heading-link" href="#solution-using-doubly-linked-list--hash-map">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Doubly Linked List</strong>: Allows us to reorder items efficiently. The most recently used items are at the front, and the least recently used items are at the back.</li>
+<li><strong>Hash Map</strong>: Provides <strong>O(1)</strong> access time for key-value lookups. It stores each key&rsquo;s corresponding node in the doubly linked list.</li>
+</ul>
+<hr>
+<h3 id="-code-breakdown-step-by-step">
+  🧑‍💻 <strong>Code Breakdown: Step-by-Step</strong>
+  <a class="heading-link" href="#-code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-data-structures">
+  <strong>Step 1: Data Structures</strong>
+  <a class="heading-link" href="#step-1-data-structures">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, list<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;::</span>iterator<span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>list<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> q;
+</span></span></code></pre></div><ul>
+<li><strong><code>mp</code></strong>: A <strong>map</strong> stores the association of keys to their corresponding nodes in the doubly linked list.</li>
+<li><strong><code>q</code></strong>: A <strong>doubly linked list</strong> holds the key-value pairs, with the most recently used items at the front and the least recently used ones at the back.</li>
+</ul>
+<h4 id="step-2-constructor">
+  <strong>Step 2: Constructor</strong>
+  <a class="heading-link" href="#step-2-constructor">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>LRUCache(<span style="color:#66d9ef">int</span> capacity) {
+</span></span><span style="display:flex;"><span>    cap <span style="color:#f92672">=</span> capacity;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Initializes the cache with the specified capacity and prepares the <code>map</code> and <code>list</code>.</li>
+</ul>
+<h4 id="step-3-get-method">
+  <strong>Step 3: <code>get</code> Method</strong>
+  <a class="heading-link" href="#step-3-get-method">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">get</span>(<span style="color:#66d9ef">int</span> key) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>mp.count(key)) <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>mp[key];
+</span></span><span style="display:flex;"><span>    q.erase(mp[key]);
+</span></span><span style="display:flex;"><span>    q.push_front(make_pair(key, it.second));
+</span></span><span style="display:flex;"><span>    mp[key] <span style="color:#f92672">=</span> q.begin();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> it.second;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Check for existence</strong>: If the key doesn&rsquo;t exist in the cache, return <code>-1</code>.</li>
+<li><strong>Move to front</strong>: If the key exists, retrieve the value, erase it from the list, and move it to the front to mark it as most recently used.</li>
+<li><strong>Return value</strong>: Return the value of the key.</li>
+</ul>
+<h4 id="step-4-put-method">
+  <strong>Step 4: <code>put</code> Method</strong>
+  <a class="heading-link" href="#step-4-put-method">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">put</span>(<span style="color:#66d9ef">int</span> key, <span style="color:#66d9ef">int</span> value) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (mp.count(key)) {
+</span></span><span style="display:flex;"><span>        q.erase(mp[key]);
+</span></span><span style="display:flex;"><span>        q.push_front(make_pair(key, value));
+</span></span><span style="display:flex;"><span>        mp[key] <span style="color:#f92672">=</span> q.begin();
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        q.push_front(make_pair(key, value));
+</span></span><span style="display:flex;"><span>        mp[key] <span style="color:#f92672">=</span> q.begin();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (q.size() <span style="color:#f92672">&gt;</span> cap) {
+</span></span><span style="display:flex;"><span>            mp.erase(q.back().first);
+</span></span><span style="display:flex;"><span>            q.pop_back();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Update existing key</strong>: If the key exists, update its value and move it to the front.</li>
+<li><strong>Insert new key</strong>: If the key doesn’t exist, add it to the front of the list.</li>
+<li><strong>Evict LRU</strong>: If the cache exceeds its capacity, evict the least recently used key (remove from the back of the list).</li>
+</ul>
+<h4 id="step-5-eviction-logic">
+  <strong>Step 5: Eviction Logic</strong>
+  <a class="heading-link" href="#step-5-eviction-logic">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (q.size() <span style="color:#f92672">&gt;</span> cap) {
+</span></span><span style="display:flex;"><span>    mp.erase(q.back().first);
+</span></span><span style="display:flex;"><span>    q.pop_back();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>When the cache exceeds its capacity, remove the least recently used element by erasing it from both the map and the list.</li>
+</ul>
+<hr>
+<h3 id="-time-and-space-complexity">
+  ⏱️ <strong>Time and Space Complexity</strong>
+  <a class="heading-link" href="#-time-and-space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  <strong>Time Complexity</strong>:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>get(key)</strong>: <strong>O(1)</strong> – Accessing an element in the map and moving it to the front of the list both take constant time.</li>
+<li><strong>put(key, value)</strong>: <strong>O(1)</strong> – Insertion and removal operations in the map and list both take constant time. Eviction also takes constant time.</li>
+</ul>
+<h4 id="space-complexity">
+  <strong>Space Complexity</strong>:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(capacity)</strong> – The space is proportional to the cache&rsquo;s capacity. The map stores key-value pairs and their corresponding list iterators, while the list stores the actual data.</li>
+</ul>
+<hr>
+<h3 id="-conclusion">
+  🎯 <strong>Conclusion</strong>
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This <strong>LRU Cache</strong> solution is highly efficient, providing <strong>O(1)</strong> time complexity for both <code>get</code> and <code>put</code> operations. By combining a <strong>doubly linked list</strong> and a <strong>hash map</strong>, the solution effectively manages cache access and eviction, ensuring the most recently used items are kept while the least recently used items are evicted when the cache is full.</p>
+<ul>
+<li><strong>Efficient Caching</strong>: The algorithm ensures that the cache operates with optimal time and space complexity.</li>
+<li><strong>Real-World Use Case</strong>: This approach is ideal for scenarios requiring real-time cache management, such as web browsers, databases, or memory management systems.</li>
 </ul>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode241s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode239s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

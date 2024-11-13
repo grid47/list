@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -279,7 +279,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Determine if a given graph is bipartite. A bipartite graph can be colored using two colors in such a way that no two adjacent vertices share the same color.</p>
+<p>The problem at hand involves determining whether a graph is <strong>bipartite</strong>. A bipartite graph is one in which the set of vertices can be divided into two disjoint sets such that no two vertices within the same set are adjacent. The goal is to return <code>true</code> if the graph is bipartite and <code>false</code> otherwise.</p>
+<p>The graph is given as an adjacency list, where each element in the list represents a vertex, and the list of integers associated with that element represents the neighbors of that vertex.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -287,80 +288,160 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To check whether the graph is bipartite, we can treat the problem as one of coloring the graph. The idea is to attempt to color each vertex with one of two colors, ensuring that adjacent vertices have different colors. If we find two adjacent vertices with the same color, the graph is not bipartite.</p>
+<p>This problem can be efficiently solved using <strong>Union-Find</strong> (also known as Disjoint-Set Union, or DSU), which is a data structure that helps efficiently track and manage the connected components of a graph.</p>
+<h3 id="key-concepts-of-union-find">
+  Key Concepts of Union-Find:
+  <a class="heading-link" href="#key-concepts-of-union-find">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
 <ol>
+<li><strong>Union</strong>: This operation merges two sets into one. It connects two elements together, meaning they belong to the same set.</li>
+<li><strong>Find</strong>: This operation determines the root of the set to which an element belongs. It is used to determine if two elements are in the same set.</li>
+<li><strong>Path Compression</strong>: This technique optimizes the <code>find</code> operation, ensuring that the trees representing sets remain flat and make subsequent find operations faster.</li>
+<li><strong>Union by Rank/Size</strong>: This technique helps optimize the <code>union</code> operation by attaching the smaller tree under the root of the larger tree, keeping the set tree structure balanced.</li>
+</ol>
+<p>By applying Union-Find, we can track the connected components and ensure that no two vertices within the same component share the same color, thus confirming whether the graph is bipartite.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a detailed breakdown of the code implementation:</p>
+<h4 id="step-1-union-find-data-structure-implementation">
+  Step 1: Union-Find Data Structure Implementation
+  <a class="heading-link" href="#step-1-union-find-data-structure-implementation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UF</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> chd;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> cnt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    UF(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>        chd.resize(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            chd[i] <span style="color:#f92672">=</span> i;  <span style="color:#75715e">// Each node starts as its own parent
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        cnt <span style="color:#f92672">=</span> n;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">uni</span>(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> find(x);  <span style="color:#75715e">// Find root of x
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> find(y);  <span style="color:#75715e">// Find root of y
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">!=</span> j) {  <span style="color:#75715e">// If roots are different, perform union
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            chd[i] <span style="color:#f92672">=</span> j;  <span style="color:#75715e">// Make one root the parent of the other
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            cnt<span style="color:#f92672">--</span>;  <span style="color:#75715e">// Decrease number of disjoint sets
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> false;  <span style="color:#75715e">// If they are already in the same set, no need to union
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">find</span>(<span style="color:#66d9ef">int</span> x) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">==</span> chd[x]) <span style="color:#66d9ef">return</span> x;  <span style="color:#75715e">// If x is its own parent, it&#39;s the root
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> chd[x] <span style="color:#f92672">=</span> find(chd[x]);  <span style="color:#75715e">// Path compression
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ol>
+<li><strong>Constructor</strong>: Initializes the Union-Find data structure with <code>n</code> elements. Initially, each element is its own parent (i.e., each element forms its own set).</li>
+<li><strong>Union (uni)</strong>: This function merges two sets, <code>x</code> and <code>y</code>, if they are not already in the same set. It reduces the count of disjoint sets and ensures that the two sets are connected.</li>
+<li><strong>Find</strong>: This function returns the root of the set containing element <code>x</code>. It also applies path compression to make future queries faster.</li>
+</ol>
+<h4 id="step-2-main-solution-to-check-bipartiteness">
+  Step 2: Main Solution to Check Bipartiteness
+  <a class="heading-link" href="#step-2-main-solution-to-check-bipartiteness">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> isBipartite(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> gph) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> gph.size();  <span style="color:#75715e">// Number of vertices in the graph
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        UF<span style="color:#f92672">*</span> uf <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> UF(n);  <span style="color:#75715e">// Create a Union-Find data structure to track connected components
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x: gph[i]) {  <span style="color:#75715e">// Iterate over the neighbors of vertex i
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                <span style="color:#66d9ef">if</span>(uf<span style="color:#f92672">-&gt;</span>find(x) <span style="color:#f92672">==</span> uf<span style="color:#f92672">-&gt;</span>find(i))  <span style="color:#75715e">// If the neighbors are already in the same set, return false
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                    <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>                uf<span style="color:#f92672">-&gt;</span>uni(gph[i][<span style="color:#ae81ff">0</span>], x);  <span style="color:#75715e">// Union the current vertex and its neighbor
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;  <span style="color:#75715e">// If no conflicts are found, the graph is bipartite
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ol>
 <li>
-<p><strong>Union-Find Data Structure</strong>:</p>
+<p><strong>Graph Input</strong>: The graph is given as an adjacency list, <code>gph</code>, where each index in the list represents a vertex, and its value is a list of its neighboring vertices.</p>
+</li>
+<li>
+<p><strong>Union-Find Setup</strong>:</p>
 <ul>
-<li>Implement a Union-Find (DSU) to manage connected components of the graph.</li>
-<li>The <code>UF</code> class keeps track of connected components and supports union and find operations.</li>
+<li>A new instance of the <code>UF</code> class is created, initialized with the number of vertices, <code>n</code>.</li>
+<li>We use this instance to track which vertices are in the same set.</li>
 </ul>
 </li>
 <li>
-<p><strong>Graph Traversal</strong>:</p>
+<p><strong>Main Loop</strong>: We loop over each vertex <code>i</code>:</p>
 <ul>
-<li>For each vertex, check its neighbors.</li>
-<li>If a neighbor is in the same connected component as the current vertex, return false (indicating the graph is not bipartite).</li>
-<li>If they are not connected, union the current vertex with the neighbor.</li>
+<li>For each vertex <code>i</code>, we loop through its neighbors (<code>gph[i]</code>).</li>
+<li>If a neighbor is already in the same set as <code>i</code> (i.e., both share the same root), we return <code>false</code>, indicating that the graph cannot be bipartite.</li>
+<li>If the vertex and its neighbor are not in the same set, we perform the <code>uni</code> operation to merge their sets.</li>
 </ul>
 </li>
 <li>
-<p><strong>Return Value</strong>:</p>
-<ul>
-<li>If no conflicts are found, the graph is bipartite, and return true.</li>
-</ul>
+<p><strong>Return Value</strong>: If no conflicts (same-set neighbors) are found, the graph is bipartite, and we return <code>true</code>.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
 <li>
-<p><strong>Classes</strong>:</p>
+<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li><code>class UF</code>: Implements the Union-Find structure.
-<ul>
-<li><code>vector&lt;int&gt; chd</code>: Stores the parent or root of each node.</li>
-<li><code>int cnt</code>: Tracks the number of unique components.</li>
-<li><code>UF(int n)</code>: Initializes the Union-Find structure with <code>n</code> nodes.</li>
-<li><code>bool uni(int x, int y)</code>: Unions two nodes and returns true if they were previously disconnected.</li>
-<li><code>int find(int x)</code>: Finds the root of the node, applying path compression.</li>
-</ul>
-</li>
+<li><strong>Union-Find Operations</strong>: Both <code>find</code> and <code>union</code> operations are nearly constant time, i.e., O(α(n)), where α is the inverse Ackermann function, which grows very slowly. Therefore, these operations are practically O(1) for all practical inputs.</li>
+<li><strong>Graph Traversal</strong>: We iterate through all vertices and their neighbors. In the worst case, this takes O(V + E) time, where V is the number of vertices and E is the number of edges in the graph.</li>
+<li>Overall time complexity is O(V + E), which is efficient for graph traversal problems.</li>
 </ul>
 </li>
 <li>
-<p><strong>Main Class</strong>:</p>
+<p><strong>Space Complexity</strong>:</p>
 <ul>
-<li><code>class Solution</code>: Contains the main function for checking if the graph is bipartite.
-<ul>
-<li><code>bool isBipartite(vector&lt;vector&lt;int&gt;&gt;&amp; gph)</code>: Main function that checks the bipartiteness of the graph.
-<ul>
-<li><strong>Parameters</strong>:
-<ul>
-<li><code>gph</code>: The adjacency list representing the graph.</li>
+<li>The space complexity is O(V), as we store the parent array in the Union-Find data structure and need to keep track of the graph’s adjacency list.</li>
+<li>The overall space complexity is linear in terms of the number of vertices and edges.</li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This solution uses the Union-Find data structure to check whether a graph is bipartite. By leveraging the union and find operations, we ensure that the graph can be divided into two disjoint sets where no two adjacent vertices belong to the same set. This approach is both time and space-efficient, making it suitable for large graphs.</p>
+<h4 id="key-takeaways">
+  Key Takeaways:
+  <a class="heading-link" href="#key-takeaways">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(V + E), where V is the number of vertices and E is the number of edges, due to the need to visit each edge and vertex.</li>
-<li><strong>Space Complexity</strong>: O(V), for the Union-Find data structure.</li>
+<li>The Union-Find data structure is an excellent choice for managing connected components in a graph.</li>
+<li>Path compression and union by rank optimize the performance of the <code>find</code> and <code>union</code> operations, making the solution scalable for large inputs.</li>
+<li>The algorithm efficiently checks for bipartiteness in a graph by ensuring that adjacent vertices have different sets (colors).</li>
 </ul>
  
 </div>

@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              7-minute read
             </span>
           </div>
 
@@ -286,112 +286,207 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * obj-&gt;insert(key,val);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * int param_2 = obj-&gt;sum(prefix);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<h2 id="hahahugoshortcode1275s1hbhb">
+<h2 id="hahahugoshortcode1264s1hbhb">
   
 
   
   <div class="markdown-body">
     <h3 id="problem-statement">
-  Problem Statement
+  Problem Statement:
   <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Design a data structure that supports the following two operations:</p>
+<p>The problem involves implementing a class <code>MapSum</code> which supports two operations efficiently:</p>
 <ol>
-<li><strong>Insert</strong> a key-value pair.</li>
-<li><strong>Sum</strong> the values of all keys that start with a given prefix.</li>
+<li><strong><code>insert(key, value)</code></strong>: Inserts a key-value pair into the map. If the key already exists, the new value should replace the old one.</li>
+<li><strong><code>sum(prefix)</code></strong>: Returns the sum of all values associated with keys that start with the given prefix.</li>
 </ol>
+<p>The challenge is to provide a solution where both operations are handled in an efficient manner, especially when dealing with large numbers of keys.</p>
 <h3 id="approach">
-  Approach
+  Approach:
   <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The solution utilizes a <strong>Trie</strong> (prefix tree) to store the keys and their associated values. The Trie allows efficient prefix lookups, making it suitable for the <code>sum</code> operation.</p>
+<p>To solve this problem efficiently, we need to handle both operations—insert and sum—optimally. A good approach is to use a <strong>Trie (prefix tree)</strong> to store the keys and their associated values. The trie will allow efficient insertion and prefix-based sum calculation. Here&rsquo;s the detailed approach:</p>
 <ol>
 <li>
-<p><strong>TrieNode Structure</strong>:</p>
+<p><strong>Trie Data Structure</strong>:</p>
 <ul>
-<li>Each <code>TrieNode</code> contains:
+<li>A <strong>Trie</strong> is a tree-like data structure where each node represents a character in a word. The structure enables fast retrieval of words with common prefixes and allows for efficient insertions.</li>
+<li>Each node in the Trie will store:
 <ul>
-<li>A vector of pointers to its children (<code>next</code>) corresponding to the 26 lowercase letters.</li>
-<li>An integer <code>sum</code> that keeps track of the cumulative value of all keys that pass through this node.</li>
-<li>A string <code>s</code> to store the key.</li>
+<li>A list of child nodes for each character (26 children, one for each lowercase letter).</li>
+<li>A <code>sum</code> field that tracks the sum of all values associated with the keys that pass through or end at this node.</li>
+<li>A string <code>s</code> to keep track of the word associated with the node, which is useful to avoid redundant inserts in case a key is modified.</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>
-<p><strong>Adding Keys</strong>:</p>
+<p><strong>Insert Operation</strong>:</p>
 <ul>
-<li>The <code>add</code> function inserts a key into the Trie:
-<ul>
-<li>Traverse each character of the key, creating new nodes as necessary.</li>
-<li>Update the cumulative sum at each node to include the value associated with the key.</li>
-</ul>
-</li>
+<li>For each key-value pair, insert the key into the Trie character by character. For each character of the key, if the node corresponding to that character does not exist, create a new node. As you traverse the trie, update the <code>sum</code> field of each node to reflect the running sum of values for keys that pass through that node.</li>
 </ul>
 </li>
 <li>
-<p><strong>Calculating the Sum</strong>:</p>
+<p><strong>Sum Operation</strong>:</p>
 <ul>
-<li>The <code>val</code> function retrieves the cumulative sum for keys that match a given prefix:
-<ul>
-<li>Traverse the Trie following the characters in the prefix.</li>
-<li>Return the sum stored at the last node reached.</li>
-</ul>
-</li>
+<li>For a given prefix, simply traverse the trie following the characters of the prefix. Once the traversal is complete, the <code>sum</code> field of the last node will contain the sum of values for all keys that share this prefix.</li>
 </ul>
 </li>
 <li>
-<p><strong>MapSum Class</strong>:</p>
+<p><strong>Handling Updates (Replacement)</strong>:</p>
 <ul>
-<li>Uses a TrieNode (<code>root</code>) to manage the Trie structure.</li>
-<li>A map (<code>store</code>) is used to keep track of the values of keys to handle updates efficiently.</li>
+<li>If a key already exists, subtract the old value from all nodes along its path in the trie and then add the new value. This ensures that the map is updated correctly without needing a full re-insertion.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>By using a Trie, we can achieve efficient insertions and prefix sum calculations, both of which are critical for solving the problem within time limits.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Initialization</strong>: When a <code>MapSum</code> object is created, a root <code>TrieNode</code> is instantiated.</li>
-<li><strong>Insert Operation</strong>: When inserting a key-value pair:
-<ul>
-<li>If the key already exists, adjust the value by subtracting the previous value from the new value.</li>
-<li>Call the <code>add</code> method of the Trie to update the structure.</li>
+<h4 id="step-1-trienode-class">
+  Step 1: <code>TrieNode</code> Class
+  <a class="heading-link" href="#step-1-trienode-class">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TrieNode</span> {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>TrieNode<span style="color:#f92672">*&gt;</span> next;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    string s;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    TrieNode() {
+</span></span><span style="display:flex;"><span>        s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>        sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        next.resize(<span style="color:#ae81ff">26</span>, NULL);  <span style="color:#75715e">// Initialize the next vector for 26 characters (a-z)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">add</span>(string key, <span style="color:#66d9ef">int</span> val) {
+</span></span><span style="display:flex;"><span>        TrieNode<span style="color:#f92672">*</span> root <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> key.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> idx <span style="color:#f92672">=</span> key[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>;  <span style="color:#75715e">// Convert char to index (0 for &#39;a&#39;, 1 for &#39;b&#39;, etc.)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> (root<span style="color:#f92672">-&gt;</span>next[idx] <span style="color:#f92672">==</span> NULL)
+</span></span><span style="display:flex;"><span>                root<span style="color:#f92672">-&gt;</span>next[idx] <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TrieNode();  <span style="color:#75715e">// Create a new node if it doesn&#39;t exist
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            root <span style="color:#f92672">=</span> root<span style="color:#f92672">-&gt;</span>next[idx];  <span style="color:#75715e">// Move to the next node
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            root<span style="color:#f92672">-&gt;</span>sum <span style="color:#f92672">+=</span> val;  <span style="color:#75715e">// Update the sum for the current node
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>        root<span style="color:#f92672">-&gt;</span>s <span style="color:#f92672">=</span> key;  <span style="color:#75715e">// Store the key in the leaf node
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">val</span>(string key) {
+</span></span><span style="display:flex;"><span>        TrieNode<span style="color:#f92672">*</span> root <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> key.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> idx <span style="color:#f92672">=</span> key[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>;  <span style="color:#75715e">// Convert char to index
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> (root<span style="color:#f92672">-&gt;</span>next[idx] <span style="color:#f92672">==</span> NULL)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// Return 0 if no prefix is found
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            root <span style="color:#f92672">=</span> root<span style="color:#f92672">-&gt;</span>next[idx];  <span style="color:#75715e">// Move to the next node
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> root<span style="color:#f92672">-&gt;</span>sum;  <span style="color:#75715e">// Return the sum at the node corresponding to the prefix
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>The <code>TrieNode</code> class represents each node in the Trie.</li>
+<li>It contains a vector of 26 pointers (<code>next</code>), representing child nodes for each letter of the alphabet.</li>
+<li>The <code>sum</code> field tracks the sum of values for all keys that pass through or end at this node.</li>
+<li>The <code>add</code> method inserts a key into the Trie, updating the <code>sum</code> values along the path.</li>
+<li>The <code>val</code> method calculates the sum of values for all keys starting with the given prefix.</li>
 </ul>
-</li>
-<li><strong>Sum Operation</strong>: The <code>sum</code> method retrieves the sum of values for all keys that start with a specified prefix by calling the <code>val</code> method of the Trie.</li>
-</ol>
-<h3 id="complexity">
-  Complexity
+<h4 id="step-2-mapsum-class">
+  Step 2: <code>MapSum</code> Class
+  <a class="heading-link" href="#step-2-mapsum-class">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">MapSum</span> {
+</span></span><span style="display:flex;"><span>    TrieNode<span style="color:#f92672">*</span> root;
+</span></span><span style="display:flex;"><span>    map<span style="color:#f92672">&lt;</span>string, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> store;  <span style="color:#75715e">// Stores key-value pairs to track value updates
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    MapSum() {
+</span></span><span style="display:flex;"><span>        root <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TrieNode();  <span style="color:#75715e">// Initialize the root of the Trie
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">insert</span>(string key, <span style="color:#66d9ef">int</span> val) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> val;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (store[key] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>            val <span style="color:#f92672">=</span> val <span style="color:#f92672">-</span> store[key];  <span style="color:#75715e">// Subtract the old value to ensure correct sum
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        root<span style="color:#f92672">-&gt;</span>add(key, val);  <span style="color:#75715e">// Add the key with the new value to the Trie
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        store[key] <span style="color:#f92672">=</span> x;  <span style="color:#75715e">// Store the new value in the map
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">sum</span>(string prefix) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> root<span style="color:#f92672">-&gt;</span>val(prefix);  <span style="color:#75715e">// Return the sum of values for the given prefix
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>The <code>MapSum</code> class manages the Trie (<code>root</code>) and a map (<code>store</code>) that tracks the most recent value for each key.</li>
+<li>The <code>insert</code> method handles inserting a new key-value pair, updating the Trie and the map. If the key already exists, the old value is subtracted before adding the new value to ensure correctness.</li>
+<li>The <code>sum</code> method calculates the sum of all values for keys that begin with the given prefix by querying the Trie.</li>
+</ul>
+<h4 id="example-usage">
+  Example Usage:
+  <a class="heading-link" href="#example-usage">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>MapSum<span style="color:#f92672">*</span> obj <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MapSum();
+</span></span><span style="display:flex;"><span>obj<span style="color:#f92672">-&gt;</span>insert(<span style="color:#e6db74">&#34;apple&#34;</span>, <span style="color:#ae81ff">3</span>);  <span style="color:#75715e">// Insert key &#34;apple&#34; with value 3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> sum1 <span style="color:#f92672">=</span> obj<span style="color:#f92672">-&gt;</span>sum(<span style="color:#e6db74">&#34;ap&#34;</span>);  <span style="color:#75715e">// Query the sum of values for keys starting with &#34;ap&#34; (should return 3)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>obj<span style="color:#f92672">-&gt;</span>insert(<span style="color:#e6db74">&#34;apple&#34;</span>, <span style="color:#ae81ff">2</span>);  <span style="color:#75715e">// Update key &#34;apple&#34; with value 2
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> sum2 <span style="color:#f92672">=</span> obj<span style="color:#f92672">-&gt;</span>sum(<span style="color:#e6db74">&#34;ap&#34;</span>);  <span style="color:#75715e">// Query the sum again after the update (should return 2)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>obj<span style="color:#f92672">-&gt;</span>insert(<span style="color:#e6db74">&#34;app&#34;</span>, <span style="color:#ae81ff">5</span>);  <span style="color:#75715e">// Insert key &#34;app&#34; with value 5
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> sum3 <span style="color:#f92672">=</span> obj<span style="color:#f92672">-&gt;</span>sum(<span style="color:#e6db74">&#34;ap&#34;</span>);  <span style="color:#75715e">// Query the sum (should return 7)
+</span></span></span></code></pre></div><h3 id="complexity">
+  Complexity:
   <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>:
+<li><strong><code>insert(key, value)</code></strong>: The time complexity is <code>O(L)</code> where <code>L</code> is the length of the key. This is because we traverse each character of the key once to insert it into the Trie and update the sums.</li>
+<li><strong><code>sum(prefix)</code></strong>: The time complexity is <code>O(L)</code> where <code>L</code> is the length of the prefix. We only need to traverse the nodes corresponding to the prefix to get the sum.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li>Insert: O(m), where m is the length of the key being inserted.</li>
-<li>Sum: O(p), where p is the length of the prefix.</li>
+<li><strong><code>O(N * L)</code></strong> where <code>N</code> is the number of keys and <code>L</code> is the average length of the keys. Each key potentially adds <code>L</code> nodes to the Trie, and the map stores <code>N</code> key-value pairs.</li>
 </ul>
-</li>
-<li><strong>Space Complexity</strong>: O(n * m) in the worst case, where n is the number of keys and m is the average length of the keys, as we may store up to n keys in the Trie.</li>
-</ul>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently handles the <code>insert</code> and <code>sum</code> operations using a Trie data structure. By using the Trie to store prefixes and associated sums, we achieve fast lookups for prefix-based sum queries. The addition of the <code>store</code> map ensures that we correctly handle key updates by adjusting the Trie sums when values change. This approach provides optimal time and space complexity for the given problem, making it suitable for large datasets.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1275s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1264s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

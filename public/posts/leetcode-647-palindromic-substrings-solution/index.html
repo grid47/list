@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -240,7 +240,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1246s1hbhb">
+<h2 id="hahahugoshortcode1247s1hbhb">
   
 
   
@@ -252,7 +252,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a string <code>s</code>, the task is to count the number of palindromic substrings in <code>s</code>. A substring is palindromic if it reads the same forwards and backwards.</p>
+<p>The problem asks us to count all the palindromic substrings in a given string <code>s</code>. A substring is defined as any contiguous sequence of characters in the string, and a palindrome is a string that reads the same forward as backward. For example, the string <code>&quot;aba&quot;</code> contains three palindromic substrings: <code>&quot;a&quot;</code>, <code>&quot;b&quot;</code>, and <code>&quot;aba&quot;</code>.</p>
+<p>Our goal is to return the total number of palindromic substrings in the string <code>s</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -260,62 +261,104 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we will use <strong>dynamic programming (DP)</strong>, specifically focusing on recognizing palindromic substrings and efficiently counting them. Here&rsquo;s how we can approach this:</p>
 <ol>
 <li>
-<p><strong>Dynamic Programming (DP)</strong>:</p>
+<p><strong>Understanding Palindromes</strong>:</p>
 <ul>
-<li>Use a 2D DP table <code>mem</code> where <code>mem[i][j]</code> will store whether the substring <code>s[i...j]</code> is a palindrome.</li>
-<li>Initialize <code>mem</code> with <code>-1</code> to indicate uncalculated states.</li>
+<li>A string is a palindrome if the first and last characters are the same, and the substring in between is also a palindrome.</li>
+<li>For example, <code>&quot;aba&quot;</code> is a palindrome because <code>s[0] == s[2]</code> and the substring <code>s[1]</code> (which is <code>&quot;b&quot;</code>) is trivially a palindrome.</li>
 </ul>
 </li>
 <li>
-<p><strong>Recursive Function</strong>:</p>
+<p><strong>Dynamic Programming (DP)</strong>:</p>
 <ul>
-<li>Define a recursive function <code>dp(i, j)</code> that checks if <code>s[i]</code> is equal to <code>s[j]</code>.</li>
-<li>If they are equal, it checks the substring <code>s[i+1...j-1]</code>.</li>
-<li>If <code>i</code> is greater than or equal to <code>j</code>, it indicates a single character or an empty substring, which is always a palindrome.</li>
+<li>We define <code>dp(i, j)</code> as a function that returns <code>1</code> if the substring <code>s[i..j]</code> is a palindrome and <code>0</code> otherwise.</li>
+<li>The recurrence for <code>dp(i, j)</code> is:
+<ul>
+<li>If <code>i &gt;= j</code>, then <code>s[i..j]</code> is trivially a palindrome (a single character or an empty string).</li>
+<li>If <code>s[i] == s[j]</code> and <code>dp(i + 1, j - 1) == 1</code>, then <code>s[i..j]</code> is a palindrome.</li>
+<li>Otherwise, it&rsquo;s not a palindrome.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization</strong>:</p>
+<ul>
+<li>Instead of recalculating <code>dp(i, j)</code> for the same indices repeatedly, we use memoization to store the results of subproblems.</li>
+<li>We initialize a 2D memoization table <code>mem[i][j]</code> where <code>mem[i][j]</code> stores the result of whether <code>s[i..j]</code> is a palindrome.</li>
+<li>Initially, we fill this table with <code>-1</code> (indicating uncalculated subproblems), and we calculate it as needed.</li>
 </ul>
 </li>
 <li>
 <p><strong>Count Palindromic Substrings</strong>:</p>
 <ul>
-<li>Iterate through all possible starting and ending indices of substrings. For each substring, call the <code>dp</code> function to determine if it is a palindrome and accumulate the count.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return the Result</strong>:</p>
-<ul>
-<li>Return the total count of palindromic substrings found.</li>
+<li>We iterate over all possible substrings in the string using two nested loops: one for the starting index <code>i</code> and one for the ending index <code>j</code>.</li>
+<li>For each pair <code>(i, j)</code>, we use the <code>dp(i, j)</code> function to determine whether the substring <code>s[i..j]</code> is a palindrome. If it is, we increment our count.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>The string is assigned to the member variable <code>s</code>, and the <code>mem</code> table is initialized.</li>
+<p>Let&rsquo;s break down the code step by step to understand its logic:</p>
+<h4 id="1-helper-function---dpi-j">
+  1. <strong>Helper Function - <code>dp(i, j)</code></strong>:
+  <a class="heading-link" href="#1-helper-function---dpi-j">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&gt;=</span> j) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Base case: single character or empty string
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(mem[i][j] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> mem[i][j];  <span style="color:#75715e">// If already calculated, return the result
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> mem[i][j] <span style="color:#f92672">=</span> (s[i] <span style="color:#f92672">==</span> s[j]) <span style="color:#f92672">?</span> dp(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// Check if characters match and inner substring is palindrome
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>This function takes two indices <code>i</code> and <code>j</code> and returns <code>1</code> if the substring <code>s[i..j]</code> is a palindrome, and <code>0</code> otherwise.</li>
+<li>The base case is when <code>i &gt;= j</code>, meaning we have a single character or an empty substring, which is always a palindrome.</li>
+<li>If <code>s[i] == s[j]</code>, the substring <code>s[i..j]</code> is a palindrome if the inner substring <code>s[i+1..j-1]</code> is also a palindrome. Thus, we recursively call <code>dp(i + 1, j - 1)</code>.</li>
+<li>Memoization is used to avoid recalculating the same values, making the algorithm more efficient.</li>
 </ul>
-</li>
-<li>
-<p><strong>Nested Loop</strong>:</p>
-<ul>
-<li>Use two loops to iterate through all possible substrings, calling <code>dp</code> for each pair of indices.</li>
+<h4 id="2-main-function---countsubstringss">
+  2. <strong>Main Function - <code>countSubstrings(s)</code></strong>:
+  <a class="heading-link" href="#2-main-function---countsubstringss">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">countSubstrings</span>(string s) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>s <span style="color:#f92672">=</span> s;  <span style="color:#75715e">// Assign input string to class member
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> s.size();
+</span></span><span style="display:flex;"><span>    mem.resize(n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));  <span style="color:#75715e">// Initialize memoization table with -1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// Variable to count the palindromic substrings
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.size(); i<span style="color:#f92672">++</span>)  <span style="color:#75715e">// Iterate over all starting indices
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> i; j <span style="color:#f92672">&lt;</span> s.size(); j<span style="color:#f92672">++</span>)  <span style="color:#75715e">// Iterate over all ending indices
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            ans <span style="color:#f92672">+=</span> dp(i, j);  <span style="color:#75715e">// Add result of dp(i, j) to count
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> ans;  <span style="color:#75715e">// Return total number of palindromic substrings
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>The <code>countSubstrings</code> function initializes the memoization table <code>mem</code> and iterates over all possible pairs of start and end indices <code>(i, j)</code> in the string <code>s</code>.</li>
+<li>For each pair, it calls <code>dp(i, j)</code> to check if the substring <code>s[i..j]</code> is a palindrome.</li>
+<li>It accumulates the results of these checks in the variable <code>ans</code>, which is eventually returned as the total count of palindromic substrings.</li>
 </ul>
-</li>
-<li>
-<p><strong>Final Count</strong>:</p>
-<ul>
-<li>The result is accumulated in <code>ans</code>, which is returned at the end.</li>
+<h4 id="3-memoization-table">
+  3. <strong>Memoization Table</strong>:
+  <a class="heading-link" href="#3-memoization-table">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>mem.resize(n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));  <span style="color:#75715e">// Initialize memoization table with -1
+</span></span></span></code></pre></div><ul>
+<li>The memoization table <code>mem</code> is a 2D vector of size <code>n x n</code> (where <code>n</code> is the size of the string <code>s</code>), initialized to <code>-1</code>. This ensures that all subproblems start as uncomputed.</li>
+<li>As we calculate <code>dp(i, j)</code>, we store the result in <code>mem[i][j]</code>, so subsequent calls for the same pair <code>(i, j)</code> can return the result in constant time.</li>
 </ul>
-</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -323,15 +366,44 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n^3), where n is the length of the string due to the two nested loops and the recursion.</li>
-<li><strong>Space Complexity</strong>: O(n^2) for the <code>mem</code> table used to store results of subproblems.</li>
+<li><strong>Filling the memoization table</strong>: For each pair <code>(i, j)</code>, we check if <code>s[i] == s[j]</code> and recursively check if the inner substring is a palindrome. This gives a time complexity of <code>O(1)</code> for each <code>dp(i, j)</code> because of memoization.</li>
+<li>We iterate over all pairs <code>(i, j)</code> where <code>i &lt;= j</code>. There are <code>n(n + 1) / 2</code> pairs, which simplifies to <code>O(n^2)</code> operations.</li>
+<li>Thus, the overall time complexity is <strong>O(n^2)</strong>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We use a 2D memoization table of size <code>n x n</code> to store the results of all subproblems. Therefore, the space complexity is <strong>O(n^2)</strong>.</li>
+<li>Additionally, we store the string <code>s</code>, but this doesn’t impact the space complexity significantly as the main space usage comes from the memoization table.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently counts the number of palindromic substrings in a given string <code>s</code> using dynamic programming with memoization. The time complexity is <strong>O(n^2)</strong>, where <code>n</code> is the length of the string, and the space complexity is also <strong>O(n^2)</strong> due to the memoization table.</p>
+<p>The approach leverages the properties of palindromes and ensures that we only calculate the results for each substring once. This makes it much more efficient than a brute-force solution that might involve checking each substring independently. The use of memoization optimizes the recursive solution and ensures that overlapping subproblems are not recomputed, leading to a significant performance boost.</p>
+<p>This solution works well for strings of moderate length and is a good example of how dynamic programming can be applied to problems involving substrings and palindromes.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1246s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1247s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

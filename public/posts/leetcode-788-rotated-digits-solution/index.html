@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -231,7 +231,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1324s1hbhb">
+<h2 id="hahahugoshortcode1322s1hbhb">
   
 
   
@@ -243,11 +243,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer <code>n</code>, count how many numbers between <code>1</code> and <code>n</code> are &ldquo;good&rdquo; numbers. A number is considered &ldquo;good&rdquo; if:</p>
-<ul>
-<li>Each digit in the number remains valid when rotated (i.e., 0, 1, 8 remain unchanged; 2, 5, 6, 9 become 5, 2, 9, 6, respectively; and 3, 4, 7 become invalid).</li>
-<li>At least one digit changes when the number is rotated.</li>
-</ul>
+<p>The task is to determine how many <strong>good integers</strong> exist from <code>1</code> to <code>n</code>. A <strong>good integer</strong> is defined as an integer that, when rotated 180 degrees, still forms a valid integer. For example, the integer <code>69</code> becomes <code>96</code> when rotated, and both of these are valid integers. However, integers like <code>3</code>, <code>4</code>, <code>7</code>, and others that don&rsquo;t form valid digits after rotation are considered invalid. We are asked to count how many such valid, rotatable integers exist between <code>1</code> and <code>n</code> (inclusive).</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -255,86 +251,112 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we need to check each integer from <code>1</code> to <code>n</code> to see if it can be rotated and still result in a valid integer. The basic idea is to examine each digit of a number, and ensure that when rotated, each digit transforms into another valid digit. Some digits remain unchanged when rotated (such as <code>0</code>, <code>1</code>, and <code>8</code>), while others change into different digits (for example, <code>6</code> becomes <code>9</code> and vice versa).</p>
+<p>The key observation is that the following digits are <strong>valid</strong> when rotated 180 degrees:</p>
+<ul>
+<li><code>0</code>, <code>1</code>, <code>8</code> stay the same.</li>
+<li><code>6</code> becomes <code>9</code>.</li>
+<li><code>9</code> becomes <code>6</code>.</li>
+</ul>
+<p>On the other hand, the digits <code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, and <code>7</code> are <strong>invalid</strong>, meaning if any of these digits appear in a number, it will be an invalid integer after rotation.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s break down the code and understand how it works to solve the problem:</p>
 <ol>
 <li>
-<p><strong>Digit Mapping</strong>:</p>
+<p><strong>Initialization</strong>:</p>
 <ul>
-<li>Create an array <code>f</code> that maps each digit to its rotation result:
+<li>First, we define an array <code>f</code> of size 10, where each index represents a digit from <code>0</code> to <code>9</code>. The value at each index indicates how the digit behaves when rotated:
 <ul>
-<li><code>0, 1, 8</code> remain unchanged (value <code>1</code>).</li>
-<li><code>2, 5, 6, 9</code> change to a valid digit (value <code>2</code>).</li>
-<li><code>3, 4, 7</code> are invalid (value <code>0</code>).</li>
+<li><code>0</code>, <code>1</code>, and <code>8</code> remain unchanged (<code>f[0] = 1</code>, <code>f[1] = 1</code>, <code>f[8] = 1</code>).</li>
+<li><code>6</code> becomes <code>9</code> (<code>f[6] = 2</code>).</li>
+<li><code>9</code> becomes <code>6</code> (<code>f[9] = 2</code>).</li>
+<li><code>2</code>, <code>3</code>, <code>4</code>, <code>5</code>, and <code>7</code> are invalid and marked as <code>0</code> in the array (<code>f[2] = 0</code>, <code>f[3] = 0</code>, etc.).</li>
 </ul>
 </li>
 </ul>
-</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> f[] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>};
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div></li>
 <li>
-<p><strong>Counting Good Numbers</strong>:</p>
+<p><strong>Iterate Over All Numbers from 1 to n</strong>:</p>
 <ul>
-<li>Initialize a counter <code>res</code> to keep track of good numbers.</li>
-<li>Loop through each number <code>i</code> from <code>1</code> to <code>n</code>.
-<ul>
-<li>For each number, initialize <code>p</code> to the current number and <code>s</code> to <code>1</code>.</li>
-<li>For each digit in the number:
-<ul>
-<li>Multiply <code>s</code> by the corresponding value in <code>f</code> using the last digit of <code>p</code>.</li>
-<li>Remove the last digit from <code>p</code> by performing integer division by <code>10</code>.</li>
+<li>We then loop through all integers <code>i</code> from <code>1</code> to <code>n</code> (inclusive).</li>
+<li>For each integer <code>i</code>, we initialize a variable <code>p</code> to the current number and a variable <code>s</code> to 1. This variable <code>s</code> will keep track of the status of the number — whether it&rsquo;s a valid or invalid number when rotated.</li>
 </ul>
-</li>
-<li>After processing all digits, if <code>s</code> is <code>2</code> or greater, increment <code>res</code> by <code>1</code> (indicating it is a good number).</li>
-</ul>
-</li>
-</ul>
-</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;=</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> p <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> s <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div></li>
 <li>
-<p><strong>Result</strong>:</p>
+<p><strong>Check the Digits of the Current Number</strong>:</p>
 <ul>
-<li>Return the total count of good numbers found.</li>
+<li>Inside the loop, we check each digit of the number <code>i</code> to see if it is valid after rotation. We do this by repeatedly extracting the last digit of the number (<code>p % 10</code>) and checking its value using the array <code>f</code>. If any digit is invalid (<code>f[digit] == 0</code>), we set <code>s</code> to <code>0</code>, indicating that the number cannot be rotated to form a valid integer.</li>
+<li>We multiply <code>s</code> by <code>f[p % 10]</code>, so if any digit is invalid, <code>s</code> becomes <code>0</code> and the number is considered invalid.</li>
 </ul>
-</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(p) {
+</span></span><span style="display:flex;"><span>    s <span style="color:#f92672">*=</span> f[p <span style="color:#f92672">%</span> <span style="color:#ae81ff">10</span>];
+</span></span><span style="display:flex;"><span>    p <span style="color:#f92672">/=</span> <span style="color:#ae81ff">10</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Update the Result</strong>:</p>
+<ul>
+<li>After checking all the digits of the number, if <code>s</code> is greater than or equal to 2, it means the number is a &ldquo;good&rdquo; integer (it forms a valid integer after rotation), and we increment the result <code>res</code> by 1.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (s <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">2</span>) res <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>Finally, the function returns the result <code>res</code>, which contains the count of good integers between <code>1</code> and <code>n</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div></li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li><strong>Class</strong>:
+<li>
+<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li><code>class Solution</code>: Contains the method to count good rotated numbers.
+<li>The time complexity of this solution is <strong>O(n * m)</strong>, where <code>n</code> is the input number and <code>m</code> is the average number of digits in the integers from <code>1</code> to <code>n</code>.</li>
+<li>For each number <code>i</code>, we extract each digit and check if it is a valid digit after rotation. In the worst case, this takes <code>O(m)</code> time, where <code>m</code> is the number of digits in <code>i</code> (which is logarithmic with respect to <code>n</code>).</li>
+<li>Therefore, the overall time complexity is <strong>O(n * log n)</strong>, where <code>log n</code> represents the number of digits in the largest number <code>n</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
 <ul>
-<li><code>int rotatedDigits(int n)</code>: Main function to compute the count of good numbers.
-<ul>
-<li><strong>Parameters</strong>:
-<ul>
-<li><code>n</code>: The upper limit of the range to count good numbers.</li>
+<li>The space complexity is <strong>O(1)</strong> since we only use a fixed amount of extra space (the array <code>f</code> and a few integer variables), regardless of the size of the input <code>n</code>.</li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: O(d * n), where ( d ) is the number of digits in each number. This results from iterating through all numbers up to <code>n</code> and checking each digit of the number.</li>
-<li><strong>Space Complexity</strong>: O(1), as we use a fixed-size array <code>f</code> and a few integer variables.</li>
-</ul>
+<p>This solution provides an efficient way to count the number of <strong>good integers</strong> from <code>1</code> to <code>n</code>. By examining each integer digit by digit and ensuring that all digits are valid when rotated, the solution can quickly identify valid integers and count them. The use of a simple lookup array <code>f</code> to determine how each digit behaves when rotated allows the solution to efficiently process each number.</p>
+<p>The algorithm is optimized for performance, achieving a time complexity of <strong>O(n * log n)</strong>, which is suitable for large inputs, and the space complexity is constant, <strong>O(1)</strong>. This makes the solution both time and space-efficient.</p>
+<p>In summary, this approach leverages digit manipulation and rotation validation using a simple lookup table to efficiently solve the problem of counting good integers. The solution works well for a wide range of input sizes and ensures that we can easily determine the count of valid numbers without performing unnecessary operations.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1324s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1322s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -237,7 +237,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> node;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1457s1hbhb">
+<h2 id="hahahugoshortcode1456s1hbhb">
   
 
   
@@ -249,13 +249,25 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given the root of a maximum binary tree and an integer <code>val</code>. A maximum binary tree is defined as follows:</p>
+<p>In this problem, you are given the root of a <strong>maximum binary tree</strong> and a value <code>val</code>. The task is to <strong>insert</strong> the given value into the binary tree such that the resulting tree is still a valid <strong>maximum binary tree</strong>.</p>
+<p>A <strong>maximum binary tree</strong> is defined as follows:</p>
 <ol>
 <li>The root is the maximum value in the tree.</li>
-<li>The left subtree is a maximum binary tree containing only values less than the root&rsquo;s value.</li>
-<li>The right subtree is a maximum binary tree containing only values greater than the root&rsquo;s value.</li>
+<li>The left subtree is a maximum binary tree of all the values smaller than the root.</li>
+<li>The right subtree is a maximum binary tree of all the values greater than the root.</li>
 </ol>
-<p>The task is to insert a new value <code>val</code> into the maximum binary tree and return the root of the modified tree.</p>
+<h3 id="problem-understanding">
+  Problem Understanding
+  <a class="heading-link" href="#problem-understanding">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Given the structure of a maximum binary tree, if you are asked to insert a new value <code>val</code>, you need to ensure that:</p>
+<ul>
+<li>The new value is inserted while maintaining the max-heap-like property of the binary tree.</li>
+<li>The tree should remain balanced such that the new value <code>val</code> becomes the new root if it is greater than the current root. Otherwise, it should be placed as the right child of the tree&rsquo;s root or somewhere further down.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -263,27 +275,63 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Recursive Insertion</strong>:
+<p>The key insight to solving this problem is to recognize how the <strong>maximum binary tree structure</strong> behaves:</p>
 <ul>
-<li>If the current <code>root</code> is not <code>NULL</code> and the value of <code>root</code> is greater than <code>val</code>, then the new value should be inserted into the right subtree.</li>
-<li>If the <code>root</code> is <code>NULL</code> or its value is less than or equal to <code>val</code>, create a new node with <code>val</code> and make this node the new root. The existing tree (root) becomes the left child of this new node.</li>
+<li>If the value <code>val</code> is larger than the current root, it should become the new root, and the original tree becomes its left subtree.</li>
+<li>If <code>val</code> is smaller than the current root, the insertion process should proceed recursively down the right child of the tree.</li>
 </ul>
-</li>
+<p>This leads us to the following steps for solving the problem:</p>
+<ol>
+<li>If the value <code>val</code> is greater than the current node&rsquo;s value, <code>val</code> should become the new root, and the current tree becomes its left subtree.</li>
+<li>Otherwise, if <code>val</code> is smaller, recursively move to the right subtree to continue the insertion process, since the right subtree of any node in a max-heap should contain values that are smaller than the node itself.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>This recursive approach ensures that we insert the new value into the tree while preserving the properties of the maximum binary tree.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The function <code>insertIntoMaxTree</code> takes the current <code>root</code> and the value to be inserted (<code>val</code>).</li>
-<li>It checks if the current <code>root</code> is valid and whether its value is greater than <code>val</code>.</li>
-<li>If so, it recursively inserts the value into the right subtree.</li>
-<li>If not, it creates a new node for <code>val</code>, sets its left child to the current <code>root</code>, and returns this new node as the new root.</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    TreeNode<span style="color:#f92672">*</span> insertIntoMaxTree(TreeNode<span style="color:#f92672">*</span> root, <span style="color:#66d9ef">int</span> val) {
+</span></span></code></pre></div><ul>
+<li><strong>Function Definition</strong>: The function <code>insertIntoMaxTree</code> is defined as a member function of the <code>Solution</code> class, which takes the root of the binary tree and the value <code>val</code> to be inserted as arguments. It returns a pointer to the root of the modified binary tree.</li>
 </ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(root <span style="color:#f92672">!=</span> NULL <span style="color:#f92672">&amp;&amp;</span> root<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">&gt;</span> val) {
+</span></span><span style="display:flex;"><span>            root<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">=</span> insertIntoMaxTree(root<span style="color:#f92672">-&gt;</span>right, val);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> root;
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li><strong>Base Case and Recursive Call</strong>:
+<ul>
+<li>If the current node <code>root</code> is not <code>NULL</code> and its value is greater than the value <code>val</code> to be inserted, the following happens:
+<ul>
+<li>We proceed to insert <code>val</code> in the right subtree of the current node. This is done by making a recursive call <code>insertIntoMaxTree(root-&gt;right, val)</code>.</li>
+<li>After the recursive call, the right child of the current node will be updated with the result of the insertion. This keeps the tree structure intact.</li>
+<li>The current node is then returned as the root of the modified subtree.</li>
+</ul>
+</li>
+<li>This step ensures that the value <code>val</code> is inserted into the right subtree of nodes where <code>val</code> is smaller than the node&rsquo;s value.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        TreeNode<span style="color:#f92672">*</span> node <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TreeNode(val);
+</span></span><span style="display:flex;"><span>        node<span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">=</span> root;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> node;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li><strong>Insertion Case</strong>:
+<ul>
+<li>If the current node <code>root</code> is either <code>NULL</code> or its value is smaller than <code>val</code>, then <code>val</code> becomes the new root of the tree.</li>
+<li>A new node is created with the value <code>val</code>, and the original root is set as the left child of this new node. This is because, in the max binary tree, any node larger than its parent should become the new root, and the old root becomes its left child.</li>
+<li>Finally, the new node is returned, which will be the new root of the tree or subtree.</li>
+</ul>
+</li>
+</ul>
+<p>This process of recursive insertion guarantees that the tree will remain a valid maximum binary tree after the insertion.</p>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -292,14 +340,27 @@
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity</strong>: O(h), where <code>h</code> is the height of the tree. In the worst case, the function may traverse the height of the tree.</li>
-<li><strong>Space Complexity</strong>: O(h) for the recursion stack in the worst case, where <code>h</code> is the height of the tree.</li>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of the solution is <strong>O(h)</strong>, where <code>h</code> is the height of the binary tree. In the worst case, we may need to traverse from the root to a leaf, which requires visiting every node along the path. Since the tree is a binary tree, the height is logarithmic in the best case (<code>O(log n)</code> for balanced trees) but can be linear (<code>O(n)</code>) in the worst case if the tree is skewed.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is <strong>O(h)</strong>, which is the space required for the recursion stack. In the worst case, if the tree is skewed, the height of the tree is <code>O(n)</code>, and thus the recursion stack will also require <code>O(n)</code> space. In the best case (balanced tree), the recursion depth is <code>O(log n)</code>.</p>
+</li>
 </ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides a simple yet efficient method for inserting a new value into a maximum binary tree. The recursive approach ensures that the properties of the tree are maintained, with the new value becoming the root if it is larger than the current root, and otherwise being inserted into the right subtree. By leveraging the natural structure of the maximum binary tree, this approach works efficiently even with large trees.</p>
+<p>The time complexity is proportional to the height of the tree, and the space complexity depends on the recursion depth. The solution is both time-efficient and space-efficient for the given problem constraints.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1457s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1456s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

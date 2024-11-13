@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -253,7 +253,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given two integer arrays, <code>pushed</code> and <code>popped</code>, representing the push and pop sequences of a stack, determine if the <code>popped</code> sequence could be the result of popping elements from the stack after pushing all elements from the <code>pushed</code> sequence.</p>
+<p>The problem asks to determine whether a sequence of operations is possible given two sequences, <code>pushed</code> and <code>popped</code>, representing a stack&rsquo;s push and pop operations. The <code>pushed</code> sequence represents the order in which elements are pushed onto the stack, while the <code>popped</code> sequence represents the order in which they are popped from the stack. The task is to verify whether it&rsquo;s possible to achieve the <code>popped</code> sequence using the <code>pushed</code> sequence while respecting the rules of a stack (i.e., LIFO order).</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -261,56 +261,73 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we need to simulate the stack operations based on the given <code>pushed</code> and <code>popped</code> sequences. The basic idea is to push elements onto a stack as per the <code>pushed</code> sequence and pop elements from the stack when they match the current element in the <code>popped</code> sequence. We need to ensure that the operations adhere to the LIFO (Last In, First Out) property of stacks. If, after processing both sequences, we have successfully matched the entire <code>popped</code> sequence, the result is <code>true</code>. Otherwise, it’s <code>false</code>.</p>
+<p>Here’s how we can break down the approach:</p>
 <ol>
 <li>
-<p><strong>Initialize a Stack</strong>:</p>
-<ul>
-<li>Use a stack to simulate the push and pop operations.</li>
-</ul>
+<p><strong>Simulate Stack Operations</strong>: We will iterate through the <code>pushed</code> sequence, pushing elements onto the stack. At each step, we will check if the top of the stack matches the current element in the <code>popped</code> sequence. If they match, we pop the stack and move to the next element in <code>popped</code>. This simulates the operation of the stack as we process the elements.</p>
 </li>
 <li>
-<p><strong>Push and Pop Simulation</strong>:</p>
-<ul>
-<li>Push the first element of the <code>pushed</code> array onto the stack.</li>
-<li>Use two pointers: <code>i</code> for iterating through <code>pushed</code> and <code>j</code> for <code>popped</code>.</li>
-<li>While iterating, check if the top of the stack matches the current element of the <code>popped</code> array:
-<ul>
-<li>If they match, pop from the stack and move the <code>j</code> pointer forward.</li>
-<li>Continue this process until the top of the stack no longer matches the current element in <code>popped</code>.</li>
-</ul>
-</li>
-</ul>
+<p><strong>Ensure Stack Validity</strong>: At the end of the process, if the stack is empty, then the operations were valid and we return <code>true</code>. If there are still elements in the stack that haven’t been popped in the correct order, we return <code>false</code>.</p>
 </li>
 <li>
-<p><strong>Continue Pushing</strong>:</p>
-<ul>
-<li>Push the next element from the <code>pushed</code> array onto the stack.</li>
-<li>Repeat the process until all elements from <code>pushed</code> are pushed onto the stack.</li>
-</ul>
-</li>
-<li>
-<p><strong>Final Check</strong>:</p>
-<ul>
-<li>After pushing all elements, perform a final check to see if there are any remaining matches between the stack and the <code>popped</code> sequence.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>If the stack is empty after processing, return <code>true</code>; otherwise, return <code>false</code>.</li>
-</ul>
+<p><strong>Edge Case Handling</strong>: We ensure that the process stops once all elements are processed, and the final stack check ensures that all pops have occurred in the correct order.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The function initializes the stack and processes the <code>pushed</code> array while simultaneously checking against the <code>popped</code> array to ensure the order of popping is valid.</li>
+<ol>
+<li>
+<p><strong>Initial Setup</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>stack<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> stk;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>stk.push(pushed[<span style="color:#ae81ff">0</span>]);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> pushed.size();
+</span></span></code></pre></div><ul>
+<li>We initialize a stack <code>stk</code> to simulate the stack operations.</li>
+<li>We start with <code>i = 1</code> because we’ve already pushed the first element from <code>pushed</code> onto the stack. <code>j = 0</code> is the pointer for iterating through the <code>popped</code> sequence.</li>
+<li><code>n</code> holds the size of the <code>pushed</code> sequence to control the iteration.</li>
 </ul>
+</li>
+<li>
+<p><strong>Push Elements and Pop When Possible</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(j <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>stk.empty() <span style="color:#f92672">&amp;&amp;</span> stk.top() <span style="color:#f92672">==</span> popped[j]) {
+</span></span><span style="display:flex;"><span>        j<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        stk.pop();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    stk.push(pushed[i<span style="color:#f92672">++</span>]);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The outer <code>while(i &lt; n)</code> loop ensures that we keep pushing elements from <code>pushed</code> onto the stack.</li>
+<li>The inner <code>while(j &lt; n &amp;&amp; !stk.empty() &amp;&amp; stk.top() == popped[j])</code> loop checks if the top of the stack matches the current element in <code>popped</code>. If they match, we pop the stack and move to the next element in <code>popped</code>.</li>
+<li>After checking for possible pops, we push the next element from <code>pushed</code> into the stack (<code>stk.push(pushed[i++])</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Check After the Loop</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(j <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>stk.empty() <span style="color:#f92672">&amp;&amp;</span> stk.top() <span style="color:#f92672">==</span> popped[j]) {
+</span></span><span style="display:flex;"><span>    j<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    stk.pop();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After we’ve pushed all elements from <code>pushed</code> to the stack, there might still be some elements in the stack that need to be popped. We check if the stack’s top matches the current element in <code>popped</code>. If they do, we pop the stack and move to the next element in <code>popped</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Return</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> stk.empty();
+</span></span></code></pre></div><ul>
+<li>If the stack is empty after processing both sequences, it means all elements were popped in the correct order as per the <code>popped</code> sequence, and we return <code>true</code>.</li>
+<li>If the stack is not empty, it indicates that some elements were not popped in the expected order, so we return <code>false</code>.</li>
+</ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -318,10 +335,28 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the number of elements in <code>pushed</code> and <code>popped</code>, as each element is processed at most twice (once pushed and once popped).</li>
-<li><strong>Space Complexity</strong>: O(n), due to the use of the stack for storing elements.</li>
+<li>The time complexity of this solution is O(n), where <code>n</code> is the number of elements in the <code>pushed</code> sequence. Each element is pushed and popped at most once from the stack, making the total number of operations proportional to the length of the sequences.</li>
 </ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is O(n), where <code>n</code> is the number of elements in the <code>pushed</code> sequence. We use a stack to store the elements temporarily, and in the worst case, the stack could hold all <code>n</code> elements.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently simulates the stack operations using two pointers to track the <code>pushed</code> and <code>popped</code> sequences. By iterating through the <code>pushed</code> sequence and popping elements from the stack when they match the current element in <code>popped</code>, we can verify if the sequences can represent valid stack operations. The solution is optimal with a time complexity of O(n) and a space complexity of O(n), making it suitable for handling large inputs within reasonable limits.</p>
  
 </div>
   

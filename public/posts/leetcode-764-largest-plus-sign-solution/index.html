@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -239,7 +239,7 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1307s1hbhb">
+<h2 id="hahahugoshortcode1310s1hbhb">
   
 
   
@@ -251,7 +251,22 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an <code>n x n</code> grid of <code>1</code>s and <code>0</code>s where <code>1</code> represents a cell that can be part of a plus sign and <code>0</code> represents a cell that cannot, the task is to find the order (size) of the largest plus sign that can be formed in the grid. A plus sign consists of a vertical and a horizontal line of <code>1</code>s, with the center of the plus sign being the intersection.</p>
+<p>The problem asks us to find the order of the largest &ldquo;plus sign&rdquo; in an <code>n x n</code> grid, given a set of &ldquo;mines&rdquo; that block certain positions in the grid. A plus sign consists of a central cell with arms extending in four cardinal directions (up, down, left, right) such that all cells in the arms are connected, and the length of each arm is equal. The goal is to determine the order of the largest plus sign that can be formed in the grid, where the order is defined as the length of the arms of the plus sign.</p>
+<p>A plus sign can only extend in the four directions as long as there are no mines in its path. The grid is filled with <code>1</code>s except where mines are located, in which case those cells are marked as <code>0</code>.</p>
+<h4 id="example">
+  Example:
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>For <code>n = 5</code> and mines located at <code>[[4, 2], [3, 2], [2, 2]]</code>, the grid looks like:</p>
+<pre tabindex="0"><code>1 1 1 1 1
+1 1 1 1 1
+1 1 0 1 1
+1 1 0 1 1
+1 0 0 0 1
+</code></pre><p>We need to determine the order of the largest plus sign that can be formed. The largest plus sign in this case has order 1, as the largest arm length is 1 (from the center of the plus).</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -259,48 +274,102 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we can use dynamic programming (DP) to compute the possible arm lengths for each cell in the grid in four directions: up, down, left, and right. The key idea is that for each cell, we calculate how far we can extend in each direction without hitting a mine. The minimum value from the four directions at each cell gives the arm length, and thus, the size of the plus sign that can be formed at that cell.</p>
+<h4 id="steps">
+  Steps:
+  <a class="heading-link" href="#steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Grid Initialization</strong>:</p>
+<p><strong>Initialization</strong>: Start by creating a <code>grid</code> where each cell is initialized to <code>n</code>, representing the maximum possible arm length for that cell if there are no mines. Cells that contain mines are immediately set to 0.</p>
+</li>
+<li>
+<p><strong>Filling the grid</strong>: Iterate through the grid and compute the arm lengths for each cell. This involves:</p>
 <ul>
-<li>Create a grid initialized with <code>n</code> (the maximum possible arm length of a plus sign).</li>
-<li>Set the cells corresponding to the mines (where <code>0</code> is present) to <code>0</code>.</li>
+<li>For each row, compute the left and right arm lengths for each cell.</li>
+<li>For each column, compute the up and down arm lengths for each cell.</li>
 </ul>
 </li>
 <li>
-<p><strong>Dynamic Programming</strong>:</p>
-<ul>
-<li>Iterate through the grid, updating each cell with the minimum arm length possible from four directions: left, right, up, and down.</li>
-<li>For each cell, the arm length in each direction is incremented if the current cell is not a mine.</li>
-</ul>
-</li>
-<li>
-<p><strong>Finding the Maximum</strong>:</p>
-<ul>
-<li>After processing the grid, find the maximum value in the grid, which represents the largest plus sign.</li>
-</ul>
+<p><strong>Finding the maximum order</strong>: After calculating the arm lengths, iterate through the grid and find the minimum arm length for each cell. The largest of these values will give the order of the largest plus sign.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
+<h4 id="step-1-initialize-the-grid">
+  Step 1: Initialize the grid
+  <a class="heading-link" href="#step-1-initialize-the-grid">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> grid(n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n, n));
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>m: mines)
+</span></span><span style="display:flex;"><span>    grid[m[<span style="color:#ae81ff">0</span>]][m[<span style="color:#ae81ff">1</span>]] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>We start by creating a grid of size <code>n x n</code> and initializing each cell to <code>n</code> because, in the worst case (no mines), a plus sign can have an arm length of <code>n-1</code>. We then mark the positions of the mines as <code>0</code> in the grid.</li>
+</ul>
+<h4 id="step-2-compute-arm-lengths-in-all-four-directions">
+  Step 2: Compute arm lengths in all four directions
+  <a class="heading-link" href="#step-2-compute-arm-lengths-in-all-four-directions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, k <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, l <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, r <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, u <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, d <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>, k<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>        grid[i][j] <span style="color:#f92672">=</span> min(grid[i][j], l <span style="color:#f92672">=</span> (grid[i][j] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span> l <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>        grid[i][k] <span style="color:#f92672">=</span> min(grid[i][k], r <span style="color:#f92672">=</span> (grid[i][k] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span> r <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>        grid[j][i] <span style="color:#f92672">=</span> min(grid[j][i], u <span style="color:#f92672">=</span> (grid[j][i] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span> u <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>        grid[k][i] <span style="color:#f92672">=</span> min(grid[k][i], d <span style="color:#f92672">=</span> (grid[k][i] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span> d <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
 <li>
-<p><strong>Class</strong>:</p>
+<p>The nested loop iterates over each row and column of the grid.</p>
 <ul>
-<li><code>class Solution</code>: Contains the method for calculating the largest plus sign.</li>
+<li>For each row, it calculates the arm lengths extending to the left (<code>l</code>) and right (<code>r</code>).</li>
+<li>For each column, it calculates the arm lengths extending upwards (<code>u</code>) and downwards (<code>d</code>).</li>
 </ul>
 </li>
 <li>
-<p><strong>Method</strong>:</p>
-<ul>
-<li><code>int orderOfLargestPlusSign(int n, vector&lt;vector&lt;int&gt;&gt;&amp; mines)</code>: This method implements the logic to find the size of the largest plus sign.</li>
-</ul>
+<p>For each direction, if the current cell is a mine (<code>grid[i][j] == 0</code>), we reset the corresponding arm length to <code>0</code>. Otherwise, we increment the arm length.</p>
 </li>
+<li>
+<p>The <code>min()</code> function ensures that for each cell, the arm length in any direction is limited by the shortest arm among the four directions.</p>
+</li>
+</ul>
+<h4 id="step-3-compute-the-largest-plus-sign">
+  Step 3: Compute the largest plus sign
+  <a class="heading-link" href="#step-3-compute-the-largest-plus-sign">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        res <span style="color:#f92672">=</span> max(grid[i][j], res);
+</span></span></code></pre></div><ul>
+<li>After computing the arm lengths for all cells, we simply iterate over the grid to find the maximum value. This value represents the largest arm length, which corresponds to the largest plus sign that can be formed.</li>
+</ul>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Finally, we return the result, which is the order of the largest plus sign.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -309,15 +378,49 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n^2), where n is the dimension of the grid, due to the double iteration through the grid.</li>
-<li><strong>Space Complexity</strong>: O(n^2), for storing the grid.</li>
+<li>The time complexity of this solution is <strong>O(n^2)</strong>, where <code>n</code> is the size of the grid. This is because:
+<ul>
+<li>We iterate through the grid multiple times: once to set the initial mine locations, and then twice to compute the arm lengths in all four directions for each cell.</li>
+<li>Each iteration involves constant time operations, and thus, the time complexity is quadratic in terms of the grid size.</li>
 </ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(n^2)</strong> because we are using a 2D grid to store the arm lengths for each cell. Additionally, we store the positions of the mines, which is also a 2D array.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the order of the largest plus sign that can be formed in a grid, even with the presence of mines. By using dynamic programming to compute the arm lengths in all four directions for each cell, we ensure that we calculate the correct plus sign order in an optimized manner.</p>
+<ul>
+<li><strong>Time Complexity</strong>: <strong>O(n^2)</strong>, where <code>n</code> is the size of the grid.</li>
+<li><strong>Space Complexity</strong>: <strong>O(n^2)</strong>, as we store the grid and mine locations in 2D arrays.</li>
+</ul>
+<p>The approach ensures that we can handle large grids efficiently while also accounting for the positions of mines that block the formation of plus signs.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1307s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1310s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

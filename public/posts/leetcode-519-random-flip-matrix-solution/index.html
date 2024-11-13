@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -254,7 +254,7 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * vector&lt;int&gt; param_1 = obj-&gt;flip();
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * obj-&gt;reset();
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<h2 id="hahahugoshortcode1191s1hbhb">
+<h2 id="hahahugoshortcode1189s1hbhb">
   
 
   
@@ -266,7 +266,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Design a solution that allows you to randomly flip a cell in a <code>m x n</code> grid and keep track of the flipped cells. The goal is to ensure that each cell can only be flipped once, and the <code>reset</code> method can be called to reset the state of the grid.</p>
+<p>The problem at hand is to design a solution that simulates flipping a coin in an <code>m x n</code> grid and allows for resetting the grid. The objective is to randomly select a cell in the grid and return its coordinates. Once a cell is selected, it cannot be selected again until the grid is reset. The problem requires implementing two primary operations:</p>
+<ol>
+<li><strong>flip()</strong>: Randomly selects a cell from the grid and returns its coordinates. Once a cell is selected, it should not be available for future flips until the grid is reset.</li>
+<li><strong>reset()</strong>: Resets the grid so that all cells are available for selection again.</li>
+</ol>
+<p>This solution needs to be efficient in both time and space, ensuring that the grid can handle large sizes.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -274,62 +279,106 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The problem can be tackled using the <strong>reservoir sampling</strong> technique, which allows us to randomly select an item from a stream of data without needing to store all the elements. In this case, the grid&rsquo;s cells can be treated as a stream where each cell is randomly chosen for flipping.</p>
+<p>We need to make the following considerations:</p>
+<ul>
+<li>The grid is a two-dimensional <code>m x n</code> matrix, but the cell positions can be represented as a one-dimensional array of size <code>m * n</code>.</li>
+<li>We need a way to map each grid cell to a unique index and efficiently track which cells have already been flipped.</li>
+</ul>
+<h4 id="key-concepts">
+  Key Concepts:
+  <a class="heading-link" href="#key-concepts">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li>
-<p><strong>Mapping Flips</strong>:</p>
-<ul>
-<li>Use a hash map <code>mp</code> to store the mapping of flipped cells to their new positions. This allows us to maintain the integrity of the random selection without duplication.</li>
-</ul>
-</li>
-<li>
-<p><strong>Index Calculation</strong>:</p>
-<ul>
-<li>Calculate a random index within the current limit (<code>lmt</code>), which initially represents the total number of cells.</li>
-<li>When a cell is flipped, decrement <code>lmt</code> to reduce the available pool of cells.</li>
-</ul>
-</li>
-<li>
-<p><strong>Handling Flips</strong>:</p>
-<ul>
-<li>If the randomly selected index has already been flipped (exists in the map), retrieve the position stored in the map.</li>
-<li>If it has not been flipped, use it directly as the selected cell.</li>
-<li>Update the mapping to reflect the flipped state and maintain the random nature of the selection by swapping the current index with the last unflipped index.</li>
-</ul>
-</li>
-<li>
-<p><strong>Resetting</strong>:</p>
-<ul>
-<li>The <code>reset</code> method clears the map and restores the limit to the original total number of cells, preparing the grid for a new set of flips.</li>
-</ul>
-</li>
+<li><strong>Indexing the Grid</strong>: The grid&rsquo;s rows and columns can be flattened into a single array with the formula <code>index = row * n + col</code>, where <code>row</code> and <code>col</code> are the row and column indices of the cell.</li>
+<li><strong>Efficient Random Selection</strong>: We can use the <code>rand()</code> function to randomly select an index in the range <code>[0, m * n - 1]</code>.</li>
+<li><strong>Efficient Tracking of Flipped Cells</strong>: A <code>map</code> (or hash map) can be used to store the mapping between flipped indices and remaining unflipped indices.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>Using the <strong>reservoir sampling</strong> method, each index is selected with equal probability, and once selected, it is swapped with another unflipped index. The <code>flip()</code> operation can then return the coordinates of the randomly selected cell.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Constructor</strong>:</p>
-<ul>
-<li>The <code>Solution</code> constructor initializes the grid dimensions and calls the <code>reset</code> method to set the initial state.</li>
+<p>Let’s break down the implementation of this solution in detail:</p>
+<h4 id="1-class-initialization">
+  1. <strong>Class Initialization</strong>:
+  <a class="heading-link" href="#1-class-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span>    map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> row, col, lmt;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    Solution(<span style="color:#66d9ef">int</span> m, <span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>        row <span style="color:#f92672">=</span> m;
+</span></span><span style="display:flex;"><span>        col <span style="color:#f92672">=</span> n;
+</span></span><span style="display:flex;"><span>        reset();
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li><strong><code>mp</code></strong>: A map to store the mapping between the flipped index and the remaining unflipped index.</li>
+<li><strong><code>row</code></strong> and <strong><code>col</code></strong>: Store the number of rows and columns in the grid.</li>
+<li><strong><code>lmt</code></strong>: The remaining number of cells that can be flipped, initialized to <code>m * n</code> (the total number of cells).</li>
 </ul>
-</li>
-<li>
-<p><strong>Flip Method</strong>:</p>
-<ul>
-<li>The <code>flip</code> method randomly selects an index, updates the mapping, and returns the coordinates of the flipped cell as a vector.</li>
+<p>The constructor initializes the grid with <code>m</code> rows and <code>n</code> columns and calls the <code>reset()</code> function to prepare the grid for flipping.</p>
+<h4 id="2-flip-method">
+  2. <strong>flip() Method</strong>:
+  <a class="heading-link" href="#2-flip-method">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> flip() {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> idx <span style="color:#f92672">=</span> rand() <span style="color:#f92672">%</span> lmt; <span style="color:#75715e">// Generate a random index
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        lmt<span style="color:#f92672">--</span>; <span style="color:#75715e">// Decrease the limit of remaining cells
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> mp.count(idx) <span style="color:#f92672">?</span> mp[idx] <span style="color:#f92672">:</span> idx; <span style="color:#75715e">// If the index is already flipped, get the mapped value
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        mp[idx] <span style="color:#f92672">=</span> mp.count(lmt) <span style="color:#f92672">?</span> mp[lmt] <span style="color:#f92672">:</span> lmt; <span style="color:#75715e">// Map the last available index to the current one
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>{x <span style="color:#f92672">/</span> col, x <span style="color:#f92672">%</span> col}; <span style="color:#75715e">// Return the coordinates of the selected cell
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span></code></pre></div><ul>
+<li><strong>Random Index</strong>: We randomly generate an index <code>idx</code> between <code>0</code> and <code>lmt - 1</code> using <code>rand() % lmt</code>. This ensures that each cell is selected with equal probability.</li>
+<li><strong>Mapping Flipped Cells</strong>: If the index <code>idx</code> has already been flipped (it is found in the map <code>mp</code>), the value at <code>mp[idx]</code> is returned, indicating the index that has replaced it.</li>
+<li><strong>Mapping the Last Cell</strong>: We then update the map to ensure that the last available cell (<code>lmt</code>) is mapped to the flipped cell <code>idx</code>. This ensures that once a cell is flipped, it’s not available again.</li>
+<li><strong>Return Coordinates</strong>: The randomly selected index <code>x</code> is then converted to row and column coordinates using integer division and modulo operations: <code>x / col</code> gives the row, and <code>x % col</code> gives the column. These coordinates are returned as a vector of integers.</li>
 </ul>
-</li>
-<li>
-<p><strong>Reset Method</strong>:</p>
-<ul>
-<li>The <code>reset</code> method clears the map and resets the limit to the total number of cells, allowing for fresh flips.</li>
+<h4 id="3-reset-method">
+  3. <strong>reset() Method</strong>:
+  <a class="heading-link" href="#3-reset-method">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">reset</span>() {
+</span></span><span style="display:flex;"><span>        mp.clear(); <span style="color:#75715e">// Clear the map of flipped indices
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        lmt <span style="color:#f92672">=</span> row <span style="color:#f92672">*</span> col; <span style="color:#75715e">// Reset the limit to the total number of cells in the grid
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li><strong>Clear the Map</strong>: The <code>mp.clear()</code> method clears the map that tracks the flipped cells.</li>
+<li><strong>Reset the Limit</strong>: The <code>lmt</code> variable is reset to the total number of cells in the grid (<code>row * col</code>), ensuring that all cells are available for flipping once the grid is reset.</li>
 </ul>
-</li>
-</ol>
+<h4 id="4-usage">
+  4. <strong>Usage</strong>:
+  <a class="heading-link" href="#4-usage">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Solution<span style="color:#f92672">*</span> obj <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Solution(m, n);
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> param_1 <span style="color:#f92672">=</span> obj<span style="color:#f92672">-&gt;</span>flip();
+</span></span><span style="display:flex;"><span>obj<span style="color:#f92672">-&gt;</span>reset();
+</span></span></code></pre></div><ul>
+<li><strong>Initialization</strong>: A new instance of the <code>Solution</code> class is created with <code>m</code> rows and <code>n</code> columns.</li>
+<li><strong>Flipping</strong>: The <code>flip()</code> method is called to randomly select a cell and return its coordinates.</li>
+<li><strong>Resetting</strong>: The <code>reset()</code> method is called to reset the grid, making all cells available again.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -337,15 +386,43 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(1) for both <code>flip</code> and <code>reset</code> operations, since operations on the map and basic arithmetic are constant time.</li>
-<li><strong>Space Complexity</strong>: O(m * n) for the storage of flipped cells in the map, where <code>m</code> is the number of rows and <code>n</code> is the number of columns.</li>
+<li><strong>flip() Method</strong>: The <code>flip()</code> method involves a constant time operation of generating a random index (<code>rand() % lmt</code>), checking if the index has been flipped (<code>mp.count(idx)</code>), and updating the map (<code>mp[idx] = ...</code>). These operations are all <strong>O(1)</strong>, meaning the <code>flip()</code> operation runs in constant time.</li>
+<li><strong>reset() Method</strong>: The <code>reset()</code> method clears the map and resets the limit, both of which are also <strong>O(1)</strong> operations.</li>
 </ul>
+<p>Thus, both <code>flip()</code> and <code>reset()</code> methods have a time complexity of <strong>O(1)</strong>.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is determined by the map <code>mp</code>, which stores the flipped indices. In the worst case, all the cells could be flipped before a reset is performed, resulting in <strong>O(m * n)</strong> space for the map. Therefore, the space complexity of the solution is <strong>O(m * n)</strong>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides an efficient implementation of a random flip and reset mechanism for a grid of size <code>m x n</code>. The <code>flip()</code> operation works in constant time, and the <code>reset()</code> operation resets the grid in constant time as well. The use of a map ensures that flipped cells are tracked efficiently, and the random sampling approach ensures that each cell is selected with equal probability.</p>
+<p>The overall time complexity for both <code>flip()</code> and <code>reset()</code> is <strong>O(1)</strong>, making the solution very efficient for large grids. The space complexity is <strong>O(m * n)</strong> due to the need to track flipped cells, which is acceptable for typical input sizes.</p>
+<p>This approach efficiently handles the problem while maintaining optimal performance and simplicity.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1191s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1189s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

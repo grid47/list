@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -216,7 +216,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1181s0hbhb">
+        <h2 id="hahahugoshortcode1179s0hbhb">
   <a href="https://leetcode.com/problems/diagonal-traverse/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -231,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1181s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1179s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -254,7 +254,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1181s2hbhb">
+<h2 id="hahahugoshortcode1179s2hbhb">
   
 
   
@@ -266,7 +266,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a matrix of integers, traverse the matrix in a diagonal order starting from the top-left corner. The traversal direction alternates between moving upwards and downwards across diagonals.</p>
+<p>The problem is to traverse a 2D matrix in a diagonal order and return the elements in a 1D array. Diagonal order starts at the top-left corner of the matrix and proceeds along diagonals. For even-numbered diagonals (starting from zero), elements are traversed from top to bottom, while for odd-numbered diagonals, elements are traversed from bottom to top. The task is to implement an efficient solution that handles matrices of varying dimensions.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -274,78 +274,123 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we use a combination of nested loops to iterate over diagonals, while adjusting the direction of traversal for each diagonal. The approach involves calculating the sum of indices for each diagonal, which simplifies the process of accessing elements along a diagonal.</p>
+<p>Here is a detailed breakdown of the approach:</p>
 <ol>
 <li>
-<p><strong>Determine Dimensions</strong>:</p>
+<p><strong>Sum of Indices to Identify Diagonals</strong>:</p>
 <ul>
-<li>Get the number of rows (<code>m</code>) and columns (<code>n</code>) of the matrix.</li>
+<li>The key insight is that elements on the same diagonal share the same sum of indices <code>i + j</code>.</li>
+<li>For a matrix with <code>m</code> rows and <code>n</code> columns, the range of possible <code>i + j</code> values is from <code>0</code> to <code>m + n - 2</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Diagonal Traversal</strong>:</p>
+<p><strong>Nested Loop Traversal</strong>:</p>
 <ul>
-<li>Iterate through each diagonal defined by the sum of indices (<code>s</code>), which ranges from <code>0</code> to <code>m + n - 2</code>.</li>
-<li>For each diagonal, compute possible index pairs <code>(i, j)</code> that fall on that diagonal.</li>
-<li>Depending on whether the diagonal index <code>s</code> is even or odd, decide the traversal direction (upwards or downwards).</li>
+<li>For each diagonal represented by <code>s = i + j</code>, we iterate through possible values of <code>i</code> from <code>0</code> to <code>s</code>, calculating <code>j</code> as <code>s - i</code>.</li>
+<li>We ensure that only valid <code>(i, j)</code> pairs are accessed within the bounds of the matrix. If <code>i</code> or <code>j</code> exceed matrix dimensions, we skip to the next element.</li>
 </ul>
 </li>
 <li>
-<p><strong>Index Validation</strong>:</p>
+<p><strong>Swapping Indices for Alternating Direction</strong>:</p>
 <ul>
-<li>Check if the calculated indices are within the bounds of the matrix before accessing elements to avoid out-of-bounds errors.</li>
+<li>For even diagonals (<code>s % 2 == 0</code>), we swap <code>i</code> and <code>j</code> to traverse from top to bottom.</li>
+<li>For odd diagonals, we retain the <code>i</code> and <code>j</code> values as they are to maintain the bottom-to-top traversal.</li>
+</ul>
+</li>
+<li>
+<p><strong>Building the Result Array</strong>:</p>
+<ul>
+<li>For each valid <code>(i, j)</code> pair, the corresponding element <code>mat[i][j]</code> is appended to the result array.</li>
+<li>After iterating through all possible diagonals, we return the result array containing the elements in diagonal order.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>Here’s a breakdown of the code:</p>
 <ol>
 <li>
-<p><strong>Class Definition</strong>:</p>
-<ul>
-<li>The <code>Solution</code> class contains the method <code>findDiagonalOrder</code>.</li>
+<p><strong>Function Signature</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> findDiagonalOrder(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> mat);
+</span></span></code></pre></div><ul>
+<li>This function accepts a matrix <code>mat</code> of dimensions <code>m x n</code> and returns a vector of integers representing the elements in diagonal order.</li>
 </ul>
 </li>
 <li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>The method initializes an empty vector <code>res</code> to store the traversal result.</li>
+<p><strong>Variable Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> mat.size(), n <span style="color:#f92672">=</span> mat[<span style="color:#ae81ff">0</span>].size();
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> res;
+</span></span></code></pre></div><ul>
+<li><code>m</code> and <code>n</code> store the dimensions of the matrix.</li>
+<li><code>res</code> is an empty vector to store the result.</li>
 </ul>
 </li>
 <li>
-<p><strong>Main Loop</strong>:</p>
-<ul>
-<li>The outer loop iterates through each diagonal sum.</li>
-<li>The inner loop calculates the valid indices <code>(i, j)</code> for each diagonal and adds the corresponding elements to <code>res</code> based on the calculated indices.</li>
+<p><strong>Looping Over Diagonals</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> s <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; s <span style="color:#f92672">&lt;=</span> m <span style="color:#f92672">+</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>; s<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; x <span style="color:#f92672">&lt;=</span> s; x<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> x;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> s <span style="color:#f92672">-</span> i;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (s <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) swap(i, j);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">&gt;=</span> m <span style="color:#f92672">||</span> j <span style="color:#f92672">&gt;=</span> n) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>        res.push_back(mat[i][j]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Outer Loop (Diagonals)</strong>: For each possible diagonal sum <code>s</code>, we loop through potential values of <code>i</code> and calculate <code>j</code> as <code>s - i</code>.</li>
+<li><strong>Even Diagonal Adjustment</strong>: When <code>s</code> is even, we swap <code>i</code> and <code>j</code> to ensure elements are traversed in the desired top-to-bottom order.</li>
+<li><strong>Bounds Check</strong>: If <code>i</code> or <code>j</code> exceed matrix dimensions (<code>i &gt;= m</code> or <code>j &gt;= n</code>), we skip to the next iteration to avoid out-of-bounds access.</li>
+<li><strong>Add Element to Result</strong>: For valid <code>(i, j)</code> pairs, <code>mat[i][j]</code> is added to <code>res</code>.</li>
 </ul>
 </li>
 <li>
 <p><strong>Return Statement</strong>:</p>
-<ul>
-<li>Finally, the function returns the result vector <code>res</code>.</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After completing all diagonal traversals, we return <code>res</code> as the result.</li>
 </ul>
 </li>
 </ol>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li><strong>Time Complexity</strong>: O(m * n), where m is the number of rows and n is the number of columns, since each element is visited once.</li>
-<li><strong>Space Complexity</strong>: O(1) for the traversal result storage (excluding the output), as no additional data structures proportional to the input size are used.</li>
+<li>The time complexity is <code>O(m * n)</code> since we process each element of the matrix once.</li>
 </ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is <code>O(m * n)</code>, where <code>m * n</code> is the size of the matrix, as we store each element in the result vector <code>res</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently handles diagonal traversal of a matrix by leveraging the properties of diagonal sums and alternating traversal directions. The approach is both concise and scalable, making it well-suited for matrices of different sizes. By adjusting traversal direction based on the sum of indices, the solution ensures that each element is accessed in the correct order, resulting in a clear and efficient solution to the diagonal traversal problem. This method also avoids extra space for auxiliary data structures, keeping the code both elegant and performant.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1181s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1179s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

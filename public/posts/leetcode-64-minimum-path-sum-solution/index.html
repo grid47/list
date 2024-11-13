@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -257,78 +257,151 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-minimum-path-sum-in-grid">
+  🛤️ <strong>Minimum Path Sum in Grid</strong>
+  <a class="heading-link" href="#-minimum-path-sum-in-grid">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a <code>m x n</code> grid filled with <code>0</code>s and <code>1</code>s, where <code>0</code> represents an empty cell and <code>1</code> represents an obstacle, you need to find the number of unique paths from the top-left corner to the bottom-right corner. You can only move down or right at any point in time, and paths that run into obstacles are not allowed.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>The problem is to find the minimum path sum from the top-left corner <code>(0, 0)</code> to the bottom-right corner <code>(m-1, n-1)</code> of an <code>m x n</code> grid. In this grid:</p>
+<ul>
+<li>Each cell contains a non-negative integer that represents the cost to move through that cell.</li>
+<li>Movement is restricted to either down or right at each step.</li>
+</ul>
+<p>The goal is to find the path from the starting point to the destination that has the lowest possible sum of costs.</p>
+<h3 id="-approach">
+  🧠 <strong>Approach</strong>
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This problem is efficiently solved using <strong>dynamic programming (DP)</strong>, where we calculate the minimum path sum to each cell by building on previously computed values in the grid.</p>
+<h4 id="key-observations">
+  Key Observations:
+  <a class="heading-link" href="#key-observations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Dynamic Programming Table</strong>:</p>
+<p><strong>Modifying the Grid in Place</strong>:</p>
 <ul>
-<li>Create a 2D vector <code>dp</code> of size <code>m x n</code> where <code>dp[i][j]</code> represents the number of unique paths to reach cell <code>(i, j)</code>.</li>
+<li>We update the original <code>grid</code> directly to store the cumulative minimum path sum for each cell. This allows us to avoid using extra space, making the solution more memory efficient.</li>
 </ul>
 </li>
 <li>
-<p><strong>Base Case Initialization</strong>:</p>
+<p><strong>Base Cases</strong>:</p>
 <ul>
-<li>Initialize <code>dp[0][0]</code> to <code>1</code> if the starting cell is empty (<code>grid[0][0] == 0</code>), otherwise set it to <code>0</code>.</li>
+<li>If the cell is in the first row (i.e., <code>i == 0</code>), it can only be reached from the left cell.</li>
+<li>If the cell is in the first column (i.e., <code>j == 0</code>), it can only be reached from the cell above.</li>
+<li>For all other cells, the minimum path sum to reach <code>grid[i][j]</code> is the value of <code>grid[i][j]</code> plus the minimum of the values from the cell directly above or to the left.</li>
 </ul>
 </li>
 <li>
-<p><strong>Filling the DP Table</strong>:</p>
+<p><strong>Recursive Formula</strong>:</p>
 <ul>
-<li>Use nested loops to fill the DP table:
-<ul>
-<li>For each cell <code>(i, j)</code>, if it is not an obstacle (<code>grid[i][j] != 1</code>), compute the number of paths to that cell by adding:
-<ul>
-<li>The number of paths from the cell directly above <code>(i - 1, j)</code> if it is within bounds and not an obstacle.</li>
-<li>The number of paths from the cell directly to the left <code>(i, j - 1)</code> if it is within bounds and not an obstacle.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Result</strong>:</p>
-<ul>
-<li>The value in <code>dp[m - 1][n - 1]</code> will be the total number of unique paths to reach the bottom-right corner.</li>
+<li>For each cell <code>(i, j)</code> (excluding the first row and column), the minimum path sum is calculated as:
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>grid[i][j] <span style="color:#f92672">+=</span> min(grid[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][j], grid[i][j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]);
+</span></span></code></pre></div></li>
+<li>This efficiently updates the <code>grid</code> with cumulative minimum path sums, ensuring that each cell holds the lowest possible cost to reach it from the start.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="-code-breakdown">
+  🔍 <strong>Code Breakdown</strong>
+  <a class="heading-link" href="#-code-breakdown">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Initialization</strong>: The DP table is initialized based on the starting cell.</li>
-<li><strong>Dynamic Filling</strong>: The nested loops populate the DP table, carefully checking for obstacles.</li>
+<h4 id="step-1-initialize-grid-dimensions">
+  Step 1: Initialize Grid Dimensions
+  <a class="heading-link" href="#step-1-initialize-grid-dimensions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> grid.size(), n <span style="color:#f92672">=</span> grid[<span style="color:#ae81ff">0</span>].size();
+</span></span></code></pre></div><ul>
+<li>Here, <code>m</code> is the number of rows, and <code>n</code> is the number of columns in the <code>grid</code>.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-2-iterate-through-the-grid">
+  Step 2: Iterate Through the Grid
+  <a class="heading-link" href="#step-2-iterate-through-the-grid">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>)
+</span></span></code></pre></div><ul>
+<li>The code iterates over each cell <code>(i, j)</code> in the <code>grid</code>, updating the minimum path sum to reach each cell.</li>
+</ul>
+<h4 id="step-3-update-each-cell">
+  Step 3: Update Each Cell
+  <a class="heading-link" href="#step-3-update-each-cell">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> j <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) grid[i][j] <span style="color:#f92672">+=</span> min(grid[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][j], grid[i][j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) grid[i][j] <span style="color:#f92672">+=</span> grid[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][j];
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(j <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) grid[i][j] <span style="color:#f92672">+=</span> grid[i][j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span></code></pre></div><ul>
+<li><strong>General Case</strong>: If the cell <code>(i, j)</code> is not in the first row or column, it adds the minimum of the values from the cell above <code>(i-1, j)</code> or to the left <code>(i, j-1)</code>.</li>
+<li><strong>First Column</strong>: Cells in the first column can only be reached from the cell above, so they add the value of <code>grid[i-1][j]</code>.</li>
+<li><strong>First Row</strong>: Cells in the first row can only be reached from the left, so they add the value of <code>grid[i][j-1]</code>.</li>
+</ul>
+<h4 id="step-4-final-result">
+  Step 4: Final Result
+  <a class="heading-link" href="#step-4-final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> grid[m <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span></code></pre></div><ul>
+<li>The value at <code>grid[m-1][n-1]</code> contains the minimum path sum to reach the bottom-right corner from the top-left corner.</li>
+</ul>
+<h3 id="-complexity-analysis">
+  📊 <strong>Complexity Analysis</strong>
+  <a class="heading-link" href="#-complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: ( O(m \times n) ) since every cell in the grid is computed once.</li>
-<li><strong>Space Complexity</strong>: ( O(m \times n) ) for storing the DP table.</li>
+<li><strong>O(m * n)</strong>: We traverse every cell in the <code>m x n</code> grid once, making the time complexity <code>O(m * n)</code>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: No extra space is used beyond the input grid, as the grid is modified in place to store cumulative minimum path sums.</li>
+</ul>
+<h3 id="-conclusion">
+  🌟 <strong>Conclusion</strong>
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This DP solution is optimal for finding the minimum path sum in a grid with non-negative integers. By modifying the <code>grid</code> in place, we efficiently compute the minimum sum, minimizing space complexity. The approach ensures that each cell holds the minimum cost path to reach it, making it a compact and efficient solution for grid-based minimum path problems.</p>
+<hr>
  
 </div>
   

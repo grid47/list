@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -216,7 +216,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1105s0hbhb">
+        <h2 id="hahahugoshortcode1104s0hbhb">
   <a href="https://leetcode.com/problems/count-numbers-with-unique-digits/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -231,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1105s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1104s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -253,89 +253,185 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1105s2hbhb">
+<h2 id="hahahugoshortcode1104s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-statement">
+  🌟 Problem Statement
+  <a class="heading-link" href="#-problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a non-negative integer ( n ), return the count of all numbers with unique digits that can be formed by digits from 0 to 9. The numbers can have at most ( n ) digits, and we want to count all such numbers including leading zeros.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>The task at hand is to count how many numbers with <strong>unique digits</strong> can be formed with <code>n</code> digits, using digits from 0 to 9, and ensuring that no digit is repeated.</p>
+<ul>
+<li><strong>For example</strong>:
+<ul>
+<li>When <code>n = 2</code>, the valid numbers with unique digits are 12, 13, 21, etc., but not 11, 22, or 33.</li>
+<li>When <code>n = 3</code>, valid 3-digit numbers include 123, 132, 231, but not 101, 121, etc.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="-approach">
+  🔍 Approach
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we&rsquo;ll break it down step-by-step:</p>
 <ol>
 <li>
-<p><strong>Base Case</strong>:</p>
+<p><strong>Single Digit Numbers</strong>:</p>
 <ul>
-<li>If ( n = 0 ), the only number possible is 0 itself, so return 1.</li>
+<li>When <code>n = 1</code>, all digits from 0 to 9 are possible. So, we have 10 such numbers.</li>
 </ul>
 </li>
 <li>
-<p><strong>Counting Unique Digit Numbers</strong>:</p>
+<p><strong>For Numbers with More than One Digit</strong>:</p>
 <ul>
-<li>Initialize <code>res</code> to 10 to count the numbers with 1 digit (0-9).</li>
-<li>Use two variables:
+<li>We start by calculating the number of valid choices for each digit:
 <ul>
-<li><code>available</code>: Represents the number of digits available for choosing unique digits. Starts at 9 (digits 1-9) after the first digit (0) is counted.</li>
-<li><code>unqNums</code>: Tracks the count of unique digit numbers that can be formed with the remaining available digits.</li>
+<li>The <strong>first digit</strong> has 9 valid choices (1 to 9, because 0 cannot be the leading digit).</li>
+<li>The <strong>second digit</strong> has 9 valid choices (0 to 9, excluding the first digit).</li>
+<li>The <strong>third digit</strong> has 8 valid choices (excluding the first two digits).</li>
+<li>This pattern continues until we fill all <code>n</code> digits.</li>
 </ul>
 </li>
-<li>For each additional digit (up to ( n )):
-<ul>
-<li>Calculate the number of unique digits that can be chosen using <code>unqNums</code> and multiply it by the available digits.</li>
-<li>Add the result to <code>res</code> and decrease the <code>available</code> count.</li>
-</ul>
-</li>
-<li>Stop when ( n ) reaches 1 or when no available digits are left.</li>
 </ul>
 </li>
 <li>
-<p><strong>Return the Result</strong>:</p>
+<p><strong>Edge Case</strong>:</p>
 <ul>
-<li>The final result is the accumulated count of unique digit numbers.</li>
+<li>If <code>n = 0</code>, the problem specifies returning 1, as there is exactly one way to have &ldquo;zero digits&rdquo; (the empty number).</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<hr>
+<h3 id="-step-by-step-code-breakdown">
+  🔨 Step-by-Step Code Breakdown
+  <a class="heading-link" href="#-step-by-step-code-breakdown">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The code starts with checking if ( n ) is 0. If so, it returns 1.</li>
-<li>It initializes <code>res</code> to account for all single-digit unique numbers.</li>
-<li>It uses a loop to compute the count of unique digit numbers for each digit count from 2 to ( n ).</li>
-<li>The loop terminates when there are no more unique digits available to use.</li>
-<li>Finally, it returns the total count.</li>
+<p>Let’s look at the code, which follows the approach outlined above:</p>
+<h4 id="step-1-handle-base-case-n--0">
+  Step 1: Handle Base Case (<code>n = 0</code>)
+  <a class="heading-link" href="#step-1-handle-base-case-n--0">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (n <span style="color:#f92672">==</span> 0) <span style="color:#66d9ef">return</span> 1;  <span style="color:#75715e">// If n is 0, return 1 (one valid number: the empty number)</span>
+</span></span></code></pre></div><ul>
+<li>When <code>n = 0</code>, we simply return 1 since the empty number is considered valid.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-2-initialize-variables">
+  Step 2: Initialize Variables
+  <a class="heading-link" href="#step-2-initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> 10;      <span style="color:#75715e">// Start with 10 valid 1-digit numbers (0 to 9)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> available <span style="color:#f92672">=</span> 9;  <span style="color:#75715e">// 9 choices for the first digit (1 to 9)</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> unqNums <span style="color:#f92672">=</span> 9;   <span style="color:#75715e">// The number of valid numbers for the first digit</span>
+</span></span></code></pre></div><ul>
+<li>We initialize <code>res</code> to 10 because there are 10 valid 1-digit numbers (0 through 9).</li>
+<li><code>available</code> represents the number of valid choices for the first digit, which is 9 (since the leading digit can&rsquo;t be 0).</li>
+<li><code>unqNums</code> stores the number of valid numbers formed up to the current digit.</li>
+</ul>
+<h4 id="step-3-loop-through-remaining-digits">
+  Step 3: Loop Through Remaining Digits
+  <a class="heading-link" href="#step-3-loop-through-remaining-digits">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (n<span style="color:#f92672">--</span> <span style="color:#f92672">&gt;</span> 1 <span style="color:#f92672">&amp;&amp;</span> available <span style="color:#f92672">&gt;</span> 0) {
+</span></span><span style="display:flex;"><span>    unqNums <span style="color:#f92672">=</span> unqNums <span style="color:#f92672">*</span> available;  <span style="color:#75715e">// Calculate possible numbers for current digit count</span>
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">+=</span> unqNums;                 <span style="color:#75715e">// Add the count to the result</span>
+</span></span><span style="display:flex;"><span>    available<span style="color:#f92672">--</span>;                    <span style="color:#75715e">// Decrease available choices for the next digit</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>For each digit from 2 to <code>n</code>, we:
+<ul>
+<li>Multiply <code>unqNums</code> by the number of available choices for the current digit.</li>
+<li>Add the result to <code>res</code> to accumulate the total count of valid numbers.</li>
+<li>Decrease <code>available</code> by 1 for the next digit.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-java" data-lang="java"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After the loop finishes, we return <code>res</code>, which holds the total number of valid unique-digit numbers.</li>
+</ul>
+<hr>
+<h3 id="-complexity-analysis">
+  📈 Complexity Analysis
+  <a class="heading-link" href="#-complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The time complexity of this solution is <strong>O(n)</strong> because we iterate from 2 up to <code>n</code> in the loop, with constant-time operations inside the loop (multiplication and addition).</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(1)</strong> because we only use a few integer variables (<code>res</code>, <code>available</code>, <code>unqNums</code>), which don&rsquo;t grow with the size of <code>n</code>.</li>
+</ul>
+<hr>
+<h3 id="-conclusion">
+  🏁 Conclusion
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution is efficient and easy to understand. By calculating the number of possible numbers step-by-step for each digit, we avoid the need to explicitly generate all possible numbers. The approach ensures we have an optimal solution in terms of both <strong>time</strong> and <strong>space</strong> complexity.</p>
+<hr>
+<h3 id="-quick-summary">
+  🎯 Quick Summary:
+  <a class="heading-link" href="#-quick-summary">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity</strong>: ( O(n) ) since we iterate ( n ) times to calculate the counts.</li>
-<li><strong>Space Complexity</strong>: ( O(1) ) as we use a constant amount of space regardless of the input size.</li>
+<li>For <code>n = 1</code>, the count of valid numbers is 10.</li>
+<li>For higher values of <code>n</code>, we calculate the possibilities for each digit, progressively reducing the available choices.</li>
+<li>The solution has <strong>O(n)</strong> time complexity, making it fast even for large <code>n</code>.</li>
 </ul>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1105s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1104s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

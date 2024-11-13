@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -243,7 +243,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1194s1hbhb">
+<h2 id="hahahugoshortcode1192s1hbhb">
   
 
   
@@ -255,7 +255,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer array <code>nums</code> and an integer <code>k</code>, determine if there exists a continuous subarray (of size at least two) such that the sum of the elements in the subarray is a multiple of <code>k</code>.</p>
+<p>The problem requires checking if there exists a continuous subarray of length at least two within a given list of integers, <code>nums</code>, such that the sum of the subarray is a multiple of an integer <code>k</code>. In other words, we need to find out if any subarray&rsquo;s sum, divided by <code>k</code>, yields a remainder of zero.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -263,56 +263,105 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This problem can be efficiently solved using modular arithmetic and a hashmap (or dictionary). The approach hinges on understanding that if two cumulative sums at different indices leave the same remainder when divided by <code>k</code>, then the sum of the numbers between these indices is divisible by <code>k</code>. This technique allows us to track remainders of cumulative sums and determine if we encounter a repeated remainder in a non-overlapping subarray.</p>
+<p>Here’s the approach broken down:</p>
 <ol>
 <li>
-<p><strong>Use a Hash Map</strong>:</p>
+<p><strong>Initialize Variables</strong>:</p>
 <ul>
-<li>Utilize a map to store the remainder of the cumulative sum when divided by <code>k</code> as the key, and the index of that remainder as the value.</li>
+<li><code>sum</code> is used to accumulate the cumulative sum of <code>nums</code> as we iterate through the array.</li>
+<li><code>mp</code> is a hashmap to store the remainders of <code>sum</code> modulo <code>k</code> and their corresponding indices, allowing us to detect cycles in remainders.</li>
+<li>Initialize <code>mp</code> with <code>{0: -1}</code> to handle cases where a valid subarray starts from the beginning of <code>nums</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Iterate Through the Array</strong>:</p>
+<p><strong>Iterate through the Array</strong>:</p>
 <ul>
-<li>Maintain a cumulative sum while iterating through the array.</li>
-<li>Calculate the remainder of the sum with respect to <code>k</code>.</li>
-<li>If the remainder has been seen before, check if the distance between the current index and the index stored in the map is greater than 1.</li>
+<li>For each element in <code>nums</code>, add it to <code>sum</code> to get the cumulative sum up to that index.</li>
+<li>Calculate <code>sum % k</code> to get the remainder of the cumulative sum when divided by <code>k</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Return Result</strong>:</p>
+<p><strong>Check for Repeated Remainders</strong>:</p>
 <ul>
-<li>If such a subarray exists, return <code>true</code>; otherwise, after checking all elements, return <code>false</code>.</li>
+<li>If this remainder has been seen before (exists in <code>mp</code>), it means there’s a subarray whose sum is divisible by <code>k</code>.</li>
+<li>Check the distance between the current index and the last index where this remainder was seen. If the distance is greater than 1, we found a valid subarray, so return <code>true</code>.</li>
+<li>If the remainder is new, store it in <code>mp</code> along with its index.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return False if No Valid Subarray is Found</strong>:</p>
+<ul>
+<li>If the loop completes without finding a valid subarray, return <code>false</code>.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>Create a map <code>mp</code> and initialize it with the remainder <code>0</code> at index <code>-1</code> to handle cases where the sum itself is a multiple of <code>k</code>.</li>
+<h4 id="step-1-initialize-variables">
+  Step 1: Initialize Variables
+  <a class="heading-link" href="#step-1-initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>mp[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li><code>mp</code> is initialized with <code>{0: -1}</code>. This handles cases where a valid subarray starts from the beginning of <code>nums</code>.</li>
+<li><code>sum</code> is initialized to 0 and will be used to calculate cumulative sums.</li>
 </ul>
-</li>
-<li>
-<p><strong>Cumulative Sum Calculation</strong>:</p>
-<ul>
-<li>For each element in <code>nums</code>, update the cumulative sum and calculate its remainder when divided by <code>k</code>.</li>
-<li>Check if this remainder has been recorded in the map.</li>
+<h4 id="step-2-loop-through-the-array">
+  Step 2: Loop Through the Array
+  <a class="heading-link" href="#step-2-loop-through-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    sum <span style="color:#f92672">+=</span> nums[i];
+</span></span><span style="display:flex;"><span>    sum <span style="color:#f92672">%=</span> k;
+</span></span></code></pre></div><ul>
+<li>The <code>for</code> loop iterates through each element in <code>nums</code>.</li>
+<li>For each element, <code>sum += nums[i]</code> updates the cumulative sum.</li>
+<li><code>sum %= k</code> takes the remainder of <code>sum</code> divided by <code>k</code>.</li>
 </ul>
-</li>
-<li>
-<p><strong>Check Subarray Length</strong>:</p>
-<ul>
-<li>If the remainder exists, check if the difference between the current index and the stored index is greater than 1, indicating a valid subarray.</li>
+<h4 id="step-3-check-if-the-remainder-exists-in-mp">
+  Step 3: Check if the Remainder Exists in <code>mp</code>
+  <a class="heading-link" href="#step-3-check-if-the-remainder-exists-in-mp">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (mp.count(sum)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">-</span> mp[sum] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>) 
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    mp[sum] <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If <code>sum</code> is already a key in <code>mp</code>, this indicates a possible subarray with a sum that’s divisible by <code>k</code>.</li>
+<li>Check if <code>i - mp[sum] &gt; 1</code> to ensure the subarray has a length of at least 2. If true, return <code>true</code>.</li>
+<li>If <code>sum</code> isn’t in <code>mp</code>, store <code>sum</code> in <code>mp</code> with its corresponding index <code>i</code>.</li>
 </ul>
-</li>
-</ol>
+<h4 id="step-4-return-false-if-no-valid-subarray-found">
+  Step 4: Return False if No Valid Subarray Found
+  <a class="heading-link" href="#step-4-return-false-if-no-valid-subarray-found">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><ul>
+<li>If the function completes the loop without finding any valid subarray, it returns <code>false</code>.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -320,15 +369,39 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the length of the input array, as we traverse the array once.</li>
-<li><strong>Space Complexity</strong>: O(k), as the size of the map can grow up to the number of unique remainders (at most <code>k</code>).</li>
+<li>The time complexity is <strong>O(n)</strong>, where <code>n</code> is the length of <code>nums</code>, because we only iterate through <code>nums</code> once.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(min(k, n))</strong>, as the hashmap <code>mp</code> stores at most <code>min(k, n)</code> keys due to the <code>sum % k</code> operation, where each unique remainder requires storage.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently finds a continuous subarray with a sum that’s a multiple of <code>k</code> by leveraging modular arithmetic and a hashmap. Using modular properties to track remainders allows for a compact, optimized solution compared to traditional approaches that might involve nested loops or explicit subarray calculations. This approach is ideal for large datasets, providing a clear path to solving the problem in linear time.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1194s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1192s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

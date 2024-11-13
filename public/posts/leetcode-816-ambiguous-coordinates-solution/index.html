@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              4-minute read
             </span>
           </div>
 
@@ -240,7 +240,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1340s1hbhb">
+<h2 id="hahahugoshortcode1342s1hbhb">
   
 
   
@@ -252,7 +252,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given a string representing a valid number in the format &ldquo;(x.y)&rdquo; where <code>x</code> and <code>y</code> can be non-empty strings of digits. Your task is to find all possible valid coordinates by splitting the number into two parts: one before and one after the decimal point, while ensuring each part satisfies the rules of a valid decimal representation.</p>
+<p>The problem requires generating possible coordinates from a given string <code>S</code> that represents a single pair of integers enclosed in parentheses, such as &ldquo;(123)&rdquo; or &ldquo;(0123)&rdquo;. The task is to split the string into two parts and then insert decimal points appropriately within each part to generate valid coordinates. The output should contain all possible coordinate combinations that can be derived from the input string.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -260,49 +260,88 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The approach for solving this problem is broken down into the following steps:</p>
 <ol>
 <li>
-<p><strong>Splitting the String</strong>:</p>
+<p><strong>String Parsing and Validation</strong>:</p>
 <ul>
-<li>The string <code>S</code> is of the form <code>&quot;(xy)&quot;</code>, where <code>x</code> and <code>y</code> represent digits. The goal is to split <code>xy</code> into two non-empty parts <code>A</code> and <code>B</code> such that <code>A</code> represents the x-coordinate and <code>B</code> represents the y-coordinate.</li>
+<li>Remove the parentheses from the input string to get the number substring.</li>
+<li>Split the remaining substring at different positions to create two parts: one representing the x-coordinate and the other representing the y-coordinate.</li>
 </ul>
 </li>
 <li>
 <p><strong>Generating Valid Coordinates</strong>:</p>
 <ul>
-<li>Create a helper function <code>f</code> that takes a string and generates all valid decimal representations of that string.</li>
-<li>The rules for a valid decimal number are:
+<li>For each part, create possible decimal representations:
 <ul>
-<li>A number cannot have leading zeros unless it is exactly &ldquo;0&rdquo;.</li>
-<li>A number can have a decimal point, but it cannot have trailing zeros (e.g., &ldquo;1.0&rdquo; is invalid).</li>
+<li>If a number part has leading zeros or ends with zero, apply specific conditions to avoid invalid representations (e.g., &ldquo;012&rdquo; should not be split, and &ldquo;30&rdquo; should not be made into &ldquo;3.0&rdquo;).</li>
+<li>Generate all valid numbers by inserting decimal points in allowable positions.</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>
-<p><strong>Iterating Through Possible Splits</strong>:</p>
+<p><strong>Combining Coordinates</strong>:</p>
 <ul>
-<li>For each possible split of <code>S</code>, call the helper function <code>f</code> on both parts (the left and right of the split) to get valid representations.</li>
-<li>Combine these representations into coordinate pairs.</li>
+<li>After generating all possible decimal placements for both x and y coordinates, combine each possible x-coordinate with each possible y-coordinate to form valid coordinate pairs.</li>
 </ul>
 </li>
 <li>
-<p><strong>Returning the Result</strong>:</p>
+<p><strong>Output</strong>:</p>
 <ul>
-<li>Collect all valid coordinate pairs and return them.</li>
+<li>Return the list of all valid coordinates in the required format.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> ambiguousCoordinates(string S) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> S.size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> res;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>; <span style="color:#f92672">++</span>i) {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> A <span style="color:#f92672">=</span> f(S.substr(<span style="color:#ae81ff">1</span>, i));
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> B <span style="color:#f92672">=</span> f(S.substr(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">-</span> i));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>a : A) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>b : B) {
+</span></span><span style="display:flex;"><span>                res.push_back(<span style="color:#e6db74">&#34;(&#34;</span> <span style="color:#f92672">+</span> a <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;, &#34;</span> <span style="color:#f92672">+</span> b <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;)&#34;</span>);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>ambiguousCoordinates</code> starts by iterating over possible split points within the number substring.</li>
+<li>For each split, the function <code>f</code> is called on both the left and right segments.</li>
+<li>The resulting coordinates from <code>f</code> are combined to form coordinate pairs.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> f(string S) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> S.size();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> (n <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> S[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;0&#39;</span> <span style="color:#f92672">&amp;&amp;</span> S[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;0&#39;</span>)) <span style="color:#66d9ef">return</span> {};
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> S[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;0&#39;</span>) <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;0.&#34;</span> <span style="color:#f92672">+</span> S.substr(<span style="color:#ae81ff">1</span>)};
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> S[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;0&#39;</span>) <span style="color:#66d9ef">return</span> {S};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> res <span style="color:#f92672">=</span> {S};
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; <span style="color:#f92672">++</span>i) res.push_back(S.substr(<span style="color:#ae81ff">0</span>, i) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;.&#39;</span> <span style="color:#f92672">+</span> S.substr(i));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>f</code> generates all valid decimal placements for a given string <code>S</code>.</li>
+<li>It checks specific conditions to filter out invalid formats:
 <ul>
-<li>The <code>ambiguousCoordinates</code> function iterates through possible split points in <code>S</code> and generates valid pairs using the helper function.</li>
-<li>The helper function <code>f</code> checks the conditions for valid numbers and returns all possible valid representations for a given string.</li>
+<li>If <code>S</code> has a leading zero and ends with zero, no valid decimal placement exists.</li>
+<li>If <code>S</code> starts with zero, only one decimal point placement after the first digit is allowed (e.g., <code>012</code> → <code>0.12</code>).</li>
+<li>If <code>S</code> ends with zero, the original string is returned without any decimal placement.</li>
+</ul>
+</li>
+<li>For valid strings, possible decimal placements are generated by splitting the string at different positions.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -311,16 +350,39 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n^2) in the worst case, where <code>n</code> is the length of the string. This accounts for generating all valid splits and checking them.</li>
-<li><strong>Space Complexity</strong>: O(n) for storing the results and intermediate representations.</li>
+<li><strong>O(N^3)</strong>, where <code>N</code> is the length of the string. This complexity arises from iterating over possible splits and generating combinations of coordinates.</li>
 </ul>
-<p>This solution effectively handles the constraints for valid number representations and generates all possible valid coordinates.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(N^2)</strong> due to the storage requirements for holding intermediate strings and results.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively generates all valid coordinates from the input string by handling decimal placements through logical validation checks. The use of helper functions and string manipulation ensures that invalid formats are excluded, and all possible combinations are captured accurately. The solution efficiently addresses all edge cases related to leading and trailing zeros, resulting in a comprehensive list of coordinate pairs that adhere to the given problem constraints.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1340s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1342s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

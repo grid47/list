@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -248,71 +248,165 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-reverse-bits-of-a-32-bit-unsigned-integer">
+  🌟 Reverse Bits of a 32-bit Unsigned Integer
+  <a class="heading-link" href="#-reverse-bits-of-a-32-bit-unsigned-integer">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a 32-bit unsigned integer <code>n</code>, reverse its bits and return the resulting integer.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>The task is to reverse the bits of a given 32-bit unsigned integer. For example, if the integer <code>n</code> is represented in binary as <code>00000010100101000001111010011100</code>, after reversing the bits, the result should be <code>00111001011110000010100101000000</code>.</p>
+<h4 id="example">
+  Example:
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Input</strong>: <code>n = 43261596</code> (binary: <code>00000010100101000001111010011100</code>)</li>
+<li><strong>Output</strong>: <code>964176192</code> (binary: <code>00111001011110000010100101000000</code>)</li>
+</ul>
+<h3 id="-approach">
+  💡 Approach
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we will use <strong>bitwise manipulation</strong>. Rather than converting the number to a binary string, reversing it, and converting it back to an integer, we will manipulate the bits directly. The process breaks down the reversal task into smaller chunks using bitwise masks and shifts. This allows us to gradually reverse the bits in an optimal way.</p>
+<p>Here are the detailed steps:</p>
 <ol>
-<li>
-<p><strong>Bit Manipulation</strong>:</p>
-<ul>
-<li>The approach uses bitwise operations to reverse the bits in groups. This involves shifting bits and applying masks to isolate specific bits.</li>
-</ul>
-</li>
-<li>
-<p><strong>Step-by-Step Reversal</strong>:</p>
-<ul>
-<li><strong>Step 1</strong>: Swap the first 16 bits with the last 16 bits.</li>
-<li><strong>Step 2</strong>: Swap the bytes within the two halves.</li>
-<li><strong>Step 3</strong>: Swap the nibbles (4 bits).</li>
-<li><strong>Step 4</strong>: Swap pairs of bits.</li>
-<li><strong>Step 5</strong>: Swap individual bits.</li>
-</ul>
-</li>
+<li><strong>Pairwise Reversal</strong>: Swap adjacent pairs of bits.</li>
+<li><strong>Nibbles Reversal</strong>: Swap 4-bit blocks (nibbles).</li>
+<li><strong>Bytes Reversal</strong>: Swap 8-bit blocks (bytes).</li>
+<li><strong>16-bit Blocks Reversal</strong>: Swap 16-bit blocks.</li>
+<li><strong>Final Reversal</strong>: After performing all the smaller block reversals, the full 32-bit number will be reversed.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="-code-breakdown">
+  🛠 Code Breakdown
+  <a class="heading-link" href="#-code-breakdown">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Line 1</strong>: Define the class <code>Solution</code>.</li>
-<li><strong>Line 2</strong>: Define the <code>reverseBits</code> function, which takes an unsigned 32-bit integer <code>n</code>.</li>
-<li><strong>Lines 3-7</strong>: Apply a series of bitwise operations to reverse the bits in <code>n</code> using masks:
-<ul>
-<li><code>n = (n &amp; 0xffffffff) &lt;&lt; 16 | (n &amp; 0xffffffff) &gt;&gt; 16;</code> — swaps the first 16 bits with the last 16 bits.</li>
-<li><code>n = (n &amp; 0x00ff00ff) &lt;&lt; 8  | (n &amp; 0xff00ff00) &gt;&gt; 8;</code> — swaps bytes within the two halves.</li>
-<li><code>n = (n &amp; 0x0f0f0f0f) &lt;&lt; 4  | (n &amp; 0xf0f0f0f0) &gt;&gt; 4;</code> — swaps nibbles.</li>
-<li><code>n = (n &amp; 0x33333333) &lt;&lt; 2  | (n &amp; 0xcccccccc) &gt;&gt; 2;</code> — swaps pairs of bits.</li>
-<li><code>n = (n &amp; 0x55555555) &lt;&lt; 1  | (n &amp; 0aaaaaaaa) &gt;&gt; 1;</code> — swaps individual bits.</li>
-</ul>
-</li>
-<li><strong>Line 8</strong>: Return the reversed bits.</li>
-</ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<p>The code uses bitwise operations to reverse the bits in the number. Here&rsquo;s the implementation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">uint32_t</span> <span style="color:#a6e22e">reverseBits</span>(<span style="color:#66d9ef">uint32_t</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Step 1: Swap 16-bit blocks
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    n <span style="color:#f92672">=</span> (n <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xffffffff</span>) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">16</span> <span style="color:#f92672">|</span> (n <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xffffffff</span>) <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">16</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Step 2: Swap 8-bit blocks
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    n <span style="color:#f92672">=</span> (n <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x00ff00ff</span>) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">8</span> <span style="color:#f92672">|</span> (n <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xff00ff00</span>) <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">8</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Step 3: Swap 4-bit blocks
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    n <span style="color:#f92672">=</span> (n <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x0f0f0f0f</span>) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">|</span> (n <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xf0f0f0f0</span>) <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">4</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Step 4: Swap 2-bit blocks
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    n <span style="color:#f92672">=</span> (n <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x33333333</span>) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">|</span> (n <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xcccccccc</span>) <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Step 5: Swap individual bits
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    n <span style="color:#f92672">=</span> (n <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x55555555</span>) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> (n <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xaaaaaaaa</span>) <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> n;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="explanation-of-each-step">
+  Explanation of Each Step:
+  <a class="heading-link" href="#explanation-of-each-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: (O(1)), as the number of operations is constant (a fixed number of bit manipulations).</li>
-<li><strong>Space Complexity</strong>: (O(1)), as the operations are performed in-place without requiring additional space.</li>
+<h4 id="1-swapping-16-bit-blocks">
+  1. <strong>Swapping 16-bit blocks</strong>:
+  <a class="heading-link" href="#1-swapping-16-bit-blocks">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>n <span style="color:#f92672">=</span> (n <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xffffffff</span>) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">16</span> <span style="color:#f92672">|</span> (n <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xffffffff</span>) <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">16</span>;
+</span></span></code></pre></div><ul>
+<li>The mask <code>0xffffffff</code> doesn&rsquo;t change the bits. This step swaps the lower 16 bits with the upper 16 bits by shifting the left and right halves.</li>
 </ul>
+<h4 id="2-swapping-8-bit-blocks">
+  2. <strong>Swapping 8-bit blocks</strong>:
+  <a class="heading-link" href="#2-swapping-8-bit-blocks">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>n <span style="color:#f92672">=</span> (n <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x00ff00ff</span>) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">8</span> <span style="color:#f92672">|</span> (n <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xff00ff00</span>) <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">8</span>;
+</span></span></code></pre></div><ul>
+<li>The mask <code>0x00ff00ff</code> isolates the lower 8 bits in each 16-bit block. These bits are shifted 8 positions to the left. The mask <code>0xff00ff00</code> isolates the higher 8 bits, which are shifted 8 positions to the right.</li>
+</ul>
+<h4 id="3-swapping-4-bit-blocks">
+  3. <strong>Swapping 4-bit blocks</strong>:
+  <a class="heading-link" href="#3-swapping-4-bit-blocks">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>n <span style="color:#f92672">=</span> (n <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x0f0f0f0f</span>) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">|</span> (n <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xf0f0f0f0</span>) <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">4</span>;
+</span></span></code></pre></div><ul>
+<li>The mask <code>0x0f0f0f0f</code> isolates each 4-bit block, and these are shifted 4 positions to the left. The mask <code>0xf0f0f0f0</code> isolates the upper 4 bits, which are shifted 4 positions to the right.</li>
+</ul>
+<h4 id="4-swapping-2-bit-blocks">
+  4. <strong>Swapping 2-bit blocks</strong>:
+  <a class="heading-link" href="#4-swapping-2-bit-blocks">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>n <span style="color:#f92672">=</span> (n <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x33333333</span>) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">|</span> (n <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xcccccccc</span>) <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">2</span>;
+</span></span></code></pre></div><ul>
+<li>This step works at the granularity of 2-bit blocks. The mask <code>0x33333333</code> isolates pairs of bits, and they are shifted 2 positions to the left. The mask <code>0xcccccccc</code> isolates the other pair of bits, which are shifted 2 positions to the right.</li>
+</ul>
+<h4 id="5-swapping-individual-bits">
+  5. <strong>Swapping individual bits</strong>:
+  <a class="heading-link" href="#5-swapping-individual-bits">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>n <span style="color:#f92672">=</span> (n <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0x55555555</span>) <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">|</span> (n <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">0xaaaaaaaa</span>) <span style="color:#f92672">&gt;&gt;</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>Finally, this step swaps each pair of adjacent bits. The mask <code>0x55555555</code> isolates the odd-numbered bits, and they are shifted to the left. The mask <code>0xaaaaaaaa</code> isolates the even-numbered bits, and they are shifted to the right.</li>
+</ul>
+<p>At this point, the 32-bit number has been completely reversed.</p>
+<h3 id="-complexity-analysis">
+  📊 Complexity Analysis
+  <a class="heading-link" href="#-complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: The time complexity is constant because the number of operations required to reverse the bits is fixed (32 bits). Each operation is performed in constant time, independent of the input value.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: The space complexity is constant since we only use a few variables and perform the reversal in-place without requiring any additional storage that scales with the input.</li>
+</ul>
+<h3 id="-conclusion">
+  ✅ Conclusion
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently reverses the bits of a 32-bit unsigned integer using <strong>bitwise manipulation</strong>. The approach divides the reversal task into smaller steps (swapping 16-bit blocks, 8-bit blocks, etc.), which guarantees optimal performance. The solution works in constant time <strong>O(1)</strong> and constant space <strong>O(1)</strong>, making it ideal for bit manipulation tasks, especially in performance-sensitive scenarios like competitive programming.</p>
  
 </div>
   

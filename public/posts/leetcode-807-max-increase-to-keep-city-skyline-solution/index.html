@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -238,7 +238,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1333s1hbhb">
+<h2 id="hahahugoshortcode1335s1hbhb">
   
 
   
@@ -250,7 +250,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an <code>n x n</code> grid representing the heights of buildings, the goal is to determine the maximum total increase in height for these buildings, such that the new heights do not exceed the skyline formed by the maximum heights in each row and column.</p>
+<p>In this problem, you are given a 2D grid representing a cityscape, where each value in the grid represents the height of a building at a particular position. Your task is to find the maximum total increase in the height of the buildings such that the skyline (viewed from the top, in both the horizontal and vertical directions) remains the same.</p>
+<p>The <strong>skyline</strong> of a city refers to the highest building visible from any row or column. This problem asks for the maximum possible increase in building heights that can occur without changing the skyline.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -258,68 +259,104 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, the key idea is that the height of each building can be increased only to the minimum of the maximum height in its row and the maximum height in its column. By iterating through the grid and determining the highest possible building height for each cell based on these constraints, we can compute the total increase in building heights.</p>
+<p>The approach can be broken down into the following steps:</p>
 <ol>
 <li>
-<p><strong>Initialize Structures</strong>:</p>
+<p><strong>Compute Maximum Heights</strong>:</p>
 <ul>
-<li>Create vectors <code>row</code> and <code>col</code> of size <code>n</code> to store the maximum heights for each row and column respectively.</li>
+<li>First, for each row and column, we need to find the maximum building height. This is necessary because the maximum height for a building in any given row or column cannot exceed the maximum height in that row or column when considering the skyline.</li>
 </ul>
 </li>
 <li>
-<p><strong>Calculate Maximum Heights</strong>:</p>
+<p><strong>Calculate Possible Increase</strong>:</p>
 <ul>
-<li>Loop through each cell in the grid:
-<ul>
-<li>For each building at position <code>(i, j)</code>, update <code>row[i]</code> and <code>col[j]</code> to store the maximum height found in that row and column.</li>
-</ul>
-</li>
+<li>For each building, the new possible height is the minimum of the maximum height in the corresponding row and column.</li>
+<li>The difference between this new height and the current height of the building will give the increase in height for that building.</li>
 </ul>
 </li>
 <li>
-<p><strong>Calculate Maximum Increase</strong>:</p>
+<p><strong>Accumulate the Increase</strong>:</p>
 <ul>
-<li>Initialize a variable <code>res</code> to accumulate the total height increase.</li>
-<li>Loop through each cell again and calculate the possible increase in height for each building:
-<ul>
-<li>The maximum new height for the building at <code>(i, j)</code> is determined by the minimum of <code>row[i]</code> and <code>col[j]</code>.</li>
-<li>Add the difference between this maximum height and the current height <code>grid[i][j]</code> to <code>res</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Final Result</strong>:</p>
-<ul>
-<li>Return the total increase stored in <code>res</code>.</li>
+<li>Sum all the increases for all buildings to get the total increase in the height of the buildings while maintaining the same skyline.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-initialization">
+  Step 1: Initialization
+  <a class="heading-link" href="#step-1-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> grid.size();
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> row(n, <span style="color:#ae81ff">0</span>), col(n, <span style="color:#ae81ff">0</span>);
+</span></span></code></pre></div><ul>
+<li><strong><code>n</code></strong>: This variable represents the size of the grid (i.e., the number of rows and columns in the square grid).</li>
+<li><strong><code>row</code></strong>: This vector will store the maximum height for each row.</li>
+<li><strong><code>col</code></strong>: This vector will store the maximum height for each column.</li>
+</ul>
+<h4 id="step-2-find-maximum-heights-for-each-row-and-column">
+  Step 2: Find Maximum Heights for Each Row and Column
+  <a class="heading-link" href="#step-2-find-maximum-heights-for-each-row-and-column">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        row[i] <span style="color:#f92672">=</span> max(row[i], grid[i][j]);
+</span></span><span style="display:flex;"><span>        col[j] <span style="color:#f92672">=</span> max(col[j], grid[i][j]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This nested loop iterates over the entire grid. For each cell <code>(i, j)</code>:
 <ul>
-<li><strong>Class</strong>:
-<ul>
-<li><code>class Solution</code>: Contains the method to compute the maximum height increase while keeping the skyline.
-<ul>
-<li><code>int maxIncreaseKeepingSkyline(vector&lt;vector&lt;int&gt;&gt;&amp; grid)</code>: Implements the logic for calculating the maximum increase.
-<ul>
-<li><strong>Parameters</strong>:
-<ul>
-<li><code>grid</code>: A vector of vectors representing the heights of the buildings.</li>
+<li><strong><code>row[i] = max(row[i], grid[i][j])</code></strong>: Updates the maximum building height for row <code>i</code>.</li>
+<li><strong><code>col[j] = max(col[j], grid[i][j])</code></strong>: Updates the maximum building height for column <code>j</code>.</li>
 </ul>
 </li>
-<li><strong>Returns</strong>: An integer representing the maximum total increase in height.</li>
+</ul>
+<p>At the end of these loops, <code>row[i]</code> contains the maximum height of the buildings in row <code>i</code>, and <code>col[j]</code> contains the maximum height of the buildings in column <code>j</code>.</p>
+<h4 id="step-3-calculate-the-maximum-possible-increase">
+  Step 3: Calculate the Maximum Possible Increase
+  <a class="heading-link" href="#step-3-calculate-the-maximum-possible-increase">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        res <span style="color:#f92672">+=</span> min(row[i], col[j]) <span style="color:#f92672">-</span> grid[i][j];
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>We initialize the variable <code>res</code> to store the total increase in height.</li>
+<li>This double loop iterates over every building in the grid. For each building at position <code>(i, j)</code>:
+<ul>
+<li><strong><code>min(row[i], col[j])</code></strong>: This determines the maximum possible height for the building at <code>(i, j)</code> without altering the skyline. It ensures that the building&rsquo;s new height will not exceed the maximum height in either its row or column.</li>
+<li><strong><code>min(row[i], col[j]) - grid[i][j]</code></strong>: This calculates the increase in height for the building by subtracting the current height from the maximum allowable height.</li>
+<li>We accumulate this increase in the variable <code>res</code>.</li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-</li>
+<h4 id="step-4-return-the-total-increase">
+  Step 4: Return the Total Increase
+  <a class="heading-link" href="#step-4-return-the-total-increase">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Finally, after summing up the increases for all the buildings, we return the result, which represents the total increase in height that can be made without altering the skyline.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -328,15 +365,47 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of the solution is <strong>O(n^2)</strong>, where:</p>
 <ul>
-<li><strong>Time Complexity</strong>: O(n^2), where <code>n</code> is the dimension of the grid. Each cell is visited multiple times.</li>
-<li><strong>Space Complexity</strong>: O(n), for the auxiliary vectors <code>row</code> and <code>col</code>.</li>
+<li><strong><code>n</code></strong> is the number of rows (or columns) in the grid (since the grid is square).</li>
+<li><strong>First Loop</strong>: The first loop calculates the maximum heights for each row and column, which takes <strong>O(n^2)</strong> time as it iterates over every cell in the grid.</li>
+<li><strong>Second Loop</strong>: The second loop calculates the total increase, which also involves iterating over every cell in the grid, contributing another <strong>O(n^2)</strong> time.</li>
 </ul>
+<p>Thus, the overall time complexity is <strong>O(n^2)</strong>, which is efficient for grid sizes typically encountered in problems of this type.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(n)</strong>, where:</p>
+<ul>
+<li><strong><code>row</code></strong> and <strong><code>col</code></strong> are both vectors of size <code>n</code>, each requiring <strong>O(n)</strong> space.</li>
+<li>The space used for storing the grid itself is not included in the space complexity, as it is assumed to be provided as input.</li>
+</ul>
+<p>Therefore, the space complexity is linear in terms of the size of the grid, i.e., <strong>O(n)</strong>.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the maximum increase in building heights while maintaining the skyline, using a straightforward approach involving two passes over the grid. The first pass calculates the maximum heights for each row and column, and the second pass computes the total increase in height by ensuring that each building&rsquo;s new height does not violate the skyline constraints.</p>
+<p>The algorithm runs in <strong>O(n^2)</strong> time, making it efficient for typical grid sizes, and requires <strong>O(n)</strong> space for storing the row and column maximums. This approach is optimal for solving the problem within the constraints of typical input sizes, and it provides a clean, easy-to-understand solution for maximizing the building heights while keeping the skyline intact.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1333s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1335s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

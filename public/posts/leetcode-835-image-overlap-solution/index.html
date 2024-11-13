@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -247,7 +247,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The goal is to find the largest overlap between two binary matrices, <code>img1</code> and <code>img2</code>, where overlap is defined as the number of <code>1</code>s that align when one image is translated over the other.</p>
+<p>Given two binary images <code>img1</code> and <code>img2</code> of size <code>n x n</code>, we are tasked with finding the largest overlap of ones between the two images after performing a 2D translation. Specifically, the problem asks us to determine the maximum number of overlapping 1&rsquo;s when one image is translated (shifted) over the other by some amount in both the vertical and horizontal directions.</p>
+<p><strong>Translation</strong> means moving the elements of <code>img1</code> and <code>img2</code> in any direction. The goal is to calculate how many <code>1's</code> overlap between the two images after the translation.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -255,43 +256,106 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we need to evaluate every possible translation of <code>img1</code> relative to <code>img2</code>. The key insight here is that the maximum overlap occurs when the <code>1's</code> from both images align after some translation. To efficiently calculate the maximum overlap, the solution breaks the problem into the following steps:</p>
 <ol>
 <li>
-<p><strong>Identify Positions of <code>1</code>s</strong>:</p>
+<p><strong>Identify the positions of the <code>1</code> pixels</strong>:</p>
 <ul>
-<li>Extract the coordinates of all <code>1</code>s from both <code>img1</code> and <code>img2</code>. Each position is represented as a single integer calculated from its row and column indices.</li>
+<li>First, extract the coordinates of all <code>1's</code> from both <code>img1</code> and <code>img2</code>. Each <code>1</code> is located at some index <code>(i, j)</code> in the matrix.</li>
 </ul>
 </li>
 <li>
-<p><strong>Calculate Offsets</strong>:</p>
+<p><strong>Translate <code>img1</code> relative to <code>img2</code></strong>:</p>
 <ul>
-<li>For each pair of positions from <code>img1</code> and <code>img2</code>, compute the offset needed to align them. The offset can be calculated as the difference between the positions of <code>1</code>s in <code>img1</code> and <code>img2</code>.</li>
+<li>For each pair of positions <code>(x1, y1)</code> from <code>img1</code> and <code>(x2, y2)</code> from <code>img2</code>, calculate the vector <code>(dx, dy)</code> representing the translation required to align <code>(x1, y1)</code> with <code>(x2, y2)</code>.</li>
+<li>This vector will represent a potential translation of <code>img1</code> relative to <code>img2</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Count Overlaps</strong>:</p>
+<p><strong>Count overlaps</strong>:</p>
 <ul>
-<li>Use a hash map to count how many times each offset occurs. The more frequent an offset, the more overlap it represents when translating <code>img1</code> over <code>img2</code>.</li>
+<li>For each translation vector <code>(dx, dy)</code>, shift all the <code>1's</code> in <code>img1</code> by <code>(dx, dy)</code> and check if they align with <code>1's</code> from <code>img2</code>.</li>
+<li>Use a hashmap to count the number of times each translation vector results in overlapping <code>1's</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Find Maximum Overlap</strong>:</p>
+<p><strong>Find the maximum overlap</strong>:</p>
 <ul>
-<li>The maximum value in the hash map will give the largest overlap.</li>
+<li>The result is the maximum count of overlapping <code>1's</code> for any translation vector.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>Loop through both matrices to collect positions of <code>1</code>s.</li>
-<li>Calculate the difference for every pair of positions between the two images, storing the results in a hash map.</li>
-<li>Iterate through the hash map to find the maximum overlap.</li>
+<h4 id="step-1-identifying-the-positions-of-1s-in-img1-and-img2">
+  Step 1: Identifying the Positions of <code>1's</code> in <code>img1</code> and <code>img2</code>
+  <a class="heading-link" href="#step-1-identifying-the-positions-of-1s-in-img1-and-img2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> la, lb;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> img1.size();
+</span></span></code></pre></div><ul>
+<li>We create two vectors <code>la</code> and <code>lb</code> to store the positions of the <code>1's</code> in <code>img1</code> and <code>img2</code>, respectively. <code>n</code> is the size of the <code>n x n</code> image.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n<span style="color:#f92672">*</span>n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(img1[i<span style="color:#f92672">/</span>n][i<span style="color:#f92672">%</span>n] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        la.push_back(i<span style="color:#f92672">/</span>n<span style="color:#f92672">*</span><span style="color:#ae81ff">100</span> <span style="color:#f92672">+</span> i<span style="color:#f92672">%</span>n);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n<span style="color:#f92672">*</span>n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(img2[i<span style="color:#f92672">/</span>n][i<span style="color:#f92672">%</span>n] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>)
+</span></span><span style="display:flex;"><span>        lb.push_back(i<span style="color:#f92672">/</span>n<span style="color:#f92672">*</span><span style="color:#ae81ff">100</span> <span style="color:#f92672">+</span> i<span style="color:#f92672">%</span>n);
+</span></span></code></pre></div><ul>
+<li>These loops iterate through each element in both <code>img1</code> and <code>img2</code>, checking if the element is <code>1</code>.</li>
+<li>We store the positions of the <code>1's</code> in a compact form by encoding the row and column of the element into a single number (<code>i/n * 100 + i%n</code>). This encoding is used to uniquely represent the position of a <code>1</code> in the matrix.</li>
+</ul>
+<h4 id="step-2-counting-overlaps-for-each-translation">
+  Step 2: Counting Overlaps for Each Translation
+  <a class="heading-link" href="#step-2-counting-overlaps-for-each-translation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span></code></pre></div><ul>
+<li>We use a hashmap <code>mp</code> to store the count of each translation. The key is the translation vector <code>(dx, dy)</code> and the value is the number of overlaps that occur for that particular translation.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i : la)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j : lb)
+</span></span><span style="display:flex;"><span>        mp[i <span style="color:#f92672">-</span> j]<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>This nested loop iterates through each combination of <code>1</code> positions from <code>img1</code> and <code>img2</code>.</li>
+<li>For each pair of positions <code>(i, j)</code> from <code>img1</code> and <code>img2</code>, we calculate the translation vector <code>(dx, dy)</code> as the difference between <code>i</code> and <code>j</code>.</li>
+<li>We then increment the count of this translation vector in the hashmap <code>mp</code>. The key here is that the value in <code>mp[i - j]</code> represents how many overlaps occur with a specific translation.</li>
+</ul>
+<h4 id="step-3-finding-the-maximum-overlap">
+  Step 3: Finding the Maximum Overlap
+  <a class="heading-link" href="#step-3-finding-the-maximum-overlap">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it : mp)
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">=</span> max(res, it.second);
+</span></span></code></pre></div><ul>
+<li>We iterate through the hashmap <code>mp</code> and track the maximum value. This value represents the maximum number of overlapping <code>1's</code> for any translation.</li>
+</ul>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Finally, we return the maximum overlap found.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -300,10 +364,40 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n^2), where n is the number of elements in each matrix. This arises from comparing every <code>1</code> in <code>img1</code> with every <code>1</code> in <code>img2</code>.</li>
-<li><strong>Space Complexity</strong>: O(n), for storing the positions of <code>1</code>s and the counts in the hash map.</li>
+<li><strong>Extracting positions of <code>1's</code></strong>: In the worst case, we are iterating over all <code>n x n</code> elements in both <code>img1</code> and <code>img2</code>. This gives a time complexity of <code>O(n^2)</code> for this step.</li>
+<li><strong>Counting overlaps</strong>: In the worst case, we will compare every pair of positions from <code>img1</code> and <code>img2</code>. If both matrices contain <code>m</code> <code>1's</code>, then there will be <code>O(m^2)</code> comparisons.</li>
+<li>Given that <code>m</code> can be at most <code>n^2</code>, the overall time complexity of counting overlaps is <code>O(n^4)</code> in the worst case.</li>
 </ul>
+<p>Thus, the overall time complexity of the algorithm is <strong>O(n^4)</strong>, which is not optimal for large images. However, the complexity can be reduced further using advanced techniques like spatial hashing or Fourier transforms.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We store the positions of <code>1's</code> in both <code>img1</code> and <code>img2</code> in two vectors. This requires <code>O(m)</code> space, where <code>m</code> is the number of <code>1's</code> in the images.</li>
+<li>We also store the translation vectors and their counts in a hashmap <code>mp</code>, which requires <code>O(m^2)</code> space in the worst case.</li>
+</ul>
+<p>Therefore, the overall space complexity is <strong>O(m^2)</strong>, where <code>m</code> is the number of <code>1's</code> in the images.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently finds the largest overlap of <code>1's</code> between two binary images after a translation. The algorithm works by first identifying the positions of <code>1's</code> in both images, then computing the translation vectors for each pair of positions from <code>img1</code> and <code>img2</code>, and finally counting the overlaps for each translation. The result is the translation that produces the maximum number of overlapping <code>1's</code>.</p>
+<p>Although the algorithm&rsquo;s time complexity can be high (<code>O(n^4)</code>), it provides a straightforward and intuitive approach to solving the problem. For larger datasets, further optimizations using techniques like spatial hashing or Fourier transforms could be explored to reduce the time complexity.</p>
  
 </div>
   

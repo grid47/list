@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -216,7 +216,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1064s0hbhb">
+        <h2 id="hahahugoshortcode1056s0hbhb">
   <a href="https://leetcode.com/problems/longest-increasing-subsequence/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -231,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1064s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1056s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -252,82 +252,146 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mx;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1064s2hbhb">
+<h2 id="hahahugoshortcode1056s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-statement">
+  🚀 Problem Statement
+  <a class="heading-link" href="#-problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer array <code>nums</code>, return the length of the longest increasing subsequence (LIS). The subsequence must be strictly increasing, and the order of elements must be preserved.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>The task is to find the length of the <strong>Longest Increasing Subsequence (LIS)</strong> in a given array of integers. Imagine you’re given a list of numbers, and you need to find the longest sequence where each number is strictly greater than the previous one! This sequence doesn’t have to be continuous but should follow an increasing order.</p>
+<p><strong>Example:</strong></p>
+<ul>
+<li><strong>Input:</strong> <code>[10, 9, 2, 5, 3, 7, 101, 18]</code></li>
+<li><strong>Output:</strong> <code>4</code><br>
+(The LIS is <code>[2, 3, 7, 101]</code>, with a length of 4)</li>
+</ul>
+<hr>
+<h3 id="-approach">
+  🧠 Approach
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The solution uses dynamic programming to find the length of the longest increasing subsequence:</p>
+<p>Finding the LIS is a <strong>classic dynamic programming problem</strong>. Here, we’ll use an array <code>dp</code> to store the LIS ending at each index in <code>nums</code>. Each element <code>dp[i]</code> will represent the LIS length up to index <code>i</code>. With a two-loop structure, we’ll update <code>dp[i]</code> based on prior elements that could extend the sequence ending at <code>i</code>. Here’s how:</p>
 <ol>
-<li>
-<p><strong>Dynamic Programming Array</strong>:</p>
+<li><strong>Initialize</strong> <code>dp</code> such that each element starts with 1 (as every element is an LIS of at least length 1).</li>
+<li><strong>Iterate</strong> through the array and compare each element <code>i</code> with all previous elements <code>j</code>.
 <ul>
-<li>Create a <code>dp</code> array where <code>dp[i]</code> represents the length of the longest increasing subsequence that ends with the element at index <code>i</code>. Initialize all values in <code>dp</code> to <code>1</code>, since the minimum length of an increasing subsequence is <code>1</code> (the element itself).</li>
+<li>If <code>nums[j] &lt; nums[i]</code>, this means <code>nums[i]</code> can continue the sequence from <code>nums[j]</code>, so update <code>dp[i]</code> as <code>dp[i] = max(dp[i], dp[j] + 1)</code>.</li>
 </ul>
 </li>
-<li>
-<p><strong>Nested Loop for DP Calculation</strong>:</p>
-<ul>
-<li>Iterate through each element <code>nums[i]</code> in the array.</li>
-<li>For each <code>nums[i]</code>, iterate through all previous elements <code>nums[j]</code> (where <code>j &lt; i</code>).</li>
-<li>If <code>nums[j] &lt; nums[i]</code>, update <code>dp[i]</code> as <code>dp[i] = max(dp[i], dp[j] + 1)</code>.</li>
-<li>Track the maximum value in the <code>dp</code> array to find the length of the longest increasing subsequence.</li>
-</ul>
-</li>
-<li>
-<p><strong>Final Result</strong>:</p>
-<ul>
-<li>The length of the longest increasing subsequence will be the maximum value in the <code>dp</code> array after processing all elements.</li>
-</ul>
-</li>
+<li><strong>Result</strong>: The maximum value in <code>dp</code> will be the length of the LIS.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<hr>
+<h3 id="-step-by-step-code-breakdown">
+  🔨 Step-by-Step Code Breakdown
+  <a class="heading-link" href="#-step-by-step-code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s a walkthrough of the solution:</p>
+<h4 id="step-1-initialization">
+  Step 1: Initialization
+  <a class="heading-link" href="#step-1-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size(), mx <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> dp(n, <span style="color:#ae81ff">1</span>);
+</span></span></code></pre></div><ul>
+<li><strong><code>n</code></strong>: Total elements in <code>nums</code>.</li>
+<li><strong><code>mx</code></strong>: Tracks the maximum LIS found.</li>
+<li><strong><code>dp</code></strong>: Initializes each element to <code>1</code> since each element is an LIS of length 1 by itself.</li>
+</ul>
+<h4 id="step-2-building-the-dp-array">
+  Step 2: Building the <code>dp</code> Array
+  <a class="heading-link" href="#step-2-building-the-dp-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> i; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(nums[j] <span style="color:#f92672">&lt;</span> nums[i]) {
+</span></span><span style="display:flex;"><span>            dp[i] <span style="color:#f92672">=</span> max(dp[i], dp[j] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>            mx <span style="color:#f92672">=</span> max(mx, dp[i]);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Outer loop</strong>: For each element <code>i</code>, checks preceding elements <code>j</code>.</li>
+<li><strong>Inner loop</strong>: If <code>nums[j] &lt; nums[i]</code>, then <code>nums[i]</code> can extend the LIS ending at <code>j</code>.
+<ul>
+<li>Update <code>dp[i]</code> to be the max of its current value or <code>dp[j] + 1</code>.</li>
+<li>Update <code>mx</code> as needed.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-returning-the-result">
+  Step 3: Returning the Result
+  <a class="heading-link" href="#step-3-returning-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> mx;
+</span></span></code></pre></div><ul>
+<li><strong>Return <code>mx</code></strong>, which now holds the LIS length across the array!</li>
+</ul>
+<hr>
+<h3 id="-complexity-analysis">
+  📈 Complexity Analysis
+  <a class="heading-link" href="#-complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li><strong>Input</strong>: A vector of integers <code>nums</code>.</li>
-<li><strong>Output</strong>: An integer representing the length of the longest increasing subsequence.</li>
+<li><strong>Time Complexity</strong>: <strong>O(n^2)</strong> due to two nested loops. For each element <code>i</code>, it compares with all previous elements <code>j</code>.</li>
+<li><strong>Space Complexity</strong>: <strong>O(n)</strong> for the <code>dp</code> array.</li>
 </ul>
+<hr>
+<h3 id="-conclusion">
+  🏁 Conclusion
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This dynamic programming solution efficiently finds the LIS length in <strong>O(n^2)</strong>, suitable for small to medium input sizes. Here’s why it works well:</p>
+<ul>
+<li><strong>Dynamic Programming</strong> simplifies tracking optimal subsequence lengths.</li>
+<li><strong>Intuitive Steps</strong> to update LIS lengths using a two-loop structure.</li>
+<li><strong>Optimizations Possible</strong>: For larger inputs, consider a binary search method for <strong>O(n log n)</strong>.</li>
+</ul>
+<hr>
+<h3 id="-key-takeaways">
+  🌟 Key Takeaways
+  <a class="heading-link" href="#-key-takeaways">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
 <ol>
-<li>Initialize the size of <code>nums</code> as <code>n</code> and the <code>dp</code> array.</li>
-<li>Use nested loops to fill the <code>dp</code> array based on the conditions outlined.</li>
-<li>Return the maximum value from the <code>dp</code> array.</li>
+<li><strong>Dynamic Programming</strong> is a valuable approach to optimization problems with overlapping subproblems.</li>
+<li><strong>Scalable Code</strong>: While <strong>O(n^2)</strong> works for moderate input sizes, the problem can scale with an <strong>O(n log n)</strong> binary search variant.</li>
+<li><strong>Visualize Your Approach</strong>: Think of <code>dp[i]</code> as the longest LIS length that ends at each index.</li>
 </ol>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ul>
-<li><strong>Time Complexity</strong>: (O(n^2)) due to the nested loops, where (n) is the number of elements in <code>nums</code>.</li>
-<li><strong>Space Complexity</strong>: (O(n)) for the <code>dp</code> array used to store lengths.</li>
-</ul>
+<p>Keep practicing, and soon enough, LIS and similar dynamic programming problems will feel like second nature!</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1064s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1056s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

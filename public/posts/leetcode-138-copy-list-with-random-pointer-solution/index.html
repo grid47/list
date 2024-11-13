@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -274,61 +274,176 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-overview-deep-copying-a-linked-list-with-random-pointers">
+  🌟 <strong>Problem Overview: Deep Copying a Linked List with Random Pointers</strong>
+  <a class="heading-link" href="#-problem-overview-deep-copying-a-linked-list-with-random-pointers">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a linked list where each node contains an additional random pointer that could point to any node in the list or <code>null</code>, create a deep copy of the list. Each node in the new list should have the same value and random pointers as the original list.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>In this challenge, you are given a <strong>linked list</strong>, where each node has an additional <strong>random pointer</strong>. The task is to <strong>clone</strong> or <strong>deep copy</strong> the linked list, ensuring both the <code>next</code> and <code>random</code> pointers are copied. The random pointer can point to any node in the list, or be <code>NULL</code>, adding complexity to the task. But don&rsquo;t worry, we&rsquo;re going to break this down step by step! 😎</p>
+<hr>
+<h3 id="-understanding-the-key-challenges">
+  🔍 <strong>Understanding the Key Challenges</strong>
+  <a class="heading-link" href="#-understanding-the-key-challenges">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we need to perform a <strong>deep copy</strong> of the linked list. Here are the main obstacles:</p>
 <ol>
-<li><strong>HashMap (or Map)</strong>:
-<ul>
-<li>Use a map to keep track of the original nodes and their corresponding copies.</li>
-<li>For each node, check if it has already been copied; if not, create a new node and store it in the map.</li>
-</ul>
-</li>
+<li><strong>Copying the <code>next</code> pointers</strong>: The next pointers will just form a straightforward chain in the new list.</li>
+<li><strong>Copying the <code>random</code> pointers</strong>: This is trickier because the random pointer can point anywhere in the list, or even be <code>NULL</code>. The key is to ensure the random pointers in the cloned list point to the corresponding nodes in the original list.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>Our solution approach will leverage a <strong>hash map (or dictionary)</strong> to keep track of the correspondence between the original nodes and their cloned counterparts. This map will allow us to handle the copying of both the <code>next</code> and <code>random</code> pointers effectively.</p>
+<hr>
+<h3 id="-step-by-step-breakdown-of-the-solution">
+  🛠️ <strong>Step-by-Step Breakdown of the Solution</strong>
+  <a class="heading-link" href="#-step-by-step-breakdown-of-the-solution">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="1-node-structure-definition">
+  1️⃣ <strong>Node Structure Definition</strong>
+  <a class="heading-link" href="#1-node-structure-definition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Node</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> val;
+</span></span><span style="display:flex;"><span>    Node<span style="color:#f92672">*</span> next;
+</span></span><span style="display:flex;"><span>    Node<span style="color:#f92672">*</span> random;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    Node(<span style="color:#66d9ef">int</span> _val) {
+</span></span><span style="display:flex;"><span>        val <span style="color:#f92672">=</span> _val;
+</span></span><span style="display:flex;"><span>        next <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>        random <span style="color:#f92672">=</span> NULL;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>This <code>Node</code> class represents a node in the linked list. Each node has:
 <ul>
-<li><strong>Line 3-8</strong>: Define the <code>Node</code> structure with <code>val</code>, <code>next</code>, and <code>random</code> pointers.</li>
-<li><strong>Line 12</strong>: Create a map named <code>mp</code> to store the mapping from original nodes to their copies.</li>
-<li><strong>Line 13</strong>: Define the <code>copyRandomList</code> function that clears the map and starts the copy process.</li>
-<li><strong>Line 15</strong>: Define the recursive <code>copy</code> function:
-<ul>
-<li><strong>Line 16</strong>: If the current <code>head</code> is null, return null.</li>
-<li><strong>Line 17</strong>: If the node is already in the map, return the corresponding copy.</li>
-<li><strong>Line 19</strong>: Create a new node for the current node and store it in the map.</li>
-<li><strong>Line 20</strong>: Recursively copy the <code>next</code> and <code>random</code> pointers.</li>
-<li><strong>Line 22</strong>: Return the new node.</li>
+<li><code>val</code>: The node’s value.</li>
+<li><code>next</code>: A pointer to the next node.</li>
+<li><code>random</code>: A pointer to any random node, or <code>NULL</code>.</li>
 </ul>
 </li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<hr>
+<h4 id="2-initializing-the-copying-process">
+  2️⃣ <strong>Initializing the Copying Process</strong>
+  <a class="heading-link" href="#2-initializing-the-copying-process">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span>Node<span style="color:#f92672">*</span>, Node<span style="color:#f92672">*&gt;</span> mp;
+</span></span><span style="display:flex;"><span>Node<span style="color:#f92672">*</span> <span style="color:#a6e22e">copyRandomList</span>(Node<span style="color:#f92672">*</span> head) {
+</span></span><span style="display:flex;"><span>    mp.clear();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> copy(head);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We declare a <strong>map (<code>mp</code>)</strong> to store the mapping between the original nodes and their corresponding clones.</li>
+<li>The function <code>copyRandomList</code> starts the deep copy process by calling the <code>copy</code> function, passing the <code>head</code> of the list. We clear the map before starting to ensure no old mappings are carried over.</li>
+</ul>
+<hr>
+<h4 id="3-recursive-copying-function">
+  3️⃣ <strong>Recursive Copying Function</strong>
+  <a class="heading-link" href="#3-recursive-copying-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Node<span style="color:#f92672">*</span> <span style="color:#a6e22e">copy</span>(Node<span style="color:#f92672">*</span> head) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>head) <span style="color:#66d9ef">return</span> head;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (mp.count(head)) <span style="color:#66d9ef">return</span> mp[head];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    Node<span style="color:#f92672">*</span> node <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Node(head<span style="color:#f92672">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>    mp[head] <span style="color:#f92672">=</span> node;
+</span></span><span style="display:flex;"><span>    node<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> copy(head<span style="color:#f92672">-&gt;</span>next);
+</span></span><span style="display:flex;"><span>    node<span style="color:#f92672">-&gt;</span>random <span style="color:#f92672">=</span> copy(head<span style="color:#f92672">-&gt;</span>random);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> node;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Base Case</strong>: If <code>head</code> is <code>NULL</code>, we return <code>NULL</code> as there’s nothing to copy.</li>
+<li><strong>Check if Node is Already Copied</strong>: Before creating a new node, we check if it&rsquo;s already been copied by looking it up in the <code>mp</code> map. If it has, we return the existing clone.</li>
+<li><strong>Create a New Node</strong>: If the node hasn&rsquo;t been copied yet, we create a new node with the same value.</li>
+<li><strong>Store the Mapping</strong>: We store the new node in the map with the original node as the key. This lets us efficiently retrieve the copied node later.</li>
+<li><strong>Copy the <code>next</code> Pointer</strong>: We recursively copy the <code>next</code> pointer by calling <code>copy(head-&gt;next)</code>.</li>
+<li><strong>Copy the <code>random</code> Pointer</strong>: Similarly, we recursively copy the <code>random</code> pointer using <code>copy(head-&gt;random)</code>.</li>
+<li><strong>Return the Copied Node</strong>: After copying both the <code>next</code> and <code>random</code> pointers, we return the new node.</li>
+</ul>
+<hr>
+<h4 id="4-handling-special-cases">
+  4️⃣ <strong>Handling Special Cases</strong>
+  <a class="heading-link" href="#4-handling-special-cases">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Empty List</strong>: If the input list is empty (<code>head == NULL</code>), we simply return <code>NULL</code>.</li>
+<li><strong>Circular Random Pointers</strong>: Even if the random pointers form a circular reference, our map ensures that each node is copied only once, so no infinite loops occur during recursion.</li>
+</ul>
+<hr>
+<h3 id="-time-and-space-complexity">
+  📊 <strong>Time and Space Complexity</strong>
+  <a class="heading-link" href="#-time-and-space-complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="-time-complexity">
+  ⏱️ Time Complexity:
+  <a class="heading-link" href="#-time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(N)), where (N) is the number of nodes in the list, as each node is processed once.</li>
-<li><strong>Space Complexity</strong>: (O(N)) for storing the mapping in the hash map.</li>
-</ul> 
+<li><strong>O(n)</strong>: We process each node exactly once. Since the algorithm only makes recursive calls for the <code>next</code> and <code>random</code> pointers, each node is copied only once, making the overall time complexity <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the linked list.</li>
+</ul>
+<h4 id="-space-complexity">
+  🧳 Space Complexity:
+  <a class="heading-link" href="#-space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: We use a map to store the correspondence between the original nodes and their copied nodes. In the worst case, the map stores one entry for each node, so the space complexity is <strong>O(n)</strong>.</li>
+</ul>
+<hr>
+<h3 id="-conclusion-the-power-of-recursive-cloning">
+  🎯 <strong>Conclusion: The Power of Recursive Cloning</strong>
+  <a class="heading-link" href="#-conclusion-the-power-of-recursive-cloning">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently clones the linked list, handling both the <code>next</code> and <code>random</code> pointers. By using a <strong>recursive approach</strong> and a <strong>hash map</strong>, we ensure that:</p>
+<ul>
+<li><strong>Each node is copied exactly once</strong>.</li>
+<li>The algorithm works even with <strong>circular random pointers</strong> or <strong>empty lists</strong>.</li>
+</ul>
+<h4 id="key-takeaways">
+  Key Takeaways:
+  <a class="heading-link" href="#key-takeaways">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Recursive Deep Copying</strong>: We recursively copy both the <code>next</code> and <code>random</code> pointers.</li>
+<li><strong>Map for Tracking</strong>: The map ensures no node is copied more than once and allows us to efficiently handle the random pointer connections.</li>
+<li><strong>Optimal Time and Space Complexity</strong>: With <strong>O(n)</strong> time and <strong>O(n)</strong> space complexity, this approach is optimal for large linked lists.</li>
+</ul>
+<p>With this solution, you’re equipped to tackle linked lists with random pointers like a pro! Keep practicing and improving your skills—you’re one step closer to becoming a coding superstar! ✨🚀</p>
+ 
 </div>
   
 

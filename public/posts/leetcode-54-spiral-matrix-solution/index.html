@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -216,7 +216,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1205s0hbhb">
+        <h2 id="hahahugoshortcode1206s0hbhb">
   <a href="https://leetcode.com/problems/spiral-matrix/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -231,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1205s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1206s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -262,91 +262,205 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1205s2hbhb">
+<h2 id="hahahugoshortcode1206s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-spiral-matrix-traversal">
+  🔄 <strong>Spiral Matrix Traversal</strong>
+  <a class="heading-link" href="#-spiral-matrix-traversal">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an <code>m x n</code> matrix, return all elements of the matrix in spiral order.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>The problem asks to return the elements of a given <strong>2D matrix</strong> in a <strong>spiral order</strong>. The traversal begins at the top-left corner of the matrix, moving right across the top row, down the rightmost column, left across the bottom row, and up the leftmost column. This process continues for the inner submatrix until all elements are visited.</p>
+<p>For example, given the matrix:</p>
+<pre tabindex="0"><code>[
+ [ 1, 2, 3 ],
+ [ 4, 5, 6 ],
+ [ 7, 8, 9 ]
+]
+</code></pre><p>The expected output in spiral order would be:</p>
+<pre tabindex="0"><code>[1, 2, 3, 6, 9, 8, 7, 4, 5]
+</code></pre><h3 id="-approach">
+  🧑‍💻 <strong>Approach</strong>
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>We solve this efficiently using a <strong>four-pointer approach</strong>. The key idea is to maintain four boundaries that track the current submatrix:</p>
+<ul>
+<li><strong><code>rBgn</code> (row beginning)</strong>: The first row to be considered.</li>
+<li><strong><code>rEnd</code> (row end)</strong>: The last row to be considered.</li>
+<li><strong><code>cBgn</code> (column beginning)</strong>: The first column to be considered.</li>
+<li><strong><code>cEnd</code> (column end)</strong>: The last column to be considered.</li>
+</ul>
+<p>The traversal follows these steps:</p>
 <ol>
-<li>
-<p><strong>Define Boundaries</strong>:</p>
-<ul>
-<li>Use four variables to define the boundaries of the spiral traversal:
-<ul>
-<li><code>cBgn</code> (column beginning)</li>
-<li><code>cEnd</code> (column end)</li>
-<li><code>rBgn</code> (row beginning)</li>
-<li><code>rEnd</code> (row end)</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Iterate in Spiral Order</strong>:</p>
-<ul>
-<li>Use a <code>while</code> loop to continue traversing as long as the boundaries are valid (i.e., <code>cBgn &lt;= cEnd</code> and <code>rBgn &lt;= rEnd</code>).</li>
-<li>Traverse the current top row from left to right.</li>
-<li>Traverse the current right column from top to bottom.</li>
-<li>If there are remaining rows, traverse the current bottom row from right to left.</li>
-<li>If there are remaining columns, traverse the current left column from bottom to top.</li>
-</ul>
-</li>
+<li>Traverse from left to right across the topmost row.</li>
+<li>Traverse from top to bottom down the rightmost column.</li>
+<li>Traverse from right to left across the bottommost row.</li>
+<li>Traverse from bottom to top up the leftmost column.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>After completing each step, we update the respective boundary and repeat until all elements are visited.</p>
+<h3 id="-code-breakdown">
+  📝 <strong>Code Breakdown</strong>
+  <a class="heading-link" href="#-code-breakdown">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Initialization</strong>:
-<ul>
-<li>Start with the initial boundaries set according to the matrix dimensions.</li>
+<h4 id="step-1-initialize-boundary-variables">
+  Step 1: Initialize Boundary Variables
+  <a class="heading-link" href="#step-1-initialize-boundary-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cBgn <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, cEnd <span style="color:#f92672">=</span> mtx[<span style="color:#ae81ff">0</span>].size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> rBgn <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, rEnd <span style="color:#f92672">=</span> mtx.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li><strong><code>cBgn</code> (column beginning)</strong> is set to 0, the first column.</li>
+<li><strong><code>cEnd</code> (column end)</strong> is set to <code>mtx[0].size() - 1</code>, which is the index of the last column.</li>
+<li><strong><code>rBgn</code> (row beginning)</strong> is set to 0, the first row.</li>
+<li><strong><code>rEnd</code> (row end)</strong> is set to <code>mtx.size() - 1</code>, which is the index of the last row.</li>
 </ul>
-</li>
-<li><strong>Traversal</strong>:
-<ul>
-<li>For each layer of the spiral:
-<ul>
-<li>Add elements from the top row, right column, bottom row, and left column to the result vector <code>ans</code>.</li>
-<li>Adjust the boundaries after each traversal to move inward.</li>
+<p>These boundaries define the current submatrix to be processed. The algorithm shrinks these boundaries after each pass.</p>
+<h4 id="step-2-initialize-the-result-array">
+  Step 2: Initialize the Result Array
+  <a class="heading-link" href="#step-2-initialize-the-result-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans;
+</span></span></code></pre></div><ul>
+<li><strong><code>ans</code></strong> is a vector to store the elements of the matrix in spiral order.</li>
 </ul>
-</li>
+<h4 id="step-3-loop-until-all-elements-are-traversed">
+  Step 3: Loop Until All Elements Are Traversed
+  <a class="heading-link" href="#step-3-loop-until-all-elements-are-traversed">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(cBgn <span style="color:#f92672">&lt;=</span> cEnd <span style="color:#f92672">&amp;&amp;</span> rBgn <span style="color:#f92672">&lt;=</span> rEnd) {
+</span></span></code></pre></div><ul>
+<li>The loop continues as long as the column and row beginning pointers (<code>cBgn</code>, <code>rBgn</code>) do not surpass their respective ending pointers (<code>cEnd</code>, <code>rEnd</code>). This ensures the entire matrix is traversed.</li>
 </ul>
-</li>
+<h4 id="step-4-traverse-from-left-to-right-across-the-top-row">
+  Step 4: Traverse from Left to Right across the Top Row
+  <a class="heading-link" href="#step-4-traverse-from-left-to-right-across-the-top-row">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> cBgn; i <span style="color:#f92672">&lt;=</span> cEnd; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    ans.push_back(mtx[rBgn][i]);
+</span></span><span style="display:flex;"><span>rBgn<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>Traverse from <code>cBgn</code> to <code>cEnd</code> (the entire top row) and append each element to <code>ans</code>.</li>
+<li>After processing the top row, increment <code>rBgn</code> to exclude this row from future iterations.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-5-traverse-from-top-to-bottom-down-the-right-column">
+  Step 5: Traverse from Top to Bottom down the Right Column
+  <a class="heading-link" href="#step-5-traverse-from-top-to-bottom-down-the-right-column">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> rBgn; i <span style="color:#f92672">&lt;=</span> rEnd; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    ans.push_back(mtx[i][cEnd]);
+</span></span><span style="display:flex;"><span>cEnd<span style="color:#f92672">--</span>;
+</span></span></code></pre></div><ul>
+<li>Traverse from <code>rBgn</code> to <code>rEnd</code> (the entire right column) and append each element to <code>ans</code>.</li>
+<li>After processing the right column, decrement <code>cEnd</code> to exclude this column in future iterations.</li>
+</ul>
+<h4 id="step-6-traverse-from-right-to-left-across-the-bottom-row-if-valid">
+  Step 6: Traverse from Right to Left across the Bottom Row (If Valid)
+  <a class="heading-link" href="#step-6-traverse-from-right-to-left-across-the-bottom-row-if-valid">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(rBgn <span style="color:#f92672">&lt;=</span> rEnd)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> cEnd; i <span style="color:#f92672">&gt;=</span> cBgn; i<span style="color:#f92672">--</span>)
+</span></span><span style="display:flex;"><span>        ans.push_back(mtx[rEnd][i]);
+</span></span><span style="display:flex;"><span>rEnd<span style="color:#f92672">--</span>;
+</span></span></code></pre></div><ul>
+<li>If <code>rBgn</code> is still less than or equal to <code>rEnd</code>, traverse from <code>cEnd</code> to <code>cBgn</code> (the entire bottom row) and append each element to <code>ans</code>.</li>
+<li>After processing the bottom row, decrement <code>rEnd</code>.</li>
+</ul>
+<h4 id="step-7-traverse-from-bottom-to-top-up-the-left-column-if-valid">
+  Step 7: Traverse from Bottom to Top up the Left Column (If Valid)
+  <a class="heading-link" href="#step-7-traverse-from-bottom-to-top-up-the-left-column-if-valid">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(cBgn <span style="color:#f92672">&lt;=</span> cEnd)            
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> rEnd; i <span style="color:#f92672">&gt;=</span> rBgn; i<span style="color:#f92672">--</span>)
+</span></span><span style="display:flex;"><span>        ans.push_back(mtx[i][cBgn]);
+</span></span><span style="display:flex;"><span>cBgn<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>If <code>cBgn</code> is still less than or equal to <code>cEnd</code>, traverse from <code>rEnd</code> to <code>rBgn</code> (the entire left column) and append each element to <code>ans</code>.</li>
+<li>After processing the left column, increment <code>cBgn</code>.</li>
+</ul>
+<h4 id="step-8-return-the-result">
+  Step 8: Return the Result
+  <a class="heading-link" href="#step-8-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>Once all elements are traversed, return <code>ans</code>, which contains the elements in spiral order.</li>
+</ul>
+<h3 id="-complexity-analysis">
+  📊 <strong>Complexity Analysis</strong>
+  <a class="heading-link" href="#-complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: ( O(m \times n) ), where ( m ) is the number of rows and ( n ) is the number of columns in the matrix, since we visit each element once.</li>
-<li><strong>Space Complexity</strong>: ( O(m \times n) ), for storing the result vector with all matrix elements.</li>
+<li><strong>O(n * m):</strong> The algorithm visits each element of the matrix exactly once, where <code>n</code> is the number of rows and <code>m</code> is the number of columns. Therefore, the time complexity is O(n * m).</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n * m):</strong> The space complexity is due to storing the result vector <code>ans</code>, which holds all the elements of the matrix. Thus, the space complexity is O(n * m).</li>
+</ul>
+<h3 id="-conclusion">
+  🌟 <strong>Conclusion</strong>
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution uses an efficient <strong>four-pointer approach</strong> to solve the <strong>spiral matrix traversal</strong> problem. The algorithm traverses the matrix layer by layer, updating the boundaries as it goes. With a time complexity of <strong>O(n * m)</strong> and space complexity of <strong>O(n * m)</strong>, this solution is optimal for large matrices, ensuring a single pass through the matrix while minimizing the use of additional space.</p>
+<p>This approach is widely applicable for problems involving spiral traversals or grid-based navigation, making it a valuable tool in algorithmic problem-solving.</p>
+<hr>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1205s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1206s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

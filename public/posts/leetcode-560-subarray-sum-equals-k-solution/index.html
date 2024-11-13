@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -245,60 +245,125 @@
   
   <div class="markdown-body">
     <h3 id="problem-statement">
-  Problem Statement
+  Problem Statement:
   <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer array <code>nums</code> and an integer <code>k</code>, return the total number of continuous subarrays whose sum equals <code>k</code>.</p>
+<p>The task is to find the number of subarrays in a given array of integers <code>nums</code> whose sum equals a given integer <code>k</code>. A subarray is any contiguous section of the array. This is a typical problem that can be solved efficiently using a combination of hashing and prefix sums.</p>
 <h3 id="approach">
-  Approach
+  Approach:
   <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Prefix Sum and HashMap</strong>:</p>
+<p>This problem can be efficiently solved using a <strong>prefix sum</strong> approach combined with a <strong>hash map</strong> (unordered map). The idea is to maintain the sum of all elements from the beginning of the array up to each point, and store the number of times each sum occurs. If the difference between the current prefix sum and <code>k</code> has been seen before, it means there is a subarray whose sum equals <code>k</code>.</p>
+<h4 id="key-observations">
+  Key Observations:
+  <a class="heading-link" href="#key-observations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li>Use a hash map (<code>unordered_map</code>) to store the cumulative sum (prefix sum) encountered so far and their respective counts.</li>
-<li>Initialize the hash map with the key <code>0</code> set to <code>1</code>, which accounts for the case where a subarray sum equals <code>k</code> starting from the beginning of the array.</li>
+<li><strong>Prefix Sum:</strong> The sum of elements from the start of the array up to a particular index.</li>
+<li><strong>HashMap (unordered_map):</strong> It helps to keep track of how many times each prefix sum has occurred.</li>
 </ul>
-</li>
-<li>
-<p><strong>Iterate Through the Array</strong>:</p>
-<ul>
-<li>For each element in the array, update the cumulative sum.</li>
-<li>Check if the difference between the current cumulative sum and <code>k</code> exists in the hash map. If it does, it indicates the presence of a subarray that sums to <code>k</code>, and you increment the count accordingly.</li>
-<li>Update the hash map with the current cumulative sum.</li>
-</ul>
-</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>The algorithm works by iterating through the array while maintaining a running sum (<code>sum</code>). If at any point the difference <code>sum - k</code> has appeared previously in the array, it means that there exists a subarray that sums to <code>k</code>. By counting how many times <code>sum - k</code> has appeared, we can determine how many subarrays end at the current index that sum to <code>k</code>.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The function <code>subarraySum</code> initializes the result counter <code>res</code> and the hash map <code>mp</code>.</li>
-<li>As it iterates through <code>nums</code>, it maintains a running sum and checks for previous sums that would form a subarray summing to <code>k</code>.</li>
-<li>Finally, the function returns the count of such subarrays.</li>
-</ul>
+<h4 id="step-1-initialize-result-and-data-structures">
+  Step 1: Initialize Result and Data Structures
+  <a class="heading-link" href="#step-1-initialize-result-and-data-structures">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// Variable to store the final count of subarrays
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;  <span style="color:#75715e">// HashMap to store the count of prefix sums
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>mp[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// We initialize with 0 to handle cases where a subarray starting from index 0 sums to k
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// sum tracks the running sum of elements; cnt is for counting subarrays
+</span></span></span></code></pre></div><p>Here, <code>res</code> is the variable that will store the final result. The map <code>mp</code> is initialized to store the frequency of prefix sums encountered during iteration. We start by assuming that the sum of 0 has occurred once, which is necessary for cases where a subarray itself directly sums to <code>k</code> from the beginning. <code>sum</code> holds the running total as we iterate through <code>nums</code>, and <code>cnt</code> tracks how many subarrays we&rsquo;ve found.</p>
+<h4 id="step-2-iterate-over-the-array-and-calculate-prefix-sums">
+  Step 2: Iterate Over the Array and Calculate Prefix Sums
+  <a class="heading-link" href="#step-2-iterate-over-the-array-and-calculate-prefix-sums">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    sum <span style="color:#f92672">+=</span> nums[i];  <span style="color:#75715e">// Update the running sum with the current element
+</span></span></span></code></pre></div><p>We start iterating through the array. At each step, we add the current element <code>nums[i]</code> to <code>sum</code>, which gives the prefix sum up to index <code>i</code>.</p>
+<h4 id="step-3-check-for-subarrays-with-sum-equal-to-k">
+  Step 3: Check for Subarrays with Sum Equal to k
+  <a class="heading-link" href="#step-3-check-for-subarrays-with-sum-equal-to-k">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mp.count(sum <span style="color:#f92672">-</span> k)) cnt <span style="color:#f92672">+=</span> mp[sum <span style="color:#f92672">-</span> k];  <span style="color:#75715e">// If sum - k has been seen, it means we have a valid subarray
+</span></span></span></code></pre></div><p>We check if <code>sum - k</code> is a key in the hash map <code>mp</code>. If it is, it means there exists a previous prefix sum such that the difference between the current sum and this previous sum equals <code>k</code>. This means we have found a subarray with sum <code>k</code>. We increment <code>cnt</code> by the frequency of <code>sum - k</code> in <code>mp</code> because each occurrence of <code>sum - k</code> represents a valid subarray that ends at the current index.</p>
+<h4 id="step-4-update-the-hashmap-with-the-current-prefix-sum">
+  Step 4: Update the HashMap with the Current Prefix Sum
+  <a class="heading-link" href="#step-4-update-the-hashmap-with-the-current-prefix-sum">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mp[sum] <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Increment the count of the current prefix sum in the hash map
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><p>Finally, we update the hash map to record the occurrence of the current <code>sum</code>. This allows us to track how many times each prefix sum has appeared so far.</p>
+<h4 id="step-5-return-the-result">
+  Step 5: Return the Result
+  <a class="heading-link" href="#step-5-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> cnt;  <span style="color:#75715e">// Return the total count of subarrays found
+</span></span></span></code></pre></div><p>After processing all elements in the array, we return the value of <code>cnt</code>, which contains the total number of subarrays that sum to <code>k</code>.</p>
 <h3 id="complexity">
-  Complexity
+  Complexity:
   <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where <code>n</code> is the length of the array. Each element is processed once.</li>
-<li><strong>Space Complexity</strong>: O(n) in the worst case, for storing the prefix sums in the hash map.</li>
+<li><strong>O(n):</strong> We iterate through the array exactly once, and for each element, we perform constant-time operations: updating the running sum and checking/updating the hash map. Since hash map operations (insertion, lookup) are on average O(1), the overall time complexity is O(n), where <code>n</code> is the size of the input array <code>nums</code>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n):</strong> In the worst case, the hash map can store up to <code>n</code> different prefix sums (if every sum encountered is unique). Therefore, the space complexity is O(n).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach leverages the efficiency of prefix sums and hash maps to solve the problem in linear time. By maintaining a cumulative sum and storing the frequency of each sum, we can quickly check for subarrays that sum to <code>k</code>. This technique is optimal and well-suited for solving problems involving subarrays and cumulative sums, providing both time and space efficiency.</p>
  
 </div>
   

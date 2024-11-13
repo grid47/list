@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              7-minute read
             </span>
           </div>
 
@@ -221,7 +221,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1142s0hbhb">
+        <h2 id="hahahugoshortcode1140s0hbhb">
   <a href="https://leetcode.com/problems/pacific-atlantic-water-flow/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -236,7 +236,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1142s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1140s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -279,7 +279,7 @@
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1142s2hbhb">
+<h2 id="hahahugoshortcode1140s2hbhb">
   
 
   
@@ -291,7 +291,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an <code>m x n</code> matrix <code>heights</code> representing the elevation of each cell in a grid, find all the coordinates where water can flow to both the Pacific and Atlantic oceans. Water can flow from a cell to an adjacent cell (up, down, left, right) if the adjacent cell&rsquo;s elevation is equal to or lower than the current cell&rsquo;s elevation.</p>
+<p>The problem asks us to find all the coordinates in a given matrix of heights where water can flow to both the Pacific and Atlantic oceans. The matrix represents an elevation map where each cell contains the height of that point. Water can flow from a cell to its neighboring cell if the height of the neighboring cell is greater than or equal to the current cell&rsquo;s height. The task is to return all the coordinates where water can flow to both oceans. The Pacific Ocean touches the left and top borders, while the Atlantic Ocean touches the right and bottom borders.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -299,34 +299,125 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The approach to solving this problem uses depth-first search (DFS) and two separate DFS traversals: one for the Pacific Ocean and one for the Atlantic Ocean. The idea is to track which cells can flow into each ocean by starting from the borders corresponding to each ocean and using DFS to propagate possible water flows.</p>
+<p>Here’s the step-by-step approach:</p>
 <ol>
-<li><strong>Initialization</strong>: Create two boolean matrices <code>pac</code> and <code>atl</code> to keep track of which cells can flow to the Pacific and Atlantic oceans, respectively.</li>
-<li><strong>DFS Traversal</strong>:
+<li>
+<p><strong>Initial Setup</strong>:</p>
 <ul>
-<li>Perform Depth First Search (DFS) from the borders of the grid:
-<ul>
-<li>For the Pacific Ocean, start from the top row (row 0) and the left column (column 0).</li>
-<li>For the Atlantic Ocean, start from the bottom row (row <code>m - 1</code>) and the right column (column <code>n - 1</code>).</li>
+<li>We have a grid <code>heights</code> with dimensions <code>m x n</code> representing the elevation of different cells.</li>
+<li>We need to determine for each cell whether water can flow to the Pacific and/or Atlantic oceans.</li>
 </ul>
 </li>
+<li>
+<p><strong>Water Flow Direction</strong>:</p>
+<ul>
+<li>Water can only flow to neighboring cells (up, down, left, or right) if the neighboring cell&rsquo;s height is greater than or equal to the current cell&rsquo;s height.</li>
+<li>We will start from the borders of the matrix: the top and left borders for the Pacific Ocean, and the bottom and right borders for the Atlantic Ocean.</li>
 </ul>
 </li>
-<li><strong>Check Flow Conditions</strong>: During the DFS, mark a cell as visited if it can flow to the respective ocean. From each cell, check its adjacent cells (up, down, left, right) to see if the water can flow based on the elevation condition.</li>
-<li><strong>Collect Results</strong>: After completing the DFS for both oceans, iterate through the matrices <code>pac</code> and <code>atl</code> to collect the coordinates of the cells that can flow to both oceans.</li>
+<li>
+<p><strong>DFS Traversal</strong>:</p>
+<ul>
+<li>We will use DFS to propagate possible water flows from the borders to the inner cells, marking cells that can flow to the corresponding ocean.</li>
+<li>The DFS is initiated from all cells along the Pacific and Atlantic borders.</li>
+</ul>
+</li>
+<li>
+<p><strong>Result Calculation</strong>:</p>
+<ul>
+<li>After running the DFS for both oceans, the final answer will consist of the coordinates of cells that can flow to both the Pacific and Atlantic oceans. These are the cells where both the corresponding matrices (one for Pacific and one for Atlantic) are marked <code>true</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The DFS runs in <code>O(m * n)</code> time for each ocean, where <code>m</code> and <code>n</code> are the number of rows and columns in the matrix. Since we perform two DFS traversals, the time complexity is <code>O(2 * m * n)</code> or simply <code>O(m * n)</code>.</li>
+</ul>
+</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Input Dimensions</strong>: Determine the dimensions of the <code>heights</code> matrix.</li>
-<li><strong>Initialize Visited Matrices</strong>: Create two <code>m x n</code> matrices to track visited cells for both oceans.</li>
-<li><strong>DFS Calls</strong>: Call the <code>dfs</code> function for the borders corresponding to both oceans.</li>
-<li><strong>Final Result Compilation</strong>: Create a result vector and add the coordinates of cells that can flow to both oceans based on the boolean matrices.</li>
-</ol>
+<h4 id="step-1-initializing-helper-data-structures">
+  Step 1: Initializing Helper Data Structures
+  <a class="heading-link" href="#step-1-initializing-helper-data-structures">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> heights.size(), n <span style="color:#f92672">=</span> heights[<span style="color:#ae81ff">0</span>].size();
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;&gt;</span> pac(m, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span>(n, false));
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;&gt;</span> atl(m, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;</span>(n, false));
+</span></span></code></pre></div><ul>
+<li>We calculate the dimensions <code>m</code> and <code>n</code> of the matrix <code>heights</code>.</li>
+<li>We initialize two 2D boolean matrices, <code>pac</code> and <code>atl</code>, each of size <code>m x n</code>. These matrices will be used to track which cells can flow to the Pacific Ocean (<code>pac</code>) and the Atlantic Ocean (<code>atl</code>). All cells are initially marked as <code>false</code>.</li>
+</ul>
+<h4 id="step-2-dfs-for-pacific-and-atlantic-ocean">
+  Step 2: DFS for Pacific and Atlantic Ocean
+  <a class="heading-link" href="#step-2-dfs-for-pacific-and-atlantic-ocean">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    dfs(heights, pac, <span style="color:#ae81ff">0</span>, j);
+</span></span><span style="display:flex;"><span>    dfs(heights, atl, m <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, j);            
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> m; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    dfs(heights, pac, j, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    dfs(heights, atl, j, n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);            
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The outer loops iterate through the borders of the matrix. The Pacific Ocean touches the top row (<code>0, j</code>) and the left column (<code>j, 0</code>), so we initiate DFS from these cells to propagate possible water flow.</li>
+<li>Similarly, the Atlantic Ocean touches the bottom row (<code>m - 1, j</code>) and the right column (<code>j, n - 1</code>), so we initiate DFS from these cells for the Atlantic Ocean.</li>
+</ul>
+<h4 id="step-3-dfs-function-for-propagating-water-flow">
+  Step 3: DFS Function for Propagating Water Flow
+  <a class="heading-link" href="#step-3-dfs-function-for-propagating-water-flow">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">dfs</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> h, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span><span style="color:#f92672">&gt;&gt;</span> <span style="color:#f92672">&amp;</span>vis, <span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j) {
+</span></span><span style="display:flex;"><span>    vis[i][j] <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>vis[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][j] <span style="color:#f92672">&amp;&amp;</span> h[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][j] <span style="color:#f92672">&gt;=</span> h[i][j])
+</span></span><span style="display:flex;"><span>        dfs(h, vis, i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, j);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(j <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>vis[i][j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">&amp;&amp;</span> h[i][j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">&gt;=</span> h[i][j])
+</span></span><span style="display:flex;"><span>        dfs(h, vis, i, j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&lt;</span> h.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>vis[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][j] <span style="color:#f92672">&amp;&amp;</span> h[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][j] <span style="color:#f92672">&gt;=</span> h[i][j])
+</span></span><span style="display:flex;"><span>        dfs(h, vis, i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, j);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(j <span style="color:#f92672">&lt;</span> h[<span style="color:#ae81ff">0</span>].size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>vis[i][j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">&amp;&amp;</span> h[i][j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">&gt;=</span> h[i][j])
+</span></span><span style="display:flex;"><span>        dfs(h, vis, i, j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The DFS function is called for each cell. The <code>vis</code> matrix tracks the visited cells for the given ocean (<code>pac</code> or <code>atl</code>).</li>
+<li>At each cell <code>(i, j)</code>, we mark it as visited (<code>vis[i][j] = true</code>).</li>
+<li>The DFS continues to neighboring cells in the up, down, left, and right directions if the neighboring cell has a greater or equal height (<code>h[i - 1][j] &gt;= h[i][j]</code> for up, and similarly for other directions).</li>
+<li>This recursive propagation ensures that all cells that can flow to the respective ocean (Pacific or Atlantic) are marked.</li>
+</ul>
+<h4 id="step-4-collecting-the-result">
+  Step 4: Collecting the Result
+  <a class="heading-link" href="#step-4-collecting-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> ans;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(pac[i][j] <span style="color:#f92672">&amp;&amp;</span> atl[i][j])
+</span></span><span style="display:flex;"><span>            ans.push_back({i, j});
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>After both DFS traversals are complete, we iterate through the matrix.</li>
+<li>For each cell <code>(i, j)</code>, if the cell can flow to both the Pacific (<code>pac[i][j] == true</code>) and Atlantic oceans (<code>atl[i][j] == true</code>), we add the cell coordinates to the result vector <code>ans</code>.</li>
+<li>Finally, we return the result vector <code>ans</code>, which contains all the coordinates where water can flow to both oceans.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -334,14 +425,42 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(m * n), where <code>m</code> is the number of rows and <code>n</code> is the number of columns. Each cell is visited a constant number of times.</li>
-<li><strong>Space Complexity</strong>: O(m * n) for the boolean matrices and the recursion stack in the DFS.</li>
-</ul> 
+<li><strong>DFS Complexity</strong>: For each DFS traversal, we visit every cell once, making the time complexity for one DFS <code>O(m * n)</code>, where <code>m</code> and <code>n</code> are the number of rows and columns of the matrix.</li>
+<li><strong>Overall Complexity</strong>: Since we perform two DFS traversals (one for the Pacific Ocean and one for the Atlantic Ocean), the overall time complexity is <code>O(2 * m * n)</code> or simply <code>O(m * n)</code>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We use two 2D matrices (<code>pac</code> and <code>atl</code>) to track whether each cell can reach the respective ocean. Each matrix takes <code>O(m * n)</code> space.</li>
+<li>The recursion stack for DFS can also take up to <code>O(m * n)</code> space in the worst case.</li>
+<li>Thus, the overall space complexity is <code>O(m * n)</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution effectively solves the problem of finding cells where water can flow to both the Pacific and Atlantic oceans by using depth-first search (DFS). The approach involves marking cells that can reach each ocean, and then collecting the coordinates where both oceans can be reached. The time and space complexity of the solution are both optimal for this problem, making it efficient even for larger matrices.</p>
+ 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1142s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1140s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

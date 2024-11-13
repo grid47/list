@@ -217,7 +217,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -258,7 +258,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1298s1hbhb">
+<h2 id="hahahugoshortcode1300s1hbhb">
   
 
   
@@ -270,7 +270,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given a directed graph represented as an array of edges <code>times</code>, where each edge is a triplet <code>(u, v, w)</code> indicating that there is a directed edge from node <code>u</code> to node <code>v</code> with a weight (or time delay) of <code>w</code>. The goal is to determine the time it takes for a signal sent from a starting node <code>k</code> to reach all <code>n</code> nodes in the network.</p>
+<p>The problem at hand asks us to determine the <strong>network delay time</strong> in a directed graph, where each edge represents the time it takes for a signal to travel from one node to another. You are given:</p>
+<ul>
+<li>A directed graph in the form of a list of edges where each edge is represented by <code>[u, v, w]</code>, which means there is a directed edge from node <code>u</code> to node <code>v</code> with a travel time of <code>w</code>.</li>
+<li>A number <code>n</code> representing the total number of nodes in the graph.</li>
+<li>A starting node <code>k</code> from where the signal starts to travel.</li>
+</ul>
+<p>The goal is to compute the time it will take for a signal to reach all nodes from the starting node <code>k</code>, or return <code>-1</code> if some nodes cannot be reached.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -278,98 +284,148 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we can apply <strong>Dijkstra&rsquo;s Algorithm</strong> — a well-known algorithm for finding the shortest paths from a source node to all other nodes in a graph with non-negative weights. The idea behind Dijkstra’s Algorithm is to always choose the node with the shortest known path to expand next. We will use a <strong>priority queue</strong> (or min-heap) to implement this behavior.</p>
+<h4 id="key-steps">
+  Key Steps:
+  <a class="heading-link" href="#key-steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Graph Representation</strong>:</p>
-<ul>
-<li>Use a map of maps (adjacency list) to represent the directed graph. The outer map represents the source node, and the inner map contains destination nodes with their corresponding weights.</li>
-</ul>
+<p><strong>Graph Representation</strong>: We need a way to store the graph. The problem specifies that it’s a directed graph, and the weights (times) are given for each edge. We can use a <strong>map of maps</strong> to represent the graph efficiently. Each node will point to another map, which maps the neighboring nodes to the edge weights.</p>
 </li>
 <li>
-<p><strong>Priority Queue</strong>:</p>
-<ul>
-<li>Use a min-heap (priority queue) to process nodes based on the current known minimum time to reach each node.</li>
-<li>The queue stores pairs of the form <code>(current time, node)</code>.</li>
-</ul>
+<p><strong>Priority Queue (Min-Heap)</strong>: Dijkstra’s algorithm relies on a priority queue to ensure we always process the node with the smallest current distance. In this case, we will use a <strong>min-heap</strong> (implemented with <code>priority_queue</code> in C++) to store pairs of <code>(time, node)</code> where <code>time</code> represents the current known shortest time to reach <code>node</code>.</p>
 </li>
 <li>
-<p><strong>Dijkstra&rsquo;s Algorithm</strong>:</p>
-<ul>
-<li>Initialize the priority queue with the starting node <code>k</code> and a time of <code>0</code>.</li>
-<li>Maintain a visited array to track which nodes have been processed.</li>
-<li>While the priority queue is not empty:
-<ul>
-<li>Pop the node with the smallest time.</li>
-<li>If the node has already been visited, skip it.</li>
-<li>Mark the node as visited and decrement the remaining nodes to visit.</li>
-<li>If all nodes are visited, return the current time.</li>
-<li>For each neighboring node, push the updated time into the priority queue.</li>
-</ul>
-</li>
-</ul>
+<p><strong>Visited Set</strong>: To avoid processing the same node more than once, we will maintain a visited set to mark the nodes that have already been processed.</p>
 </li>
 <li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>If not all nodes are reachable, return <code>-1</code>.</li>
-</ul>
+<p><strong>Processing Nodes</strong>: We start by pushing the source node <code>k</code> into the priority queue with a time of <code>0</code>. Then, we repeatedly extract the node with the smallest time from the priority queue and update the times of its neighbors. If a shorter path to a neighbor is found, it is pushed into the queue.</p>
+</li>
+<li>
+<p><strong>Termination</strong>: The algorithm terminates when all nodes are visited, or if some nodes are unreachable (in which case we return <code>-1</code>).</p>
 </li>
 </ol>
-<h3 id="complexity">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-the-graph">
+  Step 1: Initialize the Graph
+  <a class="heading-link" href="#step-1-initialize-the-graph">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We represent the graph using a map of maps where each key-value pair consists of:</p>
+<ul>
+<li>The outer map&rsquo;s key represents a source node.</li>
+<li>The inner map&rsquo;s key represents a destination node.</li>
+<li>The inner map&rsquo;s value represents the weight (time) of the edge between the two nodes.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> times.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    mp[times[i][<span style="color:#ae81ff">0</span>]][times[i][<span style="color:#ae81ff">1</span>]] <span style="color:#f92672">=</span> times[i][<span style="color:#ae81ff">2</span>];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="step-2-initialize-the-priority-queue">
+  Step 2: Initialize the Priority Queue
+  <a class="heading-link" href="#step-2-initialize-the-priority-queue">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We initialize the priority queue with the source node <code>k</code> and set its initial travel time to <code>0</code>. We also initialize a visited array to keep track of whether a node has been processed.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>priority_queue<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>, vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>, greater<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;</span> pq;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> vis(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>pq.push(make_pair(<span style="color:#ae81ff">0</span>, k));  <span style="color:#75715e">// Starting node k with time 0
+</span></span></span></code></pre></div><h4 id="step-3-process-nodes-using-the-priority-queue">
+  Step 3: Process Nodes Using the Priority Queue
+  <a class="heading-link" href="#step-3-process-nodes-using-the-priority-queue">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>While the priority queue is not empty, we extract the node with the smallest time from the queue and check if it has already been processed (i.e., if it&rsquo;s in the visited set). If it has, we continue to the next iteration. If not, we mark it as visited and decrease the number of nodes we need to visit.</p>
+<p>If all nodes are processed (i.e., <code>n == 0</code>), we return the current time of the top of the queue, which represents the latest time it took for all nodes to be visited.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> pq.top();
+</span></span><span style="display:flex;"><span>    pq.pop();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (vis[it.second]) <span style="color:#66d9ef">continue</span>;  <span style="color:#75715e">// Skip already visited nodes
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    vis[it.second] <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>    n<span style="color:#f92672">--</span>;  <span style="color:#75715e">// Decrement the remaining nodes
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (n <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> it.first;  <span style="color:#75715e">// If all nodes are visited, return the current time
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Explore neighbors
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (mp.count(it.second))
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> [key, val] <span style="color:#f92672">:</span> mp[it.second]) {
+</span></span><span style="display:flex;"><span>            pq.push(make_pair(val <span style="color:#f92672">+</span> it.first, key));  <span style="color:#75715e">// Push the new path with updated time
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="step-4-handle-unreachable-nodes">
+  Step 4: Handle Unreachable Nodes
+  <a class="heading-link" href="#step-4-handle-unreachable-nodes">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>If after processing all nodes, not all nodes have been visited (i.e., some nodes are still unreachable), we return <code>-1</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(E log V), where E is the number of edges and V is the number of nodes. The logarithmic factor comes from the priority queue operations.</li>
-<li><strong>Space Complexity</strong>: O(V + E) for storing the graph and the priority queue.</li>
+<li><strong>O((E + V) log V)</strong>, where <code>E</code> is the number of edges and <code>V</code> is the number of nodes.
+<ul>
+<li><code>E</code> comes from processing each edge once.</li>
+<li><code>V</code> comes from processing each node once, and the <code>log V</code> factor arises from the operations on the priority queue (inserting and extracting nodes).</li>
 </ul>
-<h3 id="example">
-  Example
-  <a class="heading-link" href="#example">
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(V + E)</strong>, where <code>V</code> is the number of nodes and <code>E</code> is the number of edges.
+<ul>
+<li>We store the graph using a map of maps, which takes <strong>O(E)</strong> space.</li>
+<li>The priority queue and visited array also take <strong>O(V)</strong> space.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>For <code>times = [[2,1,1],[2,3,1],[3,4,1]]</code>, <code>n = 4</code>, and <code>k = 2</code>:</p>
-<ul>
-<li>Start from node <code>2</code>:
-<ul>
-<li>Signal reaches <code>1</code> in <code>1</code> time unit.</li>
-<li>Signal reaches <code>3</code> in <code>1</code> time unit.</li>
-<li>Signal reaches <code>4</code> in <code>2</code> time units (from <code>3</code>).</li>
-</ul>
-</li>
-<li>Total time for all nodes to receive the signal is <code>2</code>.</li>
-</ul>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ul>
-<li>
-<p><strong>Class</strong>:</p>
-<ul>
-<li><code>class Solution</code>: Contains the main method for processing the graph.</li>
-</ul>
-</li>
-<li>
-<p><strong>Method</strong>:</p>
-<ul>
-<li><code>int networkDelayTime(vector&lt;vector&lt;int&gt;&gt;&amp; times, int n, int k)</code>: Implements the Dijkstra&rsquo;s algorithm to calculate the maximum delay for the signal to reach all nodes.</li>
-</ul>
-</li>
-</ul>
+<p>This solution uses a priority queue (min-heap) to efficiently find the shortest path from a starting node to all other nodes in the graph, making it an optimal solution to the network delay problem. By applying Dijkstra&rsquo;s Algorithm, we ensure that we can calculate the minimum time for a signal to reach all nodes or determine that some nodes are unreachable. The solution is efficient with a time complexity of <strong>O((E + V) log V)</strong>, making it suitable for large graphs, and provides an accurate and optimal result for the problem.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1298s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1300s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

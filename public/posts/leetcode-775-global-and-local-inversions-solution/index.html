@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -237,7 +237,21 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Determine if the given permutation <code>nums</code> is an &ldquo;ideal&rdquo; permutation. A permutation is considered ideal if no element is greater than any element that appears two positions after it.</p>
+<p>The task at hand is to determine whether a given permutation of integers can be classified as &ldquo;ideal.&rdquo; In the context of this problem, an &ldquo;ideal&rdquo; permutation is defined by the property that for every index <code>i</code>, the largest number in the subarray <code>nums[0]</code> to <code>nums[i]</code> must not exceed the element at index <code>i + 2</code>. More formally, if the permutation is ideal, for every index <code>i</code>, the following condition should hold:</p>
+<p>[ \text{max}(nums[0], nums[1], \dots, nums[i]) \leq nums[i+2] ]</p>
+<p>This problem requires us to check if this condition is satisfied for all possible indices in the array.</p>
+<p><strong>Example 1:</strong></p>
+<ul>
+<li>Input: <code>nums = [1, 0, 2, 3, 4]</code></li>
+<li>Output: <code>true</code></li>
+</ul>
+<p>Here, the array is ideal because for each <code>i</code>, the largest number up to index <code>i</code> is less than or equal to the number at index <code>i + 2</code>.</p>
+<p><strong>Example 2:</strong></p>
+<ul>
+<li>Input: <code>nums = [1, 2, 0, 3]</code></li>
+<li>Output: <code>false</code></li>
+</ul>
+<p>In this case, the condition is violated for <code>i = 0</code> because the largest number up to index <code>0</code> (which is <code>1</code>) is greater than <code>nums[2]</code> (which is <code>0</code>).</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -245,43 +259,74 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Iterate Through the Array</strong>:</p>
+<p>To solve this problem, we need to traverse the input array <code>nums</code> and, at each step, check whether the largest element in the subarray from index <code>0</code> to <code>i</code> is less than or equal to the element at index <code>i + 2</code>. Specifically, we need to track the maximum value encountered so far while iterating through the array. If, at any point, we find that this maximum value exceeds <code>nums[i + 2]</code>, we return <code>false</code>, as the permutation cannot be ideal. If no such violation is found by the end of the loop, we return <code>true</code>.</p>
+<h4 id="detailed-explanation">
+  Detailed Explanation:
+  <a class="heading-link" href="#detailed-explanation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li>Maintain a variable <code>cmax</code> to track the maximum value encountered so far.</li>
-<li>Loop through the array from the start up to <code>n - 2</code> (to avoid out-of-bounds access).</li>
-<li>For each element at index <code>i</code>, update <code>cmax</code> to be the maximum of <code>cmax</code> and <code>nums[i]</code>.</li>
-<li>Check if <code>cmax</code> is greater than <code>nums[i + 2]</code>. If it is, return <code>false</code> since the condition for an ideal permutation is violated.</li>
+<li>We initialize <code>cmax</code> to store the maximum value encountered up to index <code>i</code>.</li>
+<li>For each index <code>i</code> from <code>0</code> to <code>n-3</code> (where <code>n</code> is the length of the array), we update <code>cmax</code> to be the maximum of <code>cmax</code> and <code>nums[i]</code>.</li>
+<li>Then, we check whether <code>cmax</code> exceeds <code>nums[i + 2]</code>. If it does, the array is not ideal, and we return <code>false</code>.</li>
+<li>If we complete the loop without finding any violations, the array is ideal, and we return <code>true</code>.</li>
 </ul>
-</li>
-<li>
-<p><strong>Final Return</strong>:</p>
-<ul>
-<li>If no violations are found during the iteration, return <code>true</code>.</li>
-</ul>
-</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>This approach ensures that we are checking all potential violations efficiently in a single pass through the array.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>
-<p><strong>Class</strong>:</p>
-<ul>
-<li><code>class Solution</code>: Contains the method for checking ideal permutations.</li>
+<h4 id="step-1-initialize-variables">
+  Step 1: Initialize Variables
+  <a class="heading-link" href="#step-1-initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cmax <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, n <span style="color:#f92672">=</span> nums.size();
+</span></span></code></pre></div><ul>
+<li><code>cmax</code> is initialized to <code>0</code> and will be used to track the maximum number encountered up to the current index <code>i</code>.</li>
+<li><code>n</code> stores the size of the input array <code>nums</code>.</li>
 </ul>
-</li>
-<li>
-<p><strong>Method</strong>:</p>
-<ul>
-<li><code>bool isIdealPermutation(vector&lt;int&gt;&amp; nums)</code>: Implements the logic to verify if the permutation is ideal.</li>
+<h4 id="step-2-iterate-through-the-array">
+  Step 2: Iterate Through the Array
+  <a class="heading-link" href="#step-2-iterate-through-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    cmax <span style="color:#f92672">=</span> max(cmax, nums[i]);
+</span></span></code></pre></div><ul>
+<li>We iterate through the array from <code>i = 0</code> to <code>i = n-3</code> (i.e., the second-to-last element).</li>
+<li>At each step, we update <code>cmax</code> to be the maximum of the current <code>cmax</code> and the current element <code>nums[i]</code>.</li>
 </ul>
-</li>
+<h4 id="step-3-check-the-ideal-condition">
+  Step 3: Check the Ideal Condition
+  <a class="heading-link" href="#step-3-check-the-ideal-condition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(cmax <span style="color:#f92672">&gt;</span> nums[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>]) <span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><ul>
+<li>After updating <code>cmax</code>, we check if it exceeds <code>nums[i + 2]</code>. If it does, the permutation is not ideal, and we return <code>false</code> immediately.</li>
+</ul>
+<h4 id="step-4-return-true-if-no-violations-are-found">
+  Step 4: Return True if No Violations are Found
+  <a class="heading-link" href="#step-4-return-true-if-no-violations-are-found">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> true;
+</span></span></code></pre></div><ul>
+<li>If the loop completes without returning <code>false</code>, it means that all the conditions for an ideal permutation are satisfied, so we return <code>true</code>.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -290,10 +335,47 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the length of the array, since it iterates through the array only once.</li>
-<li><strong>Space Complexity</strong>: O(1), as it uses a constant amount of space for variables.</li>
+<li><strong>O(n)</strong>: The time complexity of the solution is linear because we are iterating through the array once. For each element, we perform constant-time operations (updating <code>cmax</code> and comparing values).</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: The space complexity is constant because we are using a fixed amount of extra space (for the variables <code>cmax</code> and <code>n</code>). No additional data structures that grow with the input size are used.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution is optimal and highly efficient for determining if a given permutation is ideal. The key to solving this problem efficiently lies in the observation that we only need to keep track of the maximum value encountered up to each index. By checking this value against <code>nums[i + 2]</code> at each step, we can verify whether the permutation satisfies the condition for being ideal.</p>
+<h4 id="key-insights">
+  Key Insights:
+  <a class="heading-link" href="#key-insights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The condition for an ideal permutation can be checked by maintaining a running maximum (<code>cmax</code>) while traversing the array.</li>
+<li>The time complexity is <strong>O(n)</strong>, which ensures that the solution can handle large input sizes efficiently.</li>
+<li>The space complexity is <strong>O(1)</strong>, making the solution space-efficient as well.</li>
+</ul>
+<p>This method is not only time-efficient but also very intuitive. It uses a single pass to determine whether the condition for an ideal permutation holds across the entire array, ensuring a quick resolution to the problem.</p>
  
 </div>
   

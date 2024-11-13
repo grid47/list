@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -211,7 +211,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1336s0hbhb">
+        <h2 id="hahahugoshortcode1338s0hbhb">
   <a href="https://leetcode.com/problems/search-in-rotated-sorted-array-ii/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -226,7 +226,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1336s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1338s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -269,112 +269,200 @@
 </span></span><span style="display:flex;"><span>    }        
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1336s2hbhb">
+<h2 id="hahahugoshortcode1338s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-search-in-rotated-sorted-array-with-duplicates--lets-solve-it-together">
+  💡 <strong>Search in Rotated Sorted Array with Duplicates</strong> – Let’s Solve It Together!
+  <a class="heading-link" href="#-search-in-rotated-sorted-array-with-duplicates--lets-solve-it-together">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer array <code>nums</code> that may contain duplicates and an integer <code>target</code>, determine if <code>target</code> exists in the array. The array is sorted in ascending order but may have been rotated at some unknown pivot.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>The <strong>Search in Rotated Sorted Array</strong> problem is a common challenge in coding interviews. In this variation, the array has been rotated at an unknown pivot, and it may contain duplicates. The goal is to <strong>efficiently search for a target number</strong> in the rotated sorted array. Let’s dive into how we can solve this problem using an optimized approach.</p>
+<h3 id="-whats-the-problem">
+  📝 <strong>What’s the Problem?</strong>
+  <a class="heading-link" href="#-whats-the-problem">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>You&rsquo;re given:</p>
+<ul>
+<li>A rotated <strong>sorted array</strong> <code>nums</code> that may contain duplicates.</li>
+<li>A <strong>target</strong> number that we need to search for in the array.</li>
+</ul>
+<p>Our task is to <strong>determine whether the target exists</strong> in the array and return <code>true</code> if it is present, or <code>false</code> otherwise.</p>
+<h3 id="-approach-modified-binary-search">
+  🔍 <strong>Approach: Modified Binary Search</strong>
+  <a class="heading-link" href="#-approach-modified-binary-search">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we’ll use a <strong>modified binary search</strong> approach. The typical binary search assumes that the array is sorted and does not handle the complexities of rotation or duplicates well. However, with careful adjustments, we can efficiently find the target in a rotated sorted array with duplicates.</p>
+<h4 id="key-observations">
+  Key Observations:
+  <a class="heading-link" href="#key-observations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li>
-<p><strong>Binary Search with Adjustments</strong>:</p>
-<ul>
-<li>Use a modified binary search to handle the potential rotation and duplicates in the array.</li>
-</ul>
-</li>
-<li>
-<p><strong>Pointers Initialization</strong>:</p>
-<ul>
-<li>Initialize two pointers, <code>l</code> (left) and <code>r</code> (right), to denote the current search range.</li>
-</ul>
-</li>
-<li>
-<p><strong>Main Loop</strong>:</p>
-<ul>
-<li>While <code>l</code> is less than or equal to <code>r</code>:
-<ul>
-<li>Calculate the mid-point <code>mid</code> using the formula <code>mid = l + (r - l) / 2</code>.</li>
-<li>Check if <code>nums[mid]</code> is equal to <code>target</code>. If yes, return true.</li>
-<li>If <code>nums[l]</code>, <code>nums[mid]</code>, and <code>nums[r]</code> are all equal, increment <code>l</code> and decrement <code>r</code> to reduce the search space.</li>
-<li>Determine which half of the array is properly sorted:
-<ul>
-<li>If the left half (<code>nums[l]</code> to <code>nums[mid]</code>) is sorted:
-<ul>
-<li>Check if <code>target</code> is within this range. If so, search in the left half; otherwise, search in the right half.</li>
-</ul>
-</li>
-<li>If the right half (<code>nums[mid]</code> to <code>nums[r]</code>) is sorted:
-<ul>
-<li>Check if <code>target</code> is within this range. If so, search in the right half; otherwise, search in the left half.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>If the loop completes without finding the target, return false.</li>
-</ul>
-</li>
+<li><strong>The array is rotated</strong> at an unknown pivot.</li>
+<li><strong>Duplicates are present</strong>, which complicates the search process.</li>
+<li><strong>Binary Search</strong> must be modified to handle both the rotation and duplicates.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Initialization</strong>: Start with the left and right pointers at the beginning and end of the array, respectively.</p>
-</li>
-<li>
-<p><strong>Binary Search Logic</strong>:</p>
+<h4 id="step-1-function-definition">
+  Step 1: Function Definition
+  <a class="heading-link" href="#step-1-function-definition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> search(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> target) {
+</span></span></code></pre></div><ul>
+<li>We define the <code>search</code> function, which takes two parameters:
 <ul>
-<li>In each iteration, evaluate the middle element and adjust pointers based on whether the left or right halves are sorted.</li>
+<li><code>nums</code>: The rotated sorted array, which may contain duplicates.</li>
+<li><code>target</code>: The number we are looking for.</li>
 </ul>
 </li>
-<li>
-<p><strong>Handling Duplicates</strong>:</p>
-<ul>
-<li>If duplicates are encountered at both ends, adjust the search space by moving the left and right pointers inward.</li>
 </ul>
-</li>
-</ol>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-2-initializing-pointers">
+  Step 2: Initializing Pointers
+  <a class="heading-link" href="#step-2-initializing-pointers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> l <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> r <span style="color:#f92672">=</span> nums.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize two pointers, <code>l</code> (left) and <code>r</code> (right), to the first and last indices of the array, respectively.</li>
+</ul>
+<h4 id="step-3-while-loop-for-binary-search">
+  Step 3: While Loop for Binary Search
+  <a class="heading-link" href="#step-3-while-loop-for-binary-search">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (l <span style="color:#f92672">&lt;=</span> r) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> l <span style="color:#f92672">+</span> (r <span style="color:#f92672">-</span> l) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (nums[mid] <span style="color:#f92672">==</span> target)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
+</span></span></code></pre></div><ul>
+<li>The <code>while</code> loop runs as long as <code>l</code> is less than or equal to <code>r</code>.</li>
+<li>We calculate the midpoint <code>mid</code> using <code>l + (r - l) / 2</code> to avoid overflow. If the element at <code>mid</code> equals the target, we return <code>true</code>.</li>
+</ul>
+<h4 id="step-4-handling-duplicates">
+  Step 4: Handling Duplicates
+  <a class="heading-link" href="#step-4-handling-duplicates">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ((nums[l] <span style="color:#f92672">==</span> nums[mid]) <span style="color:#f92672">&amp;&amp;</span> (nums[r] <span style="color:#f92672">==</span> nums[mid])) {
+</span></span><span style="display:flex;"><span>    l<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    r<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If both the left (<code>nums[l]</code>) and right (<code>nums[r]</code>) elements are equal to the middle element (<code>nums[mid]</code>), we cannot definitively determine the sorted half because of duplicates.</li>
+<li>We adjust the search range by incrementing <code>l</code> and decrementing <code>r</code>, effectively narrowing the search window.</li>
+</ul>
+<h4 id="step-5-standard-binary-search-adjustments">
+  Step 5: Standard Binary Search Adjustments
+  <a class="heading-link" href="#step-5-standard-binary-search-adjustments">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (nums[l] <span style="color:#f92672">&lt;=</span> nums[mid]) {
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Target is in the first half
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> ((nums[l] <span style="color:#f92672">&lt;=</span> target) <span style="color:#f92672">&amp;&amp;</span> (nums[mid] <span style="color:#f92672">&gt;</span> target))
+</span></span><span style="display:flex;"><span>        r <span style="color:#f92672">=</span> mid <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        l <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If the left side of the array is sorted (<code>nums[l] &lt;= nums[mid]</code>), we check if the target is in the first half of the array. If the target is in the range between <code>nums[l]</code> and <code>nums[mid]</code>, we adjust the right pointer (<code>r = mid - 1</code>), otherwise, we adjust the left pointer (<code>l = mid + 1</code>).</li>
+</ul>
+<h4 id="step-6-handling-the-right-half-of-the-array">
+  Step 6: Handling the Right Half of the Array
+  <a class="heading-link" href="#step-6-handling-the-right-half-of-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ((nums[mid] <span style="color:#f92672">&lt;</span> target) <span style="color:#f92672">&amp;&amp;</span> (nums[r] <span style="color:#f92672">&gt;=</span> target))
+</span></span><span style="display:flex;"><span>        l <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        r <span style="color:#f92672">=</span> mid <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If the right side of the array is sorted (<code>nums[mid] &lt; nums[r]</code>), we check if the target is in the right half. If the target lies within <code>nums[mid]</code> and <code>nums[r]</code>, we move the left pointer (<code>l = mid + 1</code>), otherwise, we adjust the right pointer (<code>r = mid - 1</code>).</li>
+</ul>
+<h4 id="step-7-return-statement">
+  Step 7: Return Statement
+  <a class="heading-link" href="#step-7-return-statement">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><ul>
+<li>If we exit the loop without finding the target, we return <code>false</code>, indicating that the target is not in the array.</li>
+</ul>
+<h3 id="-time-and-space-complexity">
+  ⏱️ <strong>Time and Space Complexity</strong>
+  <a class="heading-link" href="#-time-and-space-complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity:</strong> ( O(n) ) in the worst case due to duplicates causing linear scanning.</li>
-<li><strong>Space Complexity:</strong> ( O(1) ) as no additional space is required apart from the input variables.</li>
-</ul>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity is <strong>O(n)</strong> in the worst case. Although binary search typically operates in <strong>O(log n)</strong>, the presence of duplicates can degrade performance. In certain cases, when duplicates are encountered at both ends, the algorithm may fall back to a linear search, making the time complexity <strong>O(n)</strong> in the worst case.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(1)</strong> because we use a constant amount of extra space for variables such as <code>l</code>, <code>r</code>, and <code>mid</code>. The algorithm performs in-place searches, which means it doesn’t require additional memory for data structures.</p>
+<h3 id="-conclusion">
+  🚀 <strong>Conclusion</strong>
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently handles the search for a target in a rotated sorted array with duplicates. By modifying the typical binary search to handle duplicates, we ensure that we don&rsquo;t miss any potential targets. While the worst-case time complexity can be linear due to duplicates, this solution remains highly effective and optimal for most scenarios.</p>
+<p>Keep in mind that while the algorithm might degrade to a linear search in rare cases, it still provides an efficient solution for moderate-sized arrays. Happy coding! 💻🌟</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1336s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1338s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

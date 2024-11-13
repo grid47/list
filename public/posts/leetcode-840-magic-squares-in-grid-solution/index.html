@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -256,7 +256,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1368s1hbhb">
+<h2 id="hahahugoshortcode1355s1hbhb">
   
 
   
@@ -268,7 +268,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a 2D grid of integers, your task is to count the number of 3x3 magic squares that can be found within the grid. A magic square is defined as a 3x3 grid where the sum of the numbers in each row, column, and both main diagonals is the same, and all numbers are distinct and between 1 and 9 inclusive.</p>
+<p>The problem asks to find the number of &ldquo;magic squares&rdquo; within a given 2D grid. A &ldquo;magic square&rdquo; is defined as a 3x3 subgrid that contains all numbers from 1 to 9 exactly once, and where the sums of the numbers in every row, column, and both diagonals are the same.</p>
+<p>Given an <code>m x n</code> grid, the goal is to determine how many 3x3 subgrids within the grid form a magic square. If a 3x3 subgrid meets the criteria of a magic square, it is counted. The problem requires us to implement an efficient solution to check all possible 3x3 subgrids in the grid.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -276,42 +277,88 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we need to check each possible 3x3 subgrid in the given grid to see if it meets the conditions of a magic square. Here&rsquo;s how we approach the solution:</p>
 <ol>
 <li>
-<p><strong>Initialize Counters</strong>:</p>
+<p><strong>Iterate Over Possible 3x3 Subgrids</strong>: The first step is to iterate through all possible top-left corners of the 3x3 subgrids. Since a magic square is a 3x3 grid, we can only check subgrids that start from any position within the first <code>m-2</code> rows and the first <code>n-2</code> columns.</p>
+</li>
+<li>
+<p><strong>Magic Square Validity Check</strong>: For each potential 3x3 subgrid, we must verify that:</p>
 <ul>
-<li>Create a counter to keep track of the number of magic squares found.</li>
+<li>All numbers in the 3x3 subgrid are distinct and between 1 and 9.</li>
+<li>The sum of the rows, columns, and both diagonals must be equal.</li>
 </ul>
 </li>
 <li>
-<p><strong>Iterate Over the Grid</strong>:</p>
-<ul>
-<li>Loop through each possible 3x3 sub-grid in the given grid. This requires iterating from 0 to <code>m-2</code> for rows and 0 to <code>n-2</code> for columns.</li>
+<p><strong>Tracking the Numbers</strong>: A simple way to track the numbers in the 3x3 subgrid is to use an array (or hash map) to ensure that each number from 1 to 9 appears exactly once.</p>
+</li>
+<li>
+<p><strong>Check Row, Column, and Diagonal Sums</strong>: For each 3x3 subgrid, we calculate the sum of each row, each column, and the two diagonals, and ensure that they are all equal.</p>
+</li>
+<li>
+<p><strong>Count the Valid Magic Squares</strong>: For each valid magic square found, we increment the count. Finally, we return the total number of magic squares found in the grid.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Function Signature</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> numMagicSquaresInside(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> grid)
+</span></span></code></pre></div><p>This function takes a 2D grid as input and returns the number of magic squares inside the grid.</p>
+</li>
+<li>
+<p><strong>Iterating Over the Grid</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> grid.size(), n <span style="color:#f92672">=</span> grid[<span style="color:#ae81ff">0</span>].size();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>; j<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (isMagic(grid, i, j))
+</span></span><span style="display:flex;"><span>            res<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>We first calculate the dimensions <code>m</code> and <code>n</code> of the grid.</li>
+<li>We initialize a counter <code>res</code> to track the number of valid magic squares.</li>
+<li>Using two nested loops, we iterate through all possible 3x3 subgrids. The outer loops run from <code>i = 0</code> to <code>i = m-3</code> (for rows) and from <code>j = 0</code> to <code>j = n-3</code> (for columns).</li>
+<li>For each potential 3x3 subgrid, we call the helper function <code>isMagic(grid, i, j)</code> to check if it is a valid magic square.</li>
 </ul>
 </li>
 <li>
-<p><strong>Check for Magic Square</strong>:</p>
-<ul>
-<li>For each 3x3 sub-grid, use a helper function <code>isMagic</code> to check if it satisfies the properties of a magic square.</li>
-<li>The helper function will check:
-<ul>
-<li>All numbers are between 1 and 9 and are distinct.</li>
-<li>The sums of all rows, columns, and diagonals are equal.</li>
-</ul>
-</li>
+<p><strong>Magic Square Validation</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">isMagic</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> grid, <span style="color:#66d9ef">int</span> row, <span style="color:#66d9ef">int</span> col) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> record[<span style="color:#ae81ff">10</span>] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>};
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> row; i <span style="color:#f92672">&lt;</span> row <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> col; j <span style="color:#f92672">&lt;</span> col <span style="color:#f92672">+</span> <span style="color:#ae81ff">3</span>; j<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (grid[i][j] <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> grid[i][j] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">9</span> <span style="color:#f92672">||</span> record[grid[i][j]] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>            record[grid[i][j]] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sum1 <span style="color:#f92672">=</span> grid[row][col] <span style="color:#f92672">+</span> grid[row <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][col <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> grid[row <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>][col <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sum2 <span style="color:#f92672">=</span> grid[row <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>][col] <span style="color:#f92672">+</span> grid[row <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][col <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> grid[row][col <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (sum1 <span style="color:#f92672">!=</span> sum2) <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">3</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (grid[row <span style="color:#f92672">+</span> i][col] <span style="color:#f92672">+</span> grid[row <span style="color:#f92672">+</span> i][col <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> grid[row <span style="color:#f92672">+</span> i][col <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>] <span style="color:#f92672">!=</span> sum1)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (grid[row][col <span style="color:#f92672">+</span> i] <span style="color:#f92672">+</span> grid[row <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][col <span style="color:#f92672">+</span> i] <span style="color:#f92672">+</span> grid[row <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>][col <span style="color:#f92672">+</span> i] <span style="color:#f92672">!=</span> sum1)
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Tracking Distinct Numbers</strong>: We use an array <code>record[10]</code> to track which numbers have already appeared in the current 3x3 subgrid. If any number appears more than once or if any number is outside the range 1 to 9, the subgrid cannot be a magic square.</li>
+<li><strong>Sum Validation</strong>: We calculate the sum of the two diagonals (<code>sum1</code> and <code>sum2</code>) and compare them. If they are not equal, the subgrid cannot be a magic square.</li>
+<li><strong>Row and Column Sum Check</strong>: Finally, we check the sum of each row and each column of the 3x3 subgrid. If any of the sums do not match the sum of the diagonals, the subgrid is not a magic square.</li>
+<li>If all the checks pass, we return <code>true</code>, indicating that the 3x3 subgrid is a magic square.</li>
 </ul>
 </li>
 <li>
-<p><strong>Count Valid Squares</strong>:</p>
-<ul>
-<li>If a sub-grid is a magic square, increment the counter.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return the Result</strong>:</p>
-<ul>
-<li>After iterating through all possible sub-grids, return the count of magic squares.</li>
-</ul>
+<p><strong>Returning the Result</strong>:
+After iterating through all potential 3x3 subgrids, we return the value of <code>res</code>, which holds the count of valid magic squares found in the grid.</p>
 </li>
 </ol>
 <h3 id="complexity">
@@ -321,15 +368,35 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li><strong>Time Complexity</strong>: O(m * n), where m and n are the dimensions of the grid. Each potential 3x3 sub-grid is checked in constant time.</li>
-<li><strong>Space Complexity</strong>: O(1) for auxiliary space since the check can be done using fixed-size arrays.</li>
+<li>The outer loops iterate over all possible top-left corners of 3x3 subgrids. Since there are <code>(m-2) * (n-2)</code> such subgrids, the time complexity of the outer loops is O(m * n).</li>
+<li>For each subgrid, we perform a constant amount of work: checking the numbers, calculating the sums of rows, columns, and diagonals. This takes O(1) time for each subgrid.</li>
+<li>Therefore, the overall time complexity is O(m * n), where <code>m</code> and <code>n</code> are the dimensions of the grid.</li>
 </ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is O(1) because we use only a fixed amount of extra space (<code>record[10]</code>) to track the numbers in the current 3x3 subgrid, and no additional data structures are used.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, the provided solution efficiently counts the number of magic squares inside a 2D grid by iterating over all possible 3x3 subgrids and validating each one. The use of the <code>record</code> array ensures that we only count distinct numbers from 1 to 9, and the row, column, and diagonal sum checks guarantee that the subgrid meets the magic square criteria. With a time complexity of O(m * n) and constant space complexity, this approach is both time-efficient and space-efficient for solving the problem.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1368s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1355s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

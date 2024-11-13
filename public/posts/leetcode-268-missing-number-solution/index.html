@@ -222,7 +222,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -268,80 +268,159 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-statement">
+  🚀 Problem Statement
+  <a class="heading-link" href="#-problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array <code>nums</code> containing <code>n</code> distinct numbers taken from <code>0, 1, 2, ..., n</code>, find the one number that is missing from the array.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The solution utilizes the properties of the XOR operation, which is effective for finding a missing number:</p>
-<ol>
-<li>
-<p><strong>XOR Properties</strong>:</p>
+<p>In this problem, you’re given an array <code>nums</code> of integers where each integer is between 0 and <code>n</code> (inclusive), and the array contains <code>n</code> distinct numbers. Your goal is to find the missing number from the range <code>0</code> to <code>n</code>.</p>
+<p>For example:</p>
 <ul>
-<li>(a \oplus a = 0) (any number XORed with itself is 0).</li>
-<li>(a \oplus 0 = a) (any number XORed with 0 remains unchanged).</li>
-<li>XOR is commutative and associative, meaning the order of operations does not matter.</li>
+<li><strong>Input</strong>: <code>nums = [3, 0, 1]</code></li>
+<li><strong>Output</strong>: <code>2</code>
+<ul>
+<li>The array contains the numbers <code>0</code>, <code>1</code>, and <code>3</code>, so the missing number is <code>2</code>.</li>
 </ul>
 </li>
-<li>
-<p><strong>Implementation Steps</strong>:</p>
+</ul>
+<p>Let&rsquo;s dive into an efficient approach to solve this! 🏃‍♂️💨</p>
+<hr>
+<h3 id="-approach">
+  🧠 Approach
+  <a class="heading-link" href="#-approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The key to solving this problem efficiently is the <strong>XOR (exclusive OR)</strong> operation, which has some awesome properties that help us identify the missing number in no time! ⚡</p>
+<ol>
+<li><strong>Properties of XOR</strong>:
 <ul>
-<li>Start with <code>sum</code> initialized to the first element of <code>nums</code>.</li>
-<li>XOR all elements of <code>nums</code> to <code>sum</code>.</li>
-<li>XOR <code>sum</code> with all integers from <code>0</code> to <code>n</code> (where <code>n</code> is the size of <code>nums</code>).</li>
-<li>The result in <code>sum</code> will be the missing number since all other numbers will cancel out due to the properties of XOR.</li>
+<li><code>a ^ a = 0</code> (XOR of any number with itself is 0)</li>
+<li><code>a ^ 0 = a</code> (XOR of any number with 0 is the number itself)</li>
+<li>XOR is both commutative and associative, which means the order of operations doesn’t matter.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>Given these properties, XOR is like a magic tool for canceling out matching numbers. Here’s the trick:</p>
+<ul>
+<li>XOR all elements of the array with the numbers from <code>0</code> to <code>n</code>.</li>
+<li>Numbers that appear in both the array and the range cancel out, and the missing number is the one that’s left!</li>
+</ul>
+<hr>
+<h3 id="-step-by-step-code-breakdown">
+  🔨 Step-by-Step Code Breakdown
+  <a class="heading-link" href="#-step-by-step-code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the code to see how XOR works its magic! ✨</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> missingNumber(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+</span></span></code></pre></div><ul>
+<li>We define a function <code>missingNumber</code> inside the <code>Solution</code> class, which takes an array <code>nums</code> as input and returns the missing number from the range <code>0</code> to <code>n</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> sum <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            sum <span style="color:#f92672">^=</span> nums[i];
+</span></span></code></pre></div><ul>
+<li>First, we initialize a variable <code>sum</code> with the first element of the array <code>nums[0]</code>.</li>
+<li>Then, we loop through the rest of the array and XOR <code>sum</code> with each element. This ensures we accumulate the XOR of all the elements in the array.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;=</span> nums.size(); i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            sum <span style="color:#f92672">^=</span> i;
+</span></span></code></pre></div><ul>
+<li>In the second loop, we XOR <code>sum</code> with all integers from <code>0</code> to <code>n</code> (where <code>n = nums.size()</code>).</li>
+<li>This ensures that all the numbers in the range <code>0</code> to <code>n</code> are included, and the numbers that appear in both the array and the range will cancel out.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> sum;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>After both loops, <code>sum</code> will hold the missing number because all other numbers have canceled out. We return <code>sum</code>, which is our final result! 🎉</li>
+</ul>
+<hr>
+<h3 id="-complexity-analysis">
+  📈 Complexity Analysis
+  <a class="heading-link" href="#-complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s see how efficient our solution is! 🔍</p>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>, where <code>n</code> is the size of the array <code>nums</code>.
+<ul>
+<li>We have two loops:
+<ul>
+<li>The first loop processes all the elements in the array (<code>nums.size()</code> iterations).</li>
+<li>The second loop processes all integers from <code>0</code> to <code>n</code> (another <code>n + 1</code> iterations).</li>
+</ul>
+</li>
+<li>Since both loops iterate linearly over the array and the range, the overall time complexity is proportional to the size of the array.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>, constant space.
+<ul>
+<li>The algorithm only uses a few variables (<code>sum</code>, <code>i</code>), which do not depend on the size of the input array. No additional space is required, so it&rsquo;s super space-efficient! 💡</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="-conclusion">
+  🏁 Conclusion
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>We’ve now solved the problem efficiently using XOR. Let’s quickly recap the main points:</p>
+<h4 id="key-takeaways">
+  Key Takeaways:
+  <a class="heading-link" href="#key-takeaways">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>XOR Properties</strong>: XOR is a powerful tool that helps us find the missing number by canceling out matching numbers.</li>
+<li><strong>Optimal Time Complexity</strong>: The solution runs in <strong>O(n)</strong> time, which is great for large inputs.</li>
+<li><strong>No Extra Space</strong>: With <strong>O(1)</strong> space complexity, the solution doesn’t require any additional memory, making it space-efficient.</li>
+<li><strong>Simplicity</strong>: XOR operations simplify the problem, allowing us to find the missing number in just a few lines of code! ✨</li>
+</ol>
+<h3 id="-quick-recap">
+  🎯 Quick Recap:
+  <a class="heading-link" href="#-quick-recap">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li><strong>Input</strong>: A vector <code>nums</code> containing <code>n</code> distinct integers.</li>
-<li><strong>Output</strong>: The missing integer from the range <code>[0, n]</code>.</li>
+<li><strong>Time</strong>: O(n) ⏱️</li>
+<li><strong>Space</strong>: O(1) 💡</li>
+<li><strong>Solution</strong>: Use XOR to cancel out numbers and find the missing one!</li>
 </ul>
-<ol>
-<li>Initialize <code>sum</code> with the first element of <code>nums</code>.</li>
-<li>Loop through <code>nums</code>, starting from index <code>1</code>, and XOR each element with <code>sum</code>.</li>
-<li>Loop from <code>0</code> to <code>n</code>, XORing each integer with <code>sum</code>.</li>
-<li>Return <code>sum</code>, which now contains the missing number.</li>
-</ol>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ul>
-<li><strong>Time Complexity</strong>: (O(n)), where (n) is the number of elements in <code>nums</code>, as we traverse the array and the range once.</li>
-<li><strong>Space Complexity</strong>: (O(1)), since no additional space is used aside from a few variables.</li>
-</ul>
-<h3 id="edge-cases">
-  Edge Cases
-  <a class="heading-link" href="#edge-cases">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ol>
-<li><strong>Missing Zero</strong>: If the array is <code>[1]</code>, the function should correctly return <code>0</code>.</li>
-<li><strong>Full Range</strong>: If the array includes all elements except one, the function should identify the missing one correctly.</li>
-</ol>
+<p>This approach is both elegant and efficient, making it perfect for coding interviews or competitive programming. Keep practicing, and you’ll be a master at solving XOR-based problems in no time! 💪🎉</p>
  
 </div>
   

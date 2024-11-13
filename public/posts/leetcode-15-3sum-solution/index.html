@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -216,7 +216,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode262s0hbhb">
+        <h2 id="hahahugoshortcode261s0hbhb">
   <a href="https://leetcode.com/problems/3sum/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -231,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode262s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode261s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -263,107 +263,262 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode262s2hbhb">
+<h2 id="hahahugoshortcode261s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-3sum-problem-finding-unique-triplets-that-sum-to-zero">
+  🧩 <strong>3Sum Problem: Finding Unique Triplets That Sum to Zero</strong>
+  <a class="heading-link" href="#-3sum-problem-finding-unique-triplets-that-sum-to-zero">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Find all unique triplets in an array that sum up to zero. The solution must not use the same elements in different combinations.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>The task at hand is to find all unique triplets in an array of integers that sum up to zero. This is a classical problem often referred to as the &ldquo;3Sum&rdquo; problem. Here&rsquo;s a breakdown of how to efficiently solve it.</p>
+<hr>
+<h3 id="-problem-understanding">
+  🔍 <strong>Problem Understanding</strong>
+  <a class="heading-link" href="#-problem-understanding">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Utilize sorting and the two-pointer technique to efficiently find triplets that sum to zero.</p>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>Given an array of integers <code>nums</code>, we need to return all unique triplets <code>[nums[i], nums[j], nums[k]]</code> such that:</p>
+<pre tabindex="0"><code>nums[i] + nums[j] + nums[k] == 0
+</code></pre><p><strong>Important Notes:</strong></p>
+<ul>
+<li>The triplets should be unique.</li>
+<li>We must avoid a brute-force approach of checking all possible triplets.</li>
+</ul>
+<hr>
+<h3 id="-efficient-approach-sorting-and-two-pointer-technique">
+  ⚙️ <strong>Efficient Approach: Sorting and Two-Pointer Technique</strong>
+  <a class="heading-link" href="#-efficient-approach-sorting-and-two-pointer-technique">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve the problem efficiently, we can use a combination of sorting and a two-pointer technique. Here&rsquo;s how:</p>
+<h4 id="1-sort-the-array">
+  1. <strong>Sort the Array</strong>
+  <a class="heading-link" href="#1-sort-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Sorting helps us easily identify duplicate triplets and also allows us to use a two-pointer approach to find pairs that sum to a specific target.</p>
+<h4 id="2-fix-one-element">
+  2. <strong>Fix One Element</strong>
+  <a class="heading-link" href="#2-fix-one-element">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We start by fixing one element of the triplet (let’s call it <code>nums[i]</code>). For each fixed element, the problem reduces to finding two other elements that sum up to <code>-nums[i]</code>.</p>
+<h4 id="3-use-two-pointers">
+  3. <strong>Use Two Pointers</strong>
+  <a class="heading-link" href="#3-use-two-pointers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Once we fix <code>nums[i]</code>, use two pointers to find the other two numbers:</p>
+<ul>
+<li>The left pointer (<code>s</code>) starts right after <code>i</code>.</li>
+<li>The right pointer (<code>e</code>) starts from the end of the array.</li>
+<li>Adjust the pointers to find the valid triplet:
+<ul>
+<li>If the sum is smaller than the target, move the left pointer to the right.</li>
+<li>If the sum is larger than the target, move the right pointer to the left.</li>
+<li>If the sum equals the target, we have a valid triplet.</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-skip-duplicates">
+  4. <strong>Skip Duplicates</strong>
+  <a class="heading-link" href="#4-skip-duplicates">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>After finding a valid triplet, skip over any duplicate values to avoid adding the same triplet multiple times.</li>
+</ul>
+<h4 id="5-skip-duplicates-for-the-fixed-element">
+  5. <strong>Skip Duplicates for the Fixed Element</strong>
+  <a class="heading-link" href="#5-skip-duplicates-for-the-fixed-element">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>If the current element <code>nums[i]</code> is the same as the previous one, skip it to avoid duplicate triplets.</li>
+</ul>
+<hr>
+<h3 id="-code-explanation">
+  📝 <strong>Code Explanation</strong>
+  <a class="heading-link" href="#-code-explanation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> threeSum(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> ans;  <span style="color:#75715e">// Result array to store unique triplets.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    sort(nums.begin(), nums.end());  <span style="color:#75715e">// Sort the array to enable two-pointer technique.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> target <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>nums[i];  <span style="color:#75715e">// We need the sum of the other two elements to be -nums[i].
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> s <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Left pointer starts just after the fixed element.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> e <span style="color:#f92672">=</span> nums.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Right pointer starts at the end of the array.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(s <span style="color:#f92672">&lt;</span> e) {  <span style="color:#75715e">// Loop until the left and right pointers meet.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span>(nums[s] <span style="color:#f92672">+</span> nums[e] <span style="color:#f92672">&lt;</span> target) {
+</span></span><span style="display:flex;"><span>                s<span style="color:#f92672">++</span>;  <span style="color:#75715e">// If the sum is smaller than the target, move the left pointer to the right.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            } <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (nums[s] <span style="color:#f92672">+</span> nums[e] <span style="color:#f92672">&gt;</span> target) {
+</span></span><span style="display:flex;"><span>                e<span style="color:#f92672">--</span>;  <span style="color:#75715e">// If the sum is larger than the target, move the right pointer to the left.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// A valid triplet is found: [nums[i], nums[s], nums[e]].
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> res <span style="color:#f92672">=</span> {nums[i], nums[s], nums[e]};
+</span></span><span style="display:flex;"><span>                ans.push_back(res);  <span style="color:#75715e">// Add the triplet to the result.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// Skip duplicates for the left pointer.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                <span style="color:#66d9ef">while</span>(s <span style="color:#f92672">&lt;</span> e <span style="color:#f92672">&amp;&amp;</span> nums[s] <span style="color:#f92672">==</span> res[<span style="color:#ae81ff">1</span>]) s<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// Skip duplicates for the right pointer.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                <span style="color:#66d9ef">while</span>(s <span style="color:#f92672">&lt;</span> e <span style="color:#f92672">&amp;&amp;</span> res[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">==</span> nums[e]) e<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Skip duplicates for the fixed element nums[i].
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> nums.size() <span style="color:#f92672">&amp;&amp;</span> nums[i] <span style="color:#f92672">==</span> nums[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>]) i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans;  <span style="color:#75715e">// Return the list of unique triplets.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><hr>
+<h3 id="-code-walkthrough">
+  🚀 <strong>Code Walkthrough</strong>
+  <a class="heading-link" href="#-code-walkthrough">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ol>
 <li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>Create a vector <code>ans</code> to store the resulting triplets.</li>
-<li>Sort the input vector <code>nums</code> to facilitate the two-pointer technique.</li>
+<p><strong>Sorting the Array</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(nums.begin(), nums.end());
+</span></span></code></pre></div><ul>
+<li>This step allows us to efficiently find triplets and avoid duplicates.</li>
 </ul>
 </li>
 <li>
-<p><strong>Outer Loop</strong>:</p>
-<ul>
-<li>Iterate through each element <code>nums[i]</code> in the sorted array:
-<ul>
-<li>Set <code>target</code> to the negative value of the current element (<code>-nums[i]</code>).</li>
-<li>Initialize two pointers: <code>s</code> (start) at <code>i + 1</code> and <code>e</code> (end) at the last index of <code>nums</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Inner While Loop</strong>:</p>
-<ul>
-<li>Continue as long as <code>s</code> is less than <code>e</code>:
-<ul>
-<li>Calculate the sum of the elements at the two pointers:
-<ul>
-<li>If the sum is less than <code>target</code>, increment <code>s</code> to increase the sum.</li>
-<li>If the sum is greater than <code>target</code>, decrement <code>e</code> to decrease the sum.</li>
-<li>If the sum equals <code>target</code>, add the triplet <code>{nums[i], nums[s], nums[e]}</code> to <code>ans</code>.
-<ul>
-<li>Move both pointers inward to avoid duplicates:
-<ul>
-<li>Increment <code>s</code> while the next number is the same as <code>nums[s]</code>.</li>
-<li>Decrement <code>e</code> while the next number is the same as <code>nums[e]</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<p><strong>Iterate through the Array</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> target <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>nums[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> s <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> e <span style="color:#f92672">=</span> nums.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>We fix the element <code>nums[i]</code> and calculate the target (<code>-nums[i]</code>). The goal is to find two other elements that sum up to the target.</li>
 </ul>
 </li>
 <li>
-<p><strong>Avoid Duplicates</strong>:</p>
-<ul>
-<li>After processing <code>nums[i]</code>, skip all duplicate values by checking if <code>nums[i]</code> is the same as the next number.</li>
+<p><strong>Two-Pointer Technique</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(s <span style="color:#f92672">&lt;</span> e) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(nums[s] <span style="color:#f92672">+</span> nums[e] <span style="color:#f92672">&lt;</span> target) {
+</span></span><span style="display:flex;"><span>        s<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (nums[s] <span style="color:#f92672">+</span> nums[e] <span style="color:#f92672">&gt;</span> target) {
+</span></span><span style="display:flex;"><span>        e<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> res <span style="color:#f92672">=</span> {nums[i], nums[s], nums[e]};
+</span></span><span style="display:flex;"><span>        ans.push_back(res);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(s <span style="color:#f92672">&lt;</span> e <span style="color:#f92672">&amp;&amp;</span> nums[s] <span style="color:#f92672">==</span> res[<span style="color:#ae81ff">1</span>]) s<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(s <span style="color:#f92672">&lt;</span> e <span style="color:#f92672">&amp;&amp;</span> res[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">==</span> nums[e]) e<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We adjust the left and right pointers based on the sum of the values at <code>s</code> and <code>e</code>.</li>
+<li>If a valid triplet is found, it is added to the result list, and we skip over any duplicates for the <code>s</code> and <code>e</code> pointers.</li>
 </ul>
 </li>
 <li>
-<p><strong>Return the Result</strong>:</p>
-<ul>
-<li>Finally, return the vector <code>ans</code> containing all unique triplets that sum to zero.</li>
+<p><strong>Skipping Duplicates</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> nums.size() <span style="color:#f92672">&amp;&amp;</span> nums[i] <span style="color:#f92672">==</span> nums[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>]) i<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><ul>
+<li>After finding a triplet, we skip the duplicate values of <code>nums[i]</code> to ensure unique triplets.</li>
 </ul>
 </li>
 </ol>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<hr>
+<h3 id="-time-and-space-complexity">
+  📊 <strong>Time and Space Complexity</strong>
+  <a class="heading-link" href="#-time-and-space-complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity:</strong> (O(n^2)) - where (n) is the length of the input array, due to the sorting step and the nested loop.</li>
-<li><strong>Space Complexity:</strong> (O(1)) - since the space used for the output is counted separately; the algorithm uses constant space for pointers and indices.</li>
+<li>
+<p><strong>Time Complexity</strong>: <strong>O(n²)</strong>.</p>
+<ul>
+<li>Sorting the array takes <strong>O(n log n)</strong>.</li>
+<li>The two-pointer loop runs <strong>O(n)</strong> times for each element, making the overall time complexity <strong>O(n²)</strong>.</li>
 </ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: <strong>O(n)</strong>.</p>
+<ul>
+<li>The space complexity is primarily used for storing the result list, which in the worst case could contain up to <strong>O(n)</strong> triplets.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="-key-takeaways">
+  🎯 <strong>Key Takeaways</strong>
+  <a class="heading-link" href="#-key-takeaways">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Efficiency</strong>: The time complexity of O(n²) is much better than brute-force methods.</li>
+<li><strong>Two-pointer technique</strong>: A very common and effective approach for problems like 3Sum.</li>
+<li><strong>Avoiding Duplicates</strong>: Sorting the array and skipping duplicate values ensure that we only store unique triplets.</li>
+</ul>
+<h4 id="advantages">
+  <strong>Advantages</strong>:
+  <a class="heading-link" href="#advantages">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>Fast and intuitive using sorting and two pointers.</li>
+<li>Handles duplicate elements gracefully.</li>
+</ul>
+<h4 id="limitations">
+  <strong>Limitations</strong>:
+  <a class="heading-link" href="#limitations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>Assumes the input array has a reasonable size (works well up to a few thousand elements).</li>
+</ul>
+<hr>
+<h3 id="-conclusion">
+  🏁 <strong>Conclusion</strong>
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The 3Sum problem can be efficiently solved by sorting the array and using the two-pointer technique to find pairs that sum up to the negative of the fixed element. By carefully skipping duplicates, we ensure that only unique triplets are returned. This approach is optimal for this problem, with a time complexity of O(n²) and a space complexity of O(n).</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode262s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode261s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              4-minute read
             </span>
           </div>
 
@@ -221,7 +221,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode505s0hbhb">
+        <h2 id="hahahugoshortcode502s0hbhb">
   <a href="https://leetcode.com/problems/binary-tree-right-side-view/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -236,7 +236,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode505s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode502s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -275,87 +275,205 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode505s2hbhb">
+<h2 id="hahahugoshortcode502s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-right-side-view-of-a-binary-tree-bfs-approach">
+  🌟 Right Side View of a Binary Tree (BFS Approach)
+  <a class="heading-link" href="#-right-side-view-of-a-binary-tree-bfs-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given the root of a binary tree, return the values of the nodes you can see ordered from top to bottom when looking at the tree from the right side.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>In this problem, we are tasked with returning the &ldquo;right side view&rdquo; of a binary tree. The right side view consists of the nodes that are visible when the tree is viewed from the right side. Specifically, we need to return the rightmost node at each level of the binary tree.</p>
+<h4 id="example">
+  Example:
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Input:</strong>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>root <span style="color:#f92672">=</span> [<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">4</span>, null, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>]
+</span></span></code></pre></div>The tree looks like:
+<pre tabindex="0"><code>        1
+       / \
+      2   3
+     /     / \
+    4     5   6
+</code></pre></li>
+<li><strong>Output:</strong> <code>[1, 3, 6]</code><br>
+<strong>Explanation:</strong> The visible nodes from the right side are:
+<ul>
+<li>1 from the first level,</li>
+<li>3 from the second level, and</li>
+<li>6 from the third level.</li>
+</ul>
+</li>
+</ul>
+<h3 id="-approach">
+  💡 Approach
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>We can solve this problem using <strong>Breadth-First Search (BFS)</strong>. BFS allows us to explore the tree level by level, and the rightmost node at each level can be found by processing the nodes from left to right. The last node processed at each level will be the rightmost node for that level.</p>
+<h4 id="steps">
+  Steps:
+  <a class="heading-link" href="#steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li>
-<p><strong>Breadth-First Search (BFS)</strong>:</p>
-<ul>
-<li>Use a queue to perform level-order traversal of the tree.</li>
-<li>For each level, record the last node&rsquo;s value, which represents the rightmost node at that level.</li>
-</ul>
-</li>
-<li>
-<p><strong>Level Traversal</strong>:</p>
-<ul>
-<li>Initialize a queue and push the root node.</li>
-<li>While the queue is not empty, process all nodes at the current level:
-<ul>
-<li>Record the values of the nodes at this level.</li>
-<li>Enqueue the left and right children of the nodes.</li>
-</ul>
-</li>
-<li>After processing each level, add the last value of that level to the result.</li>
-</ul>
-</li>
+<li><strong>Initialize a Queue:</strong> We will use a queue for BFS traversal. The queue will help us store nodes level by level.</li>
+<li><strong>Process Each Level:</strong> For each level, we enqueue the left and right children of the current node, and at the end of the level, we record the last node (rightmost node).</li>
+<li><strong>Return the Result:</strong> After processing all levels, we will return the list of rightmost nodes.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="-code-breakdown">
+  🛠 Code Breakdown
+  <a class="heading-link" href="#-code-breakdown">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-initial-setup">
+  Step 1: Initial Setup
+  <a class="heading-link" href="#step-1-initial-setup">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> rightSideView(TreeNode<span style="color:#f92672">*</span> root) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>root) <span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>The <code>rightSideView</code> function is defined, which takes the root of a binary tree as input.</li>
+<li>If the tree is empty (<code>root == nullptr</code>), we return an empty vector as there are no visible nodes.</li>
+</ul>
+<h4 id="step-2-initialize-the-queue-for-bfs">
+  Step 2: Initialize the Queue for BFS
+  <a class="heading-link" href="#step-2-initialize-the-queue-for-bfs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    list<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*&gt;</span> q;
+</span></span><span style="display:flex;"><span>    q.push_back(root);
+</span></span></code></pre></div><ul>
+<li>We use a <code>std::list</code> as the queue to facilitate BFS traversal. The queue starts with the root node.</li>
+</ul>
+<h4 id="step-3-process-each-level">
+  Step 3: Process Each Level
+  <a class="heading-link" href="#step-3-process-each-level">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> res;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> q.size();
+</span></span></code></pre></div><ul>
+<li>The <code>while</code> loop processes each level until the queue is empty.</li>
+<li>We initialize a vector <code>res</code> to store the values of nodes at the current level.</li>
+<li><code>sz</code> is the number of nodes at the current level, which is simply the size of the queue.</li>
+</ul>
+<h4 id="step-4-process-all-nodes-at-the-current-level">
+  Step 4: Process All Nodes at the Current Level
+  <a class="heading-link" href="#step-4-process-all-nodes-at-the-current-level">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(sz<span style="color:#f92672">--</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">auto</span> tmp <span style="color:#f92672">=</span> q.front();
+</span></span><span style="display:flex;"><span>            q.pop_front();
+</span></span><span style="display:flex;"><span>            res.push_back(tmp<span style="color:#f92672">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(tmp<span style="color:#f92672">-&gt;</span>left) q.push_back(tmp<span style="color:#f92672">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(tmp<span style="color:#f92672">-&gt;</span>right) q.push_back(tmp<span style="color:#f92672">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li>The inner <code>while</code> loop processes each node at the current level:
 <ul>
-<li><strong>Line 1</strong>: Define the structure for a binary tree node.</li>
-<li><strong>Line 2</strong>: Define the class <code>Solution</code>.</li>
-<li><strong>Line 3</strong>: Define the <code>rightSideView</code> function, which takes the root of the binary tree as input.</li>
-<li><strong>Line 4</strong>: Initialize a vector <code>ans</code> to store the result.</li>
-<li><strong>Line 5</strong>: Check if the root is null; if so, return an empty result.</li>
-<li><strong>Line 6</strong>: Initialize a list (acting as a queue) and push the root node.</li>
-<li><strong>Lines 7-12</strong>: While there are nodes in the queue:
-<ul>
-<li>Create a vector <code>res</code> to hold the values of the current level&rsquo;s nodes.</li>
-<li>Process each node at the current level, adding its value and its children to the queue.</li>
+<li>We dequeue the front node.</li>
+<li>We add the node’s value to the <code>res</code> vector.</li>
+<li>If the node has left or right children, we enqueue them to the queue.</li>
 </ul>
 </li>
-<li><strong>Line 13</strong>: After processing the level, push the last node&rsquo;s value to <code>ans</code>.</li>
-<li><strong>Line 14</strong>: Return the result vector <code>ans</code>.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-5-add-the-rightmost-node-of-the-current-level">
+  Step 5: Add the Rightmost Node of the Current Level
+  <a class="heading-link" href="#step-5-add-the-rightmost-node-of-the-current-level">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        ans.push_back(res.back());
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>After processing all nodes at the current level, the last node in the <code>res</code> vector is the rightmost node of that level. We add it to the <code>ans</code> vector.</li>
+</ul>
+<h4 id="step-6-return-the-final-result">
+  Step 6: Return the Final Result
+  <a class="heading-link" href="#step-6-return-the-final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After processing all levels, we return the <code>ans</code> vector, which contains the rightmost nodes from all levels.</li>
+</ul>
+<h3 id="-complexity-analysis">
+  📊 Complexity Analysis
+  <a class="heading-link" href="#-complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(n)), where (n) is the number of nodes in the tree, since each node is visited once.</li>
-<li><strong>Space Complexity</strong>: (O(w)), where (w) is the maximum width of the tree, which is the maximum number of nodes at any level of the tree stored in the queue.</li>
+<li><strong>O(n):</strong> In the worst case, we visit every node exactly once during the BFS traversal. For each node, we perform constant-time operations (enqueuing and dequeuing). Therefore, the time complexity is linear in the number of nodes, i.e., <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the binary tree.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n):</strong> The space complexity is dominated by the size of the queue. In the worst case, the queue can hold all the nodes at the last level, which can be up to <code>n/2</code> nodes. Thus, the space complexity is <strong>O(n)</strong>.</li>
+</ul>
+<h3 id="-conclusion">
+  🚀 Conclusion
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution uses <strong>Breadth-First Search (BFS)</strong> to traverse the binary tree level by level, capturing the rightmost node at each level. Here’s a summary:</p>
+<ul>
+<li><strong>Time Complexity:</strong> <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the binary tree.</li>
+<li><strong>Space Complexity:</strong> <strong>O(n)</strong>, due to the queue storing nodes at each level.</li>
+</ul>
+<p>This approach is both efficient and straightforward, providing an optimal solution to the problem of determining the right side view of a binary tree.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode505s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode502s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

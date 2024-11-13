@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -221,7 +221,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1163s0hbhb">
+        <h2 id="hahahugoshortcode1161s0hbhb">
   <a href="https://leetcode.com/problems/assign-cookies/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -236,7 +236,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1163s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1161s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -256,7 +256,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> i;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1163s2hbhb">
+<h2 id="hahahugoshortcode1161s2hbhb">
   
 
   
@@ -268,7 +268,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given two integer arrays: <code>g</code> representing the greed factor of each child and <code>s</code> representing the size of each cookie. Each child can be content if their greed factor is less than or equal to the size of the cookie. Your goal is to find the maximum number of content children.</p>
+<p>In this problem, we are given two arrays <code>g</code> and <code>s</code>:</p>
+<ul>
+<li><code>g[i]</code> represents the greed factor of the i-th child, which indicates the minimum size of the cookie that the child will be content with.</li>
+<li><code>s[i]</code> represents the size of the i-th cookie.</li>
+</ul>
+<p>Our goal is to maximize the number of children who can be content by giving them a cookie from the available cookies. A child is content if the size of the cookie they receive is greater than or equal to their greed factor. Each child can receive at most one cookie, and each cookie can only be assigned to one child.</p>
+<p>The challenge is to implement an efficient algorithm that finds the maximum number of content children given the greed factors and the cookie sizes.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -276,59 +282,67 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The approach to solving this problem involves:</p>
 <ol>
-<li>
-<p><strong>Sorting</strong>:</p>
-<ul>
-<li>Sort both arrays <code>g</code> and <code>s</code> to facilitate a greedy approach where we attempt to satisfy the least greedy child with the smallest available cookie.</li>
-</ul>
-</li>
-<li>
-<p><strong>Two-Pointer Technique</strong>:</p>
-<ul>
-<li>Use two pointers, one for the children (<code>i</code>) and one for the cookies (<code>j</code>).</li>
-<li>Iterate through both arrays:
-<ul>
-<li>If the current cookie size (<code>s[j]</code>) can satisfy the current child&rsquo;s greed (<code>g[i]</code>), move to the next child (<code>i++</code>).</li>
-<li>Regardless of whether the cookie was used, move to the next cookie (<code>j++</code>).</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><strong>Sorting</strong>: Sorting both the greed factors array <code>g</code> and the cookies array <code>s</code> ensures that we can efficiently match children with cookies, starting from the least greedy child and the smallest cookie that can satisfy them.</li>
+<li><strong>Greedy Algorithm</strong>: We use a greedy approach to assign cookies. The basic idea is to match the smallest available cookie that can satisfy the current child, starting with the child with the least greed. If the current cookie can satisfy the current child, we move on to the next child; otherwise, we move on to the next cookie. This ensures we maximize the number of satisfied children.</li>
+<li><strong>Two-Pointer Technique</strong>: We use two pointers, one for the greed factor array (<code>g</code>) and one for the cookie sizes array (<code>s</code>). The pointer for <code>g</code> tracks the children, and the pointer for <code>s</code> tracks the available cookies. We iterate over both arrays, assigning cookies to children whenever possible.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Sorting the Arrays</strong>:</p>
+<h4 id="step-1-sort-the-greed-factors-and-cookie-sizes">
+  Step 1: Sort the Greed Factors and Cookie Sizes
+  <a class="heading-link" href="#step-1-sort-the-greed-factors-and-cookie-sizes">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(g.begin(), g.end());
+</span></span><span style="display:flex;"><span>sort(s.begin(), s.end());
+</span></span></code></pre></div><ul>
+<li>The first step in the approach is to sort both arrays: <code>g</code> (greed factors of children) and <code>s</code> (sizes of cookies). Sorting ensures that we can start assigning cookies from the smallest available size to the least greedy child.</li>
+<li>Sorting is crucial because it allows us to efficiently match the smallest cookie that satisfies the child&rsquo;s greed.</li>
+</ul>
+<h4 id="step-2-initialize-pointers-and-start-matching">
+  Step 2: Initialize Pointers and Start Matching
+  <a class="heading-link" href="#step-2-initialize-pointers-and-start-matching">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> g.size() <span style="color:#f92672">&amp;&amp;</span> j <span style="color:#f92672">&lt;</span> s.size()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(s[j] <span style="color:#f92672">&gt;=</span> g[i])
+</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">++</span>; <span style="color:#75715e">// when the child gets the cookie, forward child by 1
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    j<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We initialize two pointers: <code>i</code> for the greed factor array (<code>g</code>) and <code>j</code> for the cookie sizes array (<code>s</code>).</li>
+<li>The <code>while</code> loop continues as long as there are children left (<code>i &lt; g.size()</code>) and there are cookies left (<code>j &lt; s.size()</code>).</li>
+<li>Inside the loop:
 <ul>
-<li>Sort the arrays <code>g</code> and <code>s</code> in non-decreasing order.</li>
+<li>If the current cookie <code>s[j]</code> can satisfy the current child <code>g[i]</code> (i.e., <code>s[j] &gt;= g[i]</code>), we move the pointer <code>i</code> to the next child (<code>i++</code>), because the current child is content with the current cookie.</li>
+<li>Regardless of whether the current child is satisfied, we always move the pointer <code>j</code> to the next cookie (<code>j++</code>), as each cookie can only be used once.</li>
 </ul>
 </li>
-<li>
-<p><strong>Greedy Allocation</strong>:</p>
-<ul>
-<li>Initialize two pointers <code>i</code> (for children) and <code>j</code> (for cookies).</li>
-<li>Traverse through the cookies while checking if each cookie can satisfy the current child&rsquo;s greed:
-<ul>
-<li>If <code>s[j]</code> (cookie size) is greater than or equal to <code>g[i]</code> (child&rsquo;s greed), increment the child pointer <code>i</code>.</li>
 </ul>
-</li>
-<li>Always increment the cookie pointer <code>j</code>.</li>
+<h4 id="step-3-return-the-result">
+  Step 3: Return the Result
+  <a class="heading-link" href="#step-3-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> i;
+</span></span></code></pre></div><ul>
+<li>The variable <code>i</code> tracks how many children have been satisfied. Since we increment <code>i</code> each time we successfully match a child with a cookie, <code>i</code> will hold the number of content children when the loop finishes.</li>
+<li>We return <code>i</code> as the final result, which represents the maximum number of content children.</li>
 </ul>
-</li>
-<li>
-<p><strong>Result</strong>:</p>
-<ul>
-<li>The final value of <code>i</code> represents the number of content children.</li>
-</ul>
-</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -336,15 +350,42 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(N log N + M log M), where N and M are the sizes of arrays <code>g</code> and <code>s</code>, due to the sorting step.</li>
-<li><strong>Space Complexity</strong>: O(1), as we are using a constant amount of extra space.</li>
+<li><strong>Sorting the Greed Factors and Cookie Sizes</strong>: The time complexity of sorting both <code>g</code> and <code>s</code> is <code>O(n log n + m log m)</code>, where <code>n</code> is the number of children and <code>m</code> is the number of cookies. This is the most expensive operation in the solution.</li>
+<li><strong>Iterating Over Both Arrays</strong>: After sorting, the while loop runs in <code>O(n + m)</code> time, where <code>n</code> is the number of children and <code>m</code> is the number of cookies. In the worst case, we will iterate through both arrays once.</li>
+<li>Therefore, the overall time complexity is <code>O(n log n + m log m)</code>, which is dominated by the sorting steps.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity of the algorithm is <code>O(1)</code> since we only use a few additional integer variables (<code>i</code> and <code>j</code>) and no extra data structures that depend on the input size. The space complexity remains constant.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of maximizing the number of content children by employing a greedy algorithm with sorting and a two-pointer approach. The main steps involve sorting the greed factors and cookie sizes and then iterating over both arrays to assign cookies to children. The algorithm runs in <code>O(n log n + m log m)</code> time, making it efficient even for larger inputs. The space complexity is constant, ensuring minimal memory usage.</p>
+<p>By sorting both the greed factors and cookie sizes, we ensure that we always give the smallest available cookie to a child who can be content, thereby maximizing the number of content children. This approach is optimal and easy to understand, making it an excellent solution to the problem.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1163s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1161s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

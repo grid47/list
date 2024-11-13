@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -238,11 +238,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given two integers <code>A</code> and <code>B</code>, representing the counts of characters <code>'a'</code> and <code>'b'</code>, respectively, create a string such that:</p>
-<ol>
-<li>It contains exactly <code>A</code> occurrences of <code>'a'</code> and <code>B</code> occurrences of <code>'b'</code>.</li>
-<li>No three consecutive characters in the string are the same.</li>
-</ol>
+<p>The problem asks to generate a string consisting of characters <code>'a'</code> and <code>'b'</code>, where the number of <code>'a'</code> characters is <code>A</code> and the number of <code>'b'</code> characters is <code>B</code>. The string should be generated such that there are no three consecutive characters that are the same. In other words, the string should not contain three consecutive <code>'a'</code> or three consecutive <code>'b'</code>.</p>
+<p>The task is to return a valid string satisfying the constraints, or an empty string if no such string can be formed.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -250,33 +247,85 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, the main challenge is ensuring that no three consecutive characters of the same type appear in the resulting string. To achieve this, we can adopt a greedy approach:</p>
+<ol>
+<li>
+<p><strong>Greedy Strategy</strong>:</p>
 <ul>
-<li><strong>Recursive Reordering</strong>: If <code>B &gt; A</code>, swap the values and characters so that <code>A</code> is always the larger count.</li>
-<li><strong>String Construction</strong>:
-<ul>
-<li>While <code>A &gt; 0</code>, append character <code>a</code> to the result.</li>
-<li>If <code>A &gt; B</code> after this addition, append one more <code>a</code> to balance the count difference.</li>
-<li>If <code>B &gt; 0</code>, append character <code>b</code> and decrease both <code>A</code> and <code>B</code> accordingly.</li>
+<li>We always aim to add the character with the higher count first to the string. This ensures that we prioritize the character that still has more occurrences to be placed.</li>
+<li>After placing the first character, if the count of the first character is still higher than the second, we add the same character again.</li>
+<li>Finally, we add the other character (if any is left) to maintain the balance between the two characters, ensuring that neither <code>'a'</code> nor <code>'b'</code> appears three times consecutively.</li>
 </ul>
 </li>
-<li><strong>Base Case</strong>: Once the loop completes, the string is guaranteed to meet the requirements without three consecutive occurrences of any character.</li>
+<li>
+<p><strong>Base Case Handling</strong>:</p>
+<ul>
+<li>If <code>A</code> (the count of <code>'a'</code>) is greater than <code>B</code> (the count of <code>'b'</code>), we simply swap the values of <code>A</code> and <code>B</code> and swap the characters <code>'a'</code> and <code>'b'</code> accordingly.</li>
+<li>This guarantees that the character with the higher count will always be processed first, regardless of whether it&rsquo;s <code>'a'</code> or <code>'b'</code>.</li>
 </ul>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+</li>
+<li>
+<p><strong>Greedy Placement</strong>:</p>
+<ul>
+<li>For each iteration, the logic tries to place two occurrences of the character that appears more frequently (if doing so doesn’t violate the three-consecutive rule), followed by one occurrence of the character that appears less frequently.</li>
+</ul>
+</li>
+<li>
+<p><strong>Termination</strong>:</p>
+<ul>
+<li>The loop continues until all occurrences of both characters have been placed in the result string.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>If <code>B &gt; A</code>, swap <code>A</code> and <code>B</code> along with characters <code>a</code> and <code>b</code> to maintain <code>A &gt;= B</code>.</li>
-<li>Construct the result string by:
-<ul>
-<li>Adding <code>a</code> and then conditionally adding another <code>a</code> if <code>A &gt; B</code>.</li>
-<li>Adding <code>b</code> if <code>B &gt; 0</code>, ensuring no three consecutive characters are the same.</li>
+<h4 id="1-initial-setup">
+  1. <strong>Initial Setup</strong>:
+  <a class="heading-link" href="#1-initial-setup">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#a6e22e">strWithout3a3b</span>(<span style="color:#66d9ef">int</span> A, <span style="color:#66d9ef">int</span> B, <span style="color:#66d9ef">char</span> a <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;a&#39;</span>, <span style="color:#66d9ef">char</span> b <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;b&#39;</span>, string res <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(B <span style="color:#f92672">&gt;</span> A) <span style="color:#66d9ef">return</span> strWithout3a3b(B, A, b, a);
+</span></span></code></pre></div><ul>
+<li>The function <code>strWithout3a3b</code> takes in four parameters: <code>A</code>, <code>B</code>, the counts of characters <code>'a'</code> and <code>'b'</code>, and two additional default parameters for the characters <code>a</code> and <code>b</code>. The result string <code>res</code> is initialized as an empty string.</li>
+<li>If <code>B &gt; A</code> (i.e., there are more <code>'b'</code> characters than <code>'a'</code>), we swap the roles of <code>'a'</code> and <code>'b'</code> by calling the function recursively. This simplifies the logic, as it ensures that the character with the higher count is always processed first.</li>
 </ul>
-</li>
-</ol>
+<h4 id="2-adding-characters">
+  2. <strong>Adding Characters</strong>:
+  <a class="heading-link" href="#2-adding-characters">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(A<span style="color:#f92672">--</span> <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">+=</span> a;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(A <span style="color:#f92672">&gt;</span> B) res <span style="color:#f92672">+=</span> a, A<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(B<span style="color:#f92672">--&gt;</span><span style="color:#ae81ff">0</span>) res <span style="color:#f92672">+=</span> b;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We start a <code>while</code> loop that continues until all characters are placed in the result string. For each iteration, we first add the character <code>a</code> to the result string.</li>
+<li>If the remaining count of <code>a</code> is still greater than the remaining count of <code>b</code> (i.e., <code>A &gt; B</code>), we add another <code>a</code> to avoid breaking the rule of not having more than two consecutive <code>a</code> characters.</li>
+<li>Finally, if there are any remaining <code>b</code> characters (i.e., <code>B &gt; 0</code>), we add a <code>b</code> to the result string.</li>
+<li>The logic ensures that the string is built progressively without exceeding the allowed repetition of characters.</li>
+</ul>
+<h4 id="3-returning-the-result">
+  3. <strong>Returning the Result</strong>:
+  <a class="heading-link" href="#3-returning-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Once the loop finishes, all characters have been placed in the result string, and it is returned as the solution.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -284,10 +333,35 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(A + B), as each character is added to the result string once.</li>
-<li><strong>Space Complexity</strong>: O(A + B), as it stores the result string with length <code>A + B</code>.</li>
-</ul> 
+<li><strong>Time Complexity</strong>: The function operates in <strong>O(A + B)</strong> time because we loop through all the <code>A</code> and <code>B</code> characters exactly once, placing them into the result string. Each step involves constant-time operations (adding characters and adjusting counters).</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Space Complexity</strong>: The space complexity is <strong>O(A + B)</strong> since we are constructing the result string <code>res</code>, which holds a total of <code>A + B</code> characters. The extra space used by the function is negligible, as we only use a few extra variables for the characters and counts.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem by using a greedy approach to build the string step by step. It ensures that the string is constructed in a valid manner by avoiding three consecutive identical characters. The function operates in linear time relative to the total number of characters to be placed (<code>A + B</code>), making it scalable for larger inputs. The approach is both time and space efficient, offering a simple yet effective solution to the problem.</p>
+ 
 </div>
   
 

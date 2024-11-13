@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -211,7 +211,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode954s0hbhb">
+        <h2 id="hahahugoshortcode957s0hbhb">
   <a href="https://leetcode.com/problems/first-bad-version/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -226,7 +226,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode954s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode957s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -248,103 +248,164 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> e;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode954s2hbhb">
+<h2 id="hahahugoshortcode957s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-statement">
+  🚀 Problem Statement
+  <a class="heading-link" href="#-problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given an API <code>isBadVersion(version)</code> that returns whether a given version is bad. You need to find the first bad version in a range from <code>1</code> to <code>n</code>.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>You&rsquo;re given an API called <code>isBadVersion(int version)</code> that checks whether a particular version of a software is bad. If the version is bad, it returns <code>true</code>, otherwise, it returns <code>false</code>. The task is to find the <strong>first bad version</strong> from a total of <code>n</code> versions, and you need to do this efficiently with the least number of API calls.</p>
+<h3 id="-approach">
+  🧠 Approach
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The solution employs a binary search strategy to efficiently find the first bad version:</p>
+<p>This problem is a classic example where <strong>binary search</strong> shines! Here&rsquo;s why binary search is a perfect fit:</p>
 <ol>
-<li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>Set the start (<code>s</code>) to <code>1</code> and the end (<code>e</code>) to <code>n</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Binary Search</strong>:</p>
-<ul>
-<li>While the start is less than the end:
-<ul>
-<li>Calculate the middle point <code>mid</code>.</li>
-<li>Use the <code>isBadVersion(mid)</code> API to check if the middle version is bad.
-<ul>
-<li>If it is bad, it means the first bad version could be <code>mid</code> or earlier, so update the end (<code>e</code>) to <code>mid</code>.</li>
-<li>If it is not bad, move the start (<code>s</code>) to <code>mid + 1</code> since the first bad version must be after <code>mid</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Return</strong>: Once the loop ends, <code>e</code> will point to the first bad version.</p>
-</li>
+<li><strong>Ordered versions</strong>: The versions are sequential, and once a bad version is found, all subsequent versions are also bad.</li>
+<li><strong>Efficient narrowing</strong>: We can halve the search space at each step, making it extremely efficient even for large values of <code>n</code>.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>Binary search allows us to find the first bad version by progressively narrowing the search range until we zero in on the smallest bad version.</p>
+<hr>
+<h3 id="-step-by-step-code-breakdown">
+  🔨 Step-by-Step Code Breakdown
+  <a class="heading-link" href="#-step-by-step-code-breakdown">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Input</strong>: An integer <code>n</code>, representing the total number of versions.</li>
-<li><strong>Output</strong>: The first bad version number.</li>
+<p>Let&rsquo;s walk through the code step by step:</p>
+<h4 id="step-1-initialize-search-range">
+  Step 1: Initialize Search Range
+  <a class="heading-link" href="#step-1-initialize-search-range">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> s <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, e <span style="color:#f92672">=</span> n;
+</span></span></code></pre></div><ul>
+<li><code>s</code> (start) and <code>e</code> (end) represent the search range for the versions. Initially, the range is from <code>1</code> to <code>n</code>.</li>
 </ul>
-<ol>
-<li>Initialize <code>s</code> to <code>1</code> and <code>e</code> to <code>n</code>.</li>
-<li>Perform binary search:
-<ul>
-<li>Calculate <code>mid</code>.</li>
-<li>Check if <code>isBadVersion(mid)</code> is true or false.</li>
-<li>Adjust <code>s</code> or <code>e</code> accordingly.</li>
+<h4 id="step-2-start-the-binary-search-loop">
+  Step 2: Start the Binary Search Loop
+  <a class="heading-link" href="#step-2-start-the-binary-search-loop">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (s <span style="color:#f92672">&lt;</span> e) {
+</span></span></code></pre></div><ul>
+<li>The loop runs as long as there’s more than one element left in the search range (<code>s &lt; e</code>), ensuring we haven’t narrowed it down to the first bad version yet.</li>
 </ul>
-</li>
-<li>After the loop, return <code>e</code>, which represents the first bad version.</li>
-</ol>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-3-calculate-the-midpoint">
+  Step 3: Calculate the Midpoint
+  <a class="heading-link" href="#step-3-calculate-the-midpoint">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> s <span style="color:#f92672">+</span> (e <span style="color:#f92672">-</span> s) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+</span></span></code></pre></div><ul>
+<li>We calculate <code>mid</code> to avoid overflow (when <code>s</code> and <code>e</code> are large). This gives us the middle point in the current range.</li>
+</ul>
+<h4 id="step-4-check-if-mid-is-bad">
+  Step 4: Check if <code>mid</code> is Bad
+  <a class="heading-link" href="#step-4-check-if-mid-is-bad">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (isBadVersion(mid)) {
+</span></span><span style="display:flex;"><span>    e <span style="color:#f92672">=</span> mid;
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    s <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Bad version found</strong>: If <code>isBadVersion(mid)</code> returns <code>true</code>, it means the first bad version could be <code>mid</code> or any version before it. So, we update <code>e</code> to <code>mid</code> to continue searching on the left side.</li>
+<li><strong>Not a bad version</strong>: If <code>mid</code> isn’t a bad version, the first bad version must be somewhere after <code>mid</code>, so we update <code>s</code> to <code>mid + 1</code>.</li>
+</ul>
+<h4 id="step-5-return-the-first-bad-version">
+  Step 5: Return the First Bad Version
+  <a class="heading-link" href="#step-5-return-the-first-bad-version">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> e;
+</span></span></code></pre></div><ul>
+<li>By the time <code>s == e</code>, both will point to the first bad version, so we return <code>e</code> as the result.</li>
+</ul>
+<hr>
+<h3 id="-complexity-analysis">
+  📈 Complexity Analysis
+  <a class="heading-link" href="#-complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(\log n)) since the search space is halved in each iteration.</li>
-<li><strong>Space Complexity</strong>: (O(1)) as only a constant amount of extra space is used for variables.</li>
+<li>The time complexity is <strong>O(log n)</strong>. With each iteration of the loop, we halve the search space, making it logarithmic in terms of the number of versions, <code>n</code>.</li>
 </ul>
-<h3 id="edge-cases">
-  Edge Cases
-  <a class="heading-link" href="#edge-cases">
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(1)</strong>. We only use a constant amount of extra space to store the start (<code>s</code>), end (<code>e</code>), and middle (<code>mid</code>) points of the search range, which doesn&rsquo;t grow with the input size.</li>
+</ul>
+<hr>
+<h3 id="-conclusion">
+  🏁 Conclusion
+  <a class="heading-link" href="#-conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>All Versions Bad</strong>: If all versions are bad, the function should correctly identify the first version as <code>1</code>.</li>
-<li><strong>No Bad Versions</strong>: If there are no bad versions, the function will assume that <code>n</code> is bad.</li>
-</ol>
+<p>This binary search solution is highly efficient for finding the first bad version in a sequence of versions. By reducing the search space by half with each step, we can find the first bad version in logarithmic time — <strong>O(log n)</strong> — while using constant space.</p>
+<h4 id="key-points">
+  Key Points:
+  <a class="heading-link" href="#key-points">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Time-efficient</strong>: Logarithmic time complexity ensures quick results, even with a large number of versions.</li>
+<li><strong>Space-efficient</strong>: The algorithm only uses a small, constant amount of space.</li>
+</ul>
+<p>This method minimizes API calls and guarantees an optimal solution for the problem. Whether you’re working with a few versions or billions of them, this approach is designed to scale seamlessly!</p>
+<hr>
+<h3 id="-takeaway">
+  🎯 Takeaway
+  <a class="heading-link" href="#-takeaway">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This problem is a great example of applying <strong>binary search</strong> to reduce the search space efficiently. Mastering binary search is a valuable skill that can be applied to many different types of problems in coding interviews and real-world scenarios. Keep practicing, and you’ll be a binary search pro in no time! 🚀</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode954s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode957s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

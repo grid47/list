@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -211,7 +211,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1094s0hbhb">
+        <h2 id="hahahugoshortcode1093s0hbhb">
   <a href="https://leetcode.com/problems/search-in-rotated-sorted-array/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -226,7 +226,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1094s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1093s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -253,97 +253,162 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1094s2hbhb">
+<h2 id="hahahugoshortcode1093s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-search-in-rotated-sorted-array">
+  🔍 <strong>Search in Rotated Sorted Array</strong>
+  <a class="heading-link" href="#-search-in-rotated-sorted-array">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array of integers <code>nums</code> sorted in ascending order, and possibly rotated at some pivot unknown to you beforehand, find the index of a target value. If the target is not found, return -1.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>The task is to find the <strong>index of a target value</strong> in a <strong>rotated sorted array</strong>. The array was initially sorted in ascending order, but has been rotated at an unknown pivot. Your goal is to efficiently search for the target and return its index. If the target is not found, return <code>-1</code>.</p>
+<p>For example:</p>
+<ul>
+<li><strong>Input:</strong> <code>nums = [4, 5, 6, 7, 0, 1, 2]</code>, <code>target = 0</code>
+<ul>
+<li><strong>Output:</strong> <code>4</code></li>
+</ul>
+</li>
+<li><strong>Input:</strong> <code>nums = [4, 5, 6, 7, 0, 1, 2]</code>, <code>target = 3</code>
+<ul>
+<li><strong>Output:</strong> <code>-1</code></li>
+</ul>
+</li>
+</ul>
+<p>The challenge is to find an optimal solution with a time complexity of <strong>O(log n)</strong>, which suggests we should use a binary search approach.</p>
+<h3 id="-approach">
+  🧠 <strong>Approach</strong>
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>A <strong>rotated sorted array</strong> is an array that was originally sorted but has been rotated at some pivot. This means the array contains two sorted subarrays, with one part shifted to the front.</p>
+<p>To solve this problem efficiently, we adapt <strong>binary search</strong> to account for the rotation:</p>
 <ol>
 <li>
-<p><strong>Binary Search in Rotated Sorted Array</strong>:</p>
+<p><strong>Properties of Rotated Sorted Arrays:</strong></p>
 <ul>
-<li>Use a modified binary search to handle the rotation of the array.</li>
+<li>One half of the array is sorted, while the other is shifted.</li>
+<li>By comparing the middle element with the left and right elements, we can determine which half is sorted and which part is rotated.</li>
 </ul>
 </li>
 <li>
-<p><strong>Initialization</strong>:</p>
+<p><strong>Binary Search Adaptation:</strong></p>
 <ul>
-<li>Set <code>s</code> to the start index (0) and <code>e</code> to the end index (<code>n - 1</code>).</li>
+<li>We perform binary search, but instead of searching a single sorted array, we need to check which part is sorted and adjust our search accordingly.</li>
 </ul>
 </li>
 <li>
-<p><strong>Iterate while Search Space is Valid</strong>:</p>
+<p><strong>Key Observations:</strong></p>
 <ul>
-<li>Calculate the middle index <code>mid</code>.</li>
-<li>Check if the middle element equals the target; if yes, return <code>mid</code>.</li>
-<li>Determine which part of the array is sorted:
-<ul>
-<li>If the left part (from <code>s</code> to <code>mid</code>) is sorted:
-<ul>
-<li>If the target lies within this sorted range, adjust the end index <code>e</code>.</li>
-<li>Otherwise, adjust the start index <code>s</code>.</li>
-</ul>
-</li>
-<li>If the right part (from <code>mid</code> to <code>e</code>) is sorted:
-<ul>
-<li>If the target lies within this sorted range, adjust the start index <code>s</code>.</li>
-<li>Otherwise, adjust the end index <code>e</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Result</strong>:</p>
-<ul>
-<li>If the target is not found by the end of the loop, return -1.</li>
+<li>If the left half of the array (<code>nums[s]</code> to <code>nums[mid]</code>) is sorted, we can check if the target lies within this range.</li>
+<li>If the right half (<code>nums[mid]</code> to <code>nums[e]</code>) is sorted, we adjust our search range accordingly.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="-code-breakdown">
+  🧑‍💻 <strong>Code Breakdown</strong>
+  <a class="heading-link" href="#-code-breakdown">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Initialize Pointers</strong>: Start (<code>s</code>) and end (<code>e</code>) pointers are set.</li>
-<li><strong>Binary Search Logic</strong>: Calculate <code>mid</code>, check for target equality, and adjust search range based on sorted subarrays.</li>
-<li><strong>Return Value</strong>: Index of target if found, or -1 if not.</li>
-</ol>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ul>
-<li><strong>Time Complexity:</strong> (O(\log n)) since we are halving the search space each iteration.</li>
-<li><strong>Space Complexity:</strong> (O(1)) as no additional space is used.</li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> s <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, e <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>Initialize the size of the array <code>nums</code> and set the start (<code>s</code>) and end (<code>e</code>) indices for binary search.</li>
 </ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(s <span style="color:#f92672">&lt;=</span> e) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> s <span style="color:#f92672">+</span> (e <span style="color:#f92672">-</span> s <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+</span></span></code></pre></div><ul>
+<li>Continue the search as long as the search window is valid (<code>s &lt;= e</code>).</li>
+<li>Compute the middle index <code>mid</code> using a formula that avoids overflow.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(nums[mid] <span style="color:#f92672">==</span> target) <span style="color:#66d9ef">return</span> mid;
+</span></span></code></pre></div><ul>
+<li>If the middle element is equal to the target, return the <code>mid</code> index.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(nums[s] <span style="color:#f92672">&lt;=</span> nums[mid]) {
+</span></span></code></pre></div><ul>
+<li>If the left half of the array (<code>nums[s]</code> to <code>nums[mid]</code>) is sorted, check if the target lies within this sorted range.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(nums[s] <span style="color:#f92672">&lt;=</span> target <span style="color:#f92672">&amp;&amp;</span> target <span style="color:#f92672">&lt;</span> nums[mid])
+</span></span><span style="display:flex;"><span>    e <span style="color:#f92672">=</span> mid <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Target lies within the sorted left half
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">else</span> 
+</span></span><span style="display:flex;"><span>    s <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Search in the right half
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>If the target is within the sorted left half (<code>nums[s] &lt;= target &lt; nums[mid]</code>), adjust the search to the left half (<code>e = mid - 1</code>).</li>
+<li>Otherwise, search in the right half (<code>s = mid + 1</code>).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span> {
+</span></span></code></pre></div><ul>
+<li>If the left half is not sorted, then the right half must be sorted.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(nums[mid] <span style="color:#f92672">&lt;</span> target <span style="color:#f92672">&amp;&amp;</span> target <span style="color:#f92672">&lt;=</span> nums[e])
+</span></span><span style="display:flex;"><span>    s <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Target lies within the sorted right half
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">else</span> 
+</span></span><span style="display:flex;"><span>    e <span style="color:#f92672">=</span> mid <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Search in the left half
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>If the target is within the sorted right half (<code>nums[mid] &lt; target &amp;&amp; target &lt;= nums[e]</code>), adjust the search to the right half (<code>s = mid + 1</code>).</li>
+<li>Otherwise, search in the left half (<code>e = mid - 1</code>).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Target not found
+</span></span></span></code></pre></div><ul>
+<li>If the target is not found by the end of the loop, return <code>-1</code>.</li>
+</ul>
+<h3 id="-time-and-space-complexity">
+  📊 <strong>Time and Space Complexity</strong>
+  <a class="heading-link" href="#-time-and-space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  <strong>Time Complexity:</strong>
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(log n):</strong> The algorithm performs binary search, reducing the search space by half with each step. Thus, the time complexity is logarithmic.</li>
+</ul>
+<h4 id="space-complexity">
+  <strong>Space Complexity:</strong>
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1):</strong> The algorithm uses a constant amount of extra space, as it only maintains a few variables (indices <code>s</code>, <code>e</code>, <code>mid</code>).</li>
+</ul>
+<h3 id="-conclusion">
+  🚀 <strong>Conclusion</strong>
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <strong>search</strong> function efficiently finds the index of the target value in a rotated sorted array using a modified <strong>binary search</strong>. The algorithm adapts binary search to handle the rotation by determining which half of the array is sorted and adjusting the search range accordingly.</p>
+<ul>
+<li><strong>Time Complexity:</strong> <strong>O(log n)</strong>, making it optimal for large arrays.</li>
+<li><strong>Space Complexity:</strong> <strong>O(1)</strong>, as the algorithm uses constant space.</li>
+</ul>
+<p>This approach is well-suited for searching in rotated sorted arrays, providing both time and space efficiency.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1094s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1093s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

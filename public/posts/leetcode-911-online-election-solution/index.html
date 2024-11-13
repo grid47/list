@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -247,7 +247,7 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * TopVotedCandidate* obj = new TopVotedCandidate(persons, times);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * int param_1 = obj-&gt;q(t);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<h2 id="hahahugoshortcode1403s1hbhb">
+<h2 id="hahahugoshortcode1404s1hbhb">
   
 
   
@@ -259,45 +259,11 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The <code>TopVotedCandidate</code> class records votes for candidates over time and allows you to query who the leading candidate was at any given time.</p>
-<h3 id="class-definition">
-  Class Definition
-  <a class="heading-link" href="#class-definition">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ul>
-<li><strong>Class</strong>: <code>TopVotedCandidate</code>
-<ul>
-<li>
-<p><strong>Constructor</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TopVotedCandidate(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> persons, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> times)
-</span></span></code></pre></div><ul>
-<li><strong>Parameters</strong>:
-<ul>
-<li><code>persons</code>: A vector of integers representing the IDs of candidates receiving votes.</li>
-<li><code>times</code>: A vector of integers representing the timestamps corresponding to each vote.</li>
-</ul>
-</li>
-<li><strong>Purpose</strong>: Initializes the <code>TopVotedCandidate</code> object and tracks the leading candidate at each vote timestamp.</li>
-</ul>
-</li>
-<li>
-<p><strong>Method</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> q(<span style="color:#66d9ef">int</span> t)
-</span></span></code></pre></div><ul>
-<li><strong>Parameters</strong>:
-<ul>
-<li><code>t</code>: An integer representing a timestamp.</li>
-</ul>
-</li>
-<li><strong>Returns</strong>: The ID of the candidate who was the leading candidate at time <code>t</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<p>In this problem, we are given two lists: <code>persons</code> and <code>times</code>. The <code>persons</code> list represents the votes cast in favor of each candidate at specific times represented by the <code>times</code> list. Each entry <code>persons[i]</code> and <code>times[i]</code> denotes that candidate <code>persons[i]</code> received a vote at time <code>times[i]</code>. The goal is to implement a <code>TopVotedCandidate</code> class with two main functionalities:</p>
+<ol>
+<li><strong>Constructor</strong>: <code>TopVotedCandidate(vector&lt;int&gt;&amp; persons, vector&lt;int&gt;&amp; times)</code> - Initializes the class with voting records.</li>
+<li><strong>q(int t)</strong> - Returns the person who was leading in votes at time <code>t</code>.</li>
+</ol>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -305,25 +271,100 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we use a <strong>map</strong> to keep track of the leading candidate at each voting time. A <strong>leader</strong> in this context is the candidate who has received the most votes at any specific time. Given that votes are cast in chronological order, we can build this map once during the initialization and then perform quick lookups in response to queries.</p>
+<p>Here&rsquo;s a breakdown of the approach:</p>
 <ol>
 <li>
-<p><strong>Vote Counting</strong>:</p>
+<p><strong>Count Votes Using a Hash Map</strong>:</p>
 <ul>
-<li>Maintain a <code>map&lt;int, int&gt;</code> to store the leading candidate at each time stamp.</li>
-<li>Use an <code>unordered_map&lt;int, int&gt;</code> to count the votes for each candidate.</li>
-<li>As you iterate through the <code>persons</code> and <code>times</code> vectors:
-<ul>
-<li>Increment the vote count for the current candidate.</li>
-<li>Update the leading candidate if the current candidate has the highest vote count or ties with the current leader.</li>
-</ul>
-</li>
+<li>We use an <code>unordered_map</code> named <code>cnt</code> to keep a running count of votes for each candidate.</li>
+<li>Each time a vote is cast, we update the count for that candidate.</li>
 </ul>
 </li>
 <li>
-<p><strong>Querying</strong>:</p>
+<p><strong>Track the Leading Candidate</strong>:</p>
 <ul>
-<li>For a given timestamp <code>t</code>, use <code>mp.upper_bound(t)</code> to find the latest time less than or equal to <code>t</code>.</li>
-<li>Return the candidate ID associated with that time.</li>
+<li>After updating the vote count, we check if the current candidate has more or equal votes than the current leader. If so, we update the leader to the current candidate.</li>
+</ul>
+</li>
+<li>
+<p><strong>Store the Leader at Each Time</strong>:</p>
+<ul>
+<li>We use a <code>map&lt;int, int&gt; mp</code> to store the leader at each time in <code>times</code>. This map allows us to quickly determine the leader at any queried time <code>t</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Binary Search for Efficient Querying</strong>:</p>
+<ul>
+<li>In the <code>q(t)</code> function, we use <code>upper_bound</code> on the <code>mp</code> map to quickly find the leader at the nearest time ≤ <code>t</code>. This operation leverages the binary search capabilities of the <code>map</code> and ensures an efficient lookup.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="constructor-building-the-leader-map">
+  <strong>Constructor</strong>: Building the Leader Map
+  <a class="heading-link" href="#constructor-building-the-leader-map">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TopVotedCandidate(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> persons, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> times) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> persons.size(), lead <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> cnt;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        lead <span style="color:#f92672">=</span> <span style="color:#f92672">++</span>cnt[persons[i]] <span style="color:#f92672">&gt;=</span> cnt[lead] <span style="color:#f92672">?</span> persons[i] <span style="color:#f92672">:</span> lead;
+</span></span><span style="display:flex;"><span>        mp[times[i]] <span style="color:#f92672">=</span> lead;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>We initialize <code>lead</code> to <code>-1</code> to indicate no current leader.</li>
+<li>We also initialize <code>cnt</code> as an <code>unordered_map&lt;int, int&gt;</code> to keep a count of votes for each candidate.</li>
+</ul>
+</li>
+<li>
+<p><strong>Vote Counting and Leader Tracking</strong>:</p>
+<ul>
+<li>For each vote, we update the count of the current candidate using <code>++cnt[persons[i]]</code>.</li>
+<li>We compare this candidate’s updated vote count with the current leader&rsquo;s vote count:
+<ul>
+<li>If the current candidate has an equal or greater count, they become the new leader.</li>
+</ul>
+</li>
+<li>We store this leader in <code>mp[times[i]]</code>, mapping the time to the current leader.</li>
+</ul>
+</li>
+</ol>
+<h4 id="query-method-finding-the-leader-at-time-t">
+  <strong>Query Method</strong>: Finding the Leader at Time <code>t</code>
+  <a class="heading-link" href="#query-method-finding-the-leader-at-time-t">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">q</span>(<span style="color:#66d9ef">int</span> t) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (<span style="color:#f92672">--</span>mp.upper_bound(t))<span style="color:#f92672">-&gt;</span>second;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>Upper Bound Search</strong>:</p>
+<ul>
+<li>We use <code>upper_bound(t)</code> to locate the smallest key in <code>mp</code> that is greater than <code>t</code>.</li>
+<li>We then decrement the iterator to get the last entry that is ≤ <code>t</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Leader</strong>:</p>
+<ul>
+<li>The result of <code>(--mp.upper_bound(t))</code> is the leader at the most recent time ≤ <code>t</code>, stored in <code>mp[t]</code>.</li>
 </ul>
 </li>
 </ol>
@@ -334,29 +375,51 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  <strong>Time Complexity</strong>
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>:
+<li>
+<p><strong>Constructor (<code>TopVotedCandidate</code>)</strong>:</p>
 <ul>
-<li>Constructor: O(n log n), where n is the number of votes (due to the map insertions).</li>
-<li>Query: O(log n) for finding the upper bound in the map.</li>
+<li><strong>O(n)</strong> for processing each vote, where <code>n</code> is the length of <code>persons</code>.</li>
+<li>Each vote requires a constant-time update to <code>cnt</code> and a logarithmic-time update to <code>mp</code> due to insertion into a <code>map</code>.</li>
 </ul>
 </li>
-<li><strong>Space Complexity</strong>: O(n) for storing the candidate counts and the mapping of times to leading candidates.</li>
+<li>
+<p><strong>Query (<code>q</code>)</strong>:</p>
+<ul>
+<li><strong>O(log n)</strong> for each query, as <code>upper_bound</code> is a logarithmic operation in a <code>map</code>.</li>
 </ul>
-<h3 id="example-usage">
-  Example Usage
-  <a class="heading-link" href="#example-usage">
+</li>
+</ul>
+<h4 id="space-complexity">
+  <strong>Space Complexity</strong>
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: We use extra space to store the vote counts in <code>cnt</code> and the leader mapping in <code>mp</code>, both of which can grow up to size <code>n</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TopVotedCandidate<span style="color:#f92672">*</span> obj <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TopVotedCandidate(persons, times);
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> param_1 <span style="color:#f92672">=</span> obj<span style="color:#f92672">-&gt;</span>q(t);
-</span></span></code></pre></div> 
+<p>The <code>TopVotedCandidate</code> class efficiently tracks the leader at each voting time and can quickly retrieve the leader at any queried time. By using a map and an upper bound search, we optimize both the initialization and query processes to handle large datasets efficiently. This approach provides an effective solution for tracking and querying the leading candidate at any given time based on past voting records.</p>
+ 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1403s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1404s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

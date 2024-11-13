@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -243,7 +243,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> boats;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1385s1hbhb">
+<h2 id="hahahugoshortcode1386s1hbhb">
   
 
   
@@ -255,7 +255,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given an array <code>people</code> where each element represents the weight of a person, and an integer <code>limit</code> representing the weight limit of a boat. Each boat can carry at most two people. Your task is to determine the minimum number of boats required to rescue all the people.</p>
+<p>In this problem, we are tasked with determining the minimum number of boats required to rescue all people in a given list. Each person has a specific weight, and each boat has a weight limit. The key rule is that a boat can carry at most two people, and the combined weight of the two people cannot exceed the weight limit of the boat. Given an array <code>people</code> representing the weight of each person and an integer <code>limit</code> representing the maximum weight a boat can carry, we need to calculate the minimum number of boats required to rescue everyone.</p>
+<p>For example, if the people are <code>[3, 2, 2, 1]</code> and the limit is <code>3</code>, the minimum number of boats needed would be <code>3</code>, as the optimal pairing would be:</p>
+<ul>
+<li>Pair the two people with weight 1 and 2 (total weight 3),</li>
+<li>Pair the two people with weight 2 and 3 (total weight 3).</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -263,35 +268,111 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The solution uses a greedy two-pointer technique:</p>
+<p>The problem involves finding an optimal way to pair people in a way that minimizes the number of boats required. The greedy approach is ideal for this type of problem, and the following approach can be used:</p>
 <ol>
 <li>
-<p><strong>Sorting</strong>: First, sort the <code>people</code> array to facilitate pairing the lightest and heaviest individuals.</p>
+<p><strong>Sort the Array</strong>: First, we sort the array of people by their weights. Sorting allows us to try pairing the lightest person with the heaviest person, which often leads to optimal groupings.</p>
 </li>
 <li>
-<p><strong>Two-Pointer Technique</strong>: Use two pointers, <code>lo</code> (starting from the lightest person) and <code>hi</code> (starting from the heaviest person):</p>
+<p><strong>Two Pointers</strong>: We use two pointers, one starting at the lightest person (beginning of the array) and the other at the heaviest person (end of the array). These two pointers will help us evaluate possible pairings:</p>
 <ul>
-<li>If the sum of the weights of the people at these two pointers is less than or equal to the <code>limit</code>, it means both can share a boat. In this case, increment the <code>lo</code> pointer and decrement the <code>hi</code> pointer.</li>
-<li>If they cannot share a boat, only decrement the <code>hi</code> pointer (the heavier person goes alone).</li>
-<li>Regardless of whether one or two people are placed in a boat, increment the <code>boats</code> counter.</li>
+<li>If the sum of the lightest and heaviest person (pointed by <code>lo</code> and <code>hi</code>) is less than or equal to the boat&rsquo;s weight limit, we pair them together and move both pointers inward.</li>
+<li>If they can&rsquo;t be paired (i.e., their combined weight exceeds the limit), we place the heaviest person alone on a boat and only move the <code>hi</code> pointer.</li>
 </ul>
 </li>
 <li>
-<p><strong>Termination</strong>: Continue this process until all people have been assigned to boats.</p>
+<p><strong>Greedy Strategy</strong>: The greedy approach works here because, by sorting the people and always attempting to pair the lightest and heaviest person, we maximize the chance of fitting people within the weight limit, thus minimizing the number of boats.</p>
+</li>
+<li>
+<p><strong>Counting Boats</strong>: Each time we successfully assign two people to a boat, we increment the boat count. If only one person is placed on the boat, we still count one boat for them.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>Here’s a step-by-step breakdown of the code:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> numRescueBoats(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> people, <span style="color:#66d9ef">int</span> limit) {
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Step 1: Sort the people array
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        sort(people.begin(), people.end());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Step 2: Initialize two pointers and a counter for the boats
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> lo <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, hi <span style="color:#f92672">=</span> people.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> boats <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Step 3: Loop to pair people or place them individually on boats
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">while</span> (lo <span style="color:#f92672">&lt;=</span> hi) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Step 3.1: Check if the lightest and heaviest person can be paired
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span> (people[lo] <span style="color:#f92672">+</span> people[hi] <span style="color:#f92672">&lt;=</span> limit) {
+</span></span><span style="display:flex;"><span>                lo <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Move the lightest person pointer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                hi <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Move the heaviest person pointer
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// Step 3.2: If they can&#39;t be paired, place the heaviest person alone on a boat
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                hi <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Step 4: Increment the boat counter
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            boats<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Step 5: Return the total number of boats
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> boats;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>Let’s walk through the code in detail:</p>
+<ol>
+<li>
+<p><strong>Sorting the Array</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(people.begin(), people.end());
+</span></span></code></pre></div><p>The first step is to sort the <code>people</code> vector in ascending order. This allows us to pair the lightest person with the heaviest person, which is a typical greedy approach to maximize the space usage in each boat.</p>
+</li>
+<li>
+<p><strong>Two Pointers Setup</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> lo <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, hi <span style="color:#f92672">=</span> people.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> boats <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><p>We initialize two pointers:</p>
 <ul>
-<li>Sort the array of weights.</li>
-<li>Initialize pointers and the <code>boats</code> counter.</li>
-<li>Iterate while <code>lo</code> is less than or equal to <code>hi</code>, checking if the current lightest and heaviest can share a boat or not, and update the counters accordingly.</li>
+<li><code>lo</code> starts at the first person (the lightest person in the sorted array),</li>
+<li><code>hi</code> starts at the last person (the heaviest person).
+We also initialize <code>boats</code> to zero, which will keep track of the total number of boats used.</li>
 </ul>
+</li>
+<li>
+<p><strong>Main Loop for Pairing or Assigning People to Boats</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(lo <span style="color:#f92672">&lt;=</span> hi) {
+</span></span></code></pre></div><p>The loop continues as long as <code>lo</code> is less than or equal to <code>hi</code>, meaning there are still people who need to be placed on boats.</p>
+</li>
+<li>
+<p><strong>Check if Pairing is Possible</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(people[lo] <span style="color:#f92672">+</span> people[hi] <span style="color:#f92672">&lt;=</span> limit) {
+</span></span><span style="display:flex;"><span>    lo <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    hi <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>} <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>    hi <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Inside the loop, we check whether the lightest person (<code>people[lo]</code>) and the heaviest person (<code>people[hi]</code>) can fit together in one boat. If their combined weight is less than or equal to the boat’s weight limit, they are paired together, and both pointers are adjusted to reflect that these two people have been placed on a boat.</p>
+<ul>
+<li>If they can be paired, both <code>lo</code> and <code>hi</code> are incremented and decremented, respectively.</li>
+<li>If they cannot be paired (i.e., their combined weight exceeds the limit), only <code>hi</code> is decremented, meaning the heaviest person is placed on a separate boat.</li>
+</ul>
+</li>
+<li>
+<p><strong>Increment the Boat Counter</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>boats<span style="color:#f92672">++</span>;
+</span></span></code></pre></div><p>Each time the loop runs (whether pairing two people or placing one person on a boat), we increment the <code>boats</code> counter to track the total number of boats used.</p>
+</li>
+<li>
+<p><strong>Return the Total Boats Used</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> boats;
+</span></span></code></pre></div><p>Finally, after all people have been assigned to boats, we return the total number of boats.</p>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -299,15 +380,30 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li><strong>Time Complexity</strong>: ( O(n \log n) ), where ( n ) is the number of people, due to the sorting step.</li>
-<li><strong>Space Complexity</strong>: ( O(1) ), as no additional space proportional to the input size is used.</li>
+<li>Sorting the array takes <code>O(n log n)</code>, where <code>n</code> is the number of people.</li>
+<li>The two-pointer traversal through the array takes <code>O(n)</code>.
+Thus, the overall time complexity is dominated by the sorting step, giving a final complexity of <strong>O(n log n)</strong>.</li>
 </ul>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is <strong>O(1)</strong> because we are only using a constant amount of extra space for variables like <code>lo</code>, <code>hi</code>, and <code>boats</code>. The sorting operation is done in-place.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of determining the minimum number of boats required to rescue everyone. By sorting the array of people and utilizing a two-pointer approach, we can pair people optimally or assign them individually to boats. This greedy approach ensures that we use the least number of boats possible. The time complexity of <strong>O(n log n)</strong> is optimal for this problem, making it scalable for large inputs.</p>
+<p>This solution works well for scenarios where there are multiple people with varying weights and a boat with a fixed weight limit. By pairing the lightest and heaviest people first, we maximize the space utilization of each boat and minimize the total number of boats needed.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1385s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1386s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

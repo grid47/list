@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -251,7 +251,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">to_string</span>(A) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> to_string(B);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1225s1hbhb">
+<h2 id="hahahugoshortcode1227s1hbhb">
   
 
   
@@ -263,7 +263,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a string representing a list of fractions, return a string representing their sum in reduced form. The input format is &ldquo;a/b&rdquo;, where <code>a</code> is the numerator and <code>b</code> is the denominator.</p>
+<p>The problem requires us to implement a function that adds a series of fractions represented as a string and returns the sum in its simplest fractional form. The input string will consist of fractions in the format <code>a/b</code>, where <code>a</code> is the numerator and <code>b</code> is the denominator. The goal is to sum all the fractions and return the result in the simplest form, meaning that the greatest common divisor (GCD) of the numerator and denominator should be used to reduce the fraction.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -271,58 +271,88 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we can break the task down into the following steps:</p>
 <ol>
-<li>
-<p><strong>Parsing the Expression</strong>:</p>
-<ul>
-<li>Use <code>istringstream</code> to read the string expression token by token. Each token consists of a numerator and a denominator separated by a &lsquo;/&rsquo; character.</li>
-</ul>
-</li>
-<li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>Initialize <code>A</code> as the numerator of the result and <code>B</code> as the common denominator, starting with <code>A = 0</code> and <code>B = 1</code> to represent the fraction <code>0/1</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Processing Each Fraction</strong>:</p>
-<ul>
-<li>For each fraction parsed, update the total numerator and denominator:
-<ul>
-<li>Update the numerator: ( A = A \cdot b + a \cdot B )</li>
-<li>Update the denominator: ( B = B \cdot b )</li>
-</ul>
-</li>
-<li>This essentially combines the two fractions into a single fraction.</li>
-</ul>
-</li>
-<li>
-<p><strong>Reduction</strong>:</p>
-<ul>
-<li>After processing all fractions, reduce the resulting fraction:
-<ul>
-<li>Compute the greatest common divisor (GCD) of <code>A</code> and <code>B</code> and divide both by the GCD to ensure the result is in the simplest form.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Returning the Result</strong>:</p>
-<ul>
-<li>Convert the final numerator and denominator into a string format &ldquo;A/B&rdquo; and return it.</li>
-</ul>
-</li>
+<li><strong>Input Parsing</strong>: Extract the individual fractions from the input string.</li>
+<li><strong>Adding Fractions</strong>: Use a common denominator to sum the fractions. This can be achieved by converting each fraction to have the same denominator and summing the numerators.</li>
+<li><strong>Simplification</strong>: Once the fractions are added, simplify the resulting fraction by dividing the numerator and denominator by their greatest common divisor (GCD).</li>
+<li><strong>Return the Result</strong>: Convert the simplified result into the format <code>a/b</code> and return it.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-input-parsing">
+  Step 1: Input Parsing
+  <a class="heading-link" href="#step-1-input-parsing">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>istringstream <span style="color:#a6e22e">in</span>(expression);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> A <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, B <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, a, b;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">char</span> _;
+</span></span></code></pre></div><ul>
+<li>We start by creating an <code>istringstream</code> object to read the input <code>expression</code>. This allows us to extract each fraction in the format <code>a/b</code>.</li>
+<li>We initialize variables <code>A</code> and <code>B</code>, which will hold the cumulative numerator and denominator respectively. Initially, <code>A</code> is set to <code>0</code> (since the sum of fractions starts at 0) and <code>B</code> is set to <code>1</code> (since we are working with fractions).</li>
+<li>We also define <code>a</code> and <code>b</code> to store the numerator and denominator of each individual fraction, and <code>_</code> as a placeholder to capture the <code>/</code> character between the numerator and denominator.</li>
+</ul>
+<h4 id="step-2-adding-fractions">
+  Step 2: Adding Fractions
+  <a class="heading-link" href="#step-2-adding-fractions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(in <span style="color:#f92672">&gt;&gt;</span> a <span style="color:#f92672">&gt;&gt;</span> _ <span style="color:#f92672">&gt;&gt;</span> b) {
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> a <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;-&#39;</span> <span style="color:#f92672">&lt;&lt;</span> b <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\n&#39;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    A <span style="color:#f92672">=</span> A <span style="color:#f92672">*</span> b <span style="color:#f92672">+</span> a <span style="color:#f92672">*</span> B;  <span style="color:#75715e">// Update numerator: A * b + a * B
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    B <span style="color:#f92672">=</span> B <span style="color:#f92672">*</span> b;          <span style="color:#75715e">// Update denominator: B * b
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>The loop continues while there are fractions to process. Inside the loop, we extract the numerator (<code>a</code>) and denominator (<code>b</code>) of each fraction.</li>
+<li>The formula used to add two fractions <code>A/B</code> and <code>a/b</code> is:
+[
+\frac{A}{B} + \frac{a}{b} = \frac{A \times b + a \times B}{B \times b}
+]
 <ul>
-<li>The main function <code>fractionAddition</code> utilizes a loop to read and process each fraction from the input string.</li>
-<li>Intermediate calculations and reductions are performed, and debugging output is printed to trace values during execution.</li>
+<li>The numerator is updated by multiplying <code>A</code> by <code>b</code> and adding <code>a</code> multiplied by <code>B</code>.</li>
+<li>The denominator is updated by multiplying <code>B</code> by <code>b</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-simplification">
+  Step 3: Simplification
+  <a class="heading-link" href="#step-3-simplification">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> g <span style="color:#f92672">=</span> abs(__gcd(A, B)); <span style="color:#75715e">// Find GCD of A and B
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>cout<span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;-0&lt;&#34;</span><span style="color:#f92672">&lt;&lt;</span> g<span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;&gt;0-&#34;</span><span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\n&#39;</span>;
+</span></span><span style="display:flex;"><span>A <span style="color:#f92672">/=</span> g;  <span style="color:#75715e">// Simplify numerator
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>B <span style="color:#f92672">/=</span> g;  <span style="color:#75715e">// Simplify denominator
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>cout<span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;-0{&#34;</span><span style="color:#f92672">&lt;&lt;</span> A <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;}0-&#34;</span><span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\n&#39;</span>;
+</span></span><span style="display:flex;"><span>cout<span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;-0{&#34;</span><span style="color:#f92672">&lt;&lt;</span> B <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;}0-&#34;</span><span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\n&#39;</span>;
+</span></span></code></pre></div><ul>
+<li>After the fractions are added, we need to simplify the result by dividing both the numerator and denominator by their greatest common divisor (GCD).</li>
+<li>The <code>__gcd()</code> function is used to find the GCD of <code>A</code> and <code>B</code>. We then divide both <code>A</code> and <code>B</code> by this GCD to ensure the fraction is in its simplest form.</li>
+<li>For example, if the resulting fraction is <code>6/8</code>, the GCD of <code>6</code> and <code>8</code> is <code>2</code>, so we divide both by <code>2</code>, resulting in the fraction <code>3/4</code>.</li>
+</ul>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#a6e22e">to_string</span>(A) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;/&#34;</span> <span style="color:#f92672">+</span> to_string(B);
+</span></span></code></pre></div><ul>
+<li>Finally, we convert the simplified numerator and denominator back into a string in the format <code>a/b</code> and return the result.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -331,15 +361,52 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(N), where N is the length of the input string, as we need to parse through each character.</li>
-<li><strong>Space Complexity</strong>: O(1), not counting the input string storage since we use a fixed amount of extra space for storing numerators and denominators.</li>
+<li><strong>O(n)</strong>, where <code>n</code> is the number of fractions in the input string.
+<ul>
+<li>The <code>while</code> loop processes each fraction exactly once, and each fraction is processed in constant time. The simplification step, which involves finding the GCD, also takes constant time for each operation since the maximum size of the numbers involved is bounded by the input.</li>
+<li>Therefore, the overall time complexity is linear in terms of the number of fractions.</li>
 </ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>, aside from the input string. The space complexity is constant because we only use a fixed number of variables (<code>A</code>, <code>B</code>, <code>a</code>, <code>b</code>, <code>g</code>, etc.), and no additional data structures that grow with the input are used. The space required for storing the result is constant as well.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently handles the task of adding multiple fractions and reducing the result to its simplest form. It utilizes basic operations such as GCD computation and fractional arithmetic to achieve the desired result. The approach ensures that the solution is both time-efficient and space-efficient, making it suitable for processing a large number of fractions.</p>
+<p>In summary:</p>
+<ul>
+<li>The input string is parsed to extract individual fractions.</li>
+<li>Fractions are added by finding a common denominator and updating the numerator accordingly.</li>
+<li>The result is simplified by dividing both the numerator and denominator by their GCD.</li>
+<li>The final simplified fraction is returned as a string in the format <code>a/b</code>.</li>
+</ul>
+<p>This approach ensures correctness and efficiency, and the solution can handle large inputs with ease.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1225s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1227s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -249,94 +249,188 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1279s1hbhb">
+<h2 id="hahahugoshortcode1280s1hbhb">
   
 
   
   <div class="markdown-body">
     <h3 id="problem-statement">
-  Problem Statement
+  Problem Statement:
   <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given two strings <code>s1</code> and <code>s2</code>, find the minimum ASCII delete sum of characters to make the two strings equal. The delete sum is the sum of the ASCII values of characters that need to be deleted from both strings.</p>
+<p>The problem at hand is the <strong>Minimum Delete Sum for Two Strings</strong>, where you are given two strings <code>s1</code> and <code>s2</code>. The task is to delete characters from both strings such that the sum of the ASCII values of the deleted characters is minimized, while ensuring that the remaining characters of the two strings form the longest common subsequence (LCS). Specifically, the goal is to compute the <strong>minimum ASCII sum</strong> of deleted characters from both strings.</p>
+<p>The problem is essentially about finding the LCS of the two strings, and then calculating how much must be deleted from both strings to make them identical, while minimizing the cost in terms of ASCII values.</p>
 <h3 id="approach">
-  Approach
+  Approach:
   <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we can apply <strong>Dynamic Programming (DP)</strong>. The idea is to maintain a table <code>mem[i][j]</code> that stores the result of the minimum ASCII delete sum for the substrings <code>s1[i...]</code> and <code>s2[j...]</code>.</p>
+<h4 id="high-level-approach">
+  High-level Approach:
+  <a class="heading-link" href="#high-level-approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Dynamic Programming</strong>:</p>
-<ul>
-<li>Use a recursive function <code>dp(i, j)</code> to compute the maximum ASCII sum of the longest common subsequence (LCS) between the two strings starting from indices <code>i</code> and <code>j</code>.</li>
-<li>Use memoization to store previously computed results in a <code>mem</code> table to avoid redundant calculations.</li>
-</ul>
+<p><strong>Longest Common Subsequence (LCS)</strong>: The key observation here is that the solution involves calculating the LCS of the two strings. Once the LCS is known, the minimum delete sum can be calculated by subtracting twice the sum of the LCS characters from the total sum of all characters in both strings (since the characters in the LCS will not be deleted).</p>
 </li>
 <li>
-<p><strong>Base Case</strong>:</p>
-<ul>
-<li>If either string is fully traversed (<code>i == s1.size()</code> or <code>j == s2.size()</code>), return 0.</li>
-</ul>
+<p><strong>Recursive with Memoization</strong>: The problem can be broken down into subproblems, where <code>dp(i, j)</code> represents the minimum delete sum for the substrings <code>s1[i...]</code> and <code>s2[j...]</code>. Using a recursive approach, we solve these subproblems by comparing characters of <code>s1</code> and <code>s2</code>. If the characters are equal, we include that character in the LCS, otherwise, we explore both options of deleting one character from either <code>s1</code> or <code>s2</code>.</p>
 </li>
 <li>
-<p><strong>Recursive Case</strong>:</p>
-<ul>
-<li>If characters at the current indices match (<code>s1[i] == s2[j]</code>), add the ASCII value of that character to the result of <code>dp(i + 1, j + 1)</code>.</li>
-<li>Otherwise, calculate the maximum of two possibilities: skipping the current character of <code>s1</code> or <code>s2</code>.</li>
-</ul>
+<p><strong>Base Case</strong>: If either string has been completely traversed (i.e., <code>i == s1.size()</code> or <code>j == s2.size()</code>), then the delete sum is 0 for the remaining characters in the other string.</p>
 </li>
 <li>
-<p><strong>Final Calculation</strong>:</p>
-<ul>
-<li>Compute the total ASCII value of both strings.</li>
-<li>Subtract twice the result of the LCS from the total to get the minimum delete sum.</li>
-</ul>
+<p><strong>Memoization</strong>: To avoid redundant calculations and improve the efficiency, we store intermediate results in a 2D memoization table <code>mem[i][j]</code>.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
+<h4 id="step-1-data-members">
+  Step 1: Data Members
+  <a class="heading-link" href="#step-1-data-members">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string s1, s2;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> mem;
+</span></span></code></pre></div><ul>
+<li><code>s1</code> and <code>s2</code> are the two input strings.</li>
+<li><code>mem</code> is a 2D vector used for memoization. It stores the minimum delete sum for every pair of substrings of <code>s1</code> and <code>s2</code>.</li>
+</ul>
+<h4 id="step-2-helper-function-dpi-j">
+  Step 2: Helper Function <code>dp(i, j)</code>
+  <a class="heading-link" href="#step-2-helper-function-dpi-j">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">==</span> s1.size() <span style="color:#f92672">||</span> j <span style="color:#f92672">==</span> s2.size()) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mem[i][j] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> mem[i][j];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> max(dp(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, j), dp(i, j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(s1[i] <span style="color:#f92672">==</span> s2[j]) {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> max(ans, dp(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> s1[i]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> mem[i][j] <span style="color:#f92672">=</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
 <li>
-<p><strong>Variables</strong>:</p>
+<p><strong>Base Case</strong>: If either <code>i == s1.size()</code> or <code>j == s2.size()</code>, it means one of the strings has been completely traversed, and there are no characters left to compare. Hence, we return <code>0</code>.</p>
+</li>
+<li>
+<p><strong>Memoization Check</strong>: Before solving a subproblem, we check if it has already been solved by checking <code>mem[i][j]</code>. If the value is not <code>-1</code>, we return the stored result to avoid redundant calculations.</p>
+</li>
+<li>
+<p><strong>Recursion</strong>: We calculate the maximum of two possible cases:</p>
 <ul>
-<li><code>s1</code> and <code>s2</code>: The input strings.</li>
-<li><code>mem</code>: A memoization table to store results of subproblems.</li>
+<li><strong>Case 1</strong>: We explore deleting the character from <code>s1</code> and move to the next character in <code>s1</code> (i.e., <code>dp(i + 1, j)</code>).</li>
+<li><strong>Case 2</strong>: We explore deleting the character from <code>s2</code> and move to the next character in <code>s2</code> (i.e., <code>dp(i, j + 1)</code>).</li>
 </ul>
 </li>
 <li>
-<p><strong>Functions</strong>:</p>
-<ul>
-<li><code>dp(int i, int j)</code>: Computes the maximum ASCII sum of the LCS using recursion and memoization.</li>
-<li><code>minimumDeleteSum(string s1, string s2)</code>: Initializes the problem and computes the minimum delete sum.</li>
-</ul>
+<p>If the characters <code>s1[i]</code> and <code>s2[j]</code> are equal, we consider including that character in the LCS and recursively calculate the minimum delete sum for the remaining substrings (i.e., <code>dp(i + 1, j + 1) + s1[i]</code>).</p>
+</li>
+<li>
+<p>We store the result of <code>dp(i, j)</code> in <code>mem[i][j]</code> to use it for future calls.</p>
 </li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-3-function-minimumdeletesum">
+  Step 3: Function <code>minimumDeleteSum()</code>
+  <a class="heading-link" href="#step-3-function-minimumdeletesum">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minimumDeleteSum</span>(string s1, string s2) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>s1 <span style="color:#f92672">=</span> s1;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>s2 <span style="color:#f92672">=</span> s2;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s1.size(); i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">+=</span> s1[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s2.size(); i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">+=</span> s2[i];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    mem.resize(s1.size() <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(s2.size(), <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> dp(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Initialization</strong>: First, we assign <code>s1</code> and <code>s2</code> to the class variables.</p>
+</li>
+<li>
+<p><strong>Calculate Total ASCII Sum</strong>: We initialize a variable <code>ans</code> to store the total sum of ASCII values of all characters in both <code>s1</code> and <code>s2</code>.</p>
+</li>
+<li>
+<p><strong>Memoization Table</strong>: We resize the <code>mem</code> table to have dimensions <code>(s1.size() + 1) x (s2.size())</code>, initializing all values to <code>-1</code>, which indicates that the subproblem has not been computed yet.</p>
+</li>
+<li>
+<p><strong>Return the Final Result</strong>: Finally, we calculate the result by subtracting twice the LCS sum (calculated by the <code>dp</code> function) from the total sum of ASCII values of the characters. This ensures that the minimum delete sum is obtained by removing all characters except those that belong to the LCS.</p>
+</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis:
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(m * n), where <code>m</code> and <code>n</code> are the lengths of <code>s1</code> and <code>s2</code>, due to the memoization of subproblems.</li>
-<li><strong>Space Complexity</strong>: O(m * n) for the memoization table.</li>
+<li>
+<p><strong>Time Complexity</strong>: The <code>dp</code> function is called once for each pair of indices <code>(i, j)</code> where <code>0 &lt;= i &lt; s1.size()</code> and <code>0 &lt;= j &lt; s2.size()</code>. Thus, the time complexity is <strong>O(m * n)</strong>, where <code>m</code> is the length of <code>s1</code> and <code>n</code> is the length of <code>s2</code>. Each recursive call performs a constant amount of work, and the memoization ensures that each subproblem is computed at most once.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is dominated by the memoization table, which has dimensions <code>(m+1) x (n+1)</code>. Hence, the space complexity is <strong>O(m * n)</strong>.</p>
+</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Space Complexity</strong>: <strong>O(m * n)</strong>, where <code>m</code> and <code>n</code> are the lengths of the two strings. This is due to the storage of the memoization table <code>mem</code> which has dimensions <code>(m + 1) x (n + 1)</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently computes the minimum delete sum for two strings by leveraging the concept of <strong>Dynamic Programming</strong>. It builds the solution by solving smaller subproblems using memoization, avoiding redundant computations and optimizing performance. The time and space complexities are both manageable for typical input sizes, making this solution an effective approach for solving the problem of minimizing the delete sum for two strings.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1279s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1280s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

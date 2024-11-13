@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -211,7 +211,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode314s0hbhb">
+        <h2 id="hahahugoshortcode313s0hbhb">
   <a href="https://leetcode.com/problems/find-peak-element/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -226,7 +226,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode314s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode313s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -253,69 +253,180 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> l;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode314s2hbhb">
+<h2 id="hahahugoshortcode313s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-peak-element-finding-the-local-maximum-efficiently">
+  🌐 Peak Element: Finding the Local Maximum Efficiently
+  <a class="heading-link" href="#-peak-element-finding-the-local-maximum-efficiently">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer array <code>arr</code>, find a peak element in the array. A peak element is defined as an element that is greater than its neighbors. For corner elements, only one neighbor is considered.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>In this problem, we are tasked with finding a <strong>peak element</strong> in an array. A peak element is defined as an element that is greater than or equal to its neighbors. Specifically:</p>
+<ul>
+<li>The first element is a peak if it is greater than or equal to the second element.</li>
+<li>The last element is a peak if it is greater than or equal to the second-last element.</li>
+<li>Any other element is a peak if it is greater than or equal to both its neighbors.</li>
+</ul>
+<p>The challenge is to find a peak element using a <strong>binary search approach</strong>, which will give us a <strong>O(log n)</strong> time complexity.</p>
+<hr>
+<h3 id="-approach">
+  💡 Approach
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Binary Search</strong>:
+<p>To solve this problem efficiently, we can use a <strong>binary search</strong> strategy. The key observation is that we can reduce the search space at each step based on the properties of a peak:</p>
 <ul>
-<li>Initialize two pointers, <code>l</code> (left) and <code>r</code> (right), to represent the bounds of the search space.</li>
-<li>While <code>l</code> is less than or equal to <code>r</code>, calculate the midpoint <code>mid</code>.</li>
-<li>Check the conditions:
+<li>If the middle element is greater than or equal to both its neighbors, it is a peak element.</li>
+<li>If the middle element is smaller than the next element, then there is a peak element on the right side.</li>
+<li>If the middle element is smaller than the previous element, then there is a peak element on the left side.</li>
+</ul>
+<p>By halving the search space at each step, we can find a peak element in <strong>O(log n)</strong> time.</p>
+<hr>
+<h3 id="-code-breakdown-step-by-step">
+  📝 Code Breakdown (Step-by-Step)
+  <a class="heading-link" href="#-code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="-step-1-initial-setup">
+  🔹 Step 1: Initial Setup
+  <a class="heading-link" href="#-step-1-initial-setup">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> arr.size();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> l <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, r <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>First, the size of the array <code>arr</code> is calculated and stored in <code>n</code>.</li>
+<li><code>l</code> and <code>r</code> represent the left and right bounds of the search space. Initially, <code>l</code> is set to 0 (the first index) and <code>r</code> is set to <code>n - 1</code> (the last index).</li>
+</ul>
+<h4 id="-step-2-binary-search-loop">
+  🔹 Step 2: Binary Search Loop
+  <a class="heading-link" href="#-step-2-binary-search-loop">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(l <span style="color:#f92672">&lt;=</span> r) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> l <span style="color:#f92672">+</span> (r <span style="color:#f92672">-</span> l) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+</span></span></code></pre></div><ul>
+<li>The loop continues as long as <code>l</code> is less than or equal to <code>r</code>. We calculate the middle index <code>mid</code> using the formula <code>l + (r - l) / 2</code> to avoid overflow.</li>
+</ul>
+<h4 id="-step-3-check-if-middle-element-is-a-peak">
+  🔹 Step 3: Check if Middle Element is a Peak
+  <a class="heading-link" href="#-step-3-check-if-middle-element-is-a-peak">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> x <span style="color:#f92672">=</span> mid <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> arr[mid <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;</span> arr[mid] <span style="color:#f92672">:</span> true;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> y <span style="color:#f92672">=</span> mid <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">?</span> arr[mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;</span> arr[mid] <span style="color:#f92672">:</span> true;
+</span></span></code></pre></div><ul>
+<li>The conditions <code>x</code> and <code>y</code> check whether the current element at index <code>mid</code> is greater than or equal to its neighbors:
 <ul>
-<li>If the current element at <code>mid</code> is greater than its left neighbor (or if <code>mid</code> is the first element) and greater than its right neighbor (or if <code>mid</code> is the last element), then <code>mid</code> is a peak.</li>
-<li>If the left neighbor is greater than the current element, move the right pointer <code>r</code> to <code>mid - 1</code> to search the left half.</li>
-<li>If the right neighbor is greater, move the left pointer <code>l</code> to <code>mid + 1</code> to search the right half.</li>
+<li><code>x</code> checks if <code>arr[mid]</code> is greater than or equal to the previous element (<code>arr[mid - 1]</code>), unless <code>mid</code> is the first element (<code>mid == 0</code>).</li>
+<li><code>y</code> checks if <code>arr[mid]</code> is greater than or equal to the next element (<code>arr[mid + 1]</code>), unless <code>mid</code> is the last element (<code>mid == n - 1</code>).</li>
 </ul>
 </li>
-<li>If no peak is found during the iterations, return <code>l</code>.</li>
 </ul>
-</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h4 id="-step-4-check-for-peak-element">
+  🔹 Step 4: Check for Peak Element
+  <a class="heading-link" href="#-step-4-check-for-peak-element">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(x <span style="color:#f92672">&amp;&amp;</span> y) <span style="color:#66d9ef">return</span> mid;
+</span></span></code></pre></div><ul>
+<li>If both <code>x</code> and <code>y</code> are true, then <code>arr[mid]</code> is a peak element. We return the index <code>mid</code> as the result.</li>
+</ul>
+<h4 id="-step-5-narrow-search-space-based-on-comparisons">
+  🔹 Step 5: Narrow Search Space Based on Comparisons
+  <a class="heading-link" href="#-step-5-narrow-search-space-based-on-comparisons">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>x <span style="color:#f92672">&amp;&amp;</span> y) r <span style="color:#f92672">=</span> mid <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(x <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>y) l <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span> r <span style="color:#f92672">=</span> mid <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li>If the middle element is not greater than its left neighbor (<code>!x</code>), then there must be a peak on the left side, so we update <code>r</code> to <code>mid - 1</code> to search in the left half.</li>
+<li>If the middle element is not greater than its right neighbor (<code>!y</code>), then there must be a peak on the right side, so we update <code>l</code> to <code>mid + 1</code> to search in the right half.</li>
+</ul>
+<h4 id="-step-6-return-the-peak-element-index">
+  🔹 Step 6: Return the Peak Element Index
+  <a class="heading-link" href="#-step-6-return-the-peak-element-index">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> l;
+</span></span></code></pre></div><ul>
+<li>Once the loop terminates, the index <code>l</code> will be the index of the peak element. Since the loop ensures that either <code>arr[l]</code> or <code>arr[r]</code> is a peak, returning <code>l</code> guarantees we always find a peak.</li>
+</ul>
+<hr>
+<h3 id="-complexity">
+  🔎 Complexity
+  <a class="heading-link" href="#-complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Lines 1-4</strong>: Define the function and initialize the size of the array and pointers <code>l</code> and <code>r</code>.</li>
-<li><strong>Lines 6-14</strong>: Implement the binary search logic to find the peak element based on neighbor comparisons.</li>
-<li><strong>Line 15</strong>: Return the index of the peak element.</li>
+<li><strong>O(log n)</strong>: The binary search approach ensures that the search space is halved at each step, leading to a logarithmic time complexity.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: The algorithm uses a constant amount of extra space (just a few integer variables to track the bounds <code>l</code>, <code>r</code>, and <code>mid</code>), making the space complexity <strong>O(1)</strong>.</li>
+</ul>
+<h3 id="-conclusion">
+  ✅ Conclusion
+  <a class="heading-link" href="#-conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This solution uses a <strong>binary search</strong> approach to efficiently find a peak element in an array. By narrowing down the search space based on the comparison of middle elements with their neighbors, we achieve an optimal time complexity of <strong>O(log n)</strong>, while using <strong>O(1)</strong> extra space.</p>
+<h4 id="key-insights">
+  Key Insights:
+  <a class="heading-link" href="#key-insights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(\log N)) due to the binary search approach.</li>
-<li><strong>Space Complexity</strong>: (O(1)) as no additional space proportional to the input size is used.</li>
-</ul> 
+<li>A peak element is guaranteed to exist, but it is not necessarily unique.</li>
+<li>The binary search approach reduces the complexity from <strong>O(n)</strong> (linear search) to <strong>O(log n)</strong>, making it ideal for large input sizes.</li>
+<li>Edge cases such as the first or last element being a peak are handled with conditional checks.</li>
+</ul>
+<p>This approach is particularly useful when dealing with large arrays, as it allows us to find a peak element without scanning the entire array.</p>
+ 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode314s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode313s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -241,7 +241,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1328s1hbhb">
+<h2 id="hahahugoshortcode1330s1hbhb">
   
 
   
@@ -253,7 +253,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer array <code>nums</code>, and two integers <code>left</code> and <code>right</code>, count the number of contiguous subarrays where the maximum element is between <code>left</code> and <code>right</code> (inclusive).</p>
+<p>In this problem, we are tasked with counting the number of contiguous subarrays within a given array <code>nums</code> whose maximum element is within a specified range <code>[left, right]</code>. The problem is essentially about finding subarrays that have their largest value within a given boundary. We need to implement an efficient algorithm to compute the total number of valid subarrays.</p>
+<p>A subarray is defined as any contiguous segment of the array. The problem requires us to count how many subarrays have a maximum element within the range of <code>[left, right]</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -261,62 +262,117 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we need to take the following approach:</p>
 <ol>
 <li>
-<p><strong>Initialize Variables</strong>:</p>
+<p><strong>Breaking the Problem into Subparts</strong>:</p>
 <ul>
-<li><code>ans</code>: To store the final count of valid subarrays.</li>
-<li><code>dp</code>: To count the number of valid subarrays ending at the current position.</li>
-<li><code>prv</code>: To keep track of the last position where an element greater than <code>right</code> was found.</li>
+<li>We first identify two parts:
+<ul>
+<li>Subarrays where all elements are strictly smaller than <code>left</code>.</li>
+<li>Subarrays where all elements lie within the range <code>[left, right]</code>.</li>
+</ul>
+</li>
+<li>We can solve the problem by counting all subarrays where the maximum element is less than or equal to <code>right</code>, and subtracting subarrays where the maximum element is strictly smaller than <code>left</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Iterate Through the Array</strong>:</p>
+<p><strong>Counting Valid Subarrays</strong>:</p>
 <ul>
-<li>For each element in <code>nums</code>, check:
-<ul>
-<li>If the element is less than <code>left</code>, add the count of subarrays ending at the current position (<code>dp</code>) to <code>ans</code>.</li>
-<li>If the element is greater than <code>right</code>, reset <code>dp</code> to 0 and update <code>prv</code> to the current index.</li>
-<li>If the element is between <code>left</code> and <code>right</code> (inclusive), calculate the number of subarrays that can end at this element by using the difference between the current index and <code>prv</code>, then add this count to <code>ans</code>.</li>
-</ul>
-</li>
+<li>The key observation is that we can calculate the number of subarrays where the maximum element is less than or equal to a given value using a sliding window approach. This allows us to efficiently compute the number of subarrays that meet the criteria.</li>
 </ul>
 </li>
 <li>
-<p><strong>Return the Result</strong>:</p>
+<p><strong>Efficient Calculation</strong>:</p>
 <ul>
-<li>Finally, return the total count stored in <code>ans</code>.</li>
+<li>We use a sliding window technique to track subarrays where the maximum element is within the range <code>[left, right]</code>.</li>
+<li>By using a variable <code>dp</code> that stores the number of valid subarrays ending at the current index, we can keep updating it as we traverse through the array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling the Range</strong>:</p>
+<ul>
+<li>As we traverse through the array, we adjust the <code>dp</code> value based on the current element&rsquo;s value relative to the <code>left</code> and <code>right</code> boundaries. When the value exceeds <code>right</code>, we reset the count, as any subarray containing that element would no longer be valid.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Class</strong>:
-<ul>
-<li><code>class Solution</code>: Contains the method for counting subarrays.
-<ul>
-<li><code>int numSubarrayBoundedMax(vector&lt;int&gt;&amp; nums, int left, int right)</code>: Implements the logic to count valid subarrays.
-<ul>
-<li><strong>Parameters</strong>:
-<ul>
-<li><code>nums</code>: A vector of integers representing the array.</li>
-<li><code>left</code>: The lower bound for the maximum value in the subarrays.</li>
-<li><code>right</code>: The upper bound for the maximum value in the subarrays.</li>
+<p>The code implementation uses a sliding window approach to efficiently solve the problem. Let&rsquo;s break it down step by step:</p>
+<h4 id="step-1-initialize-variables">
+  Step 1: Initialize Variables
+  <a class="heading-link" href="#step-1-initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, dp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, prv <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><ul>
+<li><code>n</code>: The size of the <code>nums</code> array.</li>
+<li><code>ans</code>: This variable keeps track of the total number of valid subarrays.</li>
+<li><code>dp</code>: A variable used to count the number of valid subarrays ending at the current index. It is updated based on the current element.</li>
+<li><code>prv</code>: This variable tracks the last index where a number greater than <code>right</code> was found. It is used to calculate the number of valid subarrays between two indices.</li>
 </ul>
-</li>
-<li><strong>Returns</strong>: The count of subarrays where the maximum element is within the bounds.</li>
+<h4 id="step-2-traverse-through-the-array">
+  Step 2: Traverse Through the Array
+  <a class="heading-link" href="#step-2-traverse-through-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(nums[i] <span style="color:#f92672">&lt;</span> left)
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">+=</span> dp;
+</span></span></code></pre></div><ul>
+<li>We iterate over each element of the array <code>nums</code>.</li>
+<li>If the current element is less than <code>left</code>, then any subarray ending at <code>i</code> will not contribute to the valid subarrays with a maximum within the range <code>[left, right]</code>. We add <code>dp</code> to <code>ans</code>, as the subarrays from the previous positions are still valid.</li>
 </ul>
-</li>
+<h4 id="step-3-handle-elements-greater-than-right">
+  Step 3: Handle Elements Greater Than <code>right</code>
+  <a class="heading-link" href="#step-3-handle-elements-greater-than-right">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(nums[i] <span style="color:#f92672">&gt;</span> right) {
+</span></span><span style="display:flex;"><span>        dp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        prv <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>If the current element exceeds <code>right</code>, we reset <code>dp</code> to 0 because no valid subarray can end at this index if the maximum element exceeds <code>right</code>.</li>
+<li>We also update <code>prv</code> to store the index of the element greater than <code>right</code>, as any valid subarrays must end before this index.</li>
 </ul>
-</li>
+<h4 id="step-4-handle-elements-within-the-range-left-right">
+  Step 4: Handle Elements Within the Range <code>[left, right]</code>
+  <a class="heading-link" href="#step-4-handle-elements-within-the-range-left-right">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(nums[i] <span style="color:#f92672">&gt;=</span> left <span style="color:#f92672">&amp;&amp;</span> nums[i] <span style="color:#f92672">&lt;=</span> right) {
+</span></span><span style="display:flex;"><span>        dp <span style="color:#f92672">=</span> i <span style="color:#f92672">-</span> prv;
+</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">+=</span> dp;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>If the current element is within the valid range <code>[left, right]</code>, we update <code>dp</code> to the number of subarrays ending at the current index. This is calculated as <code>i - prv</code>, where <code>prv</code> is the index of the last element that exceeded <code>right</code>.</li>
+<li>We add <code>dp</code> to <code>ans</code>, as it represents the count of valid subarrays that end at index <code>i</code>.</li>
 </ul>
-</li>
+<h4 id="step-5-return-the-final-result">
+  Step 5: Return the Final Result
+  <a class="heading-link" href="#step-5-return-the-final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>Finally, the variable <code>ans</code> contains the total number of valid subarrays, and we return it.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -325,15 +381,37 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the length of the input array <code>nums</code>. Each element is processed once.</li>
-<li><strong>Space Complexity</strong>: O(1), as only a constant amount of extra space is used for variables.</li>
-</ul>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this algorithm is O(n), where <code>n</code> is the length of the input array <code>nums</code>. This is because we only traverse the array once in a single loop, and each operation inside the loop takes constant time.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is O(1), as we use only a few variables (<code>ans</code>, <code>dp</code>, <code>prv</code>, and <code>n</code>) to store intermediate results. The space used does not depend on the size of the input array, making the space complexity constant.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The provided solution effectively solves the problem of counting the number of subarrays whose maximum element lies within the specified range <code>[left, right]</code>. The approach is efficient, with a time complexity of O(n) and space complexity of O(1), making it suitable for large input arrays.</p>
+<p>The sliding window technique used to keep track of valid subarrays ensures that the solution handles the constraints optimally. By updating the count of valid subarrays as we traverse the array, the solution avoids unnecessary recomputation, making it a highly efficient solution for this problem.</p>
+<p>This solution is both easy to understand and efficient, demonstrating the power of the sliding window technique in solving range-based problems. Whether the input array is large or small, the algorithm will perform efficiently, providing an optimal solution to the problem of counting subarrays with bounded maximums.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1328s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1330s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

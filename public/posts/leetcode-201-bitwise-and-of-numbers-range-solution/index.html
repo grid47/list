@@ -197,7 +197,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -206,7 +206,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode533s0hbhb">
+        <h2 id="hahahugoshortcode523s0hbhb">
   <a href="https://leetcode.com/problems/bitwise-and-of-numbers-range/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -221,7 +221,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode533s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode523s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -242,82 +242,162 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> right <span style="color:#f92672">&lt;&lt;</span> shift;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode533s2hbhb">
+<h2 id="hahahugoshortcode523s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-statement">
+  🚀 Problem Statement
+  <a class="heading-link" href="#-problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given two integers <code>left</code> and <code>right</code>, return the bitwise AND of all numbers in the range <code>[left, right]</code>.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>We’re tasked with calculating the <strong>bitwise AND</strong> of all the numbers between <code>left</code> and <code>right</code>, inclusive. Given two integers <code>left</code> and <code>right</code>, the goal is to compute the result of applying the <strong>bitwise AND</strong> operation to all the numbers in the range.</p>
+<p>For example:</p>
+<ul>
+<li><strong>Input:</strong> <code>left = 5</code>, <code>right = 7</code></li>
+<li><strong>Output:</strong> <code>4</code></li>
+</ul>
+<p><strong>Explanation:</strong></p>
+<ul>
+<li>The numbers in the range from 5 to 7 are: <code>5, 6, 7</code>.</li>
+<li>The <strong>bitwise AND</strong> of these numbers: <code>5 &amp; 6 &amp; 7 = 4</code>.</li>
+</ul>
+<hr>
+<h3 id="-approach">
+  🧠 Approach
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The <strong>bitwise AND</strong> operation works by comparing each bit of the numbers. A <code>1</code> in the result is set only if all corresponding bits of the numbers being compared are <code>1</code>. For a large range of numbers, iterating over each one could be inefficient.</p>
+<p>But, don’t worry! We can optimize our approach based on a few key observations:</p>
+<h4 id="1-identifying-the-common-prefix">
+  1. <strong>Identifying the Common Prefix</strong>:
+  <a class="heading-link" href="#1-identifying-the-common-prefix">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The bitwise AND result for all numbers between <code>left</code> and <code>right</code> depends only on the <strong>common binary prefix</strong> of <code>left</code> and <code>right</code>. If we keep shifting both numbers to the right, the differing bits will gradually disappear. Once they’re equal, we’ve found the common prefix.</p>
+<h4 id="2-bitwise-shifting">
+  2. <strong>Bitwise Shifting</strong>:
+  <a class="heading-link" href="#2-bitwise-shifting">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>By repeatedly shifting <code>left</code> and <code>right</code> to the right (dividing by 2), we move toward making them equal. The number of shifts required to make them equal tells us the position of the common prefix. After that, we just shift <code>right</code> back to the left to restore the prefix.</p>
+<p>This clever trick means we don’t need to check each number in the range, making our solution super efficient!</p>
+<hr>
+<h3 id="-step-by-step-code-breakdown">
+  🔨 Step-by-Step Code Breakdown
+  <a class="heading-link" href="#-step-by-step-code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s walk through how to implement this approach:</p>
+<h4 id="step-1-initialize-the-shift-counter">
+  Step 1: Initialize the Shift Counter
+  <a class="heading-link" href="#step-1-initialize-the-shift-counter">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> shift <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize a variable <code>shift</code> to 0. This will track how many times we need to shift <code>left</code> and <code>right</code> to the right until they become equal.</li>
+</ul>
+<h4 id="step-2-right-shift-until-left-and-right-are-equal">
+  Step 2: Right Shift Until <code>left</code> and <code>right</code> are Equal
+  <a class="heading-link" href="#step-2-right-shift-until-left-and-right-are-equal">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(right <span style="color:#f92672">!=</span> left)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    right <span style="color:#f92672">&gt;&gt;=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    left <span style="color:#f92672">&gt;&gt;=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    shift<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>while</code> loop continues until <code>left</code> and <code>right</code> are equal.</li>
+<li>Each iteration shifts both <code>left</code> and <code>right</code> to the right by 1. Think of this as cutting each number in half and moving its bits one position to the right.</li>
+<li>We increment the <code>shift</code> counter as we keep shifting.</li>
+<li>Once <code>left</code> and <code>right</code> become equal, they now share the same common prefix in their binary representation.</li>
+</ul>
+<h4 id="step-3-shift-back-to-the-left">
+  Step 3: Shift Back to the Left
+  <a class="heading-link" href="#step-3-shift-back-to-the-left">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> right <span style="color:#f92672">&lt;&lt;</span> shift;
+</span></span></code></pre></div><ul>
+<li>After the loop, both <code>left</code> and <code>right</code> are equal, and we now shift <code>right</code> back to the left by the number of shifts we counted. This restores the common binary prefix to its original position.</li>
+<li>The result of this operation is the <strong>bitwise AND</strong> of all numbers between <code>left</code> and <code>right</code>.</li>
+</ul>
+<hr>
+<h3 id="-complexity-analysis">
+  📈 Complexity Analysis
+  <a class="heading-link" href="#-complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(log(max(left, right))):</strong> The <code>while</code> loop runs while <code>left</code> and <code>right</code> are not equal. In each iteration, both numbers are halved (right-shifted). The number of iterations needed is proportional to the number of bits in the larger of the two numbers. Since the number of bits is roughly <code>log(x)</code>, where <code>x</code> is the larger number, the time complexity is O(log(max(left, right))).</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1):</strong> We only use a constant amount of extra space for <code>shift</code>, <code>left</code>, and <code>right</code>. No additional data structures are required, so the space complexity is constant.</li>
+</ul>
+<hr>
+<h3 id="-conclusion">
+  🏁 Conclusion
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution is a game-changer! By using bitwise operations and focusing on the <strong>common binary prefix</strong> of <code>left</code> and <code>right</code>, we avoid the need to iterate through every number in the range. This makes the approach super efficient, especially for large ranges.</p>
+<h4 id="key-takeaways">
+  Key Takeaways:
+  <a class="heading-link" href="#key-takeaways">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li>
-<p><strong>Finding the Common Prefix</strong>:</p>
-<ul>
-<li>The bitwise AND of a range of numbers can be derived from their common prefix.</li>
-<li>The key observation is that any differing bits between <code>left</code> and <code>right</code> will contribute <code>0</code> to the result.</li>
-</ul>
-</li>
-<li>
-<p><strong>Right Shift</strong>:</p>
-<ul>
-<li>Continuously right shift both <code>left</code> and <code>right</code> until they are equal. This process effectively discards the differing least significant bits.</li>
-<li>Count the number of shifts performed, which indicates how many bits will be <code>0</code> in the final result.</li>
-</ul>
-</li>
-<li>
-<p><strong>Final Calculation</strong>:</p>
-<ul>
-<li>After the loop, shift the <code>right</code> value back to the left by the number of shifts to restore the common prefix.</li>
-</ul>
-</li>
+<li><strong>Efficiency:</strong> The algorithm runs in O(log(max(left, right))) time, making it perfect for large values of <code>left</code> and <code>right</code>.</li>
+<li><strong>Space Optimization:</strong> With O(1) space complexity, it’s optimal for environments where memory is limited.</li>
+<li><strong>Bitwise Power:</strong> Shifting bits around allows us to achieve the desired result in a neat, optimized way.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ul>
-<li><strong>Line 1</strong>: Define the class <code>Solution</code>.</li>
-<li><strong>Line 2</strong>: Define the <code>rangeBitwiseAnd</code> function that takes two integers, <code>left</code> and <code>right</code>.</li>
-<li><strong>Line 3</strong>: Initialize a variable <code>shift</code> to count the number of right shifts.</li>
-<li><strong>Lines 5-9</strong>:
-<ul>
-<li>While <code>left</code> is not equal to <code>right</code>, right shift both numbers and increment the <code>shift</code> counter.</li>
-</ul>
-</li>
-<li><strong>Line 11</strong>: Return the value of <code>right</code> left-shifted by <code>shift</code>, which represents the result of the bitwise AND for the range.</li>
-</ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ul>
-<li><strong>Time Complexity</strong>: (O(\log(\text{max}(left, right)))) because the number of shifts is proportional to the number of bits in the larger number.</li>
-<li><strong>Space Complexity</strong>: (O(1)) since we are using a constant amount of extra space.</li>
-</ul>
+<p>This solution is <strong>elegant</strong> and <strong>efficient</strong>, showing that sometimes the best way to solve a problem is with a little clever thinking. Keep up the great work! 👏</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode533s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode523s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

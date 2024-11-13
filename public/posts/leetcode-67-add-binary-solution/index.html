@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -269,60 +269,135 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-add-two-binary-strings">
+  ➕ <strong>Add Two Binary Strings</strong>
+  <a class="heading-link" href="#-add-two-binary-strings">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given two binary strings <code>a</code> and <code>b</code>, return their sum as a binary string.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>The task is to add two binary strings, <code>a</code> and <code>b</code>, and return their sum as a binary string. In binary addition, <code>1 + 1</code> results in <code>10</code>, carrying <code>1</code> to the next bit position. This problem requires managing the binary addition of digits from the two strings, taking care of carry values between bit positions.</p>
+<h3 id="-approach">
+  🧠 <strong>Approach</strong>
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Initialize Carry</strong>: Start with a carry variable initialized to 0.</li>
-<li><strong>Process Bits</strong>: Loop through both strings until both are empty and there is no carry left.
-<ul>
-<li>If there are remaining bits in string <code>a</code>, add the last bit to the carry and remove it from <code>a</code>.</li>
-<li>If there are remaining bits in string <code>b</code>, add the last bit to the carry and remove it from <code>b</code>.</li>
+<p>The solution performs binary addition by working from the least significant bit (rightmost) to the most significant bit (leftmost) in each string. This approach ensures that all bits are added accurately with the correct carry. The algorithm maintains a carry (<code>cr</code>) initialized to zero and iterates through both strings until all bits are processed and there’s no carry left. The resulting binary string is built by appending each computed binary digit at the start of a result string.</p>
+<h3 id="-code-breakdown-step-by-step">
+  🔍 <strong>Code Breakdown (Step by Step)</strong>
+  <a class="heading-link" href="#-code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-variables">
+  Step 1: Initialize Variables
+  <a class="heading-link" href="#step-1-initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cr <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>string res <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span></code></pre></div><ul>
+<li><code>cr</code> (carry) is set to <code>0</code>, representing the initial carry for binary addition.</li>
+<li><code>res</code> is an empty string to accumulate the binary result.</li>
 </ul>
-</li>
-<li><strong>Calculate Result Bit</strong>: The result bit is determined by <code>carry % 2</code>, which gives the current bit of the binary sum.</li>
-<li><strong>Update Carry</strong>: Update the carry for the next iteration by dividing it by 2 (<code>carry /= 2</code>).</li>
-<li><strong>Build Result</strong>: Prepend the calculated result bit to the result string.</li>
-<li><strong>Return Result</strong>: Once the loop ends, return the resulting binary string.</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h4 id="step-2-loop-until-both-strings-are-exhausted-and-no-carry-left">
+  Step 2: Loop Until Both Strings Are Exhausted and No Carry Left
+  <a class="heading-link" href="#step-2-loop-until-both-strings-are-exhausted-and-no-carry-left">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>a.empty() <span style="color:#f92672">||</span> <span style="color:#f92672">!</span>b.empty() <span style="color:#f92672">||</span> cr) {
+</span></span></code></pre></div><ul>
+<li>The loop continues until both strings are empty and there is no carry left.</li>
+<li>This ensures that all bits from both strings and any remaining carry are fully processed.</li>
+</ul>
+<h4 id="step-3-extract-and-add-bits-from-the-end-of-each-string">
+  Step 3: Extract and Add Bits from the End of Each String
+  <a class="heading-link" href="#step-3-extract-and-add-bits-from-the-end-of-each-string">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>a.empty()) {
+</span></span><span style="display:flex;"><span>    cr <span style="color:#f92672">+=</span> a.back() <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>;
+</span></span><span style="display:flex;"><span>    a.pop_back();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>b.empty()) {
+</span></span><span style="display:flex;"><span>    cr <span style="color:#f92672">+=</span> b.back() <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>;
+</span></span><span style="display:flex;"><span>    b.pop_back();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If <code>a</code> is not empty, the last character (rightmost bit) is extracted, converted to an integer, and added to <code>cr</code>.</li>
+<li>Similarly, if <code>b</code> is not empty, the last character is extracted and added to <code>cr</code>.</li>
+<li>The <code>pop_back()</code> function removes the processed bit from the string for the next iteration.</li>
+</ul>
+<h4 id="step-4-calculate-the-current-bit-and-update-carry">
+  Step 4: Calculate the Current Bit and Update Carry
+  <a class="heading-link" href="#step-4-calculate-the-current-bit-and-update-carry">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>res <span style="color:#f92672">=</span> to_string(cr <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">+</span> res;
+</span></span><span style="display:flex;"><span>cr <span style="color:#f92672">/=</span> <span style="color:#ae81ff">2</span>;
+</span></span></code></pre></div><ul>
+<li>The current bit is calculated by taking <code>cr % 2</code> and appending this value to the beginning of <code>res</code>.</li>
+<li>The carry (<code>cr</code>) is updated by dividing it by <code>2</code> (<code>cr /= 2</code>), so it becomes <code>0</code> if there&rsquo;s no carry, or <code>1</code> if the addition produced a carry.</li>
+</ul>
+<h4 id="step-5-return-the-result">
+  Step 5: Return the Result
+  <a class="heading-link" href="#step-5-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After the loop finishes, the resulting binary sum is returned as a string.</li>
+</ul>
+<h3 id="-complexity-analysis">
+  📊 <strong>Complexity Analysis</strong>
+  <a class="heading-link" href="#-complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Initialization</strong>: Start with an empty result string and a carry of 0.</li>
-<li><strong>Loop</strong>: Use a while loop that continues until both input strings are empty and there is no carry left.</li>
-<li><strong>Extract Bits</strong>: Inside the loop, check if each string is non-empty. If so, convert the last character to an integer and add it to the carry, then pop the last character.</li>
-<li><strong>Compute Result</strong>: Calculate the result bit using <code>carry % 2</code> and prepend it to the result string.</li>
-<li><strong>Update Carry</strong>: Adjust the carry for the next iteration by performing integer division by 2.</li>
-<li><strong>Final Output</strong>: Return the accumulated result string.</li>
-</ol>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h3>
+</h4>
 <ul>
-<li><strong>Time Complexity:</strong> ( O(\max(L_1, L_2)) ), where ( L_1 ) and ( L_2 ) are the lengths of the binary strings <code>a</code> and <code>b</code>, as we may need to iterate through all bits.</li>
-<li><strong>Space Complexity:</strong> ( O(L) ), where ( L ) is the length of the resulting binary string, which in the worst case could be one bit longer than the longest input string.</li>
-</ul> 
+<li><strong>O(max(m, n))</strong>: The algorithm processes each bit in both strings, where <code>m</code> and <code>n</code> are the lengths of strings <code>a</code> and <code>b</code>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(max(m, n))</strong>: The space needed for the result string <code>res</code> is proportional to the length of the longer input string plus one for potential carry.</li>
+</ul>
+<h3 id="-conclusion">
+  🌟 <strong>Conclusion</strong>
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently handles binary addition with carry management by iterating through each bit from right to left. It combines both strings bit-by-bit, ensuring accurate calculation with minimal space overhead. The approach is optimal for binary addition, providing a solution that scales well with input size and produces a correctly formatted binary output string even for cases where one string is significantly longer than the other. This code exemplifies efficient handling of bit manipulation and carry propagation in binary arithmetic.</p>
+<hr>
+ 
 </div>
   
 

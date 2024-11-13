@@ -197,7 +197,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -206,7 +206,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1093s0hbhb">
+        <h2 id="hahahugoshortcode1092s0hbhb">
   <a href="https://leetcode.com/problems/odd-even-linked-list/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -221,7 +221,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1093s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1092s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -253,80 +253,164 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> head;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1093s2hbhb">
+<h2 id="hahahugoshortcode1092s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-statement">
+  🚀 Problem Statement
+  <a class="heading-link" href="#-problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a singly linked list, group all odd nodes together followed by the even nodes. The nodes should be rearranged in the same relative order as they were in the input list.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>In this problem, we are tasked with rearranging the nodes of a singly linked list such that all the nodes at <strong>odd positions</strong> (1st, 3rd, 5th, etc.) come first, followed by the nodes at <strong>even positions</strong> (2nd, 4th, 6th, etc.). The relative order of nodes within both the odd and even groups should remain unchanged.</p>
+<p>For example:</p>
+<ul>
+<li><strong>Input</strong>: <code>1 -&gt; 2 -&gt; 3 -&gt; 4 -&gt; 5</code></li>
+<li><strong>Output</strong>: <code>1 -&gt; 3 -&gt; 5 -&gt; 2 -&gt; 4</code></li>
+</ul>
+<p>We are aiming to solve this in <strong>O(n)</strong> time complexity, where <code>n</code> is the number of nodes, and <strong>O(1)</strong> space complexity, meaning we shouldn&rsquo;t use extra space beyond a constant amount.</p>
+<hr>
+<h3 id="-approach">
+  🧠 Approach
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The approach involves maintaining two separate pointers for odd and even indexed nodes in the list. The odd indexed nodes will be linked together followed by the even indexed nodes.</p>
+<p>To tackle this efficiently, we’ll use two pointers:</p>
+<ul>
+<li>One pointer will handle the <strong>odd indexed nodes</strong>.</li>
+<li>The other pointer will manage the <strong>even indexed nodes</strong>.</li>
+</ul>
+<p>Here’s a step-by-step breakdown of the approach:</p>
 <ol>
 <li>
-<p><strong>Initialization</strong>:</p>
+<p><strong>Odd and Even List Segregation</strong>: We maintain two separate lists:</p>
 <ul>
-<li>Use two pointers: <code>odd</code> for the current odd node, initialized to the head, and <code>even</code> for the current even node, initialized to <code>head-&gt;next</code>. The <code>ehead</code> pointer is used to remember the start of the even list.</li>
+<li>One for the odd indexed nodes.</li>
+<li>Another for the even indexed nodes.</li>
 </ul>
 </li>
 <li>
-<p><strong>Rearranging the List</strong>:</p>
+<p><strong>Pointer Movement</strong>: As we traverse through the list, we update the pointers alternately:</p>
 <ul>
-<li>Traverse the linked list using a while loop until you reach the end of the even nodes. In each iteration:
-<ul>
-<li>Connect the <code>odd</code> pointer to the next odd node.</li>
-<li>Connect the <code>even</code> pointer to the next even node.</li>
-<li>Move the <code>odd</code> and <code>even</code> pointers forward.</li>
-</ul>
-</li>
+<li>Odd indexed nodes will link to the next odd indexed node.</li>
+<li>Even indexed nodes will link to the next even indexed node.</li>
 </ul>
 </li>
 <li>
-<p><strong>Final Connection</strong>:</p>
-<ul>
-<li>After the loop, connect the end of the odd list to the head of the even list (using the <code>ehead</code> pointer).</li>
-</ul>
+<p><strong>Termination</strong>: The loop ends once we reach the end of the list. Afterward, we connect the last node of the odd list to the head of the even list.</p>
+</li>
+<li>
+<p><strong>Return the New List</strong>: Finally, the rearranged list is returned starting from the head of the odd list.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<hr>
+<h3 id="-step-by-step-code-breakdown">
+  🔨 Step-by-Step Code Breakdown
+  <a class="heading-link" href="#-step-by-step-code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s walk through the code implementation:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>head) <span style="color:#66d9ef">return</span> NULL;
+</span></span></code></pre></div><ul>
+<li><strong>Edge Case</strong>: If the list is empty (<code>head == NULL</code>), we return <code>NULL</code>. This handles cases where there are no nodes.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode <span style="color:#f92672">*</span>odd <span style="color:#f92672">=</span> head, <span style="color:#f92672">*</span>ehead <span style="color:#f92672">=</span> head<span style="color:#f92672">-&gt;</span>next, <span style="color:#f92672">*</span>even <span style="color:#f92672">=</span> head<span style="color:#f92672">-&gt;</span>next;
+</span></span></code></pre></div><ul>
+<li><strong>Pointer Initialization</strong>:
+<ul>
+<li><code>odd</code>: Points to the first node (odd index).</li>
+<li><code>ehead</code>: Points to the second node (even index).</li>
+<li><code>even</code>: Tracks the current even indexed node during iteration.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (even <span style="color:#f92672">&amp;&amp;</span> even<span style="color:#f92672">-&gt;</span>next) {
+</span></span><span style="display:flex;"><span>    odd<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> odd<span style="color:#f92672">-&gt;</span>next<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>    even<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> even<span style="color:#f92672">-&gt;</span>next<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>    odd <span style="color:#f92672">=</span> odd<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>    even <span style="color:#f92672">=</span> even<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Main Loop</strong>:
+<ul>
+<li>This loop runs while there are still even indexed nodes to process.</li>
+<li>The <code>odd-&gt;next</code> pointer is updated to point to the next odd indexed node.</li>
+<li>The <code>even-&gt;next</code> pointer is updated to point to the next even indexed node.</li>
+<li>Both <code>odd</code> and <code>even</code> pointers then move forward.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>odd<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> ehead;
+</span></span></code></pre></div><ul>
+<li><strong>Connecting Odd and Even Lists</strong>: After the loop ends, all odd nodes are linked together and all even nodes are linked together. Now, we connect the last odd node to the head of the even list.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> head;
+</span></span></code></pre></div><ul>
+<li><strong>Return the Rearranged List</strong>: Finally, we return the head of the rearranged list, which starts with the odd indexed nodes followed by the even indexed ones.</li>
+</ul>
+<hr>
+<h3 id="-complexity-analysis">
+  📈 Complexity Analysis
+  <a class="heading-link" href="#-complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="-time-complexity">
+  ⏱️ Time Complexity:
+  <a class="heading-link" href="#-time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: We only traverse the linked list once, with each node being processed exactly once. Therefore, the time complexity is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the linked list.</li>
+</ul>
+<h4 id="-space-complexity">
+  💾 Space Complexity:
+  <a class="heading-link" href="#-space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: We only use a constant amount of extra space for the <code>odd</code>, <code>even</code>, and <code>ehead</code> pointers, and do not create any additional data structures. Thus, the space complexity is <strong>O(1)</strong>.</li>
+</ul>
+<hr>
+<h3 id="-conclusion">
+  🏁 Conclusion
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach solves the problem of rearranging a singly linked list in a very efficient manner. The key idea is to use two pointers — one for odd indexed nodes and one for even indexed nodes — and traverse the list only once. By doing this in-place, we achieve <strong>O(n)</strong> time complexity and <strong>O(1)</strong> space complexity, making it both time-efficient and space-efficient.</p>
+<hr>
+<h3 id="-key-takeaways">
+  🔥 Key Takeaways
+  <a class="heading-link" href="#-key-takeaways">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li><strong>Input</strong>: A pointer to the head of a singly linked list.</li>
-<li><strong>Output</strong>: A pointer to the head of the modified list with odd indexed nodes followed by even indexed nodes.</li>
+<li><strong>Time complexity</strong>: O(n)</li>
+<li><strong>Space complexity</strong>: O(1)</li>
+<li>The solution is efficient and suitable for large linked lists.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ul>
-<li><strong>Time Complexity</strong>: (O(n)), where (n) is the number of nodes in the list, as we traverse the list once.</li>
-<li><strong>Space Complexity</strong>: (O(1)), as we are using only a constant amount of extra space for the pointers.</li>
-</ul>
+<p>Great job reaching the end! 🎉 Keep practicing and refining your problem-solving skills. You&rsquo;ll master these concepts in no time! 😄</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1093s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1092s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

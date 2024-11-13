@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -285,7 +285,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given a 2D grid representing stones, where each stone&rsquo;s position is represented by a pair of coordinates (x, y). You can remove a stone if it&rsquo;s in the same row or column as another stone. The goal is to find the maximum number of stones that can be removed.</p>
+<p>The problem is to determine the maximum number of stones that can be removed from a grid, given that stones are positioned at specific coordinates. The removal condition is that two stones can be removed if they lie on the same row or the same column. The goal is to find the maximum number of stones that can be removed, leaving only the minimum number of stones behind.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -293,44 +293,129 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we can model the situation as a graph where each stone is a node. There will be an edge between two stones if they share the same row or column. The problem then becomes one of finding connected components in this graph. Stones within the same connected component can all be removed, since they are either directly or indirectly connected through shared rows or columns.</p>
+<p>We can use the <strong>Union-Find (UF)</strong> data structure to efficiently handle the connected components. The steps involved are as follows:</p>
 <ol>
-<li>
-<p><strong>Union-Find Data Structure</strong>:</p>
-<ul>
-<li>Implement a Union-Find (Disjoint Set Union) data structure to efficiently group stones based on their connections (i.e., same row or column).</li>
-</ul>
-</li>
 <li>
 <p><strong>Initialization</strong>:</p>
 <ul>
-<li>Initialize the Union-Find structure with each stone as its own parent, and count the total number of stones.</li>
+<li>For each stone, we associate it with its coordinates. Stones in the same row or column will be linked by a union operation.</li>
 </ul>
 </li>
 <li>
-<p><strong>Union Operations</strong>:</p>
+<p><strong>Union-Find Data Structure</strong>:</p>
 <ul>
-<li>Use two maps to track the last stone in each row (<code>x</code>) and column (<code>y</code>).</li>
-<li>For each stone, if a stone exists in the same row or column, perform a union operation to connect them.</li>
+<li>We will use the Union-Find data structure to group stones that can be connected through their rows and columns. The idea is that if two stones share the same row or column, they belong to the same connected component.</li>
 </ul>
 </li>
 <li>
-<p><strong>Count Components</strong>:</p>
+<p><strong>Mapping Stones by Row and Column</strong>:</p>
 <ul>
-<li>After processing all stones, the number of distinct components (connected groups of stones) will determine how many stones can be removed.</li>
-<li>The maximum number of stones that can be removed is equal to the total number of stones minus the number of distinct components.</li>
+<li>We create maps to track the most recent stone in each row and column. If a stone shares the same row or column with an already seen stone, we will perform a union operation between them, ensuring they are in the same connected component.</li>
+</ul>
+</li>
+<li>
+<p><strong>Counting Components</strong>:</p>
+<ul>
+<li>After processing all the stones, the number of connected components will be the number of stones that cannot be removed (i.e., the minimum stones left). The maximum number of stones that can be removed will be the total number of stones minus the number of connected components.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The function initializes the Union-Find structure, iterates through the list of stones, and connects them based on their row and column affiliations. Finally, it calculates the maximum removable stones by subtracting the count of connected components from the total number of stones.</li>
+<ol>
+<li>
+<p><strong>Union-Find Class</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UF</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> chd;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> cnt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    UF(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>        chd.resize(n, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>            chd[i] <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>        cnt <span style="color:#f92672">=</span> n;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">uni</span>(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> find(x);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> find(y);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">!=</span> j) {
+</span></span><span style="display:flex;"><span>            chd[i] <span style="color:#f92672">=</span> j;
+</span></span><span style="display:flex;"><span>            cnt<span style="color:#f92672">--</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">find</span>(<span style="color:#66d9ef">int</span> x) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">==</span> chd[x]) <span style="color:#66d9ef">return</span> x;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> chd[x] <span style="color:#f92672">=</span> find(chd[x]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>This <code>UF</code> class manages the Union-Find data structure, with methods for finding the root of a node (<code>find</code>) and uniting two nodes (<code>uni</code>). The <code>cnt</code> variable tracks the number of connected components.</li>
 </ul>
+</li>
+<li>
+<p><strong>Solution Class and the <code>removeStones</code> Function</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> removeStones(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> stones) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> stones.size();
+</span></span><span style="display:flex;"><span>        UF<span style="color:#f92672">*</span> uf <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> UF(n);  <span style="color:#75715e">// Initialize Union-Find with n stones
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> x, y;  <span style="color:#75715e">// Maps to track the last stone in each row and column
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Process each stone
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> p <span style="color:#f92672">=</span> stones[i][<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> q <span style="color:#f92672">=</span> stones[i][<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Union stones in the same row
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span>(x.count(p)) {
+</span></span><span style="display:flex;"><span>                uf<span style="color:#f92672">-&gt;</span>uni(x[p], i);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Union stones in the same column
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span>(y.count(q)) {
+</span></span><span style="display:flex;"><span>                uf<span style="color:#f92672">-&gt;</span>uni(y[q], i);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Update the row and column mappings
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            x[p] <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>            y[q] <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// The number of stones that cannot be removed is the number of components
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> n <span style="color:#f92672">-</span> uf<span style="color:#f92672">-&gt;</span>cnt;  <span style="color:#75715e">// The result is total stones minus the number of components
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Union and Mapping</strong>:</p>
+<ul>
+<li>For each stone at position <code>(p, q)</code>, we check if there is a previously seen stone in the same row <code>p</code> or column <code>q</code>. If there is, we union the current stone with the previously seen stone, effectively marking them as part of the same connected component.</li>
+</ul>
+</li>
+<li>
+<p><strong>Tracking Components</strong>:</p>
+<ul>
+<li>The <code>x</code> and <code>y</code> maps help track the last seen stone for each row and column. If a stone shares a row or column with a previously processed stone, we perform the union operation to ensure they are part of the same component.</li>
+</ul>
+</li>
+<li>
+<p><strong>Result Calculation</strong>:</p>
+<ul>
+<li>The total number of stones minus the number of connected components (<code>uf-&gt;cnt</code>) gives the maximum number of stones that can be removed.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -338,10 +423,30 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the number of stones, as each stone is processed once.</li>
-<li><strong>Space Complexity</strong>: O(n), for the Union-Find data structure and the maps used to track the last stones in each row and column.</li>
+<li><strong>Union-Find Operations</strong>: The <code>find</code> and <code>union</code> operations take almost constant time due to path compression and union by rank. These operations are effectively O(α(n)), where α is the inverse Ackermann function, which grows very slowly.</li>
+<li><strong>Loop Over Stones</strong>: We process each stone once, and for each stone, we perform constant-time operations (checking and updating the maps, performing union operations).</li>
+<li>Overall, the time complexity is O(n), where <code>n</code> is the number of stones.</li>
 </ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is O(n) for storing the Union-Find data structure and the <code>x</code> and <code>y</code> maps.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem by modeling it as a graph problem and using the Union-Find data structure to handle connected components. By uniting stones that are in the same row or column, the algorithm effectively determines the number of connected components, and from that, computes the maximum number of stones that can be removed. The Union-Find operations ensure that the solution runs efficiently, even for large input sizes.</p>
  
 </div>
   

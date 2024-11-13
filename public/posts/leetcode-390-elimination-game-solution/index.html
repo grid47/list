@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -211,7 +211,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1126s0hbhb">
+        <h2 id="hahahugoshortcode1124s0hbhb">
   <a href="https://leetcode.com/problems/elimination-game/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -226,7 +226,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1126s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1124s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -250,70 +250,159 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> head;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1126s2hbhb">
+<h2 id="hahahugoshortcode1124s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-statement">
+  🚀 Problem Statement
+  <a class="heading-link" href="#-problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are tasked with finding the last remaining number in a list of integers from 1 to n after repeatedly removing every second number in a circular manner.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>The task is to find the <strong>last remaining number</strong> in a sequence after repeatedly eliminating every second number. Starting with an array of integers from 1 to <code>n</code>, we eliminate every other number (either from left to right or right to left) in successive rounds. Our goal is to determine which number remains after all rounds are completed.</p>
+<hr>
+<h3 id="-approach">
+  🧠 Approach
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This problem can be simplified by recognizing a predictable pattern in the elimination process. Rather than simulating each round, we can use a mathematical approach to find the last number left standing.</p>
+<h4 id="key-observations">
+  Key Observations:
+  <a class="heading-link" href="#key-observations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>Direction alternation</strong>: The elimination direction alternates between left-to-right and right-to-left in successive rounds.</li>
+<li><strong>Halving the sequence</strong>: Each round halves the remaining sequence, as every second number is eliminated.</li>
+<li><strong>Elimination based on parity</strong>: The sequence behaves differently when the number of elements is odd vs. even. In cases where the length is odd, the last element is eliminated first in the left-to-right direction.</li>
+</ol>
+<p>By recognizing these patterns, we can use an efficient iterative approach to calculate the last remaining number without simulating the entire process.</p>
+<hr>
+<h3 id="-step-by-step-code-breakdown">
+  🔨 Step-by-Step Code Breakdown
+  <a class="heading-link" href="#-step-by-step-code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s the code that implements this approach:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> lastRemaining(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bool</span> left <span style="color:#f92672">=</span> true;  <span style="color:#75715e">// Tracks elimination direction (left-to-right or right-to-left)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> rm <span style="color:#f92672">=</span> n;        <span style="color:#75715e">// Number of remaining elements
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> step <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;      <span style="color:#75715e">// The step size (initially 1 for eliminating every second number)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> head <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;      <span style="color:#75715e">// The first number in the sequence (initially 1)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Continue until only one number remains
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">while</span> (rm <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (left <span style="color:#f92672">||</span> rm <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) {
+</span></span><span style="display:flex;"><span>                head <span style="color:#f92672">+=</span> step;  <span style="color:#75715e">// Update the first remaining number
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
+</span></span><span style="display:flex;"><span>            rm <span style="color:#f92672">/=</span> <span style="color:#ae81ff">2</span>;       <span style="color:#75715e">// Halve the sequence length
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            step <span style="color:#f92672">*=</span> <span style="color:#ae81ff">2</span>;     <span style="color:#75715e">// Double the step size
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            left <span style="color:#f92672">=</span> <span style="color:#f92672">!</span>left;  <span style="color:#75715e">// Alternate the direction of elimination
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> head;  <span style="color:#75715e">// Return the last remaining number
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h4 id="step-by-step-explanation">
+  Step-by-Step Explanation:
+  <a class="heading-link" href="#step-by-step-explanation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Initialization</strong>: Start with the first number as the head of the sequence. Use flags and variables to keep track of the direction of removal (<code>left</code>), the number of remaining elements (<code>rm</code>), the step size for removal, and the current head value.</p>
-</li>
-<li>
-<p><strong>Iterative Removal</strong>: While there is more than one number remaining:</p>
+<p><strong>Initialize Variables</strong>:</p>
 <ul>
-<li>If removing from the left or if the remaining count is odd, update the head by adding the current step size.</li>
-<li>Halve the count of remaining numbers.</li>
-<li>Double the step size for the next iteration.</li>
-<li>Toggle the direction for the next round.</li>
+<li><code>left</code>: This flag indicates whether the current round is left-to-right (<code>true</code>) or right-to-left (<code>false</code>).</li>
+<li><code>rm</code>: The number of remaining elements in the sequence, initially set to <code>n</code>.</li>
+<li><code>step</code>: The step size, which starts at 1 (eliminate every second number). It doubles with each round to account for the halving of the sequence.</li>
+<li><code>head</code>: The first number of the sequence, initially 1.</li>
 </ul>
 </li>
 <li>
-<p><strong>Return the Result</strong>: Once only one number remains, return the head value, which represents the last remaining number.</p>
+<p><strong>Iterative Process</strong>:</p>
+<ul>
+<li>The <code>while</code> loop runs as long as there is more than one element (<code>rm &gt; 1</code>).</li>
+<li>On each iteration:
+<ul>
+<li>If the direction is <code>left</code> or the number of remaining elements is odd, we update the first remaining number (<code>head</code>) by adding the <code>step</code>.</li>
+<li>We then halve the sequence (<code>rm /= 2</code>) and double the step size (<code>step *= 2</code>).</li>
+<li>The direction is toggled (<code>left = !left</code>) for the next round.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>When the loop finishes, <code>head</code> contains the last remaining number, which is returned.</li>
+</ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<hr>
+<h3 id="-complexity-analysis">
+  📈 Complexity Analysis
+  <a class="heading-link" href="#-complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this solution is <strong>O(log n)</strong>. The sequence length (<code>rm</code>) is halved in each round, meaning the loop runs approximately <strong>log n</strong> times, where <code>n</code> is the initial size of the sequence.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(1)</strong> because we are using only a few integer variables (<code>left</code>, <code>rm</code>, <code>step</code>, <code>head</code>) that occupy constant space, regardless of the size of <code>n</code>.</p>
+<hr>
+<h3 id="-conclusion">
+  🏁 Conclusion
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach efficiently computes the <strong>last remaining number</strong> in the sequence after repeatedly eliminating every second number. By leveraging the predictable halving pattern and alternating direction, we can solve the problem in <strong>O(log n)</strong> time, making it suitable for large inputs.</p>
+<h3 id="-key-takeaways">
+  🎯 Key Takeaways:
+  <a class="heading-link" href="#-key-takeaways">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li>The function uses a loop to simulate the removal process efficiently, adjusting the head and remaining numbers based on the current direction.</li>
-<li>By alternating the direction and adjusting the step size accordingly, it ensures an optimal approach without requiring additional data structures to simulate the removal of elements.</li>
+<li><strong>Optimized Iteration</strong>: Instead of simulating the elimination process, we use mathematical observations to reduce the problem to a logarithmic number of steps.</li>
+<li><strong>Constant Space</strong>: The solution only uses a few integer variables, ensuring minimal space usage.</li>
+<li><strong>Logarithmic Time</strong>: The process runs in <strong>O(log n)</strong> time, making it highly efficient for large values of <code>n</code>.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ul>
-<li><strong>Time Complexity</strong>: O(log n), where n is the initial count of numbers, as the number of remaining numbers is halved in each iteration.</li>
-<li><strong>Space Complexity</strong>: O(1), as only a constant amount of space is used for variables regardless of the input size.</li>
-</ul>
+<p>With this solution, you can confidently handle the problem even with very large inputs. Keep up the great work, and happy coding! 🚀</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1126s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1124s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -272,68 +272,177 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-understanding-preorder-traversal-of-a-binary-tree">
+  📝 <strong>Problem Understanding: Preorder Traversal of a Binary Tree</strong>
+  <a class="heading-link" href="#-problem-understanding-preorder-traversal-of-a-binary-tree">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a binary tree, return the values of its nodes in preorder traversal (root, left, right).</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>We are asked to perform a <strong>preorder traversal</strong> on a binary tree. In preorder traversal, we visit the node first, then recursively visit its left subtree, and finally, its right subtree.</p>
+<h4 id="example">
+  Example:
+  <a class="heading-link" href="#example">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h3>
-<ol>
-<li><strong>Recursive Traversal</strong>:
+</h4>
 <ul>
-<li>Use a recursive helper function to traverse the tree.</li>
-<li>First, visit the root node, then recursively traverse the left subtree, followed by the right subtree.</li>
+<li><strong>Input</strong>: <code>root = [1, null, 2, 3]</code>
+<ul>
+<li><strong>Output</strong>: <code>[1, 2, 3]</code></li>
+</ul>
+</li>
+</ul>
+<p>In this traversal:</p>
+<ol>
+<li>Visit the root node.</li>
+<li>Traverse the left subtree.</li>
+<li>Traverse the right subtree.</li>
+</ol>
+<hr>
+<h3 id="-approach-recursive-preorder-traversal">
+  🔧 <strong>Approach: Recursive Preorder Traversal</strong>
+  <a class="heading-link" href="#-approach-recursive-preorder-traversal">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To implement this, we can use a <strong>recursive approach</strong>:</p>
+<ol>
+<li><strong>Base Case</strong>: If the node is <code>NULL</code>, we return (i.e., nothing more to process).</li>
+<li><strong>Recursive Case</strong>: If the node is not <code>NULL</code>, we:
+<ul>
+<li>Process the node (add its value to the result).</li>
+<li>Recursively call the function for the left child.</li>
+<li>Recursively call the function for the right child.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>This approach follows the standard definition of preorder traversal.</p>
+<hr>
+<h3 id="-code-breakdown-step-by-step">
+  🖥️ <strong>Code Breakdown: Step-by-Step</strong>
+  <a class="heading-link" href="#-code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-define-the-treenode-structure">
+  Step 1: Define the TreeNode Structure
+  <a class="heading-link" href="#step-1-define-the-treenode-structure">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">TreeNode</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> val;
+</span></span><span style="display:flex;"><span>    TreeNode<span style="color:#f92672">*</span> left;
+</span></span><span style="display:flex;"><span>    TreeNode<span style="color:#f92672">*</span> right;
+</span></span><span style="display:flex;"><span>    TreeNode() <span style="color:#f92672">:</span> val(<span style="color:#ae81ff">0</span>), left(<span style="color:#66d9ef">nullptr</span>), right(<span style="color:#66d9ef">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#66d9ef">int</span> x) <span style="color:#f92672">:</span> val(x), left(<span style="color:#66d9ef">nullptr</span>), right(<span style="color:#66d9ef">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#66d9ef">int</span> x, TreeNode<span style="color:#f92672">*</span> left, TreeNode<span style="color:#f92672">*</span> right) <span style="color:#f92672">:</span> val(x), left(left), right(right) {}
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li><code>TreeNode</code> represents a node in the binary tree, with:
 <ul>
-<li><strong>Line 1-7</strong>: Define the <code>TreeNode</code> structure for a binary tree node.</li>
-<li><strong>Line 8</strong>: Define the <code>Solution</code> class containing the traversal methods:
-<ul>
-<li><strong>Line 9-14</strong>: Implement the <code>pre</code> function for recursive traversal:
-<ul>
-<li>Check if the current node (<code>root</code>) is null. If so, return.</li>
-<li>Add the value of the current node to the result vector (<code>ans</code>).</li>
-<li>Recursively call <code>pre</code> for the left and right children of the current node.</li>
+<li><code>val</code>: The value stored in the node.</li>
+<li><code>left</code>: Pointer to the left child.</li>
+<li><code>right</code>: Pointer to the right child.</li>
 </ul>
 </li>
-<li><strong>Line 15-18</strong>: Implement the <code>preorderTraversal</code> function:
-<ul>
-<li>Initialize an empty vector <code>ans</code> to store the traversal result.</li>
-<li>Call the <code>pre</code> function with the root node to fill the <code>ans</code> vector.</li>
-<li>Return the populated vector.</li>
 </ul>
-</li>
+<h4 id="step-2-define-the-recursive-preorder-traversal-function">
+  Step 2: Define the Recursive Preorder Traversal Function
+  <a class="heading-link" href="#step-2-define-the-recursive-preorder-traversal-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">pre</span>(TreeNode<span style="color:#f92672">*</span> root, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> ans) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>root) <span style="color:#66d9ef">return</span>;  <span style="color:#75715e">// Base case: if the node is null, do nothing.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    ans.push_back(root<span style="color:#f92672">-&gt;</span>val);  <span style="color:#75715e">// Visit the root node (process it).
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    pre(root<span style="color:#f92672">-&gt;</span>left, ans);  <span style="color:#75715e">// Recursively traverse the left subtree.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    pre(root<span style="color:#f92672">-&gt;</span>right, ans);  <span style="color:#75715e">// Recursively traverse the right subtree.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li><strong>Base Case</strong>: If the node is <code>NULL</code>, return without doing anything.</li>
+<li><strong>Recursive Case</strong>: Process the node (add <code>root-&gt;val</code> to <code>ans</code>), then recursively traverse the left and right children.</li>
 </ul>
-</li>
+<h4 id="step-3-define-the-preorder-traversal-wrapper-function">
+  Step 3: Define the Preorder Traversal Wrapper Function
+  <a class="heading-link" href="#step-3-define-the-preorder-traversal-wrapper-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> preorderTraversal(TreeNode<span style="color:#f92672">*</span> root) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans;  <span style="color:#75715e">// Initialize an empty vector to store the result.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    pre(root, ans);  <span style="color:#75715e">// Call the recursive preorder function.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> ans;  <span style="color:#75715e">// Return the result vector.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><ul>
+<li>This function initializes an empty vector <code>ans</code> to hold the preorder traversal result.</li>
+<li>It then calls the recursive function <code>pre</code> to process the tree, starting from the root.</li>
+<li>Finally, it returns the result stored in <code>ans</code>.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<hr>
+<h3 id="-time-and-space-complexity">
+  🧮 <strong>Time and Space Complexity</strong>
+  <a class="heading-link" href="#-time-and-space-complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="-time-complexity">
+  ⏱️ <strong>Time Complexity</strong>:
+  <a class="heading-link" href="#-time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(N)), where (N) is the number of nodes in the binary tree, since each node is visited exactly once.</li>
-<li><strong>Space Complexity</strong>: (O(H)), where (H) is the height of the tree. This space is used by the recursion stack in the worst case (unbalanced tree).</li>
-</ul> 
+<li><strong>O(n)</strong>: In the worst case, we visit each node exactly once, where <code>n</code> is the number of nodes in the binary tree. Thus, the time complexity is linear, <strong>O(n)</strong>.</li>
+</ul>
+<h4 id="-space-complexity">
+  🧳 <strong>Space Complexity</strong>:
+  <a class="heading-link" href="#-space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: The space complexity is determined by:
+<ul>
+<li>The space required to store the result vector <code>ans</code>, which holds <code>n</code> values.</li>
+<li>The recursive call stack. In the worst case (for a completely unbalanced tree), the recursion depth can be <code>O(n)</code>.</li>
+</ul>
+</li>
+</ul>
+<p>Thus, the overall space complexity is <strong>O(n)</strong>.</p>
+<hr>
+<h3 id="-conclusion-efficient-recursive-solution">
+  🎯 <strong>Conclusion: Efficient Recursive Solution</strong>
+  <a class="heading-link" href="#-conclusion-efficient-recursive-solution">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This recursive solution provides a straightforward and efficient way to perform a preorder traversal on a binary tree. It works by visiting the node first, then recursively traversing its left and right subtrees, ensuring the correct order of traversal.</p>
+<h4 id="key-insights">
+  Key Insights:
+  <a class="heading-link" href="#key-insights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Simple Recursive Solution</strong>: The algorithm uses recursion to process each node, making the solution easy to understand and implement.</li>
+<li><strong>Optimal Time Complexity</strong>: The time complexity is linear <strong>O(n)</strong>, which is optimal for traversing every node in the tree.</li>
+<li><strong>Space Complexity Considerations</strong>: The space complexity is <strong>O(n)</strong> due to the result vector and the recursive call stack.</li>
+</ul>
+<p>This approach is highly effective for handling medium to large binary trees and ensures minimal memory usage with a clear and concise implementation.</p>
+ 
 </div>
   
 

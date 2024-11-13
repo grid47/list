@@ -197,7 +197,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              3-minute read
             </span>
           </div>
 
@@ -226,7 +226,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1419s1hbhb">
+<h2 id="hahahugoshortcode1405s1hbhb">
   
 
   
@@ -238,7 +238,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array <code>nums</code>, partition it into two parts such that all elements in the first part are less than or equal to all elements in the second part. Return the length of the first part.</p>
+<p>The problem asks us to partition an array <code>nums</code> into two contiguous subarrays such that every element in the left partition is less than or equal to every element in the right partition. The left partition should be as small as possible in size, meaning we want to find the smallest possible length of the left subarray. Our task is to return the length of this left partition.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -246,45 +246,80 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To achieve this partition, we need to find the smallest index where we can divide <code>nums</code> so that all elements in the left subarray are less than or equal to all elements in the right subarray. The approach is based on tracking the maximum value in the left partition and updating it as we iterate through the array.</p>
 <ol>
 <li>
-<p><strong>Initialization</strong>:</p>
+<p><strong>Initialize Values</strong>:</p>
 <ul>
-<li>Start by defining <code>max_i</code> to track the maximum element in the left partition.</li>
-<li>Define <code>cur</code> to track the maximum value encountered so far while iterating through the array.</li>
-<li>Initialize <code>ans</code> to 1, which represents the minimum possible length of the first partition.</li>
+<li><code>max_i</code> keeps track of the maximum element in the left partition (initially set to <code>nums[0]</code>).</li>
+<li><code>cur</code> represents the current maximum we encounter while iterating.</li>
+<li><code>ans</code> is the answer representing the length of the left partition (initialized to 1 because the left partition must contain at least one element).</li>
 </ul>
 </li>
 <li>
 <p><strong>Iterate through the Array</strong>:</p>
 <ul>
-<li>For each element in the array (starting from the second element):
+<li>If <code>nums[i]</code> is less than <code>max_i</code>, it indicates that <code>nums[i]</code> needs to be part of the left partition to satisfy the partition condition. Therefore, we update <code>max_i</code> to <code>cur</code> (the maximum element we&rsquo;ve seen so far) and set <code>ans</code> to <code>i + 1</code>, effectively expanding the left partition.</li>
+<li>If <code>nums[i]</code> is greater than <code>cur</code>, we update <code>cur</code> to <code>nums[i]</code> to track the largest value seen while iterating.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
 <ul>
-<li>If the current element is less than <code>max_i</code>, it means the partition needs to move. Update <code>max_i</code> to <code>cur</code> and set <code>ans</code> to the current index plus one.</li>
-<li>If the current element is greater than <code>cur</code>, update <code>cur</code> to the current element.</li>
+<li>After the loop, <code>ans</code> will contain the length of the left partition that satisfies the required condition.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> partitionDisjoint(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> max_i, cur, ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        max_i <span style="color:#f92672">=</span> cur <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(nums[i] <span style="color:#f92672">&lt;</span> max_i) {
+</span></span><span style="display:flex;"><span>                max_i <span style="color:#f92672">=</span> cur;
+</span></span><span style="display:flex;"><span>                ans <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (nums[i] <span style="color:#f92672">&gt;</span> cur)
+</span></span><span style="display:flex;"><span>                cur <span style="color:#f92672">=</span> nums[i];
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li><code>max_i</code> and <code>cur</code> are both set to <code>nums[0]</code>, representing the maximum value seen so far.</li>
+<li><code>ans</code> is set to <code>1</code> to initially assume the smallest possible left partition.</li>
+</ul>
+</li>
+<li>
+<p><strong>Loop through the Array</strong>:</p>
+<ul>
+<li>For each <code>nums[i]</code>:
+<ul>
+<li>If <code>nums[i] &lt; max_i</code>, we extend the left partition and set <code>max_i</code> to <code>cur</code> to include the maximum element seen in the left partition.</li>
+<li>If <code>nums[i] &gt; cur</code>, we update <code>cur</code> to this value to track the highest element encountered so far.</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>
-<p><strong>Return Result</strong>:</p>
+<p><strong>Return Statement</strong>:</p>
 <ul>
-<li>After completing the iteration, return <code>ans</code>, which represents the length of the first partition.</li>
+<li>We return <code>ans</code>, which represents the minimum length of the left partition.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ul>
-<li>Start with the first element of the array, initializing <code>max_i</code> and <code>cur</code>.</li>
-<li>Traverse through the rest of the array, updating <code>max_i</code>, <code>cur</code>, and <code>ans</code> based on the conditions mentioned.</li>
-<li>Finally, the result is returned.</li>
-</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -293,14 +328,22 @@
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the number of elements in the array, since we traverse the array once.</li>
-<li><strong>Space Complexity</strong>: O(1), as no additional data structures are used that scale with the input size.</li>
+<li><strong>Time Complexity</strong>: <code>O(n)</code> where <code>n</code> is the length of <code>nums</code>. This is because we only make a single pass through the array.</li>
+<li><strong>Space Complexity</strong>: <code>O(1)</code> as we use a constant amount of extra space.</li>
 </ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution effectively finds the smallest possible left partition length by tracking the maximum elements in the left and right parts of the array with a single pass. This approach is efficient and ensures we meet the requirements of the problem while optimizing space usage. By keeping track of the maximum values, the solution guarantees that the left partition contains only elements less than or equal to those in the right partition, achieving the desired partition structure with minimal computational overhead.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1419s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1405s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

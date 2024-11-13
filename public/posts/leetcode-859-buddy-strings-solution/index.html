@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -237,7 +237,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (cnt <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">&amp;&amp;</span> (s[fst] <span style="color:#f92672">==</span> goal[scd]) <span style="color:#f92672">&amp;&amp;</span> (s[scd] <span style="color:#f92672">==</span> goal[fst]));
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1367s1hbhb">
+<h2 id="hahahugoshortcode1369s1hbhb">
   
 
   
@@ -249,7 +249,14 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given two strings, <code>s</code> and <code>goal</code>, determine if you can swap exactly one pair of letters in <code>s</code> to make it equal to <code>goal</code>. The strings must be of the same length.</p>
+<p>The problem asks us to determine if two given strings, <code>s</code> and <code>goal</code>, can be made equal by swapping exactly <strong>two characters</strong> in the string <code>s</code>. In addition, we need to check if the two strings can already be considered &ldquo;buddy strings&rdquo; (i.e., strings that are identical after swapping two characters in <code>s</code>).</p>
+<p><strong>Buddy strings</strong> are defined as two strings where:</p>
+<ol>
+<li>Both strings must have the same length.</li>
+<li>The strings must differ in exactly two positions.</li>
+<li>The two characters at these differing positions in <code>s</code> must be swapped to make <code>s</code> equal to <code>goal</code>.</li>
+</ol>
+<p>The task is to implement a function that returns <code>true</code> if <code>s</code> and <code>goal</code> are buddy strings, and <code>false</code> otherwise.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -257,35 +264,101 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we can approach it step-by-step with the following key observations:</p>
 <ol>
 <li>
-<p><strong>Length Check</strong>: First, check if the lengths of the two strings are different. If they are, return <code>false</code> immediately since swapping characters will not resolve length discrepancies.</p>
+<p><strong>Length Check</strong>: If the strings <code>s</code> and <code>goal</code> have different lengths, they cannot be buddy strings. This is the first quick check we can do.</p>
 </li>
 <li>
-<p><strong>Count Mismatches</strong>: Iterate through the characters of both strings, counting how many characters differ between <code>s</code> and <code>goal</code>. Track the indices of the first two mismatched characters.</p>
-</li>
-<li>
-<p><strong>Handle Cases</strong>:</p>
+<p><strong>Counting Differing Characters</strong>: We need to count how many positions <code>i</code> in <code>s</code> and <code>goal</code> have different characters. If there are:</p>
 <ul>
-<li>If there are no mismatches (<code>cnt == 0</code>), check if there is at least one character that appears twice in <code>s</code> (indicating a swap can be made with itself).</li>
-<li>If there are exactly two mismatches (<code>cnt == 2</code>), verify that swapping the mismatched characters can produce <code>goal</code>.</li>
+<li><strong>0 differences</strong>: The strings <code>s</code> and <code>goal</code> are already equal. In this case, we only need to check if there are any repeating characters in <code>s</code>, because if there is a repeat, we could swap them to form the same string.</li>
+<li><strong>2 differences</strong>: Check if swapping the two differing characters in <code>s</code> would make <code>s</code> equal to <code>goal</code>.</li>
+<li><strong>Any other number of differences</strong>: The strings cannot be made equal by a single swap, so return <code>false</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Return Result</strong>: Based on the conditions checked above, return <code>true</code> or <code>false</code>.</p>
+<p><strong>Tracking the Positions of Differences</strong>: When we find differing characters, we need to track their positions. This will allow us to check if swapping those two positions will result in two strings that are equal.</p>
+</li>
+<li>
+<p><strong>Handling Identical Strings</strong>: If <code>s</code> and <code>goal</code> are already identical and there are repeated characters in <code>s</code>, we can swap those repeated characters, and they will still be considered buddy strings.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>Use a bitwise operation to track the presence of characters in <code>s</code> for quick lookup.</li>
-<li>The final checks ensure that the characters can be swapped appropriately.</li>
+<h4 id="step-1-initial-checks-and-setup">
+  Step 1: Initial Checks and Setup
+  <a class="heading-link" href="#step-1-initial-checks-and-setup">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (s.size() <span style="color:#f92672">!=</span> goal.size()) <span style="color:#66d9ef">return</span> false;
+</span></span></code></pre></div><ul>
+<li>We begin by checking if <code>s</code> and <code>goal</code> have the same length. If they don&rsquo;t, it&rsquo;s impossible for them to be buddy strings, and we immediately return <code>false</code>.</li>
 </ul>
+<p>Next, we initialize a few variables that will help us track the differences between the strings:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, fst <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, scd <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, cl <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, fg <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, t <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span></code></pre></div><ul>
+<li><code>cnt</code>: This will count the number of positions where <code>s</code> and <code>goal</code> differ.</li>
+<li><code>fst</code> and <code>scd</code>: These will store the indices of the first and second differing positions, respectively.</li>
+<li><code>cl</code>: This is used to count if there are any repeated characters in <code>s</code>.</li>
+<li><code>fg</code>: This bitmask helps track which characters have been seen in <code>s</code>.</li>
+<li><code>t</code>: This flag is used to indicate if there is a duplicate character in <code>s</code>.</li>
+</ul>
+<h4 id="step-2-iterate-through-the-strings">
+  Step 2: Iterate Through the Strings
+  <a class="heading-link" href="#step-2-iterate-through-the-strings">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (s[i] <span style="color:#f92672">!=</span> goal[i]) {
+</span></span><span style="display:flex;"><span>        cnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (fst <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) fst <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (scd <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) scd <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> ((fg <span style="color:#f92672">&gt;&gt;</span> (s[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>)) <span style="color:#f92672">&amp;</span> <span style="color:#ae81ff">1</span>) t <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    fg <span style="color:#f92672">|=</span> (<span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> (s[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We loop through the characters of <code>s</code> and <code>goal</code> to compare them.</li>
+<li>If <code>s[i]</code> is not equal to <code>goal[i]</code>, we increment <code>cnt</code> and store the positions of the first and second differing characters in <code>fst</code> and <code>scd</code>.</li>
+<li>We also update the <code>fg</code> bitmask to track the characters we&rsquo;ve seen so far. If a character has already been seen, we set <code>t</code> to <code>1</code>, indicating that there are repeated characters in <code>s</code>.</li>
+</ul>
+<h4 id="step-3-handle-identical-strings">
+  Step 3: Handle Identical Strings
+  <a class="heading-link" href="#step-3-handle-identical-strings">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (cnt <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (t) <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If <code>cnt == 0</code>, the strings <code>s</code> and <code>goal</code> are already identical. In this case, we return <code>true</code> if there are repeated characters in <code>s</code> (since we could swap the repeated characters), and <code>false</code> otherwise.</li>
+</ul>
+<h4 id="step-4-check-for-exactly-two-differences">
+  Step 4: Check for Exactly Two Differences
+  <a class="heading-link" href="#step-4-check-for-exactly-two-differences">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> (cnt <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">&amp;&amp;</span> (s[fst] <span style="color:#f92672">==</span> goal[scd]) <span style="color:#f92672">&amp;&amp;</span> (s[scd] <span style="color:#f92672">==</span> goal[fst]));
+</span></span></code></pre></div><ul>
+<li>If there are exactly two differing positions (<code>cnt == 2</code>), we check if swapping the characters at these positions in <code>s</code> would make <code>s</code> equal to <code>goal</code>.</li>
+<li>We do this by checking if <code>s[fst] == goal[scd]</code> and <code>s[scd] == goal[fst]</code>.</li>
+</ul>
+<p>If this condition is satisfied, we return <code>true</code>, meaning the strings are buddy strings. Otherwise, we return <code>false</code>.</p>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -293,15 +366,40 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the length of the strings (since we iterate through the strings once).</li>
-<li><strong>Space Complexity</strong>: O(1) since we use a constant amount of space for counters and flags.</li>
+<li>The time complexity is <strong>O(n)</strong>, where <code>n</code> is the length of the strings <code>s</code> and <code>goal</code>. We only loop through the strings once to compare their characters and to track differences.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(1)</strong>, as we only use a fixed amount of extra space (the variables <code>cnt</code>, <code>fst</code>, <code>scd</code>, etc.). No extra space proportional to the size of the input is required.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently checks whether two strings are buddy strings by following a simple, linear-time approach. By counting differences, tracking positions, and checking if a swap can make the strings identical, we determine whether a swap is possible. The approach also handles edge cases such as identical strings and repeated characters in <code>s</code>.</p>
+<p>This solution runs in <strong>O(n)</strong> time, making it optimal for even large input sizes, and it uses constant space, making it space-efficient.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1367s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1369s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

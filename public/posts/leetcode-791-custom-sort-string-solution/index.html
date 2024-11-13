@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -234,7 +234,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> s;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1325s1hbhb">
+<h2 id="hahahugoshortcode1327s1hbhb">
   
 
   
@@ -246,7 +246,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given two strings <code>o</code> and <code>s</code>, sort the characters of <code>s</code> such that the characters that appear in <code>o</code> come first in the order they appear in <code>o</code>, followed by the characters that do not appear in <code>o</code>, sorted in ascending order.</p>
+<p>The problem is to sort a string <code>s</code> based on the order of characters defined in a string <code>o</code>. The string <code>o</code> defines a custom order of characters, and the string <code>s</code> needs to be rearranged such that its characters appear in the order specified by <code>o</code>. Any characters in <code>s</code> that do not appear in <code>o</code> should remain in their original order.</p>
+<p>The task is to implement an efficient function that takes two strings, <code>o</code> and <code>s</code>, and returns <code>s</code> sorted according to the custom order defined by <code>o</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -254,49 +255,88 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we need to use a sorting algorithm that respects a custom order defined by the string <code>o</code>. We can achieve this by:</p>
 <ol>
 <li>
-<p><strong>Mapping Order</strong>:</p>
-<ul>
-<li>Create a mapping from characters in string <code>o</code> to their respective indices to represent their order.</li>
-</ul>
+<p><strong>Mapping characters from <code>o</code> to their order</strong>: Create a mapping that associates each character in <code>o</code> with its position in the string (1-based index). This allows us to determine the priority of characters based on their positions in <code>o</code>.</p>
 </li>
 <li>
-<p><strong>Custom Sorting</strong>:</p>
-<ul>
-<li>Use the <code>sort</code> function with a custom comparator, which utilizes the mapping to determine the order of characters in <code>s</code>.</li>
-<li>Characters in <code>o</code> are sorted according to their indices in the mapping, while characters not in <code>o</code> are sorted based on their natural order.</li>
-</ul>
+<p><strong>Sorting characters in <code>s</code> using the map</strong>: Sort the string <code>s</code> by comparing the positions of each character in the map. Characters that are not present in <code>o</code> should still be compared based on their positions in <code>s</code>, so we can maintain their relative order.</p>
+</li>
+<li>
+<p><strong>Returning the sorted string</strong>: Once sorted, the function will return the string <code>s</code> with characters ordered according to <code>o</code>.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Class</strong>:
-<ul>
-<li><code>class Solution</code>: Contains the method to sort the characters of string <code>s</code> based on string <code>o</code>.
-<ul>
-<li><code>string customSortString(string o, string s)</code>: Main function that performs the custom sorting.
-<ul>
-<li><strong>Parameters</strong>:
-<ul>
-<li><code>o</code>: String defining the custom order for sorting.</li>
-<li><code>s</code>: String to be sorted based on the order defined in <code>o</code>.</li>
-</ul>
+<p>Let&rsquo;s break down the code step by step:</p>
+<ol>
+<li>
+<p><strong>Define the function</strong>:
+The function is defined as:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string customSortString(string o, string s)
+</span></span></code></pre></div><p>Here, <code>o</code> represents the custom order string, and <code>s</code> is the string that we need to sort.</p>
 </li>
-<li><strong>Returns</strong>: The sorted string.</li>
-</ul>
+<li>
+<p><strong>Create the mapping</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> o.size(); i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>    mp[o[i]] <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span></code></pre></div><p>In this step, we initialize an <code>unordered_map</code> called <code>mp</code> to store the custom order of characters from <code>o</code>. The key is the character from <code>o</code>, and the value is its position (1-based index). For example, if <code>o = &quot;cba&quot;</code>, the map will look like:</p>
+<pre tabindex="0"><code>{ &#39;c&#39;: 1, &#39;b&#39;: 2, &#39;a&#39;: 3 }
+</code></pre></li>
+<li>
+<p><strong>Sort the string <code>s</code></strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(s.begin(), s.end(), [<span style="color:#f92672">&amp;</span>](<span style="color:#66d9ef">char</span> a, <span style="color:#66d9ef">char</span> b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> mp[a] <span style="color:#f92672">&lt;</span> mp[b];
+</span></span><span style="display:flex;"><span>});
+</span></span></code></pre></div><p>Here, we use the <code>sort</code> function to sort the string <code>s</code>. The sorting comparison is customized using a lambda function. This lambda compares two characters <code>a</code> and <code>b</code> based on their order in the map <code>mp</code>. The expression <code>mp[a] &lt; mp[b]</code> ensures that characters are sorted according to their order in <code>o</code>. If a character is not found in the map, the comparison will result in a default behavior that keeps its relative order intact.</p>
 </li>
-</ul>
+<li>
+<p><strong>Return the sorted string</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> s;
+</span></span></code></pre></div><p>Once the string <code>s</code> is sorted according to the custom order, the function returns the sorted string.</p>
 </li>
+</ol>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s walk through an example to better understand how the function works:</p>
+<ol>
+<li>
+<p><strong>Input</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>o <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;cba&#34;</span>, s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;abcd&#34;</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Mapping creation</strong>:
+The unordered map <code>mp</code> is created as follows:</p>
+<pre tabindex="0"><code>{ &#39;c&#39;: 1, &#39;b&#39;: 2, &#39;a&#39;: 3 }
+</code></pre></li>
+<li>
+<p><strong>Sorting <code>s</code></strong>:
+Initially, <code>s = &quot;abcd&quot;</code>. The sorting function will compare each pair of characters in <code>s</code> based on their positions in <code>mp</code>:</p>
+<ul>
+<li>&lsquo;a&rsquo; has a rank of 3.</li>
+<li>&lsquo;b&rsquo; has a rank of 2.</li>
+<li>&lsquo;c&rsquo; has a rank of 1.</li>
+<li>&rsquo;d&rsquo; is not in <code>o</code>, so it stays in its original position.</li>
 </ul>
+<p>After sorting, <code>s</code> becomes <code>&quot;cbad&quot;</code>.</p>
 </li>
-</ul>
+<li>
+<p><strong>Output</strong>:
+The function returns <code>&quot;cbad&quot;</code>.</p>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -305,14 +345,30 @@
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity</strong>: O(m log m), where (m) is the length of string <code>s</code>, due to the sorting operation.</li>
-<li><strong>Space Complexity</strong>: O(n), where (n) is the size of the mapping used to store the order of characters from string <code>o</code>.</li>
+<li>
+<p><strong>Time Complexity</strong>:
+The time complexity of this solution is dominated by the sorting step. The <code>sort</code> function has a time complexity of <strong>O(n log n)</strong>, where <code>n</code> is the length of the string <code>s</code>. The creation of the map and the lambda comparison both take linear time, <strong>O(m)</strong>, where <code>m</code> is the length of the string <code>o</code>. Therefore, the overall time complexity is <strong>O(n log n)</strong>.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:
+The space complexity is <strong>O(m)</strong> due to the space required for the <code>unordered_map</code> that stores the custom order, where <code>m</code> is the length of the string <code>o</code>. The space complexity is also influenced by the input string <code>s</code>, which is of length <code>n</code>, but the additional space required for sorting is constant, so the overall space complexity remains <strong>O(m)</strong>.</p>
+</li>
 </ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of sorting a string according to a custom order. By leveraging an unordered map to store the custom order and using a lambda function with the <code>sort</code> function, we are able to sort the string in <strong>O(n log n)</strong> time complexity.</p>
+<p>The approach is both simple and efficient, making it well-suited for handling cases where the custom order is specified and needs to be applied to a string quickly. The time complexity of <strong>O(n log n)</strong> ensures that this solution works efficiently even for larger strings.</p>
+<p>In summary, the function is designed to provide a flexible and efficient way to sort a string based on a custom order, preserving the relative order of characters that are not specified in the custom order string. This approach is ideal for problems that require sorting with specific constraints, and it can be extended to handle other similar sorting scenarios with ease.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1325s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1327s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

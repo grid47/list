@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -267,7 +267,7 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * int param_1 = obj-&gt;seat();
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * obj-&gt;leave(p);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<h2 id="hahahugoshortcode1364s1hbhb">
+<h2 id="hahahugoshortcode1366s1hbhb">
   
 
   
@@ -279,11 +279,17 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are tasked with designing an <code>ExamRoom</code> class to manage seating in a linear exam room. The room has <code>n</code> seats, numbered from <code>0</code> to <code>n-1</code>. You need to implement two operations:</p>
+<p>The problem involves simulating a seating arrangement for students in an exam room. We are given a room with a certain number of seats (<code>n</code>), where students can seat themselves based on certain rules:</p>
 <ol>
-<li><strong><code>seat()</code></strong>: This method should return the index of the seat that should be occupied, ensuring that the student seated is maximally distant from the others already seated.</li>
-<li><strong><code>leave(int p)</code></strong>: This method allows a student to vacate the seat at index <code>p</code>.</li>
+<li>The seat that a student selects should maximize the distance from other students.</li>
+<li>If multiple seats are at the same maximum distance, select the seat with the smallest index.</li>
 </ol>
+<p>Additionally, once a student has seated, they may leave, freeing up their seat. We need to implement the <code>ExamRoom</code> class that supports the following operations:</p>
+<ul>
+<li><strong><code>seat()</code></strong>: Returns the seat number where the student should sit.</li>
+<li><strong><code>leave(int p)</code></strong>: Frees up the seat <code>p</code>, allowing future students to occupy it.</li>
+</ul>
+<p>The challenge is to design the seating strategy efficiently, considering both seating and leaving operations.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -291,68 +297,168 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, the strategy relies on keeping track of the currently occupied seats and selecting the optimal seat based on the distance from existing students. Here&rsquo;s how we approach it:</p>
 <ol>
 <li>
-<p><strong>Data Structure</strong>:</p>
+<p><strong>Seat Selection</strong>:</p>
 <ul>
-<li>Use a vector <code>L</code> to store the indices of occupied seats.</li>
-<li>Maintain the total number of seats, <code>N</code>.</li>
+<li>The first student always sits at seat <code>0</code> when the room is empty.</li>
+<li>After that, the best seat is chosen based on the maximum distance from existing students. The available seats can be split into segments between consecutive seated students or between the boundaries (seat <code>0</code> and seat <code>N-1</code>).</li>
+<li>For each segment, the seat closest to the middle is selected to maximize the distance from the nearest student.</li>
 </ul>
 </li>
 <li>
-<p><strong><code>seat()</code> Method</strong>:</p>
+<p><strong>Leave Operation</strong>:</p>
 <ul>
-<li>If no seats are occupied, seat the first student at index <code>0</code>.</li>
-<li>Calculate the maximum distance from the nearest occupied seat:
-<ul>
-<li>Check the distance from the start of the row to the first occupied seat.</li>
-<li>Check the distance from the last occupied seat to the end of the row.</li>
-<li>Check the distances between occupied seats and find the midpoint for maximum distance.</li>
-</ul>
-</li>
-<li>Insert the new seat into the vector <code>L</code> based on the calculated maximum distance.</li>
-</ul>
-</li>
-<li>
-<p><strong><code>leave(int p)</code> Method</strong>:</p>
-<ul>
-<li>Search for the index <code>p</code> in <code>L</code> and remove it to free up the seat.</li>
+<li>When a student leaves, the corresponding seat is removed from the list of occupied seats, making that seat available for future students.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The <code>ExamRoom</code> constructor initializes the room with <code>n</code> seats.</li>
-<li>The <code>seat</code> method finds the best seat based on the maximum distance calculation and updates the list of occupied seats accordingly.</li>
-<li>The <code>leave</code> method removes a specified seat from the list of occupied seats.</li>
+<h4 id="step-1-data-structure-initialization">
+  Step 1: Data Structure Initialization
+  <a class="heading-link" href="#step-1-data-structure-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> N;
+</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> L;
+</span></span></code></pre></div><ul>
+<li><strong><code>N</code></strong>: The total number of seats in the room.</li>
+<li><strong><code>L</code></strong>: A list that holds the currently occupied seats, sorted in increasing order.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-2-constructor">
+  Step 2: Constructor
+  <a class="heading-link" href="#step-2-constructor">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ExamRoom(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span>    N <span style="color:#f92672">=</span> n;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The constructor initializes the total number of seats (<code>N</code>) in the exam room. The <code>L</code> vector is initialized as an empty list to store the occupied seats.</li>
+</ul>
+<h4 id="step-3-seat-method">
+  Step 3: Seat Method
+  <a class="heading-link" href="#step-3-seat-method">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">seat</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(L.size() <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>        L.push_back(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>If the room is empty (i.e., no seats are occupied), the first student sits at seat <code>0</code>, and that seat is added to the <code>L</code> list.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> d <span style="color:#f92672">=</span> max(L[<span style="color:#ae81ff">0</span>], N <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">-</span> L[L.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> L.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>) d <span style="color:#f92672">=</span> max(d, (L[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> L[i]) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>);
+</span></span></code></pre></div><ul>
+<li>If there are already students seated, the algorithm calculates the maximum possible distance from an existing student.</li>
+<li>The first step checks the distance from the first seat (<code>L[0]</code>) and the last seat (<code>N-1 - L[L.size() - 1]</code>), which are the boundaries of the room.</li>
+<li>Then, we iterate through the list <code>L</code> of occupied seats and calculate the maximum distance between adjacent seats. The available distance is halved since the student will sit in the middle of the segment between two seats.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(L[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">==</span> d) {
+</span></span><span style="display:flex;"><span>        L.insert(L.begin(), <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> L[<span style="color:#ae81ff">0</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>If the seat at the first position (<code>0</code>) has the maximum distance (<code>d</code>), the student will sit at seat <code>0</code>. This is because the boundary seat is the farthest from other students, and no other seat can offer a better distance.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> L.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>((L[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> L[i])<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> d) {
+</span></span><span style="display:flex;"><span>            L.insert(L.begin() <span style="color:#f92672">+</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, (L[i] <span style="color:#f92672">+</span> L[i <span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>])<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> L[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>If the maximum distance is found between two adjacent students (seats <code>L[i]</code> and <code>L[i + 1]</code>), the student will sit in the middle of those seats. The new seat is added to the list <code>L</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    L.push_back(N <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> N <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If no student is seated at the boundary or middle of two adjacent students, the student sits at the last seat (<code>N-1</code>).</li>
+</ul>
+<h4 id="step-4-leave-method">
+  Step 4: Leave Method
+  <a class="heading-link" href="#step-4-leave-method">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">leave</span>(<span style="color:#66d9ef">int</span> p) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> L.size(); i<span style="color:#f92672">++</span>) <span style="color:#66d9ef">if</span>(L[i] <span style="color:#f92672">==</span> p) L.erase(L.begin() <span style="color:#f92672">+</span> i);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>leave</code> method removes the student from the seat <code>p</code> by searching for the seat in the list <code>L</code> and erasing it.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>:
+<li>
+<p><strong><code>seat()</code> method</strong>:</p>
 <ul>
-<li><code>seat()</code>: O(m) in the worst case, where m is the number of occupied seats, for distance calculations and insertion.</li>
-<li><code>leave()</code>: O(m) for finding and removing the seat.</li>
+<li><strong>Finding the best seat</strong> involves scanning through the list of occupied seats. In the worst case, we have to iterate through the entire list of seats, which takes <strong>O(k)</strong> time, where <code>k</code> is the number of students seated.</li>
+<li><strong>Inserting a seat</strong> into the list takes <strong>O(k)</strong> time due to the shifting of elements in the vector.</li>
+<li>Thus, the overall time complexity for the <code>seat()</code> method is <strong>O(k)</strong>, where <code>k</code> is the number of students currently seated.</li>
 </ul>
 </li>
-<li><strong>Space Complexity</strong>: O(m) for storing the occupied seat indices in the vector <code>L</code>.</li>
+<li>
+<p><strong><code>leave()</code> method</strong>:</p>
+<ul>
+<li>The <code>leave()</code> method involves searching for the seat in the list and removing it. Searching for the seat takes <strong>O(k)</strong> time, and removing an element takes <strong>O(k)</strong> time due to shifting elements in the vector.</li>
+<li>Thus, the overall time complexity for the <code>leave()</code> method is <strong>O(k)</strong>.</li>
 </ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Space Complexity</strong>: The space complexity is dominated by the vector <code>L</code> that stores the list of occupied seats. Therefore, the space complexity is <strong>O(k)</strong>, where <code>k</code> is the number of students currently seated.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>ExamRoom</code> class is designed to simulate the process of students seating and leaving in a room while maintaining optimal seating distance. The <code>seat()</code> method ensures that each student sits in the optimal seat by calculating the maximum distance from others, while the <code>leave()</code> method allows for freeing up seats when a student leaves.</p>
+<p>This solution is efficient, with the time complexity of each operation proportional to the number of students seated (<code>O(k)</code>), making it scalable for moderate-sized rooms. The use of a vector to maintain the list of occupied seats ensures that the algorithm handles seat selections and removals in a straightforward and understandable manner.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1364s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1366s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
