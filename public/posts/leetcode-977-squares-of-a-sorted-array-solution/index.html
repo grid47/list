@@ -143,6 +143,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -203,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -230,7 +234,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1438s1hbhb">
+<h2 id="hahahugoshortcode1443s1hbhb">
   
 
   
@@ -242,12 +246,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem is to return a <strong>sorted array</strong> of the squares of each number in the given array <code>nums</code>. The input array <code>nums</code> may contain both negative and non-negative integers, and the output should have the squares in non-decreasing order.</p>
-<p>For example:</p>
-<ul>
-<li><strong>Input</strong>: <code>nums = [-4, -1, 0, 3, 10]</code></li>
-<li><strong>Output</strong>: <code>[0, 1, 9, 16, 100]</code></li>
-</ul>
+<p>Given an integer array <code>nums</code> sorted in non-decreasing order, return an array of the squares of each number sorted in non-decreasing order.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -255,125 +254,68 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>This problem can be solved efficiently using the <strong>two-pointer technique</strong>. The key observation here is that the absolute values of the elements in the array increase as we move away from the center towards the edges in a sorted array. Therefore, by focusing on the largest values (in terms of absolute magnitude) from both the left and right sides of the array, we can directly build the sorted squares array without needing to sort the entire array afterward.</p>
-<h4 id="key-insights">
-  Key Insights:
-  <a class="heading-link" href="#key-insights">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ol>
 <li>
-<p><strong>Squared Values</strong>: When squaring both negative and positive numbers, the absolute value of negative numbers becomes positive. However, larger numbers will result in larger squared values. Therefore, for an array that contains both negative and positive values, the largest squares will come from either the largest negative number or the largest positive number.</p>
-</li>
-<li>
-<p><strong>Two-pointer Approach</strong>:</p>
+<p><strong>Two-pointer Technique</strong>:</p>
 <ul>
-<li>We can use a <strong>left pointer (<code>l</code>)</strong> starting at the beginning of the array, and a <strong>right pointer (<code>r</code>)</strong> starting at the end of the array.</li>
-<li>At each step, we compare the absolute values of the elements at the <code>l</code> and <code>r</code> positions. The larger absolute value will give us the largest square.</li>
-<li>The squared value is placed at the current position in the result array, and the pointer corresponding to the larger absolute value is moved inward.</li>
-<li>This process continues until all positions in the result array are filled.</li>
+<li>Utilize two pointers, <code>l</code> starting at the beginning and <code>r</code> at the end of the array.</li>
+<li>Create an output vector <code>ans</code> of the same size as <code>nums</code> to store the squared values.</li>
 </ul>
 </li>
 <li>
-<p><strong>Efficient Sorting</strong>:</p>
+<p><strong>Iterate in Reverse</strong>:</p>
 <ul>
-<li>By iterating from the end of the result array (starting at the largest index) and always choosing the largest squared value, we ensure that the array is populated in sorted order from the largest to the smallest value.</li>
+<li>Loop through the <code>ans</code> array from the last index to the first:
+<ul>
+<li>Calculate the square of the values at the left pointer (<code>ll = nums[l] * nums[l]</code>) and the right pointer (<code>rr = nums[r] * nums[r]</code>).</li>
+<li>Compare the squares:
+<ul>
+<li>If <code>ll</code> is less than <code>rr</code>, store <code>rr</code> in the current position of <code>ans</code> and move the right pointer (<code>r--</code>).</li>
+<li>Otherwise, store <code>ll</code> and move the left pointer (<code>l++</code>).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>After the loop, <code>ans</code> will contain the squared values sorted in non-decreasing order.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> sortedSquares(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans(nums.size());  <span style="color:#75715e">// Create a result vector to store squared values
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> l <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, r <span style="color:#f92672">=</span> nums.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Initialize two pointers: one at the start (l) and one at the end (r)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> ll, rr;
-</span></span></code></pre></div><ol>
-<li><strong>Initialization</strong>:
+<ol>
+<li><strong><code>sortedSquares</code> Method</strong>:
 <ul>
-<li><code>ans</code>: A result vector that will hold the squares of the elements from the <code>nums</code> array in sorted order.</li>
-<li><code>l</code>: A pointer initialized to the first element of the array.</li>
-<li><code>r</code>: A pointer initialized to the last element of the array.</li>
-<li><code>ll</code> and <code>rr</code>: Temporary variables to store the squared values of <code>nums[l]</code> and <code>nums[r]</code>.</li>
+<li>Initializes the output vector <code>ans</code>.</li>
+<li>Iterates from the end of the <code>ans</code> array, performing the square calculations and comparisons, and filling the <code>ans</code> array accordingly.</li>
 </ul>
 </li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> nums.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>) {  <span style="color:#75715e">// Iterate from the end of the result array
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            ll <span style="color:#f92672">=</span> nums[l] <span style="color:#f92672">*</span> nums[l];  <span style="color:#75715e">// Square the value at the left pointer
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            rr <span style="color:#f92672">=</span> nums[r] <span style="color:#f92672">*</span> nums[r];  <span style="color:#75715e">// Square the value at the right pointer
-</span></span></span></code></pre></div><ol start="2">
-<li><strong>Squaring the Values</strong>:
-<ul>
-<li>The loop starts at the last index of the result array (<code>i = nums.size() - 1</code>) and moves backwards to fill the result array.</li>
-<li><code>ll</code> and <code>rr</code> store the squared values of the elements at positions <code>l</code> and <code>r</code>.</li>
-</ul>
-</li>
-</ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(ll <span style="color:#f92672">&lt;</span> rr) ans[i] <span style="color:#f92672">=</span> rr, r<span style="color:#f92672">--</span>;  <span style="color:#75715e">// If the square at the right pointer is larger, place it in the result and move the right pointer
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">else</span> ans[i] <span style="color:#f92672">=</span> ll, l<span style="color:#f92672">++</span>;  <span style="color:#75715e">// Otherwise, place the square at the left pointer in the result and move the left pointer
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
-</span></span></code></pre></div><ol start="3">
-<li><strong>Comparing Squared Values</strong>:
-<ul>
-<li>We compare the squared values at the left (<code>ll</code>) and right (<code>rr</code>) pointers.</li>
-<li>If <code>ll</code> (square of <code>nums[l]</code>) is smaller than <code>rr</code> (square of <code>nums[r]</code>), we place <code>rr</code> in the current position of the result array (<code>ans[i]</code>) and move the <code>r</code> pointer inward (<code>r--</code>).</li>
-<li>If <code>ll</code> is greater than or equal to <code>rr</code>, we place <code>ll</code> in the result array and move the <code>l</code> pointer inward (<code>l++</code>).</li>
-<li>This ensures that the largest values are placed in the result array first, in decreasing order of their magnitude.</li>
-</ul>
-</li>
-</ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;  <span style="color:#75715e">// Return the sorted array of squares
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><ol start="4">
-<li><strong>Return the Result</strong>:
-<ul>
-<li>After the loop finishes, all the elements of the array <code>nums</code> have been squared and placed in the <code>ans</code> array in sorted order. We return this array as the result.</li>
-</ul>
-</li>
-</ol>
-<h3 id="time-and-space-complexity">
-  Time and Space Complexity
-  <a class="heading-link" href="#time-and-space-complexity">
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li>
-<p><strong>Time Complexity</strong>:</p>
-<ul>
-<li>The algorithm iterates over the <code>nums</code> array once with a two-pointer approach. Each element is processed exactly once. Therefore, the time complexity is <strong>O(n)</strong>, where <code>n</code> is the size of the input array <code>nums</code>.</li>
+<li><strong>Time Complexity</strong>: O(n), where <code>n</code> is the number of elements in <code>nums</code>, since we process each element once.</li>
+<li><strong>Space Complexity</strong>: O(n), for the output vector <code>ans</code>.</li>
 </ul>
-</li>
-<li>
-<p><strong>Space Complexity</strong>:</p>
-<ul>
-<li>The space complexity is <strong>O(n)</strong>, where <code>n</code> is the size of the input array <code>nums</code>. This is due to the result array <code>ans</code> that stores the squared values.</li>
-</ul>
-</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution leverages the <strong>two-pointer technique</strong> to efficiently solve the problem of finding the sorted squares of an array. By iterating from both ends of the array and placing the largest squared values first, we avoid the need for sorting the entire array afterward. This approach provides an optimal solution with a time complexity of <strong>O(n)</strong> and space complexity of <strong>O(n)</strong>, making it highly efficient even for large arrays. The algorithm efficiently handles both negative and non-negative integers in the input array by focusing on the magnitude of their squared values.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1438s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1443s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -389,31 +331,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-978-longest-turbulent-subarray-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #978: Longest Turbulent Subarray</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-978-longest-turbulent-subarray-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #978: Longest Turbulent Subarray</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

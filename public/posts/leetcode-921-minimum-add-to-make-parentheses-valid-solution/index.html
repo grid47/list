@@ -143,6 +143,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -203,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              4-minute read
+              2-minute read
             </span>
           </div>
 
@@ -236,7 +240,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1406s1hbhb">
+<h2 id="hahahugoshortcode1407s1hbhb">
   
 
   
@@ -248,7 +252,11 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem involves ensuring that a given string of parentheses <code>s</code> is valid by determining the minimum number of parentheses to add. A string is considered valid if every opening parenthesis has a matching closing parenthesis in the correct order. The task is to calculate the minimum additions needed to make the string valid.</p>
+<p>Given a string <code>s</code> consisting of parentheses <code>(</code> and <code>)</code>, determine the minimum number of parentheses that must be added to make the string valid. A string is considered valid if:</p>
+<ul>
+<li>Every opening parenthesis has a corresponding closing parenthesis.</li>
+<li>The closing parenthesis must occur after its corresponding opening parenthesis.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -256,96 +264,52 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem, we use a <strong>stack-based approach</strong> to manage the balancing of parentheses as we traverse through the string. Here’s the strategy:</p>
 <ol>
 <li>
-<p><strong>Using a Stack to Track Opening Parentheses</strong>:</p>
+<p><strong>Using a Stack</strong>:</p>
 <ul>
-<li>We iterate over each character in the string.</li>
-<li>For every opening parenthesis <code>'('</code>, we push it onto the stack, indicating a need for a closing parenthesis in the future.</li>
-<li>For every closing parenthesis <code>')'</code>, we check if the stack has an unbalanced opening parenthesis.
+<li>Utilize a stack to keep track of unmatched opening parentheses.</li>
+<li>Iterate through each character in the string:
 <ul>
-<li>If the stack is not empty, we pop an element (indicating that one opening parenthesis has found a match).</li>
-<li>If the stack is empty, we increment a counter <code>res</code>, as this closing parenthesis doesn’t have an opening match, so it will require an additional <code>'('</code> to make it valid.</li>
+<li>If the character is an opening parenthesis <code>(</code>, push it onto the stack.</li>
+<li>If the character is a closing parenthesis <code>)</code>:
+<ul>
+<li>Check if the stack is empty:
+<ul>
+<li>If empty, it indicates an unmatched closing parenthesis, so increment the result counter (<code>res</code>).</li>
+<li>If not empty, pop from the stack, indicating a matched pair.</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>
-<p><strong>Counting Remaining Unmatched Opening Parentheses</strong>:</p>
+<p><strong>Final Count</strong>:</p>
 <ul>
-<li>After traversing the entire string, any remaining items in the stack represent unmatched opening parentheses that will require a corresponding number of <code>')'</code> additions.</li>
-</ul>
-</li>
-<li>
-<p><strong>Calculating the Total Number of Additions</strong>:</p>
-<ul>
-<li>The result <code>res</code> is incremented by the number of items left in the stack, representing the additional closing parentheses needed for balance.</li>
-<li>Finally, <code>res</code> gives us the minimum number of parentheses required to make the string valid.</li>
+<li>After iterating through the string, any remaining opening parentheses in the stack are unmatched, so add their count to <code>res</code>.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Initialize Result Counter and Stack</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>stack<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> stk;
-</span></span></code></pre></div><ul>
-<li><code>res</code> is initialized to zero to store the count of additional parentheses needed.</li>
-<li><code>stk</code> is a stack that will be used to keep track of unmatched opening parentheses.</li>
-</ul>
-</li>
-<li>
-<p><strong>Traverse the String</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> <span style="color:#f92672">&amp;</span>a : s) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(a <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;(&#39;</span>) {
-</span></span><span style="display:flex;"><span>        stk.push(a);
-</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(stk.empty()) {
-</span></span><span style="display:flex;"><span>            res<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>            stk.pop();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>We loop through each character in the string <code>s</code>.</li>
-<li>If the character is <code>'('</code>, we push it onto the stack, signifying an unmatched opening parenthesis.</li>
-<li>If the character is <code>')'</code>:
 <ul>
-<li>We check if <code>stk</code> is empty:
+<li>Initialize a result counter <code>res</code> to 0 and a stack <code>stk</code> for unmatched opening parentheses.</li>
+<li>Loop through each character in the string:
 <ul>
-<li>If yes, it means there is no matching <code>'('</code> for this <code>')'</code>, so we increment <code>res</code> to count an additional <code>'('</code>.</li>
-<li>If no, we pop an item from <code>stk</code>, balancing one opening parenthesis with this closing parenthesis.</li>
+<li>For <code>(</code>: push onto the stack.</li>
+<li>For <code>)</code>: check the stack and update <code>res</code> accordingly.</li>
 </ul>
 </li>
+<li>Finally, add the size of the stack (unmatched <code>(</code>) to <code>res</code>.</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Count Remaining Items in Stack</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>res <span style="color:#f92672">+=</span> stk.size();
-</span></span></code></pre></div><ul>
-<li>After finishing the loop, any unmatched opening parentheses are still in <code>stk</code>.</li>
-<li>We add the size of <code>stk</code> to <code>res</code> to account for the necessary closing parentheses to balance these.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
-</span></span></code></pre></div><ul>
-<li><code>res</code> now contains the minimum number of parentheses required to make the input string valid.</li>
-</ul>
-</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -353,33 +317,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li>The time complexity is <strong>O(n)</strong>, where <code>n</code> is the length of the string <code>s</code>. Each character is processed once, either being pushed onto the stack or checked against it.</li>
+<li><strong>Time Complexity</strong>: O(n), where n is the length of the string, since we traverse the string once.</li>
+<li><strong>Space Complexity</strong>: O(n) in the worst case for the stack when all characters are <code>(</code>.</li>
 </ul>
-</li>
-<li>
-<p><strong>Space Complexity</strong>:</p>
-<ul>
-<li>The space complexity is <strong>O(n)</strong> as well, in the worst case where all characters are <code>'('</code>, requiring each to be stored in the stack.</li>
-</ul>
-</li>
-</ol>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution efficiently finds the minimum number of parentheses required to make the string valid by leveraging a stack-based approach to track unmatched opening parentheses and directly counting unmatched closing parentheses. This approach offers an optimal <strong>O(n)</strong> time complexity, making it suitable for larger strings while maintaining simplicity and readability in code structure. The solution effectively handles various cases, including fully balanced strings, unbalanced strings with excess opening or closing parentheses, and empty strings. By directly managing mismatched parentheses, this method ensures that the string becomes valid with the minimum number of additions.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1406s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1407s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -395,31 +341,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-925-long-pressed-name-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #925: Long Pressed Name</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-925-long-pressed-name-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #925: Long Pressed Name</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

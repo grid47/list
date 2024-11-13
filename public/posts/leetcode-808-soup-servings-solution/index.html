@@ -143,6 +143,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -203,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              6-minute read
+              3-minute read
             </span>
           </div>
 
@@ -232,7 +236,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mem[a][b];
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1331s1hbhb">
+<h2 id="hahahugoshortcode1342s1hbhb">
   
 
   
@@ -244,14 +248,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem revolves around a simulation where we are given two soups, and we can serve portions from both soups in different amounts. Initially, each soup has <code>n</code> milliliters, and the goal is to determine the probability that after a series of operations, soup 1 runs out of liquid before soup 2. In each operation, we perform one of the following actions:</p>
-<ul>
-<li>Pour 100 milliliters from soup 1 and 0 milliliters from soup 2.</li>
-<li>Pour 75 milliliters from soup 1 and 25 milliliters from soup 2.</li>
-<li>Pour 50 milliliters from soup 1 and 50 milliliters from soup 2.</li>
-<li>Pour 25 milliliters from soup 1 and 75 milliliters from soup 2.</li>
-</ul>
-<p>The task is to find the probability that soup 1 will run out of liquid before soup 2. The problem can be approached using dynamic programming and memoization.</p>
+<p>Given two types of soup A and B, each with an initial volume <code>n</code>, the goal is to determine the probability that soup A will be served more than soup B when both soups are served in portions. Each serving can reduce the volumes of the soups in specific ways.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -259,124 +256,83 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem is a probabilistic dynamic programming (DP) problem where we need to track the probabilities of certain outcomes based on the remaining amounts of the two soups. Each state is defined by the amounts of soup 1 and soup 2 remaining, and for each state, we can perform the above operations with associated probabilities.</p>
 <ol>
 <li>
-<p><strong>Recursive Function</strong>:</p>
+<p><strong>Base Cases</strong>:</p>
 <ul>
-<li>For each state <code>(a, b)</code> representing the amounts of soup 1 and soup 2 remaining, we recursively calculate the probability of soup 1 running out first (or not) after performing one of the four operations.</li>
-<li>The recursive calls handle the four possible transitions:
-<ul>
-<li>Pouring 100ml from soup 1 and 0ml from soup 2.</li>
-<li>Pouring 75ml from soup 1 and 25ml from soup 2.</li>
-<li>Pouring 50ml from both soups.</li>
-<li>Pouring 25ml from soup 1 and 75ml from soup 2.</li>
-</ul>
-</li>
+<li>If both soups are depleted (<code>a &lt;= 0 &amp;&amp; b &lt;= 0</code>), the probability is <code>0.5</code>.</li>
+<li>If only soup A is depleted (<code>a &lt;= 0</code>), the probability is <code>1</code> (soup B is served).</li>
+<li>If only soup B is depleted (<code>b &lt;= 0</code>), the probability is <code>0</code> (soup A is served).</li>
 </ul>
 </li>
 <li>
 <p><strong>Memoization</strong>:</p>
 <ul>
-<li>To avoid redundant calculations and optimize performance, we use memoization to store the results of previously computed states. This helps to avoid recalculating the probability for the same state multiple times.</li>
-<li>The memoization table is a 2D matrix <code>mem[a][b]</code>, where <code>a</code> represents the remaining amount of soup 1, and <code>b</code> represents the remaining amount of soup 2.</li>
+<li>Use a 2D vector <code>mem</code> to store computed probabilities for combinations of remaining volumes of soup A (<code>a</code>) and B (<code>b</code>) to avoid redundant calculations.</li>
 </ul>
 </li>
 <li>
-<p><strong>Base Cases</strong>:</p>
+<p><strong>Recursive Function</strong>:</p>
 <ul>
-<li>If both soups run out at the same time (<code>a &lt;= 0 &amp;&amp; b &lt;= 0</code>), the probability is 0.5 (since it is equally likely that either soup 1 or soup 2 will run out first).</li>
-<li>If only soup 1 runs out (<code>a &lt;= 0</code>), the probability is 1 (since soup 1 is exhausted first).</li>
-<li>If only soup 2 runs out (<code>b &lt;= 0</code>), the probability is 0 (since soup 2 is exhausted first).</li>
+<li>Define a function <code>f(int a, int b)</code> that computes the probability based on the current volumes:
+<ul>
+<li>Each recursive call considers four possible ways to serve the soups, adjusting their volumes accordingly:
+<ul>
+<li>Serve 4 units of A.</li>
+<li>Serve 3 units of A and 1 unit of B.</li>
+<li>Serve 2 units of A and 2 units of B.</li>
+<li>Serve 1 unit of A and 3 units of B.</li>
+</ul>
+</li>
+<li>The result is averaged with a factor of <code>0.25</code> for each scenario.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
-<p><strong>Optimizations</strong>:</p>
+<p><strong>Initial Call</strong>:</p>
 <ul>
-<li>If the input <code>n</code> is larger than a threshold (4800 in this case), the probability is considered to be 1, as it is highly unlikely that soup 1 will run out before soup 2 when the initial amounts are large.</li>
-<li>The function <code>f(a, b)</code> is called recursively to compute the probability for smaller subproblems, with results stored in the <code>mem</code> array to optimize performance.</li>
+<li>The main function <code>soupServings(int n)</code> checks if <code>n</code> is greater than <code>4800</code>. If so, return <code>1</code> (probability that soup A will be served more). Otherwise, call the recursive function <code>f</code> after normalizing <code>n</code>.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="step-1-initialization">
-  Step 1: Initialization
-  <a class="heading-link" href="#step-1-initialization">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;&gt;</span> mem;
-</span></span></code></pre></div><ul>
-<li><strong><code>mem</code></strong>: A 2D vector to store the probabilities of each state. The size is initially set to 200x200 to handle cases where <code>n</code> is large.</li>
-</ul>
-<h4 id="step-2-main-function-soupservings">
-  Step 2: Main Function (soupServings)
-  <a class="heading-link" href="#step-2-main-function-soupservings">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">double</span> <span style="color:#a6e22e">soupServings</span>(<span style="color:#66d9ef">int</span> n) {
-</span></span><span style="display:flex;"><span>    mem.resize(<span style="color:#ae81ff">200</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span>(<span style="color:#ae81ff">200</span>, <span style="color:#ae81ff">0</span>));
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> n <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">4800</span> <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> f((n <span style="color:#f92672">+</span> <span style="color:#ae81ff">24</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">25</span>, (n <span style="color:#f92672">+</span> <span style="color:#ae81ff">24</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">25</span>);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li><strong><code>mem.resize(200, vector&lt;double&gt;(200, 0))</code></strong>: Resizes the memoization table to store results for all possible states. The grid size is set to 200x200, as it handles the ranges of values for <code>a</code> and <code>b</code> (representing the remaining amounts of soup 1 and 2).</li>
-<li><strong><code>f((n + 24) / 25, (n + 24) / 25)</code></strong>: The function <code>soupServings</code> calls the recursive helper function <code>f</code> with adjusted values of <code>a</code> and <code>b</code>. The expression <code>(n + 24) / 25</code> ensures the value of <code>n</code> is properly scaled to match the recursive function’s state size. If <code>n</code> exceeds 4800, the function immediately returns 1, indicating that soup 1 is very likely to run out before soup 2 in such large cases.</li>
-</ul>
-<h4 id="step-3-recursive-function-f">
-  Step 3: Recursive Function (f)
-  <a class="heading-link" href="#step-3-recursive-function-f">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">double</span> <span style="color:#a6e22e">f</span>(<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (a <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> b <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0.5</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (a <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (b <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (mem[a][b] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> mem[a][b];
-</span></span><span style="display:flex;"><span>    mem[a][b] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.25</span> <span style="color:#f92672">*</span> (f(a <span style="color:#f92672">-</span> <span style="color:#ae81ff">4</span>, b) <span style="color:#f92672">+</span> f(a <span style="color:#f92672">-</span> <span style="color:#ae81ff">3</span>, b <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> f(a <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>, b <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>) <span style="color:#f92672">+</span> f(a <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, b <span style="color:#f92672">-</span> <span style="color:#ae81ff">3</span>));
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> mem[a][b];
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>
-<p><strong>Base cases</strong>:</p>
 <ul>
-<li>If both <code>a</code> and <code>b</code> are less than or equal to zero, return 0.5 (equal probability for either soup running out).</li>
-<li>If <code>a</code> is less than or equal to zero, return 1 (soup 1 is exhausted first).</li>
-<li>If <code>b</code> is less than or equal to zero, return 0 (soup 2 is exhausted first).</li>
+<li><strong>Class</strong>:
+<ul>
+<li><code>class Solution</code>: Contains the method to compute the probability.
+<ul>
+<li><code>double soupServings(int n)</code>: The entry point for the probability calculation.
+<ul>
+<li><strong>Parameters</strong>:
+<ul>
+<li><code>n</code>: Initial volume of soup A and B.</li>
 </ul>
 </li>
-<li>
-<p><strong>Memoization</strong>:</p>
-<ul>
-<li>If the result for the current state <code>(a, b)</code> is already stored in <code>mem[a][b]</code>, simply return the stored value to avoid redundant calculations.</li>
+<li><strong>Returns</strong>: A double representing the probability that soup A will be served more than soup B.</li>
 </ul>
 </li>
-<li>
-<p><strong>Recursive calculation</strong>:</p>
+<li><code>double f(int a, int b)</code>: A helper function for recursive probability calculations.
 <ul>
-<li>The recursive formula <code>mem[a][b] = 0.25 * (f(a-4, b) + f(a-3, b-1) + f(a-2, b-2) + f(a-1, b-3))</code> computes the probability by considering the four possible operations and averaging their results (multiplied by 0.25 to account for equal probabilities for each operation).</li>
+<li><strong>Parameters</strong>:
+<ul>
+<li><code>a</code>: Remaining volume of soup A.</li>
+<li><code>b</code>: Remaining volume of soup B.</li>
+</ul>
+</li>
+<li><strong>Returns</strong>: A double representing the probability based on remaining volumes.</li>
 </ul>
 </li>
 </ul>
-<h4 id="step-4-return-the-result">
-  Step 4: Return the Result
-  <a class="heading-link" href="#step-4-return-the-result">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>Once the recursive function <code>f(a, b)</code> is computed, the result is returned and stored in <code>mem[a][b]</code>.</li>
+</li>
+</ul>
+</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -385,38 +341,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>The time complexity of this solution is <strong>O(n^2)</strong>, where:</p>
 <ul>
-<li><strong>n</strong> is the size of the grid (scaled by dividing by 25). In the worst case, we will need to calculate the probabilities for each state, which requires at most <strong>O(n^2)</strong> recursive calls. However, memoization ensures that each state is calculated at most once.</li>
+<li><strong>Time Complexity</strong>: O(n^2), where <code>n</code> is the volume of the soups, due to the memoization storing results for combinations of volumes.</li>
+<li><strong>Space Complexity</strong>: O(n^2), for the memoization storage.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>The space complexity is <strong>O(n^2)</strong> due to the memoization table (<code>mem</code>), which stores the results for each state. The size of this table is proportional to the number of unique states <code>(a, b)</code> that can be reached.</p>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution efficiently calculates the probability that soup 1 runs out before soup 2 by leveraging dynamic programming with memoization. By considering all possible transitions and using a memoization table to store previously computed results, the solution avoids redundant calculations and ensures optimal performance. The recursive function captures the probabilistic nature of the problem and provides the correct results even for large values of <code>n</code> by adjusting the state size and directly handling large cases with a threshold. This approach offers both time and space efficiency, making it a suitable solution for this complex problem.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1331s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1342s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -424,31 +357,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-809-expressive-words-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #809: Expressive Words</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-809-expressive-words-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #809: Expressive Words</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

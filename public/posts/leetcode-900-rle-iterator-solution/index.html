@@ -144,6 +144,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -208,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -248,7 +252,7 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * RLEIterator* obj = new RLEIterator(encoding);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * int param_1 = obj-&gt;next(n);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<h2 id="hahahugoshortcode1392s1hbhb">
+<h2 id="hahahugoshortcode1396s1hbhb">
   
 
   
@@ -260,9 +264,31 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem requires implementing an <strong>RLEIterator</strong> class that simulates a run-length encoded (RLE) iterator. The class should be initialized with an array representing the run-length encoding of some sequence. The <code>next(n)</code> method should return the next value in the sequence after consuming <code>n</code> elements, based on the encoding provided.</p>
-<p><strong>Run-Length Encoding (RLE)</strong> is a compression technique that represents consecutive repeated elements as a single value and its count. For example, the sequence <code>[1, 1, 2, 2, 2, 3]</code> can be encoded as <code>[2, 1, 3, 2, 1, 3]</code> meaning &ldquo;two 1&rsquo;s, three 2&rsquo;s, and one 3.&rdquo;</p>
-<p>In this problem, the iterator should retrieve the value corresponding to the next <code>n</code> elements by simulating the consumption of encoded sequences. If there are not enough elements left, the method should return <code>-1</code> to indicate the end of the sequence.</p>
+<p>Implement an RLEIterator that decodes a run-length encoded sequence. The sequence is represented as a list where every two consecutive elements denote the count and the value respectively.</p>
+<h3 id="class-definition">
+  Class Definition
+  <a class="heading-link" href="#class-definition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Class</strong>: <code>RLEIterator</code>
+<ul>
+<li><strong>Constructor</strong>: <code>RLEIterator(vector&lt;int&gt;&amp; encoding)</code>
+<ul>
+<li>Initializes the iterator with the given encoding.</li>
+</ul>
+</li>
+<li><strong>Method</strong>: <code>int next(int n)</code>
+<ul>
+<li>Returns the value of the next element in the sequence after consuming <code>n</code> elements.</li>
+<li>If there are not enough elements left to fulfill the request, return <code>-1</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -272,123 +298,30 @@
 </h3>
 <ol>
 <li>
-<p><strong>Understanding RLE</strong>: The encoding format consists of pairs <code>[count, value]</code>, where:</p>
+<p><strong>Initialization</strong>:</p>
 <ul>
-<li><code>count</code> is the number of occurrences of <code>value</code>.</li>
-<li>The sequence is represented as a list of such pairs: <code>[count_1, value_1, count_2, value_2, ..., count_k, value_k]</code>.</li>
-</ul>
-<p>For example, encoding <code>[2, 1, 3, 2, 1, 3]</code> represents the sequence: <code>1, 1, 2, 2, 2, 3</code>.</p>
-</li>
-<li>
-<p><strong>Problem Requirements</strong>: The task requires:</p>
-<ul>
-<li><code>RLEIterator</code> class to be initialized with the encoded sequence.</li>
-<li><code>next(n)</code> method to return the value corresponding to the <code>n</code>-th element of the sequence, consuming the elements as you go.</li>
-<li>If there are fewer elements left than required, return <code>-1</code>.</li>
+<li>Store the run-length encoded values in the <code>arr</code> vector.</li>
+<li>Use <code>idx</code> to keep track of the current position in <code>arr</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Design</strong>:</p>
+<p><strong>Next Value Retrieval</strong>:</p>
 <ul>
-<li>We will maintain an index (<code>idx</code>) to track our position in the encoded array.</li>
-<li>The <code>next(n)</code> method will process each pair <code>[count, value]</code> in the encoding, decrementing the count and moving to the next pair when necessary.</li>
+<li>While there are still elements left in the encoding:
+<ul>
+<li>If <code>n</code> exceeds the current count (<code>arr[idx]</code>), reduce <code>n</code> by that count and move to the next run by incrementing <code>idx</code> by 2.</li>
+<li>If <code>n</code> is less than or equal to the current count:
+<ul>
+<li>Decrease the count at <code>arr[idx]</code> by <code>n</code>.</li>
+<li>Return the corresponding value at <code>arr[idx + 1]</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>If the loop exits without returning a value, it means there are not enough elements left to satisfy the request, hence return <code>-1</code>.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="class-constructor">
-  <strong>Class Constructor</strong>
-  <a class="heading-link" href="#class-constructor">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>RLEIterator(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> encoding) {
-</span></span><span style="display:flex;"><span>    arr <span style="color:#f92672">=</span> encoding;
-</span></span><span style="display:flex;"><span>    idx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li><strong>Initialization</strong>: The constructor takes a reference to a vector of integers (<code>encoding</code>) that represents the RLE-encoded sequence. It initializes the member variable <code>arr</code> with this encoding and sets the index (<code>idx</code>) to 0, indicating the current position in the sequence.</li>
-</ul>
-<h4 id="next-method">
-  <strong>Next Method</strong>
-  <a class="heading-link" href="#next-method">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">next</span>(<span style="color:#66d9ef">int</span> n) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(idx <span style="color:#f92672">&lt;</span> arr.size()) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(n <span style="color:#f92672">&gt;</span> arr[idx]) {
-</span></span><span style="display:flex;"><span>            n <span style="color:#f92672">-=</span> arr[idx];
-</span></span><span style="display:flex;"><span>            idx <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>;
-</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>            arr[idx] <span style="color:#f92672">-=</span> n;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> arr[idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>
-<p><strong>Iterate Over Encoded Pairs</strong>: The <code>next(n)</code> method is designed to retrieve the next <code>n</code> elements from the sequence based on the run-length encoding.</p>
-<ol>
-<li>
-<p><strong>While Loop</strong>:</p>
-<ul>
-<li>The loop continues until all elements in the encoding array have been processed (<code>idx &lt; arr.size()</code>).</li>
-</ul>
-</li>
-<li>
-<p><strong>Check If <code>n</code> Is Greater Than Current Run Length</strong>:</p>
-<ul>
-<li>If the required number of elements <code>n</code> is greater than the current count (<code>arr[idx]</code>), it means we need to skip over this entire run.</li>
-<li>We subtract the current run length from <code>n</code>, and then move the index forward by 2 (as each pair consists of a <code>count</code> and a <code>value</code>).</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(n <span style="color:#f92672">&gt;</span> arr[idx]) {
-</span></span><span style="display:flex;"><span>    n <span style="color:#f92672">-=</span> arr[idx];
-</span></span><span style="display:flex;"><span>    idx <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div></li>
-<li>
-<p><strong>Consume Elements</strong>:</p>
-<ul>
-<li>If <code>n</code> is less than or equal to the current count, we decrement the <code>count</code> by <code>n</code>, and return the <code>value</code> of the current pair (<code>arr[idx + 1]</code>).</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>    arr[idx] <span style="color:#f92672">-=</span> n;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> arr[idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div></li>
-<li>
-<p><strong>Return -1 If Out of Bounds</strong>:</p>
-<ul>
-<li>If the loop exits because there are no more elements to process (i.e., <code>idx</code> exceeds <code>arr.size()</code>), it means there are not enough elements left, and we return <code>-1</code>.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
-</span></span></code></pre></div></li>
-</ol>
-</li>
-</ul>
-<h4 id="example-usage">
-  <strong>Example Usage</strong>
-  <a class="heading-link" href="#example-usage">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>RLEIterator<span style="color:#f92672">*</span> obj <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> RLEIterator(encoding);
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> param_1 <span style="color:#f92672">=</span> obj<span style="color:#f92672">-&gt;</span>next(n);
-</span></span></code></pre></div><ul>
-<li>The object <code>obj</code> is created by passing the encoded array <code>encoding</code> to the constructor.</li>
-<li>The <code>next(n)</code> function is called with an integer <code>n</code>, which will return the value at the <code>n</code>-th position in the sequence based on the RLE encoding.</li>
-</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -396,51 +329,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  <strong>Time Complexity</strong>
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li>
-<p>The time complexity of the <code>next(n)</code> function is <strong>O(n)</strong> in the worst case, where <code>n</code> represents the number of calls or the number of elements that need to be consumed from the sequence. In the worst case, we may need to traverse through multiple pairs in the encoding list to retrieve the required number of elements.</p>
-</li>
-<li>
-<p>Each call to <code>next(n)</code> only processes a part of the sequence, and the iterator progresses in constant steps, moving through the encoded sequence in a linear manner. Thus, the overall time complexity is dependent on how many elements are remaining to be processed.</p>
-</li>
+<li><strong>Time Complexity</strong>: O(1) for each <code>next</code> call on average, since we can skip counts efficiently.</li>
+<li><strong>Space Complexity</strong>: O(m) where m is the size of the input <code>encoding</code> array.</li>
 </ul>
-<h4 id="space-complexity">
-  <strong>Space Complexity</strong>
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>
-<p>The space complexity of the algorithm is <strong>O(m)</strong>, where <code>m</code> is the size of the encoding array, because the space used is directly proportional to the length of the input encoding.</p>
-</li>
-<li>
-<p>There are no additional data structures that grow with the input size. The class only maintains the index (<code>idx</code>) and the encoding array (<code>arr</code>), both of which are proportional to the input size.</p>
-</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution efficiently implements an <strong>RLEIterator</strong> that simulates iterating over a run-length encoded sequence. The <code>next(n)</code> method dynamically processes each run of the sequence by reducing the count of remaining elements and returns the corresponding value when necessary.</p>
-<p>The code is optimized for linear time traversal of the encoded sequence, making it suitable for handling large datasets. The complexity is proportional to the size of the input encoding, with each call to <code>next(n)</code> efficiently processing the sequence in a straightforward manner.</p>
-<p>This approach offers a clean and effective way to work with run-length encoded sequences, providing constant-time operations for each retrieval when necessary, while minimizing unnecessary recomputations.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1392s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1396s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -456,31 +353,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-901-online-stock-span-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #901: Online Stock Span</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-901-online-stock-span-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #901: Online Stock Span</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

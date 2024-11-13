@@ -143,6 +143,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -203,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              6-minute read
+              2-minute read
             </span>
           </div>
 
@@ -236,7 +240,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1384s1hbhb">
+<h2 id="hahahugoshortcode1354s1hbhb">
   
 
   
@@ -248,13 +252,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem at hand is related to the &ldquo;Dominoes Falling&rdquo; game, where a string of dominoes is represented by the characters <code>'L'</code>, <code>'R'</code>, and <code>'.'</code>. In the string:</p>
+<p>You are given a string representing dominoes standing on a line. Each character in the string can be:</p>
 <ul>
-<li><code>'L'</code> represents a domino that is falling to the left.</li>
-<li><code>'R'</code> represents a domino that is falling to the right.</li>
-<li><code>'.'</code> represents a domino that is upright and has yet to fall.</li>
+<li>&lsquo;L&rsquo; for a domino falling left,</li>
+<li>&lsquo;R&rsquo; for a domino falling right,</li>
+<li>&lsquo;.&rsquo; for a standing domino.</li>
 </ul>
-<p>The goal is to simulate the domino falling process and determine the final state of all the dominoes. If a domino falls to the right (<code>'R'</code>), it will cause all the dominoes to fall in the same direction until either another domino falls to the left (<code>'L'</code>) or the end of the sequence is reached. Similarly, a domino falling to the left will cause all dominoes to fall leftwards until another domino falls to the right or the sequence ends.</p>
+<p>The dominoes will fall until no more can fall. Your task is to determine the final state of the dominoes after all the falls.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -262,93 +266,40 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The solution can be approached by simulating the effect of each falling domino and determining the final state of the sequence after all dominoes have fallen. Here&rsquo;s a breakdown of the approach:</p>
 <ol>
 <li>
-<p><strong>Preprocessing:</strong></p>
+<p><strong>Extend the String</strong>:</p>
 <ul>
-<li>We append <code>'L'</code> at the start and <code>'R'</code> at the end of the string to handle edge cases where the first or last domino isn&rsquo;t affected by other falling dominoes.</li>
+<li>Add &lsquo;L&rsquo; at the start and &lsquo;R&rsquo; at the end of the string. This helps handle edge cases where dominoes fall off the ends.</li>
 </ul>
 </li>
 <li>
-<p><strong>Iterating through the string:</strong></p>
+<p><strong>Iterate Through the String</strong>:</p>
 <ul>
-<li>We iterate through the string and look for sequences of consecutive upright dominoes (represented by <code>'.'</code>). These dominoes are influenced by the nearest falling domino (<code>'L'</code> or <code>'R'</code>).</li>
-<li>We split the string into segments between two falling dominoes (<code>'L'</code> or <code>'R'</code>), and based on the relationship between the two falling dominoes, we determine how the upright dominoes between them will fall:
-<ul>
-<li>If both sides have the same direction (<code>'L'</code> to <code>'L'</code> or <code>'R'</code> to <code>'R'</code>), the dominoes in between will all fall in the same direction.</li>
-<li>If the dominoes are influenced by opposite directions (<code>'L'</code> to <code>'R'</code>), the dominoes will fall towards the middle with some remaining upright dominoes if the number of upright dominoes is odd.</li>
-</ul>
-</li>
+<li>Use two pointers, <code>i</code> and <code>j</code>, to keep track of the positions of the last seen dominoes (&lsquo;L&rsquo; or &lsquo;R&rsquo;) and the standing dominoes (&rsquo;.&rsquo;) in between.</li>
 </ul>
 </li>
 <li>
-<p><strong>Edge Handling:</strong></p>
+<p><strong>Handle Different Cases</strong>:</p>
 <ul>
-<li>The solution ensures that no dominoes are missed by handling cases where the sequence starts or ends with a chain of falling dominoes.</li>
+<li><strong>Same Direction</strong>: If the dominoes at positions <code>i</code> and <code>j</code> are the same (both &lsquo;L&rsquo; or both &lsquo;R&rsquo;), fill the space between with the same domino type.</li>
+<li><strong>Opposite Directions</strong>: If one is &lsquo;L&rsquo; and the other &lsquo;R&rsquo;, the middle will remain as &lsquo;.&rsquo; since they will not affect each other.</li>
+<li><strong>Converging Directions</strong>: If the segment is between &lsquo;R&rsquo; and &lsquo;L&rsquo;, fill half with &lsquo;R&rsquo;s, potentially one with &lsquo;.&rsquo;, and the other half with &lsquo;L&rsquo;s.</li>
 </ul>
 </li>
 <li>
-<p><strong>Efficiency:</strong></p>
+<p><strong>Build the Result</strong>:</p>
 <ul>
-<li>The process involves a single pass through the string, making it an <strong>O(n)</strong> time complexity solution where <code>n</code> is the length of the domino sequence.</li>
+<li>Append the processed characters to the result string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>After processing all segments, return the final state of the dominoes.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>d <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;L&#39;</span> <span style="color:#f92672">+</span> d <span style="color:#f92672">+</span> <span style="color:#e6db74">&#39;R&#39;</span>;
-</span></span></code></pre></div><ul>
-<li>We append <code>'L'</code> at the start and <code>'R'</code> at the end of the string. This ensures that edge cases, where the first or last domino is unperturbed, are handled smoothly by the simulation.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string res <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;</span> d.length(); j<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(d[j] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;.&#39;</span>) <span style="color:#66d9ef">continue</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> middle <span style="color:#f92672">=</span> j <span style="color:#f92672">-</span> i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
-</span></span></code></pre></div><ul>
-<li>We initialize the result string <code>res</code> to store the final configuration of the dominoes.</li>
-<li>We then loop through the modified string from index <code>1</code> to <code>d.length() - 1</code> (because the first and last characters are <code>'L'</code> and <code>'R'</code>).</li>
-<li>If the current character <code>d[j]</code> is a <code>'.'</code> (i.e., an upright domino), we continue to the next domino without doing anything.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) 
-</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">+=</span> d[i];
-</span></span></code></pre></div><ul>
-<li>If <code>i</code> is greater than <code>0</code>, we append <code>d[i]</code> to the result string, as it represents the start of the next segment.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(d[i] <span style="color:#f92672">==</span> d[j])
-</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">+=</span> string(middle, d[i]);
-</span></span></code></pre></div><ul>
-<li>If both <code>d[i]</code> and <code>d[j]</code> represent the same direction (<code>'L'</code> or <code>'R'</code>), the dominoes in between will all fall in the same direction. We append <code>middle</code> number of <code>d[i]</code> characters to the result string, where <code>middle</code> represents the number of upright dominoes between the two falling dominoes.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (d[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;L&#39;</span> <span style="color:#f92672">&amp;&amp;</span> d[j] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;R&#39;</span>)
-</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">+=</span> string(middle, <span style="color:#e6db74">&#39;.&#39;</span>);
-</span></span></code></pre></div><ul>
-<li>If the dominoes on both ends are in opposite directions (<code>'L'</code> and <code>'R'</code>), the dominoes in between will not fall. They will remain upright, so we append <code>middle</code> number of <code>'.'</code> to the result.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span> 
-</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">+=</span> string(middle<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#39;R&#39;</span>) <span style="color:#f92672">+</span> string(middle<span style="color:#f92672">%</span><span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#39;.&#39;</span>) <span style="color:#f92672">+</span> string(middle<span style="color:#f92672">/</span><span style="color:#ae81ff">2</span>, <span style="color:#e6db74">&#39;L&#39;</span>);
-</span></span></code></pre></div><ul>
-<li>If the two falling dominoes are in opposite directions (<code>'R'</code> on the left and <code>'L'</code> on the right), the dominoes between them will fall towards the middle. We calculate how many dominoes will fall to the right and how many will fall to the left based on the number of dominoes in between:
-<ul>
-<li>The first part <code>string(middle/2, 'R')</code> represents the dominoes falling to the right.</li>
-<li>The second part <code>string(middle%2, '.')</code> represents any dominoes that remain upright if the count of upright dominoes is odd.</li>
-<li>The third part <code>string(middle/2, 'L')</code> represents the dominoes falling to the left.</li>
-</ul>
-</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>i <span style="color:#f92672">=</span> j;
-</span></span></code></pre></div><ul>
-<li>We update the index <code>i</code> to be <code>j</code>, as we have processed the segment between <code>i</code> and <code>j</code>, and <code>j</code> is now the new starting point for the next segment.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
-</span></span></code></pre></div><ul>
-<li>Finally, we return the result string <code>res</code> containing the final configuration of the dominoes after all of them have fallen.</li>
-</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -356,41 +307,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>O(n)</strong>: We iterate over the string exactly once, performing constant-time operations (such as string concatenations and comparisons) in each iteration. Therefore, the time complexity is linear with respect to the length of the string.</li>
+<li><strong>Time Complexity</strong>: O(n), as we traverse the string once.</li>
+<li><strong>Space Complexity</strong>: O(n), for the result string.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>O(n)</strong>: We use an additional string <code>res</code> to store the final configuration, which has a space complexity proportional to the length of the input string.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The <code>pushDominoes</code> function provides an efficient and clear solution to simulate the falling dominoes problem. By using a simple greedy approach and string manipulations, the algorithm computes the final configuration of dominoes after all the forces have acted on them.</p>
-<p>The code uses a single loop to process each segment between falling dominoes, and the use of basic string operations ensures that the solution remains efficient with a linear time complexity of <strong>O(n)</strong>. The approach is easy to understand and works well even for large inputs.</p>
-<p>The problem is a great example of how dynamic behaviors (such as the falling dominoes) can be efficiently simulated with simple iterative techniques. By treating the problem as segments of dominoes between two fixed points (<code>'L'</code> and <code>'R'</code>), we avoid unnecessary calculations and provide a clean solution with minimal overhead.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1384s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1354s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -406,31 +331,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-840-magic-squares-in-grid-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #840: Magic Squares In Grid</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-840-magic-squares-in-grid-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #840: Magic Squares In Grid</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

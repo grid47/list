@@ -144,6 +144,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -208,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              4-minute read
+              2-minute read
             </span>
           </div>
 
@@ -217,11 +221,11 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1414s0hbhb">
+        <h2 id="hahahugoshortcode1418s0hbhb">
   <a href="https://leetcode.com/problems/binary-tree-inorder-traversal/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
-      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/94.jpeg" 
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/94.webp" 
            alt="A glowing tree with nodes softly illuminating as the inorder traversal progresses." 
            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
     </div>
@@ -232,7 +236,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1414s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1418s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -256,38 +260,19 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> nodes;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1414s2hbhb">
+<h2 id="hahahugoshortcode1418s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="-inorder-traversal-of-a-binary-tree">
-  🌳 <strong>Inorder Traversal of a Binary Tree</strong>
-  <a class="heading-link" href="#-inorder-traversal-of-a-binary-tree">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>In this problem, we are tasked with performing an <strong>inorder traversal</strong> of a binary tree. The inorder traversal visits nodes in the following order:</p>
-<ol>
-<li>Left subtree</li>
-<li>Root node</li>
-<li>Right subtree</li>
-</ol>
-<h4 id="example">
-  Example
-  <a class="heading-link" href="#example">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>For the binary tree:</p>
-<pre tabindex="0"><code>       1
-      / \
-     2   3
-    / \
-   4   5
-</code></pre><p>The inorder traversal of this tree would be: <code>[4, 2, 5, 1, 3]</code>.</p>
+<p>Given the root of a binary tree, return the inorder traversal of its nodes&rsquo; values. In inorder traversal, nodes are visited in the following order: left subtree, root node, and right subtree.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -295,144 +280,51 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem, we use an <strong>iterative approach</strong> with a stack to simulate the recursive process of inorder traversal. While recursion uses the system&rsquo;s call stack, the iterative approach uses an explicit stack data structure to manage the traversal.</p>
-<p>In an inorder traversal:</p>
+<p>This solution uses an iterative approach with a stack to avoid recursion:</p>
+<ol>
+<li><strong>Initialize Stack</strong>: Use a stack <code>todo</code> to store nodes as we traverse down the left subtree.</li>
+<li><strong>Inorder Traversal</strong>:
 <ul>
-<li>We visit the left subtree first, then the node itself, and then the right subtree.</li>
-<li>The key challenge is to backtrack after visiting the left subtree so that we can visit the root and then explore the right subtree. A stack helps manage this process.</li>
+<li><strong>Left Subtree</strong>: Traverse to the leftmost node, pushing each node to <code>todo</code> along the way.</li>
+<li><strong>Visit Node</strong>: Pop the top node from <code>todo</code>, add its value to the result list <code>nodes</code>, and move to its right subtree.</li>
+<li><strong>Right Subtree</strong>: Repeat the process by traversing down the left subtree of the current right node.</li>
 </ul>
-<h3 id="steps">
-  Steps
-  <a class="heading-link" href="#steps">
+</li>
+<li><strong>End Condition</strong>: The loop terminates when there are no more nodes left to visit (i.e., <code>root</code> is <code>NULL</code> and <code>todo</code> is empty).</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ol>
-<li><strong>Initialize</strong> the stack and a result vector.</li>
-<li><strong>Traverse the left subtree</strong>: Move to the leftmost node, pushing nodes onto the stack as we go.</li>
-<li><strong>Visit the root</strong>: When we reach a node with no left child, pop it from the stack and add its value to the result vector.</li>
-<li><strong>Move to the right subtree</strong>: After visiting a node, move to its right child and repeat the process.</li>
-<li><strong>Repeat</strong> until all nodes are visited.</li>
-</ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="step-1-initialize-the-stack-and-result-vector">
-  Step 1: Initialize the Stack and Result Vector
-  <a class="heading-link" href="#step-1-initialize-the-stack-and-result-vector">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> nodes;
-</span></span><span style="display:flex;"><span>stack<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*&gt;</span> todo;
-</span></span></code></pre></div><ul>
-<li><code>nodes</code>: A vector to store the result of the inorder traversal.</li>
-<li><code>todo</code>: A stack to hold nodes that we need to visit.</li>
-</ul>
-<h4 id="step-2-traverse-the-left-subtree">
-  Step 2: Traverse the Left Subtree
-  <a class="heading-link" href="#step-2-traverse-the-left-subtree">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (root <span style="color:#f92672">||</span> <span style="color:#f92672">!</span>todo.empty()) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (root) {
-</span></span><span style="display:flex;"><span>        todo.push(root);
-</span></span><span style="display:flex;"><span>        root <span style="color:#f92672">=</span> root<span style="color:#f92672">-&gt;</span>left;
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><ul>
-<li>The outer <code>while</code> loop runs as long as there are nodes to visit (<code>root != NULL</code>) or the stack is not empty (<code>!todo.empty()</code>).</li>
-<li>The inner <code>while</code> loop traverses the leftmost path of the tree, pushing nodes onto the stack as we go down.</li>
-</ul>
-<h4 id="step-3-process-the-current-node">
-  Step 3: Process the Current Node
-  <a class="heading-link" href="#step-3-process-the-current-node">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>root <span style="color:#f92672">=</span> todo.top();
-</span></span><span style="display:flex;"><span>todo.pop();
-</span></span><span style="display:flex;"><span>nodes.push_back(root<span style="color:#f92672">-&gt;</span>val);
-</span></span></code></pre></div><ul>
-<li>After reaching the leftmost node (or a <code>NULL</code> child), we:
+<li><strong>Stack Initialization</strong>: Initialize an empty stack <code>todo</code> and vector <code>nodes</code> to store results.</li>
+<li><strong>Traversal Loop</strong>:
 <ul>
-<li>Pop the top node from the stack.</li>
-<li>Add its value to the <code>nodes</code> vector.</li>
+<li>Move to the leftmost node, pushing nodes to <code>todo</code>.</li>
+<li>Visit each node by popping from <code>todo</code>, adding it to <code>nodes</code>, and moving to its right subtree.</li>
 </ul>
 </li>
-</ul>
-<h4 id="step-4-move-to-the-right-subtree">
-  Step 4: Move to the Right Subtree
-  <a class="heading-link" href="#step-4-move-to-the-right-subtree">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>root <span style="color:#f92672">=</span> root<span style="color:#f92672">-&gt;</span>right;
-</span></span></code></pre></div><ul>
-<li>After processing a node, we move to its right child, if it exists. If there’s no right child, <code>root</code> becomes <code>NULL</code>, and the algorithm backtracks using the stack.</li>
-</ul>
-<h4 id="step-5-return-the-result">
-  Step 5: Return the Result
-  <a class="heading-link" href="#step-5-return-the-result">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> nodes;
-</span></span></code></pre></div><ul>
-<li>Once the traversal is complete, the <code>nodes</code> vector contains the node values in the correct inorder sequence. We return this vector as the final result.</li>
-</ul>
-<h3 id="time-and-space-complexity">
-  Time and Space Complexity
-  <a class="heading-link" href="#time-and-space-complexity">
+<li><strong>Result</strong>: Once the traversal is complete, <code>nodes</code> contains the inorder traversal.</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>O(n)</strong>, where <code>n</code> is the number of nodes in the binary tree. Each node is visited exactly once during the traversal, and each operation (push and pop from the stack) takes constant time. Thus, the overall time complexity is <strong>O(n)</strong>.</li>
+<li><strong>Time Complexity</strong>: (O(n)), where (n) is the number of nodes in the tree, as each node is visited once.</li>
+<li><strong>Space Complexity</strong>: (O(n)), for the stack in the worst case (unbalanced tree).</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>O(h)</strong>, where <code>h</code> is the height of the tree. In the worst case, if the tree is skewed (like a linked list), the height could be <code>n</code>, and the space complexity would be <strong>O(n)</strong> due to the stack. In a balanced tree, the height is <strong>O(log n)</strong>, leading to <strong>O(log n)</strong> space complexity.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The iterative approach to performing an inorder traversal using a stack is efficient and avoids deep recursion, which could be problematic for very large trees. This approach ensures an <strong>O(n)</strong> time complexity and <strong>O(h)</strong> space complexity, where <code>h</code> is the height of the tree. It is particularly useful for trees with large depths, as it avoids the risk of a stack overflow. By explicitly managing the nodes to visit with a stack, this method ensures the correct inorder sequence while keeping track of the traversal state.</p>
-<hr>
-<p>This method is a robust, space-efficient alternative to the recursive solution and can handle trees of varying shapes and sizes without the risk of stack overflow. Happy coding! 🌟</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1414s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1418s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -448,31 +340,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-95-unique-binary-search-trees-ii-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #95: Unique Binary Search Trees II</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-95-unique-binary-search-trees-ii-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #95: Unique Binary Search Trees II</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

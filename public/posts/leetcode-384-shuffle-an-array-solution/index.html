@@ -143,6 +143,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -203,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              6-minute read
+              2-minute read
             </span>
           </div>
 
@@ -212,11 +216,11 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1119s0hbhb">
+        <h2 id="hahahugoshortcode1120s0hbhb">
   <a href="https://leetcode.com/problems/shuffle-an-array/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
-      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/384.jpeg" 
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/384.webp" 
            alt="A glowing array where elements shuffle into new positions, gently highlighting the change." 
            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
     </div>
@@ -227,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1119s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1120s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -261,7 +265,7 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * vector&lt;int&gt; param_1 = obj-&gt;reset();
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * vector&lt;int&gt; param_2 = obj-&gt;shuffle();
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<h2 id="hahahugoshortcode1119s2hbhb">
+<h2 id="hahahugoshortcode1120s2hbhb">
   
 
   
@@ -273,18 +277,11 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem is to implement a class that can shuffle and reset a given list of integers. You are provided with a list of integers, and the class needs to support two operations:</p>
+<p>Design a data structure that supports the following two operations:</p>
 <ol>
-<li><strong>Reset</strong>: Return the original configuration of the list.</li>
-<li><strong>Shuffle</strong>: Randomly shuffle the elements in the list and return the shuffled list.</li>
+<li><strong>Reset</strong>: Restore the array to its original configuration.</li>
+<li><strong>Shuffle</strong>: Randomly shuffle the array and return the shuffled configuration.</li>
 </ol>
-<p>For example:</p>
-<ul>
-<li><code>nums = [1, 2, 3]</code></li>
-<li>After calling <code>reset()</code>, the list should return <code>[1, 2, 3]</code>.</li>
-<li>After calling <code>shuffle()</code>, the list should return a randomly shuffled version of <code>[1, 2, 3]</code> (e.g., <code>[3, 1, 2]</code> or <code>[2, 3, 1]</code>).</li>
-</ul>
-<p>You need to implement these operations efficiently while maintaining the ability to reset the list to its original configuration.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -292,169 +289,77 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem, we can use the following approach:</p>
+<p>To implement this functionality, we can follow these steps:</p>
 <ol>
 <li>
-<p><strong>Reset Operation</strong>:</p>
+<p><strong>Initialization</strong>:</p>
 <ul>
-<li>Store the original list in a data member of the class. This allows us to quickly return the original configuration whenever the <code>reset()</code> function is called.</li>
+<li>Store the original array in a class member variable upon instantiation.</li>
 </ul>
 </li>
 <li>
-<p><strong>Shuffle Operation</strong>:</p>
+<p><strong>Reset Function</strong>:</p>
 <ul>
-<li>To shuffle the list randomly, we use a common technique called the <strong>Fisher-Yates shuffle</strong> (also known as the <strong>Knuth shuffle</strong>). This shuffle algorithm ensures that each permutation of the list is equally likely.</li>
-<li>The Fisher-Yates shuffle works by iterating through the list and swapping each element with another randomly chosen element that has not yet been shuffled.</li>
+<li>Return the original array stored in the class.</li>
+</ul>
+</li>
+<li>
+<p><strong>Shuffle Function</strong>:</p>
+<ul>
+<li>Create a copy of the original array to perform shuffling.</li>
+<li>Use the Fisher-Yates shuffle algorithm (or Knuth shuffle) to randomly permute the array:
+<ul>
+<li>Iterate through the array from the first element to the last.</li>
+<li>For each element, select a random index from the unshuffled portion of the array and swap the current element with the element at that random index.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ol>
-<p>The solution needs to ensure that both operations—resetting and shuffling—are efficient and that the shuffle is unbiased, meaning that each possible permutation of the list should have an equal probability of being chosen.</p>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="1-class-definition-and-member-variables">
-  1. Class Definition and Member Variables
-  <a class="heading-link" href="#1-class-definition-and-member-variables">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> arr;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    Solution(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>        arr <span style="color:#f92672">=</span> nums;
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><ul>
-<li>The class <code>Solution</code> contains a private member variable <code>arr</code> that stores the original list of integers.</li>
-<li>The constructor accepts a vector <code>nums</code> representing the list of integers and initializes the <code>arr</code> with this list. This ensures that the list is stored in the class and can be accessed later for the <code>reset()</code> operation.</li>
-</ul>
-<h4 id="2-reset-operation">
-  2. Reset Operation
-  <a class="heading-link" href="#2-reset-operation">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> reset() {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> arr;
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><ul>
-<li>The <code>reset()</code> function simply returns the original list of integers stored in <code>arr</code>. This function does not modify the list or perform any computations. It provides the original configuration of the list as it was when the object was created.</li>
-</ul>
-<h4 id="3-shuffle-operation">
-  3. Shuffle Operation
-  <a class="heading-link" href="#3-shuffle-operation">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> shuffle() {
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> stk(arr);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> stk.size();
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> rand() <span style="color:#f92672">%</span> (n <span style="color:#f92672">-</span> i);
-</span></span><span style="display:flex;"><span>            swap(stk[i <span style="color:#f92672">+</span> j], stk[i]);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> stk;
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><ul>
-<li>The <code>shuffle()</code> function generates a random shuffle of the list.</li>
-<li>First, it creates a copy of the original list <code>arr</code> in a new vector <code>stk</code> so that the original list remains unchanged.</li>
-<li>The size of the list is stored in the variable <code>n</code>.</li>
-<li>Then, the function performs the Fisher-Yates shuffle:
 <ul>
-<li>For each index <code>i</code> in the list, it generates a random index <code>j</code> from the remaining unshuffled part of the list (<code>rand() % (n - i)</code>).</li>
-<li>It swaps the element at position <code>i + j</code> with the element at position <code>i</code>.</li>
-<li>This process ensures that each element is equally likely to be placed in any position of the shuffled list.</li>
+<li>The <code>Solution</code> class contains:
+<ul>
+<li>A constructor that initializes <code>arr</code> with the provided <code>nums</code> array.</li>
+<li>The <code>reset</code> method, which returns the original array.</li>
+<li>The <code>shuffle</code> method, which randomly shuffles the array using the Fisher-Yates algorithm.</li>
 </ul>
 </li>
-<li>Finally, the function returns the shuffled list <code>stk</code>.</li>
 </ul>
-<h4 id="4-usage-example">
-  4. Usage Example
-  <a class="heading-link" href="#4-usage-example">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">/**
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Your Solution object will be instantiated and called as such:
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Solution* obj = new Solution(nums);
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * vector&lt;int&gt; param_1 = obj-&gt;reset();
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * vector&lt;int&gt; param_2 = obj-&gt;shuffle();
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
-</span></span></code></pre></div><ul>
-<li>After creating an instance of <code>Solution</code> with a list of integers (<code>nums</code>), you can call the <code>reset()</code> method to obtain the original list and the <code>shuffle()</code> method to obtain a randomly shuffled version of the list.</li>
-</ul>
-<h3 id="complexity-analysis">
-  Complexity Analysis
-  <a class="heading-link" href="#complexity-analysis">
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
 <li>
-<p><strong>Constructor (<code>Solution(vector&lt;int&gt;&amp; nums)</code>):</strong></p>
+<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li>The constructor simply initializes the <code>arr</code> variable with the <code>nums</code> vector, which takes <strong>O(n)</strong> time, where <code>n</code> is the length of the input list.</li>
+<li><code>reset</code>: O(n), where n is the number of elements in the array (returning a copy of the original).</li>
+<li><code>shuffle</code>: O(n), where n is the number of elements in the array (iterating through the array to shuffle).</li>
 </ul>
 </li>
 <li>
-<p><strong>Reset Operation (<code>reset()</code>):</strong></p>
+<p><strong>Space Complexity</strong>:</p>
 <ul>
-<li>The <code>reset()</code> operation simply returns the stored list <code>arr</code>, so it takes <strong>O(1)</strong> time.</li>
-</ul>
-</li>
-<li>
-<p><strong>Shuffle Operation (<code>shuffle()</code>):</strong></p>
-<ul>
-<li>In the shuffle operation, we first copy the list to a new vector (<code>stk</code>), which takes <strong>O(n)</strong> time.</li>
-<li>The loop performs <strong>n</strong> iterations, and in each iteration, a constant-time operation (<code>swap()</code>) is executed. Thus, the shuffle operation has a time complexity of <strong>O(n)</strong>.</li>
+<li><code>reset</code>: O(n) for the array copy.</li>
+<li><code>shuffle</code>: O(n) for the array copy used for shuffling.</li>
 </ul>
 </li>
 </ul>
-<p>Overall, the time complexity for the shuffle operation is <strong>O(n)</strong>, and the time complexity for the reset operation is <strong>O(1)</strong>.</p>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>Space Complexity:</strong> The space complexity is <strong>O(n)</strong> due to the creation of the <code>stk</code> vector in the shuffle operation. This vector stores a copy of the original list, which requires space proportional to the length of the list. The <code>arr</code> vector also takes <strong>O(n)</strong> space, but since it&rsquo;s part of the object and not created in the shuffle method, we only count the space used by <code>stk</code> for the shuffle operation.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The <code>Solution</code> class provides an efficient way to both reset and shuffle a list of integers. The <code>reset()</code> method allows us to return the original list at any time, and the <code>shuffle()</code> method uses the Fisher-Yates shuffle algorithm to return a random permutation of the list.</p>
-<ul>
-<li><strong>Efficiency</strong>: The time complexity of the shuffle operation is <strong>O(n)</strong>, and the reset operation is constant time (<strong>O(1)</strong>). The space complexity is <strong>O(n)</strong> due to the additional storage required for the shuffled list.</li>
-<li><strong>Fisher-Yates Shuffle</strong>: The shuffle is implemented correctly using the Fisher-Yates algorithm, ensuring that each permutation of the list is equally likely.</li>
-</ul>
-<p>This approach is both efficient and simple, making it a great solution to the problem.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1119s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1120s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -470,31 +375,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-385-mini-parser-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #385: Mini Parser</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-385-mini-parser-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #385: Mini Parser</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

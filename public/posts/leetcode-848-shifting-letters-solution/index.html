@@ -143,6 +143,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -203,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              6-minute read
+              2-minute read
             </span>
           </div>
 
@@ -229,7 +233,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> s;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1357s1hbhb">
+<h2 id="hahahugoshortcode1359s1hbhb">
   
 
   
@@ -241,26 +245,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem requires us to perform a series of shifting operations on the characters of a string. Each shift operation moves a character in the string forward by a number of positions in the alphabet, with wrap-around from &lsquo;z&rsquo; back to &lsquo;a&rsquo;. The challenge is that each character in the string may have multiple shifts applied, and these shifts are defined by a vector of integers.</p>
-<p>The task is to calculate the final string after applying all shifts. Each shift value in the vector represents how many positions to move a character in the string. The trick is that each character gets a different amount of shift based on its position and the subsequent characters&rsquo; shifts.</p>
-<h3 id="example">
-  Example:
-  <a class="heading-link" href="#example">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ul>
-<li><strong>Input</strong>: <code>s = &quot;abc&quot;</code>, <code>shifts = [3, 5, 9]</code></li>
-<li><strong>Output</strong>: <code>&quot;rpl&quot;</code></li>
-</ul>
-<p>In this case, the shifting operations are:</p>
-<ol>
-<li>The first character &lsquo;a&rsquo; is shifted by <code>3</code> (it becomes &rsquo;d&rsquo;).</li>
-<li>The second character &lsquo;b&rsquo; is shifted by <code>3 + 5 = 8</code> (it becomes &lsquo;j&rsquo;).</li>
-<li>The third character &lsquo;c&rsquo; is shifted by <code>3 + 5 + 9 = 17</code> (it becomes &lsquo;r&rsquo;).</li>
-</ol>
-<p>Thus, the final string after all the shifts is <code>&quot;rpl&quot;</code>.</p>
+<p>You are given a string <code>s</code> consisting of lowercase English letters and an array <code>shifts</code> of the same length as <code>s</code>. Each element in <code>shifts</code> indicates how many positions to shift the corresponding character in <code>s</code>. The goal is to perform the shifts cumulatively and return the resulting string.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -268,80 +253,25 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The solution to this problem involves two main steps:</p>
 <ol>
-<li><strong>Cumulative Shifting</strong>: The shifts provided are cumulative from the last character to the first. That is, each character&rsquo;s shift depends on the sum of shifts starting from that character to the end of the string.</li>
-<li><strong>Character Shifting</strong>: After calculating the cumulative shifts, we apply the shift to each character in the string, adjusting the character by the appropriate number of positions in the alphabet.</li>
+<li>
+<p><strong>Calculate Cumulative Shifts</strong>:</p>
+<ul>
+<li>Iterate through the <code>shifts</code> array from the second last element to the first (right to left).</li>
+<li>For each element, add it to the next element and take modulo 26 (since there are 26 letters in the alphabet). This gives the cumulative shifts for each character.</li>
+</ul>
+</li>
+<li>
+<p><strong>Shift Characters</strong>:</p>
+<ul>
+<li>For each character in the string <code>s</code>, calculate its new position by adding the corresponding cumulative shift from the <code>shifts</code> array.</li>
+<li>Use modulo 26 to wrap around the alphabet, ensuring the new character remains a lowercase letter.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>: Convert the resulting characters back to a string and return it.</p>
+</li>
 </ol>
-<h4 id="step-1-cumulative-shifting">
-  Step 1: Cumulative Shifting
-  <a class="heading-link" href="#step-1-cumulative-shifting">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>To efficiently compute the total shift for each character, we traverse the <code>shifts</code> array from right to left, accumulating the shifts for each character. By the time we reach the first character, the shift for that character will be the sum of all shifts applied to it (and subsequent characters).</p>
-<h4 id="step-2-applying-the-shifts-to-the-string">
-  Step 2: Applying the Shifts to the String
-  <a class="heading-link" href="#step-2-applying-the-shifts-to-the-string">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>Once we have the cumulative shifts, we apply each shift to the corresponding character in the string. This is done by:</p>
-<ul>
-<li>Taking the current character&rsquo;s ASCII value (e.g., <code>'a'</code> has a value of 97).</li>
-<li>Adjusting it by adding the shift and wrapping around using modulo 26 to ensure the shift remains within the bounds of the alphabet.</li>
-<li>Updating the string with the new shifted character.</li>
-</ul>
-<p>The solution performs these operations in a linear scan, which ensures that we handle the problem efficiently.</p>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="step-1-cumulative-shifting-1">
-  Step 1: Cumulative Shifting
-  <a class="heading-link" href="#step-1-cumulative-shifting-1">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> shifts.size();
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>)
-</span></span><span style="display:flex;"><span>    shifts[i] <span style="color:#f92672">=</span> (shifts[i] <span style="color:#f92672">+</span> shifts[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>]) <span style="color:#f92672">%</span> <span style="color:#ae81ff">26</span>;
-</span></span></code></pre></div><p>In this loop, we traverse the <code>shifts</code> vector from the second-to-last element to the first. For each <code>i</code>, we accumulate the shifts from the right side:</p>
-<ul>
-<li>The shift at <code>shifts[i]</code> is updated by adding the value of <code>shifts[i + 1]</code> to it, ensuring that it reflects the total shift for character <code>i</code> and all subsequent characters.</li>
-<li>The <code>% 26</code> operation ensures that the total shift remains within the bounds of the alphabet (0 to 25, corresponding to &lsquo;a&rsquo; to &lsquo;z&rsquo;).</li>
-</ul>
-<h4 id="step-2-applying-shifts-to-the-string">
-  Step 2: Applying Shifts to the String
-  <a class="heading-link" href="#step-2-applying-shifts-to-the-string">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.size(); i<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>    s[i] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;a&#39;</span> <span style="color:#f92672">+</span> ((s[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span> <span style="color:#f92672">+</span> shifts[i]) <span style="color:#f92672">%</span> <span style="color:#ae81ff">26</span>);
-</span></span></code></pre></div><p>This loop iterates over each character in the string:</p>
-<ul>
-<li>For each character <code>s[i]</code>, we first convert it to a zero-based index (<code>s[i] - 'a'</code>), so &lsquo;a&rsquo; becomes 0, &lsquo;b&rsquo; becomes 1, and so on.</li>
-<li>We then add the corresponding shift from the <code>shifts</code> array.</li>
-<li>The <code>% 26</code> ensures that the shift wraps around the alphabet, i.e., after &lsquo;z&rsquo;, it will go back to &lsquo;a&rsquo;.</li>
-<li>Finally, we convert the zero-based index back to a character and update the string.</li>
-</ul>
-<h4 id="step-3-return-the-result">
-  Step 3: Return the Result
-  <a class="heading-link" href="#step-3-return-the-result">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> s;
-</span></span></code></pre></div><p>After all characters have been shifted, the modified string is returned as the final result.</p>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -349,42 +279,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>The time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the length of the string <code>s</code>. The two main operations—computing the cumulative shifts and applying the shifts to the string—both take linear time.</p>
-<ol>
-<li>The first loop (computing cumulative shifts) runs in <strong>O(n)</strong>, as it processes each element of the <code>shifts</code> vector once.</li>
-<li>The second loop (applying the shifts to the string) also runs in <strong>O(n)</strong>, as it processes each character in the string once.</li>
-</ol>
-<p>Since both operations are linear, the overall time complexity is <strong>O(n)</strong>.</p>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>The space complexity is <strong>O(1)</strong> if we disregard the space used for the input and output. The <code>shifts</code> vector is modified in place, and no additional data structures are used (apart from a constant amount of space for temporary variables in the loops).</p>
-<p>If we count the input string as part of the space complexity, it would be <strong>O(n)</strong> because the string <code>s</code> is given as input and modified in place. However, the space used by the <code>shifts</code> array is already accounted for in the input, so the space complexity is constant beyond that.</p>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The solution to this problem efficiently computes the result by first calculating the cumulative shifts for each character in the string and then applying those shifts in a second loop. The use of modulo 26 ensures that the alphabet wraps around correctly, and the overall time complexity of <strong>O(n)</strong> makes this solution optimal for large inputs. By modifying the <code>shifts</code> array in place and performing a single pass through the string, the solution also maintains constant extra space, making it both time and space efficient.</p>
-<p>This approach ensures that the problem is solved with minimal overhead, making it ideal for scenarios where performance is crucial, such as in competitive programming or real-time systems.</p>
+<ul>
+<li><strong>Time Complexity</strong>: O(N), where N is the length of the string <code>s</code>. This is due to the two linear passes through the <code>shifts</code> and <code>s</code> arrays.</li>
+<li><strong>Space Complexity</strong>: O(1), as the shifting is done in-place and we do not use any additional data structures that scale with input size.</li>
+</ul>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1357s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1359s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -392,31 +295,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-851-loud-and-rich-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #851: Loud and Rich</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-851-loud-and-rich-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #851: Loud and Rich</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

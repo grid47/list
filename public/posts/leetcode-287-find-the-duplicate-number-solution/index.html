@@ -144,6 +144,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -208,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -217,11 +221,11 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1003s0hbhb">
+        <h2 id="hahahugoshortcode1005s0hbhb">
   <a href="https://leetcode.com/problems/find-the-duplicate-number/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
-      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/287.jpeg" 
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/287.webp" 
            alt="A series of numbers, with the duplicate gently glowing and standing out from the rest." 
            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
     </div>
@@ -232,7 +236,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1003s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1005s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -254,7 +258,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> fast;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1003s2hbhb">
+<h2 id="hahahugoshortcode1005s2hbhb">
   
 
   
@@ -266,13 +270,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem asks you to find the <strong>duplicate number</strong> in an array of integers <code>nums</code>, where the array contains <code>n + 1</code> integers, and all the integers are between <code>1</code> and <code>n</code> (inclusive). There is exactly one duplicate number in the array, but it may appear more than once. The challenge is to find the duplicate number <strong>without modifying the array</strong> and using <strong>constant extra space</strong>.</p>
-<p>For example:</p>
-<ul>
-<li>Input: <code>nums = [1, 3, 4, 2, 2]</code></li>
-<li>Output: <code>2</code></li>
-</ul>
-<p>In this example, the number <code>2</code> is the duplicate because it appears twice in the array.</p>
+<p>Given an integer array <code>nums</code> containing <code>n + 1</code> integers where each integer is between <code>1</code> and <code>n</code> (inclusive), there is only one duplicate number in the array. The goal is to find the duplicate number without modifying the array and using constant extra space.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -280,85 +278,46 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem is a classic case that can be solved using <strong>Floyd’s Tortoise and Hare</strong> algorithm, also known as the <strong>Cycle Detection</strong> algorithm. The key idea here is that the array can be interpreted as a linked list where each number in the array points to the next index (i.e., <code>nums[i]</code> points to the index <code>nums[i]</code>).</p>
-<p>Given that there is exactly one duplicate number, we can think of this as a <strong>cycle in the linked list</strong>. By detecting the cycle, we can identify the duplicate number. The <strong>Tortoise and Hare</strong> algorithm efficiently detects this cycle without needing extra space.</p>
-<h3 id="steps">
-  Steps:
-  <a class="heading-link" href="#steps">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
+<p>The solution uses Floyd&rsquo;s Tortoise and Hare (Cycle Detection) algorithm to identify the duplicate number:</p>
 <ol>
 <li>
-<p><strong>Phase 1 (Finding the Cycle)</strong>:</p>
+<p><strong>Initialization</strong>:</p>
 <ul>
-<li>Use two pointers: a <strong>slow pointer</strong> and a <strong>fast pointer</strong>.</li>
-<li>Move the slow pointer by one step at a time, and the fast pointer by two steps at a time.</li>
-<li>Since there is a duplicate, the fast pointer will eventually meet the slow pointer inside the cycle (if a cycle exists).</li>
+<li>Use two pointers, <code>slow</code> and <code>fast</code>. The <code>slow</code> pointer moves one step at a time, while the <code>fast</code> pointer moves two steps at a time.</li>
 </ul>
 </li>
 <li>
-<p><strong>Phase 2 (Finding the Duplicate)</strong>:</p>
+<p><strong>Finding the Intersection Point</strong>:</p>
 <ul>
-<li>Once the slow pointer and fast pointer meet, reset one pointer to the start of the array.</li>
-<li>Move both pointers one step at a time. The point where they meet again will be the duplicate number.</li>
+<li>Start with <code>slow</code> at <code>nums[0]</code> and <code>fast</code> at <code>nums[nums[0]]</code>.</li>
+<li>Continue moving <code>slow</code> and <code>fast</code> until they meet. This meeting point indicates that there is a cycle in the array, which is caused by the duplicate number.</li>
+</ul>
+</li>
+<li>
+<p><strong>Finding the Entrance to the Cycle</strong>:</p>
+<ul>
+<li>Once the two pointers meet, reset <code>fast</code> to <code>0</code> (the start of the array).</li>
+<li>Move both <code>slow</code> and <code>fast</code> one step at a time. The point where they meet again is the duplicate number.</li>
 </ul>
 </li>
 </ol>
-<p>This approach uses <strong>O(n)</strong> time complexity and <strong>O(1)</strong> space complexity, making it optimal for large arrays with duplicates.</p>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="step-1-initialize-slow-and-fast-pointers">
-  Step 1: Initialize Slow and Fast Pointers
-  <a class="heading-link" href="#step-1-initialize-slow-and-fast-pointers">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> slow <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>], fast <span style="color:#f92672">=</span> nums[nums[<span style="color:#ae81ff">0</span>]];
-</span></span></code></pre></div><ul>
-<li>The <strong>slow pointer</strong> is initialized to the first element of the array, <code>nums[0]</code>.</li>
-<li>The <strong>fast pointer</strong> is initialized to <code>nums[nums[0]]</code>. This means that the fast pointer starts at the index <code>nums[0]</code>, which corresponds to the number at the index <code>nums[0]</code>. This is the key to identifying the cycle.</li>
+<ul>
+<li><strong>Input</strong>: A vector of integers <code>nums</code>.</li>
+<li><strong>Output</strong>: The duplicate number in the array.</li>
 </ul>
-<h4 id="step-2-detect-the-cycle">
-  Step 2: Detect the Cycle
-  <a class="heading-link" href="#step-2-detect-the-cycle">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(slow <span style="color:#f92672">!=</span> fast) {
-</span></span><span style="display:flex;"><span>    slow <span style="color:#f92672">=</span> nums[slow];
-</span></span><span style="display:flex;"><span>    fast <span style="color:#f92672">=</span> nums[nums[fast]];
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>The slow pointer moves one step at a time (<code>slow = nums[slow]</code>), while the fast pointer moves two steps at a time (<code>fast = nums[nums[fast]]</code>).</li>
-<li>This loop continues until the slow pointer and fast pointer meet. Once they meet, a cycle is detected. The meeting point is within the cycle, but it does not yet give us the duplicate number. We now proceed to the next phase.</li>
-</ul>
-<h4 id="step-3-find-the-start-of-the-cycle-duplicate">
-  Step 3: Find the Start of the Cycle (Duplicate)
-  <a class="heading-link" href="#step-3-find-the-start-of-the-cycle-duplicate">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>fast <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(slow <span style="color:#f92672">!=</span> fast) {
-</span></span><span style="display:flex;"><span>    slow <span style="color:#f92672">=</span> nums[slow];
-</span></span><span style="display:flex;"><span>    fast <span style="color:#f92672">=</span> nums[fast];
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> fast;
-</span></span></code></pre></div><ul>
-<li>Once a cycle is detected, reset the <code>fast</code> pointer to the start of the array (<code>fast = 0</code>).</li>
-<li>Now, move both the slow and fast pointers one step at a time. The slow pointer moves by one step (<code>slow = nums[slow]</code>), and the fast pointer also moves one step (<code>fast = nums[fast]</code>).</li>
-<li>When both pointers meet again, the point where they meet is the duplicate number. This is because the cycle is formed by the duplicate number, and the slow and fast pointers are both now pointing to the starting point of the cycle.</li>
-</ul>
+<ol>
+<li>Initialize <code>slow</code> and <code>fast</code> to start in the array.</li>
+<li>Use a while loop to move the pointers until they meet.</li>
+<li>Reset <code>fast</code> to <code>0</code> and continue moving both pointers until they meet again.</li>
+<li>Return the value of the <code>fast</code> pointer, which will be the duplicate number.</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -366,50 +325,26 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li>The time complexity of this algorithm is <strong>O(n)</strong>, where <code>n</code> is the size of the input array <code>nums</code>.</li>
-<li>In the first phase, both the slow and fast pointers move through the array. Since the fast pointer moves twice as fast as the slow pointer, they will eventually meet in the cycle.</li>
-<li>In the second phase, both pointers traverse the cycle and reach the starting point of the cycle in linear time.</li>
-<li>As a result, the algorithm runs in <strong>O(n)</strong> time.</li>
+<li><strong>Time Complexity</strong>: (O(n)) since both pointers traverse the list at most twice.</li>
+<li><strong>Space Complexity</strong>: (O(1)) as no additional space is used aside from the pointers.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>The space complexity is <strong>O(1)</strong>, because we are only using two pointers (<code>slow</code> and <code>fast</code>) to detect the cycle. No additional space is required for the solution.</li>
-<li>This satisfies the constraint of using constant extra space.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
+<h3 id="edge-cases">
+  Edge Cases
+  <a class="heading-link" href="#edge-cases">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>This solution efficiently solves the problem of finding the duplicate number in the array using <strong>Floyd&rsquo;s Tortoise and Hare</strong> cycle detection algorithm. The algorithm leverages the fact that the array can be seen as a linked list with cycles due to the duplicate number.</p>
-<p><strong>Key Advantages:</strong></p>
-<ul>
-<li><strong>Time efficiency</strong>: The algorithm runs in linear time, i.e., <strong>O(n)</strong>, where <code>n</code> is the length of the array.</li>
-<li><strong>Space efficiency</strong>: The solution uses constant space, i.e., <strong>O(1)</strong>, which ensures minimal memory usage.</li>
-<li><strong>Optimal for large inputs</strong>: Due to its time and space complexity, the algorithm is highly efficient and works well even with large inputs.</li>
-</ul>
-<p>This approach is one of the most optimal and well-known solutions to the problem of detecting duplicate numbers in an array, especially when considering the constraints that disallow modifying the array and require constant extra space.</p>
+<ol>
+<li><strong>Minimum Input</strong>: If <code>nums</code> contains only two elements, both being the same, the duplicate is immediately identified.</li>
+<li><strong>Multiple Duplicates</strong>: The algorithm guarantees to find one duplicate since the problem states there is only one duplicate number in the array.</li>
+</ol>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1003s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1005s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -425,31 +360,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-300-longest-increasing-subsequence-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #300: Longest Increasing Subsequence</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-300-longest-increasing-subsequence-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #300: Longest Increasing Subsequence</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

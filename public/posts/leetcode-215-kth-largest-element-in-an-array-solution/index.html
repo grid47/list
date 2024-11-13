@@ -145,6 +145,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -213,7 +217,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -222,11 +226,11 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode601s0hbhb">
+        <h2 id="hahahugoshortcode602s0hbhb">
   <a href="https://leetcode.com/problems/kth-largest-element-in-an-array/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
-      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/215.jpeg" 
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/215.webp" 
            alt="An array of glowing elements with the kth largest element glowing brighter than the others." 
            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
     </div>
@@ -237,7 +241,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode601s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode602s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -258,7 +262,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> x;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode601s2hbhb">
+<h2 id="hahahugoshortcode602s2hbhb">
   
 
   
@@ -270,7 +274,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The task is to find the <code>k</code>-th largest element in an unsorted array of integers. The number <code>k</code> represents the position of the largest element you are looking for, and the goal is to return the element at that position when the list is sorted in descending order.</p>
+<p>Given an integer array <code>nums</code> and an integer <code>k</code>, return the kth largest element in the array. Note that it is the kth largest element in the sorted order, not the kth distinct element.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -278,96 +282,34 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem efficiently, we can use a <strong>priority queue</strong>, which allows us to always access the largest element in constant time, while maintaining the order of the elements in the heap structure.</p>
-<h4 id="key-concepts">
-  Key Concepts:
-  <a class="heading-link" href="#key-concepts">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ol>
 <li>
-<p><strong>Priority Queue (Max-Heap)</strong>: A priority queue is a data structure that keeps the elements sorted in a way that allows efficient retrieval of the largest (or smallest) element. In the context of this problem, we use a max-heap, which ensures that the largest element is always at the top of the heap.</p>
+<p><strong>Use of Priority Queue</strong>: A max-heap (priority queue) can be utilized to efficiently retrieve the largest elements.</p>
 </li>
 <li>
-<p><strong>Heap Property</strong>: A heap is a binary tree where each parent node is either greater than or equal to its child nodes (in a max-heap). The root node always contains the largest element.</p>
-</li>
-<li>
-<p><strong>Efficiently Finding the k-th Largest Element</strong>:</p>
+<p><strong>Process</strong>:</p>
 <ul>
 <li>Insert all elements of the array into the priority queue.</li>
-<li>Extract the top element <code>k</code> times (because we want the largest element, the second largest, and so on).</li>
-<li>The <code>k</code>-th extraction will give us the <code>k</code>-th largest element.</li>
+<li>Pop the top element from the queue <code>k</code> times. The top element after the k pops will be the kth largest element.</li>
 </ul>
 </li>
 </ol>
-<p>Using a max-heap is an intuitive approach for problems involving &ldquo;largest&rdquo; or &ldquo;smallest&rdquo; elements, and it ensures that we can solve the problem efficiently.</p>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> findKthLargest(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> k) {
-</span></span><span style="display:flex;"><span>        priority_queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> pq;  <span style="color:#75715e">// Step 1: Initialize a max-heap priority queue
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x: nums)         <span style="color:#75715e">// Step 2: Insert all elements from nums into the priority queue
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            pq.push(x);
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> x;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(k<span style="color:#f92672">--&gt;</span><span style="color:#ae81ff">0</span>) {           <span style="color:#75715e">// Step 3: Extract the top element k times
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            x <span style="color:#f92672">=</span> pq.top();        <span style="color:#75715e">// Get the largest element from the heap
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            pq.pop();            <span style="color:#75715e">// Remove the largest element
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> x;                <span style="color:#75715e">// Step 4: Return the k-th largest element
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><h4 id="step-by-step-explanation">
-  Step-by-Step Explanation:
-  <a class="heading-link" href="#step-by-step-explanation">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ol>
-<li>
-<p><strong>Initialize the Priority Queue:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>priority_queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> pq;
-</span></span></code></pre></div><ul>
-<li>Here, we create a max-heap using a priority queue. In C++, the <code>priority_queue</code> is implemented as a max-heap by default, meaning that the largest element is always at the top of the queue.</li>
+<ul>
+<li><strong>findKthLargest</strong>: The main function that finds the kth largest element:
+<ul>
+<li>Iterate through each element in <code>nums</code> and push it into the priority queue.</li>
+<li>Pop the top element from the priority queue <code>k</code> times.</li>
+<li>After popping <code>k</code> elements, the top of the queue will be the kth largest element.</li>
 </ul>
 </li>
-<li>
-<p><strong>Insert Elements into the Priority Queue:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x: nums) 
-</span></span><span style="display:flex;"><span>    pq.push(x);
-</span></span></code></pre></div><ul>
-<li>We loop through each element <code>x</code> in the <code>nums</code> array and push it into the priority queue. Each <code>push</code> operation ensures that the heap property is maintained, and the largest element remains at the top.</li>
 </ul>
-</li>
-<li>
-<p><strong>Extract the Largest Element <code>k</code> Times:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(k<span style="color:#f92672">--&gt;</span><span style="color:#ae81ff">0</span>) { 
-</span></span><span style="display:flex;"><span>    x <span style="color:#f92672">=</span> pq.top(); 
-</span></span><span style="display:flex;"><span>    pq.pop();
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>The <code>top()</code> function of the priority queue returns the largest element (root of the heap).</li>
-<li>The <code>pop()</code> function removes the top element, which means that after each <code>pop()</code>, the next largest element will automatically be at the top.</li>
-<li>This loop runs <code>k</code> times to remove the first <code>k-1</code> largest elements. After <code>k</code> iterations, the element at the top of the heap will be the <code>k</code>-th largest element.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return the k-th Largest Element:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> x;
-</span></span></code></pre></div><ul>
-<li>After the loop completes, <code>x</code> holds the value of the <code>k</code>-th largest element in the array. This is the element that was removed during the <code>k</code>-th iteration, so we return it.</li>
-</ul>
-</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -375,62 +317,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li>
-<p><strong>Inserting all elements into the priority queue</strong>:</p>
-<ul>
-<li>Each <code>push</code> operation in the priority queue takes <code>O(log n)</code> time because the heap structure ensures that the elements are ordered after every insertion.</li>
-<li>Therefore, inserting all <code>n</code> elements from the array into the heap takes <code>O(n log n)</code> time.</li>
+<li><strong>Time Complexity</strong>: (O(n + k \log n)), where (n) is the number of elements in the array. The initial insertion of all elements into the priority queue takes (O(n \log n)), and popping (k) elements takes (O(k \log n)).</li>
+<li><strong>Space Complexity</strong>: (O(n)) for storing the elements in the priority queue.</li>
 </ul>
-</li>
-<li>
-<p><strong>Extracting the top element <code>k</code> times</strong>:</p>
-<ul>
-<li>Each <code>pop</code> operation takes <code>O(log n)</code> time because the heap needs to be reordered after each removal.</li>
-<li>Since we are performing <code>k</code> extractions, the time complexity for this part is <code>O(k log n)</code>.</li>
-</ul>
-</li>
-</ul>
-<p>Thus, the total time complexity is the sum of these two operations:
-[
-O(n \log n) + O(k \log n) = O(n \log n)
-]
-This is because in most cases, <code>k &lt;= n</code>, and the time complexity for inserting elements dominates the time complexity of the <code>k</code> extractions.</p>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>The space complexity is determined by the space required to store the priority queue. Since we store all <code>n</code> elements in the heap, the space complexity is <code>O(n)</code>.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The solution efficiently solves the problem of finding the <code>k</code>-th largest element in an unsorted array by using a max-heap (priority queue). The priority queue allows us to efficiently track and extract the largest elements in the array.</p>
-<ul>
-<li><strong>Time Complexity</strong>: The overall time complexity is <code>O(n log n)</code>, where <code>n</code> is the number of elements in the input array. This is mainly due to the heap operations for inserting all elements and performing the <code>k</code> extractions.</li>
-<li><strong>Space Complexity</strong>: The space complexity is <code>O(n)</code> because we store all the elements in the priority queue.</li>
-</ul>
-<p>This approach is easy to understand and guarantees the correct result while being efficient for arrays of large sizes. Although alternative approaches such as sorting or using a min-heap can also solve the problem, using a max-heap allows us to access the largest elements directly and perform the extractions efficiently. This makes the solution both intuitive and performant for most practical scenarios.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode601s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode602s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -446,31 +341,10 @@ This is because in most cases, <code>k &lt;= n</code>, and the time complexity f
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-217-contains-duplicate-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #217: Contains Duplicate</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-217-contains-duplicate-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #217: Contains Duplicate</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

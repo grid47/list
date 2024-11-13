@@ -146,6 +146,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -222,7 +226,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              6-minute read
+              2-minute read
             </span>
           </div>
 
@@ -263,7 +267,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1337s1hbhb">
+<h2 id="hahahugoshortcode1326s1hbhb">
   
 
   
@@ -275,7 +279,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem at hand involves determining how many words from a list are subsequences of a given string <code>s</code>. A subsequence is defined as a sequence that can be derived from another sequence by deleting some or no elements without changing the order of the remaining elements.</p>
+<p>Given a string <code>s</code> and a list of words, determine how many words from the list are subsequences of <code>s</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -283,100 +287,53 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem efficiently, we can take advantage of precomputed indices for each character in the string <code>s</code>. The core idea is to check whether each word in the list <code>words</code> is a subsequence of <code>s</code> by trying to match its characters one by one, using a technique that avoids checking every possible subsequence directly.</p>
-<p>The approach works as follows:</p>
-<ol>
-<li><strong>Preprocess the string <code>s</code></strong>: Create a data structure that stores, for each character, the positions of its occurrences in <code>s</code>. This allows us to efficiently find the next position where a character can appear.</li>
-<li><strong>Check each word</strong>: For each word in the list, use the preprocessed data to check if all its characters appear in order in <code>s</code>. This can be done by trying to find each character&rsquo;s next occurrence after the previous one.</li>
-</ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
 <ol>
 <li>
-<p><strong>Initialization</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> s.size();
-</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> srch(<span style="color:#ae81ff">26</span>);
-</span></span></code></pre></div><p>Here, we initialize <code>n</code> to the size of the string <code>s</code>. We also create a 2D vector <code>srch</code> of size 26 (one for each letter of the alphabet). This will hold the indices of each character in <code>s</code>.</p>
-</li>
-<li>
-<p><strong>Preprocessing the String <code>s</code></strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.size(); i<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>    srch[s[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>].push_back(i);
-</span></span></code></pre></div><p>In this step, we loop through each character of <code>s</code> and store the index of each character in the corresponding list within the <code>srch</code> vector. The expression <code>s[i] - 'a'</code> maps the character to an index between 0 and 25. For example, &lsquo;a&rsquo; will be mapped to index 0, &lsquo;b&rsquo; to index 1, and so on. This ensures that for each character in <code>s</code>, we know where it appears.</p>
-</li>
-<li>
-<p><strong>Checking Each Word in <code>words</code></strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(string word : words) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> found <span style="color:#f92672">=</span> true;
-</span></span></code></pre></div><p>We initialize <code>res</code> to 0, which will keep track of how many words are subsequences of <code>s</code>. We then loop through each word in the <code>words</code> list. For each word, we initialize <code>x = -1</code>, which will store the index of the last matched character in <code>s</code>, and <code>found = true</code>, a flag to indicate if the word is a subsequence of <code>s</code>.</p>
-</li>
-<li>
-<p><strong>Matching Characters of the Word</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> c : word) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> upper_bound(srch[c <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>].begin(), srch[c <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>].end(), x);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(it <span style="color:#f92672">==</span> srch[c <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>].end()) {
-</span></span><span style="display:flex;"><span>        found <span style="color:#f92672">=</span> false;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
-</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> x <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>it;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>We iterate through each character <code>c</code> in the current word. For each character, we use <code>upper_bound</code> on the list of indices for that character in <code>s</code> (stored in <code>srch[c - 'a']</code>). The <code>upper_bound</code> function returns an iterator to the first element that is greater than <code>x</code>, where <code>x</code> is the index of the last matched character. If no such element is found (i.e., <code>it == srch[c - 'a'].end()</code>), it means the word is not a subsequence of <code>s</code>, so we set <code>found = false</code> and break out of the loop. If a match is found, we update <code>x</code> to the new index.</p>
-</li>
-<li>
-<p><strong>Count the Valid Subsequences</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(found) res<span style="color:#f92672">++</span>;
-</span></span></code></pre></div><p>After checking all characters in the word, if all characters were successfully matched, we increment the result counter <code>res</code>.</p>
-</li>
-<li>
-<p><strong>Return the Result</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
-</span></span></code></pre></div><p>Finally, we return the count of words that are subsequences of <code>s</code>.</p>
-</li>
-</ol>
-<h3 id="example-walkthrough">
-  Example Walkthrough
-  <a class="heading-link" href="#example-walkthrough">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>Let&rsquo;s go through an example to understand the solution better:</p>
+<p><strong>Character Indexing</strong>:</p>
 <ul>
-<li>
-<p><strong>Input</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;abcde&#34;</span>, words <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;a&#34;</span>, <span style="color:#e6db74">&#34;bb&#34;</span>, <span style="color:#e6db74">&#34;acd&#34;</span>, <span style="color:#e6db74">&#34;ace&#34;</span>, <span style="color:#e6db74">&#34;bd&#34;</span>]
-</span></span></code></pre></div></li>
-<li>
-<p><strong>Preprocessing</strong>:</p>
-<ul>
-<li>We build the <code>srch</code> vector where each character in <code>s</code> is mapped to its indices:
-<pre tabindex="0"><code>srch[0] = [0]    // &#39;a&#39; at index 0
-srch[1] = [1]    // &#39;b&#39; at index 1
-srch[2] = [2]    // &#39;c&#39; at index 2
-srch[3] = [3]    // &#39;d&#39; at index 3
-srch[4] = [4]    // &#39;e&#39; at index 4
-</code></pre></li>
+<li>Create a vector of vectors (<code>srch</code>) where each vector corresponds to a character (&lsquo;a&rsquo; to &lsquo;z&rsquo;) and contains the indices of that character&rsquo;s occurrences in string <code>s</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Matching Each Word</strong>:</p>
-<ol>
-<li><code>&quot;a&quot;</code>: We match &lsquo;a&rsquo; at index 0, so it’s a subsequence. Increment <code>res</code> to 1.</li>
-<li><code>&quot;bb&quot;</code>: We match &lsquo;b&rsquo; at index 1 and &lsquo;b&rsquo; again at index 1 (but there is no next occurrence of &lsquo;b&rsquo;). This is not a subsequence. No increment.</li>
-<li><code>&quot;acd&quot;</code>: We match &lsquo;a&rsquo; at index 0, &lsquo;c&rsquo; at index 2, and &rsquo;d&rsquo; at index 3. This is a subsequence. Increment <code>res</code> to 2.</li>
-<li><code>&quot;ace&quot;</code>: We match &lsquo;a&rsquo; at index 0, &lsquo;c&rsquo; at index 2, and &rsquo;e&rsquo; at index 4. This is a subsequence. Increment <code>res</code> to 3.</li>
-<li><code>&quot;bd&quot;</code>: We match &lsquo;b&rsquo; at index 1, but there is no valid &rsquo;d&rsquo; after it. This is not a subsequence. No increment.</li>
-</ol>
+<p><strong>Subsequence Check</strong>:</p>
+<ul>
+<li>For each word in the list, iterate through its characters.</li>
+<li>For each character, use binary search (<code>upper_bound</code>) to find the first occurrence in <code>s</code> that comes after the last matched index. If a character cannot be found, the word is not a subsequence.</li>
+</ul>
 </li>
 <li>
-<p><strong>Output</strong>:
-The result is <code>3</code>, as the valid subsequences are <code>&quot;a&quot;</code>, <code>&quot;acd&quot;</code>, and <code>&quot;ace&quot;</code>.</p>
+<p><strong>Counting Matches</strong>:</p>
+<ul>
+<li>If all characters of a word are found in the correct order, increment the result count.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Class</strong>:
+<ul>
+<li><code>class Solution</code>: Contains the method to count the matching subsequences.
+<ul>
+<li><code>int numMatchingSubseq(string s, vector&lt;string&gt;&amp; words)</code>: Main function that performs the counting of subsequences.
+<ul>
+<li><strong>Parameters</strong>:
+<ul>
+<li><code>s</code>: The string in which to check for subsequences.</li>
+<li><code>words</code>: A list of words to check against <code>s</code>.</li>
+</ul>
+</li>
+<li><strong>Returns</strong>: The count of words that are subsequences of <code>s</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </li>
 </ul>
 <h3 id="complexity">
@@ -388,35 +345,22 @@ The result is <code>3</code>, as the valid subsequences are <code>&quot;a&quot;<
 </h3>
 <ul>
 <li>
-<p><strong>Time Complexity</strong>:</p>
+<p><strong>Time Complexity</strong>: O(n + w * m log n), where:</p>
 <ul>
-<li>The preprocessing step takes <strong>O(n)</strong>, where <code>n</code> is the length of the string <code>s</code>, since we are iterating through <code>s</code> once.</li>
-<li>For each word, we check every character, and for each character, we perform a binary search on the <code>srch</code> array (which contains the indices for each character). Since each binary search takes <strong>O(log n)</strong> time, and there are <code>m</code> words with each having at most <code>l</code> characters, the overall time complexity for processing the words is <strong>O(m * l * log n)</strong>, where <code>m</code> is the number of words and <code>l</code> is the average length of the words.</li>
+<li>(n) is the length of string <code>s</code>.</li>
+<li>(w) is the number of words.</li>
+<li>(m) is the average length of the words, due to the binary search for each character in <code>s</code>.</li>
 </ul>
-<p>Thus, the overall time complexity is <strong>O(n + m * l * log n)</strong>.</p>
 </li>
 <li>
-<p><strong>Space Complexity</strong>:</p>
-<ul>
-<li>The space complexity is dominated by the storage of the indices for each character in the string <code>s</code>. This takes <strong>O(n)</strong> space, where <code>n</code> is the length of <code>s</code>. Additionally, the space required to store the words is <strong>O(m * l)</strong>, where <code>m</code> is the number of words and <code>l</code> is the average length of the words.</li>
-</ul>
-<p>Hence, the space complexity is <strong>O(n + m * l)</strong>.</p>
+<p><strong>Space Complexity</strong>: O(n), where (n) is the size of the indexing vector used to store occurrences of each character in <code>s</code>.</p>
 </li>
 </ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution efficiently determines how many words in a given list are subsequences of a string <code>s</code>. By preprocessing the string <code>s</code> to store the positions of each character, we can check each word in the list in logarithmic time relative to the size of <code>s</code>. This results in a time complexity of <strong>O(n + m * l * log n)</strong>, which is much more efficient than a brute-force approach of checking each subsequence directly.</p>
-<p>This method is highly scalable and can handle larger input sizes due to its efficient use of preprocessing and binary search. The space complexity is also reasonable, as it scales linearly with the length of <code>s</code> and the total number of characters in the list of words. Overall, this approach provides an optimal solution for checking subsequences in a given string.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1337s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1326s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -432,31 +376,10 @@ The result is <code>3</code>, as the valid subsequences are <code>&quot;a&quot;<
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-794-valid-tic-tac-toe-state-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #794: Valid Tic-Tac-Toe State</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-794-valid-tic-tac-toe-state-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #794: Valid Tic-Tac-Toe State</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

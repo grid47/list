@@ -145,6 +145,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -213,7 +217,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -222,8 +226,26 @@
 
       <div class="post-content">
         
-        <p><a href="https://leetcode.com/problems/predict-the-winner/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
-<hr>
+        <h2 id="hahahugoshortcode1177s0hbhb">
+  <a href="https://leetcode.com/problems/predict-the-winner/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
+<figure class="remote-image" style="text-align:center; margin: 0;">
+    <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/486.webp" 
+           alt="A glowing sequence where the winner is predicted based on optimal strategies, with each move softly glowing." 
+           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    
+      <figcaption style="font-size: 0.8em; font-weight: 300; color:#555; margin-top: 4px; line-height: 1.2;">
+        Solution to LeetCode 486: Predict the Winner Problem
+      </figcaption>
+    
+  </figure>
+  
+  <a class="heading-link" href="#hahahugoshortcode1177s0hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <p><strong>Code:</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
@@ -256,7 +278,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ret <span style="color:#f92672">&gt;=</span> net <span style="color:#f92672">-</span> ret;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1175s1hbhb">
+<h2 id="hahahugoshortcode1177s2hbhb">
   
 
   
@@ -268,7 +290,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem is to determine if the first player can guarantee a win in a two-player game with an optimal strategy. Given an array of integers <code>nums</code>, where each element represents a score value of a card, two players take turns to pick either the leftmost or rightmost card from the array. The player with the highest total score at the end wins. The goal is to determine if the first player can guarantee victory, assuming both players play optimally.</p>
+<p>In a game, two players take turns picking numbers from either end of a list of integers. The goal is to determine if the first player can win given optimal play from both players. The first player wins if they can achieve a score greater than or equal to the second player’s score.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -276,92 +298,59 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The solution leverages dynamic programming with memoization to make this decision efficiently. Here’s a breakdown of the approach:</p>
 <ol>
 <li>
-<p><strong>Dynamic Programming (DP) Strategy</strong>:</p>
+<p><strong>Dynamic Programming (DP)</strong>:</p>
 <ul>
-<li>The key to solving this problem is to understand that each player will pick cards with the intention of maximizing their score while minimizing the opponent’s potential score.</li>
-<li>We define a recursive <code>dp</code> function that calculates the maximum score a player can obtain from a subarray defined by the indices <code>l</code> (left) and <code>r</code> (right) of <code>nums</code>.</li>
-<li>The function also tracks the <code>net</code> score, which represents the sum of the elements in the current subarray.</li>
+<li>Use a recursive function with memoization to store already computed results for subproblems defined by the current left index <code>l</code>, right index <code>r</code>, and the current score difference <code>net</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Memoization</strong>:</p>
+<p><strong>Recursive Function</strong>:</p>
 <ul>
-<li>Since calculating scores recursively for overlapping subproblems can be redundant, we use a memoization structure (<code>memo</code>) to store previously computed results.</li>
-<li>The <code>memo</code> structure is a 2D vector of maps, where <code>memo[l][r][net]</code> stores the result of the <code>dp</code> function for subarray <code>nums[l]</code> to <code>nums[r]</code> with the given <code>net</code>.</li>
+<li>Base Case: If there’s only one number left (<code>l == r</code>), return that number.</li>
+<li>Memoization: Check if the result for the current state <code>(l, r, net)</code> is already computed. If yes, return it.</li>
+<li>Recursive Cases:
+<ul>
+<li>Calculate the score if the left number is picked.</li>
+<li>Calculate the score if the right number is picked.</li>
+</ul>
+</li>
+<li>Update the memoization table with the maximum score difference achievable.</li>
 </ul>
 </li>
 <li>
-<p><strong>Recursive Calculation</strong>:</p>
+<p><strong>Determine Winner</strong>:</p>
 <ul>
-<li>For each recursive call, we consider two options:
-<ul>
-<li>If the player picks the left card, the next recursive call computes the score for the range from <code>l + 1</code> to <code>r</code>.</li>
-<li>If the player picks the right card, the range becomes <code>l</code> to <code>r - 1</code>.</li>
-</ul>
-</li>
-<li>The final score is then computed as the maximum score obtainable by either choice.</li>
-</ul>
-</li>
-<li>
-<p><strong>Game Decision</strong>:</p>
-<ul>
-<li>After calculating the maximum score for the first player, we compare it to the remainder of the total score. If the first player&rsquo;s score is greater than or equal to half of the total score, they can guarantee a win.</li>
+<li>Calculate the total score of all numbers.</li>
+<li>The first player wins if their score is greater than or equal to half of the total score.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The solution code consists of two main parts: the <code>dp</code> function and the <code>predictTheWinner</code> function.</p>
 <ol>
 <li>
-<p><strong>Member Variables</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> nums;
-</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;</span> memo;
-</span></span></code></pre></div><p>Here, <code>nums</code> stores the input array, and <code>memo</code> is a 2D vector of maps to cache results for each subarray and net value combination.</p>
-</li>
-<li>
-<p><strong>Dynamic Programming Function (<code>dp</code>)</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> l, <span style="color:#66d9ef">int</span> r, <span style="color:#66d9ef">int</span> net) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(l <span style="color:#f92672">==</span> r) <span style="color:#66d9ef">return</span> nums[l];
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(memo[l][r].count(net)) <span style="color:#66d9ef">return</span> memo[l][r][net];
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> net <span style="color:#f92672">-</span> dp(l <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, r, net <span style="color:#f92672">-</span> nums[l]);
-</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">=</span> max(ans, net <span style="color:#f92672">-</span> dp(l, r <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, net <span style="color:#f92672">-</span> nums[r]));
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> memo[l][r][net] <span style="color:#f92672">=</span> ans;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li><strong>Base Case</strong>: If <code>l</code> equals <code>r</code>, there’s only one card left, so the result is simply <code>nums[l]</code>.</li>
-<li><strong>Memoization Check</strong>: If the result for this subarray and net value has already been computed, it is returned from <code>memo</code>.</li>
-<li><strong>Recursive Calculation</strong>: The player’s score is calculated based on the choices of picking either the left or right card. The player maximizes their score while reducing the opponent’s score in the recursive calls.</li>
-<li><strong>Memoization Storage</strong>: The result is stored in <code>memo</code> to avoid recomputation in subsequent recursive calls.</li>
+<p><strong>Function Definition</strong>:</p>
+<ul>
+<li>The <code>predictTheWinner()</code> function initializes necessary variables and calls the <code>dp()</code> function.</li>
 </ul>
 </li>
 <li>
-<p><strong>Main Function (<code>predictTheWinner</code>)</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">predictTheWinner</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>nums <span style="color:#f92672">=</span> nums;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
-</span></span><span style="display:flex;"><span>    memo.resize(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, vector<span style="color:#f92672">&lt;</span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>));
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> net <span style="color:#f92672">=</span> accumulate(nums.begin(), nums.end(), <span style="color:#ae81ff">0</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ret <span style="color:#f92672">=</span> dp(<span style="color:#ae81ff">0</span>, n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, net);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ret <span style="color:#f92672">&gt;=</span> net <span style="color:#f92672">-</span> ret;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li><strong>Initialization</strong>: The input <code>nums</code> is assigned to the class variable, and <code>memo</code> is resized based on the size of <code>nums</code>.</li>
-<li><strong>Net Calculation</strong>: <code>net</code> represents the total sum of all elements in <code>nums</code>.</li>
-<li><strong>Recursive Call</strong>: The <code>dp</code> function is called for the full array, aiming to maximize the score for the first player.</li>
-<li><strong>Decision</strong>: If the first player’s score <code>ret</code> is greater than or equal to half of <code>net</code>, the function returns <code>true</code>, indicating that the first player can guarantee a win.</li>
+<p><strong>DP Function</strong>:</p>
+<ul>
+<li>The <code>dp(int l, int r, int net)</code> function computes the score difference for the player starting at the indices <code>l</code> and <code>r</code> with a total score of <code>net</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>After computing the score difference, check if the first player’s score is at least half of the total score.</li>
 </ul>
 </li>
 </ol>
@@ -372,33 +361,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li>The time complexity is roughly <code>O(n^2 * S)</code>, where <code>n</code> is the size of <code>nums</code> and <code>S</code> represents the range of potential values in <code>net</code>. However, due to memoization, this complexity is significantly reduced by storing intermediate results.</li>
+<li><strong>Time Complexity</strong>: O(n^2), where n is the number of elements in <code>nums</code>, due to the memoized DP solution.</li>
+<li><strong>Space Complexity</strong>: O(n^2) for the memoization table storing the results for all pairs <code>(l, r)</code>.</li>
 </ul>
-</li>
-<li>
-<p><strong>Space Complexity</strong>:</p>
-<ul>
-<li>The space complexity is <code>O(n^2 * S)</code>, accounting for the 2D <code>memo</code> structure.</li>
-</ul>
-</li>
-</ol>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution demonstrates an effective use of dynamic programming with memoization to solve a problem involving recursive choices. By storing intermediate results and making optimal decisions at each step, we ensure that the solution is both efficient and scalable for larger inputs. This approach is highly effective for problems involving competitive strategy, making it ideal for scenarios where players compete over resource allocation or score maximization.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1175s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1177s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -414,31 +385,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-494-target-sum-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #494: Target Sum</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-494-target-sum-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #494: Target Sum</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

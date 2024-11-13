@@ -142,6 +142,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -198,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              3-minute read
             </span>
           </div>
 
@@ -211,7 +215,7 @@
   <a href="https://leetcode.com/problems/permutations-ii/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
-      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/47.jpeg" 
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/47.webp" 
            alt="A similar sequence with a touch more complexity, glowing in multiple variations." 
            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
     </div>
@@ -258,177 +262,99 @@
 
   
   <div class="markdown-body">
-    <h3 id="-generate-unique-permutations--lets-solve-it-together">
-  💡 <strong>Generate Unique Permutations</strong> – Let’s Solve It Together!
-  <a class="heading-link" href="#-generate-unique-permutations--lets-solve-it-together">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The task is to generate all <strong>unique permutations</strong> of a list of integers. The input array <code>nums</code> may contain duplicate values, and the goal is to ensure that the permutations generated are <strong>unique</strong>, i.e., no duplicate permutations are included in the result. Let&rsquo;s dive in and solve this together!</p>
-<h3 id="-problem-statement">
-  📝 <strong>Problem Statement</strong>
-  <a class="heading-link" href="#-problem-statement">
+<p>The task is to generate all unique permutations of a given vector of integers, allowing for duplicates in the input vector. The solution should avoid generating the same permutation multiple times.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array <code>nums</code> of integers, return <strong>all possible unique permutations</strong>. The solution must account for any duplicate values in the array.</p>
-<h3 id="-approach">
-  🔍 <strong>Approach</strong>
-  <a class="heading-link" href="#-approach">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>We will use a <strong>backtracking</strong> approach combined with an <strong>unordered map (hash map)</strong> to ensure that we generate only unique permutations. Here&rsquo;s the step-by-step breakdown:</p>
 <ol>
-<li><strong>Backtracking</strong>: We recursively generate permutations of the list, swapping elements and exploring all possible configurations.</li>
-<li><strong>Handling Duplicates</strong>: We use a hash map (<code>unordered_map</code>) to track elements already used at the current level of recursion, ensuring we don’t generate duplicate permutations.</li>
-<li><strong>Swapping Elements</strong>: We swap the current element with the elements following it, exploring different permutations for the sublist.</li>
-<li><strong>Base Case</strong>: Once we’ve processed all elements, we add the current permutation to the result.</li>
-<li><strong>Recursive Case</strong>: For each index, if the current element hasn’t been used yet at the current recursion level, we swap it and recursively generate the remaining permutations.</li>
-</ol>
-<h3 id="-code-breakdown-step-by-step">
-  💻 <strong>Code Breakdown (Step-by-Step)</strong>
-  <a class="heading-link" href="#-code-breakdown-step-by-step">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="step-1-permuteunique-function">
-  Step 1: <code>permuteUnique</code> Function
-  <a class="heading-link" href="#step-1-permuteunique-function">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> permuteUnique(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> ans;
-</span></span><span style="display:flex;"><span>    f(nums, ans, <span style="color:#ae81ff">0</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> ans;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li><strong>Input</strong>: Takes a vector <code>nums</code> of integers.</li>
-<li><strong>Initialization</strong>: Creates an empty result vector <code>ans</code> to store the unique permutations.</li>
-<li><strong>Backtracking Call</strong>: Calls the recursive function <code>f(nums, ans, 0)</code> to start generating permutations from the 0th index.</li>
-<li><strong>Return</strong>: After recursion completes, the result vector <code>ans</code> is returned.</li>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>Create a vector (<code>ans</code>) to store the unique permutations.</li>
+<li>Use a recursive helper function <code>f</code> that takes the current state of <code>nums</code>, the result vector <code>ans</code>, and the current index (<code>ind</code>) to track the position in <code>nums</code>.</li>
 </ul>
-<h4 id="step-2-f-function-backtracking-logic">
-  Step 2: <code>f</code> Function (Backtracking Logic)
-  <a class="heading-link" href="#step-2-f-function-backtracking-logic">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">f</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> ans, <span style="color:#66d9ef">int</span> ind) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(ind <span style="color:#f92672">==</span> nums.size()) {
-</span></span><span style="display:flex;"><span>        ans.push_back(nums);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> ind; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(mp.find(nums[i]) <span style="color:#f92672">!=</span> mp.end()) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">continue</span>;
-</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>            mp[nums[i]]<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>            swap(nums[i], nums[ind]);
-</span></span><span style="display:flex;"><span>            f(nums, ans, ind <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
-</span></span><span style="display:flex;"><span>            swap(nums[i], nums[ind]);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>
-<p><strong>Base Case</strong>: When <code>ind</code> reaches the size of <code>nums</code>, the current permutation is complete and is added to <code>ans</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(ind <span style="color:#f92672">==</span> nums.size()) {
-</span></span><span style="display:flex;"><span>    ans.push_back(nums);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div></li>
-<li>
-<p><strong>Map for Duplicate Checking</strong>: An unordered map <code>mp</code> is used to keep track of elements that have already been swapped at the current recursion level to avoid duplicates.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
-</span></span></code></pre></div></li>
-<li>
-<p><strong>Loop Through Remaining Elements</strong>: For each element from <code>ind</code> to the end, we check if it has been used already in the current recursion. If it has, we skip it.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> ind; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mp.find(nums[i]) <span style="color:#f92672">!=</span> mp.end()) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">continue</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>If the element hasn&rsquo;t been used, we proceed with the following steps.</p>
 </li>
 <li>
-<p><strong>Swap the Element</strong>: We swap the current element with the element at <code>ind</code> to place it in the correct position.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>swap(nums[i], nums[ind]);
-</span></span></code></pre></div></li>
-<li>
-<p><strong>Recursive Call</strong>: Recursively generate permutations for the sublist starting from the next index <code>ind + 1</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>f(nums, ans, ind <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
-</span></span></code></pre></div></li>
-<li>
-<p><strong>Backtrack</strong>: After the recursive call, we undo the swap to restore the original order and explore other possible swaps.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>swap(nums[i], nums[ind]);
-</span></span></code></pre></div></li>
-</ul>
-<h3 id="-handling-duplicates">
-  🌟 <strong>Handling Duplicates</strong>
-  <a class="heading-link" href="#-handling-duplicates">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The key to solving this problem is ensuring that we <strong>don’t generate duplicate permutations</strong>. We achieve this by using the <code>unordered_map</code> (<code>mp</code>), which tracks whether a number has already been used at the current recursion level. If an element has already been swapped into the current position during the current recursive call, we skip that element to avoid duplicate permutations.</p>
-<h3 id="-time-and-space-complexity">
-  ⏱️ <strong>Time and Space Complexity</strong>
-  <a class="heading-link" href="#-time-and-space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="time-complexity">
-  Time Complexity
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>The time complexity for generating all permutations of <code>n</code> elements is <code>O(n!)</code> because there are <code>n!</code> possible permutations. However, the presence of duplicates in the input array reduces the number of unique permutations. In the worst case, where all elements are distinct, the time complexity remains <code>O(n!)</code>.</p>
+<p><strong>Base Case</strong>:</p>
 <ul>
-<li><strong>Time Complexity</strong>: <code>O(n * n!)</code>, where <code>n</code> is the number of elements in the array <code>nums</code>. This includes the time to generate and process each permutation.</li>
+<li>If the current index (<code>ind</code>) equals the size of <code>nums</code>, it indicates a complete permutation. The current permutation should be added to <code>ans</code>.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>The space complexity is driven by:</p>
-<ol>
-<li>The result vector, which stores all unique permutations. There are <code>n!</code> permutations, each with <code>n</code> elements, leading to a total space of <code>O(n * n!)</code>.</li>
-<li>The recursion stack, which has a maximum depth of <code>n</code> (the length of the input list), and temporary arrays used during backtracking. This gives a space complexity of <code>O(n)</code> for the recursion stack.</li>
+</li>
+<li>
+<p><strong>Recursive Case</strong>:</p>
+<ul>
+<li>Use an unordered map (<code>mp</code>) to keep track of the integers that have been used at the current level of recursion.</li>
+<li>Loop through the elements of <code>nums</code> starting from the current index (<code>ind</code>).</li>
+<li>Check if the current integer has already been used at this level (to avoid duplicates).</li>
+<li>If it hasn&rsquo;t been used:
+<ul>
+<li>Mark it as used by adding it to the map.</li>
+<li>Swap the current integer with the integer at the <code>ind</code> position to fix the current integer.</li>
+<li>Recursively call <code>f</code> with the next index (<code>ind + 1</code>).</li>
+<li>After the recursive call, swap back the integers to restore the original order.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>After all recursive calls complete, return the vector <code>ans</code>, which contains all unique permutations.</li>
+</ul>
+</li>
 </ol>
-<ul>
-<li><strong>Space Complexity</strong>: <code>O(n * n!)</code> for storing the result, plus <code>O(n)</code> for the recursion stack.</li>
-</ul>
-<h3 id="-conclusion">
-  🎯 <strong>Conclusion</strong>
-  <a class="heading-link" href="#-conclusion">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>This solution efficiently generates all unique permutations of a given list of integers using <strong>backtracking</strong> and an <strong>unordered map</strong> to avoid duplicates. The algorithm explores all possible permutations while ensuring that no duplicate permutations are included.</p>
+<ol>
+<li>
+<p><strong>Function Definition</strong>:</p>
 <ul>
-<li><strong>Time Complexity</strong>: <code>O(n * n!)</code>, optimal for generating permutations.</li>
-<li><strong>Space Complexity</strong>: <code>O(n * n!)</code> for storing the permutations, plus <code>O(n)</code> for the recursion stack.</li>
+<li>The <code>permuteUnique</code> function takes a vector of integers <code>nums</code>.</li>
 </ul>
-<p>By leveraging backtracking and the hash map for duplicate checking, this approach is both <strong>time-efficient</strong> and <strong>space-efficient</strong>, making it a great choice for generating permutations of moderate-sized arrays.</p>
-<hr>
-<p>Happy coding, and keep exploring! 🚀</p>
+</li>
+<li>
+<p><strong>Variables</strong>:</p>
+<ul>
+<li><code>ans</code>: A vector to store all unique permutations.</li>
+<li><code>mp</code>: An unordered map to track used integers for the current recursion level.</li>
+</ul>
+</li>
+<li>
+<p><strong>Backtracking Logic</strong>:</p>
+<ul>
+<li>The loop iterates through the elements of <code>nums</code> starting from the index <code>ind</code>.</li>
+<li>The check with <code>mp</code> ensures that duplicate integers are not processed multiple times at the same recursion depth.</li>
+<li>Swapping the integers allows for generating permutations in place without creating additional copies of <code>nums</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: (O(n \times n!)), where (n) is the number of elements in <code>nums</code>. The (n!) factor accounts for all unique permutations, and each permutation takes (O(n)) to construct.</li>
+<li><strong>Space Complexity</strong>: (O(n)) for the recursion stack and the unordered map used to track duplicates, where (n) is the depth of recursion (equal to the number of elements).</li>
+</ul>
  
 </div>
   
@@ -449,31 +375,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-48-rotate-image-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #48: Rotate Image</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-48-rotate-image-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #48: Rotate Image</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

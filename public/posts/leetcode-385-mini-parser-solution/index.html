@@ -143,6 +143,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -203,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              7-minute read
+              3-minute read
             </span>
           </div>
 
@@ -212,11 +216,11 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1120s0hbhb">
+        <h2 id="hahahugoshortcode1121s0hbhb">
   <a href="https://leetcode.com/problems/mini-parser/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
-      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/385.jpeg" 
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/385.webp" 
            alt="A series of nested lists being parsed, with each level gently unfolding and being highlighted." 
            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
     </div>
@@ -227,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1120s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1121s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -294,7 +298,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1120s2hbhb">
+<h2 id="hahahugoshortcode1121s2hbhb">
   
 
   
@@ -306,8 +310,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem at hand is to implement the deserialization of a string that represents a nested integer list. The string can represent integers or lists of integers, and these lists can be nested to any depth.</p>
-<p>The goal is to convert the given string into a data structure that represents the nested list of integers. This involves parsing the string and constructing a <code>NestedInteger</code> object, which can either hold a single integer or a list of other <code>NestedInteger</code> objects. The challenge here is to handle various cases of nested structures while ensuring the correct parsing of integers and maintaining the correct hierarchy of nested lists.</p>
+<p>Implement a function to deserialize a string representation of a nested list into a nested list structure, using the provided <code>NestedInteger</code> class interface.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -315,154 +318,45 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The core of this approach is to use a <strong>stack-based parsing algorithm</strong> that reads the string character by character and processes it based on the structure it encounters.</p>
+<p>To convert a string representation of a nested list into a <code>NestedInteger</code> object, we can use a stack-based approach to handle the nested structure efficiently:</p>
 <ol>
 <li>
-<p><strong>Identify NestedInteger Types</strong>:</p>
+<p><strong>Initialization</strong>:</p>
 <ul>
-<li>A <code>NestedInteger</code> can either hold a single integer or a list of other <code>NestedInteger</code> objects. Our task is to recursively build these structures as we parse the string.</li>
+<li>Use a stack to keep track of <code>NestedInteger</code> objects as we parse the string.</li>
 </ul>
 </li>
 <li>
-<p><strong>Data Structure</strong>:</p>
+<p><strong>Iterate Through the String</strong>:</p>
 <ul>
-<li>We use a stack (<code>stack&lt;NestedInteger&gt;</code>) to track the current state of the list being parsed.</li>
-<li>When we encounter an opening bracket <code>[</code> it indicates a new list, and we push a new <code>NestedInteger</code> onto the stack.</li>
-<li>When we encounter a closing bracket <code>]</code>, we pop the current <code>NestedInteger</code> from the stack, which represents a complete nested list, and add it to the <code>NestedInteger</code> on the top of the stack.</li>
+<li>Traverse each character in the string:
+<ul>
+<li>If the character is a digit or a negative sign, identify the complete number, convert it to an integer, and add it to the top <code>NestedInteger</code> in the stack.</li>
+<li>If the character is an opening bracket <code>'['</code>, push a new <code>NestedInteger</code> onto the stack to represent a new nested list.</li>
+<li>If the character is a closing bracket <code>']'</code>, pop the top <code>NestedInteger</code> from the stack (representing the completed nested list) and add it to the <code>NestedInteger</code> currently on top of the stack.</li>
 </ul>
 </li>
-<li>
-<p><strong>Handling Integers</strong>:</p>
-<ul>
-<li>If a number (positive or negative) is encountered, we extract it as an integer, create a <code>NestedInteger</code> object holding that integer, and add it to the current <code>NestedInteger</code> object on top of the stack.</li>
 </ul>
 </li>
 <li>
 <p><strong>Final Result</strong>:</p>
 <ul>
-<li>The stack will ultimately contain a single <code>NestedInteger</code> object, which holds the final deserialized structure. We return this object as the result.</li>
+<li>At the end of the iteration, the top of the stack will hold the fully constructed <code>NestedInteger</code>, which can be returned as the result.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="1-helper-function-to-check-for-numbers">
-  1. <strong>Helper Function to Check for Numbers</strong>
-  <a class="heading-link" href="#1-helper-function-to-check-for-numbers">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">bool</span>(<span style="color:#66d9ef">char</span>)<span style="color:#f92672">&gt;</span> isnumber <span style="color:#f92672">=</span> [](<span style="color:#66d9ef">char</span> c) { <span style="color:#66d9ef">return</span> (c <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;-&#39;</span>) <span style="color:#f92672">||</span> isdigit(c); };
-</span></span></code></pre></div><ul>
-<li>This helper function checks whether a character is part of a number (either a negative sign or a digit).</li>
-<li>It helps in recognizing and parsing integer values as the string is processed.</li>
-</ul>
-<h4 id="2-initialize-stack">
-  2. <strong>Initialize Stack</strong>
-  <a class="heading-link" href="#2-initialize-stack">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>stack<span style="color:#f92672">&lt;</span>NestedInteger<span style="color:#f92672">&gt;</span> stk;
-</span></span><span style="display:flex;"><span>stk.push(NestedInteger());
-</span></span></code></pre></div><ul>
-<li>We initialize a stack of <code>NestedInteger</code> objects.</li>
-<li>Initially, we push an empty <code>NestedInteger</code> onto the stack, which represents the root of the nested list.</li>
-</ul>
-<h4 id="3-iterate-through-the-string">
-  3. <strong>Iterate Through the String</strong>
-  <a class="heading-link" href="#3-iterate-through-the-string">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> s.begin(); it <span style="color:#f92672">!=</span> s.end();) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">char</span> <span style="color:#f92672">&amp;</span>c <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>it;
-</span></span></code></pre></div><ul>
-<li>We use an iterator <code>it</code> to traverse through the string <code>s</code>. The loop continues until the end of the string is reached.</li>
-<li><code>c</code> represents the current character being processed.</li>
-</ul>
-<h4 id="4-parsing-numbers">
-  4. <strong>Parsing Numbers</strong>
-  <a class="heading-link" href="#4-parsing-numbers">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(isnumber(c)) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> it2 <span style="color:#f92672">=</span> find_if_not(it, s.end(), isnumber);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> val <span style="color:#f92672">=</span> stoi(string(it, it2));
-</span></span><span style="display:flex;"><span>    stk.top().add(NestedInteger(val));
-</span></span><span style="display:flex;"><span>    it <span style="color:#f92672">=</span> it2;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>If the current character is part of a number, we use <code>find_if_not</code> to find the point where the number ends.</li>
-<li>We convert the substring representing the number into an integer using <code>stoi</code>.</li>
-<li>A new <code>NestedInteger</code> holding this integer is created and added to the current <code>NestedInteger</code> on top of the stack.</li>
-<li>The iterator <code>it</code> is updated to continue from where the number ends.</li>
-</ul>
-<h4 id="5-handling-opening-bracket-">
-  5. <strong>Handling Opening Bracket (<code>[</code>)</strong>
-  <a class="heading-link" href="#5-handling-opening-bracket-">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(c <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;[&#39;</span>) {
-</span></span><span style="display:flex;"><span>        stk.push(NestedInteger());
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><ul>
-<li>If we encounter an opening bracket <code>[</code>, it indicates the start of a new list.</li>
-<li>We push a new empty <code>NestedInteger</code> onto the stack, representing this new list.</li>
-</ul>
-<h4 id="6-handling-closing-bracket-">
-  6. <strong>Handling Closing Bracket (<code>]</code>)</strong>
-  <a class="heading-link" href="#6-handling-closing-bracket-">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (c <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;]&#39;</span>) {
-</span></span><span style="display:flex;"><span>    NestedInteger ni <span style="color:#f92672">=</span> stk.top();
-</span></span><span style="display:flex;"><span>    stk.pop();
-</span></span><span style="display:flex;"><span>    stk.top().add(ni);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>If we encounter a closing bracket <code>]</code>, it means we’ve finished processing a nested list.</li>
-<li>We pop the <code>NestedInteger</code> object from the stack, which represents the completed list.</li>
-<li>We add this <code>NestedInteger</code> object (representing the nested list) to the <code>NestedInteger</code> object on top of the stack, effectively adding it to its parent list.</li>
-</ul>
-<h4 id="7-increment-the-iterator">
-  7. <strong>Increment the Iterator</strong>
-  <a class="heading-link" href="#7-increment-the-iterator">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>it<span style="color:#f92672">++</span>;
-</span></span></code></pre></div><ul>
-<li>After processing the current character, we increment the iterator to move to the next character in the string.</li>
-</ul>
-<h4 id="8-return-the-result">
-  8. <strong>Return the Result</strong>
-  <a class="heading-link" href="#8-return-the-result">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>NestedInteger res <span style="color:#f92672">=</span> stk.top().getList().front();
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
-</span></span></code></pre></div><ul>
-<li>After the loop finishes, the stack will contain only one <code>NestedInteger</code> object, which holds the entire deserialized structure.</li>
-<li>We return the first element of the list from the top <code>NestedInteger</code> on the stack, as the topmost element holds the entire list.</li>
+<ul>
+<li>The <code>deserialize</code> function reads a string <code>s</code>, processes it character by character, and constructs the nested list.</li>
+<li>The lambda function <code>isnumber</code> checks if a character is part of a number.</li>
+<li>The use of <code>stack&lt;NestedInteger&gt;</code> allows managing nested structures easily.</li>
+<li>The function utilizes <code>stoi</code> to convert string numbers into integers and manages nesting through stack operations.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -471,55 +365,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>Time Complexity</strong>: The time complexity of this algorithm is <strong>O(n)</strong>, where <code>n</code> is the length of the input string <code>s</code>.
-<ul>
-<li>Each character in the string is processed exactly once.</li>
-<li>For each character, we either push or pop elements from the stack, which takes constant time.</li>
-<li>The <code>stoi</code> operation and other string manipulations inside the loop also run in constant time.</li>
+<li><strong>Time Complexity</strong>: O(n), where n is the length of the input string, as we process each character once.</li>
+<li><strong>Space Complexity</strong>: O(n) in the worst case, as we may need to store all <code>NestedInteger</code> objects in the stack.</li>
 </ul>
-</li>
-</ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>Space Complexity</strong>: The space complexity is <strong>O(n)</strong>, where <code>n</code> is the length of the string.
-<ul>
-<li>In the worst case, all the elements in the string could form separate nested lists, requiring a space complexity proportional to the input string size.</li>
-<li>The stack stores the nested integer objects, and the space required for these objects is proportional to the number of elements being stored.</li>
-</ul>
-</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This algorithm successfully deserializes a string representation of a nested list into the corresponding <code>NestedInteger</code> structure using a stack. The approach efficiently handles integers and nested lists by iterating through the string once and using a stack to manage nested lists.</p>
-<ul>
-<li><strong>Time Efficiency</strong>: The solution runs in linear time relative to the size of the input string, making it scalable for large inputs.</li>
-<li><strong>Space Efficiency</strong>: The space complexity is also linear, which is optimal for this problem as we need to store the nested list structure.</li>
-</ul>
-<p>This algorithm leverages fundamental stack operations to parse and construct the nested list, ensuring both correctness and efficiency.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1120s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1121s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -527,31 +381,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-386-lexicographical-numbers-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #386: Lexicographical Numbers</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-386-lexicographical-numbers-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #386: Lexicographical Numbers</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

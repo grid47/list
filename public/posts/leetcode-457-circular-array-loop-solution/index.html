@@ -143,6 +143,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -203,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              6-minute read
+              3-minute read
             </span>
           </div>
 
@@ -212,8 +216,26 @@
 
       <div class="post-content">
         
-        <p><a href="https://leetcode.com/problems/circular-array-loop/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
-<hr>
+        <h2 id="hahahugoshortcode1165s0hbhb">
+  <a href="https://leetcode.com/problems/circular-array-loop/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
+<figure class="remote-image" style="text-align:center; margin: 0;">
+    <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/457.webp" 
+           alt="A glowing circular array where elements move in a loop, with each cycle softly illuminated as it repeats." 
+           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    
+      <figcaption style="font-size: 0.8em; font-weight: 300; color:#555; margin-top: 4px; line-height: 1.2;">
+        Solution to LeetCode 457: Circular Array Loop Problem
+      </figcaption>
+    
+  </figure>
+  
+  <a class="heading-link" href="#hahahugoshortcode1165s0hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <p><strong>Code:</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
@@ -249,7 +271,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> i <span style="color:#f92672">+</span> nums[i] <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">?</span> (i <span style="color:#f92672">+</span> nums[i]) <span style="color:#f92672">%</span> n: n <span style="color:#f92672">+</span> ((i <span style="color:#f92672">+</span> nums[i]) <span style="color:#f92672">%</span> n);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1164s1hbhb">
+<h2 id="hahahugoshortcode1165s2hbhb">
   
 
   
@@ -261,7 +283,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem is to determine if a circular array contains a loop. In a circular array, each element points to another element by the value of the number at that index. If an element is positive, it points forward, and if the element is negative, it points backward. The task is to check whether there exists a loop, where the starting index eventually leads back to itself while following the values.</p>
+<p>Given an integer array <code>nums</code>, you need to determine if there exists a loop in the array such that:</p>
+<ul>
+<li>The loop is formed by following the indices according to the values in the array (e.g., if <code>nums[i]</code> is 2, move to index <code>i + 2</code>).</li>
+<li>The loop must consist of the same sign (all positive or all negative).</li>
+<li>The loop must have a length of at least two (i.e., you cannot loop back to the same index immediately).</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -269,130 +296,75 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem, the goal is to detect whether there is a cycle in the circular array where each number points to the next. This is a typical problem involving cycle detection in a directed graph, where each index in the array represents a node, and the value at that index represents a directed edge to another node.</p>
-<p>The main idea behind solving this problem is as follows:</p>
 <ol>
 <li>
-<p><strong>Fast and Slow Pointer (Tortoise and Hare)</strong>:</p>
+<p><strong>Initialization</strong>:</p>
 <ul>
-<li>We use two pointers, one moving one step at a time (<code>slow</code>), and the other moving two steps at a time (<code>fast</code>).</li>
-<li>If there is a loop, the slow and fast pointers will eventually meet, which signifies the presence of a cycle.</li>
-<li>If the two pointers meet, we can check if they are part of a valid cycle, i.e., both pointers should continue to move in the same direction and not reverse. Additionally, we check if the loop size is greater than 1.</li>
+<li>Get the size of the array <code>n</code>.</li>
+<li>Return <code>false</code> if the array has only one element.</li>
 </ul>
 </li>
 <li>
-<p><strong>Cycle Detection</strong>:</p>
+<p><strong>Iterate through the Array</strong>:</p>
 <ul>
-<li>Start at each unvisited index. If the value at the index is zero (indicating the number has already been processed), skip that index.</li>
-<li>For each index, follow the pointers and detect whether a cycle forms using the <code>slow</code> and <code>fast</code> pointers.</li>
-<li>If a cycle is detected, mark all the indices that form part of the loop as visited to avoid reprocessing them.</li>
+<li>Loop through each element in <code>nums</code>.</li>
+<li>Skip elements that have already been marked as <code>0</code> (indicating they are part of a processed loop).</li>
 </ul>
 </li>
 <li>
-<p><strong>Resetting Process</strong>:</p>
+<p><strong>Finding Loops</strong>:</p>
 <ul>
-<li>After determining whether a cycle exists for a starting index, reset all indices visited during the cycle search to zero (indicating they have been processed).</li>
+<li>Use two pointers, <code>j</code> and <code>k</code>, to find a loop:
+<ul>
+<li><code>j</code> starts at the current index.</li>
+<li><code>k</code> is initialized to the index pointed to by the first step.</li>
+</ul>
+</li>
+<li>Move <code>j</code> one step at a time and <code>k</code> two steps at a time (Floyd&rsquo;s Tortoise and Hare algorithm).</li>
+<li>If <code>j</code> and <code>k</code> meet, check if they point to different indices (ensuring the loop length is at least 2).</li>
+</ul>
+</li>
+<li>
+<p><strong>Mark Processed Elements</strong>:</p>
+<ul>
+<li>If a valid loop is found, mark the entire loop by setting the values to <code>0</code> to avoid reprocessing.</li>
+<li>Use the value of the starting element to determine the direction and sign of the loop.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>If no loop is found after processing all elements, return <code>false</code>.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="step-1-function-definition-and-initial-checks">
-  Step 1: Function Definition and Initial Checks
-  <a class="heading-link" href="#step-1-function-definition-and-initial-checks">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">circularArrayLoop</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(n <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> false;
-</span></span></code></pre></div><ul>
-<li>We begin by checking if the array size is 1. A single element array cannot form a loop, so we return <code>false</code>.</li>
+<ol>
+<li>
+<p><strong>Get Next Index</strong>:</p>
+<ul>
+<li>The <code>getIdx</code> function calculates the next index based on the current index and the value at that index while handling wrap-around for negative values.</li>
 </ul>
-<h4 id="step-2-loop-through-each-index">
-  Step 2: Loop Through Each Index
-  <a class="heading-link" href="#step-2-loop-through-each-index">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(nums[i] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">continue</span>;
-</span></span></code></pre></div><ul>
-<li>We iterate through each index of the <code>nums</code> array.</li>
-<li>If the value at index <code>i</code> is zero (which means the number has been marked as processed), we skip that index.</li>
+</li>
+<li>
+<p><strong>Main Loop</strong>:</p>
+<ul>
+<li>The main loop iterates through the elements, applying the above logic to find and mark loops.</li>
 </ul>
-<h4 id="step-3-initialize-pointers-for-cycle-detection">
-  Step 3: Initialize Pointers for Cycle Detection
-  <a class="heading-link" href="#step-3-initialize-pointers-for-cycle-detection">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> i, k <span style="color:#f92672">=</span> getIdx(i, nums);
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(nums[k] <span style="color:#f92672">*</span> nums[i] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> nums[getIdx(k, nums)] <span style="color:#f92672">*</span> nums[i] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(j <span style="color:#f92672">==</span> k) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(j <span style="color:#f92672">==</span> getIdx(j, nums)) <span style="color:#66d9ef">break</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    j <span style="color:#f92672">=</span> getIdx(j, nums);
-</span></span><span style="display:flex;"><span>    k <span style="color:#f92672">=</span> getIdx(getIdx(k, nums), nums);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>For each unprocessed index, we use two pointers <code>j</code> (slow) and <code>k</code> (fast). Initially, <code>j</code> starts at <code>i</code>, and <code>k</code> starts at the next position determined by <code>getIdx(i, nums)</code>.</li>
-<li>The while loop continues as long as the pointers move in the same direction (both positive or both negative) and don&rsquo;t visit a zero element.</li>
-<li>If <code>j</code> and <code>k</code> meet, it indicates a cycle. We check if <code>j</code> equals <code>getIdx(j, nums)</code> to ensure the cycle has more than one element. If not, we break out of the loop and return <code>true</code>, indicating a cycle was found.</li>
+</li>
+<li>
+<p><strong>End Condition</strong>:</p>
+<ul>
+<li>If a loop is detected, it returns <code>true</code>; otherwise, it returns <code>false</code> after checking all elements.</li>
 </ul>
-<h4 id="step-4-reset-process-for-non-cycle-elements">
-  Step 4: Reset Process for Non-Cycle Elements
-  <a class="heading-link" href="#step-4-reset-process-for-non-cycle-elements">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>j <span style="color:#f92672">=</span> i;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> val <span style="color:#f92672">=</span> nums[i];
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(nums[j] <span style="color:#f92672">*</span> val <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> next <span style="color:#f92672">=</span> getIdx(j, nums);
-</span></span><span style="display:flex;"><span>    nums[j] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>    j <span style="color:#f92672">=</span> next;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>If no cycle is detected, we move the <code>j</code> pointer along the cycle path and mark all indices it visited as zero (indicating they have been processed).</li>
-<li>This ensures we do not revisit these indices during subsequent checks.</li>
-</ul>
-<h4 id="step-5-helper-function-to-get-the-next-index">
-  Step 5: Helper Function to Get the Next Index
-  <a class="heading-link" href="#step-5-helper-function-to-get-the-next-index">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">getIdx</span>(<span style="color:#66d9ef">int</span> i, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>nums) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> i <span style="color:#f92672">+</span> nums[i] <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> (i <span style="color:#f92672">+</span> nums[i]) <span style="color:#f92672">%</span> n : n <span style="color:#f92672">+</span> ((i <span style="color:#f92672">+</span> nums[i]) <span style="color:#f92672">%</span> n);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>The <code>getIdx</code> function calculates the next index by adding the value at index <code>i</code> to <code>i</code>. It ensures the calculation wraps around the array using modulo operation, so it works for both positive and negative values.</li>
-<li>If the result of the addition is negative, the modulo operation ensures that the resulting index is valid (between 0 and <code>n-1</code>).</li>
-</ul>
-<h4 id="step-6-return-false-if-no-cycle-is-found">
-  Step 6: Return False if No Cycle is Found
-  <a class="heading-link" href="#step-6-return-false-if-no-cycle-is-found">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> false;
-</span></span></code></pre></div><ul>
-<li>After completing the loop for all indices, if no cycle is found, we return <code>false</code>.</li>
-</ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -400,40 +372,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li>The main loop iterates over each element of the array once, and each cycle check operation involves a series of <code>getIdx</code> calls, each of which is constant time.</li>
-<li>In the worst case, every element of the array could be processed multiple times (if the array contains a cycle), making the overall time complexity <strong>O(n)</strong>, where <code>n</code> is the size of the array.</li>
+<li><strong>Time Complexity</strong>: O(N), where N is the number of elements in the array since each element is processed at most twice (once for finding a loop and once for marking).</li>
+<li><strong>Space Complexity</strong>: O(1) since no additional data structures are used apart from variables for pointers and indices.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>The algorithm uses a constant amount of extra space for the two pointers and helper variables, so the space complexity is <strong>O(1)</strong>.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution efficiently detects whether there is a loop in a circular array using a fast and slow pointer approach combined with cycle detection. By marking visited nodes and utilizing modulo arithmetic to handle circular indexing, it ensures correctness while maintaining linear time complexity. The solution avoids unnecessary recomputation by resetting processed elements to zero, making it both time and space-efficient.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1164s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1165s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -441,31 +388,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-459-repeated-substring-pattern-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #459: Repeated Substring Pattern</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-459-repeated-substring-pattern-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #459: Repeated Substring Pattern</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

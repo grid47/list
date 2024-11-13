@@ -146,6 +146,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -218,7 +222,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              7-minute read
+              3-minute read
             </span>
           </div>
 
@@ -266,7 +270,7 @@
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1427s1hbhb">
+<h2 id="hahahugoshortcode1432s1hbhb">
   
 
   
@@ -278,8 +282,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem at hand involves calculating the number of <strong>regions</strong> formed by a grid of slashes and backslashes. The grid consists of characters <code>'/'</code> and <code>'\\'</code>, and we need to determine how many regions are created by these slashes when they divide the grid into smaller sub-regions. For instance, the slashes divide each cell into smaller triangles, and these cells can combine to form regions that are either connected or separated by the slashes.</p>
-<p>The goal is to return the total number of <strong>distinct regions</strong> formed by the slashes, where regions are defined as groups of connected empty spaces.</p>
+<p>Given a grid of strings representing a map of regions separated by slashes (<code>/</code> and <code>\</code>), determine how many distinct regions exist. Each slash represents a wall that divides the grid into different regions.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -287,92 +290,56 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem, we will use the following approach:</p>
 <ol>
 <li>
-<p><strong>Transform the grid</strong>: Each cell in the grid can be viewed as a 3x3 block of smaller cells, where slashes divide the block into multiple sub-cells. This transformation allows us to work with smaller units and manage the connections between them.</p>
+<p><strong>Grid Expansion</strong>:</p>
+<ul>
+<li>Expand the original grid into a larger grid (3 times the size in both dimensions) to represent the subdivisions caused by the slashes.</li>
+<li>Each character in the grid affects three cells in the expanded grid:
+<ul>
+<li>A <code>/</code> at <code>(i, j)</code> will block certain areas in the expanded grid.</li>
+<li>A <code>\</code> at <code>(i, j)</code> will block a different set of areas.</li>
+</ul>
+</li>
+</ul>
 </li>
 <li>
-<p><strong>Graph Representation</strong>: We represent the entire grid as a larger grid where each cell is divided into a 3x3 sub-grid. The task becomes a problem of counting the connected components in this transformed grid. We will use <strong>Depth First Search (DFS)</strong> to explore all connected regions in this larger grid.</p>
+<p><strong>Depth-First Search (DFS)</strong>:</p>
+<ul>
+<li>Use DFS to explore the regions in the expanded grid.</li>
+<li>Each time DFS is called on an unvisited cell, it indicates the discovery of a new region.</li>
+<li>Mark cells as visited by changing their value in the grid.</li>
+</ul>
 </li>
 <li>
-<p><strong>DFS Traversal</strong>: By using DFS, we explore all connected empty spaces (cells with value 0) in the grid. Each time we encounter a new empty space that has not been visited, we initiate a DFS search, marking all connected cells as visited. Each new DFS invocation indicates the discovery of a new region.</p>
-</li>
-<li>
-<p><strong>Counting Regions</strong>: The number of times DFS is initiated corresponds to the number of distinct regions. We count these DFS invocations to determine the total number of regions.</p>
+<p><strong>Count Regions</strong>:</p>
+<ul>
+<li>Initialize a region counter and increment it each time a new region is found through DFS.</li>
+</ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> regionsBySlashes(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> grid) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> grid.size();  <span style="color:#75715e">// Get the size of the grid (number of rows/columns)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> g(n <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">0</span>));  <span style="color:#75715e">// Create a grid of size 3*n x 3*n to represent sub-cells
-</span></span></span></code></pre></div><ol>
-<li><strong>Initialize the grid</strong>:
+<ol>
+<li>
+<p><strong><code>regionsBySlashes</code> Method</strong>:</p>
 <ul>
-<li>The input grid is of size <code>n x n</code>. To transform it into a graph where each cell is divided into 3x3 sub-cells, we create a new grid <code>g</code> of size <code>3*n x 3*n</code>. Each element of the grid <code>g</code> is initialized to 0 (indicating an empty space).</li>
+<li>Initializes a 2D vector <code>g</code> of size <code>(n * 3) x (n * 3)</code> to represent the expanded grid.</li>
+<li>Iterates through the original grid, updating the expanded grid based on the presence of slashes.</li>
+<li>Loops through the expanded grid and calls the <code>dfs</code> function for each unvisited cell to count the regions.</li>
 </ul>
 </li>
-</ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(grid[i][j] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;/&#39;</span>) {
-</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">// If the cell contains a &#39;/&#39;, mark the appropriate cells as occupied
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                    g[i <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>][j <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> g[i <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][j <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> g[i <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span>][j <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>                } <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(grid[i][j] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;\\&#39;</span>) {
-</span></span><span style="display:flex;"><span>                    <span style="color:#75715e">// If the cell contains a &#39;\\&#39;, mark the appropriate cells as occupied
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                    g[i <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span>][j <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> g[i <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][j <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> g[i <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>][j <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>                }
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }
-</span></span></code></pre></div><ol start="2">
-<li><strong>Marking the grid</strong>:
+<li>
+<p><strong><code>dfs</code> Method</strong>:</p>
 <ul>
-<li>We iterate through each cell of the input grid. For each cell that contains a slash (<code>'/'</code> or <code>'\\'</code>), we mark the appropriate sub-cells in the larger grid <code>g</code> as occupied (with <code>1</code>). For a <code>/</code>, the three cells it divides in the sub-grid are marked, and similarly, for a <code>\\</code>, its corresponding sub-cells are marked.</li>
-</ul>
-</li>
-</ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> reg <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// Initialize a counter for the regions
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span>; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">*</span> <span style="color:#ae81ff">3</span>; j<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>                reg <span style="color:#f92672">+=</span> dfs(g, i, j)<span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// For each cell, if DFS finds a new region, increment the count
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> reg;  <span style="color:#75715e">// Return the total number of regions
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
-</span></span></code></pre></div><ol start="3">
-<li><strong>Counting Regions</strong>:
-<ul>
-<li>We initialize a variable <code>reg</code> to count the number of regions.</li>
-<li>We iterate through each cell in the larger grid (<code>g</code>). If the cell is an empty space (i.e., its value is <code>0</code>), we start a DFS search to explore the connected region. Each successful DFS search indicates the discovery of a new region, so we increment the <code>reg</code> counter.</li>
-</ul>
-</li>
-</ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dfs</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> <span style="color:#f92672">&amp;</span>g, <span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (min(i, j) <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> max(i, j) <span style="color:#f92672">&gt;=</span> g.size() <span style="color:#f92672">||</span> g[i][j] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">0</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// If the cell is out of bounds or already visited, return 0
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        g[i][j] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Mark the cell as visited
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Perform DFS in all four directions: up, down, left, right
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> dfs(g, i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, j) <span style="color:#f92672">+</span> dfs(g, i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, j) <span style="color:#f92672">+</span> dfs(g, i, j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">+</span> dfs(g, i, j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><ol start="4">
-<li><strong>DFS Function</strong>:
-<ul>
-<li>The <code>dfs</code> function is a standard depth-first search. It starts from a given cell <code>(i, j)</code> and explores all connected empty spaces (cells with value <code>0</code>).</li>
-<li>It first checks if the current cell is out of bounds or has already been visited (i.e., its value is not <code>0</code>).</li>
-<li>If the cell is valid, we mark it as visited by setting <code>g[i][j] = 1</code> and recursively call DFS on the neighboring cells (up, down, left, and right).</li>
-<li>Each DFS invocation returns the number of connected empty cells, but the actual result isn&rsquo;t used because we are only interested in whether a region exists or not. Hence, DFS returns <code>1</code> for each valid region it discovers.</li>
+<li>Checks for boundary conditions and whether the current cell has been visited.</li>
+<li>Marks the current cell as visited.</li>
+<li>Recursively explores the four neighboring cells (up, down, left, right) and returns the total count of cells visited.</li>
 </ul>
 </li>
 </ol>
@@ -384,30 +351,14 @@
   </a>
 </h3>
 <ul>
-<li>
-<p><strong>Time Complexity</strong>: The time complexity of this solution is <strong>O(n^2)</strong>, where <code>n</code> is the size of the input grid. This is because:</p>
-<ul>
-<li>We traverse every cell in the grid once, which takes <code>O(n^2)</code> time.</li>
-<li>For each cell, we may perform a DFS, but each cell is visited at most once during DFS. The DFS explores at most <code>O(9)</code> cells (since each cell in the grid is represented by a 3x3 sub-grid), so the complexity per cell is constant.</li>
+<li><strong>Time Complexity</strong>: O(n^2), where <code>n</code> is the size of the input grid since each cell in the expanded grid is processed once.</li>
+<li><strong>Space Complexity</strong>: O(n^2) for the expanded grid representation.</li>
 </ul>
-</li>
-<li>
-<p><strong>Space Complexity</strong>: The space complexity is <strong>O(n^2)</strong> because the largest grid we construct (<code>g</code>) has a size of <code>3*n x 3*n</code>, which requires <code>O(n^2)</code> space. Additionally, the recursive stack used in DFS can go as deep as <code>O(n^2)</code> in the worst case (if all cells are connected).</p>
-</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution efficiently calculates the number of regions formed by slashes in the grid using depth-first search. By transforming the grid into a larger representation and applying DFS, we can systematically explore all connected components and count the distinct regions. The approach guarantees that each cell is visited only once, ensuring optimal time and space complexity for solving this problem. This method is both easy to understand and implement, making it a robust solution for this type of problem.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1427s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1432s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -423,31 +374,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-962-maximum-width-ramp-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #962: Maximum Width Ramp</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-962-maximum-width-ramp-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #962: Maximum Width Ramp</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

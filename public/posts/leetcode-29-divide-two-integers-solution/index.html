@@ -142,6 +142,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -198,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -207,11 +211,11 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1013s0hbhb">
+        <h2 id="hahahugoshortcode1014s0hbhb">
   <a href="https://leetcode.com/problems/divide-two-integers/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
-      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/29.jpeg" 
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/29.webp" 
            alt="Two smooth, glowing beams dividing and separating in perfect balance." 
            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
     </div>
@@ -222,7 +226,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1013s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1014s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -251,175 +255,85 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> sgn <span style="color:#f92672">*</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1013s2hbhb">
+<h2 id="hahahugoshortcode1014s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="-dividing-two-integers-without-using-the-division-operator">
-  🌟 <strong>Dividing Two Integers Without Using the Division Operator</strong>
-  <a class="heading-link" href="#-dividing-two-integers-without-using-the-division-operator">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>This problem challenges us to divide two integers without directly using the division (<code>/</code>), multiplication (<code>*</code>), or modulus (<code>%</code>) operators. The goal is to calculate the quotient of the division using bit manipulation and repeated subtraction. Let’s break this down and make it digestible! 🚀</p>
-<hr>
-<h4 id="-approach-overview">
-  🧠 <strong>Approach Overview</strong>
-  <a class="heading-link" href="#-approach-overview">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>The key idea here is to <strong>use bit shifts</strong> to optimize the division process. Instead of performing repeated subtraction (which is slow), we can use shifts to find how many times the divisor can fit into the dividend efficiently. This method reduces the complexity of the problem significantly.</p>
-<hr>
-<h3 id="steps-to-solve-the-problem">
-  <strong>Steps to Solve the Problem:</strong>
-  <a class="heading-link" href="#steps-to-solve-the-problem">
+<p>Implement the division of two integers without using the multiplication, division, or mod operator. Return the quotient after dividing <code>dividend</code> by <code>divisor</code>. The result should be truncated towards zero.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ol>
 <li>
-<p><strong>Handle Edge Case for Overflow</strong><br>
-When dividing <code>INT_MIN</code> by <code>-1</code>, the result would exceed the integer limit (<code>INT_MAX</code>), so we handle this case separately.</p>
+<p><strong>Handle Edge Cases</strong>:</p>
+<ul>
+<li>If the <code>dividend</code> is <code>INT_MIN</code> and <code>divisor</code> is <code>-1</code>, return <code>INT_MAX</code> to prevent overflow.</li>
+</ul>
 </li>
 <li>
-<p><strong>Convert to Positive Numbers</strong><br>
-To simplify, we work with the absolute values of both the dividend and divisor. This way, we focus only on the magnitude, and the final result&rsquo;s sign can be calculated later.</p>
+<p><strong>Use Long Data Types</strong>:</p>
+<ul>
+<li>Convert both <code>dividend</code> and <code>divisor</code> to their absolute values using <code>labs()</code> to handle negative numbers effectively.</li>
+<li>Store the sign of the result based on the signs of the <code>dividend</code> and <code>divisor</code>.</li>
+</ul>
 </li>
 <li>
-<p><strong>Bitwise Division</strong><br>
-The idea is to <strong>shift the divisor</strong> left (which is equivalent to multiplying by powers of 2) until it exceeds the dividend. This helps us quickly figure out how many times the divisor can fit into the dividend.</p>
+<p><strong>Bit Manipulation for Division</strong>:</p>
+<ul>
+<li>Initialize a variable <code>ans</code> to store the quotient.</li>
+<li>Use a loop to subtract the divisor from the dividend as long as it is possible.</li>
+<li>Utilize bit shifting to speed up the process: repeatedly double the divisor (using left shift) and check against the dividend.</li>
+</ul>
 </li>
 <li>
-<p><strong>Sign Handling</strong><br>
-Once the division is performed, the result&rsquo;s sign is determined based on whether the dividend and divisor have the same or different signs.</p>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>Multiply the result by the sign determined earlier to return the final quotient.</li>
+</ul>
 </li>
 </ol>
-<hr>
-<h3 id="-breaking-down-the-code">
-  👇 <strong>Breaking Down the Code:</strong>
-  <a class="heading-link" href="#-breaking-down-the-code">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="1-handle-special-overflow-case">
-  1. <strong>Handle Special Overflow Case</strong>
-  <a class="heading-link" href="#1-handle-special-overflow-case">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (dividend <span style="color:#f92672">==</span> INT_MIN <span style="color:#f92672">&amp;&amp;</span> divisor <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> INT_MAX;
-</span></span></code></pre></div><ul>
-<li>This checks for overflow when dividing <code>INT_MIN</code> by <code>-1</code>, which would result in an integer overflow.</li>
-</ul>
-<h4 id="2-prepare-the-dividend-and-divisor">
-  2. <strong>Prepare the Dividend and Divisor</strong>
-  <a class="heading-link" href="#2-prepare-the-dividend-and-divisor">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> dvd <span style="color:#f92672">=</span> labs(dividend), dvs <span style="color:#f92672">=</span> labs(divisor);
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> sgn <span style="color:#f92672">=</span> (dividend <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) <span style="color:#f92672">^</span> (divisor <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>;
-</span></span></code></pre></div><ul>
-<li>Convert both <code>dividend</code> and <code>divisor</code> to their absolute values using <code>labs()</code> (absolute value for long integers).</li>
-<li>Determine the sign (<code>sgn</code>) of the result by checking whether the signs of the <code>dividend</code> and <code>divisor</code> are different using XOR. If they are, the result is negative.</li>
-</ul>
-<h4 id="3-initialize-the-answer">
-  3. <strong>Initialize the Answer</strong>
-  <a class="heading-link" href="#3-initialize-the-answer">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span></code></pre></div><ul>
-<li><code>ans</code> will store the final quotient, initialized to <code>0</code>.</li>
-</ul>
-<h4 id="4-bit-shifting-for-division">
-  4. <strong>Bit Shifting for Division</strong>
-  <a class="heading-link" href="#4-bit-shifting-for-division">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (dvd <span style="color:#f92672">&gt;=</span> dvs) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> tmp <span style="color:#f92672">=</span> dvs, m <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (tmp <span style="color:#f92672">&lt;&lt;</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;=</span> dvd) {
-</span></span><span style="display:flex;"><span>        tmp <span style="color:#f92672">&lt;&lt;=</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>        m <span style="color:#f92672">&lt;&lt;=</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    dvd <span style="color:#f92672">-=</span> tmp;
-</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">+=</span> m;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li><strong>Outer loop</strong>: Continues subtracting multiples of the divisor from the dividend.</li>
-<li><strong>Inner loop</strong>: Doubles the divisor (<code>tmp &lt;&lt;= 1</code>) and tracks the power of two with <code>m &lt;&lt;= 1</code> to see how much of the divisor can be subtracted at once.</li>
-<li>Once the largest <code>tmp</code> that fits into <code>dvd</code> is found, subtract it from the dividend and add the corresponding power of two to <code>ans</code>.</li>
-</ul>
-<h4 id="5-return-the-final-answer-with-the-correct-sign">
-  5. <strong>Return the Final Answer with the Correct Sign</strong>
-  <a class="heading-link" href="#5-return-the-final-answer-with-the-correct-sign">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> sgn <span style="color:#f92672">*</span> ans;
-</span></span></code></pre></div><ul>
-<li>Finally, multiply the result by <code>sgn</code> to apply the correct sign, and return the quotient.</li>
-</ul>
-<hr>
-<h3 id="-complexity-breakdown">
-  ⏳ <strong>Complexity Breakdown</strong>
-  <a class="heading-link" href="#-complexity-breakdown">
+<ol>
+<li><strong>Edge Case Check</strong>: The first conditional checks if the input will cause an overflow.</li>
+<li><strong>Absolute Values</strong>: <code>dvd</code> and <code>dvs</code> store the absolute values of the <code>dividend</code> and <code>divisor</code>, respectively.</li>
+<li><strong>Sign Calculation</strong>: <code>sgn</code> determines if the final result should be positive or negative.</li>
+<li><strong>Division Loop</strong>: The outer loop continues until the dividend is smaller than the divisor, and the inner loop finds the largest multiple of the divisor that fits into the current dividend.</li>
+<li><strong>Final Result</strong>: The final quotient is returned by multiplying <code>ans</code> by <code>sgn</code>.</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li>
-<p><strong>Time Complexity: O(log n)</strong><br>
-The algorithm&rsquo;s time complexity is logarithmic because the divisor is doubled at each step using bit shifting. The number of iterations is proportional to the logarithm of the dividend, so we achieve <strong>O(log n)</strong> time complexity.</p>
-</li>
-<li>
-<p><strong>Space Complexity: O(1)</strong><br>
-The space complexity is constant since the algorithm only uses a fixed amount of extra space (for variables like <code>dvd</code>, <code>dvs</code>, <code>sgn</code>, and <code>ans</code>), making it very space-efficient.</p>
-</li>
+<li><strong>Time Complexity:</strong> (O(\log N)), where (N) is the absolute value of the dividend.</li>
+<li><strong>Space Complexity:</strong> (O(1)), since only a fixed amount of space is used for variables.</li>
 </ul>
-<hr>
-<h3 id="-key-insights">
-  💡 <strong>Key Insights</strong>
-  <a class="heading-link" href="#-key-insights">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ul>
-<li><strong>Efficient Division Using Bit Shifting</strong>: By shifting the divisor left, we can quickly determine how many times the divisor fits into the dividend, drastically reducing the number of operations needed compared to repeated subtraction. 🔧</li>
-<li><strong>Handling Overflow</strong>: Special handling for the case where dividing <code>INT_MIN</code> by <code>-1</code> avoids overflow and ensures the correct result. 🌟</li>
-<li><strong>In-Place Calculation</strong>: No extra data structures are used, and all modifications happen in-place, which is both memory-efficient and fast. 💨</li>
-</ul>
-<hr>
-<h3 id="-conclusion">
-  🚀 <strong>Conclusion</strong>
-  <a class="heading-link" href="#-conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution offers an optimal approach to dividing two integers <strong>without using division</strong>, multiplication, or modulus operators. By utilizing <strong>bit shifting</strong> and efficient subtraction, we achieve <strong>O(log n)</strong> time complexity and <strong>O(1)</strong> space complexity. This makes the algorithm both <strong>time-efficient</strong> and <strong>space-efficient</strong>, perfect for large inputs. 🙌</p>
-<p>Understanding how to leverage <strong>bit manipulation</strong> for such tasks is a powerful tool in your programming toolkit! 🛠</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1013s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1014s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -435,31 +349,10 @@ The space complexity is constant since the algorithm only uses a fixed amount of
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-31-next-permutation-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #31: Next Permutation</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-31-next-permutation-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #31: Next Permutation</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

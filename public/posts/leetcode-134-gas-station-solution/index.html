@@ -142,6 +142,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -198,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -207,11 +211,11 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode175s0hbhb">
+        <h2 id="hahahugoshortcode177s0hbhb">
   <a href="https://leetcode.com/problems/gas-station/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
-      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/134.jpeg" 
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/134.webp" 
            alt="A calm sequence of gas stations, each glowing softly, with the optimal starting point gently illuminated." 
            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
     </div>
@@ -222,7 +226,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode175s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode177s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -255,147 +259,77 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode175s2hbhb">
+<h2 id="hahahugoshortcode177s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="-the-problem">
-  🛣️ <strong>The Problem:</strong>
-  <a class="heading-link" href="#-the-problem">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given two lists:</p>
+<p>You are given two integer arrays, <code>gas</code> and <code>cost</code>. Each index represents a gas station where:</p>
 <ul>
-<li><strong>gas[i]</strong>: the amount of gas available at the i-th gas station.</li>
-<li><strong>cost[i]</strong>: the amount of gas required to travel from the i-th gas station to the next one.</li>
+<li><code>gas[i]</code> is the amount of gas available at station <code>i</code>.</li>
+<li><code>cost[i]</code> is the amount of gas required to travel from station <code>i</code> to the next station.</li>
 </ul>
-<p>We need to figure out:</p>
+<p>The goal is to determine the starting gas station index from which you can travel around the circuit once without running out of gas. If no such station exists, return -1.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
 <ol>
-<li><strong>Is it possible to complete a circular route starting from one of the stations?</strong></li>
-<li>If it is possible, <strong>which station should we start at?</strong></li>
-</ol>
-<p>Your task is to determine the <strong>index of the starting station</strong> such that the car can travel around the entire circle of gas stations without running out of gas. If it&rsquo;s not possible, return <code>-1</code>.</p>
-<hr>
-<h3 id="-lets-solve-it-step-by-step">
-  🚗 <strong>Let&rsquo;s Solve It Step by Step:</strong>
-  <a class="heading-link" href="#-lets-solve-it-step-by-step">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="step-1-check-the-feasibility-of-completing-the-circuit">
-  Step 1: <strong>Check the Feasibility of Completing the Circuit</strong>
-  <a class="heading-link" href="#step-1-check-the-feasibility-of-completing-the-circuit">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>Before diving into finding the right starting station, we need to check if completing the circuit is even possible.</p>
-<p>1️⃣ <strong>Total Gas vs Total Cost</strong><br>
-First, we calculate the total gas available (<code>total_gas</code>) and the total cost to travel (<code>total_cost</code>). If at any point, the total gas is less than the total cost, it is impossible to complete the journey, and we should return <code>-1</code>.</p>
-<p>Let’s calculate these sums:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> total_gas <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> total_cost <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> gas.size(); i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>    total_gas <span style="color:#f92672">+=</span> gas[i];    <span style="color:#75715e">// Total gas available at all stations
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    total_cost <span style="color:#f92672">+=</span> cost[i];  <span style="color:#75715e">// Total cost to travel between all stations
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
-</span></span></code></pre></div><ul>
-<li><strong>If <code>total_gas &lt; total_cost</code></strong>, it’s impossible to complete the journey. We can safely return <code>-1</code> at this point:</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (total_gas <span style="color:#f92672">&lt;</span> total_cost) <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
-</span></span></code></pre></div><h4 id="step-2-start-simulating-the-journey">
-  Step 2: <strong>Start Simulating the Journey</strong>
-  <a class="heading-link" href="#step-2-start-simulating-the-journey">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>If completing the journey is possible, we need to figure out from <strong>which station</strong> we should start.</p>
-<p>2️⃣ <strong>Greedy Approach</strong><br>
-We’ll use a greedy approach to simulate the journey. The idea is to start from each station and see if we can complete the trip. If at any point we run out of gas, we reset our journey and start from the next station.</p>
-<p>We’ll keep track of:</p>
-<ul>
-<li>The current fuel in the tank (<code>current_gas</code>).</li>
-<li>The total remaining fuel (<code>total_gas_so_far</code>).</li>
-</ul>
-<p>For each station:</p>
-<ol>
-<li>Add the gas available at the station to the current fuel.</li>
-<li>Subtract the cost required to travel to the next station.</li>
-<li>If at any point the <code>current_gas</code> becomes negative, reset the journey and consider the next station as the new potential starting point.</li>
-</ol>
-<p>Here’s how we can simulate this:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> current_gas <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#75715e">// Tracks current fuel
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> start_station <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#75715e">// Candidate for the start station
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> gas.size(); i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>    current_gas <span style="color:#f92672">+=</span> gas[i];    <span style="color:#75715e">// Add gas from current station
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    current_gas <span style="color:#f92672">-=</span> cost[i];   <span style="color:#75715e">// Subtract the cost to travel to next station
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (current_gas <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) {    <span style="color:#75715e">// If we run out of gas, reset journey
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        current_gas <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;      <span style="color:#75715e">// Reset the tank
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        start_station <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; <span style="color:#75715e">// Consider the next station as the new start
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li><strong>Why do we reset?</strong><br>
-If at station <code>i</code> the current gas drops below zero, it means that we cannot start from station <code>i</code> or any previous station. Hence, we reset and try starting from the next station (<code>i + 1</code>).</li>
-</ul>
-<h4 id="step-3-return-the-starting-station">
-  Step 3: <strong>Return the Starting Station</strong>
-  <a class="heading-link" href="#step-3-return-the-starting-station">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>After simulating the journey, the <code>start_station</code> will be the index of the last station where the circuit can successfully be completed.</p>
-<p>To account for the <strong>1-indexed</strong> return value, we will return the result as:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> start_station;
-</span></span></code></pre></div><hr>
-<h3 id="-time-and-space-complexity">
-  📈 <strong>Time and Space Complexity</strong>
-  <a class="heading-link" href="#-time-and-space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ul>
 <li>
-<p><strong>Time Complexity</strong>:<br>
-The approach involves a single pass through the stations, making it <strong>O(n)</strong> where <code>n</code> is the number of stations.</p>
+<p><strong>Total Gas Check</strong>:</p>
+<ul>
+<li>Calculate the total amount of gas available and the total cost required to complete the circuit.</li>
+<li>If the total cost is greater than the total gas, return -1, as it&rsquo;s impossible to complete the circuit.</li>
+</ul>
 </li>
 <li>
-<p><strong>Space Complexity</strong>:<br>
-We only use a few variables to track the gas and current station index, so the space complexity is <strong>O(1)</strong>.</p>
-</li>
+<p><strong>Finding the Starting Point</strong>:</p>
+<ul>
+<li>Traverse through each gas station, maintaining a running total of the current gas in the tank (<code>tank</code>).</li>
+<li>If the tank goes below zero, reset it to zero and update the starting station index (<code>res</code>) to the next station.</li>
+<li>The first station where the gas is sufficient to cover the cost will be the starting station.</li>
 </ul>
-<hr>
-<h3 id="-summary">
-  🚀 <strong>Summary</strong>
-  <a class="heading-link" href="#-summary">
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>By following these steps:</p>
-<ol>
-<li>We first check if completing the journey is possible by comparing the total gas and total cost.</li>
-<li>If it&rsquo;s feasible, we simulate the journey with a greedy approach, resetting the journey whenever we run out of gas and moving to the next station.</li>
-<li>The final result will give us the station index from which we can start to complete the circular journey without running out of gas.</li>
-</ol>
-<p>If it&rsquo;s not possible to complete the journey, we return <code>-1</code>.</p>
-<p>This approach ensures that we efficiently find the right station in linear time, making it optimal for large inputs.</p>
-<hr>
+<ul>
+<li><strong>Line 5-8</strong>: Calculate the total gas and total cost. If the total cost exceeds total gas, return -1.</li>
+<li><strong>Line 10</strong>: Reset <code>tank</code> for the second pass to find the starting index.</li>
+<li><strong>Line 11</strong>: Initialize <code>res</code> to store the index of the last station that failed.</li>
+<li><strong>Line 13-19</strong>: Loop through each gas station, updating the <code>tank</code> and checking if it drops below zero. If it does, reset the <code>tank</code> and set <code>res</code> to the current index.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: (O(N)), where (N) is the number of gas stations, as we traverse the list twice.</li>
+<li><strong>Space Complexity</strong>: (O(1)), as we are using a constant amount of extra space.</li>
+</ul>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode175s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode177s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -411,31 +345,10 @@ We only use a few variables to track the gas and current station index, so the s
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-136-single-number-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #136: Single Number</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-136-single-number-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #136: Single Number</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

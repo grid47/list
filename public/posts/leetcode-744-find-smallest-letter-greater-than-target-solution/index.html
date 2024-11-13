@@ -142,6 +142,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -198,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              4-minute read
+              2-minute read
             </span>
           </div>
 
@@ -223,7 +227,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1303s1hbhb">
+<h2 id="hahahugoshortcode1299s1hbhb">
   
 
   
@@ -235,13 +239,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem asks to find the <strong>next greatest letter</strong> in a sorted list of letters that is strictly greater than a given target character. The list of letters is sorted in <strong>non-decreasing</strong> order, and the target is a single character. The goal is to determine the smallest letter in the list that is strictly greater than the target. If no such letter exists, the next greatest letter should be the smallest letter in the list.</p>
-<p>For example:</p>
-<ul>
-<li>Given the letters <code>['c', 'f', 'j']</code> and the target <code>a</code>, the next greatest letter is <code>c</code>.</li>
-<li>Given the letters <code>['c', 'f', 'j']</code> and the target <code>c</code>, the next greatest letter is <code>f</code>.</li>
-<li>Given the letters <code>['c', 'f', 'j']</code> and the target <code>k</code>, the next greatest letter is <code>c</code>, because there are no letters greater than <code>k</code> in the list.</li>
-</ul>
+<p>Given a sorted array of distinct characters <code>letters</code> and a character <code>target</code>, find the smallest character in <code>letters</code> that is greater than <code>target</code>. The array wraps around, meaning that if the target is greater than or equal to the largest character, the answer should be the smallest character in the array.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -249,121 +247,58 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem, we need to:</p>
 <ol>
-<li><strong>Iterate through the list</strong> of letters.</li>
-<li><strong>Find the first letter</strong> that is strictly greater than the given target.</li>
-<li>If no such letter is found, return the <strong>first letter</strong> in the list, as the list is sorted and wrapping around should give us the smallest letter.</li>
-</ol>
-<p>The key observation here is:</p>
+<li>
+<p><strong>Iterate through the Array</strong>:</p>
 <ul>
-<li>The list is sorted, which allows us to efficiently search for the next greatest letter.</li>
-<li>We can perform a <strong>linear scan</strong> of the list because we are only required to find the first letter greater than the target, which avoids the complexity of binary search for this problem.</li>
+<li>Traverse the <code>letters</code> array from the beginning.</li>
+<li>Find the first character that is greater than <code>target</code>.</li>
 </ul>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>If such a character is found, return it. If no character is greater than <code>target</code>, return the first character in the array (wrap-around case).</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="step-1-initialization">
-  Step 1: Initialization
-  <a class="heading-link" href="#step-1-initialization">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>We begin by initializing <code>ans</code> to the first letter in the list. This is a fallback value in case the target is greater than or equal to the largest element in the list, which will ensure that the smallest letter is returned.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">char</span> ans <span style="color:#f92672">=</span> letters[<span style="color:#ae81ff">0</span>];  <span style="color:#75715e">// Initialize answer to the first letter
-</span></span></span></code></pre></div><h4 id="step-2-iterate-through-the-list">
-  Step 2: Iterate Through the List
-  <a class="heading-link" href="#step-2-iterate-through-the-list">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>We loop through the <code>letters</code> vector and compare each letter with the target character. If we find a letter that is greater than the target, we set it as our answer and <strong>break</strong> the loop.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> letters.size(); i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (letters[i] <span style="color:#f92672">&gt;</span> target) {
-</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> letters[i];  <span style="color:#75715e">// Update the answer
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">break</span>;  <span style="color:#75715e">// Stop the loop once we find the first letter greater than the target
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><h4 id="step-3-return-the-answer">
-  Step 3: Return the Answer
-  <a class="heading-link" href="#step-3-return-the-answer">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>After completing the loop, we return the character stored in <code>ans</code>. If no letter was found greater than the target (i.e., the target is greater than or equal to the largest letter in the list), <code>ans</code> will still contain the first letter of the list, as initialized.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
-</span></span></code></pre></div><h4 id="full-code">
-  Full Code:
-  <a class="heading-link" href="#full-code">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> nextGreatestLetter(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span><span style="color:#f92672">&gt;&amp;</span> letters, <span style="color:#66d9ef">char</span> target) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">char</span> ans <span style="color:#f92672">=</span> letters[<span style="color:#ae81ff">0</span>];  <span style="color:#75715e">// Default answer if no greater letter is found
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> letters.size(); i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(letters[i] <span style="color:#f92672">&gt;</span> target) {
-</span></span><span style="display:flex;"><span>                ans <span style="color:#f92672">=</span> letters[i];  <span style="color:#75715e">// Update the answer
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                <span style="color:#66d9ef">break</span>;  <span style="color:#75715e">// Exit the loop as soon as we find the first greater letter
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;  <span style="color:#75715e">// Return the next greatest letter
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><h3 id="complexity">
+<ul>
+<li>
+<p><strong>Class</strong>:</p>
+<ul>
+<li><code>class Solution</code>: Contains the method to find the next greatest letter.</li>
+</ul>
+</li>
+<li>
+<p><strong>Method</strong>:</p>
+<ul>
+<li><code>char nextGreatestLetter(vector&lt;char&gt;&amp; letters, char target)</code>: Implements the logic to find and return the next greatest letter.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>O(n)</strong> where <code>n</code> is the number of elements in the <code>letters</code> list.
-<ul>
-<li>In the worst case, we iterate through all <code>n</code> letters once to find the first one that is greater than the target. This is a linear scan, which ensures an optimal time complexity for this approach.</li>
+<li><strong>Time Complexity</strong>: O(N), where N is the number of characters in the <code>letters</code> array, since we may need to check each character.</li>
+<li><strong>Space Complexity</strong>: O(1), as no additional data structures are used.</li>
 </ul>
-</li>
-</ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>O(1)</strong> because we only use a few extra variables (<code>ans</code>, <code>i</code>) to store intermediate results. We are not using any additional data structures that grow with the input size.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution efficiently solves the problem of finding the next greatest letter in a sorted list. By leveraging a <strong>linear scan</strong>, we ensure that we find the first letter greater than the target in <strong>O(n)</strong> time, which is optimal for this problem given the constraints. The simplicity of the approach and the constant space usage makes it an effective solution for a variety of input sizes.</p>
-<p>By iterating through the sorted list and breaking early when a valid answer is found, this approach ensures both clarity and performance. The solution is easy to implement and read, making it ideal for understanding and quick usage in similar problems.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1303s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1299s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -371,31 +306,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-746-min-cost-climbing-stairs-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #746: Min Cost Climbing Stairs</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-746-min-cost-climbing-stairs-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #746: Min Cost Climbing Stairs</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

@@ -143,6 +143,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -203,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              4-minute read
+              One-minute read
             </span>
           </div>
 
@@ -240,139 +244,27 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-overview">
-  Problem Overview
-  <a class="heading-link" href="#problem-overview">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The objective is to identify characters that are common to all strings in a given list. For instance, if we have the input <code>[&quot;bella&quot;, &quot;label&quot;, &quot;roller&quot;]</code>, the expected output should be the characters <code>[&quot;e&quot;, &quot;l&quot;, &quot;l&quot;]</code>. The characters &rsquo;e&rsquo; and &rsquo;l&rsquo; appear in every string, and our solution must efficiently determine this.</p>
-<h3 id="code-explanation">
-  Code Explanation
-  <a class="heading-link" href="#code-explanation">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>Let&rsquo;s analyze the provided C++ code. The code employs a systematic approach to find the common characters, leveraging arrays to count occurrences and maintain minimum frequencies.</p>
-<h3 id="step-1-class-definition">
-  Step 1: Class Definition
-  <a class="heading-link" href="#step-1-class-definition">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The code starts with defining a class named <code>Solution</code>. This class encapsulates the method we will use to find the common characters.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span></code></pre></div><h3 id="step-2-method-declaration">
-  Step 2: Method Declaration
-  <a class="heading-link" href="#step-2-method-declaration">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>Within the class, we declare a public method named <code>commonChars</code>, which takes a vector of strings as input and returns a vector of strings representing the common characters.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> commonChars(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> words) {
-</span></span></code></pre></div><h3 id="step-3-initializing-frequency-array">
-  Step 3: Initializing Frequency Array
-  <a class="heading-link" href="#step-3-initializing-frequency-array">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>Inside the method, we first create a frequency array <code>frq</code> of size 26 (for each letter of the English alphabet) initialized to <code>INT_MAX</code>. This array will help us track the minimum frequency of each character found across all input strings.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> frq(<span style="color:#ae81ff">26</span>, INT_MAX);
-</span></span></code></pre></div><h3 id="step-4-iterating-through-words">
-  Step 4: Iterating Through Words
-  <a class="heading-link" href="#step-4-iterating-through-words">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>Next, we iterate over each string in the input vector <code>words</code>. For each string, we will count the occurrences of each character.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(string<span style="color:#f92672">&amp;</span> s: words) {
-</span></span></code></pre></div><h3 id="step-5-counting-characters">
-  Step 5: Counting Characters
-  <a class="heading-link" href="#step-5-counting-characters">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>For counting, we initialize a temporary array <code>cnt</code> of size 26 to zero. This array will hold the count of characters for the current string being processed.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> cnt(<span style="color:#ae81ff">26</span>, <span style="color:#ae81ff">0</span>);
-</span></span></code></pre></div><p>We then loop through each character in the string <code>s</code>, updating the count in the <code>cnt</code> array. The character&rsquo;s corresponding index in the <code>cnt</code> array is calculated by subtracting the ASCII value of &lsquo;a&rsquo; from the character.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> x: s) cnt[x <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>]<span style="color:#f92672">++</span>;
-</span></span></code></pre></div><h3 id="step-6-updating-minimum-frequencies">
-  Step 6: Updating Minimum Frequencies
-  <a class="heading-link" href="#step-6-updating-minimum-frequencies">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>After counting the characters in the current string, we need to update our <code>frq</code> array. This is done by comparing the current counts in <code>cnt</code> with the existing values in <code>frq</code>. We take the minimum of the current frequency and the counted frequency for each character.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">26</span>; i<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>                frq[i] <span style="color:#f92672">=</span> min(frq[i], cnt[i]);
-</span></span></code></pre></div><p>This ensures that <code>frq</code> retains the minimum count of each character that has been encountered so far across all strings.</p>
-<h3 id="step-7-collecting-results">
-  Step 7: Collecting Results
-  <a class="heading-link" href="#step-7-collecting-results">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>After processing all words, we initialize an empty vector <code>res</code> to store the results.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> res;
-</span></span></code></pre></div><p>We then loop through the <code>frq</code> array to construct the result vector. For each character index that has a non-zero count, we append that character to <code>res</code> as many times as it appears in common.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">26</span>; i<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> frq[i]; j<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>                res.push_back(string(<span style="color:#ae81ff">1</span>, <span style="color:#e6db74">&#39;a&#39;</span> <span style="color:#f92672">+</span> i));
-</span></span></code></pre></div><h3 id="step-8-returning-the-result">
-  Step 8: Returning the Result
-  <a class="heading-link" href="#step-8-returning-the-result">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>Finally, the method returns the result vector containing all the common characters.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><h3 id="complexity-analysis">
-  Complexity Analysis
-  <a class="heading-link" href="#complexity-analysis">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h3 id="time-complexity">
-  Time Complexity
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The time complexity of this solution is O(N * M), where N is the number of strings and M is the average length of the strings. This is because we iterate through each string and count characters.</p>
-<h3 id="space-complexity">
-  Space Complexity
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The space complexity is O(1) since the frequency array <code>frq</code> and count array <code>cnt</code> are of fixed size (26). Thus, regardless of the number of strings or their lengths, the space usage remains constant.</p>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This C++ solution is a clear and efficient approach to finding common characters in a list of strings. By using frequency arrays and simple loops, we can achieve the desired results with minimal overhead. Understanding this algorithm not only helps in this particular problem but also enhances one&rsquo;s overall programming and problem-solving skills.</p>
-<p>Whether you are preparing for coding interviews, working on competitive programming problems, or simply looking to improve your coding proficiency, grasping the nuances of such algorithms is invaluable. The presented solution exemplifies clarity, efficiency, and effectiveness in tackling a common problem in string manipulation.</p>
-<p>If you found this breakdown helpful, consider exploring more algorithmic challenges and solutions that deepen your understanding of data structures and algorithms.</p>
-<pre tabindex="0"><code></code></pre> 
+    <p>class Solution {
+public:
+vector<!-- raw HTML omitted --> commonChars(vector<!-- raw HTML omitted -->&amp; words) {
+vector<!-- raw HTML omitted --> frq(26, INT_MAX);
+for(string&amp; s: words) {
+vector<!-- raw HTML omitted --> cnt(26, 0);
+for(char x: s) cnt[x - &lsquo;a&rsquo;]++;</p>
+<pre><code>        for(int i = 0; i &lt; 26; i++)
+        frq[i] = min(frq[i], cnt[i]);
+    }
+
+    vector&lt;string&gt; res;
+    for(int i = 0; i &lt; 26; i++)
+    for(int j = 0; j &lt; frq[i]; j++)
+        res.push_back(string(1, 'a' + i));
+
+    return res;
+}
+</code></pre>
+<p>};</p>
+ 
 </div>
   
 
@@ -392,31 +284,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-1003-check-if-word-is-valid-after-substitutions-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #1003: Check If Word Is Valid After Substitutions</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-1003-check-if-word-is-valid-after-substitutions-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #1003: Check If Word Is Valid After Substitutions</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

@@ -144,6 +144,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -208,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              6-minute read
+              3-minute read
             </span>
           </div>
 
@@ -260,183 +264,73 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> edges[<span style="color:#ae81ff">0</span>];
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1267s1hbhb">
+<h2 id="hahahugoshortcode1264s1hbhb">
   
 
   
   <div class="markdown-body">
     <h3 id="problem-statement">
-  Problem Statement:
+  Problem Statement
   <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem at hand is to find the redundant edge in an undirected graph represented by a list of edges. This graph has <code>n</code> nodes and <code>n-1</code> edges, forming a tree. However, one of the edges has been added redundantly, creating a cycle. The goal is to identify this redundant edge in the graph.</p>
-<p>Given a graph as a list of edges, each edge is represented as an array <code>[u, v]</code>, where <code>u</code> and <code>v</code> are the nodes connected by the edge. We need to identify the edge that, if removed, will eliminate the cycle and return that edge.</p>
+<p>You are given a list of edges in an undirected graph, where each edge connects two nodes. The graph initially has no cycles. However, the list may contain one redundant edge that, when added, creates a cycle. Your task is to identify and return that redundant edge.</p>
 <h3 id="approach">
-  Approach:
+  Approach
   <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve the problem of finding the redundant edge in an undirected graph, we can utilize a <strong>Union-Find (Disjoint Set Union - DSU)</strong> data structure. This data structure allows us to efficiently track connected components in the graph. The main idea is to iterate through all edges and for each edge:</p>
+<p>The approach leverages the Union-Find (Disjoint Set Union) data structure to detect cycles efficiently while processing the edges. The steps are as follows:</p>
 <ol>
-<li>If the two nodes connected by the edge are already in the same connected component (i.e., they belong to the same set), then adding this edge would create a cycle, and this edge is the redundant one.</li>
-<li>If the nodes are in different components, we unite them into a single component.</li>
+<li>
+<p><strong>Union-Find Structure</strong>: Implement a Union-Find (UF) class that supports the union and find operations to manage and track connected components.</p>
+</li>
+<li>
+<p><strong>Initialize the Union-Find</strong>: Start with each node as its own parent. The <code>cnt</code> variable keeps track of the number of connected components.</p>
+</li>
+<li>
+<p><strong>Process Edges</strong>: Iterate through the list of edges and attempt to union the two nodes of each edge:</p>
+<ul>
+<li>If the nodes are already connected (i.e., they have the same root), the current edge is redundant and creates a cycle.</li>
+<li>If they are not connected, union them and continue.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Redundant Edge</strong>: As soon as a cycle is detected by trying to union two already connected nodes, return that edge.</p>
+</li>
 </ol>
-<p>By using this approach, we can detect cycles in an efficient manner while processing the edges. The algorithm works in nearly constant time due to the optimized union-find operations, making it suitable for large graphs.</p>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step):
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="step-1-union-find-data-structure-uf-class">
-  Step 1: Union-Find Data Structure (UF Class)
-  <a class="heading-link" href="#step-1-union-find-data-structure-uf-class">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UF</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> chd;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> cnt;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    UF(<span style="color:#66d9ef">int</span> n) {
-</span></span><span style="display:flex;"><span>        chd.resize(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>            chd[i] <span style="color:#f92672">=</span> i;
-</span></span><span style="display:flex;"><span>        cnt <span style="color:#f92672">=</span> n;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">uni</span>(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> find(x);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> find(y);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">!=</span> j) {
-</span></span><span style="display:flex;"><span>            chd[i] <span style="color:#f92672">=</span> j;
-</span></span><span style="display:flex;"><span>            cnt<span style="color:#f92672">--</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> true;
-</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> false;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">find</span>(<span style="color:#66d9ef">int</span> x) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">==</span> chd[x]) <span style="color:#66d9ef">return</span> x;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> chd[x] <span style="color:#f92672">=</span> find(chd[x]);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><ul>
-<li>The <code>UF</code> class is used to represent the Union-Find data structure. It maintains an array <code>chd</code> to track the parent of each node. Initially, each node is its own parent.</li>
-<li><code>cnt</code> tracks the number of connected components (sets) in the graph.</li>
-<li>The constructor <code>UF(int n)</code> initializes the <code>chd</code> array and sets each node to be its own parent, effectively creating <code>n</code> connected components.</li>
-</ul>
-<h4 id="step-2-uni-method-union-operation">
-  Step 2: <code>uni</code> Method (Union Operation)
-  <a class="heading-link" href="#step-2-uni-method-union-operation">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">uni</span>(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> find(x);  <span style="color:#75715e">// Find the root of the set containing x
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> find(y);  <span style="color:#75715e">// Find the root of the set containing y
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">!=</span> j) {  <span style="color:#75715e">// If they are in different sets
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        chd[i] <span style="color:#f92672">=</span> j;  <span style="color:#75715e">// Unite the sets by linking the root of x to the root of y
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        cnt<span style="color:#f92672">--</span>;  <span style="color:#75715e">// Decrease the number of connected components
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> true;
-</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">return</span> false;  <span style="color:#75715e">// If they are already in the same set, return false (cycle detected)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
-</span></span></code></pre></div><ul>
-<li>The <code>uni</code> function takes two nodes <code>x</code> and <code>y</code> and attempts to unite the sets they belong to. If the two nodes are already in the same set, it means adding the edge between them would form a cycle, so the function returns <code>false</code>. Otherwise, it unites the sets and returns <code>true</code>.</li>
-</ul>
-<h4 id="step-3-find-method-find-operation-with-path-compression">
-  Step 3: <code>find</code> Method (Find Operation with Path Compression)
-  <a class="heading-link" href="#step-3-find-method-find-operation-with-path-compression">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">find</span>(<span style="color:#66d9ef">int</span> x) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">==</span> chd[x]) <span style="color:#66d9ef">return</span> x;  <span style="color:#75715e">// If x is its own parent, it&#39;s the root of the set
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> chd[x] <span style="color:#f92672">=</span> find(chd[x]);  <span style="color:#75715e">// Path compression: recursively find the root and make x point directly to it
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
-</span></span></code></pre></div><ul>
-<li>The <code>find</code> function recursively finds the root of the set containing <code>x</code>. It also performs <strong>path compression</strong> to flatten the structure of the tree, speeding up future queries.</li>
-</ul>
-<h4 id="step-4-main-solution-findredundantconnection-method">
-  Step 4: Main Solution (<code>findRedundantConnection</code> Method)
-  <a class="heading-link" href="#step-4-main-solution-findredundantconnection-method">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> findRedundantConnection(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> edges) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> edges.size();
-</span></span><span style="display:flex;"><span>        UF<span style="color:#f92672">*</span> uf <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> UF(n);  <span style="color:#75715e">// Initialize the Union-Find structure with n nodes
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>uf<span style="color:#f92672">-&gt;</span>uni(edges[i][<span style="color:#ae81ff">0</span>], edges[i][<span style="color:#ae81ff">1</span>])) {  <span style="color:#75715e">// If the edge forms a cycle
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                <span style="color:#66d9ef">return</span> edges[i];  <span style="color:#75715e">// Return the redundant edge
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> edges[<span style="color:#ae81ff">0</span>];  <span style="color:#75715e">// Default return (this will not be hit in practice)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><ul>
-<li>The main function <code>findRedundantConnection</code> takes the <code>edges</code> of the graph as input and creates a Union-Find structure <code>uf</code> with <code>n</code> nodes.</li>
-<li>It iterates over all the edges in the graph. For each edge, it checks if the nodes are already connected using the <code>uni</code> method:
 <ul>
-<li>If <code>uni</code> returns <code>false</code>, it means the nodes are already connected, indicating that adding the edge would create a cycle. Therefore, the current edge is the redundant one, and we return it.</li>
-<li>If the edge does not create a cycle, we proceed to the next edge.</li>
-</ul>
-</li>
-<li>The algorithm terminates as soon as it finds the redundant edge.</li>
+<li>The <code>UF</code> class initializes the parent array and counts the number of components. The <code>uni</code> function connects two nodes and decreases the component count if they were previously disconnected. The <code>find</code> function retrieves the root parent of a node, applying path compression for efficiency.</li>
+<li>In the <code>Solution</code> class, the <code>findRedundantConnection</code> function creates an instance of <code>UF</code>, processes each edge, and checks for cycles using the <code>uni</code> method.</li>
 </ul>
 <h3 id="complexity">
-  Complexity:
+  Complexity
   <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>O(n * α(n))</strong>, where <code>n</code> is the number of edges and <code>α(n)</code> is the inverse Ackermann function. The Union-Find operations (<code>find</code> and <code>uni</code>) take nearly constant time due to the <strong>path compression</strong> and <strong>union by rank</strong> techniques.</li>
-<li>The total time complexity is dominated by the number of edges, which is <code>n</code> (since the number of nodes is typically proportional to the number of edges).</li>
+<li><strong>Time Complexity</strong>: O(E α(N)), where E is the number of edges and α is the inverse Ackermann function, which grows very slowly, making the operation nearly constant for practical input sizes.</li>
+<li><strong>Space Complexity</strong>: O(N), where N is the number of nodes in the graph, for storing the parent array.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>O(n)</strong>, where <code>n</code> is the number of nodes. The Union-Find data structure stores an array of size <code>n</code> to track the parent of each node.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion:
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The provided solution efficiently detects the redundant edge in a graph by utilizing the Union-Find data structure with path compression. This approach ensures that we can process the graph in nearly constant time for each edge. The solution works optimally for large graphs and provides a clear and effective way to identify the redundant edge that creates a cycle.</p>
-<p>By using the Union-Find algorithm with its optimization techniques, such as path compression and union by rank, we can handle the problem of cycle detection in graphs with high efficiency. This solution is optimal for scenarios where the graph has a large number of edges, and it provides a fast and scalable method for solving the problem.</p>
+<p>This method is efficient for cycle detection in undirected graphs and works well within the given constraints.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1267s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1264s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -452,31 +346,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-686-repeated-string-match-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #686: Repeated String Match</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-686-repeated-string-match-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #686: Repeated String Match</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

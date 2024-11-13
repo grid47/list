@@ -144,6 +144,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -208,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              6-minute read
+              3-minute read
             </span>
           </div>
 
@@ -248,7 +252,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">int</span>) ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1395s1hbhb">
+<h2 id="hahahugoshortcode1399s1hbhb">
   
 
   
@@ -260,7 +264,26 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem asks us to calculate the sum of the minimum values of all <strong>subarrays</strong> of a given array of integers. The array can contain both positive and negative numbers, and we need to compute the sum of the minimum values of all possible subarrays modulo (10^9 + 7).</p>
+<p>Given an integer array <code>nums</code>, return the sum of the minimums of all possible subarrays. Since the answer may be large, return it modulo (10^9 + 7).</p>
+<h3 id="class-definition">
+  Class Definition
+  <a class="heading-link" href="#class-definition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Class</strong>: <code>Solution</code>
+<ul>
+<li><strong>Method</strong>: <code>int sumSubarrayMins(vector&lt;int&gt;&amp; nums)</code>
+<ul>
+<li>Takes a vector of integers <code>nums</code>.</li>
+<li>Returns the sum of the minimums of all subarrays modulo (10^9 + 7).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -268,146 +291,48 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem efficiently, a brute force approach where we generate all possible subarrays and compute their minimums would be too slow, especially for large arrays. Instead, we can use an efficient approach based on <strong>monotonic stacks</strong> and dynamic programming principles to reduce the time complexity.</p>
-<h4 id="key-insight">
-  <strong>Key Insight:</strong>
-  <a class="heading-link" href="#key-insight">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>For each element in the array, we need to determine how many subarrays have that element as their <strong>minimum</strong>. This can be achieved by:</p>
-<ol>
-<li>Using a <strong>monotonic stack</strong> to track the <strong>previous smaller element</strong> and the <strong>next smaller element</strong> for each element in the array.</li>
-<li>Using the distances to compute how many subarrays have each element as the minimum.</li>
-<li>Once we have this information, we can easily compute the sum of the minimum values for all subarrays by multiplying each element by the number of subarrays it serves as the minimum in.</li>
-</ol>
-<h4 id="steps">
-  <strong>Steps:</strong>
-  <a class="heading-link" href="#steps">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ol>
 <li>
-<p><strong>Calculate <code>left[]</code> and <code>right[]</code> arrays</strong>:</p>
+<p><strong>Initialization</strong>:</p>
 <ul>
-<li><code>left[i]</code>: The number of subarrays that end at index <code>i</code> where <code>nums[i]</code> is the minimum element.</li>
-<li><code>right[i]</code>: The number of subarrays that start at index <code>i</code> where <code>nums[i]</code> is the minimum element.</li>
+<li>Create a stack <code>stk_p</code> to store pairs of integers (value, index).</li>
+<li>Initialize two vectors, <code>left</code> and <code>right</code>, to keep track of the number of subarrays where each element is the minimum:
+<ul>
+<li><code>left[i]</code> indicates how many consecutive elements to the left (including itself) are greater than or equal to <code>nums[i]</code>.</li>
+<li><code>right[i]</code> indicates how many consecutive elements to the right (including itself) are greater than or equal to <code>nums[i]</code>.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
-<p><strong>Use a monotonic stack</strong> to compute <code>left[]</code> and <code>right[]</code>:</p>
+<p><strong>Fill Left and Right Arrays</strong>:</p>
 <ul>
-<li>Traverse the array to fill the <code>left[]</code> and <code>right[]</code> arrays using a stack to efficiently find the nearest smaller element on the left and right.</li>
+<li>Pre-fill <code>left[i]</code> with (i + 1) and <code>right[i]</code> with (n - i) (the default count of elements in one direction).</li>
+<li>Iterate through <code>nums</code>:
+<ul>
+<li>For each element, use the stack to determine how many consecutive elements are less than or equal to the current element:
+<ul>
+<li>Pop elements from the stack while the top element is greater than the current element, updating <code>right</code> for the indices popped.</li>
+<li>Update <code>left</code> based on the top of the stack (if it exists).</li>
+<li>Push the current element and its index onto the stack.</li>
+</ul>
+</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
-<p><strong>Sum the contributions</strong> of each element:</p>
+<p><strong>Calculate Result</strong>:</p>
 <ul>
-<li>Once we have the <code>left[]</code> and <code>right[]</code> values, for each element <code>nums[i]</code>, its contribution to the total sum is ( \text{nums[i]} \times \text{left[i]} \times \text{right[i]} ).</li>
+<li>Initialize <code>ans</code> to zero. Loop through <code>nums</code> and calculate the contribution of each element to the sum of subarray minimums using:
+<ul>
+<li><code>ans += nums[i] * left[i] * right[i]</code></li>
 </ul>
 </li>
-<li>
-<p><strong>Take the modulo (10^9 + 7)</strong> to avoid overflow and ensure that the result fits within the problem&rsquo;s constraints.</p>
+<li>Return the result modulo (10^9 + 7).</li>
+</ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="class-definition">
-  <strong>Class Definition</strong>
-  <a class="heading-link" href="#class-definition">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sumSubarrayMins(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>        stack<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> stk_p;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> left(n), right(n);
-</span></span></code></pre></div><ul>
-<li><code>stk_p</code>: A stack used to store pairs of the form <code>(value, index)</code>, which helps in calculating the left and right boundaries for each element.</li>
-<li><code>n</code>: The size of the <code>nums</code> array.</li>
-<li><code>left</code> and <code>right</code>: Arrays that will store the number of subarrays where <code>nums[i]</code> is the minimum for the left and right boundaries, respectively.</li>
-</ul>
-<h4 id="prefill-the-left-and-right-arrays">
-  <strong>Prefill the <code>left[]</code> and <code>right[]</code> Arrays</strong>
-  <a class="heading-link" href="#prefill-the-left-and-right-arrays">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)  left[i] <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) right[i] <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> i;
-</span></span></code></pre></div><ul>
-<li>Initially, we prefill the <code>left[]</code> array with <code>i + 1</code>, meaning that each element can at least form a subarray by itself.</li>
-<li>Similarly, we prefill the <code>right[]</code> array with <code>n - i</code>, meaning that each element can at least form a subarray ending at the last element.</li>
-</ul>
-<h4 id="fill-left-and-right-using-the-monotonic-stack">
-  <strong>Fill <code>left[]</code> and <code>right[]</code> Using the Monotonic Stack</strong>
-  <a class="heading-link" href="#fill-left-and-right-using-the-monotonic-stack">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>stk_p.empty() <span style="color:#f92672">&amp;&amp;</span> stk_p.top().first <span style="color:#f92672">&gt;</span> nums[i]) {
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">auto</span> x <span style="color:#f92672">=</span> stk_p.top();
-</span></span><span style="display:flex;"><span>                stk_p.pop();
-</span></span><span style="display:flex;"><span>                right[x.second] <span style="color:#f92672">=</span> i <span style="color:#f92672">-</span> x.second;
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            left[i] <span style="color:#f92672">=</span> stk_p.empty() <span style="color:#f92672">?</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> i <span style="color:#f92672">-</span> stk_p.top().second;
-</span></span><span style="display:flex;"><span>            stk_p.push({ nums[i], i });
-</span></span><span style="display:flex;"><span>        }
-</span></span></code></pre></div><ul>
-<li>For each element in <code>nums</code> (at index <code>i</code>), we:
-<ul>
-<li><strong>Pop from the stack</strong> while the top element of the stack is greater than the current element (<code>nums[i]</code>). This helps us find the nearest smaller element to the right and calculate the number of subarrays where the element at the popped index is the minimum. We then update <code>right[]</code> for the popped element.</li>
-<li><strong>Update <code>left[i]</code></strong>: If the stack is empty, it means there is no smaller element on the left, and hence <code>left[i]</code> is simply <code>i + 1</code>. If there is a smaller element on the left (represented by the top of the stack), <code>left[i]</code> is calculated as <code>i - stk_p.top().second</code>, which gives the number of subarrays ending at <code>i</code> where <code>nums[i]</code> is the minimum.</li>
-<li>Finally, push the current element <code>(nums[i], i)</code> onto the stack.</li>
-</ul>
-</li>
-</ul>
-<h4 id="sum-the-contributions">
-  <strong>Sum the Contributions</strong>
-  <a class="heading-link" href="#sum-the-contributions">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mod <span style="color:#f92672">=</span> (<span style="color:#66d9ef">int</span>) <span style="color:#ae81ff">1e9</span> <span style="color:#f92672">+</span> <span style="color:#ae81ff">7</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>            ans <span style="color:#f92672">=</span> (ans <span style="color:#f92672">+</span> (<span style="color:#66d9ef">long</span>) nums[i] <span style="color:#f92672">*</span> (<span style="color:#66d9ef">long</span>) left[i] <span style="color:#f92672">*</span> (<span style="color:#66d9ef">long</span>) right[i]) <span style="color:#f92672">%</span> mod;
-</span></span></code></pre></div><ul>
-<li>We compute the total sum by iterating over each element <code>nums[i]</code>:
-<ul>
-<li>The total contribution of <code>nums[i]</code> is its value multiplied by <code>left[i]</code> and <code>right[i]</code>, which represent the number of subarrays where <code>nums[i]</code> is the minimum.</li>
-<li>We take the modulo (10^9 + 7) at each step to avoid overflow and adhere to the problem&rsquo;s constraints.</li>
-</ul>
-</li>
-</ul>
-<h4 id="return-the-result">
-  <strong>Return the Result</strong>
-  <a class="heading-link" href="#return-the-result">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> (<span style="color:#66d9ef">int</span>) ans;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><ul>
-<li>Finally, we return the result as an integer.</li>
-</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -415,39 +340,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  <strong>Time Complexity</strong>
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>O(n)</strong>: We iterate through the array once to compute <code>left[]</code> and <code>right[]</code> using the stack, and then iterate through the array again to compute the final sum. The stack operations (push and pop) each take constant time, making the overall time complexity linear with respect to the size of the input array <code>n</code>.</li>
+<li><strong>Time Complexity</strong>: O(n), where n is the number of elements in <code>nums</code>, since each element is processed at most twice.</li>
+<li><strong>Space Complexity</strong>: O(n) for the left and right arrays and the stack.</li>
 </ul>
-<h4 id="space-complexity">
-  <strong>Space Complexity</strong>
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>O(n)</strong>: The space complexity is dominated by the stack and the arrays <code>left[]</code> and <code>right[]</code>, which both require linear space relative to the size of the input array <code>n</code>.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution efficiently computes the sum of the minimum values of all subarrays using the monotonic stack technique. By leveraging the stack to track the nearest smaller elements to the left and right, we can compute the number of subarrays where each element serves as the minimum in linear time. This approach is highly efficient and scales well with large input sizes, making it suitable for problems with large arrays. The modulo operation ensures that the result remains within the specified limits, and the use of dynamic programming principles ensures that we avoid a brute force solution that would be too slow.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1395s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1399s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -463,31 +364,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-909-snakes-and-ladders-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #909: Snakes and Ladders</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-909-snakes-and-ladders-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #909: Snakes and Ladders</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

@@ -144,6 +144,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -208,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              3-minute read
             </span>
           </div>
 
@@ -262,7 +266,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1372s1hbhb">
+<h2 id="hahahugoshortcode1369s1hbhb">
   
 
   
@@ -274,12 +278,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>In this problem, we are tasked with solving a variant of the &ldquo;21 Game&rdquo; in a probabilistic setting. In the game, we are given a total number of points <code>n</code>, a threshold value <code>k</code> (which is the target), and a range <code>w</code> of possible points you can get in each draw. The task is to calculate the probability of achieving exactly <code>n</code> points or fewer, starting from a score of <code>0</code>, without exceeding <code>n</code> points.</p>
+<p>In a card game, you draw cards until your score exceeds a certain value. Given the parameters:</p>
 <ul>
-<li><strong>n</strong>: The total score we aim to achieve or exceed.</li>
-<li><strong>k</strong>: The threshold score, at which we stop drawing cards (if the score is greater than or equal to <code>k</code>, no more cards are drawn).</li>
-<li><strong>w</strong>: The maximum value a single card can have in a draw.</li>
+<li><code>n</code>: the maximum score you can achieve.</li>
+<li><code>k</code>: the threshold score where you stop drawing.</li>
+<li><code>w</code>: the maximum value of a card drawn (1 to <code>w</code>).</li>
 </ul>
+<p>The goal is to find the probability of achieving a score less than or equal to <code>n</code> after you stop drawing cards.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -287,56 +292,42 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The goal is to compute the probability of reaching a score less than or equal to <code>n</code> without exceeding <code>n</code>. The game has certain dynamics, where you draw cards, and each card has a value from <code>1</code> to <code>w</code>. If a score <code>i</code> exceeds <code>n</code>, the game ends, and we do not continue drawing cards. We need to calculate the probability that the game ends in a score less than or equal to <code>n</code>.</p>
-<h4 id="key-observations">
-  Key Observations:
-  <a class="heading-link" href="#key-observations">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ol>
-<li>The game ends as soon as your score reaches or exceeds <code>k</code>. If the score exceeds <code>n</code>, it is also an end condition.</li>
-<li>Every time you draw a card, you gain between 1 and <code>w</code> points, and the probability of drawing a particular card value is <code>1/w</code>.</li>
-<li>The dynamic programming approach works well here. We use a DP array, <code>dp[i]</code>, to store the probability of reaching exactly <code>i</code> points at any given time. The main challenge is to efficiently calculate these probabilities without redundantly computing subproblems.</li>
-<li>We start by initializing <code>dp[0] = 1</code> because starting from score <code>0</code> is guaranteed. Then, we calculate probabilities for each score up to <code>n</code>.</li>
-</ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> dp(n<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>);
-</span></span><span style="display:flex;"><span>dp[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">double</span> Wsum <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0</span>, res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0</span>;
-</span></span></code></pre></div><ul>
-<li>We initialize an array <code>dp</code> of size <code>n + 1</code> to store the probabilities. The element <code>dp[i]</code> will represent the probability of having exactly <code>i</code> points.</li>
-<li>We set <code>dp[0] = 1</code> because the probability of starting from <code>0</code> is always 1.</li>
-<li><code>Wsum</code> is used to maintain the sum of the probabilities from the previous <code>w</code> states (i.e., the sum of probabilities for scores that can contribute to the current score).</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> n; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>    dp[i] <span style="color:#f92672">=</span> Wsum <span style="color:#f92672">/</span> w;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&lt;</span> k) Wsum <span style="color:#f92672">+=</span> dp[i];
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> res <span style="color:#f92672">+=</span> dp[i];
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">-</span> w <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>) Wsum <span style="color:#f92672">-=</span> dp[i <span style="color:#f92672">-</span> w];
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>For each score <code>i</code> from <code>1</code> to <code>n</code>, we compute the probability of reaching <code>i</code> points by considering all possible previous states that can contribute to this score.
+<li>
+<p><strong>Special Cases</strong>:</p>
 <ul>
-<li>The probability <code>dp[i]</code> is computed as the sum of probabilities of drawing any card that leads to score <code>i</code>, which is given by <code>Wsum / w</code> (as we divide the sum by <code>w</code> because each draw has an equal probability).</li>
+<li>If <code>k == 0</code>, the probability is <code>1</code> because you don&rsquo;t need to draw any cards.</li>
+<li>If <code>n &gt;= k + w</code>, you can always achieve a score of at least <code>k</code>, so the probability is <code>1</code>.</li>
 </ul>
 </li>
-<li>If <code>i &lt; k</code>, we add <code>dp[i]</code> to <code>Wsum</code> since we are still drawing cards and the score has not reached the threshold <code>k</code>.</li>
-<li>If <code>i &gt;= k</code>, we stop drawing cards and add <code>dp[i]</code> to the result <code>res</code> because this is the score we are interested in.</li>
-<li>If <code>i - w &gt;= 0</code>, we subtract <code>dp[i - w]</code> from <code>Wsum</code> to ensure that the sliding window of probabilities is kept up to date.</li>
+<li>
+<p><strong>Dynamic Programming (DP)</strong>:</p>
+<ul>
+<li>Use a DP array <code>dp</code> where <code>dp[i]</code> represents the probability of achieving exactly <code>i</code> points.</li>
+<li>Initialize <code>dp[0] = 1</code> because the probability of starting with 0 points is 1.</li>
+<li>Maintain a sliding window <code>Wsum</code> to sum the probabilities of the last <code>w</code> values.</li>
 </ul>
-<p>Finally, the result <code>res</code> will contain the total probability of reaching a score from <code>k</code> to <code>n</code> without exceeding <code>n</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
-</span></span></code></pre></div><ul>
-<li>Return the result <code>res</code>, which contains the total probability of achieving a score within the required range.</li>
+</li>
+<li>
+<p><strong>Filling the DP Array</strong>:</p>
+<ul>
+<li>For each score <code>i</code> from <code>1</code> to <code>n</code>:
+<ul>
+<li>Calculate the probability of achieving score <code>i</code> by averaging the probabilities of the previous <code>w</code> scores (i.e., from <code>i - 1</code> to <code>i - w</code>).</li>
+<li>If <code>i &lt; k</code>, add <code>dp[i]</code> to <code>Wsum</code> because you still need to draw cards.</li>
+<li>If <code>i &gt;= k</code>, add <code>dp[i]</code> to the result <code>res</code>.</li>
+<li>Subtract the value <code>dp[i - w]</code> from <code>Wsum</code> if <code>i - w</code> is non-negative.</li>
 </ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>The result will be the sum of probabilities for scores <code>k</code> or more.</li>
+</ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -344,41 +335,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>O(n)</strong>: We loop through each score from <code>1</code> to <code>n</code>. For each score, we perform constant time operations (adding and subtracting values to/from <code>Wsum</code>). Thus, the overall time complexity is linear with respect to the number of scores <code>n</code>.</li>
+<li><strong>Time Complexity</strong>: O(n), as we iterate through scores from <code>1</code> to <code>n</code>.</li>
+<li><strong>Space Complexity</strong>: O(n), due to the storage required for the DP array.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>O(n)</strong>: We use an array <code>dp</code> of size <code>n + 1</code> to store the probabilities for each score from <code>0</code> to <code>n</code>. The space complexity is therefore proportional to <code>n</code>.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The <code>new21Game</code> function computes the probability of achieving a score within the allowed range by using dynamic programming. By maintaining a running sum of probabilities (<code>Wsum</code>), the solution efficiently calculates the required probability for each score. The sliding window technique ensures that we do not redundantly compute overlapping subproblems, making this approach both time and space efficient.</p>
-<p>This solution is optimal for solving the problem with a time complexity of <strong>O(n)</strong> and space complexity of <strong>O(n)</strong>, making it scalable for large inputs.</p>
-<p>This approach uses concepts of dynamic programming, sliding window, and probabilistic calculations, all of which contribute to its efficiency in solving the &ldquo;new21Game&rdquo; problem.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1372s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1369s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -394,31 +359,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-838-push-dominoes-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #838: Push Dominoes</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-838-push-dominoes-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #838: Push Dominoes</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

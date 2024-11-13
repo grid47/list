@@ -144,6 +144,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -208,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -245,7 +249,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1423s1hbhb">
+<h2 id="hahahugoshortcode1428s1hbhb">
   
 
   
@@ -257,7 +261,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array of integers <code>arr</code>, the task is to determine if it is possible to reorder the elements such that each element <code>x</code> has a corresponding <code>2 * x</code> in the array. More specifically, for every element <code>x</code> in the array, we need to check if there exists a <code>2 * x</code> in the array, and if so, we need to &ldquo;pair&rdquo; them. The goal is to return <code>true</code> if the array can be rearranged in such a way, and <code>false</code> otherwise. This problem is commonly encountered when dealing with pairing elements with double relationships in a dataset.</p>
+<p>Given an array of integers, determine if it can be reordered such that for every element <code>x</code>, there exists an element <code>2x</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -265,76 +269,50 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem, we can follow a greedy approach. We need to ensure that for each element <code>x</code> in the array, there is a corresponding <code>2 * x</code> that can be paired with it. The approach involves:</p>
 <ol>
 <li>
-<p><strong>Counting Elements</strong>: We first count the occurrences of each element in the array using a hash map (unordered map).</p>
+<p><strong>Count Occurrences</strong>:</p>
+<ul>
+<li>Use an unordered map to count the occurrences of each element in the array.</li>
+</ul>
 </li>
 <li>
-<p><strong>Sorting by Absolute Value</strong>: Since the problem involves pairs of numbers where one is double the other, we need to consider numbers based on their absolute values. Sorting the keys (unique values of the array) based on their absolute values allows us to process smaller values first. This helps to handle potential conflicts when larger elements depend on smaller elements to form pairs.</p>
+<p><strong>Sort Unique Elements</strong>:</p>
+<ul>
+<li>Extract the unique keys from the map into a vector.</li>
+<li>Sort the vector based on the absolute values of the elements. This ensures that we handle negative values properly.</li>
+</ul>
 </li>
 <li>
-<p><strong>Greedy Pairing</strong>: We attempt to pair each element <code>x</code> with its double <code>2 * x</code>. If there are more occurrences of <code>x</code> than <code>2 * x</code>, then it is impossible to form valid pairs, so we return <code>false</code>. We decrement the count of <code>2 * x</code> as we successfully pair it with <code>x</code>.</p>
+<p><strong>Check Doubling Condition</strong>:</p>
+<ul>
+<li>Iterate through the sorted keys:
+<ul>
+<li>For each element <code>x</code>, check if the count of <code>x</code> is greater than the count of <code>2x</code>. If it is, return <code>false</code> since there aren&rsquo;t enough pairs.</li>
+<li>Decrement the count of <code>2x</code> by the count of <code>x</code> to account for the pairs formed.</li>
+</ul>
+</li>
+</ul>
 </li>
 <li>
-<p><strong>Final Check</strong>: After attempting to pair all elements, if any unpaired elements are left, we return <code>false</code>. If all elements can be paired successfully, we return <code>true</code>.</p>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>If all elements are processed without returning <code>false</code>, return <code>true</code>.</li>
+</ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Counting Element Occurrences</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> c;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i : arr)
-</span></span><span style="display:flex;"><span>    c[i]<span style="color:#f92672">++</span>;
-</span></span></code></pre></div><ul>
-<li>We use an unordered map <code>c</code> to store the count of each element in the array <code>arr</code>. The key is the element, and the value is its frequency in the array.</li>
+<ul>
+<li>The function initializes a count map for the elements.</li>
+<li>It sorts the unique keys based on their absolute values.</li>
+<li>The function checks the doubling condition for each unique element and updates the count accordingly.</li>
 </ul>
-</li>
-<li>
-<p><strong>Storing Unique Keys</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> keys;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it: c)
-</span></span><span style="display:flex;"><span>    keys.push_back(it.first);
-</span></span></code></pre></div><ul>
-<li>We extract all the unique keys (elements) from the map into the vector <code>keys</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Sorting the Keys by Absolute Value</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(keys.begin(), keys.end(), [<span style="color:#f92672">&amp;</span>](<span style="color:#66d9ef">int</span> a, <span style="color:#66d9ef">int</span> b){
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">abs</span>(a) <span style="color:#f92672">&lt;</span> abs(b);
-</span></span><span style="display:flex;"><span>});
-</span></span></code></pre></div><ul>
-<li>We sort the keys by their absolute values in ascending order. This ensures that we handle smaller values first, which is important because we need to find and pair each element <code>x</code> with <code>2 * x</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Greedy Pairing Process</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x: keys) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(c[x] <span style="color:#f92672">&gt;</span> c[<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> x])
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false;
-</span></span><span style="display:flex;"><span>    c[<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> x] <span style="color:#f92672">-=</span> c[x];
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>For each element <code>x</code> in the sorted list, we check if there are more occurrences of <code>x</code> than its double <code>2 * x</code>. If so, it’s impossible to form pairs, and we return <code>false</code>.</li>
-<li>If we can form valid pairs, we decrement the count of <code>2 * x</code> by the number of occurrences of <code>x</code> because those occurrences of <code>x</code> are now paired with <code>2 * x</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Final Result</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> true;
-</span></span></code></pre></div><ul>
-<li>If the entire process completes without encountering any issues, we return <code>true</code>, indicating that the array can be rearranged to satisfy the condition.</li>
-</ul>
-</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -342,36 +320,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li>Counting the occurrences of each element takes O(n), where <code>n</code> is the size of the array <code>arr</code>.</li>
-<li>Sorting the unique keys based on their absolute values takes O(k log k), where <code>k</code> is the number of unique elements in <code>arr</code>.</li>
-<li>The final loop where we pair elements takes O(k), as we process each unique element once.</li>
-<li>Overall, the time complexity is dominated by the sorting step, so it is O(k log k). Since <code>k</code> is at most <code>n</code>, the total time complexity is O(n log n).</li>
+<li><strong>Time Complexity</strong>: O(n log n), where n is the number of elements in the array. This includes counting elements and sorting the keys.</li>
+<li><strong>Space Complexity</strong>: O(n) for the count map and the keys vector.</li>
 </ul>
-</li>
-<li>
-<p><strong>Space Complexity</strong>:</p>
-<ul>
-<li>The space complexity is O(n), as we store the counts of each element in the unordered map, and the list of unique keys requires space proportional to the number of distinct elements in the array.</li>
-</ul>
-</li>
-</ol>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution efficiently solves the problem by using a greedy approach with a hash map to count element occurrences and a sorting step to ensure that smaller elements are processed first. By sorting the array based on absolute values and processing each element in increasing order, we ensure that the pairing is done optimally. The overall time complexity of O(n log n) is efficient enough for large inputs, and the space complexity of O(n) is also manageable. The solution is both intuitive and effective for solving the problem of pairing elements with their doubles in an array.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1423s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1428s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -387,31 +344,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-955-delete-columns-to-make-sorted-ii-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #955: Delete Columns to Make Sorted II</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-955-delete-columns-to-make-sorted-ii-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #955: Delete Columns to Make Sorted II</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

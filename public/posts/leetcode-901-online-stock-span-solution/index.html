@@ -144,6 +144,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -208,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              6-minute read
+              2-minute read
             </span>
           </div>
 
@@ -247,7 +251,7 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * StockSpanner* obj = new StockSpanner();
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * int param_1 = obj-&gt;next(price);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<h2 id="hahahugoshortcode1393s1hbhb">
+<h2 id="hahahugoshortcode1397s1hbhb">
   
 
   
@@ -259,12 +263,31 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem asks us to design a <strong>StockSpanner</strong> class that supports the following method:</p>
+<p>Implement the <code>StockSpanner</code> class that calculates the span of stock prices for a series of daily stock prices. The span for a stock price today is defined as the maximum number of consecutive days (including today) the stock price was less than or equal to today&rsquo;s price.</p>
+<h3 id="class-definition">
+  Class Definition
+  <a class="heading-link" href="#class-definition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
 <ul>
-<li><code>next(price)</code> — this method will receive an integer <code>price</code> representing the current day&rsquo;s stock price. It should return an integer that represents the <strong>span</strong> of the stock&rsquo;s price, defined as the number of consecutive days (including today) where the stock price was less than or equal to <code>price</code>.</li>
+<li><strong>Class</strong>: <code>StockSpanner</code>
+<ul>
+<li><strong>Constructor</strong>: <code>StockSpanner()</code>
+<ul>
+<li>Initializes an empty stack to store stock prices and their spans.</li>
 </ul>
-<p>The <strong>span</strong> of a stock is the number of consecutive days up to the current day where the stock price was greater than or equal to today&rsquo;s price. For example, if the stock prices for the last 5 days are <code>[100, 80, 60, 70, 60]</code>, and today&rsquo;s price is 75, then the stock span for the day with price 75 would be 2, since the price was greater than or equal to 75 on the two previous days.</p>
-<p>We are to implement the class <code>StockSpanner</code> that efficiently calculates the span for each price on each call to <code>next(price)</code>.</p>
+</li>
+<li><strong>Method</strong>: <code>int next(int price)</code>
+<ul>
+<li>Takes an integer <code>price</code> representing the stock price for the day.</li>
+<li>Returns the span of stock prices for that day.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -272,140 +295,26 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem efficiently, we can use a <strong>monotonic stack</strong> to track the indices of the stock prices in a way that allows us to efficiently calculate the span for each price.</p>
-<h4 id="explanation-of-approach">
-  <strong>Explanation of Approach</strong>
-  <a class="heading-link" href="#explanation-of-approach">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ol>
 <li>
-<p><strong>Monotonic Stack</strong>:</p>
+<p><strong>Initialization</strong>:</p>
 <ul>
-<li>We use a stack to store pairs of stock prices and their corresponding spans. Each pair contains:
-<ul>
-<li>The stock price on a particular day.</li>
-<li>The span of that stock price, which is how many consecutive days (including the current day) the stock price has been greater than or equal to the price on that day.</li>
-</ul>
-</li>
+<li>Use a stack <code>cp</code> to store pairs of stock prices and their respective spans.</li>
 </ul>
 </li>
 <li>
-<p><strong>Pop from Stack</strong>:</p>
+<p><strong>Calculating Span</strong>:</p>
 <ul>
-<li>For each new price, we compare it with the price at the top of the stack. If the price at the top of the stack is less than or equal to the new price, we pop that price from the stack and add its span to the span of the new price.</li>
-<li>This is because the span of the current price will include the span of the prices that are less than or equal to it (as we can include all consecutive days where the price was less than or equal to the current price).</li>
+<li>Initialize the span (<code>res</code>) to 1 for the current day&rsquo;s price.</li>
+<li>While the stack is not empty and the price at the top of the stack is less than or equal to the current price:
+<ul>
+<li>Add the span of the stock price at the top of the stack to <code>res</code> and pop the stack.</li>
 </ul>
 </li>
-<li>
-<p><strong>Update Span</strong>:</p>
-<ul>
-<li>If we pop items from the stack, we continue adding their spans to the current span until we find a price greater than the current price or the stack becomes empty.</li>
-<li>Once the stack is empty or we find a price greater than the current price, the span for the current price is calculated and pushed onto the stack.</li>
+<li>After processing, push the current price along with its calculated span onto the stack.</li>
+<li>Return the calculated span.</li>
 </ul>
 </li>
-<li>
-<p><strong>Efficiency</strong>:</p>
-<ul>
-<li>Each price is pushed and popped from the stack at most once, making the time complexity of each <code>next(price)</code> call <strong>O(1)</strong>, leading to an overall <strong>O(n)</strong> time complexity for a sequence of <code>n</code> price inputs.</li>
-</ul>
-</li>
-</ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="class-definition">
-  <strong>Class Definition</strong>
-  <a class="heading-link" href="#class-definition">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">StockSpanner</span> {
-</span></span><span style="display:flex;"><span>    stack<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> cp;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    StockSpanner() {
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">next</span>(<span style="color:#66d9ef">int</span> price) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>cp.empty() <span style="color:#f92672">&amp;&amp;</span> cp.top().first <span style="color:#f92672">&lt;=</span> price) {
-</span></span><span style="display:flex;"><span>            res <span style="color:#f92672">+=</span> cp.top().second;
-</span></span><span style="display:flex;"><span>            cp.pop();
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        cp.push(make_pair(price, res));
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><ol>
-<li>
-<p><strong>StockSpanner Class</strong>:</p>
-<ul>
-<li>We define the class <code>StockSpanner</code> with a private member <code>cp</code>, which is a stack of pairs.
-<ul>
-<li>The stack stores pairs of <code>(price, span)</code>, where <code>price</code> is the stock price on a given day, and <code>span</code> is the stock span for that price.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Constructor</strong>:</p>
-<ul>
-<li>The constructor initializes the stack <code>cp</code> to be empty. It does not need to take any parameters since we initialize the stack when a new <code>StockSpanner</code> object is created.</li>
-</ul>
-</li>
-<li>
-<p><strong><code>next(price)</code> Method</strong>:</p>
-<ul>
-<li>
-<p><strong>Initialize Span</strong>: We initialize <code>res</code> to 1 because the span of the current day&rsquo;s price is at least 1 (the price itself).</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-</span></span></code></pre></div></li>
-<li>
-<p><strong>Pop Prices from the Stack</strong>:</p>
-<ul>
-<li>We enter a loop where we check if the stack is non-empty and the price at the top of the stack is less than or equal to the current price (<code>cp.top().first &lt;= price</code>).</li>
-<li>If this condition is true, we add the span of the top element (<code>cp.top().second</code>) to the result (<code>res</code>) and pop the top element off the stack.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>cp.empty() <span style="color:#f92672">&amp;&amp;</span> cp.top().first <span style="color:#f92672">&lt;=</span> price) {
-</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">+=</span> cp.top().second;
-</span></span><span style="display:flex;"><span>    cp.pop();
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div></li>
-<li>
-<p><strong>Push Current Price and Span onto the Stack</strong>:</p>
-<ul>
-<li>After processing any prices from the stack, we push the current price and its span onto the stack.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>cp.push(make_pair(price, res));
-</span></span></code></pre></div></li>
-<li>
-<p><strong>Return the Span</strong>:</p>
-<ul>
-<li>Finally, we return the span for the current price, which is stored in <code>res</code>.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
-</span></span></code></pre></div></li>
-</ul>
-</li>
-<li>
-<p><strong>Example Usage</strong>:</p>
-<ul>
-<li>An instance of the <code>StockSpanner</code> class is created, and we repeatedly call <code>next(price)</code> to get the span for each stock price.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>StockSpanner<span style="color:#f92672">*</span> obj <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> StockSpanner();
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> param_1 <span style="color:#f92672">=</span> obj<span style="color:#f92672">-&gt;</span>next(price);
-</span></span></code></pre></div></li>
 </ol>
 <h3 id="complexity">
   Complexity
@@ -414,40 +323,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  <strong>Time Complexity</strong>
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li>Each price is pushed onto the stack and popped from the stack at most once. As a result, the time complexity for each <code>next(price)</code> call is <strong>O(1)</strong>, and for a sequence of <code>n</code> price inputs, the overall time complexity is <strong>O(n)</strong>.</li>
+<li><strong>Time Complexity</strong>: O(1) on average for each <code>next</code> call since each price is pushed and popped from the stack at most once.</li>
+<li><strong>Space Complexity</strong>: O(n) in the worst case, where n is the number of stock prices stored in the stack.</li>
 </ul>
-<h4 id="space-complexity">
-  <strong>Space Complexity</strong>
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>The space complexity of the solution is <strong>O(n)</strong>, where <code>n</code> is the number of stock prices in the sequence. This is because, in the worst case, all prices could be stored in the stack, each having a corresponding span.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The <code>StockSpanner</code> class provides an efficient solution for calculating the span of stock prices using a <strong>monotonic stack</strong>. By leveraging the stack to store pairs of stock prices and their corresponding spans, we can efficiently compute the span for each price with each <code>next(price)</code> call in constant time, resulting in an overall time complexity of <strong>O(n)</strong> for <code>n</code> price inputs.</p>
-<p>The solution is both space-efficient and time-efficient, handling even large sequences of stock prices efficiently. The stack-based approach ensures that we only need to process each stock price once, making it an optimal solution for this problem.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1393s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1397s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -463,31 +347,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-904-fruit-into-baskets-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #904: Fruit Into Baskets</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-904-fruit-into-baskets-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #904: Fruit Into Baskets</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

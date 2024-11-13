@@ -142,6 +142,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -198,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -207,11 +211,11 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1110s0hbhb">
+        <h2 id="hahahugoshortcode1111s0hbhb">
   <a href="https://leetcode.com/problems/find-k-pairs-with-smallest-sums/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
-      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/373.jpeg" 
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/373.webp" 
            alt="A series of pairs of numbers, with the smallest sum softly glowing as each pair is tested." 
            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
     </div>
@@ -222,7 +226,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1110s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1111s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -250,7 +254,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1110s2hbhb">
+<h2 id="hahahugoshortcode1111s2hbhb">
   
 
   
@@ -262,13 +266,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given two sorted integer arrays, <code>nums1</code> and <code>nums2</code>, and an integer <code>k</code>, your task is to find the <code>k</code> smallest pairs (x, y) where <code>x</code> is from <code>nums1</code> and <code>y</code> is from <code>nums2</code>. The pairs should be returned in ascending order of their sum, i.e., pairs with smaller sums come first.</p>
-<p>For example:</p>
-<ul>
-<li>Input: <code>nums1 = [1,7,11]</code>, <code>nums2 = [2,4,6]</code>, <code>k = 3</code></li>
-<li>Output: <code>[[1,2],[1,4],[1,6]]</code></li>
-</ul>
-<p>If there are fewer than <code>k</code> pairs, return all the possible pairs.</p>
+<p>Given two integer arrays <code>nums1</code> and <code>nums2</code> sorted in ascending order, find the <code>k</code> smallest pairs <code>(u, v)</code> where <code>u</code> is from <code>nums1</code> and <code>v</code> is from <code>nums2</code>. The output should be a list of pairs sorted in ascending order based on the sum of the pairs.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -276,98 +274,45 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem efficiently, we use the following approach:</p>
 <ol>
 <li>
-<p><strong>Min-Heap (Priority Queue)</strong>: This is a common technique used to solve problems where we need to extract the smallest elements in a dynamic order. Here, the min-heap will help us find the <code>k</code> smallest pairs in <code>O(k log k)</code> time.</p>
+<p><strong>Priority Queue</strong>:</p>
+<ul>
+<li>Use a min-heap (priority queue) to keep track of the smallest sums and their corresponding pairs. This allows efficient retrieval of the smallest sums as we explore potential pairs.</li>
+</ul>
 </li>
 <li>
-<p><strong>Iterative Pairing</strong>: We start by pushing the smallest potential pair into the heap, which is formed by the smallest element from <code>nums1</code> paired with the smallest element from <code>nums2</code>. As we pop pairs from the heap, we push the next possible pair formed by the current element from <code>nums1</code> and the next element in <code>nums2</code> into the heap. This ensures that the heap always contains the smallest possible pairs.</p>
+<p><strong>Initial Pair Insertion</strong>:</p>
+<ul>
+<li>Initially insert the pairs formed by the first element of <code>nums1</code> with the first element of <code>nums2</code>. This helps kickstart the process as we will always be adding the smallest potential sums first.</li>
+</ul>
 </li>
 <li>
-<p><strong>Efficient Pair Management</strong>: Since both <code>nums1</code> and <code>nums2</code> are sorted, by pairing the smallest elements of <code>nums1</code> with the smallest element of <code>nums2</code>, and progressively replacing the smallest element in <code>nums2</code> for each element of <code>nums1</code>, we can efficiently generate pairs in ascending order of their sums.</p>
+<p><strong>Processing Pairs</strong>:</p>
+<ul>
+<li>Extract the smallest pair from the priority queue and push it to the result list.</li>
+<li>After extracting a pair <code>(u, v)</code>, generate a new pair by replacing <code>v</code> with the next element in <code>nums2</code> (if it exists). This maintains the order of sums while exploring new pairs.</li>
+</ul>
 </li>
 <li>
-<p><strong>Optimization Consideration</strong>: We limit the number of pairs in the heap to <code>k</code>, which ensures that we do not generate unnecessary pairs beyond the required count.</p>
+<p><strong>Stopping Condition</strong>:</p>
+<ul>
+<li>Continue this process until we have found <code>k</code> pairs or exhausted all possible pairs.</li>
+</ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Here’s how the code works:</p>
-<h4 id="1-initial-setup">
-  1. <strong>Initial Setup</strong>
-  <a class="heading-link" href="#1-initial-setup">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> ans;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n1 <span style="color:#f92672">=</span> nums1.size(), n2 <span style="color:#f92672">=</span> nums2.size();
-</span></span><span style="display:flex;"><span>priority_queue<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>, greater<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;</span> pq;
-</span></span></code></pre></div><ul>
-<li><code>ans</code>: A vector to store the result (the smallest pairs).</li>
-<li><code>n1</code> and <code>n2</code>: The sizes of <code>nums1</code> and <code>nums2</code>.</li>
-<li><code>pq</code>: A min-heap (priority queue) to store the pairs in the order of their sum.</li>
+<ul>
+<li>The function <code>kSmallestPairs</code> initializes the priority queue and inserts the initial pairs.</li>
+<li>It enters a loop where it retrieves the smallest pair from the queue, updates the result list, and pushes a new pair based on the next element from <code>nums2</code>.</li>
+<li>Finally, it returns the collected <code>k</code> smallest pairs.</li>
 </ul>
-<h4 id="2-push-the-first-k-pairs">
-  2. <strong>Push the First <code>k</code> Pairs</strong>
-  <a class="heading-link" href="#2-push-the-first-k-pairs">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n1 <span style="color:#f92672">&amp;&amp;</span> i <span style="color:#f92672">&lt;</span> k; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>    pq.push({nums1[i] <span style="color:#f92672">+</span> nums2[<span style="color:#ae81ff">0</span>], nums1[i], nums2[<span style="color:#ae81ff">0</span>], <span style="color:#ae81ff">0</span>});
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>We loop through the elements of <code>nums1</code> and push the pairs of the form <code>(nums1[i], nums2[0])</code> into the heap. This ensures that the heap is initialized with the smallest element from <code>nums1</code> paired with the smallest element from <code>nums2</code>.</li>
-</ul>
-<p>Each entry in the heap is a vector of four integers:</p>
-<ol>
-<li>The sum of the pair (<code>nums1[i] + nums2[0]</code>).</li>
-<li>The current element from <code>nums1</code> (<code>nums1[i]</code>).</li>
-<li>The current element from <code>nums2</code> (<code>nums2[0]</code>).</li>
-<li>The index in <code>nums2</code> that is being paired with <code>nums1[i]</code> (initially <code>0</code>).</li>
-</ol>
-<h4 id="3-heap-extraction-and-pair-generation">
-  3. <strong>Heap Extraction and Pair Generation</strong>
-  <a class="heading-link" href="#3-heap-extraction-and-pair-generation">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>pq.empty() <span style="color:#f92672">&amp;&amp;</span> ans.size() <span style="color:#f92672">&lt;</span> k) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> pq.top();
-</span></span><span style="display:flex;"><span>    pq.pop();
-</span></span><span style="display:flex;"><span>    ans.push_back({it[<span style="color:#ae81ff">1</span>], it[<span style="color:#ae81ff">2</span>]});
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(it[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">==</span> n2 <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">continue</span>;
-</span></span><span style="display:flex;"><span>    it[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> it[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> nums2[it[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
-</span></span><span style="display:flex;"><span>    it[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> nums2[it[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
-</span></span><span style="display:flex;"><span>    it[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">=</span> it[<span style="color:#ae81ff">3</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>    pq.push(it);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>We enter a loop where we extract pairs from the heap until we have <code>k</code> pairs in the result (<code>ans</code>).</li>
-<li>The <code>top()</code> function extracts the smallest pair, and we pop it from the heap.</li>
-<li>We add the pair <code>(it[1], it[2])</code> (i.e., <code>nums1[i]</code> and <code>nums2[j]</code>) to the result.</li>
-<li>If the current pair’s second element (<code>it[3]</code>), which is the index in <code>nums2</code>, is the last index (<code>n2 - 1</code>), we skip it because there are no more elements to form new pairs with this <code>nums1[i]</code>.</li>
-<li>If we can form a new pair (i.e., <code>it[3] &lt; n2 - 1</code>), we update the pair by replacing <code>nums2[it[3] + 1]</code> in the next step and push it back into the heap.</li>
-</ul>
-<p>This process ensures that we always extract the smallest possible pair at each step and expand the search space efficiently.</p>
-<h4 id="4-return-the-result">
-  4. <strong>Return the Result</strong>
-  <a class="heading-link" href="#4-return-the-result">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
-</span></span></code></pre></div><p>Finally, after the loop finishes, we return the result, which contains the <code>k</code> smallest pairs.</p>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -375,49 +320,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>Heap Operations</strong>: Each pair that we push or pop from the heap requires <code>O(log k)</code> time, where <code>k</code> is the number of pairs we need to extract. The maximum number of pairs we can insert into the heap is <code>k</code> at any point in time, as the heap size is bounded by <code>k</code>.</li>
-<li><strong>Loop Iterations</strong>: The loop runs for at most <code>k</code> iterations since we only need <code>k</code> smallest pairs. For each iteration, we perform a constant number of operations to update the heap.</li>
+<li><strong>Time Complexity</strong>: ( O(k \log k) ), where ( k ) is the number of pairs we need to return. Each insertion and extraction operation from the priority queue takes logarithmic time.</li>
+<li><strong>Space Complexity</strong>: ( O(k) ) for storing the result pairs and the priority queue.</li>
 </ul>
-<p>Thus, the overall time complexity is:</p>
-<ul>
-<li><strong>O(k log k)</strong>, where <code>k</code> is the number of pairs we need to return.</li>
-</ul>
-<h4 id="space-complexity">
-  Space Complexity
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>We are using a priority queue (heap) of size at most <code>k</code> to store the pairs, so the space complexity is:</li>
-<li><strong>O(k)</strong>.</li>
-</ul>
-<p>Additionally, we store the result, which can hold up to <code>k</code> pairs, so the overall space complexity is:</p>
-<ul>
-<li><strong>O(k)</strong>.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The <code>kSmallestPairs</code> function efficiently computes the <code>k</code> smallest pairs from two sorted arrays using a priority queue (min-heap) and the concept of iterative pairing. By leveraging the properties of sorted arrays and a heap, the algorithm can efficiently generate the desired result with optimal time and space complexity. This solution is well-suited for problems where the input arrays are large and the number of pairs to be generated is small (<code>k</code>).</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1110s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1111s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -425,31 +336,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-375-guess-number-higher-or-lower-ii-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #375: Guess Number Higher or Lower II</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-375-guess-number-higher-or-lower-ii-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #375: Guess Number Higher or Lower II</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

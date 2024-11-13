@@ -142,6 +142,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -198,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              6-minute read
+              2-minute read
             </span>
           </div>
 
@@ -234,7 +238,7 @@
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1380s1hbhb">
+<h2 id="hahahugoshortcode1383s1hbhb">
   
 
   
@@ -246,8 +250,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem asks us to decode a string <code>s</code> and find the character at the <code>k</code>-th position of the decoded string. The string <code>s</code> consists of letters and digits. Each digit <code>x</code> in the string represents a repetition of the preceding substring <code>x</code> times. Our task is to determine the character at the <code>k</code>-th position of the fully decoded string without fully decoding it, which could result in a large memory footprint.</p>
-<p>For example, given <code>s = &quot;leet2code3&quot;</code>, the decoded string would be <code>&quot;leetleetcodeleetcode&quot;</code>. If <code>k = 10</code>, the character at the 10th position is <code>&quot;o&quot;</code>, and that is what we should return.</p>
+<p>You are given a string <code>s</code> which consists of lowercase letters and digits. Each digit <code>d</code> indicates that the preceding substring should be repeated <code>d</code> times. The task is to find the <code>k</code>-th character of the decoded string. The decoded string can be very large, so you need to determine the character without explicitly constructing the full string.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -255,106 +258,43 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The challenge in this problem is to avoid fully decoding the string since it can become very large, especially if the string contains large numbers. Instead of building the entire decoded string, we simulate the decoding process using the length of the decoded string. We maintain a running total of the length of the string as it would be after decoding. This allows us to find the <code>k</code>-th character without ever explicitly constructing the decoded string.</p>
-<p>We employ the following approach:</p>
+<p>The solution involves two main steps:</p>
 <ol>
 <li>
-<p><strong>Calculate the total length of the decoded string</strong>:
-First, we iterate over the string <code>s</code> to calculate the total length <code>N</code> of the decoded string. During this pass, we handle characters and digits accordingly:</p>
+<p><strong>Calculate the Length of the Decoded String</strong>:</p>
 <ul>
-<li>If the character is a letter, we increment the length by 1 (since letters are added as is).</li>
-<li>If the character is a digit, it means the previous substring is repeated <code>x</code> times, and we multiply the current length <code>N</code> by this digit.</li>
+<li>Iterate through the string and compute the effective length of the decoded string <code>N</code> until it reaches or exceeds <code>k</code>.</li>
+<li>For each character in the string:
+<ul>
+<li>If it&rsquo;s a digit, multiply <code>N</code> by the digit (the repeat factor).</li>
+<li>If it&rsquo;s a letter, increment <code>N</code> by 1.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
-<p><strong>Backtrack to find the k-th character</strong>:
-Once we have the total length <code>N</code>, we start from the end of the string and backtrack:</p>
+<p><strong>Backtrack to Find the k-th Character</strong>:</p>
 <ul>
-<li>If the current character is a digit, it means we have just encountered a repetition. We divide the length <code>N</code> by the digit and update <code>k</code> as <code>k % N</code> (this effectively reduces the position relative to the new size of the current substring).</li>
-<li>If the character is a letter, we check if it corresponds to the <code>k</code>-th position in the string. If <code>k % N == 0</code>, this means we have found the position, and we return the character.</li>
+<li>Start from the end of the string and backtrack to find the <code>k</code>-th character:
+<ul>
+<li>If the character is a digit, divide <code>N</code> by the digit and update <code>k</code> to find its position in the expanded string.</li>
+<li>If the character is a letter, check if the current position corresponds to <code>k</code>. If so, return that character.</li>
 </ul>
 </li>
-<li>
-<p><strong>Edge Cases</strong>:</p>
-<ul>
-<li>If the string does not contain any digits, the problem simplifies, and we can directly access the <code>k</code>-th character in the string.</li>
-<li>If <code>k</code> is larger than the total length of the decoded string, we continue adjusting <code>k</code> as we backtrack until we reach the correct position.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Here is a step-by-step breakdown of the code implementation:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    string decodeAtIndex(string s, <span style="color:#66d9ef">int</span> k) {
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">long</span> N <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, i;  <span style="color:#75715e">// Initialize the total length of the decoded string (N) and index (i)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Calculate the total length of the decoded string
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span>(i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; N <span style="color:#f92672">&lt;</span> k; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (isdigit(s[i])) {  <span style="color:#75715e">// If the current character is a digit
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                N <span style="color:#f92672">=</span> (s[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>) <span style="color:#f92672">*</span> N;  <span style="color:#75715e">// Multiply the total length by the digit (repetition factor)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>                N <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// If the character is a letter, increase the length by 1
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// Backtrack to find the k-th character
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">while</span>(i<span style="color:#f92672">--</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(isdigit(s[i])) {  <span style="color:#75715e">// If the current character is a digit
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                N <span style="color:#f92672">/=</span> (s[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>);  <span style="color:#75715e">// Reduce the total length by dividing by the repetition factor
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                k <span style="color:#f92672">%=</span> N;  <span style="color:#75715e">// Update the position of k relative to the reduced length
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            } <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (k <span style="color:#f92672">%</span> N<span style="color:#f92672">--</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {  <span style="color:#75715e">// If the character is a letter and k corresponds to the position
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                <span style="color:#66d9ef">return</span> string(<span style="color:#ae81ff">1</span>, s[i]);  <span style="color:#75715e">// Return the letter as the result
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;hello yasir&#34;</span>;  <span style="color:#75715e">// Default return (should not reach here for valid input)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><p>Let&rsquo;s break down the key sections:</p>
-<ol>
-<li>
-<p><strong>Initial Setup and Loop for Total Length Calculation</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; N <span style="color:#f92672">&lt;</span> k; i<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>    N <span style="color:#f92672">=</span> isdigit(s[i]) <span style="color:#f92672">?</span> (s[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>) <span style="color:#f92672">*</span> N : N <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
-</span></span></code></pre></div><p>This loop runs until the total length <code>N</code> of the decoded string is at least <code>k</code>. As it processes the string <code>s</code>:</p>
 <ul>
-<li>If the character <code>s[i]</code> is a digit, we multiply the current total length <code>N</code> by the value of the digit. This simulates the effect of repeating the previous part of the string.</li>
-<li>If it&rsquo;s a letter, we simply increment the total length <code>N</code> by 1.</li>
+<li>The function <code>decodeAtIndex</code> begins by calculating the total length of the decoded string.</li>
+<li>After determining the total length, it backtracks through the string to find the exact character at position <code>k</code>.</li>
 </ul>
-</li>
-<li>
-<p><strong>Backtracking to Find the k-th Character</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(i<span style="color:#f92672">--</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(isdigit(s[i])) {
-</span></span><span style="display:flex;"><span>        N <span style="color:#f92672">/=</span> (s[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>);
-</span></span><span style="display:flex;"><span>        k <span style="color:#f92672">%=</span> N;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (k <span style="color:#f92672">%</span> N<span style="color:#f92672">--</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> string(<span style="color:#ae81ff">1</span>, s[i]);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>After calculating the total decoded length <code>N</code>, we backtrack through the string:</p>
-<ul>
-<li>If the current character is a digit, it means we&rsquo;re in a repeated section. We divide <code>N</code> by the digit to simulate reducing the length of the substring.</li>
-<li>We update <code>k</code> by taking <code>k % N</code>, which gives the relative position within the current substring.</li>
-<li>If the current character is a letter and <code>k % N == 0</code>, it means the current character is at the <code>k</code>-th position in the decoded string, and we return it.</li>
-</ul>
-</li>
-<li>
-<p><strong>Final Return</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;hello yasir&#34;</span>;
-</span></span></code></pre></div><p>This line is effectively a fallback in case of unexpected behavior, though it should never be hit given valid input.</p>
-</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -362,27 +302,15 @@ Once we have the total length <code>N</code>, we start from the end of the strin
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li><strong>O(n)</strong> where <code>n</code> is the length of the string <code>s</code>. We traverse the string twice: once to calculate the total decoded length and once to backtrack and find the k-th character. Both passes are linear in terms of the number of characters in <code>s</code>.</li>
+<li><strong>Time Complexity</strong>: ( O(n) ), where ( n ) is the length of the string <code>s</code>, since we make a single pass through the string.</li>
+<li><strong>Space Complexity</strong>: ( O(1) ), as we are using a constant amount of extra space.</li>
 </ul>
-<p><strong>Space Complexity</strong>:</p>
-<ul>
-<li><strong>O(1)</strong>. We only use a few variables for tracking the length and the current position in the string. There is no additional space used that grows with the size of the input.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution is highly efficient for finding the k-th character in a potentially very large decoded string without explicitly decoding the entire string. By simulating the decoding process using the total length and backtracking, we manage to determine the correct character in an optimal manner. This approach works particularly well when the string contains large repetition factors, making it ideal for solving large-scale problems in a time-efficient way.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1380s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1383s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -390,31 +318,10 @@ Once we have the total length <code>N</code>, we start from the end of the strin
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-881-boats-to-save-people-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #881: Boats to Save People</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-881-boats-to-save-people-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #881: Boats to Save People</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

@@ -145,6 +145,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -213,7 +217,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              6-minute read
+              2-minute read
             </span>
           </div>
 
@@ -247,7 +251,7 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * MyCalendar* obj = new MyCalendar();
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * bool param_1 = obj-&gt;book(start,end);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<h2 id="hahahugoshortcode1286s1hbhb">
+<h2 id="hahahugoshortcode1289s1hbhb">
   
 
   
@@ -259,7 +263,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>In this problem, we are tasked with implementing a calendar system that allows us to book events. Each event is defined by a start and end time, and we need to ensure that no two events overlap. The objective is to design a calendar system where we can efficiently check if a new event can be scheduled and, if so, add it to the calendar.</p>
+<p>Design a calendar system that allows scheduling events. Each event has a start and end time, and no two events can overlap.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -267,165 +271,59 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The key challenge is to efficiently check if a new event overlaps with any previously booked event. We can achieve this by using a <strong>map (or balanced binary search tree)</strong> to store the end times as the keys and the start times as the values. This allows for efficient lookups and insertion operations.</p>
-<h4 id="steps">
-  Steps:
-  <a class="heading-link" href="#steps">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ol>
 <li>
-<p><strong>Initialization</strong>:</p>
+<p><strong>Data Structure</strong>:</p>
 <ul>
-<li>We maintain a <code>map&lt;int, int&gt; mp</code> where the keys represent the end time of booked events, and the values represent the corresponding start time of those events. This ensures that the events are stored in chronological order based on their end times.</li>
+<li>Use a <code>map&lt;int, int&gt;</code> to store the end times of booked events as keys, with their corresponding start times as values.</li>
 </ul>
 </li>
 <li>
 <p><strong>Booking an Event</strong>:</p>
 <ul>
-<li>For each new event, we check if there is any existing event that overlaps with it. We do this by looking for the first event whose start time is after the new event&rsquo;s start time using <code>upper_bound(start)</code> function on the map. This gives us an iterator pointing to the first event that starts after the proposed start time of the new event.</li>
-<li>If such an event exists, we then check if the end time of this event is before the proposed end time of the new event. If it is, then the events overlap, and we return <code>false</code> to indicate that the booking is not possible.</li>
-<li>If no overlap is found, we can safely add the new event to the calendar by inserting it into the map with its end time as the key.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Value</strong>:</p>
-<ul>
-<li>The <code>book</code> function returns <code>true</code> if the event was successfully booked, otherwise, it returns <code>false</code> if the event overlaps with an already existing one.</li>
+<li>For each booking request, check if the event can be scheduled without overlapping existing events.</li>
+<li>Use <code>upper_bound</code> to find the next booked event that starts after the requested start time.</li>
+<li>If the next booked event exists and its start time is less than the requested end time, the booking fails (overlap).</li>
+<li>If no overlap is found, record the booking by adding the end time as a key and the start time as its value.</li>
 </ul>
 </li>
 </ol>
-<p>This approach allows for efficient insertion and overlap checking by leveraging the properties of the <code>map</code> (balanced tree structure) that ensures logarithmic time complexity for both operations.</p>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="1-constructor-mycalendar">
-  1. <strong>Constructor <code>MyCalendar</code></strong>
-  <a class="heading-link" href="#1-constructor-mycalendar">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>MyCalendar() {
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Constructor initializes the calendar system
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
-</span></span></code></pre></div><ul>
-<li>The constructor initializes an empty <code>map&lt;int, int&gt; mp</code>, which will be used to store events.</li>
-</ul>
-<h4 id="2-booking-function-book">
-  2. <strong>Booking Function <code>book</code></strong>
-  <a class="heading-link" href="#2-booking-function-book">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">book</span>(<span style="color:#66d9ef">int</span> start, <span style="color:#66d9ef">int</span> end) {
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Find the first event that starts after the proposed start time
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">auto</span> nxt <span style="color:#f92672">=</span> mp.upper_bound(start);
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Check if the next event starts before the current event ends (overlap check)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> (nxt <span style="color:#f92672">!=</span> mp.end() <span style="color:#f92672">&amp;&amp;</span> (<span style="color:#f92672">*</span>nxt).second <span style="color:#f92672">&lt;</span> end) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false;  <span style="color:#75715e">// If overlap exists, return false
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// If no overlap, insert the event into the map
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    mp[end] <span style="color:#f92672">=</span> start;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> true;  <span style="color:#75715e">// Booking was successful
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
-</span></span></code></pre></div><ul>
-<li><strong><code>auto nxt = mp.upper_bound(start)</code></strong>: Finds the first event whose start time is greater than <code>start</code>. The <code>upper_bound</code> function returns an iterator pointing to the first element whose key is greater than <code>start</code>.</li>
-<li><strong>Overlap check</strong>: We then check if the <code>nxt</code> event starts before the proposed event&rsquo;s end time. If it does, it means there is an overlap, and we return <code>false</code>.</li>
-<li><strong>Booking</strong>: If no overlap is found, we add the new event to the <code>map</code> with <code>end</code> as the key and <code>start</code> as the value, indicating that this event has been booked.</li>
-<li><strong>Return <code>true</code></strong>: If the event is successfully booked, we return <code>true</code>.</li>
-</ul>
-<h4 id="3-helper-functions-upper-bound-and-insert">
-  3. <strong>Helper Functions (Upper Bound and Insert)</strong>
-  <a class="heading-link" href="#3-helper-functions-upper-bound-and-insert">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>The <code>upper_bound</code> function is provided by the map to perform a binary search on the keys. It efficiently finds the first element that is greater than the specified start time.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> nxt <span style="color:#f92672">=</span> mp.upper_bound(start);
-</span></span></code></pre></div><p>This allows us to avoid scanning through the entire map and efficiently check for overlaps. The map ensures that all keys (end times) are stored in sorted order, allowing us to perform binary search in <strong>O(log n)</strong> time complexity.</p>
-<h4 id="4-mycalendar-object-usage">
-  4. <strong><code>MyCalendar</code> Object Usage</strong>
-  <a class="heading-link" href="#4-mycalendar-object-usage">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>MyCalendar<span style="color:#f92672">*</span> obj <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> MyCalendar();
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> param_1 <span style="color:#f92672">=</span> obj<span style="color:#f92672">-&gt;</span>book(start, end);
-</span></span></code></pre></div><ul>
-<li><strong>Instantiating the calendar</strong>: An object <code>obj</code> of type <code>MyCalendar</code> is created.</li>
-<li><strong>Booking an event</strong>: The <code>book</code> function is called with the start and end times of the new event. The result (<code>true</code> or <code>false</code>) is stored in <code>param_1</code>.</li>
-</ul>
-<h3 id="complexity-analysis">
-  Complexity Analysis
-  <a class="heading-link" href="#complexity-analysis">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong><code>book</code> function</strong>: The primary operations in the <code>book</code> function are:
+<li><strong>Class</strong>:
 <ul>
-<li><strong>Finding the next event</strong>: <code>upper_bound(start)</code> takes <strong>O(log n)</strong> time where <code>n</code> is the number of events booked so far. This operation performs a binary search in the map to find the correct position.</li>
-<li><strong>Insertion into the map</strong>: Inserting a new element into the <code>map</code> also takes <strong>O(log n)</strong> time due to the balanced tree structure of the map.</li>
-<li>Overall, the time complexity for the <code>book</code> function is <strong>O(log n)</strong>.</li>
+<li><code>class MyCalendar</code>: Implements the booking system.</li>
+<li><strong>Constructor</strong>: Initializes the calendar system.</li>
+<li><strong>Method</strong>:
+<ul>
+<li><code>bool book(int start, int end)</code>: Attempts to book an event from <code>start</code> to <code>end</code>. Returns <code>true</code> if successful, <code>false</code> otherwise.</li>
 </ul>
 </li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>The space complexity is determined by the size of the <code>map</code> that stores the events. In the worst case, when all events are booked without overlap, the map will store <code>n</code> events. Therefore, the space complexity is <strong>O(n)</strong>, where <code>n</code> is the number of events booked.</li>
+</li>
 </ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The <code>MyCalendar</code> class effectively solves the problem of booking events without overlap using a <code>map</code> to store the events and efficiently check for possible overlaps. The approach leverages the properties of a balanced tree to achieve efficient booking operations with logarithmic time complexity for both insertion and overlap checking. This makes the solution scalable and performant for large inputs.</p>
-<h4 id="key-points">
-  Key Points:
-  <a class="heading-link" href="#key-points">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>Efficient overlap checking</strong>: By using a <code>map</code>, we can check for overlaps in <strong>O(log n)</strong> time.</li>
-<li><strong>Balanced tree structure</strong>: The <code>map</code> maintains the events in sorted order, making insertions and lookups efficient.</li>
-<li><strong>Space and time efficiency</strong>: The solution efficiently uses space and time resources, with complexities of <strong>O(log n)</strong> for each booking operation and <strong>O(n)</strong> space for storing events.</li>
+<li><strong>Time Complexity</strong>: O(log N) for each booking due to the map operations.</li>
+<li><strong>Space Complexity</strong>: O(N) for storing booked events, where N is the number of bookings.</li>
 </ul>
-<p>This design is optimal for scenarios where frequent event bookings and overlap checks are needed. It provides a clean and efficient way to manage a calendar with minimal overhead.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1286s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1289s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -441,31 +339,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-731-my-calendar-ii-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #731: My Calendar II</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-731-my-calendar-ii-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #731: My Calendar II</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

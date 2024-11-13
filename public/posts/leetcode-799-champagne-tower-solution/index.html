@@ -141,6 +141,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -193,7 +197,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              6-minute read
+              2-minute read
             </span>
           </div>
 
@@ -224,7 +228,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> currRow[query_glass];
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1327s1hbhb">
+<h2 id="hahahugoshortcode1330s1hbhb">
   
 
   
@@ -236,34 +240,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem is a simulation of pouring champagne into a triangular tower of glasses. The tower consists of rows of glasses, where each glass can hold at most 1 unit of champagne. The goal is to determine how much champagne will be in a specific glass after pouring a certain amount of champagne into the topmost glass.</p>
-<h3 id="problem-details">
-  Problem Details:
-  <a class="heading-link" href="#problem-details">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ul>
-<li>We are given an integer <code>poured</code> representing the amount of champagne to be poured into the topmost glass.</li>
-<li>We are also given <code>query_row</code> and <code>query_glass</code>, which specify the row and glass in the tower for which we need to determine the amount of champagne remaining after the pour.</li>
-</ul>
-<p>The tower follows a specific structure:</p>
-<ul>
-<li>The first row contains one glass.</li>
-<li>The second row contains two glasses.</li>
-<li>The third row contains three glasses.</li>
-<li>And so on.</li>
-</ul>
-<p>When champagne is poured into a glass, any excess champagne (overflow) is evenly distributed into the two glasses directly below it. If a glass exceeds its maximum capacity of 1 unit, the excess champagne overflows equally to the two glasses directly below it.</p>
-<h3 id="objective">
-  Objective:
-  <a class="heading-link" href="#objective">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>Determine the amount of champagne in the glass at the position <code>[query_row][query_glass]</code> after pouring <code>poured</code> units of champagne into the topmost glass.</p>
+<p>You have a champagne tower where champagne is poured into the top glass. Each glass can hold a maximum of one liter of champagne. If a glass overflows, the excess champagne is poured equally into the two glasses directly below it. Given the amount of champagne poured, and a specific glass at a certain row, return how much champagne is in that glass after pouring.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -271,76 +248,69 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem requires simulating the pouring process into the champagne tower. We can break down the approach as follows:</p>
 <ol>
 <li>
-<p><strong>Simulate the pouring process</strong>:</p>
+<p><strong>Initialize Current Row</strong>:</p>
 <ul>
-<li>Start by pouring the champagne into the topmost glass.</li>
-<li>For each row, calculate the overflow and distribute it equally into the glasses below.</li>
-<li>The glasses below the current one can receive overflow from the current glass if it exceeds its capacity of 1 unit.</li>
+<li>Start with a vector <code>currRow</code> initialized with the amount of champagne poured into the top glass.</li>
 </ul>
 </li>
 <li>
-<p><strong>Tracking the champagne in each glass</strong>:</p>
+<p><strong>Simulate the Pouring Process</strong>:</p>
 <ul>
-<li>The glasses are modeled as rows of a list where each row contains an array representing the glasses in that row.</li>
-<li>For each glass, if the amount of champagne exceeds 1, the excess champagne is split equally between the two glasses in the next row directly beneath it.</li>
+<li>For each row from 0 to <code>query_row</code>:
+<ul>
+<li>Create a new vector <code>nextrow</code> to store the amounts for the next row, initialized to zero.</li>
+<li>For each glass in the current row:
+<ul>
+<li>If the amount in the glass is greater than or equal to 1 liter, calculate the overflow:
+<ul>
+<li>Distribute half of the overflow to the glass directly below (left) and half to the glass directly below (right).</li>
+<li>Set the current glass amount to 1 liter (the maximum capacity).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>If the current row is not the query row, update <code>currRow</code> to be <code>nextrow</code>.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
-<p><strong>Iterate through each row until reaching the row of interest</strong>:</p>
+<p><strong>Return the Result</strong>:</p>
 <ul>
-<li>Each row has one more glass than the previous row, so it is important to track the pouring process row by row.</li>
-<li>Once the simulation reaches the <code>query_row</code>, return the amount of champagne in the specified <code>query_glass</code> of that row.</li>
-</ul>
-</li>
-<li>
-<p><strong>Optimized space usage</strong>:</p>
-<ul>
-<li>The solution avoids storing the entire tower structure for all rows. Instead, only the current row and the next row are kept in memory at any given time to reduce the space complexity.</li>
+<li>After processing up to the <code>query_row</code>, return the amount in <code>currRow[query_glass]</code>.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Let’s walk through the code:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">double</span> <span style="color:#a6e22e">champagneTower</span>(<span style="color:#66d9ef">int</span> poured, <span style="color:#66d9ef">int</span> query_row, <span style="color:#66d9ef">int</span> query_glass) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> currRow(<span style="color:#ae81ff">1</span>, poured);  <span style="color:#75715e">// Initialize the top row with poured champagne.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Loop through each row up to the query_row
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;=</span> query_row; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">double</span><span style="color:#f92672">&gt;</span> nextrow(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">0</span>);  <span style="color:#75715e">// Initialize the next row with 0 champagne.
-</span></span></span></code></pre></div><ul>
-<li>We start by initializing the <code>currRow</code> vector, which represents the glasses in the current row, and set the topmost glass to the amount of poured champagne.</li>
-<li>For each row up to the <code>query_row</code>, we create the next row (<code>nextrow</code>), which has one more glass than the current row.</li>
+<ul>
+<li><strong>Class</strong>:
+<ul>
+<li><code>class Solution</code>: Contains the method to determine the champagne in a specific glass.
+<ul>
+<li><code>double champagneTower(int poured, int query_row, int query_glass)</code>: Implements the logic for calculating the champagne amount.
+<ul>
+<li><strong>Parameters</strong>:
+<ul>
+<li><code>poured</code>: An integer representing the total amount of champagne poured.</li>
+<li><code>query_row</code>: An integer representing the row number of the glass to query.</li>
+<li><code>query_glass</code>: An integer representing the glass number to query.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;=</span> i; j<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Check if the current glass has more than 1 unit of champagne.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span>(currRow[j] <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">1</span>) {
-</span></span><span style="display:flex;"><span>                nextrow[j]      <span style="color:#f92672">+=</span> (currRow[j] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2.0</span>;  <span style="color:#75715e">// Overflow to the left glass in the next row.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                nextrow[j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>]  <span style="color:#f92672">+=</span> (currRow[j] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2.0</span>;  <span style="color:#75715e">// Overflow to the right glass in the next row.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                currRow[j]       <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Set current glass to 1 (maximum capacity).
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
-</span></span><span style="display:flex;"><span>        }
-</span></span></code></pre></div><ul>
-<li>In this loop, we check each glass in the current row (<code>currRow</code>). If a glass contains more than 1 unit of champagne, the excess is distributed equally to the two glasses directly below it (in the next row).</li>
-<li>We update the <code>currRow</code> to reflect that the current glass has reached its maximum capacity of 1.</li>
+</li>
+<li><strong>Returns</strong>: A double representing the amount of champagne in the specified glass.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">!=</span> query_row) currRow <span style="color:#f92672">=</span> nextrow;  <span style="color:#75715e">// Update the current row to the next row.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
-</span></span></code></pre></div><ul>
-<li>Once we have processed the current row, we update <code>currRow</code> to <code>nextrow</code> for the next iteration. If we&rsquo;ve reached the row of interest (<code>query_row</code>), we stop updating <code>currRow</code>.</li>
+</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> currRow[query_glass];  <span style="color:#75715e">// Return the amount of champagne in the queried glass.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
-</span></span></code></pre></div><ul>
-<li>After the loop finishes, <code>currRow</code> contains the amount of champagne in each glass of the <code>query_row</code>. We simply return the amount in the <code>query_glass</code>.</li>
+</li>
+</ul>
+</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -349,45 +319,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>The time complexity of the solution is <strong>O(query_row)</strong>, where <code>query_row</code> is the row we are interested in. This is because:</p>
 <ul>
-<li>For each row, we process each glass in the row, and the number of glasses in each row is <code>i + 1</code> (where <code>i</code> is the current row index).</li>
-<li>The total number of glasses we process is approximately the sum of the first <code>query_row</code> integers, which is O(query_row^2).</li>
-<li>Since we only need to process up to <code>query_row</code> and not all rows, the time complexity is O(query_row).</li>
+<li><strong>Time Complexity</strong>: O(row^2), where row is the number of rows processed (up to <code>query_row</code>). Each row involves processing the number of glasses corresponding to its index.</li>
+<li><strong>Space Complexity</strong>: O(row), as only the current row and the next row are stored during the simulation.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>The space complexity is <strong>O(query_row)</strong> because:</p>
-<ul>
-<li>We only store the <code>currRow</code> and <code>nextrow</code> arrays, each of which can have at most <code>query_row + 1</code> elements.</li>
-<li>Thus, the space complexity is linear in the number of rows, i.e., O(query_row).</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The solution efficiently simulates the pouring process in the champagne tower using two arrays (<code>currRow</code> and <code>nextrow</code>) to track the amount of champagne in each glass at each stage. By iterating over each row up to the <code>query_row</code>, the solution determines the amount of champagne in the specified glass without needing to store the entire tower structure.</p>
-<p>This approach is both time and space efficient, with a time complexity of O(query_row) and a space complexity of O(query_row). It effectively handles the problem constraints and provides the correct result for any valid input values.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1327s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1330s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -403,31 +343,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-802-find-eventual-safe-states-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #802: Find Eventual Safe States</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-802-find-eventual-safe-states-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #802: Find Eventual Safe States</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

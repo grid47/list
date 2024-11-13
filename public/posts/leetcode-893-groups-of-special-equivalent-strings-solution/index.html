@@ -144,6 +144,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -208,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -237,7 +241,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> s.size();
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1410s1hbhb">
+<h2 id="hahahugoshortcode1390s1hbhb">
   
 
   
@@ -249,13 +253,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem is to find the number of <strong>special equivalent groups</strong> in a given list of strings. Two strings are considered <strong>special equivalent</strong> if one string can be transformed into the other by swapping characters at <strong>even indices</strong> or <strong>odd indices</strong> independently. The goal is to determine how many distinct groups of strings exist where each group contains strings that can be transformed into each other.</p>
-<p>For example, the strings &ldquo;abc&rdquo; and &ldquo;cab&rdquo; are special equivalent because:</p>
-<ul>
-<li>After sorting the characters at the <strong>even indices</strong> (0-based index 0, 2), both strings give the same result: &ldquo;a&rdquo; and &ldquo;b&rdquo; for &ldquo;abc&rdquo; and &ldquo;c&rdquo; and &ldquo;a&rdquo; for &ldquo;cab&rdquo;.</li>
-<li>After sorting the characters at the <strong>odd indices</strong> (1-based index 1), both give the same result: &ldquo;b&rdquo; and &ldquo;c&rdquo;.</li>
-</ul>
-<p>Given a list of strings, we need to determine how many such distinct groups exist.</p>
+<p>Given an array of strings <code>words</code>, you need to find the number of special-equivalent groups. Two strings are special-equivalent if they can be made equal by swapping characters at even indices with each other and characters at odd indices with each other.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -263,91 +261,55 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem, the key observation is that the strings in the same special equivalent group must have the same characters at <strong>even indices</strong> and <strong>odd indices</strong> (though their order might differ, they must form the same set of characters).</p>
-<h4 id="key-steps">
-  Key Steps:
-  <a class="heading-link" href="#key-steps">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
+<p>To determine the number of special-equivalent groups:</p>
 <ol>
 <li>
-<p><strong>Separation of Characters</strong>: For each string, divide it into two parts:</p>
+<p><strong>Character Classification</strong>:</p>
 <ul>
-<li>One containing the characters at <strong>even indices</strong>.</li>
-<li>The other containing the characters at <strong>odd indices</strong>.</li>
+<li>For each string, separate its characters into two groups: characters at even indices and characters at odd indices.</li>
 </ul>
 </li>
 <li>
-<p><strong>Sorting to Group Equivalent Characters</strong>: Once the characters are divided into even and odd indexed groups, <strong>sort</strong> these groups to ensure that different permutations of the same characters (like &ldquo;abc&rdquo; and &ldquo;cab&rdquo;) become identical.</p>
+<p><strong>Sorting</strong>:</p>
+<ul>
+<li>Sort the characters within each group. This allows us to standardize the representation of each string based on the characters it contains in even and odd positions.</li>
+</ul>
 </li>
 <li>
-<p><strong>Pairing and Grouping</strong>: After sorting the two groups, pair the sorted even-indexed characters with the sorted odd-indexed characters. This unique pair represents a string&rsquo;s &ldquo;signature&rdquo;, which can be used to group equivalent strings together.</p>
-</li>
-<li>
-<p><strong>Using a Set to Track Unique Groups</strong>: The set data structure is used to track unique pairs. Each pair represents a unique group of special equivalent strings. By inserting each string&rsquo;s pair into the set, we can automatically ensure that only unique pairs are counted.</p>
-</li>
-<li>
-<p><strong>Counting Distinct Groups</strong>: The number of unique special equivalent groups is simply the size of the set after processing all the strings.</p>
+<p><strong>Unique Representation</strong>:</p>
+<ul>
+<li>Use a set to store unique pairs of sorted even and odd character groups. The size of the set will represent the number of special-equivalent groups.</li>
+</ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="steps">
+  Steps
+  <a class="heading-link" href="#steps">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ol>
-<li>
-<p><strong>Set Initialization</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>set<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span>string, string<span style="color:#f92672">&gt;&gt;</span> s;
-</span></span></code></pre></div><ul>
-<li>A set <code>s</code> of pairs is created. Each pair will contain two strings: one for the even-indexed characters and one for the odd-indexed characters. Using a set automatically ensures that only unique pairs are kept.</li>
+<li>Initialize a set to keep track of unique pairs of sorted character groups.</li>
+<li>Loop through each string in the <code>words</code> array:
+<ul>
+<li>Create a pair of strings for the sorted characters at even and odd indices.</li>
+<li>Insert this pair into the set.</li>
 </ul>
 </li>
-<li>
-<p><strong>Looping Through Each Word</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">auto</span><span style="color:#f92672">&amp;</span> w: words) {
-</span></span><span style="display:flex;"><span>    pair<span style="color:#f92672">&lt;</span>string, string<span style="color:#f92672">&gt;</span> p;
-</span></span></code></pre></div><ul>
-<li>The program iterates through each word in the <code>words</code> array. For each word, a pair <code>p</code> is created to store the two groups (even and odd indexed characters).</li>
-</ul>
-</li>
-<li>
-<p><strong>Separating Even and Odd Indexed Characters</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> w.size(); i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (i <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>) p.first  <span style="color:#f92672">+=</span> w[i];
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>       p.second <span style="color:#f92672">+=</span> w[i];
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>For each word, a loop iterates through its characters. If the index <code>i</code> is <strong>even</strong>, the character is added to <code>p.second</code>, which will hold the even-indexed characters. If the index <code>i</code> is <strong>odd</strong>, the character is added to <code>p.first</code>, which will hold the odd-indexed characters.</li>
-</ul>
-</li>
-<li>
-<p><strong>Sorting the Characters</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(p.first.begin(), p.first.end());
-</span></span><span style="display:flex;"><span>sort(p.second.begin(), p.second.end());
-</span></span></code></pre></div><ul>
-<li>After collecting the even and odd indexed characters, both groups are <strong>sorted</strong> to ensure that any permutation of characters in the groups is considered the same.</li>
-</ul>
-</li>
-<li>
-<p><strong>Inserting into Set</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>s.insert(p);
-</span></span></code></pre></div><ul>
-<li>The sorted pair <code>(p.first, p.second)</code> is inserted into the set. If an identical pair already exists, it will not be added again, ensuring that only unique groups are counted.</li>
-</ul>
-</li>
-<li>
-<p><strong>Returning the Result</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> s.size();
-</span></span></code></pre></div><ul>
-<li>The size of the set <code>s</code> is returned, which represents the number of unique special equivalent groups.</li>
-</ul>
-</li>
+<li>Return the size of the set, which indicates the number of unique special-equivalent groups.</li>
 </ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The <code>numSpecialEquivGroups</code> function processes each word in the <code>words</code> vector, categorizing its characters and storing their sorted representations in a set.</li>
+<li>Finally, it returns the number of unique entries in the set.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -355,43 +317,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>Sorting Each Word</strong>: For each word in the list, we sort the characters in both the even and odd indexed groups. Sorting two halves of the string takes <strong>O(M log M)</strong> time, where <code>M</code> is the length of the word.</li>
-<li><strong>Inserting into Set</strong>: Inserting a pair into a set takes <strong>O(log G)</strong> time, where <code>G</code> is the number of distinct pairs. In the worst case, the number of distinct pairs can be as large as the number of words in the list.</li>
+<li><strong>Time Complexity</strong>: (O(n \cdot m \log m)), where (n) is the number of words and (m) is the maximum length of the words (due to sorting).</li>
+<li><strong>Space Complexity</strong>: (O(n)) for storing unique pairs in the set.</li>
 </ul>
-<p>Thus, the total time complexity for the solution is <strong>O(N * M log M)</strong>, where <code>N</code> is the number of words in the list and <code>M</code> is the average length of the words.</p>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>Space for Set</strong>: The space complexity is dominated by the space needed to store the set of pairs. In the worst case, the set will contain one pair for each word, so the space complexity is <strong>O(N)</strong>, where <code>N</code> is the number of words in the list.</li>
-<li><strong>Auxiliary Space for Sorting</strong>: Sorting the characters of each word requires additional space, leading to a space complexity of <strong>O(M)</strong> for each word&rsquo;s sorting operation.</li>
-</ul>
-<p>Thus, the overall space complexity is <strong>O(N * M)</strong>.</p>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution efficiently counts the number of distinct <strong>special equivalent groups</strong> by using sorting and set operations. The sorting of even and odd indexed characters ensures that permutations of characters within those indices are treated as equivalent. By using a set, we automatically eliminate duplicate groups. This method provides a clear and effective approach to solve the problem with a time complexity of <strong>O(N * M log M)</strong>, where <code>N</code> is the number of words and <code>M</code> is the average length of the words. The space complexity is manageable, making this approach suitable for large inputs.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1410s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1390s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -407,31 +341,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-894-all-possible-full-binary-trees-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #894: All Possible Full Binary Trees</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-894-all-possible-full-binary-trees-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #894: All Possible Full Binary Trees</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

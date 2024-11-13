@@ -143,6 +143,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -203,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -212,11 +216,11 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode963s0hbhb">
+        <h2 id="hahahugoshortcode964s0hbhb">
   <a href="https://leetcode.com/problems/perfect-squares/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
-      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/279.jpeg" 
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/279.webp" 
            alt="A series of glowing squares being formed from numbers, each square glowing brighter as it becomes perfect." 
            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
     </div>
@@ -227,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode963s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode964s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -248,7 +252,7 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode963s2hbhb">
+<h2 id="hahahugoshortcode964s2hbhb">
   
 
   
@@ -260,13 +264,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem asks you to find the <strong>least number of perfect squares</strong> that sum up to a given number <code>n</code>. A <strong>perfect square</strong> is an integer that is the square of another integer. For example, the numbers <code>1</code>, <code>4</code>, <code>9</code>, <code>16</code>, <code>25</code>, and so on are perfect squares. You need to determine the minimum number of these perfect squares that add up to <code>n</code>.</p>
-<p>For example:</p>
-<ul>
-<li>If <code>n = 12</code>, the least number of perfect squares that sum up to <code>12</code> is <code>3</code> because <code>12 = 4 + 4 + 4</code>.</li>
-<li>If <code>n = 13</code>, the least number of perfect squares that sum up to <code>13</code> is <code>2</code> because <code>13 = 9 + 4</code>.</li>
-</ul>
-<p>This is a typical example of a dynamic programming problem, where you aim to break the problem down into smaller subproblems and use the results of these subproblems to solve the overall problem.</p>
+<p>Given a positive integer <code>n</code>, find the least number of perfect square numbers that sum to <code>n</code>. A perfect square is an integer that is the square of an integer.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -274,62 +272,48 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem, we will use <strong>dynamic programming</strong> (DP). The main idea is to break down the problem into smaller subproblems, and each subproblem answers how many perfect squares are needed to sum up to a particular number.</p>
-<p>We maintain an array <code>cnt</code> where <code>cnt[i]</code> stores the minimum number of perfect squares required to sum up to <code>i</code>. We can fill this array iteratively by considering all perfect squares smaller than or equal to <code>i</code>.</p>
-<p><strong>Steps:</strong></p>
+<p>The solution uses dynamic programming to build up the minimum count of perfect squares that sum to each integer up to <code>n</code>:</p>
 <ol>
-<li><strong>Initialization:</strong> Start by initializing an array <code>cnt</code> of size <code>n + 1</code> to store the results. Set <code>cnt[0] = 0</code> because no perfect square is needed to sum up to <code>0</code>.</li>
-<li><strong>Iterate over all numbers up to <code>n</code>:</strong> For each number <code>i</code> from <code>1</code> to <code>n</code>, we check all perfect squares smaller than or equal to <code>i</code>. For each square <code>j * j</code>, we check if we can improve the result for <code>cnt[i]</code> by considering <code>cnt[i - j * j] + 1</code>. This means we are subtracting a square from <code>i</code> and looking for the best solution for the remaining sum (<code>i - j * j</code>).</li>
-<li><strong>Return the result for <code>n</code>:</strong> After iterating over all numbers, the value <code>cnt[n]</code> will contain the minimum number of perfect squares that sum up to <code>n</code>.</li>
+<li>
+<p><strong>Dynamic Programming Array</strong>:</p>
+<ul>
+<li>Create a vector <code>cnt</code> of size <code>n + 1</code>, initialized to a maximum value (infinity). The <code>cnt[i]</code> will represent the minimum number of perfect squares that sum up to <code>i</code>.</li>
+<li>Set <code>cnt[0]</code> to <code>0</code> since zero can be formed by zero perfect squares.</li>
+</ul>
+</li>
+<li>
+<p><strong>Filling the Array</strong>:</p>
+<ul>
+<li>Iterate through each number <code>i</code> from <code>1</code> to <code>n</code>.</li>
+<li>For each <code>i</code>, iterate through each perfect square <code>j * j</code> such that <code>j * j &lt;= i</code>. Update <code>cnt[i]</code> by taking the minimum of its current value and <code>cnt[i - j * j] + 1</code> (which represents using one additional perfect square).</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>: The value at <code>cnt[n]</code> will give the least number of perfect squares that sum to <code>n</code>.</p>
+</li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="step-1-initialize-the-cnt-array">
-  Step 1: Initialize the <code>cnt</code> Array
-  <a class="heading-link" href="#step-1-initialize-the-cnt-array">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> cnt(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, INT_MAX);
-</span></span><span style="display:flex;"><span>cnt[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span></code></pre></div><ul>
-<li>We initialize a vector <code>cnt</code> of size <code>n + 1</code> with the value <code>INT_MAX</code> (which represents infinity) to signify that initially, we don&rsquo;t know how to sum up to any number other than <code>0</code>.</li>
-<li>We set <code>cnt[0] = 0</code> because no perfect squares are needed to sum up to <code>0</code>.</li>
+<ul>
+<li><strong>Input</strong>: A positive integer <code>n</code>.</li>
+<li><strong>Output</strong>: The least number of perfect square numbers that sum to <code>n</code>.</li>
 </ul>
-<h4 id="step-2-iterate-through-all-numbers-from-1-to-n">
-  Step 2: Iterate Through All Numbers from <code>1</code> to <code>n</code>
-  <a class="heading-link" href="#step-2-iterate-through-all-numbers-from-1-to-n">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;=</span> n; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">*</span> j <span style="color:#f92672">&lt;=</span> i; j<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>        cnt[i] <span style="color:#f92672">=</span> min(cnt[i], cnt[i <span style="color:#f92672">-</span> j <span style="color:#f92672">*</span> j] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>We loop through each number <code>i</code> from <code>1</code> to <code>n</code> (outer loop).</li>
-<li>For each <code>i</code>, we consider all perfect squares <code>j * j</code> such that <code>j * j &lt;= i</code> (inner loop).</li>
-<li>We update <code>cnt[i]</code> with the minimum value between its current value and <code>cnt[i - j * j] + 1</code>. This represents using the square <code>j * j</code> and finding the best result for the remaining sum <code>i - j * j</code>.</li>
+<ol>
+<li>Initialize a vector <code>cnt</code> of size <code>n + 1</code> with all elements set to <code>INT_MAX</code>.</li>
+<li>Set <code>cnt[0]</code> to <code>0</code>.</li>
+<li>Use nested loops:
+<ul>
+<li>The outer loop runs from <code>1</code> to <code>n</code>.</li>
+<li>The inner loop runs from <code>1</code> until the square of <code>j</code> exceeds <code>i</code>, updating <code>cnt[i]</code>.</li>
 </ul>
-<h4 id="step-3-return-the-result-for-n">
-  Step 3: Return the Result for <code>n</code>
-  <a class="heading-link" href="#step-3-return-the-result-for-n">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> cnt[n];
-</span></span></code></pre></div><ul>
-<li>After filling in the array <code>cnt</code>, the result for <code>n</code> will be stored in <code>cnt[n]</code>, which represents the least number of perfect squares that sum up to <code>n</code>.</li>
-</ul>
+</li>
+<li>Return <code>cnt[n]</code>, which contains the minimum number of perfect squares for <code>n</code>.</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -337,43 +321,26 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li>The outer loop runs from <code>1</code> to <code>n</code>, so it executes <code>n</code> iterations.</li>
-<li>The inner loop iterates over all perfect squares less than or equal to <code>i</code>. For each <code>i</code>, the number of perfect squares less than or equal to <code>i</code> is approximately <code>sqrt(i)</code>. So for each <code>i</code>, the inner loop runs at most <code>O(sqrt(i))</code> times.</li>
-<li>Therefore, the time complexity is the sum of <code>sqrt(i)</code> for <code>i</code> from <code>1</code> to <code>n</code>. This can be approximated as <code>O(n * sqrt(n))</code>.</li>
+<li><strong>Time Complexity</strong>: (O(n \sqrt{n})) because the outer loop runs <code>n</code> times and the inner loop runs approximately <code>\sqrt{n}</code> times for each <code>i</code>.</li>
+<li><strong>Space Complexity</strong>: (O(n)) for the <code>cnt</code> vector.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>We use a vector <code>cnt</code> of size <code>n + 1</code> to store the minimum number of perfect squares for each number up to <code>n</code>. This takes <code>O(n)</code> space.</li>
-</ul>
-<p>Thus, the overall time complexity is <code>O(n * sqrt(n))</code> and the space complexity is <code>O(n)</code>.</p>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
+<h3 id="edge-cases">
+  Edge Cases
+  <a class="heading-link" href="#edge-cases">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>This solution is an efficient approach to the problem of finding the least number of perfect squares that sum up to a given number <code>n</code>. By using dynamic programming, we break down the problem into smaller subproblems, and iteratively compute the solution for each number from <code>1</code> to <code>n</code>. The use of the <code>cnt</code> array helps us store intermediate results, which are then reused to compute the final solution.</p>
-<p>The time complexity of the solution is <code>O(n * sqrt(n))</code>, which is quite efficient for moderately large values of <code>n</code>. The space complexity is <code>O(n)</code>, which is manageable. This approach ensures that we can compute the result in an optimal way without unnecessary recalculations. Overall, this is a well-optimized solution for the problem and can handle large inputs effectively.</p>
+<ol>
+<li><strong>Minimum Input</strong>: For <code>n = 1</code>, the result should be <code>1</code> (since (1^2 = 1)).</li>
+<li><strong>Perfect Square Input</strong>: If <code>n</code> is a perfect square (like <code>4</code>), the output should be <code>1</code>.</li>
+</ol>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode963s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode964s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -389,31 +356,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-283-move-zeroes-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #283: Move Zeroes</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-283-move-zeroes-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #283: Move Zeroes</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

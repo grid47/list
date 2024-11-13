@@ -146,6 +146,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -218,7 +222,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -261,166 +265,94 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * KthLargest* obj = new KthLargest(k, nums);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * int param_1 = obj-&gt;add(val);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
-<h2 id="hahahugoshortcode1276s1hbhb">
+<h2 id="hahahugoshortcode1274s1hbhb">
   
 
   
   <div class="markdown-body">
     <h3 id="problem-statement">
-  Problem Statement:
+  Problem Statement
   <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem is to design a class <code>KthLargest</code> that efficiently supports two operations:</p>
-<ol>
-<li><strong>Initialization</strong>: It should accept an integer <code>k</code> and a list of integers <code>nums</code>. The class should store the k-th largest element from the list of numbers provided.</li>
-<li><strong>Addition</strong>: Given a number <code>val</code>, it should be added to the list, and the class should return the k-th largest number after this insertion.</li>
-</ol>
-<p>This problem typically involves using a data structure like a heap (or priority queue) to efficiently manage and retrieve the k-th largest element. The solution should be optimized for both the initial list and future additions.</p>
+<p>Design a class <code>KthLargest</code> that keeps track of the kth largest element in a stream of integers. The class should support the following operations:</p>
+<ul>
+<li>Constructor: Initializes the object with the integer k and an initial list of integers.</li>
+<li><code>add(val)</code>: Adds a new integer to the stream and returns the current kth largest element.</li>
+</ul>
 <h3 id="approach">
-  Approach:
+  Approach
   <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The most efficient way to solve this problem is to use a <strong>min-heap</strong> (priority queue). The idea is to maintain a heap of size <code>k</code>, where:</p>
-<ul>
-<li>The root of the heap is the k-th largest element in the current list of numbers.</li>
-<li>As we add new numbers, if the size of the heap exceeds <code>k</code>, we remove the smallest element (i.e., the root of the heap).</li>
-</ul>
-<p>This approach ensures that after every insertion, the heap always maintains the k largest elements, and the root will represent the k-th largest element in the array.</p>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step):
-  <a class="heading-link" href="#code-breakdown-step-by-step">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="step-1-define-the-data-members">
-  Step 1: Define the Data Members
-  <a class="heading-link" href="#step-1-define-the-data-members">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>priority_queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>, greater<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> pq;  <span style="color:#75715e">// Min-heap to store the k largest elements
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> k;  <span style="color:#75715e">// The k-th largest element to track
-</span></span></span></code></pre></div><ul>
-<li><code>pq</code> is a priority queue (min-heap) implemented using a vector. The third argument <code>greater&lt;int&gt;</code> ensures that the priority queue behaves as a min-heap (i.e., the smallest element is at the top).</li>
-<li><code>k</code> stores the value of <code>k</code>, indicating the k-th largest element that we need to track.</li>
-</ul>
-<h4 id="step-2-constructor-to-initialize-the-kthlargest-object">
-  Step 2: Constructor to Initialize the KthLargest Object
-  <a class="heading-link" href="#step-2-constructor-to-initialize-the-kthlargest-object">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>KthLargest(<span style="color:#66d9ef">int</span> k, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>k <span style="color:#f92672">=</span> k;  <span style="color:#75715e">// Set the value of k
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> x: nums) {  <span style="color:#75715e">// Iterate over each number in the input list
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        pq.push(x);  <span style="color:#75715e">// Add the number to the heap
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span>(pq.size() <span style="color:#f92672">&gt;</span> k) {  <span style="color:#75715e">// If the heap size exceeds k, remove the smallest element
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            cout <span style="color:#f92672">&lt;&lt;</span> pq.top();  <span style="color:#75715e">// Debugging line to print the top element (not part of the final solution)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            pq.pop();  <span style="color:#75715e">// Remove the smallest element
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li><strong>Initialization</strong>: The constructor accepts an integer <code>k</code> and a vector <code>nums</code> containing the initial list of numbers.</li>
-<li>We iterate over each element in <code>nums</code> and insert it into the min-heap.</li>
-<li>After inserting each number, we check if the heap size exceeds <code>k</code>. If it does, we remove the smallest element (<code>pq.pop()</code>), ensuring that the heap always stores only the k largest elements. The root of the heap (<code>pq.top()</code>) will always be the k-th largest element.</li>
-<li>The <code>cout</code> statement prints the current smallest element in the heap for debugging purposes.</li>
-</ul>
-<h4 id="step-3-add-method-to-insert-new-elements">
-  Step 3: Add Method to Insert New Elements
-  <a class="heading-link" href="#step-3-add-method-to-insert-new-elements">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">add</span>(<span style="color:#66d9ef">int</span> val) {
-</span></span><span style="display:flex;"><span>    pq.push(val);  <span style="color:#75715e">// Add the new value to the heap
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span>(pq.size() <span style="color:#f92672">&gt;</span> k) {  <span style="color:#75715e">// If the heap size exceeds k, remove the smallest element
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        pq.pop();  <span style="color:#75715e">// Remove the smallest element to maintain the heap size as k
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> pq.top();  <span style="color:#75715e">// Return the k-th largest element (the root of the min-heap)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
-</span></span></code></pre></div><ul>
-<li>The <code>add()</code> function accepts an integer <code>val</code> and inserts it into the min-heap.</li>
-<li>After inserting the new value, we check if the heap size exceeds <code>k</code>. If it does, we remove the smallest element (i.e., the root of the heap) to ensure that the heap size remains <code>k</code>.</li>
-<li>Finally, we return the root of the heap (<code>pq.top()</code>), which represents the current k-th largest element.</li>
-</ul>
-<h4 id="step-4-notes-on-cout-in-the-constructor">
-  Step 4: Notes on <code>cout</code> in the Constructor
-  <a class="heading-link" href="#step-4-notes-on-cout-in-the-constructor">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>The line <code>cout &lt;&lt; pq.top();</code> inside the constructor is not necessary for the final solution. It seems like a debugging step to print the k-th largest element during the initialization phase. This should be removed in the production version to avoid unnecessary output.</p>
-<h3 id="complexity-analysis">
-  Complexity Analysis:
-  <a class="heading-link" href="#complexity-analysis">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
+<ol>
 <li>
-<p><strong>Constructor (<code>KthLargest</code>)</strong>:</p>
+<p><strong>Input Parameters</strong>:</p>
 <ul>
-<li>Inserting an element into the min-heap takes <strong>O(log k)</strong> time.</li>
-<li>Since there are <code>n</code> elements in <code>nums</code>, the total time for the constructor is <strong>O(n log k)</strong>, where <code>n</code> is the size of the input array <code>nums</code>.</li>
+<li><code>k</code>: The position of the largest element to track.</li>
+<li><code>nums</code>: A vector of integers that initializes the stream.</li>
 </ul>
 </li>
 <li>
-<p><strong>Add Method (<code>add</code>)</strong>:</p>
+<p><strong>Data Structures</strong>:</p>
 <ul>
-<li>Inserting a new element into the min-heap takes <strong>O(log k)</strong> time.</li>
-<li>If the size of the heap exceeds <code>k</code>, we remove the smallest element, which also takes <strong>O(log k)</strong> time.</li>
-<li>Therefore, the time complexity of the <code>add</code> method is <strong>O(log k)</strong>.</li>
+<li>Use a min-heap (priority queue) to store the k largest elements. This allows efficient retrieval of the kth largest element.</li>
 </ul>
 </li>
-</ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
+<li>
+<p><strong>Constructor</strong>:</p>
 <ul>
-<li><strong>O(k)</strong>: The priority queue stores at most <code>k</code> elements at any given time. Hence, the space complexity is <strong>O(k)</strong>, where <code>k</code> is the size of the heap.</li>
+<li>In the constructor, iterate through the initial list of integers (<code>nums</code>).</li>
+<li>Push each number into the min-heap.</li>
+<li>If the size of the heap exceeds k, remove the smallest element (the top of the heap).</li>
 </ul>
-<h3 id="conclusion">
-  Conclusion:
-  <a class="heading-link" href="#conclusion">
+</li>
+<li>
+<p><strong>Add Method</strong>:</p>
+<ul>
+<li>The <code>add</code> method pushes the new value into the min-heap.</li>
+<li>If the size of the heap exceeds k, pop the smallest element.</li>
+<li>Return the top element of the heap, which represents the current kth largest element.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The solution efficiently manages the k-th largest element using a min-heap (priority queue). This ensures that:</p>
 <ul>
-<li>Insertion of elements and maintaining the heap is done in <strong>O(log k)</strong> time.</li>
-<li>The space used by the heap is proportional to <code>k</code>, making it scalable even for large values of <code>n</code> (the number of elements to be processed).</li>
+<li>The constructor initializes the <code>KthLargest</code> object by populating the priority queue with the provided numbers.</li>
+<li>The <code>add</code> method maintains the size of the priority queue at k, ensuring that the kth largest element can always be accessed efficiently.</li>
+<li>The top of the priority queue is always the kth largest element, which is returned after each addition.</li>
 </ul>
-<p>This approach is highly efficient for problems involving dynamic insertion of elements while keeping track of the k-th largest value. The use of a min-heap ensures that the algorithm remains optimal, making it a preferred solution for similar problems in competitive programming and real-world applications.</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>:
+<ul>
+<li>Constructor: O(N log k), where N is the number of elements in <code>nums</code>.</li>
+<li><code>add(val)</code>: O(log k) for each call due to the insertion and possible removal of the smallest element.</li>
+</ul>
+</li>
+<li><strong>Space Complexity</strong>: O(k) for storing the k largest elements in the priority queue.</li>
+</ul>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1276s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1274s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -436,31 +368,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-704-binary-search-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #704: Binary Search</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-704-binary-search-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #704: Binary Search</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

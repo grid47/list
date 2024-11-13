@@ -146,6 +146,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -218,7 +222,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -231,7 +235,7 @@
   <a href="https://leetcode.com/problems/flatten-nested-list-iterator/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
-      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/341.jpeg" 
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/341.webp" 
            alt="A nested list unfolding and flattening into a 1D array, with each item softly glowing as it appears." 
            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
     </div>
@@ -292,30 +296,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>In this problem, we are tasked with designing a <strong>NestedIterator</strong> for a nested list of integers. The input is a list that can contain both integers and other lists, and we need to iterate over all the integers in the list in a flat manner.</p>
-<h4 id="given">
-  Given:
-  <a class="heading-link" href="#given">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>A nested list can contain integers or lists of integers.</li>
-<li>The objective is to implement an iterator that returns integers in a <strong>flattened</strong> order.</li>
-</ul>
-<h4 id="example">
-  Example:
-  <a class="heading-link" href="#example">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>For the nested list:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a6e22e">[[1,1],2,[1,1]]</span>
-</span></span></code></pre></div><p>The iterator should return:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">2</span>,<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1</span>
-</span></span></code></pre></div><p>The iterator should work efficiently, using the <code>next()</code> method to return the next integer, and <code>hasNext()</code> to check if more integers are available.</p>
+<p>Design a nested iterator to traverse a nested list of integers. Each element in the nested list can be either an integer or another list of integers. Implement the <code>NestedIterator</code> class that provides the ability to iterate through this nested structure as if it were a flat list of integers.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -323,128 +304,50 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem, we will utilize a <strong>stack-based approach</strong> that helps us keep track of the current position in the nested list structure. The stack will allow us to navigate through the nested lists by treating each list or integer as a position and allowing us to &ldquo;pop&rdquo; and &ldquo;push&rdquo; as we traverse deeper into nested lists.</p>
-<h4 id="key-ideas">
-  Key Ideas:
-  <a class="heading-link" href="#key-ideas">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ol>
 <li>
-<p><strong>Stack-Based Iteration</strong>:
-We can flatten the nested list by using a stack to track the iterators of the nested lists. Each element in the stack represents a &ldquo;cursor&rdquo; in a specific level of the nested structure.</p>
+<p><strong>Data Structure</strong>:</p>
+<ul>
+<li>Utilize two stacks: <code>begins</code> to track the current position in each list and <code>ends</code> to track the end of each list. This helps manage the state of traversal through the nested structure.</li>
+</ul>
 </li>
 <li>
-<p><strong>Handling Nested Lists</strong>:
-When encountering a list inside another list, we push the beginning and end of the inner list onto the stack. This allows us to continue flattening from the deeper level.</p>
+<p><strong>Constructor</strong>:</p>
+<ul>
+<li>Initialize the stacks by pushing the beginning and ending iterators of the outermost list onto them.</li>
+</ul>
 </li>
 <li>
-<p><strong>Handling Integer Values</strong>:
-When encountering an integer, we immediately return it.</p>
+<p><strong>Next Function</strong>:</p>
+<ul>
+<li>Call <code>hasNext()</code> to ensure that the next integer is ready to be returned.</li>
+<li>Retrieve the integer from the current position and increment the iterator.</li>
+</ul>
 </li>
 <li>
-<p><strong>Efficiency</strong>:
-By using the stack and only pushing and popping iterators when necessary, we can keep our solution efficient, ensuring that each call to <code>next()</code> and <code>hasNext()</code> operates in constant time relative to the size of the nested structure.</p>
+<p><strong>HasNext Function</strong>:</p>
+<ul>
+<li>Continuously check the top of the <code>begins</code> stack:
+<ul>
+<li>If the current iterator equals the end iterator, pop both stacks to move up a level in the nested structure.</li>
+<li>If the current element is an integer, return <code>true</code>.</li>
+<li>If the current element is a list, push its begin and end iterators onto the respective stacks, advancing to the next element.</li>
+</ul>
+</li>
+</ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Let’s walk through the code in detail.</p>
-<h4 id="step-1-constructor">
-  Step 1: Constructor
-  <a class="heading-link" href="#step-1-constructor">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>NestedIterator(vector<span style="color:#f92672">&lt;</span>NestedInteger<span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>nestedList) {
-</span></span><span style="display:flex;"><span>    begins.push(nestedList.begin());
-</span></span><span style="display:flex;"><span>    ends.push(nestedList.end());
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>In the constructor, we initialize two stacks:
 <ul>
-<li><code>begins</code>: Tracks the current iterator for each list.</li>
-<li><code>ends</code>: Tracks the end of each list.</li>
+<li><strong>Initialization</strong>: The iterator starts at the beginning of the nested list.</li>
+<li><strong>Iteration</strong>: The <code>next()</code> method retrieves the next integer, while <code>hasNext()</code> checks if there are any remaining integers to iterate through.</li>
 </ul>
-</li>
-</ul>
-<p>We push the beginning and the end of the given <code>nestedList</code> into the stacks.</p>
-<h4 id="step-2-next-method">
-  Step 2: <code>next()</code> Method
-  <a class="heading-link" href="#step-2-next-method">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">next</span>() {
-</span></span><span style="display:flex;"><span>    hasNext();
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (begins.top()<span style="color:#f92672">++</span>)<span style="color:#f92672">-&gt;</span>getInteger();
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>The <code>next()</code> method first calls <code>hasNext()</code> to ensure that there is a next integer available.</li>
-<li>After <code>hasNext()</code> is called, we get the integer from the current top iterator in <code>begins</code> using the <code>getInteger()</code> method.</li>
-<li>The iterator is incremented (<code>begins.top()++</code>), advancing to the next position.</li>
-</ul>
-<h4 id="step-3-hasnext-method">
-  Step 3: <code>hasNext()</code> Method
-  <a class="heading-link" href="#step-3-hasnext-method">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">hasNext</span>() {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span> (begins.size()) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (begins.top() <span style="color:#f92672">==</span> ends.top()) {
-</span></span><span style="display:flex;"><span>            begins.pop();
-</span></span><span style="display:flex;"><span>            ends.pop();
-</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">auto</span> x <span style="color:#f92672">=</span> begins.top();
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (x<span style="color:#f92672">-&gt;</span>isInteger())
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">return</span> true;
-</span></span><span style="display:flex;"><span>            begins.top()<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>            begins.push(x<span style="color:#f92672">-&gt;</span>getList().begin());
-</span></span><span style="display:flex;"><span>            ends.push(x<span style="color:#f92672">-&gt;</span>getList().end());
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> false;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>The <code>hasNext()</code> method ensures that we are always pointing to an integer.</li>
-<li><strong>Step 1</strong>: While the <code>begins</code> stack is not empty:
-<ul>
-<li>If the top iterator of <code>begins</code> equals the top iterator of <code>ends</code> (i.e., the iterator has reached the end of the current list), we pop both stacks to move back one level.</li>
-<li>If the current element is a list (checked by <code>isInteger()</code>), we traverse deeper:
-<ul>
-<li>We increment the current iterator (<code>begins.top()++</code>).</li>
-<li>We push the start and end iterators of the nested list onto the stack.</li>
-</ul>
-</li>
-<li>If the current element is an integer, we return <code>true</code>, as we have found an integer.</li>
-</ul>
-</li>
-<li><strong>Step 2</strong>: If no integers are left, we return <code>false</code>.</li>
-</ul>
-<h4 id="step-4-stack-for-nested-traversal">
-  Step 4: Stack for Nested Traversal
-  <a class="heading-link" href="#step-4-stack-for-nested-traversal">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>The stacks <code>begins</code> and <code>ends</code> hold iterators of the nested list:</p>
-<ul>
-<li><strong><code>begins</code> stack</strong>: Holds the iterator pointing to the current element in each nested list.</li>
-<li><strong><code>ends</code> stack</strong>: Holds the iterator pointing to the end of each nested list.</li>
-</ul>
-<p>By keeping track of these iterators, we can easily navigate through any depth of nested lists and always return the next integer when <code>next()</code> is called.</p>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -452,41 +355,10 @@ By using the stack and only pushing and popping iterators when necessary, we can
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong><code>next()</code> Method</strong>: In the worst case, the time complexity for each <code>next()</code> is <strong>O(1)</strong>. This is because, for each integer, we simply need to retrieve it from the top of the stack and increment the iterator. The stack operations are constant time.</li>
-<li><strong><code>hasNext()</code> Method</strong>: In the worst case, the <code>hasNext()</code> method might need to traverse the entire nested list to find the next integer. However, the overall time complexity is still <strong>O(1)</strong> per call, as we’re only visiting each element once.</li>
+<li><strong>Time Complexity</strong>: (O(1)) for <code>next()</code> and <code>hasNext()</code> in the average case, but can be up to (O(n)) in the worst case when traversing nested lists.</li>
+<li><strong>Space Complexity</strong>: (O(d)), where (d) is the maximum depth of the nested lists, due to the stack storage.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>O(d)</strong>, where <code>d</code> is the maximum depth of the nested list. This is because the space is used by the stack, which holds iterators for each level of nesting. The depth of nesting determines the space required for the iterators.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The <strong>NestedIterator</strong> class efficiently flattens a nested list using a stack-based approach. The core idea is to traverse the nested structure and manage iterators for each level of nesting. The <code>next()</code> and <code>hasNext()</code> methods work in constant time, ensuring that the iteration through the nested list is both fast and memory-efficient.</p>
-<ul>
-<li><strong>Efficiency</strong>: Each call to <code>next()</code> and <code>hasNext()</code> works in constant time relative to the size of the nested list.</li>
-<li><strong>Simplicity</strong>: By using iterators and stacks, the code keeps the solution simple and intuitive while handling complex nested structures.</li>
-<li><strong>Flexibility</strong>: This approach is robust enough to handle deeply nested lists of arbitrary depth.</li>
-</ul>
-<p>This solution is an excellent example of how to deal with nested data structures efficiently, and is optimal for problems requiring flat iteration over hierarchical data.</p>
  
 </div>
   
@@ -507,31 +379,10 @@ By using the stack and only pushing and popping iterators when necessary, we can
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-342-power-of-four-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #342: Power of Four</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-342-power-of-four-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #342: Power of Four</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

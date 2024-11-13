@@ -143,6 +143,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -203,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              6-minute read
+              3-minute read
             </span>
           </div>
 
@@ -275,7 +279,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>In this problem, we are asked to solve a linear equation of the form <code>ax + b = cx + d</code>, where <code>a</code>, <code>b</code>, <code>c</code>, and <code>d</code> are integers. The equation might contain one or more <code>x</code> terms, and the goal is to solve for <code>x</code>. The equation is given as a string, and we need to return the solution in the format <code>&quot;x=solution&quot;</code> or indicate that there are &ldquo;Infinite solutions&rdquo; or &ldquo;No solution&rdquo; based on the values of <code>a</code>, <code>b</code>, <code>c</code>, and <code>d</code>.</p>
+<p>You are given a string representation of a linear equation in one variable, which can be of the form <code>ax + b = cx + d</code>. Your task is to solve for <code>x</code> and return the solution in the format <code>x=value</code>, or return &ldquo;Infinite solutions&rdquo; if there are infinitely many solutions, or &ldquo;No solution&rdquo; if no solution exists.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -283,157 +287,53 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The equation is of the form <code>ax + b = cx + d</code>, where the terms may contain variables and constants. Our task is to process the equation, extract the coefficients of <code>x</code> and constants, and then solve for <code>x</code>. The main steps of the approach are:</p>
 <ol>
 <li>
-<p><strong>Divide the equation</strong>: We can treat the equation as two parts—one before the <code>=</code> sign and one after it. The first part represents terms involving <code>x</code> and constants on the left-hand side, while the second part represents the right-hand side.</p>
-</li>
-<li>
-<p><strong>Identify terms</strong>: Each side may have constants and terms involving <code>x</code>. The <code>x</code> terms will be grouped together on both sides of the equation, and the constants will be added separately.</p>
-</li>
-<li>
-<p><strong>Simplify the equation</strong>: After identifying the coefficients of <code>x</code> and constants on both sides, move all <code>x</code> terms to one side and constants to the other side. This results in a simplified equation of the form:</p>
-<pre tabindex="0"><code>(a - c) * x = (d - b)
-</code></pre><p>We can then solve for <code>x</code> using algebraic manipulations.</p>
-</li>
-<li>
-<p><strong>Handle edge cases</strong>: There are three potential scenarios:</p>
+<p><strong>Initialization</strong>:</p>
 <ul>
-<li>If both the coefficients of <code>x</code> and constants on both sides are zero, the equation has &ldquo;Infinite solutions&rdquo;.</li>
-<li>If the coefficient of <code>x</code> is zero but the constant term is not, the equation has &ldquo;No solution&rdquo;.</li>
-<li>Otherwise, solve for <code>x</code> as <code>(d - b) / (a - c)</code>.</li>
+<li>Use variables to keep track of the coefficients of <code>x</code> (denoted as <code>xpara</code>) and the constant terms (denoted as <code>para</code>).</li>
+<li>Set a <code>flag</code> to manage the sign of the coefficients based on their position in the equation (before or after the equals sign).</li>
+</ul>
+</li>
+<li>
+<p><strong>Parsing the Equation</strong>:</p>
+<ul>
+<li>Traverse the string character by character.</li>
+<li>Depending on the character, update the coefficients and constant terms:
+<ul>
+<li>If the character is <code>=</code>, switch the <code>flag</code> to indicate that the following terms belong to the right side of the equation.</li>
+<li>If the character is a sign (<code>+</code> or <code>-</code>), adjust the <code>sgn</code> accordingly.</li>
+<li>If the character is a digit, parse the entire number and update either <code>xpara</code> or <code>para</code> based on whether the term includes <code>x</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Evaluation</strong>:</p>
+<ul>
+<li>After parsing the entire equation, check the values of <code>para</code> and <code>xpara</code>:
+<ul>
+<li>If both are zero, return &ldquo;Infinite solutions&rdquo;.</li>
+<li>If <code>xpara</code> is zero but <code>para</code> is non-zero, return &ldquo;No solution&rdquo;.</li>
+<li>Otherwise, compute the solution for <code>x</code> as <code>-para/xpara</code>.</li>
+</ul>
+</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Let’s walk through the code step by step to understand how the solution is implemented.</p>
-<h4 id="1-initial-setup-and-variable-declarations">
-  1. <strong>Initial Setup and Variable Declarations</strong>
-  <a class="heading-link" href="#1-initial-setup-and-variable-declarations">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    string solveEquation(string eqn) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> para <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, xpara <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> flag <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-</span></span></code></pre></div><ul>
-<li>We declare variables <code>i</code>, <code>para</code>, and <code>xpara</code>. <code>i</code> is used to iterate through the equation string, <code>para</code> stores the sum of constants, and <code>xpara</code> stores the sum of coefficients of <code>x</code>.</li>
-<li>The variable <code>flag</code> is set to <code>1</code> initially to indicate the sign of the terms we are currently processing.</li>
-</ul>
-<h4 id="2-iterating-through-the-equation-string">
-  2. <strong>Iterating Through the Equation String</strong>
-  <a class="heading-link" href="#2-iterating-through-the-equation-string">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> eqn.size()) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> sgn <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> tmp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span></code></pre></div><ul>
-<li>We use a while loop to process each character in the equation string <code>eqn</code>.</li>
-<li><code>sgn</code> is used to track the sign of the term (<code>1</code> for positive and <code>-1</code> for negative).</li>
-<li><code>tmp</code> is used to accumulate the value of numbers before encountering any operator or <code>x</code>.</li>
-</ul>
-<h4 id="3-handling-the--symbol">
-  3. <strong>Handling the <code>=</code> Symbol</strong>
-  <a class="heading-link" href="#3-handling-the--symbol">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(eqn[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;=&#39;</span>) {
-</span></span><span style="display:flex;"><span>                flag <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>                i<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>            } 
-</span></span></code></pre></div><ul>
-<li>If the current character is <code>=</code>, it marks the separation between the left-hand side (LHS) and right-hand side (RHS) of the equation.</li>
-<li>We update <code>flag</code> to <code>-1</code>, which indicates that we are now processing terms on the RHS.</li>
-<li>We increment <code>i</code> to move to the next character.</li>
-</ul>
-<h4 id="4-processing-the-sign-of-each-term">
-  4. <strong>Processing the Sign of Each Term</strong>
-  <a class="heading-link" href="#4-processing-the-sign-of-each-term">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(eqn[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;-&#39;</span>) {
-</span></span><span style="display:flex;"><span>                sgn <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>                i<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(eqn[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;+&#39;</span>) {
-</span></span><span style="display:flex;"><span>                sgn <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>                i<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>            }
-</span></span></code></pre></div><ul>
-<li>If the current character is <code>+</code> or <code>-</code>, we update <code>sgn</code> to reflect the sign of the current term.</li>
-<li>We increment <code>i</code> to process the next character.</li>
-</ul>
-<h4 id="5-processing-numbers-and-terms-involving-x">
-  5. <strong>Processing Numbers and Terms Involving <code>x</code></strong>
-  <a class="heading-link" href="#5-processing-numbers-and-terms-involving-x">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(isdigit(eqn[i])) {
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> eqn.size() <span style="color:#f92672">&amp;&amp;</span> isdigit(eqn[i])) {
-</span></span><span style="display:flex;"><span>                    tmp <span style="color:#f92672">=</span> tmp <span style="color:#f92672">*</span> <span style="color:#ae81ff">10</span> <span style="color:#f92672">+</span> eqn[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;0&#39;</span>;
-</span></span><span style="display:flex;"><span>                    i<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>                }
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&lt;</span> eqn.size() <span style="color:#f92672">&amp;&amp;</span> eqn[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;x&#39;</span>) {
-</span></span><span style="display:flex;"><span>                    xpara <span style="color:#f92672">+=</span> flag <span style="color:#f92672">*</span> sgn <span style="color:#f92672">*</span> tmp;
-</span></span><span style="display:flex;"><span>                    i<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>                }
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">else</span> para <span style="color:#f92672">+=</span> flag <span style="color:#f92672">*</span> sgn <span style="color:#f92672">*</span> tmp;
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>                xpara <span style="color:#f92672">+=</span> flag <span style="color:#f92672">*</span> sgn;
-</span></span><span style="display:flex;"><span>                i<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>            }
-</span></span></code></pre></div><ul>
-<li>If the current character is a digit, we accumulate the value of the number (<code>tmp</code>), which could be the coefficient of <code>x</code> or a constant.</li>
-<li>If the next character is <code>x</code>, we update the coefficient of <code>x</code> (<code>xpara</code>) accordingly.</li>
-<li>Otherwise, we add the constant term (<code>para</code>).</li>
-<li>If the current character is not a digit, it must be <code>x</code> with an implicit coefficient of <code>1</code>. We directly add the coefficient of <code>x</code> to <code>xpara</code>.</li>
-</ul>
-<h4 id="6-solving-the-equation">
-  6. <strong>Solving the Equation</strong>
-  <a class="heading-link" href="#6-solving-the-equation">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        string res;
-</span></span><span style="display:flex;"><span>        cout <span style="color:#f92672">&lt;&lt;</span> para <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;-&#39;</span><span style="color:#f92672">&lt;&lt;</span> xpara;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(para <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> xpara <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>            res <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Infinite solutions&#34;</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (xpara <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>            res <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;No solution&#34;</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> res <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;x=&#34;</span> <span style="color:#f92672">+</span> to_string(para<span style="color:#f92672">/</span>xpara<span style="color:#f92672">*-</span><span style="color:#ae81ff">1</span>);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><ul>
-<li>After processing all terms in the equation, we check the values of <code>para</code> and <code>xpara</code> to determine the type of solution.
-<ul>
-<li>If both <code>para</code> and <code>xpara</code> are zero, the equation has &ldquo;Infinite solutions&rdquo;.</li>
-<li>If <code>xpara</code> is zero but <code>para</code> is not, the equation has &ldquo;No solution&rdquo;.</li>
-<li>Otherwise, we solve for <code>x</code> using the equation <code>x = -para / xpara</code>.</li>
-</ul>
-</li>
-</ul>
+<ol>
+<li><strong>Loop through Characters</strong>: The while loop continues until the end of the string, processing each character.</li>
+<li><strong>Sign Management</strong>: The sign of each term is determined based on the preceding characters.</li>
+<li><strong>Coefficient Calculation</strong>: The coefficients of <code>x</code> and the constant terms are calculated based on the parsed numbers and their signs.</li>
+<li><strong>Result Construction</strong>: Finally, construct the result string based on the values of <code>para</code> and <code>xpara</code>.</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -441,34 +341,10 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>O(n)</strong> where <code>n</code> is the length of the equation string. The algorithm processes each character in the string once, performing constant-time operations for each character.</li>
+<li><strong>Time Complexity</strong>: O(n), where n is the length of the equation string, as each character is processed once.</li>
+<li><strong>Space Complexity</strong>: O(1), since only a fixed number of integer variables are used for calculations.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>O(1)</strong>. The space complexity is constant because we are using a fixed number of variables to store the coefficients and constants, and the space for the result is independent of the input size.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution efficiently solves the equation by breaking it down into terms, processing each term to extract coefficients of <code>x</code> and constants, and then solving the simplified equation. It handles edge cases such as missing coefficients for <code>x</code> and implicitly considers the sign of each term. By processing the string in a single pass, the solution is both time and space efficient.</p>
  
 </div>
   
@@ -481,31 +357,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-641-design-circular-deque-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #641: Design Circular Deque</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-641-design-circular-deque-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #641: Design Circular Deque</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

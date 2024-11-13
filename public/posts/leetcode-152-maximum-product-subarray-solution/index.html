@@ -142,6 +142,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -198,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              4-minute read
+              2-minute read
             </span>
           </div>
 
@@ -207,11 +211,11 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode272s0hbhb">
+        <h2 id="hahahugoshortcode273s0hbhb">
   <a href="https://leetcode.com/problems/maximum-product-subarray/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
-      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/152.jpeg" 
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/152.webp" 
            alt="A radiant subarray of numbers, with the product of values glowing brightly as the maximum result." 
            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
     </div>
@@ -222,7 +226,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode272s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode273s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -244,160 +248,88 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode272s2hbhb">
+<h2 id="hahahugoshortcode273s2hbhb">
   
 
   
   <div class="markdown-body">
-    <p>Your explanation is well-structured and thorough! Here’s a version with added emojis for readability and a slightly more engaging tone:</p>
-<hr>
-<h3 id="-problem-statement">
-  💥 Problem Statement
-  <a class="heading-link" href="#-problem-statement">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The goal is to find the <strong>maximum product</strong> of any <strong>contiguous subarray</strong> within a given array of integers. The array may contain both positive and negative integers, and we should consider subarrays of any length. A <strong>subarray</strong> is any continuous section of the array, and our task is to return the maximum product we can achieve from any such subarray.</p>
-<p>For example, given an input array like <code>[-2, 3, -4]</code>, the subarray with the maximum product is <code>[3, -4]</code>, and its product is <code>12</code>. This problem becomes particularly intriguing because of <strong>negative numbers</strong>, which can flip the product&rsquo;s sign and potentially create larger products when combined with other negatives!</p>
-<hr>
-<h3 id="-approach">
-  💡 Approach
-  <a class="heading-link" href="#-approach">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>To tackle this efficiently, we use a dynamic programming-inspired approach, keeping track of two variables:</p>
-<ol>
-<li><strong><code>mx</code></strong> (maximum product up to the current index)</li>
-<li><strong><code>mn</code></strong> (minimum product up to the current index)</li>
-</ol>
-<p>Why track both <code>mx</code> and <code>mn</code>? Because a <strong>negative number</strong> can flip the sign of a product. The idea is:</p>
-<ul>
-<li>If the current number is <strong>positive</strong>, the maximum product can either be the current number itself or the product of <code>mx</code> and the current number.</li>
-<li>If the current number is <strong>negative</strong>, the <strong>minimum product</strong> can flip to become the maximum when multiplied by this negative number, and vice versa.</li>
-</ul>
-<p>By tracking both values at each step, we can efficiently compute the maximum product of any subarray in just one pass!</p>
-<hr>
-<h3 id="-code-breakdown-step-by-step">
-  📝 Code Breakdown (Step-by-Step)
-  <a class="heading-link" href="#-code-breakdown-step-by-step">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="-step-1-initialize-variables">
-  🔹 Step 1: Initialize Variables
-  <a class="heading-link" href="#-step-1-initialize-variables">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mx <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, mn <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> INT_MIN;
-</span></span></code></pre></div><p>Here’s what each variable means:</p>
-<ul>
-<li><code>mx</code>: Holds the <strong>maximum product</strong> up to the current index. We initialize it to <code>1</code> since the product of no numbers is <code>1</code>.</li>
-<li><code>mn</code>: Holds the <strong>minimum product</strong> up to the current index. We also initialize this to <code>1</code>.</li>
-<li><code>res</code>: Stores the <strong>global maximum product</strong> so far, starting at <code>INT_MIN</code> to ensure any product is larger.</li>
-</ul>
-<h4 id="-step-2-traverse-the-array">
-  🔹 Step 2: Traverse the Array
-  <a class="heading-link" href="#-step-2-traverse-the-array">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> nums.size(); i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (nums[i] <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) swap(mx, mn);
-</span></span></code></pre></div><p>We loop through <code>nums</code> one element at a time. If the current number is negative, we <strong>swap <code>mx</code> and <code>mn</code></strong>. This is because multiplying a negative number by a smaller negative can make it the <strong>largest product</strong>!</p>
-<h4 id="-step-3-update-mx-and-mn">
-  🔹 Step 3: Update <code>mx</code> and <code>mn</code>
-  <a class="heading-link" href="#-step-3-update-mx-and-mn">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    mx <span style="color:#f92672">=</span> max(nums[i], mx <span style="color:#f92672">*</span> nums[i]);
-</span></span><span style="display:flex;"><span>    mn <span style="color:#f92672">=</span> min(nums[i], mn <span style="color:#f92672">*</span> nums[i]);
-</span></span></code></pre></div><p>Here’s why this works:</p>
-<ul>
-<li><code>mx = max(nums[i], mx * nums[i])</code>: The new <code>mx</code> is either the current number itself or the product of <code>mx</code> and the current number, extending the subarray.</li>
-<li><code>mn = min(nums[i], mn * nums[i])</code>: Similarly, <code>mn</code> is either the current number or the product of <code>mn</code> and the current number, for future flips.</li>
-</ul>
-<h4 id="-step-4-update-the-global-maximum">
-  🔹 Step 4: Update the Global Maximum
-  <a class="heading-link" href="#-step-4-update-the-global-maximum">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    res <span style="color:#f92672">=</span> max(res, mx);
-</span></span></code></pre></div><p>At each step, we check if <code>mx</code> is the largest product so far and update <code>res</code> accordingly.</p>
-<h4 id="-step-5-return-the-result">
-  🔹 Step 5: Return the Result
-  <a class="heading-link" href="#-step-5-return-the-result">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
-</span></span></code></pre></div><p>When the loop ends, <code>res</code> will contain the maximum product of any contiguous subarray, so we return it!</p>
-<hr>
-<h3 id="-complexity-analysis">
-  ⚙️ Complexity Analysis
-  <a class="heading-link" href="#-complexity-analysis">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="time-complexity">
-  Time Complexity
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>O(n)</strong>, where <code>n</code> is the size of <code>nums</code>. We only traverse the array once, performing constant-time operations at each step.</li>
-</ul>
-<h4 id="space-complexity">
-  Space Complexity
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>O(1)</strong>, as we only need a constant amount of extra space to store <code>mx</code>, <code>mn</code>, and <code>res</code>.</li>
-</ul>
-<hr>
-<h3 id="-key-insights">
-  🔍 Key Insights
-  <a class="heading-link" href="#-key-insights">
+<p>Given an integer array <code>nums</code>, find the contiguous subarray (containing at least one number) which has the largest product and return that product.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ol>
-<li><strong>Handling Negatives:</strong> A negative number can flip the sign of the product, so tracking both the minimum and maximum is key.</li>
-<li><strong>Efficient DP Approach:</strong> By using a DP-like approach and two variables, we avoid explicitly storing subarrays, keeping the space complexity low.</li>
+<li>
+<p><strong>Tracking Maximum and Minimum Products</strong>:</p>
+<ul>
+<li>Use two variables <code>mx</code> and <code>mn</code> to keep track of the maximum and minimum products at each position. The minimum is needed because a negative number can turn a large negative product into a large positive product when multiplied.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate Through the Array</strong>:</p>
+<ul>
+<li>For each element in <code>nums</code>:
+<ul>
+<li>If the current number is negative, swap <code>mx</code> and <code>mn</code>.</li>
+<li>Update <code>mx</code> to be the maximum of the current number or the product of <code>mx</code> and the current number.</li>
+<li>Update <code>mn</code> to be the minimum of the current number or the product of <code>mn</code> and the current number.</li>
+<li>Update <code>res</code> to keep track of the maximum product found so far.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>Return the maximum product found after processing all elements.</li>
+</ul>
+</li>
 </ol>
-<hr>
-<h3 id="-conclusion">
-  🎉 Conclusion
-  <a class="heading-link" href="#-conclusion">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>This solution is optimal for this problem, combining an efficient <strong>O(n)</strong> time complexity with a <strong>O(1)</strong> space complexity. It handles mixed arrays with positives and negatives effectively, computing the maximum product in one pass while using minimal space!</p>
+<ul>
+<li><strong>Line 1</strong>: Define the <code>maxProduct</code> function, accepting a vector of integers as input.</li>
+<li><strong>Line 2</strong>: Initialize <code>mx</code> and <code>mn</code> to 1, and <code>res</code> to the smallest possible integer.</li>
+<li><strong>Line 3-12</strong>: Iterate over each number in <code>nums</code>:
+<ul>
+<li><strong>Line 4</strong>: If the number is negative, swap <code>mx</code> and <code>mn</code> to handle the effect of multiplication.</li>
+<li><strong>Line 5-6</strong>: Update <code>mx</code> and <code>mn</code> based on the current number.</li>
+<li><strong>Line 8</strong>: Update <code>res</code> to be the maximum of itself and <code>mx</code>.</li>
+</ul>
+</li>
+<li><strong>Line 13</strong>: Return <code>res</code>, which contains the maximum product.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: (O(N)), where (N) is the number of elements in <code>nums</code>, since each element is processed once.</li>
+<li><strong>Space Complexity</strong>: (O(1)) as only a fixed amount of extra space is used regardless of the input size.</li>
+</ul>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode272s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode273s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -413,31 +345,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-153-find-minimum-in-rotated-sorted-array-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #153: Find Minimum in Rotated Sorted Array</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-153-find-minimum-in-rotated-sorted-array-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #153: Find Minimum in Rotated Sorted Array</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

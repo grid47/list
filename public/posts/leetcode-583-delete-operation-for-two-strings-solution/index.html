@@ -142,6 +142,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -198,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -225,142 +229,83 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> word1.size() <span style="color:#f92672">+</span> word2.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> dp[m][n];
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1223s1hbhb">
+<h2 id="hahahugoshortcode1221s1hbhb">
   
 
   
   <div class="markdown-body">
     <h3 id="problem-statement">
-  Problem Statement:
+  Problem Statement
   <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem at hand is to compute the minimum number of operations required to convert one string, <code>word1</code>, into another string, <code>word2</code>. The allowed operations are:</p>
-<ol>
-<li>Insert a character.</li>
-<li>Delete a character.</li>
-<li>Replace a character.</li>
-</ol>
-<p>This is a classical problem known as <strong>edit distance</strong> or <strong>Levenshtein distance</strong>. The task is to find the minimum number of such operations to transform <code>word1</code> into <code>word2</code>.</p>
+<p>Given two strings <code>word1</code> and <code>word2</code>, find the minimum number of operations required to convert <code>word1</code> into <code>word2</code>. The allowed operations are insertions, deletions, and substitutions.</p>
 <h3 id="approach">
-  Approach:
+  Approach
   <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem efficiently, we use <strong>Dynamic Programming (DP)</strong>. Specifically, the idea is to break the problem down into smaller subproblems, where each subproblem is a pair of substrings of <code>word1</code> and <code>word2</code>.</p>
-<p>The minimum number of operations required to convert a substring of <code>word1</code> to a substring of <code>word2</code> can be calculated based on three main choices:</p>
+<ol>
+<li>
+<p><strong>Longest Common Subsequence (LCS)</strong>:</p>
 <ul>
-<li><strong>Insertion</strong>: Add a character to <code>word1</code>.</li>
-<li><strong>Deletion</strong>: Remove a character from <code>word1</code>.</li>
-<li><strong>Substitution</strong>: Replace a character in <code>word1</code> to match <code>word2</code>.</li>
+<li>The problem can be reduced to finding the length of the longest common subsequence (LCS) of the two strings. The LCS helps determine how many characters are already in common between the two strings.</li>
 </ul>
-<p>In this solution, we use a technique called <strong>Longest Common Subsequence (LCS)</strong>. The LCS of two strings is the longest sequence that appears in both strings in the same order. The idea is that the minimum number of operations can be determined by considering how much of the two strings are common. Once we know the LCS, the remaining operations are determined by the characters not part of the LCS.</p>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step):
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+</li>
+<li>
+<p><strong>Dynamic Programming Table</strong>:</p>
+<ul>
+<li>Create a 2D DP table <code>dp</code> where <code>dp[i][j]</code> represents the length of LCS of the substrings <code>word1[0...i-1]</code> and <code>word2[0...j-1]</code>.</li>
+<li>Initialize the first row and column to zero since the LCS of an empty string with any string is zero.</li>
+</ul>
+</li>
+<li>
+<p><strong>Filling the DP Table</strong>:</p>
+<ul>
+<li>Iterate through each character of <code>word1</code> and <code>word2</code>. If characters match, increment the LCS count from the previous indices. If they don&rsquo;t match, take the maximum value from either ignoring the current character of <code>word1</code> or <code>word2</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculate Minimum Distance</strong>:</p>
+<ul>
+<li>The minimum operations required to convert <code>word1</code> to <code>word2</code> can be computed using the formula:
+[
+\text{minDistance} = (\text{length of word1}) + (\text{length of word2}) - 2 \times (\text{LCS length})
+]</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="step-1-initialize-dp-table">
-  Step 1: Initialize DP Table
-  <a class="heading-link" href="#step-1-initialize-dp-table">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> word1.size(), n <span style="color:#f92672">=</span> word2.size();
-</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> dp(m <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>));
-</span></span></code></pre></div><ul>
-<li>The lengths of the two strings <code>word1</code> and <code>word2</code> are stored in <code>m</code> and <code>n</code>, respectively.</li>
-<li>We then initialize a 2D DP table <code>dp</code> of size <code>(m + 1) x (n + 1)</code> where each cell <code>dp[i][j]</code> represents the length of the LCS of the substrings <code>word1[0...i-1]</code> and <code>word2[0...j-1]</code>.</li>
-</ul>
-<h4 id="step-2-fill-dp-table">
-  Step 2: Fill DP Table
-  <a class="heading-link" href="#step-2-fill-dp-table">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(word1[i] <span style="color:#f92672">==</span> word2[j]) dp[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>][j<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> dp[i][j] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> dp[i<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>][j<span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> max(dp[i][j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>], dp[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][j]);
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><ul>
-<li>The nested loops iterate through all pairs of characters from <code>word1</code> and <code>word2</code>.</li>
-<li>If the characters <code>word1[i]</code> and <code>word2[j]</code> are equal, we increment the LCS value at <code>dp[i+1][j+1]</code> by 1 from the diagonal value <code>dp[i][j]</code> because this character contributes to the common subsequence.</li>
-<li>If the characters are not equal, we take the maximum of the values from the cell above (<code>dp[i][j+1]</code>) or the cell to the left (<code>dp[i+1][j]</code>). This is because we either delete a character from <code>word1</code> or insert a character into <code>word1</code> to make the substrings equal.</li>
-</ul>
-<h4 id="step-3-calculate-the-minimum-edit-distance">
-  Step 3: Calculate the Minimum Edit Distance
-  <a class="heading-link" href="#step-3-calculate-the-minimum-edit-distance">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> word1.size() <span style="color:#f92672">+</span> word2.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> dp[m][n];
-</span></span></code></pre></div><ul>
-<li>
-<p>After the DP table is filled, the value <code>dp[m][n]</code> represents the length of the Longest Common Subsequence (LCS) of <code>word1</code> and <code>word2</code>.</p>
-</li>
-<li>
-<p>The minimum number of operations is calculated by subtracting twice the LCS length from the total length of both strings. This is because each unmatched character in <code>word1</code> and <code>word2</code> must either be deleted or inserted to match the other string.</p>
-</li>
-<li>
-<p>Specifically, the formula is:
-[
-\text{Minimum Edit Distance} = \text{len(word1)} + \text{len(word2)} - 2 \times \text{LCS length}
-]</p>
-<p>This formula works because the characters that are part of the LCS don&rsquo;t need any operations; they remain in both strings. The remaining characters (those not in the LCS) require insertions or deletions.</p>
-</li>
+<ul>
+<li>The function initializes a DP table and fills it based on matches between characters of the two words.</li>
+<li>Finally, it computes and returns the minimum number of operations using the calculated LCS length.</li>
 </ul>
 <h3 id="complexity">
-  Complexity:
+  Complexity
   <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>O(m * n)</strong>: The algorithm uses a DP table of size <code>(m + 1) x (n + 1)</code> where <code>m</code> and <code>n</code> are the lengths of <code>word1</code> and <code>word2</code>, respectively. Filling each cell in the DP table takes constant time, so the overall time complexity is O(m * n).</li>
+<li><strong>Time Complexity</strong>: O(m * n), where <code>m</code> and <code>n</code> are the lengths of <code>word1</code> and <code>word2</code>, respectively, due to the nested loops filling the DP table.</li>
+<li><strong>Space Complexity</strong>: O(m * n), for storing the DP table.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>O(m * n)</strong>: The space complexity is also O(m * n) because we need to store the DP table with dimensions <code>(m + 1) x (n + 1)</code>.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion:
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution provides an efficient way to calculate the minimum number of operations needed to transform one string into another using the edit distance concept, particularly focusing on the relationship with the <strong>Longest Common Subsequence (LCS)</strong>.</p>
-<p>By utilizing Dynamic Programming, we efficiently compute the solution in O(m * n) time and space. This approach is optimal and scales well for typical string sizes, making it suitable for a wide range of input cases.</p>
-<p>Overall, the solution is both time-efficient and space-efficient, offering a clear path to solving the edit distance problem with great accuracy. By breaking down the problem into subproblems of LCS, we can ensure that the solution is robust and handles various edge cases effectively.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1223s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1221s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -376,31 +321,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-589-n-ary-tree-preorder-traversal-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #589: N-ary Tree Preorder Traversal</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-589-n-ary-tree-preorder-traversal-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #589: N-ary Tree Preorder Traversal</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

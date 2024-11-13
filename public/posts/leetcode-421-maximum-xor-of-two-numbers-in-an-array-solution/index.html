@@ -144,6 +144,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -208,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              6-minute read
+              3-minute read
             </span>
           </div>
 
@@ -217,8 +221,26 @@
 
       <div class="post-content">
         
-        <p><a href="https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
-<hr>
+        <h2 id="hahahugoshortcode1144s0hbhb">
+  <a href="https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
+<figure class="remote-image" style="text-align:center; margin: 0;">
+    <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/421.webp" 
+           alt="A glowing sequence of numbers where the XOR result is softly highlighted, showing the maximum possible value." 
+           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    
+      <figcaption style="font-size: 0.8em; font-weight: 300; color:#555; margin-top: 4px; line-height: 1.2;">
+        Solution to LeetCode 421: Maximum XOR of Two Numbers in an Array Problem
+      </figcaption>
+    
+  </figure>
+  
+  <a class="heading-link" href="#hahahugoshortcode1144s0hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <p><strong>Code:</strong></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TrieNode</span> {
 </span></span><span style="display:flex;"><span>    TrieNode<span style="color:#f92672">*</span> children[<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> {};
@@ -262,170 +284,79 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1143s1hbhb">
+<h2 id="hahahugoshortcode1144s2hbhb">
   
 
   
   <div class="markdown-body">
     <h3 id="problem-statement">
-  Problem Statement:
+  Problem Statement
   <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem at hand involves finding the maximum XOR value between two numbers in a given list of integers. XOR, or exclusive OR, is a binary operation where the bits of the two operands are compared and return 1 if the bits are different and 0 if they are the same. The task is to find two numbers in the array such that their XOR is the maximum possible, and then return this maximum value.</p>
+<p>Given an integer array <code>nums</code>, find the maximum XOR of any two elements in the array. The XOR of two integers is the bitwise exclusive OR operation that returns a number whose bits are set to 1 if the corresponding bits of the operands are different.</p>
 <h3 id="approach">
-  Approach:
+  Approach
   <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The brute force approach would involve comparing every possible pair of numbers in the list, computing their XOR values, and keeping track of the maximum XOR. However, this would result in a time complexity of (O(n^2)), which can be inefficient for large arrays.</p>
-<p>Instead, a more optimal approach involves using a <strong>Trie (prefix tree)</strong> data structure, which allows for efficient storage and querying of the binary representations of the numbers. A <strong>TrieNode</strong> stores an array of child nodes corresponding to the binary digits (0 and 1). The main idea is to build the Trie with the binary representations of the numbers and then, for each number, traverse the Trie to maximize the XOR value by trying to take the opposite bit at each step (since 1 XOR 0 = 1, which gives the highest contribution to the XOR result).</p>
-<p>The overall approach uses the Trie structure to efficiently perform the XOR maximization by exploiting the properties of binary numbers and the Trie’s ability to represent and traverse bitwise data.</p>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step):
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<ol>
+<li><strong>Trie Structure</strong>: Utilize a binary trie (prefix tree) to efficiently store binary representations of the numbers. Each <code>TrieNode</code> has two children representing the binary digits <code>0</code> and <code>1</code>.</li>
+<li><strong>Adding Numbers</strong>:
+<ul>
+<li>For each number, insert its 32-bit binary representation into the trie, starting from the most significant bit (MSB) to the least significant bit (LSB).</li>
+</ul>
+</li>
+<li><strong>Finding Maximum XOR</strong>:
+<ul>
+<li>For each number in <code>nums</code>, traverse the trie to find the number that maximizes the XOR result.</li>
+<li>At each bit position, try to take the opposite bit (1 - current bit) if it exists, as this would contribute to a higher XOR value.</li>
+</ul>
+</li>
+<li><strong>Result Calculation</strong>: Keep track of the maximum XOR value found during these traversals.</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ol>
-<li>
-<p><strong>TrieNode Class</strong>:</p>
+<li><strong>TrieNode Class</strong>: Defines the structure of a trie node with methods to add numbers and find the maximum XOR.
 <ul>
-<li>
-<p><strong>Attributes</strong>:</p>
-<ul>
-<li><code>children[2]</code>: This array stores two children for each node: one for bit 0 and the other for bit 1. It represents the binary structure.</li>
+<li><code>add(int num)</code>: Inserts the binary representation of <code>num</code> into the trie.</li>
+<li><code>max(int num)</code>: Computes the maximum XOR that can be formed with <code>num</code> by traversing the trie.</li>
 </ul>
 </li>
-<li>
-<p><strong>Methods</strong>:</p>
+<li><strong>Solution Class</strong>:
 <ul>
-<li>
-<p><code>add(int num)</code>: This method inserts the binary representation of the number <code>num</code> into the Trie. Starting from the most significant bit (MSB), it iteratively checks if the current bit exists. If it doesn&rsquo;t, a new TrieNode is created. This builds the Trie for all numbers in the array.</p>
-</li>
-<li>
-<p><code>max(int num)</code>: This method calculates the maximum XOR of a given number with any number already inserted into the Trie. Starting from the MSB, it attempts to take the opposite bit (1 - bit) at each level if possible. If not, it takes the same bit. This process maximizes the XOR by trying to diverge from the current number.</p>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Solution Class</strong>:</p>
-<ul>
-<li>
-<p><strong>Methods</strong>:</p>
-<ul>
-<li><code>findMaximumXOR(vector&lt;int&gt;&amp; nums)</code>: This is the main method that handles the process of building the Trie and computing the maximum XOR. It initializes the Trie, inserts all numbers, and then computes the XOR for each number, updating the result with the maximum value encountered.</li>
-</ul>
-</li>
-<li>
-<p><strong>Algorithm Flow</strong>:</p>
-<ul>
-<li>The method iterates over all the numbers in the input list <code>nums</code>, inserting them into the Trie.</li>
-<li>It then computes the maximum XOR value for each number by calling the <code>max</code> method of the <code>TrieNode</code> class, which tries to get the maximum possible XOR by traversing the Trie.</li>
-<li>Finally, it returns the largest XOR value found.</li>
-</ul>
-</li>
+<li>Create a root <code>TrieNode</code> to serve as the starting point.</li>
+<li>Add each number from <code>nums</code> to the trie.</li>
+<li>For each number, calculate the potential maximum XOR using the <code>max</code> method.</li>
+<li>Return the overall maximum XOR found.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-explanation">
-  Code Explanation:
-  <a class="heading-link" href="#code-explanation">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="trienode-class">
-  TrieNode Class:
-  <a class="heading-link" href="#trienode-class">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>The <code>TrieNode</code> class represents each node in the Trie, where each node corresponds to a bit in the binary representation of a number. Each node has two children:</p>
-<ul>
-<li>One for bit 0.</li>
-<li>One for bit 1.</li>
-</ul>
-<h4 id="add-method">
-  add Method:
-  <a class="heading-link" href="#add-method">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>The method begins by processing the number from the most significant bit (31st bit for a 32-bit integer).</li>
-<li>It checks each bit and ensures that the appropriate child node is created. If a child node for a given bit doesn’t exist, it creates a new node. This process constructs the Trie.</li>
-</ul>
-<h4 id="max-method">
-  max Method:
-  <a class="heading-link" href="#max-method">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>For a given number, the method traverses the Trie to find the maximum XOR possible by attempting to take the opposite bit wherever possible.</li>
-<li>This is done by checking the child corresponding to the opposite bit (1 - bit). If it exists, it traverses that path, setting the respective bit in the result (<code>ans</code>), since this gives a higher XOR value.</li>
-<li>If the opposite bit doesn’t exist, it takes the same bit as the current number.</li>
-</ul>
-<h4 id="solution-class">
-  Solution Class:
-  <a class="heading-link" href="#solution-class">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>The <code>findMaximumXOR</code> method initializes the Trie and adds all numbers from the input array.</li>
-<li>After inserting the numbers, it computes the maximum XOR value by iterating through the numbers and calling the <code>max</code> method.</li>
-</ul>
-<h3 id="complexity-analysis">
-  Complexity Analysis:
-  <a class="heading-link" href="#complexity-analysis">
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li>
-<p><strong>Time Complexity</strong>:</p>
-<ul>
-<li>The <code>add</code> method runs in (O(32)) time for each number because it processes 32 bits for each integer (assuming 32-bit integers).</li>
-<li>The <code>max</code> method also runs in (O(32)) time for each number since it traverses the Trie bit by bit.</li>
-<li>Overall, for (n) numbers, the time complexity is (O(32n)), which simplifies to (O(n)).</li>
-</ul>
-</li>
-<li>
-<p><strong>Space Complexity</strong>:</p>
-<ul>
-<li>The space complexity is (O(32n)) for storing the Trie, where (n) is the number of integers in the input array, and each number requires at most 32 nodes (one for each bit).</li>
-<li>Simplified, the space complexity is (O(n)).</li>
-</ul>
-</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion:
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The solution utilizes the Trie data structure to efficiently compute the maximum XOR between any two numbers in the given list. The time complexity of (O(n)) (where (n) is the number of integers) makes this approach far superior to the brute force method, which has a time complexity of (O(n^2)). The Trie-based method not only optimizes the process of finding the maximum XOR but also leverages bitwise operations to maximize the XOR value efficiently.</p>
-<p>This approach can be generalized to similar problems that involve bitwise operations, such as finding the maximum OR, AND, or other bitwise combinations in an array. By using a Trie, one can reduce the problem&rsquo;s complexity and handle large input sizes more effectively. The solution is ideal for competitive programming scenarios or real-world applications where performance is critical.</p>
- 
+<li><strong>Time Complexity</strong>: O(n * 32), where <code>n</code> is the number of elements in <code>nums</code>. Each number is processed in constant time due to the fixed 32-bit length.</li>
+<li><strong>Space Complexity</strong>: O(n * 32), as the trie could potentially store up to <code>2 * n</code> nodes in the worst case (one for each bit of each number).</li>
+</ul> 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1143s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1144s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -433,31 +364,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-423-reconstruct-original-digits-from-english-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #423: Reconstruct Original Digits from English</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-423-reconstruct-original-digits-from-english-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #423: Reconstruct Original Digits from English</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

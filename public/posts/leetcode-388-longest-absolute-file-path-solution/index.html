@@ -143,6 +143,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -203,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              7-minute read
+              3-minute read
             </span>
           </div>
 
@@ -212,11 +216,11 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1123s0hbhb">
+        <h2 id="hahahugoshortcode1124s0hbhb">
   <a href="https://leetcode.com/problems/longest-absolute-file-path/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
-      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/388.jpeg" 
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/388.webp" 
            alt="A file path glowing as it grows, showing the longest path as it is traced step by step." 
            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
     </div>
@@ -227,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1123s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1124s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -264,7 +268,7 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1123s2hbhb">
+<h2 id="hahahugoshortcode1124s2hbhb">
   
 
   
@@ -276,8 +280,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem is to find the length of the longest absolute path to a file in a file system, represented as a string. The string contains file and directory names, with each level of the file system being separated by a newline (<code>\n</code>) character. Directories are represented by strings that may include tabs (<code>\t</code>) to indicate the depth (or level) of the directory in the hierarchy. A file is distinguished by its name containing a dot (<code>.</code>), while a directory does not have a dot.</p>
-<p>Given such a string input representing the structure of a file system, the task is to compute the longest possible path to a file in this structure. The path length is the sum of the lengths of all directory and file names along the path from the root to the file.</p>
+<p>Given a string representing a file system path where directories and files are separated by newline characters (<code>\n</code>) and directory levels are indicated by tab characters (<code>\t</code>), find the length of the longest path to a file. A path is considered to lead to a file if it contains a dot (<code>.</code>) in its name.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -285,110 +288,52 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem, we need to calculate the length of the longest path from the root directory to any file in the directory structure described by the input string. The string contains both directory names and file names. We can approach this problem by simulating a file system traversal with the following steps:</p>
 <ol>
 <li>
-<p><strong>Track Depth Levels:</strong>
-Each directory or file name in the input string is indented by a certain number of tabs (<code>\t</code>). The number of tabs corresponds to the depth level in the file system. For instance, one tab means the item is a child of the root, two tabs mean it&rsquo;s a child of the child directory, and so on.</p>
+<p><strong>Initialize Variables</strong>:</p>
+<ul>
+<li>Use a vector <code>levels</code> to keep track of the lengths of the current path at each directory level.</li>
+<li>Variables for <code>level</code> (current directory level), <code>isFile</code> (flag to check if the current entry is a file), <code>ans</code> (maximum length of the file path), and <code>len</code> (length of the current file/directory name).</li>
+</ul>
 </li>
 <li>
-<p><strong>Accumulate Path Lengths:</strong>
-For each item (whether a directory or a file), we need to maintain the cumulative length of the path up to that level. This can be done by maintaining an array (<code>levels</code>) where each index corresponds to the depth level, and the value at each index holds the cumulative length of the path to that level. For instance, if the directory structure has &ldquo;folder1/folder2&rdquo;, the cumulative path lengths are updated as we encounter the directories.</p>
+<p><strong>Iterate Over Characters</strong>:</p>
+<ul>
+<li>Traverse through the string character by character.</li>
+<li>Use a <code>switch</code> statement to handle different characters:
+<ul>
+<li><strong>Newline (<code>\n</code>)</strong>: Reset <code>level</code>, <code>isFile</code>, and <code>len</code> to prepare for a new path entry.</li>
+<li><strong>Tab (<code>\t</code>)</strong>: Increment the <code>level</code> to indicate moving deeper into the directory structure.</li>
+<li><strong>File Indicator (<code>.</code>)</strong>: Set <code>isFile</code> to true if the current name contains a dot.</li>
+<li><strong>Default</strong>: Count the length of the current file/directory name and store it in <code>levels[level]</code>.</li>
+</ul>
+</li>
+</ul>
 </li>
 <li>
-<p><strong>Check for Files:</strong>
-A file is identified by the presence of a dot (<code>.</code>) in its name. Whenever a file is encountered, we calculate the total path length from the root to the file by summing the lengths of all parent directories and adding the file name length.</p>
+<p><strong>Calculate Length</strong>:</p>
+<ul>
+<li>If the current entry is a file, calculate the total length of the path up to that file by summing the lengths from the <code>levels</code> vector, including the current level for file length.</li>
+</ul>
 </li>
 <li>
-<p><strong>Keep Track of Maximum Length:</strong>
-The maximum path length to a file is updated whenever a longer path is found.</p>
+<p><strong>Return Maximum Length</strong>:</p>
+<ul>
+<li>The function returns the maximum length found for any file path.</li>
+</ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="step-1-initialize-variables">
-  Step 1: Initialize Variables
-  <a class="heading-link" href="#step-1-initialize-variables">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> levels(<span style="color:#ae81ff">300</span>, <span style="color:#ae81ff">0</span>);
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> level <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> isFile <span style="color:#f92672">=</span> false;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> len <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span></code></pre></div><ul>
-<li><code>levels</code>: This array is used to store the cumulative lengths of the path for each depth level. We assume the maximum depth of the file system won&rsquo;t exceed 300 levels.</li>
-<li><code>level</code>: This variable keeps track of the current depth level in the file system as we parse the string.</li>
-<li><code>isFile</code>: This boolean flag indicates whether the current item is a file (i.e., it contains a dot <code>.</code>).</li>
-<li><code>ans</code>: This variable stores the length of the longest path to a file found so far.</li>
-<li><code>len</code>: This variable keeps track of the length of the current directory or file name.</li>
-</ul>
-<h4 id="step-2-iterate-over-the-input-string">
-  Step 2: Iterate Over the Input String
-  <a class="heading-link" href="#step-2-iterate-over-the-input-string">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> c: ipt) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">switch</span>(c) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;\n&#39;</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>            level <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, isFile <span style="color:#f92672">=</span> false, len <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#66d9ef">break</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;\t&#39;</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>            level<span style="color:#f92672">++</span>; <span style="color:#66d9ef">break</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#39;.&#39;</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>            isFile <span style="color:#f92672">=</span> true;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>            len<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>            levels[level] <span style="color:#f92672">=</span> len;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(isFile) {
-</span></span><span style="display:flex;"><span>                ans <span style="color:#f92672">=</span> max(ans, accumulate(levels.begin(), levels.begin() <span style="color:#f92672">+</span> level <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>) <span style="color:#f92672">+</span> level);
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>The loop iterates over each character in the input string (<code>ipt</code>).</li>
-<li>The <code>switch</code> statement handles different types of characters in the string:
 <ul>
-<li><code>\n</code>: This character indicates the end of a line. When we encounter a newline, we reset the <code>level</code>, <code>isFile</code>, and <code>len</code> variables because we are starting a new line in the file system.</li>
-<li><code>\t</code>: A tab character indicates that the item is at a deeper level in the file system. So, we increment the <code>level</code> to reflect the depth of the current item.</li>
-<li><code>.</code>: A dot character indicates that the current item is a file. We set the <code>isFile</code> flag to <code>true</code> to mark the item as a file.</li>
-<li><code>default</code>: For any other character (which is part of a directory or file name), we increment the <code>len</code> variable to count the length of the current name. The <code>levels[level]</code> is updated with the current name length.</li>
-</ul>
-</li>
-</ul>
-<h4 id="step-3-calculate-path-length-for-files">
-  Step 3: Calculate Path Length for Files
-  <a class="heading-link" href="#step-3-calculate-path-length-for-files">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(isFile) {
-</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">=</span> max(ans, accumulate(levels.begin(), levels.begin() <span style="color:#f92672">+</span> level <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>) <span style="color:#f92672">+</span> level);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>When we encounter a file (i.e., <code>isFile</code> is <code>true</code>), we calculate the total length of the path from the root to the file. This is done by summing the values in the <code>levels</code> array up to the current depth level (<code>level</code>). The <code>accumulate</code> function computes the sum of all directory lengths up to the current level.</li>
-<li>We add the <code>level</code> to this sum because the path length includes the total number of slashes (<code>/</code>) separating the directories.</li>
-<li>We then update <code>ans</code> to keep track of the maximum path length found.</li>
-</ul>
-<h4 id="step-4-return-the-final-result">
-  Step 4: Return the Final Result
-  <a class="heading-link" href="#step-4-return-the-final-result">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
-</span></span></code></pre></div><ul>
-<li>Finally, we return <code>ans</code>, which holds the length of the longest path to a file in the file system.</li>
+<li>The function processes the string in a single pass, making adjustments based on the character type.</li>
+<li>It uses a <code>switch</code> statement for clear handling of character types, making the code organized and easy to follow.</li>
+<li>At the end, the maximum path length is determined based on the accumulated lengths of directories leading to any file.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -397,43 +342,15 @@ The maximum path length to a file is updated whenever a longer path is found.</p
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>Loop Iteration</strong>: We iterate over each character in the input string exactly once. So, the time complexity of this step is <code>O(n)</code>, where <code>n</code> is the length of the input string.</li>
-<li><strong>Accumulate</strong>: For each file encountered, we use the <code>accumulate</code> function to sum the path lengths of the directories. In the worst case, we may need to sum up to <code>O(n)</code> elements (if the depth level is large). Since the accumulate operation is done at most once per file, the overall time complexity remains <code>O(n)</code>.</li>
+<li><strong>Time Complexity</strong>: O(n), where n is the length of the input string, since we process each character once.</li>
+<li><strong>Space Complexity</strong>: O(d), where d is the depth of the directory structure (up to 300 levels in this case).</li>
 </ul>
-<p>Thus, the overall time complexity is <code>O(n)</code>.</p>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>The space complexity is determined by the space required to store the <code>levels</code> array. Since the array has a fixed size of 300, the space complexity is <code>O(1)</code> (constant space).</li>
-<li>The string <code>ipt</code> takes <code>O(n)</code> space, but this space is given as input and is not part of the additional memory used by the algorithm.</li>
-</ul>
-<p>Thus, the overall space complexity is <code>O(1)</code>.</p>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution efficiently calculates the length of the longest absolute path to a file in a file system represented by a string. The approach cleverly utilizes an array to track cumulative path lengths at each level of the directory structure. By iterating through the input string once and updating the path lengths dynamically, the solution achieves optimal time complexity of <code>O(n)</code> and space complexity of <code>O(1)</code>. The solution handles various edge cases, including deep file structures, files and directories with long names, and varying indentation with tabs. This makes it a robust and efficient method for solving the problem of determining the longest file path.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1123s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1124s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -441,31 +358,10 @@ The maximum path length to a file is updated whenever a longer path is found.</p
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-390-elimination-game-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #390: Elimination Game</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-390-elimination-game-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #390: Elimination Game</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

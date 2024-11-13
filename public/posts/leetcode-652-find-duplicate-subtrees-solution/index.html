@@ -144,6 +144,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -208,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              6-minute read
+              2-minute read
             </span>
           </div>
 
@@ -253,7 +257,7 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1251s1hbhb">
+<h2 id="hahahugoshortcode1250s1hbhb">
   
 
   
@@ -265,7 +269,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>In this problem, we are given a binary tree, and we need to find all the subtrees in the tree that are duplicates. A subtree is defined as a part of the tree that includes the node itself, along with all its descendants. Two subtrees are considered duplicate if they have the same structure and node values. The task is to return a list of the root nodes of all duplicate subtrees.</p>
+<p>Given a binary tree, the task is to find all duplicate subtrees in the tree. A duplicate subtree is defined as one that appears more than once in the tree, and each subtree is defined by its root node and its structure.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -273,85 +277,54 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem, we can take advantage of <strong>tree serialization</strong> and a <strong>hash map</strong> (unordered_map) to efficiently identify and track duplicate subtrees. The idea is to convert each subtree into a unique string representation, and then store these representations in a hash map. If we encounter a subtree that has been seen before (i.e., it maps to the same string), we can be sure that it is a duplicate subtree.</p>
-<p>The algorithm can be broken down into two main parts:</p>
 <ol>
-<li><strong>Serializing the tree</strong>: This is done by traversing the tree and creating a string that uniquely represents each subtree. For each node, we recursively serialize its left and right subtrees, and combine them with the node&rsquo;s value to form a string. This way, identical subtrees will result in the same string representation.</li>
-<li><strong>Tracking duplicates</strong>: As we serialize each subtree, we store the serialized string in a hash map. If a particular string (representing a subtree) appears more than once, we know that the subtree is a duplicate.</li>
+<li>
+<p><strong>Serialization of Subtrees</strong>:</p>
+<ul>
+<li>Use a helper function to serialize each subtree in a standardized string format. This string representation allows for easy identification of duplicate structures.</li>
+<li>The serialization format includes the subtree&rsquo;s value and its left and right child representations enclosed in parentheses.</li>
+</ul>
+</li>
+<li>
+<p><strong>Storage of Subtree References</strong>:</p>
+<ul>
+<li>Utilize an unordered map (or dictionary) to store serialized strings as keys and their corresponding subtree nodes as values (in a vector). This helps in tracking how many times each subtree structure appears.</li>
+</ul>
+</li>
+<li>
+<p><strong>Identification of Duplicates</strong>:</p>
+<ul>
+<li>After serializing all subtrees, iterate through the map to find those entries that have more than one subtree associated with them. These represent the duplicate subtrees.</li>
+</ul>
+</li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="1-treenode-definition">
-  1. <strong>TreeNode Definition</strong>:
-  <a class="heading-link" href="#1-treenode-definition">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">TreeNode</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> val;
-</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#f92672">*</span>left;
-</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#f92672">*</span>right;
-</span></span><span style="display:flex;"><span>    TreeNode() <span style="color:#f92672">:</span> val(<span style="color:#ae81ff">0</span>), left(<span style="color:#66d9ef">nullptr</span>), right(<span style="color:#66d9ef">nullptr</span>) {}
-</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#66d9ef">int</span> x) <span style="color:#f92672">:</span> val(x), left(<span style="color:#66d9ef">nullptr</span>), right(<span style="color:#66d9ef">nullptr</span>) {}
-</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#66d9ef">int</span> x, TreeNode <span style="color:#f92672">*</span>left, TreeNode <span style="color:#f92672">*</span>right) <span style="color:#f92672">:</span> val(x), left(left), right(right) {}
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><ul>
-<li>The <code>TreeNode</code> structure defines the binary tree node, containing the integer <code>val</code>, a pointer to the left child <code>left</code>, and a pointer to the right child <code>right</code>. The constructor initializes these values.</li>
-</ul>
-<h4 id="2-main-function-findduplicatesubtrees">
-  2. <strong>Main Function (findDuplicateSubtrees)</strong>:
-  <a class="heading-link" href="#2-main-function-findduplicatesubtrees">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*&gt;</span> findDuplicateSubtrees(TreeNode<span style="color:#f92672">*</span> root) {
-</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#f92672">&lt;</span>string, vector<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*&gt;&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    serialise(mp, root);
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*&gt;</span> res;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it: mp) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(it.second.size() <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>            res.push_back(it.second[<span style="color:#ae81ff">0</span>]);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>We define a hash map <code>mp</code> that stores serialized subtree strings as keys, and vectors of <code>TreeNode*</code> as values. The vector contains all the nodes that share the same subtree structure and node values.</li>
-<li>The function <code>serialise(mp, root)</code> is called to fill this map by serializing all subtrees.</li>
-<li>After serialization, we iterate through the map to identify any subtrees that appear more than once. If the vector for a subtree has more than one element, we know that subtree is a duplicate, and we add the first occurrence of it (i.e., the root node) to the result list <code>res</code>.</li>
-</ul>
-<h4 id="3-subtree-serialization-serialise">
-  3. <strong>Subtree Serialization (serialise)</strong>:
-  <a class="heading-link" href="#3-subtree-serialization-serialise">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#a6e22e">serialise</span>(unordered_map<span style="color:#f92672">&lt;</span>string, vector<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*&gt;&gt;</span> <span style="color:#f92672">&amp;</span>mp, TreeNode<span style="color:#f92672">*</span> root) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(root <span style="color:#f92672">==</span> NULL) <span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>;
-</span></span><span style="display:flex;"><span>    string s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;(&#34;</span> <span style="color:#f92672">+</span> serialise(mp, root<span style="color:#f92672">-&gt;</span>left) <span style="color:#f92672">+</span> to_string(root<span style="color:#f92672">-&gt;</span>val) <span style="color:#f92672">+</span> serialise(mp, root<span style="color:#f92672">-&gt;</span>right) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;)&#34;</span>;
-</span></span><span style="display:flex;"><span>    mp[s].push_back(root);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> s;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>The <code>serialise</code> function recursively serializes each subtree. If the current node is <code>NULL</code>, we return an empty string.</li>
-<li>For each non-NULL node, we create a string <code>s</code> by concatenating:
+<ol>
+<li>
+<p><strong>Data Structure Initialization</strong>:</p>
 <ul>
-<li>The serialized left subtree (<code>serialise(mp, root-&gt;left)</code>),</li>
-<li>The current node&rsquo;s value (<code>to_string(root-&gt;val)</code>),</li>
-<li>The serialized right subtree (<code>serialise(mp, root-&gt;right)</code>).</li>
+<li>Define a map to store serialized strings and their corresponding TreeNode pointers.</li>
 </ul>
 </li>
-<li>This string representation ensures that the structure and node values are captured, so that identical subtrees will generate the same serialized string.</li>
-<li>We then store this string in the hash map <code>mp</code> and associate it with the current root node of the subtree.</li>
-<li>Finally, the function returns the serialized string <code>s</code>.</li>
+<li>
+<p><strong>Recursive Serialization</strong>:</p>
+<ul>
+<li>Implement a recursive function that constructs the serialized string for each subtree, storing it in the map and associating it with the root node of that subtree.</li>
 </ul>
+</li>
+<li>
+<p><strong>Final Result Construction</strong>:</p>
+<ul>
+<li>After serialization is complete, gather all unique subtree roots that appear more than once and return them as the final result.</li>
+</ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -359,44 +332,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ol>
-<li><strong>Tree Traversal</strong>: The algorithm performs a depth-first traversal of the entire tree to serialize each node and its subtrees. This traversal takes <strong>O(n)</strong> time, where <code>n</code> is the number of nodes in the tree.</li>
-<li><strong>Serialization and Hash Map Operations</strong>: Each node&rsquo;s serialization involves creating a string and performing a hash map lookup and insertion. In the worst case, the serialization string for each subtree can be linear in terms of the size of the subtree (though in practice it may be shorter). The time complexity for handling each node is <strong>O(n)</strong>, leading to a total time complexity of <strong>O(n)</strong> for the entire process.</li>
-</ol>
-<p>Therefore, the overall time complexity is <strong>O(n)</strong>.</p>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ol>
-<li><strong>Hash Map</strong>: The space complexity is dominated by the storage required for the hash map, which stores one serialized string for each unique subtree. In the worst case, if no two subtrees are identical, the hash map will store <code>n</code> strings. Each string can be at most <strong>O(n)</strong> in length. Hence, the space complexity for the hash map is <strong>O(n^2)</strong>.</li>
-<li><strong>Recursive Call Stack</strong>: The depth of the recursion is the height of the tree, which is <strong>O(n)</strong> in the worst case for an unbalanced tree.</li>
-</ol>
-<p>Thus, the overall space complexity is <strong>O(n^2)</strong>, dominated by the storage of the serialized strings in the hash map.</p>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The solution to finding duplicate subtrees in a binary tree efficiently uses serialization and a hash map. By recursively traversing the tree and creating a string representation for each subtree, we can easily identify duplicate subtrees by looking for duplicate strings in the hash map. The approach ensures that the problem is solved with a time complexity of <strong>O(n)</strong> and a space complexity of <strong>O(n^2)</strong>, making it suitable for most binary trees.</p>
-<p>This method is optimal for solving subtree duplication problems, and the recursive approach allows for easy implementation while ensuring that both time and space complexities are manageable.</p>
+<ul>
+<li><strong>Time Complexity</strong>: O(N), where N is the number of nodes in the tree. Each node is processed exactly once during serialization.</li>
+<li><strong>Space Complexity</strong>: O(N), for the storage of serialized strings and references to the duplicate subtree roots in the map.</li>
+</ul>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1251s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1250s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -412,31 +356,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-654-maximum-binary-tree-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #654: Maximum Binary Tree</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-654-maximum-binary-tree-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #654: Maximum Binary Tree</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

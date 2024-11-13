@@ -143,6 +143,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -203,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              4-minute read
+              2-minute read
             </span>
           </div>
 
@@ -239,7 +243,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1350s1hbhb">
+<h2 id="hahahugoshortcode1341s1hbhb">
   
 
   
@@ -251,7 +255,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem is to determine the number of connected components in a linked list given a subset of its nodes. A connected component in this context is a sequence of nodes that are part of both the linked list and the subset, <code>nums</code>. Nodes in a connected component must be consecutive in the linked list. The task is to count the number of these components.</p>
+<p>Given a linked list and a list of integers (<code>nums</code>), the task is to count the number of connected components in the linked list, where a component is defined as a maximal sublist of the linked list where each node&rsquo;s value is present in <code>nums</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -259,88 +263,43 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem efficiently, we need to identify contiguous segments in the linked list where each node’s value is present in the subset <code>nums</code>. This is achieved using an unordered set and a simple traversal of the linked list.</p>
-<p>The main steps in the approach are as follows:</p>
 <ol>
 <li>
-<p><strong>Convert <code>nums</code> to an Unordered Set</strong>:</p>
+<p><strong>Use a Set for Fast Lookup</strong>:</p>
 <ul>
-<li>Storing the elements of <code>nums</code> in an unordered set, <code>setG</code>, allows for O(1) average time complexity when checking whether a node&rsquo;s value is part of <code>nums</code>.</li>
-<li>This setup is crucial for efficient lookup and helps determine whether each node in the list belongs to the target subset.</li>
+<li>Convert the vector <code>nums</code> into an unordered set for O(1) average time complexity for lookups. This will help to quickly check if a node&rsquo;s value is part of the components we are interested in.</li>
 </ul>
 </li>
 <li>
 <p><strong>Traverse the Linked List</strong>:</p>
 <ul>
-<li>We iterate through each node in the linked list to identify contiguous segments where each node&rsquo;s value belongs to <code>setG</code>.</li>
-<li>For each node, we check if:
+<li>Initialize a counter <code>res</code> to keep track of the number of components.</li>
+<li>Iterate through each node in the linked list:
 <ul>
-<li>The node’s value is in <code>setG</code>.</li>
-<li>Either the next node is <code>NULL</code> (end of the list) or the next node&rsquo;s value is not in <code>setG</code>.</li>
+<li>Check if the current node&rsquo;s value exists in the set.</li>
+<li>Additionally, check if the next node is either <code>NULL</code> or not in the set. If both conditions are true, it indicates the end of a connected component, so increment the counter.</li>
 </ul>
 </li>
-<li>If these conditions are met, it signifies the end of a connected component.</li>
-</ul>
-</li>
-<li>
-<p><strong>Count Connected Components</strong>:</p>
-<ul>
-<li>Each time the above conditions are satisfied, we increment the count of connected components (<code>res</code>).</li>
-<li>This way, we only count distinct segments as components, avoiding double-counting nodes that appear in <code>nums</code> but are part of the same contiguous sequence.</li>
-</ul>
-</li>
-</ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The code implementation follows the approach described:</p>
-<ol>
-<li>
-<p><strong>Convert <code>nums</code> to an Unordered Set</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> setG(nums.begin(), nums.end());
-</span></span></code></pre></div><ul>
-<li>This line initializes <code>setG</code> with the elements of <code>nums</code> for quick lookups, allowing us to check whether each node’s value is in the subset efficiently.</li>
-</ul>
-</li>
-<li>
-<p><strong>Initialize Component Counter</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span></code></pre></div><ul>
-<li>We set up a counter <code>res</code> to store the count of connected components we encounter in the linked list.</li>
-</ul>
-</li>
-<li>
-<p><strong>Traverse the Linked List and Count Components</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(head <span style="color:#f92672">!=</span> NULL) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(setG.count(head<span style="color:#f92672">-&gt;</span>val) <span style="color:#f92672">&amp;&amp;</span> 
-</span></span><span style="display:flex;"><span>    (head<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">==</span> NULL <span style="color:#f92672">||</span> <span style="color:#f92672">!</span>setG.count(head<span style="color:#f92672">-&gt;</span>next<span style="color:#f92672">-&gt;</span>val)))
-</span></span><span style="display:flex;"><span>        res<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>    head <span style="color:#f92672">=</span> head<span style="color:#f92672">-&gt;</span>next;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>We iterate through the linked list using a <code>while</code> loop.</li>
-<li>For each node, we check if its value is in <code>setG</code> and if either:
-<ul>
-<li>The next node is <code>NULL</code>, marking the end of the list, or</li>
-<li>The next node’s value is not in <code>setG</code>, indicating the end of a contiguous segment.</li>
-</ul>
-</li>
-<li>If both conditions are met, we increment <code>res</code>, signaling the detection of a new connected component.</li>
-<li>The <code>head</code> pointer is then moved to the next node, and the loop continues until we reach the end of the list.</li>
 </ul>
 </li>
 <li>
 <p><strong>Return the Result</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
-</span></span></code></pre></div><ul>
-<li>Finally, we return the value of <code>res</code>, which represents the total number of connected components found in the linked list.</li>
+<ul>
+<li>After traversing the entire list, return the counter as the result.</li>
 </ul>
 </li>
 </ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The <code>numComponents</code> function initializes a set from <code>nums</code> and then iterates through the linked list to count the components.</li>
+<li>It uses a single loop to traverse the linked list, making it efficient.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -349,22 +308,15 @@
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where <code>n</code> is the number of nodes in the linked list. Each node is visited once, and lookups in the unordered set are on average O(1). This makes the traversal efficient.</li>
-<li><strong>Space Complexity</strong>: O(m), where <code>m</code> is the size of <code>nums</code>. The unordered set <code>setG</code> stores each element of <code>nums</code>, ensuring constant-time lookups.</li>
+<li><strong>Time Complexity</strong>: O(N), where N is the number of nodes in the linked list, since we visit each node exactly once.</li>
+<li><strong>Space Complexity</strong>: O(M), where M is the number of unique elements in <code>nums</code>, due to the storage of these elements in the set.</li>
 </ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution effectively identifies contiguous segments in a linked list that match a given subset of values, <code>nums</code>. By leveraging an unordered set, the algorithm achieves optimal time complexity for lookup operations, making it suitable for handling larger lists and subsets efficiently. This approach demonstrates a practical application of hash sets and pointer manipulation in linked lists, resulting in an intuitive yet efficient solution for finding connected components in linked data structures.</p>
+<p>This solution is efficient and clearly counts the connected components in the linked list based on the given criteria.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1350s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1341s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -380,31 +332,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-820-short-encoding-of-words-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #820: Short Encoding of Words</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-820-short-encoding-of-words-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #820: Short Encoding of Words</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

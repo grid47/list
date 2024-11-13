@@ -144,6 +144,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -208,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              4-minute read
+              2-minute read
             </span>
           </div>
 
@@ -237,7 +241,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1339s1hbhb">
+<h2 id="hahahugoshortcode1344s1hbhb">
   
 
   
@@ -249,8 +253,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The task is to find the minimum length of an encoded string that includes all the words in a given list. Each word can be a suffix of another, meaning it may be part of the encoding if another word already contains it as an ending substring. The encoded string should represent each word uniquely, and each word should be followed by a <code>#</code> to distinguish where it ends.</p>
-<p>For example, given the words <code>[&quot;time&quot;, &quot;me&quot;, &quot;bell&quot;]</code>, the minimum encoding is <code>&quot;time#bell#&quot;</code> with a length of 10, as &ldquo;me&rdquo; is already a suffix of &ldquo;time&rdquo;.</p>
+<p>Given a list of words, we need to find the minimum length of a string that can encode all the words by appending a <code>#</code> character after each word. Each word should be represented only once and should not overlap with the others.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -258,66 +261,44 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>This problem can be solved efficiently by leveraging an unordered set and a few key insights regarding suffixes:</p>
 <ol>
 <li>
-<p><strong>Eliminate Redundant Suffixes</strong>:</p>
+<p><strong>Use a Set for Unique Words</strong>:</p>
 <ul>
-<li>First, store each word in an unordered set. This set will help us keep track of which words need to be included in the final encoding.</li>
-<li>Then, iterate through each word and attempt to remove all its suffixes from the set. This removal ensures that if one word is a suffix of another, it will not contribute to the final encoding length because it&rsquo;s already covered by the longer word.</li>
+<li>Store all words in an unordered set to ensure uniqueness and allow for efficient lookup.</li>
 </ul>
 </li>
 <li>
-<p><strong>Calculate Encoding Length</strong>:</p>
+<p><strong>Remove Substrings</strong>:</p>
 <ul>
-<li>After the set has been reduced to only the longest words (those that are not suffixes of any other words), we calculate the length of the encoded string.</li>
-<li>For each remaining word in the set, we add its length plus one (<code>+1</code> for the <code>#</code> character) to represent the encoded format.</li>
-</ul>
-</li>
-</ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The code follows this approach to efficiently compute the minimum encoding length:</p>
-<ol>
-<li>
-<p><strong>Initialize Unordered Set</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_set<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> s(words.begin(), words.end());
-</span></span></code></pre></div><p>This line constructs an unordered set <code>s</code> containing all words from the input <code>words</code> list. This set allows for efficient O(1) average time complexity for insertions and lookups, essential for managing word suffixes.</p>
-</li>
-<li>
-<p><strong>Eliminate Suffixes</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(string w: words)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> w.size(); i<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>        s.erase(w.substr(i));
-</span></span></code></pre></div><ul>
-<li>This nested loop iterates over each word <code>w</code> in the list <code>words</code>. For each word, it generates all possible suffixes starting from index <code>1</code> (ignoring the entire word itself) and removes each suffix from the set <code>s</code>.</li>
-<li>For instance, if <code>w = &quot;time&quot;</code>, this loop will generate <code>&quot;ime&quot;</code>, <code>&quot;me&quot;</code>, and <code>&quot;e&quot;</code> as suffixes and attempt to remove them from <code>s</code>.</li>
-<li>By erasing all possible suffixes, we ensure only the longest necessary words remain in <code>s</code>.</li>
+<li>For each word, iterate through its possible suffixes (from the second character to the end of the word) and remove these suffixes from the set. This is done because if a suffix of a word exists in the set, the full word does not need to be counted as it can be represented by its suffix.</li>
 </ul>
 </li>
 <li>
-<p><strong>Calculate Encoding Length</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(string sk: s)
-</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">+=</span> (sk.size() <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
-</span></span></code></pre></div><ul>
-<li>After the set is reduced to only non-suffix words, the loop calculates the minimum encoding length.</li>
-<li>For each word <code>sk</code> in the set <code>s</code>, it adds <code>sk.size() + 1</code> to the result (<code>res</code>), accounting for the word length and the additional <code>#</code>.</li>
+<p><strong>Calculate Length</strong>:</p>
+<ul>
+<li>After processing all words, the remaining words in the set represent the unique roots. The total length required to encode these words is calculated by summing the lengths of the words plus one for the <code>#</code> character for each.</li>
 </ul>
 </li>
 <li>
 <p><strong>Return the Result</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
-</span></span></code></pre></div><ul>
-<li>Finally, the function returns <code>res</code>, representing the minimum length of the encoded string that uniquely represents all words.</li>
+<ul>
+<li>Return the total calculated length.</li>
 </ul>
 </li>
 </ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>The <code>minimumLengthEncoding</code> function initializes a set with the input words.</li>
+<li>It then removes all substrings (suffixes) from the set.</li>
+<li>Finally, it sums the lengths of the remaining words, adding one for each, to compute the total length.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -326,22 +307,15 @@
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity</strong>: O(n * k^2), where <code>n</code> is the number of words, and <code>k</code> is the average length of the words. Generating each suffix of a word takes O(k^2) time, and for each word, we check or erase the suffixes in the set, which has O(1) average complexity due to the unordered set.</li>
-<li><strong>Space Complexity</strong>: O(n * k) for storing the words and their suffixes in the unordered set <code>s</code>.</li>
+<li><strong>Time Complexity</strong>: O(N * L), where N is the number of words and L is the average length of the words. This is due to iterating over each word and its suffixes.</li>
+<li><strong>Space Complexity</strong>: O(N), as we store the unique words in a set.</li>
 </ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution effectively reduces redundant suffixes and uses an unordered set to achieve an optimal encoding length. By eliminating words that are suffixes of other words, the algorithm minimizes the size of the encoded string. This approach is efficient and well-suited for handling large lists of words with varying lengths, demonstrating a practical use of hash sets to solve string encoding problems with suffix elimination.</p>
+<p>This method efficiently computes the minimum length required for encoding the words by leveraging the properties of substrings.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1339s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1344s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -349,31 +323,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-822-card-flipping-game-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #822: Card Flipping Game</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-822-card-flipping-game-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #822: Card Flipping Game</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

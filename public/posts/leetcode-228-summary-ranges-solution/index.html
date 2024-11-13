@@ -141,6 +141,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -193,7 +197,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              6-minute read
+              2-minute read
             </span>
           </div>
 
@@ -202,11 +206,11 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode674s0hbhb">
+        <h2 id="hahahugoshortcode679s0hbhb">
   <a href="https://leetcode.com/problems/summary-ranges/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
-      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/228.jpeg" 
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/228.webp" 
            alt="A range of numbers with each segment gently highlighted, showing the summarized range." 
            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
     </div>
@@ -217,7 +221,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode674s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode679s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -241,7 +245,7 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode674s2hbhb">
+<h2 id="hahahugoshortcode679s2hbhb">
   
 
   
@@ -253,7 +257,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem asks to return the summary of a given list of sorted integers as ranges. A range is a sequence of consecutive integers. The goal is to group consecutive integers together and represent them as a range, for example, &ldquo;1-&gt;5&rdquo; instead of listing all the integers individually (&ldquo;1&rdquo;, &ldquo;2&rdquo;, &ldquo;3&rdquo;, &ldquo;4&rdquo;, &ldquo;5&rdquo;). If the integers are not consecutive, they should be listed individually.</p>
+<p>Given a sorted integer array without duplicates, return the summary of its ranges. For example, for the input <code>[0, 1, 2, 4, 5, 7]</code>, the output should be <code>[&quot;0-&gt;2&quot;, &quot;4-&gt;5&quot;, &quot;7&quot;]</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -261,121 +265,33 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem, the approach revolves around iterating through the sorted list of integers and identifying consecutive sequences. For each sequence of consecutive integers, we need to represent it as a range, while isolated integers are represented individually.</p>
-<p>The approach can be broken down as follows:</p>
-<ol>
-<li>
-<p><strong>Edge Case Handling:</strong></p>
 <ul>
-<li>If the input list is empty (<code>nums.size() == 0</code>), we return an empty result immediately.</li>
+<li><strong>Iterate through the array</strong>: Use a while loop to traverse the array and identify continuous ranges.</li>
+<li><strong>Track the start and end of ranges</strong>: For each range, keep track of the starting index and extend the end index as long as the next number is consecutive.</li>
+<li><strong>Generate output</strong>: If the start and end indices are the same, append the single number; otherwise, append the range in the format <code>&quot;start-&gt;end&quot;</code>.</li>
 </ul>
-</li>
-<li>
-<p><strong>Iterating Through the List:</strong></p>
-<ul>
-<li>We initialize a pointer <code>i</code> to iterate through the list. For each sequence of consecutive integers, we identify the start and end of the range.</li>
-<li>We use a <code>while</code> loop to check for consecutive numbers. If the next number in the list is exactly one greater than the current number (<code>nums[end + 1] == nums[end] + 1</code>), we extend the end of the range (<code>end</code>).</li>
-</ul>
-</li>
-<li>
-<p><strong>Range Construction:</strong></p>
-<ul>
-<li>If the sequence has more than one integer, we create a range in the format <code>&quot;start-&gt;end&quot;</code>. If the sequence has only one number, we just include that number (e.g., <code>&quot;start&quot;</code>).</li>
-<li>We add the constructed range or number to the result vector.</li>
-</ul>
-</li>
-<li>
-<p><strong>Update the Pointer:</strong></p>
-<ul>
-<li>After processing a range (or single number), we update the pointer <code>i</code> to continue from the next element after the range.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return the Result:</strong></p>
-<ul>
-<li>After processing all elements, we return the vector containing all the summarized ranges or individual numbers.</li>
-</ul>
-</li>
-</ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="step-1-handle-edge-case-for-empty-input">
-  Step 1: Handle Edge Case for Empty Input
-  <a class="heading-link" href="#step-1-handle-edge-case-for-empty-input">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">const</span> <span style="color:#66d9ef">int</span> size_n <span style="color:#f92672">=</span> nums.size();
-</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> res;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> ( <span style="color:#ae81ff">0</span> <span style="color:#f92672">==</span> size_n) <span style="color:#66d9ef">return</span> res;
-</span></span></code></pre></div><ul>
-<li>We first check if the input list <code>nums</code> is empty. If it is, we return an empty result (<code>res</code>). This is a straightforward edge case check that avoids unnecessary computations for an empty input.</li>
+<ul>
+<li><strong>Function <code>summaryRanges(vector&lt;int&gt;&amp; nums)</code></strong>:
+<ul>
+<li>Initialize the result vector <code>res</code> and check if the input <code>nums</code> is empty.</li>
+<li>Use a loop to iterate through the input array:
+<ul>
+<li>Set <code>start</code> and <code>end</code> to the current index <code>i</code>.</li>
+<li>Use a nested while loop to extend <code>end</code> while the next number is consecutive.</li>
+<li>Based on whether <code>start</code> equals <code>end</code>, either push a single number or a range string to <code>res</code>.</li>
+<li>Update <code>i</code> to <code>end + 1</code> for the next iteration.</li>
 </ul>
-<h4 id="step-2-initialize-the-iteration-variables">
-  Step 2: Initialize the Iteration Variables
-  <a class="heading-link" href="#step-2-initialize-the-iteration-variables">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> size_n;) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> start <span style="color:#f92672">=</span> i, end <span style="color:#f92672">=</span> i;
-</span></span></code></pre></div><ul>
-<li>We begin iterating through the list using a loop where <code>i</code> keeps track of the current position in the list.</li>
-<li>We initialize <code>start</code> and <code>end</code> to <code>i</code>, representing the beginning of a potential range.</li>
+</li>
+<li>Return the <code>res</code> vector containing the ranges.</li>
 </ul>
-<h4 id="step-3-find-consecutive-numbers-in-the-list">
-  Step 3: Find Consecutive Numbers in the List
-  <a class="heading-link" href="#step-3-find-consecutive-numbers-in-the-list">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (end <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> size_n <span style="color:#f92672">&amp;&amp;</span> nums[end <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> nums[end] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) end<span style="color:#f92672">++</span>;
-</span></span></code></pre></div><ul>
-<li>Inside a <code>while</code> loop, we check if the current number is consecutive to the next number. If it is, we move the <code>end</code> pointer forward to extend the range.</li>
-<li>The condition <code>end + 1 &lt; size_n</code> ensures we don&rsquo;t go out of bounds, and <code>nums[end + 1] == nums[end] + 1</code> checks if the numbers are consecutive.</li>
-</ul>
-<h4 id="step-4-construct-the-range">
-  Step 4: Construct the Range
-  <a class="heading-link" href="#step-4-construct-the-range">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (end <span style="color:#f92672">&gt;</span> start) res.push_back(to_string(nums[start]) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;-&gt;&#34;</span> <span style="color:#f92672">+</span> to_string(nums[end]));
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">else</span> res.push_back(to_string(nums[start]));
-</span></span></code></pre></div><ul>
-<li>After exiting the <code>while</code> loop, we check whether <code>start</code> and <code>end</code> represent a range with more than one number. If <code>end &gt; start</code>, we create a string representing the range in the format <code>&quot;start-&gt;end&quot;</code>.</li>
-<li>If the range consists of only one number, we add the number itself as a string.</li>
-</ul>
-<h4 id="step-5-move-to-the-next-range-or-number">
-  Step 5: Move to the Next Range or Number
-  <a class="heading-link" href="#step-5-move-to-the-next-range-or-number">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>i <span style="color:#f92672">=</span> end <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
-</span></span></code></pre></div><ul>
-<li>We then update the pointer <code>i</code> to the next number after the current range by setting <code>i = end + 1</code>. This allows us to continue processing the next sequence of consecutive numbers.</li>
-</ul>
-<h4 id="step-6-return-the-result">
-  Step 6: Return the Result
-  <a class="heading-link" href="#step-6-return-the-result">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
-</span></span></code></pre></div><ul>
-<li>Finally, after processing all the numbers in the list, we return the vector <code>res</code> containing the summarized ranges or individual numbers.</li>
+</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -384,47 +300,14 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li>
-<p>The main loop iterates through each element of the <code>nums</code> array exactly once, ensuring that the time complexity is linear in terms of the size of the input array <code>n</code>. The inner <code>while</code> loop also iterates only for consecutive numbers, so every element is visited once, making the overall time complexity <code>O(n)</code>.</p>
-<ul>
-<li><strong>Best Case:</strong> If all numbers are individual and non-consecutive, the <code>while</code> loop won&rsquo;t be triggered, and we will process each number once, giving a time complexity of <code>O(n)</code>.</li>
-<li><strong>Worst Case:</strong> If all numbers are consecutive, the <code>while</code> loop will iterate once for each element in the list, but still only once for each element, so the time complexity remains <code>O(n)</code>.</li>
-</ul>
-</li>
-</ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>The space complexity is determined by the space required to store the result. The result vector <code>res</code> contains at most <code>n</code> elements (in the case where all numbers are individual and not part of a range). Therefore, the space complexity is <code>O(n)</code>.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This algorithm is efficient, with a time complexity of <code>O(n)</code> and space complexity of <code>O(n)</code>. It provides a clear and concise way to summarize ranges of consecutive numbers in a sorted list. The use of simple iteration and condition checking ensures that we handle both individual numbers and consecutive sequences optimally.</p>
-<p>The algorithm is highly scalable, and it works well even for large lists of integers. The edge case handling for empty inputs is also an important feature, making the solution robust in all scenarios.</p>
-<p>Overall, this solution is optimal in terms of both time and space complexity, making it well-suited for problems involving summarizing ranges of integers.</p>
- 
+<li><strong>Time Complexity</strong>: (O(n)), where (n) is the number of elements in <code>nums</code>, since each element is processed once.</li>
+<li><strong>Space Complexity</strong>: (O(k)), where (k) is the number of ranges generated, which could be at most (n) in the case of no ranges.</li>
+</ul> 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode674s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode679s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -440,31 +323,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-229-majority-element-ii-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #229: Majority Element II</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-229-majority-element-ii-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #229: Majority Element II</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 

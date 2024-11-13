@@ -143,6 +143,10 @@
             </li>
           
             <li class="navigation-item">
+              <a class="navigation-link " href="/courses/">Course</a>
+            </li>
+          
+            <li class="navigation-item">
               <a class="navigation-link " href="/terms/">Terms</a>
             </li>
           
@@ -203,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              6-minute read
+              3-minute read
             </span>
           </div>
 
@@ -245,7 +249,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span>  dfs(node<span style="color:#f92672">-&gt;</span>left, voyage) <span style="color:#f92672">&amp;&amp;</span> dfs(node<span style="color:#f92672">-&gt;</span>right, voyage);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1454s1hbhb">
+<h2 id="hahahugoshortcode1440s1hbhb">
   
 
   
@@ -257,7 +261,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem asks us to determine whether we can flip some of the nodes of a binary tree so that the tree’s preorder traversal matches a given voyage array. If it is possible, the task is to return the list of nodes that need to be flipped to achieve this. If it is not possible, we need to return <code>[-1]</code>. The tree is represented as a binary tree, and the voyage is an array of integers representing the desired preorder traversal of the tree. The flip operation allows us to swap the left and right child nodes of any tree node.</p>
+<p>Given a binary tree and a vector <code>voyage</code>, determine if it is possible to flip some nodes in the tree so that the resulting tree&rsquo;s preorder traversal matches the given <code>voyage</code>. If flipping is necessary, return the values of the nodes that were flipped. If it&rsquo;s impossible to match the <code>voyage</code>, return <code>[-1]</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -265,91 +269,51 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The solution to this problem involves a depth-first search (DFS) approach to traverse the binary tree and check whether we can match the preorder traversal <code>voyage</code> while keeping track of the nodes that need to be flipped to achieve the desired traversal. The steps to approach this problem are as follows:</p>
 <ol>
-<li><strong>Start from the root of the tree</strong>: We initiate a DFS traversal starting from the root of the binary tree.</li>
-<li><strong>Matching node values with the voyage</strong>: During the DFS, at each node, we check if the current node’s value matches the value in the <code>voyage</code> array. If the value matches, we proceed to the next node in the <code>voyage</code>. If not, we return <code>false</code>.</li>
-<li><strong>Identifying a required flip</strong>: If the left child node exists and its value does not match the next value in the <code>voyage</code>, we recognize that a flip is needed. We then swap the left and right children for the current node, record the node as flipped in the result list, and continue the DFS.</li>
-<li><strong>Return the result</strong>: Once the traversal is complete, we check if we successfully matched the entire <code>voyage</code>. If so, we return the list of flipped nodes. If any mismatch occurs during the traversal, we return <code>[-1]</code>.</li>
+<li>
+<p><strong>Depth-First Search (DFS)</strong>:</p>
+<ul>
+<li>Perform a DFS traversal of the tree, comparing the values of nodes with the <code>voyage</code> vector.</li>
+<li>Keep track of the current index in the <code>voyage</code> vector.</li>
+</ul>
+</li>
+<li>
+<p><strong>Node Value Check</strong>:</p>
+<ul>
+<li>If the value of the current node does not match the expected value in <code>voyage</code>, return <code>false</code>.</li>
+<li>If the left child exists but the next value in <code>voyage</code> does not match the left child’s value, flip the current node by pushing its value onto the result vector and recursively traverse the right child first, followed by the left child.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Values</strong>:</p>
+<ul>
+<li>If all nodes match and no invalid conditions are encountered, return the result vector containing the flipped node values.</li>
+<li>If the traversal cannot match the <code>voyage</code>, return a vector containing <code>-1</code>.</li>
+</ul>
+</li>
 </ol>
-<p>The problem is solved in a recursive manner by using the DFS technique, making use of an auxiliary variable <code>i</code> to keep track of the current position in the <code>voyage</code>.</p>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> res;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> flipMatchVoyage(TreeNode<span style="color:#f92672">*</span> root, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> voyage) {
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> fail <span style="color:#f92672">=</span> {<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>};
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">dfs</span>(root, voyage) <span style="color:#f92672">?</span> res : fail;
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><ol>
-<li><strong>Function Declaration</strong>:
+<ol>
+<li>
+<p><strong><code>flipMatchVoyage</code> Method</strong>:</p>
 <ul>
-<li>The function <code>flipMatchVoyage</code> is declared with two arguments: <code>root</code> (the root node of the binary tree) and <code>voyage</code> (the array representing the desired preorder traversal).</li>
-<li>We initialize an empty vector <code>res</code> to store the flipped nodes. We also initialize <code>i = 0</code>, which will serve as an index to track the current position in the <code>voyage</code>.</li>
-<li>If the DFS traversal returns <code>true</code>, meaning the <code>voyage</code> is successfully matched with the tree’s preorder traversal, the function returns the <code>res</code> vector containing the flipped nodes. If not, it returns <code>[-1]</code>, indicating that it is not possible to achieve the desired traversal.</li>
+<li>Initializes a result vector <code>res</code> and an index <code>i</code>.</li>
+<li>Calls the <code>dfs</code> function to begin the traversal.</li>
+<li>Returns the result or <code>[-1]</code> based on the traversal outcome.</li>
 </ul>
 </li>
-</ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">dfs</span>(TreeNode<span style="color:#f92672">*</span> node, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>voyage) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(node <span style="color:#f92672">==</span> NULL) <span style="color:#66d9ef">return</span> true;
-</span></span></code></pre></div><ol start="2">
-<li><strong>DFS Traversal</strong>:
+<li>
+<p><strong><code>dfs</code> Method</strong>:</p>
 <ul>
-<li>The DFS function is defined to traverse the binary tree.</li>
-<li>The base case checks if the current node is <code>NULL</code>. If it is, it returns <code>true</code> since there is nothing to flip or match at a <code>NULL</code> node.</li>
-</ul>
-</li>
-</ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(node<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">!=</span> voyage[i<span style="color:#f92672">++</span>]) <span style="color:#66d9ef">return</span> false;
-</span></span></code></pre></div><ol start="3">
-<li><strong>Matching Node Value with Voyage</strong>:
-<ul>
-<li>For each node in the tree, we compare its value (<code>node-&gt;val</code>) with the value in the <code>voyage</code> at index <code>i</code>.</li>
-<li>If the value does not match, we return <code>false</code>, as this means the tree cannot match the desired preorder traversal.</li>
-<li>We also increment <code>i</code> after the comparison to move to the next index in the <code>voyage</code>.</li>
-</ul>
-</li>
-</ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(node<span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">!=</span> NULL <span style="color:#f92672">&amp;&amp;</span> node<span style="color:#f92672">-&gt;</span>left<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">!=</span> voyage[i]) {
-</span></span></code></pre></div><ol start="4">
-<li><strong>Check for Flip Requirement</strong>:
-<ul>
-<li>If the left child of the current node exists (<code>node-&gt;left != NULL</code>), we check whether the left child’s value matches the next value in the <code>voyage</code> at index <code>i</code>. If it does not match, we need to flip the left and right children to continue matching the <code>voyage</code>.</li>
-<li>If a flip is required, we enter the block of code that swaps the left and right children and adds the current node’s value to the <code>res</code> vector.</li>
-</ul>
-</li>
-</ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res.push_back(node<span style="color:#f92672">-&gt;</span>val);
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">dfs</span>(node<span style="color:#f92672">-&gt;</span>right, voyage) <span style="color:#f92672">&amp;&amp;</span> dfs(node<span style="color:#f92672">-&gt;</span>left, voyage);
-</span></span></code></pre></div><ol start="5">
-<li><strong>Flip the Node</strong>:
-<ul>
-<li>We push the current node’s value into the result vector <code>res</code>, indicating that this node needs to be flipped.</li>
-<li>After the flip, we recursively call <code>dfs</code> on the right child first (<code>node-&gt;right</code>), followed by the left child (<code>node-&gt;left</code>). This ensures that we are flipping the children nodes and then continuing the DFS traversal for both sides.</li>
-</ul>
-</li>
-</ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">dfs</span>(node<span style="color:#f92672">-&gt;</span>left, voyage) <span style="color:#f92672">&amp;&amp;</span> dfs(node<span style="color:#f92672">-&gt;</span>right, voyage);
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><ol start="6">
-<li><strong>Recursive DFS Without Flip</strong>:
-<ul>
-<li>If no flip is needed (i.e., the left child’s value matches the next value in the <code>voyage</code>), we recursively call <code>dfs</code> on the left child (<code>node-&gt;left</code>) first, and then the right child (<code>node-&gt;right</code>). This is the standard preorder traversal (left, right).</li>
-</ul>
-</li>
-</ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>};
-</span></span></code></pre></div><ol start="7">
-<li><strong>End of Function</strong>:
-<ul>
-<li>The DFS function ends, and control is returned to the main function <code>flipMatchVoyage</code>.</li>
+<li>Checks if the current node is null and returns <code>true</code>.</li>
+<li>Compares the current node&rsquo;s value to the corresponding value in <code>voyage</code>.</li>
+<li>Handles the condition for flipping nodes and recursively checks the appropriate child nodes.</li>
 </ul>
 </li>
 </ol>
@@ -361,32 +325,14 @@
   </a>
 </h3>
 <ul>
-<li>
-<p><strong>Time Complexity</strong>:</p>
-<ul>
-<li>The time complexity of this algorithm is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the binary tree. In the worst case, the algorithm performs a DFS traversal of all the nodes in the tree, visiting each node once. Each comparison and operation inside the DFS function takes constant time.</li>
+<li><strong>Time Complexity</strong>: O(n), where <code>n</code> is the number of nodes in the tree, as we potentially visit each node once.</li>
+<li><strong>Space Complexity</strong>: O(h), where <code>h</code> is the height of the tree, due to the recursion stack.</li>
 </ul>
-</li>
-<li>
-<p><strong>Space Complexity</strong>:</p>
-<ul>
-<li>The space complexity is <strong>O(h)</strong>, where <code>h</code> is the height of the tree. This is because the recursive DFS function uses a call stack that can grow up to the height of the tree in the worst case. The additional space used by the result vector <code>res</code> is proportional to the number of flipped nodes, but this is at most <code>n</code>, where <code>n</code> is the number of nodes.</li>
-</ul>
-</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution effectively solves the problem by performing a depth-first search (DFS) on the binary tree while keeping track of the nodes that need to be flipped in order to match the desired preorder traversal given in the <code>voyage</code>. The approach ensures that only the necessary nodes are flipped, and it efficiently checks whether the tree’s preorder traversal can be transformed to match the <code>voyage</code>. The solution uses recursion, a common technique for tree traversal problems, and ensures the result is returned in the form of a vector containing the flipped nodes. If the transformation is not possible, it correctly returns <code>[-1]</code>.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1454s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1440s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -402,31 +348,10 @@
 <table>
   <thead>
       <tr>
-          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / Next : <a href="https://grid47.xyz/posts/leetcode-973-k-closest-points-to-origin-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #973: K Closest Points to Origin</a></th>
+          <th><a href="https://grid47.xyz/leetcode/"  class="external-link" target="_blank" rel="noopener">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/"  class="external-link" target="_blank" rel="noopener">DSA Sheets</a> / <a href="https://grid47.xyz/courses/"  class="external-link" target="_blank" rel="noopener">Course Catalog</a> / Next : <a href="https://grid47.xyz/posts/leetcode-973-k-closest-points-to-origin-solution/"  class="external-link" target="_blank" rel="noopener">LeetCode #973: K Closest Points to Origin</a></th>
       </tr>
   </thead>
   <tbody>
-      <tr>
-          <td><div class="notice tip">
-  <div class="notice-title">
-    <i class="fa-solid fa-lightbulb" aria-hidden="true"></i>Tip
-  </div>
-  <div class="notice-content">Unlock the power of patterns! Mastering one problem builds a pathway to solve many more. Dive into practice, and let each problem sharpen your skills. <a href="https://www.udemy.com/course/algorithms-and-data-structures-in-cpp/"  class="external-link" target="_blank" rel="noopener">Check out my Momentum Learning course at Udemy! 🚀 </a></div>
-</div>
-</td>
-      </tr>
-      <tr>
-          <td>Coupen: 
-
-<div class="copy-container">
-  <span class="copy-text">GRID100FREE</span>
-  <button class="copy-btn" data-clipboard-text="GRID100FREE" aria-label="Copy to clipboard">
-    <svg class="copy-icon" viewBox="0 0 24 24" width="18" height="18">
-      <path fill="currentColor" d="M16 1H4C3 1 2 2 2 3v14h2V3h12V1zm3 4H8C7 5 6 6 6 7v14c0 1 1 2 2 2h11c1 0 2-1 2-2V7c0-1-1-2-2-2zm0 16H8V7h11v14z"/>
-    </svg>
-  </button>
-</div></td>
-      </tr>
   </tbody>
 </table>
 
