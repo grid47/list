@@ -209,32 +209,32 @@
         <p><a href="https://leetcode.com/problems/the-dining-philosophers/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DiningPhilosophers</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    mutex mtx[<span style="color:#ae81ff">5</span>];
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">DiningPhilosophers</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    mutex mtx[<span style="color:#666">5</span>];
 </span></span><span style="display:flex;"><span>    DiningPhilosophers() {
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">wantsToEat</span>(<span style="color:#66d9ef">int</span> philosopher,
-</span></span><span style="display:flex;"><span>                    function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>()<span style="color:#f92672">&gt;</span> pickLeftFork,
-</span></span><span style="display:flex;"><span>                    function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>()<span style="color:#f92672">&gt;</span> pickRightFork,
-</span></span><span style="display:flex;"><span>                    function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>()<span style="color:#f92672">&gt;</span> eat,
-</span></span><span style="display:flex;"><span>                    function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>()<span style="color:#f92672">&gt;</span> putLeftFork,
-</span></span><span style="display:flex;"><span>                    function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>()<span style="color:#f92672">&gt;</span> putRightFork) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">wantsToEat</span>(<span style="color:#0b0;font-weight:bold">int</span> philosopher,
+</span></span><span style="display:flex;"><span>                    function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> pickLeftFork,
+</span></span><span style="display:flex;"><span>                    function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> pickRightFork,
+</span></span><span style="display:flex;"><span>                    function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> eat,
+</span></span><span style="display:flex;"><span>                    function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> putLeftFork,
+</span></span><span style="display:flex;"><span>                    function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> putRightFork) {
 </span></span><span style="display:flex;"><span>		
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> left <span style="color:#f92672">=</span> philosopher;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> right <span style="color:#f92672">=</span> (philosopher <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">%</span> <span style="color:#ae81ff">5</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> left <span style="color:#666">=</span> philosopher;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> right <span style="color:#666">=</span> (philosopher <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">%</span> <span style="color:#666">5</span>;
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        unique_lock<span style="color:#f92672">&lt;</span>mutex<span style="color:#f92672">&gt;</span> lck1(mtx[left], defer_lock);
-</span></span><span style="display:flex;"><span>        unique_lock<span style="color:#f92672">&lt;</span>mutex<span style="color:#f92672">&gt;</span> lck2(mtx[right], defer_lock);
+</span></span><span style="display:flex;"><span>        unique_lock<span style="color:#666">&lt;</span>mutex<span style="color:#666">&gt;</span> lck1(mtx[left], defer_lock);
+</span></span><span style="display:flex;"><span>        unique_lock<span style="color:#666">&lt;</span>mutex<span style="color:#666">&gt;</span> lck2(mtx[right], defer_lock);
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(philosopher <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(philosopher <span style="color:#666">%</span> <span style="color:#666">2</span>) {
 </span></span><span style="display:flex;"><span>            lck1.lock();
 </span></span><span style="display:flex;"><span>            lck2.lock();
 </span></span><span style="display:flex;"><span>            pickLeftFork();
 </span></span><span style="display:flex;"><span>            pickRightFork();
-</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
 </span></span><span style="display:flex;"><span>            lck2.lock();
 </span></span><span style="display:flex;"><span>            lck1.lock();
 </span></span><span style="display:flex;"><span>            pickLeftFork();
@@ -245,7 +245,7 @@
 </span></span><span style="display:flex;"><span>        putRightFork();
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode126s1hbhb">
+<h2 id="hahahugoshortcode125s1hbhb">
   
 
   
@@ -285,43 +285,43 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">DiningPhilosophers</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    mutex mtx[<span style="color:#ae81ff">5</span>];
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">DiningPhilosophers</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    mutex mtx[<span style="color:#666">5</span>];
 </span></span></code></pre></div><ul>
 <li><strong>Lines 1-2</strong>: We define the <code>DiningPhilosophers</code> class and create an array of mutexes (<code>mtx[5]</code>) to represent the five forks.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    DiningPhilosophers() {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    DiningPhilosophers() {
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div><ul>
 <li><strong>Lines 3-5</strong>: The constructor of the <code>DiningPhilosophers</code> class is defined, but it doesn’t perform any operations. It&rsquo;s here to facilitate object creation.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">wantsToEat</span>(<span style="color:#66d9ef">int</span> philosopher,
-</span></span><span style="display:flex;"><span>                    function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>()<span style="color:#f92672">&gt;</span> pickLeftFork,
-</span></span><span style="display:flex;"><span>                    function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>()<span style="color:#f92672">&gt;</span> pickRightFork,
-</span></span><span style="display:flex;"><span>                    function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>()<span style="color:#f92672">&gt;</span> eat,
-</span></span><span style="display:flex;"><span>                    function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>()<span style="color:#f92672">&gt;</span> putLeftFork,
-</span></span><span style="display:flex;"><span>                    function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>()<span style="color:#f92672">&gt;</span> putRightFork) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">wantsToEat</span>(<span style="color:#0b0;font-weight:bold">int</span> philosopher,
+</span></span><span style="display:flex;"><span>                    function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> pickLeftFork,
+</span></span><span style="display:flex;"><span>                    function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> pickRightFork,
+</span></span><span style="display:flex;"><span>                    function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> eat,
+</span></span><span style="display:flex;"><span>                    function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> putLeftFork,
+</span></span><span style="display:flex;"><span>                    function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> putRightFork) {
 </span></span></code></pre></div><ul>
 <li><strong>Lines 6-11</strong>: We define the <code>wantsToEat</code> method, which takes the philosopher&rsquo;s index and several function callbacks that represent the actions of picking up and putting down forks, as well as eating.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> left <span style="color:#f92672">=</span> philosopher;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> right <span style="color:#f92672">=</span> (philosopher <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">%</span> <span style="color:#ae81ff">5</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> left <span style="color:#666">=</span> philosopher;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> right <span style="color:#666">=</span> (philosopher <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">%</span> <span style="color:#666">5</span>;
 </span></span></code></pre></div><ul>
 <li><strong>Lines 12-13</strong>: We determine the indices for the left and right forks. The left fork corresponds to the philosopher&rsquo;s index, while the right fork is calculated using modulo arithmetic to wrap around the array.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        unique_lock<span style="color:#f92672">&lt;</span>mutex<span style="color:#f92672">&gt;</span> lck1(mtx[left], defer_lock);
-</span></span><span style="display:flex;"><span>        unique_lock<span style="color:#f92672">&lt;</span>mutex<span style="color:#f92672">&gt;</span> lck2(mtx[right], defer_lock);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        unique_lock<span style="color:#666">&lt;</span>mutex<span style="color:#666">&gt;</span> lck1(mtx[left], defer_lock);
+</span></span><span style="display:flex;"><span>        unique_lock<span style="color:#666">&lt;</span>mutex<span style="color:#666">&gt;</span> lck2(mtx[right], defer_lock);
 </span></span></code></pre></div><ul>
 <li><strong>Lines 14-15</strong>: We create two unique locks (<code>lck1</code> and <code>lck2</code>) for the left and right forks, initializing them with <code>defer_lock</code> to allow us to lock them later.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(philosopher <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(philosopher <span style="color:#666">%</span> <span style="color:#666">2</span>) {
 </span></span><span style="display:flex;"><span>            lck1.lock();
 </span></span><span style="display:flex;"><span>            lck2.lock();
 </span></span><span style="display:flex;"><span>            pickLeftFork();
 </span></span><span style="display:flex;"><span>            pickRightFork();
-</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
 </span></span><span style="display:flex;"><span>            lck2.lock();
 </span></span><span style="display:flex;"><span>            lck1.lock();
 </span></span><span style="display:flex;"><span>            pickLeftFork();
@@ -336,7 +336,7 @@
 </li>
 <li>This alternating strategy prevents deadlock by ensuring that at least one philosopher can always pick up their forks without being blocked.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        eat();
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        eat();
 </span></span><span style="display:flex;"><span>        putLeftFork();
 </span></span><span style="display:flex;"><span>        putRightFork();
 </span></span><span style="display:flex;"><span>    }
@@ -371,7 +371,7 @@
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode126s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode125s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

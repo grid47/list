@@ -209,49 +209,49 @@
         <p><a href="https://leetcode.com/problems/print-in-order/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Foo</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> curVal;
-</span></span><span style="display:flex;"><span>    std<span style="color:#f92672">::</span>mutex mtx;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Foo</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> curVal;
+</span></span><span style="display:flex;"><span>    std<span style="color:#666">::</span>mutex mtx;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span><span style="display:flex;"><span>    Foo() {
-</span></span><span style="display:flex;"><span>        curVal <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        curVal <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">first</span>(function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>()<span style="color:#f92672">&gt;</span> printFirst) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">first</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> printFirst) {
 </span></span><span style="display:flex;"><span>        mtx.lock();
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// printFirst() outputs &#34;first&#34;. Do not change or remove this line.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        printFirst();
-</span></span><span style="display:flex;"><span>        curVal<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// printFirst() outputs &#34;first&#34;. Do not change or remove this line.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        printFirst();
+</span></span><span style="display:flex;"><span>        curVal<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>        mtx.unlock();
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">second</span>(function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>()<span style="color:#f92672">&gt;</span> printSecond) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">second</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> printSecond) {
 </span></span><span style="display:flex;"><span>        mtx.lock();
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(curVal <span style="color:#f92672">!=</span> <span style="color:#ae81ff">2</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(curVal <span style="color:#666">!=</span> <span style="color:#666">2</span>)
 </span></span><span style="display:flex;"><span>        {
 </span></span><span style="display:flex;"><span>            mtx.unlock();
 </span></span><span style="display:flex;"><span>            mtx.lock();
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>        mtx.unlock();
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// printSecond() outputs &#34;second&#34;. Do not change or remove this line.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        printSecond();
-</span></span><span style="display:flex;"><span>        curVal<span style="color:#f92672">++</span> ;       
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// printSecond() outputs &#34;second&#34;. Do not change or remove this line.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        printSecond();
+</span></span><span style="display:flex;"><span>        curVal<span style="color:#666">++</span> ;       
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">third</span>(function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>()<span style="color:#f92672">&gt;</span> printThird) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">third</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> printThird) {
 </span></span><span style="display:flex;"><span>        mtx.lock();
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(curVal <span style="color:#f92672">!=</span> <span style="color:#ae81ff">3</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(curVal <span style="color:#666">!=</span> <span style="color:#666">3</span>)
 </span></span><span style="display:flex;"><span>        {
 </span></span><span style="display:flex;"><span>            mtx.unlock();
 </span></span><span style="display:flex;"><span>            mtx.lock();
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>        mtx.unlock();
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// printThird() outputs &#34;third&#34;. Do not change or remove this line.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        printThird();
-</span></span><span style="display:flex;"><span>        curVal<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// printThird() outputs &#34;third&#34;. Do not change or remove this line.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        printThird();
+</span></span><span style="display:flex;"><span>        curVal<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode80s1hbhb">
+<h2 id="hahahugoshortcode81s1hbhb">
   
 
   
@@ -299,51 +299,51 @@
 <ol>
 <li>
 <p><strong>Class Definition</strong>: The <code>Foo</code> class is defined with private members to manage state and synchronization.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Foo</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> curVal;      <span style="color:#75715e">// Tracks the current method that can execute
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    std<span style="color:#f92672">::</span>mutex mtx;  <span style="color:#75715e">// Mutex for synchronizing access
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Foo</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> curVal;      <span style="color:#080;font-style:italic">// Tracks the current method that can execute
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    std<span style="color:#666">::</span>mutex mtx;  <span style="color:#080;font-style:italic">// Mutex for synchronizing access
 </span></span></span></code></pre></div></li>
 <li>
 <p><strong>Constructor</strong>: The constructor initializes <code>curVal</code> to 1, indicating that the <code>first</code> method should be executed first.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span><span style="display:flex;"><span>        Foo() {
-</span></span><span style="display:flex;"><span>            curVal <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Start with curVal set to 1
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>            curVal <span style="color:#666">=</span> <span style="color:#666">1</span>;  <span style="color:#080;font-style:italic">// Start with curVal set to 1
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        }
 </span></span></code></pre></div></li>
 <li>
 <p><strong>First Method</strong>: The <code>first</code> method locks the mutex, prints &ldquo;first&rdquo;, increments <code>curVal</code>, and then unlocks the mutex.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">first</span>(function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>()<span style="color:#f92672">&gt;</span> printFirst) {
-</span></span><span style="display:flex;"><span>            mtx.lock();          <span style="color:#75715e">// Lock the mutex
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            printFirst();        <span style="color:#75715e">// Print &#34;first&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            curVal<span style="color:#f92672">++</span>;            <span style="color:#75715e">// Move to the next method
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            mtx.unlock();        <span style="color:#75715e">// Unlock the mutex
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">first</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> printFirst) {
+</span></span><span style="display:flex;"><span>            mtx.lock();          <span style="color:#080;font-style:italic">// Lock the mutex
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            printFirst();        <span style="color:#080;font-style:italic">// Print &#34;first&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            curVal<span style="color:#666">++</span>;            <span style="color:#080;font-style:italic">// Move to the next method
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            mtx.unlock();        <span style="color:#080;font-style:italic">// Unlock the mutex
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        }
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Second Method</strong>: The <code>second</code> method locks the mutex and uses a while loop to check whether it&rsquo;s the correct turn to execute. If not, it releases the lock and rechecks.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">second</span>(function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>()<span style="color:#f92672">&gt;</span> printSecond) {
-</span></span><span style="display:flex;"><span>            mtx.lock();          <span style="color:#75715e">// Lock the mutex
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">while</span>(curVal <span style="color:#f92672">!=</span> <span style="color:#ae81ff">2</span>) { <span style="color:#75715e">// Wait until it&#39;s this method&#39;s turn
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                mtx.unlock();    <span style="color:#75715e">// Unlock and wait
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                mtx.lock();      <span style="color:#75715e">// Lock again for rechecking
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
-</span></span><span style="display:flex;"><span>            mtx.unlock();        <span style="color:#75715e">// Unlock the mutex
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            printSecond();       <span style="color:#75715e">// Print &#34;second&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            curVal<span style="color:#f92672">++</span>;            <span style="color:#75715e">// Move to the next method
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">second</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> printSecond) {
+</span></span><span style="display:flex;"><span>            mtx.lock();          <span style="color:#080;font-style:italic">// Lock the mutex
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#a2f;font-weight:bold">while</span>(curVal <span style="color:#666">!=</span> <span style="color:#666">2</span>) { <span style="color:#080;font-style:italic">// Wait until it&#39;s this method&#39;s turn
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                mtx.unlock();    <span style="color:#080;font-style:italic">// Unlock and wait
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                mtx.lock();      <span style="color:#080;font-style:italic">// Lock again for rechecking
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            }
+</span></span><span style="display:flex;"><span>            mtx.unlock();        <span style="color:#080;font-style:italic">// Unlock the mutex
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            printSecond();       <span style="color:#080;font-style:italic">// Print &#34;second&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            curVal<span style="color:#666">++</span>;            <span style="color:#080;font-style:italic">// Move to the next method
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        }
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Third Method</strong>: The <code>third</code> method follows the same pattern as <code>second</code>, waiting for <code>curVal</code> to equal 3 before proceeding.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">third</span>(function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>()<span style="color:#f92672">&gt;</span> printThird) {
-</span></span><span style="display:flex;"><span>            mtx.lock();          <span style="color:#75715e">// Lock the mutex
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">while</span>(curVal <span style="color:#f92672">!=</span> <span style="color:#ae81ff">3</span>) { <span style="color:#75715e">// Wait until it&#39;s this method&#39;s turn
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                mtx.unlock();    <span style="color:#75715e">// Unlock and wait
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                mtx.lock();      <span style="color:#75715e">// Lock again for rechecking
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
-</span></span><span style="display:flex;"><span>            mtx.unlock();        <span style="color:#75715e">// Unlock the mutex
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            printThird();        <span style="color:#75715e">// Print &#34;third&#34;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            curVal<span style="color:#f92672">++</span>;            <span style="color:#75715e">// Increment to finish
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">third</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> printThird) {
+</span></span><span style="display:flex;"><span>            mtx.lock();          <span style="color:#080;font-style:italic">// Lock the mutex
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#a2f;font-weight:bold">while</span>(curVal <span style="color:#666">!=</span> <span style="color:#666">3</span>) { <span style="color:#080;font-style:italic">// Wait until it&#39;s this method&#39;s turn
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                mtx.unlock();    <span style="color:#080;font-style:italic">// Unlock and wait
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                mtx.lock();      <span style="color:#080;font-style:italic">// Lock again for rechecking
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            }
+</span></span><span style="display:flex;"><span>            mtx.unlock();        <span style="color:#080;font-style:italic">// Unlock the mutex
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            printThird();        <span style="color:#080;font-style:italic">// Print &#34;third&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            curVal<span style="color:#666">++</span>;            <span style="color:#080;font-style:italic">// Increment to finish
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        }
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div></li>
 </ol>
@@ -372,7 +372,7 @@
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode80s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode81s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

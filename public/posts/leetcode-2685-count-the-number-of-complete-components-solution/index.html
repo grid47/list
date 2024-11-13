@@ -224,60 +224,60 @@
         <p><a href="https://leetcode.com/problems/count-the-number-of-complete-components/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UF</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> par, edge, rnk;
-</span></span><span style="display:flex;"><span>    UF(<span style="color:#66d9ef">int</span> n) {
-</span></span><span style="display:flex;"><span>        par.resize(n, <span style="color:#ae81ff">0</span>);
-</span></span><span style="display:flex;"><span>        iota(par.begin(), par.end(), <span style="color:#ae81ff">0</span>);
-</span></span><span style="display:flex;"><span>        edge.resize(n, <span style="color:#ae81ff">0</span>);
-</span></span><span style="display:flex;"><span>        rnk.resize(n, <span style="color:#ae81ff">1</span>);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">UF</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> par, edge, rnk;
+</span></span><span style="display:flex;"><span>    UF(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>        par.resize(n, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        iota(par.begin(), par.end(), <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        edge.resize(n, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        rnk.resize(n, <span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">join</span>(<span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> p <span style="color:#f92672">=</span> find(i);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> q <span style="color:#f92672">=</span> find(j);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(p <span style="color:#f92672">!=</span> q) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(rnk[p] <span style="color:#f92672">&gt;</span> rnk[q]) {
-</span></span><span style="display:flex;"><span>                rnk[p]<span style="color:#f92672">+=</span>rnk[q];
-</span></span><span style="display:flex;"><span>                par[q] <span style="color:#f92672">=</span> p;
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>                rnk[q]<span style="color:#f92672">+=</span>rnk[p];
-</span></span><span style="display:flex;"><span>                par[p] <span style="color:#f92672">=</span> q;         
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">join</span>(<span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> p <span style="color:#666">=</span> find(i);
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> q <span style="color:#666">=</span> find(j);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(p <span style="color:#666">!=</span> q) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(rnk[p] <span style="color:#666">&gt;</span> rnk[q]) {
+</span></span><span style="display:flex;"><span>                rnk[p]<span style="color:#666">+=</span>rnk[q];
+</span></span><span style="display:flex;"><span>                par[q] <span style="color:#666">=</span> p;
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                rnk[q]<span style="color:#666">+=</span>rnk[p];
+</span></span><span style="display:flex;"><span>                par[p] <span style="color:#666">=</span> q;         
 </span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> e <span style="color:#f92672">=</span> edge[p]<span style="color:#f92672">+</span>edge[q] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>            edge[p] <span style="color:#f92672">=</span>e; <span style="color:#75715e">// dge[q] + 1;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            edge[q] <span style="color:#f92672">=</span>e; <span style="color:#75715e">// dge[p] + 1;            
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> e <span style="color:#666">=</span> edge[p]<span style="color:#666">+</span>edge[q] <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            edge[p] <span style="color:#666">=</span>e; <span style="color:#080;font-style:italic">// dge[q] + 1;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            edge[q] <span style="color:#666">=</span>e; <span style="color:#080;font-style:italic">// dge[p] + 1;            
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        edge[q]<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>        edge[q]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">find</span>(<span style="color:#66d9ef">int</span> p) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(p <span style="color:#f92672">==</span> par[p]) <span style="color:#66d9ef">return</span> p;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> par[p] <span style="color:#f92672">=</span> find(par[p]);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">find</span>(<span style="color:#0b0;font-weight:bold">int</span> p) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(p <span style="color:#666">==</span> par[p]) <span style="color:#a2f;font-weight:bold">return</span> p;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> par[p] <span style="color:#666">=</span> find(par[p]);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> countCompleteComponents(<span style="color:#66d9ef">int</span> n, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> edges) {
-</span></span><span style="display:flex;"><span>        UF uf <span style="color:#f92672">=</span> UF(n);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> e: edges) {
-</span></span><span style="display:flex;"><span>            uf.join(e[<span style="color:#ae81ff">0</span>], e[<span style="color:#ae81ff">1</span>]);
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> countCompleteComponents(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> edges) {
+</span></span><span style="display:flex;"><span>        UF uf <span style="color:#666">=</span> UF(n);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">e</span>: edges) {
+</span></span><span style="display:flex;"><span>            uf.join(e[<span style="color:#666">0</span>], e[<span style="color:#666">1</span>]);
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> pk;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// cout &lt;&lt; &#34;edges membercnt edgescal \n&#34;;         
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> par <span style="color:#f92672">=</span> uf.find(i);
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(pk.count(par)) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>        set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> pk;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">// cout &lt;&lt; &#34;edges membercnt edgescal \n&#34;;         
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> par <span style="color:#666">=</span> uf.find(i);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(pk.count(par)) <span style="color:#a2f;font-weight:bold">continue</span>;
 </span></span><span style="display:flex;"><span>            pk.insert(par);
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> uf.edge[par];
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// cout &lt;&lt; cnt &lt;&lt; &#34; &#34; &lt;&lt; uf.rnk[par] &lt;&lt; &#34; &#34; &lt;&lt; uf.rnk[par] * (uf.rnk[par] - 1) / 2 &lt;&lt; &#34;\n&#34;;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span>(uf.rnk[par] <span style="color:#f92672">*</span> (uf.rnk[par] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> cnt) res<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> uf.edge[par];
+</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">// cout &lt;&lt; cnt &lt;&lt; &#34; &#34; &lt;&lt; uf.rnk[par] &lt;&lt; &#34; &#34; &lt;&lt; uf.rnk[par] * (uf.rnk[par] - 1) / 2 &lt;&lt; &#34;\n&#34;;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#a2f;font-weight:bold">if</span>(uf.rnk[par] <span style="color:#666">*</span> (uf.rnk[par] <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span> <span style="color:#666">==</span> cnt) res<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
 <h2 id="hahahugoshortcode918s1hbhb">
@@ -331,14 +331,14 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UF</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> par, edge, rnk;
-</span></span><span style="display:flex;"><span>    UF(<span style="color:#66d9ef">int</span> n) {
-</span></span><span style="display:flex;"><span>        par.resize(n, <span style="color:#ae81ff">0</span>);
-</span></span><span style="display:flex;"><span>        iota(par.begin(), par.end(), <span style="color:#ae81ff">0</span>);
-</span></span><span style="display:flex;"><span>        edge.resize(n, <span style="color:#ae81ff">0</span>);
-</span></span><span style="display:flex;"><span>        rnk.resize(n, <span style="color:#ae81ff">1</span>);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">UF</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> par, edge, rnk;
+</span></span><span style="display:flex;"><span>    UF(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>        par.resize(n, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        iota(par.begin(), par.end(), <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        edge.resize(n, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        rnk.resize(n, <span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><ul>
@@ -354,24 +354,24 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">join</span>(<span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> j) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> p <span style="color:#f92672">=</span> find(i);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> q <span style="color:#f92672">=</span> find(j);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (p <span style="color:#f92672">!=</span> q) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (rnk[p] <span style="color:#f92672">&gt;</span> rnk[q]) {
-</span></span><span style="display:flex;"><span>            rnk[p] <span style="color:#f92672">+=</span> rnk[q];
-</span></span><span style="display:flex;"><span>            par[q] <span style="color:#f92672">=</span> p;
-</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>            rnk[q] <span style="color:#f92672">+=</span> rnk[p];
-</span></span><span style="display:flex;"><span>            par[p] <span style="color:#f92672">=</span> q;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">join</span>(<span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> p <span style="color:#666">=</span> find(i);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> q <span style="color:#666">=</span> find(j);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (p <span style="color:#666">!=</span> q) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (rnk[p] <span style="color:#666">&gt;</span> rnk[q]) {
+</span></span><span style="display:flex;"><span>            rnk[p] <span style="color:#666">+=</span> rnk[q];
+</span></span><span style="display:flex;"><span>            par[q] <span style="color:#666">=</span> p;
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>            rnk[q] <span style="color:#666">+=</span> rnk[p];
+</span></span><span style="display:flex;"><span>            par[p] <span style="color:#666">=</span> q;
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> e <span style="color:#f92672">=</span> edge[p] <span style="color:#f92672">+</span> edge[q] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>        edge[p] <span style="color:#f92672">=</span> e;
-</span></span><span style="display:flex;"><span>        edge[q] <span style="color:#f92672">=</span> e;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> e <span style="color:#666">=</span> edge[p] <span style="color:#666">+</span> edge[q] <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        edge[p] <span style="color:#666">=</span> e;
+</span></span><span style="display:flex;"><span>        edge[q] <span style="color:#666">=</span> e;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    edge[q]<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    edge[q]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ul>
 <li>The <code>join</code> method performs the union of two components <code>i</code> and <code>j</code>. If they are in different components, it merges them.</li>
@@ -385,9 +385,9 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">find</span>(<span style="color:#66d9ef">int</span> p) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (p <span style="color:#f92672">==</span> par[p]) <span style="color:#66d9ef">return</span> p;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> par[p] <span style="color:#f92672">=</span> find(par[p]);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">find</span>(<span style="color:#0b0;font-weight:bold">int</span> p) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (p <span style="color:#666">==</span> par[p]) <span style="color:#a2f;font-weight:bold">return</span> p;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> par[p] <span style="color:#666">=</span> find(par[p]);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ul>
 <li>The <code>find</code> method uses path compression to find the representative (or root) of a component.</li>
@@ -400,21 +400,21 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">countCompleteComponents</span>(<span style="color:#66d9ef">int</span> n, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> edges) {
-</span></span><span style="display:flex;"><span>    UF uf <span style="color:#f92672">=</span> UF(n);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> e : edges) {
-</span></span><span style="display:flex;"><span>        uf.join(e[<span style="color:#ae81ff">0</span>], e[<span style="color:#ae81ff">1</span>]);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countCompleteComponents</span>(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> edges) {
+</span></span><span style="display:flex;"><span>    UF uf <span style="color:#666">=</span> UF(n);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">e</span> : edges) {
+</span></span><span style="display:flex;"><span>        uf.join(e[<span style="color:#666">0</span>], e[<span style="color:#666">1</span>]);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> pk;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> par <span style="color:#f92672">=</span> uf.find(i);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (pk.count(par)) <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> pk;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> par <span style="color:#666">=</span> uf.find(i);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (pk.count(par)) <span style="color:#a2f;font-weight:bold">continue</span>;
 </span></span><span style="display:flex;"><span>        pk.insert(par);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> uf.edge[par];
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (uf.rnk[par] <span style="color:#f92672">*</span> (uf.rnk[par] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">==</span> cnt) res<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> uf.edge[par];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (uf.rnk[par] <span style="color:#666">*</span> (uf.rnk[par] <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span> <span style="color:#666">==</span> cnt) res<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ul>
 <li>The <code>countCompleteComponents</code> method initializes the Union-Find structure with <code>n</code> vertices.</li>

@@ -224,58 +224,58 @@
         <p><a href="https://leetcode.com/problems/remove-sub-folders-from-the-filesystem/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TrieNode</span> {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>TrieNode<span style="color:#f92672">*&gt;</span> letter;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> main;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    TrieNode (<span style="color:#66d9ef">bool</span> m) {
-</span></span><span style="display:flex;"><span>        letter.resize(<span style="color:#ae81ff">27</span>, NULL);
-</span></span><span style="display:flex;"><span>        main <span style="color:#f92672">=</span> m;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">TrieNode</span> {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>TrieNode<span style="color:#666">*&gt;</span> letter;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> main;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    TrieNode (<span style="color:#0b0;font-weight:bold">bool</span> m) {
+</span></span><span style="display:flex;"><span>        letter.resize(<span style="color:#666">27</span>, <span style="color:#a2f">NULL</span>);
+</span></span><span style="display:flex;"><span>        main <span style="color:#666">=</span> m;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">add</span>(string key) {
-</span></span><span style="display:flex;"><span>        TrieNode<span style="color:#f92672">*</span> root <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> key.size(); i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> nxt;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (key[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;/&#39;</span>) nxt <span style="color:#f92672">=</span> <span style="color:#ae81ff">26</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span>               nxt <span style="color:#f92672">=</span> key[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">add</span>(string key) {
+</span></span><span style="display:flex;"><span>        TrieNode<span style="color:#666">*</span> root <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">this</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> key.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> nxt;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (key[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;/&#39;</span>) nxt <span style="color:#666">=</span> <span style="color:#666">26</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span>               nxt <span style="color:#666">=</span> key[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (root<span style="color:#f92672">-&gt;</span>letter[nxt] <span style="color:#f92672">==</span> NULL) {
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(nxt <span style="color:#f92672">!=</span> <span style="color:#ae81ff">26</span>) root<span style="color:#f92672">-&gt;</span>letter[nxt] <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TrieNode(false);
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> (root<span style="color:#f92672">-&gt;</span>main) <span style="color:#66d9ef">return</span> false;
-</span></span><span style="display:flex;"><span>                    root<span style="color:#f92672">-&gt;</span>letter[nxt] <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TrieNode(false);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (root<span style="color:#666">-&gt;</span>letter[nxt] <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(nxt <span style="color:#666">!=</span> <span style="color:#666">26</span>) root<span style="color:#666">-&gt;</span>letter[nxt] <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TrieNode(<span style="color:#a2f">false</span>);
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">if</span> (root<span style="color:#666">-&gt;</span>main) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>                    root<span style="color:#666">-&gt;</span>letter[nxt] <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TrieNode(<span style="color:#a2f">false</span>);
 </span></span><span style="display:flex;"><span>                }
 </span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            root <span style="color:#f92672">=</span> root<span style="color:#f92672">-&gt;</span>letter[nxt];
+</span></span><span style="display:flex;"><span>            root <span style="color:#666">=</span> root<span style="color:#666">-&gt;</span>letter[nxt];
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>root<span style="color:#f92672">-&gt;</span>main) {
-</span></span><span style="display:flex;"><span>            root<span style="color:#f92672">-&gt;</span>main <span style="color:#f92672">=</span> true;
-</span></span><span style="display:flex;"><span>            root<span style="color:#f92672">-&gt;</span>letter.resize(<span style="color:#ae81ff">27</span>, NULL);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>root<span style="color:#666">-&gt;</span>main) {
+</span></span><span style="display:flex;"><span>            root<span style="color:#666">-&gt;</span>main <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>            root<span style="color:#666">-&gt;</span>letter.resize(<span style="color:#666">27</span>, <span style="color:#a2f">NULL</span>);
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// plane sequence equated till they match
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//     sufix is a letter        - go head its new directory with prefix name natches
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//     sufix is a  : bar
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//          is current a main dir then cut else create new dir
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//                 - new folder - create it,
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">//                 - sub dir    - stop do not proceed or add
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> removeSubfolders(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> folder) {
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">// plane sequence equated till they match
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">//     sufix is a letter        - go head its new directory with prefix name natches
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">//     sufix is a  : bar
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">//          is current a main dir then cut else create new dir
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">//                 - new folder - create it,
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">//                 - sub dir    - stop do not proceed or add
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> removeSubfolders(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> folder) {
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>        sort(folder.begin(), folder.end());
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> ans;
-</span></span><span style="display:flex;"><span>        TrieNode<span style="color:#f92672">*</span> root <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TrieNode(false);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> folder.size(); i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(root<span style="color:#f92672">-&gt;</span>add(folder[i]))
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> ans;
+</span></span><span style="display:flex;"><span>        TrieNode<span style="color:#666">*</span> root <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TrieNode(<span style="color:#a2f">false</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> folder.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(root<span style="color:#666">-&gt;</span>add(folder[i]))
 </span></span><span style="display:flex;"><span>                ans.push_back(folder[i]);
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
 <h2 id="hahahugoshortcode128s1hbhb">
@@ -321,32 +321,32 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TrieNode</span> {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>TrieNode<span style="color:#f92672">*&gt;</span> letter;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> main;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    TrieNode (<span style="color:#66d9ef">bool</span> m) {
-</span></span><span style="display:flex;"><span>        letter.resize(<span style="color:#ae81ff">27</span>, NULL);
-</span></span><span style="display:flex;"><span>        main <span style="color:#f92672">=</span> m;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">TrieNode</span> {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>TrieNode<span style="color:#666">*&gt;</span> letter;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> main;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    TrieNode (<span style="color:#0b0;font-weight:bold">bool</span> m) {
+</span></span><span style="display:flex;"><span>        letter.resize(<span style="color:#666">27</span>, <span style="color:#a2f">NULL</span>);
+</span></span><span style="display:flex;"><span>        main <span style="color:#666">=</span> m;
 </span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div><ul>
 <li><strong>Lines 1-7</strong>: The <code>TrieNode</code> class is defined. It contains a vector of pointers to its children (representing the letters in the folder names) and a boolean indicating if the node represents the end of a main folder.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">add</span>(string key) {
-</span></span><span style="display:flex;"><span>        TrieNode<span style="color:#f92672">*</span> root <span style="color:#f92672">=</span> <span style="color:#66d9ef">this</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> key.size(); i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> nxt;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (key[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;/&#39;</span>) nxt <span style="color:#f92672">=</span> <span style="color:#ae81ff">26</span>;  <span style="color:#75715e">// Using index 26 for &#39;/&#39;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">else</span>                       nxt <span style="color:#f92672">=</span> key[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>; <span style="color:#75715e">// Convert char to index
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (root<span style="color:#f92672">-&gt;</span>letter[nxt] <span style="color:#f92672">==</span> NULL) {
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(nxt <span style="color:#f92672">!=</span> <span style="color:#ae81ff">26</span>) root<span style="color:#f92672">-&gt;</span>letter[nxt] <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TrieNode(false);
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span> (root<span style="color:#f92672">-&gt;</span>main) <span style="color:#66d9ef">return</span> false; <span style="color:#75715e">// Encountering a subfolder
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                    root<span style="color:#f92672">-&gt;</span>letter[nxt] <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TrieNode(false);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">add</span>(string key) {
+</span></span><span style="display:flex;"><span>        TrieNode<span style="color:#666">*</span> root <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">this</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> key.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> nxt;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (key[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;/&#39;</span>) nxt <span style="color:#666">=</span> <span style="color:#666">26</span>;  <span style="color:#080;font-style:italic">// Using index 26 for &#39;/&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#a2f;font-weight:bold">else</span>                       nxt <span style="color:#666">=</span> key[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>; <span style="color:#080;font-style:italic">// Convert char to index
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (root<span style="color:#666">-&gt;</span>letter[nxt] <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(nxt <span style="color:#666">!=</span> <span style="color:#666">26</span>) root<span style="color:#666">-&gt;</span>letter[nxt] <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TrieNode(<span style="color:#a2f">false</span>);
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">if</span> (root<span style="color:#666">-&gt;</span>main) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>; <span style="color:#080;font-style:italic">// Encountering a subfolder
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                    root<span style="color:#666">-&gt;</span>letter[nxt] <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TrieNode(<span style="color:#a2f">false</span>);
 </span></span><span style="display:flex;"><span>                }
 </span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            root <span style="color:#f92672">=</span> root<span style="color:#f92672">-&gt;</span>letter[nxt];
+</span></span><span style="display:flex;"><span>            root <span style="color:#666">=</span> root<span style="color:#666">-&gt;</span>letter[nxt];
 </span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></div><ul>
 <li><strong>Lines 8-23</strong>: The <code>add</code> method is defined for the <code>TrieNode</code> class, which handles inserting a folder path into the Trie.
@@ -357,33 +357,33 @@
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>root<span style="color:#f92672">-&gt;</span>main) {
-</span></span><span style="display:flex;"><span>            root<span style="color:#f92672">-&gt;</span>main <span style="color:#f92672">=</span> true; <span style="color:#75715e">// Mark this node as a main folder
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            root<span style="color:#f92672">-&gt;</span>letter.resize(<span style="color:#ae81ff">27</span>, NULL);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>root<span style="color:#666">-&gt;</span>main) {
+</span></span><span style="display:flex;"><span>            root<span style="color:#666">-&gt;</span>main <span style="color:#666">=</span> <span style="color:#a2f">true</span>; <span style="color:#080;font-style:italic">// Mark this node as a main folder
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            root<span style="color:#666">-&gt;</span>letter.resize(<span style="color:#666">27</span>, <span style="color:#a2f">NULL</span>);
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><ul>
 <li><strong>Lines 24-30</strong>: After traversing the entire path, we check if the node does not already represent a main folder. If not, we mark it as a main folder and return true, indicating successful insertion.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> removeSubfolders(vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> folder) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> removeSubfolders(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> folder) {
 </span></span><span style="display:flex;"><span>        sort(folder.begin(), folder.end());
 </span></span></code></pre></div><ul>
 <li><strong>Lines 31-33</strong>: The <code>Solution</code> class is defined, and the <code>removeSubfolders</code> method is declared. The folder paths are sorted to ensure parent folders come before their subfolders.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> ans;
-</span></span><span style="display:flex;"><span>        TrieNode<span style="color:#f92672">*</span> root <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TrieNode(false);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> folder.size(); i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(root<span style="color:#f92672">-&gt;</span>add(folder[i]))
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> ans;
+</span></span><span style="display:flex;"><span>        TrieNode<span style="color:#666">*</span> root <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TrieNode(<span style="color:#a2f">false</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> folder.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(root<span style="color:#666">-&gt;</span>add(folder[i]))
 </span></span><span style="display:flex;"><span>                ans.push_back(folder[i]);
 </span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></div><ul>
 <li><strong>Lines 34-39</strong>: A vector <code>ans</code> is initialized to store the resulting folder paths. A new Trie root node is created. We then iterate through each folder, attempting to add it to the Trie. If the folder is successfully added (i.e., it&rsquo;s not a subfolder), it gets pushed onto the result vector.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><ul>

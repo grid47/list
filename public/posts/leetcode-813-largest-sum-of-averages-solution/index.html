@@ -219,31 +219,31 @@
         <p><a href="https://leetcode.com/problems/largest-sum-of-averages/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> memo[<span style="color:#ae81ff">200</span>][<span style="color:#ae81ff">200</span>];
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">largestSumOfAverages</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> k) {
-</span></span><span style="display:flex;"><span>        memset(memo, <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">sizeof</span>(memo));
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">double</span> cur <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            cur <span style="color:#f92672">+=</span> nums[i];
-</span></span><span style="display:flex;"><span>            memo[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> cur <span style="color:#f92672">/</span> (i<span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">double</span> memo[<span style="color:#666">200</span>][<span style="color:#666">200</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">double</span> <span style="color:#00a000">largestSumOfAverages</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>        memset(memo, <span style="color:#666">0</span>, <span style="color:#a2f;font-weight:bold">sizeof</span>(memo));
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">double</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            cur <span style="color:#666">+=</span> nums[i];
+</span></span><span style="display:flex;"><span>            memo[i <span style="color:#666">+</span> <span style="color:#666">1</span>][<span style="color:#666">1</span>] <span style="color:#666">=</span> cur <span style="color:#666">/</span> (i<span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> search(n, k, nums);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> search(n, k, nums);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> <span style="color:#a6e22e">search</span>(<span style="color:#66d9ef">int</span> n, <span style="color:#66d9ef">int</span> k, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>nums) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(memo[n][k] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> memo[n][k];
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">double</span> cur <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>) {
-</span></span><span style="display:flex;"><span>            cur <span style="color:#f92672">+=</span> nums[i];
-</span></span><span style="display:flex;"><span>            memo[n][k] <span style="color:#f92672">=</span> max(memo[n][k], search(i, k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, nums) <span style="color:#f92672">+</span> cur <span style="color:#f92672">/</span> (n <span style="color:#f92672">-</span> i));
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">double</span> <span style="color:#00a000">search</span>(<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> k, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>nums) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(memo[n][k] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[n][k];
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">double</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>; i <span style="color:#666">&gt;</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>            cur <span style="color:#666">+=</span> nums[i];
+</span></span><span style="display:flex;"><span>            memo[n][k] <span style="color:#666">=</span> max(memo[n][k], search(i, k <span style="color:#666">-</span> <span style="color:#666">1</span>, nums) <span style="color:#666">+</span> cur <span style="color:#666">/</span> (n <span style="color:#666">-</span> i));
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> memo[n][k];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> memo[n][k];
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1341s1hbhb">
+<h2 id="hahahugoshortcode1336s1hbhb">
   
 
   
@@ -297,7 +297,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>memset(memo, <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">sizeof</span>(memo));
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>memset(memo, <span style="color:#666">0</span>, <span style="color:#a2f;font-weight:bold">sizeof</span>(memo));
 </span></span></code></pre></div><ul>
 <li>We initialize the <code>memo</code> table to store the results of subproblems. The size of the table is <code>[200][200]</code> since the problem constraints suggest that the number of elements in <code>nums</code> is manageable, and <code>k</code> is at most 200. This memoization ensures we don’t compute the same subproblem multiple times, making the solution efficient.</li>
 </ul>
@@ -308,11 +308,11 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">double</span> cur <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>    cur <span style="color:#f92672">+=</span> nums[i];
-</span></span><span style="display:flex;"><span>    memo[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> cur <span style="color:#f92672">/</span> (i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">double</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    cur <span style="color:#666">+=</span> nums[i];
+</span></span><span style="display:flex;"><span>    memo[i <span style="color:#666">+</span> <span style="color:#666">1</span>][<span style="color:#666">1</span>] <span style="color:#666">=</span> cur <span style="color:#666">/</span> (i <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ul>
 <li>We iterate through the array and compute the prefix sums (<code>cur</code>). For each prefix sum, we store the average of the first <code>i+1</code> elements in <code>memo[i+1][1]</code>, since this is the maximum sum we can get by using only one subarray from the start of the array to index <code>i</code>.</li>
@@ -324,14 +324,14 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">double</span> <span style="color:#a6e22e">search</span>(<span style="color:#66d9ef">int</span> n, <span style="color:#66d9ef">int</span> k, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(memo[n][k] <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> memo[n][k];
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">double</span> cur <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>) {
-</span></span><span style="display:flex;"><span>        cur <span style="color:#f92672">+=</span> nums[i];
-</span></span><span style="display:flex;"><span>        memo[n][k] <span style="color:#f92672">=</span> max(memo[n][k], search(i, k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, nums) <span style="color:#f92672">+</span> cur <span style="color:#f92672">/</span> (n <span style="color:#f92672">-</span> i));
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">double</span> <span style="color:#00a000">search</span>(<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> k, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[n][k] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[n][k];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">double</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>; i <span style="color:#666">&gt;</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>        cur <span style="color:#666">+=</span> nums[i];
+</span></span><span style="display:flex;"><span>        memo[n][k] <span style="color:#666">=</span> max(memo[n][k], search(i, k <span style="color:#666">-</span> <span style="color:#666">1</span>, nums) <span style="color:#666">+</span> cur <span style="color:#666">/</span> (n <span style="color:#666">-</span> i));
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> memo[n][k];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[n][k];
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ul>
 <li>This is the core recursive function. It computes the maximum sum of averages for <code>n</code> elements and <code>k</code> subarrays.</li>
@@ -346,7 +346,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#a6e22e">search</span>(n, k, nums);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">search</span>(n, k, nums);
 </span></span></code></pre></div><ul>
 <li>After initializing the first subarray averages, we call the <code>search</code> function to compute the maximum sum of averages for the entire array with <code>k</code> subarrays.</li>
 </ul>
@@ -399,7 +399,7 @@
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1341s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1336s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

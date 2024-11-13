@@ -214,41 +214,41 @@
         <p><a href="https://leetcode.com/problems/minimum-moves-to-reach-target-score/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> cur, <span style="color:#66d9ef">int</span> end, <span style="color:#66d9ef">int</span> dops) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(cur <span style="color:#f92672">==</span> end) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(cur <span style="color:#f92672">&gt;</span> end) <span style="color:#66d9ef">return</span> INT_MAX <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> cur, <span style="color:#0b0;font-weight:bold">int</span> end, <span style="color:#0b0;font-weight:bold">int</span> dops) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cur <span style="color:#666">==</span> end) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cur <span style="color:#666">&gt;</span> end) <span style="color:#a2f;font-weight:bold">return</span> INT_MAX <span style="color:#666">-</span> <span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(mp.count(cur) <span style="color:#f92672">&amp;&amp;</span> mp[cur].count(dops)) <span style="color:#66d9ef">return</span> mp[cur][dops];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp.count(cur) <span style="color:#666">&amp;&amp;</span> mp[cur].count(dops)) <span style="color:#a2f;font-weight:bold">return</span> mp[cur][dops];
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> dp(cur <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, end, dops);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(dops <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> min(ans, <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> dp(cur <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>, end, dops <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">1</span> <span style="color:#666">+</span> dp(cur <span style="color:#666">+</span> <span style="color:#666">1</span>, end, dops);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(dops <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> min(ans, <span style="color:#666">1</span> <span style="color:#666">+</span> dp(cur <span style="color:#666">*</span> <span style="color:#666">2</span>, end, dops <span style="color:#666">-</span> <span style="color:#666">1</span>));
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mp[cur][dops] <span style="color:#f92672">=</span> ans;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> mp[cur][dops] <span style="color:#666">=</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minMoves</span>(<span style="color:#66d9ef">int</span> end, <span style="color:#66d9ef">int</span> dops) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minMoves</span>(<span style="color:#0b0;font-weight:bold">int</span> end, <span style="color:#0b0;font-weight:bold">int</span> dops) {
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(end <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(end <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>) end <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(dops <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
-</span></span><span style="display:flex;"><span>                end <span style="color:#f92672">/=</span> <span style="color:#ae81ff">2</span>;
-</span></span><span style="display:flex;"><span>                dops<span style="color:#f92672">--</span>;
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>                cnt <span style="color:#f92672">+=</span> (end <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">break</span>;                
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(end <span style="color:#666">&gt;</span> <span style="color:#666">1</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(end <span style="color:#666">%</span> <span style="color:#666">2</span>) end <span style="color:#666">-=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(dops <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>                end <span style="color:#666">/=</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>                dops<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                cnt <span style="color:#666">+=</span> (end <span style="color:#666">-</span><span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">break</span>;                
 </span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            cnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            cnt<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> cnt;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> cnt;
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// return dp(1, end, dops);
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// return dp(1, end, dops);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
 <h2 id="hahahugoshortcode597s1hbhb">
@@ -295,22 +295,22 @@
 <ol>
 <li>
 <p><strong>Class Declaration</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span></code></pre></div><ul>
 <li>This defines the <code>Solution</code> class, which contains methods for solving the problem.</li>
 </ul>
 </li>
 <li>
 <p><strong>Data Structure</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> mp;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> mp;
 </span></span></code></pre></div><ul>
 <li>A nested map (<code>mp</code>) is used to store previously computed results for specific states defined by the current value and remaining doubles. This structure helps in memoization.</li>
 </ul>
 </li>
 <li>
 <p><strong>Dynamic Programming Function</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> cur, <span style="color:#66d9ef">int</span> end, <span style="color:#66d9ef">int</span> dops) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> cur, <span style="color:#0b0;font-weight:bold">int</span> end, <span style="color:#0b0;font-weight:bold">int</span> dops) {
 </span></span></code></pre></div><ul>
 <li>The <code>dp</code> function is defined to compute the minimum moves recursively. It takes three parameters:
 <ul>
@@ -323,8 +323,8 @@
 </li>
 <li>
 <p><strong>Base Cases</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(cur <span style="color:#f92672">==</span> end) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(cur <span style="color:#f92672">&gt;</span> end) <span style="color:#66d9ef">return</span> INT_MAX <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(cur <span style="color:#666">==</span> end) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(cur <span style="color:#666">&gt;</span> end) <span style="color:#a2f;font-weight:bold">return</span> INT_MAX <span style="color:#666">-</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div><ul>
 <li>If the current value equals the target, no more moves are needed, so return 0.</li>
 <li>If the current value exceeds the target, it is impossible to reach the target from this state, so return a large number to signify an invalid state.</li>
@@ -332,16 +332,16 @@
 </li>
 <li>
 <p><strong>Memoization Check</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(mp.count(cur) <span style="color:#f92672">&amp;&amp;</span> mp[cur].count(dops)) <span style="color:#66d9ef">return</span> mp[cur][dops];
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(mp.count(cur) <span style="color:#666">&amp;&amp;</span> mp[cur].count(dops)) <span style="color:#a2f;font-weight:bold">return</span> mp[cur][dops];
 </span></span></code></pre></div><ul>
 <li>Before performing calculations, the function checks if the result for the current state has already been computed. If it has, it returns the stored result.</li>
 </ul>
 </li>
 <li>
 <p><strong>Recursive Calculation</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> dp(cur <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, end, dops);
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(dops <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>)
-</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">=</span> min(ans, <span style="color:#ae81ff">1</span> <span style="color:#f92672">+</span> dp(cur <span style="color:#f92672">*</span> <span style="color:#ae81ff">2</span>, end, dops <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>));
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">1</span> <span style="color:#666">+</span> dp(cur <span style="color:#666">+</span> <span style="color:#666">1</span>, end, dops);
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(dops <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)
+</span></span><span style="display:flex;"><span>    ans <span style="color:#666">=</span> min(ans, <span style="color:#666">1</span> <span style="color:#666">+</span> dp(cur <span style="color:#666">*</span> <span style="color:#666">2</span>, end, dops <span style="color:#666">-</span> <span style="color:#666">1</span>));
 </span></span></code></pre></div><ul>
 <li>The recursive relation calculates the minimum moves:
 <ul>
@@ -353,33 +353,33 @@
 </li>
 <li>
 <p><strong>Memoization Store</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> mp[cur][dops] <span style="color:#f92672">=</span> ans;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> mp[cur][dops] <span style="color:#666">=</span> ans;
 </span></span></code></pre></div><ul>
 <li>The result is stored in the memoization map for future reference before returning the answer.</li>
 </ul>
 </li>
 <li>
 <p><strong>Main Function</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minMoves</span>(<span style="color:#66d9ef">int</span> end, <span style="color:#66d9ef">int</span> dops) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minMoves</span>(<span style="color:#0b0;font-weight:bold">int</span> end, <span style="color:#0b0;font-weight:bold">int</span> dops) {
 </span></span></code></pre></div><ul>
 <li>The <code>minMoves</code> function is defined to initiate the process. It sets up the variables needed for counting moves.</li>
 </ul>
 </li>
 <li>
 <p><strong>Counting Moves</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(end <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">1</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(end <span style="color:#f92672">%</span> <span style="color:#ae81ff">2</span>) end <span style="color:#f92672">-=</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(dops <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
-</span></span><span style="display:flex;"><span>        end <span style="color:#f92672">/=</span> <span style="color:#ae81ff">2</span>;
-</span></span><span style="display:flex;"><span>        dops<span style="color:#f92672">--</span>;
-</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>        cnt <span style="color:#f92672">+=</span> (end <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;                
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(end <span style="color:#666">&gt;</span> <span style="color:#666">1</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(end <span style="color:#666">%</span> <span style="color:#666">2</span>) end <span style="color:#666">-=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(dops <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>        end <span style="color:#666">/=</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>        dops<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>        cnt <span style="color:#666">+=</span> (end <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">break</span>;                
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    cnt<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    cnt<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> cnt;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> cnt;
 </span></span></code></pre></div><ul>
 <li>The loop continues until <code>end</code> is greater than 1. The logic inside the loop uses the greedy approach as described:
 <ul>
@@ -392,21 +392,21 @@
 </li>
 <li>
 <p><strong>Return Statement</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> cnt;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> cnt;
 </span></span></code></pre></div><ul>
 <li>Finally, the function returns the total count of moves needed to reach the target.</li>
 </ul>
 </li>
 <li>
 <p><strong>Commented Out DP Approach</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">// return dp(1, end, dops);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#080;font-style:italic">// return dp(1, end, dops);
 </span></span></span></code></pre></div><ul>
 <li>This line suggests an alternative solution using the recursive approach but is commented out in this implementation.</li>
 </ul>
 </li>
 <li>
 <p><strong>End of Class</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>};
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>};
 </span></span></code></pre></div><ul>
 <li>This closing brace signifies the end of the <code>Solution</code> class.</li>
 </ul>

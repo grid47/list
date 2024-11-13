@@ -234,48 +234,48 @@
         <p><a href="https://leetcode.com/problems/shopping-offers/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    map<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">shoppingOffers</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> price, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> special, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> needs) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(mp[needs]) <span style="color:#66d9ef">return</span> mp[needs];
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> best <span style="color:#f92672">=</span> calculate(price, needs);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>sp: special) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">shoppingOffers</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> price, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> special, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> needs) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp[needs]) <span style="color:#a2f;font-weight:bold">return</span> mp[needs];
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> best <span style="color:#666">=</span> calculate(price, needs);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">sp</span>: special) {
 </span></span><span style="display:flex;"><span>            sub(needs, sp);
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(noneg(needs)) {
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> woffer <span style="color:#f92672">=</span> sp.back() <span style="color:#f92672">+</span> shoppingOffers(price, special, needs);
-</span></span><span style="display:flex;"><span>                best <span style="color:#f92672">=</span> min(best, woffer);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(noneg(needs)) {
+</span></span><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> woffer <span style="color:#666">=</span> sp.back() <span style="color:#666">+</span> shoppingOffers(price, special, needs);
+</span></span><span style="display:flex;"><span>                best <span style="color:#666">=</span> min(best, woffer);
 </span></span><span style="display:flex;"><span>            }
 </span></span><span style="display:flex;"><span>            add(needs, sp);
 </span></span><span style="display:flex;"><span>        }        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mp[needs] <span style="color:#f92672">=</span> best;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> mp[needs] <span style="color:#666">=</span> best;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">calculate</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>prices, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>needs) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> needs.size(); i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            res <span style="color:#f92672">+=</span> (needs[i] <span style="color:#f92672">*</span> prices[i]);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">calculate</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>prices, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>needs) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> needs.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            res <span style="color:#666">+=</span> (needs[i] <span style="color:#666">*</span> prices[i]);
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;        
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">add</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>needs, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>sp) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> needs.size(); i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            needs[i] <span style="color:#f92672">+=</span> sp[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">add</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>needs, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>sp) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> needs.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            needs[i] <span style="color:#666">+=</span> sp[i];
 </span></span><span style="display:flex;"><span>        }     
 </span></span><span style="display:flex;"><span>    }    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">sub</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>needs, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>sp) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> needs.size(); i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            needs[i] <span style="color:#f92672">-=</span> sp[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">sub</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>needs, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>sp) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> needs.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            needs[i] <span style="color:#666">-=</span> sp[i];
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">noneg</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>needs) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> needs.size(); i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(needs[i] <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">noneg</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>needs) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> needs.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(needs[i] <span style="color:#666">&lt;</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1241s1hbhb">
+<h2 id="hahahugoshortcode1242s1hbhb">
   
 
   
@@ -324,7 +324,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
 </span></span></code></pre></div><ul>
 <li><code>mp</code> is a memoization map that stores the minimum cost for a given state of <code>needs</code>. This map helps avoid redundant calculations for the same needs.</li>
 </ul>
@@ -335,9 +335,9 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">shoppingOffers</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> price, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> special, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> needs) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mp[needs]) <span style="color:#66d9ef">return</span> mp[needs];
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> best <span style="color:#f92672">=</span> calculate(price, needs);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">shoppingOffers</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> price, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> special, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> needs) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mp[needs]) <span style="color:#a2f;font-weight:bold">return</span> mp[needs];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> best <span style="color:#666">=</span> calculate(price, needs);
 </span></span></code></pre></div><ul>
 <li>The function <code>shoppingOffers</code> is the main entry point. It checks if the current <code>needs</code> have been computed previously using the <code>mp</code> map. If yes, it returns the stored result.</li>
 <li>Otherwise, it calculates the cost of fulfilling the current <code>needs</code> without any offers using the <code>calculate</code> function and stores it in <code>best</code>.</li>
@@ -349,11 +349,11 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>sp: special) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">sp</span>: special) {
 </span></span><span style="display:flex;"><span>    sub(needs, sp);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(noneg(needs)) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> woffer <span style="color:#f92672">=</span> sp.back() <span style="color:#f92672">+</span> shoppingOffers(price, special, needs);
-</span></span><span style="display:flex;"><span>        best <span style="color:#f92672">=</span> min(best, woffer);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(noneg(needs)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> woffer <span style="color:#666">=</span> sp.back() <span style="color:#666">+</span> shoppingOffers(price, special, needs);
+</span></span><span style="display:flex;"><span>        best <span style="color:#666">=</span> min(best, woffer);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    add(needs, sp);
 </span></span><span style="display:flex;"><span>}
@@ -369,7 +369,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> mp[needs] <span style="color:#f92672">=</span> best;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> mp[needs] <span style="color:#666">=</span> best;
 </span></span></code></pre></div><ul>
 <li>After considering all possible special offers, the function stores the minimum cost found for the current <code>needs</code> in the memoization map <code>mp</code>.</li>
 </ul>
@@ -383,37 +383,37 @@
 <ul>
 <li><strong><code>calculate</code></strong>: This function calculates the cost of fulfilling the current <code>needs</code> without any offers.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">calculate</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>prices, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>needs) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> needs.size(); i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>        res <span style="color:#f92672">+=</span> (needs[i] <span style="color:#f92672">*</span> prices[i]);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">calculate</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>prices, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>needs) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> needs.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> (needs[i] <span style="color:#666">*</span> prices[i]);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ul>
 <li><strong><code>add</code></strong>: This function adds the quantities from a special offer to the <code>needs</code> vector.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">add</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>needs, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>sp) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> needs.size(); i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>        needs[i] <span style="color:#f92672">+=</span> sp[i];
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">add</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>needs, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>sp) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> needs.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        needs[i] <span style="color:#666">+=</span> sp[i];
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ul>
 <li><strong><code>sub</code></strong>: This function subtracts the quantities from a special offer from the <code>needs</code> vector.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">sub</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>needs, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>sp) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> needs.size(); i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>        needs[i] <span style="color:#f92672">-=</span> sp[i];
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">sub</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>needs, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>sp) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> needs.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        needs[i] <span style="color:#666">-=</span> sp[i];
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ul>
 <li><strong><code>noneg</code></strong>: This function checks if any of the values in the <code>needs</code> vector are negative. If any value is negative, it means the offer cannot be applied, so the function returns false.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">noneg</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>needs) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> needs.size(); i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(needs[i] <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> false;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">noneg</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>needs) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> needs.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(needs[i] <span style="color:#666">&lt;</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h3 id="complexity">
   Complexity
@@ -469,7 +469,7 @@
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1241s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1242s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

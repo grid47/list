@@ -214,49 +214,49 @@
         <p><a href="https://leetcode.com/problems/html-entity-parser/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span><span style="display:flex;"><span>    string entityParser(string text) {
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        map<span style="color:#f92672">&lt;</span>string, string<span style="color:#f92672">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>        mp[<span style="color:#e6db74">&#34;&amp;quot;&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">&#34;</span>;
-</span></span><span style="display:flex;"><span>        mp[<span style="color:#e6db74">&#34;&amp;apos;&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\&#39;</span><span style="color:#e6db74">&#34;</span>;
-</span></span><span style="display:flex;"><span>        mp[<span style="color:#e6db74">&#34;&amp;amp;&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&amp;&#34;</span>;
-</span></span><span style="display:flex;"><span>        mp[<span style="color:#e6db74">&#34;&amp;gt;&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&gt;&#34;</span>;
-</span></span><span style="display:flex;"><span>        mp[<span style="color:#e6db74">&#34;&amp;lt;&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&lt;&#34;</span>;
-</span></span><span style="display:flex;"><span>        mp[<span style="color:#e6db74">&#34;&amp;frasl;&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/&#34;</span>;
+</span></span><span style="display:flex;"><span>        map<span style="color:#666">&lt;</span>string, string<span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>        mp[<span style="color:#b44">&#34;&amp;quot;&#34;</span>] <span style="color:#666">=</span> <span style="color:#b44">&#34;</span><span style="color:#b62;font-weight:bold">\&#34;</span><span style="color:#b44">&#34;</span>;
+</span></span><span style="display:flex;"><span>        mp[<span style="color:#b44">&#34;&amp;apos;&#34;</span>] <span style="color:#666">=</span> <span style="color:#b44">&#34;</span><span style="color:#b62;font-weight:bold">\&#39;</span><span style="color:#b44">&#34;</span>;
+</span></span><span style="display:flex;"><span>        mp[<span style="color:#b44">&#34;&amp;amp;&#34;</span>] <span style="color:#666">=</span> <span style="color:#b44">&#34;&amp;&#34;</span>;
+</span></span><span style="display:flex;"><span>        mp[<span style="color:#b44">&#34;&amp;gt;&#34;</span>] <span style="color:#666">=</span> <span style="color:#b44">&#34;&gt;&#34;</span>;
+</span></span><span style="display:flex;"><span>        mp[<span style="color:#b44">&#34;&amp;lt;&#34;</span>] <span style="color:#666">=</span> <span style="color:#b44">&#34;&lt;&#34;</span>;
+</span></span><span style="display:flex;"><span>        mp[<span style="color:#b44">&#34;&amp;frasl;&#34;</span>] <span style="color:#666">=</span> <span style="color:#b44">&#34;/&#34;</span>;
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        string res <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> text.size()) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(text[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;&amp;&#39;</span>) {
-</span></span><span style="display:flex;"><span>                string tmp <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> text.size() <span style="color:#f92672">&amp;&amp;</span> text[i] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;;&#39;</span>){
-</span></span><span style="display:flex;"><span>                    tmp <span style="color:#f92672">+=</span> text[i<span style="color:#f92672">++</span>];
-</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&lt;</span> text.size() <span style="color:#f92672">&amp;&amp;</span> text[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;&amp;&#39;</span>) {
-</span></span><span style="display:flex;"><span>                        res <span style="color:#f92672">+=</span> tmp;
-</span></span><span style="display:flex;"><span>                        tmp <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>        string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;        
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> text.size()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(text[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;&amp;&#39;</span>) {
+</span></span><span style="display:flex;"><span>                string tmp <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> text.size() <span style="color:#666">&amp;&amp;</span> text[i] <span style="color:#666">!=</span> <span style="color:#b44">&#39;;&#39;</span>){
+</span></span><span style="display:flex;"><span>                    tmp <span style="color:#666">+=</span> text[i<span style="color:#666">++</span>];
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> text.size() <span style="color:#666">&amp;&amp;</span> text[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;&amp;&#39;</span>) {
+</span></span><span style="display:flex;"><span>                        res <span style="color:#666">+=</span> tmp;
+</span></span><span style="display:flex;"><span>                        tmp <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
 </span></span><span style="display:flex;"><span>                    }
 </span></span><span style="display:flex;"><span>                } 
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(text[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;;&#39;</span>) {
-</span></span><span style="display:flex;"><span>                    i<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>                    tmp <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#39;;&#39;</span>;
-</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span>(mp.count(tmp)) {
-</span></span><span style="display:flex;"><span>                        res <span style="color:#f92672">+=</span> mp[tmp];
-</span></span><span style="display:flex;"><span>                    } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>                        res <span style="color:#f92672">+=</span> tmp;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(text[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;;&#39;</span>) {
+</span></span><span style="display:flex;"><span>                    i<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>                    tmp <span style="color:#666">+=</span> <span style="color:#b44">&#39;;&#39;</span>;
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">if</span>(mp.count(tmp)) {
+</span></span><span style="display:flex;"><span>                        res <span style="color:#666">+=</span> mp[tmp];
+</span></span><span style="display:flex;"><span>                    } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                        res <span style="color:#666">+=</span> tmp;
 </span></span><span style="display:flex;"><span>                    }
-</span></span><span style="display:flex;"><span>                } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>                    res <span style="color:#f92672">+=</span> tmp;
+</span></span><span style="display:flex;"><span>                } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                    res <span style="color:#666">+=</span> tmp;
 </span></span><span style="display:flex;"><span>                }
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>                res <span style="color:#f92672">+=</span> text[i<span style="color:#f92672">++</span>];
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                res <span style="color:#666">+=</span> text[i<span style="color:#666">++</span>];
 </span></span><span style="display:flex;"><span>            }
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode216s1hbhb">
+<h2 id="hahahugoshortcode215s1hbhb">
   
 
   
@@ -305,28 +305,28 @@
 <ol>
 <li>
 <p><strong>Class Definition</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span></code></pre></div><ul>
 <li>A class named <code>Solution</code> is defined, containing the method <code>entityParser</code>.</li>
 </ul>
 </li>
 <li>
 <p><strong>Function Declaration</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string <span style="color:#a6e22e">entityParser</span>(string text) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string <span style="color:#00a000">entityParser</span>(string text) {
 </span></span></code></pre></div><ul>
 <li>The <code>entityParser</code> function takes a single parameter <code>text</code>, which is a string that may contain HTML entities.</li>
 </ul>
 </li>
 <li>
 <p><strong>Mapping HTML Entities</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        map<span style="color:#f92672">&lt;</span>string, string<span style="color:#f92672">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>        mp[<span style="color:#e6db74">&#34;&amp;quot;&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\&#34;</span><span style="color:#e6db74">&#34;</span>;
-</span></span><span style="display:flex;"><span>        mp[<span style="color:#e6db74">&#34;&amp;apos;&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;</span><span style="color:#ae81ff">\&#39;</span><span style="color:#e6db74">&#34;</span>;
-</span></span><span style="display:flex;"><span>        mp[<span style="color:#e6db74">&#34;&amp;amp;&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&amp;&#34;</span>;
-</span></span><span style="display:flex;"><span>        mp[<span style="color:#e6db74">&#34;&amp;gt;&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&gt;&#34;</span>;
-</span></span><span style="display:flex;"><span>        mp[<span style="color:#e6db74">&#34;&amp;lt;&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&lt;&#34;</span>;
-</span></span><span style="display:flex;"><span>        mp[<span style="color:#e6db74">&#34;&amp;frasl;&#34;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/&#34;</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        map<span style="color:#666">&lt;</span>string, string<span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>        mp[<span style="color:#b44">&#34;&amp;quot;&#34;</span>] <span style="color:#666">=</span> <span style="color:#b44">&#34;</span><span style="color:#b62;font-weight:bold">\&#34;</span><span style="color:#b44">&#34;</span>;
+</span></span><span style="display:flex;"><span>        mp[<span style="color:#b44">&#34;&amp;apos;&#34;</span>] <span style="color:#666">=</span> <span style="color:#b44">&#34;</span><span style="color:#b62;font-weight:bold">\&#39;</span><span style="color:#b44">&#34;</span>;
+</span></span><span style="display:flex;"><span>        mp[<span style="color:#b44">&#34;&amp;amp;&#34;</span>] <span style="color:#666">=</span> <span style="color:#b44">&#34;&amp;&#34;</span>;
+</span></span><span style="display:flex;"><span>        mp[<span style="color:#b44">&#34;&amp;gt;&#34;</span>] <span style="color:#666">=</span> <span style="color:#b44">&#34;&gt;&#34;</span>;
+</span></span><span style="display:flex;"><span>        mp[<span style="color:#b44">&#34;&amp;lt;&#34;</span>] <span style="color:#666">=</span> <span style="color:#b44">&#34;&lt;&#34;</span>;
+</span></span><span style="display:flex;"><span>        mp[<span style="color:#b44">&#34;&amp;frasl;&#34;</span>] <span style="color:#666">=</span> <span style="color:#b44">&#34;/&#34;</span>;
 </span></span></code></pre></div><ul>
 <li>A map named <code>mp</code> is created to store the mapping of HTML entities to their respective characters.</li>
 <li>Each entity is associated with its corresponding character.</li>
@@ -334,8 +334,8 @@
 </li>
 <li>
 <p><strong>Result Initialization</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        string res <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;        
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div><ul>
 <li>An empty string <code>res</code> is initialized to build the final result.</li>
 <li>A variable <code>i</code> is initialized to iterate through the characters of the input string.</li>
@@ -343,8 +343,8 @@
 </li>
 <li>
 <p><strong>Iterating Through the String</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> text.size()) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(text[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;&amp;&#39;</span>) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> text.size()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(text[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;&amp;&#39;</span>) {
 </span></span></code></pre></div><ul>
 <li>A while loop is set up to traverse the string until all characters are processed.</li>
 <li>Inside the loop, a check is performed to see if the current character is an ampersand (<code>&amp;</code>).</li>
@@ -352,12 +352,12 @@
 </li>
 <li>
 <p><strong>Building the Entity String</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                string tmp <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;</span> text.size() <span style="color:#f92672">&amp;&amp;</span> text[i] <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#39;;&#39;</span>){
-</span></span><span style="display:flex;"><span>                    tmp <span style="color:#f92672">+=</span> text[i<span style="color:#f92672">++</span>];
-</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&lt;</span> text.size() <span style="color:#f92672">&amp;&amp;</span> text[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;&amp;&#39;</span>) {
-</span></span><span style="display:flex;"><span>                        res <span style="color:#f92672">+=</span> tmp;
-</span></span><span style="display:flex;"><span>                        tmp <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;&#34;</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                string tmp <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> text.size() <span style="color:#666">&amp;&amp;</span> text[i] <span style="color:#666">!=</span> <span style="color:#b44">&#39;;&#39;</span>){
+</span></span><span style="display:flex;"><span>                    tmp <span style="color:#666">+=</span> text[i<span style="color:#666">++</span>];
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> text.size() <span style="color:#666">&amp;&amp;</span> text[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;&amp;&#39;</span>) {
+</span></span><span style="display:flex;"><span>                        res <span style="color:#666">+=</span> tmp;
+</span></span><span style="display:flex;"><span>                        tmp <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
 </span></span><span style="display:flex;"><span>                    }
 </span></span><span style="display:flex;"><span>                }
 </span></span></code></pre></div><ul>
@@ -368,19 +368,19 @@
 </li>
 <li>
 <p><strong>Handling the Semicolon</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(text[i] <span style="color:#f92672">==</span> <span style="color:#e6db74">&#39;;&#39;</span>) {
-</span></span><span style="display:flex;"><span>                    i<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>                    tmp <span style="color:#f92672">+=</span> <span style="color:#e6db74">&#39;;&#39;</span>;
-</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span>(mp.count(tmp)) {
-</span></span><span style="display:flex;"><span>                        res <span style="color:#f92672">+=</span> mp[tmp];
-</span></span><span style="display:flex;"><span>                    } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>                        res <span style="color:#f92672">+=</span> tmp;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(text[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;;&#39;</span>) {
+</span></span><span style="display:flex;"><span>                    i<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>                    tmp <span style="color:#666">+=</span> <span style="color:#b44">&#39;;&#39;</span>;
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">if</span>(mp.count(tmp)) {
+</span></span><span style="display:flex;"><span>                        res <span style="color:#666">+=</span> mp[tmp];
+</span></span><span style="display:flex;"><span>                    } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                        res <span style="color:#666">+=</span> tmp;
 </span></span><span style="display:flex;"><span>                    }
-</span></span><span style="display:flex;"><span>                } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>                    res <span style="color:#f92672">+=</span> tmp;
+</span></span><span style="display:flex;"><span>                } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                    res <span style="color:#666">+=</span> tmp;
 </span></span><span style="display:flex;"><span>                }
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>                res <span style="color:#f92672">+=</span> text[i<span style="color:#f92672">++</span>];
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                res <span style="color:#666">+=</span> text[i<span style="color:#666">++</span>];
 </span></span><span style="display:flex;"><span>            }
 </span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></div><ul>
@@ -391,7 +391,7 @@
 </li>
 <li>
 <p><strong>Returning the Result</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><ul>
@@ -451,7 +451,7 @@
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode216s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode215s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

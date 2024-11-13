@@ -224,43 +224,43 @@
         <p><a href="https://leetcode.com/problems/find-positive-integer-solution-for-a-given-equation/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">/*
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * // This is the custom function interface.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * // You should not implement it, or speculate about its implementation
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * class CustomFunction {
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * public:
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     // Returns f(x, y) for any given positive integers x and y.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     // Note that f(x, y) is increasing with respect to both x and y.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     // i.e. f(x, y) &lt; f(x + 1, y), f(x, y) &lt; f(x, y + 1)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     int f(int x, int y);
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * };
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#080;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * // This is the custom function interface.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * // You should not implement it, or speculate about its implementation
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * class CustomFunction {
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * public:
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     // Returns f(x, y) for any given positive integers x and y.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     // Note that f(x, y) is increasing with respect to both x and y.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     // i.e. f(x, y) &lt; f(x + 1, y), f(x, y) &lt; f(x, y + 1)
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     int f(int x, int y);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * };
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> */</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> findSolution(CustomFunction<span style="color:#f92672">&amp;</span> cf, <span style="color:#66d9ef">int</span> z) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> xl <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, xr <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> findSolution(CustomFunction<span style="color:#666">&amp;</span> cf, <span style="color:#0b0;font-weight:bold">int</span> z) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> xl <span style="color:#666">=</span> <span style="color:#666">1</span>, xr <span style="color:#666">=</span> <span style="color:#666">1000</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> res;
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> res;
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; x <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1000</span>; x<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(cf.f(x, <span style="color:#ae81ff">0</span>) <span style="color:#f92672">&gt;</span> z) <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> <span style="color:#666">1</span>; x <span style="color:#666">&lt;=</span> <span style="color:#666">1000</span>; x<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(cf.f(x, <span style="color:#666">0</span>) <span style="color:#666">&gt;</span> z) <span style="color:#a2f;font-weight:bold">break</span>;
 </span></span><span style="display:flex;"><span>            
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> yl <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, yr <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>;            
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span>(yl <span style="color:#f92672">&lt;=</span> yr) {
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> ymid <span style="color:#f92672">=</span> yl <span style="color:#f92672">+</span> (yr <span style="color:#f92672">-</span> yl <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> sol <span style="color:#f92672">=</span> cf.f(x, ymid);
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(sol <span style="color:#f92672">==</span> z) {
-</span></span><span style="display:flex;"><span>                    ans <span style="color:#f92672">=</span> ymid;
-</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> yl <span style="color:#666">=</span> <span style="color:#666">1</span>, yr <span style="color:#666">=</span> <span style="color:#666">1000</span>;            
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(yl <span style="color:#666">&lt;=</span> yr) {
+</span></span><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> ymid <span style="color:#666">=</span> yl <span style="color:#666">+</span> (yr <span style="color:#666">-</span> yl <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> sol <span style="color:#666">=</span> cf.f(x, ymid);
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(sol <span style="color:#666">==</span> z) {
+</span></span><span style="display:flex;"><span>                    ans <span style="color:#666">=</span> ymid;
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">break</span>;
 </span></span><span style="display:flex;"><span>                }
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(sol <span style="color:#f92672">&lt;</span> z) yl <span style="color:#f92672">=</span> ymid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">else</span>        yr <span style="color:#f92672">=</span> ymid <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(sol <span style="color:#666">&lt;</span> z) yl <span style="color:#666">=</span> ymid <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">else</span>        yr <span style="color:#666">=</span> ymid <span style="color:#666">-</span> <span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(ans <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) res.push_back({x, ans});
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(ans <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) res.push_back({x, ans});
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
 <h2 id="hahahugoshortcode130s1hbhb">
@@ -299,49 +299,49 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> findSolution(CustomFunction<span style="color:#f92672">&amp;</span> cf, <span style="color:#66d9ef">int</span> z) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> xl <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, xr <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>;
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> res;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> findSolution(CustomFunction<span style="color:#666">&amp;</span> cf, <span style="color:#0b0;font-weight:bold">int</span> z) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> xl <span style="color:#666">=</span> <span style="color:#666">1</span>, xr <span style="color:#666">=</span> <span style="color:#666">1000</span>;
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> res;
 </span></span></code></pre></div><ul>
 <li><strong>Lines 1-4</strong>: We define the <code>Solution</code> class and declare the public method <code>findSolution</code>, which takes a <code>CustomFunction</code> reference and an integer <code>z</code> as inputs. We also initialize the bounds for ( x ) and an empty result vector <code>res</code> to store the valid pairs.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; x <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">1000</span>; x<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(cf.f(x, <span style="color:#ae81ff">0</span>) <span style="color:#f92672">&gt;</span> z) <span style="color:#66d9ef">break</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> <span style="color:#666">1</span>; x <span style="color:#666">&lt;=</span> <span style="color:#666">1000</span>; x<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(cf.f(x, <span style="color:#666">0</span>) <span style="color:#666">&gt;</span> z) <span style="color:#a2f;font-weight:bold">break</span>;
 </span></span></code></pre></div><ul>
 <li><strong>Lines 5-7</strong>: We begin an outer loop that iterates ( x ) from ( 1 ) to ( 1000 ). Inside this loop, we check if ( f(x, 0) ) is greater than ( z ). If it is, we break out of the loop, as all further values of ( x ) will also yield results greater than ( z ).</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> yl <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>, yr <span style="color:#f92672">=</span> <span style="color:#ae81ff">1000</span>;            
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> yl <span style="color:#666">=</span> <span style="color:#666">1</span>, yr <span style="color:#666">=</span> <span style="color:#666">1000</span>;            
 </span></span></code></pre></div><ul>
 <li><strong>Lines 8-10</strong>: We initialize <code>ans</code> to store the valid ( y ) value when found and set the binary search bounds for ( y ) from ( 1 ) to ( 1000 ).</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span>(yl <span style="color:#f92672">&lt;=</span> yr) {
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> ymid <span style="color:#f92672">=</span> yl <span style="color:#f92672">+</span> (yr <span style="color:#f92672">-</span> yl <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> sol <span style="color:#f92672">=</span> cf.f(x, ymid);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(yl <span style="color:#666">&lt;=</span> yr) {
+</span></span><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> ymid <span style="color:#666">=</span> yl <span style="color:#666">+</span> (yr <span style="color:#666">-</span> yl <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> sol <span style="color:#666">=</span> cf.f(x, ymid);
 </span></span></code></pre></div><ul>
 <li><strong>Lines 11-13</strong>: We start a while loop for binary search, continuing as long as the lower bound ( yl ) is less than or equal to the upper bound ( yr ). We calculate the midpoint ( ymid ) and call the function ( f ) to evaluate ( sol ).</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(sol <span style="color:#f92672">==</span> z) {
-</span></span><span style="display:flex;"><span>                    ans <span style="color:#f92672">=</span> ymid;
-</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(sol <span style="color:#666">==</span> z) {
+</span></span><span style="display:flex;"><span>                    ans <span style="color:#666">=</span> ymid;
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">break</span>;
 </span></span><span style="display:flex;"><span>                }
 </span></span></code></pre></div><ul>
 <li><strong>Lines 14-16</strong>: If ( sol ) equals ( z ), we have found a valid ( y ) for the current ( x ). We store this ( y ) in <code>ans</code> and break out of the binary search.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(sol <span style="color:#f92672">&lt;</span> z) yl <span style="color:#f92672">=</span> ymid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">else</span>        yr <span style="color:#f92672">=</span> ymid <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(sol <span style="color:#666">&lt;</span> z) yl <span style="color:#666">=</span> ymid <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">else</span>        yr <span style="color:#666">=</span> ymid <span style="color:#666">-</span> <span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>            }
 </span></span></code></pre></div><ul>
 <li><strong>Lines 17-20</strong>: If ( sol ) is less than ( z ), we adjust the lower bound ( yl ) to ( ymid + 1 ) to search for higher ( y ) values. Conversely, if ( sol ) is greater than ( z ), we adjust the upper bound ( yr ) to ( ymid - 1 ).</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(ans <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) res.push_back({x, ans});
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(ans <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) res.push_back({x, ans});
 </span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></div><ul>
 <li><strong>Lines 21-23</strong>: After the binary search completes, if <code>ans</code> has been updated (i.e., it is not -1), we push the pair ( (x, ans) ) into the result vector <code>res</code>.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><ul>

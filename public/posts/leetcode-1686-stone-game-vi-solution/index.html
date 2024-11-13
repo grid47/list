@@ -234,38 +234,38 @@
         <p><a href="https://leetcode.com/problems/stone-game-vi/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> stoneGameVI(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> alice, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> bob) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ap <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, bp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> stoneGameVI(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> alice, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> bob) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> ap <span style="color:#666">=</span> <span style="color:#666">0</span>, bp <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> alice.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> alice.size();
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/*
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">            Take out stones with max points (alice[i] + bob[i])
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">            It either increase our winning chance
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">            or reduces the opponents winning chance
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        */</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">            Take out stones with max points (alice[i] + bob[i])
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">            It either increase our winning chance
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">            or reduces the opponents winning chance
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        */</span>
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        priority_queue<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>, vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>, less<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;</span> pq;
+</span></span><span style="display:flex;"><span>        priority_queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span>, less<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;</span> pq;
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            pq.push({alice[i] <span style="color:#f92672">+</span> bob[i], i});
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            pq.push({alice[i] <span style="color:#666">+</span> bob[i], i});
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">bool</span> isA <span style="color:#f92672">=</span> true;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>pq.empty()) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">auto</span> tmp <span style="color:#f92672">=</span> pq.top();
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">bool</span> isA <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> tmp <span style="color:#666">=</span> pq.top();
 </span></span><span style="display:flex;"><span>            pq.pop();
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(isA) {
-</span></span><span style="display:flex;"><span>                ap <span style="color:#f92672">+=</span> alice[tmp.second];
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>                bp <span style="color:#f92672">+=</span> bob[tmp.second];
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(isA) {
+</span></span><span style="display:flex;"><span>                ap <span style="color:#666">+=</span> alice[tmp.second];
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                bp <span style="color:#666">+=</span> bob[tmp.second];
 </span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            isA <span style="color:#f92672">=</span> <span style="color:#f92672">!</span>isA;
+</span></span><span style="display:flex;"><span>            isA <span style="color:#666">=</span> <span style="color:#666">!</span>isA;
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// cout &lt;&lt; ap &lt;&lt; &#34; &#34; &lt;&lt; bp;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> ap <span style="color:#f92672">&gt;</span> bp <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> ap <span style="color:#f92672">&lt;</span> bp <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// cout &lt;&lt; ap &lt;&lt; &#34; &#34; &lt;&lt; bp;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">return</span> ap <span style="color:#666">&gt;</span> bp <span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">:</span> ap <span style="color:#666">&lt;</span> bp <span style="color:#666">?</span> <span style="color:#666">-</span><span style="color:#666">1</span><span style="color:#666">:</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
 <h2 id="hahahugoshortcode348s1hbhb">
@@ -323,15 +323,15 @@
   </a>
 </h3>
 <p>Here is a step-by-step breakdown of the implementation:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> stoneGameVI(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> alice, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> bob) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> stoneGameVI(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> alice, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> bob) {
 </span></span></code></pre></div><ul>
 <li><strong>Class Definition</strong>: We define a class named <code>Solution</code> and create a public method <code>stoneGameVI</code>, which takes two vectors of integers, <code>alice</code> and <code>bob</code>, as parameters.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ap <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, bp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> ap <span style="color:#666">=</span> <span style="color:#666">0</span>, bp <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> alice.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> alice.size();
 </span></span></code></pre></div><ul>
 <li><strong>Variable Initialization</strong>:
 <ul>
@@ -340,10 +340,10 @@
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        priority_queue<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>, vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>, less<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;</span> pq;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        priority_queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span>, less<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;</span> pq;
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            pq.push({alice[i] <span style="color:#f92672">+</span> bob[i], i});
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            pq.push({alice[i] <span style="color:#666">+</span> bob[i], i});
 </span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></div><ul>
 <li><strong>Priority Queue Setup</strong>:
@@ -353,9 +353,9 @@
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">bool</span> isA <span style="color:#f92672">=</span> true;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>pq.empty()) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">auto</span> tmp <span style="color:#f92672">=</span> pq.top();
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">bool</span> isA <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> tmp <span style="color:#666">=</span> pq.top();
 </span></span><span style="display:flex;"><span>            pq.pop();
 </span></span></code></pre></div><ul>
 <li><strong>Game Simulation</strong>:
@@ -365,12 +365,12 @@
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(isA) {
-</span></span><span style="display:flex;"><span>                ap <span style="color:#f92672">+=</span> alice[tmp.second];
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>                bp <span style="color:#f92672">+=</span> bob[tmp.second];
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(isA) {
+</span></span><span style="display:flex;"><span>                ap <span style="color:#666">+=</span> alice[tmp.second];
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                bp <span style="color:#666">+=</span> bob[tmp.second];
 </span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            isA <span style="color:#f92672">=</span> <span style="color:#f92672">!</span>isA;
+</span></span><span style="display:flex;"><span>            isA <span style="color:#666">=</span> <span style="color:#666">!</span>isA;
 </span></span></code></pre></div><ul>
 <li><strong>Score Updating</strong>:
 <ul>
@@ -379,7 +379,7 @@
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ap <span style="color:#f92672">&gt;</span> bp <span style="color:#f92672">?</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> ap <span style="color:#f92672">&lt;</span> bp <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> <span style="color:#ae81ff">0</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ap <span style="color:#666">&gt;</span> bp <span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">:</span> ap <span style="color:#666">&lt;</span> bp <span style="color:#666">?</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">:</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><ul>

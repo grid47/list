@@ -224,35 +224,35 @@
         <p><a href="https://leetcode.com/problems/find-and-replace-in-string/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    string findReplaceString(string s, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> indices, vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> sources, vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> targets) {
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/*
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        string s
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        indices - arr of int
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        src       arr of str
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        tgt       arr of str
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        */</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    string findReplaceString(string s, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> indices, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> sources, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> targets) {
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        string s
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        indices - arr of int
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        src       arr of str
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        tgt       arr of str
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        */</span>
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> ind;
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ind;
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> indices.size(); i<span style="color:#f92672">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> indices.size(); i<span style="color:#666">++</span>)
 </span></span><span style="display:flex;"><span>            ind.push_back({indices[i], i});
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>        sort(ind.rbegin(), ind.rend());
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it: ind) {
-</span></span><span style="display:flex;"><span>            string src <span style="color:#f92672">=</span> sources[it.second], tgt <span style="color:#f92672">=</span> targets[it.second];
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(s.substr(it.first, src.size()) <span style="color:#f92672">==</span> src)
-</span></span><span style="display:flex;"><span>                s <span style="color:#f92672">=</span> s.substr(<span style="color:#ae81ff">0</span>, it.first) <span style="color:#f92672">+</span> tgt <span style="color:#f92672">+</span> s.substr(it.first<span style="color:#f92672">+</span> src.size());
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: ind) {
+</span></span><span style="display:flex;"><span>            string src <span style="color:#666">=</span> sources[it.second], tgt <span style="color:#666">=</span> targets[it.second];
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(s.substr(it.first, src.size()) <span style="color:#666">==</span> src)
+</span></span><span style="display:flex;"><span>                s <span style="color:#666">=</span> s.substr(<span style="color:#666">0</span>, it.first) <span style="color:#666">+</span> tgt <span style="color:#666">+</span> s.substr(it.first<span style="color:#666">+</span> src.size());
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> s;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> s;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1357s1hbhb">
+<h2 id="hahahugoshortcode1347s1hbhb">
   
 
   
@@ -293,8 +293,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> ind;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> indices.size(); i<span style="color:#f92672">++</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ind;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> indices.size(); i<span style="color:#666">++</span>)
 </span></span><span style="display:flex;"><span>    ind.push_back({indices[i], i});
 </span></span></code></pre></div><p>Here, we initialize a vector <code>ind</code> which will hold pairs of the form <code>{index, source_index}</code>. This will allow us to associate each index with the corresponding source string from the <code>sources</code> array. Each pair consists of:</p>
 <ul>
@@ -308,7 +308,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(ind.rbegin(), ind.rend());
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(ind.rbegin(), ind.rend());
 </span></span></code></pre></div><ul>
 <li>To avoid issues with multiple replacements affecting one another (when performing replacements that overlap), we sort the vector <code>ind</code> in <strong>descending order</strong>. This ensures that we always perform replacements starting from the end of the string.</li>
 <li>This prevents any modification of parts of the string that will later be replaced, as earlier replacements (which could change the string structure) are handled after later ones.</li>
@@ -320,10 +320,10 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it: ind) {
-</span></span><span style="display:flex;"><span>    string src <span style="color:#f92672">=</span> sources[it.second], tgt <span style="color:#f92672">=</span> targets[it.second];
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(s.substr(it.first, src.size()) <span style="color:#f92672">==</span> src)
-</span></span><span style="display:flex;"><span>        s <span style="color:#f92672">=</span> s.substr(<span style="color:#ae81ff">0</span>, it.first) <span style="color:#f92672">+</span> tgt <span style="color:#f92672">+</span> s.substr(it.first <span style="color:#f92672">+</span> src.size());
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: ind) {
+</span></span><span style="display:flex;"><span>    string src <span style="color:#666">=</span> sources[it.second], tgt <span style="color:#666">=</span> targets[it.second];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s.substr(it.first, src.size()) <span style="color:#666">==</span> src)
+</span></span><span style="display:flex;"><span>        s <span style="color:#666">=</span> s.substr(<span style="color:#666">0</span>, it.first) <span style="color:#666">+</span> tgt <span style="color:#666">+</span> s.substr(it.first <span style="color:#666">+</span> src.size());
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ul>
 <li>We iterate through the sorted <code>ind</code> array, where each element contains an index and the corresponding source-target pair.</li>
@@ -348,7 +348,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> s;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> s;
 </span></span></code></pre></div><ul>
 <li>After performing all the replacements, we return the final modified string <code>s</code>.</li>
 </ul>
@@ -397,10 +397,10 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;abcd&#34;</span>;
-</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> indices <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>};
-</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> sources <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;ab&#34;</span>, <span style="color:#e6db74">&#34;cd&#34;</span>};
-</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;</span> targets <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#34;xy&#34;</span>, <span style="color:#e6db74">&#34;yz&#34;</span>};
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string s <span style="color:#666">=</span> <span style="color:#b44">&#34;abcd&#34;</span>;
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> indices <span style="color:#666">=</span> {<span style="color:#666">0</span>, <span style="color:#666">2</span>};
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> sources <span style="color:#666">=</span> {<span style="color:#b44">&#34;ab&#34;</span>, <span style="color:#b44">&#34;cd&#34;</span>};
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> targets <span style="color:#666">=</span> {<span style="color:#b44">&#34;xy&#34;</span>, <span style="color:#b44">&#34;yz&#34;</span>};
 </span></span></code></pre></div><ul>
 <li>The string <code>s</code> is <code>&quot;abcd&quot;</code>.</li>
 <li>The indices are <code>{0, 2}</code>, meaning we need to check for replacements starting at indices 0 and 2.</li>
@@ -443,7 +443,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#e6db74">&#34;xyyz&#34;</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#b44">&#34;xyyz&#34;</span>
 </span></span></code></pre></div><h3 id="conclusion">
   Conclusion
   <a class="heading-link" href="#conclusion">
@@ -456,7 +456,7 @@
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1357s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1347s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

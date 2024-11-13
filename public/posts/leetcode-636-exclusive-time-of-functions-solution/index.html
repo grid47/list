@@ -214,41 +214,41 @@
         <p><a href="https://leetcode.com/problems/exclusive-time-of-functions/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">Log</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> id;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">struct</span> <span style="color:#00f">Log</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> id;
 </span></span><span style="display:flex;"><span>    string status;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> time;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> time;
 </span></span><span style="display:flex;"><span>};
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> exclusiveTime(<span style="color:#66d9ef">int</span> n, vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> logs) {
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans(n, <span style="color:#ae81ff">0</span>);
-</span></span><span style="display:flex;"><span>        stack<span style="color:#f92672">&lt;</span>Log<span style="color:#f92672">&gt;</span> stk;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(string log : logs) {
-</span></span><span style="display:flex;"><span>            stringstream <span style="color:#a6e22e">ss</span>(log);
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> exclusiveTime(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> logs) {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans(n, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        stack<span style="color:#666">&lt;</span>Log<span style="color:#666">&gt;</span> stk;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(string <span style="color:#a0a000">log</span> : logs) {
+</span></span><span style="display:flex;"><span>            stringstream <span style="color:#00a000">ss</span>(log);
 </span></span><span style="display:flex;"><span>            string num, adj, time;
-</span></span><span style="display:flex;"><span>            getline(ss, num,  <span style="color:#e6db74">&#39;:&#39;</span>);
-</span></span><span style="display:flex;"><span>            getline(ss, adj,  <span style="color:#e6db74">&#39;:&#39;</span>);
-</span></span><span style="display:flex;"><span>            getline(ss, time, <span style="color:#e6db74">&#39;:&#39;</span>);
-</span></span><span style="display:flex;"><span>            Log item <span style="color:#f92672">=</span> { stoi(num), adj, stoi(time) };
+</span></span><span style="display:flex;"><span>            getline(ss, num,  <span style="color:#b44">&#39;:&#39;</span>);
+</span></span><span style="display:flex;"><span>            getline(ss, adj,  <span style="color:#b44">&#39;:&#39;</span>);
+</span></span><span style="display:flex;"><span>            getline(ss, time, <span style="color:#b44">&#39;:&#39;</span>);
+</span></span><span style="display:flex;"><span>            Log item <span style="color:#666">=</span> { stoi(num), adj, stoi(time) };
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(item.status <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;start&#34;</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(item.status <span style="color:#666">==</span> <span style="color:#b44">&#34;start&#34;</span>) {
 </span></span><span style="display:flex;"><span>                stk.push(item);
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>                assert(stk.top().id <span style="color:#f92672">==</span> item.id);
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> t <span style="color:#f92672">=</span> item.time <span style="color:#f92672">-</span> stk.top().time <span style="color:#f92672">+</span><span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>                ans[item.id] <span style="color:#f92672">+=</span> t;
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                assert(stk.top().id <span style="color:#666">==</span> item.id);
+</span></span><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> t <span style="color:#666">=</span> item.time <span style="color:#666">-</span> stk.top().time <span style="color:#666">+</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>                ans[item.id] <span style="color:#666">+=</span> t;
 </span></span><span style="display:flex;"><span>                stk.pop();
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>stk.empty()){
-</span></span><span style="display:flex;"><span>                    assert(stk.top().status <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;start&#34;</span>);
-</span></span><span style="display:flex;"><span>                    ans[stk.top().id] <span style="color:#f92672">-=</span> t;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>stk.empty()){
+</span></span><span style="display:flex;"><span>                    assert(stk.top().status <span style="color:#666">==</span> <span style="color:#b44">&#34;start&#34;</span>);
+</span></span><span style="display:flex;"><span>                    ans[stk.top().id] <span style="color:#666">-=</span> t;
 </span></span><span style="display:flex;"><span>                }
 </span></span><span style="display:flex;"><span>            }
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1240s1hbhb">
+<h2 id="hahahugoshortcode1241s1hbhb">
   
 
   
@@ -291,8 +291,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans(n, <span style="color:#ae81ff">0</span>);
-</span></span><span style="display:flex;"><span>stack<span style="color:#f92672">&lt;</span>Log<span style="color:#f92672">&gt;</span> stk;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans(n, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>stack<span style="color:#666">&lt;</span>Log<span style="color:#666">&gt;</span> stk;
 </span></span></code></pre></div><ul>
 <li>We initialize a <code>vector&lt;int&gt; ans</code> with size <code>n</code> to store the exclusive execution times of each function. The <code>vector</code> is initialized with zeros.</li>
 <li>A stack <code>stk</code> of type <code>Log</code> is used to track functions as they start. Each entry in the stack represents a function that is currently running, including its ID, status, and start time.</li>
@@ -304,13 +304,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(string log : logs) {
-</span></span><span style="display:flex;"><span>    stringstream <span style="color:#a6e22e">ss</span>(log);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(string <span style="color:#a0a000">log</span> : logs) {
+</span></span><span style="display:flex;"><span>    stringstream <span style="color:#00a000">ss</span>(log);
 </span></span><span style="display:flex;"><span>    string num, adj, time;
-</span></span><span style="display:flex;"><span>    getline(ss, num, <span style="color:#e6db74">&#39;:&#39;</span>);
-</span></span><span style="display:flex;"><span>    getline(ss, adj, <span style="color:#e6db74">&#39;:&#39;</span>);
-</span></span><span style="display:flex;"><span>    getline(ss, time, <span style="color:#e6db74">&#39;:&#39;</span>);
-</span></span><span style="display:flex;"><span>    Log item <span style="color:#f92672">=</span> { stoi(num), adj, stoi(time) };
+</span></span><span style="display:flex;"><span>    getline(ss, num, <span style="color:#b44">&#39;:&#39;</span>);
+</span></span><span style="display:flex;"><span>    getline(ss, adj, <span style="color:#b44">&#39;:&#39;</span>);
+</span></span><span style="display:flex;"><span>    getline(ss, time, <span style="color:#b44">&#39;:&#39;</span>);
+</span></span><span style="display:flex;"><span>    Log item <span style="color:#666">=</span> { stoi(num), adj, stoi(time) };
 </span></span></code></pre></div><ul>
 <li>We iterate through each log in the <code>logs</code> vector. Each log string is passed to a stringstream <code>ss</code> to extract the function ID (<code>num</code>), status (<code>adj</code>), and timestamp (<code>time</code>) using <code>getline()</code>.</li>
 <li>We convert <code>num</code> and <code>time</code> to integers using <code>stoi()</code>, and create a <code>Log</code> structure with the parsed information.</li>
@@ -322,7 +322,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(item.status <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;start&#34;</span>) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(item.status <span style="color:#666">==</span> <span style="color:#b44">&#34;start&#34;</span>) {
 </span></span><span style="display:flex;"><span>    stk.push(item);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ul>
@@ -335,10 +335,10 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>    assert(stk.top().id <span style="color:#f92672">==</span> item.id);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> t <span style="color:#f92672">=</span> item.time <span style="color:#f92672">-</span> stk.top().time <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>    ans[item.id] <span style="color:#f92672">+=</span> t;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>    assert(stk.top().id <span style="color:#666">==</span> item.id);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> t <span style="color:#666">=</span> item.time <span style="color:#666">-</span> stk.top().time <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    ans[item.id] <span style="color:#666">+=</span> t;
 </span></span><span style="display:flex;"><span>    stk.pop();
 </span></span></code></pre></div><ul>
 <li>If the log represents an &ldquo;end&rdquo; event, we first check that the function ID of the &ldquo;end&rdquo; log matches the function ID of the function at the top of the stack (i.e., the currently executing function).</li>
@@ -353,9 +353,9 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>stk.empty()){
-</span></span><span style="display:flex;"><span>    assert(stk.top().status <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;start&#34;</span>);
-</span></span><span style="display:flex;"><span>    ans[stk.top().id] <span style="color:#f92672">-=</span> t;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>stk.empty()){
+</span></span><span style="display:flex;"><span>    assert(stk.top().status <span style="color:#666">==</span> <span style="color:#b44">&#34;start&#34;</span>);
+</span></span><span style="display:flex;"><span>    ans[stk.top().id] <span style="color:#666">-=</span> t;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ul>
 <li>If the stack is not empty (i.e., there is a function that called the current function), we subtract the execution time of the current function from the exclusive execution time of the function at the top of the stack. This ensures that the time spent in the current function is not counted as part of the calling function&rsquo;s exclusive time.</li>
@@ -367,7 +367,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span></code></pre></div><ul>
 <li>After processing all logs, the <code>ans</code> vector will contain the exclusive execution times of all functions, which we return.</li>
 </ul>
@@ -411,7 +411,7 @@
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1240s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1241s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -234,25 +234,25 @@
         <p><a href="https://leetcode.com/problems/k-divisible-elements-subarrays/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> countDistinct(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> k, <span style="color:#66d9ef">int</span> p) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> countDistinct(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k, <span style="color:#0b0;font-weight:bold">int</span> p) {
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, n <span style="color:#f92672">=</span> nums.size();
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> cnt(<span style="color:#ae81ff">201</span>, <span style="color:#ae81ff">0</span>); vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> hash(<span style="color:#ae81ff">201</span>, <span style="color:#ae81ff">0</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; sz <span style="color:#f92672">&lt;</span> n; sz<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            unordered_set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> s;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">+</span> sz <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>){
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> cnt(<span style="color:#666">201</span>, <span style="color:#666">0</span>); vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> hash(<span style="color:#666">201</span>, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> <span style="color:#666">0</span>; sz <span style="color:#666">&lt;</span> n; sz<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            unordered_set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">+</span> sz <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>){
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>cnt[i] <span style="color:#f92672">+=</span> ((nums[i <span style="color:#f92672">+</span> sz] <span style="color:#f92672">%</span> p) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>);
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(cnt[i] <span style="color:#f92672">&lt;=</span> k) {
-</span></span><span style="display:flex;"><span>hash[i] <span style="color:#f92672">=</span> (hash[i] <span style="color:#f92672">*</span> <span style="color:#ae81ff">200</span> <span style="color:#f92672">+</span> nums[i <span style="color:#f92672">+</span> sz]) <span style="color:#f92672">%</span> <span style="color:#ae81ff">1000000007</span>;
-</span></span><span style="display:flex;"><span>                res <span style="color:#f92672">+=</span> s.insert(hash[i]).second;
+</span></span><span style="display:flex;"><span>cnt[i] <span style="color:#666">+=</span> ((nums[i <span style="color:#666">+</span> sz] <span style="color:#666">%</span> p) <span style="color:#666">==</span> <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(cnt[i] <span style="color:#666">&lt;=</span> k) {
+</span></span><span style="display:flex;"><span>hash[i] <span style="color:#666">=</span> (hash[i] <span style="color:#666">*</span> <span style="color:#666">200</span> <span style="color:#666">+</span> nums[i <span style="color:#666">+</span> sz]) <span style="color:#666">%</span> <span style="color:#666">1000000007</span>;
+</span></span><span style="display:flex;"><span>                res <span style="color:#666">+=</span> s.insert(hash[i]).second;
 </span></span><span style="display:flex;"><span>            }
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
 <h2 id="hahahugoshortcode667s1hbhb">
@@ -296,9 +296,9 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, n <span style="color:#f92672">=</span> nums.size();
-</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> cnt(<span style="color:#ae81ff">201</span>, <span style="color:#ae81ff">0</span>); 
-</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> hash(<span style="color:#ae81ff">201</span>, <span style="color:#ae81ff">0</span>);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> cnt(<span style="color:#666">201</span>, <span style="color:#666">0</span>); 
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> hash(<span style="color:#666">201</span>, <span style="color:#666">0</span>);
 </span></span></code></pre></div><ul>
 <li><code>res</code> keeps track of the number of distinct subarrays that meet the condition.</li>
 <li><code>n</code> is the size of the input array <code>nums</code>.</li>
@@ -312,9 +312,9 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; sz <span style="color:#f92672">&lt;</span> n; sz<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>    unordered_set<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> s;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">+</span> sz <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> <span style="color:#666">0</span>; sz <span style="color:#666">&lt;</span> n; sz<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    unordered_set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">+</span> sz <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
 </span></span></code></pre></div><ul>
 <li>The outer loop (<code>sz</code>) iterates through all possible subarray sizes from 0 to <code>n-1</code>.</li>
 <li>The inner loop (<code>i</code>) iterates through all starting positions for a subarray of size <code>sz</code>.</li>
@@ -326,7 +326,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>cnt[i] <span style="color:#f92672">+=</span> ((nums[i <span style="color:#f92672">+</span> sz] <span style="color:#f92672">%</span> p) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>cnt[i] <span style="color:#666">+=</span> ((nums[i <span style="color:#666">+</span> sz] <span style="color:#666">%</span> p) <span style="color:#666">==</span> <span style="color:#666">0</span>);
 </span></span></code></pre></div><ul>
 <li>For each subarray, we increment the count of divisible elements by <code>p</code> for the element <code>nums[i + sz]</code>. If the element is divisible by <code>p</code>, we increment the count for that starting index <code>i</code> in the <code>cnt</code> array.</li>
 </ul>
@@ -337,9 +337,9 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(cnt[i] <span style="color:#f92672">&lt;=</span> k) {
-</span></span><span style="display:flex;"><span>    hash[i] <span style="color:#f92672">=</span> (hash[i] <span style="color:#f92672">*</span> <span style="color:#ae81ff">200</span> <span style="color:#f92672">+</span> nums[i <span style="color:#f92672">+</span> sz]) <span style="color:#f92672">%</span> <span style="color:#ae81ff">1000000007</span>;
-</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">+=</span> s.insert(hash[i]).second;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(cnt[i] <span style="color:#666">&lt;=</span> k) {
+</span></span><span style="display:flex;"><span>    hash[i] <span style="color:#666">=</span> (hash[i] <span style="color:#666">*</span> <span style="color:#666">200</span> <span style="color:#666">+</span> nums[i <span style="color:#666">+</span> sz]) <span style="color:#666">%</span> <span style="color:#666">1000000007</span>;
+</span></span><span style="display:flex;"><span>    res <span style="color:#666">+=</span> s.insert(hash[i]).second;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ul>
 <li>If the count of elements divisible by <code>p</code> is less than or equal to <code>k</code>, we calculate the hash for the subarray.</li>
@@ -354,7 +354,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div><ul>
 <li>After processing all subarrays, the variable <code>res</code> contains the number of distinct subarrays that satisfy the condition.</li>
 </ul>

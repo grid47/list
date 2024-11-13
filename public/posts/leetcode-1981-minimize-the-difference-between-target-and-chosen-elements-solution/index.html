@@ -219,30 +219,30 @@
         <p><a href="https://leetcode.com/problems/minimize-the-difference-between-target-and-chosen-elements/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> mat;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> memo[<span style="color:#ae81ff">4901</span>][<span style="color:#ae81ff">70</span>];
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">int</span> sum, <span style="color:#66d9ef">int</span> net) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">==</span> mat.size()) <span style="color:#66d9ef">return</span> abs(sum <span style="color:#f92672">-</span> net);
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> mat;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> memo[<span style="color:#666">4901</span>][<span style="color:#666">70</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> sum, <span style="color:#0b0;font-weight:bold">int</span> net) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> mat.size()) <span style="color:#a2f;font-weight:bold">return</span> abs(sum <span style="color:#666">-</span> net);
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(memo[sum][idx] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> memo[sum][idx];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(memo[sum][idx] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[sum][idx];
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> INT_MAX;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> mat[<span style="color:#ae81ff">0</span>].size(); i<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>            ans <span style="color:#f92672">=</span> min(ans, dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, sum <span style="color:#f92672">+</span> mat[idx][i], net));
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> INT_MAX;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> mat[<span style="color:#666">0</span>].size(); i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>            ans <span style="color:#666">=</span> min(ans, dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, sum <span style="color:#666">+</span> mat[idx][i], net));
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> memo[sum][idx] <span style="color:#f92672">=</span> ans;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> memo[sum][idx] <span style="color:#666">=</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minimizeTheDifference</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> mat, <span style="color:#66d9ef">int</span> target) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>mat <span style="color:#f92672">=</span> mat;
-</span></span><span style="display:flex;"><span>        memset(memo, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#66d9ef">sizeof</span>(memo));
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, target);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimizeTheDifference</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mat, <span style="color:#0b0;font-weight:bold">int</span> target) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>mat <span style="color:#666">=</span> mat;
+</span></span><span style="display:flex;"><span>        memset(memo, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#a2f;font-weight:bold">sizeof</span>(memo));
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> dp(<span style="color:#666">0</span>, <span style="color:#666">0</span>, target);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode517s1hbhb">
+<h2 id="hahahugoshortcode503s1hbhb">
   
 
   
@@ -270,30 +270,30 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span></code></pre></div><p>The <code>Solution</code> class is defined to encapsulate the logic for solving the problem.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> mat;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> memo[<span style="color:#ae81ff">4901</span>][<span style="color:#ae81ff">70</span>];
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> mat;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> memo[<span style="color:#666">4901</span>][<span style="color:#666">70</span>];
 </span></span></code></pre></div><p>A member variable <code>mat</code> is declared to hold the matrix of integers. The <code>memo</code> array is initialized to store computed results for the dynamic programming approach, where the size is set to accommodate possible sums and row indices.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">int</span> sum, <span style="color:#66d9ef">int</span> net) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> sum, <span style="color:#0b0;font-weight:bold">int</span> net) {
 </span></span></code></pre></div><p>The recursive function <code>dp</code> is defined to explore the combinations of integers from the matrix. It takes three parameters: <code>idx</code>, which indicates the current row being processed, <code>sum</code>, which is the current total sum of selected integers, and <code>net</code>, the target value.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">==</span> mat.size()) <span style="color:#66d9ef">return</span> abs(sum <span style="color:#f92672">-</span> net);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> mat.size()) <span style="color:#a2f;font-weight:bold">return</span> abs(sum <span style="color:#666">-</span> net);
 </span></span></code></pre></div><p>The base case checks if all rows have been processed. If so, it returns the absolute difference between the current sum and the target.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(memo[sum][idx] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> memo[sum][idx];
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(memo[sum][idx] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[sum][idx];
 </span></span></code></pre></div><p>Before proceeding with further calculations, the function checks if the result for the current state <code>(sum, idx)</code> is already computed and stored in the <code>memo</code> array. If it is, it returns the stored result to save time.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> INT_MAX;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> INT_MAX;
 </span></span></code></pre></div><p>The variable <code>ans</code> is initialized to store the minimum difference found during the recursion. It starts with the maximum integer value.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> mat[<span style="color:#ae81ff">0</span>].size(); i<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>            ans <span style="color:#f92672">=</span> min(ans, dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, sum <span style="color:#f92672">+</span> mat[idx][i], net));
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> mat[<span style="color:#666">0</span>].size(); i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>            ans <span style="color:#666">=</span> min(ans, dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, sum <span style="color:#666">+</span> mat[idx][i], net));
 </span></span></code></pre></div><p>A loop iterates through all integers in the current row (<code>mat[idx]</code>). For each integer, the function calls itself recursively to explore the next row, adding the current integer to the sum. The result is compared with the current minimum difference stored in <code>ans</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> memo[sum][idx] <span style="color:#f92672">=</span> ans;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> memo[sum][idx] <span style="color:#666">=</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div><p>After evaluating all possibilities for the current row, the minimum difference found is stored in the <code>memo</code> array and returned.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minimizeTheDifference</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> mat, <span style="color:#66d9ef">int</span> target) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>mat <span style="color:#f92672">=</span> mat;
-</span></span><span style="display:flex;"><span>        memset(memo, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#66d9ef">sizeof</span>(memo));
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, target);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimizeTheDifference</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mat, <span style="color:#0b0;font-weight:bold">int</span> target) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>mat <span style="color:#666">=</span> mat;
+</span></span><span style="display:flex;"><span>        memset(memo, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#a2f;font-weight:bold">sizeof</span>(memo));
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> dp(<span style="color:#666">0</span>, <span style="color:#666">0</span>, target);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><p>The main function <code>minimizeTheDifference</code> initializes the matrix and the memoization array, then starts the recursion with the first row and a starting sum of 0. Finally, it returns the minimum difference calculated.</p>
@@ -328,17 +328,17 @@
   </a>
 </h3>
 <p>Here’s an example of how you can utilize the <code>minimizeTheDifference</code> method:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;vector&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">using</span> <span style="color:#66d9ef">namespace</span> std;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#080">#include</span> <span style="color:#080">&lt;vector&gt;</span><span style="color:#080">
+</span></span></span><span style="display:flex;"><span><span style="color:#080">#include</span> <span style="color:#080">&lt;iostream&gt;</span><span style="color:#080">
+</span></span></span><span style="display:flex;"><span><span style="color:#080"></span><span style="color:#a2f;font-weight:bold">using</span> <span style="color:#a2f;font-weight:bold">namespace</span> std;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">main</span>() {
 </span></span><span style="display:flex;"><span>    Solution sol;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> mat <span style="color:#f92672">=</span> {{<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">3</span>}, {<span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>, <span style="color:#ae81ff">6</span>}, {<span style="color:#ae81ff">7</span>, <span style="color:#ae81ff">8</span>, <span style="color:#ae81ff">9</span>}};
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> target <span style="color:#f92672">=</span> <span style="color:#ae81ff">10</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> result <span style="color:#f92672">=</span> sol.minimizeTheDifference(mat, target);
-</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;The minimum difference is: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> result <span style="color:#f92672">&lt;&lt;</span> endl; <span style="color:#75715e">// Example output
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> mat <span style="color:#666">=</span> {{<span style="color:#666">1</span>, <span style="color:#666">2</span>, <span style="color:#666">3</span>}, {<span style="color:#666">4</span>, <span style="color:#666">5</span>, <span style="color:#666">6</span>}, {<span style="color:#666">7</span>, <span style="color:#666">8</span>, <span style="color:#666">9</span>}};
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> target <span style="color:#666">=</span> <span style="color:#666">10</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> result <span style="color:#666">=</span> sol.minimizeTheDifference(mat, target);
+</span></span><span style="display:flex;"><span>    cout <span style="color:#666">&lt;&lt;</span> <span style="color:#b44">&#34;The minimum difference is: &#34;</span> <span style="color:#666">&lt;&lt;</span> result <span style="color:#666">&lt;&lt;</span> endl; <span style="color:#080;font-style:italic">// Example output
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><h3 id="potential-improvements">
   Potential Improvements
@@ -363,7 +363,7 @@
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode517s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode503s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

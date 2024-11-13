@@ -224,53 +224,53 @@
         <p><a href="https://leetcode.com/problems/number-of-ways-to-arrive-at-destination/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#define ll long long
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define pll pair&lt;ll, ll&gt;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> countPaths(<span style="color:#66d9ef">int</span> n, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> rds) {
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>pll<span style="color:#f92672">&gt;&gt;</span> gph(n);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>e : rds) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> u <span style="color:#f92672">=</span> e[<span style="color:#ae81ff">0</span>], v <span style="color:#f92672">=</span> e[<span style="color:#ae81ff">1</span>], time <span style="color:#f92672">=</span> e[<span style="color:#ae81ff">2</span>];
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#080">#define ll long long
+</span></span></span><span style="display:flex;"><span><span style="color:#080">#define pll pair&lt;ll, ll&gt;
+</span></span></span><span style="display:flex;"><span><span style="color:#080"></span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> countPaths(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> rds) {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>pll<span style="color:#666">&gt;&gt;</span> gph(n);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">e</span> : rds) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> u <span style="color:#666">=</span> e[<span style="color:#666">0</span>], v <span style="color:#666">=</span> e[<span style="color:#666">1</span>], time <span style="color:#666">=</span> e[<span style="color:#666">2</span>];
 </span></span><span style="display:flex;"><span>            gph[u].push_back({v, time});
 </span></span><span style="display:flex;"><span>            gph[v].push_back({u, time});
 </span></span><span style="display:flex;"><span>            
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>ll<span style="color:#f92672">&gt;</span> ways(n, <span style="color:#ae81ff">0</span>), dst(n, LLONG_MAX);
-</span></span><span style="display:flex;"><span>        ways[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>         dst[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>ll<span style="color:#666">&gt;</span> ways(n, <span style="color:#666">0</span>), dst(n, LLONG_MAX);
+</span></span><span style="display:flex;"><span>        ways[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>         dst[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        priority_queue<span style="color:#f92672">&lt;</span>pll, vector<span style="color:#f92672">&lt;</span>pll<span style="color:#f92672">&gt;</span>, greater<span style="color:#f92672">&lt;&gt;&gt;</span> pq;
+</span></span><span style="display:flex;"><span>        priority_queue<span style="color:#666">&lt;</span>pll, vector<span style="color:#666">&lt;</span>pll<span style="color:#666">&gt;</span>, greater<span style="color:#666">&lt;&gt;&gt;</span> pq;
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        pq.push({<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>});
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        pq.push({<span style="color:#666">0</span>, <span style="color:#666">0</span>});
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty()) {
 </span></span><span style="display:flex;"><span>            
-</span></span><span style="display:flex;"><span>          <span style="color:#66d9ef">auto</span> [d, u] <span style="color:#f92672">=</span> pq.top();
+</span></span><span style="display:flex;"><span>          <span style="color:#a2f;font-weight:bold">auto</span> [d, u] <span style="color:#666">=</span> pq.top();
 </span></span><span style="display:flex;"><span>          pq.pop();
 </span></span><span style="display:flex;"><span>            
-</span></span><span style="display:flex;"><span>   <span style="color:#66d9ef">for</span>(pll nb : gph[u]) {
-</span></span><span style="display:flex;"><span>              <span style="color:#66d9ef">int</span> nxt <span style="color:#f92672">=</span> nb.first, t <span style="color:#f92672">=</span> nb.second;
-</span></span><span style="display:flex;"><span>       <span style="color:#66d9ef">if</span>(dst[nxt] <span style="color:#f92672">&gt;</span> d <span style="color:#f92672">+</span> t) {
+</span></span><span style="display:flex;"><span>   <span style="color:#a2f;font-weight:bold">for</span>(pll <span style="color:#a0a000">nb</span> : gph[u]) {
+</span></span><span style="display:flex;"><span>              <span style="color:#0b0;font-weight:bold">int</span> nxt <span style="color:#666">=</span> nb.first, t <span style="color:#666">=</span> nb.second;
+</span></span><span style="display:flex;"><span>       <span style="color:#a2f;font-weight:bold">if</span>(dst[nxt] <span style="color:#666">&gt;</span> d <span style="color:#666">+</span> t) {
 </span></span><span style="display:flex;"><span>           
-</span></span><span style="display:flex;"><span>           dst[nxt] <span style="color:#f92672">=</span> d <span style="color:#f92672">+</span> t;
-</span></span><span style="display:flex;"><span>           ways[nxt] <span style="color:#f92672">=</span> ways[u];
-</span></span><span style="display:flex;"><span>           pq.push({d <span style="color:#f92672">+</span> t, nxt});
-</span></span><span style="display:flex;"><span>       } <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (dst[nxt] <span style="color:#f92672">==</span> d <span style="color:#f92672">+</span> t) {
-</span></span><span style="display:flex;"><span>           ways[nxt] <span style="color:#f92672">=</span> (ways[nxt] <span style="color:#f92672">+</span> ways[u]) <span style="color:#f92672">%</span> <span style="color:#ae81ff">1000000007</span>;
+</span></span><span style="display:flex;"><span>           dst[nxt] <span style="color:#666">=</span> d <span style="color:#666">+</span> t;
+</span></span><span style="display:flex;"><span>           ways[nxt] <span style="color:#666">=</span> ways[u];
+</span></span><span style="display:flex;"><span>           pq.push({d <span style="color:#666">+</span> t, nxt});
+</span></span><span style="display:flex;"><span>       } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> (dst[nxt] <span style="color:#666">==</span> d <span style="color:#666">+</span> t) {
+</span></span><span style="display:flex;"><span>           ways[nxt] <span style="color:#666">=</span> (ways[nxt] <span style="color:#666">+</span> ways[u]) <span style="color:#666">%</span> <span style="color:#666">1000000007</span>;
 </span></span><span style="display:flex;"><span>       }
 </span></span><span style="display:flex;"><span>       
 </span></span><span style="display:flex;"><span>   }
 </span></span><span style="display:flex;"><span>            
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ways[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ways[n <span style="color:#666">-</span> <span style="color:#666">1</span>];
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode494s1hbhb">
+<h2 id="hahahugoshortcode499s1hbhb">
   
 
   
@@ -326,44 +326,44 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">#define ll long long
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#define pll pair&lt;ll, ll&gt;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#080">#define ll long long
+</span></span></span><span style="display:flex;"><span><span style="color:#080">#define pll pair&lt;ll, ll&gt;
 </span></span></span></code></pre></div><p>Here, we define <code>ll</code> as an alias for <code>long long</code> to handle large integer values and <code>pll</code> as a pair of long long integers for ease of use in the priority queue.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> countPaths(<span style="color:#66d9ef">int</span> n, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> rds) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> countPaths(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> rds) {
 </span></span></code></pre></div><p>The main class <code>Solution</code> contains the method <code>countPaths</code>, which takes the number of nodes <code>n</code> and a vector of roads <code>rds</code> as parameters.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>pll<span style="color:#f92672">&gt;&gt;</span> gph(n);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>e : rds) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> u <span style="color:#f92672">=</span> e[<span style="color:#ae81ff">0</span>], v <span style="color:#f92672">=</span> e[<span style="color:#ae81ff">1</span>], time <span style="color:#f92672">=</span> e[<span style="color:#ae81ff">2</span>];
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>pll<span style="color:#666">&gt;&gt;</span> gph(n);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">e</span> : rds) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> u <span style="color:#666">=</span> e[<span style="color:#666">0</span>], v <span style="color:#666">=</span> e[<span style="color:#666">1</span>], time <span style="color:#666">=</span> e[<span style="color:#666">2</span>];
 </span></span><span style="display:flex;"><span>            gph[u].push_back({v, time});
 </span></span><span style="display:flex;"><span>            gph[v].push_back({u, time});
 </span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></div><p>We initialize an adjacency list <code>gph</code> of size <code>n</code> and populate it with edges from the <code>rds</code> vector. Each edge connects two nodes and has a travel time.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>ll<span style="color:#f92672">&gt;</span> ways(n, <span style="color:#ae81ff">0</span>), dst(n, LLONG_MAX);
-</span></span><span style="display:flex;"><span>        ways[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>        dst[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>ll<span style="color:#666">&gt;</span> ways(n, <span style="color:#666">0</span>), dst(n, LLONG_MAX);
+</span></span><span style="display:flex;"><span>        ways[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        dst[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div><p>Two vectors are initialized:</p>
 <ul>
 <li><code>ways</code> to count the number of paths to each node, initialized to zero, except for the starting node which is set to 1.</li>
 <li><code>dst</code> to keep track of the shortest distance to each node, initialized to <code>LLONG_MAX</code> for all nodes except the starting node, which is set to 0.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        priority_queue<span style="color:#f92672">&lt;</span>pll, vector<span style="color:#f92672">&lt;</span>pll<span style="color:#f92672">&gt;</span>, greater<span style="color:#f92672">&lt;&gt;&gt;</span> pq;
-</span></span><span style="display:flex;"><span>        pq.push({<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>});
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        priority_queue<span style="color:#666">&lt;</span>pll, vector<span style="color:#666">&lt;</span>pll<span style="color:#666">&gt;</span>, greater<span style="color:#666">&lt;&gt;&gt;</span> pq;
+</span></span><span style="display:flex;"><span>        pq.push({<span style="color:#666">0</span>, <span style="color:#666">0</span>});
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div><p>A priority queue <code>pq</code> is initialized to facilitate Dijkstra’s algorithm. The starting node (0) with a distance of 0 is pushed onto the queue.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>pq.empty()) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">auto</span> [d, u] <span style="color:#f92672">=</span> pq.top();
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> [d, u] <span style="color:#666">=</span> pq.top();
 </span></span><span style="display:flex;"><span>            pq.pop();
 </span></span></code></pre></div><p>The main loop continues as long as there are nodes in the priority queue. The node with the smallest distance is retrieved and removed from the queue.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(pll nb : gph[u]) {
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> nxt <span style="color:#f92672">=</span> nb.first, t <span style="color:#f92672">=</span> nb.second;
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(dst[nxt] <span style="color:#f92672">&gt;</span> d <span style="color:#f92672">+</span> t) {
-</span></span><span style="display:flex;"><span>                    dst[nxt] <span style="color:#f92672">=</span> d <span style="color:#f92672">+</span> t;
-</span></span><span style="display:flex;"><span>                    ways[nxt] <span style="color:#f92672">=</span> ways[u];
-</span></span><span style="display:flex;"><span>                    pq.push({d <span style="color:#f92672">+</span> t, nxt});
-</span></span><span style="display:flex;"><span>                } <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (dst[nxt] <span style="color:#f92672">==</span> d <span style="color:#f92672">+</span> t) {
-</span></span><span style="display:flex;"><span>                    ways[nxt] <span style="color:#f92672">=</span> (ways[nxt] <span style="color:#f92672">+</span> ways[u]) <span style="color:#f92672">%</span> <span style="color:#ae81ff">1000000007</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(pll <span style="color:#a0a000">nb</span> : gph[u]) {
+</span></span><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> nxt <span style="color:#666">=</span> nb.first, t <span style="color:#666">=</span> nb.second;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(dst[nxt] <span style="color:#666">&gt;</span> d <span style="color:#666">+</span> t) {
+</span></span><span style="display:flex;"><span>                    dst[nxt] <span style="color:#666">=</span> d <span style="color:#666">+</span> t;
+</span></span><span style="display:flex;"><span>                    ways[nxt] <span style="color:#666">=</span> ways[u];
+</span></span><span style="display:flex;"><span>                    pq.push({d <span style="color:#666">+</span> t, nxt});
+</span></span><span style="display:flex;"><span>                } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> (dst[nxt] <span style="color:#666">==</span> d <span style="color:#666">+</span> t) {
+</span></span><span style="display:flex;"><span>                    ways[nxt] <span style="color:#666">=</span> (ways[nxt] <span style="color:#666">+</span> ways[u]) <span style="color:#666">%</span> <span style="color:#666">1000000007</span>;
 </span></span><span style="display:flex;"><span>                }
 </span></span><span style="display:flex;"><span>            }
 </span></span></code></pre></div><p>For each neighbor <code>nb</code> of the current node <code>u</code>, we check if a shorter path to <code>nxt</code> (the neighbor) can be established. If so:</p>
@@ -373,7 +373,7 @@
 <li>Push the new distance and the neighbor onto the priority queue.
 If the shortest distance to <code>nxt</code> is equal to the newly computed distance, it means we&rsquo;ve found another way to reach <code>nxt</code>, and we add the number of ways to reach <code>u</code> to <code>ways[nxt]</code>.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ways[n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ways[n <span style="color:#666">-</span> <span style="color:#666">1</span>];
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><p>Finally, the method returns the number of distinct paths to reach the destination node (n-1).</p>
@@ -408,11 +408,11 @@ If the shortest distance to <code>nxt</code> is equal to the newly computed dist
   </a>
 </h3>
 <p>Here’s an example of how to use the <code>countPaths</code> function:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Solution sol;
-</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> roads <span style="color:#f92672">=</span> {{<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>}, {<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">5</span>}, {<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">1</span>}};
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>; <span style="color:#75715e">// Number of nodes
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">int</span> result <span style="color:#f92672">=</span> sol.countPaths(n, roads);
-</span></span><span style="display:flex;"><span>cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;Number of distinct paths from node 0 to node &#34;</span> <span style="color:#f92672">&lt;&lt;</span> n<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;: &#34;</span> <span style="color:#f92672">&lt;&lt;</span> result <span style="color:#f92672">&lt;&lt;</span> endl; <span style="color:#75715e">// Example output
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Solution sol;
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> roads <span style="color:#666">=</span> {{<span style="color:#666">0</span>, <span style="color:#666">1</span>, <span style="color:#666">2</span>}, {<span style="color:#666">0</span>, <span style="color:#666">2</span>, <span style="color:#666">5</span>}, {<span style="color:#666">1</span>, <span style="color:#666">2</span>, <span style="color:#666">1</span>}};
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> <span style="color:#666">3</span>; <span style="color:#080;font-style:italic">// Number of nodes
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#0b0;font-weight:bold">int</span> result <span style="color:#666">=</span> sol.countPaths(n, roads);
+</span></span><span style="display:flex;"><span>cout <span style="color:#666">&lt;&lt;</span> <span style="color:#b44">&#34;Number of distinct paths from node 0 to node &#34;</span> <span style="color:#666">&lt;&lt;</span> n<span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> <span style="color:#b44">&#34;: &#34;</span> <span style="color:#666">&lt;&lt;</span> result <span style="color:#666">&lt;&lt;</span> endl; <span style="color:#080;font-style:italic">// Example output
 </span></span></span></code></pre></div><p>This example initializes a graph with roads and computes the number of distinct paths from node 0 to node n-1, providing a practical demonstration of the algorithm&rsquo;s functionality.</p>
 <h3 id="potential-improvements-and-variations">
   Potential Improvements and Variations
@@ -437,7 +437,7 @@ If the shortest distance to <code>nxt</code> is equal to the newly computed dist
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode494s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode499s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

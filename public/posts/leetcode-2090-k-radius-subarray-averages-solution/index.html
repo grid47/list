@@ -214,27 +214,27 @@
         <p><a href="https://leetcode.com/problems/k-radius-subarray-averages/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> getAverages(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> k) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span><span style="color:#f92672">&gt;</span> psum(n, <span style="color:#ae81ff">0</span>);
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> avg(n, <span style="color:#ae81ff">0</span>);
-</span></span><span style="display:flex;"><span>        psum[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>];
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>            psum[i] <span style="color:#f92672">=</span> psum[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> nums[i];
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> getAverages(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> psum(n, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> avg(n, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        psum[<span style="color:#666">0</span>] <span style="color:#666">=</span> nums[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>            psum[i] <span style="color:#666">=</span> psum[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+</span> nums[i];
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">-</span> k <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> i <span style="color:#f92672">+</span> k <span style="color:#f92672">&gt;=</span> n) {
-</span></span><span style="display:flex;"><span>                avg[i] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>                avg[i] <span style="color:#f92672">=</span> (psum[i <span style="color:#f92672">+</span> k] <span style="color:#f92672">-</span> ((i <span style="color:#f92672">-</span> k) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span> psum[i <span style="color:#f92672">-</span> k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>])) <span style="color:#f92672">/</span> (<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> k <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">-</span> k <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> i <span style="color:#666">+</span> k <span style="color:#666">&gt;=</span> n) {
+</span></span><span style="display:flex;"><span>                avg[i] <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                avg[i] <span style="color:#666">=</span> (psum[i <span style="color:#666">+</span> k] <span style="color:#666">-</span> ((i <span style="color:#666">-</span> k) <span style="color:#666">==</span> <span style="color:#666">0</span><span style="color:#666">?</span> <span style="color:#666">0</span><span style="color:#666">:</span> psum[i <span style="color:#666">-</span> k <span style="color:#666">-</span> <span style="color:#666">1</span>])) <span style="color:#666">/</span> (<span style="color:#666">2</span> <span style="color:#666">*</span> k <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>            }
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> avg;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> avg;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode568s1hbhb">
+<h2 id="hahahugoshortcode567s1hbhb">
   
 
   
@@ -283,25 +283,25 @@
 <ol>
 <li>
 <p><strong>Prefix Sum Calculation</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>psum[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> nums[<span style="color:#ae81ff">0</span>];
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>    psum[i] <span style="color:#f92672">=</span> psum[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> nums[i];
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>psum[<span style="color:#666">0</span>] <span style="color:#666">=</span> nums[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    psum[i] <span style="color:#666">=</span> psum[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+</span> nums[i];
 </span></span></code></pre></div><p>Here, we initialize the first element of the prefix sum array and iteratively fill in the rest by adding the current element to the previous sum.</p>
 </li>
 <li>
 <p><strong>Average Calculation</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">-</span> k <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> i <span style="color:#f92672">+</span> k <span style="color:#f92672">&gt;=</span> n) {
-</span></span><span style="display:flex;"><span>        avg[i] <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>        avg[i] <span style="color:#f92672">=</span> (psum[i <span style="color:#f92672">+</span> k] <span style="color:#f92672">-</span> ((i <span style="color:#f92672">-</span> k) <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">:</span> psum[i <span style="color:#f92672">-</span> k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>])) <span style="color:#f92672">/</span> (<span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> k <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">-</span> k <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> i <span style="color:#666">+</span> k <span style="color:#666">&gt;=</span> n) {
+</span></span><span style="display:flex;"><span>        avg[i] <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>        avg[i] <span style="color:#666">=</span> (psum[i <span style="color:#666">+</span> k] <span style="color:#666">-</span> ((i <span style="color:#666">-</span> k) <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">?</span> <span style="color:#666">0</span> <span style="color:#666">:</span> psum[i <span style="color:#666">-</span> k <span style="color:#666">-</span> <span style="color:#666">1</span>])) <span style="color:#666">/</span> (<span style="color:#666">2</span> <span style="color:#666">*</span> k <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>In this loop, we assess whether we can form a complete window around the index <code>i</code>. If not, we assign <code>-1</code>. If we can, we calculate the average by leveraging the prefix sum array for quick access to the necessary sums.</p>
 </li>
 <li>
 <p><strong>Return Statement</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> avg;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> avg;
 </span></span></code></pre></div><p>Finally, the computed averages are returned as a vector.</p>
 </li>
 </ol>
@@ -325,7 +325,7 @@
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode568s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode567s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

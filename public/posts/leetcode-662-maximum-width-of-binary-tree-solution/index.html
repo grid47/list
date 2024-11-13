@@ -224,41 +224,41 @@
         <p><a href="https://leetcode.com/problems/maximum-width-of-binary-tree/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">/**
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Definition for a binary tree node.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * struct TreeNode {
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     int val;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode *left;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode *right;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * };
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> widthOfBinaryTree(TreeNode<span style="color:#f92672">*</span> root) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(root <span style="color:#f92672">==</span> NULL) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        queue<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> q;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> width <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        q.push({root, <span style="color:#ae81ff">0</span>});
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> f <span style="color:#f92672">=</span> q.front().second;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> b <span style="color:#f92672">=</span> q.back().second;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> q.size();
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> cnt; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>                TreeNode<span style="color:#f92672">*</span> elem <span style="color:#f92672">=</span> q.front().first;
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> idx <span style="color:#f92672">=</span> q.front().second <span style="color:#f92672">-</span> b;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Definition for a binary tree node.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * struct TreeNode {
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     int val;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode *left;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode *right;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * };
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> widthOfBinaryTree(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> q;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> width <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        q.push({root, <span style="color:#666">0</span>});
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> f <span style="color:#666">=</span> q.front().second;
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> b <span style="color:#666">=</span> q.back().second;
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> q.size();
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> cnt; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>                TreeNode<span style="color:#666">*</span> elem <span style="color:#666">=</span> q.front().first;
+</span></span><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> idx <span style="color:#666">=</span> q.front().second <span style="color:#666">-</span> b;
 </span></span><span style="display:flex;"><span>                q.pop();
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(elem<span style="color:#f92672">-&gt;</span>left  <span style="color:#f92672">!=</span> NULL) q.push({elem<span style="color:#f92672">-&gt;</span>left,  <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>});
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(elem<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">!=</span> NULL) q.push({elem<span style="color:#f92672">-&gt;</span>right, <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>});                
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(elem<span style="color:#666">-&gt;</span>left  <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) q.push({elem<span style="color:#666">-&gt;</span>left,  <span style="color:#666">2</span> <span style="color:#666">*</span> idx <span style="color:#666">+</span> <span style="color:#666">1</span>});
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(elem<span style="color:#666">-&gt;</span>right <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) q.push({elem<span style="color:#666">-&gt;</span>right, <span style="color:#666">2</span> <span style="color:#666">*</span> idx <span style="color:#666">+</span> <span style="color:#666">2</span>});                
 </span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            width <span style="color:#f92672">=</span> max(width, b <span style="color:#f92672">-</span> f <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>            width <span style="color:#666">=</span> max(width, b <span style="color:#666">-</span> f <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> width;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> width;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1268s1hbhb">
+<h2 id="hahahugoshortcode1255s1hbhb">
   
 
   
@@ -304,7 +304,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(root <span style="color:#f92672">==</span> NULL) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div><ul>
 <li>Before starting the main logic, we handle the edge case where the root is <code>NULL</code>. In this case, the width is obviously <code>0</code>, and we return <code>0</code>.</li>
 </ul>
@@ -315,9 +315,9 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>queue<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> q;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> width <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>q.push({root, <span style="color:#ae81ff">0</span>});
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> q;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> width <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>q.push({root, <span style="color:#666">0</span>});
 </span></span></code></pre></div><ul>
 <li>We declare a queue of pairs: each pair consists of a <code>TreeNode*</code> (the node) and an integer (its index at that level).</li>
 <li>We initialize the queue by pushing the root node with an index of <code>0</code>. This index will represent the position of the root in the tree.</li>
@@ -329,18 +329,18 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> f <span style="color:#f92672">=</span> q.front().second;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> b <span style="color:#f92672">=</span> q.back().second;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> q.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> cnt; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>        TreeNode<span style="color:#f92672">*</span> elem <span style="color:#f92672">=</span> q.front().first;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> idx <span style="color:#f92672">=</span> q.front().second <span style="color:#f92672">-</span> b;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> f <span style="color:#666">=</span> q.front().second;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> b <span style="color:#666">=</span> q.back().second;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> q.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> cnt; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        TreeNode<span style="color:#666">*</span> elem <span style="color:#666">=</span> q.front().first;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> idx <span style="color:#666">=</span> q.front().second <span style="color:#666">-</span> b;
 </span></span><span style="display:flex;"><span>        q.pop();
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(elem<span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">!=</span> NULL) q.push({elem<span style="color:#f92672">-&gt;</span>left, <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>});
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(elem<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">!=</span> NULL) q.push({elem<span style="color:#f92672">-&gt;</span>right, <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span>});
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(elem<span style="color:#666">-&gt;</span>left <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) q.push({elem<span style="color:#666">-&gt;</span>left, <span style="color:#666">2</span> <span style="color:#666">*</span> idx <span style="color:#666">+</span> <span style="color:#666">1</span>});
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(elem<span style="color:#666">-&gt;</span>right <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) q.push({elem<span style="color:#666">-&gt;</span>right, <span style="color:#666">2</span> <span style="color:#666">*</span> idx <span style="color:#666">+</span> <span style="color:#666">2</span>});
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    width <span style="color:#f92672">=</span> max(width, b <span style="color:#f92672">-</span> f <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    width <span style="color:#666">=</span> max(width, b <span style="color:#666">-</span> f <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ul>
 <li>
@@ -372,7 +372,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> width;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> width;
 </span></span></code></pre></div><ul>
 <li>Once the level-order traversal is complete, we return the maximum width observed during the process.</li>
 </ul>
@@ -415,7 +415,7 @@
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1268s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1255s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -234,32 +234,32 @@
         <p><a href="https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">/**
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Definition for a binary tree node.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * struct TreeNode {
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     int val;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode *left;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode *right;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * };
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    TreeNode<span style="color:#f92672">*</span> bstFromPreorder(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> pre, <span style="color:#66d9ef">int</span> bound <span style="color:#f92672">=</span> INT_MAX) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">==</span> pre.size() <span style="color:#f92672">||</span> pre[i] <span style="color:#f92672">&gt;</span> bound) <span style="color:#66d9ef">return</span> NULL;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Definition for a binary tree node.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * struct TreeNode {
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     int val;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode *left;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode *right;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * };
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    TreeNode<span style="color:#666">*</span> bstFromPreorder(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> pre, <span style="color:#0b0;font-weight:bold">int</span> bound <span style="color:#666">=</span> INT_MAX) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> pre.size() <span style="color:#666">||</span> pre[i] <span style="color:#666">&gt;</span> bound) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">NULL</span>;
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        TreeNode<span style="color:#f92672">*</span> root <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TreeNode(pre[i<span style="color:#f92672">++</span>]);
-</span></span><span style="display:flex;"><span>        root<span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">=</span> bstFromPreorder(pre, root<span style="color:#f92672">-&gt;</span>val);
-</span></span><span style="display:flex;"><span>        root<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">=</span> bstFromPreorder(pre, bound);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> root;
+</span></span><span style="display:flex;"><span>        TreeNode<span style="color:#666">*</span> root <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TreeNode(pre[i<span style="color:#666">++</span>]);
+</span></span><span style="display:flex;"><span>        root<span style="color:#666">-&gt;</span>left <span style="color:#666">=</span> bstFromPreorder(pre, root<span style="color:#666">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>        root<span style="color:#666">-&gt;</span>right <span style="color:#666">=</span> bstFromPreorder(pre, bound);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> root;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode30s1hbhb">
+<h2 id="hahahugoshortcode29s1hbhb">
   
 
   
@@ -373,7 +373,7 @@
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode30s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode29s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

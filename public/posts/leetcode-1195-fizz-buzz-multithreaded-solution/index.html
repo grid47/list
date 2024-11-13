@@ -209,35 +209,35 @@
         <p><a href="https://leetcode.com/problems/fizz-buzz-multithreaded/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FizzBuzz</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n, i;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">FizzBuzz</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">private</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n, i;
 </span></span><span style="display:flex;"><span>    mutex f, b, fz, num;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    FizzBuzz(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    FizzBuzz(<span style="color:#0b0;font-weight:bold">int</span> n) {
 </span></span><span style="display:flex;"><span>        f.lock();
 </span></span><span style="display:flex;"><span>        b.lock();
 </span></span><span style="display:flex;"><span>        fz.lock();
-</span></span><span style="display:flex;"><span>        i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>n <span style="color:#f92672">=</span> n;
+</span></span><span style="display:flex;"><span>        i <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>n <span style="color:#666">=</span> n;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// printFizz() outputs &#34;fizz&#34;.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fizz</span>(function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>()<span style="color:#f92672">&gt;</span> printFizz) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;=</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// printFizz() outputs &#34;fizz&#34;.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">fizz</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> printFizz) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> n) {
 </span></span><span style="display:flex;"><span>            f.lock();
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&lt;=</span> n)            
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;=</span> n)            
 </span></span><span style="display:flex;"><span>            printFizz();
-</span></span><span style="display:flex;"><span>            i<span style="color:#f92672">++</span>;            
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span><span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>  <span style="color:#f92672">&amp;&amp;</span> i <span style="color:#f92672">%</span> <span style="color:#ae81ff">5</span><span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> ) {
+</span></span><span style="display:flex;"><span>            i<span style="color:#666">++</span>;            
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">%</span> <span style="color:#666">3</span><span style="color:#666">==</span> <span style="color:#666">0</span>  <span style="color:#666">&amp;&amp;</span> i <span style="color:#666">%</span> <span style="color:#666">5</span><span style="color:#666">==</span> <span style="color:#666">0</span> ) {
 </span></span><span style="display:flex;"><span>                fz.unlock();
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">%</span> <span style="color:#666">3</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) {
 </span></span><span style="display:flex;"><span>                f.unlock();
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">%</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">%</span> <span style="color:#666">5</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) {
 </span></span><span style="display:flex;"><span>                b.unlock();
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&lt;=</span> n) {
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;=</span> n) {
 </span></span><span style="display:flex;"><span>                num.unlock();
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
 </span></span><span style="display:flex;"><span>                fz.unlock();
 </span></span><span style="display:flex;"><span>                f.unlock();
 </span></span><span style="display:flex;"><span>                b.unlock();
@@ -247,22 +247,22 @@
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// printBuzz() outputs &#34;buzz&#34;.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">buzz</span>(function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>()<span style="color:#f92672">&gt;</span> printBuzz) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;=</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// printBuzz() outputs &#34;buzz&#34;.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">buzz</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> printBuzz) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> n) {
 </span></span><span style="display:flex;"><span>            b.lock();
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&lt;=</span> n)            
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;=</span> n)            
 </span></span><span style="display:flex;"><span>            printBuzz();
-</span></span><span style="display:flex;"><span>            i<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span><span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>  <span style="color:#f92672">&amp;&amp;</span> i <span style="color:#f92672">%</span> <span style="color:#ae81ff">5</span><span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> ) {
+</span></span><span style="display:flex;"><span>            i<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">%</span> <span style="color:#666">3</span><span style="color:#666">==</span> <span style="color:#666">0</span>  <span style="color:#666">&amp;&amp;</span> i <span style="color:#666">%</span> <span style="color:#666">5</span><span style="color:#666">==</span> <span style="color:#666">0</span> ) {
 </span></span><span style="display:flex;"><span>                fz.unlock();
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">%</span> <span style="color:#666">3</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) {
 </span></span><span style="display:flex;"><span>                f.unlock();
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">%</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">%</span> <span style="color:#666">5</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) {
 </span></span><span style="display:flex;"><span>                b.unlock();
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&lt;=</span> n) {
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;=</span> n) {
 </span></span><span style="display:flex;"><span>                num.unlock();
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
 </span></span><span style="display:flex;"><span>                fz.unlock();
 </span></span><span style="display:flex;"><span>                f.unlock();
 </span></span><span style="display:flex;"><span>                b.unlock();
@@ -271,22 +271,22 @@
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// printFizzBuzz() outputs &#34;fizzbuzz&#34;.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fizzbuzz</span>(function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>()<span style="color:#f92672">&gt;</span> printFizzBuzz) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;=</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// printFizzBuzz() outputs &#34;fizzbuzz&#34;.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>	<span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">fizzbuzz</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> printFizzBuzz) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> n) {
 </span></span><span style="display:flex;"><span>            fz.lock();
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&lt;=</span> n)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;=</span> n)
 </span></span><span style="display:flex;"><span>            printFizzBuzz();
-</span></span><span style="display:flex;"><span>            i<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> i <span style="color:#f92672">%</span> <span style="color:#ae81ff">5</span><span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> ) {
+</span></span><span style="display:flex;"><span>            i<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">%</span> <span style="color:#666">3</span> <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> i <span style="color:#666">%</span> <span style="color:#666">5</span><span style="color:#666">==</span> <span style="color:#666">0</span> ) {
 </span></span><span style="display:flex;"><span>                fz.unlock();
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">%</span> <span style="color:#666">3</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) {
 </span></span><span style="display:flex;"><span>                f.unlock();
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">%</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">%</span> <span style="color:#666">5</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) {
 </span></span><span style="display:flex;"><span>                b.unlock();
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&lt;=</span> n) {
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;=</span> n) {
 </span></span><span style="display:flex;"><span>                num.unlock();
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
 </span></span><span style="display:flex;"><span>                fz.unlock();
 </span></span><span style="display:flex;"><span>                f.unlock();
 </span></span><span style="display:flex;"><span>                b.unlock();
@@ -295,22 +295,22 @@
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// printNumber(x) outputs &#34;x&#34;, where x is an integer.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">number</span>(function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>(<span style="color:#66d9ef">int</span>)<span style="color:#f92672">&gt;</span> printNumber) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;=</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// printNumber(x) outputs &#34;x&#34;, where x is an integer.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">number</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>(<span style="color:#0b0;font-weight:bold">int</span>)<span style="color:#666">&gt;</span> printNumber) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> n) {
 </span></span><span style="display:flex;"><span>            num.lock();
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&lt;=</span> n)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;=</span> n)
 </span></span><span style="display:flex;"><span>            printNumber(i);
-</span></span><span style="display:flex;"><span>            i<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> i <span style="color:#f92672">%</span> <span style="color:#ae81ff">5</span><span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> ) {
+</span></span><span style="display:flex;"><span>            i<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">%</span> <span style="color:#666">3</span> <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> i <span style="color:#666">%</span> <span style="color:#666">5</span><span style="color:#666">==</span> <span style="color:#666">0</span> ) {
 </span></span><span style="display:flex;"><span>                fz.unlock();
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">%</span> <span style="color:#666">3</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) {
 </span></span><span style="display:flex;"><span>                f.unlock();
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">%</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">%</span> <span style="color:#666">5</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) {
 </span></span><span style="display:flex;"><span>                b.unlock();
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&lt;=</span> n) {
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;=</span> n) {
 </span></span><span style="display:flex;"><span>                num.unlock();
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
 </span></span><span style="display:flex;"><span>                fz.unlock();
 </span></span><span style="display:flex;"><span>                f.unlock();
 </span></span><span style="display:flex;"><span>                b.unlock();
@@ -319,7 +319,7 @@
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode111s1hbhb">
+<h2 id="hahahugoshortcode114s1hbhb">
   
 
   
@@ -352,42 +352,42 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">FizzBuzz</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n, i;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">FizzBuzz</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">private</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n, i;
 </span></span><span style="display:flex;"><span>    mutex f, b, fz, num;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    FizzBuzz(<span style="color:#66d9ef">int</span> n) {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    FizzBuzz(<span style="color:#0b0;font-weight:bold">int</span> n) {
 </span></span><span style="display:flex;"><span>        f.lock();
 </span></span><span style="display:flex;"><span>        b.lock();
 </span></span><span style="display:flex;"><span>        fz.lock();
-</span></span><span style="display:flex;"><span>        i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>n <span style="color:#f92672">=</span> n;
+</span></span><span style="display:flex;"><span>        i <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>n <span style="color:#666">=</span> n;
 </span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div><ul>
 <li><strong>Lines 1-8</strong>: The <code>FizzBuzz</code> class is defined with private member variables <code>n</code> (the upper limit), <code>i</code> (the current number), and four mutexes (<code>f</code>, <code>b</code>, <code>fz</code>, and <code>num</code>). The constructor initializes the mutexes and sets <code>i</code> to <code>1</code>.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fizz</span>(function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>()<span style="color:#f92672">&gt;</span> printFizz) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;=</span> n) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">fizz</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> printFizz) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> n) {
 </span></span><span style="display:flex;"><span>            f.lock();
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&lt;=</span> n)            
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;=</span> n)            
 </span></span><span style="display:flex;"><span>                printFizz();
-</span></span><span style="display:flex;"><span>            i<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Unlock logic follows...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>            i<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">// Unlock logic follows...
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div><ul>
 <li><strong>Lines 10-22</strong>: The <code>fizz</code> method is defined. It loops while <code>i</code> is less than or equal to <code>n</code>. It locks the <code>f</code> mutex to ensure that only one thread can execute this section at a time. If the current number <code>i</code> is a valid output (not exceeding <code>n</code>), it calls <code>printFizz()</code> to print <code>&quot;fizz&quot;</code>, then increments <code>i</code>.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span><span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">&amp;&amp;</span> i <span style="color:#f92672">%</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span> ) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">%</span> <span style="color:#666">3</span><span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> i <span style="color:#666">%</span> <span style="color:#666">5</span> <span style="color:#666">==</span> <span style="color:#666">0</span> ) {
 </span></span><span style="display:flex;"><span>                fz.unlock();
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(i <span style="color:#f92672">%</span> <span style="color:#ae81ff">3</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(i <span style="color:#666">%</span> <span style="color:#666">3</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) {
 </span></span><span style="display:flex;"><span>                f.unlock();
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(i <span style="color:#f92672">%</span> <span style="color:#ae81ff">5</span> <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) {
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(i <span style="color:#666">%</span> <span style="color:#666">5</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) {
 </span></span><span style="display:flex;"><span>                b.unlock();
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(i <span style="color:#f92672">&lt;=</span> n) {
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(i <span style="color:#666">&lt;=</span> n) {
 </span></span><span style="display:flex;"><span>                num.unlock();
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
 </span></span><span style="display:flex;"><span>                fz.unlock();
 </span></span><span style="display:flex;"><span>                f.unlock();
 </span></span><span style="display:flex;"><span>                b.unlock();
@@ -406,38 +406,38 @@
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">buzz</span>(function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>()<span style="color:#f92672">&gt;</span> printBuzz) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;=</span> n) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">buzz</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> printBuzz) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> n) {
 </span></span><span style="display:flex;"><span>            b.lock();
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&lt;=</span> n)            
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;=</span> n)            
 </span></span><span style="display:flex;"><span>                printBuzz();
-</span></span><span style="display:flex;"><span>            i<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Unlock logic follows...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>            i<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">// Unlock logic follows...
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div><ul>
 <li><strong>Lines 37-49</strong>: The <code>buzz</code> method works similarly to <code>fizz</code>. It locks the <code>b</code> mutex to print <code>&quot;buzz&quot;</code> for numbers divisible by <code>5</code>, then checks the conditions to unlock the appropriate mutexes.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">fizzbuzz</span>(function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>()<span style="color:#f92672">&gt;</span> printFizzBuzz) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;=</span> n) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">fizzbuzz</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>()<span style="color:#666">&gt;</span> printFizzBuzz) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> n) {
 </span></span><span style="display:flex;"><span>            fz.lock();
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&lt;=</span> n)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;=</span> n)
 </span></span><span style="display:flex;"><span>                printFizzBuzz();
-</span></span><span style="display:flex;"><span>            i<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Unlock logic follows...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>            i<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">// Unlock logic follows...
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div><ul>
 <li><strong>Lines 51-63</strong>: The <code>fizzbuzz</code> method locks the <code>fz</code> mutex and prints <code>&quot;fizzbuzz&quot;</code> for numbers divisible by both <code>3</code> and <code>5</code>, similarly unlocking the necessary mutexes afterward.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">number</span>(function<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">void</span>(<span style="color:#66d9ef">int</span>)<span style="color:#f92672">&gt;</span> printNumber) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(i <span style="color:#f92672">&lt;=</span> n) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">number</span>(function<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">void</span>(<span style="color:#0b0;font-weight:bold">int</span>)<span style="color:#666">&gt;</span> printNumber) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;=</span> n) {
 </span></span><span style="display:flex;"><span>            num.lock();
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">&lt;=</span> n)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;=</span> n)
 </span></span><span style="display:flex;"><span>                printNumber(i);
-</span></span><span style="display:flex;"><span>            i<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// Unlock logic follows...
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+</span></span><span style="display:flex;"><span>            i<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">// Unlock logic follows...
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div><ul>
 <li><strong>Lines 65-77</strong>: The <code>number</code> method locks the <code>num</code> mutex and prints the current number <code>i</code>, following the same unlocking logic.</li>
@@ -475,7 +475,7 @@
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode111s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode114s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -229,27 +229,27 @@
         <p><a href="https://leetcode.com/problems/find-score-of-an-array-after-marking-all-elements/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> findScore(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> score <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        priority_queue<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>, greater<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;</span> pq;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
-</span></span><span style="display:flex;"><span>        unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> findScore(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> score <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        priority_queue<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span>, greater<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;</span> pq;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>        unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
 </span></span><span style="display:flex;"><span>            pq.push({nums[i], i});
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>pq.empty()) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>pq.empty() <span style="color:#f92672">&amp;&amp;</span> mp.count(pq.top()[<span style="color:#ae81ff">1</span>])) pq.pop();
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>pq.empty()) {
-</span></span><span style="display:flex;"><span>                score <span style="color:#f92672">+=</span> pq.top()[<span style="color:#ae81ff">0</span>];
-</span></span><span style="display:flex;"><span>                mp[pq.top()[<span style="color:#ae81ff">1</span>]] <span style="color:#f92672">=</span> true;
-</span></span><span style="display:flex;"><span>                mp[pq.top()[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> true;
-</span></span><span style="display:flex;"><span>                mp[pq.top()[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> true;                
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty() <span style="color:#666">&amp;&amp;</span> mp.count(pq.top()[<span style="color:#666">1</span>])) pq.pop();
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>                score <span style="color:#666">+=</span> pq.top()[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>                mp[pq.top()[<span style="color:#666">1</span>]] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>                mp[pq.top()[<span style="color:#666">1</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>                mp[pq.top()[<span style="color:#666">1</span>] <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;                
 </span></span><span style="display:flex;"><span>                pq.pop();
 </span></span><span style="display:flex;"><span>            }
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> score;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> score;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
 <h2 id="hahahugoshortcode875s1hbhb">
@@ -288,10 +288,10 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">long</span> <span style="color:#66d9ef">long</span> score <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>priority_queue<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>, greater<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;</span> pq;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
-</span></span><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> score <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>priority_queue<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span>, greater<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;</span> pq;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
 </span></span></code></pre></div><ul>
 <li><strong>score</strong>: This variable will hold the total score as we progress.</li>
 <li><strong>pq</strong>: A priority queue is used to select the smallest unselected number at each step. The queue stores pairs of <code>(value, index)</code> where <code>value</code> is the number from the <code>nums</code> array, and <code>index</code> is its corresponding index.</li>
@@ -304,7 +304,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
 </span></span><span style="display:flex;"><span>    pq.push({nums[i], i});
 </span></span></code></pre></div><ul>
 <li>Here, we iterate over the <code>nums</code> array and push each element along with its index into the priority queue. The priority queue is organized to always pop the smallest value first because we are using <code>greater&lt;vector&lt;int&gt;&gt;</code> to compare elements. The smallest number will always be at the top of the queue.</li>
@@ -316,13 +316,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>pq.empty()) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>pq.empty() <span style="color:#f92672">&amp;&amp;</span> mp.count(pq.top()[<span style="color:#ae81ff">1</span>])) pq.pop();
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>pq.empty()) {
-</span></span><span style="display:flex;"><span>        score <span style="color:#f92672">+=</span> pq.top()[<span style="color:#ae81ff">0</span>];
-</span></span><span style="display:flex;"><span>        mp[pq.top()[<span style="color:#ae81ff">1</span>]] <span style="color:#f92672">=</span> true;
-</span></span><span style="display:flex;"><span>        mp[pq.top()[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> true;
-</span></span><span style="display:flex;"><span>        mp[pq.top()[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> true;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty() <span style="color:#666">&amp;&amp;</span> mp.count(pq.top()[<span style="color:#666">1</span>])) pq.pop();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>        score <span style="color:#666">+=</span> pq.top()[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>        mp[pq.top()[<span style="color:#666">1</span>]] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>        mp[pq.top()[<span style="color:#666">1</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>        mp[pq.top()[<span style="color:#666">1</span>] <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>        pq.pop();
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
@@ -344,7 +344,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> score;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> score;
 </span></span></code></pre></div><ul>
 <li>Once all valid elements have been selected, and the priority queue is empty, the final score is returned as the result.</li>
 </ul>
@@ -363,7 +363,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> nums <span style="color:#f92672">=</span> {<span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3</span>, <span style="color:#ae81ff">2</span>, <span style="color:#ae81ff">4</span>, <span style="color:#ae81ff">5</span>};
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> nums <span style="color:#666">=</span> {<span style="color:#666">1</span>, <span style="color:#666">3</span>, <span style="color:#666">2</span>, <span style="color:#666">4</span>, <span style="color:#666">5</span>};
 </span></span></code></pre></div><ol>
 <li>
 <p><strong>Initialization</strong>:</p>
@@ -427,7 +427,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> <span style="color:#ae81ff">8</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">8</span>;
 </span></span></code></pre></div><h3 id="time-complexity">
   Time Complexity
   <a class="heading-link" href="#time-complexity">

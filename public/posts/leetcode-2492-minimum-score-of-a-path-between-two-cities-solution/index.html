@@ -224,73 +224,73 @@
         <p><a href="https://leetcode.com/problems/minimum-score-of-a-path-between-two-cities/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UF</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> par;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mn;    
-</span></span><span style="display:flex;"><span>    UF(<span style="color:#66d9ef">int</span> n) {
-</span></span><span style="display:flex;"><span>        par.resize(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
-</span></span><span style="display:flex;"><span>        mn.resize(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            par[i] <span style="color:#f92672">=</span> i;
-</span></span><span style="display:flex;"><span>            mn[i] <span style="color:#f92672">=</span> INT_MAX;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">UF</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> par;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mn;    
+</span></span><span style="display:flex;"><span>    UF(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>        par.resize(n <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        mn.resize(n <span style="color:#666">+</span> <span style="color:#666">1</span>);        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            par[i] <span style="color:#666">=</span> i;
+</span></span><span style="display:flex;"><span>            mn[i] <span style="color:#666">=</span> INT_MAX;
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">uni</span>(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y, <span style="color:#66d9ef">int</span> n) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> p <span style="color:#f92672">=</span> find(x);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> q <span style="color:#f92672">=</span> find(y);
-</span></span><span style="display:flex;"><span>        mn[p] <span style="color:#f92672">=</span> min({mn[p], mn[q], n});
-</span></span><span style="display:flex;"><span>        mn[q] <span style="color:#f92672">=</span> mn[p];
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(p <span style="color:#f92672">==</span> q) <span style="color:#66d9ef">return</span> false;
-</span></span><span style="display:flex;"><span>        par[p] <span style="color:#f92672">=</span> q;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">uni</span>(<span style="color:#0b0;font-weight:bold">int</span> x, <span style="color:#0b0;font-weight:bold">int</span> y, <span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> p <span style="color:#666">=</span> find(x);
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> q <span style="color:#666">=</span> find(y);
+</span></span><span style="display:flex;"><span>        mn[p] <span style="color:#666">=</span> min({mn[p], mn[q], n});
+</span></span><span style="display:flex;"><span>        mn[q] <span style="color:#666">=</span> mn[p];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(p <span style="color:#666">==</span> q) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>        par[p] <span style="color:#666">=</span> q;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">find</span>(<span style="color:#66d9ef">int</span> x) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(par[x] <span style="color:#f92672">==</span> x) <span style="color:#66d9ef">return</span> x;
-</span></span><span style="display:flex;"><span>        mn[x] <span style="color:#f92672">=</span> mn[find(par[x])];
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> par[x] <span style="color:#f92672">=</span> find(par[x]);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">find</span>(<span style="color:#0b0;font-weight:bold">int</span> x) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(par[x] <span style="color:#666">==</span> x) <span style="color:#a2f;font-weight:bold">return</span> x;
+</span></span><span style="display:flex;"><span>        mn[x] <span style="color:#666">=</span> mn[find(par[x])];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> par[x] <span style="color:#666">=</span> find(par[x]);
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">mini</span>(<span style="color:#66d9ef">int</span> x) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mn[x];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">mini</span>(<span style="color:#0b0;font-weight:bold">int</span> x) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> mn[x];
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">check</span>(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> find(x) <span style="color:#f92672">==</span> find(y);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">check</span>(<span style="color:#0b0;font-weight:bold">int</span> x, <span style="color:#0b0;font-weight:bold">int</span> y) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> find(x) <span style="color:#666">==</span> find(y);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> minScore(<span style="color:#66d9ef">int</span> n, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> roads) {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> minScore(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> roads) {
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;</span> grid(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;</span> grid(n <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it: roads) {
-</span></span><span style="display:flex;"><span>            grid[it[<span style="color:#ae81ff">0</span>]].push_back({it[<span style="color:#ae81ff">1</span>], it[<span style="color:#ae81ff">2</span>]});
-</span></span><span style="display:flex;"><span>            grid[it[<span style="color:#ae81ff">1</span>]].push_back({it[<span style="color:#ae81ff">0</span>], it[<span style="color:#ae81ff">2</span>]});
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: roads) {
+</span></span><span style="display:flex;"><span>            grid[it[<span style="color:#666">0</span>]].push_back({it[<span style="color:#666">1</span>], it[<span style="color:#666">2</span>]});
+</span></span><span style="display:flex;"><span>            grid[it[<span style="color:#666">1</span>]].push_back({it[<span style="color:#666">0</span>], it[<span style="color:#666">2</span>]});
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> vis(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, false); 
-</span></span><span style="display:flex;"><span>        queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> q;
-</span></span><span style="display:flex;"><span>        q.push(<span style="color:#ae81ff">1</span>);
-</span></span><span style="display:flex;"><span>        vis[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> true;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mn <span style="color:#f92672">=</span> INT_MAX;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> q.size();
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span>(sz<span style="color:#f92672">--</span>) {
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> q.front();
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> vis(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#a2f">false</span>); 
+</span></span><span style="display:flex;"><span>        queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q;
+</span></span><span style="display:flex;"><span>        q.push(<span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        vis[<span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mn <span style="color:#666">=</span> INT_MAX;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> q.front();
 </span></span><span style="display:flex;"><span>                q.pop();
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> x: grid[it]) {
-</span></span><span style="display:flex;"><span>                        mn <span style="color:#f92672">=</span> min(mn, x[<span style="color:#ae81ff">1</span>]);                    
-</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>vis[x[<span style="color:#ae81ff">0</span>]]) {
-</span></span><span style="display:flex;"><span>                        q.push(x[<span style="color:#ae81ff">0</span>]);
-</span></span><span style="display:flex;"><span>                        vis[x[<span style="color:#ae81ff">0</span>]] <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">x</span>: grid[it]) {
+</span></span><span style="display:flex;"><span>                        mn <span style="color:#666">=</span> min(mn, x[<span style="color:#666">1</span>]);                    
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>vis[x[<span style="color:#666">0</span>]]) {
+</span></span><span style="display:flex;"><span>                        q.push(x[<span style="color:#666">0</span>]);
+</span></span><span style="display:flex;"><span>                        vis[x[<span style="color:#666">0</span>]] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>                    }
 </span></span><span style="display:flex;"><span>                }
 </span></span><span style="display:flex;"><span>            }
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mn;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> mn;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
@@ -334,42 +334,42 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UF</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> par;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mn;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">UF</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> par;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mn;
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    UF(<span style="color:#66d9ef">int</span> n) {
-</span></span><span style="display:flex;"><span>        par.resize(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
-</span></span><span style="display:flex;"><span>        mn.resize(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            par[i] <span style="color:#f92672">=</span> i;
-</span></span><span style="display:flex;"><span>            mn[i] <span style="color:#f92672">=</span> INT_MAX;
+</span></span><span style="display:flex;"><span>    UF(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>        par.resize(n <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        mn.resize(n <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            par[i] <span style="color:#666">=</span> i;
+</span></span><span style="display:flex;"><span>            mn[i] <span style="color:#666">=</span> INT_MAX;
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">uni</span>(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y, <span style="color:#66d9ef">int</span> n) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> p <span style="color:#f92672">=</span> find(x);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> q <span style="color:#f92672">=</span> find(y);
-</span></span><span style="display:flex;"><span>        mn[p] <span style="color:#f92672">=</span> min({mn[p], mn[q], n});
-</span></span><span style="display:flex;"><span>        mn[q] <span style="color:#f92672">=</span> mn[p];
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(p <span style="color:#f92672">==</span> q) <span style="color:#66d9ef">return</span> false;
-</span></span><span style="display:flex;"><span>        par[p] <span style="color:#f92672">=</span> q;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">uni</span>(<span style="color:#0b0;font-weight:bold">int</span> x, <span style="color:#0b0;font-weight:bold">int</span> y, <span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> p <span style="color:#666">=</span> find(x);
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> q <span style="color:#666">=</span> find(y);
+</span></span><span style="display:flex;"><span>        mn[p] <span style="color:#666">=</span> min({mn[p], mn[q], n});
+</span></span><span style="display:flex;"><span>        mn[q] <span style="color:#666">=</span> mn[p];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(p <span style="color:#666">==</span> q) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>        par[p] <span style="color:#666">=</span> q;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">find</span>(<span style="color:#66d9ef">int</span> x) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(par[x] <span style="color:#f92672">==</span> x) <span style="color:#66d9ef">return</span> x;
-</span></span><span style="display:flex;"><span>        mn[x] <span style="color:#f92672">=</span> mn[find(par[x])];
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> par[x] <span style="color:#f92672">=</span> find(par[x]);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">find</span>(<span style="color:#0b0;font-weight:bold">int</span> x) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(par[x] <span style="color:#666">==</span> x) <span style="color:#a2f;font-weight:bold">return</span> x;
+</span></span><span style="display:flex;"><span>        mn[x] <span style="color:#666">=</span> mn[find(par[x])];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> par[x] <span style="color:#666">=</span> find(par[x]);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">mini</span>(<span style="color:#66d9ef">int</span> x) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mn[x];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">mini</span>(<span style="color:#0b0;font-weight:bold">int</span> x) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> mn[x];
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">check</span>(<span style="color:#66d9ef">int</span> x, <span style="color:#66d9ef">int</span> y) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> find(x) <span style="color:#f92672">==</span> find(y);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">check</span>(<span style="color:#0b0;font-weight:bold">int</span> x, <span style="color:#0b0;font-weight:bold">int</span> y) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> find(x) <span style="color:#666">==</span> find(y);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><ul>
@@ -388,41 +388,41 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> minScore(<span style="color:#66d9ef">int</span> n, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> roads) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> minScore(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> roads) {
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;</span> grid(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;</span> grid(n <span style="color:#666">+</span> <span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it: roads) {
-</span></span><span style="display:flex;"><span>            grid[it[<span style="color:#ae81ff">0</span>]].push_back({it[<span style="color:#ae81ff">1</span>], it[<span style="color:#ae81ff">2</span>]});
-</span></span><span style="display:flex;"><span>            grid[it[<span style="color:#ae81ff">1</span>]].push_back({it[<span style="color:#ae81ff">0</span>], it[<span style="color:#ae81ff">2</span>]});
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: roads) {
+</span></span><span style="display:flex;"><span>            grid[it[<span style="color:#666">0</span>]].push_back({it[<span style="color:#666">1</span>], it[<span style="color:#666">2</span>]});
+</span></span><span style="display:flex;"><span>            grid[it[<span style="color:#666">1</span>]].push_back({it[<span style="color:#666">0</span>], it[<span style="color:#666">2</span>]});
 </span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></div><ul>
 <li>First, we represent the graph using an adjacency list <code>grid</code>. Each node is connected to other nodes via roads, and each road has a score.</li>
 <li>The input <code>roads</code> consists of pairs of nodes with the score between them. The list is used to fill the adjacency list representation of the graph where each element <code>grid[i]</code> contains a list of pairs <code>[node, score]</code>, representing an edge from node <code>i</code> to another node with the corresponding score.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> vis(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, false); 
-</span></span><span style="display:flex;"><span>        queue<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> q;
-</span></span><span style="display:flex;"><span>        q.push(<span style="color:#ae81ff">1</span>);
-</span></span><span style="display:flex;"><span>        vis[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> true;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mn <span style="color:#f92672">=</span> INT_MAX;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> q.size();
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span>(sz<span style="color:#f92672">--</span>) {
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> q.front();
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> vis(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#a2f">false</span>); 
+</span></span><span style="display:flex;"><span>        queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q;
+</span></span><span style="display:flex;"><span>        q.push(<span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        vis[<span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mn <span style="color:#666">=</span> INT_MAX;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> q.front();
 </span></span><span style="display:flex;"><span>                q.pop();
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> x: grid[it]) {
-</span></span><span style="display:flex;"><span>                        mn <span style="color:#f92672">=</span> min(mn, x[<span style="color:#ae81ff">1</span>]);                    
-</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>vis[x[<span style="color:#ae81ff">0</span>]]) {
-</span></span><span style="display:flex;"><span>                        q.push(x[<span style="color:#ae81ff">0</span>]);
-</span></span><span style="display:flex;"><span>                        vis[x[<span style="color:#ae81ff">0</span>]] <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">x</span>: grid[it]) {
+</span></span><span style="display:flex;"><span>                        mn <span style="color:#666">=</span> min(mn, x[<span style="color:#666">1</span>]);                    
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>vis[x[<span style="color:#666">0</span>]]) {
+</span></span><span style="display:flex;"><span>                        q.push(x[<span style="color:#666">0</span>]);
+</span></span><span style="display:flex;"><span>                        vis[x[<span style="color:#666">0</span>]] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>                    }
 </span></span><span style="display:flex;"><span>                }
 </span></span><span style="display:flex;"><span>            }
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mn;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> mn;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><ul>

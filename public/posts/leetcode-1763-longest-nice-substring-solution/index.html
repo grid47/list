@@ -229,30 +229,30 @@
         <p><a href="https://leetcode.com/problems/longest-nice-substring/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    string longestNiceSubstring(string s, <span style="color:#66d9ef">int</span> start <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">int</span> end <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (end <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>            end <span style="color:#f92672">=</span> s.size();
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> cnt[<span style="color:#ae81ff">26</span>][<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> {}, j <span style="color:#f92672">=</span> start <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> i <span style="color:#f92672">=</span> start; i <span style="color:#f92672">&lt;</span> end; <span style="color:#f92672">++</span>i)
-</span></span><span style="display:flex;"><span>            cnt[tolower(s[i]) <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>][(<span style="color:#66d9ef">bool</span>)islower(s[i])] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    string longestNiceSubstring(string s, <span style="color:#0b0;font-weight:bold">int</span> start <span style="color:#666">=</span> <span style="color:#666">0</span>, <span style="color:#0b0;font-weight:bold">int</span> end <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (end <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span>)
+</span></span><span style="display:flex;"><span>            end <span style="color:#666">=</span> s.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> cnt[<span style="color:#666">26</span>][<span style="color:#666">2</span>] <span style="color:#666">=</span> {}, j <span style="color:#666">=</span> start <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> start; i <span style="color:#666">&lt;</span> end; <span style="color:#666">++</span>i)
+</span></span><span style="display:flex;"><span>            cnt[tolower(s[i]) <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>][(<span style="color:#0b0;font-weight:bold">bool</span>)islower(s[i])] <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>        string res;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> i <span style="color:#f92672">=</span> start; i <span style="color:#f92672">&lt;=</span> end; <span style="color:#f92672">++</span>i) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> ch <span style="color:#f92672">=</span> i <span style="color:#f92672">==</span> end <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> tolower(s[i]) <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (ch <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> cnt[ch][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> cnt[ch][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) {
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (j <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">&amp;&amp;</span> ch <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">return</span> s;
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">auto</span> res1 <span style="color:#f92672">=</span> longestNiceSubstring(s.substr(j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, i <span style="color:#f92672">-</span> j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>));
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span> (res1.size() <span style="color:#f92672">&gt;</span> res.size())
-</span></span><span style="display:flex;"><span>                    res <span style="color:#f92672">=</span> res1;
-</span></span><span style="display:flex;"><span>                j <span style="color:#f92672">=</span> i;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> start; i <span style="color:#666">&lt;=</span> end; <span style="color:#666">++</span>i) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> ch <span style="color:#666">=</span> i <span style="color:#666">==</span> end <span style="color:#666">?</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">:</span> tolower(s[i]) <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (ch <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">||</span> cnt[ch][<span style="color:#666">0</span>] <span style="color:#666">+</span> cnt[ch][<span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#666">1</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span> (j <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> ch <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span>)
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">return</span> s;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">auto</span> res1 <span style="color:#666">=</span> longestNiceSubstring(s.substr(j <span style="color:#666">+</span> <span style="color:#666">1</span>, i <span style="color:#666">-</span> j <span style="color:#666">-</span> <span style="color:#666">1</span>));
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span> (res1.size() <span style="color:#666">&gt;</span> res.size())
+</span></span><span style="display:flex;"><span>                    res <span style="color:#666">=</span> res1;
+</span></span><span style="display:flex;"><span>                j <span style="color:#666">=</span> i;
 </span></span><span style="display:flex;"><span>            }
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode390s1hbhb">
+<h2 id="hahahugoshortcode391s1hbhb">
   
 
   
@@ -295,47 +295,47 @@
 <ol>
 <li>
 <p><strong>Class Definition</strong>: The solution is encapsulated within the <code>Solution</code> class.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Method Signature</strong>: The <code>longestNiceSubstring</code> method accepts a string <code>s</code> and two integer parameters, <code>start</code> and <code>end</code>. The <code>end</code> parameter defaults to -1, which signals that the full length of the string should be analyzed.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    string longestNiceSubstring(string s, <span style="color:#66d9ef">int</span> start <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, <span style="color:#66d9ef">int</span> end <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    string longestNiceSubstring(string s, <span style="color:#0b0;font-weight:bold">int</span> start <span style="color:#666">=</span> <span style="color:#666">0</span>, <span style="color:#0b0;font-weight:bold">int</span> end <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) {
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Initialization</strong>: If <code>end</code> is not provided, it is set to the length of the string. An array <code>cnt</code> is initialized to track character counts, and <code>j</code> is initialized to <code>start - 1</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (end <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>    end <span style="color:#f92672">=</span> s.size();
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> cnt[<span style="color:#ae81ff">26</span>][<span style="color:#ae81ff">2</span>] <span style="color:#f92672">=</span> {}, j <span style="color:#f92672">=</span> start <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (end <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span>)
+</span></span><span style="display:flex;"><span>    end <span style="color:#666">=</span> s.size();
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> cnt[<span style="color:#666">26</span>][<span style="color:#666">2</span>] <span style="color:#666">=</span> {}, j <span style="color:#666">=</span> start <span style="color:#666">-</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Counting Characters</strong>: The loop iterates from <code>start</code> to <code>end</code>, counting the occurrence of both lowercase and uppercase versions of each character.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> i <span style="color:#f92672">=</span> start; i <span style="color:#f92672">&lt;</span> end; <span style="color:#f92672">++</span>i)
-</span></span><span style="display:flex;"><span>    cnt[tolower(s[i]) <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>][(<span style="color:#66d9ef">bool</span>)islower(s[i])] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> start; i <span style="color:#666">&lt;</span> end; <span style="color:#666">++</span>i)
+</span></span><span style="display:flex;"><span>    cnt[tolower(s[i]) <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>][(<span style="color:#0b0;font-weight:bold">bool</span>)islower(s[i])] <span style="color:#666">=</span> <span style="color:#666">1</span>;
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Iterating through Characters</strong>: A second loop runs from <code>start</code> to <code>end + 1</code> to check the characters, keeping track of the current character being analyzed.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string res;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> i <span style="color:#f92672">=</span> start; i <span style="color:#f92672">&lt;=</span> end; <span style="color:#f92672">++</span>i) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ch <span style="color:#f92672">=</span> i <span style="color:#f92672">==</span> end <span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">:</span> tolower(s[i]) <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string res;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> start; i <span style="color:#666">&lt;=</span> end; <span style="color:#666">++</span>i) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ch <span style="color:#666">=</span> i <span style="color:#666">==</span> end <span style="color:#666">?</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">:</span> tolower(s[i]) <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Checking Nice Condition</strong>: If the character is the end marker or the count of both cases for the current character is less than 2, it signifies a break in the nice substring condition.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (ch <span style="color:#f92672">==</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span> <span style="color:#f92672">||</span> cnt[ch][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> cnt[ch][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (ch <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">||</span> cnt[ch][<span style="color:#666">0</span>] <span style="color:#666">+</span> cnt[ch][<span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#666">1</span>) {
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Recursive Call</strong>: When a break occurs, the function makes a recursive call to find the longest nice substring in the segment formed between <code>j + 1</code> and <code>i</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">auto</span> res1 <span style="color:#f92672">=</span> longestNiceSubstring(s.substr(j <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, i <span style="color:#f92672">-</span> j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>));
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">auto</span> res1 <span style="color:#666">=</span> longestNiceSubstring(s.substr(j <span style="color:#666">+</span> <span style="color:#666">1</span>, i <span style="color:#666">-</span> j <span style="color:#666">-</span> <span style="color:#666">1</span>));
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Updating Result</strong>: If the newly found substring is longer than the current result, update the result.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (res1.size() <span style="color:#f92672">&gt;</span> res.size())
-</span></span><span style="display:flex;"><span>    res <span style="color:#f92672">=</span> res1;
-</span></span><span style="display:flex;"><span>j <span style="color:#f92672">=</span> i;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (res1.size() <span style="color:#666">&gt;</span> res.size())
+</span></span><span style="display:flex;"><span>    res <span style="color:#666">=</span> res1;
+</span></span><span style="display:flex;"><span>j <span style="color:#666">=</span> i;
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Return the Result</strong>: Finally, the longest nice substring found during the iterations is returned.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div></li>
 </ol>
@@ -369,7 +369,7 @@
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode390s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode391s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

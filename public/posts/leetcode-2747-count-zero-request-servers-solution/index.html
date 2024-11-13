@@ -224,41 +224,41 @@
         <p><a href="https://leetcode.com/problems/count-zero-request-servers/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> countServers(<span style="color:#66d9ef">int</span> n, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> logs, <span style="color:#66d9ef">int</span> x, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> queries) {
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> qs;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span>;i<span style="color:#f92672">&lt;</span>queries.size();i<span style="color:#f92672">++</span>){      <span style="color:#75715e">// sorting and also storing the index to create an anwer at the end
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            qs.push_back({queries[i],i});   <span style="color:#75715e">// at their appropiate place
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> countServers(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> logs, <span style="color:#0b0;font-weight:bold">int</span> x, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> queries) {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> qs;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span><span style="color:#666">0</span>;i<span style="color:#666">&lt;</span>queries.size();i<span style="color:#666">++</span>){      <span style="color:#080;font-style:italic">// sorting and also storing the index to create an anwer at the end
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            qs.push_back({queries[i],i});   <span style="color:#080;font-style:italic">// at their appropiate place
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        }
 </span></span><span style="display:flex;"><span>        sort(qs.begin(),qs.end());
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> result(queries.size());
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> result(queries.size());
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        set<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> s;       <span style="color:#75715e">// for storing {time,id}
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> count;         <span style="color:#75715e">// for storing the number of ids in the current window
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        
-</span></span><span style="display:flex;"><span>        sort(logs.begin(),logs.end(),[<span style="color:#f92672">&amp;</span>](<span style="color:#66d9ef">auto</span> <span style="color:#66d9ef">const</span> <span style="color:#f92672">&amp;</span>a,<span style="color:#66d9ef">auto</span> <span style="color:#66d9ef">const</span> <span style="color:#f92672">&amp;</span>b){  <span style="color:#75715e">// sorting the logs based on their time
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">return</span> a[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">&lt;</span>b[<span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>        set<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> s;       <span style="color:#080;font-style:italic">// for storing {time,id}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> count;         <span style="color:#080;font-style:italic">// for storing the number of ids in the current window
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        
+</span></span><span style="display:flex;"><span>        sort(logs.begin(),logs.end(),[<span style="color:#666">&amp;</span>](<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a2f;font-weight:bold">const</span> <span style="color:#666">&amp;</span>a,<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a2f;font-weight:bold">const</span> <span style="color:#666">&amp;</span>b){  <span style="color:#080;font-style:italic">// sorting the logs based on their time
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#a2f;font-weight:bold">return</span> a[<span style="color:#666">1</span>]<span style="color:#666">&lt;</span>b[<span style="color:#666">1</span>];
 </span></span><span style="display:flex;"><span>        });         
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>[q,index]<span style="color:#f92672">:</span>qs){
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span>(i<span style="color:#f92672">&lt;</span>logs.size() <span style="color:#f92672">&amp;&amp;</span> logs[i][<span style="color:#ae81ff">1</span>]<span style="color:#f92672">&lt;=</span>q){          <span style="color:#75715e">// adding all the servers that have time &lt;= q
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                s.insert({logs[i][<span style="color:#ae81ff">1</span>],logs[i][<span style="color:#ae81ff">0</span>]});          
-</span></span><span style="display:flex;"><span>                count[logs[i][<span style="color:#ae81ff">0</span>]]<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>                i<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span>[q,index]<span style="color:#666">:</span>qs){
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(i<span style="color:#666">&lt;</span>logs.size() <span style="color:#666">&amp;&amp;</span> logs[i][<span style="color:#666">1</span>]<span style="color:#666">&lt;=</span>q){          <span style="color:#080;font-style:italic">// adding all the servers that have time &lt;= q
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                s.insert({logs[i][<span style="color:#666">1</span>],logs[i][<span style="color:#666">0</span>]});          
+</span></span><span style="display:flex;"><span>                count[logs[i][<span style="color:#666">0</span>]]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>                i<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>s.empty() <span style="color:#f92672">&amp;&amp;</span> s.begin()<span style="color:#f92672">-&gt;</span>first<span style="color:#f92672">&lt;</span>q<span style="color:#f92672">-</span>x){      <span style="color:#75715e">// removing all the elements that are out of the current 
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                count[s.begin()<span style="color:#f92672">-&gt;</span>second]<span style="color:#f92672">--</span>;                 <span style="color:#75715e">// window i.e. &lt; q-x
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                <span style="color:#66d9ef">if</span>(count[s.begin()<span style="color:#f92672">-&gt;</span>second]<span style="color:#f92672">==</span><span style="color:#ae81ff">0</span>) count.erase(s.begin()<span style="color:#f92672">-&gt;</span>second);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>s.empty() <span style="color:#666">&amp;&amp;</span> s.begin()<span style="color:#666">-&gt;</span>first<span style="color:#666">&lt;</span>q<span style="color:#666">-</span>x){      <span style="color:#080;font-style:italic">// removing all the elements that are out of the current 
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                count[s.begin()<span style="color:#666">-&gt;</span>second]<span style="color:#666">--</span>;                 <span style="color:#080;font-style:italic">// window i.e. &lt; q-x
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                <span style="color:#a2f;font-weight:bold">if</span>(count[s.begin()<span style="color:#666">-&gt;</span>second]<span style="color:#666">==</span><span style="color:#666">0</span>) count.erase(s.begin()<span style="color:#666">-&gt;</span>second);
 </span></span><span style="display:flex;"><span>                s.erase(s.begin());
 </span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            result[index] <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> count.size();
+</span></span><span style="display:flex;"><span>            result[index] <span style="color:#666">=</span> n <span style="color:#666">-</span> count.size();
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> result;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> result;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode942s1hbhb">
+<h2 id="hahahugoshortcode941s1hbhb">
   
 
   
@@ -272,8 +272,8 @@
 </h3>
 <p>The problem asks us to determine the number of servers that are active for each query in a system where multiple logs and queries are given. Each log entry contains a server ID and a timestamp, indicating when a server was active. Each query specifies a timestamp, and the task is to count how many servers are active during the time window <code>[query - x, query]</code> for each query.</p>
 <p>For example, if the logs are as follows:</p>
-<pre tabindex="0"><code>logs = [[1, 2], [2, 5], [3, 8], [4, 10]]
-</code></pre><p>and we have a query at <code>6</code> with a window of <code>3</code> (<code>x = 3</code>), we want to count how many servers are active between time <code>3</code> and <code>6</code> (i.e., logs at times <code>2</code>, <code>5</code>, and <code>6</code> are relevant).</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>logs = [[1, 2], [2, 5], [3, 8], [4, 10]]
+</span></span></code></pre></div><p>and we have a query at <code>6</code> with a window of <code>3</code> (<code>x = 3</code>), we want to count how many servers are active between time <code>3</code> and <code>6</code> (i.e., logs at times <code>2</code>, <code>5</code>, and <code>6</code> are relevant).</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -327,11 +327,11 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> qs;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> queries.size(); i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>    qs.push_back({queries[i], i});  <span style="color:#75715e">// Store the query value and its original index
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
-</span></span><span style="display:flex;"><span>sort(qs.begin(), qs.end());  <span style="color:#75715e">// Sort queries based on time
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> qs;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> queries.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    qs.push_back({queries[i], i});  <span style="color:#080;font-style:italic">// Store the query value and its original index
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
+</span></span><span style="display:flex;"><span>sort(qs.begin(), qs.end());  <span style="color:#080;font-style:italic">// Sort queries based on time
 </span></span></span></code></pre></div><ul>
 <li>We store each query along with its original index in the <code>qs</code> vector.</li>
 <li>Sorting the queries allows us to process them in chronological order.</li>
@@ -343,9 +343,9 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(logs.begin(), logs.end(), [<span style="color:#f92672">&amp;</span>](<span style="color:#66d9ef">auto</span> <span style="color:#66d9ef">const</span> <span style="color:#f92672">&amp;</span>a, <span style="color:#66d9ef">auto</span> <span style="color:#66d9ef">const</span> <span style="color:#f92672">&amp;</span>b){
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> a[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;</span> b[<span style="color:#ae81ff">1</span>];  <span style="color:#75715e">// Sort logs based on their timestamps
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>});
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(logs.begin(), logs.end(), [<span style="color:#666">&amp;</span>](<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a2f;font-weight:bold">const</span> <span style="color:#666">&amp;</span>a, <span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a2f;font-weight:bold">const</span> <span style="color:#666">&amp;</span>b){
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> a[<span style="color:#666">1</span>] <span style="color:#666">&lt;</span> b[<span style="color:#666">1</span>];  <span style="color:#080;font-style:italic">// Sort logs based on their timestamps
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>});
 </span></span></code></pre></div><ul>
 <li>We sort the logs based on the timestamp, ensuring that we process the logs in chronological order.</li>
 </ul>
@@ -356,8 +356,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>set<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> s;  <span style="color:#75715e">// To store the {timestamp, server_id} pairs
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> count;     <span style="color:#75715e">// To count the number of active logs for each server
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>set<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> s;  <span style="color:#080;font-style:italic">// To store the {timestamp, server_id} pairs
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> count;     <span style="color:#080;font-style:italic">// To count the number of active logs for each server
 </span></span></span></code></pre></div><ul>
 <li><code>s</code> is a <code>set</code> used to store active servers as pairs of timestamps and IDs, so we can efficiently remove expired entries.</li>
 <li><code>count</code> is a <code>map</code> that keeps track of the number of active logs for each server ID.</li>
@@ -369,24 +369,24 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> <span style="color:#f92672">&amp;</span>[q, index] <span style="color:#f92672">:</span> qs) {
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Add all logs where timestamp &lt;= current query
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">while</span> (i <span style="color:#f92672">&lt;</span> logs.size() <span style="color:#f92672">&amp;&amp;</span> logs[i][<span style="color:#ae81ff">1</span>] <span style="color:#f92672">&lt;=</span> q) {
-</span></span><span style="display:flex;"><span>        s.insert({logs[i][<span style="color:#ae81ff">1</span>], logs[i][<span style="color:#ae81ff">0</span>]});
-</span></span><span style="display:flex;"><span>        count[logs[i][<span style="color:#ae81ff">0</span>]]<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>        i<span style="color:#f92672">++</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span>[q, index] <span style="color:#666">:</span> qs) {
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Add all logs where timestamp &lt;= current query
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">while</span> (i <span style="color:#666">&lt;</span> logs.size() <span style="color:#666">&amp;&amp;</span> logs[i][<span style="color:#666">1</span>] <span style="color:#666">&lt;=</span> q) {
+</span></span><span style="display:flex;"><span>        s.insert({logs[i][<span style="color:#666">1</span>], logs[i][<span style="color:#666">0</span>]});
+</span></span><span style="display:flex;"><span>        count[logs[i][<span style="color:#666">0</span>]]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        i<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Remove logs where timestamp is outside the current window (i.e., &lt; q - x)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#66d9ef">while</span> (<span style="color:#f92672">!</span>s.empty() <span style="color:#f92672">&amp;&amp;</span> s.begin()<span style="color:#f92672">-&gt;</span>first <span style="color:#f92672">&lt;</span> q <span style="color:#f92672">-</span> x) {
-</span></span><span style="display:flex;"><span>        count[s.begin()<span style="color:#f92672">-&gt;</span>second]<span style="color:#f92672">--</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (count[s.begin()<span style="color:#f92672">-&gt;</span>second] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) count.erase(s.begin()<span style="color:#f92672">-&gt;</span>second);
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Remove logs where timestamp is outside the current window (i.e., &lt; q - x)
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">while</span> (<span style="color:#666">!</span>s.empty() <span style="color:#666">&amp;&amp;</span> s.begin()<span style="color:#666">-&gt;</span>first <span style="color:#666">&lt;</span> q <span style="color:#666">-</span> x) {
+</span></span><span style="display:flex;"><span>        count[s.begin()<span style="color:#666">-&gt;</span>second]<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (count[s.begin()<span style="color:#666">-&gt;</span>second] <span style="color:#666">==</span> <span style="color:#666">0</span>) count.erase(s.begin()<span style="color:#666">-&gt;</span>second);
 </span></span><span style="display:flex;"><span>        s.erase(s.begin());
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// Store the result: the number of servers not in the current window
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    result[index] <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> count.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Store the result: the number of servers not in the current window
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    result[index] <span style="color:#666">=</span> n <span style="color:#666">-</span> count.size();
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ul>
 <li>For each query <code>q</code>, we:
@@ -404,7 +404,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> result;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> result;
 </span></span></code></pre></div><ul>
 <li>After processing all queries, the <code>result</code> vector contains the answer for each query, which is returned to the caller.</li>
 </ul>
@@ -459,7 +459,7 @@
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode942s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode941s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

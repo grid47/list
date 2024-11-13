@@ -219,44 +219,44 @@
         <p><a href="https://leetcode.com/problems/rotting-oranges/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> orangesRotting(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> grid) {
-</span></span><span style="display:flex;"><span>        queue<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> q;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> grid.size(), n <span style="color:#f92672">=</span> grid[<span style="color:#ae81ff">0</span>].size();
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(grid[i][j] <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> orangesRotting(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
+</span></span><span style="display:flex;"><span>        queue<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> q;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#666">2</span>) {
 </span></span><span style="display:flex;"><span>                q.push({i, j});
 </span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> vis(m, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n, <span style="color:#ae81ff">0</span>));
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> t <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> dir[] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>};
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> q.size();
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span>(sz<span style="color:#f92672">--</span>) {
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> q.front();
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> vis(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">0</span>));
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> t <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> dir[] <span style="color:#666">=</span> {<span style="color:#666">0</span>, <span style="color:#666">1</span>, <span style="color:#666">0</span>, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#666">0</span>};
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> q.front();
 </span></span><span style="display:flex;"><span>                q.pop();
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(vis[it[<span style="color:#ae81ff">0</span>]][it[<span style="color:#ae81ff">1</span>]]) <span style="color:#66d9ef">continue</span>;
-</span></span><span style="display:flex;"><span>                vis[it[<span style="color:#ae81ff">0</span>]][it[<span style="color:#ae81ff">1</span>]] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">4</span>; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> it[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> dir[i], y <span style="color:#f92672">=</span> it[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> dir[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
-</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> y <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> x <span style="color:#f92672">==</span> m <span style="color:#f92672">||</span> y <span style="color:#f92672">==</span> n <span style="color:#f92672">||</span> vis[x][y] <span style="color:#f92672">||</span> grid[x][y] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">continue</span>;
-</span></span><span style="display:flex;"><span>                    grid[x][y] <span style="color:#f92672">=</span> grid[it[<span style="color:#ae81ff">0</span>]][it[<span style="color:#ae81ff">1</span>]] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(vis[it[<span style="color:#666">0</span>]][it[<span style="color:#666">1</span>]]) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>                vis[it[<span style="color:#666">0</span>]][it[<span style="color:#666">1</span>]] <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">4</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> it[<span style="color:#666">0</span>] <span style="color:#666">+</span> dir[i], y <span style="color:#666">=</span> it[<span style="color:#666">1</span>] <span style="color:#666">+</span> dir[i <span style="color:#666">+</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> y <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> x <span style="color:#666">==</span> m <span style="color:#666">||</span> y <span style="color:#666">==</span> n <span style="color:#666">||</span> vis[x][y] <span style="color:#666">||</span> grid[x][y] <span style="color:#666">!=</span> <span style="color:#666">1</span>)
+</span></span><span style="display:flex;"><span>                        <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>                    grid[x][y] <span style="color:#666">=</span> grid[it[<span style="color:#666">0</span>]][it[<span style="color:#666">1</span>]] <span style="color:#666">+</span> <span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>                    q.push({x, y});
 </span></span><span style="display:flex;"><span>                }
 </span></span><span style="display:flex;"><span>            }
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mx <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(grid[i][j] <span style="color:#f92672">&gt;</span> mx) mx <span style="color:#f92672">=</span> grid[i][j];
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(grid[i][j] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mx <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">&gt;</span> mx) mx <span style="color:#666">=</span> grid[i][j];
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> mx <span style="color:#666">-</span> <span style="color:#666">2</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1454s1hbhb">
+<h2 id="hahahugoshortcode1453s1hbhb">
   
 
   
@@ -297,11 +297,11 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> orangesRotting(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> grid) {
-</span></span><span style="display:flex;"><span>        queue<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> q;  <span style="color:#75715e">// A queue to store the positions of rotten oranges
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> grid.size(), n <span style="color:#f92672">=</span> grid[<span style="color:#ae81ff">0</span>].size();  <span style="color:#75715e">// Dimensions of the grid
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> orangesRotting(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
+</span></span><span style="display:flex;"><span>        queue<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> q;  <span style="color:#080;font-style:italic">// A queue to store the positions of rotten oranges
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();  <span style="color:#080;font-style:italic">// Dimensions of the grid
 </span></span></span></code></pre></div><ol>
 <li><strong>Initialize the Queue</strong>:
 <ul>
@@ -310,11 +310,11 @@
 </ul>
 </li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(grid[i][j] <span style="color:#f92672">==</span> <span style="color:#ae81ff">2</span>) {
-</span></span><span style="display:flex;"><span>                q.push({i, j});  <span style="color:#75715e">// Add the positions of all rotten oranges to the queue
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#666">2</span>) {
+</span></span><span style="display:flex;"><span>                q.push({i, j});  <span style="color:#080;font-style:italic">// Add the positions of all rotten oranges to the queue
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            }
 </span></span></code></pre></div><ol start="2">
 <li><strong>Push Rotten Oranges to the Queue</strong>:
 <ul>
@@ -322,9 +322,9 @@
 </ul>
 </li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> vis(m, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n, <span style="color:#ae81ff">0</span>));  <span style="color:#75715e">// A 2D vector to keep track of visited cells
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> t <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// Initialize the time counter
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> dir[] <span style="color:#f92672">=</span> {<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">0</span>};  <span style="color:#75715e">// Directions for BFS (right, down, left, up)
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> vis(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">0</span>));  <span style="color:#080;font-style:italic">// A 2D vector to keep track of visited cells
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#0b0;font-weight:bold">int</span> t <span style="color:#666">=</span> <span style="color:#666">0</span>;  <span style="color:#080;font-style:italic">// Initialize the time counter
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#0b0;font-weight:bold">int</span> dir[] <span style="color:#666">=</span> {<span style="color:#666">0</span>, <span style="color:#666">1</span>, <span style="color:#666">0</span>, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#666">0</span>};  <span style="color:#080;font-style:italic">// Directions for BFS (right, down, left, up)
 </span></span></span></code></pre></div><ol start="3">
 <li><strong>Visited Array and Direction Array</strong>:
 <ul>
@@ -333,11 +333,11 @@
 </ul>
 </li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()) {  <span style="color:#75715e">// Perform BFS until the queue is empty
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> q.size();  <span style="color:#75715e">// Get the number of rotten oranges in the current round
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">while</span>(sz<span style="color:#f92672">--</span>) {
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> q.front();  <span style="color:#75715e">// Get the front element in the queue
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                q.pop();  <span style="color:#75715e">// Pop the element from the queue
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {  <span style="color:#080;font-style:italic">// Perform BFS until the queue is empty
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();  <span style="color:#080;font-style:italic">// Get the number of rotten oranges in the current round
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> q.front();  <span style="color:#080;font-style:italic">// Get the front element in the queue
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                q.pop();  <span style="color:#080;font-style:italic">// Pop the element from the queue
 </span></span></span></code></pre></div><ol start="4">
 <li><strong>BFS Loop</strong>:
 <ul>
@@ -346,8 +346,8 @@
 </ul>
 </li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(vis[it[<span style="color:#ae81ff">0</span>]][it[<span style="color:#ae81ff">1</span>]]) <span style="color:#66d9ef">continue</span>;  <span style="color:#75715e">// Skip if the cell is already visited
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                vis[it[<span style="color:#ae81ff">0</span>]][it[<span style="color:#ae81ff">1</span>]] <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Mark the cell as visited
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(vis[it[<span style="color:#666">0</span>]][it[<span style="color:#666">1</span>]]) <span style="color:#a2f;font-weight:bold">continue</span>;  <span style="color:#080;font-style:italic">// Skip if the cell is already visited
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                vis[it[<span style="color:#666">0</span>]][it[<span style="color:#666">1</span>]] <span style="color:#666">=</span> <span style="color:#666">1</span>;  <span style="color:#080;font-style:italic">// Mark the cell as visited
 </span></span></span></code></pre></div><ol start="5">
 <li><strong>Mark Visited</strong>:
 <ul>
@@ -355,13 +355,13 @@
 </ul>
 </li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">4</span>; i<span style="color:#f92672">++</span>) {  <span style="color:#75715e">// Explore all four directions (right, down, left, up)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> it[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">+</span> dir[i], y <span style="color:#f92672">=</span> it[<span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> dir[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
-</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">if</span>(x <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> y <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">||</span> x <span style="color:#f92672">==</span> m <span style="color:#f92672">||</span> y <span style="color:#f92672">==</span> n <span style="color:#f92672">||</span> vis[x][y] <span style="color:#f92672">||</span> grid[x][y] <span style="color:#f92672">!=</span> <span style="color:#ae81ff">1</span>)
-</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">continue</span>;  <span style="color:#75715e">// Skip if the cell is out of bounds, already visited, or not a fresh orange
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                    grid[x][y] <span style="color:#f92672">=</span> grid[it[<span style="color:#ae81ff">0</span>]][it[<span style="color:#ae81ff">1</span>]] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// Mark the fresh orange as rotten (increment the time)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                    q.push({x, y});  <span style="color:#75715e">// Push the newly rotten orange into the queue
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                }
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">4</span>; i<span style="color:#666">++</span>) {  <span style="color:#080;font-style:italic">// Explore all four directions (right, down, left, up)
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                    <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> it[<span style="color:#666">0</span>] <span style="color:#666">+</span> dir[i], y <span style="color:#666">=</span> it[<span style="color:#666">1</span>] <span style="color:#666">+</span> dir[i <span style="color:#666">+</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> y <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> x <span style="color:#666">==</span> m <span style="color:#666">||</span> y <span style="color:#666">==</span> n <span style="color:#666">||</span> vis[x][y] <span style="color:#666">||</span> grid[x][y] <span style="color:#666">!=</span> <span style="color:#666">1</span>)
+</span></span><span style="display:flex;"><span>                        <span style="color:#a2f;font-weight:bold">continue</span>;  <span style="color:#080;font-style:italic">// Skip if the cell is out of bounds, already visited, or not a fresh orange
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                    grid[x][y] <span style="color:#666">=</span> grid[it[<span style="color:#666">0</span>]][it[<span style="color:#666">1</span>]] <span style="color:#666">+</span> <span style="color:#666">1</span>;  <span style="color:#080;font-style:italic">// Mark the fresh orange as rotten (increment the time)
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                    q.push({x, y});  <span style="color:#080;font-style:italic">// Push the newly rotten orange into the queue
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                }
 </span></span><span style="display:flex;"><span>            }
 </span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></div><ol start="6">
@@ -372,13 +372,13 @@
 </ul>
 </li>
 </ol>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mx <span style="color:#f92672">=</span> <span style="color:#ae81ff">2</span>;  <span style="color:#75715e">// Initialize `mx` to track the maximum time
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> m; i<span style="color:#f92672">++</span>)  <span style="color:#75715e">// Traverse the grid to check for unrotted fresh oranges and track the maximum time
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> n; j<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(grid[i][j] <span style="color:#f92672">&gt;</span> mx) mx <span style="color:#f92672">=</span> grid[i][j];  <span style="color:#75715e">// Update the maximum time
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(grid[i][j] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;  <span style="color:#75715e">// If any fresh orange is left, return -1
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">return</span> mx <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>;  <span style="color:#75715e">// The time taken is the maximum time minus 2 (to account for the initial rotten oranges)
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">2</span>;  <span style="color:#080;font-style:italic">// Initialize `mx` to track the maximum time
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)  <span style="color:#080;font-style:italic">// Traverse the grid to check for unrotted fresh oranges and track the maximum time
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">&gt;</span> mx) mx <span style="color:#666">=</span> grid[i][j];  <span style="color:#080;font-style:italic">// Update the maximum time
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;  <span style="color:#080;font-style:italic">// If any fresh orange is left, return -1
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">return</span> mx <span style="color:#666">-</span> <span style="color:#666">2</span>;  <span style="color:#080;font-style:italic">// The time taken is the maximum time minus 2 (to account for the initial rotten oranges)
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><ol start="7">
 <li><strong>Final Check</strong>:
@@ -415,7 +415,7 @@
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1454s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1453s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

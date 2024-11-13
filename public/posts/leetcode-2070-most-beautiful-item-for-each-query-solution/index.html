@@ -219,36 +219,36 @@
         <p><a href="https://leetcode.com/problems/most-beautiful-item-for-each-query/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> maximumBeauty(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> items, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> queries) {
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// ith item -&gt; price, beauty
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#75715e">// max beauty of an item? whoes price &lt;= query[i]
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans(queries.size());
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> maximumBeauty(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> items, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> queries) {
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// ith item -&gt; price, beauty
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#080;font-style:italic">// max beauty of an item? whoes price &lt;= query[i]
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans(queries.size());
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> queriesPair;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> queries.size(); i<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> queriesPair;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> queries.size(); i<span style="color:#666">++</span>) {
 </span></span><span style="display:flex;"><span>            queriesPair.push_back({queries[i], i});
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>        sort(queriesPair.begin(), queriesPair.end());
 </span></span><span style="display:flex;"><span>        sort(items.begin(), items.end());
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> itemIdx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, maxBeauty <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> queriesPair.size(); i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> maxPriceAllowed <span style="color:#f92672">=</span> queriesPair[i].first;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> queryOriginalIndex <span style="color:#f92672">=</span> queriesPair[i].second;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> itemIdx <span style="color:#666">=</span> <span style="color:#666">0</span>, maxBeauty <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> queriesPair.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> maxPriceAllowed <span style="color:#666">=</span> queriesPair[i].first;
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> queryOriginalIndex <span style="color:#666">=</span> queriesPair[i].second;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span>(itemIdx <span style="color:#f92672">&lt;</span> items.size() <span style="color:#f92672">&amp;&amp;</span> items[itemIdx][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&lt;=</span> maxPriceAllowed) {
-</span></span><span style="display:flex;"><span>                maxBeauty <span style="color:#f92672">=</span> max(maxBeauty, items[itemIdx][<span style="color:#ae81ff">1</span>]);
-</span></span><span style="display:flex;"><span>                itemIdx<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(itemIdx <span style="color:#666">&lt;</span> items.size() <span style="color:#666">&amp;&amp;</span> items[itemIdx][<span style="color:#666">0</span>] <span style="color:#666">&lt;=</span> maxPriceAllowed) {
+</span></span><span style="display:flex;"><span>                maxBeauty <span style="color:#666">=</span> max(maxBeauty, items[itemIdx][<span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>                itemIdx<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            ans[queryOriginalIndex] <span style="color:#f92672">=</span> maxBeauty;
+</span></span><span style="display:flex;"><span>            ans[queryOriginalIndex] <span style="color:#666">=</span> maxBeauty;
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode558s1hbhb">
+<h2 id="hahahugoshortcode559s1hbhb">
   
 
   
@@ -300,42 +300,42 @@
 <ol>
 <li>
 <p><strong>Function Definition</strong>: The <code>maximumBeauty</code> function takes in a vector of items and a vector of queries. It initializes a result vector to store the maximum beauty for each query.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> maximumBeauty(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> items, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> queries) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans(queries.size());
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> maximumBeauty(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> items, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> queries) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans(queries.size());
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Preparing the Queries</strong>: Each query is paired with its original index to ensure we can place the results in the correct order after processing.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> queriesPair;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> queries.size(); i<span style="color:#f92672">++</span>) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> queriesPair;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> queries.size(); i<span style="color:#666">++</span>) {
 </span></span><span style="display:flex;"><span>    queriesPair.push_back({queries[i], i});
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Sorting</strong>: The items and queries are sorted. Sorting the items by price allows us to efficiently find all items that fit within each query&rsquo;s price limit.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(queriesPair.begin(), queriesPair.end());
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(queriesPair.begin(), queriesPair.end());
 </span></span><span style="display:flex;"><span>sort(items.begin(), items.end());
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Processing Queries</strong>: The main loop iterates over each sorted query. The <code>itemIdx</code> variable tracks our current position in the items list, and <code>maxBeauty</code> keeps track of the highest beauty value found so far.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> itemIdx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, maxBeauty <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> queriesPair.size(); i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> maxPriceAllowed <span style="color:#f92672">=</span> queriesPair[i].first;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> queryOriginalIndex <span style="color:#f92672">=</span> queriesPair[i].second;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> itemIdx <span style="color:#666">=</span> <span style="color:#666">0</span>, maxBeauty <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> queriesPair.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> maxPriceAllowed <span style="color:#666">=</span> queriesPair[i].first;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> queryOriginalIndex <span style="color:#666">=</span> queriesPair[i].second;
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Evaluating Items</strong>: As long as there are items that fall within the current query&rsquo;s price limit, we update <code>maxBeauty</code> and move to the next item.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(itemIdx <span style="color:#f92672">&lt;</span> items.size() <span style="color:#f92672">&amp;&amp;</span> items[itemIdx][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&lt;=</span> maxPriceAllowed) {
-</span></span><span style="display:flex;"><span>    maxBeauty <span style="color:#f92672">=</span> max(maxBeauty, items[itemIdx][<span style="color:#ae81ff">1</span>]);
-</span></span><span style="display:flex;"><span>    itemIdx<span style="color:#f92672">++</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(itemIdx <span style="color:#666">&lt;</span> items.size() <span style="color:#666">&amp;&amp;</span> items[itemIdx][<span style="color:#666">0</span>] <span style="color:#666">&lt;=</span> maxPriceAllowed) {
+</span></span><span style="display:flex;"><span>    maxBeauty <span style="color:#666">=</span> max(maxBeauty, items[itemIdx][<span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>    itemIdx<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Storing Results</strong>: After processing all applicable items for the query, we store the maximum beauty found for that query in the result vector at the original index.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ans[queryOriginalIndex] <span style="color:#f92672">=</span> maxBeauty;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ans[queryOriginalIndex] <span style="color:#666">=</span> maxBeauty;
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Returning Results</strong>: Finally, the function returns the result vector containing the maximum beauties for each query.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span></code></pre></div></li>
 </ol>
 <h3 id="complexity">
@@ -367,7 +367,7 @@
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode558s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode559s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

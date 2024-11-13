@@ -229,43 +229,43 @@
         <p><a href="https://leetcode.com/problems/stone-game-ii/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#75715e">/*
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    Taking postfix sum to count pile is new concept - residual count
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    Thinking like, I had taken this much and pick what you
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    require out of remaining, from how much ever you picked
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    the rest is mine
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    each call is others turn
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">    */</span>
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> piles;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> memo;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">int</span> m) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span><span style="color:#f92672">*</span> m <span style="color:#f92672">&gt;=</span> piles.size()) <span style="color:#66d9ef">return</span> piles[idx];
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(memo[idx][m] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> memo[idx][m];
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> tmp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; x <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> m; x<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> tmp <span style="color:#f92672">=</span> piles[idx] <span style="color:#f92672">-</span> piles[idx <span style="color:#f92672">+</span> x];
-</span></span><span style="display:flex;"><span>            ans <span style="color:#f92672">=</span> max(ans, tmp <span style="color:#f92672">+</span> piles[idx <span style="color:#f92672">+</span> x] <span style="color:#f92672">-</span> dp(idx <span style="color:#f92672">+</span> x, max(m, x)) );
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    Taking postfix sum to count pile is new concept - residual count
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    Thinking like, I had taken this much and pick what you
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    require out of remaining, from how much ever you picked
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    the rest is mine
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    each call is others turn
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    */</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> piles;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> memo;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> m) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">+</span> <span style="color:#666">2</span><span style="color:#666">*</span> m <span style="color:#666">&gt;=</span> piles.size()) <span style="color:#a2f;font-weight:bold">return</span> piles[idx];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(memo[idx][m] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[idx][m];
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> <span style="color:#666">1</span>; x <span style="color:#666">&lt;=</span> <span style="color:#666">2</span> <span style="color:#666">*</span> m; x<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> piles[idx] <span style="color:#666">-</span> piles[idx <span style="color:#666">+</span> x];
+</span></span><span style="display:flex;"><span>            ans <span style="color:#666">=</span> max(ans, tmp <span style="color:#666">+</span> piles[idx <span style="color:#666">+</span> x] <span style="color:#666">-</span> dp(idx <span style="color:#666">+</span> x, max(m, x)) );
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> memo[idx][m] <span style="color:#f92672">=</span> ans;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> memo[idx][m] <span style="color:#666">=</span> ans;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">stoneGameII</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> p) {
-</span></span><span style="display:flex;"><span>        n <span style="color:#f92672">=</span> p.size();
-</span></span><span style="display:flex;"><span>        piles <span style="color:#f92672">=</span> p;
-</span></span><span style="display:flex;"><span>        memo.resize(n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> p.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>)
-</span></span><span style="display:flex;"><span>            piles[i] <span style="color:#f92672">+=</span> piles[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">stoneGameII</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> p) {
+</span></span><span style="display:flex;"><span>        n <span style="color:#666">=</span> p.size();
+</span></span><span style="display:flex;"><span>        piles <span style="color:#666">=</span> p;
+</span></span><span style="display:flex;"><span>        memo.resize(n, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">-</span><span style="color:#666">1</span>));
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> p.size() <span style="color:#666">-</span> <span style="color:#666">2</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>)
+</span></span><span style="display:flex;"><span>            piles[i] <span style="color:#666">+=</span> piles[i <span style="color:#666">+</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> dp(<span style="color:#666">0</span>, <span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode94s1hbhb">
+<h2 id="hahahugoshortcode98s1hbhb">
   
 
   
@@ -315,14 +315,14 @@
   </a>
 </h3>
 <p>Here’s a detailed breakdown of the code:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span></code></pre></div><ul>
 <li><strong>Line 1-2</strong>: A class named <code>Solution</code> is defined, marking the start of the implementation.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> piles;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> memo;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> piles;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> memo;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n;
 </span></span></code></pre></div><ul>
 <li><strong>Line 3-5</strong>: Three member variables are declared:
 <ul>
@@ -332,20 +332,20 @@
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">int</span> m) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> m) {
 </span></span></code></pre></div><ul>
 <li><strong>Line 6</strong>: The <code>dp</code> function is defined, taking the current index <code>idx</code> and the maximum stones <code>m</code> as parameters. This function will compute the maximum stones collectible from the current state.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> m <span style="color:#f92672">&gt;=</span> piles.size()) <span style="color:#66d9ef">return</span> piles[idx];
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">+</span> <span style="color:#666">2</span> <span style="color:#666">*</span> m <span style="color:#666">&gt;=</span> piles.size()) <span style="color:#a2f;font-weight:bold">return</span> piles[idx];
 </span></span></code></pre></div><ul>
 <li><strong>Line 7</strong>: This condition checks if the index plus twice the maximum stones exceeds the size of the pile. If true, it means all remaining stones can be taken, so the function returns the total stones from the current index onward.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(memo[idx][m] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> memo[idx][m];
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(memo[idx][m] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[idx][m];
 </span></span></code></pre></div><ul>
 <li><strong>Line 8</strong>: This line checks if the current state has already been computed. If it has (i.e., <code>memo[idx][m]</code> is not -1), it returns the stored result.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> tmp <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div><ul>
 <li><strong>Line 9-10</strong>: Initializes variables:
 <ul>
@@ -354,41 +354,41 @@
 </ul>
 </li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; x <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">2</span> <span style="color:#f92672">*</span> m; x<span style="color:#f92672">++</span>) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> <span style="color:#666">1</span>; x <span style="color:#666">&lt;=</span> <span style="color:#666">2</span> <span style="color:#666">*</span> m; x<span style="color:#666">++</span>) {
 </span></span></code></pre></div><ul>
 <li><strong>Line 11</strong>: A for loop iterates over the possible number of stones <code>x</code> that can be taken, which ranges from <code>1</code> to <code>2 * m</code>.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> tmp <span style="color:#f92672">=</span> piles[idx] <span style="color:#f92672">-</span> piles[idx <span style="color:#f92672">+</span> x];
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> piles[idx] <span style="color:#666">-</span> piles[idx <span style="color:#666">+</span> x];
 </span></span></code></pre></div><ul>
 <li><strong>Line 12</strong>: This calculates the stones left after taking <code>x</code> stones. It uses the cumulative sum to determine how many stones remain in the pile.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans <span style="color:#f92672">=</span> max(ans, tmp <span style="color:#f92672">+</span> piles[idx <span style="color:#f92672">+</span> x] <span style="color:#f92672">-</span> dp(idx <span style="color:#f92672">+</span> x, max(m, x)) );
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans <span style="color:#666">=</span> max(ans, tmp <span style="color:#666">+</span> piles[idx <span style="color:#666">+</span> x] <span style="color:#666">-</span> dp(idx <span style="color:#666">+</span> x, max(m, x)) );
 </span></span></code></pre></div><ul>
 <li><strong>Line 13</strong>: The maximum score is updated by comparing the current <code>ans</code> with the potential score if <code>x</code> stones are taken. It adds the stones left after the current move and subtracts the result of the subsequent player’s optimal move from the new index.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> memo[idx][m] <span style="color:#f92672">=</span> ans;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> memo[idx][m] <span style="color:#666">=</span> ans;
 </span></span></code></pre></div><ul>
 <li><strong>Line 14</strong>: The computed result for the current state is stored in the <code>memo</code> table before returning it.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">stoneGameII</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> p) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">stoneGameII</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> p) {
 </span></span></code></pre></div><ul>
 <li><strong>Line 15</strong>: The main function <code>stoneGameII</code> is defined, which takes a vector <code>p</code> as input representing the initial pile of stones.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        n <span style="color:#f92672">=</span> p.size();
-</span></span><span style="display:flex;"><span>        piles <span style="color:#f92672">=</span> p;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        n <span style="color:#666">=</span> p.size();
+</span></span><span style="display:flex;"><span>        piles <span style="color:#666">=</span> p;
 </span></span></code></pre></div><ul>
 <li><strong>Line 16-17</strong>: The size of the pile is stored in <code>n</code>, and the input vector <code>p</code> is assigned to the member variable <code>piles</code>.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        memo.resize(n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        memo.resize(n, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">-</span><span style="color:#666">1</span>));
 </span></span></code></pre></div><ul>
 <li><strong>Line 18</strong>: The <code>memo</code> table is resized to <code>n x n</code> and initialized with <code>-1</code> to indicate that no states have been computed yet.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> p.size() <span style="color:#f92672">-</span> <span style="color:#ae81ff">2</span>; i <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>; i<span style="color:#f92672">--</span>)
-</span></span><span style="display:flex;"><span>            piles[i] <span style="color:#f92672">+=</span> piles[i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> p.size() <span style="color:#666">-</span> <span style="color:#666">2</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>)
+</span></span><span style="display:flex;"><span>            piles[i] <span style="color:#666">+=</span> piles[i <span style="color:#666">+</span> <span style="color:#666">1</span>];
 </span></span></code></pre></div><ul>
 <li><strong>Line 19-21</strong>: A loop computes the postfix sum, updating <code>piles[i]</code> to include the stones from <code>piles[i + 1]</code>. This prepares the <code>piles</code> vector for efficient score calculations.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">dp</span>(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">1</span>);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">dp</span>(<span style="color:#666">0</span>, <span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><ul>
@@ -417,7 +417,7 @@
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode94s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode98s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

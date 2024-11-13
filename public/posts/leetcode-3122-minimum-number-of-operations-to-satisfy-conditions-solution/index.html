@@ -219,41 +219,41 @@
         <p><a href="https://leetcode.com/problems/minimum-number-of-operations-to-satisfy-conditions/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> m, n;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> frq, mem;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m, n;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> frq, mem;
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> prv) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">==</span> frq.size()) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(mem[i][prv <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> mem[i][prv <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> prv) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> frq.size()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mem[i][prv <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> mem[i][prv <span style="color:#666">+</span> <span style="color:#666">1</span>];
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> INT_MAX;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">9</span>; j<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(j <span style="color:#f92672">==</span> prv) <span style="color:#66d9ef">continue</span>;
-</span></span><span style="display:flex;"><span>            ans <span style="color:#f92672">=</span> min(ans, m <span style="color:#f92672">-</span> frq[i][j] <span style="color:#f92672">+</span> dp(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, j));
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> INT_MAX;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;=</span> <span style="color:#666">9</span>; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(j <span style="color:#666">==</span> prv) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>            ans <span style="color:#666">=</span> min(ans, m <span style="color:#666">-</span> frq[i][j] <span style="color:#666">+</span> dp(i <span style="color:#666">+</span> <span style="color:#666">1</span>, j));
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mem[i][prv <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> ans;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> mem[i][prv <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minimumOperations</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> grid) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumOperations</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        m <span style="color:#f92672">=</span> grid.size(), n <span style="color:#f92672">=</span> grid[<span style="color:#ae81ff">0</span>].size();
+</span></span><span style="display:flex;"><span>        m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        frq.resize(n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">0</span>));
-</span></span><span style="display:flex;"><span>        mem.resize(n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(<span style="color:#ae81ff">11</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>        frq.resize(n, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(<span style="color:#666">10</span>, <span style="color:#666">0</span>));
+</span></span><span style="display:flex;"><span>        mem.resize(n, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(<span style="color:#666">11</span>, <span style="color:#666">-</span><span style="color:#666">1</span>));
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> m; j<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            frq[i][grid[j][i]]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> m; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            frq[i][grid[j][i]]<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> dp(<span style="color:#666">0</span>, <span style="color:#666">-</span><span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1072s1hbhb">
+<h2 id="hahahugoshortcode1073s1hbhb">
   
 
   
@@ -296,8 +296,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> m, n;
-</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> frq, mem;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> m, n;
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> frq, mem;
 </span></span></code></pre></div><ul>
 <li><code>m</code>: The number of rows in the grid.</li>
 <li><code>n</code>: The number of columns in the grid.</li>
@@ -311,9 +311,9 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> m; j<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>        frq[i][grid[j][i]]<span style="color:#f92672">++</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> m; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        frq[i][grid[j][i]]<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div><ul>
 <li>We iterate over each cell in the grid and populate the <code>frq</code> array. This array keeps track of how many times each digit (0-9) appears in each column. This helps us determine the number of changes needed when choosing a particular digit for each column.</li>
@@ -325,17 +325,17 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> i, <span style="color:#66d9ef">int</span> prv) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(i <span style="color:#f92672">==</span> frq.size()) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mem[i][prv <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">!=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>) <span style="color:#66d9ef">return</span> mem[i][prv <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>];
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> prv) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> frq.size()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mem[i][prv <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> mem[i][prv <span style="color:#666">+</span> <span style="color:#666">1</span>];
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> INT_MAX;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">9</span>; j<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(j <span style="color:#f92672">==</span> prv) <span style="color:#66d9ef">continue</span>;
-</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> min(ans, m <span style="color:#f92672">-</span> frq[i][j] <span style="color:#f92672">+</span> dp(i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, j));
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> INT_MAX;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;=</span> <span style="color:#666">9</span>; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(j <span style="color:#666">==</span> prv) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> min(ans, m <span style="color:#666">-</span> frq[i][j] <span style="color:#666">+</span> dp(i <span style="color:#666">+</span> <span style="color:#666">1</span>, j));
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> mem[i][prv <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">=</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mem[i][prv <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> ans;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ul>
 <li><strong>Base Case</strong>: If we have processed all columns (<code>i == frq.size()</code>), no more changes are needed, so return 0.</li>
@@ -350,18 +350,18 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minimumOperations</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> grid) {
-</span></span><span style="display:flex;"><span>    m <span style="color:#f92672">=</span> grid.size(), n <span style="color:#f92672">=</span> grid[<span style="color:#ae81ff">0</span>].size();
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumOperations</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
+</span></span><span style="display:flex;"><span>    m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    frq.resize(n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(<span style="color:#ae81ff">10</span>, <span style="color:#ae81ff">0</span>));
-</span></span><span style="display:flex;"><span>    mem.resize(n, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(<span style="color:#ae81ff">11</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>    frq.resize(n, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(<span style="color:#666">10</span>, <span style="color:#666">0</span>));
+</span></span><span style="display:flex;"><span>    mem.resize(n, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(<span style="color:#666">11</span>, <span style="color:#666">-</span><span style="color:#666">1</span>));
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; j <span style="color:#f92672">&lt;</span> m; j<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            frq[i][grid[j][i]]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> m; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            frq[i][grid[j][i]]<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>, <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp(<span style="color:#666">0</span>, <span style="color:#666">-</span><span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ul>
 <li><strong>Grid Size Initialization</strong>: The dimensions of the grid (<code>m</code> and <code>n</code>) are initialized.</li>
@@ -427,7 +427,7 @@
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1072s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1073s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -234,29 +234,29 @@
         <p><a href="https://leetcode.com/problems/maximum-length-of-repeated-subarray/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> findLength(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums1, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums2) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n1 <span style="color:#f92672">=</span> nums1.size(), n2 <span style="color:#f92672">=</span> nums2.size();
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> dp(n1 <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n2 <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>));
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> findLength(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums1, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums2) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n1 <span style="color:#666">=</span> nums1.size(), n2 <span style="color:#666">=</span> nums2.size();
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> dp(n1 <span style="color:#666">+</span> <span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n2 <span style="color:#666">+</span> <span style="color:#666">1</span>));
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n1 <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>) dp[i][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n2 <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>) dp[<span style="color:#ae81ff">0</span>][i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// dp[0][0] = 0;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// subseq - !subarr
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> mx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n1 <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;</span> n2 <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; j<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span> (nums1[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> nums2[j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]) {
-</span></span><span style="display:flex;"><span>                 dp[i][j] <span style="color:#f92672">=</span> dp[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>                mx <span style="color:#f92672">=</span> max(mx, dp[i][j]);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n1 <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) dp[i][<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n2 <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) dp[<span style="color:#666">0</span>][i] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// dp[0][0] = 0;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// subseq - !subarr
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n1 <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n2 <span style="color:#666">+</span> <span style="color:#666">1</span>; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (nums1[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> nums2[j <span style="color:#666">-</span> <span style="color:#666">1</span>]) {
+</span></span><span style="display:flex;"><span>                 dp[i][j] <span style="color:#666">=</span> dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>                mx <span style="color:#666">=</span> max(mx, dp[i][j]);
 </span></span><span style="display:flex;"><span>            }
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mx;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> mx;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1286s1hbhb">
+<h2 id="hahahugoshortcode1285s1hbhb">
   
 
   
@@ -298,31 +298,31 @@
 <ul>
 <li>We first compute the sizes of the two input arrays:</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n1 <span style="color:#f92672">=</span> nums1.size(), n2 <span style="color:#f92672">=</span> nums2.size();
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n1 <span style="color:#666">=</span> nums1.size(), n2 <span style="color:#666">=</span> nums2.size();
 </span></span></code></pre></div><ul>
 <li>We then create a 2D DP table <code>dp</code> of size <code>(n1 + 1) x (n2 + 1)</code> initialized to 0. The extra row and column are used to handle the base case when one of the arrays is empty:</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> dp(n1 <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(n2 <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>));
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> dp(n1 <span style="color:#666">+</span> <span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n2 <span style="color:#666">+</span> <span style="color:#666">1</span>));
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Base Case</strong>:</p>
 <ul>
 <li>The first row (<code>dp[0][*]</code>) and the first column (<code>dp[*][0]</code>) are initialized to zero because if either array is empty, the longest common subarray is of length 0. This is done using two loops:</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n1 <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>) dp[i][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n2 <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>) dp[<span style="color:#ae81ff">0</span>][i] <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n1 <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) dp[i][<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n2 <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) dp[<span style="color:#666">0</span>][i] <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Dynamic Programming Transition</strong>:</p>
 <ul>
 <li>We then iterate through both arrays starting from index 1 to compute the values in the DP table:</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;  <span style="color:#75715e">// This will hold the maximum length of the common subarray.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n1 <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; i<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; j <span style="color:#f92672">&lt;</span> n2 <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; j<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (nums1[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">==</span> nums2[j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]) {
-</span></span><span style="display:flex;"><span>            dp[i][j] <span style="color:#f92672">=</span> dp[i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>][j <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>] <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>            mx <span style="color:#f92672">=</span> max(mx, dp[i][j]);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">0</span>;  <span style="color:#080;font-style:italic">// This will hold the maximum length of the common subarray.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n1 <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n2 <span style="color:#666">+</span> <span style="color:#666">1</span>; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (nums1[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> nums2[j <span style="color:#666">-</span> <span style="color:#666">1</span>]) {
+</span></span><span style="display:flex;"><span>            dp[i][j] <span style="color:#666">=</span> dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            mx <span style="color:#666">=</span> max(mx, dp[i][j]);
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div><ul>
@@ -330,14 +330,14 @@
 <li>If <code>nums1[i - 1] != nums2[j - 1]</code>, the value of <code>dp[i][j]</code> remains 0, as no common subarray ends at those indices.</li>
 <li>At each step, we update <code>mx</code> to track the maximum length of any common subarray encountered so far:</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>mx <span style="color:#f92672">=</span> max(mx, dp[i][j]);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>mx <span style="color:#666">=</span> max(mx, dp[i][j]);
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Return the Result</strong>:</p>
 <ul>
 <li>After iterating through the entire array, the maximum length of the longest common subarray is stored in <code>mx</code>, and we return this value:</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> mx;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> mx;
 </span></span></code></pre></div></li>
 </ol>
 <h3 id="complexity-analysis">
@@ -376,7 +376,7 @@
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1286s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1285s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

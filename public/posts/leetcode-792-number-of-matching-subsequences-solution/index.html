@@ -238,36 +238,36 @@
         <p><a href="https://leetcode.com/problems/number-of-matching-subsequences/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> numMatchingSubseq(string s, vector<span style="color:#f92672">&lt;</span>string<span style="color:#f92672">&gt;&amp;</span> words) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> s.size();
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> srch(<span style="color:#ae81ff">26</span>);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> numMatchingSubseq(string s, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> words) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s.size();
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> srch(<span style="color:#666">26</span>);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.size(); i<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>            srch[s[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>].push_back(i);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>            srch[s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>].push_back(i);
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(string word : words) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">bool</span> found <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(string <span style="color:#a0a000">word</span> : words) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">bool</span> found <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> c : word) {
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> upper_bound(srch[c <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>].begin(), srch[c <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>].end(), x);
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(it <span style="color:#f92672">==</span> srch[c <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>].end()) {
-</span></span><span style="display:flex;"><span>                    found <span style="color:#f92672">=</span> false;
-</span></span><span style="display:flex;"><span>                    <span style="color:#66d9ef">break</span>;
-</span></span><span style="display:flex;"><span>                } <span style="color:#66d9ef">else</span> x <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>it;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span> : word) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> upper_bound(srch[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>].begin(), srch[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>].end(), x);
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(it <span style="color:#666">==</span> srch[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>].end()) {
+</span></span><span style="display:flex;"><span>                    found <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>                } <span style="color:#a2f;font-weight:bold">else</span> x <span style="color:#666">=</span> <span style="color:#666">*</span>it;
 </span></span><span style="display:flex;"><span>            }
 </span></span><span style="display:flex;"><span>            
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(found) res<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(found) res<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>                
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1328s1hbhb">
+<h2 id="hahahugoshortcode1324s1hbhb">
   
 
   
@@ -303,43 +303,43 @@
 <ol>
 <li>
 <p><strong>Initialization</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> s.size();
-</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> srch(<span style="color:#ae81ff">26</span>);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s.size();
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> srch(<span style="color:#666">26</span>);
 </span></span></code></pre></div><p>Here, we initialize <code>n</code> to the size of the string <code>s</code>. We also create a 2D vector <code>srch</code> of size 26 (one for each letter of the alphabet). This will hold the indices of each character in <code>s</code>.</p>
 </li>
 <li>
 <p><strong>Preprocessing the String <code>s</code></strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.size(); i<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>    srch[s[i] <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>].push_back(i);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    srch[s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>].push_back(i);
 </span></span></code></pre></div><p>In this step, we loop through each character of <code>s</code> and store the index of each character in the corresponding list within the <code>srch</code> vector. The expression <code>s[i] - 'a'</code> maps the character to an index between 0 and 25. For example, &lsquo;a&rsquo; will be mapped to index 0, &lsquo;b&rsquo; to index 1, and so on. This ensures that for each character in <code>s</code>, we know where it appears.</p>
 </li>
 <li>
 <p><strong>Checking Each Word in <code>words</code></strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> res <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(string word : words) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> x <span style="color:#f92672">=</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> found <span style="color:#f92672">=</span> true;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(string <span style="color:#a0a000">word</span> : words) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> found <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
 </span></span></code></pre></div><p>We initialize <code>res</code> to 0, which will keep track of how many words are subsequences of <code>s</code>. We then loop through each word in the <code>words</code> list. For each word, we initialize <code>x = -1</code>, which will store the index of the last matched character in <code>s</code>, and <code>found = true</code>, a flag to indicate if the word is a subsequence of <code>s</code>.</p>
 </li>
 <li>
 <p><strong>Matching Characters of the Word</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">char</span> c : word) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> upper_bound(srch[c <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>].begin(), srch[c <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>].end(), x);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(it <span style="color:#f92672">==</span> srch[c <span style="color:#f92672">-</span> <span style="color:#e6db74">&#39;a&#39;</span>].end()) {
-</span></span><span style="display:flex;"><span>        found <span style="color:#f92672">=</span> false;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">break</span>;
-</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> x <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>it;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span> : word) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> upper_bound(srch[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>].begin(), srch[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>].end(), x);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(it <span style="color:#666">==</span> srch[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>].end()) {
+</span></span><span style="display:flex;"><span>        found <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> x <span style="color:#666">=</span> <span style="color:#666">*</span>it;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><p>We iterate through each character <code>c</code> in the current word. For each character, we use <code>upper_bound</code> on the list of indices for that character in <code>s</code> (stored in <code>srch[c - 'a']</code>). The <code>upper_bound</code> function returns an iterator to the first element that is greater than <code>x</code>, where <code>x</code> is the index of the last matched character. If no such element is found (i.e., <code>it == srch[c - 'a'].end()</code>), it means the word is not a subsequence of <code>s</code>, so we set <code>found = false</code> and break out of the loop. If a match is found, we update <code>x</code> to the new index.</p>
 </li>
 <li>
 <p><strong>Count the Valid Subsequences</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(found) res<span style="color:#f92672">++</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(found) res<span style="color:#666">++</span>;
 </span></span></code></pre></div><p>After checking all characters in the word, if all characters were successfully matched, we increment the result counter <code>res</code>.</p>
 </li>
 <li>
 <p><strong>Return the Result</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div><p>Finally, we return the count of words that are subsequences of <code>s</code>.</p>
 </li>
 </ol>
@@ -354,18 +354,18 @@
 <ul>
 <li>
 <p><strong>Input</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;abcde&#34;</span>, words <span style="color:#f92672">=</span> [<span style="color:#e6db74">&#34;a&#34;</span>, <span style="color:#e6db74">&#34;bb&#34;</span>, <span style="color:#e6db74">&#34;acd&#34;</span>, <span style="color:#e6db74">&#34;ace&#34;</span>, <span style="color:#e6db74">&#34;bd&#34;</span>]
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>s <span style="color:#666">=</span> <span style="color:#b44">&#34;abcde&#34;</span>, words <span style="color:#666">=</span> [<span style="color:#b44">&#34;a&#34;</span>, <span style="color:#b44">&#34;bb&#34;</span>, <span style="color:#b44">&#34;acd&#34;</span>, <span style="color:#b44">&#34;ace&#34;</span>, <span style="color:#b44">&#34;bd&#34;</span>]
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Preprocessing</strong>:</p>
 <ul>
 <li>We build the <code>srch</code> vector where each character in <code>s</code> is mapped to its indices:
-<pre tabindex="0"><code>srch[0] = [0]    // &#39;a&#39; at index 0
-srch[1] = [1]    // &#39;b&#39; at index 1
-srch[2] = [2]    // &#39;c&#39; at index 2
-srch[3] = [3]    // &#39;d&#39; at index 3
-srch[4] = [4]    // &#39;e&#39; at index 4
-</code></pre></li>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>srch[0] = [0]    // &#39;a&#39; at index 0
+</span></span><span style="display:flex;"><span>srch[1] = [1]    // &#39;b&#39; at index 1
+</span></span><span style="display:flex;"><span>srch[2] = [2]    // &#39;c&#39; at index 2
+</span></span><span style="display:flex;"><span>srch[3] = [3]    // &#39;d&#39; at index 3
+</span></span><span style="display:flex;"><span>srch[4] = [4]    // &#39;e&#39; at index 4
+</span></span></code></pre></div></li>
 </ul>
 </li>
 <li>
@@ -420,7 +420,7 @@ The result is <code>3</code>, as the valid subsequences are <code>&quot;a&quot;<
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1328s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1324s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

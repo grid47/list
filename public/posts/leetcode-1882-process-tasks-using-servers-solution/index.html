@@ -214,37 +214,37 @@
         <p><a href="https://leetcode.com/problems/process-tasks-using-servers/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> assignTasks(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> servers, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> tasks) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> assignTasks(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> servers, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> tasks) {
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        priority_queue<span style="color:#f92672">&lt;</span>array<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span>, <span style="color:#ae81ff">3</span><span style="color:#f92672">&gt;</span>, vector<span style="color:#f92672">&lt;</span>array<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span>, <span style="color:#ae81ff">3</span><span style="color:#f92672">&gt;&gt;</span>, greater<span style="color:#f92672">&lt;</span>array<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span>, <span style="color:#ae81ff">3</span><span style="color:#f92672">&gt;&gt;&gt;</span> avail, busy;
+</span></span><span style="display:flex;"><span>        priority_queue<span style="color:#666">&lt;</span>array<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span>, <span style="color:#666">3</span><span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>array<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span>, <span style="color:#666">3</span><span style="color:#666">&gt;&gt;</span>, greater<span style="color:#666">&lt;</span>array<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span>, <span style="color:#666">3</span><span style="color:#666">&gt;&gt;&gt;</span> avail, busy;
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> servers.size();
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>            avail.push({<span style="color:#ae81ff">0</span>, servers[i], i});
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> servers.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>            avail.push({<span style="color:#666">0</span>, servers[i], i});
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> tasks.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> tasks.size();
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans;        
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans;        
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> t <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; t <span style="color:#f92672">&lt;</span> m; t<span style="color:#f92672">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> t <span style="color:#666">=</span> <span style="color:#666">0</span>; t <span style="color:#666">&lt;</span> m; t<span style="color:#666">++</span>) {
 </span></span><span style="display:flex;"><span>            
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>busy.empty() <span style="color:#f92672">&amp;&amp;</span> (busy.top()[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&lt;=</span> t <span style="color:#f92672">||</span> avail.empty())) {
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">auto</span> [time, w, idx] <span style="color:#f92672">=</span> busy.top();
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>busy.empty() <span style="color:#666">&amp;&amp;</span> (busy.top()[<span style="color:#666">0</span>] <span style="color:#666">&lt;=</span> t <span style="color:#666">||</span> avail.empty())) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">auto</span> [time, w, idx] <span style="color:#666">=</span> busy.top();
 </span></span><span style="display:flex;"><span>                busy.pop();
-</span></span><span style="display:flex;"><span>                avail.push({time <span style="color:#f92672">&lt;=</span> t<span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span> time, w, idx});
+</span></span><span style="display:flex;"><span>                avail.push({time <span style="color:#666">&lt;=</span> t<span style="color:#666">?</span> <span style="color:#666">0</span><span style="color:#666">:</span> time, w, idx});
 </span></span><span style="display:flex;"><span>            }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">auto</span> [time, w, idx] <span style="color:#f92672">=</span> avail.top();
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> [time, w, idx] <span style="color:#666">=</span> avail.top();
 </span></span><span style="display:flex;"><span>            avail.pop();
-</span></span><span style="display:flex;"><span>            busy.push({ max(time, (<span style="color:#66d9ef">long</span>)t) <span style="color:#f92672">+</span> tasks[t], w, idx});
+</span></span><span style="display:flex;"><span>            busy.push({ max(time, (<span style="color:#0b0;font-weight:bold">long</span>)t) <span style="color:#666">+</span> tasks[t], w, idx});
 </span></span><span style="display:flex;"><span>            ans.push_back(idx);
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode452s1hbhb">
+<h2 id="hahahugoshortcode463s1hbhb">
   
 
   
@@ -291,45 +291,45 @@
 <ol>
 <li>
 <p><strong>Class Definition</strong>: The solution is encapsulated in a class named <code>Solution</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Function Definition</strong>: The function <code>assignTasks</code> takes two vectors as parameters: <code>servers</code> and <code>tasks</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> assignTasks(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> servers, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> tasks) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> assignTasks(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> servers, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> tasks) {
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Priority Queue Initialization</strong>: Two priority queues are defined: <code>avail</code> for available servers and <code>busy</code> for busy servers. The available queue is populated with all servers initialized to be free at time 0.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        priority_queue<span style="color:#f92672">&lt;</span>array<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span>, <span style="color:#ae81ff">3</span><span style="color:#f92672">&gt;</span>, vector<span style="color:#f92672">&lt;</span>array<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span>, <span style="color:#ae81ff">3</span><span style="color:#f92672">&gt;&gt;</span>, greater<span style="color:#f92672">&lt;</span>array<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">long</span>, <span style="color:#ae81ff">3</span><span style="color:#f92672">&gt;&gt;&gt;</span> avail, busy;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> servers.size();
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>)
-</span></span><span style="display:flex;"><span>            avail.push({<span style="color:#ae81ff">0</span>, servers[i], i});
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        priority_queue<span style="color:#666">&lt;</span>array<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span>, <span style="color:#666">3</span><span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>array<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span>, <span style="color:#666">3</span><span style="color:#666">&gt;&gt;</span>, greater<span style="color:#666">&lt;</span>array<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span>, <span style="color:#666">3</span><span style="color:#666">&gt;&gt;&gt;</span> avail, busy;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> servers.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>            avail.push({<span style="color:#666">0</span>, servers[i], i});
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Task Processing</strong>: Loop through each task to assign it to a server.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> m <span style="color:#f92672">=</span> tasks.size();
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> ans;        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> t <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; t <span style="color:#f92672">&lt;</span> m; t<span style="color:#f92672">++</span>) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> tasks.size();
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans;        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> t <span style="color:#666">=</span> <span style="color:#666">0</span>; t <span style="color:#666">&lt;</span> m; t<span style="color:#666">++</span>) {
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Handling Busy Servers</strong>: While there are busy servers and the task time has exceeded their completion time, move these servers back to the available queue.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>busy.empty() <span style="color:#f92672">&amp;&amp;</span> (busy.top()[<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&lt;=</span> t <span style="color:#f92672">||</span> avail.empty())) {
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">auto</span> [time, w, idx] <span style="color:#f92672">=</span> busy.top();
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>busy.empty() <span style="color:#666">&amp;&amp;</span> (busy.top()[<span style="color:#666">0</span>] <span style="color:#666">&lt;=</span> t <span style="color:#666">||</span> avail.empty())) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">auto</span> [time, w, idx] <span style="color:#666">=</span> busy.top();
 </span></span><span style="display:flex;"><span>                busy.pop();
-</span></span><span style="display:flex;"><span>                avail.push({time <span style="color:#f92672">&lt;=</span> t<span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span> time, w, idx});
+</span></span><span style="display:flex;"><span>                avail.push({time <span style="color:#666">&lt;=</span> t<span style="color:#666">?</span> <span style="color:#666">0</span><span style="color:#666">:</span> time, w, idx});
 </span></span><span style="display:flex;"><span>            }
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Assigning Tasks</strong>: Extract the server with the least processing power from the available queue, and assign the task. Update the busy queue with the new busy status of the server.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">auto</span> [time, w, idx] <span style="color:#f92672">=</span> avail.top();
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> [time, w, idx] <span style="color:#666">=</span> avail.top();
 </span></span><span style="display:flex;"><span>            avail.pop();
-</span></span><span style="display:flex;"><span>            busy.push({ max(time, (<span style="color:#66d9ef">long</span>)t) <span style="color:#f92672">+</span> tasks[t], w, idx});
+</span></span><span style="display:flex;"><span>            busy.push({ max(time, (<span style="color:#0b0;font-weight:bold">long</span>)t) <span style="color:#666">+</span> tasks[t], w, idx});
 </span></span><span style="display:flex;"><span>            ans.push_back(idx);
 </span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Return Result</strong>: Finally, return the list of server indices corresponding to the assigned tasks.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div></li>
@@ -364,7 +364,7 @@
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode452s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode463s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

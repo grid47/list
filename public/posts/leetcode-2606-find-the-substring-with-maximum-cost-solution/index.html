@@ -224,28 +224,28 @@
         <p><a href="https://leetcode.com/problems/find-the-substring-with-maximum-cost/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> maximumCostSubstring(string s, string chars, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> vals) {
-</span></span><span style="display:flex;"><span>        map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> chars.size(); i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            mp[chars[i]] <span style="color:#f92672">=</span> vals[i];
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> maximumCostSubstring(string s, string chars, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> vals) {
+</span></span><span style="display:flex;"><span>        map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> chars.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            mp[chars[i]] <span style="color:#666">=</span> vals[i];
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">26</span>; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">char</span> x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;a&#39;</span> <span style="color:#f92672">+</span> i;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(mp.count(x)) <span style="color:#66d9ef">continue</span>;
-</span></span><span style="display:flex;"><span>            mp[x] <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">char</span> x <span style="color:#666">=</span> <span style="color:#b44">&#39;a&#39;</span> <span style="color:#666">+</span> i;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(mp.count(x)) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>            mp[x] <span style="color:#666">=</span> i <span style="color:#666">+</span> <span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> lmax <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, gmax <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.size(); i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(mp[s[i]] <span style="color:#f92672">&lt;</span> lmax <span style="color:#f92672">+</span> mp[s[i]]) {
-</span></span><span style="display:flex;"><span>                lmax <span style="color:#f92672">=</span> lmax <span style="color:#f92672">+</span> mp[s[i]];
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> lmax <span style="color:#f92672">=</span> mp[s[i]];
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> lmax <span style="color:#666">=</span> <span style="color:#666">0</span>, gmax <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(mp[s[i]] <span style="color:#666">&lt;</span> lmax <span style="color:#666">+</span> mp[s[i]]) {
+</span></span><span style="display:flex;"><span>                lmax <span style="color:#666">=</span> lmax <span style="color:#666">+</span> mp[s[i]];
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> lmax <span style="color:#666">=</span> mp[s[i]];
 </span></span><span style="display:flex;"><span>            
-</span></span><span style="display:flex;"><span>            gmax <span style="color:#f92672">=</span> max(gmax, lmax);
+</span></span><span style="display:flex;"><span>            gmax <span style="color:#666">=</span> max(gmax, lmax);
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> gmax;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> gmax;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
 <h2 id="hahahugoshortcode885s1hbhb">
@@ -294,9 +294,9 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">char</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> chars.size(); i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>    mp[chars[i]] <span style="color:#f92672">=</span> vals[i];
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> chars.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    mp[chars[i]] <span style="color:#666">=</span> vals[i];
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ul>
 <li>Here, we create a map <code>mp</code> where each character in the <code>chars</code> string is mapped to its corresponding value from <code>vals</code>.</li>
@@ -309,10 +309,10 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">26</span>; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">char</span> x <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;a&#39;</span> <span style="color:#f92672">+</span> i;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mp.count(x)) <span style="color:#66d9ef">continue</span>;
-</span></span><span style="display:flex;"><span>    mp[x] <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">char</span> x <span style="color:#666">=</span> <span style="color:#b44">&#39;a&#39;</span> <span style="color:#666">+</span> i;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mp.count(x)) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>    mp[x] <span style="color:#666">=</span> i <span style="color:#666">+</span> <span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ul>
 <li>This loop checks for characters in the alphabet that are not present in the <code>chars</code> string.</li>
@@ -325,7 +325,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> lmax <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, gmax <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> lmax <span style="color:#666">=</span> <span style="color:#666">0</span>, gmax <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div><ul>
 <li><code>lmax</code> keeps track of the current running sum of the substring. It is initialized to 0 because we start with no elements selected.</li>
 <li><code>gmax</code> stores the global maximum sum encountered during the iteration through the string <code>s</code>.</li>
@@ -337,12 +337,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> s.size(); i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(mp[s[i]] <span style="color:#f92672">&lt;</span> lmax <span style="color:#f92672">+</span> mp[s[i]]) {
-</span></span><span style="display:flex;"><span>        lmax <span style="color:#f92672">=</span> lmax <span style="color:#f92672">+</span> mp[s[i]];
-</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> lmax <span style="color:#f92672">=</span> mp[s[i]];
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mp[s[i]] <span style="color:#666">&lt;</span> lmax <span style="color:#666">+</span> mp[s[i]]) {
+</span></span><span style="display:flex;"><span>        lmax <span style="color:#666">=</span> lmax <span style="color:#666">+</span> mp[s[i]];
+</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> lmax <span style="color:#666">=</span> mp[s[i]];
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    gmax <span style="color:#f92672">=</span> max(gmax, lmax);
+</span></span><span style="display:flex;"><span>    gmax <span style="color:#666">=</span> max(gmax, lmax);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ul>
 <li>The loop iterates through each character in the string <code>s</code> and uses the previously created map <code>mp</code> to get the corresponding value of the character.</li>
@@ -357,7 +357,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> gmax;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> gmax;
 </span></span></code></pre></div><ul>
 <li>After iterating through the string, the function returns <code>gmax</code>, which contains the maximum sum of the substring.</li>
 </ul>

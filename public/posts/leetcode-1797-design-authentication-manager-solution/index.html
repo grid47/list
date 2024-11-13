@@ -224,54 +224,54 @@
         <p><a href="https://leetcode.com/problems/design-authentication-manager/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AuthenticationManager</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    priority_queue<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, string<span style="color:#f92672">&gt;</span>, vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, string<span style="color:#f92672">&gt;&gt;</span>, greater<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, string<span style="color:#f92672">&gt;&gt;&gt;</span> pq;
-</span></span><span style="display:flex;"><span>    map<span style="color:#f92672">&lt;</span>string, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ttl;
-</span></span><span style="display:flex;"><span>    AuthenticationManager(<span style="color:#66d9ef">int</span> timeToLive) {
-</span></span><span style="display:flex;"><span>        ttl <span style="color:#f92672">=</span> timeToLive;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">AuthenticationManager</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, string<span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, string<span style="color:#666">&gt;&gt;</span>, greater<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, string<span style="color:#666">&gt;&gt;&gt;</span> pq;
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span>string, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ttl;
+</span></span><span style="display:flex;"><span>    AuthenticationManager(<span style="color:#0b0;font-weight:bold">int</span> timeToLive) {
+</span></span><span style="display:flex;"><span>        ttl <span style="color:#666">=</span> timeToLive;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">generate</span>(string tokenId, <span style="color:#66d9ef">int</span> currentTime) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>pq.empty() <span style="color:#f92672">&amp;&amp;</span> currentTime <span style="color:#f92672">&gt;=</span> pq.top().first) {
-</span></span><span style="display:flex;"><span>            mp[pq.top().second]<span style="color:#f92672">--</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(mp[pq.top().second] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) mp.erase(pq.top().second);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">generate</span>(string tokenId, <span style="color:#0b0;font-weight:bold">int</span> currentTime) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty() <span style="color:#666">&amp;&amp;</span> currentTime <span style="color:#666">&gt;=</span> pq.top().first) {
+</span></span><span style="display:flex;"><span>            mp[pq.top().second]<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(mp[pq.top().second] <span style="color:#666">==</span> <span style="color:#666">0</span>) mp.erase(pq.top().second);
 </span></span><span style="display:flex;"><span>            pq.pop();
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        pq.push({currentTime <span style="color:#f92672">+</span> ttl, tokenId});
-</span></span><span style="display:flex;"><span>        mp[tokenId]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        pq.push({currentTime <span style="color:#666">+</span> ttl, tokenId});
+</span></span><span style="display:flex;"><span>        mp[tokenId]<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">renew</span>(string tokenId, <span style="color:#66d9ef">int</span> currentTime) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>pq.empty() <span style="color:#f92672">&amp;&amp;</span> currentTime <span style="color:#f92672">&gt;=</span> pq.top().first) {
-</span></span><span style="display:flex;"><span>            mp[pq.top().second]<span style="color:#f92672">--</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(mp[pq.top().second] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) mp.erase(pq.top().second);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">renew</span>(string tokenId, <span style="color:#0b0;font-weight:bold">int</span> currentTime) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty() <span style="color:#666">&amp;&amp;</span> currentTime <span style="color:#666">&gt;=</span> pq.top().first) {
+</span></span><span style="display:flex;"><span>            mp[pq.top().second]<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(mp[pq.top().second] <span style="color:#666">==</span> <span style="color:#666">0</span>) mp.erase(pq.top().second);
 </span></span><span style="display:flex;"><span>            pq.pop();
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(mp.count(tokenId)) {
-</span></span><span style="display:flex;"><span>            pq.push({currentTime <span style="color:#f92672">+</span> ttl, tokenId});            
-</span></span><span style="display:flex;"><span>            mp[tokenId]<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp.count(tokenId)) {
+</span></span><span style="display:flex;"><span>            pq.push({currentTime <span style="color:#666">+</span> ttl, tokenId});            
+</span></span><span style="display:flex;"><span>            mp[tokenId]<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">countUnexpiredTokens</span>(<span style="color:#66d9ef">int</span> currentTime) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>pq.empty() <span style="color:#f92672">&amp;&amp;</span> currentTime <span style="color:#f92672">&gt;=</span> pq.top().first) {
-</span></span><span style="display:flex;"><span>            mp[pq.top().second]<span style="color:#f92672">--</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(mp[pq.top().second] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) mp.erase(pq.top().second);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countUnexpiredTokens</span>(<span style="color:#0b0;font-weight:bold">int</span> currentTime) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty() <span style="color:#666">&amp;&amp;</span> currentTime <span style="color:#666">&gt;=</span> pq.top().first) {
+</span></span><span style="display:flex;"><span>            mp[pq.top().second]<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(mp[pq.top().second] <span style="color:#666">==</span> <span style="color:#666">0</span>) mp.erase(pq.top().second);
 </span></span><span style="display:flex;"><span>            pq.pop();
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mp.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> mp.size();
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Your AuthenticationManager object will be instantiated and called as such:
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * AuthenticationManager* obj = new AuthenticationManager(timeToLive);
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * obj-&gt;generate(tokenId,currentTime);
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * obj-&gt;renew(tokenId,currentTime);
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * int param_3 = obj-&gt;countUnexpiredTokens(currentTime);
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span></span></span></code></pre></div>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your AuthenticationManager object will be instantiated and called as such:
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * AuthenticationManager* obj = new AuthenticationManager(timeToLive);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * obj-&gt;generate(tokenId,currentTime);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * obj-&gt;renew(tokenId,currentTime);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * int param_3 = obj-&gt;countUnexpiredTokens(currentTime);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> */</span></span></span></code></pre></div>
 <h2 id="hahahugoshortcode405s1hbhb">
   
 
@@ -317,63 +317,63 @@
   </a>
 </h3>
 <p>Here’s the complete code for the <code>AuthenticationManager</code> class:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AuthenticationManager</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    priority_queue<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, string<span style="color:#f92672">&gt;</span>, vector<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, string<span style="color:#f92672">&gt;&gt;</span>, greater<span style="color:#f92672">&lt;</span>pair<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, string<span style="color:#f92672">&gt;&gt;&gt;</span> pq;
-</span></span><span style="display:flex;"><span>    map<span style="color:#f92672">&lt;</span>string, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ttl;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">AuthenticationManager</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    priority_queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, string<span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, string<span style="color:#666">&gt;&gt;</span>, greater<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, string<span style="color:#666">&gt;&gt;&gt;</span> pq;
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span>string, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ttl;
 </span></span></code></pre></div><ul>
 <li>We define the <code>AuthenticationManager</code> class, which includes a priority queue <code>pq</code> to store token expiration times and their corresponding IDs.</li>
 <li>A map <code>mp</code> keeps track of the count of each token ID currently active.</li>
 <li>An integer <code>ttl</code> holds the time-to-live value for tokens.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    AuthenticationManager(<span style="color:#66d9ef">int</span> timeToLive) {
-</span></span><span style="display:flex;"><span>        ttl <span style="color:#f92672">=</span> timeToLive;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    AuthenticationManager(<span style="color:#0b0;font-weight:bold">int</span> timeToLive) {
+</span></span><span style="display:flex;"><span>        ttl <span style="color:#666">=</span> timeToLive;
 </span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div><ul>
 <li>The constructor initializes the <code>ttl</code> variable with the provided time-to-live value for the tokens.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">generate</span>(string tokenId, <span style="color:#66d9ef">int</span> currentTime) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>pq.empty() <span style="color:#f92672">&amp;&amp;</span> currentTime <span style="color:#f92672">&gt;=</span> pq.top().first) {
-</span></span><span style="display:flex;"><span>            mp[pq.top().second]<span style="color:#f92672">--</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(mp[pq.top().second] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) mp.erase(pq.top().second);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">generate</span>(string tokenId, <span style="color:#0b0;font-weight:bold">int</span> currentTime) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty() <span style="color:#666">&amp;&amp;</span> currentTime <span style="color:#666">&gt;=</span> pq.top().first) {
+</span></span><span style="display:flex;"><span>            mp[pq.top().second]<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(mp[pq.top().second] <span style="color:#666">==</span> <span style="color:#666">0</span>) mp.erase(pq.top().second);
 </span></span><span style="display:flex;"><span>            pq.pop();
 </span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></div><ul>
 <li>The <code>generate</code> method first checks for any expired tokens. If the current time exceeds the expiration time of the earliest token in the priority queue, it decrements the count of that token ID in the map. If the count drops to zero, the token ID is removed from the map.</li>
 <li>The expired tokens are then removed from the priority queue as well.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.push({currentTime <span style="color:#f92672">+</span> ttl, tokenId});
-</span></span><span style="display:flex;"><span>        mp[tokenId]<span style="color:#f92672">++</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.push({currentTime <span style="color:#666">+</span> ttl, tokenId});
+</span></span><span style="display:flex;"><span>        mp[tokenId]<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div><ul>
 <li>After cleaning up expired tokens, the method adds a new token to the priority queue with its expiration time and updates the map to reflect the new token.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">renew</span>(string tokenId, <span style="color:#66d9ef">int</span> currentTime) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>pq.empty() <span style="color:#f92672">&amp;&amp;</span> currentTime <span style="color:#f92672">&gt;=</span> pq.top().first) {
-</span></span><span style="display:flex;"><span>            mp[pq.top().second]<span style="color:#f92672">--</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(mp[pq.top().second] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) mp.erase(pq.top().second);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">renew</span>(string tokenId, <span style="color:#0b0;font-weight:bold">int</span> currentTime) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty() <span style="color:#666">&amp;&amp;</span> currentTime <span style="color:#666">&gt;=</span> pq.top().first) {
+</span></span><span style="display:flex;"><span>            mp[pq.top().second]<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(mp[pq.top().second] <span style="color:#666">==</span> <span style="color:#666">0</span>) mp.erase(pq.top().second);
 </span></span><span style="display:flex;"><span>            pq.pop();
 </span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></div><ul>
 <li>The <code>renew</code> method similarly cleans up expired tokens before attempting to renew the specified token ID.</li>
 <li>If the token is valid (exists in the map), it updates the expiration time and increments its count in the map.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(mp.count(tokenId)) {
-</span></span><span style="display:flex;"><span>            pq.push({currentTime <span style="color:#f92672">+</span> ttl, tokenId});            
-</span></span><span style="display:flex;"><span>            mp[tokenId]<span style="color:#f92672">++</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp.count(tokenId)) {
+</span></span><span style="display:flex;"><span>            pq.push({currentTime <span style="color:#666">+</span> ttl, tokenId});            
+</span></span><span style="display:flex;"><span>            mp[tokenId]<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span></code></pre></div><ul>
 <li>If the token exists, a new expiration time is pushed to the priority queue, and its count is incremented.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">countUnexpiredTokens</span>(<span style="color:#66d9ef">int</span> currentTime) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>pq.empty() <span style="color:#f92672">&amp;&amp;</span> currentTime <span style="color:#f92672">&gt;=</span> pq.top().first) {
-</span></span><span style="display:flex;"><span>            mp[pq.top().second]<span style="color:#f92672">--</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(mp[pq.top().second] <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) mp.erase(pq.top().second);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countUnexpiredTokens</span>(<span style="color:#0b0;font-weight:bold">int</span> currentTime) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty() <span style="color:#666">&amp;&amp;</span> currentTime <span style="color:#666">&gt;=</span> pq.top().first) {
+</span></span><span style="display:flex;"><span>            mp[pq.top().second]<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(mp[pq.top().second] <span style="color:#666">==</span> <span style="color:#666">0</span>) mp.erase(pq.top().second);
 </span></span><span style="display:flex;"><span>            pq.pop();
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mp.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> mp.size();
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><ul>

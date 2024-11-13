@@ -214,41 +214,41 @@
         <p><a href="https://leetcode.com/problems/maximum-profit-of-operating-a-centennial-wheel/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> minOperationsMaxProfit(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> cust, <span style="color:#66d9ef">int</span> boardingCost, <span style="color:#66d9ef">int</span> runningCost) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> minOperationsMaxProfit(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> cust, <span style="color:#0b0;font-weight:bold">int</span> boardingCost, <span style="color:#0b0;font-weight:bold">int</span> runningCost) {
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#75715e">/*
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        4gondolas
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        couter clockwise
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        running cost
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e">        */</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        4gondolas
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        couter clockwise
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        running cost
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        */</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> cust.size();
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> wait <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> profit <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, rot <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mx <span style="color:#f92672">=</span> INT_MIN;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> idx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(idx <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">||</span> wait <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
-</span></span><span style="display:flex;"><span>            wait <span style="color:#f92672">+=</span> idx <span style="color:#f92672">&lt;</span> n<span style="color:#f92672">?</span> cust[idx]<span style="color:#f92672">:</span><span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// cout &lt;&lt; wait &lt;&lt; &#34; &#34;;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span>(wait <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">4</span>) {
-</span></span><span style="display:flex;"><span>                profit <span style="color:#f92672">+=</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">*</span> boardingCost <span style="color:#f92672">-</span> runningCost;
-</span></span><span style="display:flex;"><span>                wait <span style="color:#f92672">-=</span> <span style="color:#ae81ff">4</span>;
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(wait <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
-</span></span><span style="display:flex;"><span>                profit <span style="color:#f92672">+=</span> wait <span style="color:#f92672">*</span> boardingCost <span style="color:#f92672">-</span> runningCost;
-</span></span><span style="display:flex;"><span>                wait <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> cust.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> wait <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> profit <span style="color:#666">=</span> <span style="color:#666">0</span>, rot <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> INT_MIN;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> idx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(idx <span style="color:#666">&lt;</span> n <span style="color:#666">||</span> wait <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>            wait <span style="color:#666">+=</span> idx <span style="color:#666">&lt;</span> n<span style="color:#666">?</span> cust[idx]<span style="color:#666">:</span><span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">// cout &lt;&lt; wait &lt;&lt; &#34; &#34;;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#a2f;font-weight:bold">if</span>(wait <span style="color:#666">&gt;</span> <span style="color:#666">4</span>) {
+</span></span><span style="display:flex;"><span>                profit <span style="color:#666">+=</span> <span style="color:#666">4</span> <span style="color:#666">*</span> boardingCost <span style="color:#666">-</span> runningCost;
+</span></span><span style="display:flex;"><span>                wait <span style="color:#666">-=</span> <span style="color:#666">4</span>;
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(wait <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>                profit <span style="color:#666">+=</span> wait <span style="color:#666">*</span> boardingCost <span style="color:#666">-</span> runningCost;
+</span></span><span style="display:flex;"><span>                wait <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>            }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(mx <span style="color:#f92672">&lt;</span> profit) {
-</span></span><span style="display:flex;"><span>                mx <span style="color:#f92672">=</span> profit;
-</span></span><span style="display:flex;"><span>                rot <span style="color:#f92672">=</span> idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(mx <span style="color:#666">&lt;</span> profit) {
+</span></span><span style="display:flex;"><span>                mx <span style="color:#666">=</span> profit;
+</span></span><span style="display:flex;"><span>                rot <span style="color:#666">=</span> idx <span style="color:#666">+</span> <span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            idx<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            idx<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mx <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#f92672">:</span> rot;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> mx <span style="color:#666">&lt;=</span> <span style="color:#666">0</span><span style="color:#666">?</span> <span style="color:#666">-</span><span style="color:#666">1</span><span style="color:#666">:</span> rot;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
 <h2 id="hahahugoshortcode305s1hbhb">
@@ -300,49 +300,49 @@
   </a>
 </h3>
 <p>Here&rsquo;s the provided code with an explanation of each section:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> minOperationsMaxProfit(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> cust, <span style="color:#66d9ef">int</span> boardingCost, <span style="color:#66d9ef">int</span> runningCost) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> minOperationsMaxProfit(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> cust, <span style="color:#0b0;font-weight:bold">int</span> boardingCost, <span style="color:#0b0;font-weight:bold">int</span> runningCost) {
 </span></span></code></pre></div><ul>
 <li><strong>Class Definition</strong>: We define a class <code>Solution</code> that contains a public method <code>minOperationsMaxProfit</code>. This method takes in a vector of integers representing customer arrivals (<code>cust</code>), the cost of boarding each customer (<code>boardingCost</code>), and the fixed cost for running the gondola for each round (<code>runningCost</code>).</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> cust.size(); <span style="color:#75715e">// Get the total number of customer entries
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> wait <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#75715e">// Initialize the waiting customer count
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> profit <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, rot <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#75715e">// Initialize profit and rotation count
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> mx <span style="color:#f92672">=</span> INT_MIN; <span style="color:#75715e">// Initialize maximum profit to the smallest integer value
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">int</span> idx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#75715e">// Initialize the index for customer processing
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> cust.size(); <span style="color:#080;font-style:italic">// Get the total number of customer entries
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#0b0;font-weight:bold">int</span> wait <span style="color:#666">=</span> <span style="color:#666">0</span>; <span style="color:#080;font-style:italic">// Initialize the waiting customer count
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#0b0;font-weight:bold">int</span> profit <span style="color:#666">=</span> <span style="color:#666">0</span>, rot <span style="color:#666">=</span> <span style="color:#666">0</span>; <span style="color:#080;font-style:italic">// Initialize profit and rotation count
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> INT_MIN; <span style="color:#080;font-style:italic">// Initialize maximum profit to the smallest integer value
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#0b0;font-weight:bold">int</span> idx <span style="color:#666">=</span> <span style="color:#666">0</span>; <span style="color:#080;font-style:italic">// Initialize the index for customer processing
 </span></span></span></code></pre></div><ul>
 <li><strong>Variable Initialization</strong>: Here, we initialize the total number of customers, waiting customer count, current profit, rotation count, maximum profit tracker, and the index for iteration.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(idx <span style="color:#f92672">&lt;</span> n <span style="color:#f92672">||</span> wait <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) { <span style="color:#75715e">// Continue until all customers are processed or waiting
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            wait <span style="color:#f92672">+=</span> idx <span style="color:#f92672">&lt;</span> n<span style="color:#f92672">?</span> cust[idx]<span style="color:#f92672">:</span><span style="color:#ae81ff">0</span>; <span style="color:#75715e">// Add new customers to the waiting count
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(idx <span style="color:#666">&lt;</span> n <span style="color:#666">||</span> wait <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) { <span style="color:#080;font-style:italic">// Continue until all customers are processed or waiting
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            wait <span style="color:#666">+=</span> idx <span style="color:#666">&lt;</span> n<span style="color:#666">?</span> cust[idx]<span style="color:#666">:</span><span style="color:#666">0</span>; <span style="color:#080;font-style:italic">// Add new customers to the waiting count
 </span></span></span></code></pre></div><ul>
 <li><strong>Main Loop</strong>: This loop continues until all customers have been processed and there are no waiting customers left. It first adds any new customers from the input list to the waiting count.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(wait <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">4</span>) {
-</span></span><span style="display:flex;"><span>                profit <span style="color:#f92672">+=</span> <span style="color:#ae81ff">4</span> <span style="color:#f92672">*</span> boardingCost <span style="color:#f92672">-</span> runningCost; <span style="color:#75715e">// Calculate profit for full boarding
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                wait <span style="color:#f92672">-=</span> <span style="color:#ae81ff">4</span>; <span style="color:#75715e">// Decrease waiting count by 4
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            } <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(wait <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>) {
-</span></span><span style="display:flex;"><span>                profit <span style="color:#f92672">+=</span> wait <span style="color:#f92672">*</span> boardingCost <span style="color:#f92672">-</span> runningCost; <span style="color:#75715e">// Calculate profit for remaining customers
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                wait <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; <span style="color:#75715e">// Reset wait to 0 after boarding all waiting customers
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(wait <span style="color:#666">&gt;</span> <span style="color:#666">4</span>) {
+</span></span><span style="display:flex;"><span>                profit <span style="color:#666">+=</span> <span style="color:#666">4</span> <span style="color:#666">*</span> boardingCost <span style="color:#666">-</span> runningCost; <span style="color:#080;font-style:italic">// Calculate profit for full boarding
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                wait <span style="color:#666">-=</span> <span style="color:#666">4</span>; <span style="color:#080;font-style:italic">// Decrease waiting count by 4
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(wait <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>                profit <span style="color:#666">+=</span> wait <span style="color:#666">*</span> boardingCost <span style="color:#666">-</span> runningCost; <span style="color:#080;font-style:italic">// Calculate profit for remaining customers
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                wait <span style="color:#666">=</span> <span style="color:#666">0</span>; <span style="color:#080;font-style:italic">// Reset wait to 0 after boarding all waiting customers
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            }
 </span></span></code></pre></div><ul>
 <li><strong>Profit Calculation</strong>: The first <code>if</code> condition checks if there are more than 4 customers waiting. If so, the profit is calculated based on 4 customers boarding, and the waiting count is decreased accordingly. If there are fewer than 4 but more than 0, we calculate profit based on all remaining waiting customers and reset the waiting count.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(mx <span style="color:#f92672">&lt;</span> profit) {
-</span></span><span style="display:flex;"><span>                mx <span style="color:#f92672">=</span> profit; <span style="color:#75715e">// Update maximum profit
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                rot <span style="color:#f92672">=</span> idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>; <span style="color:#75715e">// Update the round number associated with max profit
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            }
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(mx <span style="color:#666">&lt;</span> profit) {
+</span></span><span style="display:flex;"><span>                mx <span style="color:#666">=</span> profit; <span style="color:#080;font-style:italic">// Update maximum profit
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                rot <span style="color:#666">=</span> idx <span style="color:#666">+</span> <span style="color:#666">1</span>; <span style="color:#080;font-style:italic">// Update the round number associated with max profit
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            }
 </span></span></code></pre></div><ul>
 <li><strong>Max Profit Tracking</strong>: After calculating the profit for the current round, we check if this profit is greater than the previously recorded maximum. If so, we update the maximum profit and store the current round number.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            idx<span style="color:#f92672">++</span>; <span style="color:#75715e">// Move to the next customer entry
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        }
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            idx<span style="color:#666">++</span>; <span style="color:#080;font-style:italic">// Move to the next customer entry
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        }
 </span></span></code></pre></div><ul>
 <li><strong>Iteration Control</strong>: Increment the index to process the next customer in the subsequent round.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> mx <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">?</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span><span style="color:#f92672">:</span> rot; <span style="color:#75715e">// Return the result based on the maximum profit observed
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> mx <span style="color:#666">&lt;=</span> <span style="color:#666">0</span><span style="color:#666">?</span> <span style="color:#666">-</span><span style="color:#666">1</span><span style="color:#666">:</span> rot; <span style="color:#080;font-style:italic">// Return the result based on the maximum profit observed
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><ul>
 <li><strong>Result Return</strong>: After completing the loop, we return the round number associated with the maximum profit unless the maximum profit is less than or equal to zero, in which case we return -1.</li>

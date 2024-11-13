@@ -214,74 +214,74 @@
         <p><a href="https://leetcode.com/problems/house-robber-iv/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> nums;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;&gt;</span> memo;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> nums;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;&gt;</span> memo;
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">int</span> k, <span style="color:#66d9ef">bool</span> prv, <span style="color:#66d9ef">int</span> mx) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">==</span> n) <span style="color:#66d9ef">return</span> (k <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>)<span style="color:#f92672">?</span> INT_MAX: mx;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> k, <span style="color:#0b0;font-weight:bold">bool</span> prv, <span style="color:#0b0;font-weight:bold">int</span> mx) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> n) <span style="color:#a2f;font-weight:bold">return</span> (k <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)<span style="color:#666">?</span> <span style="color:#a0a000">INT_MAX</span>: mx;
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(memo[idx][k][prv].count(mx)) <span style="color:#66d9ef">return</span> memo[idx][k][prv][mx];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(memo[idx][k][prv].count(mx)) <span style="color:#a2f;font-weight:bold">return</span> memo[idx][k][prv][mx];
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, k, false, mx);
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, k, <span style="color:#a2f">false</span>, mx);
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>prv) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> tmp <span style="color:#f92672">=</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span> k<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, true, mx <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">?</span> nums[idx]<span style="color:#f92672">:</span> (mx <span style="color:#f92672">&gt;</span> nums[idx]) <span style="color:#f92672">?</span> mx: nums[idx]);
-</span></span><span style="display:flex;"><span>            ans <span style="color:#f92672">=</span> min(ans, tmp);            
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>prv) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, k <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">&lt;</span> <span style="color:#666">1</span><span style="color:#666">?</span> <span style="color:#666">0</span><span style="color:#666">:</span> k<span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#a2f">true</span>, mx <span style="color:#666">==</span> <span style="color:#666">0</span><span style="color:#666">?</span> nums[idx]<span style="color:#666">:</span> (mx <span style="color:#666">&gt;</span> nums[idx]) <span style="color:#666">?</span> <span style="color:#a0a000">mx</span>: nums[idx]);
+</span></span><span style="display:flex;"><span>            ans <span style="color:#666">=</span> min(ans, tmp);            
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> memo[idx][k][prv][mx] <span style="color:#f92672">=</span> ans;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> memo[idx][k][prv][mx] <span style="color:#666">=</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minCap</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> k) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">this</span><span style="color:#f92672">-&gt;</span>nums <span style="color:#f92672">=</span> nums;
-</span></span><span style="display:flex;"><span>        n <span style="color:#f92672">=</span> nums.size();
-</span></span><span style="display:flex;"><span>        memo.resize(n, vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;</span>(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, vector<span style="color:#f92672">&lt;</span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>,<span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>(<span style="color:#ae81ff">2</span>)));
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>, k, false, <span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minCap</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>nums <span style="color:#666">=</span> nums;
+</span></span><span style="display:flex;"><span>        n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>        memo.resize(n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;</span>(n <span style="color:#666">+</span> <span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span>(<span style="color:#666">2</span>)));
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> dp(<span style="color:#666">0</span>, k, <span style="color:#a2f">false</span>, <span style="color:#666">0</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">can</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>nums, <span style="color:#66d9ef">int</span> k, <span style="color:#66d9ef">int</span> mid) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, take <span style="color:#f92672">=</span> true;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">1</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(nums[i] <span style="color:#f92672">&lt;=</span> mid <span style="color:#f92672">&amp;&amp;</span> take) {
-</span></span><span style="display:flex;"><span>                take <span style="color:#f92672">=</span> false;
-</span></span><span style="display:flex;"><span>                cnt<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>take) {
-</span></span><span style="display:flex;"><span>                take <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">can</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>nums, <span style="color:#0b0;font-weight:bold">int</span> k, <span style="color:#0b0;font-weight:bold">int</span> mid) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>, take <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i <span style="color:#666">+=</span> <span style="color:#666">1</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">&lt;=</span> mid <span style="color:#666">&amp;&amp;</span> take) {
+</span></span><span style="display:flex;"><span>                take <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>                cnt<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>take) {
+</span></span><span style="display:flex;"><span>                take <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(cnt <span style="color:#f92672">&gt;=</span> k) <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(cnt <span style="color:#666">&gt;=</span> k) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, take <span style="color:#f92672">=</span> true;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(nums[i] <span style="color:#f92672">&lt;=</span> mid <span style="color:#f92672">&amp;&amp;</span> take) {
-</span></span><span style="display:flex;"><span>                take <span style="color:#f92672">=</span> false;
-</span></span><span style="display:flex;"><span>                cnt<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>take) {
-</span></span><span style="display:flex;"><span>                take <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>        cnt <span style="color:#666">=</span> <span style="color:#666">0</span>, take <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i <span style="color:#666">+=</span> <span style="color:#666">2</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">&lt;=</span> mid <span style="color:#666">&amp;&amp;</span> take) {
+</span></span><span style="display:flex;"><span>                take <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>                cnt<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>take) {
+</span></span><span style="display:flex;"><span>                take <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(cnt <span style="color:#f92672">&gt;=</span> k) <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(cnt <span style="color:#666">&gt;=</span> k) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>        }        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">minCapability</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> nums, <span style="color:#66d9ef">int</span> k) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minCapability</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mx <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>max_element(nums.begin(), nums.end());
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mn <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>min_element(nums.begin(), nums.end());
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> l <span style="color:#f92672">=</span> mn, r <span style="color:#f92672">=</span> mx, ans <span style="color:#f92672">=</span> mx;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(l <span style="color:#f92672">&lt;=</span> r) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> l <span style="color:#f92672">+</span> (r <span style="color:#f92672">-</span> l <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#75715e">// cout &lt;&lt; mid &lt;&lt; &#34; &#34; &lt;&lt; can(nums, k, mid) &lt;&lt; &#34;\n&#34;;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>            <span style="color:#66d9ef">if</span>(can(nums, k, mid)) {
-</span></span><span style="display:flex;"><span>                ans <span style="color:#f92672">=</span> mid;
-</span></span><span style="display:flex;"><span>                r <span style="color:#f92672">=</span> mid <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> l <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">*</span>max_element(nums.begin(), nums.end());
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mn <span style="color:#666">=</span> <span style="color:#666">*</span>min_element(nums.begin(), nums.end());
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> mn, r <span style="color:#666">=</span> mx, ans <span style="color:#666">=</span> mx;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;=</span> r) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">// cout &lt;&lt; mid &lt;&lt; &#34; &#34; &lt;&lt; can(nums, k, mid) &lt;&lt; &#34;\n&#34;;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#a2f;font-weight:bold">if</span>(can(nums, k, mid)) {
+</span></span><span style="display:flex;"><span>                ans <span style="color:#666">=</span> mid;
+</span></span><span style="display:flex;"><span>                r <span style="color:#666">=</span> mid <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> l <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
 <h2 id="hahahugoshortcode851s1hbhb">
@@ -343,9 +343,9 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mx <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>max_element(nums.begin(), nums.end());
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> mn <span style="color:#f92672">=</span> <span style="color:#f92672">*</span>min_element(nums.begin(), nums.end());
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> l <span style="color:#f92672">=</span> mn, r <span style="color:#f92672">=</span> mx, ans <span style="color:#f92672">=</span> mx;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">*</span>max_element(nums.begin(), nums.end());
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mn <span style="color:#666">=</span> <span style="color:#666">*</span>min_element(nums.begin(), nums.end());
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> mn, r <span style="color:#666">=</span> mx, ans <span style="color:#666">=</span> mx;
 </span></span></code></pre></div><ul>
 <li><strong>mx</strong>: The maximum element in the list <code>nums</code>, which serves as the upper bound for our binary search.</li>
 <li><strong>mn</strong>: The minimum element in <code>nums</code>, which is the lower bound for our binary search.</li>
@@ -359,12 +359,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(l <span style="color:#f92672">&lt;=</span> r) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> l <span style="color:#f92672">+</span> (r <span style="color:#f92672">-</span> l <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(can(nums, k, mid)) {
-</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> mid;
-</span></span><span style="display:flex;"><span>        r <span style="color:#f92672">=</span> mid <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> l <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;=</span> r) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(can(nums, k, mid)) {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> mid;
+</span></span><span style="display:flex;"><span>        r <span style="color:#666">=</span> mid <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> l <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ul>
 <li>In each iteration of the binary search loop, we calculate the middle point <code>mid</code>.</li>
@@ -379,29 +379,29 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> <span style="color:#a6e22e">can</span>(vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>nums, <span style="color:#66d9ef">int</span> k, <span style="color:#66d9ef">int</span> mid) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n <span style="color:#f92672">=</span> nums.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, take <span style="color:#f92672">=</span> true;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> n; i<span style="color:#f92672">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(nums[i] <span style="color:#f92672">&lt;=</span> mid <span style="color:#f92672">&amp;&amp;</span> take) {
-</span></span><span style="display:flex;"><span>            take <span style="color:#f92672">=</span> false;
-</span></span><span style="display:flex;"><span>            cnt<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>take) {
-</span></span><span style="display:flex;"><span>            take <span style="color:#f92672">=</span> true;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">can</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>nums, <span style="color:#0b0;font-weight:bold">int</span> k, <span style="color:#0b0;font-weight:bold">int</span> mid) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>, take <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">&lt;=</span> mid <span style="color:#666">&amp;&amp;</span> take) {
+</span></span><span style="display:flex;"><span>            take <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>            cnt<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>take) {
+</span></span><span style="display:flex;"><span>            take <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(cnt <span style="color:#f92672">&gt;=</span> k) <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cnt <span style="color:#666">&gt;=</span> k) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    cnt <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, take <span style="color:#f92672">=</span> true;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; i <span style="color:#f92672">&lt;</span> n; i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(nums[i] <span style="color:#f92672">&lt;=</span> mid <span style="color:#f92672">&amp;&amp;</span> take) {
-</span></span><span style="display:flex;"><span>            take <span style="color:#f92672">=</span> false;
-</span></span><span style="display:flex;"><span>            cnt<span style="color:#f92672">++</span>;
-</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>take) {
-</span></span><span style="display:flex;"><span>            take <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>    cnt <span style="color:#666">=</span> <span style="color:#666">0</span>, take <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i <span style="color:#666">+=</span> <span style="color:#666">2</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">&lt;=</span> mid <span style="color:#666">&amp;&amp;</span> take) {
+</span></span><span style="display:flex;"><span>            take <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>            cnt<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>take) {
+</span></span><span style="display:flex;"><span>            take <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(cnt <span style="color:#f92672">&gt;=</span> k) <span style="color:#66d9ef">return</span> true;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cnt <span style="color:#666">&gt;=</span> k) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>    }        
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> false;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ul>
 <li><strong>Feasibility Check</strong>: This function checks whether we can select <code>k</code> non-adjacent numbers from <code>nums</code> where each selected number is less than or equal to <code>mid</code>.</li>
@@ -420,17 +420,17 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> nums;
-</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;&gt;</span> memo;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">int</span> k, <span style="color:#66d9ef">bool</span> prv, <span style="color:#66d9ef">int</span> mx) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">==</span> n) <span style="color:#66d9ef">return</span> (k <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span>)<span style="color:#f92672">?</span> INT_MAX: mx;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(memo[idx][k][prv].count(mx)) <span style="color:#66d9ef">return</span> memo[idx][k][prv][mx];
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, k, false, mx);
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>prv) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> tmp <span style="color:#f92672">=</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span> <span style="color:#f92672">&lt;</span> <span style="color:#ae81ff">1</span><span style="color:#f92672">?</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">:</span> k<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, true, mx <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span><span style="color:#f92672">?</span> nums[idx]<span style="color:#f92672">:</span> (mx <span style="color:#f92672">&gt;</span> nums[idx]) <span style="color:#f92672">?</span> mx: nums[idx]);
-</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> min(ans, tmp);            
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> nums;
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;&gt;</span> memo;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> k, <span style="color:#0b0;font-weight:bold">bool</span> prv, <span style="color:#0b0;font-weight:bold">int</span> mx) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> n) <span style="color:#a2f;font-weight:bold">return</span> (k <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)<span style="color:#666">?</span> <span style="color:#a0a000">INT_MAX</span>: mx;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[idx][k][prv].count(mx)) <span style="color:#a2f;font-weight:bold">return</span> memo[idx][k][prv][mx];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, k, <span style="color:#a2f">false</span>, mx);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>prv) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, k <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">&lt;</span> <span style="color:#666">1</span><span style="color:#666">?</span> <span style="color:#666">0</span><span style="color:#666">:</span> k<span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#a2f">true</span>, mx <span style="color:#666">==</span> <span style="color:#666">0</span><span style="color:#666">?</span> nums[idx]<span style="color:#666">:</span> (mx <span style="color:#666">&gt;</span> nums[idx]) <span style="color:#666">?</span> <span style="color:#a0a000">mx</span>: nums[idx]);
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> min(ans, tmp);            
 </span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> memo[idx][k][prv][mx] <span style="color:#f92672">=</span> ans;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[idx][k][prv][mx] <span style="color:#666">=</span> ans;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ul>
 <li><strong>Memoization</strong>: The <code>memo</code> array stores the results of previously computed subproblems to avoid recalculating them.</li>
@@ -443,7 +443,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span></code></pre></div><ul>
 <li>Once the binary search is complete, the value of <code>ans</code> will be the minimum capability <code>x</code> for which it&rsquo;s possible to select <code>k</code> non-adjacent numbers.</li>
 </ul>

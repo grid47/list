@@ -224,49 +224,49 @@
         <p><a href="https://leetcode.com/problems/reverse-odd-levels-of-binary-tree/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">/**
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Definition for a binary tree node.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * struct TreeNode {
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     int val;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode *left;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode *right;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * };
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    TreeNode<span style="color:#f92672">*</span> reverseOddLevels(TreeNode<span style="color:#f92672">*</span> root) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>root) <span style="color:#66d9ef">return</span> root;
-</span></span><span style="display:flex;"><span>        queue<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*&gt;</span> q;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Definition for a binary tree node.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * struct TreeNode {
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     int val;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode *left;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode *right;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * };
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    TreeNode<span style="color:#666">*</span> reverseOddLevels(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>root) <span style="color:#a2f;font-weight:bold">return</span> root;
+</span></span><span style="display:flex;"><span>        queue<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> q;
 </span></span><span style="display:flex;"><span>        q.push(root);
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> vals;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> level <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> vals;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> level <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> q.size();
-</span></span><span style="display:flex;"><span>            vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> temp;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> sz; i<span style="color:#f92672">++</span>)  {
-</span></span><span style="display:flex;"><span>                TreeNode<span style="color:#f92672">*</span> node <span style="color:#f92672">=</span> q.front(); q.pop();
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(level <span style="color:#f92672">%</span><span style="color:#ae81ff">2</span>) node<span style="color:#f92672">-&gt;</span>val<span style="color:#f92672">=</span> vals[sz<span style="color:#f92672">-</span> i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(node<span style="color:#f92672">-&gt;</span>left) {
-</span></span><span style="display:flex;"><span>                    q.push(node<span style="color:#f92672">-&gt;</span>left);
-</span></span><span style="display:flex;"><span>                    temp.push_back(node<span style="color:#f92672">-&gt;</span>left<span style="color:#f92672">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
+</span></span><span style="display:flex;"><span>            vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> temp;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> sz; i<span style="color:#666">++</span>)  {
+</span></span><span style="display:flex;"><span>                TreeNode<span style="color:#666">*</span> node <span style="color:#666">=</span> q.front(); q.pop();
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(level <span style="color:#666">%</span><span style="color:#666">2</span>) node<span style="color:#666">-&gt;</span>val<span style="color:#666">=</span> vals[sz<span style="color:#666">-</span> i <span style="color:#666">-</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>left) {
+</span></span><span style="display:flex;"><span>                    q.push(node<span style="color:#666">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>                    temp.push_back(node<span style="color:#666">-&gt;</span>left<span style="color:#666">-&gt;</span>val);
 </span></span><span style="display:flex;"><span>                }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">if</span>(node<span style="color:#f92672">-&gt;</span>right) {
-</span></span><span style="display:flex;"><span>                    q.push(node<span style="color:#f92672">-&gt;</span>right);
-</span></span><span style="display:flex;"><span>                    temp.push_back(node<span style="color:#f92672">-&gt;</span>right<span style="color:#f92672">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>right) {
+</span></span><span style="display:flex;"><span>                    q.push(node<span style="color:#666">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>                    temp.push_back(node<span style="color:#666">-&gt;</span>right<span style="color:#666">-&gt;</span>val);
 </span></span><span style="display:flex;"><span>                }
 </span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>            vals <span style="color:#f92672">=</span> temp;
-</span></span><span style="display:flex;"><span>            level<span style="color:#f92672">++</span>;
+</span></span><span style="display:flex;"><span>            vals <span style="color:#666">=</span> temp;
+</span></span><span style="display:flex;"><span>            level<span style="color:#666">++</span>;
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> root;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> root;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode761s1hbhb">
+<h2 id="hahahugoshortcode760s1hbhb">
   
 
   
@@ -307,13 +307,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">TreeNode</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> val;
-</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#f92672">*</span>left;
-</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#f92672">*</span>right;
-</span></span><span style="display:flex;"><span>    TreeNode() <span style="color:#f92672">:</span> val(<span style="color:#ae81ff">0</span>), left(<span style="color:#66d9ef">nullptr</span>), right(<span style="color:#66d9ef">nullptr</span>) {}
-</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#66d9ef">int</span> x) <span style="color:#f92672">:</span> val(x), left(<span style="color:#66d9ef">nullptr</span>), right(<span style="color:#66d9ef">nullptr</span>) {}
-</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#66d9ef">int</span> x, TreeNode <span style="color:#f92672">*</span>left, TreeNode <span style="color:#f92672">*</span>right) <span style="color:#f92672">:</span> val(x), left(left), right(right) {}
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">struct</span> <span style="color:#00f">TreeNode</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> val;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#666">*</span>left;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#666">*</span>right;
+</span></span><span style="display:flex;"><span>    TreeNode() <span style="color:#666">:</span> val(<span style="color:#666">0</span>), left(<span style="color:#a2f;font-weight:bold">nullptr</span>), right(<span style="color:#a2f;font-weight:bold">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#0b0;font-weight:bold">int</span> x) <span style="color:#666">:</span> val(x), left(<span style="color:#a2f;font-weight:bold">nullptr</span>), right(<span style="color:#a2f;font-weight:bold">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#0b0;font-weight:bold">int</span> x, TreeNode <span style="color:#666">*</span>left, TreeNode <span style="color:#666">*</span>right) <span style="color:#666">:</span> val(x), left(left), right(right) {}
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><ul>
 <li>The <code>TreeNode</code> struct defines the basic structure of a binary tree node. Each node has an integer value <code>val</code>, and two pointers <code>left</code> and <code>right</code>, pointing to the left and right child nodes, respectively. The default constructor initializes a node with a value of <code>0</code>, and the parameterized constructors initialize the node with a given value and optional left and right child nodes.</li>
@@ -325,8 +325,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#f92672">*</span> <span style="color:#a6e22e">reverseOddLevels</span>(TreeNode<span style="color:#f92672">*</span> root) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(<span style="color:#f92672">!</span>root) <span style="color:#66d9ef">return</span> root;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> <span style="color:#00a000">reverseOddLevels</span>(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>root) <span style="color:#a2f;font-weight:bold">return</span> root;
 </span></span></code></pre></div><ul>
 <li>The function <code>reverseOddLevels</code> accepts a pointer to the root of the binary tree and returns a pointer to the root of the modified tree. If the root is <code>nullptr</code>, the function immediately returns <code>nullptr</code> since there is nothing to process.</li>
 </ul>
@@ -337,10 +337,10 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>queue<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*&gt;</span> q;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>queue<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> q;
 </span></span><span style="display:flex;"><span>q.push(root);
-</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> vals;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> level <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> vals;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> level <span style="color:#666">=</span> <span style="color:#666">0</span>;
 </span></span></code></pre></div><ul>
 <li>A queue <code>q</code> is initialized to perform level-order traversal.</li>
 <li>The root of the tree is added to the queue.</li>
@@ -354,9 +354,9 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(<span style="color:#f92672">!</span>q.empty()) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> sz <span style="color:#f92672">=</span> q.size();
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> temp;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> temp;
 </span></span></code></pre></div><ul>
 <li>The <code>while</code> loop continues as long as there are nodes in the queue, ensuring that we process every level of the tree.</li>
 <li><code>sz</code> stores the number of nodes at the current level. A new vector <code>temp</code> is used to store the values of the nodes at the current level.</li>
@@ -368,8 +368,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> sz; i<span style="color:#f92672">++</span>)  {
-</span></span><span style="display:flex;"><span>    TreeNode<span style="color:#f92672">*</span> node <span style="color:#f92672">=</span> q.front(); q.pop();
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> sz; i<span style="color:#666">++</span>)  {
+</span></span><span style="display:flex;"><span>    TreeNode<span style="color:#666">*</span> node <span style="color:#666">=</span> q.front(); q.pop();
 </span></span></code></pre></div><ul>
 <li>The <code>for</code> loop iterates over each node at the current level.</li>
 <li><code>node</code> is set to the node at the front of the queue, and the node is removed from the queue using <code>q.pop()</code>.</li>
@@ -381,7 +381,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(level <span style="color:#f92672">%</span><span style="color:#ae81ff">2</span>) node<span style="color:#f92672">-&gt;</span>val <span style="color:#f92672">=</span> vals[sz <span style="color:#f92672">-</span> i <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>];
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(level <span style="color:#666">%</span><span style="color:#666">2</span>) node<span style="color:#666">-&gt;</span>val <span style="color:#666">=</span> vals[sz <span style="color:#666">-</span> i <span style="color:#666">-</span> <span style="color:#666">1</span>];
 </span></span></code></pre></div><ul>
 <li>If the current level is odd (<code>level % 2</code> evaluates to <code>true</code>), the value of the node is updated. We set the node&rsquo;s value to the corresponding value from the <code>vals</code> vector, which is the reversed order of values at the current level.</li>
 <li>The <code>vals[sz - i - 1]</code> expression is used to access the reversed value, as we are reversing the order of the values in <code>vals</code>.</li>
@@ -393,14 +393,14 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(node<span style="color:#f92672">-&gt;</span>left) {
-</span></span><span style="display:flex;"><span>    q.push(node<span style="color:#f92672">-&gt;</span>left);
-</span></span><span style="display:flex;"><span>    temp.push_back(node<span style="color:#f92672">-&gt;</span>left<span style="color:#f92672">-&gt;</span>val);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>left) {
+</span></span><span style="display:flex;"><span>    q.push(node<span style="color:#666">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>    temp.push_back(node<span style="color:#666">-&gt;</span>left<span style="color:#666">-&gt;</span>val);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span>(node<span style="color:#f92672">-&gt;</span>right) {
-</span></span><span style="display:flex;"><span>    q.push(node<span style="color:#f92672">-&gt;</span>right);
-</span></span><span style="display:flex;"><span>    temp.push_back(node<span style="color:#f92672">-&gt;</span>right<span style="color:#f92672">-&gt;</span>val);
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>right) {
+</span></span><span style="display:flex;"><span>    q.push(node<span style="color:#666">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>    temp.push_back(node<span style="color:#666">-&gt;</span>right<span style="color:#666">-&gt;</span>val);
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div><ul>
 <li>If the node has a left child, the left child is added to the queue and its value is added to the <code>temp</code> vector.</li>
@@ -413,8 +413,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vals <span style="color:#f92672">=</span> temp;
-</span></span><span style="display:flex;"><span>level<span style="color:#f92672">++</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vals <span style="color:#666">=</span> temp;
+</span></span><span style="display:flex;"><span>level<span style="color:#666">++</span>;
 </span></span></code></pre></div><ul>
 <li>After processing all nodes at the current level, the <code>vals</code> vector is updated to <code>temp</code>, which contains the values of the nodes at the next level.</li>
 <li>The <code>level</code> variable is incremented to move to the next level in the next iteration.</li>
@@ -426,7 +426,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h4>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> root;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> root;
 </span></span></code></pre></div><ul>
 <li>After the traversal is complete and the values of the nodes at odd levels have been reversed, the root of the modified tree is returned.</li>
 </ul>
@@ -469,7 +469,7 @@
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode761s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode760s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

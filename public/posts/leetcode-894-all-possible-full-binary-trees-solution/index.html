@@ -229,40 +229,40 @@
         <p><a href="https://leetcode.com/problems/all-possible-full-binary-trees/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">/**
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Definition for a binary tree node.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * struct TreeNode {
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     int val;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode *left;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode *right;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * };
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*&gt;</span> allPossibleFBT(<span style="color:#66d9ef">int</span> n) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Definition for a binary tree node.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * struct TreeNode {
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     int val;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode *left;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode *right;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * };
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> allPossibleFBT(<span style="color:#0b0;font-weight:bold">int</span> n) {
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*&gt;&gt;</span> dp(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
-</span></span><span style="display:flex;"><span>        dp[<span style="color:#ae81ff">1</span>].push_back(<span style="color:#66d9ef">new</span> TreeNode(<span style="color:#ae81ff">0</span>));
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;&gt;</span> dp(n <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        dp[<span style="color:#666">1</span>].push_back(<span style="color:#a2f;font-weight:bold">new</span> TreeNode(<span style="color:#666">0</span>));
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>; i <span style="color:#f92672">&lt;=</span> n; i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> l <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; l <span style="color:#f92672">&lt;</span> i; l <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>) {
-</span></span><span style="display:flex;"><span>                <span style="color:#75715e">// cout &lt;&lt; l;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>                <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it: dp[l])
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> it2: dp[i <span style="color:#f92672">-</span> l <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]) {
-</span></span><span style="display:flex;"><span>                    TreeNode<span style="color:#f92672">*</span> node <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TreeNode(<span style="color:#ae81ff">0</span>);
-</span></span><span style="display:flex;"><span>                    node<span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">=</span> it;
-</span></span><span style="display:flex;"><span>                    node<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">=</span> it2;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">3</span>; i <span style="color:#666">&lt;=</span> n; i <span style="color:#666">+=</span> <span style="color:#666">2</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">1</span>; l <span style="color:#666">&lt;</span> i; l <span style="color:#666">+=</span> <span style="color:#666">2</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#080;font-style:italic">// cout &lt;&lt; l;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: dp[l])
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it2</span>: dp[i <span style="color:#666">-</span> l <span style="color:#666">-</span> <span style="color:#666">1</span>]) {
+</span></span><span style="display:flex;"><span>                    TreeNode<span style="color:#666">*</span> node <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TreeNode(<span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>                    node<span style="color:#666">-&gt;</span>left <span style="color:#666">=</span> it;
+</span></span><span style="display:flex;"><span>                    node<span style="color:#666">-&gt;</span>right <span style="color:#666">=</span> it2;
 </span></span><span style="display:flex;"><span>                    dp[i].push_back(node);
 </span></span><span style="display:flex;"><span>                }
 </span></span><span style="display:flex;"><span>            }
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dp[n];        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> dp[n];        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1392s1hbhb">
+<h2 id="hahahugoshortcode1388s1hbhb">
   
 
   
@@ -329,27 +329,27 @@
 <ol>
 <li>
 <p><strong>Initialize DP Array</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*&gt;&gt;</span> dp(n <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>);
-</span></span><span style="display:flex;"><span>dp[<span style="color:#ae81ff">1</span>].push_back(<span style="color:#66d9ef">new</span> TreeNode(<span style="color:#ae81ff">0</span>));  <span style="color:#75715e">// Base case: only one node in the tree.
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;&gt;</span> dp(n <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>dp[<span style="color:#666">1</span>].push_back(<span style="color:#a2f;font-weight:bold">new</span> TreeNode(<span style="color:#666">0</span>));  <span style="color:#080;font-style:italic">// Base case: only one node in the tree.
 </span></span></span></code></pre></div><ul>
 <li>We create a DP array <code>dp</code> with <code>n + 1</code> elements, where each element is a vector of <code>TreeNode*</code>. The first element, <code>dp[1]</code>, contains one tree with just a single node.</li>
 </ul>
 </li>
 <li>
 <p><strong>Iterating Over Odd Numbers (i)</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">3</span>; i <span style="color:#f92672">&lt;=</span> n; i <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">3</span>; i <span style="color:#666">&lt;=</span> n; i <span style="color:#666">+=</span> <span style="color:#666">2</span>) {
 </span></span></code></pre></div><ul>
 <li>The outer loop starts from <code>i = 3</code> and increments by 2, considering only odd values of <code>i</code>. We build full binary trees for each odd <code>i</code>.</li>
 </ul>
 </li>
 <li>
 <p><strong>Generating Combinations of Left and Right Subtrees</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">int</span> l <span style="color:#f92672">=</span> <span style="color:#ae81ff">1</span>; l <span style="color:#f92672">&lt;</span> i; l <span style="color:#f92672">+=</span> <span style="color:#ae81ff">2</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> it : dp[l]) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">auto</span> it2 : dp[i <span style="color:#f92672">-</span> l <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>]) {
-</span></span><span style="display:flex;"><span>            TreeNode<span style="color:#f92672">*</span> node <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TreeNode(<span style="color:#ae81ff">0</span>);
-</span></span><span style="display:flex;"><span>            node<span style="color:#f92672">-&gt;</span>left <span style="color:#f92672">=</span> it;
-</span></span><span style="display:flex;"><span>            node<span style="color:#f92672">-&gt;</span>right <span style="color:#f92672">=</span> it2;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">1</span>; l <span style="color:#666">&lt;</span> i; l <span style="color:#666">+=</span> <span style="color:#666">2</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span> : dp[l]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it2</span> : dp[i <span style="color:#666">-</span> l <span style="color:#666">-</span> <span style="color:#666">1</span>]) {
+</span></span><span style="display:flex;"><span>            TreeNode<span style="color:#666">*</span> node <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TreeNode(<span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>            node<span style="color:#666">-&gt;</span>left <span style="color:#666">=</span> it;
+</span></span><span style="display:flex;"><span>            node<span style="color:#666">-&gt;</span>right <span style="color:#666">=</span> it2;
 </span></span><span style="display:flex;"><span>            dp[i].push_back(node);
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
@@ -361,7 +361,7 @@
 </li>
 <li>
 <p><strong>Returning the Result</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> dp[n];
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> dp[n];
 </span></span></code></pre></div><ul>
 <li>Finally, we return the list of all possible full binary trees for <code>n</code> nodes, which is stored in <code>dp[n]</code>.</li>
 </ul>
@@ -412,7 +412,7 @@
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1392s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1388s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

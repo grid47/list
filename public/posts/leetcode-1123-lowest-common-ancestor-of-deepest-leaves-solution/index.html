@@ -229,32 +229,32 @@
         <p><a href="https://leetcode.com/problems/lowest-common-ancestor-of-deepest-leaves/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">/**
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Definition for a binary tree node.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * struct TreeNode {
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     int val;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode *left;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode *right;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * };
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    TreeNode<span style="color:#f92672">*</span> lcaDeepestLeaves(TreeNode<span style="color:#f92672">*</span> root) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">helper</span>(root).first;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Definition for a binary tree node.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * struct TreeNode {
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     int val;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode *left;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode *right;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * };
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    TreeNode<span style="color:#666">*</span> lcaDeepestLeaves(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">helper</span>(root).first;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    pair<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> helper(TreeNode<span style="color:#f92672">*</span> root) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(root <span style="color:#f92672">==</span> NULL) <span style="color:#66d9ef">return</span> {NULL, <span style="color:#ae81ff">0</span>};
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">auto</span> left <span style="color:#f92672">=</span> helper(root<span style="color:#f92672">-&gt;</span>left);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">auto</span> right <span style="color:#f92672">=</span> helper(root<span style="color:#f92672">-&gt;</span>right);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(left.second <span style="color:#f92672">&gt;</span> right.second)
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {left.first, left.second <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>};
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span>(left.second <span style="color:#f92672">&lt;</span> right.second)
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {right.first, right.second <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>};
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {root, left.second <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>};
+</span></span><span style="display:flex;"><span>    pair<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> helper(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> {<span style="color:#a2f">NULL</span>, <span style="color:#666">0</span>};
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> left <span style="color:#666">=</span> helper(root<span style="color:#666">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> right <span style="color:#666">=</span> helper(root<span style="color:#666">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(left.second <span style="color:#666">&gt;</span> right.second)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> {left.first, left.second <span style="color:#666">+</span> <span style="color:#666">1</span>};
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(left.second <span style="color:#666">&lt;</span> right.second)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> {right.first, right.second <span style="color:#666">+</span> <span style="color:#666">1</span>};
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> {root, left.second <span style="color:#666">+</span> <span style="color:#666">1</span>};
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
 <h2 id="hahahugoshortcode86s1hbhb">
@@ -271,14 +271,14 @@
 </h3>
 <p>The problem requires finding the lowest common ancestor (LCA) of the deepest leaves in a binary tree. The LCA of two nodes <code>A</code> and <code>B</code> in a binary tree is defined as the deepest node that is an ancestor of both <code>A</code> and <code>B</code>. If the tree has multiple deepest leaves, the LCA should be the deepest node that connects them.</p>
 <p>For instance, consider the binary tree below:</p>
-<pre tabindex="0"><code>        1
-       / \
-      2   3
-     / \   \
-    4   5   6
-   /
-  7
-</code></pre><p>In this example, the deepest leaves are <code>7</code>, and the LCA of the deepest leaves is <code>4</code>.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>        1
+</span></span><span style="display:flex;"><span>       / \
+</span></span><span style="display:flex;"><span>      2   3
+</span></span><span style="display:flex;"><span>     / \   \
+</span></span><span style="display:flex;"><span>    4   5   6
+</span></span><span style="display:flex;"><span>   /
+</span></span><span style="display:flex;"><span>  7
+</span></span></code></pre></div><p>In this example, the deepest leaves are <code>7</code>, and the LCA of the deepest leaves is <code>4</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -307,39 +307,39 @@
 <ol>
 <li>
 <p><strong>Class Definition</strong>: The <code>Solution</code> class is defined, which contains the method <code>lcaDeepestLeaves</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Method Definition</strong>: The public method <code>lcaDeepestLeaves</code> accepts a pointer to the root of the binary tree and calls the helper function.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    TreeNode<span style="color:#f92672">*</span> <span style="color:#a6e22e">lcaDeepestLeaves</span>(TreeNode<span style="color:#f92672">*</span> root) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> helper(root).first; <span style="color:#75715e">// Returns the first element of the pair returned by helper
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    TreeNode<span style="color:#666">*</span> <span style="color:#00a000">lcaDeepestLeaves</span>(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> helper(root).first; <span style="color:#080;font-style:italic">// Returns the first element of the pair returned by helper
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Helper Function</strong>: The <code>helper</code> function is defined, which is responsible for traversing the tree recursively.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    pair<span style="color:#f92672">&lt;</span>TreeNode<span style="color:#f92672">*</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> helper(TreeNode<span style="color:#f92672">*</span> root) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    pair<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> helper(TreeNode<span style="color:#666">*</span> root) {
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Base Case</strong>: The base case checks if the current node (<code>root</code>) is <code>NULL</code>. If it is, the function returns a pair with <code>NULL</code> and depth <code>0</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (root <span style="color:#f92672">==</span> NULL) <span style="color:#66d9ef">return</span> {NULL, <span style="color:#ae81ff">0</span>}; <span style="color:#75715e">// Base case
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> {<span style="color:#a2f">NULL</span>, <span style="color:#666">0</span>}; <span style="color:#080;font-style:italic">// Base case
 </span></span></span></code></pre></div></li>
 <li>
 <p><strong>Recursive Calls</strong>: The function recursively calls itself for the left and right children of the current node to compute their respective depths and potential LCAs.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">auto</span> left <span style="color:#f92672">=</span> helper(root<span style="color:#f92672">-&gt;</span>left);   <span style="color:#75715e">// Left subtree
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">auto</span> right <span style="color:#f92672">=</span> helper(root<span style="color:#f92672">-&gt;</span>right); <span style="color:#75715e">// Right subtree
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> left <span style="color:#666">=</span> helper(root<span style="color:#666">-&gt;</span>left);   <span style="color:#080;font-style:italic">// Left subtree
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">auto</span> right <span style="color:#666">=</span> helper(root<span style="color:#666">-&gt;</span>right); <span style="color:#080;font-style:italic">// Right subtree
 </span></span></span></code></pre></div></li>
 <li>
 <p><strong>Depth Comparison</strong>: The function compares the depths of the left and right subtrees. Depending on which subtree is deeper, it returns the appropriate node and its depth.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (left.second <span style="color:#f92672">&gt;</span> right.second)
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> {left.first, left.second <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>}; <span style="color:#75715e">// Left subtree is deeper
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">else</span> <span style="color:#a6e22e">if</span> (left.second <span style="color:#f92672">&lt;</span> right.second)
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> {right.first, right.second <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>}; <span style="color:#75715e">// Right subtree is deeper
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (left.second <span style="color:#666">&gt;</span> right.second)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> {left.first, left.second <span style="color:#666">+</span> <span style="color:#666">1</span>}; <span style="color:#080;font-style:italic">// Left subtree is deeper
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> (left.second <span style="color:#666">&lt;</span> right.second)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> {right.first, right.second <span style="color:#666">+</span> <span style="color:#666">1</span>}; <span style="color:#080;font-style:italic">// Right subtree is deeper
 </span></span></span></code></pre></div></li>
 <li>
 <p><strong>Same Depth Case</strong>: If both left and right depths are equal, the current node is the LCA of the deepest leaves.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {root, left.second <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>}; <span style="color:#75715e">// Current node is LCA
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    }
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> {root, left.second <span style="color:#666">+</span> <span style="color:#666">1</span>}; <span style="color:#080;font-style:italic">// Current node is LCA
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div></li>
 </ol>

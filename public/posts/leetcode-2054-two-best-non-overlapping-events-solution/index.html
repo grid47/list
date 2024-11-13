@@ -229,64 +229,64 @@
         <p><a href="https://leetcode.com/problems/two-best-non-overlapping-events/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> eve;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;</span> memo;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> n;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> eve;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;</span> memo;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n;
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">int</span> end, <span style="color:#66d9ef">int</span> k) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">&gt;=</span> n <span style="color:#f92672">||</span> k <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> end, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">&gt;=</span> n <span style="color:#666">||</span> k <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(memo[idx][k].count(end)) <span style="color:#66d9ef">return</span> memo[idx][k][end];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(memo[idx][k].count(end)) <span style="color:#a2f;font-weight:bold">return</span> memo[idx][k][end];
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, end, k);
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, end, k);
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> l <span style="color:#f92672">=</span> idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, r <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, res <span style="color:#f92672">=</span> n;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> idx <span style="color:#666">+</span> <span style="color:#666">1</span>, r <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>, res <span style="color:#666">=</span> n;
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(l <span style="color:#f92672">&lt;=</span> r) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> l <span style="color:#f92672">+</span> (r <span style="color:#f92672">-</span> l <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;=</span> r) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>;
 </span></span><span style="display:flex;"><span>            
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(eve[mid][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&gt;</span> eve[idx][<span style="color:#ae81ff">1</span>]) {
-</span></span><span style="display:flex;"><span>                res <span style="color:#f92672">=</span> mid;
-</span></span><span style="display:flex;"><span>                r <span style="color:#f92672">=</span> mid <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> l <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(eve[mid][<span style="color:#666">0</span>] <span style="color:#666">&gt;</span> eve[idx][<span style="color:#666">1</span>]) {
+</span></span><span style="display:flex;"><span>                res <span style="color:#666">=</span> mid;
+</span></span><span style="display:flex;"><span>                r <span style="color:#666">=</span> mid <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> l <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>            
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> max(ans, eve[idx][<span style="color:#ae81ff">2</span>] <span style="color:#f92672">+</span> dp(res, eve[idx][<span style="color:#ae81ff">1</span>], k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>));
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> max(ans, eve[idx][<span style="color:#666">2</span>] <span style="color:#666">+</span> dp(res, eve[idx][<span style="color:#666">1</span>], k <span style="color:#666">-</span> <span style="color:#666">1</span>));
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> memo[idx][k][end] <span style="color:#f92672">=</span> ans;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> memo[idx][k][end] <span style="color:#666">=</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">ma</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> events) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">ma</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> events) {
 </span></span><span style="display:flex;"><span>        sort(events.begin(), events.end());
-</span></span><span style="display:flex;"><span>        eve <span style="color:#f92672">=</span> events;
-</span></span><span style="display:flex;"><span>        n <span style="color:#f92672">=</span> eve.size();
-</span></span><span style="display:flex;"><span>        memo.resize(n, vector<span style="color:#f92672">&lt;</span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>(<span style="color:#ae81ff">3</span>));
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>);        
+</span></span><span style="display:flex;"><span>        eve <span style="color:#666">=</span> events;
+</span></span><span style="display:flex;"><span>        n <span style="color:#666">=</span> eve.size();
+</span></span><span style="display:flex;"><span>        memo.resize(n, vector<span style="color:#666">&lt;</span>unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span>(<span style="color:#666">3</span>));
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> dp(<span style="color:#666">0</span>, <span style="color:#666">0</span>, <span style="color:#666">2</span>);        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">maxTwoEvents</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> events) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxTwoEvents</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> events) {
 </span></span><span style="display:flex;"><span>        sort(events.begin(), events.end());
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, mx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>, mx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> size <span style="color:#f92672">=</span> events.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> size <span style="color:#666">=</span> events.size();
 </span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(size<span style="color:#f92672">--</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> mp.upper_bound(events[size][<span style="color:#ae81ff">1</span>]);
-</span></span><span style="display:flex;"><span>            mx <span style="color:#f92672">=</span> max(mx, events[size][<span style="color:#ae81ff">2</span>]);
-</span></span><span style="display:flex;"><span>            mp[events[size][<span style="color:#ae81ff">0</span>]] <span style="color:#f92672">=</span> mx;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(it <span style="color:#f92672">==</span> mp.end()) {
-</span></span><span style="display:flex;"><span>                ans <span style="color:#f92672">=</span> max(ans, mx);
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>                ans <span style="color:#f92672">=</span> max(ans, events[size][<span style="color:#ae81ff">2</span>] <span style="color:#f92672">+</span> it<span style="color:#f92672">-&gt;</span>second);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(size<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> mp.upper_bound(events[size][<span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>            mx <span style="color:#666">=</span> max(mx, events[size][<span style="color:#666">2</span>]);
+</span></span><span style="display:flex;"><span>            mp[events[size][<span style="color:#666">0</span>]] <span style="color:#666">=</span> mx;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(it <span style="color:#666">==</span> mp.end()) {
+</span></span><span style="display:flex;"><span>                ans <span style="color:#666">=</span> max(ans, mx);
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                ans <span style="color:#666">=</span> max(ans, events[size][<span style="color:#666">2</span>] <span style="color:#666">+</span> it<span style="color:#666">-&gt;</span>second);
 </span></span><span style="display:flex;"><span>            }
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> ans;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
 <h2 id="hahahugoshortcode548s1hbhb">
@@ -337,9 +337,9 @@
 <li><code>memo</code>: A 3D vector for memoization, caching results to avoid redundant calculations.</li>
 <li><code>n</code>: Represents the number of events.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> eve;
-</span></span><span style="display:flex;"><span>vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&gt;</span> memo;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> n;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> eve;
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;</span> memo;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n;
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Recursive DP with Binary Search</strong> (<code>dp</code> function): This function calculates the maximum value for attending up to two non-overlapping events:</p>
@@ -349,38 +349,38 @@
 <li><strong>Binary Search</strong>: Using binary search, find the next non-overlapping event. The loop narrows down to the earliest event starting after the current one ends.</li>
 <li><strong>Recursive Call</strong>: The <code>dp</code> function calls itself for both the scenario where the event is skipped and where it is included.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dp</span>(<span style="color:#66d9ef">int</span> idx, <span style="color:#66d9ef">int</span> end, <span style="color:#66d9ef">int</span> k) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(idx <span style="color:#f92672">&gt;=</span> n <span style="color:#f92672">||</span> k <span style="color:#f92672">==</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> end, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">&gt;=</span> n <span style="color:#666">||</span> k <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(memo[idx][k].count(end)) <span style="color:#66d9ef">return</span> memo[idx][k][end];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[idx][k].count(end)) <span style="color:#a2f;font-weight:bold">return</span> memo[idx][k][end];
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> dp(idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, end, k);  <span style="color:#75715e">// Skip the event
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> l <span style="color:#f92672">=</span> idx <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>, r <span style="color:#f92672">=</span> n <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>, res <span style="color:#f92672">=</span> n;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, end, k);  <span style="color:#080;font-style:italic">// Skip the event
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> idx <span style="color:#666">+</span> <span style="color:#666">1</span>, r <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>, res <span style="color:#666">=</span> n;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">while</span>(l <span style="color:#f92672">&lt;=</span> r) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> mid <span style="color:#f92672">=</span> l <span style="color:#f92672">+</span> (r <span style="color:#f92672">-</span> l <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>) <span style="color:#f92672">/</span> <span style="color:#ae81ff">2</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(eve[mid][<span style="color:#ae81ff">0</span>] <span style="color:#f92672">&gt;</span> eve[idx][<span style="color:#ae81ff">1</span>]) {
-</span></span><span style="display:flex;"><span>            res <span style="color:#f92672">=</span> mid;
-</span></span><span style="display:flex;"><span>            r <span style="color:#f92672">=</span> mid <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>;
-</span></span><span style="display:flex;"><span>        } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>            l <span style="color:#f92672">=</span> mid <span style="color:#f92672">+</span> <span style="color:#ae81ff">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;=</span> r) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(eve[mid][<span style="color:#666">0</span>] <span style="color:#666">&gt;</span> eve[idx][<span style="color:#666">1</span>]) {
+</span></span><span style="display:flex;"><span>            res <span style="color:#666">=</span> mid;
+</span></span><span style="display:flex;"><span>            r <span style="color:#666">=</span> mid <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>            l <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    ans <span style="color:#f92672">=</span> max(ans, eve[idx][<span style="color:#ae81ff">2</span>] <span style="color:#f92672">+</span> dp(res, eve[idx][<span style="color:#ae81ff">1</span>], k <span style="color:#f92672">-</span> <span style="color:#ae81ff">1</span>)); <span style="color:#75715e">// Include the event
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> memo[idx][k][end] <span style="color:#f92672">=</span> ans;
+</span></span><span style="display:flex;"><span>    ans <span style="color:#666">=</span> max(ans, eve[idx][<span style="color:#666">2</span>] <span style="color:#666">+</span> dp(res, eve[idx][<span style="color:#666">1</span>], k <span style="color:#666">-</span> <span style="color:#666">1</span>)); <span style="color:#080;font-style:italic">// Include the event
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[idx][k][end] <span style="color:#666">=</span> ans;
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Main Function <code>ma</code></strong>: This function sets up <code>eve</code> with sorted events and calls <code>dp</code> with the initial parameters.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">ma</span>(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> events) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">ma</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> events) {
 </span></span><span style="display:flex;"><span>    sort(events.begin(), events.end());
-</span></span><span style="display:flex;"><span>    eve <span style="color:#f92672">=</span> events;
-</span></span><span style="display:flex;"><span>    n <span style="color:#f92672">=</span> eve.size();
-</span></span><span style="display:flex;"><span>    memo.resize(n, vector<span style="color:#f92672">&lt;</span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span>(<span style="color:#ae81ff">3</span>));
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> dp(<span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">0</span>, <span style="color:#ae81ff">2</span>);        
+</span></span><span style="display:flex;"><span>    eve <span style="color:#666">=</span> events;
+</span></span><span style="display:flex;"><span>    n <span style="color:#666">=</span> eve.size();
+</span></span><span style="display:flex;"><span>    memo.resize(n, vector<span style="color:#666">&lt;</span>unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span>(<span style="color:#666">3</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp(<span style="color:#666">0</span>, <span style="color:#666">0</span>, <span style="color:#666">2</span>);        
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div></li>
 </ol>
@@ -395,7 +395,7 @@
 <ol>
 <li>
 <p><strong>Sort Events</strong>: Events are sorted by their start times, allowing us to traverse from the last event to the first.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(events.begin(), events.end());
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(events.begin(), events.end());
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Backward Traversal with Map</strong>:</p>
@@ -409,24 +409,24 @@
 </li>
 <li>The backward traversal ensures that each event only checks subsequent non-overlapping events, making this process efficient.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> ans <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>, mx <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, <span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> mp;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> size <span style="color:#f92672">=</span> events.size();
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>, mx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> size <span style="color:#666">=</span> events.size();
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span>(size<span style="color:#f92672">--</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">auto</span> it <span style="color:#f92672">=</span> mp.upper_bound(events[size][<span style="color:#ae81ff">1</span>]);
-</span></span><span style="display:flex;"><span>    mx <span style="color:#f92672">=</span> max(mx, events[size][<span style="color:#ae81ff">2</span>]);
-</span></span><span style="display:flex;"><span>    mp[events[size][<span style="color:#ae81ff">0</span>]] <span style="color:#f92672">=</span> mx;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(it <span style="color:#f92672">==</span> mp.end()) {
-</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> max(ans, mx);
-</span></span><span style="display:flex;"><span>    } <span style="color:#66d9ef">else</span> {
-</span></span><span style="display:flex;"><span>        ans <span style="color:#f92672">=</span> max(ans, events[size][<span style="color:#ae81ff">2</span>] <span style="color:#f92672">+</span> it<span style="color:#f92672">-&gt;</span>second);
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(size<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> mp.upper_bound(events[size][<span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>    mx <span style="color:#666">=</span> max(mx, events[size][<span style="color:#666">2</span>]);
+</span></span><span style="display:flex;"><span>    mp[events[size][<span style="color:#666">0</span>]] <span style="color:#666">=</span> mx;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(it <span style="color:#666">==</span> mp.end()) {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> max(ans, mx);
+</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> max(ans, events[size][<span style="color:#666">2</span>] <span style="color:#666">+</span> it<span style="color:#666">-&gt;</span>second);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Return Result</strong>: The function returns the maximum possible value for attending up to two non-overlapping events.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> ans;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span></code></pre></div></li>
 </ol>
 <h3 id="complexity">

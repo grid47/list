@@ -214,42 +214,42 @@
         <p><a href="https://leetcode.com/problems/remove-zero-sum-consecutive-nodes-from-linked-list/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">/**
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Definition for singly-linked list.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * struct ListNode {
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     int val;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     ListNode *next;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     ListNode() : val(0), next(nullptr) {}
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     ListNode(int x) : val(x), next(nullptr) {}
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     ListNode(int x, ListNode *next) : val(x), next(next) {}
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * };
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    ListNode<span style="color:#f92672">*</span> removeZeroSumSublists(ListNode<span style="color:#f92672">*</span> head) {
-</span></span><span style="display:flex;"><span>        ListNode<span style="color:#f92672">*</span> dummy <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ListNode(<span style="color:#ae81ff">0</span>), <span style="color:#f92672">*</span>cur <span style="color:#f92672">=</span> dummy;
-</span></span><span style="display:flex;"><span>        dummy<span style="color:#f92672">-&gt;</span>next<span style="color:#f92672">=</span> head;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> prefix <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, ListNode<span style="color:#f92672">*&gt;</span> mp;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(cur) {
-</span></span><span style="display:flex;"><span>            prefix <span style="color:#f92672">+=</span> cur<span style="color:#f92672">-&gt;</span>val;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(mp.count(prefix)) {
-</span></span><span style="display:flex;"><span>                cur <span style="color:#f92672">=</span> mp[prefix]<span style="color:#f92672">-&gt;</span>next;
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> p <span style="color:#f92672">=</span> prefix <span style="color:#f92672">+</span> cur<span style="color:#f92672">-&gt;</span>val;
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">while</span>(p <span style="color:#f92672">!=</span> prefix) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Definition for singly-linked list.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * struct ListNode {
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     int val;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     ListNode *next;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     ListNode() : val(0), next(nullptr) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     ListNode(int x) : val(x), next(nullptr) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * };
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    ListNode<span style="color:#666">*</span> removeZeroSumSublists(ListNode<span style="color:#666">*</span> head) {
+</span></span><span style="display:flex;"><span>        ListNode<span style="color:#666">*</span> dummy <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> ListNode(<span style="color:#666">0</span>), <span style="color:#666">*</span>cur <span style="color:#666">=</span> dummy;
+</span></span><span style="display:flex;"><span>        dummy<span style="color:#666">-&gt;</span>next<span style="color:#666">=</span> head;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> prefix <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, ListNode<span style="color:#666">*&gt;</span> mp;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(cur) {
+</span></span><span style="display:flex;"><span>            prefix <span style="color:#666">+=</span> cur<span style="color:#666">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(mp.count(prefix)) {
+</span></span><span style="display:flex;"><span>                cur <span style="color:#666">=</span> mp[prefix]<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> p <span style="color:#666">=</span> prefix <span style="color:#666">+</span> cur<span style="color:#666">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">while</span>(p <span style="color:#666">!=</span> prefix) {
 </span></span><span style="display:flex;"><span>                    mp.erase(p);
-</span></span><span style="display:flex;"><span>                    cur <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>next;
-</span></span><span style="display:flex;"><span>                    p <span style="color:#f92672">+=</span> cur<span style="color:#f92672">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>                    cur <span style="color:#666">=</span> cur<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>                    p <span style="color:#666">+=</span> cur<span style="color:#666">-&gt;</span>val;
 </span></span><span style="display:flex;"><span>                }
-</span></span><span style="display:flex;"><span>                mp[prefix]<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>next;
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> mp[prefix]  <span style="color:#f92672">=</span> cur;
+</span></span><span style="display:flex;"><span>                mp[prefix]<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> cur<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> mp[prefix]  <span style="color:#666">=</span> cur;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            cur <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>            cur <span style="color:#666">=</span> cur<span style="color:#666">-&gt;</span>next;
 </span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dummy<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> dummy<span style="color:#666">-&gt;</span>next;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode106s1hbhb">
+<h2 id="hahahugoshortcode109s1hbhb">
   
 
   
@@ -283,42 +283,42 @@
   </a>
 </h3>
 <p>Let’s break down the implementation step by step:</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#75715e">/**
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * Definition for singly-linked list.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * struct ListNode {
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     int val;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     ListNode *next;
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     ListNode() : val(0), next(nullptr) {}
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     ListNode(int x) : val(x), next(nullptr) {}
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> *     ListNode(int x, ListNode *next) : val(x), next(next) {}
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * };
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    ListNode<span style="color:#f92672">*</span> removeZeroSumSublists(ListNode<span style="color:#f92672">*</span> head) {
-</span></span><span style="display:flex;"><span>        ListNode<span style="color:#f92672">*</span> dummy <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> ListNode(<span style="color:#ae81ff">0</span>), <span style="color:#f92672">*</span>cur <span style="color:#f92672">=</span> dummy;
-</span></span><span style="display:flex;"><span>        dummy<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> head;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> prefix <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
-</span></span><span style="display:flex;"><span>        map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, ListNode<span style="color:#f92672">*&gt;</span> mp;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Definition for singly-linked list.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * struct ListNode {
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     int val;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     ListNode *next;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     ListNode() : val(0), next(nullptr) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     ListNode(int x) : val(x), next(nullptr) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * };
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    ListNode<span style="color:#666">*</span> removeZeroSumSublists(ListNode<span style="color:#666">*</span> head) {
+</span></span><span style="display:flex;"><span>        ListNode<span style="color:#666">*</span> dummy <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> ListNode(<span style="color:#666">0</span>), <span style="color:#666">*</span>cur <span style="color:#666">=</span> dummy;
+</span></span><span style="display:flex;"><span>        dummy<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> head;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> prefix <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, ListNode<span style="color:#666">*&gt;</span> mp;
 </span></span></code></pre></div><ul>
 <li><strong>Lines 1-9</strong>: The <code>ListNode</code> struct defines a node in a singly linked list. The <code>Solution</code> class contains the method <code>removeZeroSumSublists</code>, which takes the head of the linked list as input.</li>
 <li>A dummy node is created to simplify operations on the linked list, especially for cases where the head node might be part of a zero-sum sequence. The current pointer (<code>cur</code>) starts at the dummy node.</li>
 <li>The variable <code>prefix</code> is initialized to store cumulative sums as we traverse the list. The map <code>mp</code> is used to track the prefix sums and their corresponding nodes.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">while</span>(cur) {
-</span></span><span style="display:flex;"><span>            prefix <span style="color:#f92672">+=</span> cur<span style="color:#f92672">-&gt;</span>val;
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(mp.count(prefix)) {
-</span></span><span style="display:flex;"><span>                cur <span style="color:#f92672">=</span> mp[prefix]<span style="color:#f92672">-&gt;</span>next;
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">int</span> p <span style="color:#f92672">=</span> prefix <span style="color:#f92672">+</span> cur<span style="color:#f92672">-&gt;</span>val;
-</span></span><span style="display:flex;"><span>                <span style="color:#66d9ef">while</span>(p <span style="color:#f92672">!=</span> prefix) {
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(cur) {
+</span></span><span style="display:flex;"><span>            prefix <span style="color:#666">+=</span> cur<span style="color:#666">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(mp.count(prefix)) {
+</span></span><span style="display:flex;"><span>                cur <span style="color:#666">=</span> mp[prefix]<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> p <span style="color:#666">=</span> prefix <span style="color:#666">+</span> cur<span style="color:#666">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">while</span>(p <span style="color:#666">!=</span> prefix) {
 </span></span><span style="display:flex;"><span>                    mp.erase(p);
-</span></span><span style="display:flex;"><span>                    cur <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>next;
-</span></span><span style="display:flex;"><span>                    p <span style="color:#f92672">+=</span> cur<span style="color:#f92672">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>                    cur <span style="color:#666">=</span> cur<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>                    p <span style="color:#666">+=</span> cur<span style="color:#666">-&gt;</span>val;
 </span></span><span style="display:flex;"><span>                }
-</span></span><span style="display:flex;"><span>                mp[prefix]<span style="color:#f92672">-&gt;</span>next <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>next;
-</span></span><span style="display:flex;"><span>            } <span style="color:#66d9ef">else</span> mp[prefix]  <span style="color:#f92672">=</span> cur;
+</span></span><span style="display:flex;"><span>                mp[prefix]<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> cur<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> mp[prefix]  <span style="color:#666">=</span> cur;
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>            cur <span style="color:#f92672">=</span> cur<span style="color:#f92672">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>            cur <span style="color:#666">=</span> cur<span style="color:#666">-&gt;</span>next;
 </span></span><span style="display:flex;"><span>        }
 </span></span></code></pre></div><ul>
 <li><strong>Lines 11-29</strong>: This <code>while</code> loop continues as long as the current node (<code>cur</code>) is not null.</li>
@@ -332,7 +332,7 @@
 </li>
 <li>If the prefix sum is not in the map, we simply add the current prefix sum and its corresponding node to the map.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> dummy<span style="color:#f92672">-&gt;</span>next;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> dummy<span style="color:#666">-&gt;</span>next;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};
 </span></span></code></pre></div><ul>
@@ -361,7 +361,7 @@
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode106s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode109s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

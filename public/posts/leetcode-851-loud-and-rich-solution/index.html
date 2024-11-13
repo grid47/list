@@ -224,26 +224,26 @@
         <p><a href="https://leetcode.com/problems/loud-and-rich/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
 <hr>
 <p><strong>Code:</strong></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> richer2;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> res;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> loudAndRich(vector<span style="color:#f92672">&lt;</span>vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;&amp;</span> richer, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&amp;</span> quiet) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> v: richer) richer2[v[<span style="color:#ae81ff">1</span>]].push_back(v[<span style="color:#ae81ff">0</span>]);
-</span></span><span style="display:flex;"><span>        res <span style="color:#f92672">=</span> vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> (quiet.size(), <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> quiet.size(); i<span style="color:#f92672">++</span>) dfs(i, quiet);
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> richer2;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> loudAndRich(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> richer, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> quiet) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">v</span>: richer) richer2[v[<span style="color:#666">1</span>]].push_back(v[<span style="color:#666">0</span>]);
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> (quiet.size(), <span style="color:#666">-</span><span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> quiet.size(); i<span style="color:#666">++</span>) dfs(i, quiet);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dfs</span>(<span style="color:#66d9ef">int</span> i, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>quiet) {
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(res[i] <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> res[i];
-</span></span><span style="display:flex;"><span>        res[i] <span style="color:#f92672">=</span> i;
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j : richer2[i])
-</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">if</span>(quiet[res[i]] <span style="color:#f92672">&gt;</span> quiet[dfs(j, quiet)]) res[i] <span style="color:#f92672">=</span> res[j];
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> res[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dfs</span>(<span style="color:#0b0;font-weight:bold">int</span> i, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>quiet) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(res[i] <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> res[i];
+</span></span><span style="display:flex;"><span>        res[i] <span style="color:#666">=</span> i;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">j</span> : richer2[i])
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(quiet[res[i]] <span style="color:#666">&gt;</span> quiet[dfs(j, quiet)]) res[i] <span style="color:#666">=</span> res[j];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res[i];
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1363s1hbhb">
+<h2 id="hahahugoshortcode1359s1hbhb">
   
 
   
@@ -316,8 +316,8 @@ For each person <code>i</code>, find the richest person in their social group wh
 <li>
 <p><strong>Graph Construction</strong>:
 The <code>richer2</code> map is used to store the relationship between richer and poorer individuals. For every pair <code>[a, b]</code> in <code>richer</code>, we add <code>a</code> to the list of people richer than <code>b</code>.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span>, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;&gt;</span> richer2;
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">auto</span> v: richer) richer2[v[<span style="color:#ae81ff">1</span>]].push_back(v[<span style="color:#ae81ff">0</span>]);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> richer2;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">v</span>: richer) richer2[v[<span style="color:#666">1</span>]].push_back(v[<span style="color:#666">0</span>]);
 </span></span></code></pre></div></li>
 <li>
 <p><strong>Initialization</strong>:</p>
@@ -325,7 +325,7 @@ The <code>richer2</code> map is used to store the relationship between richer an
 <li>The result vector <code>res</code> is initialized with <code>-1</code> for each person. This is because we are initially unaware of the quietest person for each individual.</li>
 <li>The size of the <code>res</code> vector is the same as the size of the <code>quiet</code> vector, as we need to compute one result for each person.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>res <span style="color:#f92672">=</span> vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span>(quiet.size(), <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>);
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>res <span style="color:#666">=</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(quiet.size(), <span style="color:#666">-</span><span style="color:#666">1</span>);
 </span></span></code></pre></div></li>
 <li>
 <p><strong>DFS Function</strong>:</p>
@@ -336,12 +336,12 @@ The <code>richer2</code> map is used to store the relationship between richer an
 <li>We then explore all the people who are richer than <code>i</code> by traversing the graph. For each person <code>j</code> that is richer than <code>i</code>, we compute the quietest person in <code>j</code>&rsquo;s social group using a recursive call to <code>dfs</code>.</li>
 <li>After exploring all richer individuals, we update <code>res[i]</code> to reflect the quietest person in the group.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">dfs</span>(<span style="color:#66d9ef">int</span> i, vector<span style="color:#f92672">&lt;</span><span style="color:#66d9ef">int</span><span style="color:#f92672">&gt;</span> <span style="color:#f92672">&amp;</span>quiet) {
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(res[i] <span style="color:#f92672">&gt;=</span> <span style="color:#ae81ff">0</span>) <span style="color:#66d9ef">return</span> res[i];
-</span></span><span style="display:flex;"><span>    res[i] <span style="color:#f92672">=</span> i;
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> j : richer2[i])
-</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span>(quiet[res[i]] <span style="color:#f92672">&gt;</span> quiet[dfs(j, quiet)]) res[i] <span style="color:#f92672">=</span> res[j];
-</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> res[i];
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dfs</span>(<span style="color:#0b0;font-weight:bold">int</span> i, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>quiet) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(res[i] <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> res[i];
+</span></span><span style="display:flex;"><span>    res[i] <span style="color:#666">=</span> i;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">j</span> : richer2[i])
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(quiet[res[i]] <span style="color:#666">&gt;</span> quiet[dfs(j, quiet)]) res[i] <span style="color:#666">=</span> res[j];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res[i];
 </span></span><span style="display:flex;"><span>}
 </span></span></code></pre></div></li>
 <li>
@@ -350,8 +350,8 @@ The <code>richer2</code> map is used to store the relationship between richer an
 <li>The <code>loudAndRich</code> function invokes the <code>dfs</code> function for each person in the <code>quiet</code> list to compute the quietest person in their group and stores the result in <code>res</code>.</li>
 <li>Finally, the function returns the <code>res</code> vector containing the quietest person for each individual.</li>
 </ul>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>; i <span style="color:#f92672">&lt;</span> quiet.size(); i<span style="color:#f92672">++</span>) dfs(i, quiet);
-</span></span><span style="display:flex;"><span><span style="color:#66d9ef">return</span> res;
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> quiet.size(); i<span style="color:#666">++</span>) dfs(i, quiet);
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span></code></pre></div></li>
 </ol>
 <h3 id="complexity">
@@ -399,7 +399,7 @@ The <code>richer2</code> map is used to store the relationship between richer an
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1363s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1359s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
