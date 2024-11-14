@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/network-delay-time/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/743.webp" 
+    alt="A network of nodes where the delay time is calculated, with the shortest delay glowing softly as it’s found."
+    caption="Solution to LeetCode 743: Network Delay Time Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

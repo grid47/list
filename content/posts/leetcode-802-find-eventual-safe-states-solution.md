@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/find-eventual-safe-states/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/802.webp" 
+    alt="A graph with nodes marked as safe, glowing softly as they are identified."
+    caption="Solution to LeetCode 802: Find Eventual Safe States Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

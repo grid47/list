@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/k-diff-pairs-in-an-array/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/532.webp" 
+    alt="An array where each valid pair with a difference of `k` is softly illuminated."
+    caption="Solution to LeetCode 532: K-diff Pairs in an Array Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

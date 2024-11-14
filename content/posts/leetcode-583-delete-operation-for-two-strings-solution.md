@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/delete-operation-for-two-strings/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/583.webp" 
+    alt="Two strings where characters are deleted, with each deletion softly glowing as it happens."
+    caption="Solution to LeetCode 583: Delete Operation for Two Strings Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

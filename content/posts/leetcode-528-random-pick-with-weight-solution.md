@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/random-pick-with-weight/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/528.webp" 
+    alt="A series of objects with different weights, each object softly glowing based on its probability of being picked."
+    caption="Solution to LeetCode 528: Random Pick with Weight Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

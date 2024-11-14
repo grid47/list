@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/valid-parenthesis-string/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/678.webp" 
+    alt="A string of parentheses being validated, with valid ones glowing softly and invalid ones fading away."
+    caption="Solution to LeetCode 678: Valid Parenthesis String Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

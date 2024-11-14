@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/number-of-subarrays-with-bounded-maximum/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/795.webp" 
+    alt="A sequence of numbers where subarrays are counted with a bounded maximum, glowing softly as each valid subarray is found."
+    caption="Solution to LeetCode 795: Number of Subarrays with Bounded Maximum Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

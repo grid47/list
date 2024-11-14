@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/k-th-symbol-in-grammar/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/779.webp" 
+    alt="A sequence where the kth symbol is found, glowing softly as it is located."
+    caption="Solution to LeetCode 779: K-th Symbol in Grammar Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

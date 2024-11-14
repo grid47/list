@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/random-flip-matrix/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/519.webp" 
+    alt="A matrix where cells are randomly flipped, with each flipped cell softly glowing as it changes state."
+    caption="Solution to LeetCode 519: Random Flip Matrix Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

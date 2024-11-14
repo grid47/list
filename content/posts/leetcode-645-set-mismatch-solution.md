@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/set-mismatch/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/645.webp" 
+    alt="Two sets where the mismatch is found and highlighted, with each mismatched element glowing softly."
+    caption="Solution to LeetCode 645: Set Mismatch Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

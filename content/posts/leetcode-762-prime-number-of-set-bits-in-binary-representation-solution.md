@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/prime-number-of-set-bits-in-binary-representation/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/762.webp" 
+    alt="A set of binary numbers where the prime number of set bits is calculated, each prime set bit glowing softly."
+    caption="Solution to LeetCode 762: Prime Number of Set Bits in Binary Representation Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

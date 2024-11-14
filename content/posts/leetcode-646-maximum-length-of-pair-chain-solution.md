@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/maximum-length-of-pair-chain/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/646.webp" 
+    alt="A sequence of pairs where the longest chain is highlighted and softly glowing."
+    caption="Solution to LeetCode 646: Maximum Length of Pair Chain Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

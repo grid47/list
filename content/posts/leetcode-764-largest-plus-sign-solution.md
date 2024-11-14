@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/largest-plus-sign/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/764.webp" 
+    alt="A grid where the largest plus sign is found, glowing softly as the shape is identified."
+    caption="Solution to LeetCode 764: Largest Plus Sign Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

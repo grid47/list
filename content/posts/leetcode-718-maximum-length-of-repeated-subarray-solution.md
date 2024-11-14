@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/maximum-length-of-repeated-subarray/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/718.webp" 
+    alt="An array where the longest repeated subarray is highlighted and softly glowing as it's determined."
+    caption="Solution to LeetCode 718: Maximum Length of Repeated Subarray Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

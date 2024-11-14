@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/reverse-words-in-a-string-iii/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/557.webp" 
+    alt="A string where the words are reversed, with each word glowing softly as it flips in place."
+    caption="Solution to LeetCode 557: Reverse Words in a String III Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

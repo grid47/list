@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/cheapest-flights-within-k-stops/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/787.webp" 
+    alt="A map where the cheapest flight path is calculated, glowing softly as the optimal path is found."
+    caption="Solution to LeetCode 787: Cheapest Flights Within K Stops Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

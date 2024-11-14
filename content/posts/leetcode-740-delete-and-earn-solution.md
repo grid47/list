@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/delete-and-earn/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/740.webp" 
+    alt="A series of numbers where the optimal strategy to delete and earn is highlighted, glowing softly as the calculation is made"
+    caption="Solution to LeetCode 740: Delete and Earn Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

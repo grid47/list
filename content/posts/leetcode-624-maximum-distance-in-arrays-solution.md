@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/maximum-distance-in-arrays/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/624.webp" 
+    alt="Two arrays with the maximum distance between values highlighted, glowing as the distance is found."
+    caption="Solution to LeetCode 624: Maximum Distance in Arrays Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

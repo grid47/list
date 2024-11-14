@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/714.webp" 
+    alt="A stock price chart where the best time to buy and sell is highlighted, with the optimal prices softly glowing."
+    caption="Solution to LeetCode 714: Best Time to Buy and Sell Stock with Transaction Fee Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

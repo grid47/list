@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/domino-and-tromino-tiling/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/790.webp" 
+    alt="A grid being tiled with dominos and trominos, with the valid tiles glowing softly as they’re placed."
+    caption="Solution to LeetCode 790: Domino and Tromino Tiling Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

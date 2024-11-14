@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/accounts-merge/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/721.webp" 
+    alt="A set of accounts where identical accounts are merged, with each merge softly glowing as it’s processed."
+    caption="Solution to LeetCode 721: Accounts Merge Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

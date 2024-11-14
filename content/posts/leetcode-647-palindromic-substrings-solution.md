@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/palindromic-substrings/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/647.webp" 
+    alt="A string where palindromic substrings glow softly, each valid palindrome softly illuminated."
+    caption="Solution to LeetCode 647: Palindromic Substrings Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

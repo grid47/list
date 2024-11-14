@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/n-ary-tree-preorder-traversal/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/589.webp" 
+    alt="An N-ary tree where each node is visited in preorder, with each visit softly glowing as the nodes are explored."
+    caption="Solution to LeetCode 589: N-ary Tree Preorder Traversal Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

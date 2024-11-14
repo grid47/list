@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/brick-wall/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/554.webp" 
+    alt="A wall made of bricks where the minimum number of bricks to be removed is calculated, with the optimal brick removals glowing."
+    caption="Solution to LeetCode 554: Brick Wall Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/minesweeper/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/529.webp" 
+    alt="A glowing grid with mines and safe spots, where the player’s moves are highlighted to avoid mines."
+    caption="Solution to LeetCode 529: Minesweeper Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

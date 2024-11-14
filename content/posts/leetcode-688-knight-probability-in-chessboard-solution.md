@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/knight-probability-in-chessboard/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/688.webp" 
+    alt="A chessboard where the knight’s possible moves are calculated, with the highest probability glowing softly."
+    caption="Solution to LeetCode 688: Knight Probability in Chessboard Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

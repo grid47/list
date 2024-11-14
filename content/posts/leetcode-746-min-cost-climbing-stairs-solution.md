@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/min-cost-climbing-stairs/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/746.webp" 
+    alt="A staircase where the minimum cost to climb is calculated, with each step glowing softly as it is taken."
+    caption="Solution to LeetCode 746: Min Cost Climbing Stairs Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

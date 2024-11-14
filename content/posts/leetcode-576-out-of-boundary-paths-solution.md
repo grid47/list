@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/out-of-boundary-paths/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/576.webp" 
+    alt="A grid where paths leading out of bounds are highlighted and softly glowing."
+    caption="Solution to LeetCode 576: Out of Boundary Paths Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

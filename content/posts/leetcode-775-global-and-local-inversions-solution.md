@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/global-and-local-inversions/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/775.webp" 
+    alt="A sequence where global and local inversions are counted, each inversion glowing softly as it's identified."
+    caption="Solution to LeetCode 775: Global and Local Inversions Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/daily-temperatures/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/739.webp" 
+    alt="A series of temperatures with the next warmer day highlighted, glowing softly as it is identified."
+    caption="Solution to LeetCode 739: Daily Temperatures Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

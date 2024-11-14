@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/split-linked-list-in-parts/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/725.webp" 
+    alt="A linked list being split into parts, with each split segment softly glowing as it’s separated."
+    caption="Solution to LeetCode 725: Split Linked List in Parts Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

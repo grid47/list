@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/subarray-sum-equals-k/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/560.webp" 
+    alt="An array where subarrays that sum to `k` are highlighted, each valid sum softly glowing as it is found."
+    caption="Solution to LeetCode 560: Subarray Sum Equals K Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/optimal-division/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/553.webp" 
+    alt="A sequence of numbers being divided optimally, with each division step softly glowing as the optimal result is reached."
+    caption="Solution to LeetCode 553: Optimal Division Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

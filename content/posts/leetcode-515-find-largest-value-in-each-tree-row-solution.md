@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/find-largest-value-in-each-tree-row/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/515.webp" 
+    alt="A tree with rows of values, each row highlighted with the largest value softly glowing."
+    caption="Solution to LeetCode 515: Find Largest Value in Each Tree Row Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/valid-tic-tac-toe-state/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/794.webp" 
+    alt="A Tic-Tac-Toe board where valid states are checked, with valid states softly glowing as they’re found."
+    caption="Solution to LeetCode 794: Valid Tic-Tac-Toe State Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/convert-bst-to-greater-tree/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/538.webp" 
+    alt="A binary search tree where each node is gradually updated to a greater tree, with each transformation softly highlighted."
+    caption="Solution to LeetCode 538: Convert BST to Greater Tree Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

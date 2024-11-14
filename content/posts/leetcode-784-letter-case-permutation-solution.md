@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/letter-case-permutation/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/784.webp" 
+    alt="A string where letter case permutations are made, with each new permutation softly glowing as it’s generated."
+    caption="Solution to LeetCode 784: Letter Case Permutation Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

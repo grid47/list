@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/longest-word-in-dictionary-through-deleting/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/524.webp" 
+    alt="A string where characters are deleted to form the longest word from a dictionary, with each step glowing softly."
+    caption="Solution to LeetCode 524: Longest Word in Dictionary through Deleting Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/sum-of-square-numbers/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/633.webp" 
+    alt="A series of squares where the sum of square numbers is calculated and softly glowing as it’s computed."
+    caption="Solution to LeetCode 633: Sum of Square Numbers Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

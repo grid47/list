@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/single-element-in-a-sorted-array/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/540.webp" 
+    alt="An array where the single unique element glows softly as it is found among duplicates."
+    caption="Solution to LeetCode 540: Single Element in a Sorted Array Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/largest-sum-of-averages/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/813.webp" 
+    alt="A set of averages where the largest sum is calculated, glowing softly as the sum is found."
+    caption="Solution to LeetCode 813: Largest Sum of Averages Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/fibonacci-number/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/509.webp" 
+    alt="A sequence of numbers where each Fibonacci number glows as it is calculated in the sequence."
+    caption="Solution to LeetCode 509: Fibonacci Number Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

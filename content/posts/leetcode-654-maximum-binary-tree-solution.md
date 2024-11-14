@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/maximum-binary-tree/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/654.webp" 
+    alt="A binary tree where the maximum value node is highlighted, glowing softly as it’s determined."
+    caption="Solution to LeetCode 654: Maximum Binary Tree Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

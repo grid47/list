@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/is-graph-bipartite/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/785.webp" 
+    alt="A graph where bipartiteness is checked, with the two sets glowing softly as they are separated."
+    caption="Solution to LeetCode 785: Is Graph Bipartite? Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

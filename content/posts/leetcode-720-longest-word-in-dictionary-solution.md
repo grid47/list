@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/longest-word-in-dictionary/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/720.webp" 
+    alt="A dictionary where the longest word is highlighted, softly glowing as it stands out."
+    caption="Solution to LeetCode 720: Longest Word in Dictionary Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

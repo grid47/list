@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/subdomain-visit-count/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/811.webp" 
+    alt="A set of web domains where subdomains are counted, with each subdomain glowing softly as it’s identified."
+    caption="Solution to LeetCode 811: Subdomain Visit Count Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

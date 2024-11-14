@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/max-chunks-to-make-sorted/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/769.webp" 
+    alt="A sequence where chunks are sorted, with each sorted chunk glowing softly as the process completes."
+    caption="Solution to LeetCode 769: Max Chunks To Make Sorted Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

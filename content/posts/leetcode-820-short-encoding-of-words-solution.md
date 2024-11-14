@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/short-encoding-of-words/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/820.webp" 
+    alt="A series of words encoded, with the shortest encoding glowing softly as it is created."
+    caption="Solution to LeetCode 820: Short Encoding of Words Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

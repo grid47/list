@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/rabbits-in-forest/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/781.webp" 
+    alt="A forest where rabbits are hiding, with each rabbit's position glowing softly as it’s found."
+    caption="Solution to LeetCode 781: Rabbits in Forest Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

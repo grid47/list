@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/task-scheduler/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/621.webp" 
+    alt="A glowing task list where tasks are scheduled, with optimal scheduling steps softly illuminating."
+    caption="Solution to LeetCode 621: Task Scheduler Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/asteroid-collision/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/735.webp" 
+    alt="Asteroids moving in space, where collisions are detected, and the remaining asteroids glow softly after the impact."
+    caption="Solution to LeetCode 735: Asteroid Collision Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

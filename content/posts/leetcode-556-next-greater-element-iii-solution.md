@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/next-greater-element-iii/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/556.webp" 
+    alt="A sequence of numbers where each next greater element softly illuminates as it’s found for the next number."
+    caption="Solution to LeetCode 556: Next Greater Element III Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

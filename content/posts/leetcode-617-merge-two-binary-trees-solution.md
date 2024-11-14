@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/merge-two-binary-trees/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/617.webp" 
+    alt="Two binary trees merging together, with each node softly glowing as they combine."
+    caption="Solution to LeetCode 617: Merge Two Binary Trees Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

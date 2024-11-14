@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/find-smallest-letter-greater-than-target/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/744.webp" 
+    alt="A string where the smallest letter greater than the target is found and highlighted with a soft glow."
+    caption="Solution to LeetCode 744: Find Smallest Letter Greater Than Target Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/most-frequent-subtree-sum/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/508.webp" 
+    alt="A tree with sums at each subtree, and the most frequent subtree sum glowing brightly as it is discovered."
+    caption="Solution to LeetCode 508: Most Frequent Subtree Sum Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

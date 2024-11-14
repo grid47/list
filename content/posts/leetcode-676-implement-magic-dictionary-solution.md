@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/implement-magic-dictionary/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/676.webp" 
+    alt="A glowing dictionary where each word is stored and retrieved, with each word softly glowing as it’s found."
+    caption="Solution to LeetCode 676: Implement Magic Dictionary Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/shortest-unsorted-continuous-subarray/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/581.webp" 
+    alt="An array where the shortest unsorted subarray is found, each element softly glowing as it is highlighted."
+    caption="Solution to LeetCode 581: Shortest Unsorted Continuous Subarray Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/flood-fill/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/733.webp" 
+    alt="A grid where the flood fill algorithm is applied, with the flooded area glowing softly as it spreads."
+    caption="Solution to LeetCode 733: Flood Fill Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

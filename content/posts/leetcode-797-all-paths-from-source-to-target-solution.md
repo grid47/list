@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/all-paths-from-source-to-target/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/797.webp" 
+    alt="A graph where all paths are traced from source to target, with each path softly glowing as it is found."
+    caption="Solution to LeetCode 797: All Paths From Source to Target Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

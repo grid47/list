@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/dota2-senate/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/649.webp" 
+    alt="A series of characters where the senate is divided and illuminated by those voting for or against, softly glowing."
+    caption="Solution to LeetCode 649: Dota2 Senate Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 

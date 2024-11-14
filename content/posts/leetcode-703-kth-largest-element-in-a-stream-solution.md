@@ -15,7 +15,15 @@ series = ["Leetcode"]
 
 
 [`Problem Link`](https://leetcode.com/problems/kth-largest-element-in-a-stream/description/)
-
+{{< rmtimg 
+    src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/703.webp" 
+    alt="A stream of numbers where the kth largest element is identified, glowing brightly as it’s found."
+    caption="Solution to LeetCode 703: Kth Largest Element in a Stream Problem"
+    width="900px"
+    borderRadius="8px"
+    align="center" 
+    captionColor="#555"
+>}}
 ---
 **Code:**
 
