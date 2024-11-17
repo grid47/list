@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -250,62 +250,133 @@
   
   <div class="markdown-body">
     <h3 id="problem-statement">
-  Problem Statement
+  Problem Statement:
   <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given two strings <code>a</code> and <code>b</code>, your task is to find the minimum number of times you need to repeat string <code>a</code> such that string <code>b</code> is a substring of the repeated version of <code>a</code>. If it is not possible, return -1.</p>
+<p>The problem at hand is to determine how many times a string <code>a</code> must be repeated to make it contain string <code>b</code> as a substring. If it is not possible for <code>b</code> to appear in the repeated version of <code>a</code>, the function should return <code>-1</code>. This type of problem is common when dealing with string matching and repeated patterns.</p>
+<p>Given two strings <code>a</code> and <code>b</code>, the objective is to find the minimum number of times string <code>a</code> needs to be repeated such that string <code>b</code> becomes a substring of the repeated string.</p>
 <h3 id="approach">
-  Approach
+  Approach:
   <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The approach involves checking for each possible starting position in <code>a</code> whether <code>b</code> can be formed by repeating <code>a</code>. The key steps in the algorithm are:</p>
+<p>To solve the problem, we must check if the string <code>b</code> can be formed by repeating string <code>a</code>. The basic idea is to simulate the repeating process of string <code>a</code> and check if <code>b</code> can be matched within the repeated string.</p>
+<p>We will take a brute force approach where we:</p>
 <ol>
-<li>
-<p><strong>Double the String</strong>: While we will not actually create a repeated string, we can conceptually treat <code>a</code> as if it were repeated by allowing it to wrap around using the modulo operation.</p>
-</li>
-<li>
-<p><strong>Nested Loop</strong>: Use two nested loops:</p>
-<ul>
-<li>The outer loop iterates over each character in <code>a</code>.</li>
-<li>The inner loop checks if the characters of <code>b</code> match the characters of <code>a</code>, accounting for wrapping using modulo.</li>
-</ul>
-</li>
-<li>
-<p><strong>Count Repetitions</strong>: If a full match of <code>b</code> is found starting from a given index in <code>a</code>, calculate the number of times <code>a</code> needs to be repeated to form this match.</p>
-</li>
-<li>
-<p><strong>Return the Result</strong>: If no match is found after all possible starting positions, return -1.</p>
-</li>
+<li>Iterate over each possible starting position of <code>b</code> within the repeated <code>a</code>.</li>
+<li>For each possible position, compare the characters of <code>a</code> with <code>b</code> while considering the wrapping effect due to repetition.</li>
+<li>Return the number of repetitions of <code>a</code> required for <code>b</code> to become a substring.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="key-observations">
+  Key Observations:
+  <a class="heading-link" href="#key-observations">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li>The outer loop iterates through each character of <code>a</code>. For each starting character, the inner loop checks if the substring of <code>b</code> can be matched with the repeated characters of <code>a</code> using the modulo operator to handle wrapping.</li>
-<li>If a full match of <code>b</code> is found, the number of repetitions is calculated based on the index of the match in relation to the size of <code>a</code>.</li>
+<li>The idea is to iterate through the string <code>a</code> in a circular manner (as it repeats).</li>
+<li>We try to align string <code>b</code> starting from each index in <code>a</code> and check if the entire string <code>b</code> can be formed by wrapping around and repeating <code>a</code>.</li>
+<li>If at any point string <code>b</code> is completely matched, we calculate how many repetitions of <code>a</code> are required and return that number.</li>
+<li>If no valid alignment is found, we return <code>-1</code>.</li>
+</ul>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-iterate-over-each-character-of-a">
+  Step 1: Iterate over Each Character of <code>a</code>
+  <a class="heading-link" href="#step-1-iterate-over-each-character-of-a">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> a.size(); i<span style="color:#666">++</span>) {
+</span></span></code></pre></div><ul>
+<li>We use two indices: <code>i</code> to iterate over each character in <code>a</code> and <code>j</code> to compare the corresponding characters of <code>a</code> and <code>b</code>. The outer loop tries starting at each index in <code>a</code> as a potential starting point for <code>b</code>.</li>
+</ul>
+<h4 id="step-2-compare-characters-of-a-and-b-in-circular-fashion">
+  Step 2: Compare Characters of <code>a</code> and <code>b</code> in Circular Fashion
+  <a class="heading-link" href="#step-2-compare-characters-of-a-and-b-in-circular-fashion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> b.size() <span style="color:#666">&amp;&amp;</span> a[(i <span style="color:#666">+</span> j) <span style="color:#666">%</span> a.size()] <span style="color:#666">==</span> b[j]; j<span style="color:#666">++</span>);
+</span></span></code></pre></div><ul>
+<li>This inner loop compares characters of <code>a</code> and <code>b</code> character by character. Since <code>a</code> repeats, we use the modulo operation <code>(i + j) % a.size()</code> to simulate the circular nature of string <code>a</code>.</li>
+<li>If <code>a[(i + j) % a.size()] == b[j]</code> holds true, we continue comparing the next characters.</li>
+<li>The loop continues until all characters of <code>b</code> are matched, or the characters in <code>a</code> and <code>b</code> do not match.</li>
+</ul>
+<h4 id="step-3-check-if-entire-b-is-matched">
+  Step 3: Check if Entire <code>b</code> is Matched
+  <a class="heading-link" href="#step-3-check-if-entire-b-is-matched">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(j <span style="color:#666">==</span> b.size())
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (j <span style="color:#666">+</span> i <span style="color:#666">-</span> <span style="color:#666">1</span>)<span style="color:#666">/</span> a.size() <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div><ul>
+<li>If the inner loop completes successfully (i.e., <code>j == b.size()</code>), it means we have matched all characters of <code>b</code> with the corresponding characters in the repeated string <code>a</code>.</li>
+<li>The formula <code>(j + i - 1)/ a.size() + 1</code> calculates how many repetitions of <code>a</code> are needed to cover the substring <code>b</code>. Here, <code>i</code> is the starting index in <code>a</code>, and <code>j</code> is the total number of characters matched.</li>
+</ul>
+<h4 id="step-4-return--1-if-no-match-is-found">
+  Step 4: Return -1 if No Match is Found
+  <a class="heading-link" href="#step-4-return--1-if-no-match-is-found">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span></code></pre></div><ul>
+<li>If no valid starting index in <code>a</code> leads to a match of <code>b</code>, we return <code>-1</code>, indicating that <code>b</code> cannot be formed by repeating <code>a</code>.</li>
 </ul>
 <h3 id="complexity">
-  Complexity
+  Complexity:
   <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(m * n), where <code>m</code> is the length of <code>a</code> and <code>n</code> is the length of <code>b</code>. In the worst case, the algorithm checks all characters in <code>b</code> for every character in <code>a</code>.</li>
-<li><strong>Space Complexity</strong>: O(1) since we are not using any additional data structures that grow with input size.</li>
+<li><strong>O(n * m)</strong>, where <code>n</code> is the length of string <code>a</code> and <code>m</code> is the length of string <code>b</code>. In the worst case, we need to check each possible starting point in <code>a</code> and compare up to <code>m</code> characters of <code>b</code> at each step.</li>
+<li>The time complexity arises from the nested loops where the outer loop runs <code>n</code> times and the inner loop runs at most <code>m</code> times.</li>
 </ul>
-<p>This method efficiently checks for substring formation through repetition without generating large strings, making it suitable for the problem constraints.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>. The algorithm uses a constant amount of extra space since we only use a few integer variables (<code>i</code> and <code>j</code>) for indexing and comparison. No additional space is required for storing the strings or intermediate results.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of finding how many times a string <code>a</code> must be repeated to contain string <code>b</code> as a substring. It uses a brute force approach with a circular comparison of characters to simulate the repeated nature of string <code>a</code>. The time complexity is linear with respect to the product of the lengths of <code>a</code> and <code>b</code>, making it feasible for moderately sized strings.</p>
+<p>The use of modulo operations ensures that the comparison respects the repetition of string <code>a</code> without explicitly constructing the repeated string, which is both memory-efficient and easy to understand. The solution works for edge cases such as when <code>b</code> is already a substring of <code>a</code> or when <code>b</code> cannot be formed even with multiple repetitions of <code>a</code>.</p>
  
 </div>
   

@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -260,100 +260,201 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-statement">
+  🚀 Problem Statement
+  <a class="heading-link" href="#-problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given an array <code>prices</code> where <code>prices[i]</code> is the price of a given stock on the <code>i</code>-th day. You want to maximize your profit by performing at most one transaction, with the following constraints:</p>
+<p>Imagine you’re a savvy stock trader 📈, and you want to maximize your profit by buying and selling shares of a stock over several days. However, there are a few rules:</p>
+<ol>
+<li>You can <strong>buy</strong> one share of the stock on any day.</li>
+<li>You can <strong>sell</strong> one share of the stock on any day.</li>
+<li>After selling a share, you need to wait one day before you can buy again (this is the &ldquo;cooldown&rdquo; period ❄️).</li>
+</ol>
+<p>Your task is to calculate the <strong>maximum profit</strong> possible from these transactions given an array <code>prices</code> where <code>prices[i]</code> is the stock price on day <code>i</code>.</p>
+<p>For example:</p>
 <ul>
-<li>You can buy and sell the stock multiple times, but you must wait for one day after selling before buying again (cooldown).</li>
+<li><strong>Input:</strong> <code>[1, 2, 3, 0, 2]</code></li>
+<li><strong>Output:</strong> <code>3</code></li>
 </ul>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>The optimal transactions here would be buying on day 0, selling on day 2, waiting on day 3, and buying again on day 4 for a maximum profit of 3.</p>
+<hr>
+<h3 id="-approach">
+  🧠 Approach
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The solution employs dynamic programming with memoization to find the maximum profit while adhering to the constraints:</p>
+<p>To tackle this problem, we&rsquo;ll use <strong>Dynamic Programming (DP)</strong> to break it down into manageable pieces. At each day, we’ll decide whether to buy, sell, or wait based on what will maximize our profit.</p>
+<h4 id="key-states">
+  <strong>Key States</strong>
+  <a class="heading-link" href="#key-states">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Let&rsquo;s break down the states we need to track:</p>
+<ul>
+<li><strong>Day (<code>idx</code>)</strong>: The current day we&rsquo;re considering.</li>
+<li><strong>Buy (<code>buy</code>)</strong>: Whether we&rsquo;re allowed to buy on the current day (<code>true</code> if yes, <code>false</code> if no).</li>
+<li><strong>Cooldown (<code>cool</code>)</strong>: Whether we&rsquo;re in the cooldown period after a sale (<code>true</code> if yes, <code>false</code> if no).</li>
+</ul>
+<p>Each state is like a checkpoint in our journey to maximizing profit, represented by the tuple <code>(idx, buy, cool)</code>.</p>
+<h4 id="recursive-plan-with-memoization">
+  <strong>Recursive Plan with Memoization</strong>
+  <a class="heading-link" href="#recursive-plan-with-memoization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The core of our approach will be a recursive function with <strong>memoization</strong> to avoid recalculating results for the same states. We’ll consider two main actions for each day based on our state:</p>
 <ol>
 <li>
-<p><strong>State Representation</strong>:</p>
+<p><strong>If we’re allowed to buy</strong>, we can either:</p>
 <ul>
-<li>Use <code>dp(idx, buy, cool)</code> where:
-<ul>
-<li><code>idx</code> is the current day (index in <code>prices</code>).</li>
-<li><code>buy</code> is a boolean indicating whether you currently hold the stock.</li>
-<li><code>cool</code> is a boolean indicating whether you are in the cooldown period after selling.</li>
-</ul>
-</li>
+<li><strong>Skip</strong> the day without buying.</li>
+<li><strong>Buy</strong> the stock and move to the next day with a &ldquo;cooldown&rdquo; period after the buy.</li>
 </ul>
 </li>
 <li>
-<p><strong>Base Case</strong>:</p>
+<p><strong>If we’re in the &ldquo;sell&rdquo; state</strong> (i.e., <code>buy = false</code>), we can:</p>
 <ul>
-<li>If <code>idx</code> equals the size of <code>prices</code>, return <code>0</code> since no profit can be made beyond the last day.</li>
-</ul>
-</li>
-<li>
-<p><strong>Memoization Check</strong>:</p>
-<ul>
-<li>Before performing calculations, check if the result for the current state <code>(idx, buy, cool)</code> is already computed and stored in <code>memo</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Recursive Cases</strong>:</p>
-<ul>
-<li>If you don&rsquo;t take any action, call <code>dp(idx + 1, buy, false)</code> to move to the next day without changing the state.</li>
-<li>If you are in a position to buy (i.e., holding stock and not in cooldown), compute potential profit by selling and transitioning to a cooldown state:
-<ul>
-<li><code>res = max(res, dp(idx + 1, false, false) - nums[idx])</code>.</li>
-</ul>
-</li>
-<li>If you are not holding stock, compute potential profit by buying:
-<ul>
-<li><code>res = max(res, dp(idx + 1, true, true) + nums[idx])</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Return the Result</strong>:</p>
-<ul>
-<li>Store the computed result in <code>memo</code> and return it.</li>
+<li><strong>Skip</strong> the day.</li>
+<li><strong>Sell</strong> the stock and enter the &ldquo;cooldown&rdquo; state the following day.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<hr>
+<h3 id="-step-by-step-code-breakdown">
+  🔨 Step-by-Step Code Breakdown
+  <a class="heading-link" href="#-step-by-step-code-breakdown">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Input</strong>: A vector of integers <code>prices</code>.</li>
-<li><strong>Output</strong>: An integer representing the maximum profit achievable.</li>
+<p>Here&rsquo;s how this all translates into code:</p>
+<h4 id="1-memoization-table-">
+  <strong>1. Memoization Table</strong> 📝
+  <a class="heading-link" href="#1-memoization-table-">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> memo[<span style="color:#666">5001</span>][<span style="color:#666">2</span>][<span style="color:#666">2</span>];
+</span></span></code></pre></div><ul>
+<li>This 3D array will store results for each <code>(idx, buy, cool)</code> state to avoid redundant calculations.</li>
 </ul>
-<ol>
-<li>Initialize the memoization array with <code>-1</code> to indicate uncomputed states.</li>
-<li>Store the prices in the class variable for easy access.</li>
-<li>Start the dynamic programming process by calling <code>dp(0, true, false)</code> to represent the initial state.</li>
-</ol>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="2-recursive-dp-function-">
+  <strong>2. Recursive DP Function</strong> 📐
+  <a class="heading-link" href="#2-recursive-dp-function-">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">bool</span> buy, <span style="color:#0b0;font-weight:bold">bool</span> cool) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (idx <span style="color:#666">==</span> nums.size()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>; <span style="color:#080;font-style:italic">// Base case: reached end of days
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (memo[idx][buy][cool] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[idx][buy][cool]; <span style="color:#080;font-style:italic">// Return memoized result
+</span></span></span></code></pre></div><ul>
+<li><strong>Base Case:</strong> When <code>idx</code> equals the length of <code>prices</code>, we’ve processed all days, so profit is <code>0</code>.</li>
+<li><strong>Memoization:</strong> If we’ve already calculated the result for the state <code>(idx, buy, cool)</code>, return it directly.</li>
+</ul>
+<h4 id="3-decision-making-">
+  <strong>3. Decision Making</strong> 💡
+  <a class="heading-link" href="#3-decision-making-">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, buy, <span style="color:#a2f">false</span>); <span style="color:#080;font-style:italic">// Skip the current day
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (buy <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>cool) { <span style="color:#080;font-style:italic">// If we can buy and we&#39;re not in cooldown
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    res <span style="color:#666">=</span> max(res, dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#a2f">false</span>, <span style="color:#a2f">false</span>) <span style="color:#666">-</span> nums[idx]); <span style="color:#080;font-style:italic">// Buy stock
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>} <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> (<span style="color:#666">!</span>buy) { <span style="color:#080;font-style:italic">// If we can&#39;t buy (in selling state)
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    res <span style="color:#666">=</span> max(res, dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#a2f">true</span>, <span style="color:#a2f">true</span>) <span style="color:#666">+</span> nums[idx]); <span style="color:#080;font-style:italic">// Sell stock and enter cooldown
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
+</span></span></code></pre></div><ul>
+<li><strong>Skip the Day:</strong> Profit remains unchanged if we do nothing.</li>
+<li><strong>Buy</strong>: If we&rsquo;re in the &ldquo;buy&rdquo; state and not in cooldown, consider buying the stock.</li>
+<li><strong>Sell</strong>: If we&rsquo;re in the &ldquo;sell&rdquo; state, consider selling and entering the cooldown.</li>
+</ul>
+<h4 id="4-memoize-the-result-">
+  <strong>4. Memoize the Result</strong> 📌
+  <a class="heading-link" href="#4-memoize-the-result-">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> memo[idx][buy][cool] <span style="color:#666">=</span> res; <span style="color:#080;font-style:italic">// Store result for future reference
+</span></span></span></code></pre></div><ul>
+<li>Save the computed result for the current state to use later.</li>
+</ul>
+<h4 id="5-main-function-">
+  <strong>5. Main Function</strong> 💼
+  <a class="heading-link" href="#5-main-function-">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">maxProfit</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> prices) {
+</span></span><span style="display:flex;"><span>    memset(memo, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#a2f;font-weight:bold">sizeof</span>(memo)); <span style="color:#080;font-style:italic">// Initialize memo table
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>nums <span style="color:#666">=</span> prices; <span style="color:#080;font-style:italic">// Store prices in the global vector
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">return</span> dp(<span style="color:#666">0</span>, <span style="color:#a2f">true</span>, <span style="color:#a2f">false</span>); <span style="color:#080;font-style:italic">// Start recursion with first day
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
+</span></span></code></pre></div><ul>
+<li>Initialize memo table with <code>-1</code>, indicating no states have been processed.</li>
+<li>Start the recursive function with <code>idx = 0</code>, <code>buy = true</code>, and <code>cool = false</code>.</li>
+</ul>
+<hr>
+<h3 id="-complexity-analysis">
+  📈 Complexity Analysis
+  <a class="heading-link" href="#-complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity-">
+  <strong>Time Complexity</strong> ⏱️
+  <a class="heading-link" href="#time-complexity-">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(n)), where (n) is the number of days in <code>prices</code>. Each state is computed once.</li>
-<li><strong>Space Complexity</strong>: (O(n)) for the memoization table storing results for each state.</li>
+<li><strong>O(n)</strong>, where <code>n</code> is the number of days in the <code>prices</code> array. This is because each state <code>(idx, buy, cool)</code> is processed once due to memoization, making the recursion efficient.</li>
 </ul>
+<h4 id="space-complexity-">
+  <strong>Space Complexity</strong> 💾
+  <a class="heading-link" href="#space-complexity-">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>, which accounts for the memoization table to store results for each <code>(idx, buy, cool)</code> state.</li>
+</ul>
+<hr>
+<h3 id="-conclusion">
+  🏁 Conclusion
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This DP-based solution efficiently calculates the maximum profit for the given stock trading scenario with cooldowns. By storing results for each subproblem and reusing them, we avoid unnecessary recalculations and achieve optimal performance.</p>
+<hr>
+<h4 id="-summary">
+  🎉 Summary
+  <a class="heading-link" href="#-summary">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Using dynamic programming and memoization, we tackled a complex stock trading scenario with a cooldown rule. This approach ensures an <strong>O(n)</strong> time complexity, making it efficient even for large inputs.</p>
+<p>Happy trading! Remember, just like in coding, patience and strategy make all the difference. 💪📈</p>
  
 </div>
   

@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -245,7 +245,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given two non-negative integers <code>x</code> and <code>y</code>, and an upper bound <code>bound</code>, find all the unique integers that can be expressed as <code>x^i + y^j</code> where <code>i &gt;= 0</code> and <code>j &gt;= 0</code>, and the result is less than or equal to <code>bound</code>.</p>
+<p>The problem asks to find all possible powerful integers, which are integers that can be written as the sum of powers of two integers <code>x</code> and <code>y</code>, where <code>x</code> and <code>y</code> are positive integers greater than or equal to 1, and the sum of these powers is less than or equal to a given bound. Specifically, the task is to return all unique integers that can be expressed as <code>x^i + y^j</code> such that the resulting number does not exceed the given <code>bound</code>.</p>
+<p>For this problem, we are tasked to find all such values of <code>i</code> and <code>j</code> where:</p>
+<ul>
+<li><code>x^i + y^j &lt;= bound</code></li>
+<li>The values of <code>x</code> and <code>y</code> are fixed.</li>
+<li><code>i</code> and <code>j</code> are non-negative integers.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -253,48 +259,123 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The approach is based on brute-forcing the power values of <code>x</code> and <code>y</code> while ensuring that the sum of the powers does not exceed the <code>bound</code>. The main steps of the approach are:</p>
 <ol>
 <li>
-<p><strong>Use of Sets</strong>:</p>
+<p><strong>Iterate over powers of <code>x</code></strong>:</p>
 <ul>
-<li>Utilize an unordered set to store the results to ensure all integers are unique.</li>
+<li>We start by iterating over all powers of <code>x</code> starting from <code>x^0 = 1</code> (the smallest power) up to the largest power of <code>x</code> that is still less than or equal to the <code>bound</code>.</li>
+<li>In each iteration, the current power of <code>x</code> is multiplied by <code>x</code>, generating the next power of <code>x</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Iterate through Powers</strong>:</p>
+<p><strong>Iterate over powers of <code>y</code></strong>:</p>
 <ul>
-<li>For each power of <code>x</code> starting from <code>x^0</code> (which is 1), calculate the values until <code>x^i</code> exceeds <code>bound</code>.</li>
-<li>For each value of <code>x^i</code>, iterate through powers of <code>y</code>, starting from <code>y^0</code>, and calculate <code>x^i + y^j</code> until the sum exceeds <code>bound</code>.</li>
+<li>For each power of <code>x</code>, we start iterating over the powers of <code>y</code>, from <code>y^0 = 1</code> and continue to calculate powers of <code>y</code> until the sum of the current power of <code>x</code> and the current power of <code>y</code> exceeds the <code>bound</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Handle Special Cases</strong>:</p>
+<p><strong>Store the results</strong>:</p>
 <ul>
-<li>If either <code>x</code> or <code>y</code> is 1, handle the case separately to avoid infinite loops since any power of 1 remains 1.</li>
+<li>If the sum of a power of <code>x</code> and a power of <code>y</code> is less than or equal to <code>bound</code>, we store that sum in an unordered set to ensure uniqueness.</li>
+<li>This ensures that we do not include duplicates in our result.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handle special cases</strong>:</p>
+<ul>
+<li>If <code>x == 1</code>, the powers of <code>x</code> will always be <code>1</code>, so we need to break out of the loop to avoid unnecessary calculations.</li>
+<li>Similarly, if <code>y == 1</code>, the powers of <code>y</code> will always be <code>1</code>, and we only need to calculate sums involving <code>x</code>&rsquo;s powers and <code>1</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the result</strong>:</p>
+<ul>
+<li>After processing all valid powers, we return the result as a vector containing all unique sums stored in the set.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong><code>powerfulIntegers</code> Method</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> powerfulIntegers(<span style="color:#0b0;font-weight:bold">int</span> x, <span style="color:#0b0;font-weight:bold">int</span> y, <span style="color:#0b0;font-weight:bold">int</span> bound) {
+</span></span></code></pre></div><ol>
+<li><strong>Function Declaration</strong>:
 <ul>
-<li>Initializes an unordered set <code>s</code> to store the results.</li>
-<li>Uses a loop to calculate powers of <code>x</code>, and for each power of <code>x</code>, it computes powers of <code>y</code>.</li>
-<li>Inserts the sum <code>x^i + y^j</code> into the set if it is within the specified <code>bound</code>.</li>
-<li>Breaks early for <code>x</code> or <code>y</code> equal to 1 to avoid infinite calculations.</li>
+<li>The function <code>powerfulIntegers</code> is defined to take three arguments: <code>x</code>, <code>y</code>, and <code>bound</code>. <code>x</code> and <code>y</code> are the base integers, and <code>bound</code> is the upper limit for the sum of the powers.</li>
 </ul>
 </li>
-<li>
-<p><strong>Return the Result</strong>:</p>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        unordered_set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s;
+</span></span></code></pre></div><ol start="2">
+<li><strong>Unordered Set for Storing Unique Results</strong>:
 <ul>
-<li>Converts the set into a vector and returns it.</li>
+<li>An unordered set <code>s</code> is used to store the unique sums of the form <code>x^i + y^j</code>. Using a set ensures that duplicate sums are not added, as the set automatically handles uniqueness.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> bound; i <span style="color:#666">*=</span> x) {
+</span></span></code></pre></div><ol start="3">
+<li><strong>Outer Loop for Powers of <code>x</code></strong>:
+<ul>
+<li>We begin the outer loop to iterate over the powers of <code>x</code>. Starting from <code>i = 1</code> (which represents <code>x^0</code>), we multiply <code>i</code> by <code>x</code> in each iteration. The loop continues until <code>i</code> exceeds the <code>bound</code>.</li>
+<li>The condition <code>i &lt;= bound</code> ensures that we stop iterating once <code>x^i</code> becomes greater than <code>bound</code>.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">+</span> j <span style="color:#666">&lt;=</span> bound; j <span style="color:#666">*=</span> y) {
+</span></span></code></pre></div><ol start="4">
+<li><strong>Inner Loop for Powers of <code>y</code></strong>:
+<ul>
+<li>For each power of <code>x</code>, we start an inner loop to iterate over the powers of <code>y</code>. Initially, <code>j = 1</code> represents <code>y^0</code>. We multiply <code>j</code> by <code>y</code> in each iteration, generating subsequent powers of <code>y</code>.</li>
+<li>The loop continues as long as the sum of <code>i + j</code> is less than or equal to <code>bound</code>.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                s.insert(i <span style="color:#666">+</span> j);
+</span></span></code></pre></div><ol start="5">
+<li><strong>Insert Sum into Set</strong>:
+<ul>
+<li>For each valid pair of powers of <code>x</code> and <code>y</code> (i.e., where <code>i + j &lt;= bound</code>), we insert the sum <code>i + j</code> into the set <code>s</code>. This ensures that only unique sums are stored, as the set does not allow duplicate values.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(y <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span></code></pre></div><ol start="6">
+<li><strong>Break if <code>y == 1</code></strong>:
+<ul>
+<li>If <code>y == 1</code>, the powers of <code>y</code> will always be <code>1</code> (since <code>y^j = 1</code> for all <code>j</code>). In this case, the inner loop will keep adding the same value (<code>i + 1</code>) to the set. Thus, we break the inner loop early to avoid redundant calculations.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span></code></pre></div><ol start="7">
+<li><strong>Break if <code>x == 1</code></strong>:
+<ul>
+<li>Similarly, if <code>x == 1</code>, the powers of <code>x</code> will always be <code>1</code> (since <code>x^i = 1</code> for all <code>i</code>). Thus, we break the outer loop early as further iterations of <code>i</code> will be unnecessary.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(s.begin(), s.end());
+</span></span></code></pre></div><ol start="8">
+<li><strong>Convert Set to Vector</strong>:
+<ul>
+<li>After collecting all unique sums, we return the result as a vector. The unordered set <code>s</code> is converted to a vector using its iterator range (<code>s.begin()</code> to <code>s.end()</code>), and this vector is returned as the final result.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ol start="9">
+<li><strong>End of Function and Class</strong>:
+<ul>
+<li>The function ends, and the solution is complete.</li>
 </ul>
 </li>
 </ol>
@@ -306,9 +387,28 @@
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity</strong>: O(log(bound) * log(bound)) in the worst case, depending on the number of unique powers generated for <code>x</code> and <code>y</code>.</li>
-<li><strong>Space Complexity</strong>: O(n), where <code>n</code> is the number of unique integers stored in the set.</li>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity is <strong>O(log(bound) * log(bound))</strong>, where <code>log(bound)</code> represents the number of iterations for <code>x^i</code> and <code>y^j</code> respectively.</li>
+<li>The outer loop runs for the powers of <code>x</code> (i.e., <code>log_x(bound)</code>), and for each power of <code>x</code>, the inner loop runs for the powers of <code>y</code> (i.e., <code>log_y(bound)</code>). Thus, the total time complexity is approximately the product of these two logarithms.</li>
 </ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is <strong>O(k)</strong>, where <code>k</code> is the number of unique sums that are less than or equal to <code>bound</code>. This is because the unordered set <code>s</code> stores all unique results, and the resulting vector will also have a size of <code>k</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes all powerful integers that can be expressed as <code>x^i + y^j</code> without exceeding the given bound. By using nested loops for powers of <code>x</code> and <code>y</code>, and leveraging an unordered set to ensure uniqueness, the approach guarantees that only valid and unique sums are considered. The algorithm handles edge cases where either <code>x</code> or <code>y</code> is <code>1</code> by breaking early from loops, preventing unnecessary calculations. With logarithmic time complexity with respect to the bound, this solution is efficient and scalable for large inputs.</p>
  
 </div>
   

@@ -217,7 +217,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -226,7 +226,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1198s0hbhb">
+        <h2 id="hahahugoshortcode1199s0hbhb">
   <a href="https://leetcode.com/problems/minimum-absolute-difference-in-bst/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -241,7 +241,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1198s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1199s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -280,7 +280,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1198s2hbhb">
+<h2 id="hahahugoshortcode1199s2hbhb">
   
 
   
@@ -292,7 +292,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a binary search tree (BST), find the minimum absolute difference between the values of any two nodes in the tree.</p>
+<p>Given a binary search tree (BST), the task is to find the minimum absolute difference between the values of any two nodes. This difference must be as small as possible.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -300,34 +300,83 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Inorder Traversal</strong>: Since a BST is ordered, performing an inorder traversal yields the values in sorted order. This allows us to easily find the minimum difference between consecutive nodes.</p>
-</li>
-<li>
-<p><strong>Tracking Previous Node</strong>: Use a variable <code>prv</code> to keep track of the previous node during the traversal. This helps in calculating the difference between the current node and the previous node.</p>
-</li>
-<li>
-<p><strong>Using a Stack</strong>: Utilize a stack to implement an iterative inorder traversal:</p>
-<ul>
-<li>Traverse the left subtree until you reach the leftmost node, pushing all nodes onto the stack.</li>
-<li>Pop nodes from the stack to visit them, check the difference between the current node and the previous node, and update the minimum difference accordingly.</li>
-<li>Move to the right subtree after visiting a node.</li>
-</ul>
-</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>The structure of a BST ensures that for any given node, all nodes in its left subtree have values less than the node’s value, while nodes in its right subtree have values greater. Thus, performing an in-order traversal (visiting nodes in ascending order) allows us to sequentially access the node values in sorted order.</p>
+<p>In this solution, we use an in-order traversal to examine consecutive node values and calculate the differences. The smallest of these differences is the answer.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-initialize-variables">
+  Step 1: Initialize Variables
+  <a class="heading-link" href="#step-1-initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> prv <span style="color:#666">=</span> <span style="color:#a2f">NULL</span>; <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> INT_MAX;
+</span></span><span style="display:flex;"><span>stack<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> stk;
+</span></span></code></pre></div><ul>
+<li><code>prv</code>: A pointer to track the previously visited node during traversal. We initialize it to <code>NULL</code> as there is no &ldquo;previous node&rdquo; before the traversal starts.</li>
+<li><code>ans</code>: An integer to store the minimum difference. It&rsquo;s initialized to <code>INT_MAX</code>, which is the largest possible integer, ensuring any actual difference will be smaller.</li>
+<li><code>stk</code>: A stack to facilitate iterative in-order traversal of the tree, as recursion could be replaced with stack usage in iterative approaches.</li>
+</ul>
+<h4 id="step-2-start-the-in-order-traversal-loop">
+  Step 2: Start the In-Order Traversal Loop
+  <a class="heading-link" href="#step-2-start-the-in-order-traversal-loop">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>stk.empty() <span style="color:#666">||</span> root) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(root) {
+</span></span><span style="display:flex;"><span>        stk.push(root);
+</span></span><span style="display:flex;"><span>        root <span style="color:#666">=</span> root<span style="color:#666">-&gt;</span>left;
+</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>        root <span style="color:#666">=</span> stk.top();
+</span></span><span style="display:flex;"><span>        stk.pop();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(prv <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) {
+</span></span><span style="display:flex;"><span>            ans <span style="color:#666">=</span> min(ans, root<span style="color:#666">-&gt;</span>val <span style="color:#666">-</span> prv<span style="color:#666">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        prv <span style="color:#666">=</span> root;
+</span></span><span style="display:flex;"><span>        root <span style="color:#666">=</span> root<span style="color:#666">-&gt;</span>right;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p>This loop handles in-order traversal iteratively.</p>
 <ul>
-<li>Initialize <code>prv</code> to <code>NULL</code> and <code>ans</code> to <code>INT_MAX</code>.</li>
-<li>Use a stack to perform the inorder traversal iteratively.</li>
-<li>For each visited node, calculate the difference with the <code>prv</code> node if <code>prv</code> is not <code>NULL</code>, and update <code>ans</code> with the minimum difference found.</li>
-<li>Finally, return the minimum difference.</li>
+<li>If <code>root</code> is not <code>NULL</code>, it means we have not yet reached the leftmost node in the current subtree. We push <code>root</code> onto the stack and move to <code>root-&gt;left</code>.</li>
+<li>If <code>root</code> is <code>NULL</code>, it means we have reached the leftmost node of the subtree or completed processing the left subtree of a node.
+<ul>
+<li>We set <code>root</code> to the top of the stack, representing the current node we are visiting.</li>
+<li>We then pop this node from the stack as we are about to process it.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>We compute the difference between the current node’s value (<code>root-&gt;val</code>) and the previous node’s value (<code>prv-&gt;val</code>) only if <code>prv</code> is not <code>NULL</code>.</p>
+<ul>
+<li>Update <code>ans</code> with the minimum of <code>ans</code> and this difference.</li>
+</ul>
+</li>
+<li>
+<p>After processing the current node, <code>prv</code> is updated to the current <code>root</code>, and <code>root</code> is moved to <code>root-&gt;right</code> to continue the in-order traversal on the right subtree.</p>
+</li>
+</ul>
+<h4 id="step-3-return-the-result">
+  Step 3: Return the Result
+  <a class="heading-link" href="#step-3-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>The minimum difference computed, stored in <code>ans</code>, is returned as the final answer.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -337,14 +386,22 @@
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the number of nodes in the tree. Each node is visited exactly once.</li>
-<li><strong>Space Complexity</strong>: O(h), where h is the height of the tree, due to the stack used for the traversal. In the worst case (a skewed tree), this can be O(n).</li>
+<li><strong>Time Complexity</strong>: <code>O(n)</code>, where <code>n</code> is the number of nodes in the binary search tree. This is because each node is visited once during the traversal.</li>
+<li><strong>Space Complexity</strong>: <code>O(h)</code>, where <code>h</code> is the height of the tree. In the worst case (for a completely unbalanced tree), this can be <code>O(n)</code> if the tree is a linked list. For a balanced tree, it is <code>O(log n)</code>.</li>
 </ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides an efficient way to find the minimum absolute difference between values in a BST using in-order traversal. By leveraging BST properties, we only compare consecutive nodes in sorted order, which minimizes unnecessary comparisons and optimizes the process. The approach effectively handles even large BSTs due to its <code>O(n)</code> time complexity and efficient memory use.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1198s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1199s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

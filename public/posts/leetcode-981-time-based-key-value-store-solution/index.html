@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -271,7 +271,16 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Implement a <code>TimeMap</code> class that can store a key-value pair along with a timestamp. The class should support setting values with timestamps and retrieving values based on the given timestamp, returning the most recent value for a timestamp that is less than or equal to the given one.</p>
+<p>The problem asks to implement a <strong>TimeMap</strong> class that supports two operations:</p>
+<ol>
+<li>
+<p><strong><code>set(key, value, timestamp)</code></strong>: This operation stores a key-value pair along with a timestamp. It should allow storing multiple values for the same key at different timestamps.</p>
+</li>
+<li>
+<p><strong><code>get(key, timestamp)</code></strong>: This operation retrieves the most recent value stored for the given key at or before the given timestamp. If no such value exists, it should return an empty string.</p>
+</li>
+</ol>
+<p>This problem tests the ability to store key-value pairs with time-based indexing and efficiently retrieve the most recent value for a given key at a specific timestamp.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -279,38 +288,131 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve the problem, we need to efficiently store and retrieve key-value pairs with respect to their timestamps. The idea is to utilize a <strong>map</strong> (or dictionary) to store the keys, where each key maps to a vector of <strong>timestamp-value pairs</strong>. We will then use binary search to efficiently retrieve the most recent value for a key at or before the requested timestamp.</p>
+<h4 id="data-structures-used">
+  Data Structures Used:
+  <a class="heading-link" href="#data-structures-used">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>map&lt;string, vector&lt;pair&lt;int, string&raquo;&gt;</strong>:</p>
+<ul>
+<li>A map is used to store keys, where each key is mapped to a vector of pairs. Each pair consists of a timestamp and a value.</li>
+<li>The vector will store the timestamps in increasing order, ensuring that we can efficiently retrieve the most recent value using binary search.</li>
+</ul>
+</li>
+<li>
+<p><strong>Binary Search</strong>:</p>
+<ul>
+<li>For the <code>get()</code> operation, we will use binary search on the vector associated with a key to find the most recent timestamp that is less than or equal to the provided timestamp. This allows for a fast retrieval operation.</li>
+</ul>
+</li>
+</ul>
+<h4 id="steps-for-each-operation">
+  Steps for Each Operation:
+  <a class="heading-link" href="#steps-for-each-operation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li><strong>Data Structure</strong>: Use a <code>map&lt;string, vector&lt;pair&lt;int, string&gt;&gt;&gt;</code> to store values. Each key maps to a vector of timestamp-value pairs.</li>
-<li><strong>Setting Values</strong>: For each <code>set</code> call, insert the <code>(timestamp, value)</code> pair into the vector associated with the <code>key</code>.</li>
-<li><strong>Retrieving Values</strong>: For each <code>get</code> call, use binary search on the vector to find the latest timestamp that is less than or equal to the specified <code>timestamp</code>.</li>
+<li>
+<p><strong><code>set(key, value, timestamp)</code></strong>:</p>
+<ul>
+<li>For each <code>set</code> call, we store the given value at the given timestamp. Since the timestamps are stored in increasing order, we append the new pair <code>(timestamp, value)</code> to the vector corresponding to the key.</li>
+<li>This operation is done in <strong>O(log n)</strong> due to the use of a map for storing key-value pairs.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>get(key, timestamp)</code></strong>:</p>
+<ul>
+<li>For each <code>get</code> call, we perform binary search on the vector of timestamp-value pairs associated with the given key. The binary search helps find the most recent timestamp that is less than or equal to the requested timestamp.</li>
+<li>The binary search ensures that the <code>get()</code> operation runs in <strong>O(log n)</strong> time.</li>
+</ul>
+</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong><code>set</code> Method</strong>:</p>
+<h4 id="1-class-definition">
+  1. <strong>Class Definition</strong>:
+  <a class="heading-link" href="#1-class-definition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">TimeMap</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span>string, vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, string<span style="color:#666">&gt;&gt;&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    TimeMap() {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The <code>TimeMap</code> class has a member variable <code>mp</code>, which is a map that stores the key-value pairs. Each key (a string) maps to a vector of pairs, where each pair consists of a timestamp (an integer) and a value (a string).</li>
+</ul>
+<h4 id="2-set-method">
+  2. <strong>set Method</strong>:
+  <a class="heading-link" href="#2-set-method">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">set</span>(string key, string value, <span style="color:#0b0;font-weight:bold">int</span> timestamp) {
+</span></span><span style="display:flex;"><span>        mp[key].push_back(make_pair(timestamp, value));
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The <code>set</code> method stores the key-value pair along with the timestamp in the map <code>mp</code>.</li>
+<li>We use <code>push_back</code> to append a pair <code>(timestamp, value)</code> to the vector associated with the key.</li>
+<li>This ensures that we can store multiple values for the same key at different timestamps.</li>
+</ul>
+<h4 id="3-get-method">
+  3. <strong>get Method</strong>:
+  <a class="heading-link" href="#3-get-method">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string <span style="color:#00a000">get</span>(string key, <span style="color:#0b0;font-weight:bold">int</span> ts) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>mp.count(key)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span></code></pre></div><ul>
+<li>The <code>get</code> method first checks if the key exists in the map. If the key is not found, it returns an empty string (<code>&quot;&quot;</code>).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">0</span>, r <span style="color:#666">=</span> mp[key].size() <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;=</span> r) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span></code></pre></div><ul>
+<li>If the key exists, we perform a binary search on the vector of pairs corresponding to the key.</li>
+<li>We initialize two pointers <code>l</code> (left) and <code>r</code> (right) to define the search range, which spans the entire vector.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(ts <span style="color:#666">&gt;</span> mp[key][m].first) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(m <span style="color:#666">==</span> r <span style="color:#666">||</span> ts <span style="color:#666">&lt;</span> mp[key][m <span style="color:#666">+</span> <span style="color:#666">1</span>].first)
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">return</span> mp[key][m].second;
+</span></span><span style="display:flex;"><span>                l <span style="color:#666">=</span> m <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(ts <span style="color:#666">&lt;</span> mp[key][m].first)
+</span></span><span style="display:flex;"><span>                r <span style="color:#666">=</span> m <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> mp[key][m].second;
+</span></span></code></pre></div><ul>
+<li>In the binary search loop:
 <ul>
-<li>Insert <code>(timestamp, value)</code> into the vector for the given <code>key</code>.</li>
+<li>If the current timestamp (<code>ts</code>) is greater than the timestamp of the midpoint (<code>mp[key][m].first</code>), this means we need to search in the right half of the vector, so we move the left pointer to <code>m + 1</code>.</li>
+<li>If the current timestamp is less than the midpoint timestamp, we search the left half, adjusting the right pointer to <code>m - 1</code>.</li>
+<li>If we find an exact match for the timestamp (<code>ts == mp[key][m].first</code>), we return the corresponding value (<code>mp[key][m].second</code>).</li>
+<li>If <code>ts &gt; mp[key][m].first</code>, we continue searching for a closer match. If the next timestamp is greater than <code>ts</code>, then we know the current timestamp is the most recent timestamp less than or equal to <code>ts</code>, and we return its value.</li>
 </ul>
 </li>
-<li>
-<p><strong><code>get</code> Method</strong>:</p>
-<ul>
-<li>If the <code>key</code> does not exist in the map, return an empty string.</li>
-<li>Perform binary search on the vector of timestamp-value pairs:
-<ul>
-<li>If <code>timestamp</code> matches a value, return it.</li>
-<li>Otherwise, return the value with the largest timestamp less than or equal to <code>timestamp</code>.</li>
 </ul>
-</li>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>If no match is found, the function returns an empty string.</li>
 </ul>
-</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -319,14 +421,29 @@
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity</strong>:
+<li>
+<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li><code>set</code> operation: O(1), since it simply appends to a vector.</li>
-<li><code>get</code> operation: O(log n), due to binary search on the timestamps.</li>
+<li><strong><code>set</code> operation</strong>: O(log n) — Inserting a key-value pair into the map takes logarithmic time, and each key-value pair insertion into the vector is an O(1) operation.</li>
+<li><strong><code>get</code> operation</strong>: O(log n) — The binary search on the vector associated with each key takes logarithmic time.</li>
+</ul>
+<p>Therefore, both operations (<code>set</code> and <code>get</code>) have a time complexity of O(log n), where <code>n</code> is the number of elements stored for a given key.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity of the solution is <strong>O(m)</strong>, where <code>m</code> is the total number of key-value pairs stored across all keys. The map stores the key-value pairs along with their timestamps, and the space required is proportional to the number of pairs.</li>
 </ul>
 </li>
-<li><strong>Space Complexity</strong>: O(n), where <code>n</code> is the number of unique <code>set</code> operations across all keys.</li>
 </ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>TimeMap</code> class efficiently handles the operations <code>set(key, value, timestamp)</code> and <code>get(key, timestamp)</code> using a map and binary search. The use of binary search ensures that the <code>get</code> operation is efficient, even with a large number of timestamps stored for a given key. This solution is optimal for the problem as it supports both operations in <strong>O(log n)</strong> time, where <code>n</code> is the number of timestamps stored for a given key, making it well-suited for real-time applications that require time-based lookups.</p>
  
 </div>
   

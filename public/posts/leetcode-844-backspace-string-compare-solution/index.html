@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -249,7 +249,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> i <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span>;        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1358s1hbhb">
+<h2 id="hahahugoshortcode1357s1hbhb">
   
 
   
@@ -261,7 +261,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given two strings, <code>S</code> and <code>T</code>, that may contain the &lsquo;#&rsquo; character which represents a backspace. Your task is to determine whether the two strings are equal after all backspaces have been applied.</p>
+<p>The task at hand is to compare two strings <code>S</code> and <code>T</code> after simulating the process of backspacing. In both strings, the character <code>#</code> represents a backspace, which means it erases the previous character (if any) before it. The goal is to determine whether the final strings, after all backspace operations, are equal.</p>
+<p>For example:</p>
+<ul>
+<li><code>&quot;ab#c&quot;</code> becomes <code>&quot;ac&quot;</code> after backspacing, and <code>&quot;ad#c&quot;</code> becomes <code>&quot;ac&quot;</code> as well. Thus, the two strings are equal after backspacing, and the function should return <code>true</code>.</li>
+<li><code>&quot;ab##&quot;</code> and <code>&quot;c#d#&quot;</code> both become an empty string after backspacing, so they are equal as well.</li>
+</ul>
+<p>The challenge is to implement a function that efficiently handles the backspace operation and compares the resulting strings.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -269,43 +275,81 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we can simulate the backspace operation directly without actually creating new strings. Instead, we work backwards through the input strings, applying the backspace rule and comparing characters as we go. The idea is to use two pointers, one for each string, and move backward through both strings while handling the <code>#</code> characters as backspace operations. We keep track of the characters we need to compare after the backspace operations.</p>
+<p>The detailed approach is as follows:</p>
+<ol>
+<li><strong>Start from the end of both strings</strong>: Since we need to process characters in reverse order, we begin by setting pointers <code>i</code> and <code>j</code> to the last characters of <code>S</code> and <code>T</code>, respectively.</li>
+<li><strong>Handle backspace operations</strong>: If the current character is <code>#</code>, we increment a counter <code>back</code> that tracks how many characters to skip (i.e., erase). For every non-<code>#</code> character, we decrement the <code>back</code> counter, which means we should &ldquo;keep&rdquo; that character.</li>
+<li><strong>Compare characters</strong>: If after handling backspaces, the characters at <code>S[i]</code> and <code>T[j]</code> are equal, we move both pointers one step backward to continue comparing the next characters.</li>
+<li><strong>End condition</strong>: The process continues until we have either:
+<ul>
+<li>Exhausted both strings (<code>i == -1</code> and <code>j == -1</code>), in which case the strings are equal.</li>
+<li>Found a mismatch or reached the end of one string before the other (<code>i &gt;= 0</code> or <code>j &gt;= 0</code>), indicating the strings are not equal.</li>
+</ul>
+</li>
+</ol>
+<p>This approach avoids the need to create new strings after backspacing, which saves both time and space.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s break down the solution step by step:</p>
 <ol>
 <li>
-<p><strong>Two-Pointer Technique</strong>:</p>
-<ul>
-<li>Use two pointers, <code>i</code> and <code>j</code>, to traverse the strings <code>S</code> and <code>T</code> from the end to the beginning.</li>
-<li>Keep track of the number of backspaces encountered using a variable <code>back</code>.</li>
-</ul>
-</li>
+<p><strong>Initialization</strong>:
+We start by initializing two pointers <code>i</code> and <code>j</code> to point to the last characters of the strings <code>S</code> and <code>T</code>, respectively.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> S.length() <span style="color:#666">-</span> <span style="color:#666">1</span>, j <span style="color:#666">=</span> T.length() <span style="color:#666">-</span> <span style="color:#666">1</span>, back;
+</span></span></code></pre></div></li>
 <li>
-<p><strong>Backspace Processing</strong>:</p>
-<ul>
-<li>For each string, while the pointer is within bounds and the number of backspaces (<code>back</code>) is greater than zero or the current character is a backspace (&rsquo;#&rsquo;):
-<ul>
-<li>If the character is &lsquo;#&rsquo;, increment <code>back</code> (indicating a backspace).</li>
-<li>If the character is not &lsquo;#&rsquo;, decrement <code>back</code> (indicating a valid character).</li>
-<li>Move the pointer leftward.</li>
-</ul>
-</li>
-</ul>
-</li>
+<p><strong>Main loop</strong>:
+The main loop runs indefinitely until either both strings are fully processed or a mismatch is found. The condition <code>while (true)</code> ensures that the loop will continue until we explicitly break it.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span> (<span style="color:#a2f">true</span>) {
+</span></span><span style="display:flex;"><span>    back <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    ...
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> S[i] <span style="color:#666">==</span> T[j]) {
+</span></span><span style="display:flex;"><span>        i<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>        j<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
 <li>
-<p><strong>Character Comparison</strong>:</p>
-<ul>
-<li>After processing backspaces for both strings, compare the characters at the pointers:
-<ul>
-<li>If both pointers are valid and the characters at the pointers are equal, move both pointers leftward.</li>
-<li>If they are not equal or one of the pointers is invalid while the other is not, break the loop.</li>
-</ul>
-</li>
-</ul>
-</li>
+<p><strong>Backspace processing for <code>S</code></strong>:
+For string <code>S</code>, we check if the current character is a backspace (<code>#</code>). If it is, we increment the <code>back</code> counter to skip the next character, simulating the backspace. If it&rsquo;s not a backspace, we decrement the <code>back</code> counter and compare the current character.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>back <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span> (i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> (back <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> S[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;#&#39;</span>)) {
+</span></span><span style="display:flex;"><span>    back <span style="color:#666">+=</span> S[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;#&#39;</span> <span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">:</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    i<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
 <li>
-<p><strong>Final Check</strong>:</p>
-<ul>
-<li>After the loop, both pointers should be at -1 if the strings are equal after all backspaces.</li>
-</ul>
-</li>
+<p><strong>Backspace processing for <code>T</code></strong>:
+Similarly, for string <code>T</code>, we process characters in the same manner as we did for string <code>S</code>.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>back <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span> (j <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> (back <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> T[j] <span style="color:#666">==</span> <span style="color:#b44">&#39;#&#39;</span>)) {
+</span></span><span style="display:flex;"><span>    back <span style="color:#666">+=</span> T[j] <span style="color:#666">==</span> <span style="color:#b44">&#39;#&#39;</span> <span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">:</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    j<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Character comparison</strong>:
+After applying the backspace rule to both strings, we compare the characters at the current positions <code>i</code> and <code>j</code>. If they are equal, we move both pointers backward to continue checking the next characters.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> S[i] <span style="color:#666">==</span> T[j]) {
+</span></span><span style="display:flex;"><span>    i<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>    j<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>} <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return condition</strong>:
+Finally, if both pointers have reached the beginning of their respective strings, we return <code>true</code>, indicating that the strings are equal after backspacing. If any of the pointers is not at the beginning of the string, we return <code>false</code>, as the strings are not equal.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> i <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span></code></pre></div></li>
 </ol>
 <h3 id="complexity">
   Complexity
@@ -314,15 +358,34 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The time and space complexity of this solution can be analyzed as follows:</p>
 <ul>
-<li><strong>Time Complexity</strong>: O(N + M), where N and M are the lengths of strings <code>S</code> and <code>T</code>, respectively. Each character is processed at most once.</li>
-<li><strong>Space Complexity</strong>: O(1), as no additional data structures are used beyond a few variables.</li>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>In the worst case, we will iterate through both strings once, processing each character at most twice (once during the backspace processing and once during the comparison). Thus, the time complexity is O(n + m), where <code>n</code> is the length of string <code>S</code> and <code>m</code> is the length of string <code>T</code>. In the worst case, this simplifies to O(n), assuming the strings are of similar length.</li>
 </ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is O(1), as we are only using a few integer variables for the pointers and the backspace count. We do not need any extra space that scales with the input size, making this solution very space-efficient.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently handles the problem of comparing two strings after simulating the backspace operation by processing the strings from the end and applying the backspace rule directly. By avoiding the need to create new strings and by using simple pointer manipulations, we achieve both optimal time and space complexity. This makes the solution highly suitable for large strings where performance is crucial.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1358s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1357s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

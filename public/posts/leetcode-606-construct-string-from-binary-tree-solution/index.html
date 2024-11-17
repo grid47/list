@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -278,14 +278,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Convert a binary tree into a string representation. The string format should follow these rules:</p>
-<ol>
-<li>The root value should be printed first.</li>
-<li>If the left child exists, its string representation should follow, enclosed in parentheses.</li>
-<li>If the right child exists, its string representation should also follow, enclosed in parentheses.</li>
-<li>If the left child does not exist, but the right child does, the left child should still be represented as an empty pair of parentheses <code>()</code>.</li>
-<li>If both children are absent, nothing should be printed for them.</li>
-</ol>
+<p>Given the root node of a binary tree, the task is to generate a string representation of the tree following a specific format. The string should represent the binary tree in the following way:</p>
+<ul>
+<li>The root node is represented by its value.</li>
+<li>Left and right subtrees are enclosed in parentheses.</li>
+<li>If the left child is <code>null</code>, it is represented as an empty pair of parentheses <code>()</code> and must be included even if the right child exists.</li>
+<li>If a node has only a right child, then the left child must still be represented by an empty pair of parentheses.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -293,41 +292,97 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The key observation in solving this problem is that the binary tree needs to be represented in a depth-first traversal manner, where the root node is processed first, followed by its left subtree and then its right subtree.</p>
 <ol>
 <li>
-<p><strong>Recursive Traversal</strong>:</p>
+<p><strong>Recursive Approach</strong>: The problem can be solved efficiently using recursion, starting from the root node. At each step:</p>
 <ul>
-<li>Use a recursive function <code>tree2str</code> to traverse the tree and build the string representation.</li>
-<li>Start from the root node, convert its value to a string, and append the string representations of its children.</li>
+<li>If the node is <code>null</code>, return an empty string.</li>
+<li>Otherwise, convert the current node value to a string.</li>
+<li>Recursively process the left and right subtrees.</li>
+<li>If the left child exists, enclose it in parentheses. If the right child exists, do the same.</li>
 </ul>
 </li>
 <li>
-<p><strong>Handling Left and Right Children</strong>:</p>
+<p><strong>Edge Cases</strong>:</p>
 <ul>
-<li>If the left child exists, recursively call <code>tree2str</code> for the left child and enclose the result in parentheses.</li>
-<li>If the right child exists, similarly, get the string for the right child and enclose it in parentheses.</li>
-<li>If the left child does not exist but the right child does, include <code>()</code> for the left child.</li>
-</ul>
-</li>
-<li>
-<p><strong>Base Case</strong>:</p>
-<ul>
-<li>If the current node is <code>NULL</code>, return an empty string.</li>
+<li>If the left child is <code>null</code> and the right child exists, the left child must still be represented as an empty pair of parentheses <code>()</code>.</li>
+<li>If both children are <code>null</code>, the node itself should only be represented by its value.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The function first checks if the root is <code>NULL</code>. If it is, it returns an empty string.</li>
-<li>It builds the strings for the left and right subtrees recursively.</li>
-<li>It handles the cases where children may be absent, ensuring the correct format is maintained.</li>
+<h4 id="step-1-check-for-null-root">
+  Step 1: Check for <code>null</code> root
+  <a class="heading-link" href="#step-1-check-for-null-root">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span></code></pre></div><ul>
+<li>If the root node is <code>null</code>, return an empty string. This handles the base case of the recursion when we reach the end of a branch in the tree.</li>
 </ul>
+<h4 id="step-2-recursively-process-the-left-child">
+  Step 2: Recursively process the left child
+  <a class="heading-link" href="#step-2-recursively-process-the-left-child">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string left <span style="color:#666">=</span> tree2str(root<span style="color:#666">-&gt;</span>left);
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (left <span style="color:#666">!=</span> <span style="color:#b44">&#34;&#34;</span>) left <span style="color:#666">=</span> <span style="color:#b44">&#39;(&#39;</span> <span style="color:#666">+</span> left <span style="color:#666">+</span> <span style="color:#b44">&#39;)&#39;</span>;
+</span></span></code></pre></div><ul>
+<li>We recursively call the <code>tree2str</code> function on the left child. If the left child exists, the resulting string is wrapped in parentheses.</li>
+<li>If the left child is <code>null</code>, the recursive call will return an empty string, and no parentheses will be added.</li>
+</ul>
+<h4 id="step-3-recursively-process-the-right-child">
+  Step 3: Recursively process the right child
+  <a class="heading-link" href="#step-3-recursively-process-the-right-child">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string right <span style="color:#666">=</span> tree2str(root<span style="color:#666">-&gt;</span>right);
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (right <span style="color:#666">!=</span> <span style="color:#b44">&#34;&#34;</span>) right <span style="color:#666">=</span> <span style="color:#b44">&#39;(&#39;</span> <span style="color:#666">+</span> right <span style="color:#666">+</span> <span style="color:#b44">&#39;)&#39;</span>;
+</span></span></code></pre></div><ul>
+<li>Similarly, we recursively process the right child of the current node. If the right child exists, we wrap the resulting string in parentheses.</li>
+</ul>
+<h4 id="step-4-handle-the-case-where-the-left-child-is-null-and-the-right-child-exists">
+  Step 4: Handle the case where the left child is <code>null</code> and the right child exists
+  <a class="heading-link" href="#step-4-handle-the-case-where-the-left-child-is-null-and-the-right-child-exists">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (left <span style="color:#666">==</span> <span style="color:#b44">&#34;&#34;</span> <span style="color:#666">&amp;&amp;</span> right <span style="color:#666">!=</span> <span style="color:#b44">&#34;&#34;</span>) left <span style="color:#666">=</span> <span style="color:#b44">&#34;()&#34;</span>;
+</span></span></code></pre></div><ul>
+<li>If the left child is <code>null</code> and the right child exists, we add an empty pair of parentheses for the left child. This ensures that the tree string is formatted correctly, showing the absence of a left child.</li>
+</ul>
+<h4 id="step-5-combine-the-results">
+  Step 5: Combine the results
+  <a class="heading-link" href="#step-5-combine-the-results">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">to_string</span>(root<span style="color:#666">-&gt;</span>val) <span style="color:#666">+</span> left <span style="color:#666">+</span> right;
+</span></span></code></pre></div><ul>
+<li>Finally, we return the string representation of the current node. This consists of:
+<ul>
+<li>The root node value as a string (<code>to_string(root-&gt;val)</code>).</li>
+<li>The string representing the left child (if it exists).</li>
+<li>The string representing the right child (if it exists).</li>
+</ul>
+</li>
+</ul>
+<p>The result is a string representing the tree in the required format.</p>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -335,10 +390,40 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(N), where N is the number of nodes in the tree, as each node is visited exactly once.</li>
-<li><strong>Space Complexity</strong>: O(H), where H is the height of the tree, due to the recursive call stack.</li>
+<li><strong>O(N)</strong>: The time complexity is linear with respect to the number of nodes in the tree. Each node is visited exactly once, and at each node, the string operations (concatenation) are performed in constant time, assuming that the length of the strings representing the left and right children are bounded by the tree height.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(H)</strong>: The space complexity is dominated by the recursion stack, which in the worst case (for a skewed tree) can be as deep as the height of the tree (<code>H</code>). In a balanced tree, the height would be logarithmic relative to the number of nodes (<code>O(log N)</code>).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently converts a binary tree into its string representation following the required format using a recursive approach. The approach:</p>
+<ol>
+<li>Uses depth-first traversal to process each node.</li>
+<li>Handles edge cases, such as missing left or right children.</li>
+<li>Ensures that the final string correctly represents the structure of the tree.</li>
+</ol>
+<p>The solution provides an optimal time complexity of <strong>O(N)</strong> and a space complexity of <strong>O(H)</strong>, making it well-suited for trees of varying sizes, from balanced trees to skewed trees.</p>
  
 </div>
   

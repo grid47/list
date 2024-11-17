@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -259,76 +259,166 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-statement">
+  🚀 Problem Statement
+  <a class="heading-link" href="#-problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array of distinct integers <code>nums</code> and a target integer <code>target</code>, you need to determine the number of possible combinations that add up to the target. The order of numbers in a combination matters (i.e., different orders of the same numbers count as different combinations).</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>The <strong>Combination Sum IV</strong> problem asks us to find how many ways we can combine numbers from a given array <code>nums</code> to sum up to a target number <code>target</code>. The twist? We can use each number in <code>nums</code> multiple times, and the order of the numbers in each combination matters.</p>
+<p>For example, with <code>nums = [1, 2, 3]</code> and <code>target = 4</code>, the valid combinations are:</p>
+<ul>
+<li><code>[1, 1, 1, 1]</code></li>
+<li><code>[1, 1, 2]</code></li>
+<li><code>[2, 2]</code></li>
+<li><code>[1, 3]</code></li>
+</ul>
+<p>So, there are <strong>7</strong> ways to make <code>4</code>!</p>
+<hr>
+<h3 id="-approach">
+  🧠 Approach
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Dynamic Programming with Memoization</strong>:</p>
+<p>To tackle this efficiently, we&rsquo;ll use <strong>Dynamic Programming (DP)</strong>, where we break the problem down into smaller subproblems. This approach allows us to reuse the results of previously solved subproblems, saving time and computational effort.</p>
+<h4 id="key-idea">
+  Key Idea:
+  <a class="heading-link" href="#key-idea">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We create a DP array that tells us how many ways we can form each target sum from <code>0</code> to the given <code>target</code>.</p>
 <ul>
-<li>Use a memoization array <code>mem</code> to store the results of previously computed states, preventing redundant calculations.</li>
+<li><strong>Base case</strong>: There&rsquo;s exactly <strong>1</strong> way to make a target of <code>0</code>—by not choosing any numbers.</li>
+<li>For any other target, we consider each number in <code>nums</code> and recursively subtract it from the target, accumulating the number of ways we can form the remaining sum.</li>
 </ul>
-</li>
-<li>
-<p><strong>Recursive Function</strong>:</p>
-<ul>
-<li>Implement a recursive function <code>dp</code> that computes the number of combinations that can sum up to the remaining target (denoted as <code>left</code>).</li>
-<li><strong>Base Cases</strong>:
-<ul>
-<li>If <code>left</code> is 0, return 1, indicating one valid combination has been found.</li>
-<li>If <code>left</code> is negative, return 0, indicating no valid combination exists for this path.</li>
-</ul>
-</li>
-<li>If <code>mem[left]</code> is not <code>-1</code>, return the cached result from <code>mem</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Recurrence Relation</strong>:</p>
-<ul>
-<li>Iterate through each number in <code>nums</code> and recursively call <code>dp</code> with the new target as <code>left - nums[i]</code>. Sum the results to get the total number of combinations.</li>
-</ul>
-</li>
-<li>
-<p><strong>Result</strong>:</p>
-<ul>
-<li>Call the <code>dp</code> function with the original target to start the computation.</li>
-</ul>
-</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<hr>
+<h3 id="-step-by-step-code-breakdown">
+  🔨 Step-by-Step Code Breakdown
+  <a class="heading-link" href="#-step-by-step-code-breakdown">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The <code>combinationSum4</code> function initializes the memoization vector <code>mem</code> and calls the recursive <code>dp</code> function.</li>
-<li>The <code>dp</code> function handles the base cases and recursively computes the number of combinations for the remaining target, caching results in <code>mem</code>.</li>
+<h4 id="step-1-initializing-memoization">
+  Step 1: Initializing Memoization
+  <a class="heading-link" href="#step-1-initializing-memoization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mem;
+</span></span><span style="display:flex;"><span>mem.resize(target <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">-</span><span style="color:#666">1</span>);
+</span></span></code></pre></div><ul>
+<li>We declare a memoization vector <code>mem</code> that will store the results for all subproblems. It’s initialized with <code>-1</code>, meaning no subproblem has been solved yet.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-2-the-combinationsum4-function">
+  Step 2: The <code>combinationSum4</code> Function
+  <a class="heading-link" href="#step-2-the-combinationsum4-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">dp</span>(nums, target);
+</span></span></code></pre></div><ul>
+<li>The main function calls the helper function <code>dp</code> to calculate the number of ways to reach the target sum.</li>
+</ul>
+<h4 id="step-3-the-dp-function">
+  Step 3: The <code>dp</code> Function
+  <a class="heading-link" href="#step-3-the-dp-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> left) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(left <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(left <span style="color:#666">&lt;</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mem[left] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> mem[left];
+</span></span></code></pre></div><ul>
+<li><strong>Base cases</strong>:
+<ul>
+<li>If <code>left == 0</code>, we&rsquo;ve found a valid combination, so return <code>1</code>.</li>
+<li>If <code>left &lt; 0</code>, we&rsquo;ve overshot the target, so return <code>0</code>.</li>
+</ul>
+</li>
+<li>If we&rsquo;ve already solved for this sum (i.e., <code>mem[left] != -1</code>), return the stored value to avoid redundant calculations.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    res <span style="color:#666">+=</span> dp(nums, left <span style="color:#666">-</span> nums[i]);
+</span></span></code></pre></div><ul>
+<li>For each number in <code>nums</code>, subtract it from the target <code>left</code>, and recursively calculate the number of ways to reach the new target. We accumulate this count into <code>res</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> mem[left] <span style="color:#666">=</span> res;
+</span></span></code></pre></div><ul>
+<li>Once we&rsquo;ve calculated the number of ways to form the target, store it in <code>mem[left]</code> to reuse it later.</li>
+</ul>
+<h4 id="step-4-returning-the-result">
+  Step 4: Returning the Result
+  <a class="heading-link" href="#step-4-returning-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Finally, the result is returned from <code>mem[target]</code>, which contains the number of ways to form the target sum using elements from <code>nums</code>.</p>
+<hr>
+<h3 id="-complexity-analysis">
+  📈 Complexity Analysis
+  <a class="heading-link" href="#-complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity is <strong>O(target * n)</strong>, where <code>n</code> is the size of the <code>nums</code> array and <code>target</code> is the target sum.</p>
 <ul>
-<li><strong>Time Complexity</strong>: ( O(n \times t) ), where ( n ) is the number of elements in <code>nums</code> and ( t ) is the <code>target</code>, as each state can take ( n ) calculations and there are ( t ) possible states.</li>
-<li><strong>Space Complexity</strong>: ( O(t) ) for the memoization array <code>mem</code>.</li>
+<li>For each target sum from <code>0</code> to <code>target</code>, we recursively check all the elements in <code>nums</code>, leading to a complexity of <strong>O(n)</strong> per target sum.</li>
+<li>Therefore, the total time complexity is <strong>O(target * n)</strong>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(target)</strong>, as we only need to store the results for all subproblems from <code>0</code> to <code>target</code> in the memoization array <code>mem</code>.</p>
+<ul>
+<li>Additionally, the recursion call stack might use some space, but since we&rsquo;re using memoization, the total space complexity is <strong>O(target)</strong>.</li>
+</ul>
+<hr>
+<h3 id="-conclusion">
+  🏁 Conclusion
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>By using <strong>Dynamic Programming (DP)</strong> with <strong>Memoization</strong>, we solve the <strong>Combination Sum IV</strong> problem efficiently! This approach ensures we don&rsquo;t repeatedly calculate the same subproblems, making it fast and optimal for larger inputs.</p>
+<h4 id="quick-recap">
+  Quick Recap:
+  <a class="heading-link" href="#quick-recap">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Time Complexity</strong>: O(target * n)</li>
+<li><strong>Space Complexity</strong>: O(target)</li>
+<li><strong>Efficient solution using DP and memoization</strong></li>
+<li><strong>Great for overlapping subproblems!</strong></li>
+</ul>
+<p>With this method, we can confidently solve this problem and handle even bigger test cases with ease! Keep going—you&rsquo;ve got this! 💪🎉</p>
  
 </div>
   

@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -211,7 +211,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1151s0hbhb">
+        <h2 id="hahahugoshortcode1155s0hbhb">
   <a href="https://leetcode.com/problems/string-compression/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -226,7 +226,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1151s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1155s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -258,7 +258,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> j;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1151s2hbhb">
+<h2 id="hahahugoshortcode1155s2hbhb">
   
 
   
@@ -270,11 +270,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a character array <code>chars</code>, compress it using the following algorithm:</p>
-<ul>
-<li>Begin with an empty string. For each group of consecutive repeating characters in <code>chars</code>, append the character followed by its count if greater than 1.</li>
-<li>The compressed string should be stored in the same array <code>chars</code>. The function should return the new length of the compressed string.</li>
-</ul>
+<p>The problem requires us to implement a string compression algorithm. Given a list of characters, we need to compress the string by replacing consecutive repeated characters with a single character followed by the count of its repetitions. For example, the input <code>[&quot;a&quot;,&quot;a&quot;,&quot;b&quot;,&quot;b&quot;,&quot;c&quot;,&quot;c&quot;,&quot;c&quot;]</code> should be compressed to <code>[&quot;a&quot;,&quot;2&quot;,&quot;b&quot;,&quot;2&quot;,&quot;c&quot;,&quot;3&quot;]</code>. The goal is to compress the list in-place, using the minimum amount of extra space, and return the new length of the compressed list.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -282,79 +278,101 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The key idea behind this solution is to use a two-pointer approach to iterate through the <code>chars</code> array and compress consecutive characters as we encounter them. The approach works by:</p>
 <ol>
-<li>
-<p><strong>Two Pointers</strong>:</p>
-<ul>
-<li>Use two pointers, <code>i</code> to iterate through the original array and <code>j</code> to build the compressed version.</li>
-</ul>
-</li>
-<li>
-<p><strong>Count Consecutive Characters</strong>:</p>
-<ul>
-<li>For each character at position <code>i</code>, count how many times it appears consecutively.</li>
-<li>Move <code>i</code> forward until the character changes, counting occurrences.</li>
-</ul>
-</li>
-<li>
-<p><strong>Building the Compressed Array</strong>:</p>
-<ul>
-<li>For each character, write it to <code>chars[j]</code>.</li>
-<li>If the count of the character is greater than 1, convert the count to a string and append each digit to <code>chars</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Update Pointer</strong>:</p>
-<ul>
-<li>After processing a group, update the pointer <code>j</code> to the next position for writing.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return New Length</strong>:</p>
-<ul>
-<li>Once the loop finishes, return the new length of the compressed array.</li>
-</ul>
-</li>
+<li><strong>Iterating through the input array</strong>: Using a pointer <code>i</code> to traverse through each character and another pointer <code>j</code> to place the result of compression.</li>
+<li><strong>Counting consecutive characters</strong>: For each character, we count how many times it repeats consecutively.</li>
+<li><strong>Compressing the string</strong>: If the character repeats more than once, we add both the character and the count of its occurrences to the <code>chars</code> array. If it only appears once, we just add the character.</li>
+<li><strong>Updating the pointer</strong>: After processing a sequence of repeated characters, we update the pointer <code>j</code> accordingly and continue to the next unique character.</li>
+<li><strong>Handling edge cases</strong>: Special cases like when the input string has fewer than two characters or no characters at all are handled early in the function.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>Initialize <code>i</code> and <code>j</code> to zero.</li>
+<h4 id="step-1-handle-short-inputs">
+  Step 1: Handle Short Inputs
+  <a class="heading-link" href="#step-1-handle-short-inputs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(chars.size() <span style="color:#666">&lt;</span> <span style="color:#666">2</span>) <span style="color:#a2f;font-weight:bold">return</span> chars.size();
+</span></span></code></pre></div><ul>
+<li>We first handle the base case where the input has fewer than two characters. In this case, there’s no compression to do, so the function simply returns the size of the input.</li>
 </ul>
-</li>
-<li>
-<p><strong>Outer Loop</strong>:</p>
-<ul>
-<li>Iterate while <code>i</code> is less than the size of <code>chars</code>.</li>
+<h4 id="step-2-initialize-pointers">
+  Step 2: Initialize Pointers
+  <a class="heading-link" href="#step-2-initialize-pointers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div><ul>
+<li>Two pointers are initialized: <code>i</code> is used to traverse the array to find consecutive characters, and <code>j</code> is used to place the result of the compression.</li>
 </ul>
-</li>
-<li>
-<p><strong>Inner Counting Loop</strong>:</p>
-<ul>
-<li>Count the number of occurrences of <code>chars[i]</code> and move <code>i</code> accordingly.</li>
+<h4 id="step-3-main-loop-to-traverse-and-compress">
+  Step 3: Main Loop to Traverse and Compress
+  <a class="heading-link" href="#step-3-main-loop-to-traverse-and-compress">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> chars.size()) {
+</span></span><span style="display:flex;"><span>    chars[j] <span style="color:#666">=</span> chars[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div><ul>
+<li>The loop begins with <code>i</code> pointing to the first character. The character at <code>chars[i]</code> is placed at <code>chars[j]</code> to preserve it for later compression. We also initialize a counter <code>cnt</code> to zero to count the consecutive occurrences of the current character.</li>
 </ul>
-</li>
-<li>
-<p><strong>Writing to the Array</strong>:</p>
-<ul>
-<li>Write the character to <code>chars[j]</code>. If the count is greater than 1, convert the count to a string and append each character to <code>chars</code>.</li>
+<h4 id="step-4-count-consecutive-occurrences">
+  Step 4: Count Consecutive Occurrences
+  <a class="heading-link" href="#step-4-count-consecutive-occurrences">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> chars.size() <span style="color:#666">&amp;&amp;</span> chars[i] <span style="color:#666">==</span> chars[j]) {
+</span></span><span style="display:flex;"><span>    cnt<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    i<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We use an inner <code>while</code> loop to count how many times the current character repeats consecutively in the array. Each time we find a match (<code>chars[i] == chars[j]</code>), we increment the counter <code>cnt</code> and move the pointer <code>i</code> to the next character.</li>
 </ul>
-</li>
-<li>
-<p><strong>Final Length</strong>:</p>
-<ul>
-<li>After processing all characters, return the value of <code>j</code>, which represents the new length of the compressed array.</li>
+<h4 id="step-5-handle-the-count-of-repeated-characters">
+  Step 5: Handle the Count of Repeated Characters
+  <a class="heading-link" href="#step-5-handle-the-count-of-repeated-characters">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(cnt <span style="color:#666">==</span> <span style="color:#666">1</span>) {
+</span></span><span style="display:flex;"><span>    j<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>} <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>    string cntt <span style="color:#666">=</span> to_string(cnt);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">ch</span>: cntt) {
+</span></span><span style="display:flex;"><span>        chars[<span style="color:#666">++</span>j] <span style="color:#666">=</span> ch;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    j<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If the character appears only once (i.e., <code>cnt == 1</code>), we simply increment the pointer <code>j</code> to place the next character.</li>
+<li>If the character appears more than once, we convert the count <code>cnt</code> to a string and place each digit of the count in the <code>chars</code> array, updating <code>j</code> each time we place a character or digit.</li>
 </ul>
-</li>
-</ol>
+<h4 id="step-6-return-the-new-length">
+  Step 6: Return the New Length
+  <a class="heading-link" href="#step-6-return-the-new-length">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> j;
+</span></span></code></pre></div><ul>
+<li>Finally, the function returns <code>j</code>, which represents the new length of the compressed string after the in-place compression is done.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -362,15 +380,40 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the length of the input array, as we make a single pass through the characters.</li>
-<li><strong>Space Complexity</strong>: O(1), since we use the input array for storage without requiring additional space.</li>
+<li>The time complexity of the solution is <code>O(n)</code>, where <code>n</code> is the size of the <code>chars</code> array. This is because we only traverse the input array once, and the inner loop only operates on a limited number of characters (i.e., the digits of the count). The overall number of iterations is proportional to the length of the input array, so the time complexity is linear.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <code>O(1)</code>, which means that the algorithm uses constant space, excluding the input and output. The compression is done in-place, meaning we do not use any additional data structures to store intermediate results (other than a small number of variables like <code>i</code>, <code>j</code>, and <code>cnt</code>).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides an efficient in-place approach to compressing a list of characters by replacing consecutive repeated characters with the character followed by the number of occurrences. It uses a two-pointer technique to traverse the list, counting consecutive characters and placing the result directly into the input array. The time complexity is linear (<code>O(n)</code>), making this approach very efficient for large inputs. The space complexity is constant (<code>O(1)</code>), making it an optimal solution in terms of memory usage as well.</p>
+<p>By following this method, the function efficiently solves the problem while maintaining the required constraints and ensuring that the output is in the correct compressed format.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1151s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1155s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

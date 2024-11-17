@@ -217,7 +217,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -262,70 +262,157 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> dp[n];        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1391s1hbhb">
+<h2 id="hahahugoshortcode1390s1hbhb">
   
 
   
   <div class="markdown-body">
-    <h2 id="problem-statement">
+    <h3 id="problem-statement">
   Problem Statement
   <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h2>
-<p>The problem involves generating all possible full binary trees (FBTs) with <code>n</code> nodes. A full binary tree is defined as a binary tree where each node has either 0 or 2 children.</p>
-<h2 id="approach">
+</h3>
+<p>The problem asks us to generate all <strong>possible full binary trees (FBT)</strong> with <code>n</code> nodes, where <code>n</code> is an odd number. A full binary tree is defined as a binary tree where every node has either <strong>two children</strong> (both left and right) or <strong>no children</strong> (i.e., it is a leaf node). For this problem, we need to return a list of all distinct full binary trees that can be constructed with exactly <code>n</code> nodes.</p>
+<p>A full binary tree must always have an odd number of nodes, and every non-leaf node must have exactly two children. We are tasked with finding all possible full binary trees with <code>n</code> nodes.</p>
+<h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h2>
-<ol>
-<li><strong>Dynamic Programming Table</strong>: Use a vector of vectors <code>dp</code> where <code>dp[i]</code> stores all possible FBTs with <code>i</code> nodes.</li>
-<li><strong>Base Case</strong>: Initialize <code>dp[1]</code> with a single node tree.</li>
-<li><strong>Building Trees</strong>: For every odd number of nodes <code>i</code> from 3 to <code>n</code>:
-<ul>
-<li>Split <code>i</code> into left and right subtrees by choosing odd sizes for the left subtree <code>l</code> (from 1 to <code>i - 2</code>).</li>
-<li>For each left subtree in <code>dp[l]</code> and each right subtree in <code>dp[i - l - 1]</code>, create a new root node with these subtrees as children.</li>
-<li>Store the constructed tree in <code>dp[i]</code>.</li>
-</ul>
-</li>
-</ol>
-<h2 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+</h3>
+<p>The approach to solve this problem involves utilizing <strong>dynamic programming (DP)</strong>. We will iteratively build the full binary trees for smaller numbers of nodes and use these to construct larger trees.</p>
+<h4 id="key-insights">
+  Key Insights:
+  <a class="heading-link" href="#key-insights">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h2>
+</h4>
+<ol>
+<li>
+<p><strong>Base Case</strong>: The simplest full binary tree is a tree with just one node, i.e., a single root node with no children. This is the only configuration for <code>n = 1</code>, and we initialize this base case with a tree containing only the root node.</p>
+</li>
+<li>
+<p><strong>Recursive Construction</strong>: For any odd number <code>n</code>, a full binary tree can be constructed by combining two smaller full binary trees:</p>
 <ul>
-<li>The code defines a method <code>allPossibleFBT</code> which takes an integer <code>n</code> as input.</li>
-<li>A 2D vector <code>dp</code> is initialized, where <code>dp[i]</code> will contain all full binary trees with <code>i</code> nodes.</li>
-<li><code>dp[1]</code> is populated with a single <code>TreeNode</code> (the base case).</li>
-<li>For odd numbers from 3 to <code>n</code>, the code loops over possible sizes for the left subtree:
-<ul>
-<li>For each combination of left and right subtree sizes, a new tree is created with a new root and the respective left and right children.</li>
+<li>The left subtree will have <code>l</code> nodes, and the right subtree will have <code>n - l - 1</code> nodes. Both <code>l</code> and <code>n - l - 1</code> must be odd numbers since a full binary tree with an even number of nodes is not possible.</li>
+<li>For each combination of left and right subtrees, we create a new root node, with the left and right subtrees as its children.</li>
 </ul>
 </li>
-<li>Finally, the function returns all possible FBTs with <code>n</code> nodes stored in <code>dp[n]</code>.</li>
+<li>
+<p><strong>Dynamic Programming Array (<code>dp</code>)</strong>:</p>
+<ul>
+<li>We maintain a DP array <code>dp[i]</code> where <code>dp[i]</code> holds a list of all possible full binary trees with <code>i</code> nodes.</li>
+<li>For each odd number <code>i</code> (starting from 3 and incrementing by 2), we generate all full binary trees by combining smaller trees from previously computed values in <code>dp</code>.</li>
 </ul>
-<h2 id="complexity">
+</li>
+<li>
+<p><strong>Combinations of Subtrees</strong>:</p>
+<ul>
+<li>For each number <code>l</code> of nodes in the left subtree, the right subtree will contain <code>n - l - 1</code> nodes. We combine every tree in <code>dp[l]</code> with every tree in <code>dp[n - l - 1]</code> and create a new tree with these two subtrees as children of a new root node.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Final Result</strong>: After filling the DP array, the result for <code>n</code> nodes will be stored in <code>dp[n]</code>.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialize DP Array</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;&gt;</span> dp(n <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>dp[<span style="color:#666">1</span>].push_back(<span style="color:#a2f;font-weight:bold">new</span> TreeNode(<span style="color:#666">0</span>));  <span style="color:#080;font-style:italic">// Base case: only one node in the tree.
+</span></span></span></code></pre></div><ul>
+<li>We create a DP array <code>dp</code> with <code>n + 1</code> elements, where each element is a vector of <code>TreeNode*</code>. The first element, <code>dp[1]</code>, contains one tree with just a single node.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterating Over Odd Numbers (i)</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">3</span>; i <span style="color:#666">&lt;=</span> n; i <span style="color:#666">+=</span> <span style="color:#666">2</span>) {
+</span></span></code></pre></div><ul>
+<li>The outer loop starts from <code>i = 3</code> and increments by 2, considering only odd values of <code>i</code>. We build full binary trees for each odd <code>i</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Generating Combinations of Left and Right Subtrees</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">1</span>; l <span style="color:#666">&lt;</span> i; l <span style="color:#666">+=</span> <span style="color:#666">2</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span> : dp[l]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it2</span> : dp[i <span style="color:#666">-</span> l <span style="color:#666">-</span> <span style="color:#666">1</span>]) {
+</span></span><span style="display:flex;"><span>            TreeNode<span style="color:#666">*</span> node <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TreeNode(<span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>            node<span style="color:#666">-&gt;</span>left <span style="color:#666">=</span> it;
+</span></span><span style="display:flex;"><span>            node<span style="color:#666">-&gt;</span>right <span style="color:#666">=</span> it2;
+</span></span><span style="display:flex;"><span>            dp[i].push_back(node);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>For each value of <code>l</code>, we consider all pairs of left and right subtrees. The left subtree has <code>l</code> nodes, and the right subtree has <code>i - l - 1</code> nodes.</li>
+<li>We then create a new root node, assign the left and right subtrees to it, and push this new tree into <code>dp[i]</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> dp[n];
+</span></span></code></pre></div><ul>
+<li>Finally, we return the list of all possible full binary trees for <code>n</code> nodes, which is stored in <code>dp[n]</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h2>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n^3), as constructing trees involves nested loops over <code>n</code>, and for each pair of subtrees, a new tree node is created.</li>
-<li><strong>Space Complexity</strong>: O(n), where n is the number of nodes since each valid tree is stored in the <code>dp</code> array.</li>
-</ul> 
+<li><strong>Outer Loop</strong>: The outer loop runs from <code>i = 3</code> to <code>i = n</code>, and it iterates with a step size of 2, which means it runs approximately <code>n/2</code> times.</li>
+<li><strong>Inner Loops</strong>: For each value of <code>i</code>, the inner loops iterate over all combinations of <code>l</code> (where <code>l</code> is odd and less than <code>i</code>). For each pair of <code>l</code> and <code>n - l - 1</code>, we combine all trees from <code>dp[l]</code> and <code>dp[n - l - 1]</code>. The number of trees in <code>dp[l]</code> and <code>dp[n - l - 1]</code> grows exponentially with <code>l</code> and <code>n</code>.
+<ul>
+<li>The total number of operations in the worst case is roughly the <strong>number of possible full binary trees</strong> up to <code>n</code>, which follows the structure of <strong>Catalan numbers</strong>. The Catalan number for <code>n</code> is approximately <code>O(4^n / n^(3/2))</code>.</li>
+<li>Therefore, the time complexity of this approach is <strong>O(4^n / n^(3/2))</strong>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is dominated by the storage of the trees in <code>dp[i]</code>. Since each tree is represented as a <code>TreeNode</code> object and there are at most <strong>Catalan number</strong> of trees for each <code>i</code>, the space complexity is <strong>O(4^n / n^(3/2))</strong>, similar to the time complexity.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes all possible full binary trees for a given number <code>n</code> using dynamic programming. By constructing trees recursively from smaller subproblems, the solution avoids the inefficiencies of brute force tree generation. Although the time and space complexities grow exponentially with <code>n</code>, the algorithm leverages the properties of full binary trees and dynamic programming to handle the problem in a more optimized way compared to generating every tree individually. The approach works efficiently for smaller values of <code>n</code> and provides a clear and methodical way to generate all full binary trees.</p>
+ 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1391s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1390s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

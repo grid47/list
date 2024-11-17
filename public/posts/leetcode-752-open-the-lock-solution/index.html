@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -221,7 +221,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1304s0hbhb">
+        <h2 id="hahahugoshortcode1305s0hbhb">
   <a href="https://leetcode.com/problems/open-the-lock/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -236,7 +236,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1304s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1305s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -277,7 +277,7 @@
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1304s2hbhb">
+<h2 id="hahahugoshortcode1305s2hbhb">
   
 
   
@@ -289,7 +289,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given a lock with four wheels, each displaying a digit from <code>0</code> to <code>9</code>. The lock starts at <code>0000</code>, and your goal is to reach a target configuration by turning the wheels. Some configurations are &ldquo;dead ends&rdquo; and cannot be reached. The task is to determine the minimum number of turns required to reach the target configuration from the starting configuration, avoiding any dead ends.</p>
+<p>The problem asks us to find the minimum number of turns required to unlock a combination lock, starting from the &ldquo;0000&rdquo; combination and aiming to reach a target combination, while avoiding certain &ldquo;deadends.&rdquo; Each turn allows us to change one digit of the combination by either increasing or decreasing it by one, and we are provided with a list of &ldquo;deadends,&rdquo; which are combinations that we should avoid. The task is to return the minimum number of turns required to reach the target combination or <code>-1</code> if it&rsquo;s not possible.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -297,80 +297,116 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we can use <strong>Breadth-First Search (BFS)</strong>. BFS is ideal for problems like this because it explores all possibilities level by level, ensuring that the first time we encounter the target combination, we have found the shortest path (minimum number of turns).</p>
+<p>Here’s a step-by-step breakdown of how we can apply BFS to this problem:</p>
+<ol>
+<li><strong>Initial State</strong>: Start with the combination &ldquo;0000.&rdquo;</li>
+<li><strong>Queue</strong>: Use a queue to explore all possible combinations. Each element in the queue represents a combination we can reach from the current state, and the queue will hold combinations for which we still need to explore their neighbors.</li>
+<li><strong>Deadends</strong>: Maintain a set of &ldquo;deadends&rdquo; (combinations we should avoid), and skip any combination that is in the &ldquo;deadends&rdquo; set.</li>
+<li><strong>Neighbor Exploration</strong>: For each combination, generate all its neighbors by changing one digit at a time, either increasing or decreasing it by 1. This step generates the next valid combinations we can explore.</li>
+<li><strong>Track Turns</strong>: Track the number of turns or levels of BFS that have been completed to reach a particular combination.</li>
+<li><strong>Termination</strong>: If we reach the target combination, return the number of turns. If the queue is empty and we haven’t reached the target, return <code>-1</code> to indicate that it&rsquo;s impossible to reach the target.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
 <ol>
 <li>
-<p><strong>Data Structures</strong>:</p>
+<p><strong>Initialization</strong>:</p>
 <ul>
-<li>Use an <code>unordered_set</code> to store the dead-end configurations for quick lookups.</li>
-<li>Use a <code>queue</code> for BFS (Breadth-First Search) to explore all possible configurations starting from <code>0000</code>.</li>
+<li>We first convert the <code>deadends</code> vector into an unordered set for fast lookup. This allows us to quickly check if a combination is a deadend.</li>
+<li>If &ldquo;0000&rdquo; is a deadend, immediately return <code>-1</code> since we can&rsquo;t start from there.</li>
+<li>Initialize the queue with the starting combination &ldquo;0000&rdquo; and begin BFS.</li>
 </ul>
-</li>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> dead(deadends.begin(), deadends.end());
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (dead.count(<span style="color:#b44">&#34;0000&#34;</span>)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>queue<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> q({<span style="color:#b44">&#34;0000&#34;</span>});
+</span></span></code></pre></div></li>
 <li>
-<p><strong>BFS Initialization</strong>:</p>
+<p><strong>BFS Loop</strong>:</p>
 <ul>
-<li>If <code>0000</code> is a dead end, return <code>-1</code>.</li>
-<li>Initialize the queue with the starting configuration <code>0000</code>.</li>
+<li>The BFS loop continues until the queue is empty. Each iteration of BFS represents a &ldquo;turn&rdquo; or level of exploration.</li>
+<li>For each turn, we process each element in the queue. For every combination in the queue, we generate its neighbors and add them to the queue if they are not deadends and haven’t been visited yet.</li>
 </ul>
-</li>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> turn <span style="color:#666">=</span> <span style="color:#666">0</span>; <span style="color:#666">!</span>q.empty(); turn<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> q.size(); i <span style="color:#666">&gt;</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> curr <span style="color:#666">=</span> q.front(); q.pop();
+</span></span><span style="display:flex;"><span>        cout <span style="color:#666">&lt;&lt;</span> curr <span style="color:#666">&lt;&lt;</span> <span style="color:#b44">&#39; &#39;</span> <span style="color:#666">&lt;&lt;</span> target <span style="color:#666">&lt;&lt;</span> endl;  <span style="color:#080;font-style:italic">// For debugging
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">if</span> (curr <span style="color:#666">==</span> target) <span style="color:#a2f;font-weight:bold">return</span> turn;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span> : neighbours(curr)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (dead.count(it)) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>            dead.insert(it);  <span style="color:#080;font-style:italic">// Mark as visited
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            q.push(it);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;  <span style="color:#080;font-style:italic">// If the queue is empty and target is not found
+</span></span></span></code></pre></div></li>
 <li>
-<p><strong>BFS Execution</strong>:</p>
+<p><strong>Generating Neighbors</strong>:</p>
 <ul>
-<li>For each turn, process all configurations currently in the queue.</li>
-<li>If the current configuration matches the target, return the number of turns taken.</li>
-<li>Generate all possible neighboring configurations by turning each wheel up or down.</li>
-<li>Skip dead-end configurations, mark valid neighbors as visited (by inserting into the dead set), and add them to the queue.</li>
+<li>For each combination, the function <code>neighbours()</code> generates all the possible combinations by changing one digit at a time, either increasing or decreasing that digit by one. This is done for each of the four digits in the combination.</li>
+<li>Each change is computed in the following way: for each digit, we add 1 (clockwise) or subtract 1 (counterclockwise) and apply modulo 10 to wrap around the digit. This ensures we can handle changes from &lsquo;9&rsquo; to &lsquo;0&rsquo; and vice versa.</li>
 </ul>
-</li>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> neighbours(<span style="color:#a2f;font-weight:bold">const</span> string <span style="color:#666">&amp;</span>code) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">4</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> diff <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>; diff <span style="color:#666">&lt;=</span> <span style="color:#666">1</span>; diff<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            string nei <span style="color:#666">=</span> code;
+</span></span><span style="display:flex;"><span>            nei[i] <span style="color:#666">=</span> (nei[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">+</span> diff <span style="color:#666">+</span> <span style="color:#666">10</span>) <span style="color:#666">%</span> <span style="color:#666">10</span> <span style="color:#666">+</span> <span style="color:#b44">&#39;0&#39;</span>;
+</span></span><span style="display:flex;"><span>            res.push_back(nei);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
 <li>
-<p><strong>Return Result</strong>:</p>
+<p><strong>Termination</strong>:</p>
 <ul>
-<li>If the queue is empty and the target hasn&rsquo;t been reached, return <code>-1</code>.</li>
+<li>The BFS loop terminates either when we find the target combination, in which case we return the number of turns taken, or when the queue is empty and the target is not found, indicating it&rsquo;s impossible to reach the target.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
 <li>
-<p><strong>Class</strong>:</p>
+<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li><code>class Solution</code>: Contains methods to solve the lock problem.</li>
+<li>Each combination is explored at most once. There are 10,000 possible combinations (from &ldquo;0000&rdquo; to &ldquo;9999&rdquo;). For each combination, we generate up to 8 neighbors (changing each of the 4 digits by +1 or -1). Thus, the time complexity is <strong>O(10,000 * 8)</strong>, which simplifies to <strong>O(1)</strong> since the number of possible combinations is constant.</li>
 </ul>
 </li>
 <li>
-<p><strong>Method</strong>:</p>
+<p><strong>Space Complexity</strong>:</p>
 <ul>
-<li><code>int openLock(vector&lt;string&gt;&amp; deadends, string target)</code>: Implements the BFS logic to find the minimum number of turns to reach the target.</li>
-</ul>
-</li>
-<li>
-<p><strong>Helper Method</strong>:</p>
-<ul>
-<li><code>vector&lt;string&gt; neighbours(const string &amp;code)</code>: Generates all valid neighboring configurations by turning each wheel one step up or down.</li>
+<li>The space complexity is dominated by the storage of combinations in the queue and the set of deadends. The queue can hold at most all possible combinations, and the set of deadends can store up to 10,000 combinations. Therefore, the space complexity is <strong>O(10,000)</strong>, which is also considered constant for practical purposes.</li>
 </ul>
 </li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: O(1), as there are a limited number of configurations (10,000 possible combinations).</li>
-<li><strong>Space Complexity</strong>: O(1) for the BFS queue and the dead set, considering the constant size of the lock configuration space.</li>
-</ul>
+<p>This solution efficiently solves the problem of finding the minimum number of turns to open the lock using a BFS approach. The key advantage of BFS is that it guarantees the shortest path to the target combination by exploring all possibilities level by level. By avoiding deadends and efficiently generating neighbors, the algorithm ensures that we can solve the problem in an optimal manner.</p>
+<p>The solution is both time-efficient and space-efficient, leveraging BFS to explore all possible combinations while ensuring that we don’t revisit states unnecessarily. Additionally, using a set to track deadends and visited combinations ensures that the algorithm avoids cycles and redundant computations.</p>
+<p>This approach is scalable and well-suited for problems involving search spaces with limited size, such as this one where there are only 10,000 possible combinations. It can be extended or adapted to similar problems where BFS or graph traversal is applicable.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1304s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1305s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

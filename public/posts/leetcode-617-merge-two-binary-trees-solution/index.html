@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -221,7 +221,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1231s0hbhb">
+        <h2 id="hahahugoshortcode1232s0hbhb">
   <a href="https://leetcode.com/problems/merge-two-binary-trees/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -236,7 +236,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1231s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1232s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -269,7 +269,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1231s2hbhb">
+<h2 id="hahahugoshortcode1232s2hbhb">
   
 
   
@@ -281,7 +281,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given two binary trees, merge them into a new binary tree. The merging process involves summing the values of overlapping nodes. If two nodes overlap, their values are summed. If only one of the trees has a node at a given position, that node is used as the node in the merged tree.</p>
+<p>Given two binary trees, we are tasked with merging them into a new binary tree. The merging process is defined as follows:</p>
+<ul>
+<li>If two nodes overlap, we sum their values and create a new node with this sum.</li>
+<li>If one of the trees has a node and the other does not, we keep the existing node&rsquo;s value.</li>
+<li>If both trees have a <code>NULL</code> node at the same position, the merged tree will also have a <code>NULL</code> node at that position.</li>
+</ul>
+<p>The goal is to return the merged tree as a new binary tree.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -289,36 +295,101 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The problem can be solved using a <strong>recursive approach</strong>. At each step of recursion, we merge two nodes:</p>
 <ol>
-<li>
-<p><strong>Base Cases</strong>:</p>
-<ul>
-<li>If both nodes are <code>NULL</code>, return <code>NULL</code>.</li>
-<li>If one of the nodes is <code>NULL</code>, return the other node.</li>
-<li>If both nodes are not <code>NULL</code>, create a new node with the sum of the values of both nodes.</li>
-</ul>
-</li>
-<li>
-<p><strong>Recursion</strong>:</p>
-<ul>
-<li>Recursively merge the left children of both nodes.</li>
-<li>Recursively merge the right children of both nodes.</li>
-</ul>
-</li>
+<li><strong>Base Case:</strong> If both nodes are <code>NULL</code>, return <code>NULL</code> because there&rsquo;s nothing to merge.</li>
+<li><strong>If both nodes exist:</strong> We sum the values of the two nodes and create a new node with this value.</li>
+<li><strong>If one of the nodes is <code>NULL</code>:</strong> If one tree has a node and the other tree does not, we take the node from the tree that has it.</li>
+<li><strong>Recursively merge left and right children:</strong> After processing the current nodes, we proceed to merge the left children and right children recursively.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>This recursive approach ensures that all nodes from both trees are merged appropriately.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The <code>mergeTrees</code> function takes two binary tree nodes (<code>r1</code> and <code>r2</code>).</li>
-<li>It creates a new node (<code>ans</code>) for the merged tree.</li>
-<li>Depending on the presence of <code>r1</code> and <code>r2</code>, it populates <code>ans-&gt;val</code>.</li>
-<li>It recursively merges the left and right subtrees.</li>
-<li>Finally, it returns the merged tree&rsquo;s root node.</li>
+<h4 id="step-1-initialize-the-result-node">
+  Step 1: Initialize the Result Node
+  <a class="heading-link" href="#step-1-initialize-the-result-node">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> ans <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TreeNode(<span style="color:#666">0</span>);
+</span></span></code></pre></div><ul>
+<li>We create a new <code>TreeNode</code> object, <code>ans</code>, which will hold the merged value at the current level. Initially, the value is set to <code>0</code> because it will be updated later based on the current merge condition.</li>
+</ul>
+<h4 id="step-2-base-case--both-nodes-are-null">
+  Step 2: Base Case – Both Nodes are <code>NULL</code>
+  <a class="heading-link" href="#step-2-base-case--both-nodes-are-null">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(r1 <span style="color:#666">==</span> <span style="color:#a2f">NULL</span> <span style="color:#666">&amp;&amp;</span> r2 <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">NULL</span>;
+</span></span></code></pre></div><ul>
+<li>This is the base case where both input nodes (<code>r1</code> and <code>r2</code>) are <code>NULL</code>. In this case, there is nothing to merge, so we return <code>NULL</code>.</li>
+</ul>
+<h4 id="step-3-merging-the-nodes-when-both-exist">
+  Step 3: Merging the Nodes When Both Exist
+  <a class="heading-link" href="#step-3-merging-the-nodes-when-both-exist">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(r1 <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span> <span style="color:#666">&amp;&amp;</span> r2 <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>)
+</span></span><span style="display:flex;"><span>    ans<span style="color:#666">-&gt;</span>val <span style="color:#666">=</span> r1<span style="color:#666">-&gt;</span>val <span style="color:#666">+</span> r2<span style="color:#666">-&gt;</span>val;
+</span></span></code></pre></div><ul>
+<li>If both <code>r1</code> and <code>r2</code> are non-<code>NULL</code>, we add their values and assign the sum to the <code>ans</code> node&rsquo;s <code>val</code> field.</li>
+</ul>
+<h4 id="step-4-handling-missing-nodes">
+  Step 4: Handling Missing Nodes
+  <a class="heading-link" href="#step-4-handling-missing-nodes">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(r1 <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>)
+</span></span><span style="display:flex;"><span>    ans<span style="color:#666">-&gt;</span>val <span style="color:#666">=</span> r2<span style="color:#666">-&gt;</span>val;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">else</span>
+</span></span><span style="display:flex;"><span>    ans<span style="color:#666">-&gt;</span>val <span style="color:#666">=</span> r1<span style="color:#666">-&gt;</span>val;
+</span></span></code></pre></div><ul>
+<li>If only one of <code>r1</code> or <code>r2</code> is <code>NULL</code>, we assign the value of the non-<code>NULL</code> node to the <code>ans</code> node. This ensures that the merged tree keeps the value from the tree that has the node.</li>
+</ul>
+<h4 id="step-5-recursively-merge-left-subtrees">
+  Step 5: Recursively Merge Left Subtrees
+  <a class="heading-link" href="#step-5-recursively-merge-left-subtrees">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ans<span style="color:#666">-&gt;</span>left <span style="color:#666">=</span> mergeTrees(r1 <span style="color:#666">?</span> r1<span style="color:#666">-&gt;</span><span style="color:#a0a000">left</span> : <span style="color:#a2f">NULL</span>, r2 <span style="color:#666">?</span> r2<span style="color:#666">-&gt;</span><span style="color:#a0a000">left</span> : <span style="color:#a2f">NULL</span>);
+</span></span></code></pre></div><ul>
+<li>After handling the current node, we recursively merge the left children of <code>r1</code> and <code>r2</code>. If either <code>r1</code> or <code>r2</code> is <code>NULL</code>, we pass <code>NULL</code> for the corresponding left child.</li>
+</ul>
+<h4 id="step-6-recursively-merge-right-subtrees">
+  Step 6: Recursively Merge Right Subtrees
+  <a class="heading-link" href="#step-6-recursively-merge-right-subtrees">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ans<span style="color:#666">-&gt;</span>right <span style="color:#666">=</span> mergeTrees(r1 <span style="color:#666">?</span> r1<span style="color:#666">-&gt;</span><span style="color:#a0a000">right</span> : <span style="color:#a2f">NULL</span>, r2 <span style="color:#666">?</span> r2<span style="color:#666">-&gt;</span><span style="color:#a0a000">right</span> : <span style="color:#a2f">NULL</span>);
+</span></span></code></pre></div><ul>
+<li>Similarly, we recursively merge the right children of <code>r1</code> and <code>r2</code>. The same logic applies: if one of the trees is missing the right child, we pass <code>NULL</code>.</li>
+</ul>
+<h4 id="step-7-return-the-merged-tree">
+  Step 7: Return the Merged Tree
+  <a class="heading-link" href="#step-7-return-the-merged-tree">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>After processing the current nodes and their left and right subtrees, we return the <code>ans</code> node, which contains the merged value and the references to its merged left and right children.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -327,15 +398,46 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(N), where N is the number of nodes in the merged tree, as each node from both trees is processed exactly once.</li>
-<li><strong>Space Complexity</strong>: O(H), where H is the height of the tree due to the recursion stack.</li>
+<li>The time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the larger tree. The reason is that we visit each node in the trees exactly once during the recursion. Each recursive call processes one node, so the overall complexity is linear in terms of the total number of nodes across both trees.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(h)</strong>, where <code>h</code> is the height of the tree. This is due to the recursion stack used to store the function calls during the merging process. In the worst case, where the tree is unbalanced (e.g., a linked list), the recursion depth would be equal to the number of nodes, and thus the space complexity will be <strong>O(n)</strong>. In the best case, where the tree is balanced, the recursion depth will be <strong>O(log n)</strong>, and the space complexity will be <strong>O(log n)</strong>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution successfully merges two binary trees by combining their nodes. The recursive approach is simple yet efficient, ensuring that each node is processed only once. The approach handles all possible cases:</p>
+<ol>
+<li>If both nodes exist, their values are summed and stored.</li>
+<li>If only one node exists, the value from that node is kept.</li>
+<li>If both nodes are <code>NULL</code>, the merged node is also <code>NULL</code>.</li>
+</ol>
+<p>The time complexity of <strong>O(n)</strong> makes this approach suitable for large binary trees, while the space complexity of <strong>O(h)</strong> ensures that it remains manageable even for deep trees. By summing overlapping nodes and recursively merging the subtrees, the solution creates a merged tree that is both correct and efficient.</p>
+<p>This approach works efficiently in real-world scenarios where trees may vary in size and structure, and it provides an optimal solution to the problem of merging binary trees.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1231s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1232s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

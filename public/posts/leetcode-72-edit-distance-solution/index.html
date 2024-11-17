@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -211,7 +211,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1285s0hbhb">
+        <h2 id="hahahugoshortcode1282s0hbhb">
   <a href="https://leetcode.com/problems/edit-distance/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -226,7 +226,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1285s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1282s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -258,84 +258,188 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> dp(<span style="color:#666">0</span>, <span style="color:#666">0</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1285s2hbhb">
+<h2 id="hahahugoshortcode1282s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-edit-distance-problem-levenshtein-distance--lets-solve-it-together">
+  💡 <strong>Edit Distance Problem (Levenshtein Distance)</strong> – Let&rsquo;s Solve It Together!
+  <a class="heading-link" href="#-edit-distance-problem-levenshtein-distance--lets-solve-it-together">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given two strings <code>word1</code> and <code>word2</code>, find the minimum number of operations required to convert <code>word1</code> into <code>word2</code>. The allowed operations are:</p>
+<p>The <strong>Edit Distance</strong> problem is a classic challenge in string manipulation. The task is to find the <strong>minimum number of operations</strong> required to convert one string into another using three operations:</p>
 <ol>
-<li>Insert a character</li>
-<li>Delete a character</li>
-<li>Replace a character</li>
+<li><strong>Insert a character</strong></li>
+<li><strong>Delete a character</strong></li>
+<li><strong>Replace a character</strong></li>
 </ol>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>Given two strings <code>word1</code> and <code>word2</code>, our goal is to return the minimum number of operations to transform <code>word1</code> into <code>word2</code>.</p>
+<h3 id="-problem-breakdown">
+  📝 <strong>Problem Breakdown</strong>
+  <a class="heading-link" href="#-problem-breakdown">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>You are given:</p>
+<ul>
+<li><strong><code>word1</code></strong> and <strong><code>word2</code></strong> — two strings that you need to transform.</li>
+</ul>
+<p>The goal is to compute the <strong>minimum number of operations</strong> required to convert <code>word1</code> into <code>word2</code>.</p>
+<h3 id="-approach-dynamic-programming">
+  🔍 <strong>Approach: Dynamic Programming</strong>
+  <a class="heading-link" href="#-approach-dynamic-programming">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This problem can be efficiently solved using <strong>Dynamic Programming (DP)</strong>. We will maintain a table (2D array) <code>dp</code>, where each entry <code>dp(i, j)</code> represents the minimum number of operations required to convert the substring <code>word1[0..i-1]</code> to <code>word2[0..j-1]</code>. This allows us to break the problem into smaller sub-problems and solve it recursively.</p>
+<h4 id="step-by-step-explanation">
+  Step-by-Step Explanation:
+  <a class="heading-link" href="#step-by-step-explanation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li><strong>Dynamic Programming (DP)</strong>: Use a 2D DP table to store the minimum edit distance for all substrings of <code>word1</code> and <code>word2</code>.</li>
-<li><strong>Base Cases</strong>:
+<li>
+<p><strong>State Representation</strong>:</p>
 <ul>
-<li>If one string is empty, the edit distance is the length of the other string (all insertions or deletions).</li>
+<li>Let <code>dp(i, j)</code> represent the minimum number of operations required to convert the substring <code>word1[0..i-1]</code> to <code>word2[0..j-1]</code>.</li>
+<li>Our goal is to compute <code>dp(a.size(), b.size())</code>, where <code>a</code> and <code>b</code> are <code>word1</code> and <code>word2</code> respectively.</li>
 </ul>
 </li>
-<li><strong>State Transition</strong>:
+<li>
+<p><strong>Base Cases</strong>:</p>
 <ul>
-<li>If the current characters of both strings are equal, continue to the next characters without any operation.</li>
-<li>If they are not equal, consider the minimum of the following three operations:
+<li>If either string is empty:
 <ul>
-<li><strong>Insert</strong>: Convert the substring up to <code>word1[i]</code> and <code>word2[j-1]</code> and add one for the insertion.</li>
-<li><strong>Delete</strong>: Convert the substring up to <code>word1[i-1]</code> and <code>word2[j]</code> and add one for the deletion.</li>
-<li><strong>Replace</strong>: Convert the substring up to <code>word1[i-1]</code> and <code>word2[j-1]</code> and add one for the replacement.</li>
+<li><code>dp(i, 0)</code> represents converting <code>word1[0..i-1]</code> to an empty string, requiring <code>i</code> deletions.</li>
+<li><code>dp(0, j)</code> represents converting an empty string to <code>word2[0..j-1]</code>, requiring <code>j</code> insertions.</li>
 </ul>
 </li>
+</ul>
+</li>
+<li>
+<p><strong>Recurrence Relation</strong>:</p>
+<ul>
+<li>If <code>a[i]</code> equals <code>b[j]</code>, no operation is needed, so we move diagonally: <code>dp(i, j) = dp(i+1, j+1)</code>.</li>
+<li>If the characters are different, we compute the minimum of the following:
+<ul>
+<li><strong>Insertion</strong>: Insert <code>b[j]</code> into <code>word1</code>, giving <code>dp(i, j+1) + 1</code>.</li>
+<li><strong>Deletion</strong>: Delete <code>a[i]</code>, giving <code>dp(i+1, j) + 1</code>.</li>
+<li><strong>Replacement</strong>: Replace <code>a[i]</code> with <code>b[j]</code>, giving <code>dp(i+1, j+1) + 1</code>.</li>
+</ul>
+</li>
+<li>We take the minimum of these three options.</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization</strong>:</p>
+<ul>
+<li>We use memoization to avoid redundant calculations, storing results of sub-problems in a 2D array <code>memo[i][j]</code>. If <code>memo[i][j]</code> is not <code>-1</code>, we return the stored value directly.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Result</strong>:</p>
+<ul>
+<li>The final result will be stored in <code>memo[0][0]</code>, which gives the minimum number of operations to convert <code>word1</code> to <code>word2</code>.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="-lets-look-at-the-code">
+  🧑‍💻 <strong>Let’s Look at the Code!</strong>
+  <a class="heading-link" href="#-lets-look-at-the-code">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Initialization</strong>: Store the input strings <code>word1</code> and <code>word2</code> in member variables <code>a</code> and <code>b</code>. Initialize the <code>memo</code> table with size equal to the lengths of <code>word1</code> and <code>word2</code>, filled with <code>-1</code> to indicate uncomputed values.</li>
-<li><strong>Recursive Function</strong>:
-<ul>
-<li>Check for base cases (when either string is fully processed).</li>
-<li>If characters match, move to the next characters.</li>
-<li>If not, calculate the minimum edit distance considering the three operations and store the result in <code>memo</code>.</li>
-</ul>
-</li>
-<li><strong>Result</strong>: The minimum edit distance from the first characters of both strings is returned.</li>
-</ol>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<p>Here’s how we can implement this approach in C++:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#080">#include</span> <span style="color:#080">&lt;iostream&gt;</span><span style="color:#080">
+</span></span></span><span style="display:flex;"><span><span style="color:#080">#include</span> <span style="color:#080">&lt;vector&gt;</span><span style="color:#080">
+</span></span></span><span style="display:flex;"><span><span style="color:#080"></span><span style="color:#a2f;font-weight:bold">using</span> <span style="color:#a2f;font-weight:bold">namespace</span> std;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j, <span style="color:#a2f;font-weight:bold">const</span> string<span style="color:#666">&amp;</span> a, <span style="color:#a2f;font-weight:bold">const</span> string<span style="color:#666">&amp;</span> b, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> memo) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> a.size() <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">==</span> b.size()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;  <span style="color:#080;font-style:italic">// Both strings are at the end
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> a.size()) <span style="color:#a2f;font-weight:bold">return</span> b.size() <span style="color:#666">-</span> j;  <span style="color:#080;font-style:italic">// Insert remaining characters of b
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">if</span>(j <span style="color:#666">==</span> b.size()) <span style="color:#a2f;font-weight:bold">return</span> a.size() <span style="color:#666">-</span> i;  <span style="color:#080;font-style:italic">// Delete remaining characters of a
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[i][j] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[i][j];  <span style="color:#080;font-style:italic">// Return already computed result
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(a[i] <span style="color:#666">!=</span> b[j]) {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> min({dp(i<span style="color:#666">+</span><span style="color:#666">1</span>, j, a, b, memo), dp(i, j<span style="color:#666">+</span><span style="color:#666">1</span>, a, b, memo), dp(i<span style="color:#666">+</span><span style="color:#666">1</span>, j<span style="color:#666">+</span><span style="color:#666">1</span>, a, b, memo)}) <span style="color:#666">+</span> <span style="color:#666">1</span>;  <span style="color:#080;font-style:italic">// Min of insert, delete, replace
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> dp(i <span style="color:#666">+</span> <span style="color:#666">1</span>, j <span style="color:#666">+</span> <span style="color:#666">1</span>, a, b, memo);  <span style="color:#080;font-style:italic">// No operation needed if chars are equal
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[i][j] <span style="color:#666">=</span> ans;  <span style="color:#080;font-style:italic">// Store the result in memo table
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minDistance</span>(string word1, string word2) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> memo(word1.size() <span style="color:#666">+</span> <span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(word2.size() <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">-</span><span style="color:#666">1</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp(<span style="color:#666">0</span>, <span style="color:#666">0</span>, word1, word2, memo);  <span style="color:#080;font-style:italic">// Start the recursive DP function
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
+</span></span></code></pre></div><h3 id="-handling-edge-cases">
+  🌟 <strong>Handling Edge Cases</strong>
+  <a class="heading-link" href="#-handling-edge-cases">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity:</strong> ( O(M \times N) ), where ( M ) and ( N ) are the lengths of <code>word1</code> and <code>word2</code>, respectively. Each substring is computed once.</li>
-<li><strong>Space Complexity:</strong> ( O(M \times N) ) for the DP table to store computed results.</li>
-</ul> 
+<li>If one of the strings is empty, the result is the length of the other string, as we would need to insert or delete all the characters.</li>
+<li>If both strings are identical, no operations are needed, and the result will be <code>0</code>.</li>
+</ul>
+<h3 id="-time-and-space-complexity">
+  ⏱️ <strong>Time and Space Complexity</strong>
+  <a class="heading-link" href="#-time-and-space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:<br>
+<strong>O(m * n)</strong> — where <code>m</code> is the length of <code>word1</code> and <code>n</code> is the length of <code>word2</code>. The algorithm computes the result for every pair <code>(i, j)</code> in the <code>m x n</code> memoization table, and each computation takes constant time.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:<br>
+<strong>O(m * n)</strong> — The space complexity is also <strong>O(m * n)</strong> due to the memoization table storing results for all sub-problems.</p>
+</li>
+</ul>
+<h3 id="-why-this-approach-is-efficient">
+  💡 <strong>Why This Approach is Efficient</strong>
+  <a class="heading-link" href="#-why-this-approach-is-efficient">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>By using <strong>Dynamic Programming with memoization</strong>, we avoid redundant calculations and efficiently solve the problem in <strong>O(m * n)</strong> time. This approach ensures that we only compute each sub-problem once, storing the results to be reused when needed.</p>
+<h3 id="-you-got-this">
+  🏁 <strong>You Got This!</strong>
+  <a class="heading-link" href="#-you-got-this">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The Edit Distance problem is a great example of how breaking a problem into smaller sub-problems can simplify the solution. By using Dynamic Programming, you can efficiently solve string transformation problems. Keep practicing, and soon you’ll be mastering more complex challenges!</p>
+<hr>
+<h4 id="-final-thoughts-keep-coding-keep-growing">
+  🌟 <strong>Final Thoughts</strong>: Keep Coding, Keep Growing!
+  <a class="heading-link" href="#-final-thoughts-keep-coding-keep-growing">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Every problem you solve helps build your coding skills. Keep pushing yourself, and you’ll continue to improve. Coding isn’t just about solving problems—it’s about enjoying the process and learning every step of the way. Keep going, coder! 🚀</p>
+<p>Happy coding, and remember: <strong>every small step brings you closer to mastery!</strong> ✨</p>
+ 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1285s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1282s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

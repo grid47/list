@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -263,88 +263,229 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-statement">
+  🚀 Problem Statement
+  <a class="heading-link" href="#-problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given a positive integer <code>n</code>. You can perform the following operations on <code>n</code>:</p>
+<p>The problem asks us to determine the <strong>minimum number of operations</strong> required to reduce a given integer <code>n</code> to 1 using the following operations:</p>
 <ol>
-<li>If <code>n</code> is even, divide it by 2.</li>
-<li>If <code>n</code> is odd, you can either:
+<li>If <code>n</code> is <strong>even</strong>, divide <code>n</code> by 2.</li>
+<li>If <code>n</code> is <strong>odd</strong>, either increment or decrement <code>n</code> by 1.</li>
+</ol>
+<p>Our goal is to return the minimum number of operations needed to reach <code>1</code> from <code>n</code>. Let&rsquo;s dive into the approach to tackle this problem efficiently! 😎</p>
+<hr>
+<h3 id="-approach">
+  🧠 Approach
+  <a class="heading-link" href="#-approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we can use a <strong>greedy strategy</strong> that aims to reduce the number <code>n</code> as efficiently as possible:</p>
 <ul>
-<li>Increment <code>n</code> by 1, or</li>
-<li>Decrement <code>n</code> by 1.</li>
+<li>If <code>n</code> is <strong>even</strong>, we divide <code>n</code> by 2, as it&rsquo;s the most efficient operation.</li>
+<li>If <code>n</code> is <strong>odd</strong>, we have two options:
+<ul>
+<li><strong>Increment <code>n</code></strong>: If <code>(n + 1) % 4 == 0</code> (i.e., <code>n + 1</code> is divisible by 4), this will potentially allow us to reach a number that can be halved more quickly in the next steps.</li>
+<li><strong>Decrement <code>n</code></strong>: If the condition is not met, we decrement <code>n</code> to make it even, allowing us to use the division operation.</li>
+</ul>
+</li>
+</ul>
+<p>By making these decisions, we aim to minimize the number of steps to reach 1. Let&rsquo;s break it down! 💡</p>
+<hr>
+<h3 id="-step-by-step-code-breakdown">
+  🔨 Step-by-Step Code Breakdown
+  <a class="heading-link" href="#-step-by-step-code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s walk through the code and understand how it works:</p>
+<h4 id="step-1-handle-the-edge-case-for-int_max">
+  Step 1: Handle the Edge Case for <code>INT_MAX</code>
+  <a class="heading-link" href="#step-1-handle-the-edge-case-for-int_max">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">==</span> INT_MAX) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">32</span>;
+</span></span></code></pre></div><ul>
+<li>If <code>n</code> is equal to <strong><code>INT_MAX</code></strong> (i.e., <code>2^31 - 1</code>), we can directly return <code>32</code>, since we know from its binary structure that it will always take exactly 32 steps to reach 1. This is a shortcut for efficiency. 🚀</li>
+</ul>
+<hr>
+<h4 id="step-2-initialize-the-counter">
+  Step 2: Initialize the Counter
+  <a class="heading-link" href="#step-2-initialize-the-counter">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize a counter <code>cnt</code> to <strong>track</strong> the number of operations we perform. Every time we modify <code>n</code>, we increase this counter.</li>
+</ul>
+<hr>
+<h4 id="step-3-main-loop-to-reduce-n">
+  Step 3: Main Loop to Reduce <code>n</code>
+  <a class="heading-link" href="#step-3-main-loop-to-reduce-n">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(n <span style="color:#666">&gt;</span> <span style="color:#666">1</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) n <span style="color:#666">/=</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>((n <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">%</span> <span style="color:#666">4</span> <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> (n <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">!=</span> <span style="color:#666">2</span>) n<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> n<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    cnt<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We enter a loop that continues <strong>until <code>n</code> becomes 1</strong>.</li>
+<li>If <code>n</code> is <strong>even</strong>, we simply divide it by 2. This operation drastically reduces the value of <code>n</code>. 📉</li>
+<li>If <code>n</code> is <strong>odd</strong>, we decide whether to increment or decrement:
+<ul>
+<li><strong>Increment</strong> <code>n</code> if <code>(n + 1) % 4 == 0</code> and <code>(n - 1) != 2</code>, because making <code>n + 1</code> divisible by 4 can potentially lead to faster halving.</li>
+<li><strong>Decrement</strong> <code>n</code> otherwise, so it becomes even and we can divide it in the next step. 🔄</li>
+</ul>
+</li>
+<li>After each operation, we increment <code>cnt</code> to keep track of the number of steps taken. ⏳</li>
+</ul>
+<hr>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> cnt;
+</span></span></code></pre></div><ul>
+<li>Once <code>n</code> becomes 1, we return <code>cnt</code>, which holds the <strong>minimum number of operations</strong> required to reduce <code>n</code> to 1. 🏁</li>
+</ul>
+<hr>
+<h3 id="-example-walkthrough">
+  📈 Example Walkthrough
+  <a class="heading-link" href="#-example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s go through a couple of examples to see how the algorithm works in action! 🎬</p>
+<h4 id="example-1-n--8">
+  Example 1: <code>n = 8</code>
+  <a class="heading-link" href="#example-1-n--8">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>integerReplacement(<span style="color:#666">8</span>);
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>Initial value of <code>n = 8</code></strong>:</p>
+<ul>
+<li><code>n</code> is <strong>even</strong>, so divide by 2: <code>n = 8 / 2 = 4</code> (1 operation)</li>
+<li><code>cnt = 1</code></li>
+</ul>
+</li>
+<li>
+<p><strong><code>n = 4</code></strong>:</p>
+<ul>
+<li><code>n</code> is <strong>even</strong>, so divide by 2: <code>n = 4 / 2 = 2</code> (1 operation)</li>
+<li><code>cnt = 2</code></li>
+</ul>
+</li>
+<li>
+<p><strong><code>n = 2</code></strong>:</p>
+<ul>
+<li><code>n</code> is <strong>even</strong>, so divide by 2: <code>n = 2 / 2 = 1</code> (1 operation)</li>
+<li><code>cnt = 3</code></li>
 </ul>
 </li>
 </ol>
-<p>Your goal is to determine the minimum number of operations required to reduce <code>n</code> to 1.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p><strong>Result</strong>: The function returns <code>cnt = 3</code>, meaning it took <strong>3 operations</strong> to reduce <code>n = 8</code> to 1. 🏆</p>
+<hr>
+<h4 id="example-2-n--7">
+  Example 2: <code>n = 7</code>
+  <a class="heading-link" href="#example-2-n--7">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h3>
-<ol>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>integerReplacement(<span style="color:#666">7</span>);
+</span></span></code></pre></div><ol>
 <li>
-<p><strong>Check for Edge Cases</strong>:</p>
+<p><strong>Initial value of <code>n = 7</code></strong>:</p>
 <ul>
-<li>If <code>n</code> is <code>INT_MAX</code>, return <code>32</code> directly, as reducing <code>INT_MAX</code> to <code>1</code> requires <code>32</code> operations.</li>
-</ul>
-</li>
-<li>
-<p><strong>Loop Until <code>n</code> Equals 1</strong>:</p>
-<ul>
-<li>Use a loop that continues until <code>n</code> becomes <code>1</code>.</li>
-<li>Inside the loop:
-<ul>
-<li>If <code>n</code> is even, perform the operation <code>n /= 2</code>.</li>
-<li>If <code>n</code> is odd:
-<ul>
-<li>Check if incrementing <code>n</code> leads to a number that can be halved down to <code>1</code> in fewer steps:
-<ul>
-<li>If <code>(n + 1) % 4 == 0</code> and <code>(n - 1) != 2</code>, increment <code>n</code> (to take advantage of more even divisions).</li>
-<li>Otherwise, decrement <code>n</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<li><code>n</code> is <strong>odd</strong>, and <code>(n + 1) % 4 == 0</code> (because 8 is divisible by 4), so <strong>increment</strong> <code>n</code>: <code>n = 7 + 1 = 8</code> (1 operation)</li>
+<li><code>cnt = 1</code></li>
 </ul>
 </li>
 <li>
-<p><strong>Count Operations</strong>:</p>
+<p><strong><code>n = 8</code></strong>:</p>
 <ul>
-<li>Keep a counter that tracks the number of operations performed and increment it after each operation.</li>
+<li><code>n</code> is <strong>even</strong>, so divide by 2: <code>n = 8 / 2 = 4</code> (1 operation)</li>
+<li><code>cnt = 2</code></li>
+</ul>
+</li>
+<li>
+<p><strong><code>n = 4</code></strong>:</p>
+<ul>
+<li><code>n</code> is <strong>even</strong>, so divide by 2: <code>n = 4 / 2 = 2</code> (1 operation)</li>
+<li><code>cnt = 3</code></li>
+</ul>
+</li>
+<li>
+<p><strong><code>n = 2</code></strong>:</p>
+<ul>
+<li><code>n</code> is <strong>even</strong>, so divide by 2: <code>n = 2 / 2 = 1</code> (1 operation)</li>
+<li><code>cnt = 4</code></li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p><strong>Result</strong>: The function returns <code>cnt = 4</code>, meaning it took <strong>4 operations</strong> to reduce <code>n = 7</code> to 1. 🏅</p>
+<hr>
+<h3 id="-complexity-analysis">
+  📊 Complexity Analysis
+  <a class="heading-link" href="#-complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>Let’s analyze the time and space complexity of this solution:</p>
+<h4 id="-time-complexity">
+  ⏱️ Time Complexity:
+  <a class="heading-link" href="#-time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li>The function initializes a counter <code>cnt</code> to zero.</li>
-<li>It uses a while loop to modify <code>n</code> according to the even or odd condition and tracks the number of operations until <code>n</code> equals <code>1</code>.</li>
+<li><strong>Time Complexity</strong>: <code>O(log n)</code>. In each iteration, <code>n</code> is halved (for even numbers) or adjusted by 1 and halved in the next step (for odd numbers). This logarithmic reduction continues until <code>n</code> becomes 1, so the time complexity is proportional to the logarithm of <code>n</code>, i.e., <code>O(log n)</code>. 📉</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="-space-complexity">
+  🧠 Space Complexity:
+  <a class="heading-link" href="#-space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Space Complexity</strong>: <code>O(1)</code>. The solution uses a constant amount of space because we only store a few variables like <code>cnt</code>, <code>n</code>, and a few temporary values. No additional data structures are used. 🧳</li>
+</ul>
+<hr>
+<h3 id="-conclusion">
+  🏁 Conclusion
+  <a class="heading-link" href="#-conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: O(log n), as each operation effectively reduces the value of <code>n</code> significantly, especially when dividing by 2.</li>
-<li><strong>Space Complexity</strong>: O(1), since no additional data structures are used that scale with input size.</li>
-</ul>
+<p>In conclusion, this approach provides an <strong>efficient way</strong> to reduce a given integer <code>n</code> to 1 by using a greedy strategy. By deciding whether to increment or decrement <code>n</code> based on the structure of the number, we minimize the number of operations. With a time complexity of <code>O(log n)</code> and space complexity of <code>O(1)</code>, this solution is both <strong>time-efficient</strong> and <strong>space-efficient</strong>! 🚀</p>
+<p>So, no matter how large <code>n</code> is, you can now reduce it to 1 in a minimal number of operations. Keep coding, and don’t forget to challenge yourself with new problems! 💪</p>
  
 </div>
   

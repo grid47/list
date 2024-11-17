@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -268,88 +268,190 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-statement">
+  🏷️ <strong>Problem Statement</strong>
+  <a class="heading-link" href="#-problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer array <code>nums</code>, return all possible subsets (the power set). The solution set must not contain duplicate subsets.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>The goal of this problem is to generate all possible subsets from a given list of integers, <code>nums</code>. A subset of a set is any combination of its elements, including the empty set. The output should be a collection of all subsets where the order of subsets does not matter.</p>
+<h4 id="example">
+  Example:
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Input:</strong> <code>nums = [1, 2, 3]</code></li>
+<li><strong>Output:</strong> <code>[[ ], [1], [2], [3], [1, 2], [1, 3], [2, 3], [1, 2, 3]]</code></li>
+</ul>
+<p>Here, we are tasked with generating all possible combinations of the elements of the list, including the empty set and the set containing all elements.</p>
+<hr>
+<h3 id="-approach">
+  🧠 <strong>Approach</strong>
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The solution to this problem uses <strong>backtracking</strong>, a technique where we explore all possible combinations of elements by making incremental decisions and undoing those decisions when necessary. This is a perfect fit for problems like subset generation.</p>
+<h4 id="key-concepts">
+  Key Concepts:
+  <a class="heading-link" href="#key-concepts">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Backtracking</strong>:</p>
+<p><strong>Recursive Backtracking:</strong>
+We use a helper function (<code>bt</code>) to recursively explore all possible subsets by either including or excluding each element in the set.</p>
+</li>
+<li>
+<p><strong>Exploration of Subsets:</strong>
+For each element in <code>nums</code>, we make two choices:</p>
 <ul>
-<li>Use a recursive backtracking method to explore all possible subsets.</li>
-<li>Maintain a temporary vector to store the current subset being constructed.</li>
+<li><strong>Exclude it</strong> from the current subset.</li>
+<li><strong>Include it</strong> in the current subset.
+By exploring both choices recursively, we cover all subsets.</li>
 </ul>
 </li>
 <li>
-<p><strong>Base Case</strong>:</p>
-<ul>
-<li>If the current index (<code>idx</code>) reaches the size of the input array, add the temporary subset to the results.</li>
-</ul>
+<p><strong>Base Case:</strong>
+When the function has considered all elements (i.e., <code>idx == nums.size()</code>), we add the current subset (<code>tmp</code>) to the result list (<code>ans</code>).</p>
 </li>
 <li>
-<p><strong>Recursive Exploration</strong>:</p>
-<ul>
-<li>At each index, there are two choices:
-<ul>
-<li>Exclude the current number and move to the next index.</li>
-<li>Include the current number in the subset, add it to the temporary vector, and then move to the next index.</li>
-</ul>
-</li>
-<li>After exploring with the current number included, remove it from the temporary vector (backtrack) for further exploration.</li>
-</ul>
+<p><strong>Backtracking:</strong>
+After including an element, we backtrack by removing it from the current subset (<code>tmp</code>) and proceed with the next recursive step to explore other possibilities.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<hr>
+<h3 id="-code-breakdown">
+  📝 <strong>Code Breakdown</strong>
+  <a class="heading-link" href="#-code-breakdown">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Initialization</strong>:</p>
+<h4 id="step-1-definition-of-member-variables">
+  Step 1: Definition of Member Variables
+  <a class="heading-link" href="#step-1-definition-of-member-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> nums;
+</span></span></code></pre></div><p>This vector holds the input list <code>nums</code>. It will be set through the method call.</p>
+<h4 id="step-2-subsets-method">
+  Step 2: Subsets Method
+  <a class="heading-link" href="#step-2-subsets-method">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> subsets(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>nums <span style="color:#666">=</span> nums;          <span style="color:#080;font-style:italic">// Store the input nums in the member variable
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans;    <span style="color:#080;font-style:italic">// Vector to store all subsets
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp;            <span style="color:#080;font-style:italic">// Temporary vector to store the current subset
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    bt(ans, tmp, <span style="color:#666">0</span>);            <span style="color:#080;font-style:italic">// Start the backtracking function
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">return</span> ans;                 <span style="color:#080;font-style:italic">// Return the answer containing all subsets
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
+</span></span></code></pre></div><ul>
+<li><strong>Explanation:</strong>
 <ul>
-<li>Store the input array in a class member variable and initialize the results vector.</li>
-<li>Call the backtracking function starting from index <code>0</code>.</li>
+<li>The method stores the input <code>nums</code> and initializes the <code>ans</code> vector (which holds all subsets) and <code>tmp</code> (used for the current subset).</li>
+<li>The backtracking function (<code>bt</code>) is called to start exploring subsets from index <code>0</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-backtracking-method">
+  Step 3: Backtracking Method
+  <a class="heading-link" href="#step-3-backtracking-method">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">bt</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>ans, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>tmp, <span style="color:#0b0;font-weight:bold">int</span> idx) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (idx <span style="color:#666">==</span> nums.size()) {
+</span></span><span style="display:flex;"><span>        ans.push_back(tmp);  <span style="color:#080;font-style:italic">// Add current subset to the answer when all elements are considered
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    bt(ans, tmp, idx <span style="color:#666">+</span> <span style="color:#666">1</span>);    <span style="color:#080;font-style:italic">// Case 1: Exclude the current element
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>    tmp.push_back(nums[idx]); <span style="color:#080;font-style:italic">// Case 2: Include the current element
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    bt(ans, tmp, idx <span style="color:#666">+</span> <span style="color:#666">1</span>);    <span style="color:#080;font-style:italic">// Recurse with the updated subset
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    tmp.pop_back();           <span style="color:#080;font-style:italic">// Backtrack, remove the last element to explore other possibilities
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Base Case:</strong> When <code>idx == nums.size()</code>, we&rsquo;ve considered all elements, so the current subset (<code>tmp</code>) is added to the result.</p>
+</li>
+<li>
+<p><strong>Recursive Steps:</strong></p>
+<ul>
+<li><strong>Exclude the current element:</strong> The first recursive call <code>bt(ans, tmp, idx + 1)</code> explores subsets without including <code>nums[idx]</code>.</li>
+<li><strong>Include the current element:</strong> The second recursive call <code>bt(ans, tmp, idx + 1)</code> explores subsets with <code>nums[idx]</code> included, before backtracking.</li>
 </ul>
 </li>
 <li>
-<p><strong>Backtracking Function</strong>:</p>
-<ul>
-<li>Check if the current index is equal to the size of the input array.</li>
-<li>If true, add the current subset to the results.</li>
-<li>Recursively call the backtracking function, first excluding the current number, then including it, and finally backtracking by popping the last added number.</li>
-</ul>
+<p><strong>Backtracking:</strong> After including <code>nums[idx]</code>, the function removes it (<code>tmp.pop_back()</code>) to explore subsets that don&rsquo;t include it.</p>
 </li>
-<li>
-<p><strong>Return the Result</strong>:</p>
-<ul>
-<li>After all recursive calls, return the list of subsets.</li>
 </ul>
-</li>
-</ol>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<hr>
+<h3 id="-complexity-analysis">
+  🧮 <strong>Complexity Analysis</strong>
+  <a class="heading-link" href="#-complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The number of subsets of a list of size <code>n</code> is <strong>2^n</strong> because each element has two choices: to be included or excluded. Therefore, the time complexity is <strong>O(2^n)</strong>. For each subset, we also spend <strong>O(n)</strong> time to store and process it.</p>
+<p>Thus, the overall time complexity is <strong>O(2^n * n)</strong>.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The recursive call stack has a maximum depth of <code>n</code> (the number of elements in <code>nums</code>), so the space complexity for recursion is <strong>O(n)</strong>.</li>
+<li>The space required to store all subsets is <strong>O(2^n * n)</strong>, since there are <code>2^n</code> subsets, and each subset can have up to <code>n</code> elements.</li>
+</ul>
+<p>Thus, the overall space complexity is <strong>O(2^n * n)</strong>, dominated by the space required to store the subsets.</p>
+<hr>
+<h3 id="-conclusion">
+  🎯 <strong>Conclusion</strong>
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach effectively generates all subsets of a given list of integers using the <strong>backtracking</strong> technique. By recursively considering both including and excluding each element, we explore all possible subsets. The time and space complexities are both exponential, reflecting the large number of subsets, but the algorithm is efficient and elegant for solving the problem of subset generation.</p>
+<p>Backtracking allows us to systematically explore all possibilities, making it a perfect solution for combinatorial problems like this one.</p>
+<hr>
+<h3 id="-key-takeaways">
+  ✨ <strong>Key Takeaways</strong>
+  <a class="heading-link" href="#-key-takeaways">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity:</strong> ( O(2^n) ), where ( n ) is the number of elements in <code>nums</code>. Each element can either be included or excluded from the subset, leading to ( 2^n ) possible subsets.</li>
-<li><strong>Space Complexity:</strong> ( O(n) ) for the temporary vector used to store the current subset during recursion.</li>
+<li><strong>Backtracking</strong> is a useful technique for exploring all combinations or subsets.</li>
+<li>The time complexity of <strong>O(2^n * n)</strong> accounts for generating and storing all subsets.</li>
+<li>Space complexity is also <strong>O(2^n * n)</strong>, dominated by the storage of subsets.</li>
+<li>This solution is optimal for smaller input sizes, though it can be expensive for very large lists.</li>
 </ul>
  
 </div>

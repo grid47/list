@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -216,7 +216,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1269s0hbhb">
+        <h2 id="hahahugoshortcode1267s0hbhb">
   <a href="https://leetcode.com/problems/longest-univalue-path/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -231,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1269s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1267s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -273,74 +273,163 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span> <span style="color:#666">+</span> max(l, r);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1269s2hbhb">
+<h2 id="hahahugoshortcode1267s2hbhb">
   
 
   
   <div class="markdown-body">
     <h3 id="problem-statement">
-  Problem Statement
+  Problem Statement:
   <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given the root of a binary tree. Your task is to find the length of the longest path where each node in the path has the same value. This path may or may not pass through the root.</p>
+<p>The problem at hand involves finding the longest univalue path in a binary tree. A univalue path is defined as a path where all nodes along the path have the same value. The task is to return the length of the longest path where the nodes have the same value. The path does not necessarily have to pass through the root, but it can go through any node in the tree.</p>
 <h3 id="approach">
-  Approach
+  Approach:
   <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The solution utilizes a depth-first search (DFS) traversal of the binary tree to compute the longest univalue path. The main steps are:</p>
+<p>To solve this problem, we use a <strong>Depth-First Search (DFS)</strong> approach. The main idea is to traverse the tree and calculate, for each node, the longest path that starts from that node and extends along its left and right subtrees while maintaining the same value. During this traversal, we also keep track of the maximum univalue path encountered so far.</p>
+<p>We need to focus on two main things:</p>
 <ol>
-<li>
-<p><strong>DFS Traversal</strong>: Perform a post-order DFS traversal of the tree, processing the left and right children before the parent node.</p>
-</li>
-<li>
-<p><strong>Path Length Calculation</strong>:</p>
-<ul>
-<li>For each node, determine the longest path on its left and right that has the same value as the node itself.</li>
-<li>If the left child has the same value, add its path length to <code>l</code> (left length); similarly, for the right child.</li>
-</ul>
-</li>
-<li>
-<p><strong>Update Maximum Length</strong>: Compare and store the maximum univalue path length found during the traversal.</p>
-</li>
-<li>
-<p><strong>Return Result</strong>: After traversing all nodes, return the maximum path length found.</p>
-</li>
+<li><strong>DFS Traversal</strong>: Recursively explore both left and right subtrees for each node.</li>
+<li><strong>Path Calculation</strong>: For each node, calculate the longest univalue path starting from the current node and extending through its left and right children.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="1-treenode-definition">
+  1. <strong>TreeNode Definition</strong>
+  <a class="heading-link" href="#1-treenode-definition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The problem statement includes a predefined <code>TreeNode</code> structure:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">struct</span> <span style="color:#00f">TreeNode</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> val;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#666">*</span>left;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#666">*</span>right;
+</span></span><span style="display:flex;"><span>    TreeNode() <span style="color:#666">:</span> val(<span style="color:#666">0</span>), left(<span style="color:#a2f;font-weight:bold">nullptr</span>), right(<span style="color:#a2f;font-weight:bold">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#0b0;font-weight:bold">int</span> x) <span style="color:#666">:</span> val(x), left(<span style="color:#a2f;font-weight:bold">nullptr</span>), right(<span style="color:#a2f;font-weight:bold">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#0b0;font-weight:bold">int</span> x, TreeNode <span style="color:#666">*</span>left, TreeNode <span style="color:#666">*</span>right) <span style="color:#666">:</span> val(x), left(left), right(right) {}
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>Each <code>TreeNode</code> contains:</p>
 <ul>
-<li>The <code>longestUnivaluePath</code> function initializes the maximum length and checks for edge cases (e.g., if the tree is empty or a single node).</li>
-<li>The <code>dfs</code> function calculates the lengths of the left and right univalue paths for each node, updating the maximum length found so far.</li>
-<li>The function returns the longer of the left or right univalue path lengths plus one (to account for the current node).</li>
+<li><code>val</code>: The value of the node.</li>
+<li><code>left</code>: A pointer to the left child of the node.</li>
+<li><code>right</code>: A pointer to the right child of the node.</li>
 </ul>
+<h4 id="2-main-solution-class">
+  2. <strong>Main Solution Class</strong>
+  <a class="heading-link" href="#2-main-solution-class">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> maxi;  <span style="color:#080;font-style:italic">// To store the maximum length of univalue path found.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> longestUnivaluePath(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>        maxi <span style="color:#666">=</span> <span style="color:#666">0</span>;  <span style="color:#080;font-style:italic">// Initialize maxi to 0.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">if</span> ((root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#666">||</span> (root<span style="color:#666">-&gt;</span>left <span style="color:#666">==</span> <span style="color:#a2f">NULL</span> <span style="color:#666">&amp;&amp;</span> root<span style="color:#666">-&gt;</span>right <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>))
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;  <span style="color:#080;font-style:italic">// If the root is null or the tree has no child, return 0.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        dfs(root);  <span style="color:#080;font-style:italic">// Start DFS traversal to calculate the univalue paths.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">return</span> maxi;  <span style="color:#080;font-style:italic">// Return the longest univalue path found.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
+</span></span></code></pre></div><p>The function <code>longestUnivaluePath</code> initializes the <code>maxi</code> variable to track the longest path found. If the root is <code>NULL</code> or a leaf node (no children), the function returns <code>0</code> as there are no paths to explore. Otherwise, it calls the <code>dfs</code> function to start the depth-first search from the root and returns the result stored in <code>maxi</code>.</p>
+<h4 id="3-dfs-function">
+  3. <strong>DFS Function</strong>
+  <a class="heading-link" href="#3-dfs-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dfs</span>(TreeNode <span style="color:#666">*</span>root) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;  <span style="color:#080;font-style:italic">// Base case: if the node is NULL, return 0.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">0</span>, r <span style="color:#666">=</span> <span style="color:#666">0</span>;  <span style="color:#080;font-style:italic">// Initialize the lengths of the left and right paths.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#0b0;font-weight:bold">int</span> lft <span style="color:#666">=</span> dfs(root<span style="color:#666">-&gt;</span>left);  <span style="color:#080;font-style:italic">// Recursive DFS for the left child.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#0b0;font-weight:bold">int</span> rgt <span style="color:#666">=</span> dfs(root<span style="color:#666">-&gt;</span>right);  <span style="color:#080;font-style:italic">// Recursive DFS for the right child.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// If the left child has the same value as the current node, extend the left path.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">if</span> ((root<span style="color:#666">-&gt;</span>left <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) <span style="color:#666">&amp;&amp;</span> (root<span style="color:#666">-&gt;</span>left<span style="color:#666">-&gt;</span>val <span style="color:#666">==</span> root<span style="color:#666">-&gt;</span>val))
+</span></span><span style="display:flex;"><span>            l <span style="color:#666">=</span> lft;  
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// If the right child has the same value as the current node, extend the right path.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">if</span> ((root<span style="color:#666">-&gt;</span>right <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) <span style="color:#666">&amp;&amp;</span> (root<span style="color:#666">-&gt;</span>right<span style="color:#666">-&gt;</span>val <span style="color:#666">==</span> root<span style="color:#666">-&gt;</span>val))
+</span></span><span style="display:flex;"><span>            r <span style="color:#666">=</span> rgt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// Update the maxi variable to store the maximum length of the univalue path.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        maxi <span style="color:#666">=</span> max(maxi, l <span style="color:#666">+</span> r);  
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// Return the longest univalue path starting from the current node.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span> <span style="color:#666">+</span> max(l, r);  
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>The <code>dfs</code> function works recursively to explore the tree. It computes the longest univalue path that starts from the current node and extends to its left or right subtree. Here’s how it works:</p>
+<ul>
+<li><strong>Base Case</strong>: If the current node is <code>NULL</code>, return <code>0</code> as there’s no path to explore.</li>
+<li><strong>Recursive Case</strong>:
+<ul>
+<li>Call <code>dfs(root-&gt;left)</code> and <code>dfs(root-&gt;right)</code> to get the longest univalue paths starting from the left and right subtrees, respectively.</li>
+<li>Check if the left or right children have the same value as the current node. If they do, extend the path from that child.</li>
+</ul>
+</li>
+<li><strong>Update <code>maxi</code></strong>: After checking both left and right subtrees, calculate the total univalue path that passes through the current node by summing the lengths of the left and right paths (<code>l + r</code>), and update <code>maxi</code> with the maximum of its current value and the new path length.</li>
+<li><strong>Return the Length</strong>: Return the length of the longest univalue path starting from the current node. Since the current node is part of the path, add <code>1</code> to the maximum of the left and right path lengths.</li>
+</ul>
+<h4 id="4-final-output">
+  4. <strong>Final Output</strong>
+  <a class="heading-link" href="#4-final-output">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Once the DFS is complete, the longest univalue path will be stored in <code>maxi</code>, which is then returned by the <code>longestUnivaluePath</code> function.</p>
 <h3 id="complexity">
-  Complexity
+  Complexity:
   <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: O(N), where N is the number of nodes in the tree, as each node is visited exactly once.</li>
-<li><strong>Space Complexity</strong>: O(H), where H is the height of the tree due to the recursion stack. In the worst case (unbalanced tree), this could be O(N).</li>
-</ul>
-<p>This efficient approach allows for calculating the longest univalue path in a binary tree with minimal overhead and clear logic.</p>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this solution is <strong>O(N)</strong>, where <code>N</code> is the number of nodes in the binary tree. The reason for this is that the DFS function visits each node exactly once, performing a constant amount of work per node.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(H)</strong>, where <code>H</code> is the height of the tree. This is due to the recursive nature of DFS, where the maximum number of recursive calls that can be stacked is equal to the height of the tree. In the worst case (a skewed tree), this could be <code>O(N)</code>.</p>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively solves the problem of finding the longest univalue path in a binary tree using a depth-first search (DFS) approach. It efficiently computes the longest path where all nodes have the same value by recursively exploring the left and right subtrees of each node while keeping track of the maximum path length found. The time and space complexity are optimal for a tree traversal algorithm, making this solution both time-efficient and space-efficient.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1269s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1267s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

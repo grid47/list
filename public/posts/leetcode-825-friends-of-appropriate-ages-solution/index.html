@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -243,7 +243,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">!</span>(b <span style="color:#666">&lt;=</span> <span style="color:#666">0.5</span> <span style="color:#666">*</span> a <span style="color:#666">+</span> <span style="color:#666">7</span> <span style="color:#666">||</span> b <span style="color:#666">&gt;</span> a <span style="color:#666">||</span> (b <span style="color:#666">&gt;</span> <span style="color:#666">100</span> <span style="color:#666">&amp;&amp;</span> a <span style="color:#666">&lt;</span> <span style="color:#666">100</span>));
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1347s1hbhb">
+<h2 id="hahahugoshortcode1346s1hbhb">
   
 
   
@@ -255,7 +255,17 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The task is to calculate the number of friend requests that can be sent based on the ages of individuals, adhering to specific rules about age compatibility.</p>
+<p>In this problem, you are given an array of ages, where each element represents the age of a person. The task is to calculate the total number of <strong>friend requests</strong> that can be made based on a specific set of rules. The rules for friend requests between two people with ages <code>a</code> and <code>b</code> are as follows:</p>
+<ol>
+<li>A person with age <code>a</code> can send a friend request to another person with age <code>b</code> if:
+<ul>
+<li><code>b</code> is greater than 0.5 times <code>a</code> plus 7 (<code>b &gt; 0.5 * a + 7</code>).</li>
+<li><code>b</code> is not greater than <code>a</code> (<code>b &lt;= a</code>).</li>
+<li>If <code>b</code> is greater than 100, <code>a</code> must also be greater than 100 (<code>b &lt;= 100</code> and <code>a &gt; 100</code>).</li>
+</ul>
+</li>
+</ol>
+<p>Given these conditions, the goal is to calculate how many valid friend requests can be made for all pairs of people in the given <code>ages</code> list.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -263,29 +273,87 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The approach to solving this problem involves:</p>
 <ol>
-<li><strong>Count Ages</strong>: Utilize a hash map to count the occurrences of each age in the input list.</li>
-<li><strong>Evaluate Requests</strong>: For each unique pair of ages, determine if a friend request can be sent using the <code>request</code> function, which checks the following conditions:
+<li>
+<p><strong>Counting the Frequency of Ages</strong>:</p>
 <ul>
-<li>The recipient&rsquo;s age must not be less than half the sender&rsquo;s age plus 7.</li>
-<li>The recipient&rsquo;s age must be less than or equal to the sender&rsquo;s age.</li>
-<li>If either person&rsquo;s age is greater than 100, the other must also be 100 or younger.</li>
+<li>Since we are only interested in comparing pairs of ages and making requests between them, it is beneficial to first count how many people are of each age. This can be done using a hash map, where the key is the age and the value is the count of people with that age.</li>
 </ul>
 </li>
-<li><strong>Calculate Total Requests</strong>: For each valid age pair, calculate the total requests based on the counts stored in the map, ensuring to adjust for self-requests.</li>
+<li>
+<p><strong>Iterating Over All Age Pairs</strong>:</p>
+<ul>
+<li>Once we have the frequency of each age, we need to iterate over all pairs of ages (<code>a</code> and <code>b</code>). For each pair, check if the friend request is valid using the provided rules.</li>
+<li>If a valid friend request exists between ages <code>a</code> and <code>b</code>, the number of possible requests is the product of their respective frequencies. However, if <code>a == b</code>, we subtract one from the count to avoid counting the person sending a request to themselves.</li>
+</ul>
+</li>
+<li>
+<p><strong>Efficiency</strong>:</p>
+<ul>
+<li>Instead of comparing every person with every other person (which would take quadratic time), we reduce the problem to a pairwise comparison of distinct ages by counting the occurrences of each age.</li>
+</ul>
+</li>
+<li>
+<p><strong>Request Function</strong>:</p>
+<ul>
+<li>A helper function <code>request(int a, int b)</code> checks whether a valid request can be made based on the given conditions. This ensures that the core logic is clean and modular.</li>
+</ul>
+</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The <code>numFriendRequests</code> function first populates a map with age counts.</li>
-<li>It then iterates through all pairs of ages and checks the friend request conditions using the <code>request</code> function.</li>
-<li>The result is updated based on the counts of the valid pairs and returned.</li>
+<ol>
+<li>
+<p><strong>Count Frequency of Ages</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> cnt;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">age</span>: ages)
+</span></span><span style="display:flex;"><span>    cnt[age]<span style="color:#666">++</span>;
+</span></span></code></pre></div><ul>
+<li>We create an unordered map <code>cnt</code> to store the frequency of each age. By iterating over the <code>ages</code> array, we populate this map, where the key is the age and the value is the count of people with that age.</li>
 </ul>
+</li>
+<li>
+<p><strong>Iterating Through Age Pairs</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">a</span>: cnt)
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">b</span>: cnt)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(request(a.first, b.first))
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> a.second <span style="color:#666">*</span> (b.second <span style="color:#666">-</span> (a.first <span style="color:#666">==</span> b.first <span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">:</span> <span style="color:#666">0</span>));
+</span></span></code></pre></div><ul>
+<li>We initialize <code>res</code> to zero, which will hold the total number of valid requests.</li>
+<li>We then iterate over all pairs of ages in the frequency map <code>cnt</code>. Each pair of ages (<code>a.first</code> and <code>b.first</code>) is checked to see if a request is valid using the helper function <code>request</code>.</li>
+<li>If the request is valid, we calculate the number of possible requests between these two ages. If both <code>a</code> and <code>b</code> are the same, we subtract one to ensure that a person doesn’t send a request to themselves.</li>
+</ul>
+</li>
+<li>
+<p><strong>Helper Function for Validating Requests</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">request</span>(<span style="color:#0b0;font-weight:bold">int</span> a, <span style="color:#0b0;font-weight:bold">int</span> b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">!</span>(b <span style="color:#666">&lt;=</span> <span style="color:#666">0.5</span> <span style="color:#666">*</span> a <span style="color:#666">+</span> <span style="color:#666">7</span> <span style="color:#666">||</span> b <span style="color:#666">&gt;</span> a <span style="color:#666">||</span> (b <span style="color:#666">&gt;</span> <span style="color:#666">100</span> <span style="color:#666">&amp;&amp;</span> a <span style="color:#666">&lt;</span> <span style="color:#666">100</span>));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>request</code> function checks if a friend request can be made between two people of ages <code>a</code> and <code>b</code> by verifying the following conditions:
+<ol>
+<li><code>b &gt; 0.5 * a + 7</code>: ensures that <code>b</code> is not too small compared to <code>a</code>.</li>
+<li><code>b &lt;= a</code>: ensures that <code>b</code> is not greater than <code>a</code> because the rule specifies that a person can only send a request to someone younger or of the same age.</li>
+<li><code>(b &gt; 100 &amp;&amp; a &lt; 100)</code>: ensures that if <code>b</code> is greater than 100, <code>a</code> must also be greater than 100.</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Finally, the total number of valid friend requests <code>res</code> is returned.</li>
+</ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -294,13 +362,34 @@
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity</strong>: O(N^2), where N is the number of unique ages since it evaluates requests for each unique pair.</li>
-<li><strong>Space Complexity</strong>: O(U), where U is the number of unique ages stored in the hash map.</li>
-</ul> 
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity is (O(n + k^2)), where (n) is the size of the <code>ages</code> array and (k) is the number of distinct ages in the <code>ages</code> list.</li>
+<li>The first part of the code (counting frequencies) takes (O(n)), where (n) is the number of people in the list.</li>
+<li>The second part, where we iterate over all pairs of distinct ages, takes (O(k^2)), where (k) is the number of unique ages. In the worst case, if all ages are distinct, (k) is (n), leading to a quadratic time complexity for the pairwise comparison.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(k)), where (k) is the number of unique ages, as we store the frequency of each unique age in the unordered map <code>cnt</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the total number of valid friend requests based on the given conditions. By using a frequency map to count the occurrences of each age, we reduce the problem from potentially (O(n^2)) (comparing every person to every other person) to (O(k^2)), where (k) is the number of distinct ages. The helper function <code>request</code> ensures that the conditions for valid requests are checked in a modular and clean way. The solution is both time-efficient and space-efficient, making it suitable for large inputs where (n) (the number of people) can be large.</p>
+ 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1347s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1346s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

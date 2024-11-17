@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -221,7 +221,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1176s0hbhb">
+        <h2 id="hahahugoshortcode1177s0hbhb">
   <a href="https://leetcode.com/problems/group-anagrams/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -236,7 +236,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1176s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1177s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -271,88 +271,157 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1176s2hbhb">
+<h2 id="hahahugoshortcode1177s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-group-anagrams">
+  🔄 <strong>Group Anagrams</strong>
+  <a class="heading-link" href="#-group-anagrams">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The goal is to group a list of strings into anagrams. An anagram is formed by rearranging the letters of a string to create another string using all the original letters exactly once.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>The task is to group anagrams from a given list of strings. An <strong>anagram</strong> is a word or phrase formed by rearranging the letters of another word or phrase, using all the original letters exactly once. The goal is to return a list of lists, where each list contains words that are anagrams of each other.</p>
+<h3 id="-example">
+  📊 <strong>Example</strong>
+  <a class="heading-link" href="#-example">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>Given the input list of strings:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>[&#34;eat&#34;, &#34;tea&#34;, &#34;tan&#34;, &#34;ate&#34;, &#34;nat&#34;, &#34;bat&#34;]
+</span></span></code></pre></div><p>The output should be:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-plaintext" data-lang="plaintext"><span style="display:flex;"><span>[[&#34;eat&#34;, &#34;tea&#34;, &#34;ate&#34;], [&#34;tan&#34;, &#34;nat&#34;], [&#34;bat&#34;]]
+</span></span></code></pre></div><h3 id="-approach">
+  🧠 <strong>Approach</strong>
+  <a class="heading-link" href="#-approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we will use the following approach:</p>
 <ol>
 <li>
-<p><strong>Character Count as a Key</strong>:</p>
-<ul>
-<li>For each string, create a &ldquo;mask&rdquo; that represents the count of each character (a-z). This count will serve as a unique identifier for anagrams.</li>
-</ul>
+<p><strong>Generate a Signature (Mask) for Each Word</strong>:
+Two words are anagrams if they have the exact same frequency of characters. Therefore, we can represent each word with a frequency distribution (a &ldquo;mask&rdquo;), which allows us to group words that share the same distribution.</p>
 </li>
 <li>
-<p><strong>Using a Map to Group Anagrams</strong>:</p>
-<ul>
-<li>Use a map to associate each unique mask with a list of strings (anagrams) that share that mask.</li>
-</ul>
+<p><strong>Use a Map to Group Words</strong>:
+We use a map to store words, where the key is the &ldquo;mask&rdquo; and the value is a list of words that share the same mask. If two words have the same mask, they are anagrams.</p>
 </li>
 <li>
-<p><strong>Constructing the Result</strong>:</p>
-<ul>
-<li>Iterate through the map and extract the grouped anagrams into the result vector.</li>
-</ul>
+<p><strong>Return the Grouped Anagrams</strong>:
+After processing all words, the map will contain the anagram groups. We return these groups as a list of lists.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="-code-breakdown-step-by-step">
+  💻 <strong>Code Breakdown (Step by Step)</strong>
+  <a class="heading-link" href="#-code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Function <code>code</code></strong>:</p>
-<ul>
-<li>This helper function takes a string <code>x</code> and constructs a mask as a string.</li>
-<li>It initializes a vector <code>q</code> of size 26 to count occurrences of each character.</li>
-<li>For each character in the string, it increments the respective index in the vector.</li>
-<li>It then converts the count vector into a comma-separated string and returns it.</li>
-</ul>
-</li>
-<li>
-<p><strong>Function <code>groupAnagrams</code></strong>:</p>
-<ul>
-<li>This function initializes a map <code>ma</code> where the key is the anagram mask and the value is a vector of strings.</li>
-<li>For each string in the input <code>strs</code>, it calls the <code>code</code> function to get the mask and inserts the string into the corresponding vector in the map.</li>
-<li>Finally, it constructs the result vector <code>ans</code> by extracting the values from the map.</li>
-</ul>
-</li>
+<h4 id="step-1-creating-the-mask-for-a-word">
+  Step 1: <strong>Creating the Mask for a Word</strong>
+  <a class="heading-link" href="#step-1-creating-the-mask-for-a-word">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We create a mask for each word based on the frequency of its characters:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">code</span>(string x) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q(<span style="color:#666">26</span>, <span style="color:#666">0</span>);  <span style="color:#080;font-style:italic">// Initialize a vector to store the frequency of each letter in the word.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> x.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        q[x[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;  <span style="color:#080;font-style:italic">// Increment the count of the character.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
+</span></span><span style="display:flex;"><span>    stringstream ss;  <span style="color:#080;font-style:italic">// Use a stringstream to construct the string representation of the frequency array.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">!=</span> <span style="color:#666">0</span>) ss <span style="color:#666">&lt;&lt;</span> <span style="color:#b44">&#39;,&#39;</span>;  <span style="color:#080;font-style:italic">// Separate counts by commas.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        ss <span style="color:#666">&lt;&lt;</span> q[i];  <span style="color:#080;font-style:italic">// Append the count of the current character to the stringstream.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ss.str();  <span style="color:#080;font-style:italic">// Return the generated mask as a string.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
+</span></span></code></pre></div><ol>
+<li><strong>Frequency Array</strong>: We use an array <code>q</code> of size 26 (one for each letter of the alphabet) initialized to zero, which stores the frequency of each character in the word.</li>
+<li><strong>Counting Characters</strong>: For each character in the word, we increment the corresponding index in the array <code>q</code>.</li>
+<li><strong>Build the Mask</strong>: We use a <code>stringstream</code> to create a string that represents the frequency of each character, separated by commas.</li>
+<li><strong>Return Mask</strong>: The final string represents the word&rsquo;s frequency distribution and serves as its signature.</li>
 </ol>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-2-group-words-by-their-masks">
+  Step 2: <strong>Group Words by Their Masks</strong>
+  <a class="heading-link" href="#step-2-group-words-by-their-masks">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We group words by their corresponding masks in a map:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> groupAnagrams(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> strs) {
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span>string, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> ma;  <span style="color:#080;font-style:italic">// Map to store groups of anagrams, using the mask as the key.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span>(string <span style="color:#a0a000">x</span>: strs) {
+</span></span><span style="display:flex;"><span>        string mask <span style="color:#666">=</span> code(x);  <span style="color:#080;font-style:italic">// Get the mask for the current word.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        ma[mask].push_back(x);  <span style="color:#080;font-style:italic">// Group the word by its mask.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> ans;  <span style="color:#080;font-style:italic">// Vector to store the final result.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> [key, val]<span style="color:#666">:</span> ma)
+</span></span><span style="display:flex;"><span>        ans.push_back(val);  <span style="color:#080;font-style:italic">// Add all groups of anagrams to the result vector.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;  <span style="color:#080;font-style:italic">// Return the list of anagram groups.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
+</span></span></code></pre></div><ol>
+<li><strong>Initialize the Map</strong>: We initialize a map <code>ma</code> where the key is the mask, and the value is a vector of words sharing the same mask (i.e., anagrams).</li>
+<li><strong>Process Each Word</strong>: For each word, we calculate its mask using the <code>code</code> function and insert it into the corresponding vector in the map.</li>
+<li><strong>Build Final Result</strong>: After processing all words, the map contains the anagram groups. We iterate through the map and add each group of anagrams to the result vector <code>ans</code>.</li>
+<li><strong>Return Result</strong>: We return the list of anagram groups.</li>
+</ol>
+<h3 id="-time-and-space-complexity">
+  ⏱️ <strong>Time and Space Complexity</strong>
+  <a class="heading-link" href="#-time-and-space-complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: ( O(n \cdot k) ), where ( n ) is the number of strings and ( k ) is the maximum length of a string. Each string is processed to count characters.</li>
-<li><strong>Space Complexity</strong>: ( O(n \cdot k) ) for storing the grouped anagrams and the character counts.</li>
+<li><strong>Generating the Mask</strong>: The time to generate the mask for each word is proportional to the length of the word. If the total number of characters in all words is <code>n</code>, the time for generating masks is <code>O(n)</code>.</li>
+<li><strong>Grouping Words</strong>: Inserting a word into the map takes <code>O(log m)</code> time, where <code>m</code> is the number of distinct masks. The total time for this step is <code>O(n log m)</code>, where <code>n</code> is the number of words and <code>m</code> is the number of distinct masks.</li>
+<li><strong>Final Grouping</strong>: The final step, iterating through the map and collecting the results, takes <code>O(n)</code> time.</li>
 </ul>
+<p>Thus, the overall time complexity is <code>O(n log m)</code> where <code>n</code> is the number of words and <code>m</code> is the number of distinct masks (which in the worst case could be <code>n</code>), resulting in a time complexity of <code>O(n log n)</code>.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Space for Masks</strong>: We need <code>O(n)</code> space to store the frequency masks for each word.</li>
+<li><strong>Space for Map and Result</strong>: The map stores the words grouped by their masks, and the result stores all words. Therefore, the total space complexity is <code>O(n)</code>.</li>
+</ul>
+<h3 id="-conclusion">
+  🎯 <strong>Conclusion</strong>
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach efficiently groups anagrams by leveraging a frequency-based mask for each word. Using a map to store words with the same mask allows us to group anagrams in a time-efficient manner. The algorithm has a <strong>time complexity of O(n log n)</strong> and a <strong>space complexity of O(n)</strong>, making it suitable for large inputs.</p>
+<hr>
+<p>Happy coding! Keep grouping those anagrams efficiently! 🎉</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1176s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1177s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

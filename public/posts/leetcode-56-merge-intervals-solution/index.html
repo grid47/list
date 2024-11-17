@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -255,78 +255,153 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-merge-intervals">
+  🚀 <strong>Merge Intervals</strong>
+  <a class="heading-link" href="#-merge-intervals">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a collection of intervals, merge all overlapping intervals and return an array of the merged intervals.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>The problem asks you to merge overlapping intervals from a collection of intervals. Each interval is represented as a pair of integers <code>[start, end]</code>, where <code>start</code> is the beginning of the interval, and <code>end</code> is the end. The task is to merge all overlapping or contiguous intervals and return a list of non-overlapping intervals.</p>
+<p>For example, given the intervals:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>[[1, 3], [2, 4], [5, 7], [6, 8]]
+</span></span></code></pre></div><p>The intervals <code>[1, 3]</code> and <code>[2, 4]</code> overlap, so they should be merged into <code>[1, 4]</code>. Similarly, the intervals <code>[5, 7]</code> and <code>[6, 8]</code> should be merged into <code>[5, 8]</code>. The final result would be:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>[[1, 4], [5, 8]]
+</span></span></code></pre></div><h3 id="-approach">
+  🧑‍💻 <strong>Approach</strong>
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we use a <strong>greedy approach</strong>. The core steps are:</p>
 <ol>
-<li>
-<p><strong>Sort Intervals</strong>:</p>
+<li><strong>Sort the intervals</strong> by their start times. Sorting helps us group overlapping intervals together, making it easier to merge them.</li>
+<li><strong>Iterate through the sorted intervals</strong> and compare each interval with the last added merged interval:
 <ul>
-<li>First, sort the intervals based on their starting times. This ensures that if any intervals overlap, they will be adjacent to each other in the sorted order.</li>
+<li>If the current interval overlaps or is contiguous with the last merged interval, merge them by updating the end of the last interval.</li>
+<li>If there is no overlap, add the current interval as a new merged interval into the result list.</li>
 </ul>
 </li>
-<li>
-<p><strong>Merge Overlapping Intervals</strong>:</p>
-<ul>
-<li>Initialize a temporary vector <code>tmp</code> with the first interval.</li>
-<li>Iterate through the sorted intervals:
-<ul>
-<li>If the current interval overlaps with <code>tmp</code> (i.e., the start of the current interval is less than or equal to the end of <code>tmp</code>), update the end of <code>tmp</code> to the maximum of the two ends.</li>
-<li>If there is no overlap, push <code>tmp</code> into the answer vector and update <code>tmp</code> to the current interval.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Add the Last Interval</strong>:</p>
-<ul>
-<li>After the loop, push the last <code>tmp</code> into the answer vector to ensure it is included.</li>
-</ul>
-</li>
+<li>Finally, return the list of merged intervals.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>This approach ensures that we merge overlapping intervals in an optimal manner.</p>
+<h3 id="-code-breakdown">
+  📝 <strong>Code Breakdown</strong>
+  <a class="heading-link" href="#-code-breakdown">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Initialization</strong>:
-<ul>
-<li>Start by sorting the input intervals.</li>
+<h4 id="step-1-sorting-the-intervals">
+  Step 1: Sorting the Intervals
+  <a class="heading-link" href="#step-1-sorting-the-intervals">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(iv.begin(), iv.end());
+</span></span></code></pre></div><ul>
+<li><strong>Sorting:</strong> We start by sorting the input list of intervals <code>iv</code> based on their starting points (<code>iv[i][0]</code>). This helps us easily compare consecutive intervals to check if they overlap. Sorting ensures that we process intervals in increasing order of their start times, which simplifies the merging logic.</li>
 </ul>
-</li>
-<li><strong>Merging Logic</strong>:
-<ul>
-<li>Loop through the sorted intervals and merge as necessary.</li>
-<li>The merged intervals are stored in <code>ans</code>.</li>
+<h4 id="step-2-initialization">
+  Step 2: Initialization
+  <a class="heading-link" href="#step-2-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans;
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp <span style="color:#666">=</span> iv[<span style="color:#666">0</span>];
+</span></span></code></pre></div><ul>
+<li><strong>ans:</strong> This vector will store the final merged intervals.</li>
+<li><strong>tmp:</strong> This temporary vector is initialized to the first interval <code>iv[0]</code> and represents the current interval being merged with subsequent intervals.</li>
 </ul>
-</li>
+<h4 id="step-3-iterating-over-the-intervals">
+  Step 3: Iterating Over the Intervals
+  <a class="heading-link" href="#step-3-iterating-over-the-intervals">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> iv.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(iv[i][<span style="color:#666">0</span>] <span style="color:#666">&lt;=</span> tmp[<span style="color:#666">1</span>]) {
+</span></span><span style="display:flex;"><span>        tmp[<span style="color:#666">1</span>] <span style="color:#666">=</span> max(tmp[<span style="color:#666">1</span>], iv[i][<span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>        ans.push_back(tmp);
+</span></span><span style="display:flex;"><span>        tmp <span style="color:#666">=</span> iv[i];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Loop through intervals:</strong> We iterate through the sorted intervals.</li>
+<li><strong>If the current interval overlaps:</strong> If the start of the current interval (<code>iv[i][0]</code>) is less than or equal to the end of the last merged interval (<code>tmp[1]</code>), it means the intervals overlap or are contiguous. In this case, we merge them by updating the end time of <code>tmp</code> to the maximum of the two intervals&rsquo; end times (<code>tmp[1] = max(tmp[1], iv[i][1])</code>).</li>
+<li><strong>If there is no overlap:</strong> If the current interval does not overlap with the last merged interval, we push the current merged interval (<code>tmp</code>) into the result list <code>ans</code> and start a new merge with the current interval <code>iv[i]</code>.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-4-final-merge">
+  Step 4: Final Merge
+  <a class="heading-link" href="#step-4-final-merge">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ans.push_back(tmp);
+</span></span></code></pre></div><ul>
+<li>After the loop ends, we push the last interval <code>tmp</code> into the result list <code>ans</code> since it has not been added yet. This ensures that the final merged interval is included.</li>
+</ul>
+<h4 id="step-5-return-the-result">
+  Step 5: Return the Result
+  <a class="heading-link" href="#step-5-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>Finally, we return the list of merged intervals stored in <code>ans</code>.</li>
+</ul>
+<h3 id="-complexity-analysis">
+  📊 <strong>Complexity Analysis</strong>
+  <a class="heading-link" href="#-complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: ( O(n \log n) ) due to sorting, where ( n ) is the number of intervals.</li>
-<li><strong>Space Complexity</strong>: ( O(n) ) in the worst case to store the merged intervals.</li>
+<li><strong>O(n log n):</strong> The most time-consuming operation is sorting the intervals, which takes <code>O(n log n)</code> time, where <code>n</code> is the number of intervals. After sorting, we iterate over the intervals once to merge them, which takes <code>O(n)</code> time. Therefore, the overall time complexity is dominated by the sorting step, resulting in <strong>O(n log n)</strong>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n):</strong> The space complexity is <code>O(n)</code> because we store the merged intervals in the result list <code>ans</code>. In the worst case, if no intervals overlap, the result will contain <code>n</code> intervals, requiring <code>O(n)</code> space.</li>
+</ul>
+<h3 id="-conclusion">
+  🌟 <strong>Conclusion</strong>
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently merges overlapping intervals using a <strong>greedy approach</strong>. By sorting the intervals and iterating through them once, we can merge overlapping or contiguous intervals in an optimal manner. The time complexity of <strong>O(n log n)</strong> makes this approach suitable for handling large input sizes, and the space complexity of <strong>O(n)</strong> ensures efficient memory usage.</p>
+<p>The algorithm works by:</p>
+<ol>
+<li>Sorting the intervals to make merging easier.</li>
+<li>Iterating through the sorted intervals to merge them as necessary.</li>
+<li>Returning the final merged intervals.</li>
+</ol>
+<p>This approach guarantees that we can handle all edge cases, such as intervals that don’t overlap, intervals that are already merged, or more complex overlapping scenarios. With its simplicity and efficiency, this solution is ideal for practical applications requiring interval merging.</p>
+<hr>
  
 </div>
   

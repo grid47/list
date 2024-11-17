@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -246,7 +246,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> i <span style="color:#666">==</span> q.size();
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1430s1hbhb">
+<h2 id="hahahugoshortcode1429s1hbhb">
   
 
   
@@ -258,7 +258,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a binary tree, determine if it is a complete binary tree. A complete binary tree is defined as a binary tree in which all levels, except possibly the last, are completely filled, and all nodes are as far left as possible.</p>
+<p>The problem is to determine if a binary tree is a <strong>complete binary tree</strong>. A complete binary tree is defined as a binary tree in which every level, except possibly the last, is completely filled, and all nodes are as far left as possible. In other words, all nodes on every level, except the last, must have two children, and the last level must be filled from left to right.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -266,39 +266,49 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To check if a binary tree is complete, we can perform a <strong>level-order traversal</strong> using a <strong>queue</strong> (Breadth-First Search). The key idea is to traverse the tree level by level and ensure that there are no missing nodes in between. The steps of the approach are as follows:</p>
 <ol>
-<li>
-<p><strong>Level Order Traversal</strong>:</p>
-<ul>
-<li>The function uses a vector to simulate a queue for level order traversal of the binary tree, starting from the root node.</li>
-</ul>
-</li>
-<li>
-<p><strong>Node Processing</strong>:</p>
-<ul>
-<li>Nodes are processed in the order they are added to the vector. For each node, its left and right children are added to the end of the vector.</li>
-<li>The traversal continues until a null node is encountered, indicating the potential end of a complete level.</li>
-</ul>
-</li>
-<li>
-<p><strong>Validation</strong>:</p>
-<ul>
-<li>After processing all nodes, the function checks if all subsequent nodes after the first null node are also null. If there are any non-null nodes after a null node, the tree is not complete.</li>
-</ul>
-</li>
+<li><strong>Start with the root node</strong>: We begin by pushing the root node of the tree into the queue.</li>
+<li><strong>Perform a level-order traversal</strong>: For each node in the tree, we check its left and right children. We push the left and right children into the queue if they exist.</li>
+<li><strong>Null node handling</strong>: If a node is missing (i.e., null), it indicates a potential violation of the complete binary tree property. However, we can only tolerate such null nodes if they occur at the end of the traversal, after all nodes on the current level have been processed.</li>
+<li><strong>Validation</strong>: After filling the queue, we continue to traverse the remaining nodes in the queue. If any non-null node appears after encountering a null node, the tree is not complete. If no such violations occur, then the tree is a complete binary tree.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>By using this method, we ensure that the tree&rsquo;s nodes are processed in a way that checks for completeness, and we can easily return whether the tree is complete or not.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The main function initializes a vector <code>q</code> and starts with the root node.</li>
-<li>It uses a loop to process each node, adding their children to <code>q</code>.</li>
-<li>After finishing processing, another loop checks for any remaining non-null nodes after the first null, determining if the tree is complete.</li>
-</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> isCompleteTree(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> q;  <span style="color:#080;font-style:italic">// Initialize a queue to store nodes of the tree
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        q.push_back(root);     <span style="color:#080;font-style:italic">// Push the root node to the queue
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;             <span style="color:#080;font-style:italic">// Initialize an index to track the nodes in the queue
+</span></span></span></code></pre></div><ol>
+<li><strong>Initialize the queue</strong>: The <code>q</code> vector is used as a queue to perform a level-order traversal of the tree. We start by pushing the root node into the queue.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> q.size() <span style="color:#666">&amp;&amp;</span> q[i]) {  <span style="color:#080;font-style:italic">// Traverse the tree while there are nodes in the queue
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            q.push_back(q[i]<span style="color:#666">-&gt;</span>left);   <span style="color:#080;font-style:italic">// Push the left child of the current node
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            q.push_back(q[i]<span style="color:#666">-&gt;</span>right);  <span style="color:#080;font-style:italic">// Push the right child of the current node
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            i<span style="color:#666">++</span>;  <span style="color:#080;font-style:italic">// Increment the index to move to the next node
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        }
+</span></span></code></pre></div><ol start="2">
+<li><strong>Level-order traversal</strong>: The first <code>while</code> loop iterates through the queue, checking each node and pushing its children (left and right) into the queue. If a node is non-null, its children are added to the queue for the next iteration.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> q.size() <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>q[i])  <span style="color:#080;font-style:italic">// Check if the current node is null
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            i<span style="color:#666">++</span>;  <span style="color:#080;font-style:italic">// Increment the index to skip null nodes
+</span></span></span></code></pre></div><ol start="3">
+<li><strong>Handle null nodes</strong>: The second <code>while</code> loop skips any null nodes in the queue. These null nodes are allowed only if they are at the end of the queue. If they appear in the middle of the queue, it means the tree is not complete.</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> i <span style="color:#666">==</span> q.size();  <span style="color:#080;font-style:italic">// If the index matches the size of the queue, the tree is complete
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ol start="4">
+<li><strong>Final check</strong>: Finally, the function checks if the index <code>i</code> matches the size of the queue. If they are equal, it means no nodes are left after a null node, and the tree is complete. Otherwise, the tree is not complete.</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -307,14 +317,26 @@
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where <code>n</code> is the number of nodes in the tree, as each node is visited once.</li>
-<li><strong>Space Complexity</strong>: O(n), for storing the nodes in the vector during traversal.</li>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the tree. The reason for this is that we visit each node in the tree exactly once during the level-order traversal. Each node is pushed and popped from the queue once, and the while loops run for all nodes.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is also <strong>O(n)</strong> due to the queue, which stores all the nodes of the tree at most once. In the worst case, the queue will store all the nodes of the last level, which is <code>n/2</code> nodes, leading to an overall space complexity of <strong>O(n)</strong>.</p>
+</li>
 </ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution leverages a level-order traversal to efficiently determine whether a binary tree is a complete binary tree. The approach ensures that we traverse the tree in a systematic way while adhering to the properties of completeness. By using a queue to handle the nodes and their children, we can efficiently check for missing nodes and determine if the tree is complete or not. This method is optimal in terms of time and space complexity for this problem.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1430s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1429s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -258,7 +258,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res <span style="color:#666">==</span> <span style="color:#666">1</span><span style="color:#666">?</span> <span style="color:#666">0</span><span style="color:#666">:</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1359s1hbhb">
+<h2 id="hahahugoshortcode1358s1hbhb">
   
 
   
@@ -270,16 +270,16 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given an integer array <code>arr</code>. A mountain is defined as a subarray that meets the following criteria:</p>
+<p>The problem asks us to find the length of the longest mountain in a given array of integers. A <strong>mountain</strong> is defined as a subarray that first strictly increases and then strictly decreases. Specifically, for a subarray to be a mountain:</p>
 <ul>
-<li>It has at least three elements.</li>
-<li>There exists an index <code>i</code> (0 &lt; i &lt; arr.length - 1) such that:
+<li>There must be at least one element that is strictly smaller than the one before it (the peak of the mountain).</li>
+<li>The subarray must contain at least three elements: one increasing, one peak element, and one decreasing.</li>
+</ul>
+<p>For example:</p>
 <ul>
-<li>arr[i-1] &lt; arr[i] &gt; arr[i+1].
-Your task is to find the length of the longest mountain in the array.</li>
+<li>The array <code>[2, 1, 1, 5, 6, 2, 3, 1]</code> contains a mountain of length 5, where the peak is <code>5</code>.</li>
 </ul>
-</li>
-</ul>
+<p>The goal is to find the length of the longest mountain, or to return 0 if no such mountain exists.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -287,72 +287,145 @@ Your task is to find the length of the longest mountain in the array.</li>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we use an efficient approach that leverages two auxiliary arrays to track the longest increasing and decreasing subsequences for each element. Specifically, we maintain:</p>
 <ol>
-<li>
-<p><strong>Initial Check</strong>: If the array has fewer than 3 elements, return 0 as it can&rsquo;t form a mountain.</p>
-</li>
-<li>
-<p><strong>Prefix and Suffix Arrays</strong>:</p>
-<ul>
-<li>Create two arrays, <code>pre</code> and <code>suf</code>, of the same length as <code>arr</code> to store the counts of increasing and decreasing sequences:
-<ul>
-<li><code>pre[i]</code> counts how many elements before index <code>i</code> are part of an increasing sequence.</li>
-<li><code>suf[i]</code> counts how many elements after index <code>i</code> are part of a decreasing sequence.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Fill Prefix Array</strong>:</p>
-<ul>
-<li>Traverse the array from left to right:
-<ul>
-<li>If the current element is greater than the previous element, increment the current count; otherwise, reset it to zero.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Fill Suffix Array</strong>:</p>
-<ul>
-<li>Traverse the array from right to left:
-<ul>
-<li>If the current element is greater than the next element, increment the current count; otherwise, reset it to zero.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Calculate Maximum Mountain Length</strong>:</p>
-<ul>
-<li>Iterate through the array and check for potential mountain peaks:
-<ul>
-<li>A peak exists if both <code>pre[i]</code> and <code>suf[i]</code> are greater than 0. The length of the mountain is <code>pre[i] + suf[i] + 1</code>.</li>
-</ul>
-</li>
-<li>Update the maximum length found.</li>
-</ul>
-</li>
-<li>
-<p><strong>Final Check</strong>: If the longest mountain length is 1 (indicating no mountain was found), return 0.</p>
-</li>
+<li><code>pre[i]</code> — the length of the increasing subsequence ending at index <code>i</code>.</li>
+<li><code>suf[i]</code> — the length of the decreasing subsequence starting at index <code>i</code>.</li>
 </ol>
-<h3 id="complexity">
+<p>With these two arrays, the length of the mountain at any index <code>i</code> can be determined as:</p>
+<ul>
+<li><code>pre[i] &gt; 0</code> — there is an increasing subsequence before <code>i</code>.</li>
+<li><code>suf[i] &gt; 0</code> — there is a decreasing subsequence after <code>i</code>.</li>
+</ul>
+<p>We then combine these two values to calculate the length of the mountain, ensuring the condition of having a valid peak (<code>pre[i] &gt; 0</code> and <code>suf[i] &gt; 0</code>).</p>
+<p>Finally, the length of the longest mountain is the maximum value found from all the indices in the array.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-handle-edge-case">
+  Step 1: Handle Edge Case
+  <a class="heading-link" href="#step-1-handle-edge-case">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We begin by checking if the array contains fewer than 3 elements. If the array is too short to form a mountain, we return 0 immediately.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">&lt;</span> <span style="color:#666">3</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div><h4 id="step-2-initialize-helper-arrays">
+  Step 2: Initialize Helper Arrays
+  <a class="heading-link" href="#step-2-initialize-helper-arrays">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We create two arrays <code>pre</code> and <code>suf</code> to store the length of the increasing and decreasing subsequences for each index, respectively.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> pre(n, <span style="color:#666">0</span>), suf(n, <span style="color:#666">0</span>);
+</span></span></code></pre></div><p>Here, <code>pre[i]</code> will store the length of the increasing subsequence that ends at index <code>i</code>, and <code>suf[i]</code> will store the length of the decreasing subsequence that starts at index <code>i</code>.</p>
+<h4 id="step-3-populate-pre-array">
+  Step 3: Populate <code>pre</code> Array
+  <a class="heading-link" href="#step-3-populate-pre-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We iterate over the array from left to right. If the current element is greater than the previous one (<code>arr[i] &gt; arr[i - 1]</code>), we increment the count of the increasing subsequence at that index. Otherwise, we reset the count to 0.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (arr[i] <span style="color:#666">&gt;</span> arr[i <span style="color:#666">-</span> <span style="color:#666">1</span>])
+</span></span><span style="display:flex;"><span>        cur<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span>
+</span></span><span style="display:flex;"><span>        cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    pre[i] <span style="color:#666">=</span> cur;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>At the end of this loop, <code>pre[i]</code> will contain the length of the increasing subsequence that ends at index <code>i</code>.</p>
+<h4 id="step-4-populate-suf-array">
+  Step 4: Populate <code>suf</code> Array
+  <a class="heading-link" href="#step-4-populate-suf-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We perform a similar loop, but this time we iterate from right to left. If the current element is greater than the next one (<code>arr[i] &gt; arr[i + 1]</code>), we increment the count of the decreasing subsequence at that index. Otherwise, we reset the count to 0.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">2</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (arr[i] <span style="color:#666">&gt;</span> arr[i <span style="color:#666">+</span> <span style="color:#666">1</span>])
+</span></span><span style="display:flex;"><span>        cur<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span>
+</span></span><span style="display:flex;"><span>        cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    suf[i] <span style="color:#666">=</span> cur;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>At the end of this loop, <code>suf[i]</code> will contain the length of the decreasing subsequence that starts at index <code>i</code>.</p>
+<h4 id="step-5-calculate-the-longest-mountain">
+  Step 5: Calculate the Longest Mountain
+  <a class="heading-link" href="#step-5-calculate-the-longest-mountain">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Now that we have the <code>pre</code> and <code>suf</code> arrays populated, we can compute the length of the longest mountain. We iterate over each element of the array. If there is both an increasing subsequence before the index (<code>pre[i] &gt; 0</code>) and a decreasing subsequence after the index (<code>suf[i] &gt; 0</code>), we calculate the potential mountain length as <code>pre[i] + suf[i] + 1</code>. This is because <code>pre[i]</code> counts the elements before the peak and <code>suf[i]</code> counts the elements after the peak, but we need to add 1 to count the peak itself.</p>
+<p>We then update the result with the maximum length found.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (pre[i] <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> suf[i] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> max(pre[i] <span style="color:#666">+</span> suf[i] <span style="color:#666">+</span> <span style="color:#666">1</span>, res);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="step-6-return-the-result">
+  Step 6: Return the Result
+  <a class="heading-link" href="#step-6-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Finally, we return the result. If no valid mountain was found, the result will remain 0. If the result is 1, it means the length of the mountain was just 1 (which is invalid since a mountain must have at least 3 elements), so we return 0.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res <span style="color:#666">==</span> <span style="color:#666">1</span> <span style="color:#666">?</span> <span style="color:#666">0</span> <span style="color:#666">:</span> res;
+</span></span></code></pre></div><h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(N), where N is the length of the input array. Each element is processed a constant number of times.</li>
-<li><strong>Space Complexity</strong>: O(N) for the <code>pre</code> and <code>suf</code> arrays.</li>
+<li><strong>Building <code>pre</code> and <code>suf</code> Arrays</strong>: Both arrays are filled in linear time (<code>O(n)</code>), where <code>n</code> is the length of the array.</li>
+<li><strong>Final Comparison Loop</strong>: The final loop runs once over all elements (<code>O(n)</code>).
+Thus, the overall time complexity is <code>O(n)</code>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We use two additional arrays <code>pre</code> and <code>suf</code> to store the lengths of increasing and decreasing subsequences. This requires <code>O(n)</code> space, where <code>n</code> is the length of the input array.
+Thus, the space complexity is <code>O(n)</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach efficiently solves the problem of finding the longest mountain in an array with a time complexity of <code>O(n)</code> and a space complexity of <code>O(n)</code>. By leveraging the <code>pre</code> and <code>suf</code> arrays, we simulate the process of identifying increasing and decreasing subsequences, which allows us to calculate the length of the longest mountain. This solution is both time and space-efficient, making it suitable for large input sizes.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1359s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1358s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

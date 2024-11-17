@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -261,7 +261,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given two binary trees, you need to determine if the leaves of the two trees are similar. The leaves of a tree are defined as the nodes that do not have any children. Two trees are considered leaf-similar if their leaf values, in order from left to right, are the same.</p>
+<p>In this problem, we are asked to determine whether two binary trees are &ldquo;leaf similar.&rdquo; Two trees are considered leaf similar if their leaf nodes (the nodes that do not have left or right children) form the same sequence when traversed from left to right. Specifically, we are given two binary trees, <code>root1</code> and <code>root2</code>, and we need to check if their leaf nodes&rsquo; values appear in the same order.</p>
+<p>A leaf node is defined as a node that does not have a left or right child.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -269,40 +270,96 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we can take advantage of <strong>depth-first search (DFS)</strong> to traverse the trees. We aim to compare the sequences of leaf nodes from both trees and check if they match. Here’s how the solution is structured:</p>
 <ol>
 <li>
-<p><strong>Use Stacks for Iteration</strong>: We will use two stacks to traverse the trees. This allows us to perform a depth-first search (DFS) without recursion.</p>
+<p><strong>Use DFS for Leaf Extraction</strong>: Perform a DFS traversal of both trees and extract the leaf nodes. This traversal will allow us to check the nodes one by one, comparing them as we go.</p>
 </li>
 <li>
-<p><strong>DFS for Leaves</strong>: The helper function <code>dfs</code> will be used to find the next leaf in the tree:</p>
-<ul>
-<li>Pop nodes from the stack until a leaf node is found. If the popped node has children, push them onto the stack.</li>
-<li>Return the value of the leaf node.</li>
-</ul>
+<p><strong>Simultaneous DFS on Both Trees</strong>: We use two stacks (one for each tree) to traverse both trees simultaneously. At each step, we compare the leaf nodes from both trees.</p>
 </li>
 <li>
-<p><strong>Compare Leaves</strong>:</p>
-<ul>
-<li>While both stacks are not empty, repeatedly call <code>dfs</code> to get the next leaf from each tree.</li>
-<li>If the leaf values are different at any point, return <code>false</code>.</li>
-<li>If one stack is empty before the other, the trees are not leaf-similar.</li>
-</ul>
-</li>
-<li>
-<p><strong>Final Check</strong>: After exiting the loop, check if both stacks are empty, confirming that both trees have the same number of leaves.</p>
+<p><strong>Return Result Based on Comparison</strong>: If the leaf nodes from both trees match in the same order, we return <code>true</code>; otherwise, we return <code>false</code>.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The <code>leafSimilar</code> function initializes two stacks and pushes the root nodes of both trees.</li>
-<li>It compares the leaves found by <code>dfs</code> until either stack is empty.</li>
-<li>The function concludes by checking if both trees are exhausted simultaneously.</li>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> leafSimilar(TreeNode<span style="color:#666">*</span> root1, TreeNode<span style="color:#666">*</span> root2) {
+</span></span><span style="display:flex;"><span>        stack<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> s1, s2;
+</span></span><span style="display:flex;"><span>        s1.push(root1), s2.push(root2);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>s1.empty() <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>s2.empty())  <span style="color:#080;font-style:italic">// Step 1: Compare leaf nodes
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#a2f;font-weight:bold">if</span>(dfs(s1) <span style="color:#666">!=</span> dfs(s2)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> s1.empty() <span style="color:#666">&amp;&amp;</span> s2.empty();  <span style="color:#080;font-style:italic">// Step 2: Ensure both stacks are empty
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dfs</span>(stack<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> <span style="color:#666">&amp;</span>stk) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#a2f">true</span>) {  <span style="color:#080;font-style:italic">// Step 3: DFS to extract leaf node value
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            TreeNode<span style="color:#666">*</span> node <span style="color:#666">=</span> stk.top(); stk.pop();
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>left) stk.push(node<span style="color:#666">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>right) stk.push(node<span style="color:#666">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>node<span style="color:#666">-&gt;</span>left <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>node<span style="color:#666">-&gt;</span>right) <span style="color:#a2f;font-weight:bold">return</span> node<span style="color:#666">-&gt;</span>val;  <span style="color:#080;font-style:italic">// Step 4: Return leaf node value
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h4 id="step-1-compare-leaf-nodes-simultaneously">
+  Step 1: Compare Leaf Nodes Simultaneously
+  <a class="heading-link" href="#step-1-compare-leaf-nodes-simultaneously">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>stack<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> s1, s2;
+</span></span><span style="display:flex;"><span>s1.push(root1), s2.push(root2);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>s1.empty() <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>s2.empty()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(dfs(s1) <span style="color:#666">!=</span> dfs(s2)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We use two stacks <code>s1</code> and <code>s2</code> to hold the nodes of <code>root1</code> and <code>root2</code> respectively.</li>
+<li>The <code>while</code> loop runs as long as both stacks are not empty. At each iteration, we pop leaf nodes from both stacks using the <code>dfs</code> function.</li>
+<li>If the leaf values from the two trees do not match, we return <code>false</code> immediately, indicating that the leaf nodes in both trees are not similar.</li>
+</ul>
+<h4 id="step-2-ensure-both-stacks-are-empty">
+  Step 2: Ensure Both Stacks are Empty
+  <a class="heading-link" href="#step-2-ensure-both-stacks-are-empty">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> s1.empty() <span style="color:#666">&amp;&amp;</span> s2.empty();
+</span></span></code></pre></div><ul>
+<li>After the loop, if both stacks are empty, we know that both trees have been completely traversed, and all leaf nodes from both trees have been compared. If no mismatches were found, we return <code>true</code>.</li>
+<li>If any stack is not empty, it means that one tree has more leaf nodes than the other, and we return <code>false</code>.</li>
+</ul>
+<h4 id="step-3-depth-first-search-to-extract-leaf-nodes">
+  Step 3: Depth-First Search to Extract Leaf Nodes
+  <a class="heading-link" href="#step-3-depth-first-search-to-extract-leaf-nodes">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dfs</span>(stack<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> <span style="color:#666">&amp;</span>stk) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#a2f">true</span>) {
+</span></span><span style="display:flex;"><span>        TreeNode<span style="color:#666">*</span> node <span style="color:#666">=</span> stk.top(); stk.pop();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>left) stk.push(node<span style="color:#666">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>right) stk.push(node<span style="color:#666">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>node<span style="color:#666">-&gt;</span>left <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>node<span style="color:#666">-&gt;</span>right) <span style="color:#a2f;font-weight:bold">return</span> node<span style="color:#666">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>dfs</code> function is responsible for performing a depth-first traversal and extracting the leaf node value.</li>
+<li>We start by popping the top node from the stack. If the node has left or right children, we push them onto the stack.</li>
+<li>If a node does not have left or right children (i.e., it is a leaf node), we return its value.</li>
+<li>The <code>dfs</code> function is called each time in the main <code>while</code> loop to retrieve the next leaf node from both trees.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -311,10 +368,37 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where ( n ) is the total number of nodes in both trees. In the worst case, all nodes are leaves.</li>
-<li><strong>Space Complexity</strong>: O(h), where ( h ) is the height of the taller tree, due to the stack space used for the DFS traversal.</li>
+<li><strong>DFS Traversal</strong>: Both trees are traversed in a depth-first manner. In the worst case, each tree has <code>N</code> nodes (where <code>N</code> is the number of nodes in the tree), and we visit each node once. Thus, the DFS traversal for each tree takes <code>O(N)</code> time.</li>
+<li><strong>Comparison</strong>: At each step, we compare the leaf nodes of both trees. Each comparison is done in constant time, <code>O(1)</code>.</li>
+<li>Therefore, the total time complexity is <code>O(N)</code>, where <code>N</code> is the total number of nodes in both trees.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Stack Space</strong>: We use two stacks, <code>s1</code> and <code>s2</code>, which each store at most <code>O(N)</code> nodes during the DFS traversal.</li>
+<li>Therefore, the space complexity is <code>O(N)</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently compares the leaf nodes of two binary trees by performing a depth-first traversal on both trees simultaneously. The two stacks (<code>s1</code> and <code>s2</code>) allow us to traverse the trees in a memory-efficient manner, and the DFS function helps in extracting leaf nodes. By comparing the leaf nodes one-by-one, we ensure that the order and values match. This approach has a time complexity of <code>O(N)</code>, where <code>N</code> is the number of nodes in the trees, and a space complexity of <code>O(N)</code> due to the use of the stacks.</p>
  
 </div>
   

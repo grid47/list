@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -211,7 +211,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1401s0hbhb">
+        <h2 id="hahahugoshortcode1400s0hbhb">
   <a href="https://leetcode.com/problems/decode-ways/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -226,7 +226,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1401s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1400s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -253,72 +253,192 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> memo[i] <span style="color:#666">=</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1401s2hbhb">
+<h2 id="hahahugoshortcode1400s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-decode-ways--unravel-the-mystery-of-decoding">
+  🔐 <strong>Decode Ways</strong> – Unravel the Mystery of Decoding!
+  <a class="heading-link" href="#-decode-ways--unravel-the-mystery-of-decoding">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a string <code>s</code> representing a message encoded using a mapping (&lsquo;A&rsquo; = 1, &lsquo;B&rsquo; = 2, &hellip;, &lsquo;Z&rsquo; = 26), determine the total number of ways to decode it. A &lsquo;0&rsquo; character cannot be mapped to any letter, so it requires special handling.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>The <strong>Decode Ways</strong> problem is a fascinating challenge, where you’re tasked with decoding a string of digits into alphabetic characters. Each digit or pair of digits represents a letter in the alphabet (&lsquo;A&rsquo; = 1, &lsquo;B&rsquo; = 2, &hellip;, &lsquo;Z&rsquo; = 26). Your goal is to determine the number of distinct ways the string can be decoded.</p>
+<h4 id="example-walkthrough">
+  Example Walkthrough:
+  <a class="heading-link" href="#example-walkthrough">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h3>
-<ol>
-<li><strong>Memoization</strong>: Use a memo array to store results of subproblems and avoid redundant calculations.</li>
-<li><strong>Recursive Function</strong>:
+</h4>
 <ul>
-<li>Define a recursive function <code>ways(i, s)</code> to find decoding ways starting from index <code>i</code>.</li>
-<li>Base Case: If <code>i</code> reaches the end of <code>s</code>, return 1 as a valid decoding path.</li>
-<li>If <code>s[i]</code> is &lsquo;0&rsquo;, return 0 as &lsquo;0&rsquo; cannot represent any letter alone.</li>
-<li><strong>Single-digit Decoding</strong>: Recursively call <code>ways(i + 1, s)</code> to decode the current character as a single digit.</li>
-<li><strong>Two-digit Decoding</strong>: If <code>i</code> and <code>i+1</code> form a valid two-digit number (10 to 26), add the result of <code>ways(i + 2, s)</code>.</li>
+<li>
+<p><strong>Input</strong>: <code>&quot;12&quot;</code></p>
+<ul>
+<li>Decodings: &ldquo;AB&rdquo; (1 → A, 2 → B) or &ldquo;L&rdquo; (12 → L)</li>
+<li><strong>Output</strong>: <code>2</code></li>
 </ul>
 </li>
-<li><strong>Store Results</strong>: Cache results in <code>memo</code> at each index to optimize repeated calls.</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ol>
-<li><strong>Initialization</strong>: Resize <code>memo</code> to <code>s.size()</code>, initializing all values to -1.</li>
-<li><strong>Recursive Calls</strong>: Begin with <code>ways(0, s)</code>, which recursively explores all valid decoding paths.</li>
-<li><strong>Base Cases</strong>:
+<li>
+<p><strong>Input</strong>: <code>&quot;226&quot;</code></p>
 <ul>
-<li>If <code>s[i]</code> is &lsquo;0&rsquo;, return 0.</li>
-<li>If <code>i</code> reaches <code>s.size()</code>, return 1.</li>
+<li>Decodings: &ldquo;BBF&rdquo;, &ldquo;BZ&rdquo;, &ldquo;VF&rdquo;</li>
+<li><strong>Output</strong>: <code>3</code></li>
 </ul>
 </li>
-<li><strong>Memoization Check</strong>: Before each recursive call, check if <code>memo[i]</code> is already calculated.</li>
-</ol>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+</ul>
+<p>We also need to handle edge cases like leading zeros or numbers greater than 26, which represent invalid decodings.</p>
+<h3 id="-approach">
+  🛠️ <strong>Approach</strong>
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The problem is solved efficiently using <strong>dynamic programming (DP)</strong> with <strong>memoization</strong>. The idea is to break down the problem into smaller subproblems, storing intermediate results to avoid redundant calculations. Here&rsquo;s a step-by-step breakdown:</p>
+<ol>
+<li>
+<p><strong>Base Case</strong>:<br>
+If we reach the end of the string, we return 1 because it means the string is fully decoded.</p>
+</li>
+<li>
+<p><strong>Invalid Cases</strong>:<br>
+If the current digit is &lsquo;0&rsquo;, it’s an invalid character (since no letter corresponds to &lsquo;0&rsquo;). We return 0 for this case.</p>
+</li>
+<li>
+<p><strong>Memoization</strong>:<br>
+We use a <code>memo</code> array to store the results of subproblems. This ensures that we don’t recompute the number of decodings for the same index multiple times.</p>
+</li>
+<li>
+<p><strong>Recursive Case</strong>:</p>
 <ul>
-<li><strong>Time Complexity</strong>: (O(n)), where (n) is the length of <code>s</code>, due to memoization.</li>
-<li><strong>Space Complexity</strong>: (O(n)), for storing memoized results in <code>memo</code>.</li>
-</ul> 
+<li>Recursively calculate the number of ways to decode starting from the next index (<code>i + 1</code>).</li>
+<li>If the current and next characters form a valid two-digit number (between 10 and 26), recursively calculate the number of ways to decode starting from <code>i + 2</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="-code-breakdown">
+  📜 <strong>Code Breakdown</strong>
+  <a class="heading-link" href="#-code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-memoization-setup">
+  Step 1: Memoization Setup
+  <a class="heading-link" href="#step-1-memoization-setup">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> memo;
+</span></span></code></pre></div><ul>
+<li>We declare a vector <code>memo</code> that will store the number of decodings for each index in the string. Initially, it is empty and will be resized according to the size of the input string <code>s</code>.</li>
+</ul>
+<h4 id="step-2-main-function-to-call-the-helper">
+  Step 2: Main Function to Call the Helper
+  <a class="heading-link" href="#step-2-main-function-to-call-the-helper">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numDecodings</span>(string s) {
+</span></span><span style="display:flex;"><span>    memo.resize(s.size(), <span style="color:#666">-</span><span style="color:#666">1</span>); <span style="color:#080;font-style:italic">// Initialize memoization array
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">!</span>s.size()<span style="color:#666">?</span> <span style="color:#666">0</span> <span style="color:#666">:</span> ways(<span style="color:#666">0</span>, s);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>memo</code> array is resized to match the length of the input string <code>s</code>, with all elements initialized to <code>-1</code> (indicating that no subproblem has been solved yet).</li>
+<li>The function checks if the string is empty. If so, it returns 0 because an empty string cannot be decoded.</li>
+</ul>
+<h4 id="step-3-helper-function-for-recursion">
+  Step 3: Helper Function for Recursion
+  <a class="heading-link" href="#step-3-helper-function-for-recursion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">ways</span>(<span style="color:#0b0;font-weight:bold">int</span> i, string s) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> s.size()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;  <span style="color:#080;font-style:italic">// Base case: reached the end of the string
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;    <span style="color:#080;font-style:italic">// Invalid character (&#39;0&#39; cannot be decoded)
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[i] <span style="color:#666">&gt;</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[i];  <span style="color:#080;font-style:italic">// Return memoized result if already computed
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> ways(i <span style="color:#666">+</span> <span style="color:#666">1</span>, s);  <span style="color:#080;font-style:italic">// Decode the current character as a single digit
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// If current and next character together form a valid two-digit number (10-26)
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> s.size() <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> (s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;1&#39;</span> <span style="color:#666">||</span> (s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;2&#39;</span> <span style="color:#666">&amp;&amp;</span> s[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">&lt;</span> <span style="color:#b44">&#39;7&#39;</span>))) {
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> ways(i <span style="color:#666">+</span> <span style="color:#666">2</span>, s);  <span style="color:#080;font-style:italic">// Decode the pair of digits as a two-digit number
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[i] <span style="color:#666">=</span> res;  <span style="color:#080;font-style:italic">// Store the result in the memoization array
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
+</span></span></code></pre></div><ul>
+<li><strong>Base Case 1</strong>: If <code>i</code> reaches the end of the string (<code>i == s.size()</code>), return 1 because we&rsquo;ve successfully decoded the entire string.</li>
+<li><strong>Base Case 2</strong>: If the current character is <code>'0'</code>, return 0 since it cannot be decoded into any letter.</li>
+<li><strong>Memoization Check</strong>: If the result for the current index <code>i</code> is already calculated (<code>memo[i] &gt; -1</code>), simply return the stored value.</li>
+<li>We recursively calculate the number of decodings starting from index <code>i + 1</code> (for single-digit decoding).</li>
+<li>If the current and next character together form a valid two-digit number between 10 and 26, we also calculate the number of decodings starting from <code>i + 2</code> (for two-digit decoding).</li>
+</ul>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The result is stored in the <code>memo</code> array and returned to avoid redundant calculations.</p>
+<h3 id="-time-and-space-complexity">
+  📈 <strong>Time and Space Complexity</strong>
+  <a class="heading-link" href="#-time-and-space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The time complexity of the solution is <strong>O(n)</strong>, where <code>n</code> is the length of the input string <code>s</code>. This is because each index is processed only once due to memoization.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(n)</strong> because we use a memoization array of size <code>n</code> and recursion depth can also reach <code>n</code> in the worst case.</li>
+</ul>
+<h3 id="-conclusion">
+  🏁 <strong>Conclusion</strong>
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <strong>dynamic programming</strong> approach with <strong>memoization</strong> efficiently counts the number of decodings of a string. By breaking the problem into subproblems and reusing previously computed results, the algorithm achieves a time complexity of <strong>O(n)</strong>. This approach ensures that we avoid redundant calculations and scale well for large inputs.</p>
+<p>This solution is <strong>optimal</strong> for this problem, making it perfect for scenarios where you need to decode strings of significant length efficiently.</p>
+<h3 id="-final-thoughts">
+  🌟 <strong>Final Thoughts</strong>
+  <a class="heading-link" href="#-final-thoughts">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This problem is a great example of how <strong>dynamic programming</strong> and <strong>memoization</strong> can transform a seemingly complex recursive problem into an efficient one. Understanding this technique will help you tackle many similar challenges in coding interviews and competitive programming.</p>
+<p>Keep practicing and decoding more problems! 🚀 Happy coding! ✨</p>
+<hr>
+ 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1401s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1400s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

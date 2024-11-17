@@ -197,7 +197,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -206,7 +206,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1290s0hbhb">
+        <h2 id="hahahugoshortcode1288s0hbhb">
   <a href="https://leetcode.com/problems/split-linked-list-in-parts/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -221,7 +221,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1290s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1288s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -275,7 +275,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1290s2hbhb">
+<h2 id="hahahugoshortcode1288s2hbhb">
   
 
   
@@ -287,7 +287,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given the head of a singly linked list and an integer <code>k</code>, split the linked list into <code>k</code> consecutive parts. The length of each part should be as equal as possible. The parts should be returned as an array of ListNode pointers. If the linked list has fewer nodes than <code>k</code>, some parts should be <code>NULL</code>.</p>
+<p>The problem asks us to split a singly linked list into <strong>k parts</strong> of approximately equal size. If the list cannot be evenly divided, the extra nodes should be distributed across the first few parts. Each part should be represented by the head of a sublist, and if there are fewer nodes than parts, some parts should be <code>NULL</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -295,70 +295,157 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To approach this problem, we need to break the linked list into <strong>k parts</strong>, while maintaining the size constraints. Specifically, we want to:</p>
 <ol>
-<li>
-<p><strong>Calculate Length</strong>:</p>
-<ul>
-<li>Traverse the linked list to determine its total length <code>len</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Determine Size of Each Part</strong>:</p>
-<ul>
-<li>Calculate the number of nodes in each part as <code>numNodes = len / k</code>.</li>
-<li>Calculate the number of extra nodes as <code>ext = len % k</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Split the List</strong>:</p>
-<ul>
-<li>Iterate through the linked list:
-<ul>
-<li>For each part, store the starting node in the result vector.</li>
-<li>Traverse <code>numNodes</code> times to find the end of the current part.</li>
-<li>If there are remaining extra nodes (<code>ext &gt; 0</code>), include one more node in the current part and decrement <code>ext</code>.</li>
-<li>Disconnect the current part from the rest of the list by setting the <code>next</code> pointer to <code>NULL</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Handle Insufficient Nodes</strong>:</p>
-<ul>
-<li>If the total length of the linked list is less than <code>k</code>, fill the remaining parts with <code>NULL</code>.</li>
-</ul>
-</li>
+<li><strong>Calculate the length of the list</strong>: We need to determine how many nodes are in the linked list.</li>
+<li><strong>Divide nodes into approximately equal parts</strong>: If the total number of nodes is not divisible by <code>k</code>, then the first few parts will contain one extra node.</li>
+<li><strong>Iterate through the list</strong>: We can split the list by adjusting the <code>next</code> pointers and creating new heads for each part.</li>
+<li><strong>Edge cases</strong>: Handle cases where the list is shorter than <code>k</code> by returning <code>NULL</code> for the remaining parts.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>Let&rsquo;s break down the code step by step to understand how it works:</p>
+<h4 id="step-1-calculate-the-length-of-the-list">
+  Step 1: Calculate the length of the list
+  <a class="heading-link" href="#step-1-calculate-the-length-of-the-list">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> len <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>ListNode<span style="color:#666">*</span> temp <span style="color:#666">=</span> head;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(temp) {
+</span></span><span style="display:flex;"><span>    len<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    temp <span style="color:#666">=</span> temp<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We initialize <code>len</code> to 0 to track the number of nodes in the linked list.</li>
+<li>We traverse the entire list, incrementing <code>len</code> with each node.</li>
+<li>After the loop finishes, <code>len</code> will hold the total number of nodes in the list.</li>
+</ul>
+<h4 id="step-2-determine-the-size-of-each-part-and-the-remainder">
+  Step 2: Determine the size of each part and the remainder
+  <a class="heading-link" href="#step-2-determine-the-size-of-each-part-and-the-remainder">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> numNodes <span style="color:#666">=</span> len <span style="color:#666">/</span> k;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> ext <span style="color:#666">=</span> len <span style="color:#666">%</span> k;
+</span></span></code></pre></div><ul>
+<li><code>numNodes</code>: This is the base number of nodes in each part, calculated by dividing the total length of the list by <code>k</code>.</li>
+<li><code>ext</code>: This is the remainder when dividing the list length by <code>k</code>, indicating how many parts should contain one extra node. These extra nodes will be distributed across the first <code>ext</code> parts.</li>
+</ul>
+<h4 id="step-3-split-the-list-into-parts">
+  Step 3: Split the list into parts
+  <a class="heading-link" href="#step-3-split-the-list-into-parts">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>ListNode<span style="color:#666">*&gt;</span> res;
+</span></span><span style="display:flex;"><span>temp <span style="color:#666">=</span> head;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(temp) {
+</span></span><span style="display:flex;"><span>    res.push_back(temp);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> curLen <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(curLen <span style="color:#666">&lt;</span> numNodes) {
+</span></span><span style="display:flex;"><span>        temp <span style="color:#666">=</span>  temp<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>        curLen<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(ext <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> len <span style="color:#666">&gt;</span> k) {
+</span></span><span style="display:flex;"><span>        temp <span style="color:#666">=</span> temp<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>        ext<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    ListNode<span style="color:#666">*</span> x <span style="color:#666">=</span> temp<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>    temp<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> <span style="color:#a2f">NULL</span>;
+</span></span><span style="display:flex;"><span>    temp <span style="color:#666">=</span> x;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Initialize an empty vector <code>res</code></strong>: This will store the heads of the resulting sublists.</li>
+<li><strong>Iterate through the list</strong>: We start at the head of the list and keep adding parts to <code>res</code>. In each iteration:
 <ul>
-<li><strong>Function</strong>:
-<ul>
-<li><code>vector&lt;ListNode*&gt; splitListToParts(ListNode* head, int k)</code>: Splits the linked list into <code>k</code> parts.</li>
+<li>We push the current node (<code>temp</code>) to <code>res</code>.</li>
+<li>We traverse <code>numNodes</code> nodes for the current part, and if the current part is one of the <code>ext</code> parts that needs one extra node, we handle that.</li>
+<li>After reaching the last node of the current part, we set the <code>next</code> pointer to <code>NULL</code> to terminate the part.</li>
+<li>We move <code>temp</code> to the next node in the list to start the next part.</li>
 </ul>
 </li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-4-handle-the-case-where-there-are-fewer-nodes-than-parts">
+  Step 4: Handle the case where there are fewer nodes than parts
+  <a class="heading-link" href="#step-4-handle-the-case-where-there-are-fewer-nodes-than-parts">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(len <span style="color:#666">&lt;</span> k) {
+</span></span><span style="display:flex;"><span>    res.push_back(<span style="color:#a2f">NULL</span>);
+</span></span><span style="display:flex;"><span>    len<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If the list is shorter than <code>k</code>, we need to append <code>NULL</code> to the result vector to ensure that the final output has exactly <code>k</code> parts.</li>
+</ul>
+<h4 id="step-5-return-the-result">
+  Step 5: Return the result
+  <a class="heading-link" href="#step-5-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After splitting the list into parts, we return the vector <code>res</code>, which contains the heads of the sublists.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity-on">
+  Time Complexity: <strong>O(n)</strong>
+  <a class="heading-link" href="#time-complexity-on">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(N), where N is the number of nodes in the linked list, since we traverse the list to calculate its length and then again to split it.</li>
-<li><strong>Space Complexity</strong>: O(K), where K is the number of parts, as we store the parts in a vector.</li>
+<li>We traverse the linked list twice: once to calculate its length and once to split it into parts. Each traversal takes O(n) time, where <code>n</code> is the number of nodes in the linked list.</li>
+<li>Other operations inside the loop (such as pushing elements into the vector) are O(1) operations.</li>
+<li>Therefore, the overall time complexity is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the linked list.</li>
 </ul>
+<h4 id="space-complexity-ok">
+  Space Complexity: <strong>O(k)</strong>
+  <a class="heading-link" href="#space-complexity-ok">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We are storing the resulting sublists in a vector of size <code>k</code>. This is the primary space usage.</li>
+<li>The space complexity is independent of the length of the list, but depends on the number of parts (<code>k</code>), and is therefore <strong>O(k)</strong>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution efficiently splits a singly linked list into <strong>k parts</strong> while maintaining the required size constraints. It calculates the total length of the list, divides it into parts of approximately equal size, and then adjusts for the remainder by adding extra nodes to the first few parts. The solution handles edge cases such as when the list is shorter than <code>k</code> or when the list length is not evenly divisible by <code>k</code>.</p>
+<p>By iterating through the list once and using a few auxiliary variables to track the division of nodes, the algorithm achieves an optimal time complexity of <strong>O(n)</strong> and space complexity of <strong>O(k)</strong>, making it efficient for large input sizes.</p>
+<p>This approach provides a clear, scalable way to split a list into multiple parts while ensuring that the list is divided as evenly as possible, and it elegantly handles the edge cases by appending <code>NULL</code> for any extra parts that do not have nodes.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1290s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1288s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

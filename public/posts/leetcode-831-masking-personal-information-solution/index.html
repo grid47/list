@@ -197,7 +197,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -235,7 +235,11 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The objective is to mask personally identifiable information (PII) from a given string, which can either be an email address or a phone number.</p>
+<p>In this problem, you are asked to mask personal information from a given string <code>s</code> which represents either a phone number or an email address. The task involves transforming the input string into a masked format while maintaining privacy.</p>
+<ul>
+<li>If the string represents an <strong>email address</strong>, mask the local part (before the <code>@</code>) with asterisks, leaving only the first letter of the local part visible, followed by five asterisks, and the domain part (after the <code>@</code>) remains unchanged.</li>
+<li>If the string represents a <strong>phone number</strong>, mask all but the last four digits. Additionally, format the number in a standard format based on the country code (if present).</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -243,50 +247,182 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>We need to process two types of strings: email addresses and phone numbers. We will identify which type the string belongs to based on the presence of an <code>@</code> symbol and perform the necessary transformations accordingly.</p>
 <ol>
 <li>
-<p><strong>Email Masking</strong>: If the input string contains an &lsquo;@&rsquo; character, it is identified as an email address. The transformation involves:</p>
+<p><strong>For Email Addresses</strong>:</p>
 <ul>
-<li>Converting the entire email to lowercase.</li>
-<li>Retaining the first character and the domain (after the &lsquo;@&rsquo;), while masking the middle part with five asterisks.</li>
+<li>Convert all letters to lowercase.</li>
+<li>Mask the local part (before <code>@</code>) by displaying the first letter, followed by five asterisks (<code>*****</code>).</li>
+<li>The domain part (after <code>@</code>) remains unchanged.</li>
 </ul>
 </li>
 <li>
-<p><strong>Phone Number Masking</strong>: If the input does not contain an &lsquo;@&rsquo;, it is treated as a phone number. The steps include:</p>
+<p><strong>For Phone Numbers</strong>:</p>
 <ul>
-<li>Removing all non-digit characters using a regular expression.</li>
-<li>Using a predefined format to determine the country code based on the number of digits:
-<ul>
-<li>If there are 10 digits, format as <code>***-***-XXXX</code>.</li>
-<li>If there are more digits, prefix the number with a country code while masking the remaining digits.</li>
-</ul>
-</li>
+<li>First, remove all non-numeric characters.</li>
+<li>Mask the first part of the phone number with <code>***-***-</code>, leaving the last four digits visible.</li>
+<li>Use different country formats based on the length of the phone number (10 digits for a local number, 11 or 12 digits for international numbers).</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The <code>country</code> vector defines the formatting for phone numbers based on their lengths.</li>
-<li>For email addresses, the result is constructed by concatenating the first character, asterisks, and the last part of the email.</li>
-<li>For phone numbers, non-numeric characters are stripped, and the appropriate masked format is returned based on the total digit count.</li>
+<p>Let&rsquo;s walk through the code step by step:</p>
+<h4 id="step-1-defining-the-country-format">
+  Step 1: Defining the Country Format
+  <a class="heading-link" href="#step-1-defining-the-country-format">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> country <span style="color:#666">=</span> {<span style="color:#b44">&#34;&#34;</span>, <span style="color:#b44">&#34;+*-&#34;</span>, <span style="color:#b44">&#34;+**-&#34;</span>, <span style="color:#b44">&#34;+***-&#34;</span>};
+</span></span></code></pre></div><ul>
+<li>This array <code>country</code> contains different country code formats. The first entry is an empty string, as we don&rsquo;t need any country code for a standard 10-digit number.</li>
+<li>The second entry is for a 11-digit phone number, prefixed with a <code>+</code> followed by one asterisk (<code>*</code>), for example: <code>+*-</code>.</li>
+<li>The third and fourth entries correspond to a 12-digit phone number format.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-2-handling-the-email-address">
+  Step 2: Handling the Email Address
+  <a class="heading-link" href="#step-2-handling-the-email-address">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> at <span style="color:#666">=</span> s.find(<span style="color:#b44">&#39;@&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(at <span style="color:#666">!=</span> string<span style="color:#666">::</span>npos) {
+</span></span><span style="display:flex;"><span>    transform(s.begin(), s.end(), s.begin(), <span style="color:#666">::</span>tolower);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> s.substr(<span style="color:#666">0</span>, <span style="color:#666">1</span>) <span style="color:#666">+</span> <span style="color:#b44">&#34;*****&#34;</span> <span style="color:#666">+</span> s.substr(at <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We first check if the string contains the <code>@</code> symbol, which identifies it as an email address.</li>
+<li>If the email is valid, we convert the entire string to lowercase using <code>transform()</code>. This ensures that the email address is standardized regardless of the case of the input.</li>
+<li>The local part of the email is masked by taking the first character (<code>s.substr(0, 1)</code>) and replacing the rest with <code>*****</code> (five asterisks).</li>
+<li>We then append the domain part of the email (the portion after <code>@</code>) using <code>s.substr(at - 1)</code> to keep everything after <code>@</code> intact.</li>
+</ul>
+<h4 id="step-3-handling-the-phone-number">
+  Step 3: Handling the Phone Number
+  <a class="heading-link" href="#step-3-handling-the-phone-number">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>s <span style="color:#666">=</span> regex_replace(s, regex(<span style="color:#b44">&#34;[^0-9]&#34;</span>), <span style="color:#b44">&#34;&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> country[s.size() <span style="color:#666">-</span> <span style="color:#666">10</span>]  <span style="color:#666">+</span> <span style="color:#b44">&#34;***-***-&#34;</span> <span style="color:#666">+</span> s.substr(s.size() <span style="color:#666">-</span> <span style="color:#666">4</span>);
+</span></span></code></pre></div><ul>
+<li>If the string is not an email address, we assume it is a phone number.</li>
+<li>First, we remove all non-numeric characters using <code>regex_replace()</code>. This cleans up the string, leaving only the digits.</li>
+<li>We then determine the appropriate country format by calculating the length of the string. The phone number should contain at least 10 digits, and we adjust the format based on the number of digits:
+<ul>
+<li>For a 10-digit number, no country code is added.</li>
+<li>For longer numbers (11 or 12 digits), we append the corresponding country code format from the <code>country</code> array.</li>
+</ul>
+</li>
+<li>Finally, we format the phone number in the standard format <code>***-***-xxxx</code>, where <code>xxxx</code> are the last four digits of the phone number.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(N), where N is the length of the input string, as we need to iterate through the string for masking.</li>
-<li><strong>Space Complexity</strong>: O(1) for the constant space used by the <code>country</code> vector.</li>
+<li>
+<p><strong>For Email Address</strong>:</p>
+<ul>
+<li>The time complexity for processing an email address is <strong>O(n)</strong>, where <code>n</code> is the length of the string. This comes from the need to traverse the string to convert it to lowercase and apply the substring operations.</li>
 </ul>
+</li>
+<li>
+<p><strong>For Phone Number</strong>:</p>
+<ul>
+<li>Removing non-numeric characters using <code>regex_replace()</code> takes <strong>O(n)</strong> time, where <code>n</code> is the number of characters in the input string.</li>
+<li>After that, we perform simple operations like calculating the size of the string and appending parts of the string, all of which take constant time.</li>
+</ul>
+</li>
+</ul>
+<p>Thus, the overall time complexity is <strong>O(n)</strong>, where <code>n</code> is the length of the input string.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(n)</strong> because we use extra space for storing the transformed string (either the masked email or the cleaned phone number).</li>
+</ul>
+<h3 id="example-walkthrough">
+  Example Walkthrough
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="input-1-email-address">
+  Input 1: Email Address
+  <a class="heading-link" href="#input-1-email-address">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string s <span style="color:#666">=</span> <span style="color:#b44">&#34;JohnDoe@example.com&#34;</span>;
+</span></span></code></pre></div><ol>
+<li>The <code>@</code> symbol is found, so we process it as an email.</li>
+<li>The entire string is converted to lowercase: <code>&quot;johndoe@example.com&quot;</code>.</li>
+<li>The local part is masked: <code>&quot;j*****&quot;</code>.</li>
+<li>The domain part is appended: <code>&quot;j*****@example.com&quot;</code>.</li>
+</ol>
+<p><strong>Output</strong>: <code>&quot;j*****@example.com&quot;</code></p>
+<h4 id="input-2-phone-number">
+  Input 2: Phone Number
+  <a class="heading-link" href="#input-2-phone-number">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string s <span style="color:#666">=</span> <span style="color:#b44">&#34;+1 (234) 567-8901&#34;</span>;
+</span></span></code></pre></div><ol>
+<li>We remove all non-numeric characters, leaving <code>&quot;12345678901&quot;</code>.</li>
+<li>The string has 11 digits, so we use the country format <code>+*-</code> for international numbers.</li>
+<li>The phone number is formatted as <code>+*-***-***-8901</code>.</li>
+</ol>
+<p><strong>Output</strong>: <code>&quot;+*-***-***-8901&quot;</code></p>
+<h4 id="input-3-local-phone-number">
+  Input 3: Local Phone Number
+  <a class="heading-link" href="#input-3-local-phone-number">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string s <span style="color:#666">=</span> <span style="color:#b44">&#34;123-456-7890&#34;</span>;
+</span></span></code></pre></div><ol>
+<li>We remove all non-numeric characters, leaving <code>&quot;1234567890&quot;</code>.</li>
+<li>The string has 10 digits, so no country code is added.</li>
+<li>The phone number is formatted as <code>***-***-7890</code>.</li>
+</ol>
+<p><strong>Output</strong>: <code>&quot;***-***-7890&quot;</code></p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides an efficient way to mask personal information in strings, whether it be email addresses or phone numbers. By using regular expressions and string manipulation, we can clean the input and apply the necessary transformations. The approach ensures that sensitive information is protected while still allowing the essential parts of the email address or phone number to be visible. This solution operates in linear time, making it well-suited for large inputs.</p>
  
 </div>
   

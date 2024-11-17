@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -221,7 +221,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1188s0hbhb">
+        <h2 id="hahahugoshortcode1190s0hbhb">
   <a href="https://leetcode.com/problems/find-largest-value-in-each-tree-row/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -236,7 +236,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1188s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1190s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -277,7 +277,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;    
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1188s2hbhb">
+<h2 id="hahahugoshortcode1190s2hbhb">
   
 
   
@@ -289,7 +289,19 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a binary tree, return an array containing the largest value from each row of the tree.</p>
+<p>The problem at hand is to find the largest value in each level of a binary tree. Given a binary tree, we are tasked with returning a list of integers where each integer corresponds to the largest value found in each level of the tree.</p>
+<p>For example, for the binary tree:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>         1
+</span></span><span style="display:flex;"><span>        / \
+</span></span><span style="display:flex;"><span>       3   2
+</span></span><span style="display:flex;"><span>      / \   \
+</span></span><span style="display:flex;"><span>     5   3   9
+</span></span></code></pre></div><p>The output should be <code>[1, 3, 9]</code>, as:</p>
+<ul>
+<li>Level 1 has only the node <code>1</code>.</li>
+<li>Level 2 has the nodes <code>3</code> and <code>2</code>, with the largest value being <code>3</code>.</li>
+<li>Level 3 has the nodes <code>5</code>, <code>3</code>, and <code>9</code>, with the largest value being <code>9</code>.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -297,79 +309,85 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we can use a <strong>breadth-first search (BFS)</strong> approach, where we traverse the tree level by level. The idea is to traverse the tree starting from the root node, and for each level, we keep track of the largest value. The BFS is ideal for this scenario because it naturally processes nodes level by level.</p>
+<p>Here’s a step-by-step explanation of the approach:</p>
 <ol>
 <li>
-<p><strong>Level Order Traversal</strong>:</p>
+<p><strong>Breadth-First Search (BFS)</strong>: We use a queue to store the nodes of the tree. The queue helps in processing nodes level by level. We start by pushing the root node into the queue.</p>
+</li>
+<li>
+<p><strong>Iterate Through Levels</strong>: For each level of the tree, we:</p>
 <ul>
-<li>Use a queue to perform a level order traversal (BFS) of the binary tree.</li>
-<li>At each level, track the maximum value encountered.</li>
+<li>Track the number of nodes at that level (<code>sz</code>).</li>
+<li>Traverse all nodes at the current level and find the maximum value.</li>
+<li>If a node has left or right children, push those children into the queue to be processed in the next level.</li>
 </ul>
 </li>
 <li>
-<p><strong>Iterate Through Levels</strong>:</p>
-<ul>
-<li>For each level, initialize a variable to hold the maximum value for that level.</li>
-<li>Update this maximum value as you traverse each node in the level.</li>
-</ul>
+<p><strong>Store Maximum Value for Each Level</strong>: After processing all nodes in a level, we store the largest value of that level.</p>
 </li>
 <li>
-<p><strong>Enqueue Children</strong>:</p>
-<ul>
-<li>For each node, enqueue its left and right children for processing in the next level.</li>
-</ul>
-</li>
-<li>
-<p><strong>Store Results</strong>:</p>
-<ul>
-<li>After processing all nodes at a level, append the maximum value to the results vector.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>The results vector will contain the largest value from each row in the binary tree.</li>
-</ul>
+<p><strong>Return Result</strong>: After all levels are processed, the result is a list of maximum values for each level of the tree.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The solution uses a breadth-first search to process the tree level by level and track the largest values for each level:</p>
 <ol>
 <li>
-<p><strong>Function Definition</strong>:</p>
-<ul>
-<li>The <code>largestValues</code> function takes a pointer to the root of the binary tree.</li>
+<p><strong>Initialize a Queue and Result Vector</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>queue<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> q;
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>root) <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>q.push(root);
+</span></span></code></pre></div><ul>
+<li>We initialize a queue <code>q</code> that will hold the nodes to be processed.</li>
+<li>The <code>res</code> vector is used to store the largest value at each level.</li>
+<li>If the tree is empty (i.e., the root is <code>nullptr</code>), we return an empty result.</li>
 </ul>
 </li>
 <li>
-<p><strong>Queue Initialization</strong>:</p>
-<ul>
-<li>Initialize a queue and push the root node into it.</li>
-<li>Check if the root is null; if so, return an empty result vector.</li>
+<p><strong>Process Each Level</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
+</span></span><span style="display:flex;"><span>    mx <span style="color:#666">=</span> INT_MIN;
+</span></span></code></pre></div><ul>
+<li>We enter a loop that processes each level of the tree. The variable <code>sz</code> holds the number of nodes in the current level.</li>
+<li><code>mx</code> is initialized to <code>INT_MIN</code> to keep track of the maximum value at the current level.</li>
 </ul>
 </li>
 <li>
-<p><strong>Level Traversal</strong>:</p>
-<ul>
-<li>While the queue is not empty, determine the number of nodes at the current level.</li>
-<li>Initialize <code>mx</code> to keep track of the maximum value at that level.</li>
+<p><strong>Process Nodes at Current Level</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span> <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>    root <span style="color:#666">=</span> q.front();
+</span></span><span style="display:flex;"><span>    q.pop();
+</span></span><span style="display:flex;"><span>    mx <span style="color:#666">=</span> max(mx, root<span style="color:#666">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(root<span style="color:#666">-&gt;</span>left)  q.push(root<span style="color:#666">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(root<span style="color:#666">-&gt;</span>right) q.push(root<span style="color:#666">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We process each node at the current level by popping it from the front of the queue.</li>
+<li>For each node, we compare its value with <code>mx</code> to track the maximum value at the current level.</li>
+<li>If the node has a left or right child, we push them into the queue for processing in the next level.</li>
 </ul>
 </li>
 <li>
-<p><strong>Node Processing</strong>:</p>
-<ul>
-<li>Process all nodes at the current level, updating <code>mx</code> with the maximum value found.</li>
-<li>Enqueue the left and right children of each node if they exist.</li>
+<p><strong>Store Maximum Value for the Current Level</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>res.push_back(mx);
+</span></span></code></pre></div><ul>
+<li>After processing all nodes at the current level, we push the maximum value found (<code>mx</code>) into the <code>res</code> vector.</li>
 </ul>
 </li>
 <li>
-<p><strong>Final Output</strong>:</p>
-<ul>
-<li>After processing all levels, return the <code>res</code> vector containing the largest values.</li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Once all levels have been processed, we return the <code>res</code> vector, which contains the largest values for each level of the tree.</li>
 </ul>
 </li>
 </ol>
@@ -380,15 +398,40 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the number of nodes in the tree, since each node is visited once.</li>
-<li><strong>Space Complexity</strong>: O(w), where w is the maximum width of the tree, due to the queue used for level order traversal.</li>
+<li><strong>O(n)</strong>: We traverse each node of the tree exactly once, and at each node, we perform constant-time operations such as comparing values and enqueuing child nodes. Here <code>n</code> is the number of nodes in the tree.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>: In the worst case, the queue will contain all nodes at the last level of the tree. In a balanced binary tree, this would be roughly <code>n / 2</code> nodes, but in the worst case (e.g., a skewed tree), it could contain up to <code>n</code> nodes.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, this solution efficiently computes the largest value at each level of a binary tree using a breadth-first search (BFS) approach. The BFS ensures that we process each level of the tree sequentially, and by tracking the largest value in each level, we can build the result in linear time and space. This approach is optimal and well-suited for problems involving tree traversal where levels and node relationships are crucial, such as in binary tree level-order traversals.</p>
+<p>This solution is both time-efficient and space-efficient, making it a great choice for handling large binary trees where we need to compute level-based information, such as finding the largest values at each level.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1188s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1190s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

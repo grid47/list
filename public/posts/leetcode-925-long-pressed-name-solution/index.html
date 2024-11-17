@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -238,7 +238,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given two strings, <code>name</code> and <code>typed</code>, determine if <code>typed</code> is a valid long-pressed version of <code>name</code>. A long-pressed version of <code>name</code> can be obtained by pressing some characters of <code>name</code> multiple times (including zero times).</p>
+<p>The task is to determine if a name can be considered validly &ldquo;typed&rdquo; by comparing it with a given typed string. In particular, the typed string might contain additional letters, which result from the key being &ldquo;long-pressed,&rdquo; meaning some characters may appear consecutively more than once. To solve this, we check if the typed string can be produced by long-pressing characters from the name. If every character in the name matches with a character in the typed string, including possible repetitions in typed, we conclude it is a validly typed name.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -246,46 +246,83 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The problem is solved using two pointers: one iterating over <code>name</code> and the other iterating over <code>typed</code>. Here’s the approach:</p>
 <ol>
 <li>
-<p><strong>Two-Pointer Technique</strong>:</p>
+<p><strong>Pointer Setup</strong>:</p>
 <ul>
-<li>Use two pointers: <code>i</code> for <code>name</code> and <code>j</code> for <code>typed</code>.</li>
-<li>Traverse through <code>typed</code> using the pointer <code>j</code> while checking the corresponding character in <code>name</code> using pointer <code>i</code>.</li>
+<li>Let <code>i</code> point to the current position in <code>name</code> and <code>j</code> point to the current position in <code>typed</code>.</li>
+<li>Both pointers start at the beginning of their respective strings.</li>
+<li><code>m</code> is the length of <code>name</code> and <code>n</code> is the length of <code>typed</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Character Matching</strong>:</p>
+<p><strong>Traversing <code>typed</code></strong>:</p>
 <ul>
-<li>If the characters at both pointers match (<code>name[i] == typed[j]</code>), increment <code>i</code> to move to the next character in <code>name</code>.</li>
-<li>If there’s a mismatch and it’s not a repeated character from the previous position in <code>typed</code>, return false.</li>
-<li>If the current character in <code>typed</code> is not equal to the previous character, it indicates a new character not matching <code>name</code>.</li>
+<li>We iterate through <code>typed</code> with <code>j</code>, checking if each character matches the current character in <code>name</code> pointed by <code>i</code>.</li>
+<li>If <code>typed[j]</code> matches <code>name[i]</code>, it means this character is a valid character that can be part of the typed result, so we increment <code>i</code> to move to the next character in <code>name</code>.</li>
+<li>If <code>typed[j]</code> does not match <code>name[i]</code>:
+<ul>
+<li>We check if it is the same as <code>typed[j - 1]</code>. If it is, then it’s a valid long-pressed character, and we continue to the next <code>j</code>.</li>
+<li>If <code>typed[j]</code> is not the same as <code>typed[j - 1]</code>, we return <code>false</code> since this indicates that <code>typed</code> includes an extra character that cannot be explained by long-pressing.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
 <p><strong>Final Check</strong>:</p>
 <ul>
-<li>After traversing <code>typed</code>, check if all characters in <code>name</code> were matched by ensuring <code>i</code> equals the length of <code>name</code>.</li>
+<li>After the loop, we check if <code>i == m</code>. If <code>i</code> has reached the end of <code>name</code>, it means that all characters in <code>name</code> have been successfully matched in <code>typed</code>, possibly with some characters being long-pressed. If <code>i</code> has not reached the end of <code>name</code>, this means some characters in <code>name</code> were not matched, so we return <code>false</code>.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>Initialize two pointers: <code>i</code> for <code>name</code> and <code>j</code> for <code>typed</code>.</li>
-<li>Iterate through each character in <code>typed</code>:
-<ul>
-<li>If characters match, increment the pointer for <code>name</code>.</li>
-<li>If there’s a mismatch and it’s not a repeat character, return false.</li>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, m <span style="color:#666">=</span> name.length(), n <span style="color:#666">=</span> typed.length();
+</span></span></code></pre></div><ul>
+<li><code>i</code> is initialized to 0 to iterate over <code>name</code>.</li>
+<li><code>m</code> and <code>n</code> are initialized to store the lengths of <code>name</code> and <code>typed</code>, respectively.</li>
 </ul>
 </li>
-<li>At the end, check if all characters of <code>name</code> were accounted for by ensuring <code>i</code> equals the length of <code>name</code>.</li>
+<li>
+<p><strong>Traverse the Typed String</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; <span style="color:#666">++</span>j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">&lt;</span> m <span style="color:#666">&amp;&amp;</span> name[i] <span style="color:#666">==</span> typed[j])
+</span></span><span style="display:flex;"><span>        <span style="color:#666">++</span>i;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> (<span style="color:#666">!</span>j <span style="color:#666">||</span> typed[j] <span style="color:#666">!=</span> typed[j <span style="color:#666">-</span> <span style="color:#666">1</span>])
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>j</code> iterates through each character in <code>typed</code>.</li>
+<li><strong>Character Match</strong>:
+<ul>
+<li>If <code>name[i]</code> equals <code>typed[j]</code>, increment <code>i</code> to move to the next character in <code>name</code>.</li>
 </ul>
+</li>
+<li><strong>Long-Press Validation</strong>:
+<ul>
+<li>If <code>typed[j]</code> doesn’t match <code>name[i]</code>, check if it matches <code>typed[j - 1]</code>. If it does, continue since it’s a valid long-press of the previous character.</li>
+<li>If it doesn’t, return <code>false</code> immediately as this extra character cannot be explained by long-pressing.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Validation</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> i <span style="color:#666">==</span> m;
+</span></span></code></pre></div><ul>
+<li>Return <code>true</code> if <code>i</code> has reached the end of <code>name</code>, indicating that all characters in <code>name</code> have been matched correctly in <code>typed</code>. Otherwise, return <code>false</code>.</li>
+</ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -293,10 +330,28 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the length of <code>typed</code>, as we traverse it once.</li>
-<li><strong>Space Complexity</strong>: O(1), as we use a constant amount of extra space for pointers.</li>
+<li>The time complexity is <strong>O(n)</strong>, where <code>n</code> is the length of <code>typed</code>. The algorithm iterates over <code>typed</code> and checks each character against the characters in <code>name</code>.</li>
 </ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is <strong>O(1)</strong> since only a few variables are used to track the state, and no additional data structures are required for storage.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively checks if <code>typed</code> is a valid representation of <code>name</code> when long-pressing is considered. By using a two-pointer approach, it ensures each character in <code>name</code> has a matching character in <code>typed</code>, including cases where characters are repeated due to long-pressing. This approach is efficient with a linear time complexity, making it suitable for handling long strings. The solution handles edge cases such as unmatched characters, initial characters without previous values, and complete matches, ensuring robust handling of various inputs.</p>
  
 </div>
   

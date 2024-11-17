@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -257,75 +257,173 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-maximum-area-of-water-between-two-lines--lets-solve-it-together">
+  💡 <strong>Maximum Area of Water Between Two Lines</strong> – Let&rsquo;s Solve It Together!
+  <a class="heading-link" href="#-maximum-area-of-water-between-two-lines--lets-solve-it-together">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array of integers <code>height</code> representing the height of vertical lines on a Cartesian plane, find two lines that together with the x-axis form a container that holds the most water. Return the maximum amount of water that can be contained.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>The <strong>Maximum Area</strong> problem asks us to find the largest possible container that can hold water between two lines in a given array. Each element in the array represents the height of a line drawn at that position. The width between two lines is simply the distance between their indices. Our goal is to maximize the area of the container formed by any two lines and the x-axis.</p>
+<h3 id="-whats-the-problem">
+  📝 <strong>What’s the Problem?</strong>
+  <a class="heading-link" href="#-whats-the-problem">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Use a two-pointer technique to maximize the area by evaluating the potential area formed by the lines at the two pointers and moving the pointer that points to the shorter line inward.</p>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>You are given:</p>
+<ul>
+<li><strong><code>height[]</code></strong> — an array where <code>height[i]</code> represents the height of the line at index <code>i</code>.</li>
+<li><strong><code>target</code></strong> — the maximum area we want to find between two lines.</li>
+</ul>
+<p>Our task is to <strong>determine the largest possible area</strong> formed by any two lines in the array.</p>
+<h4 id="example">
+  Example:
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Input</strong>: <code>height = [1,8,6,2,5,4,8,3,7]</code></li>
+<li><strong>Output</strong>: <code>49</code><br>
+(The maximum area is formed between lines at positions 1 and 8, with heights 8 and 7).</li>
+</ul>
+<hr>
+<h3 id="-approach-the-two-pointer-technique">
+  🔍 <strong>Approach: The Two-Pointer Technique</strong>
+  <a class="heading-link" href="#-approach-the-two-pointer-technique">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this efficiently, we use the <strong>two-pointer technique</strong>. The idea is to consider the container formed by two lines, one at the beginning (<code>i</code>) and one at the end (<code>j</code>) of the array. We calculate the area formed by the two lines and then move the pointers in such a way that we try to maximize the area.</p>
+<h4 id="key-observations">
+  Key Observations:
+  <a class="heading-link" href="#key-observations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>Set <code>res</code> to 0 to keep track of the maximum area found.</li>
-<li>Initialize two pointers: <code>i</code> at the start (0) and <code>j</code> at the end of the <code>height</code> array.</li>
-</ul>
-</li>
-<li>
-<p><strong>While Loop</strong>:</p>
-<ul>
-<li>Continue iterating as long as <code>i</code> is less than <code>j</code>:
-<ul>
-<li>Calculate the area formed between the lines at the two pointers using the formula:
+<p><strong>Area Calculation</strong>: The area between two lines is calculated as:
 [
-\text{Area} = \min(\text{height}[i], \text{height}[j]) \times (j - i)
-]</li>
-<li>Update <code>res</code> with the maximum area found so far.</li>
-<li>Move the pointer corresponding to the shorter line inward:
-<ul>
-<li>If <code>height[i]</code> is less than <code>height[j]</code>, increment <code>i</code> to consider the next line on the left.</li>
-<li>Otherwise, decrement <code>j</code> to consider the next line on the right.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+\text{Area} = \text{min}(height[i], height[j]) \times (j - i)
+]
+Where <code>height[i]</code> and <code>height[j]</code> are the heights of the two lines, and <code>(j - i)</code> is the width between them.</p>
 </li>
 <li>
-<p><strong>Return the Result</strong>:</p>
+<p><strong>Strategy to Maximize the Area</strong>:</p>
 <ul>
-<li>After exiting the loop, return the maximum area stored in <code>res</code>.</li>
+<li>Start with two pointers, <code>i = 0</code> at the beginning of the array and <code>j = height.size() - 1</code> at the end.</li>
+<li>Calculate the area formed between the two lines.</li>
+<li>Move the pointer of the shorter line inward. The idea is that we may find a taller line that increases the area.</li>
 </ul>
 </li>
 </ol>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<hr>
+<h3 id="-step-by-step-code-implementation">
+  🧑‍💻 <strong>Step-by-Step Code Implementation</strong>
+  <a class="heading-link" href="#-step-by-step-code-implementation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s dive into how we can implement this approach:</p>
+<ol>
+<li>
+<p><strong>Initialize Variables</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;  <span style="color:#080;font-style:italic">// Variable to store the maximum area
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> height.size() <span style="color:#666">-</span> <span style="color:#666">1</span>;  <span style="color:#080;font-style:italic">// Pointers at the start and end of the array
+</span></span></span></code></pre></div></li>
+<li>
+<p><strong>Calculate the Area</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>res <span style="color:#666">=</span> max(res, min(height[i], height[j]) <span style="color:#666">*</span> (j <span style="color:#666">-</span> i));
+</span></span></code></pre></div><ul>
+<li>The area between the two lines at <code>i</code> and <code>j</code> is calculated as the minimum of their heights (<code>min(height[i], height[j])</code>) multiplied by the width (<code>j - i</code>).</li>
+<li>We update the <code>res</code> variable with the maximum area found so far.</li>
+</ul>
+</li>
+<li>
+<p><strong>Move the Pointers</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(height[i] <span style="color:#666">&lt;</span> height[j]) 
+</span></span><span style="display:flex;"><span>    i<span style="color:#666">++</span>;  <span style="color:#080;font-style:italic">// Move i right if height[i] is shorter
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#a2f;font-weight:bold">else</span> 
+</span></span><span style="display:flex;"><span>    j<span style="color:#666">--</span>;  <span style="color:#080;font-style:italic">// Move j left if height[j] is shorter
+</span></span></span></code></pre></div><ul>
+<li>We move the pointer corresponding to the shorter line inward. This is because the area is constrained by the shorter line, so we attempt to find a taller one by moving the shorter line.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Maximum Area</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div></li>
+</ol>
+<hr>
+<h3 id="-time-and-space-complexity">
+  ⏱️ <strong>Time and Space Complexity</strong>
+  <a class="heading-link" href="#-time-and-space-complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity:</strong> (O(n)) - where (n) is the number of elements in the <code>height</code> array, since each element is processed once.</li>
-<li><strong>Space Complexity:</strong> (O(1)) - no additional space is used beyond a few variables.</li>
+<li>
+<p><strong>Time Complexity</strong>:<br>
+<strong>O(n)</strong> — The algorithm has a time complexity of O(n), where <code>n</code> is the length of the <code>height</code> array. The two-pointer technique ensures that each pointer is moved at most <code>n</code> times.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:<br>
+<strong>O(1)</strong> — The space complexity is constant, O(1), as we use a fixed amount of extra space for the <code>res</code> variable and the two pointers.</p>
+</li>
 </ul>
+<hr>
+<h3 id="-why-this-approach-works">
+  💡 <strong>Why This Approach Works</strong>
+  <a class="heading-link" href="#-why-this-approach-works">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Optimal Efficiency</strong>: The two-pointer technique ensures that we only need <strong>one pass</strong> through the array, making the solution highly efficient.</li>
+<li><strong>Simplicity</strong>: The approach is intuitive and easy to implement because it directly models the process of finding the maximum area by comparing heights and adjusting the pointers.</li>
+</ul>
+<hr>
+<h3 id="-conclusion">
+  🏁 <strong>Conclusion</strong>
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently finds the <strong>maximum area</strong> formed by two lines from an array of heights using the <strong>two-pointer technique</strong>.</p>
+<h4 id="advantages">
+  Advantages:
+  <a class="heading-link" href="#advantages">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Optimal Time Complexity</strong>: O(n), making it perfect for large arrays.</li>
+<li><strong>Intuitive and Clean Logic</strong>: The process is simple and avoids unnecessary computations.</li>
+</ul>
+<h4 id="limitations">
+  Limitations:
+  <a class="heading-link" href="#limitations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The solution assumes that the heights are non-negative, as negative heights don’t make sense in the context of the problem.</li>
+</ul>
+<p>With this approach, we avoid the O(n²) brute-force solution, and our time and space complexity is greatly reduced. This technique ensures that even large datasets can be handled with ease!</p>
+<hr>
+<p>Happy coding! 🚀 And remember, each problem you solve brings you one step closer to becoming a coding master! ✨</p>
  
 </div>
   

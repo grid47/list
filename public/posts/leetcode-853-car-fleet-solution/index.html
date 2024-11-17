@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -253,44 +253,127 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given a target position and two arrays, <code>pos</code> (representing the initial positions of cars) and <code>v</code> (representing their respective speeds). Your task is to determine how many car fleets will arrive at the target position.</p>
-<h3 id="approach">
+<p>In this problem, we are tasked with simulating car fleets traveling towards a target. Each car is at a certain position on a 1D line and is traveling at a constant speed. We need to determine how many fleets will reach the target, where a fleet is a group of cars that arrive at the target simultaneously.</p>
+<p>A fleet is formed when multiple cars are close enough to each other such that the lead car’s speed determines the speed of the whole group. If a faster car catches up to a slower car, they form a fleet, and both will reach the target at the same time.</p>
+<h4 id="input">
+  Input:
+  <a class="heading-link" href="#input">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>An integer <code>target</code> represents the target point on the 1D axis.</li>
+<li>A vector <code>pos</code> of integers, where each value represents the position of a car.</li>
+<li>A vector <code>v</code> of integers, where each value represents the speed of the corresponding car in the <code>pos</code> vector.</li>
+</ul>
+<h4 id="output">
+  Output:
+  <a class="heading-link" href="#output">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The number of car fleets that will reach the target.</li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a0a000">Input</span>: target <span style="color:#666">=</span> <span style="color:#666">12</span>, pos <span style="color:#666">=</span> [<span style="color:#666">10</span>, <span style="color:#666">8</span>, <span style="color:#666">0</span>, <span style="color:#666">5</span>, <span style="color:#666">3</span>], v <span style="color:#666">=</span> [<span style="color:#666">2</span>, <span style="color:#666">4</span>, <span style="color:#666">1</span>, <span style="color:#666">1</span>, <span style="color:#666">3</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a0a000">Output</span>: <span style="color:#666">3</span>
+</span></span></code></pre></div><h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we can use a greedy approach combined with sorting. The key insight is that the slower cars will eventually &ldquo;catch up&rdquo; to the faster ones if they start behind and are not too far apart.</p>
 <ol>
 <li>
-<p><strong>Calculate Arrival Times</strong>:</p>
+<p><strong>Understanding the Fleet Formation</strong>:</p>
 <ul>
-<li>Use a <code>map</code> to store the negative positions as keys and their respective arrival times at the target as values. This is done to sort the positions in descending order.</li>
-<li>The arrival time for each car can be calculated using the formula:
+<li>Cars that start behind and travel faster can eventually catch up to cars in front, forming a fleet.</li>
+<li>A fleet is formed when a slower car catches up with a faster car. Once a fleet forms, all cars in that fleet move as one, and they will reach the target at the same time.</li>
+</ul>
+</li>
+<li>
+<p><strong>Plan</strong>:</p>
+<ul>
+<li>We will first calculate the time it takes for each car to reach the target.</li>
+<li>The time to reach the target for each car is calculated as:
 [
-\text{time} = \frac{\text{target} - \text{position}}{\text{speed}}
+\text{time} = \frac{\text{target} - \text{position}}{\text{velocity}}
 ]</li>
-<li>Store the computed time in the map.</li>
+<li>Sort the cars by their position in descending order (from the furthest car to the nearest car).</li>
+<li>Then, we will simulate the formation of fleets by iterating over the cars. For each car, if it takes longer to reach the target than the car ahead of it, it will form a new fleet. Otherwise, it will join the fleet of the car ahead.</li>
 </ul>
 </li>
 <li>
-<p><strong>Count Fleets</strong>:</p>
+<p><strong>Efficiency</strong>:</p>
 <ul>
-<li>Initialize a variable <code>fleet</code> to count the number of fleets and <code>cur</code> to track the current maximum time of the fleet.</li>
-<li>Iterate through the map of times. For each time:
-<ul>
-<li>If the current car&rsquo;s time is greater than <code>cur</code>, it indicates a new fleet, so increment <code>fleet</code> and update <code>cur</code> to the current time.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>After iterating through all the cars, return the total count of fleets.</li>
+<li>Sorting the cars by their position ensures that we process them from the car that is farthest away from the target to the one closest.</li>
+<li>We track the lead car’s time for each fleet, and if a car behind has a longer or equal time, it joins the fleet.</li>
 </ul>
 </li>
 </ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-store-time-to-reach-target">
+  Step 1: Store Time to Reach Target
+  <a class="heading-link" href="#step-1-store-time-to-reach-target">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;</span> t;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> pos.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    t[<span style="color:#666">-</span>pos[i]] <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">double</span>) (target <span style="color:#666">-</span> pos[i]) <span style="color:#666">/</span> v[i];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We create a <code>map</code> <code>t</code> to store the time it takes for each car to reach the target. The key of the map is the negative of the car&rsquo;s position (<code>-pos[i]</code>) to ensure cars are processed in descending order of their position (furthest first).</li>
+<li>The value in the map is the time it will take for the car at position <code>pos[i]</code> to reach the target, which is calculated using the formula:
+[
+\text{time} = \frac{\text{target} - \text{position}}{\text{velocity}}
+]</li>
+</ul>
+<h4 id="step-2-process-cars-to-form-fleets">
+  Step 2: Process Cars to Form Fleets
+  <a class="heading-link" href="#step-2-process-cars-to-form-fleets">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> fleet <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">double</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: t) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (it.second <span style="color:#666">&gt;</span> cur) fleet<span style="color:#666">++</span>, cur <span style="color:#666">=</span> it.second;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We initialize <code>fleet</code> to 0 to count the number of fleets, and <code>cur</code> to 0 to keep track of the current lead car’s time.</li>
+<li>We iterate over the <code>map</code> to process each car starting from the furthest car:
+<ul>
+<li>If the current car’s time (<code>it.second</code>) is greater than the time of the car ahead (<code>cur</code>), it means this car cannot catch up to the car ahead, so it forms a new fleet. We increment the fleet count and update <code>cur</code> to the current car&rsquo;s time.</li>
+<li>If the current car’s time is less than or equal to <code>cur</code>, it means this car will catch up with the car ahead, so it does not form a new fleet, and it joins the existing fleet.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-return-result">
+  Step 3: Return Result
+  <a class="heading-link" href="#step-3-return-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> fleet;
+</span></span></code></pre></div><ul>
+<li>Finally, we return the total number of fleets.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -298,10 +381,43 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(N log N), where N is the number of cars. This is due to the sorting of positions and calculating arrival times.</li>
-<li><strong>Space Complexity</strong>: O(N), for storing the arrival times in the map.</li>
+<li>Sorting the cars by position takes <strong>O(n log n)</strong>, where <code>n</code> is the number of cars (i.e., the size of the <code>pos</code> vector).</li>
+<li>Iterating over the cars and processing them takes <strong>O(n)</strong> time.</li>
+<li>Therefore, the overall time complexity is <strong>O(n log n)</strong> due to the sorting step.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(n)</strong> due to the storage of the <code>map</code> which holds the time for each car.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem by leveraging the properties of sorting and greedy algorithms. By calculating the time to reach the target for each car and processing them from the furthest car to the nearest, we can easily determine the number of fleets that will reach the target. The use of sorting and a greedy approach ensures that we achieve the solution in <strong>O(n log n)</strong> time, making it suitable for large inputs.</p>
+<p>Key points:</p>
+<ul>
+<li><strong>Sorting</strong> helps us process the cars from the farthest to the nearest.</li>
+<li><strong>Greedy approach</strong> ensures that we minimize the number of fleets by merging cars that can catch up with each other.</li>
+<li>The solution is efficient both in terms of time and space, making it a robust solution for the problem.</li>
+</ul>
+<p>This method is a great example of applying a greedy approach to a real-world problem involving cars moving toward a target, and it showcases how sorting and optimal traversal can solve such problems efficiently.</p>
  
 </div>
   

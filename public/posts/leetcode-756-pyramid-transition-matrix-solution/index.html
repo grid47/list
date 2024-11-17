@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -216,7 +216,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1306s0hbhb">
+        <h2 id="hahahugoshortcode1303s0hbhb">
   <a href="https://leetcode.com/problems/pyramid-transition-matrix/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -231,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1306s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1303s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -264,7 +264,7 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span><span style="display:flex;"><span>  }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1306s2hbhb">
+<h2 id="hahahugoshortcode1303s2hbhb">
   
 
   
@@ -276,7 +276,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are tasked with building a pyramid where each block of the pyramid consists of a string. The bottom row of the pyramid is given as <code>bottom</code>, and you have a list of allowed transitions represented by strings in the <code>allowed</code> vector. Each string in <code>allowed</code> indicates that if you have two blocks in the current row, you can place a specific block above them in the next row. The goal is to determine whether it is possible to build the pyramid all the way to the top.</p>
+<p>The problem involves constructing a pyramid from a bottom row of blocks, where each block can have a certain type, and each block can only be placed on top of a pair of blocks that form a specific allowed transition. You are given a bottom row and a list of allowed transitions, and your task is to determine whether it is possible to form a valid pyramid by placing blocks above the current bottom row using these allowed transitions.</p>
+<p>Each block on the current row can only be stacked with blocks above it that follow one of the allowed transitions, and the next row must be shorter than the previous row. The goal is to check if it&rsquo;s possible to build a pyramid from the given bottom row using the allowed transitions.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -284,63 +285,120 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The approach to solve this problem can be broken down into recursive exploration with memoization and pruning to optimize the solution. The key idea is to simulate the pyramid-building process step by step, starting with the bottom row, and recursively attempting to build the next row based on the allowed transitions.</p>
+<p>To solve this, we use:</p>
 <ol>
-<li>
-<p><strong>Data Structure</strong>:</p>
-<ul>
-<li>Use an unordered map to store the allowed blocks that can be placed on top of pairs of blocks from the current row.</li>
-</ul>
-</li>
-<li>
-<p><strong>Recursive Helper Function</strong>:</p>
-<ul>
-<li>Define a recursive function <code>helper</code> that checks whether it is possible to transition from the current <code>bottom</code> row to the next row.</li>
-<li>The function parameters include:
-<ul>
-<li><code>bottom</code>: the current row of the pyramid.</li>
-<li><code>m</code>: the map of allowed transitions.</li>
-<li><code>start</code>: the current index being processed in the <code>bottom</code>.</li>
-<li><code>next</code>: the blocks that will form the next row.</li>
-</ul>
-</li>
-<li>If the size of <code>bottom</code> reaches 1, return <code>true</code>, indicating that the pyramid can be completed.</li>
-<li>If the current <code>bottom</code> has already been processed and is invalid, return <code>false</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Transition Logic</strong>:</p>
-<ul>
-<li>If the end of the <code>bottom</code> row is reached, recursively call the helper function for the next row, checking if the transition can be made. If not, mark the <code>next</code> configuration as invalid.</li>
-<li>For each valid pair of blocks in <code>bottom</code>, try to add each allowed block from the map and recursively check if it leads to a successful configuration.</li>
-</ul>
-</li>
+<li><strong>Recursive Search</strong>: We attempt to recursively build the pyramid from the bottom row to the top row, where each step attempts to build the next row based on the allowed transitions.</li>
+<li><strong>Memoization</strong>: We memoize the results for substrings of the bottom row that have been computed previously to avoid redundant work.</li>
+<li><strong>State Pruning</strong>: We use an unordered set (<code>invalid</code>) to mark and store configurations of the bottom row that are impossible, thus preventing the exploration of invalid configurations in future recursive calls.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
+<h4 id="step-1-initial-setup">
+  Step 1: Initial Setup
+  <a class="heading-link" href="#step-1-initial-setup">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> invalid;
+</span></span></code></pre></div><p>Here, we define an unordered set <code>invalid</code> to store configurations of the bottom row that are deemed impossible. This allows us to avoid revisiting invalid states during the recursive calls.</p>
+<h4 id="step-2-main-function-to-start-pyramid-building">
+  Step 2: Main Function to Start Pyramid Building
+  <a class="heading-link" href="#step-2-main-function-to-start-pyramid-building">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">pyramidTransition</span>(string bottom, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> allowed) {
+</span></span><span style="display:flex;"><span>    invalid.clear();
+</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span>string, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span> m;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Mapping allowed transitions from pairs of blocks to the possible top block
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span><span style="color:#666">&amp;</span> <span style="color:#a0a000">s</span> : allowed) {
+</span></span><span style="display:flex;"><span>        m[s.substr(<span style="color:#666">0</span>, <span style="color:#666">2</span>)].push_back(s.back());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> helper(bottom, m, <span style="color:#666">0</span>, <span style="color:#b44">&#34;&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
 <li>
-<p><strong>Class</strong>:</p>
+<p><strong><code>unordered_map&lt;string, vector&lt;char&gt;&gt; m;</code></strong>: This map stores the allowed transitions. The key is a string of two adjacent characters (representing a pair of blocks), and the value is a vector of characters representing the allowed blocks that can be placed on top of that pair.</p>
+</li>
+<li>
+<p><strong><code>for (auto&amp; s : allowed)</code></strong>: This loop iterates over the allowed transitions, and for each transition, it adds the allowed top block (last character of the string) to the vector corresponding to the pair of blocks represented by the first two characters of the string.</p>
+</li>
+<li>
+<p><strong><code>return helper(bottom, m, 0, &quot;&quot;);</code></strong>: We start the recursive process by calling the <code>helper</code> function with the current <code>bottom</code> row, the <code>unordered_map</code> of allowed transitions (<code>m</code>), and an empty string <code>next</code> representing the next row to be constructed.</p>
+</li>
+</ul>
+<h4 id="step-3-recursive-helper-function">
+  Step 3: Recursive Helper Function
+  <a class="heading-link" href="#step-3-recursive-helper-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">helper</span>(string bottom, unordered_map<span style="color:#666">&lt;</span>string, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&amp;</span> m, <span style="color:#0b0;font-weight:bold">int</span> start, string next) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (bottom.size() <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;  <span style="color:#080;font-style:italic">// If we have reached a single block, the pyramid is complete.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (invalid.find(bottom) <span style="color:#666">!=</span> invalid.end()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;  <span style="color:#080;font-style:italic">// If the bottom configuration is invalid, stop.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (start <span style="color:#666">==</span> (<span style="color:#0b0;font-weight:bold">int</span>)bottom.size() <span style="color:#666">-</span> <span style="color:#666">1</span>) {  <span style="color:#080;font-style:italic">// When we reach the end of the bottom row, attempt to construct the next row.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#0b0;font-weight:bold">bool</span> res <span style="color:#666">=</span> helper(next, m, <span style="color:#666">0</span>, <span style="color:#b44">&#34;&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>res) { invalid.insert(next); }  <span style="color:#080;font-style:italic">// Mark the configuration as invalid if it cannot lead to a valid pyramid.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span> : m[bottom.substr(start, <span style="color:#666">2</span>)]) {  <span style="color:#080;font-style:italic">// For the current pair of blocks, explore the allowed transitions.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">if</span> (helper(bottom, m, start <span style="color:#666">+</span> <span style="color:#666">1</span>, next <span style="color:#666">+</span> c)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;  <span style="color:#080;font-style:italic">// Recursively try adding the next block to the next row.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;  <span style="color:#080;font-style:italic">// Return false if no valid configurations are found.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Base Cases</strong>:</p>
 <ul>
-<li><code>class Solution</code>: Contains the method to determine if the pyramid can be built.</li>
+<li><strong><code>if (bottom.size() == 1)</code></strong>: When the <code>bottom</code> row has only one block left, the pyramid is successfully built, so we return <code>true</code>.</li>
+<li><strong><code>else if (invalid.find(bottom) != invalid.end())</code></strong>: If the current configuration of the <code>bottom</code> row is already known to be invalid (stored in the <code>invalid</code> set), we return <code>false</code> to prevent further exploration of this path.</li>
+<li><strong><code>else if (start == (int)bottom.size() - 1)</code></strong>: If we have reached the last block in the current <code>bottom</code> row, it is time to attempt constructing the next row (i.e., the row above the current one). We do this by calling <code>helper(next, m, 0, &quot;&quot;)</code>, where <code>next</code> is the string representing the next row to be constructed.</li>
 </ul>
 </li>
 <li>
-<p><strong>Method</strong>:</p>
+<p><strong>Recursive Exploration</strong>:</p>
 <ul>
-<li><code>bool pyramidTransition(string bottom, vector&lt;string&gt;&amp; allowed)</code>: Prepares the data structures and initiates the helper function to check the pyramid construction.</li>
+<li><strong><code>for (char c : m[bottom.substr(start, 2)])</code></strong>: We iterate over all possible blocks (<code>c</code>) that can be placed on top of the current pair of blocks (<code>bottom.substr(start, 2)</code>) based on the transitions stored in <code>m</code>.</li>
+<li><strong><code>helper(bottom, m, start + 1, next + c)</code></strong>: For each allowed block <code>c</code>, we recursively attempt to place it on the <code>next</code> row. We continue this process for each pair of blocks in the <code>bottom</code> row.</li>
 </ul>
 </li>
 <li>
-<p><strong>Helper Function</strong>:</p>
+<p><strong>Failure Case</strong>:</p>
 <ul>
-<li><code>bool helper(string bottom, unordered_map&lt;string, vector&lt;char&gt;&gt;&amp; m, int start, string next)</code>: Recursively attempts to build the pyramid by exploring all valid transitions.</li>
+<li>If none of the recursive calls succeed, we return <code>false</code>, indicating that it is impossible to build a valid pyramid from the given bottom row.</li>
 </ul>
 </li>
+</ul>
+<h4 id="step-4-memoization">
+  Step 4: Memoization
+  <a class="heading-link" href="#step-4-memoization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>If the recursive call returns <code>false</code> for a given configuration of <code>next</code>, we mark that configuration as invalid by inserting it into the <code>invalid</code> set. This ensures that the next time the same configuration is encountered, it will be skipped, improving the efficiency of the algorithm by preventing redundant checks.</li>
+</ul>
+<h4 id="final-result">
+  Final Result
+  <a class="heading-link" href="#final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>If we successfully build a pyramid, the function returns <code>true</code>, otherwise <code>false</code>.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -350,14 +408,32 @@
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity</strong>: O(3^n) in the worst case, where <code>n</code> is the size of the <code>bottom</code> string, due to the branching factor of possible transitions.</li>
-<li><strong>Space Complexity</strong>: O(n) for the recursion stack and additional space used for storing invalid configurations.</li>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity is difficult to express in simple terms because of the recursive nature of the solution. However, the function explores possible transitions at each step, and due to memoization, it avoids redundant work. The complexity is roughly proportional to the number of possible pyramid configurations, which is exponential in the worst case, but greatly reduced by pruning invalid states early.</li>
 </ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is <strong>O(n)</strong>, where <code>n</code> is the number of blocks in the <code>bottom</code> row, because of the recursion stack and the <code>unordered_set</code> used for memoization.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution leverages a recursive approach with memoization to efficiently check whether it&rsquo;s possible to construct a pyramid from a given bottom row using allowed transitions. By storing invalid configurations and pruning redundant computations, the algorithm ensures optimal performance even for larger inputs. This approach avoids brute-forcing through every possible configuration, making it both time and space efficient for solving the pyramid transition problem.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1306s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1303s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

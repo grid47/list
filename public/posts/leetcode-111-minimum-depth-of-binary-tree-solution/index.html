@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -278,56 +278,221 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-statement-find-the-minimum-depth-of-a-binary-tree">
+  🌳 <strong>Problem Statement: Find the Minimum Depth of a Binary Tree</strong>
+  <a class="heading-link" href="#-problem-statement-find-the-minimum-depth-of-a-binary-tree">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Find the minimum depth of a binary tree, defined as the shortest path from the root node to any leaf node.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>The task is to find the <strong>minimum depth</strong> of a binary tree. The <strong>minimum depth</strong> is defined as the length of the shortest path from the root node to any leaf node. A <strong>leaf node</strong> is a node with no children, meaning both its left and right children are <code>NULL</code>.</p>
+<p>For example, consider the binary tree:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>        1
+</span></span><span style="display:flex;"><span>       / \
+</span></span><span style="display:flex;"><span>      2   3
+</span></span><span style="display:flex;"><span>       \
+</span></span><span style="display:flex;"><span>        4
+</span></span></code></pre></div><p>In this case, the minimum depth is <code>2</code> (root → 3), since it’s the shortest path to a leaf node. For an empty tree, the minimum depth is <code>0</code>.</p>
+<hr>
+<h3 id="-approach-to-solve-the-minimum-depth-problem">
+  🧠 <strong>Approach to Solve the Minimum Depth Problem</strong>
+  <a class="heading-link" href="#-approach-to-solve-the-minimum-depth-problem">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we use a <strong>depth-first search (DFS)</strong> approach. The algorithm recursively explores the tree’s nodes from top to bottom, calculating the depth of each subtree. Here’s the breakdown:</p>
 <ol>
-<li>Use recursion to calculate the minimum depth of the left and right subtrees.</li>
-<li>For each node:
+<li>
+<p><strong>Base Case:</strong></p>
 <ul>
-<li>If both left and right children exist, take the minimum depth of the two subtrees.</li>
-<li>If only one child exists, take the depth of that subtree since the node isn’t a leaf.</li>
+<li>If the current node is <code>NULL</code> (i.e., the tree is empty), return <code>0</code>, as an empty tree has no depth.</li>
 </ul>
 </li>
-<li>Add 1 to the minimum depth to account for the current node in the path.</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
+<li>
+<p><strong>Recursive Calculation of Depth:</strong></p>
 <ul>
-<li><strong>Line 6</strong>: If <code>root</code> is <code>NULL</code>, return 0 as the tree is empty.</li>
-<li><strong>Lines 8-9</strong>: Recursively calculate the minimum depth for the left (<code>l</code>) and right (<code>r</code>) subtrees.</li>
-<li><strong>Line 11-13</strong>: If both left and right children exist, return <code>1 + min(l, r)</code>.</li>
-<li><strong>Lines 15-17</strong>: If only the left child exists, return <code>1 + l</code>.</li>
-<li><strong>Line 19</strong>: If only the right child exists, return <code>1 + r</code>.</li>
+<li>If both left and right children of the node are present, compute the depth for both subtrees and return the minimum of the two.</li>
+<li>If only one child is present, return the depth of that subtree plus 1, as the path to the leaf will include that subtree.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+</li>
+<li>
+<p><strong>Final Result:</strong></p>
+<ul>
+<li>The minimum depth will be the shortest path from the root to a leaf node, which is calculated recursively.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="-code-breakdown-step-by-step">
+  🔧 <strong>Code Breakdown: Step-by-Step</strong>
+  <a class="heading-link" href="#-code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-handle-the-empty-tree">
+  <strong>Step 1: Handle the Empty Tree</strong>
+  <a class="heading-link" href="#step-1-handle-the-empty-tree">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div><ul>
+<li>If the root is <code>NULL</code>, the tree is empty, so we return <code>0</code> because an empty tree has no depth.</li>
+</ul>
+<h4 id="step-2-recursive-calculation-for-left-and-right-subtrees">
+  <strong>Step 2: Recursive Calculation for Left and Right Subtrees</strong>
+  <a class="heading-link" href="#step-2-recursive-calculation-for-left-and-right-subtrees">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> minDepth(root<span style="color:#666">-&gt;</span>left);
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> r <span style="color:#666">=</span> minDepth(root<span style="color:#666">-&gt;</span>right);
+</span></span></code></pre></div><ul>
+<li>We recursively calculate the minimum depth of the left (<code>l</code>) and right (<code>r</code>) subtrees. The recursion continues until the base case (a <code>NULL</code> node) is encountered.</li>
+</ul>
+<h4 id="step-3-calculate-the-minimum-depth-based-on-child-nodes">
+  <strong>Step 3: Calculate the Minimum Depth Based on Child Nodes</strong>
+  <a class="heading-link" href="#step-3-calculate-the-minimum-depth-based-on-child-nodes">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (root<span style="color:#666">-&gt;</span>left <span style="color:#666">&amp;&amp;</span> root<span style="color:#666">-&gt;</span>right) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span> <span style="color:#666">+</span> ((l <span style="color:#666">&lt;</span> r) <span style="color:#666">?</span> <span style="color:#a0a000">l</span> : r);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If both left and right children are non-null, return <code>1 + min(l, r)</code>, where <code>l</code> and <code>r</code> are the depths of the left and right subtrees. This ensures we find the shortest path to a leaf.</li>
+</ul>
+<h4 id="step-4-handle-the-case-when-one-child-is-null">
+  <strong>Step 4: Handle the Case When One Child Is Null</strong>
+  <a class="heading-link" href="#step-4-handle-the-case-when-one-child-is-null">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (root<span style="color:#666">-&gt;</span>left) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span> <span style="color:#666">+</span> l;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If the left child is <code>NULL</code>, the minimum depth will be <code>1 + depth of the right subtree</code>, as there is no left child to traverse.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span> <span style="color:#666">+</span> r;
+</span></span></code></pre></div><ul>
+<li>Similarly, if the right child is <code>NULL</code>, the minimum depth will be <code>1 + depth of the left subtree</code>.</li>
+</ul>
+<h4 id="final-result">
+  <strong>Final Result:</strong>
+  <a class="heading-link" href="#final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(N)), where (N) is the number of nodes, as each node is visited once.</li>
-<li><strong>Space Complexity</strong>: (O(H)), where (H) is the height of the tree, due to the recursion stack.</li>
-</ul> 
+<li>The recursion continues until all nodes are visited, and the function returns the minimum depth from the root to any leaf node.</li>
+</ul>
+<hr>
+<h3 id="-time-and-space-complexity">
+  ⏱️ <strong>Time and Space Complexity</strong>
+  <a class="heading-link" href="#-time-and-space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity-on">
+  <strong>Time Complexity: O(n)</strong>
+  <a class="heading-link" href="#time-complexity-on">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The algorithm visits each node exactly once to compute its depth. The time complexity is linear with respect to the number of nodes <code>n</code> in the tree, so it is <strong>O(n)</strong>.</li>
+</ul>
+<h4 id="space-complexity-oh">
+  <strong>Space Complexity: O(h)</strong>
+  <a class="heading-link" href="#space-complexity-oh">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is dominated by the recursion stack. In the worst case, the tree is completely unbalanced, resulting in a recursion depth of <code>h = n</code>, giving a space complexity of <strong>O(n)</strong>.</li>
+<li>In the best case, if the tree is balanced, the height <code>h</code> would be <strong>O(log n)</strong>, and the space complexity would be <strong>O(log n)</strong>.</li>
+</ul>
+<hr>
+<h3 id="-example-walkthrough">
+  🔍 <strong>Example Walkthrough</strong>
+  <a class="heading-link" href="#-example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s walk through an example to see how the solution works.</p>
+<h4 id="example-1-a-balanced-binary-tree">
+  <strong>Example 1: A Balanced Binary Tree</strong>
+  <a class="heading-link" href="#example-1-a-balanced-binary-tree">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Consider the following tree:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>        1
+</span></span><span style="display:flex;"><span>       / \
+</span></span><span style="display:flex;"><span>      2   3
+</span></span><span style="display:flex;"><span>     / \
+</span></span><span style="display:flex;"><span>    4   5
+</span></span></code></pre></div><ul>
+<li>The root is <code>1</code>, and its left child is <code>2</code> and right child is <code>3</code>.</li>
+<li>We first call <code>minDepth(root)</code> for node <code>1</code>.</li>
+<li>The left subtree (rooted at <code>2</code>) and the right subtree (rooted at <code>3</code>) are explored.</li>
+<li>Recursively, the minimum depth of the left and right subtrees is computed:
+<ul>
+<li>The left child of node <code>2</code> is <code>4</code> (leaf), and the right child is <code>5</code> (leaf). The minimum depth of this subtree is <code>2</code>.</li>
+<li>The right subtree rooted at <code>3</code> is a leaf node, so its depth is <code>1</code>.</li>
+</ul>
+</li>
+<li>The minimum depth of the entire tree is <code>1 + min(2, 1) = 2</code>.</li>
+</ul>
+<h4 id="example-2-an-unbalanced-binary-tree">
+  <strong>Example 2: An Unbalanced Binary Tree</strong>
+  <a class="heading-link" href="#example-2-an-unbalanced-binary-tree">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Consider the following tree:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>        1
+</span></span><span style="display:flex;"><span>       /
+</span></span><span style="display:flex;"><span>      2
+</span></span><span style="display:flex;"><span>     /
+</span></span><span style="display:flex;"><span>    3
+</span></span><span style="display:flex;"><span>   /
+</span></span><span style="display:flex;"><span>  4
+</span></span></code></pre></div><ul>
+<li>The root is <code>1</code>, and its left child is <code>2</code>, which has a left child <code>3</code>, and so on.</li>
+<li>We recursively find the minimum depth of each subtree:
+<ul>
+<li>The left subtree continues until node <code>4</code>, which is a leaf node.</li>
+</ul>
+</li>
+<li>The minimum depth of the entire tree is <code>4</code>, since there is only one branch to follow (root → 2 → 3 → 4).</li>
+</ul>
+<hr>
+<h3 id="-conclusion">
+  🚀 <strong>Conclusion</strong>
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution to finding the minimum depth of a binary tree uses <strong>depth-first search (DFS)</strong> to explore each node’s depth recursively. The algorithm computes the depth of each subtree and returns the shortest path to a leaf node. With a time complexity of <strong>O(n)</strong> and a space complexity of <strong>O(h)</strong>, this solution is optimal for handling both balanced and unbalanced trees. The use of recursion makes the solution clean and efficient.</p>
+<p>Happy coding! 🌱</p>
+<hr>
+ 
 </div>
   
 

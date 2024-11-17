@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -258,7 +258,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a positive integer <code>n</code>, find the next greater permutation of its digits. If no such permutation exists, return <code>-1</code>.</p>
+<p>The problem asks to find the next greater element with the same digits as the given number <code>n</code>. This involves rearranging the digits of <code>n</code> to find the next larger number that can be formed. If no such larger number exists (i.e., <code>n</code> is the largest possible number with those digits), the function should return <code>-1</code>. The output must be returned as an integer.</p>
+<p><strong>Example 1:</strong></p>
+<p>Input: <code>12</code><br>
+Output: <code>21</code><br>
+Explanation: The next greater number with the same digits as <code>12</code> is <code>21</code>.</p>
+<p><strong>Example 2:</strong></p>
+<p>Input: <code>21</code><br>
+Output: <code>-1</code><br>
+Explanation: Since <code>21</code> is already the largest number that can be formed with its digits, the function returns <code>-1</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -266,43 +274,79 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The goal is to find the next greater permutation of the digits of the given number <code>n</code>. To achieve this, we can leverage a well-known algorithm for finding the &ldquo;next permutation&rdquo; in an ordered set of numbers.</p>
+<p>Here are the steps to solve the problem:</p>
 <ol>
-<li>
-<p><strong>Convert to Digits</strong>:</p>
+<li><strong>Convert the Number to a String</strong>: Since we are dealing with digits, it’s easier to manipulate the digits if they are treated as characters in a string.</li>
+<li><strong>Next Permutation Algorithm</strong>: This algorithm helps us find the next lexicographically larger permutation of the digits:
 <ul>
-<li>Convert the integer <code>n</code> into a string to easily access and manipulate its digits.</li>
+<li>Traverse the string of digits from right to left and find the first digit that is smaller than the digit next to it.</li>
+<li>Swap this digit with the smallest digit that is larger than it, found to its right.</li>
+<li>Reverse the digits to the right of the swapped digit to get the smallest lexicographical order.</li>
 </ul>
 </li>
-<li>
-<p><strong>Generate Next Permutation</strong>:</p>
-<ul>
-<li>Use the <code>next_permutation</code> function from the standard library to rearrange the digits into the next lexicographical order.</li>
-</ul>
-</li>
-<li>
-<p><strong>Convert Back to Integer</strong>:</p>
-<ul>
-<li>Convert the resulting string back to a long long integer.</li>
-</ul>
-</li>
-<li>
-<p><strong>Check for Validity</strong>:</p>
-<ul>
-<li>Ensure the resulting integer is greater than <code>n</code> and does not exceed <code>INT_MAX</code>. If either condition is not met, return <code>-1</code>.</li>
-</ul>
-</li>
+<li><strong>Check the Validity of the Result</strong>: The result should be a valid integer that is greater than the original number. If the result exceeds the maximum value of an integer (<code>INT_MAX</code>), or if the result is smaller than or equal to the original number, return <code>-1</code>.</li>
+<li><strong>Return the Result</strong>: Convert the digits back to an integer and return the result if it is valid, otherwise return <code>-1</code>.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="1-converting-the-number-to-a-string">
+  1. <strong>Converting the Number to a String</strong>
+  <a class="heading-link" href="#1-converting-the-number-to-a-string">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">auto</span> digits <span style="color:#666">=</span> to_string(n);
+</span></span></code></pre></div><ul>
+<li>First, we convert the given number <code>n</code> to a string so that we can manipulate the digits more easily. This allows us to use string manipulation functions like <code>next_permutation</code> on the digits.</li>
+</ul>
+<h4 id="2-applying-the-next-permutation">
+  2. <strong>Applying the Next Permutation</strong>
+  <a class="heading-link" href="#2-applying-the-next-permutation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>next_permutation(begin(digits), end(digits));
+</span></span></code></pre></div><ul>
+<li>The function <code>next_permutation</code> is a built-in function in C++ that rearranges the digits to the next lexicographical permutation.</li>
+<li>It modifies the sequence of digits to the next greater permutation (if possible), otherwise, it rearranges the digits into the smallest possible order (if the input is already the largest permutation).</li>
+<li>We call this function on the <code>digits</code> string, which rearranges the digits into the next permutation.</li>
+</ul>
+<h4 id="3-converting-back-to-an-integer">
+  3. <strong>Converting Back to an Integer</strong>
+  <a class="heading-link" href="#3-converting-back-to-an-integer">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">auto</span> res <span style="color:#666">=</span> stoll(digits);
+</span></span></code></pre></div><ul>
+<li>After the digits are rearranged, we convert the modified string back to an integer using <code>stoll</code> (which stands for &ldquo;string to long long&rdquo;), since the number could potentially be large and beyond the range of <code>int</code>.</li>
+<li><code>stoll</code> converts the string back into an integer type that can handle large numbers.</li>
+</ul>
+<h4 id="4-validating-the-result">
+  4. <strong>Validating the Result</strong>
+  <a class="heading-link" href="#4-validating-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> (res <span style="color:#666">&gt;</span> INT_MAX <span style="color:#666">||</span> res <span style="color:#666">&lt;=</span> n)<span style="color:#666">?</span> <span style="color:#666">-</span><span style="color:#666">1</span><span style="color:#666">:</span> res;
+</span></span></code></pre></div><ul>
+<li>The final check ensures that the resulting number is valid:
 <ul>
-<li>The function <code>nextGreaterElement</code> takes an integer <code>n</code>.</li>
-<li>It converts <code>n</code> into a string, calls <code>next_permutation</code> to find the next greater arrangement of digits, and converts it back to an integer.</li>
-<li>Finally, it checks if the resulting integer is valid before returning it.</li>
+<li>If the result exceeds <code>INT_MAX</code> (the maximum value an <code>int</code> can hold), the function returns <code>-1</code>, since the number would be out of the valid range for a 32-bit integer.</li>
+<li>If the result is less than or equal to the original number <code>n</code>, the function also returns <code>-1</code>, since we are looking for the next greater number, not the same or smaller number.</li>
+</ul>
+</li>
+<li>If both conditions are passed, the result <code>res</code> is returned as the next greater number.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -311,10 +355,47 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(d), where <code>d</code> is the number of digits in <code>n</code>, due to the next permutation operation.</li>
-<li><strong>Space Complexity</strong>: O(d) for storing the digits in a string.</li>
+<li><strong>O(d)</strong>, where <code>d</code> is the number of digits in the given number <code>n</code>. The <code>next_permutation</code> function operates in linear time with respect to the number of digits, as it needs to examine and rearrange the digits once.</li>
+<li>Converting the number to a string and back to an integer also takes linear time with respect to the number of digits. Therefore, the time complexity is <strong>O(d)</strong>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(d)</strong>, where <code>d</code> is the number of digits in <code>n</code>. This space is required to store the string representation of the digits of <code>n</code> and the result. The space complexity comes from the need to store the digits as a string and the final rearranged string, making the space complexity linear with respect to the number of digits.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently finds the next greater number that can be formed from the digits of a given number <code>n</code>. It uses the &ldquo;next permutation&rdquo; algorithm, which is a well-established algorithm for finding the next lexicographically greater permutation in an ordered set of numbers.</p>
+<p><strong>Key points:</strong></p>
+<ul>
+<li>The algorithm finds the next permutation of digits in linear time.</li>
+<li>It uses string manipulation to facilitate the rearrangement of digits.</li>
+<li>It checks if the resulting number is within the valid range for integers and returns <code>-1</code> if not.</li>
+</ul>
+<p><strong>Advantages:</strong></p>
+<ul>
+<li>The solution is fast with a time complexity of <strong>O(d)</strong>, where <code>d</code> is the number of digits, making it suitable for large numbers.</li>
+<li>The space complexity is also <strong>O(d)</strong>, as it uses only the necessary space to store the digits and the result.</li>
+</ul>
+<p>This approach is a simple yet effective way to solve the problem using the next permutation algorithm, ensuring correctness and efficiency.</p>
  
 </div>
   

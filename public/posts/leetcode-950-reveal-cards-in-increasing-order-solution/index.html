@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -258,7 +258,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given an array of integers representing a deck of cards. Each integer represents the value of a card. The goal is to rearrange the deck such that when the cards are revealed in a specific order, they appear in increasing order.</p>
+<p>The problem requires us to return a deck of cards in a specific order. Initially, the deck is shuffled, and the goal is to simulate a process where the cards are revealed and rearranged in a defined pattern. The task is to reveal the cards in increasing order but follow a specific sequence of operations. Here&rsquo;s how the card revelation process works:</p>
+<ol>
+<li>Start with a shuffled deck of <code>n</code> cards.</li>
+<li>Sort the cards in increasing order.</li>
+<li>The first card is revealed.</li>
+<li>The next card is placed at the bottom of the deck.</li>
+<li>Repeat the above two steps until all the cards are revealed.</li>
+</ol>
+<p>The output should be the sequence of cards in the order they were revealed after performing this process.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -266,51 +274,90 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we can break down the problem into the following steps:</p>
 <ol>
 <li>
-<p><strong>Sorting the Deck</strong>:</p>
+<p><strong>Sorting the Deck</strong>: Since the cards need to be revealed in increasing order, we begin by sorting the deck in ascending order.</p>
+</li>
+<li>
+<p><strong>Simulating the Revealing Process</strong>:</p>
 <ul>
-<li>Start by sorting the input deck in ascending order. This ensures that we can place the cards in increasing order when revealed.</li>
+<li>We use a queue to simulate the positions of the cards.</li>
+<li>We initially push all card indices into the queue.</li>
+<li>For each card in the sorted deck, we place the card at the front of the queue (which corresponds to the current revealed position) and then move the next card to the bottom of the queue.</li>
+<li>This ensures that the revealed cards are arranged in the correct order while maintaining the order of the remaining cards.</li>
 </ul>
 </li>
 <li>
-<p><strong>Using a Queue</strong>:</p>
+<p><strong>Result Storage</strong>:</p>
 <ul>
-<li>Initialize a queue to keep track of the indices of the cards. This will help manage the order in which cards are revealed.</li>
-<li>Fill the queue with indices from <code>0</code> to <code>n-1</code>, where <code>n</code> is the number of cards.</li>
+<li>We store the cards in their final revealed order in a result array, where each index represents the position in the queue where the card is revealed.</li>
 </ul>
 </li>
 <li>
-<p><strong>Revealing Cards</strong>:</p>
+<p><strong>Queue Manipulation</strong>:</p>
 <ul>
-<li>For each card in the sorted deck:
-<ul>
-<li>Place the current card in the result array at the index specified by the front of the queue.</li>
-<li>Remove that index from the queue.</li>
-<li>If there are still indices left in the queue, move the next index to the back of the queue to simulate the &ldquo;revealing&rdquo; and &ldquo;placing at the back&rdquo; operations.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Returning the Result</strong>:</p>
-<ul>
-<li>Once all cards are placed, return the result array.</li>
+<li>We continue processing the cards until all cards have been revealed.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The function begins by sorting the <code>deck</code>.</li>
-<li>It uses a queue to maintain the order of indices and fills the result array by iterating through the sorted deck.</li>
-<li>Finally, it returns the result array with the cards arranged as required.</li>
+<ol>
+<li>
+<p><strong>Sorting the Deck</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(deck.begin(), deck.end());
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> deck.size();
+</span></span></code></pre></div><ul>
+<li>First, we sort the deck in increasing order so that the smallest card is revealed first.</li>
 </ul>
+</li>
+<li>
+<p><strong>Initializing Variables</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q;
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res(n, <span style="color:#666">0</span>);
+</span></span></code></pre></div><ul>
+<li>We initialize a queue <code>q</code> to simulate the process of revealing cards.</li>
+<li><code>res</code> is a vector that will store the final order of cards after the revealing process.</li>
+</ul>
+</li>
+<li>
+<p><strong>Pushing Initial Positions into Queue</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    q.push(i);
+</span></span></code></pre></div><ul>
+<li>We push all indices from 0 to <code>n-1</code> into the queue to represent the positions of the cards in the deck.</li>
+</ul>
+</li>
+<li>
+<p><strong>Simulating the Revealing Process</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    res[q.front()] <span style="color:#666">=</span> deck[i];
+</span></span><span style="display:flex;"><span>    q.pop();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>        q.push(q.front());
+</span></span><span style="display:flex;"><span>        q.pop();                
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>In the main loop, we reveal the current card (<code>deck[i]</code>) by placing it in the position given by <code>q.front()</code>. This corresponds to the card index in the queue.</li>
+<li>After revealing a card, we remove it from the front of the queue (<code>q.pop()</code>).</li>
+<li>If there are still cards left in the queue, we simulate the process of moving the next card to the bottom by pushing the front card to the back of the queue (<code>q.push(q.front())</code>) and then popping it from the front.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After processing all cards, the <code>res</code> array contains the final sequence of revealed cards.</li>
+</ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -318,10 +365,30 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li><strong>Time Complexity</strong>: O(n log n) due to the sorting operation.</li>
-<li><strong>Space Complexity</strong>: O(n) for the queue and result vector.</li>
+<li>Sorting the deck takes <code>O(n log n)</code>, where <code>n</code> is the number of cards in the deck.</li>
+<li>The loop for simulating the revealing process runs <code>n</code> times, and each operation inside the loop involves either a <code>pop</code> or a <code>push</code> operation on the queue. Each of these operations takes constant time, so the total time complexity for this part is <code>O(n)</code>.</li>
+<li>Overall, the time complexity is dominated by the sorting step, which is <code>O(n log n)</code>.</li>
 </ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>We use a queue to store <code>n</code> indices, and a result array <code>res</code> of size <code>n</code> to store the final card sequence. Thus, the space complexity is <code>O(n)</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently simulates the process of revealing cards in increasing order while respecting the specific sequence of operations required by the problem. By using a queue to manage the card positions and sorting the deck beforehand, we ensure that the cards are revealed in the correct order. The time complexity of <code>O(n log n)</code> makes this approach suitable for larger inputs, and the space complexity of <code>O(n)</code> ensures that the solution is memory efficient. The problem&rsquo;s solution is optimal in both time and space, making it an excellent approach to solving this problem.</p>
  
 </div>
   

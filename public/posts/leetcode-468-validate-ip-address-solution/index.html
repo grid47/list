@@ -197,7 +197,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -206,7 +206,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1168s0hbhb">
+        <h2 id="hahahugoshortcode1171s0hbhb">
   <a href="https://leetcode.com/problems/validate-ip-address/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -221,7 +221,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1168s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1171s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -285,7 +285,7 @@
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1168s2hbhb">
+<h2 id="hahahugoshortcode1171s2hbhb">
   
 
   
@@ -297,7 +297,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a string <code>queryIP</code>, determine if it is a valid IPv4 or IPv6 address. If it is valid, return &ldquo;IPv4&rdquo; or &ldquo;IPv6&rdquo;. If it is neither, return &ldquo;Neither&rdquo;.</p>
+<p>The problem asks us to determine whether a given query string is a valid IPv4 address, a valid IPv6 address, or neither. An IPv4 address is a 32-bit address written as four decimal numbers, separated by periods, and each number must be between 0 and 255. An IPv6 address is composed of eight groups of four hexadecimal characters, separated by colons.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -305,67 +305,148 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>We can break the solution into the following steps:</p>
 <ol>
 <li>
-<p><strong>Character Identification</strong>:</p>
+<p><strong>Identify the Type of IP Address</strong>: First, we determine whether the query string is an IPv4 address or an IPv6 address based on the presence of periods (<code>.</code>) or colons (<code>:</code>).</p>
 <ul>
-<li>Iterate through the characters in the <code>queryIP</code>. Check for the presence of <code>.</code> or <code>:</code> to determine if it&rsquo;s an IPv4 or IPv6 address.</li>
+<li>If the string contains periods, it&rsquo;s likely an IPv4 address.</li>
+<li>If the string contains colons, it&rsquo;s likely an IPv6 address.</li>
 </ul>
 </li>
 <li>
-<p><strong>IPv4 Address Validation</strong>:</p>
+<p><strong>Validate the IPv4 Address</strong>: If the string is identified as an IPv4 address, we validate it by checking the format and constraints:</p>
 <ul>
-<li>Split the string by <code>.</code> and check the following:
-<ul>
-<li>The address must contain exactly 4 parts.</li>
-<li>Each part must be between 1 to 3 characters long.</li>
-<li>Each character must be a digit (<code>0-9</code>).</li>
-<li>No part should start with <code>0</code> unless it is exactly <code>0</code>.</li>
-<li>Each part should convert to an integer not exceeding <code>255</code>.</li>
-</ul>
-</li>
+<li>The address must consist of four parts, each part being a number between 0 and 255.</li>
+<li>Each part must not have leading zeros, except when the part is exactly &ldquo;0&rdquo;.</li>
+<li>The part must be a valid integer and not exceed 255.</li>
 </ul>
 </li>
 <li>
-<p><strong>IPv6 Address Validation</strong>:</p>
+<p><strong>Validate the IPv6 Address</strong>: If the string is identified as an IPv6 address, we validate it by ensuring:</p>
 <ul>
-<li>Split the string by <code>:</code> and check the following:
-<ul>
-<li>The address must contain exactly 8 parts.</li>
-<li>Each part must be between 1 to 4 characters long.</li>
-<li>Each character must be a hexadecimal digit (<code>0-9</code>, <code>a-f</code>, <code>A-F</code>).</li>
+<li>The address must consist of exactly eight groups, each with 1 to 4 hexadecimal characters (letters <code>a-f</code>, <code>A-F</code> and digits <code>0-9</code>).</li>
+<li>Each group must not contain anything other than valid hexadecimal characters.</li>
 </ul>
 </li>
+<li>
+<p><strong>Return the Result</strong>: Based on the checks, we return:</p>
+<ul>
+<li>&ldquo;IPv4&rdquo; if the query string is a valid IPv4 address.</li>
+<li>&ldquo;IPv6&rdquo; if the query string is a valid IPv6 address.</li>
+<li>&ldquo;Neither&rdquo; if it is neither valid IPv4 nor IPv6.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Main Function</strong>:</p>
+<h4 id="step-1-initial-check-for--or-">
+  Step 1: Initial Check for <code>.</code> or <code>:</code>
+  <a class="heading-link" href="#step-1-initial-check-for--or-">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">ch</span>: queryIP) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (ch <span style="color:#666">==</span> <span style="color:#b44">&#39;.&#39;</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(checkIPv4(queryIP))
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#34;IPv4&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#34;Neither&#34;</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> (ch <span style="color:#666">==</span> <span style="color:#b44">&#39;:&#39;</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(checkIPv6(queryIP))                
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#34;IPv6&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#34;Neither&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#34;Neither&#34;</span>;
+</span></span></code></pre></div><ul>
+<li>The code begins by iterating through each character of the <code>queryIP</code> string.</li>
+<li>If a period (<code>.</code>) is found, it checks whether the string is a valid IPv4 address by calling the <code>checkIPv4</code> method.</li>
+<li>If a colon (<code>:</code>) is found, it checks whether the string is a valid IPv6 address by calling the <code>checkIPv6</code> method.</li>
+<li>If neither a period nor a colon is found, the function returns <code>&quot;Neither&quot;</code>.</li>
+</ul>
+<h4 id="step-2-checking-for-a-valid-ipv4-address">
+  Step 2: Checking for a Valid IPv4 Address
+  <a class="heading-link" href="#step-2-checking-for-a-valid-ipv4-address">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">checkIPv4</span>(string s) {
+</span></span><span style="display:flex;"><span>    s <span style="color:#666">+=</span> <span style="color:#b44">&#39;.&#39;</span>;  <span style="color:#080;font-style:italic">// Append a period to ensure last part is processed
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    stringstream ss(s);  <span style="color:#080;font-style:italic">// Convert string to stringstream for easier parsing
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    string str;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n_mark <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(getline(ss, str, <span style="color:#b44">&#39;.&#39;</span>)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(str.size() <span style="color:#666">&lt;</span> <span style="color:#666">1</span> <span style="color:#666">||</span> str.size() <span style="color:#666">&gt;</span> <span style="color:#666">3</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">ip</span>: str) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(ip<span style="color:#666">&lt;=</span><span style="color:#b44">&#39;9&#39;</span> <span style="color:#666">&amp;&amp;</span> ip <span style="color:#666">&gt;=</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>((str[<span style="color:#666">0</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">&amp;&amp;</span> str[<span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#666">||</span> (str[<span style="color:#666">0</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">&amp;&amp;</span> str[<span style="color:#666">1</span>] <span style="color:#666">&gt;=</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">&amp;&amp;</span> str[<span style="color:#666">1</span>] <span style="color:#666">&lt;=</span> <span style="color:#b44">&#39;9&#39;</span>))
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(stoi(str) <span style="color:#666">&gt;</span> <span style="color:#666">255</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>        n_mark<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n_mark <span style="color:#666">!=</span> <span style="color:#666">4</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>checkIPv4</code> function adds a period at the end of the input string to ensure the final part of the address is processed.</li>
+<li>The function uses a <code>stringstream</code> to split the string by periods (<code>.</code>) into individual parts.</li>
+<li>Each part is validated:
 <ul>
-<li>The function <code>validIPAddress</code> checks each character to determine if the input is an IPv4 or IPv6 address and calls the respective validation function.</li>
+<li>The part must be between 1 and 3 characters long.</li>
+<li>The part must contain only numeric characters.</li>
+<li>No part can have leading zeros unless it&rsquo;s &ldquo;0&rdquo;.</li>
+<li>The integer value of each part must not exceed 255.</li>
 </ul>
 </li>
-<li>
-<p><strong>IPv4 Validation</strong>:</p>
+<li>The function ensures that there are exactly four parts, returning <code>true</code> if all conditions are met and <code>false</code> otherwise.</li>
+</ul>
+<h4 id="step-3-checking-for-a-valid-ipv6-address">
+  Step 3: Checking for a Valid IPv6 Address
+  <a class="heading-link" href="#step-3-checking-for-a-valid-ipv6-address">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">checkIPv6</span>(string s) {
+</span></span><span style="display:flex;"><span>    s <span style="color:#666">+=</span> <span style="color:#b44">&#39;:&#39;</span>;  <span style="color:#080;font-style:italic">// Append a colon to ensure last part is processed
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    stringstream ss(s);
+</span></span><span style="display:flex;"><span>    string str;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n_mark <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(getline(ss, str, <span style="color:#b44">&#39;:&#39;</span>)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(str.size() <span style="color:#666">&lt;</span> <span style="color:#666">1</span> <span style="color:#666">||</span> str.size() <span style="color:#666">&gt;</span> <span style="color:#666">4</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">ip</span>: str) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>((ip <span style="color:#666">&gt;=</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">&amp;&amp;</span> ip <span style="color:#666">&lt;=</span> <span style="color:#b44">&#39;9&#39;</span>) <span style="color:#666">||</span> (ip <span style="color:#666">&gt;=</span> <span style="color:#b44">&#39;a&#39;</span> <span style="color:#666">&amp;&amp;</span> ip <span style="color:#666">&lt;=</span> <span style="color:#b44">&#39;f&#39;</span>) <span style="color:#666">||</span> (ip<span style="color:#666">&gt;=</span> <span style="color:#b44">&#39;A&#39;</span> <span style="color:#666">&amp;&amp;</span> ip<span style="color:#666">&lt;=</span><span style="color:#b44">&#39;F&#39;</span>))
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        n_mark<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(n_mark <span style="color:#666">!=</span> <span style="color:#666">8</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>checkIPv6</code> function appends a colon to the string to ensure the last part is processed.</li>
+<li>The function uses a <code>stringstream</code> to split the string by colons (<code>:</code>) into individual parts.</li>
+<li>Each part is validated:
 <ul>
-<li>The function <code>checkIPv4</code> uses a string stream to split the input and validates each part based on the conditions specified.</li>
+<li>The part must be between 1 and 4 characters long.</li>
+<li>Each character in the part must be a valid hexadecimal character (either a digit or a letter between <code>a-f</code> or <code>A-F</code>).</li>
 </ul>
 </li>
-<li>
-<p><strong>IPv6 Validation</strong>:</p>
-<ul>
-<li>The function <code>checkIPv6</code> similarly uses a string stream to split the input and validates each part based on the conditions for IPv6 addresses.</li>
+<li>The function ensures that there are exactly eight parts, returning <code>true</code> if all conditions are met and <code>false</code> otherwise.</li>
 </ul>
-</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -373,15 +454,41 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where <code>n</code> is the length of the input string <code>queryIP</code>, as each character is processed a constant number of times.</li>
-<li><strong>Space Complexity</strong>: O(1), as we only use a fixed amount of extra space for variables and the string stream.</li>
+<li><strong>IPv4 Checking</strong>: For an IPv4 address, the <code>checkIPv4</code> function processes the string in a linear pass and performs constant-time operations for each part. Therefore, its time complexity is <code>O(n)</code>, where <code>n</code> is the length of the string.</li>
+<li><strong>IPv6 Checking</strong>: Similarly, for an IPv6 address, the <code>checkIPv6</code> function processes the string in a linear pass, making its time complexity <code>O(n)</code>.</li>
+<li>The overall time complexity is dominated by the longest string to be checked, so it is <code>O(n)</code>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <code>O(1)</code> because the algorithm uses a fixed amount of extra space (mainly the stringstream and temporary variables), and the input size does not affect the space usage significantly.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of validating whether a string is a valid IPv4 or IPv6 address. By systematically checking the format and constraints for both types of IP addresses, the solution is both time-efficient and easy to understand. It ensures that each address follows the required rules for valid IPv4 and IPv6 formats, returning the appropriate result for each case. The time complexity of <code>O(n)</code> makes it well-suited for handling long IP address strings, and the space complexity of <code>O(1)</code> ensures minimal memory usage.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1168s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1171s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

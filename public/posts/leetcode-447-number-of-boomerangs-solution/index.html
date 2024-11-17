@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -216,7 +216,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1156s0hbhb">
+        <h2 id="hahahugoshortcode1159s0hbhb">
   <a href="https://leetcode.com/problems/number-of-boomerangs/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -231,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1156s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1159s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -260,7 +260,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> x <span style="color:#666">*</span> x <span style="color:#666">+</span> y <span style="color:#666">*</span> y;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1156s2hbhb">
+<h2 id="hahahugoshortcode1159s2hbhb">
   
 
   
@@ -272,7 +272,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a list of points in the 2D plane, the task is to find the number of boomerangs. A boomerang is defined as a tuple of points <code>(P1, P2, P3)</code> such that the distance between <code>P1</code> and <code>P2</code> is the same as the distance between <code>P1</code> and <code>P3</code>, and <code>P2</code> and <code>P3</code> are distinct points.</p>
+<p>The problem asks us to find the number of <strong>boomerangs</strong> in a given set of 2D points. A <strong>boomerang</strong> is defined as a set of three points <code>(i, j, k)</code> such that:</p>
+<ul>
+<li>The distance between points <code>i</code> and <code>j</code> is equal to the distance between points <code>i</code> and <code>k</code>.</li>
+<li>The points are distinct, and all points must be different.</li>
+</ul>
+<p>The task is to count how many such sets of three points (boomerangs) exist in the given list of points.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -280,81 +285,93 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve the problem, we can break it down into the following steps:</p>
 <ol>
 <li>
-<p><strong>Distance Calculation</strong>:</p>
+<p><strong>Understanding the Problem</strong>:</p>
 <ul>
-<li>Use the squared Euclidean distance to avoid floating-point precision issues and unnecessary square root calculations.</li>
-<li>Define a helper function <code>getDist</code> to compute the squared distance between two points.</li>
+<li>We need to identify sets of three points that form boomerangs. The key insight is that for each point <code>i</code>, we can calculate the distance from <code>i</code> to all other points <code>j</code> and <code>k</code>. If two other points have the same distance from <code>i</code>, they form a boomerang with <code>i</code>.</li>
+<li>To efficiently calculate the distance between points, we use the squared distance formula: <code>d = (x2 - x1)² + (y2 - y1)²</code>. Using squared distance avoids unnecessary floating-point precision errors and makes comparisons straightforward.</li>
 </ul>
 </li>
 <li>
-<p><strong>Counting Distances</strong>:</p>
+<p><strong>Plan</strong>:</p>
 <ul>
-<li>For each point <code>P1</code>, calculate the distance to every other point <code>P2</code>.</li>
-<li>Store the counts of these distances in a map (<code>mp</code>), where the key is the distance and the value is the number of points at that distance.</li>
+<li><strong>For each point <code>i</code></strong>:
+<ul>
+<li>Calculate the distance between <code>i</code> and every other point <code>j</code>.</li>
+<li>Store these distances in a map (or hash map) where the key is the distance, and the value is the count of how many points are at that distance from <code>i</code>.</li>
+<li>For each unique distance, if there are <code>n</code> points at that distance, then the number of ways to choose two points from these <code>n</code> points (which form a boomerang with <code>i</code>) is <code>n * (n - 1)</code>, because we choose two distinct points out of <code>n</code> and each pair can form a distinct boomerang.</li>
+<li>Accumulate the boomerang count.</li>
+</ul>
+</li>
 </ul>
 </li>
 <li>
-<p><strong>Calculating Boomerangs</strong>:</p>
+<p><strong>Efficiency Consideration</strong>:</p>
 <ul>
-<li>For each unique distance, if there are <code>val</code> points at that distance from <code>P1</code>, the number of ways to choose two distinct points (for <code>P2</code> and <code>P3</code>) is <code>val * (val - 1)</code>.</li>
-<li>This is because there are <code>val</code> options for <code>P2</code> and <code>val - 1</code> options for <code>P3</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Summing Results</strong>:</p>
-<ul>
-<li>Accumulate the counts of boomerangs for each point, clear the map after processing each point to avoid carrying over counts from previous iterations.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return the Result</strong>:</p>
-<ul>
-<li>Finally, return the total count of boomerangs found.</li>
+<li>The approach essentially compares all pairs of points for each point in the list, which gives a time complexity of <code>O(n^2)</code> where <code>n</code> is the number of points. This is feasible because the solution uses a hash map to efficiently count distances.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>Create a variable <code>res</code> to store the result and a map <code>mp</code> to count distances for each point.</li>
+<h4 id="step-1-helper-function-to-calculate-distance">
+  Step 1: Helper Function to Calculate Distance
+  <a class="heading-link" href="#step-1-helper-function-to-calculate-distance">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">getDist</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> a, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> a[<span style="color:#666">0</span>] <span style="color:#666">-</span> b[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> y <span style="color:#666">=</span> a[<span style="color:#666">1</span>] <span style="color:#666">-</span> b[<span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> x <span style="color:#666">*</span> x <span style="color:#666">+</span> y <span style="color:#666">*</span> y;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The function <code>getDist</code> computes the squared distance between two points <code>a</code> and <code>b</code>. The formula used is <code>(x2 - x1)² + (y2 - y1)²</code> where <code>a[0]</code> and <code>a[1]</code> are the coordinates of point <code>a</code>, and <code>b[0]</code> and <code>b[1]</code> are the coordinates of point <code>b</code>.</li>
+<li>The squared distance is used to avoid floating-point calculations and maintain precision when comparing distances.</li>
 </ul>
-</li>
-<li>
-<p><strong>Nested Loops for Distance Calculation</strong>:</p>
-<ul>
-<li>The outer loop iterates through each point as <code>P1</code>, while the inner loop calculates distances to every other point as <code>P2</code>.</li>
-<li>Use the <code>getDist</code> function to compute the squared distance.</li>
+<h4 id="step-2-main-logic-for-counting-boomerangs">
+  Step 2: Main Logic for Counting Boomerangs
+  <a class="heading-link" href="#step-2-main-logic-for-counting-boomerangs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> points.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> points.size(); j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> d <span style="color:#666">=</span> getDist(points[i], points[j]);
+</span></span><span style="display:flex;"><span>        mp[d]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> [_, val]<span style="color:#666">:</span> mp)
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> val <span style="color:#666">*</span> (val <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    mp.clear();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>mp</code> is a map that stores the frequency of distances from a given point <code>i</code> to all other points.</li>
+<li>We iterate through each point <code>i</code>. For each point <code>i</code>, we calculate the distance <code>d</code> between <code>i</code> and every other point <code>j</code>, and increment the count of that distance in <code>mp</code>.</li>
+<li>After calculating all distances from point <code>i</code> to every other point, we calculate how many boomerangs can be formed. If there are <code>val</code> points at the same distance from <code>i</code>, the number of ways to form boomerangs is <code>val * (val - 1)</code> (choosing two distinct points from <code>val</code>).</li>
+<li>Finally, we clear the map <code>mp</code> to prepare for the next point <code>i</code>.</li>
 </ul>
-</li>
-<li>
-<p><strong>Updating Boomerangs Count</strong>:</p>
-<ul>
-<li>For each distance in the map, calculate the number of boomerangs formed using the count of points at that distance.</li>
+<h4 id="step-3-return-the-result">
+  Step 3: Return the Result
+  <a class="heading-link" href="#step-3-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div><ul>
+<li>The variable <code>res</code> holds the total number of boomerangs found. Once all points have been processed, we return the final count.</li>
 </ul>
-</li>
-<li>
-<p><strong>Clearing the Map</strong>:</p>
-<ul>
-<li>Clear the distance map after processing each point to ensure accurate counting for the next point.</li>
-</ul>
-</li>
-<li>
-<p><strong>Returning the Count</strong>:</p>
-<ul>
-<li>Return the accumulated count of boomerangs after processing all points.</li>
-</ul>
-</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -362,15 +379,43 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n^2), where <code>n</code> is the number of points. The algorithm involves two nested loops to calculate distances.</li>
-<li><strong>Space Complexity</strong>: O(n), where <code>n</code> is the number of points, as we store distances in a map for each point.</li>
+<li><strong>Outer Loops</strong>: We have two nested loops: the outer loop iterates over each point (<code>O(n)</code>), and the inner loop iterates over all points for distance calculation (<code>O(n)</code>).</li>
+<li><strong>Distance Calculation</strong>: For each pair of points <code>(i, j)</code>, we calculate the squared distance, which is an <code>O(1)</code> operation.</li>
+<li><strong>Total Time Complexity</strong>: The overall time complexity of the algorithm is <code>O(n^2)</code> where <code>n</code> is the number of points. This is because for each point, we compute distances to every other point.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Map Storage</strong>: The space complexity is determined by the map <code>mp</code>, which stores the frequencies of distances. In the worst case, there can be <code>O(n)</code> distinct distances, so the space complexity is <code>O(n)</code>.</li>
+<li><strong>Total Space Complexity</strong>: The overall space complexity is <code>O(n)</code> for the map storage.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution effectively counts the number of boomerangs in a given set of points by calculating the squared distances between every pair of points and utilizing a map to count how many points lie at each distance. By iterating over each point and counting the possible boomerangs formed by pairs of points at the same distance, we achieve an optimal solution with a time complexity of <code>O(n^2)</code>.</p>
+<p>This approach is efficient enough for moderate-sized input datasets and provides a clear and concise method for solving the problem using simple geometric insights and hash-based counting.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1156s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1159s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

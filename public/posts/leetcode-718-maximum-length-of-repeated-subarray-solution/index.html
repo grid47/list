@@ -222,7 +222,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -231,7 +231,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1284s0hbhb">
+        <h2 id="hahahugoshortcode1283s0hbhb">
   <a href="https://leetcode.com/problems/maximum-length-of-repeated-subarray/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -246,7 +246,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1284s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1283s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -274,7 +274,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> mx;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1284s2hbhb">
+<h2 id="hahahugoshortcode1283s2hbhb">
   
 
   
@@ -286,7 +286,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given two integer arrays <code>nums1</code> and <code>nums2</code>, return the length of the longest common subarray between them. A subarray is a contiguous part of an array.</p>
+<p>The problem asks us to find the length of the longest common subarray between two given arrays, <code>nums1</code> and <code>nums2</code>. A <strong>subarray</strong> is defined as a contiguous segment of an array. The goal is to identify the longest contiguous segment that appears in both arrays and return its length.</p>
+<p>This problem can be viewed as a variation of the <strong>longest common subsequence</strong> problem, but with the additional restriction that the matching elements must be contiguous in both arrays.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -294,72 +295,106 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Dynamic Programming</strong>:</p>
+<p>To solve this problem, we can utilize <strong>dynamic programming (DP)</strong>. The idea is to use a two-dimensional DP table to store the length of the longest common subarray found so far at any pair of indices in the two arrays.</p>
+<p>We define a DP table <code>dp[i][j]</code> where:</p>
 <ul>
-<li>Use a 2D array <code>dp</code> where <code>dp[i][j]</code> represents the length of the longest common subarray that ends at <code>nums1[i-1]</code> and <code>nums2[j-1]</code>.</li>
+<li><code>dp[i][j]</code> represents the length of the longest common subarray ending at <code>nums1[i-1]</code> and <code>nums2[j-1]</code>.</li>
 </ul>
-</li>
+<p>The key idea is to iterate through both arrays and update the DP table based on whether the elements <code>nums1[i-1]</code> and <code>nums2[j-1]</code> are equal. If they are, the longest common subarray ending at <code>i</code> and <code>j</code> is one longer than the longest common subarray ending at <code>i-1</code> and <code>j-1</code>. Otherwise, the common subarray length is zero.</p>
+<p>At each step, we track the maximum length of the common subarray encountered so far.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the code to understand how it works:</p>
+<ol>
 <li>
 <p><strong>Initialization</strong>:</p>
 <ul>
-<li>Initialize the <code>dp</code> array with dimensions <code>(n1 + 1) x (n2 + 1)</code>, where <code>n1</code> is the length of <code>nums1</code> and <code>n2</code> is the length of <code>nums2</code>.</li>
-<li>The first row and first column are initialized to zero, representing the scenario of comparing with an empty array.</li>
+<li>We first compute the sizes of the two input arrays:</li>
 </ul>
-</li>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n1 <span style="color:#666">=</span> nums1.size(), n2 <span style="color:#666">=</span> nums2.size();
+</span></span></code></pre></div><ul>
+<li>We then create a 2D DP table <code>dp</code> of size <code>(n1 + 1) x (n2 + 1)</code> initialized to 0. The extra row and column are used to handle the base case when one of the arrays is empty:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> dp(n1 <span style="color:#666">+</span> <span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n2 <span style="color:#666">+</span> <span style="color:#666">1</span>));
+</span></span></code></pre></div></li>
 <li>
-<p><strong>State Transition</strong>:</p>
+<p><strong>Base Case</strong>:</p>
 <ul>
-<li>Iterate through each element of <code>nums1</code> and <code>nums2</code>:
-<ul>
-<li>If <code>nums1[i - 1]</code> is equal to <code>nums2[j - 1]</code>, then:
-<ul>
-<li>Set <code>dp[i][j] = dp[i - 1][j - 1] + 1</code> (indicating a common subarray has been found and its length increases).</li>
-<li>Update <code>mx</code> with the maximum value found so far.</li>
+<li>The first row (<code>dp[0][*]</code>) and the first column (<code>dp[*][0]</code>) are initialized to zero because if either array is empty, the longest common subarray is of length 0. This is done using two loops:</li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n1 <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) dp[i][<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n2 <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) dp[<span style="color:#666">0</span>][i] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div></li>
 <li>
-<p><strong>Result</strong>:</p>
+<p><strong>Dynamic Programming Transition</strong>:</p>
 <ul>
-<li>The value of <code>mx</code> holds the length of the longest common subarray.</li>
+<li>We then iterate through both arrays starting from index 1 to compute the values in the DP table:</li>
 </ul>
-</li>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">0</span>;  <span style="color:#080;font-style:italic">// This will hold the maximum length of the common subarray.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n1 <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n2 <span style="color:#666">+</span> <span style="color:#666">1</span>; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (nums1[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> nums2[j <span style="color:#666">-</span> <span style="color:#666">1</span>]) {
+</span></span><span style="display:flex;"><span>            dp[i][j] <span style="color:#666">=</span> dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            mx <span style="color:#666">=</span> max(mx, dp[i][j]);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>For each pair of indices <code>i</code> and <code>j</code>, if <code>nums1[i - 1] == nums2[j - 1]</code>, it means we have found a common element. The length of the longest common subarray ending at <code>i</code> and <code>j</code> is <code>dp[i-1][j-1] + 1</code>, which is the length of the subarray ending at <code>i-1</code> and <code>j-1</code> extended by one element.</li>
+<li>If <code>nums1[i - 1] != nums2[j - 1]</code>, the value of <code>dp[i][j]</code> remains 0, as no common subarray ends at those indices.</li>
+<li>At each step, we update <code>mx</code> to track the maximum length of any common subarray encountered so far:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>mx <span style="color:#666">=</span> max(mx, dp[i][j]);
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>After iterating through the entire array, the maximum length of the longest common subarray is stored in <code>mx</code>, and we return this value:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> mx;
+</span></span></code></pre></div></li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li><strong>Function</strong>:
+<li>
+<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li><code>findLength(vector&lt;int&gt;&amp; nums1, vector&lt;int&gt;&amp; nums2)</code>: Computes the length of the longest common subarray between the two arrays.</li>
+<li>The algorithm uses two nested loops to fill the DP table, where the outer loop runs <code>n1</code> times and the inner loop runs <code>n2</code> times, where <code>n1</code> and <code>n2</code> are the lengths of the two input arrays <code>nums1</code> and <code>nums2</code>. Thus, the time complexity is <strong>O(n1 * n2)</strong>, which is optimal for this type of problem.</li>
 </ul>
 </li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The algorithm uses a 2D DP table of size <code>(n1 + 1) x (n2 + 1)</code>, which requires <strong>O(n1 * n2)</strong> space. This is the space complexity of the solution. The extra space is necessary to store the intermediate results of the DP computation.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<p>If space is a concern, one could optimize the space complexity by using only two rows of the DP table, reducing the space complexity to <strong>O(min(n1, n2))</strong>, since only the previous row is needed at each step.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: O(n1 * n2), where <code>n1</code> and <code>n2</code> are the lengths of <code>nums1</code> and <code>nums2</code>, respectively, due to the nested loop over both arrays.</li>
-<li><strong>Space Complexity</strong>: O(n1 * n2) for the <code>dp</code> array used to store intermediate results.</li>
-</ul>
+<p>This solution leverages dynamic programming to find the longest common subarray between two arrays. By using a 2D DP table, we track the length of the longest subarray ending at each pair of indices in <code>nums1</code> and <code>nums2</code>. The algorithm is efficient, with a time complexity of <strong>O(n1 * n2)</strong> and a space complexity of <strong>O(n1 * n2)</strong>, making it well-suited for solving problems involving finding common subarrays or subsequences.</p>
+<p>This method ensures that we explore all possible matching subarrays and compute the longest one efficiently. The use of dynamic programming eliminates the need for brute-force solutions, which would be much slower for large inputs. This approach can be easily adapted to other problems involving common subsequences or subarrays.</p>
+<p>In summary, the dynamic programming approach used here is a robust and optimal way to solve the problem of finding the longest common subarray. It provides a clear, systematic approach that can be applied to a variety of related problems in string and array manipulation.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1284s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1283s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

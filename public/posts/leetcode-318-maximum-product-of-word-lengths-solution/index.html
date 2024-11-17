@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -264,70 +264,132 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-statement">
+  🚀 Problem Statement
+  <a class="heading-link" href="#-problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a list of unique words, find the maximum product of lengths of two words where the two words do not share any common letters.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>We&rsquo;re tackling a fun challenge today! The goal is to find <strong>two words in a list</strong> that have no common letters and to maximize the <strong>product of their lengths</strong>. So, if we have words like <code>&quot;abcw&quot;</code>, <code>&quot;baz&quot;</code>, <code>&quot;foo&quot;</code>, and <code>&quot;bar&quot;</code>, we need to find pairs where <strong>no letters overlap</strong> and calculate the best possible length product. Let&rsquo;s dive into how we can solve this effectively!</p>
+<hr>
+<h3 id="-approach">
+  🧠 Approach
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The solution employs bit manipulation to efficiently determine whether two words share common letters. The main steps are:</p>
+<p>To solve this, we&rsquo;ll take a unique approach using <strong>bitwise operations</strong>. Here’s the game plan:</p>
 <ol>
 <li>
-<p><strong>Bitmask Representation</strong>:</p>
+<p><strong>Create a Bitmask for Each Word</strong> 🧩:</p>
 <ul>
-<li>Create an array <code>mask</code> where each element represents a word in the list as a bitmask. Each bit in the mask indicates whether a corresponding letter (&lsquo;a&rsquo; to &lsquo;z&rsquo;) is present in the word.</li>
+<li>For each word, we’ll create a bitmask where each <strong>bit represents a letter</strong>. If a letter is present in the word, we set that bit to 1. This lets us compactly store all the letters in the word in a single integer.</li>
 </ul>
 </li>
 <li>
-<p><strong>Calculating the Mask</strong>:</p>
+<p><strong>Check for Overlapping Letters with Bitwise AND</strong> 🔍:</p>
 <ul>
-<li>For each word, iterate through its characters and set the respective bits in the bitmask. For example, if the word contains the character &lsquo;c&rsquo;, the bit at position <code>2</code> (since &lsquo;c&rsquo; is the third letter) is set.</li>
+<li>Two words have no shared letters if their <strong>bitwise AND</strong> results in 0. This way, we can instantly know if two words share any letters without looping through each character. Super efficient!</li>
 </ul>
 </li>
 <li>
-<p><strong>Finding the Maximum Product</strong>:</p>
+<p><strong>Pair Comparison for Maximum Product</strong> 🎯:</p>
 <ul>
-<li>For each word, compare its bitmask with the bitmasks of all previously processed words. If the bitwise AND of the two masks is <code>0</code>, it means there are no common letters between the two words.</li>
-<li>Calculate the product of their lengths and update the maximum product found so far.</li>
+<li>We’ll compare each pair of words, checking if their bitmasks overlap. If not, we calculate their length product and track the maximum product we find.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<hr>
+<h3 id="-step-by-step-code-breakdown">
+  🔨 Step-by-Step Code Breakdown
+  <a class="heading-link" href="#-step-by-step-code-breakdown">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Input</strong>: A vector of strings <code>words</code>.</li>
-<li><strong>Output</strong>: An integer representing the maximum product of lengths of two words with no common letters.</li>
+<p>Let’s break down each part of the code for clarity.</p>
+<h4 id="step-1-bitmask-setup-for-each-word">
+  Step 1: Bitmask Setup for Each Word
+  <a class="heading-link" href="#step-1-bitmask-setup-for-each-word">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> len <span style="color:#666">=</span> words.size();
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mask(len, <span style="color:#666">0</span>);
+</span></span></code></pre></div><ul>
+<li><strong>Initialize a Mask Array</strong>: We&rsquo;ll use <code>mask</code> to store the bitmask of each word in the list.</li>
 </ul>
+<h4 id="step-2-generate-each-words-bitmask-">
+  Step 2: Generate Each Word’s Bitmask 🎲
+  <a class="heading-link" href="#step-2-generate-each-words-bitmask-">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> len; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    string word <span style="color:#666">=</span> words[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> word.size(); j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        mask[i] <span style="color:#666">|=</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> (word[j] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Loop Through Each Word</strong>: For every letter in each word, we set the appropriate bit in that word’s mask.</li>
+<li><strong>Bit Position Calculation</strong>: We calculate the position as <code>word[j] - 'a'</code> and set the bit using <code>|= (1 &lt;&lt; position)</code>. Each bit in the bitmask represents a letter in the alphabet.</li>
+</ul>
+<h4 id="step-3-compare-each-pair-for-maximum-product-">
+  Step 3: Compare Each Pair for Maximum Product 📊
+  <a class="heading-link" href="#step-3-compare-each-pair-for-maximum-product-">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> len; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> i; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>((mask[i] <span style="color:#666">&amp;</span> mask[j]) <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>            res <span style="color:#666">=</span> max(res, <span style="color:#0b0;font-weight:bold">int</span>(words[i].size() <span style="color:#666">*</span> words[j].size()));
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div><ul>
+<li><strong>Pairwise Comparison</strong>: For every pair of words, we check if they share any letters by checking <code>(mask[i] &amp; mask[j]) == 0</code>.</li>
+<li><strong>Update Maximum Product</strong>: If there are no shared letters, we calculate the product of their lengths and update our maximum product if this new one is larger.</li>
+</ul>
+<hr>
+<h3 id="-complexity-analysis">
+  📈 Complexity Analysis
+  <a class="heading-link" href="#-complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>Generating bitmasks takes <strong>O(n * L)</strong>, where <code>L</code> is the average word length.</li>
+<li>Comparing each pair of words takes <strong>O(n^2)</strong>. Each comparison is quick due to bitwise operations, making this efficient enough for moderately large inputs.</li>
+</ul>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>We only use extra space for the <code>mask</code> array, so <strong>O(n)</strong> in space.</li>
+</ul>
+<hr>
+<h3 id="-conclusion">
+  🏁 Conclusion
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution gives us a smart and efficient way to find the maximum product of two non-overlapping words! By leveraging bitwise operations, we can speed through comparisons without wasting time checking each letter individually. Here’s what we achieved:</p>
 <ol>
-<li>Initialize a mask for each word based on its letters.</li>
-<li>Compare the masks of each pair of words to determine if they share any common letters.</li>
-<li>Return the maximum product of the lengths of the valid word pairs.</li>
+<li><strong>Optimized Comparisons</strong> 🛠️: Bitwise AND lets us check for common letters in constant time!</li>
+<li><strong>Clear Structure</strong> 📐: Our approach combines bitmasks with simple logic to calculate maximums efficiently.</li>
+<li><strong>Scalable for Moderate Inputs</strong> 🌐: With an <strong>O(n^2)</strong> complexity, this solution is ready to handle reasonably large lists of words.</li>
 </ol>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ul>
-<li><strong>Time Complexity</strong>: (O(n^2 \cdot m)), where (n) is the number of words and (m) is the average length of the words. The nested loop compares each pair of words.</li>
-<li><strong>Space Complexity</strong>: (O(n)) for the mask array.</li>
-</ul>
+<p><strong>Keep up the great work on cracking these tricky challenges! 🏆 Each bitwise technique learned is one step closer to becoming a DSA master!</strong></p>
  
 </div>
   

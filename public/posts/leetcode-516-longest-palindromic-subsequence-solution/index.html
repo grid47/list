@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -211,7 +211,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1187s0hbhb">
+        <h2 id="hahahugoshortcode1185s0hbhb">
   <a href="https://leetcode.com/problems/longest-palindromic-subsequence/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -226,7 +226,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1187s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1185s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -258,7 +258,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> dp(<span style="color:#666">0</span>, n <span style="color:#666">-</span> <span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1187s2hbhb">
+<h2 id="hahahugoshortcode1185s2hbhb">
   
 
   
@@ -270,7 +270,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a string <code>s</code>, return the length of the longest palindromic subsequence in <code>s</code>.</p>
+<p>The task is to find the <strong>longest palindromic subsequence</strong> (LPS) in a given string. A subsequence is a sequence that can be derived from another sequence by deleting some or no elements without changing the order of the remaining elements. A palindromic subsequence is one that reads the same backward as forward.</p>
+<p>For example:</p>
+<ul>
+<li>In the string <code>&quot;bbbab&quot;</code>, the longest palindromic subsequence is <code>&quot;bbbb&quot;</code>.</li>
+<li>In the string <code>&quot;cbbd&quot;</code>, the longest palindromic subsequence is <code>&quot;bb&quot;</code>.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -278,87 +283,86 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we use <strong>dynamic programming (DP)</strong>. The idea is to break the problem into smaller subproblems, each solving a subpart of the string and storing the results to avoid redundant calculations.</p>
+<p>The basic idea behind the DP solution is to compute the longest palindromic subsequence for substrings of the input string. If the characters at the two ends of a substring match, they can be part of the palindrome. If not, the solution is the maximum value obtained by excluding either the left or the right character and computing the LPS for the remaining substring.</p>
+<h4 id="key-steps">
+  Key Steps:
+  <a class="heading-link" href="#key-steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li>
-<p><strong>Dynamic Programming</strong>:</p>
-<ul>
-<li>Use a 2D array <code>memo</code> to store the lengths of the longest palindromic subsequences for different substrings of <code>s</code>.</li>
-<li>The dimensions of the array will be <code>n x n</code>, where <code>n</code> is the length of the string.</li>
-</ul>
-</li>
-<li>
-<p><strong>Recursive Function</strong>:</p>
-<ul>
-<li>Implement a recursive function <code>dp(i, j)</code> that computes the longest palindromic subsequence length for the substring <code>s[i..j]</code>.</li>
-<li>Base cases:
-<ul>
-<li>If <code>i == j</code>, it means the substring is a single character, which is a palindrome of length 1.</li>
-<li>If <code>i == j - 1</code>, check if the two characters are the same:
-<ul>
-<li>If they are, return 2 (both characters form a palindrome).</li>
-<li>If not, return 1 (either character can form a palindrome).</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Memoization</strong>:</p>
-<ul>
-<li>If the value for <code>memo[i][j]</code> has already been computed, return that value to avoid redundant calculations.</li>
-</ul>
-</li>
-<li>
-<p><strong>Recurrence Relation</strong>:</p>
-<ul>
-<li>If <code>s[i] == s[j]</code>, the characters can contribute to a palindromic subsequence, so add 2 to the result of <code>dp(i + 1, j - 1)</code>.</li>
-<li>If they are not equal, take the maximum of the results from the two possible options: excluding the character at the beginning or the end of the substring.</li>
-</ul>
-</li>
-<li>
-<p><strong>Result Computation</strong>:</p>
-<ul>
-<li>Call the <code>dp(0, n - 1)</code> function, which considers the entire string, to get the final result.</li>
-</ul>
-</li>
+<li><strong>Base Case</strong>: A string of length 1 is always a palindrome, so <code>dp(i, i) = 1</code>.</li>
+<li><strong>Pair Matching</strong>: If the characters at the two ends of the substring match (<code>str[i] == str[j]</code>), the length of the palindromic subsequence can be extended by 2, i.e., <code>dp(i, j) = 2 + dp(i + 1, j - 1)</code>.</li>
+<li><strong>Maximize by Excluding Characters</strong>: If the characters don&rsquo;t match, the longest subsequence can be obtained by excluding either the left or right character. Thus, <code>dp(i, j) = max(dp(i + 1, j), dp(i, j - 1))</code>.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>This approach uses memoization (caching the results of subproblems) to optimize the time complexity. Memoization helps avoid recalculating the same subproblem multiple times.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>Let&rsquo;s break down the code into its components and explain each part:</p>
 <ol>
 <li>
-<p><strong>Function Definition</strong>:</p>
-<ul>
-<li>The <code>longestPalindromeSubseq</code> function initializes the string and the memoization table.</li>
+<p><strong>Class Definition and Member Variables</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    string str;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> memo;
+</span></span></code></pre></div><ul>
+<li>The <code>str</code> variable holds the input string.</li>
+<li><code>memo</code> is a 2D vector used to store the results of subproblems, where <code>memo[i][j]</code> represents the longest palindromic subsequence between indices <code>i</code> and <code>j</code> in the string <code>str</code>. Initially, it is filled with <code>-1</code> to indicate that no subproblem has been solved yet.</li>
 </ul>
 </li>
 <li>
-<p><strong>Recursive DP Call</strong>:</p>
+<p><strong>DP Function (Recursive)</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> j) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> j <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> str[i] <span style="color:#666">==</span> str[j]<span style="color:#666">?</span> <span style="color:#666">2</span> <span style="color:#666">:</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[i][j] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[i][j];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(str[i] <span style="color:#666">==</span> str[j]) {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> <span style="color:#666">2</span> <span style="color:#666">+</span> dp(i <span style="color:#666">+</span> <span style="color:#666">1</span>, j <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> max(dp(i <span style="color:#666">+</span> <span style="color:#666">1</span>, j), dp(i, j <span style="color:#666">-</span> <span style="color:#666">1</span>));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[i][j] <span style="color:#666">=</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Base Cases</strong>:
 <ul>
-<li>The function <code>dp(i, j)</code> is called with the entire range of the string.</li>
+<li>If <code>i == j</code>, it means we are considering a single character, which is always a palindrome of length 1.</li>
+<li>If <code>i == j - 1</code>, we are looking at two adjacent characters. If they are equal, the palindromic subsequence is of length 2; otherwise, it is 1 (each character alone).</li>
+</ul>
+</li>
+<li><strong>Memoization Check</strong>: If <code>memo[i][j]</code> is not <code>-1</code>, it means the subproblem has already been solved, and we can return the cached result.</li>
+<li><strong>Recursive Computation</strong>:
+<ul>
+<li>If <code>str[i] == str[j]</code>, then these two characters can be part of the palindrome, so we add 2 to the result of <code>dp(i + 1, j - 1)</code>.</li>
+<li>If <code>str[i] != str[j]</code>, we compute the LPS by excluding either the left or right character: <code>max(dp(i + 1, j), dp(i, j - 1))</code>.</li>
+</ul>
+</li>
+<li>The result is stored in <code>memo[i][j]</code> to be reused later.</li>
 </ul>
 </li>
 <li>
-<p><strong>Memoization Check</strong>:</p>
-<ul>
-<li>The function checks if the result for the current substring has been computed and stored in <code>memo</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Base Cases</strong>:</p>
-<ul>
-<li>Handle the single character and two-character cases directly.</li>
-</ul>
-</li>
-<li>
-<p><strong>Recursion and Memoization</strong>:</p>
-<ul>
-<li>Calculate the result based on the conditions and store it in <code>memo</code> before returning.</li>
+<p><strong>Main Function to Initialize and Call the DP</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestPalindromeSubseq</span>(string s) {
+</span></span><span style="display:flex;"><span>    str <span style="color:#666">=</span> s;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s.size();
+</span></span><span style="display:flex;"><span>    memo.resize(n, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">-</span><span style="color:#666">1</span>));
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp(<span style="color:#666">0</span>, n <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>longestPalindromeSubseq</code> function initializes the <code>str</code> variable with the input string <code>s</code> and the <code>memo</code> table to store the results of subproblems.</li>
+<li>It then calls the <code>dp(0, n - 1)</code> function, which starts the recursive calculation for the entire string.</li>
+<li>Finally, it returns the result, which is the length of the longest palindromic subsequence in the string.</li>
 </ul>
 </li>
 </ol>
@@ -369,15 +373,40 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n^2), where n is the length of the string, since each substring is computed once.</li>
-<li><strong>Space Complexity</strong>: O(n^2), due to the memoization table used for storing results of computed subproblems.</li>
+<li><strong>O(n^2)</strong>: The time complexity of this solution is quadratic because we are solving each subproblem for all pairs <code>(i, j)</code> where <code>i &lt;= j</code>, resulting in <code>O(n^2)</code> subproblems. For each subproblem, we perform constant-time operations (comparison and recursion).</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n^2)</strong>: We use a 2D memoization table <code>memo</code> of size <code>n x n</code> to store the results of subproblems. Therefore, the space complexity is also quadratic.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the longest palindromic subsequence in a given string using dynamic programming with memoization. By breaking the problem down into smaller subproblems and reusing previously computed results, the solution avoids redundant calculations and achieves optimal performance. The time and space complexity of O(n^2) make this approach feasible for relatively large input sizes.</p>
+<p>This technique is applicable to other string manipulation problems that require finding subsequences, such as the longest common subsequence (LCS) and edit distance, making it a versatile tool for solving a wide range of dynamic programming problems.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1187s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1185s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

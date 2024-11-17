@@ -217,7 +217,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -226,7 +226,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1233s0hbhb">
+        <h2 id="hahahugoshortcode1231s0hbhb">
   <a href="https://leetcode.com/problems/valid-triangle-number/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -241,7 +241,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1233s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1231s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -265,7 +265,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> cnt;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1233s2hbhb">
+<h2 id="hahahugoshortcode1231s2hbhb">
   
 
   
@@ -277,7 +277,10 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array of integers <code>nums</code>, determine the number of valid triangles that can be formed using the elements of the array. A triangle is valid if the sum of the lengths of any two sides is greater than the length of the third side.</p>
+<p>Given an array of integers <code>nums</code>, we are tasked with finding the number of valid triangles that can be formed with three sides where the side lengths are taken from the array. For a set of three side lengths to form a valid triangle, the sum of any two sides must be greater than the third side. Specifically, given three side lengths <code>a</code>, <code>b</code>, and <code>c</code> (where <code>a &lt;= b &lt;= c</code>), the condition for forming a triangle is:</p>
+<ul>
+<li><code>a + b &gt; c</code></li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -285,44 +288,100 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we can use the <strong>two-pointer technique</strong> combined with sorting. The main idea is to:</p>
 <ol>
-<li>
-<p><strong>Sorting the Array</strong>:</p>
-<ul>
-<li>Start by sorting the array in non-decreasing order. This makes it easier to apply the triangle inequality since for any three sides <code>a</code>, <code>b</code>, and <code>c</code> (where <code>a ≤ b ≤ c</code>), we only need to check if <code>a + b &gt; c</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Two-Pointer Technique</strong>:</p>
-<ul>
-<li>Use a loop to fix the largest side (<code>nums[i]</code>).</li>
-<li>Use two pointers: one starting at the beginning of the array (<code>j</code>) and the other just before the fixed largest side (<code>k</code>).</li>
-<li>Check if the sum of the two pointers&rsquo; values (<code>nums[j] + nums[k]</code>) is greater than the largest side (<code>nums[i]</code>):
-<ul>
-<li>If it is, then all values between <code>j</code> and <code>k</code> can form a valid triangle with <code>nums[i]</code>. Thus, add <code>k - j</code> to the count and decrement <code>k</code>.</li>
-<li>If it is not, increment <code>j</code> to try a larger value.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Count Valid Triangles</strong>:</p>
-<ul>
-<li>Keep a counter (<code>cnt</code>) that tracks the number of valid triangles found.</li>
-</ul>
-</li>
+<li><strong>Sort the array</strong>: Sorting the array will allow us to simplify checking the triangle inequality condition. If the array is sorted, for any triplet of sides <code>a</code>, <code>b</code>, and <code>c</code> (where <code>a &lt;= b &lt;= c</code>), we only need to check if <code>a + b &gt; c</code> to verify if they form a valid triangle.</li>
+<li><strong>Iterate through each element</strong>: For each element <code>nums[i]</code>, treat it as the largest side (<code>c</code>) of the triangle.</li>
+<li><strong>Use two pointers</strong>: For each fixed <code>nums[i]</code> as <code>c</code>, use two pointers (<code>j</code> and <code>k</code>) to find pairs of numbers from the previous elements (<code>nums[0]</code> to <code>nums[i-1]</code>) that can form valid triangles with <code>nums[i]</code>. Specifically, for each pair <code>nums[j]</code> and <code>nums[k]</code>, we check if they satisfy the condition <code>nums[j] + nums[k] &gt; nums[i]</code>.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-sorting-the-array">
+  Step 1: Sorting the Array
+  <a class="heading-link" href="#step-1-sorting-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(nums.begin(), nums.end());
+</span></span></code></pre></div><ul>
+<li>We begin by sorting the <code>nums</code> array in ascending order. This ensures that for each triplet <code>a</code>, <code>b</code>, and <code>c</code> where <code>a &lt;= b &lt;= c</code>, the triangle inequality check (<code>a + b &gt; c</code>) will be straightforward to implement.</li>
+</ul>
+<h4 id="step-2-initialize-variables">
+  Step 2: Initialize Variables
+  <a class="heading-link" href="#step-2-initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>, n <span style="color:#666">=</span> nums.size();
+</span></span></code></pre></div><ul>
+<li><code>cnt</code> will store the count of valid triangles.</li>
+<li><code>n</code> is the size of the input array <code>nums</code>.</li>
+</ul>
+<h4 id="step-3-loop-over-the-largest-side-c">
+  Step 3: Loop Over the Largest Side (<code>c</code>)
+  <a class="heading-link" href="#step-3-loop-over-the-largest-side-c">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>)
+</span></span></code></pre></div><ul>
+<li>We start by iterating backward from the last element of the sorted array (<code>i = n - 1</code>). The element at index <code>i</code> is considered as the largest side (<code>c</code>) of the triangle.</li>
+<li>The reason for iterating backwards is that we want to consider the largest possible side first and check for possible valid triangles with smaller sides.</li>
+</ul>
+<h4 id="step-4-use-two-pointers-to-find-valid-pairs">
+  Step 4: Use Two Pointers to Find Valid Pairs
+  <a class="heading-link" href="#step-4-use-two-pointers-to-find-valid-pairs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>, k <span style="color:#666">=</span> i <span style="color:#666">-</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> k;)
+</span></span></code></pre></div><ul>
+<li>For each fixed value of <code>nums[i]</code>, we use two pointers (<code>j</code> and <code>k</code>) to check for valid pairs of sides from the previous elements (<code>nums[0]</code> to <code>nums[i-1]</code>).
 <ul>
-<li>The <code>triangleNumber</code> function takes a vector of integers (<code>nums</code>).</li>
-<li>It sorts <code>nums</code> to facilitate the triangle inequality check.</li>
-<li>For each potential largest side, it uses a nested loop with two pointers to count all valid triangles that can be formed with the remaining sides.</li>
+<li><code>j</code> starts at 0 (the smallest element) and <code>k</code> starts at <code>i - 1</code> (the element just before <code>nums[i]</code>).</li>
+<li>The goal is to check if the sum of <code>nums[j]</code> and <code>nums[k]</code> is greater than <code>nums[i]</code> (the largest side of the triangle).</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-5-check-triangle-validity-and-update-pointers">
+  Step 5: Check Triangle Validity and Update Pointers
+  <a class="heading-link" href="#step-5-check-triangle-validity-and-update-pointers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">&lt;</span> nums[j] <span style="color:#666">+</span> nums[k]) {
+</span></span><span style="display:flex;"><span>    cnt <span style="color:#666">+=</span> k <span style="color:#666">-</span> j;
+</span></span><span style="display:flex;"><span>    k<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>} <span style="color:#a2f;font-weight:bold">else</span> j<span style="color:#666">++</span>;
+</span></span></code></pre></div><ul>
+<li>If <code>nums[j] + nums[k] &gt; nums[i]</code>, we have found valid pairs that can form a triangle with <code>nums[i]</code> as the largest side.
+<ul>
+<li>The number of valid triangles with <code>nums[i]</code> as the largest side is <code>k - j</code>, because every pair of <code>nums[j]</code> and <code>nums[l]</code> (where <code>j &lt;= l &lt;= k</code>) will satisfy the condition <code>nums[j] + nums[l] &gt; nums[i]</code>.</li>
+<li>We increment the count <code>cnt</code> by <code>k - j</code> and move the pointer <code>k--</code> to check the next smaller pair.</li>
+</ul>
+</li>
+<li>If <code>nums[j] + nums[k] &lt;= nums[i]</code>, we increment <code>j</code> to try with a larger value for <code>nums[j]</code>.</li>
+</ul>
+<h4 id="step-6-return-the-final-count">
+  Step 6: Return the Final Count
+  <a class="heading-link" href="#step-6-return-the-final-count">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> cnt;
+</span></span></code></pre></div><ul>
+<li>After iterating through all possible valid triangles, the final count of valid triangles is returned.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -331,15 +390,50 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(N^2), where N is the number of elements in <code>nums</code>. This arises from the outer loop iterating over the largest side and the inner while loop working with the two pointers.</li>
-<li><strong>Space Complexity</strong>: O(1), as no additional space proportional to the input size is used.</li>
+<li><strong>O(n^2)</strong>:
+<ul>
+<li>Sorting the array takes <strong>O(n log n)</strong> time.</li>
+<li>The outer loop runs <code>n</code> times (for each <code>nums[i]</code>), and for each iteration of the outer loop, the inner loop runs with two pointers, resulting in a total of <strong>O(n^2)</strong> iterations in the worst case.</li>
+<li>Therefore, the overall time complexity is <strong>O(n^2)</strong>.</li>
 </ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>:
+<ul>
+<li>The space complexity is constant because we only use a few extra variables (<code>cnt</code>, <code>n</code>, <code>j</code>, <code>k</code>), and no extra space is used for storing additional data structures (except for the input array).</li>
+<li>Therefore, the space complexity is <strong>O(1)</strong>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently counts the number of valid triangles that can be formed from the given array of integers. By leveraging sorting and the two-pointer technique, we can reduce the complexity of the problem from <strong>O(n^3)</strong> (brute force approach) to <strong>O(n^2)</strong>, making it suitable for larger input sizes. The algorithm ensures that all possible triplets are checked in an optimal manner, yielding the correct count of valid triangles. This method is both time-efficient and space-efficient, providing an ideal solution for counting valid triangles from side lengths in a sorted array.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1233s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1231s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

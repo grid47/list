@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -256,58 +256,170 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-statement">
+  🚀 Problem Statement
+  <a class="heading-link" href="#-problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given two strings <code>s</code> and <code>t</code>, determine if <code>s</code> is a subsequence of <code>t</code>. A string <code>s</code> is a subsequence of <code>t</code> if you can remove some characters from <code>t</code> (without changing the order of the remaining characters) to get <code>s</code>.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>We are tasked with checking whether a string <code>s</code> is a <strong>subsequence</strong> of another string <code>t</code>. A subsequence is a sequence derived from another sequence by deleting some or no characters without changing the order of the remaining characters. In this case, we want to determine if <code>s</code> can be formed as a subsequence of <code>t</code>. That means, all characters of <code>s</code> must appear in <code>t</code> in the same order, though not necessarily consecutively.</p>
+<hr>
+<h3 id="-approach">
+  🧠 Approach
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we can utilize a <strong>two-pointer technique</strong>. The idea is simple: traverse through string <code>t</code> while trying to match each character of string <code>s</code> in order. The two pointers will help us track our position in both strings, allowing us to efficiently determine if <code>s</code> is a subsequence of <code>t</code>.</p>
+<h4 id="key-steps">
+  Key Steps:
+  <a class="heading-link" href="#key-steps">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Pointer Initialization</strong>: Use two pointers, <code>sdx</code> for string <code>s</code> and <code>tdx</code> for string <code>t</code>, both initialized to 0. These pointers will help track the current character being evaluated in each string.</p>
+<p><strong>Initial Check for Empty String</strong>: If string <code>s</code> is empty, it is trivially a subsequence of any string, so we return <code>true</code> immediately.</p>
 </li>
 <li>
-<p><strong>Iterate Through String <code>t</code></strong>: Loop through the characters of <code>t</code> using the <code>tdx</code> pointer:</p>
+<p><strong>Two-Pointer Technique</strong>: We initialize two pointers:</p>
 <ul>
-<li>If the current character in <code>t</code> matches the current character in <code>s</code> (i.e., <code>t[tdx] == s[sdx]</code>), increment the <code>sdx</code> pointer to check the next character in <code>s</code>.</li>
-<li>If <code>sdx</code> reaches the length of <code>s</code>, this means all characters of <code>s</code> have been found in <code>t</code>, and we can return true.</li>
+<li><code>sdx</code> for string <code>s</code> (starting at 0).</li>
+<li><code>tdx</code> for string <code>t</code> (also starting at 0).</li>
 </ul>
+<p>We will iterate over <code>t</code> and try to match the characters of <code>s</code> one by one.</p>
 </li>
 <li>
-<p><strong>Completion Check</strong>: If the loop completes and not all characters of <code>s</code> have been matched, return false.</p>
+<p><strong>Matching Characters</strong>: As we iterate through <code>t</code>, whenever we find a character in <code>t</code> that matches the current character in <code>s</code>, we move the pointer <code>sdx</code> forward (to match the next character in <code>s</code>).</p>
+</li>
+<li>
+<p><strong>Check Completion</strong>: If we have matched all characters of <code>s</code> (i.e., <code>sdx</code> reaches the end of <code>s</code>), then <code>s</code> is a subsequence of <code>t</code>, and we return <code>true</code>.</p>
+</li>
+<li>
+<p><strong>Return False</strong>: If we finish the loop without matching all characters of <code>s</code>, we return <code>false</code>.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<hr>
+<h3 id="-step-by-step-code-breakdown">
+  🔨 Step-by-Step Code Breakdown
+  <a class="heading-link" href="#-step-by-step-code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s the code implementing the approach:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> isSubsequence(string s, string t) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (s <span style="color:#666">==</span> <span style="color:#b44">&#34;&#34;</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;  <span style="color:#080;font-style:italic">// If s is empty, it&#39;s trivially a subsequence
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sdx <span style="color:#666">=</span> <span style="color:#666">0</span>, tdx <span style="color:#666">=</span> <span style="color:#666">0</span>;  <span style="color:#080;font-style:italic">// Pointers for s and t
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">while</span> (tdx <span style="color:#666">&lt;</span> t.size()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (t[tdx] <span style="color:#666">==</span> s[sdx]) {  <span style="color:#080;font-style:italic">// If characters match
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                sdx<span style="color:#666">++</span>;  <span style="color:#080;font-style:italic">// Move to the next character in s
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            }
+</span></span><span style="display:flex;"><span>            tdx<span style="color:#666">++</span>;  <span style="color:#080;font-style:italic">// Always move to the next character in t
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#a2f;font-weight:bold">if</span> (sdx <span style="color:#666">==</span> s.size()) {  <span style="color:#080;font-style:italic">// If we&#39;ve matched all characters of s
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;  <span style="color:#080;font-style:italic">// If we couldn&#39;t match all characters of s
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h4 id="explanation-of-code">
+  Explanation of Code:
+  <a class="heading-link" href="#explanation-of-code">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Base Case for Empty String</strong>:</p>
+<ul>
+<li>If <code>s</code> is empty, we return <code>true</code> because an empty string is a subsequence of any string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialize Pointers</strong>:</p>
+<ul>
+<li><code>sdx</code> tracks the current character of <code>s</code> we are trying to match.</li>
+<li><code>tdx</code> tracks the current character of <code>t</code> we are comparing with.</li>
+</ul>
+</li>
+<li>
+<p><strong>Loop through <code>t</code></strong>:</p>
+<ul>
+<li>We loop through <code>t</code> with <code>tdx</code>. If we find a character in <code>t</code> that matches the character in <code>s[sdx]</code>, we move <code>sdx</code> forward to check the next character in <code>s</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Match Completion</strong>:</p>
+<ul>
+<li>If <code>sdx</code> reaches the length of <code>s</code>, it means we&rsquo;ve found all characters of <code>s</code> in <code>t</code>, and we return <code>true</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return False</strong>:</p>
+<ul>
+<li>If we finish the loop and haven&rsquo;t matched all characters of <code>s</code>, we return <code>false</code>.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="-complexity-analysis">
+  📈 Complexity Analysis
+  <a class="heading-link" href="#-complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Best Case</strong>: If <code>s</code> is empty, we return <code>true</code> immediately, which takes <strong>O(1)</strong> time.</li>
+<li><strong>Worst Case</strong>: In the worst case, we iterate over all characters in <code>t</code> once. Since we are only moving forward in both strings, the time complexity is <strong>O(n)</strong>, where <code>n</code> is the length of string <code>t</code>. This is the time it takes to check all characters of <code>t</code> and possibly match all characters of <code>s</code>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(1)</strong> since we only use a constant amount of space for the two pointers (<code>sdx</code> and <code>tdx</code>). No additional space is used regardless of the size of <code>s</code> or <code>t</code>.</li>
+</ul>
+<hr>
+<h3 id="-conclusion">
+  🏁 Conclusion
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently checks whether string <code>s</code> is a subsequence of string <code>t</code> using the two-pointer technique. It runs in <strong>O(n)</strong> time where <code>n</code> is the length of <code>t</code> and uses <strong>O(1)</strong> space, making it highly efficient and scalable even for large input sizes.</p>
+<h3 id="-key-takeaways">
+  🎯 Key Takeaways:
+  <a class="heading-link" href="#-key-takeaways">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li>The loop efficiently checks each character of <code>t</code> against <code>s</code>, leveraging pointer arithmetic to confirm the sequence order.</li>
-<li>The check for <code>s</code> being empty is handled at the start, ensuring an immediate return of true when applicable.</li>
+<li><strong>Optimal Time Complexity</strong>: The algorithm runs in linear time, <strong>O(n)</strong>, making it suitable for large strings.</li>
+<li><strong>Constant Space</strong>: The space complexity is constant (<strong>O(1)</strong>), which ensures minimal memory usage.</li>
+<li><strong>Simple Logic</strong>: The two-pointer approach is intuitive and efficient for solving the subsequence problem.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the length of string <code>t</code>, as we may need to traverse all characters in <code>t</code>.</li>
-<li><strong>Space Complexity</strong>: O(1), as no additional data structures are used, just a few pointers.</li>
-</ul>
+<p>Keep coding and optimizing! 🚀 You’ve got this!</p>
  
 </div>
   

@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -251,7 +251,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1400s1hbhb">
+<h2 id="hahahugoshortcode1399s1hbhb">
   
 
   
@@ -263,26 +263,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given a square board of size <code>n x n</code>, where the cells are numbered from 1 to ( n^2 ) in a snake-like fashion (1 at the bottom-left corner, moving right to the end of the row, then moving up to the next row). Some cells contain snakes or ladders which affect movement on the board. Write a function to determine the minimum number of moves required to reach the last cell (( n^2 )) from the first cell (1).</p>
-<h3 id="class-definition">
-  Class Definition
-  <a class="heading-link" href="#class-definition">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ul>
-<li><strong>Class</strong>: <code>Solution</code>
-<ul>
-<li><strong>Method</strong>: <code>int snakesAndLadders(vector&lt;vector&lt;int&gt;&gt;&amp; board)</code>
-<ul>
-<li>Takes a 2D vector <code>board</code> representing the Snakes and Ladders game.</li>
-<li>Returns the minimum number of moves to reach cell ( n^2 ) from cell 1. Returns -1 if it is not possible.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<p>In this problem, you are tasked with simulating a game of <strong>Snakes and Ladders</strong> on an <code>n x n</code> board, where the positions are numbered sequentially from 1 to <code>n*n</code>. The goal is to start at position 1 and reach the last position <code>n*n</code> with the minimum number of dice rolls. Each dice roll can land on a number between 1 and 6. If a player lands on a snake, they are forced to slide back to another position, and if they land on a ladder, they are immediately transported to a higher position. The goal is to return the minimum number of dice rolls required to reach the last position, or -1 if it is not possible.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -290,50 +271,84 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we can model the game as a <strong>shortest path problem</strong> on a graph:</p>
 <ol>
-<li>
-<p><strong>Coordinate Calculation</strong>:</p>
-<ul>
-<li>Use the helper function <code>getCoordinate</code> to convert a cell number <code>s</code> into its corresponding row and column on the board.</li>
-<li>The row is calculated based on how many complete rows fit into the cell number, while the column adjusts based on the direction of traversal (left-to-right or right-to-left).</li>
-</ul>
-</li>
-<li>
-<p><strong>Breadth-First Search (BFS)</strong>:</p>
-<ul>
-<li>Initialize a queue to explore the board, starting from cell 1 with 0 moves (<code>{1, 0}</code>).</li>
-<li>Maintain a <code>seen</code> vector to track visited cells.</li>
-<li>While the queue is not empty:
-<ul>
-<li>Dequeue the front element, retrieve the current cell number <code>s</code> and the distance in moves.</li>
-<li>If <code>s</code> is equal to ( n^2 ), return the distance as the result.</li>
-<li>For each possible die roll (1 to 6):
-<ul>
-<li>Calculate the next cell number <code>s+i</code>.</li>
-<li>Get the corresponding row and column using <code>getCoordinate</code>.</li>
-<li>Check if the next cell has a snake or ladder:
-<ul>
-<li>If it has, use the final destination cell; otherwise, use <code>s+i</code>.</li>
-</ul>
-</li>
-<li>If the final cell has not been visited:
-<ul>
-<li>Mark it as seen and enqueue it with the incremented distance.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Return</strong>:</p>
-<ul>
-<li>If the loop completes without reaching ( n^2 ), return -1, indicating that the end is unreachable.</li>
-</ul>
-</li>
+<li><strong>Board as Graph</strong>: Each square on the board can be thought of as a node in a graph, where edges represent dice rolls from 1 to 6.</li>
+<li><strong>Breadth-First Search (BFS)</strong>: Since we want to find the shortest path (minimum number of dice rolls), we can use <strong>BFS</strong>. BFS guarantees that the first time we reach the last position (<code>n*n</code>), we have done so in the fewest number of steps.</li>
+<li><strong>Handling Snakes and Ladders</strong>: If a player lands on a square with a snake or ladder, they are immediately transported to a different square. This can be handled by checking the board value at that square, and if it&rsquo;s not <code>-1</code> (which indicates no snake or ladder), we move the player to the new square.</li>
 </ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="helper-function-getcoordinate">
+  <strong>Helper Function: <code>getCoordinate</code></strong>
+  <a class="heading-link" href="#helper-function-getcoordinate">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">getCoordinate</span>(<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> s, <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#666">&amp;</span>row, <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#666">&amp;</span>col) {
+</span></span><span style="display:flex;"><span>    row <span style="color:#666">=</span> n<span style="color:#666">-</span><span style="color:#666">1</span><span style="color:#666">-</span>(s<span style="color:#666">-</span><span style="color:#666">1</span>)<span style="color:#666">/</span>n;
+</span></span><span style="display:flex;"><span>    col <span style="color:#666">=</span> (s<span style="color:#666">-</span><span style="color:#666">1</span>)<span style="color:#666">%</span>n;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>((n<span style="color:#666">%</span><span style="color:#666">2</span> <span style="color:#666">==</span><span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> row<span style="color:#666">%</span><span style="color:#666">2</span><span style="color:#666">==</span><span style="color:#666">1</span>) <span style="color:#666">||</span> (n<span style="color:#666">%</span><span style="color:#666">2</span><span style="color:#666">==</span><span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> row<span style="color:#666">%</span><span style="color:#666">2</span><span style="color:#666">==</span><span style="color:#666">0</span>))
+</span></span><span style="display:flex;"><span>        col<span style="color:#666">=</span> n<span style="color:#666">-</span><span style="color:#666">1</span><span style="color:#666">-</span>col;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The helper function <code>getCoordinate</code> converts the linear position <code>s</code> into the corresponding row and column on the board.</li>
+<li>The position is calculated by dividing and taking the modulo with respect to the size of the board <code>n</code>.</li>
+<li>The board has a <strong>zig-zag</strong> pattern where the rows alternate in direction. If the row number is odd, the board&rsquo;s direction is reversed.</li>
+<li>The function updates the <code>row</code> and <code>col</code> by using these rules, ensuring we can correctly map a linear index to the 2D board.</li>
+</ul>
+<h4 id="main-function-snakesandladders">
+  <strong>Main Function: <code>snakesAndLadders</code></strong>
+  <a class="heading-link" href="#main-function-snakesandladders">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">snakesAndLadders</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> board) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> board.size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> seen(n<span style="color:#666">*</span>n<span style="color:#666">+</span><span style="color:#666">1</span>, <span style="color:#a2f">false</span>);
+</span></span><span style="display:flex;"><span>    seen[<span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> q;
+</span></span><span style="display:flex;"><span>    q.push({<span style="color:#666">1</span>, <span style="color:#666">0</span>});
+</span></span></code></pre></div><ul>
+<li>The function starts by initializing the board&rsquo;s size <code>n</code> and a <code>seen</code> array to track which positions have been visited.</li>
+<li>We initialize BFS with the first position (1) and a distance of 0 (since we start at position 1).</li>
+<li>A queue is used to process the BFS, where each element is a pair of the form <code>{position, distance}</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>        pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> p <span style="color:#666">=</span> q.front();
+</span></span><span style="display:flex;"><span>        q.pop();
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> row, col, s <span style="color:#666">=</span> p.first, dist <span style="color:#666">=</span> p.second;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s <span style="color:#666">==</span> n<span style="color:#666">*</span>n) 
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> dist;
+</span></span></code></pre></div><ul>
+<li>The main BFS loop dequeues the front of the queue and extracts the current position <code>s</code> and the current distance <code>dist</code>.</li>
+<li>If the current position <code>s</code> is equal to <code>n*n</code>, we&rsquo;ve reached the goal, and we return the distance, which represents the minimum number of dice rolls.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; s<span style="color:#666">+</span>i<span style="color:#666">&lt;=</span> n <span style="color:#666">*</span>n <span style="color:#666">&amp;&amp;</span> i<span style="color:#666">&lt;=</span><span style="color:#666">6</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            getCoordinate(n, s<span style="color:#666">+</span>i, row, col);
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> sfinal <span style="color:#666">=</span> board[row][col] <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">?</span> s<span style="color:#666">+</span><span style="color:#a0a000">i</span> : board[row][col];
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(seen[sfinal] <span style="color:#666">==</span> <span style="color:#a2f">false</span>) {
+</span></span><span style="display:flex;"><span>                seen[sfinal] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>                q.push({sfinal, dist <span style="color:#666">+</span> <span style="color:#666">1</span>});
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>For each position, we attempt to roll the dice and move to the next 6 possible positions.</li>
+<li>We use <code>getCoordinate</code> to determine the row and column corresponding to the new position.</li>
+<li>If the board value at the new position is not <code>-1</code>, this means there is a snake or ladder, and we move to the new position specified by the board value.</li>
+<li>If the final position (after accounting for any snakes or ladders) hasn&rsquo;t been visited yet, we mark it as visited and enqueue it with an incremented distance.</li>
+<li>If no solution is found (i.e., we exhaust the queue without reaching <code>n*n</code>), we return -1.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -341,15 +356,39 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  <strong>Time Complexity</strong>
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n^2), as the maximum number of cells is ( n^2 ) and each cell can be visited once.</li>
-<li><strong>Space Complexity</strong>: O(n^2), for the <code>seen</code> vector and the BFS queue.</li>
+<li><strong>O(n^2)</strong>: We visit each square on the board at most once. In each iteration of the BFS, we process up to 6 potential moves (dice rolls). Therefore, the time complexity is proportional to the number of squares on the board, which is ( O(n^2) ).</li>
 </ul>
+<h4 id="space-complexity">
+  <strong>Space Complexity</strong>
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n^2)</strong>: We need space for the <code>seen</code> array to track visited positions, as well as a queue for BFS. In the worst case, the queue can store all positions, so the space complexity is also ( O(n^2) ).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the Snakes and Ladders problem using a <strong>Breadth-First Search (BFS)</strong> approach to simulate the process of rolling dice and moving across the board. By modeling the problem as a shortest-path graph problem, we ensure that we can find the minimum number of moves required to reach the final position. The BFS approach guarantees that we always explore the shortest paths first, and the use of a queue helps in processing each potential dice roll step-by-step. This method efficiently handles the constraints of the problem and provides an optimal solution with a time complexity of ( O(n^2) ).</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1400s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1399s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -281,69 +281,168 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-statement">
+  🚀 Problem Statement
+  <a class="heading-link" href="#-problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Implement a solution that allows randomly selecting a node&rsquo;s value from a singly linked list with equal probability. The class <code>Solution</code> should provide a method <code>getRandom()</code> that returns a random node&rsquo;s value from the linked list.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>In this problem, we&rsquo;re tasked with implementing a <code>Solution</code> class for a <strong>singly linked list</strong>. The class should have a method called <code>getRandom()</code> that returns the value of a random node from the list. The catch? We need to ensure that each node has <strong>equal probability</strong> of being selected, and we can&rsquo;t use extra space proportional to the size of the list.</p>
+<hr>
+<h3 id="-approach">
+  🧠 Approach
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To achieve uniform random selection from a linked list, we will use the <strong>Reservoir Sampling</strong> technique, which allows us to randomly select an item from a stream of unknown size.</p>
+<p>To solve this challenge, we will use an algorithm called <strong>Reservoir Sampling</strong>. This technique allows us to pick a random element from a stream (in this case, the linked list) while maintaining <strong>uniform probability</strong>.</p>
+<h4 id="key-idea">
+  Key Idea:
+  <a class="heading-link" href="#key-idea">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>The <code>Solution</code> class is initialized with the head of the linked list.</li>
-</ul>
-</li>
-<li>
-<p><strong>Random Selection</strong>:</p>
-<ul>
-<li>Use a loop to traverse through the linked list.</li>
-<li>For each node encountered, use <code>rand() % i</code> to decide whether to replace the current random value:
-<ul>
-<li>If the generated number is <code>0</code>, replace the stored value with the current node&rsquo;s value.</li>
-<li>Increment the index <code>i</code> at each step to keep track of the number of nodes processed.</li>
-</ul>
-</li>
-<li>This ensures that each value has an equal probability of being selected.</li>
-</ul>
-</li>
+<li><strong>Traverse the List</strong>: We&rsquo;ll go through the list node by node.</li>
+<li><strong>Maintain a Running Random Value</strong>: At each node, we have a chance to replace the current selected value with the value of the current node. The probability of replacing the value decreases as we move through the list.</li>
+<li><strong>End of List</strong>: Once we reach the end, we&rsquo;ll have our random selection.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>By applying this approach, we ensure that each node has the same probability of being selected, and it only takes one pass through the list. This results in a time complexity of <strong>O(n)</strong>, where n is the length of the list, and a space complexity of <strong>O(1)</strong>.</p>
+<hr>
+<h3 id="-step-by-step-code-breakdown">
+  🔨 Step-by-Step Code Breakdown
+  <a class="heading-link" href="#-step-by-step-code-breakdown">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>Let&rsquo;s break down the implementation in a step-by-step manner:</p>
+<h4 id="step-1-definition-of-listnode">
+  Step 1: Definition of <code>ListNode</code>
+  <a class="heading-link" href="#step-1-definition-of-listnode">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">struct</span> <span style="color:#00f">ListNode</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> val;
+</span></span><span style="display:flex;"><span>    ListNode <span style="color:#666">*</span>next;
+</span></span><span style="display:flex;"><span>    ListNode() <span style="color:#666">:</span> val(<span style="color:#666">0</span>), next(<span style="color:#a2f;font-weight:bold">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    ListNode(<span style="color:#0b0;font-weight:bold">int</span> x) <span style="color:#666">:</span> val(x), next(<span style="color:#a2f;font-weight:bold">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    ListNode(<span style="color:#0b0;font-weight:bold">int</span> x, ListNode<span style="color:#666">*</span> next) <span style="color:#666">:</span> val(x), next(next) {}
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>The <code>ListNode</code> structure defines the linked list node. Each node holds a <code>val</code> (its value) and a pointer <code>next</code> to the next node in the list.</li>
+<li>We provide multiple constructors to easily create nodes with or without a <code>next</code> pointer.</li>
+</ul>
+<h4 id="step-2-solution-class-and-constructor">
+  Step 2: <code>Solution</code> Class and Constructor
+  <a class="heading-link" href="#step-2-solution-class-and-constructor">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span>    ListNode<span style="color:#666">*</span> head;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    Solution(ListNode<span style="color:#666">*</span> head) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>head <span style="color:#666">=</span> head;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>The <code>Solution</code> class has a member <code>head</code>, which holds a reference to the head of the linked list.</li>
+<li>The constructor initializes the <code>head</code> from the passed argument, linking the list to the solution object.</li>
+</ul>
+<h4 id="step-3-getrandom-method">
+  Step 3: <code>getRandom</code> Method
+  <a class="heading-link" href="#step-3-getrandom-method">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">getRandom</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>, i <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        ListNode<span style="color:#666">*</span> p <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>head;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(p) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(rand() <span style="color:#666">%</span> i <span style="color:#666">==</span> <span style="color:#666">0</span>) ans <span style="color:#666">=</span> p<span style="color:#666">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>            i<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            p <span style="color:#666">=</span> p<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li><strong>Random Selection Process</strong>:
 <ul>
-<li>The <code>Solution</code> class contains:
-<ul>
-<li>A pointer to the head of the linked list.</li>
-<li>The <code>getRandom()</code> method, which implements reservoir sampling.</li>
+<li>We initialize <code>ans</code> to store the current random selection and <code>i</code> to keep track of the current node&rsquo;s index.</li>
+<li>For each node, we calculate <code>rand() % i</code>. If the result is 0, we replace the current <code>ans</code> with the value of the current node. This gives each node a 1/i chance of being selected.</li>
+<li>As we move to the next node, the probability of selecting it adjusts, but the overall probability remains uniform across the list.</li>
 </ul>
 </li>
+<li>At the end of the traversal, <code>ans</code> holds the value of the randomly selected node.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-4-instantiating-the-solution-class">
+  Step 4: Instantiating the <code>Solution</code> Class
+  <a class="heading-link" href="#step-4-instantiating-the-solution-class">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your Solution object will be instantiated and called as such:
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Solution* obj = new Solution(head);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * int param_1 = obj-&gt;getRandom();
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> */</span>
+</span></span></code></pre></div><ul>
+<li>We create a <code>Solution</code> object by passing the head of the linked list.</li>
+<li>Then, we call the <code>getRandom()</code> method to fetch a random node’s value.</li>
+</ul>
+<hr>
+<h3 id="-complexity-analysis">
+  📈 Complexity Analysis
+  <a class="heading-link" href="#-complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the number of nodes in the linked list, since we must traverse the entire list to ensure uniform randomness.</li>
-<li><strong>Space Complexity</strong>: O(1), as we use a constant amount of space for variables, regardless of the input size.</li>
+<li><strong>O(n)</strong> where n is the number of nodes in the linked list. We traverse each node exactly once and perform a constant amount of work at each step (generating a random number and potentially updating the selection).</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>. We use only a few variables (<code>ans</code>, <code>i</code>, and <code>p</code>), regardless of the size of the linked list. No extra space proportional to the list is used.</li>
+</ul>
+<hr>
+<h3 id="-conclusion">
+  🏁 Conclusion
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution leverages <strong>Reservoir Sampling</strong> to efficiently select a random node from a singly linked list with <strong>uniform probability</strong>. By doing so, we achieve optimal time and space complexities:</p>
+<ul>
+<li><strong>Time Complexity</strong>: <strong>O(n)</strong>, as we traverse the list once.</li>
+<li><strong>Space Complexity</strong>: <strong>O(1)</strong>, since we only use a few variables for the process.</li>
+</ul>
+<p>The beauty of this solution lies in its simplicity: by adjusting the probability at each node and using just a single traversal, we ensure that each node has an equal chance of being selected. This makes the approach both <strong>time-efficient</strong> and <strong>space-efficient</strong>, making it ideal for situations where the list might be large.</p>
+<hr>
  
 </div>
   

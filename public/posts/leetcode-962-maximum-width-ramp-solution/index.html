@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -247,7 +247,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer array <code>nums</code>, you need to find the maximum width ramp in the array. The width of a ramp is defined as the difference between the indices <code>j</code> and <code>i</code> (i.e., <code>j - i</code>), where <code>0 &lt;= i &lt;= j &lt; nums.length</code> and <code>nums[j] &gt;= nums[i]</code>.</p>
+<p>The problem asks to find the <strong>maximum width ramp</strong> in an array <code>nums</code>. A ramp is defined as a pair of indices <code>(i, j)</code> such that <code>i &lt; j</code> and <code>nums[i] &lt;= nums[j]</code>. The goal is to return the maximum difference <code>j - i</code> for which the above condition holds. This essentially involves finding the widest subarray where the value at the start of the subarray is smaller than or equal to the value at the end.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -255,47 +255,101 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we can use the <strong>monotonic stack</strong> technique. Here&rsquo;s a step-by-step breakdown of the approach:</p>
 <ol>
 <li>
-<p><strong>Monotonic Stack</strong>:</p>
+<p><strong>Initial Observations</strong>:</p>
 <ul>
-<li>Use a stack to maintain indices of the array <code>nums</code>. The stack will store indices in increasing order of their corresponding values in <code>nums</code>.</li>
-<li>Iterate through the <code>nums</code> array. If the current number is less than the number at the index stored at the top of the stack, push the current index onto the stack.</li>
+<li>The problem asks to find pairs of indices <code>(i, j)</code> such that <code>nums[i] &lt;= nums[j]</code> and <code>i &lt; j</code>.</li>
+<li>We want to maximize <code>j - i</code>, meaning we need to find the farthest pair of indices where the condition <code>nums[i] &lt;= nums[j]</code> holds.</li>
 </ul>
 </li>
 <li>
-<p><strong>Calculate Maximum Width</strong>:</p>
+<p><strong>Using a Stack</strong>:</p>
 <ul>
-<li>After building the stack, iterate through the <code>nums</code> array from the end to the beginning. For each index <code>i</code>, check if the top of the stack (representing an index <code>j</code>) can form a valid ramp.</li>
-<li>While the value at the index on the top of the stack is less than or equal to the value at the current index <code>i</code>, calculate the width as <code>i - s.top()</code>, update the maximum width if this width is larger, and pop the index from the stack.</li>
+<li>A <strong>monotonic stack</strong> helps efficiently track indices of the array in a way that we can always find the smallest value in the stack.</li>
+<li>We can use the stack to store indices of the array in increasing order of values (so that <code>nums[s.top()] &lt;= nums[i]</code> when comparing).</li>
 </ul>
 </li>
 <li>
-<p><strong>Return the Result</strong>:</p>
+<p><strong>First Pass</strong> (Populate the Stack):</p>
 <ul>
-<li>Finally, return the maximum width found.</li>
+<li>Traverse the array from left to right. For each element, push its index into the stack if it is smaller than the element at the top of the stack. This ensures the stack only contains indices of values that are in increasing order.</li>
+<li>This first pass helps us store indices of potential starting points (<code>i</code>) of valid ramps, as those indices are smaller than the elements that come after them.</li>
+</ul>
+</li>
+<li>
+<p><strong>Second Pass</strong> (Find the Maximum Ramp Width):</p>
+<ul>
+<li>Traverse the array from right to left. For each element, check if the value at the current index <code>nums[i]</code> can form a valid ramp with an element from the stack (<code>nums[s.top()]</code>).</li>
+<li>If <code>nums[s.top()] &lt;= nums[i]</code>, pop the stack and calculate the width <code>i - s.top()</code>. Track the maximum width of all valid ramps.</li>
+</ul>
+</li>
+<li>
+<p><strong>Efficiency</strong>:</p>
+<ul>
+<li>This approach ensures that we process each index exactly once, with stack operations (push and pop) taking constant time. Thus, the overall time complexity is <strong>O(n)</strong>, where <code>n</code> is the size of the array.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> maxWidthRamp(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>        stack<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s;  <span style="color:#080;font-style:italic">// Initialize an empty stack to store indices
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// First pass: Fill the stack with indices of elements in increasing order
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">// If the stack is empty or nums[s.top()] &gt; nums[i], push the current index
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#a2f;font-weight:bold">if</span>(s.empty() <span style="color:#666">||</span> nums[s.top()] <span style="color:#666">&gt;</span> nums[i]) {
+</span></span><span style="display:flex;"><span>                s.push(i);  <span style="color:#080;font-style:italic">// Add the index to the stack
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;  <span style="color:#080;font-style:italic">// Variable to store the maximum ramp width
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// Second pass: Traverse the array from right to left
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> nums.size() <span style="color:#666">-</span> <span style="color:#666">1</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">// While there are indices in the stack and nums[s.top()] &lt;= nums[i]
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>s.empty() <span style="color:#666">&amp;&amp;</span> nums[s.top()] <span style="color:#666">&lt;=</span> nums[i]) {
+</span></span><span style="display:flex;"><span>                <span style="color:#080;font-style:italic">// Calculate the ramp width and update the maximum result
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                res <span style="color:#666">=</span> max(res, i <span style="color:#666">-</span> s.top());
+</span></span><span style="display:flex;"><span>                s.pop();  <span style="color:#080;font-style:italic">// Pop the stack as we&#39;ve found a valid ramp
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;  <span style="color:#080;font-style:italic">// Return the maximum width of the ramp found
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ol>
 <li>
-<p><strong><code>maxWidthRamp</code> Method</strong>:</p>
+<p><strong>Initialization</strong>:</p>
 <ul>
-<li>Initializes a stack to store indices and populates it based on the condition that <code>nums[s.top()]</code> should be greater than <code>nums[i]</code>.</li>
-<li>Then, iterates backwards through the <code>nums</code> array to compute the maximum width using the indices stored in the stack.</li>
+<li>We begin by initializing an empty stack <code>s</code> and a variable <code>res</code> to store the maximum width of the ramp found.</li>
 </ul>
 </li>
 <li>
-<p><strong>Stack Operations</strong>:</p>
+<p><strong>First Pass</strong>:</p>
 <ul>
-<li>The stack ensures that the indices are in increasing order of their values, which allows for efficient width calculation.</li>
+<li>We loop through the array from left to right (i.e., from index <code>0</code> to <code>n-1</code>). For each element <code>nums[i]</code>, we check if the stack is empty or if the element at the top of the stack (<code>nums[s.top()]</code>) is greater than <code>nums[i]</code>. If so, we push the index <code>i</code> onto the stack. This ensures that the stack always contains indices of values in increasing order, which will be useful when looking for valid ramps later.</li>
+</ul>
+</li>
+<li>
+<p><strong>Second Pass</strong>:</p>
+<ul>
+<li>After filling the stack with the indices, we then start another loop from right to left (i.e., from index <code>n-1</code> to <code>0</code>). For each element <code>nums[i]</code>, we check if the element at the top of the stack (<code>nums[s.top()]</code>) is less than or equal to <code>nums[i]</code>. If this condition is met, it means we&rsquo;ve found a valid ramp (because <code>nums[s.top()] &lt;= nums[i]</code> and <code>s.top()</code> is less than <code>i</code>), so we calculate the width of the ramp as <code>i - s.top()</code>. We then update <code>res</code> to be the maximum of the current value of <code>res</code> and the newly calculated width. Finally, we pop the top of the stack since we have already used that index for this ramp.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>After completing both passes, <code>res</code> will contain the maximum ramp width. We return this value as the result.</li>
 </ul>
 </li>
 </ol>
@@ -307,9 +361,33 @@
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity</strong>: O(N), where N is the length of the array. Each index is pushed and popped from the stack at most once.</li>
-<li><strong>Space Complexity</strong>: O(N) in the worst case for the stack, although in practice, it will store fewer than N indices.</li>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity is <strong>O(n)</strong>, where <code>n</code> is the size of the input array <code>nums</code>. This is because:
+<ul>
+<li>In the first pass, each index is pushed onto the stack at most once.</li>
+<li>In the second pass, each index is popped from the stack at most once.</li>
+<li>Hence, the total number of operations is proportional to the number of elements in the array, resulting in <strong>O(n)</strong> time complexity.</li>
 </ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is <strong>O(n)</strong> due to the stack used to store indices. In the worst case, the stack can hold all <code>n</code> indices if the elements are strictly decreasing.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides an efficient way to calculate the maximum width ramp in an array by using a monotonic stack. The key idea is to use two passes: one to store indices in increasing order and another to find the widest ramp possible by comparing the current element with the stack&rsquo;s top. This approach has a linear time complexity of <strong>O(n)</strong>, making it highly efficient for large input sizes. By utilizing a stack for optimal storage and comparisons, the solution avoids unnecessary comparisons and redundant calculations, ensuring that the solution works effectively for a variety of input scenarios.</p>
  
 </div>
   

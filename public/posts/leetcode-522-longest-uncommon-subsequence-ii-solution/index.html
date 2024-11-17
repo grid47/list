@@ -217,7 +217,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -286,7 +286,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a list of strings, find the length of the longest uncommon subsequence (LUS). The longest uncommon subsequence is defined as the longest string that is not a subsequence of any other string in the list. If there is no such string, return -1.</p>
+<p>The problem requires finding the length of the &ldquo;Longest Uncommon Subsequence&rdquo; among a list of strings. The longest uncommon subsequence is the longest subsequence of one of these strings that is not a subsequence of any other string in the list. If there is no such uncommon subsequence, return <code>-1</code>. The solution should focus on identifying any string that has a unique sequence not replicated as a subsequence in any other string in the list.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -294,54 +294,87 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The solution involves comparing each string in the list with every other string. For each string, we check if it is not a subsequence of any other string. If so, it qualifies as an &ldquo;uncommon subsequence&rdquo; candidate, and we track its length as the result.</p>
+<p>To implement this:</p>
 <ol>
-<li>
-<p><strong>Iterate Through Each String</strong>:</p>
-<ul>
-<li>For each string in the list, check against all other strings to see if it is a subsequence of any of them.</li>
-</ul>
-</li>
-<li>
-<p><strong>Check for Subsequence</strong>:</p>
-<ul>
-<li>Use a helper function <code>LCS</code> to determine if one string is a subsequence of another.</li>
-</ul>
-</li>
-<li>
-<p><strong>Update Result</strong>:</p>
-<ul>
-<li>If a string is found that is not a subsequence of any other string, compare its length with the current longest uncommon length and update accordingly.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>After checking all strings, return the length of the longest uncommon subsequence found.</li>
-</ul>
-</li>
+<li><strong>Iterate through each string</strong> in the list.</li>
+<li><strong>For each string, check against all others</strong> to verify it is not a subsequence of any of them.</li>
+<li>Use a helper function, <code>LCS</code> (Longest Common Subsequence), to determine if a string is a subsequence of another.</li>
+<li>If the current string is not a subsequence of any other string, we record its length as a candidate for the longest uncommon subsequence.</li>
+<li>Finally, return the length of the longest valid uncommon subsequence.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Main Function</strong>:</p>
-<ul>
-<li>Loop through each string, and for each string, loop through the others to check if it is a subsequence using the <code>LCS</code> function.</li>
-<li>If a string is not a subsequence of any other string, update the maximum length.</li>
+<h4 id="step-1-define-the-main-function">
+  Step 1: Define the Main Function
+  <a class="heading-link" href="#step-1-define-the-main-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findLUSlength</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> strs) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (strs.empty()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>; <span style="color:#080;font-style:italic">// Handle empty input
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#0b0;font-weight:bold">int</span> rst <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span></code></pre></div><ul>
+<li><strong>Check for Empty Input</strong>: If the input list <code>strs</code> is empty, return <code>-1</code>.</li>
+<li><strong>Initialize Result Variable</strong>: <code>rst</code> will store the length of the longest uncommon subsequence. Initially, it’s set to <code>-1</code>, indicating no valid uncommon subsequence has been found.</li>
 </ul>
-</li>
-<li>
-<p><strong>LCS Function</strong>:</p>
-<ul>
-<li>The function checks if string <code>a</code> is a subsequence of string <code>b</code> by iterating through <code>b</code> and trying to match characters from <code>a</code>.</li>
+<h4 id="step-2-outer-loop--iterate-through-each-string">
+  Step 2: Outer Loop – Iterate through Each String
+  <a class="heading-link" href="#step-2-outer-loop--iterate-through-each-string">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> strs.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (; j <span style="color:#666">&lt;</span> strs.size(); j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">==</span> j) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (LCS(strs[i], strs[j])) <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (j <span style="color:#666">==</span> strs.size())
+</span></span><span style="display:flex;"><span>            rst <span style="color:#666">=</span> max(rst, <span style="color:#a2f;font-weight:bold">static_cast</span><span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(strs[i].size()));
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li><strong>Iterate with Index <code>i</code></strong>: For each string at index <code>i</code>, this outer loop will consider it as a candidate uncommon subsequence.</li>
+<li><strong>Inner Loop with Index <code>j</code></strong>: For each string at index <code>i</code>, this inner loop iterates through all other strings at index <code>j</code> to check if <code>strs[i]</code> is a subsequence of any other string.</li>
+<li><strong>Skip Identical Index</strong>: <code>i == j</code> is skipped since a string should not be compared with itself.</li>
+<li><strong>Check for Subsequence</strong>: If <code>strs[i]</code> is a subsequence of any other string, <code>LCS(strs[i], strs[j])</code> returns <code>true</code>, and the inner loop breaks.</li>
+<li><strong>Update Result for Uncommon Subsequence</strong>: If <code>j</code> reaches the end of the inner loop without breaking (i.e., <code>strs[i]</code> is not a subsequence of any other string), <code>rst</code> is updated with the maximum of <code>rst</code> and the length of <code>strs[i]</code>.</li>
 </ul>
-</li>
-</ol>
+<h4 id="step-3-define-the-helper-function--lcs">
+  Step 3: Define the Helper Function – <code>LCS</code>
+  <a class="heading-link" href="#step-3-define-the-helper-function--lcs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">LCS</span>(<span style="color:#a2f;font-weight:bold">const</span> string<span style="color:#666">&amp;</span> a, <span style="color:#a2f;font-weight:bold">const</span> string<span style="color:#666">&amp;</span> b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (b.size() <span style="color:#666">&lt;</span> a.size()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">ch</span> : b)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">&lt;</span> a.size() <span style="color:#666">&amp;&amp;</span> a[i] <span style="color:#666">==</span> ch) i<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> i <span style="color:#666">==</span> a.size();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Check Lengths</strong>: If the length of <code>b</code> is smaller than <code>a</code>, then <code>a</code> can’t be a subsequence of <code>b</code>, and <code>LCS</code> immediately returns <code>false</code>.</li>
+<li><strong>Subsequence Check</strong>: We iterate over each character in <code>b</code>. If <code>a[i]</code> matches the current character in <code>b</code>, increment <code>i</code> to check the next character in <code>a</code>.</li>
+<li><strong>Return True or False</strong>: If <code>i</code> reaches the length of <code>a</code>, then all characters of <code>a</code> have been matched in order within <code>b</code>, and <code>a</code> is a subsequence of <code>b</code>. Otherwise, <code>a</code> is not a subsequence of <code>b</code>.</li>
+</ul>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> rst;
+</span></span></code></pre></div><p>If a longest uncommon subsequence is found, this will return its length. If none is found, <code>rst</code> remains <code>-1</code>, indicating that no uncommon subsequence exists among the strings.</p>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -349,10 +382,36 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n^2 * m), where n is the number of strings and m is the average length of the strings, since for each string, we may need to check against every other string.</li>
-<li><strong>Space Complexity</strong>: O(1), as the algorithm uses a constant amount of additional space.</li>
+<li><strong>Outer Loop</strong>: The outer loop iterates <code>n</code> times, where <code>n</code> is the number of strings.</li>
+<li><strong>Inner Loop</strong>: For each string, the inner loop also iterates <code>n</code> times in the worst case.</li>
+<li><strong>Subsequence Check</strong>: Each subsequence check with <code>LCS</code> takes up to <strong>O(m)</strong> time, where <code>m</code> is the maximum length of the strings.</li>
 </ul>
+<p>Overall, the time complexity is <strong>O(n^2 * m)</strong>, where <code>n</code> is the number of strings and <code>m</code> is the length of the longest string in the list.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(1)</strong>, as we are only using a constant amount of extra space for variables.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides an efficient approach to identify the length of the longest uncommon subsequence among a list of strings. By iterating through each string and checking if it’s a subsequence of any other, we ensure that only strings with unique sequences are considered.</p>
+<p>The helper function <code>LCS</code> allows for a quick and efficient way to check subsequences without needing additional data structures. This solution is well-suited for handling lists of strings with moderate length and provides a systematic way to address the problem requirements.</p>
  
 </div>
   

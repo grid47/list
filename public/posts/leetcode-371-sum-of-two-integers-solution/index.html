@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -211,7 +211,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1108s0hbhb">
+        <h2 id="hahahugoshortcode1109s0hbhb">
   <a href="https://leetcode.com/problems/sum-of-two-integers/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -226,7 +226,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1108s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1109s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -238,77 +238,238 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> b <span style="color:#666">==</span> <span style="color:#666">0</span><span style="color:#666">?</span> <span style="color:#a0a000">a</span>: getSum(a<span style="color:#666">^</span>b, (a<span style="color:#666">&amp;</span>b)<span style="color:#666">&lt;&lt;</span><span style="color:#666">1</span>);
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1108s2hbhb">
+<h2 id="hahahugoshortcode1109s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-statement">
+  🚀 Problem Statement
+  <a class="heading-link" href="#-problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Implement a function that computes the sum of two integers without using the <code>+</code> operator.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>In this challenge, we&rsquo;re asked to calculate the sum of two integers, <code>a</code> and <code>b</code>, without using the typical <code>+</code> or <code>-</code> arithmetic operators. Instead, we&rsquo;re going to solve this by utilizing bitwise operations—how cool is that? 😎</p>
+<hr>
+<h3 id="-key-insights">
+  🧠 Key Insights
+  <a class="heading-link" href="#-key-insights">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To tackle this problem, we need to understand how numbers are added at the <strong>bit level</strong>. Here’s how it works in binary addition:</p>
+<ol>
+<li><strong>XOR (exclusive OR)</strong>: This operation gives us the sum of two bits <strong>without considering the carry</strong>. It’s like adding the bits as if there’s no carryover.</li>
+<li><strong>AND</strong>: The AND operation helps us <strong>detect where the carry</strong> is. If both bits are 1, there’s a carry.</li>
+</ol>
+<p>By combining these two operations, we can compute the sum iteratively without using <code>+</code>.</p>
+<hr>
+<h3 id="-approach">
+  🔍 Approach
+  <a class="heading-link" href="#-approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The algorithm works by repeatedly simulating the addition process with the help of bitwise operations:</p>
+<ol>
+<li><strong>XOR (<code>^</code>)</strong>: The XOR operation computes the sum of two numbers <strong>without carrying over</strong>.</li>
+<li><strong>AND (<code>&amp;</code>)</strong>: This operation helps <strong>detect where the carry</strong> occurs.</li>
+<li><strong>Left shift (<code>&lt;&lt;</code>)</strong>: Once we know where the carry is, we shift it left by one bit to move it to the right place for the next addition.</li>
+</ol>
+<p>Here’s how the algorithm goes step by step:</p>
+<ul>
+<li><strong>Step 1</strong>: Compute the partial sum using <code>a^b</code> (XOR).</li>
+<li><strong>Step 2</strong>: Find the carry using <code>(a&amp;b)</code>, then shift it left to the correct position with <code>&lt;&lt;</code>.</li>
+<li><strong>Step 3</strong>: Repeat this process until there’s no carry left (i.e., <code>b == 0</code>).</li>
+</ul>
+<p>Once the carry becomes zero, we have our result!</p>
+<hr>
+<h3 id="-step-by-step-code-breakdown">
+  🔨 Step-by-Step Code Breakdown
+  <a class="heading-link" href="#-step-by-step-code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s walk through the code:</p>
+<h4 id="step-1-base-case-check">
+  Step 1: Base Case Check
+  <a class="heading-link" href="#step-1-base-case-check">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> b <span style="color:#666">==</span> <span style="color:#666">0</span><span style="color:#666">?</span> <span style="color:#a0a000">a</span> : getSum(a<span style="color:#666">^</span>b, (a<span style="color:#666">&amp;</span>b)<span style="color:#666">&lt;&lt;</span><span style="color:#666">1</span>);
+</span></span></code></pre></div><ul>
+<li>If <code>b</code> is zero, the addition is done! We return <code>a</code> because no further calculation is needed.</li>
+<li>If <code>b</code> isn’t zero, we call the function recursively with the new arguments:
+<ul>
+<li><code>a^b</code>: The sum without carry.</li>
+<li><code>(a&amp;b)&lt;&lt;1</code>: The carry, shifted to the right position.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-2-xor-operation-ab">
+  Step 2: XOR Operation (<code>a^b</code>)
+  <a class="heading-link" href="#step-2-xor-operation-ab">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The XOR operation gives the <strong>sum without carry</strong>:
+<ul>
+<li>If the bits are the same (0,0 or 1,1), the result is 0.</li>
+<li>If the bits are different (0,1 or 1,0), the result is 1.</li>
+</ul>
+</li>
+<li>Example:
+<ul>
+<li><code>5 ^ 3 = 6</code> (because <code>0101 ^ 0011 = 0110</code>)</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-and-and-left-shift-operation-ab1">
+  Step 3: AND and Left Shift Operation (<code>(a&amp;b)&lt;&lt;1</code>)
+  <a class="heading-link" href="#step-3-and-and-left-shift-operation-ab1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The AND operation finds where the carry happens:
+<ul>
+<li><code>a&amp;b</code>: A 1 where both <code>a</code> and <code>b</code> have 1 at the same position.</li>
+<li>Then, we shift the result left by one bit to move the carry to the right position for the next iteration.</li>
+</ul>
+</li>
+<li>Example:
+<ul>
+<li><code>(5 &amp; 3) = 1</code>, and shifting left by one bit gives <code>2</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-4-recursion">
+  Step 4: Recursion
+  <a class="heading-link" href="#step-4-recursion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The function calls itself recursively with the new values:
+<ul>
+<li><code>a^b</code>: The new sum without carry.</li>
+<li><code>(a&amp;b)&lt;&lt;1</code>: The new carry, shifted to the correct position.</li>
+</ul>
+</li>
+<li>This continues until <code>b == 0</code>, and then the result is returned.</li>
+</ul>
+<hr>
+<h3 id="-example-walkthrough">
+  📊 Example Walkthrough
+  <a class="heading-link" href="#-example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s walk through an example with <code>a = 5</code> and <code>b = 3</code>:</p>
 <ol>
 <li>
-<p><strong>Bit Manipulation</strong>:</p>
+<p><strong>First Iteration</strong>:</p>
 <ul>
-<li>The sum of two integers can be obtained using bitwise operations:
-<ul>
-<li><strong>XOR (<code>^</code>)</strong>: This operation gives the sum of two bits without considering the carry. For example, ( 1 \oplus 1 = 0 ) (carry 1) and ( 1 \oplus 0 = 1 ).</li>
-<li><strong>AND (<code>&amp;</code>)</strong>: This operation helps in calculating the carry. The carry for each bit can be obtained by performing ( (a &amp; b) ) and then shifting it left by one position using <code>&lt;&lt;</code>. This left shift effectively moves the carry to the left to add it in the next significant bit.</li>
-</ul>
-</li>
+<li><code>a = 5</code>, <code>b = 3</code></li>
+<li><code>a^b = 6</code> (sum without carry)</li>
+<li><code>(a&amp;b)&lt;&lt;1 = 2</code> (carry)</li>
+<li>Call <code>getSum(6, 2)</code></li>
 </ul>
 </li>
 <li>
-<p><strong>Recursive Function</strong>:</p>
+<p><strong>Second Iteration</strong>:</p>
 <ul>
-<li>The function keeps applying the above logic until there is no carry left (i.e., <code>b</code> becomes 0).</li>
+<li><code>a = 6</code>, <code>b = 2</code></li>
+<li><code>a^b = 4</code> (sum without carry)</li>
+<li><code>(a&amp;b)&lt;&lt;1 = 4</code> (carry)</li>
+<li>Call <code>getSum(4, 4)</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Third Iteration</strong>:</p>
+<ul>
+<li><code>a = 4</code>, <code>b = 4</code></li>
+<li><code>a^b = 0</code> (sum without carry)</li>
+<li><code>(a&amp;b)&lt;&lt;1 = 8</code> (carry)</li>
+<li>Call <code>getSum(0, 8)</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Fourth Iteration</strong>:</p>
+<ul>
+<li><code>a = 0</code>, <code>b = 8</code></li>
+<li><code>a^b = 8</code> (sum without carry)</li>
+<li><code>(a&amp;b)&lt;&lt;1 = 0</code> (carry)</li>
+<li>Call <code>getSum(8, 0)</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Base Case</strong>:</p>
+<ul>
+<li><code>a = 8</code>, <code>b = 0</code></li>
+<li>Since <code>b == 0</code>, we return <code>a = 8</code>.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>The sum of <code>5</code> and <code>3</code> is <code>8</code>. 🎉</p>
+<hr>
+<h3 id="-time-complexity">
+  📈 Time Complexity
+  <a class="heading-link" href="#-time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The time complexity of this algorithm is <strong>O(log(max(a, b)))</strong>. This is because each recursive call reduces the number of bits in the carry (<code>b</code>) by one. Since the number of bits in <code>a</code> and <code>b</code> is proportional to <strong>log(max(a, b))</strong>, the recursion depth is logarithmic.</p>
+<hr>
+<h3 id="-space-complexity">
+  🛠️ Space Complexity
+  <a class="heading-link" href="#-space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The space complexity is <strong>O(log(max(a, b)))</strong>, as the recursion depth is proportional to the number of bits in <code>a</code> and <code>b</code>. Each recursive call consumes space on the call stack, leading to logarithmic space complexity.</p>
+<hr>
+<h3 id="-conclusion">
+  🏁 Conclusion
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This bitwise approach is a brilliant way to perform addition without using the standard <code>+</code> operator! By using XOR for the sum and AND (with a left shift) for the carry, we efficiently compute the result in <strong>logarithmic time</strong>. 🏆</p>
+<p>The algorithm is not only <strong>elegant</strong> but also <strong>efficient</strong>, demonstrating the power of bitwise operations. So next time you encounter a problem that seems to require regular arithmetic, remember that bitwise tricks can often come to the rescue! 🔥</p>
+<hr>
+<h3 id="-quick-recap">
+  🎯 Quick Recap:
+  <a class="heading-link" href="#-quick-recap">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li>The function <code>getSum(int a, int b)</code> checks if <code>b</code> is zero:
-<ul>
-<li>If yes, it returns <code>a</code> (the final sum).</li>
-<li>If no, it computes the new <code>a</code> using the XOR of <code>a</code> and <code>b</code>, and computes the new <code>b</code> as the carry shifted left by one bit.</li>
-</ul>
-</li>
-<li>This process continues recursively until all carries are resolved.</li>
-</ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ul>
-<li><strong>Time Complexity</strong>: ( O(1) ) because the number of operations is constant, regardless of the input size, given the fixed size of integer representation.</li>
-<li><strong>Space Complexity</strong>: ( O(1) ) as no additional data structures are used.</li>
+<li><strong>Key Operations</strong>: XOR for sum, AND for carry.</li>
+<li><strong>Time Complexity</strong>: O(log(max(a, b))).</li>
+<li><strong>Space Complexity</strong>: O(log(max(a, b))).</li>
+<li><strong>Motivational Note</strong>: You can solve this problem without relying on the typical addition operator, showing just how versatile bitwise operations can be! Keep exploring new techniques to make your solutions even more efficient. 💪</li>
 </ul>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1108s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1109s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

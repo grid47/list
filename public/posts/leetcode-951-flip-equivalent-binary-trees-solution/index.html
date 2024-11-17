@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -254,7 +254,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given two binary trees, determine if they are flip equivalent. Two binary trees are considered flip equivalent if they can be made identical by swapping the left and right children of some nodes.</p>
+<p>The problem asks us to determine whether two binary trees are equivalent when considering a special form of equivalence, known as <strong>flip equivalence</strong>. In this problem, two binary trees are considered equivalent if they can be made identical by flipping the children of any number of nodes. A flip operation at a node means swapping its left and right children. The goal is to return <code>true</code> if the two binary trees are flip equivalent, and <code>false</code> otherwise.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -262,50 +262,53 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we use a recursive approach to check the equivalence between two binary trees under the allowed flip operations. The idea is that for each pair of corresponding nodes in the two trees, we check if their values are the same, and then check recursively whether the subtrees rooted at those nodes are equivalent either in the original or flipped orientation.</p>
+<p>There are two possible ways to check the equivalence of the subtrees:</p>
 <ol>
-<li>
-<p><strong>Base Cases</strong>:</p>
-<ul>
-<li>If both nodes are <code>NULL</code>, they are equivalent.</li>
-<li>If only one of the nodes is <code>NULL</code>, they are not equivalent.</li>
-</ul>
-</li>
-<li>
-<p><strong>Check Node Values</strong>:</p>
-<ul>
-<li>If the values of the current nodes (<code>root1</code> and <code>root2</code>) are not equal, return <code>false</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Recursive Checks</strong>:</p>
-<ul>
-<li>Recursively check for two scenarios:
-<ul>
-<li>The left subtree of <code>root1</code> is equivalent to the left subtree of <code>root2</code> and the right subtree of <code>root1</code> is equivalent to the right subtree of <code>root2</code>.</li>
-<li>The left subtree of <code>root1</code> is equivalent to the right subtree of <code>root2</code> and the right subtree of <code>root1</code> is equivalent to the left subtree of <code>root2</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>Return the logical OR of the results of the two scenarios.</li>
-</ul>
-</li>
+<li>The left child of <code>root1</code> is equivalent to the left child of <code>root2</code> and the right child of <code>root1</code> is equivalent to the right child of <code>root2</code>.</li>
+<li>The left child of <code>root1</code> is equivalent to the right child of <code>root2</code> and the right child of <code>root1</code> is equivalent to the left child of <code>root2</code>.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>If either of these conditions hold true for each pair of nodes, the trees are flip equivalent.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The function first checks for base cases of <code>NULL</code> nodes.</li>
-<li>It then checks the values of the nodes and recursively evaluates the two possible subtree equivalences.</li>
-<li>The final result is a boolean indicating if the trees are flip equivalent.</li>
+<ol>
+<li>
+<p><strong>Base Case</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(root1 <span style="color:#666">==</span> <span style="color:#a2f">NULL</span> <span style="color:#666">||</span> root2 <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) 
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> root1 <span style="color:#666">==</span> root2;
+</span></span></code></pre></div><ul>
+<li>The base case checks whether either of the trees is <code>NULL</code>. If both are <code>NULL</code>, they are considered equivalent, so we return <code>true</code>. If only one of them is <code>NULL</code>, they are not equivalent, so we return <code>false</code>.</li>
 </ul>
+</li>
+<li>
+<p><strong>Recursion for Node Values</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> (root1<span style="color:#666">-&gt;</span>val <span style="color:#666">==</span> root2<span style="color:#666">-&gt;</span>val) <span style="color:#666">&amp;&amp;</span> 
+</span></span><span style="display:flex;"><span>(flipEquiv(root1<span style="color:#666">-&gt;</span>left, root2<span style="color:#666">-&gt;</span>left) <span style="color:#666">&amp;&amp;</span> flipEquiv(root1<span style="color:#666">-&gt;</span>right, root2<span style="color:#666">-&gt;</span>right) <span style="color:#666">||</span>
+</span></span><span style="display:flex;"><span>flipEquiv(root1<span style="color:#666">-&gt;</span>left, root2<span style="color:#666">-&gt;</span>right) <span style="color:#666">&amp;&amp;</span> flipEquiv(root1<span style="color:#666">-&gt;</span>right, root2<span style="color:#666">-&gt;</span>left));
+</span></span></code></pre></div><ul>
+<li>After ensuring that neither of the nodes is <code>NULL</code>, we check if their values are the same. If they are not, we return <code>false</code> immediately.</li>
+<li>If the values are the same, we proceed to check the two recursive conditions:
+<ol>
+<li>The left child of <code>root1</code> is flip equivalent to the left child of <code>root2</code> and the right child of <code>root1</code> is flip equivalent to the right child of <code>root2</code>.</li>
+<li>The left child of <code>root1</code> is flip equivalent to the right child of <code>root2</code> and the right child of <code>root1</code> is flip equivalent to the left child of <code>root2</code>.</li>
+</ol>
+</li>
+<li>If either of these conditions is true, we return <code>true</code>; otherwise, we return <code>false</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Flip Equivalence Check</strong>:</p>
+<ul>
+<li>The recursive function <code>flipEquiv()</code> is called for all the child nodes, checking whether the trees rooted at these child nodes are equivalent in either the original or flipped configuration.</li>
+<li>The recursive calls are structured such that both configurations (original and flipped) are checked for each pair of corresponding child nodes.</li>
+</ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -313,10 +316,29 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the number of nodes in the trees, since each node is processed once.</li>
-<li><strong>Space Complexity</strong>: O(h), where h is the height of the trees, due to the recursive stack.</li>
+<li>The time complexity of this solution depends on the number of nodes in the binary trees. Since we visit each node once and perform constant-time operations for each node (i.e., comparing values and recursively checking child nodes), the time complexity is <strong>O(N)</strong>, where <code>N</code> is the number of nodes in the trees.</li>
+<li>The recursion depth is also O(N) in the worst case (i.e., when the tree is skewed).</li>
 </ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is primarily due to the recursive stack used for traversing the tree. In the worst case (i.e., a skewed tree), the recursion depth will be O(N). Thus, the space complexity is <strong>O(N)</strong>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The solution uses a recursive approach to check if two binary trees are flip equivalent. The key idea is to recursively check the equivalence of the left and right subtrees, both in the original and flipped configurations, at each level of the tree. This approach ensures that we correctly handle cases where a flip at a node might be necessary to achieve equivalence. The time and space complexity of the solution are both O(N), making it efficient for solving this problem within the constraints typically given in competitive programming contexts.</p>
  
 </div>
   

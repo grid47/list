@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -211,7 +211,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1109s0hbhb">
+        <h2 id="hahahugoshortcode1111s0hbhb">
   <a href="https://leetcode.com/problems/super-pow/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -226,7 +226,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1109s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1111s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -249,76 +249,158 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">powmod</span>(superPow(a, b), <span style="color:#666">10</span>) <span style="color:#666">*</span> powmod(a, last_digit) <span style="color:#666">%</span> base;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1109s2hbhb">
+<h2 id="hahahugoshortcode1111s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-statement">
+  🚀 Problem Statement
+  <a class="heading-link" href="#-problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given two integers <code>a</code> and <code>b</code> (where <code>a</code> is a positive integer and <code>b</code> is a non-negative integer represented as an array of digits), calculate ( a^{b} \mod 1337 ).</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>The goal here is to calculate <code>a^b % 1337</code>, where <code>a</code> is an integer and <code>b</code> is an array of digits that represent a very large exponent. The challenge is to efficiently compute this modular exponentiation, especially since <code>b</code> can have a large number of digits. We&rsquo;re tasked with calculating this without directly manipulating the large number <code>b</code>, and to do this, we’ll leverage some clever mathematical techniques!</p>
+<hr>
+<h3 id="-approach">
+  🧠 Approach
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we’ll break it down into a series of steps that involve <strong>modular arithmetic</strong> and <strong>recursive power reduction</strong>. Here are the key ideas:</p>
 <ol>
 <li>
-<p><strong>Modular Exponentiation</strong>:</p>
-<ul>
-<li>To efficiently compute ( a^b \mod 1337 ), we can break down the problem using properties of modular arithmetic.</li>
-<li>We use the fact that ( a^b \mod m = (a^{b \mod \phi(m)}) \mod m ) where ( \phi ) is Euler&rsquo;s totient function, especially useful when ( a ) is larger than ( m ).</li>
-</ul>
+<p><strong>Modular Arithmetic</strong>: By taking advantage of the modulus (<code>1337</code>), we can simplify each step of the calculation, ensuring we never have to deal with numbers too large to handle. At each recursive step, we compute the modular exponentiation, which avoids overflow and helps us manage big numbers.</p>
 </li>
 <li>
-<p><strong>Recursive Function</strong>:</p>
-<ul>
-<li>The function <code>superPow(int a, vector&lt;int&gt;&amp; b)</code> uses recursion to handle the digits in <code>b</code>.</li>
-<li>The last digit of <code>b</code> is processed, and the remaining digits are passed recursively. This way, we can compute ( a^b ) using ( a^{(b / 10)} ) and ( a^{(b \mod 10)} ).</li>
-</ul>
+<p><strong>Recursive Decomposition</strong>: Since <code>b</code> is an array of digits, we don’t need to calculate the entire exponent <code>a^b</code> directly. Instead, we recursively reduce <code>b</code> by removing one digit at a time, breaking the problem into smaller subproblems that are easier to solve.</p>
 </li>
 <li>
-<p><strong>Power Calculation</strong>:</p>
-<ul>
-<li>The function <code>powmod(int a, int k)</code> computes ( a^k \mod 1337 ) iteratively to avoid stack overflow and to optimize performance.</li>
-</ul>
+<p><strong>Efficient Modular Exponentiation</strong>: Using <strong>exponentiation by squaring</strong>, we can compute <code>a^k % base</code> efficiently, which significantly reduces the number of operations required.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<hr>
+<h3 id="-step-by-step-code-breakdown">
+  🔨 Step-by-Step Code Breakdown
+  <a class="heading-link" href="#-step-by-step-code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Now, let’s dive into the code and break it down step by step!</p>
+<h4 id="1-powmod-function-efficient-modular-exponentiation">
+  1. <code>powmod</code> Function (Efficient Modular Exponentiation)
+  <a class="heading-link" href="#1-powmod-function-efficient-modular-exponentiation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The <code>powmod</code> function computes <code>a^k % base</code> efficiently. Here’s how it works:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">powmod</span>(<span style="color:#0b0;font-weight:bold">int</span> a, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>    a <span style="color:#666">%=</span> base;  <span style="color:#080;font-style:italic">// Reduce &#39;a&#39; modulo base to avoid large numbers
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">1</span>;  <span style="color:#080;font-style:italic">// Start with result = 1 (multiplicative identity)
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> k; i<span style="color:#666">++</span>) {  <span style="color:#080;font-style:italic">// Loop &#39;k&#39; times
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        res <span style="color:#666">=</span> (res <span style="color:#666">*</span> a) <span style="color:#666">%</span> base;  <span style="color:#080;font-style:italic">// Multiply and take modulo
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;  <span style="color:#080;font-style:italic">// Return the result
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
+</span></span></code></pre></div><ul>
+<li><strong>Line 1</strong>: We reduce <code>a</code> modulo <code>base</code> to avoid handling large numbers.</li>
+<li><strong>Line 2</strong>: We start with <code>res = 1</code>, which is the identity for multiplication.</li>
+<li><strong>Lines 3-4</strong>: We loop <code>k</code> times, multiplying the result by <code>a</code> and taking modulo <code>base</code>.</li>
+<li><strong>Line 5</strong>: Finally, we return the result, which is <code>a^k % base</code>.</li>
+</ul>
+<p>This function is crucial for efficiently calculating powers modulo <code>1337</code>!</p>
+<h4 id="2-superpow-function-recursive-decomposition">
+  2. <code>superPow</code> Function (Recursive Decomposition)
+  <a class="heading-link" href="#2-superpow-function-recursive-decomposition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The <code>superPow</code> function breaks down the problem of computing <code>a^b % 1337</code> (where <code>b</code> is an array of digits) using recursion:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">superPow</span>(<span style="color:#0b0;font-weight:bold">int</span> a, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(b.empty()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;  <span style="color:#080;font-style:italic">// Base case: if &#39;b&#39; is empty, return 1
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#0b0;font-weight:bold">int</span> last_digit <span style="color:#666">=</span> b.back();  <span style="color:#080;font-style:italic">// Get the last digit of &#39;b&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    b.pop_back();  <span style="color:#080;font-style:italic">// Remove the last digit from &#39;b&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Recursively calculate the result and reduce the problem
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">return</span> powmod(superPow(a, b), <span style="color:#666">10</span>) <span style="color:#666">*</span> powmod(a, last_digit) <span style="color:#666">%</span> base;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Line 1</strong>: If <code>b</code> is empty, we return <code>1</code> because any number raised to the power of <code>0</code> is <code>1</code>.</li>
+<li><strong>Line 2</strong>: Extract the last digit of <code>b</code> (this is the least significant digit of the exponent).</li>
+<li><strong>Line 3</strong>: Remove the last digit from <code>b</code>, reducing the problem size for the next recursive step.</li>
+<li><strong>Line 4</strong>: We recursively calculate <code>superPow(a, b)</code>, then raise it to the power of 10 using <code>powmod</code>. This is crucial for breaking down large powers efficiently.</li>
+<li><strong>Line 5</strong>: We also compute <code>powmod(a, last_digit)</code> to handle the effect of the current digit on the exponent. We multiply the results and take modulo <code>base</code>.</li>
+</ul>
+<p>This recursive approach reduces the problem step by step, making it manageable and efficient!</p>
+<h4 id="3-base-variable">
+  3. Base Variable
+  <a class="heading-link" href="#3-base-variable">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> base <span style="color:#666">=</span> <span style="color:#666">1337</span>;
+</span></span></code></pre></div><p>The modulus <code>1337</code> is predefined in the problem, and we use it to ensure the result stays within bounds while preventing overflow.</p>
+<hr>
+<h3 id="-time-and-space-complexity">
+  📈 Time and Space Complexity
+  <a class="heading-link" href="#-time-and-space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The <code>superPow</code> function is called recursively for each digit of <code>b</code>. If <code>n</code> is the number of digits in <code>b</code>, the recursion depth is <code>O(n)</code>. For each recursive call, we perform two <code>powmod</code> calls, each with an exponent of at most <code>10</code>. The time complexity for <code>powmod</code> is constant (<code>O(1)</code>), so the overall time complexity is <strong>O(n)</strong>, where <code>n</code> is the number of digits in <code>b</code>.</p>
+<h4 id="space-complexity">
+  Space Complexity
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(n)</strong>, where <code>n</code> is the number of digits in <code>b</code>, because the recursion depth grows with the number of digits.</p>
+<hr>
+<h3 id="-conclusion">
+  🏁 Conclusion
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this problem, we tackled the challenge of computing <code>a^b % 1337</code>, where <code>b</code> is represented as an array of digits. By using modular exponentiation and recursive decomposition, we efficiently computed the result without dealing directly with the large exponent. The approach is both time and space efficient, with a linear complexity relative to the number of digits in <code>b</code>.</p>
+<p>This technique is perfect for handling large numbers and ensures that we can work with numbers that are too large to handle traditionally. Keep practicing, and you’ll soon master these advanced mathematical concepts!</p>
+<hr>
+<h3 id="-quick-summary">
+  🌟 Quick Summary
+  <a class="heading-link" href="#-quick-summary">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li>The main function <code>superPow</code> checks if <code>b</code> is empty, returning 1 if true (base case).</li>
-<li>It pops the last digit of <code>b</code>, then recursively calculates ( a^{b} \mod 1337 ) and combines results using the properties of modular arithmetic.</li>
-<li>The <code>powmod</code> function computes the power modulo 1337 for the recursive parts.</li>
+<li>We used <strong>modular exponentiation</strong> to compute <code>a^b % 1337</code> efficiently.</li>
+<li>We broke the problem down recursively by removing one digit from <code>b</code> at a time.</li>
+<li><strong>Time Complexity</strong>: <strong>O(n)</strong> (where <code>n</code> is the number of digits in <code>b</code>).</li>
+<li><strong>Space Complexity</strong>: <strong>O(n)</strong> due to recursion depth.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ul>
-<li><strong>Time Complexity</strong>: ( O(k) ), where ( k ) is the number of digits in <code>b</code> (because of the recursion).</li>
-<li><strong>Space Complexity</strong>: ( O(k) ) for the recursion stack.</li>
-</ul>
+<p>Now you’re ready to solve similar problems and tackle even bigger challenges! 🚀</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1109s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1111s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

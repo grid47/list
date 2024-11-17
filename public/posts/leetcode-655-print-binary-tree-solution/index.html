@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -221,7 +221,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1253s0hbhb">
+        <h2 id="hahahugoshortcode1252s0hbhb">
   <a href="https://leetcode.com/problems/print-binary-tree/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -236,7 +236,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1253s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1252s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -284,7 +284,7 @@
 </span></span><span style="display:flex;"><span>        helper(ans, p<span style="color:#666">-&gt;</span>right, level <span style="color:#666">+</span> <span style="color:#666">1</span>, mid <span style="color:#666">+</span> <span style="color:#666">1</span>, r);        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1253s2hbhb">
+<h2 id="hahahugoshortcode1252s2hbhb">
   
 
   
@@ -296,7 +296,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a binary tree, print the tree in a 2D array format where each row represents a level of the tree, and each column represents the position of the nodes in that level. The structure should have empty strings for null nodes.</p>
+<p>Given a <strong>binary tree</strong>, we are tasked with printing the binary tree in a <strong>2D array</strong> format. The goal is to represent the tree such that each level of the tree is printed on a new row and the nodes are aligned in the appropriate positions within their respective rows. For nodes that do not exist at a given position, the space should be filled with an empty string.</p>
+<p>The challenge involves:</p>
+<ol>
+<li>Computing the dimensions of the 2D array to fit the entire tree structure.</li>
+<li>Filling out the array with node values, ensuring proper alignment for each node.</li>
+<li>Handling cases where a node may not have a child on one side (left or right).</li>
+</ol>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -304,59 +310,123 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we need to approach it in the following way:</p>
 <ol>
 <li>
-<p><strong>Height and Width Calculation</strong>:</p>
+<p><strong>Calculate the Height and Width of the Tree:</strong></p>
 <ul>
-<li>Calculate the height of the tree to determine the number of rows in the output.</li>
-<li>Calculate the width of the tree to determine the number of columns in the output. The width is defined as <code>2^h - 1</code> where <code>h</code> is the height of the tree.</li>
+<li><strong>Height</strong> of the tree is the number of levels in the binary tree.</li>
+<li><strong>Width</strong> of the tree corresponds to the number of columns required to fit the largest level, considering the placement of child nodes between each parent node.</li>
 </ul>
 </li>
 <li>
-<p><strong>2D Vector Initialization</strong>:</p>
+<p><strong>Store Tree Representation in a 2D Array:</strong></p>
 <ul>
-<li>Initialize a 2D vector (<code>ans</code>) with dimensions determined by the height and width, filled with empty strings.</li>
+<li>Using a <strong>2D vector</strong>, we will store the tree nodes level by level. Each level will be a new row in the array, and each node will be placed in its corresponding position within that row.</li>
 </ul>
 </li>
 <li>
-<p><strong>Recursive Tree Population</strong>:</p>
+<p><strong>Recursive Tree Traversal (DFS):</strong></p>
 <ul>
-<li>Use a helper function to fill the 2D vector with values from the tree nodes:
-<ul>
-<li>For each node, determine its position in the 2D vector based on its level and the current left and right boundaries.</li>
-<li>Recursively call the helper function for the left and right children, adjusting the boundaries accordingly.</li>
-</ul>
-</li>
+<li>We will perform a <strong>depth-first search (DFS)</strong> to traverse the tree and fill in the 2D array. The recursive function will visit each node and place it at its correct position based on the level and the left-right position within that level.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>The main function <code>printTree</code> initializes the dimensions and calls the helper function.</li>
+<h4 id="1-treenode-definition">
+  1. <strong>TreeNode Definition:</strong>
+  <a class="heading-link" href="#1-treenode-definition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">struct</span> <span style="color:#00f">TreeNode</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> val;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#666">*</span>left;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#666">*</span>right;
+</span></span><span style="display:flex;"><span>    TreeNode() <span style="color:#666">:</span> val(<span style="color:#666">0</span>), left(<span style="color:#a2f;font-weight:bold">nullptr</span>), right(<span style="color:#a2f;font-weight:bold">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#0b0;font-weight:bold">int</span> x) <span style="color:#666">:</span> val(x), left(<span style="color:#a2f;font-weight:bold">nullptr</span>), right(<span style="color:#a2f;font-weight:bold">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#0b0;font-weight:bold">int</span> x, TreeNode <span style="color:#666">*</span>left, TreeNode <span style="color:#666">*</span>right) <span style="color:#666">:</span> val(x), left(left), right(right) {}
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>This <code>TreeNode</code> structure is used to represent each node in the binary tree. It holds an integer value (<code>val</code>), a pointer to the left child (<code>left</code>), and a pointer to the right child (<code>right</code>).</li>
 </ul>
-</li>
-<li>
-<p><strong>Recursive Functionality</strong>:</p>
-<ul>
-<li>The <code>helper</code> function places the node value in the correct position and makes recursive calls for the left and right children, effectively filling in the tree&rsquo;s structure into the 2D vector.</li>
+<h4 id="2-main-function">
+  2. <strong>Main Function:</strong>
+  <a class="heading-link" href="#2-main-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> printTree(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> h <span style="color:#666">=</span> get_height(root), w <span style="color:#666">=</span> get_width(root);
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> ans(h, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span>(w, <span style="color:#b44">&#34;&#34;</span>));
+</span></span><span style="display:flex;"><span>    helper(ans, root, <span style="color:#666">0</span>, <span style="color:#666">0</span>, w <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong><code>get_height(root)</code></strong> and <strong><code>get_width(root)</code></strong> are helper functions that calculate the height and width of the binary tree, respectively.</li>
+<li>A <strong>2D vector <code>ans</code></strong> is initialized to store the tree&rsquo;s values. The size of the vector is based on the tree&rsquo;s height and width, with each cell initialized to an empty string.</li>
+<li>The function <strong><code>helper()</code></strong> is then called to fill in the 2D vector with the appropriate node values.</li>
 </ul>
-</li>
-<li>
-<p><strong>Return the Result</strong>:</p>
-<ul>
-<li>Finally, the filled 2D vector is returned.</li>
+<h4 id="3-calculating-the-height-of-the-tree">
+  3. <strong>Calculating the Height of the Tree:</strong>
+  <a class="heading-link" href="#3-calculating-the-height-of-the-tree">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">get_height</span>(TreeNode <span style="color:#666">*</span>p) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>p) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> left <span style="color:#666">=</span> get_height(p<span style="color:#666">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> right <span style="color:#666">=</span> get_height(p<span style="color:#666">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> max(left, right) <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>get_height</code> function calculates the height of the tree recursively. It returns 0 for a <code>null</code> node (base case). Otherwise, it calculates the height of the left and right subtrees and returns the greater of the two, plus 1 for the current node.</li>
 </ul>
-</li>
-</ol>
+<h4 id="4-calculating-the-width-of-the-tree">
+  4. <strong>Calculating the Width of the Tree:</strong>
+  <a class="heading-link" href="#4-calculating-the-width-of-the-tree">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">get_width</span>(TreeNode <span style="color:#666">*</span>p) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>p) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> left <span style="color:#666">=</span> get_width(p<span style="color:#666">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> right <span style="color:#666">=</span> get_width(p<span style="color:#666">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> max(left, right) <span style="color:#666">*</span> <span style="color:#666">2</span> <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>get_width</code> function computes the width of the tree. It works similarly to the height function, recursively calculating the width of the left and right subtrees. The width is determined by the maximum width between the left and right subtrees, multiplied by 2, and adding 1 for the current node.</li>
+</ul>
+<h4 id="5-populating-the-2d-array">
+  5. <strong>Populating the 2D Array:</strong>
+  <a class="heading-link" href="#5-populating-the-2d-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">helper</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>ans, TreeNode <span style="color:#666">*</span>p, <span style="color:#0b0;font-weight:bold">int</span> level, <span style="color:#0b0;font-weight:bold">int</span> l, <span style="color:#0b0;font-weight:bold">int</span> r) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>p) <span style="color:#a2f;font-weight:bold">return</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>    ans[level][mid] <span style="color:#666">=</span> to_string(p<span style="color:#666">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>    helper(ans, p<span style="color:#666">-&gt;</span>left, level <span style="color:#666">+</span> <span style="color:#666">1</span>, l, mid <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    helper(ans, p<span style="color:#666">-&gt;</span>right, level <span style="color:#666">+</span> <span style="color:#666">1</span>, mid <span style="color:#666">+</span> <span style="color:#666">1</span>, r);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>helper</code> function is responsible for recursively placing the nodes in their correct positions in the 2D vector <code>ans</code>.</li>
+<li>The base case is when the node is <code>null</code>, in which case the function returns immediately.</li>
+<li>For each node, it calculates the <strong>middle position</strong> (<code>mid</code>) within the current range <code>[l, r]</code> and assigns the node&rsquo;s value to that position.</li>
+<li>It then recursively processes the left and right subtrees, updating the <code>level</code> and adjusting the left and right bounds for the subtree placement.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -364,15 +434,57 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(N), where N is the number of nodes in the tree. Each node is processed once to calculate height, width, and during the population of the 2D vector.</li>
-<li><strong>Space Complexity</strong>: O(N), for the 2D vector and the recursion stack in the case of a skewed tree.</li>
+<li>
+<p><strong>Height and Width Calculation:</strong></p>
+<ul>
+<li>The <code>get_height</code> and <code>get_width</code> functions each visit every node in the tree once. Therefore, both functions have a time complexity of <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the binary tree.</li>
 </ul>
+</li>
+<li>
+<p><strong>Tree Population:</strong></p>
+<ul>
+<li>The <code>helper</code> function also visits each node exactly once and fills in the 2D array with the node&rsquo;s value. Thus, its time complexity is also <strong>O(n)</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Overall Time Complexity:</strong></p>
+<ul>
+<li>Since both height and width calculations and the tree population involve linear traversals of the tree, the overall time complexity of the solution is <strong>O(n)</strong>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is determined by the space used for the 2D array, which has a size of <strong>O(h * w)</strong>, where <code>h</code> is the height and <code>w</code> is the width of the tree. In the worst case, the width could be proportional to the number of nodes, and the height is proportional to the depth of the tree.</li>
+<li>Therefore, the space complexity is <strong>O(n)</strong>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently prints a binary tree in a 2D format by calculating its height and width, followed by a depth-first traversal to fill in the tree’s values at the correct positions. By leveraging recursive tree traversal and calculating the necessary dimensions beforehand, the solution optimizes both time and space complexity to provide an elegant approach to the problem. The time complexity of <strong>O(n)</strong> makes it suitable for large trees, while the space complexity of <strong>O(n)</strong> ensures that the solution is memory-efficient. This approach is both simple and effective, providing a clean solution for visualizing binary trees in a 2D grid-like format.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1253s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1252s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

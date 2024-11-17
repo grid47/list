@@ -217,7 +217,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -257,7 +257,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer array <code>nums</code>, find the maximum possible sum of a non-empty subarray of the array. The subarray may wrap around the end of the array (circular).</p>
+<p>The problem requires finding the maximum possible sum of a subarray in a circular array. In a circular array, the end of the array is connected back to the beginning, so the subarray can wrap around. The challenge here is to efficiently compute the maximum subarray sum in this circular context. We need to consider both the standard non-circular maximum subarray sum and the circular maximum subarray sum, returning the greater of the two values.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -265,47 +265,74 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we break down the solution into two key parts:</p>
 <ol>
 <li>
-<p><strong>Initial Variables</strong>:</p>
+<p><strong>Calculate the Non-Circular Maximum Subarray Sum</strong>:</p>
 <ul>
-<li>Initialize variables <code>lmax</code>, <code>lmin</code>, <code>gmax</code>, and <code>gmin</code> to keep track of the current maximum and minimum subarray sums and the global maximum and minimum sums, respectively.</li>
-<li>Initialize <code>sum</code> to hold the total sum of the array.</li>
+<li>This is simply the maximum subarray sum without considering the circular nature of the array.</li>
+<li>We use <strong>Kadane&rsquo;s algorithm</strong> to find this sum, which allows us to compute the maximum subarray sum in linear time. The algorithm maintains a local maximum <code>lmax</code> as we traverse the array and updates a global maximum <code>gmax</code> whenever <code>lmax</code> exceeds <code>gmax</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Iterate Through Array</strong>:</p>
+<p><strong>Calculate the Circular Maximum Subarray Sum</strong>:</p>
 <ul>
-<li>Loop through each element in <code>nums</code>, updating the following:
-<ul>
-<li><code>lmax</code>: The maximum subarray sum ending at the current position.</li>
-<li><code>gmax</code>: The global maximum subarray sum found so far.</li>
-<li><code>lmin</code>: The minimum subarray sum ending at the current position.</li>
-<li><code>gmin</code>: The global minimum subarray sum found so far.</li>
-<li><code>sum</code>: Accumulate the total sum of the array.</li>
-</ul>
-</li>
+<li>To handle the circular nature, we need to consider the subarrays that wrap around the array. The key observation here is that the maximum circular subarray sum can be found by subtracting the minimum subarray sum from the total sum of the array.</li>
+<li>By subtracting the smallest subarray sum from the total sum, we effectively get the maximum &ldquo;wrapped&rdquo; subarray sum.</li>
+<li>Using a similar approach to Kadane’s algorithm, we calculate the minimum subarray sum by maintaining a local minimum <code>lmin</code> and a global minimum <code>gmin</code> as we iterate through the array.</li>
 </ul>
 </li>
 <li>
-<p><strong>Calculate Result</strong>:</p>
+<p><strong>Determine the Final Result</strong>:</p>
 <ul>
-<li>If <code>gmax</code> is greater than 0, return the maximum of <code>gmax</code> and <code>sum - gmin</code> (which accounts for wrapping around).</li>
-<li>If <code>gmax</code> is not greater than 0, simply return <code>gmax</code>.</li>
+<li>After obtaining both the non-circular maximum (<code>gmax</code>) and the circular maximum (computed as <code>sum - gmin</code>), we return the larger of the two.</li>
+<li>One edge case to consider is when all elements are negative. In this case, the circular sum would incorrectly give zero (sum - gmin), so we simply return <code>gmax</code>.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The code iteratively calculates local maximum and minimum subarray sums while keeping track of the global sums and the total array sum.</li>
-<li>The final result is derived from either the maximum subarray sum found directly or the circular sum derived by subtracting the minimum subarray sum from the total.</li>
+<ol>
+<li>
+<p><strong>Initialize Variables</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> lmax <span style="color:#666">=</span> nums[<span style="color:#666">0</span>], lmin <span style="color:#666">=</span> nums[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> gmax <span style="color:#666">=</span> nums[<span style="color:#666">0</span>], gmin <span style="color:#666">=</span> nums[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> nums[<span style="color:#666">0</span>];
+</span></span></code></pre></div><ul>
+<li>We initialize variables for local and global maximums (<code>lmax</code>, <code>gmax</code>) and minimums (<code>lmin</code>, <code>gmin</code>) with the first element of the array.</li>
+<li>We also initialize <code>sum</code> with the first element to keep track of the total sum of the array.</li>
 </ul>
+</li>
+<li>
+<p><strong>Iterate Through the Array</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    sum <span style="color:#666">+=</span> nums[i];
+</span></span><span style="display:flex;"><span>    lmax <span style="color:#666">=</span> max(nums[i], lmax <span style="color:#666">+</span> nums[i]);
+</span></span><span style="display:flex;"><span>    gmax <span style="color:#666">=</span> max(lmax, gmax);
+</span></span><span style="display:flex;"><span>    lmin <span style="color:#666">=</span> min(nums[i], lmin <span style="color:#666">+</span> nums[i]);
+</span></span><span style="display:flex;"><span>    gmin <span style="color:#666">=</span> min(lmin, gmin);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We iterate through the rest of the array, updating <code>sum</code> with each element.</li>
+<li>For each element, we compute the new <code>lmax</code> (local maximum), which is the maximum of the current element itself or the sum of <code>lmax</code> plus the current element.</li>
+<li>We update <code>gmax</code> to store the highest <code>lmax</code> encountered.</li>
+<li>Similarly, we calculate <code>lmin</code> (local minimum) as the minimum of the current element or <code>lmin</code> plus the current element, and update <code>gmin</code> to the lowest <code>lmin</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> gmax <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">?</span> max(gmax, sum <span style="color:#666">-</span> gmin) <span style="color:#666">:</span> gmax;
+</span></span></code></pre></div><ul>
+<li>We check if <code>gmax</code> is greater than zero. If it is, we return the maximum of <code>gmax</code> and the circular subarray sum (<code>sum - gmin</code>).</li>
+<li>If <code>gmax</code> is non-positive (indicating all elements are negative), we return <code>gmax</code> to avoid incorrect results from the circular calculation.</li>
+</ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -313,10 +340,28 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the number of elements in <code>nums</code>, as it requires a single pass through the array.</li>
-<li><strong>Space Complexity</strong>: O(1), as only a constant amount of additional space is used for the variables.</li>
+<li>The time complexity is <strong>O(n)</strong>, where <code>n</code> is the number of elements in the input array. This is because we only need a single pass through the array to compute all the required values for <code>gmax</code>, <code>gmin</code>, and <code>sum</code>.</li>
 </ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is <strong>O(1)</strong> since we only use a constant amount of extra space to store variables for the local and global maximums and minimums.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively finds the maximum subarray sum for both the non-circular and circular cases in a single pass, using Kadane’s algorithm for optimal performance. By leveraging both the maximum and minimum subarray sums, the approach handles the circular nature of the array while ensuring efficiency. The algorithm is well-suited for large arrays, maintaining O(n) complexity with minimal space requirements. This makes it an ideal solution for applications where quick subarray sum calculations are needed on circular data.</p>
  
 </div>
   

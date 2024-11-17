@@ -217,7 +217,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -282,94 +282,196 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
+    <h3 id="-surrounded-regions-problem-protecting-the-boundary">
+  💡 <strong>Surrounded Regions Problem: Protecting the Boundary</strong>
+  <a class="heading-link" href="#-surrounded-regions-problem-protecting-the-boundary">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The &ldquo;Surrounded Regions&rdquo; problem is a fascinating challenge where we need to modify a board of characters represented by &lsquo;X&rsquo; and &lsquo;O&rsquo;. The goal is to change all &lsquo;O&rsquo; characters that are <strong>completely surrounded</strong> by &lsquo;X&rsquo; characters into &lsquo;X&rsquo;. However, any &lsquo;O&rsquo; that is <strong>connected to the boundary</strong> should remain unchanged. This problem is a great example of how we can use depth-first search (DFS) to traverse and modify connected regions efficiently.</p>
+<h4 id="problem-statement">
+  <strong>Problem Statement</strong>
   <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h3>
-<p>Given a 2D board containing &lsquo;X&rsquo; and &lsquo;O&rsquo;, capture all regions surrounded by &lsquo;X&rsquo;. A region is captured if all &lsquo;O&rsquo;s in that region are completely surrounded by &lsquo;X&rsquo;s.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+</h4>
+<p>Given a board represented by a 2D grid of characters, where &lsquo;O&rsquo; represents regions of interest and &lsquo;X&rsquo; represents boundary or filled areas, we need to:</p>
+<ul>
+<li>Modify the board such that any &lsquo;O&rsquo; that is <strong>completely surrounded</strong> by &lsquo;X&rsquo; characters should be changed to &lsquo;X&rsquo;.</li>
+<li>Any &lsquo;O&rsquo; that is connected to the <strong>boundary</strong> (either directly or indirectly) should remain unchanged.</li>
+</ul>
+<h3 id="example">
+  <strong>Example</strong>
+  <a class="heading-link" href="#example">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>Given the following board:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>X X X X
+</span></span><span style="display:flex;"><span>X O O X
+</span></span><span style="display:flex;"><span>X X O X
+</span></span><span style="display:flex;"><span>X O X X
+</span></span></code></pre></div><p>After applying the solution, the board should be modified as follows:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>X X X X
+</span></span><span style="display:flex;"><span>X X X X
+</span></span><span style="display:flex;"><span>X X X X
+</span></span><span style="display:flex;"><span>X O X X
+</span></span></code></pre></div><hr>
+<h3 id="-approach-using-depth-first-search-dfs">
+  🛠️ <strong>Approach: Using Depth-First Search (DFS)</strong>
+  <a class="heading-link" href="#-approach-using-depth-first-search-dfs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem efficiently, we&rsquo;ll utilize <strong>DFS</strong> to explore and modify the board. The idea is to:</p>
+<ol>
+<li><strong>Identify Boundary &lsquo;O&rsquo;s</strong>: Start by identifying all &lsquo;O&rsquo; regions connected to the boundary, as these should remain unchanged.</li>
+<li><strong>Mark Safe &lsquo;O&rsquo; Regions</strong>: Use DFS to mark all &lsquo;O&rsquo; regions connected to the boundary as safe (we temporarily mark them with a different character like &lsquo;1&rsquo;).</li>
+<li><strong>Flip Surrounded &lsquo;O&rsquo;s to &lsquo;X&rsquo;</strong>: After marking all safe regions, flip all unmarked &lsquo;O&rsquo;s to &lsquo;X&rsquo;, as they are surrounded by &lsquo;X&rsquo;. Finally, restore the safe regions from &lsquo;1&rsquo; back to &lsquo;O&rsquo;.</li>
+</ol>
+<hr>
+<h3 id="-code-breakdown">
+  ✨ <strong>Code Breakdown</strong>
+  <a class="heading-link" href="#-code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-solve-function">
+  1️⃣ <strong>Solve Function</strong>
+  <a class="heading-link" href="#1-solve-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> solve(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&amp;</span> board)
+</span></span></code></pre></div><p>This function processes the entire board, marking the boundary-connected &lsquo;O&rsquo; regions and flipping the surrounded &lsquo;O&rsquo; regions.</p>
 <ol>
 <li>
-<p><strong>Depth-First Search (DFS)</strong>:</p>
-<ul>
-<li>Traverse the borders of the board and use DFS to mark all &lsquo;O&rsquo;s that are connected to the borders (i.e., the &lsquo;O&rsquo;s that should not be captured).</li>
-<li>Mark these &lsquo;O&rsquo;s temporarily as &lsquo;1&rsquo; to differentiate them from the &lsquo;X&rsquo;s.</li>
-</ul>
+<p><strong>Initialize Board Dimensions</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> board.size(), n <span style="color:#666">=</span> board[<span style="color:#666">0</span>].size();
+</span></span></code></pre></div><p>Here, <code>m</code> represents the number of rows, and <code>n</code> represents the number of columns in the grid.</p>
 </li>
 <li>
-<p><strong>Post DFS Processing</strong>:</p>
-<ul>
-<li>After marking, iterate through the board:
-<ul>
-<li>Convert all remaining &lsquo;O&rsquo;s (not connected to the borders) to &lsquo;X&rsquo; since they are surrounded.</li>
-<li>Convert all &lsquo;1&rsquo;s back to &lsquo;O&rsquo;, restoring the originally un-captured regions.</li>
-</ul>
+<p><strong>Mark Boundary-Connected &lsquo;O&rsquo; Regions</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> j <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> i <span style="color:#666">==</span> m <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">||</span> j <span style="color:#666">==</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(board[i][j] <span style="color:#666">==</span> <span style="color:#b44">&#39;O&#39;</span>)
+</span></span><span style="display:flex;"><span>            dfs(board, i, j);
+</span></span></code></pre></div><p>This loop checks all cells in the first and last rows and columns (the boundaries). If an &lsquo;O&rsquo; is found, we initiate DFS to explore and mark all connected &lsquo;O&rsquo; regions.</p>
 </li>
+<li>
+<p><strong>Flip Surrounded &lsquo;O&rsquo; Regions</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(board[i][j] <span style="color:#666">==</span> <span style="color:#b44">&#39;O&#39;</span>)
+</span></span><span style="display:flex;"><span>        board[i][j] <span style="color:#666">=</span> <span style="color:#b44">&#39;X&#39;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(board[i][j] <span style="color:#666">==</span> <span style="color:#b44">&#39;1&#39;</span>)
+</span></span><span style="display:flex;"><span>        board[i][j] <span style="color:#666">=</span> <span style="color:#b44">&#39;O&#39;</span>;
+</span></span></code></pre></div><p>After marking boundary-connected regions, this loop traverses the entire board:</p>
+<ul>
+<li>Any &lsquo;O&rsquo; that is not marked as &lsquo;1&rsquo; (i.e., surrounded) is flipped to &lsquo;X&rsquo;.</li>
+<li>Any cell marked as &lsquo;1&rsquo; (connected to the boundary) is restored to &lsquo;O&rsquo;.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h4 id="2-dfs-function">
+  2️⃣ <strong>DFS Function</strong>
+  <a class="heading-link" href="#2-dfs-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>grid, <span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> j <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> i <span style="color:#666">==</span> grid.size() <span style="color:#666">||</span> 
+</span></span><span style="display:flex;"><span>       j <span style="color:#666">==</span> grid[<span style="color:#666">0</span>].size() <span style="color:#666">||</span> grid[i][j] <span style="color:#666">!=</span> <span style="color:#b44">&#39;O&#39;</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>;
+</span></span><span style="display:flex;"><span>    grid[i][j] <span style="color:#666">=</span> <span style="color:#b44">&#39;1&#39;</span>;
+</span></span><span style="display:flex;"><span>    dfs(grid, i <span style="color:#666">+</span> <span style="color:#666">1</span>, j);
+</span></span><span style="display:flex;"><span>    dfs(grid, i, j <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    dfs(grid, i <span style="color:#666">-</span> <span style="color:#666">1</span>, j);
+</span></span><span style="display:flex;"><span>    dfs(grid, i, j <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>dfs</code> function recursively explores all connected &lsquo;O&rsquo; cells from a given cell <code>(i, j)</code>.</li>
+<li>If an &lsquo;O&rsquo; is found, it is marked as &lsquo;1&rsquo; to indicate it is part of a safe region connected to the boundary.</li>
+<li>The DFS continues exploring in four directions (up, down, left, right) until no more connected &lsquo;O&rsquo; cells are found.</li>
+</ul>
+<hr>
+<h3 id="-time-and-space-complexity">
+  🔍 <strong>Time and Space Complexity</strong>
+  <a class="heading-link" href="#-time-and-space-complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
 <li>
-<p><strong><code>solve</code> function</strong>:</p>
+<p><strong>Time Complexity</strong>: <code>O(m * n)</code></p>
 <ul>
-<li><strong>Line 2-3</strong>: Get the dimensions of the board (<code>m</code> for rows and <code>n</code> for columns).</li>
-<li><strong>Line 4-8</strong>: Loop through all border elements:
-<ul>
-<li>For each &lsquo;O&rsquo; found on the border, initiate a DFS.</li>
-</ul>
-</li>
+<li>The DFS will visit each &lsquo;O&rsquo; cell at most once. Since we perform DFS for all cells on the boundary and then process the entire board, the time complexity is proportional to the total number of cells (<code>m * n</code>), where <code>m</code> is the number of rows and <code>n</code> is the number of columns.</li>
 </ul>
 </li>
 <li>
-<p><strong>Inner Loop</strong>: Check if the current element is on the border and if it&rsquo;s &lsquo;O&rsquo;.</p>
-</li>
-<li>
-<p><strong>Line 10-15</strong>: Post DFS processing:</p>
+<p><strong>Space Complexity</strong>: <code>O(m * n)</code></p>
 <ul>
-<li>Convert remaining &lsquo;O&rsquo;s to &lsquo;X&rsquo;.</li>
-<li>Convert &lsquo;1&rsquo;s back to &lsquo;O&rsquo;.</li>
-</ul>
-</li>
-<li>
-<p><strong><code>dfs</code> function</strong>:</p>
-<ul>
-<li><strong>Line 17-30</strong>: Perform DFS:
-<ul>
-<li>Check for boundary conditions and if the current cell is &lsquo;O&rsquo;.</li>
-<li>Mark the current &lsquo;O&rsquo; as &lsquo;1&rsquo; to indicate it is connected to the border.</li>
-<li>Recursively call DFS for all four adjacent cells (up, down, left, right).</li>
+<li>The recursion stack in the DFS function can be as deep as the number of &lsquo;O&rsquo; cells connected to the boundary. In the worst case, the space complexity is proportional to the number of cells in the grid (<code>m * n</code>), due to the depth of the recursion stack.</li>
 </ul>
 </li>
 </ul>
-</li>
-</ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<hr>
+<h3 id="-example-walkthrough">
+  🧑‍💻 <strong>Example Walkthrough</strong>
+  <a class="heading-link" href="#-example-walkthrough">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>Let’s walk through the example with the board:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>X X X X
+</span></span><span style="display:flex;"><span>X O O X
+</span></span><span style="display:flex;"><span>X X O X
+</span></span><span style="display:flex;"><span>X O X X
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>Initial Board</strong>:</p>
 <ul>
-<li><strong>Time Complexity</strong>: (O(M \times N)), where (M) is the number of rows and (N) is the number of columns, since we may visit every cell in the worst case.</li>
-<li><strong>Space Complexity</strong>: (O(M \times N)) due to the call stack in the worst case during DFS, but typically it would be much lower depending on the board&rsquo;s configuration.</li>
+<li>The boundary cells are checked, and DFS is initiated from boundary &lsquo;O&rsquo;s at <code>(1, 1)</code>, <code>(1, 2)</code>, and <code>(3, 1)</code>.</li>
 </ul>
+</li>
+<li>
+<p><strong>DFS Marks Boundary Connected Regions</strong>:</p>
+<ul>
+<li>The &lsquo;O&rsquo; at <code>(1, 1)</code> is connected to <code>(1, 2)</code> and <code>(3, 1)</code>. These are marked as &lsquo;1&rsquo;.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Board</strong>:</p>
+<ul>
+<li>All other &lsquo;O&rsquo; cells not connected to the boundary are surrounded by &lsquo;X&rsquo; and are flipped.</li>
+</ul>
+<p>The final modified board is:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>X X X X
+</span></span><span style="display:flex;"><span>X X X X
+</span></span><span style="display:flex;"><span>X X X X
+</span></span><span style="display:flex;"><span>X O X X
+</span></span></code></pre></div></li>
+</ol>
+<hr>
+<h3 id="-conclusion">
+  🏁 <strong>Conclusion</strong>
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively handles the &ldquo;Surrounded Regions&rdquo; problem by utilizing <strong>DFS</strong> to explore and mark the regions connected to the boundary. By marking the safe regions and flipping only the surrounded regions, we ensure optimal performance while maintaining clarity in the solution. With a time complexity of <code>O(m * n)</code> and a space complexity of <code>O(m * n)</code>, this approach is both efficient and suitable for large boards.</p>
+<p>Keep practicing these techniques, and you’ll get better at identifying optimal solutions for different problems! Keep going, you’ve got this! 💪✨</p>
  
 </div>
   

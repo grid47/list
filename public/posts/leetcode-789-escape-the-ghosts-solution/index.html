@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -254,7 +254,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given the positions of ghosts and your target position, determine if you can reach your target position before any ghost does. You can move one unit per turn, and ghosts move at the same speed.</p>
+<p>The problem asks if a person can escape from ghosts on a grid. The grid is represented by two-dimensional coordinates. The person starts at a position <code>(0, 0)</code>, and the ghosts start at various other positions, given by the list <code>gs</code>. The target position where the person wants to escape is given by the list <code>t</code>. The goal is to determine if the person can reach the target without any of the ghosts reaching it first. The movement is constrained by the grid, and the only allowed movements are along the grid axes (left, right, up, down).</p>
+<p>We are tasked with finding out if the person can escape the ghosts, given the following conditions:</p>
+<ul>
+<li>The person can move any number of steps in any direction, but each step is taken one at a time.</li>
+<li>The ghosts can also move, but the same conditions apply to them.</li>
+</ul>
+<p>The person starts at <code>(0, 0)</code>, and their escape point is given in <code>t</code>. Each ghost has a starting position provided in <code>gs</code>, and we need to check if any ghost can reach the target position faster than the person.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -262,72 +268,92 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The problem boils down to a <strong>Manhattan distance</strong> calculation on a grid. The Manhattan distance between two points <code>(x1, y1)</code> and <code>(x2, y2)</code> is simply the sum of the absolute differences of their respective coordinates, i.e.,</p>
+<p>[
+\text{Manhattan Distance} = |x2 - x1| + |y2 - y1|
+]</p>
+<p>For the person to escape successfully, they must reach the target point <code>(t[0], t[1])</code> before any ghost can reach it. The strategy is simple:</p>
+<ol>
+<li><strong>Compute the Manhattan distance for the person</strong> from the origin <code>(0, 0)</code> to the target <code>t</code>.</li>
+<li><strong>Check the Manhattan distance for each ghost</strong> from their starting point to the target <code>t</code>.</li>
+<li>If any ghost has a distance to the target that is less than or equal to the distance the person must travel, then it is impossible for the person to escape.</li>
+<li>If none of the ghosts can reach the target faster or simultaneously, the person can escape successfully.</li>
+</ol>
+<p>The approach leverages the fact that ghosts and the person are moving in a grid, and their movements are entirely constrained to horizontal or vertical steps, which simplifies the computation to Manhattan distances.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s break down the code and understand how it works:</p>
 <ol>
 <li>
-<p><strong>Calculate Your Distance</strong>:</p>
-<ul>
-<li>Compute the Manhattan distance from your current position (assumed to be <code>(0, 0)</code>) to the target position <code>t</code>, which is given by:
-[
-d = |t[0]| + |t[1]|
-]</li>
-<li>This represents the total number of steps you need to reach the target.</li>
-</ul>
+<p><strong>Calculate the Manhattan Distance for the Person</strong>:
+The person starts at <code>(0, 0)</code>, so their Manhattan distance to the target <code>t</code> is calculated by the formula:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> d <span style="color:#666">=</span> abs(t[<span style="color:#666">0</span>]) <span style="color:#666">+</span> abs(t[<span style="color:#666">1</span>]);
+</span></span></code></pre></div><p>This gives the number of steps the person needs to take to reach the target, given that they can only move along the grid axes (horizontally or vertically).</p>
 </li>
 <li>
-<p><strong>Check Ghost Distances</strong>:</p>
-<ul>
-<li>For each ghost&rsquo;s position <code>it</code>, calculate its distance to the target using the formula:
-[
-\text{distance}_{\text{ghost}} = |it[0] - t[0]| + |it[1] - t[1]|
-]</li>
-<li>If the ghost&rsquo;s distance to the target is less than or equal to your distance <code>d</code>, you cannot reach the target before that ghost, so return <code>false</code>.</li>
-</ul>
+<p><strong>Iterate Over the Ghosts’ Positions</strong>:
+Next, we iterate through each ghost’s starting position in the list <code>gs</code>. The ghosts are also restricted to move along the grid axes. For each ghost, we compute the Manhattan distance from their starting position to the target <code>t</code>. If any ghost’s Manhattan distance is less than or equal to the person’s distance to the target, the person cannot escape because the ghost will reach the target first.</p>
+<p>The following loop checks the distance for each ghost:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: gs)
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(d <span style="color:#666">&gt;=</span> abs(it[<span style="color:#666">0</span>] <span style="color:#666">-</span> t[<span style="color:#666">0</span>]) <span style="color:#666">+</span> abs(it[<span style="color:#666">1</span>] <span style="color:#666">-</span> t[<span style="color:#666">1</span>]))
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span></code></pre></div><p>Here, <code>it</code> represents the ghost’s position. We check if the person’s distance <code>d</code> is greater than or equal to the ghost’s distance. If so, the function immediately returns <code>false</code>, indicating that the person cannot escape the ghosts. This breaks out of the loop early for efficiency.</p>
 </li>
 <li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>If none of the ghosts can reach the target before you, return <code>true</code>.</li>
-</ul>
-</li>
+<p><strong>Return the Final Result</strong>:
+If no ghost can reach the target faster than the person, we return <code>true</code>, indicating that the person can escape:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span></code></pre></div></li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li><strong>Class</strong>:
-<ul>
-<li><code>class Solution</code>: Contains the method to determine if you can escape from the ghosts.
-<ul>
-<li><code>bool escapeGhosts(vector&lt;vector&lt;int&gt;&gt;&amp; gs, vector&lt;int&gt;&amp; t)</code>: Main function to compute the escape possibility.
-<ul>
-<li><strong>Parameters</strong>:
-<ul>
-<li><code>gs</code>: A 2D vector representing the positions of the ghosts.</li>
-<li><code>t</code>: A vector representing your target position.</li>
-</ul>
+<li>
+<p><strong>Time Complexity</strong>:
+The time complexity of this solution is <strong>O(g)</strong>, where <code>g</code> is the number of ghosts in the list <code>gs</code>. For each ghost, we compute the Manhattan distance to the target, which takes constant time <strong>O(1)</strong>. Thus, the time complexity is linear in terms of the number of ghosts.</p>
+<p>In the worst case, if the list <code>gs</code> contains <code>n</code> ghosts, the overall time complexity will be <strong>O(n)</strong>.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:
+The space complexity is <strong>O(1)</strong>, since we are only using a constant amount of extra space. We store a few integer variables (like <code>d</code>), but no extra space is required that grows with the input size.</p>
 </li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This solution provides a very efficient method for determining if the person can escape from the ghosts. The problem is reduced to simple Manhattan distance calculations, which are computationally inexpensive. By checking each ghost’s position and ensuring they cannot reach the target before the person, we can make a decision quickly.</p>
 <ul>
-<li><strong>Time Complexity</strong>: O(g), where ( g ) is the number of ghosts, since we check the distance for each ghost.</li>
-<li><strong>Space Complexity</strong>: O(1), as we only use a fixed number of integer variables.</li>
+<li>
+<p><strong>Key Points</strong>:</p>
+<ul>
+<li>The algorithm uses <strong>Manhattan distance</strong> to calculate the distance between the person, ghosts, and the target.</li>
+<li>If any ghost can reach the target faster than the person, the function returns <code>false</code>.</li>
+<li>If none of the ghosts can reach the target before the person, the function returns <code>true</code>.</li>
 </ul>
+</li>
+<li>
+<p><strong>Efficiency</strong>:</p>
+<ul>
+<li><strong>Time Complexity</strong>: O(g), where <code>g</code> is the number of ghosts.</li>
+<li><strong>Space Complexity</strong>: O(1), using a constant amount of space.</li>
+</ul>
+</li>
+</ul>
+<p>This solution is optimal for the problem and provides an elegant, easy-to-understand approach to solving it.</p>
  
 </div>
   

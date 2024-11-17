@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -216,7 +216,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1298s0hbhb">
+        <h2 id="hahahugoshortcode1297s0hbhb">
   <a href="https://leetcode.com/problems/search-a-2d-matrix/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -231,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1298s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1297s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -252,93 +252,177 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1298s2hbhb">
+<h2 id="hahahugoshortcode1297s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-search-in-a-2d-matrix-sorted-rows-and-columns">
+  🔍 <strong>Search in a 2D Matrix (Sorted Rows and Columns)</strong>
+  <a class="heading-link" href="#-search-in-a-2d-matrix-sorted-rows-and-columns">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a 2D matrix <code>mtx</code> that is sorted in ascending order both row-wise and column-wise, and a target integer <code>target</code>, determine if <code>target</code> exists in the matrix.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
+<p>In this problem, you are asked to search for a target value in a <strong>2D matrix</strong> where each row and each column is sorted in ascending order. The goal is to determine whether the target value exists in the matrix using an efficient approach without having to check every element.</p>
+<p>Given the following constraints:</p>
 <ol>
-<li>
-<p><strong>Binary Search</strong>: Treat the 2D matrix as a 1D array for the purpose of searching.</p>
-<ul>
-<li>The matrix can be visualized as a single sorted array of size <code>m * n</code>, where <code>m</code> is the number of rows and <code>n</code> is the number of columns.</li>
-</ul>
-</li>
-<li>
-<p><strong>Calculate Row and Column Indices</strong>:</p>
-<ul>
-<li>For a given mid index, calculate the corresponding row index (<code>rw</code>) and column index (<code>c</code>) using:
-<ul>
-<li><code>rw = mid / n</code></li>
-<li><code>c = mid % n</code></li>
-</ul>
-</li>
-<li>This allows accessing the matrix elements using standard indexing.</li>
-</ul>
-</li>
-<li>
-<p><strong>Search Logic</strong>:</p>
-<ul>
-<li>Perform a binary search:
-<ul>
-<li>If the value at the calculated mid index matches <code>target</code>, return <code>true</code>.</li>
-<li>If the value is greater than <code>target</code>, adjust the right boundary (<code>r</code>).</li>
-<li>If the value is less than <code>target</code>, adjust the left boundary (<code>l</code>).</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>End Condition</strong>:</p>
-<ul>
-<li>If the search concludes without finding the target, return <code>false</code>.</li>
-</ul>
-</li>
+<li><strong>Rows are sorted in ascending order</strong>.</li>
+<li><strong>Columns are sorted in ascending order</strong>.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="-approach">
+  🚀 <strong>Approach</strong>
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The structure of the matrix — where both rows and columns are sorted — allows us to search for the target efficiently, using <strong>binary search</strong>, rather than checking every single element (which would be inefficient).</p>
+<p>The idea is to <strong>flatten the 2D matrix into a 1D array</strong>, and then perform <strong>binary search</strong> on this 1D representation. By doing this, we take advantage of the sorted order of both the rows and columns, significantly improving the search time.</p>
+<h4 id="key-insights">
+  Key Insights:
+  <a class="heading-link" href="#key-insights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
-<li><strong>Initialization</strong>: Set the left (<code>l</code>) and right (<code>r</code>) pointers to cover the entire matrix.</li>
-<li><strong>Loop</strong>: Continue the search until the left pointer exceeds the right pointer.</li>
-<li><strong>Mid Calculation</strong>: Calculate the mid index and derive its corresponding row and column.</li>
-<li><strong>Comparison</strong>: Check the value at that index against the target and adjust pointers accordingly.</li>
+<li><strong>Sorted Rows and Columns</strong>: The matrix is sorted such that each row and each column increases in value.</li>
+<li><strong>Binary Search</strong>: Flattening the matrix into a 1D array allows us to apply binary search, which is optimal for sorted sequences.</li>
+<li><strong>Index Mapping</strong>: The index in the 1D array corresponds to a position in the 2D matrix, so we can efficiently search across both dimensions.</li>
 </ol>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h3 id="-code-breakdown">
+  📝 <strong>Code Breakdown</strong>
+  <a class="heading-link" href="#-code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-define-matrix-dimensions">
+  Step 1: Define Matrix Dimensions
+  <a class="heading-link" href="#step-1-define-matrix-dimensions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> mtx.size(), n <span style="color:#666">=</span> mtx[<span style="color:#666">0</span>].size();
+</span></span></code></pre></div><ul>
+<li>We first get the number of rows <code>m</code> and the number of columns <code>n</code> from the matrix. This will help us calculate the correct index mapping in the flattened 1D array.</li>
+</ul>
+<h4 id="step-2-initialize-binary-search-range">
+  Step 2: Initialize Binary Search Range
+  <a class="heading-link" href="#step-2-initialize-binary-search-range">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">0</span>, r <span style="color:#666">=</span> m <span style="color:#666">*</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize two pointers <code>l</code> (left) and <code>r</code> (right) representing the search range in the 1D array.</li>
+<li>The total number of elements in the matrix is <code>m * n</code>, so <code>l = 0</code> and <code>r = m * n - 1</code>.</li>
+</ul>
+<h4 id="step-3-perform-binary-search">
+  Step 3: Perform Binary Search
+  <a class="heading-link" href="#step-3-perform-binary-search">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;=</span> r) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> rw <span style="color:#666">=</span> mid <span style="color:#666">/</span> n, c <span style="color:#666">=</span> mid <span style="color:#666">%</span> n, val <span style="color:#666">=</span> mtx[rw][c];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(val <span style="color:#666">==</span> target) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(val <span style="color:#666">&gt;</span> target) r <span style="color:#666">=</span> mid <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span> l <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Binary Search Loop</strong>:
+<ul>
+<li>While <code>l</code> is less than or equal to <code>r</code>, we calculate the middle index <code>mid</code>.</li>
+<li><code>mid / n</code> gives the row index <code>rw</code> in the matrix, and <code>mid % n</code> gives the column index <code>c</code>.</li>
+<li>We then check the value at this position (<code>mtx[rw][c]</code>) against the target value.</li>
+<li>If <code>val == target</code>, we return <code>true</code> as the target is found.</li>
+<li>If <code>val &gt; target</code>, we search in the left half by adjusting <code>r</code> to <code>mid - 1</code>.</li>
+<li>If <code>val &lt; target</code>, we search in the right half by adjusting <code>l</code> to <code>mid + 1</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-4-return-false-if-target-is-not-found">
+  Step 4: Return False if Target is Not Found
+  <a class="heading-link" href="#step-4-return-false-if-target-is-not-found">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span></code></pre></div><ul>
+<li>If the binary search completes without finding the target, return <code>false</code> to indicate that the target is not present in the matrix.</li>
+</ul>
+<h3 id="-complexity-analysis">
+  📊 <strong>Complexity Analysis</strong>
+  <a class="heading-link" href="#-complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(log(m * n))</strong>:
+<ul>
+<li>We perform <strong>binary search</strong> on the 1D flattened array with <code>m * n</code> elements.</li>
+<li>The time complexity of binary search on a sequence of size <code>m * n</code> is <code>O(log(m * n))</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>:
+<ul>
+<li>The algorithm uses a constant amount of space to store the binary search pointers (<code>l</code>, <code>r</code>) and the index calculations.</li>
+<li>No additional space is used, making the space complexity <strong>O(1)</strong>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="-conclusion">
+  🎯 <strong>Conclusion</strong>
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently searches for the target element in a 2D matrix by applying <strong>binary search</strong> on a flattened 1D array representation of the matrix. The sorted order of the matrix rows and columns allows us to utilize the binary search to reduce the time complexity to <strong>O(log(m * n))</strong>, which is optimal for large matrices. With <strong>O(1)</strong> space complexity, the solution avoids using extra memory, making it ideal for memory-constrained environments.</p>
+<p>This approach highlights the power of leveraging sorting properties in data structures like matrices to improve search efficiency. By transforming the matrix into a sequence suitable for binary search, we achieve faster results and can handle larger datasets effectively.</p>
+<hr>
+<h3 id="-key-takeaways">
+  🌟 <strong>Key Takeaways</strong>
+  <a class="heading-link" href="#-key-takeaways">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity:</strong> ( O(\log(M \times N)) ), where ( M ) and ( N ) are the dimensions of the matrix.</li>
-<li><strong>Space Complexity:</strong> ( O(1) ), since only a constant amount of extra space is used for variables.</li>
+<li><strong>Binary search</strong> is highly efficient for sorted arrays and matrices.</li>
+<li>Flattening a 2D matrix into a 1D array allows you to apply binary search without extra space usage.</li>
+<li>Always consider how the structure of your data (like sorted rows and columns) can help optimize your search or sorting algorithms.</li>
 </ul>
+<hr>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1298s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1297s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

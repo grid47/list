@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -226,7 +226,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span> <span style="color:#666">-</span> p<span style="color:#666">%</span><span style="color:#666">2</span> <span style="color:#666">+</span> q<span style="color:#666">%</span><span style="color:#666">2</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1366s1hbhb">
+<h2 id="hahahugoshortcode1367s1hbhb">
   
 
   
@@ -238,7 +238,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are tasked with finding out which receiver will catch a light ray that starts at one corner of a rectangular room with dimensions <code>p</code> and <code>q</code>. The light ray reflects off the walls, and you need to determine which corner (0, 1, or 2) it will reach first after an infinite number of reflections.</p>
+<p>The problem at hand involves simulating the reflection of light in a room with a square shape. We are given a room with dimensions <code>p</code> by <code>q</code>, where the light starts at one of the corners. The goal is to determine which corner the light will eventually reach after bouncing off the walls of the room.</p>
+<p>The light beam will be reflected in a manner similar to how light behaves in a coordinate system. The corners are numbered as follows:</p>
+<ul>
+<li>Corner 0: The top-left corner of the room (starting point).</li>
+<li>Corner 1: The top-right corner of the room.</li>
+<li>Corner 2: The bottom-left corner of the room.</li>
+<li>Corner 3: The bottom-right corner of the room.</li>
+</ul>
+<p>The light beam starts at the top-left corner and travels at a 45-degree angle, bouncing off the walls until it reaches one of the corners. We are tasked with determining which corner the light reaches first, given the dimensions of the room.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -246,52 +254,112 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The key observation here is that we can avoid simulating the light&rsquo;s path step-by-step by instead thinking in terms of how the light would behave if the walls of the room were &ldquo;unfolded&rdquo; and extended indefinitely. This way, the light&rsquo;s path forms a straight line through multiple rooms, instead of bouncing back and forth in a confined space.</p>
+<h4 id="key-insights">
+  Key Insights:
+  <a class="heading-link" href="#key-insights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Understanding Reflections</strong>: The light ray will continue to reflect indefinitely in the room. If the dimensions of the room <code>p</code> and <code>q</code> are both even, you can simplify the problem by dividing both by 2 until at least one of them becomes odd. This is because each time the ray hits a wall, it can be thought of as passing into an adjacent room of the same dimensions.</p>
-</li>
-<li>
-<p><strong>Determine the Receiver</strong>:</p>
+<p><strong>Handling Even and Odd Values</strong>:</p>
 <ul>
-<li>If <code>p</code> is odd and <code>q</code> is even, the ray will reach the top edge and hit receiver 0.</li>
-<li>If <code>p</code> is odd and <code>q</code> is odd, the ray will reach the opposite corner and hit receiver 1.</li>
-<li>If <code>p</code> is even and <code>q</code> is odd, the ray will hit the bottom edge and hit receiver 2.</li>
+<li>If both <code>p</code> (width) and <code>q</code> (height) are even, then the light will eventually reach the corner 0.</li>
+<li>If <code>p</code> is even and <code>q</code> is odd, the light will reach corner 2.</li>
+<li>If <code>p</code> is odd and <code>q</code> is even, the light will reach corner 1.</li>
+<li>If both <code>p</code> and <code>q</code> are odd, the light will reach corner 3.</li>
 </ul>
 </li>
 <li>
-<p><strong>Final Calculation</strong>: After simplifying <code>p</code> and <code>q</code>, the result can be derived using the formula:
-[
-\text{Result} = 1 - (p % 2) + (q % 2)
-]</p>
+<p><strong>Greatest Common Divisor (GCD)</strong>:</p>
+<ul>
+<li>We could compute the GCD of <code>p</code> and <code>q</code>, and then look for how the light will &ldquo;fold&rdquo; back. But a more efficient way to solve this problem uses bit manipulation to repeatedly divide both <code>p</code> and <code>q</code> by 2 until at least one of them becomes odd.</li>
+</ul>
+</li>
+<li>
+<p><strong>Modulo Arithmetic</strong>:</p>
+<ul>
+<li>Since we need to determine the behavior of the light when it bounces, we can use the modulo operator to help us figure out which corner the light reaches. The behavior of the light can be simplified into checking whether <code>p</code> and <code>q</code> are odd or even after some basic transformations.</li>
+</ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The while loop reduces both <code>p</code> and <code>q</code> by half whenever they are both even.</li>
-<li>The return statement uses the modulo operation to determine the final receiver based on the parity of <code>p</code> and <code>q</code>.</li>
+<h4 id="step-1-simplifying-the-problem">
+  Step 1: Simplifying the Problem
+  <a class="heading-link" href="#step-1-simplifying-the-problem">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>We begin by simplifying the problem using bitwise operations. Specifically, we use the <code>p &gt;&gt;= 1</code> and <code>q &gt;&gt;= 1</code> operations to divide both <code>p</code> and <code>q</code> by 2 (shift right) as long as they are both even. This reduces the problem to a case where either <code>p</code> or <code>q</code> is odd.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>( p <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> q <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) p <span style="color:#666">&gt;&gt;=</span> <span style="color:#666">1</span>, q <span style="color:#666">&gt;&gt;=</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div><ul>
+<li>This loop ensures that we eliminate any factors of 2 from both <code>p</code> and <code>q</code>. By dividing by 2 repeatedly, we can reduce the problem to smaller values of <code>p</code> and <code>q</code> where at least one of them is odd.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-2-determining-the-corner">
+  Step 2: Determining the Corner
+  <a class="heading-link" href="#step-2-determining-the-corner">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Once we have reduced <code>p</code> and <code>q</code> such that at least one of them is odd, the next step is to determine which corner the light reaches. This can be done by examining the parity (odd or even) of <code>p</code> and <code>q</code>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span> <span style="color:#666">-</span> p <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">+</span> q <span style="color:#666">%</span> <span style="color:#666">2</span>;
+</span></span></code></pre></div><ul>
+<li>If both <code>p</code> and <code>q</code> are odd (<code>p % 2 == 1</code> and <code>q % 2 == 1</code>), the light reaches corner 3.</li>
+<li>If <code>p</code> is even and <code>q</code> is odd, the light reaches corner 2.</li>
+<li>If <code>p</code> is odd and <code>q</code> is even, the light reaches corner 1.</li>
+<li>If both <code>p</code> and <code>q</code> are even, the light reaches corner 0.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(log(max(p, q))) for reducing <code>p</code> and <code>q</code>.</li>
-<li><strong>Space Complexity</strong>: O(1) as only a constant amount of space is used for variables.</li>
+<li>The time complexity of this approach is <strong>O(log p + log q)</strong>, which is the time required to repeatedly divide <code>p</code> and <code>q</code> by 2 until at least one of them becomes odd. Since the number of divisions is proportional to the number of bits in the binary representation of <code>p</code> and <code>q</code>, the time complexity is logarithmic with respect to the size of the inputs.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity of this approach is <strong>O(1)</strong> since we are only using a few variables to store the values of <code>p</code>, <code>q</code>, and the result. No additional data structures are needed.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently determines the corner where the light will eventually reach by using bitwise operations and modulo arithmetic. By reducing the problem to simpler terms with repeated division by 2, we avoid the need for simulating the light&rsquo;s path and make the solution run in logarithmic time.</p>
+<p>The time complexity of <strong>O(log p + log q)</strong> ensures that this approach will run efficiently even for large values of <code>p</code> and <code>q</code>. The constant space complexity <strong>O(1)</strong> further contributes to the overall efficiency of the solution. This approach provides an optimal solution for the problem by leveraging simple and efficient bit manipulation techniques.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1366s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1367s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

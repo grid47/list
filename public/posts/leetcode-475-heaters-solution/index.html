@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -221,7 +221,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1172s0hbhb">
+        <h2 id="hahahugoshortcode1169s0hbhb">
   <a href="https://leetcode.com/problems/heaters/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -236,7 +236,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1172s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1169s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -268,7 +268,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">*</span><span style="color:#00a000">max_element</span>(res.begin(), res.end());
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1172s2hbhb">
+<h2 id="hahahugoshortcode1169s2hbhb">
   
 
   
@@ -280,7 +280,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given two integer arrays: <code>home</code> representing the positions of homes and <code>warm</code> representing the positions of warmers. Your goal is to find the minimum radius such that all homes are covered by at least one warmer.</p>
+<p>In this problem, we are tasked with determining the minimum radius needed for heaters to cover all the houses on a 1D line. Specifically, we are given two arrays:</p>
+<ul>
+<li><strong>home</strong>: A list of positions of houses on a 1D axis.</li>
+<li><strong>warm</strong>: A list of positions of heaters on the same axis.</li>
+</ul>
+<p>The goal is to find the smallest radius such that every house is within the radius of at least one heater. The radius of a heater is defined as the distance between the heater&rsquo;s position and the farthest house it can cover.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -288,66 +293,105 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we need to minimize the maximum distance from each house to the closest heater. The strategy involves:</p>
 <ol>
-<li>
-<p><strong>Sorting</strong>:</p>
+<li><strong>Sorting the Arrays</strong>: By sorting the <code>home</code> and <code>warm</code> arrays, we can ensure that we compare houses and heaters in order, which helps in efficiently finding the closest heater for each house.</li>
+<li><strong>Two-Pass Approach</strong>:
 <ul>
-<li>Sort both <code>home</code> and <code>warm</code> arrays. This allows us to efficiently find the closest warmer for each home.</li>
+<li>In the first pass, we iterate through the homes from left to right, finding the nearest heater that is to the right or equal to the current house.</li>
+<li>In the second pass, we iterate through the homes from right to left, finding the nearest heater that is to the left or equal to the current house.</li>
 </ul>
 </li>
-<li>
-<p><strong>Two-Pointer Technique</strong>:</p>
-<ul>
-<li>Initialize two pointers, <code>h</code> for homes and <code>w</code> for warmers, and an array <code>res</code> to store the minimum distances (radii) for each home.</li>
-</ul>
-</li>
-<li>
-<p><strong>Left to Right Pass</strong>:</p>
-<ul>
-<li>Iterate through the homes using the <code>h</code> pointer. For each home, if the current warmer&rsquo;s position is greater than or equal to the home&rsquo;s position, calculate the distance from the home to the warmer and update <code>res[h]</code>.</li>
-<li>If the warmer&rsquo;s position is less than the home&rsquo;s position, move the warmer pointer forward to find the closest warmer.</li>
-</ul>
-</li>
-<li>
-<p><strong>Right to Left Pass</strong>:</p>
-<ul>
-<li>Repeat the process but in reverse. Start from the last home and the last warmer and check the distance in the opposite direction. Update <code>res[h]</code> with the minimum distance found.</li>
-</ul>
-</li>
-<li>
-<p><strong>Result</strong>:</p>
-<ul>
-<li>The maximum value in the <code>res</code> array will be the minimum radius needed to cover all homes.</li>
-</ul>
-</li>
+<li><strong>Final Result</strong>: For each house, the final radius required is the minimum of the distances to the closest heater from the left and right directions. We then return the largest radius among all houses to ensure that all houses are covered.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Function Definition</strong>:</p>
+<h4 id="step-1-sort-the-home-and-warm-arrays">
+  Step 1: Sort the Home and Warm Arrays
+  <a class="heading-link" href="#step-1-sort-the-home-and-warm-arrays">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(home.begin(), home.end());
+</span></span><span style="display:flex;"><span>sort(warm.begin(), warm.end());
+</span></span></code></pre></div><ul>
+<li>We begin by sorting both the <code>home</code> and <code>warm</code> arrays. Sorting ensures that we can process the houses and heaters in an ordered manner, which simplifies the process of finding the nearest heater to each house.</li>
+</ul>
+<h4 id="step-2-initialize-a-result-array">
+  Step 2: Initialize a Result Array
+  <a class="heading-link" href="#step-2-initialize-a-result-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> home.size(), n <span style="color:#666">=</span> warm.size();
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res(m, INT_MAX);
+</span></span></code></pre></div><ul>
+<li>We initialize a result array <code>res</code> of size <code>m</code> (number of houses) where each element represents the minimum distance from a house to the nearest heater. Initially, we set all elements to <code>INT_MAX</code>, indicating that we have not yet computed the distance for each house.</li>
+</ul>
+<h4 id="step-3-first-pass---left-to-right">
+  Step 3: First Pass - Left to Right
+  <a class="heading-link" href="#step-3-first-pass---left-to-right">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> h <span style="color:#666">=</span> <span style="color:#666">0</span>, w <span style="color:#666">=</span> <span style="color:#666">0</span>; h <span style="color:#666">&lt;</span> m <span style="color:#666">&amp;&amp;</span> w <span style="color:#666">&lt;</span> n; ) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (home[h] <span style="color:#666">&lt;=</span> warm[w]) {
+</span></span><span style="display:flex;"><span>        res[h] <span style="color:#666">=</span> warm[w] <span style="color:#666">-</span> home[h];
+</span></span><span style="display:flex;"><span>        h<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> w<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This loop iterates over the houses (<code>h</code> index) and heaters (<code>w</code> index) from left to right.</li>
+<li>For each house, we check if the current heater is positioned at or before the house (<code>home[h] &lt;= warm[w]</code>).
 <ul>
-<li>The function <code>findRadius()</code> takes two vectors of integers as inputs.</li>
+<li>If the heater is positioned before or at the house, we compute the distance from this house to the heater and update the <code>res[h]</code> with this distance.</li>
+<li>We then move to the next house (<code>h++</code>).</li>
+<li>If the heater is farther from the house, we move to the next heater (<code>w++</code>) to find the closest one.</li>
 </ul>
 </li>
-<li>
-<p><strong>Finding Minimum Distances</strong>:</p>
+</ul>
+<h4 id="step-4-second-pass---right-to-left">
+  Step 4: Second Pass - Right to Left
+  <a class="heading-link" href="#step-4-second-pass---right-to-left">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> h <span style="color:#666">=</span> m <span style="color:#666">-</span> <span style="color:#666">1</span>, w <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>; h <span style="color:#666">&gt;=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> w <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; ) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (home[h] <span style="color:#666">&gt;=</span> warm[w]) {
+</span></span><span style="display:flex;"><span>        res[h] <span style="color:#666">=</span> min(res[h], home[h] <span style="color:#666">-</span> warm[w]);
+</span></span><span style="display:flex;"><span>        h<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> w<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This loop works similarly to the first pass, but in this case, we iterate from right to left.</li>
+<li>For each house, we check if the current heater is positioned at or after the house (<code>home[h] &gt;= warm[w]</code>).
 <ul>
-<li>The code uses two passes to calculate the minimum distance for each home to the nearest warmer.</li>
+<li>If the heater is positioned after or at the house, we compute the distance from this house to the heater.</li>
+<li>We then update the <code>res[h]</code> array with the minimum of the existing value in <code>res[h]</code> and the new computed distance to the current heater. This ensures we get the minimum distance to a heater from either direction.</li>
+<li>We then move to the next house (<code>h--</code>) or the next heater (<code>w--</code>) based on the comparison.</li>
 </ul>
 </li>
-<li>
-<p><strong>Return Value</strong>:</p>
-<ul>
-<li>The function returns the maximum distance from the <code>res</code> array, which represents the minimum radius required.</li>
 </ul>
-</li>
-</ol>
+<h4 id="step-5-return-the-maximum-radius">
+  Step 5: Return the Maximum Radius
+  <a class="heading-link" href="#step-5-return-the-maximum-radius">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">*</span><span style="color:#00a000">max_element</span>(res.begin(), res.end());
+</span></span></code></pre></div><ul>
+<li>After processing all the houses, we take the maximum value in the <code>res</code> array, which represents the minimum radius required to cover all the houses. This is the largest distance from any house to its closest heater.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -355,15 +399,44 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(m log m + n log n), where <code>m</code> is the number of homes and <code>n</code> is the number of warmers due to sorting. The two-pointer traversal is O(m + n).</li>
-<li><strong>Space Complexity</strong>: O(m) for the <code>res</code> array.</li>
+<li><strong>Sorting</strong>: Sorting both the <code>home</code> and <code>warm</code> arrays takes <code>O(m log m + n log n)</code>, where <code>m</code> is the number of houses and <code>n</code> is the number of heaters.</li>
+<li><strong>First Pass</strong>: The first pass involves iterating over both the <code>home</code> and <code>warm</code> arrays, which takes <code>O(m + n)</code> time.</li>
+<li><strong>Second Pass</strong>: The second pass also involves iterating over both the <code>home</code> and <code>warm</code> arrays, which takes <code>O(m + n)</code> time.</li>
+<li><strong>Final Calculation</strong>: The final step of finding the maximum value in the <code>res</code> array takes <code>O(m)</code> time.</li>
+<li><strong>Overall Time Complexity</strong>: The overall time complexity is dominated by the sorting step, which gives us <code>O(m log m + n log n)</code>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We use a result array <code>res</code> of size <code>m</code> to store the minimum distance for each house, which requires <code>O(m)</code> space.</li>
+<li>We do not use any additional data structures that grow with the input size, so the overall space complexity is <code>O(m)</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the minimum radius required to cover all houses with heaters by using a two-pass approach: one from left to right and the other from right to left. By sorting both the <code>home</code> and <code>warm</code> arrays, we can easily compute the closest heater for each house in both directions and find the minimum radius. The algorithm runs in <code>O(m log m + n log n)</code> time and uses <code>O(m)</code> space, making it optimal for this problem. This approach guarantees that every house is covered by the nearest heater while minimizing the maximum radius.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1172s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1169s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -267,71 +267,144 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-combination-sum-ii--find-unique-combinations-that-add-up-to-target">
+  🌟 <strong>Combination Sum II</strong> – Find Unique Combinations That Add Up to Target
+  <a class="heading-link" href="#-combination-sum-ii--find-unique-combinations-that-add-up-to-target">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The task is to find all unique combinations of candidate numbers that sum up to a specified target. Each candidate number can be used only once in a combination, and the solution must avoid duplicate combinations.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>In this problem, you are given a list of candidate numbers and a target sum. The goal is to find <strong>all unique combinations</strong> from the list that sum up to the target. Each number can only be used <strong>once</strong> per combination, and no duplicates should appear in the results.</p>
+<hr>
+<h4 id="-approach-backtracking-with-duplicate-handling">
+  🧩 <strong>Approach: Backtracking with Duplicate Handling</strong>
+  <a class="heading-link" href="#-approach-backtracking-with-duplicate-handling">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h3>
+</h4>
+<p>This problem is best solved using the <strong>backtracking</strong> technique, where we systematically explore all potential combinations of numbers. The challenge here is handling <strong>duplicates</strong> effectively. Here’s how we can break it down:</p>
 <ol>
-<li><strong>Backtracking</strong>: This approach involves exploring all possible combinations recursively while keeping track of the current sum.</li>
-<li><strong>Sorting</strong>: The input list is sorted to easily skip duplicates during the combination generation.</li>
-<li><strong>Base Cases</strong>:
+<li><strong>Sorting the candidates</strong> helps us handle duplicates more easily.</li>
+<li><strong>Backtracking</strong> allows us to explore every combination, either including or excluding a candidate.</li>
+<li><strong>Skipping duplicates</strong> during backtracking ensures that we don’t generate redundant combinations.</li>
+</ol>
+<hr>
+<h4 id="-key-steps-in-the-algorithm">
+  ✨ <strong>Key Steps in the Algorithm</strong>
+  <a class="heading-link" href="#-key-steps-in-the-algorithm">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>Sort the candidates</strong>: This helps in skipping duplicates by ensuring they are adjacent.</li>
+<li><strong>Backtracking Function</strong>: We recursively explore the possible combinations, checking if the sum becomes zero, and backtrack when necessary.</li>
+<li><strong>Skip duplicates</strong>: If a number is the same as the previous one, we skip it to avoid repeating combinations.</li>
+</ol>
+<hr>
+<h4 id="-code-breakdown">
+  🧠 <strong>Code Breakdown</strong>
+  <a class="heading-link" href="#-code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>Let’s walk through the code that implements this solution:</p>
+<h5 id="main-function-combinationsum2">
+  Main Function: <code>combinationSum2</code>
+  <a class="heading-link" href="#main-function-combinationsum2">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h5>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> combinationSum2(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> cand, <span style="color:#0b0;font-weight:bold">int</span> target) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp;
+</span></span><span style="display:flex;"><span>    mp.clear();
+</span></span><span style="display:flex;"><span>    sort(cand.begin(), cand.end());  <span style="color:#080;font-style:italic">// Sorting candidates
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    bt(ans, cand, <span style="color:#666">0</span>, target, tmp);   <span style="color:#080;font-style:italic">// Start backtracking
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Sorting</strong>: The list is sorted to make skipping duplicates easier.</li>
+<li><strong>Backtracking Call</strong>: The function <code>bt</code> is invoked to explore all possible combinations.</li>
+</ul>
+<h5 id="backtracking-function-bt">
+  Backtracking Function: <code>bt</code>
+  <a class="heading-link" href="#backtracking-function-bt">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h5>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">bt</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>ans, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>nums, <span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> sum, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>tmp) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>        ans.push_back(tmp);  <span style="color:#080;font-style:italic">// Found a valid combination
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">return</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> idx <span style="color:#666">==</span> nums.size()) <span style="color:#a2f;font-weight:bold">return</span>;  <span style="color:#080;font-style:italic">// No valid combination
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> idx; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// Skip duplicates
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&amp;&amp;</span> i <span style="color:#666">&gt;</span> idx <span style="color:#666">&amp;&amp;</span> nums[i] <span style="color:#666">==</span> nums[i<span style="color:#666">-</span><span style="color:#666">1</span>]) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>        tmp.push_back(nums[i]);  <span style="color:#080;font-style:italic">// Include the current candidate
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        bt(ans, nums, i <span style="color:#666">+</span> <span style="color:#666">1</span>, sum <span style="color:#666">-</span> nums[i], tmp);  <span style="color:#080;font-style:italic">// Recursive call
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        tmp.pop_back();  <span style="color:#080;font-style:italic">// Backtrack
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Base Case</strong>: If the remaining sum (<code>sum</code>) is zero, we’ve found a valid combination and add it to the result.</li>
+<li><strong>Skip Duplicate Candidates</strong>: If the current number is the same as the previous one, we skip it to avoid redundant combinations.</li>
+<li><strong>Backtracking</strong>: We try each candidate, making recursive calls with updated values and backtrack when necessary.</li>
+</ul>
+<hr>
+<h4 id="-complexity-analysis">
+  📈 <strong>Complexity Analysis</strong>
+  <a class="heading-link" href="#-complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li>If the remaining sum equals zero, add the current combination to the result.</li>
-<li>If the remaining sum becomes negative or the index exceeds the bounds of the list, terminate that path.</li>
+<li><strong>Sorting</strong>: Sorting the list takes <strong>O(n log n)</strong>, where <code>n</code> is the number of candidates.</li>
+<li><strong>Backtracking</strong>: In the worst case, we explore all possible combinations, which gives us an <strong>O(2^n)</strong> complexity due to the binary decision (include or exclude) for each candidate.</li>
+<li>Overall, <strong>Time Complexity</strong>: <strong>O(2^n + n log n)</strong></li>
 </ul>
 </li>
-<li><strong>Iterating through Candidates</strong>:
+<li>
+<p><strong>Space Complexity</strong>:</p>
 <ul>
-<li>Use a loop to iterate through the candidates, starting from the current index.</li>
-<li>Skip duplicate candidates to prevent generating the same combination.</li>
+<li><strong>Auxiliary Space</strong>: The depth of the recursion stack can go up to <code>n</code>, so the recursive space complexity is <strong>O(n)</strong>.</li>
+<li><strong>Result Storage</strong>: The space needed to store the result depends on the number of valid combinations, which can be exponential in the worst case. Hence, the space complexity is <strong>O(n + 2^n)</strong>.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<hr>
+<h4 id="-key-takeaways">
+  🎯 <strong>Key Takeaways</strong>
+  <a class="heading-link" href="#-key-takeaways">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h3>
-<ol>
-<li><strong>Initialization</strong>: The <code>combinationSum2</code> function initializes the answer vector, temporary storage vector, and sorts the candidate numbers.</li>
-<li><strong>Backtracking Function (<code>bt</code>)</strong>:
+</h4>
 <ul>
-<li>If the target sum is achieved (zero), store the current combination.</li>
-<li>If the sum is negative or the end of the candidate list is reached, exit the function.</li>
-<li>Loop through the candidates starting from the current index:
-<ul>
-<li>Skip duplicates to ensure unique combinations.</li>
-<li>Include the current candidate in the temporary combination and recurse with the updated sum and index.</li>
-<li>Remove the last candidate to backtrack and try other combinations.</li>
+<li><strong>Sorting and Skipping Duplicates</strong>: By sorting the candidates and skipping duplicates during backtracking, we avoid redundant combinations and ensure that we only generate unique results.</li>
+<li><strong>Efficient Backtracking</strong>: The recursive approach efficiently explores all combinations, with backtracking ensuring we don&rsquo;t explore invalid paths.</li>
+<li><strong>Exponential Time Complexity</strong>: Although the time complexity is exponential, this approach works well for smaller inputs and avoids redundant calculations.</li>
 </ul>
-</li>
-</ul>
-</li>
-</ol>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<hr>
+<h4 id="-practice-makes-perfect">
+  🚀 <strong>Practice Makes Perfect!</strong>
+  <a class="heading-link" href="#-practice-makes-perfect">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h3>
-<ul>
-<li><strong>Time Complexity</strong>: The complexity is exponential, (O(2^{\text{n}})), due to the potential combinations being generated.</li>
-<li><strong>Space Complexity</strong>: The space complexity is (O(\text{n})) for the recursion stack and storage of combinations.</li>
-</ul> 
+</h4>
+<p>This backtracking approach is both <strong>elegant</strong> and <strong>efficient</strong> in handling problems like this. By practicing, you’ll get more comfortable with the technique of backtracking and learn how to optimize it in various scenarios. Keep up the good work! 💪</p>
+ 
 </div>
   
 

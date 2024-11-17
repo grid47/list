@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -241,7 +241,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1357s1hbhb">
+<h2 id="hahahugoshortcode1359s1hbhb">
   
 
   
@@ -253,7 +253,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a string <code>num</code>, you need to split it into the Fibonacci sequence. The sequence starts with any two numbers, and every subsequent number must be the sum of the previous two. You are required to return a vector containing the numbers in the Fibonacci sequence.</p>
+<p>The problem asks to find a way to split a string of digits into a Fibonacci-like sequence. The string <code>num</code> represents a number, and the task is to split it into a sequence of integers where each integer is formed from a contiguous substring of <code>num</code>. The sequence must satisfy the condition that each number (starting from the third) is the sum of the previous two numbers. We need to return the resulting Fibonacci sequence as a list of integers, or an empty list if no such sequence exists.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -261,39 +261,83 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we can use a <strong>backtracking</strong> approach. The idea is to try all possible ways of splitting the string into integers and check if the sequence formed follows the Fibonacci-like property: each number must be the sum of the previous two.</p>
+<p>The key steps in the approach are:</p>
 <ol>
 <li>
-<p><strong>Recursive Backtracking</strong>:</p>
+<p><strong>Recursive Backtracking</strong>: The backtracking function explores different ways of splitting the string, trying each substring starting from the current index. For each valid substring, we try to build the Fibonacci sequence.</p>
+</li>
+<li>
+<p><strong>Valid Substrings</strong>: For each split, we need to ensure that:</p>
 <ul>
-<li>Implement a recursive function <code>split</code> that takes the current index, the result vector, and the original string as parameters.</li>
+<li>The substring doesn&rsquo;t have a leading zero unless it is just &lsquo;0&rsquo;.</li>
+<li>The number formed by the substring doesn&rsquo;t exceed the maximum integer limit (<code>INT_MAX</code>).</li>
 </ul>
 </li>
 <li>
-<p><strong>Base Case</strong>:</p>
-<ul>
-<li>If the current index <code>idx</code> equals the length of the string and the result vector has at least three elements, return <code>true</code>.</li>
+<p><strong>Fibonacci Sequence Validation</strong>: Once we have at least two numbers in the sequence, we check if the next number in the sequence is the sum of the previous two numbers. If the sequence violates this property at any point, we backtrack and try another split.</p>
+</li>
+<li>
+<p><strong>Stopping Conditions</strong>: The recursion stops if the end of the string is reached and at least three numbers are in the sequence, indicating we’ve found a valid Fibonacci-like sequence.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Main Function (<code>splitIntoFibonacci</code>)</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> splitIntoFibonacci(string num) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
+</span></span><span style="display:flex;"><span>    split(<span style="color:#666">0</span>, res, num);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This function initializes an empty result vector <code>res</code> and calls the helper function <code>split</code> to start the backtracking process from the 0th index.</li>
+<li>Once the recursion completes, the <code>res</code> vector will contain the Fibonacci-like sequence if it is possible, and the function returns this sequence.</li>
 </ul>
 </li>
 <li>
-<p><strong>Loop through the String</strong>:</p>
+<p><strong>Backtracking Function (<code>split</code>)</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">split</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>res, string num) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> num.size() <span style="color:#666">&amp;&amp;</span> res.size() <span style="color:#666">&gt;=</span> <span style="color:#666">3</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> idx; i <span style="color:#666">&lt;</span> num.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(num[idx] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">&amp;&amp;</span> i <span style="color:#666">&gt;</span> idx) <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> i <span style="color:#666">-</span> idx <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> n <span style="color:#666">=</span> stol(<span style="color:#b44">&#34;0&#34;</span> <span style="color:#666">+</span> num.substr(idx, sz));
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">&gt;</span> INT_MAX) <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(res.size() <span style="color:#666">&lt;=</span> <span style="color:#666">1</span> <span style="color:#666">||</span> (n <span style="color:#666">==</span> (<span style="color:#0b0;font-weight:bold">long</span>)res.back() <span style="color:#666">+</span> res[res.size() <span style="color:#666">-</span> <span style="color:#666">2</span>])) {
+</span></span><span style="display:flex;"><span>            res.push_back(n);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(split(i <span style="color:#666">+</span> <span style="color:#666">1</span>, res, num)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>            res.pop_back();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Base Case</strong>: The recursion continues as long as <code>idx</code> (the current index) is not equal to the size of the string, and we ensure that the sequence has at least three numbers (<code>res.size() &gt;= 3</code>). If this condition is met, we return <code>true</code>, indicating we&rsquo;ve found a valid Fibonacci-like sequence.</p>
+</li>
+<li>
+<p><strong>Loop Over Possible Splits</strong>: We use a loop to consider all substrings starting at index <code>idx</code>. For each possible substring, we:</p>
 <ul>
-<li>Iterate through the string starting from the current index.</li>
-<li>Handle leading zeros: if the first character of the current segment is &lsquo;0&rsquo; and the segment length is greater than 1, break the loop.</li>
-<li>Convert the current substring to a long integer.</li>
-<li>If the number exceeds <code>INT_MAX</code>, break the loop.</li>
+<li><strong>Skip Invalid Substrings</strong>: We skip any substring that starts with &lsquo;0&rsquo; unless it is just &lsquo;0&rsquo; (to avoid leading zeroes).</li>
+<li><strong>Convert the Substring to a Number</strong>: We use <code>stol</code> to convert the substring into a number (<code>n</code>). We ensure that the number doesn&rsquo;t exceed the integer limit (<code>INT_MAX</code>).</li>
 </ul>
 </li>
 <li>
-<p><strong>Check Fibonacci Condition</strong>:</p>
-<ul>
-<li>If the result vector has less than 2 elements, or if the current number is the sum of the last two numbers in the result vector, add the number to the result vector and recursively call <code>split</code> for the next index.</li>
-<li>If the recursive call returns <code>true</code>, propagate this success back. If not, remove the last added number (backtrack) and continue.</li>
-</ul>
+<p><strong>Fibonacci Validation</strong>: If the sequence already has at least two numbers, we check if the current number <code>n</code> is the sum of the last two numbers in the sequence: <code>n == res.back() + res[res.size() - 2]</code>. If this condition is met, we push <code>n</code> to the sequence and recursively try to continue building the sequence.</p>
 </li>
 <li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>If no valid Fibonacci sequence can be formed, return an empty vector.</li>
+<p><strong>Backtracking</strong>: If adding the current number doesn’t lead to a valid sequence, we pop the last number from <code>res</code> and try the next possible split.</p>
+</li>
+<li>
+<p><strong>Termination</strong>: The function returns <code>true</code> if a valid sequence is found, and <code>false</code> if no valid sequence exists for the current split.</p>
+</li>
 </ul>
 </li>
 </ol>
@@ -304,15 +348,35 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li><strong>Time Complexity</strong>: O(2^N) in the worst case due to the exponential nature of recursive backtracking.</li>
-<li><strong>Space Complexity</strong>: O(N) for the recursion stack and the result vector.</li>
+<li>The time complexity is driven by the recursive backtracking function, which tries all possible ways of splitting the string into integers. For each recursive call, we check substrings starting from the current index <code>idx</code>, and in the worst case, we try every possible substring.</li>
+<li>Since each recursive call handles a different substring and there are approximately <code>O(2^n)</code> potential splits, where <code>n</code> is the length of the string, the time complexity can be considered exponential in the worst case. However, in practice, pruning through invalid splits (such as those with leading zeros or exceeding <code>INT_MAX</code>) reduces the number of recursive calls significantly.</li>
 </ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is determined by the size of the recursion stack and the storage for the result. At any point, the recursion stack can hold up to <code>O(n)</code> calls, where <code>n</code> is the length of the string.</li>
+<li>Additionally, the result vector <code>res</code> can hold up to <code>O(n)</code> integers (since in the worst case, we would split the entire string into individual Fibonacci-like numbers). Therefore, the space complexity is <code>O(n)</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In conclusion, the provided solution efficiently solves the problem of finding a Fibonacci-like sequence from a string of digits using a backtracking approach. The key to the solution is trying different valid splits of the string and validating whether the formed numbers follow the Fibonacci property: each number is the sum of the previous two numbers. The use of recursion ensures that all possible valid sequences are explored, and backtracking ensures that invalid paths are pruned early. Despite the exponential worst-case time complexity, the pruning mechanisms in the algorithm significantly improve performance in practice. This solution is optimal for solving problems related to string partitioning and sequence validation.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1357s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1359s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

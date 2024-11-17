@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -270,60 +270,170 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-statement-check-if-a-binary-tree-is-height-balanced">
+  🌳 <strong>Problem Statement: Check if a Binary Tree is Height-Balanced</strong>
+  <a class="heading-link" href="#-problem-statement-check-if-a-binary-tree-is-height-balanced">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Determine if a binary tree is height-balanced. A binary tree is balanced if, for every node, the height difference between the left and right subtrees is at most 1.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>The task is to determine whether a binary tree is <strong>height-balanced</strong>. A tree is considered balanced if, for every node, the difference in the heights of its left and right subtrees is at most 1. The <strong>height</strong> of a node is the number of edges on the longest path from that node to a leaf. This problem is important because a balanced binary tree ensures optimal performance in operations like insertion, deletion, and traversal.</p>
+<hr>
+<h3 id="-approach-checking-tree-balance-efficiently">
+  🧠 <strong>Approach: Checking Tree Balance Efficiently</strong>
+  <a class="heading-link" href="#-approach-checking-tree-balance-efficiently">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve the problem of checking if a binary tree is height-balanced, we can break down the solution into two key tasks:</p>
 <ol>
-<li>For each node, calculate the heights of its left and right subtrees.</li>
-<li>Check if the absolute difference between the heights is less than or equal to 1.</li>
-<li>Recursively apply the check to all nodes in the tree.</li>
-<li>Define a helper function <code>h</code> to calculate the height of each subtree, returning 1 plus the maximum height of the left or right subtree.</li>
+<li>
+<p><strong>Recursive Balance Check:</strong></p>
+<ul>
+<li>For each node, check if the difference in heights between its left and right subtrees is at most 1. This ensures balance at every level of the tree.</li>
+</ul>
+</li>
+<li>
+<p><strong>Height Calculation During Recursion:</strong></p>
+<ul>
+<li>The height of a node is the longest path from that node to any leaf in its subtree. By calculating the height and checking balance in a single recursive pass, we can achieve both goals efficiently.</li>
+</ul>
+</li>
+<li>
+<p><strong>Optimization:</strong></p>
+<ul>
+<li>By combining the height calculation and balance check in one function, we avoid redundant recalculations and make the process more efficient.</li>
+</ul>
+</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<hr>
+<h3 id="-code-breakdown-step-by-step">
+  🔧 <strong>Code Breakdown: Step-by-Step</strong>
+  <a class="heading-link" href="#-code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong><code>isBalanced</code> function</strong>:
-<ul>
-<li><strong>Line 6</strong>: If <code>root</code> is <code>NULL</code>, the tree is balanced by definition, so return <code>true</code>.</li>
-<li><strong>Lines 7-8</strong>: Calculate the heights <code>l</code> and <code>r</code> of the left and right subtrees using <code>h</code>.</li>
-<li><strong>Line 9</strong>: Check if the tree is balanced at the root (difference in heights ≤ 1) and recursively check the left and right subtrees.</li>
+<h4 id="step-1-isbalanced-function">
+  <strong>Step 1: <code>isBalanced</code> Function</strong>
+  <a class="heading-link" href="#step-1-isbalanced-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isBalanced</span>(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>root) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> h(root<span style="color:#666">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> r <span style="color:#666">=</span> h(root<span style="color:#666">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> abs(l <span style="color:#666">-</span> r) <span style="color:#666">&lt;=</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span>
+</span></span><span style="display:flex;"><span>           isBalanced(root<span style="color:#666">-&gt;</span>left) <span style="color:#666">&amp;&amp;</span>
+</span></span><span style="display:flex;"><span>           isBalanced(root<span style="color:#666">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Base Case:</strong> If the current node (<code>root</code>) is <code>NULL</code>, return <code>true</code> because an empty tree is considered balanced.</li>
+<li><strong>Height Calculation:</strong> The heights of the left and right subtrees are calculated using the helper function <code>h()</code>. This is explained in the next step.</li>
+<li><strong>Balance Check:</strong> The absolute difference between the heights of the left and right subtrees is checked. If it exceeds 1, return <code>false</code> since the tree is unbalanced.</li>
+<li><strong>Recursive Check:</strong> The function recursively checks the balance of both the left and right subtrees. If either subtree is unbalanced, the tree is unbalanced.</li>
 </ul>
-</li>
-<li><strong><code>h</code> function</strong>:
-<ul>
-<li><strong>Lines 12-16</strong>: Base case – if the node is <code>NULL</code>, return height 0.</li>
-<li>Calculate the heights of left (<code>l</code>) and right (<code>r</code>) subtrees and return <code>1 + max(l, r)</code> for the total height.</li>
+<h4 id="step-2-h-function-height-calculation">
+  <strong>Step 2: <code>h</code> Function (Height Calculation)</strong>
+  <a class="heading-link" href="#step-2-h-function-height-calculation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">h</span>(TreeNode<span style="color:#666">*</span> node) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (node <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> h(node<span style="color:#666">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> r <span style="color:#666">=</span> h(node<span style="color:#666">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span> <span style="color:#666">+</span> max(l, r);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Base Case:</strong> If the node is <code>NULL</code>, return <code>0</code> because there’s no height to calculate.</li>
+<li><strong>Recursive Height Calculation:</strong> The function recursively calculates the heights of the left and right subtrees of the current node.</li>
+<li><strong>Return Height:</strong> The height of the current node is <code>1 + max(l, r)</code>, where <code>l</code> and <code>r</code> are the heights of the left and right subtrees, respectively. The <code>max</code> ensures we take the longer path.</li>
 </ul>
-</li>
-</ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<hr>
+<h3 id="-time-and-space-complexity">
+  ⏱️ <strong>Time and Space Complexity</strong>
+  <a class="heading-link" href="#-time-and-space-complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity-on">
+  <strong>Time Complexity: O(n)</strong>
+  <a class="heading-link" href="#time-complexity-on">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(N^2)) in the worst case, as <code>h</code> is called for every node in <code>isBalanced</code>.</li>
-<li><strong>Space Complexity</strong>: (O(H)), where (H) is the height of the tree, due to the recursion stack.</li>
-</ul> 
+<li>The <code>isBalanced</code> function recursively visits each node in the tree.</li>
+<li>The <code>h</code> function is also called for each node to compute the height of its subtrees.</li>
+<li>Each node is visited once, and the height is computed in constant time for each node once its subtrees have been calculated. Therefore, the time complexity is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the tree.</li>
+</ul>
+<h4 id="space-complexity-oh">
+  <strong>Space Complexity: O(h)</strong>
+  <a class="heading-link" href="#space-complexity-oh">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is determined by the recursion stack. In the worst case, the tree could be unbalanced, leading to a recursion depth of <strong>O(n)</strong>.</li>
+<li>In the best case (a perfectly balanced tree), the height <code>h</code> is <strong>O(log n)</strong>, resulting in a space complexity of <strong>O(log n)</strong>.</li>
+</ul>
+<hr>
+<h3 id="-example-walkthrough">
+  🔍 <strong>Example Walkthrough</strong>
+  <a class="heading-link" href="#-example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s consider an example of a binary tree to understand how the solution works:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>        3
+</span></span><span style="display:flex;"><span>       / \
+</span></span><span style="display:flex;"><span>      9   20
+</span></span><span style="display:flex;"><span>         /  \
+</span></span><span style="display:flex;"><span>        15   7
+</span></span></code></pre></div><ol>
+<li>
+<p><strong>Step 1:</strong> Start at the root node <code>3</code>. Calculate the heights of its left and right subtrees:</p>
+<ul>
+<li>The left subtree is just <code>9</code>, with a height of <code>0</code>.</li>
+<li>The right subtree has <code>20</code>, whose left and right subtrees are <code>15</code> and <code>7</code>, both with heights of <code>0</code>. So, the height of node <code>20</code> is <code>1</code>.</li>
+<li>The height of node <code>3</code> is <code>1 + max(0, 2) = 3</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Step 2:</strong> Check if the tree is balanced at node <code>3</code>:</p>
+<ul>
+<li>The left subtree has a height of <code>0</code>, and the right subtree has a height of <code>2</code>. The absolute difference is <code>2</code>, which is greater than <code>1</code>, so the tree is <strong>not balanced</strong>.</li>
+</ul>
+</li>
+</ol>
+<p>Thus, the function will return <code>false</code>, indicating that the tree is unbalanced.</p>
+<hr>
+<h3 id="-conclusion">
+  🚀 <strong>Conclusion</strong>
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently checks whether a binary tree is balanced by:</p>
+<ul>
+<li>Recursively calculating the height of each subtree.</li>
+<li>Checking the balance condition (the height difference between left and right subtrees) at each node.</li>
+<li>Returning <code>true</code> if the tree is balanced and <code>false</code> if it is unbalanced.</li>
+</ul>
+<p>The time complexity is <strong>O(n)</strong>, and the space complexity is <strong>O(h)</strong>, making the solution optimal for most binary tree problems. It handles both balanced and unbalanced trees efficiently and uses recursion to traverse the tree while calculating heights.</p>
+<p>Happy coding! 🌱</p>
+<hr>
+ 
 </div>
   
 

@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              4-minute read
+              7-minute read
             </span>
           </div>
 
@@ -211,7 +211,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1279s0hbhb">
+        <h2 id="hahahugoshortcode1301s0hbhb">
   <a href="https://leetcode.com/problems/design-linked-list/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -226,7 +226,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1279s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1301s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -308,130 +308,233 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * obj-&gt;addAtIndex(index,val);
 </span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * obj-&gt;deleteAtIndex(index);
 </span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> */</span></span></span></code></pre></div>
-<h2 id="hahahugoshortcode1279s2hbhb">
+<h2 id="hahahugoshortcode1301s2hbhb">
   
 
   
   <div class="markdown-body">
     <h3 id="problem-statement">
-  Problem Statement
+  Problem Statement:
   <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Design a linked list that supports the following operations:</p>
+<p>The problem involves implementing a singly linked list class, <code>MyLinkedList</code>, that supports the following operations:</p>
 <ol>
-<li><code>get(index)</code>: Get the value of the node at the specified index.</li>
-<li><code>addAtHead(val)</code>: Add a node with the value <code>val</code> at the head of the linked list.</li>
-<li><code>addAtTail(val)</code>: Add a node with the value <code>val</code> at the tail of the linked list.</li>
-<li><code>addAtIndex(index, val)</code>: Add a node with the value <code>val</code> at the specified index.</li>
-<li><code>deleteAtIndex(index)</code>: Delete the node at the specified index.</li>
+<li><strong>get(index)</strong>: Returns the value at the given index of the linked list. If the index is invalid, return <code>-1</code>.</li>
+<li><strong>addAtHead(val)</strong>: Adds a new node with the value <code>val</code> at the beginning of the linked list.</li>
+<li><strong>addAtTail(val)</strong>: Adds a new node with the value <code>val</code> at the end of the linked list.</li>
+<li><strong>addAtIndex(index, val)</strong>: Adds a new node with the value <code>val</code> at the given index in the linked list. If the index is greater than the size of the list, the node is not added.</li>
+<li><strong>deleteAtIndex(index)</strong>: Deletes the node at the given index. If the index is invalid, do nothing.</li>
 </ol>
+<p>Your task is to implement this linked list class efficiently with constant-time operations for certain tasks.</p>
 <h3 id="approach">
-  Approach
+  Approach:
   <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The approach to solving this problem involves using a <strong>singly linked list</strong> data structure. A linked list is a dynamic data structure where each element (node) stores both the data and a reference (or pointer) to the next element in the list.</p>
 <ul>
-<li><strong>Node Structure</strong>: Create a <code>Node</code> class to represent each node in the linked list, which contains a value and a pointer to the next node.</li>
-<li><strong>Linked List Structure</strong>: Create a <code>MyLinkedList</code> class that maintains:
+<li><strong>Head Node</strong>: The list will have a reference to its first node, known as the head node.</li>
+<li><strong>Singly Linked List</strong>: Each node points only to the next node and does not have a reference to its previous node. This simplifies the structure but requires traversal for certain operations.</li>
+</ul>
+<p>The operations to be implemented require careful handling of pointers (next references) to ensure that elements are added, retrieved, and deleted in constant time when possible. The key operations include:</p>
 <ul>
-<li><code>sz</code>: The current size of the linked list.</li>
-<li><code>head</code>: A pointer to the first node in the list.</li>
+<li><strong>Traversal</strong>: For adding or deleting nodes at a specific index, we must traverse the list to the required position, which takes linear time in the worst case.</li>
+<li><strong>Edge Cases</strong>: We must handle cases where the list is empty or when the index is out of bounds.</li>
 </ul>
-</li>
-</ul>
-<h3 id="operations">
-  Operations
-  <a class="heading-link" href="#operations">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Get</strong>:</p>
-<ul>
-<li>Check if the index is within bounds. If not, return -1.</li>
-<li>Traverse the list until reaching the desired index and return the node&rsquo;s value.</li>
+<h4 id="step-1-define-the-node-class">
+  Step 1: Define the Node Class
+  <a class="heading-link" href="#step-1-define-the-node-class">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Node</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> val;
+</span></span><span style="display:flex;"><span>    Node<span style="color:#666">*</span> next;
+</span></span><span style="display:flex;"><span>    Node(<span style="color:#0b0;font-weight:bold">int</span> x)<span style="color:#666">:</span> val(x), next(<span style="color:#a2f;font-weight:bold">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>The <code>Node</code> class represents an individual node in the linked list. It stores an integer value (<code>val</code>) and a pointer to the next node (<code>next</code>).</li>
+<li>The constructor initializes the node with a given value (<code>x</code>) and sets <code>next</code> to <code>nullptr</code>, indicating that this node does not point to any other node when it is created.</li>
 </ul>
-</li>
-<li>
-<p><strong>Add at Head</strong>:</p>
-<ul>
-<li>Call <code>addAtIndex(0, val)</code> to insert the value at the head of the list.</li>
+<h4 id="step-2-define-the-mylinkedlist-class">
+  Step 2: Define the <code>MyLinkedList</code> Class
+  <a class="heading-link" href="#step-2-define-the-mylinkedlist-class">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">MyLinkedList</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sz;
+</span></span><span style="display:flex;"><span>    Node<span style="color:#666">*</span> head;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    MyLinkedList()<span style="color:#666">:</span> sz(<span style="color:#666">0</span>), head(<span style="color:#a2f;font-weight:bold">nullptr</span>) { }
+</span></span></code></pre></div><ul>
+<li><code>sz</code> stores the size of the linked list, initialized to <code>0</code>.</li>
+<li><code>head</code> points to the first node in the linked list. Initially, it is set to <code>nullptr</code>, indicating that the list is empty.</li>
 </ul>
-</li>
-<li>
-<p><strong>Add at Tail</strong>:</p>
-<ul>
-<li>Call <code>addAtIndex(sz, val)</code> to append the value at the end of the list.</li>
+<h4 id="step-3-implement-the-get-function">
+  Step 3: Implement the <code>get</code> Function
+  <a class="heading-link" href="#step-3-implement-the-get-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">get</span>(<span style="color:#0b0;font-weight:bold">int</span> index) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(index <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> index <span style="color:#666">&gt;=</span> sz)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>        Node<span style="color:#666">*</span> curr <span style="color:#666">=</span> head;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> index; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>            curr <span style="color:#666">=</span> curr<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> curr<span style="color:#666">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Index Validation</strong>: First, we check if the index is within the bounds of the list. If the index is negative or greater than or equal to the size of the list, return <code>-1</code>.</li>
+<li><strong>Traversal</strong>: If the index is valid, we traverse the list by moving through <code>next</code> pointers until we reach the desired index, and return the value of the node at that index.</li>
 </ul>
-</li>
-<li>
-<p><strong>Add at Index</strong>:</p>
-<ul>
-<li>Check if the index is valid (0 ≤ index ≤ size). If invalid, do nothing.</li>
-<li>Create a new node with the given value.</li>
-<li>If adding at index 0, set the new node&rsquo;s next pointer to the current head and update the head pointer.</li>
-<li>For other indices, traverse the list to find the node just before the index and adjust the pointers accordingly.</li>
+<h4 id="step-4-implement-the-addathead-function">
+  Step 4: Implement the <code>addAtHead</code> Function
+  <a class="heading-link" href="#step-4-implement-the-addathead-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">addAtHead</span>(<span style="color:#0b0;font-weight:bold">int</span> val) {
+</span></span><span style="display:flex;"><span>    addAtIndex(<span style="color:#666">0</span>, val);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>To add a node at the head, we simply call <code>addAtIndex</code> with <code>index = 0</code> and the given <code>val</code>. This ensures that the node is inserted at the beginning of the list.</li>
 </ul>
-</li>
-<li>
-<p><strong>Delete at Index</strong>:</p>
-<ul>
-<li>Check if the index is valid. If not, do nothing.</li>
-<li>If deleting the head (index 0), update the head pointer and delete the old head node.</li>
-<li>For other indices, traverse the list to find the node just before the index, update pointers to bypass the node to be deleted, and then delete it.</li>
+<h4 id="step-5-implement-the-addattail-function">
+  Step 5: Implement the <code>addAtTail</code> Function
+  <a class="heading-link" href="#step-5-implement-the-addattail-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">addAtTail</span>(<span style="color:#0b0;font-weight:bold">int</span> val) {
+</span></span><span style="display:flex;"><span>    addAtIndex(sz, val);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>To add a node at the tail (end), we call <code>addAtIndex</code> with the current size of the list (<code>sz</code>) as the index, and the given value <code>val</code>. This appends the node to the end of the list.</li>
 </ul>
-</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h4 id="step-6-implement-the-addatindex-function">
+  Step 6: Implement the <code>addAtIndex</code> Function
+  <a class="heading-link" href="#step-6-implement-the-addatindex-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">addAtIndex</span>(<span style="color:#0b0;font-weight:bold">int</span> index, <span style="color:#0b0;font-weight:bold">int</span> val) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(index <span style="color:#666">&gt;</span> sz <span style="color:#666">||</span> index <span style="color:#666">&lt;</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span>;
+</span></span><span style="display:flex;"><span>    Node<span style="color:#666">*</span> cur <span style="color:#666">=</span> head;
+</span></span><span style="display:flex;"><span>    Node<span style="color:#666">*</span> new_node <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> Node(val);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(index <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>        new_node<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> head;
+</span></span><span style="display:flex;"><span>        head <span style="color:#666">=</span> new_node;
+</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> index <span style="color:#666">-</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>            cur <span style="color:#666">=</span> cur<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>        new_node<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> cur<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>        cur<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> new_node;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    sz<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Index Validation</strong>: If the <code>index</code> is greater than the size of the list (<code>sz</code>) or negative, we simply return without adding anything.</li>
+<li><strong>Inserting at Head</strong>: If the <code>index</code> is <code>0</code>, we insert the new node at the beginning by pointing its <code>next</code> to the current head and updating <code>head</code> to point to the new node.</li>
+<li><strong>Inserting at Other Indexes</strong>: For other indexes, we traverse the list to find the node just before the insertion point (index - 1). Then, we adjust the <code>next</code> pointers: the new node&rsquo;s <code>next</code> points to the current node&rsquo;s <code>next</code>, and the previous node&rsquo;s <code>next</code> points to the new node.</li>
+<li>Finally, we increment the size (<code>sz</code>).</li>
+</ul>
+<h4 id="step-7-implement-the-deleteatindex-function">
+  Step 7: Implement the <code>deleteAtIndex</code> Function
+  <a class="heading-link" href="#step-7-implement-the-deleteatindex-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">deleteAtIndex</span>(<span style="color:#0b0;font-weight:bold">int</span> index) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(index <span style="color:#666">&gt;=</span> sz <span style="color:#666">||</span> index <span style="color:#666">&lt;</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(index <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>        Node<span style="color:#666">*</span> nxt <span style="color:#666">=</span> head<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">delete</span> head;
+</span></span><span style="display:flex;"><span>        head <span style="color:#666">=</span> nxt;
+</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>        Node<span style="color:#666">*</span> cur <span style="color:#666">=</span> head;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> index <span style="color:#666">-</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>            cur <span style="color:#666">=</span> cur<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>        Node<span style="color:#666">*</span> nxt <span style="color:#666">=</span> cur<span style="color:#666">-&gt;</span>next<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">delete</span> cur<span style="color:#666">-&gt;</span>next;
+</span></span><span style="display:flex;"><span>        cur<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> nxt;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    sz<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Index Validation</strong>: If the <code>index</code> is out of bounds (greater than or equal to the size of the list or negative), we return without doing anything.</li>
+<li><strong>Deleting Head Node</strong>: If the <code>index</code> is <code>0</code>, we delete the head node by updating <code>head</code> to point to the next node (<code>head-&gt;next</code>) and deleting the current head.</li>
+<li><strong>Deleting Other Nodes</strong>: For other indexes, we traverse the list to find the node just before the one to be deleted (index - 1). We update the previous node&rsquo;s <code>next</code> pointer to skip the node to be deleted and free the memory of the node.</li>
+</ul>
+<h3 id="complexity-analysis">
+  Complexity Analysis:
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Node Class</strong>: A simple structure for linked list nodes.</li>
-<li><strong>MyLinkedList Class</strong>:
+<li><strong>get(index)</strong>: O(n), where <code>n</code> is the number of nodes in the list. In the worst case, we might need to traverse the entire list to find the element at the given index.</li>
+<li><strong>addAtHead(val)</strong>: O(1). Adding a node at the head involves constant time operations.</li>
+<li><strong>addAtTail(val)</strong>: O(n). In the worst case, we need to traverse the entire list to find the tail.</li>
+<li><strong>addAtIndex(index, val)</strong>: O(n). We may need to traverse the list to find the insertion point, especially if the index is near the end.</li>
+<li><strong>deleteAtIndex(index)</strong>: O(n). We may need to traverse the list to find the node just before the deletion point.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li>Initializes with size 0 and a null head.</li>
-<li>Implements methods for all required operations.</li>
+<li><strong>O(n)</strong>, where <code>n</code> is the number of nodes in the list. Each node requires space to store its value and pointer to the next node.</li>
 </ul>
-</li>
-</ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>
-<p><strong>Time Complexity</strong>:</p>
-<ul>
-<li><code>get</code>: O(n) in the worst case (traversing the list).</li>
-<li><code>addAtHead</code>: O(1).</li>
-<li><code>addAtTail</code>: O(n) in the worst case.</li>
-<li><code>addAtIndex</code>: O(n) in the worst case (if inserting near the end).</li>
-<li><code>deleteAtIndex</code>: O(n) in the worst case (if deleting near the end).</li>
-</ul>
-</li>
-<li>
-<p><strong>Space Complexity</strong>: O(n) for storing the nodes in the linked list.</p>
-</li>
-</ul>
+<p>The <code>MyLinkedList</code> class implements a basic singly linked list with efficient operations for adding, deleting, and accessing nodes at specific positions. The key operations are <strong>addAtHead</strong> (O(1)), <strong>addAtTail</strong> (O(n)), <strong>addAtIndex</strong> (O(n)), and <strong>deleteAtIndex</strong> (O(n)). The space complexity is proportional to the number of elements stored in the list. This implementation provides a simple and efficient way to manipulate a linked list while handling edge cases like invalid indices and empty lists.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1279s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1301s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

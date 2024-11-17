@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -248,7 +248,16 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given two arrays, <code>nums1</code> and <code>nums2</code>, you need to rearrange <code>nums1</code> in such a way that for each element in <code>nums2</code>, the corresponding element in <code>nums1</code> is greater than the element in <code>nums2</code>. If there are no suitable elements, you should return the smallest available element from <code>nums1</code>.</p>
+<p>The problem asks us to rearrange the elements of the array <code>nums1</code> in such a way that, when compared element-wise to the array <code>nums2</code>, each element in <code>nums1</code> is greater than the corresponding element in <code>nums2</code> wherever possible. The task is to maximize the number of elements in <code>nums1</code> that are greater than the elements in <code>nums2</code> by selecting elements in an advantageous manner.</p>
+<p>For example:</p>
+<ul>
+<li><strong>Input</strong>: <code>nums1 = [2, 7, 11, 15]</code>, <code>nums2 = [1, 10, 4, 11]</code></li>
+<li><strong>Output</strong>: <code>[2, 11, 7, 15]</code>
+<ul>
+<li>Here, we want to maximize how many times an element from <code>nums1</code> is strictly greater than the corresponding element in <code>nums2</code>. We can see that the optimal arrangement is <code>[2, 11, 7, 15]</code>, where all values of <code>nums1</code> are greater than the corresponding elements in <code>nums2</code> (except for the second one).</li>
+</ul>
+</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -256,36 +265,95 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The approach for solving this problem revolves around the idea of &ldquo;greedy matching,&rdquo; where we want to find the smallest element in <code>nums1</code> that can beat the current element in <code>nums2</code>. If we cannot beat the element in <code>nums2</code>, we simply choose the smallest element from <code>nums1</code> that hasn&rsquo;t been used yet.</p>
 <ol>
 <li>
-<p><strong>Use a Multiset</strong>: Store the elements of <code>nums1</code> in a multiset to allow for efficient access and removal of elements.</p>
+<p><strong>Sort the arrays</strong>: We first sort <code>nums1</code> and <code>nums2</code> in ascending order. The goal is to try and match each element from <code>nums2</code> with the smallest element from <code>nums1</code> that is strictly greater.</p>
 </li>
 <li>
-<p><strong>Iterate through nums2</strong>:</p>
-<ul>
-<li>For each element in <code>nums2</code>, check if the largest element in <code>nums1</code> (<code>*s.rbegin()</code>) is less than or equal to the current element in <code>nums2</code>.</li>
-<li>If it is, use the smallest element from <code>nums1</code> (<code>*s.begin()</code>).</li>
-<li>Otherwise, use the smallest element in <code>nums1</code> that is greater than the current element in <code>nums2</code> using <code>s.upper_bound(nums2[i])</code>.</li>
-</ul>
+<p><strong>Use a multiset for efficient element selection</strong>: A <code>multiset</code> is used to store the elements of <code>nums1</code>. The reason we use a <code>multiset</code> is that it allows us to efficiently retrieve the smallest element greater than a given value (<code>upper_bound</code> operation) and also removes elements from the set after they have been assigned.</p>
 </li>
 <li>
-<p><strong>Replace the Elements</strong>: Replace the elements in <code>nums1</code> with the chosen elements based on the conditions above.</p>
+<p><strong>Greedy element assignment</strong>: For each element in <code>nums2</code>, check if we can find a larger element in <code>nums1</code>. If we can, replace the corresponding element in <code>nums1</code>. If we cannot, simply use the smallest element left from <code>nums1</code>.</p>
 </li>
 <li>
-<p><strong>Return Result</strong>: Return the modified <code>nums1</code>.</p>
+<p><strong>Return the rearranged <code>nums1</code></strong>: After matching all elements, we return the modified <code>nums1</code> which represents the advantageous arrangement.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>A multiset <code>s</code> is initialized with the elements of <code>nums1</code>.</li>
-<li>For each element in <code>nums2</code>, the appropriate element from <code>nums1</code> is determined and assigned.</li>
-<li>The chosen element is then erased from the multiset to ensure it cannot be reused.</li>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> advantageCount(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums1, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums2) {
+</span></span><span style="display:flex;"><span>    multiset<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s(begin(nums1), end(nums1));  <span style="color:#080;font-style:italic">// Step 1: Convert nums1 to a multiset
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums2.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// Step 2: Try to find a number from nums1 that is greater than nums2[i]
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">auto</span> p <span style="color:#666">=</span> <span style="color:#666">*</span>s.rbegin() <span style="color:#666">&lt;=</span> nums2[i] <span style="color:#666">?</span> s.begin() <span style="color:#666">:</span> s.upper_bound(nums2[i]);
+</span></span><span style="display:flex;"><span>        nums1[i] <span style="color:#666">=</span> <span style="color:#666">*</span>p;  <span style="color:#080;font-style:italic">// Step 3: Assign the selected number from nums1 to nums2&#39;s current position
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        s.erase(p);  <span style="color:#080;font-style:italic">// Step 4: Remove the used element from the multiset
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> nums1;  <span style="color:#080;font-style:italic">// Step 5: Return the rearranged nums1
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
+</span></span></code></pre></div><h4 id="step-1-convert-nums1-to-a-multiset">
+  Step 1: Convert <code>nums1</code> to a <code>multiset</code>
+  <a class="heading-link" href="#step-1-convert-nums1-to-a-multiset">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>multiset<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s(begin(nums1), end(nums1));
+</span></span></code></pre></div><ul>
+<li>We convert <code>nums1</code> into a <code>multiset</code>. A multiset is a data structure that stores elements in a sorted order and allows us to efficiently search for elements greater than a given value.</li>
+<li>The multiset <code>s</code> holds all the elements of <code>nums1</code>. We can access the smallest element using <code>s.begin()</code> and the largest element using <code>s.rbegin()</code>.</li>
+</ul>
+<h4 id="step-2-greedily-assign-elements-to-nums1">
+  Step 2: Greedily assign elements to <code>nums1</code>
+  <a class="heading-link" href="#step-2-greedily-assign-elements-to-nums1">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">auto</span> p <span style="color:#666">=</span> <span style="color:#666">*</span>s.rbegin() <span style="color:#666">&lt;=</span> nums2[i] <span style="color:#666">?</span> s.begin() <span style="color:#666">:</span> s.upper_bound(nums2[i]);
+</span></span></code></pre></div><ul>
+<li>For each element <code>nums2[i]</code>, we attempt to find the smallest element from <code>nums1</code> that is greater than <code>nums2[i]</code>.</li>
+<li>If the largest element in <code>nums1</code> (i.e., <code>*s.rbegin()</code>) is not greater than <code>nums2[i]</code>, we take the smallest element (<code>s.begin()</code>).</li>
+<li>Otherwise, we use the <code>upper_bound</code> function to find the first element in <code>nums1</code> that is strictly greater than <code>nums2[i]</code>.</li>
+</ul>
+<h4 id="step-3-assign-the-selected-element-to-the-result">
+  Step 3: Assign the selected element to the result
+  <a class="heading-link" href="#step-3-assign-the-selected-element-to-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>nums1[i] <span style="color:#666">=</span> <span style="color:#666">*</span>p;
+</span></span></code></pre></div><ul>
+<li>Once we have found an element from <code>nums1</code> that is greater than <code>nums2[i]</code> (or the smallest element if no larger one exists), we assign it to the corresponding position in <code>nums1</code>.</li>
+</ul>
+<h4 id="step-4-remove-the-used-element-from-the-multiset">
+  Step 4: Remove the used element from the <code>multiset</code>
+  <a class="heading-link" href="#step-4-remove-the-used-element-from-the-multiset">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>s.erase(p);
+</span></span></code></pre></div><ul>
+<li>After using the element, we remove it from the multiset to prevent reusing it in the subsequent steps.</li>
+</ul>
+<h4 id="step-5-return-the-final-result">
+  Step 5: Return the final result
+  <a class="heading-link" href="#step-5-return-the-final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> nums1;
+</span></span></code></pre></div><ul>
+<li>After all elements in <code>nums2</code> have been processed, we return the rearranged <code>nums1</code> array.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -294,10 +362,45 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n log n), where ( n ) is the size of <code>nums1</code> (or <code>nums2</code>). This is due to the operations on the multiset, which involves logarithmic complexity for insertion, deletion, and access.</li>
-<li><strong>Space Complexity</strong>: O(n), as we store the elements of <code>nums1</code> in a multiset.</li>
+<li><strong>Sorting <code>nums1</code></strong>: Sorting the array <code>nums1</code> takes <code>O(n log n)</code>, where <code>n</code> is the size of <code>nums1</code>.</li>
+<li><strong>Using <code>upper_bound</code></strong>: For each element in <code>nums2</code>, we perform an <code>upper_bound</code> operation, which takes <code>O(log n)</code> because the <code>multiset</code> is sorted.</li>
+<li><strong>Looping through <code>nums2</code></strong>: We loop through each element of <code>nums2</code>, and for each element, we perform the <code>upper_bound</code> operation and an <code>erase</code> operation, both of which are <code>O(log n)</code>.</li>
 </ul>
+<p>Thus, the total time complexity is <code>O(n log n)</code> due to sorting and the log operations in the loop.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We use a <code>multiset</code> to store the elements of <code>nums1</code>, which takes <code>O(n)</code> space.</li>
+<li>Therefore, the overall space complexity is <code>O(n)</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively rearranges <code>nums1</code> to maximize the number of elements that are greater than the corresponding elements in <code>nums2</code>. By utilizing a <code>multiset</code>, we can efficiently manage and select elements to achieve the desired result. The greedy approach ensures that we always pick the smallest possible element from <code>nums1</code> that can beat the current element in <code>nums2</code>, which optimizes the number of &ldquo;wins&rdquo; in the rearranged array.</p>
+<p>Key Points:</p>
+<ul>
+<li><strong>Greedy Strategy</strong>: We aim to maximize the advantage by always selecting the smallest available element that can beat the current element from <code>nums2</code>.</li>
+<li><strong>Multiset Usage</strong>: The use of a multiset allows efficient searching and removing elements from <code>nums1</code>.</li>
+<li><strong>Optimal Complexity</strong>: With a time complexity of <code>O(n log n)</code> and space complexity of <code>O(n)</code>, the solution is efficient enough for large inputs.</li>
+</ul>
+<p>This approach is an excellent demonstration of using efficient data structures (like <code>multiset</code>) to solve optimization problems in a greedy manner.</p>
  
 </div>
   

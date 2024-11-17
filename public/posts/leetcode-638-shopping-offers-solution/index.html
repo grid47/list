@@ -222,7 +222,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -305,7 +305,14 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given the prices of different items and a list of special offers that can be applied when shopping for those items. Each offer consists of a set of items that can be bought together at a discounted price. The goal is to determine the minimum cost to satisfy a list of item needs using both direct purchases and special offers.</p>
+<p>The problem asks us to find the minimum cost of buying products given the prices for each item and a list of special offers. Each special offer provides a discount if certain quantities of items are bought together. We need to calculate the minimum cost to satisfy a set of product needs using the given prices and special offers.</p>
+<p>We are given:</p>
+<ol>
+<li><code>price</code>: A list of prices for each product.</li>
+<li><code>special</code>: A list of special offers, where each offer contains a set of quantities of products and the corresponding price for that set.</li>
+<li><code>needs</code>: A list of quantities of products needed.</li>
+</ol>
+<p>Our goal is to find the minimum cost to fulfill the needs, utilizing the special offers optimally, without purchasing more than required.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -313,65 +320,169 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The key challenge in solving this problem is efficiently deciding whether to buy individual products at full price or utilize the special offers. We need to recursively explore both options while ensuring that we minimize the total cost. The approach uses <strong>memoization</strong> (dynamic programming) to avoid recomputation of previously solved subproblems.</p>
+<p>We use a <strong>depth-first search (DFS)</strong> with memoization to explore all possible ways to fulfill the needs:</p>
 <ol>
-<li>
-<p><strong>Dynamic Programming with Memoization</strong>:</p>
-<ul>
-<li>Use a map (<code>mp</code>) to cache results for specific item needs to avoid redundant calculations.</li>
-<li>The function <code>shoppingOffers</code> calculates the minimum cost to meet the specified needs.</li>
-</ul>
-</li>
-<li>
-<p><strong>Calculating Cost</strong>:</p>
-<ul>
-<li>The function <code>calculate</code> computes the total cost of the current needs without any offers applied.</li>
-</ul>
-</li>
-<li>
-<p><strong>Applying Special Offers</strong>:</p>
-<ul>
-<li>For each special offer:
-<ul>
-<li>Update the current needs by subtracting the items included in the offer.</li>
-<li>Check if the updated needs are valid (i.e., non-negative).</li>
-<li>Recursively call <code>shoppingOffers</code> to compute the cost if this offer is applied.</li>
-<li>Restore the original needs after checking the offer.</li>
-</ul>
-</li>
-<li>Keep track of the minimum cost encountered.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>The function returns the minimum cost found for the given needs.</li>
-</ul>
-</li>
+<li><strong>Base case</strong>: If we reach a state where no more products are needed, the cost is 0.</li>
+<li><strong>Recursive case</strong>: For each special offer, we check if we can apply it and then recursively calculate the cost for the remaining needs. We keep track of the minimum cost found.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>In addition, we calculate the cost of buying products at the full price for the current needs and compare it with the costs obtained by applying the special offers.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Base Case</strong>: If the current needs have been computed before, return the cached result.</li>
-<li><strong>Calculate Cost</strong>: Compute the direct purchase cost for the current needs.</li>
-<li><strong>Iterate Offers</strong>: For each special offer, modify the current needs and recursively calculate the potential cost.</li>
-<li><strong>Update Cache</strong>: Store the computed minimum cost for the current needs in the map.</li>
-</ol>
-<h3 id="complexity">
+<p>Let&rsquo;s break down the code and understand how it works:</p>
+<h4 id="1-data-structures-and-initialization">
+  1. <strong>Data Structures and Initialization</strong>
+  <a class="heading-link" href="#1-data-structures-and-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span></code></pre></div><ul>
+<li><code>mp</code> is a memoization map that stores the minimum cost for a given state of <code>needs</code>. This map helps avoid redundant calculations for the same needs.</li>
+</ul>
+<h4 id="2-recursive-function-shoppingoffers">
+  2. <strong>Recursive Function <code>shoppingOffers</code></strong>
+  <a class="heading-link" href="#2-recursive-function-shoppingoffers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">shoppingOffers</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> price, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> special, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> needs) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mp[needs]) <span style="color:#a2f;font-weight:bold">return</span> mp[needs];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> best <span style="color:#666">=</span> calculate(price, needs);
+</span></span></code></pre></div><ul>
+<li>The function <code>shoppingOffers</code> is the main entry point. It checks if the current <code>needs</code> have been computed previously using the <code>mp</code> map. If yes, it returns the stored result.</li>
+<li>Otherwise, it calculates the cost of fulfilling the current <code>needs</code> without any offers using the <code>calculate</code> function and stores it in <code>best</code>.</li>
+</ul>
+<h4 id="3-processing-special-offers">
+  3. <strong>Processing Special Offers</strong>
+  <a class="heading-link" href="#3-processing-special-offers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">sp</span>: special) {
+</span></span><span style="display:flex;"><span>    sub(needs, sp);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(noneg(needs)) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> woffer <span style="color:#666">=</span> sp.back() <span style="color:#666">+</span> shoppingOffers(price, special, needs);
+</span></span><span style="display:flex;"><span>        best <span style="color:#666">=</span> min(best, woffer);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    add(needs, sp);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The function then iterates through each special offer in <code>special</code>. For each offer, it first attempts to apply the offer by subtracting the quantities of the items in the offer from the current <code>needs</code> using the <code>sub</code> function.</li>
+<li>If the result is valid (i.e., no negative needs remain), it recursively calculates the total cost of using the special offer (which is the offer&rsquo;s cost plus the cost of the remaining needs).</li>
+<li>The <code>best</code> variable is updated to store the minimum cost encountered.</li>
+</ul>
+<h4 id="4-calculate-full-price-for-current-needs">
+  4. <strong>Calculate Full Price for Current Needs</strong>
+  <a class="heading-link" href="#4-calculate-full-price-for-current-needs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> mp[needs] <span style="color:#666">=</span> best;
+</span></span></code></pre></div><ul>
+<li>After considering all possible special offers, the function stores the minimum cost found for the current <code>needs</code> in the memoization map <code>mp</code>.</li>
+</ul>
+<h4 id="5-helper-functions">
+  5. <strong>Helper Functions</strong>
+  <a class="heading-link" href="#5-helper-functions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong><code>calculate</code></strong>: This function calculates the cost of fulfilling the current <code>needs</code> without any offers.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">calculate</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>prices, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>needs) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> needs.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> (needs[i] <span style="color:#666">*</span> prices[i]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong><code>add</code></strong>: This function adds the quantities from a special offer to the <code>needs</code> vector.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">add</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>needs, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>sp) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> needs.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        needs[i] <span style="color:#666">+=</span> sp[i];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong><code>sub</code></strong>: This function subtracts the quantities from a special offer from the <code>needs</code> vector.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">sub</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>needs, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>sp) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> needs.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        needs[i] <span style="color:#666">-=</span> sp[i];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong><code>noneg</code></strong>: This function checks if any of the values in the <code>needs</code> vector are negative. If any value is negative, it means the offer cannot be applied, so the function returns false.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">noneg</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>needs) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> needs.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(needs[i] <span style="color:#666">&lt;</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(N^k), where N is the number of different items and k is the maximum number of items needed in any offer. This is because for each state, we may consider multiple offers.</li>
-<li><strong>Space Complexity</strong>: O(m), where m is the size of the needs vector, due to storage in the cache map.</li>
+<li>
+<p><strong>O(n * m * k)</strong>, where:</p>
+<ul>
+<li><code>n</code> is the number of products (size of <code>needs</code> and <code>price</code>),</li>
+<li><code>m</code> is the number of special offers (size of <code>special</code>),</li>
+<li><code>k</code> is the size of the state vector (size of <code>needs</code>).</li>
 </ul>
+<p>The algorithm explores all possible ways to fulfill the <code>needs</code> recursively, while memoizing the results to avoid redundant calculations.</p>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>O(n * k)</strong>, where:</p>
+<ul>
+<li><code>n</code> is the number of products,</li>
+<li><code>k</code> is the size of the state vector (size of <code>needs</code>).</li>
+</ul>
+<p>The space complexity is determined by the memoization map <code>mp</code>, which stores the minimum cost for each unique state of <code>needs</code>.</p>
+</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently calculates the minimum cost to fulfill the shopping needs using dynamic programming and memoization. By recursively exploring all combinations of full price and special offers, we ensure that the minimum cost is obtained. The use of helper functions like <code>sub</code>, <code>add</code>, and <code>noneg</code> ensures that the state transitions (i.e., applying and removing special offers) are correctly handled. This approach allows the solution to scale well even with a large number of products and special offers.</p>
  
 </div>
   

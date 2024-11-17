@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -258,71 +258,155 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-statement">
+  🚀 Problem Statement
+  <a class="heading-link" href="#-problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a non-negative integer <code>num</code>, repeatedly add all its digits until the result has only one digit. Return that single digit.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The solution uses an iterative approach to sum the digits of the number until a single-digit result is obtained:</p>
-<ol>
-<li><strong>Inner Loop</strong>: Extract the last digit using modulo operation and add it to the result <code>res</code>. Divide the number by 10 to remove the last digit.</li>
-<li><strong>Outer Loop</strong>: Continue this process until <code>num</code> becomes a single-digit number (less than or equal to 9).</li>
-<li><strong>Return the Result</strong>: Once <code>num</code> is a single digit, return it.</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
+<p>In this challenge, we are tasked with implementing a function that repeatedly adds the digits of a given integer <code>num</code> until a single digit is obtained. This process is known as the <strong>digit root</strong>. ✨</p>
+<p>For example:</p>
 <ul>
-<li><strong>Input</strong>: A non-negative integer <code>num</code>.</li>
-<li><strong>Output</strong>: The single-digit result obtained by repeatedly adding the digits of <code>num</code>.</li>
-</ul>
-<ol>
-<li>Initialize <code>res</code> to 0.</li>
-<li>While <code>num</code> is greater than 9:
+<li><strong>Input</strong>: <code>num = 38</code></li>
+<li><strong>Output</strong>: <code>2</code>
 <ul>
-<li>Reset <code>res</code> to 0 for each iteration.</li>
-<li>Extract and sum each digit of <code>num</code> using a while loop.</li>
-<li>Update <code>num</code> with the sum of digits stored in <code>res</code>.</li>
+<li>First, sum of digits: 3 + 8 = 11</li>
+<li>Second, sum of digits: 1 + 1 = 2</li>
 </ul>
 </li>
-<li>Return <code>num</code>, which is now a single-digit number.</li>
+</ul>
+<p>Your goal is to create a function that efficiently computes this digit root! 🌟</p>
+<hr>
+<h3 id="-approach">
+  🧠 Approach
+  <a class="heading-link" href="#-approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To solve this problem, we need to repeatedly reduce the number by summing its digits until only a single digit remains. Here&rsquo;s how we can approach it:</p>
+<ol>
+<li><strong>Extract and Sum Digits</strong>: We&rsquo;ll break the number down into its individual digits, sum them, and repeat the process until the result is a single-digit number.</li>
+<li><strong>Termination Condition</strong>: The process stops as soon as the result is less than 10, meaning we have a single digit.</li>
 </ol>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<p>Now, let&rsquo;s dive deeper into the steps needed to implement this solution in an efficient manner. 🧑‍💻</p>
+<hr>
+<h3 id="-step-by-step-code-breakdown">
+  🔨 Step-by-Step Code Breakdown
+  <a class="heading-link" href="#-step-by-step-code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s break down the code step by step to see how this process works! 🛠️</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> addDigits(<span style="color:#0b0;font-weight:bold">int</span> num) {
+</span></span></code></pre></div><ul>
+<li>Here, we define a function <code>addDigits</code> that takes an integer <code>num</code>. Our goal is to reduce this number to a single-digit number by summing its digits repeatedly.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize a variable <code>res</code> to 0. This will temporarily store the sum of the digits in each iteration.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(num <span style="color:#666">&gt;</span> <span style="color:#666">9</span>) {
+</span></span></code></pre></div><ul>
+<li>The <code>while</code> loop runs as long as <code>num</code> is greater than 9. This ensures we keep summing the digits until <code>num</code> is a single digit.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(num <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>                res <span style="color:#666">+=</span> num <span style="color:#666">%</span> <span style="color:#666">10</span>;
+</span></span><span style="display:flex;"><span>                num <span style="color:#666">/=</span> <span style="color:#666">10</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span></code></pre></div><ul>
+<li>
+<p>In the inner loop, we:</p>
+<ol>
+<li><strong>Extract the Last Digit</strong>: <code>num % 10</code> gives the last digit of the number. We add this digit to <code>res</code>.</li>
+<li><strong>Remove the Last Digit</strong>: <code>num /= 10</code> removes the last digit from <code>num</code>.</li>
+</ol>
+</li>
+<li>
+<p>This ensures we sum all digits of <code>num</code> in each iteration.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            num <span style="color:#666">=</span> res;
+</span></span><span style="display:flex;"><span>            res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div><ul>
+<li>After summing the digits, we assign the sum (<code>res</code>) back to <code>num</code>, effectively reducing <code>num</code> to the sum of its digits. We reset <code>res</code> to 0 for the next iteration.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> num;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>The loop continues until <code>num</code> is a single-digit number. Once that happens, we return <code>num</code> as the final digit root. 🏆</li>
+</ul>
+<hr>
+<h3 id="-complexity-analysis">
+  📈 Complexity Analysis
+  <a class="heading-link" href="#-complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s now analyze the performance of our solution! 🔍</p>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(d)</strong>, where <code>d</code> is the number of digits in <code>num</code>. This is because, in the worst case, we need to sum the digits of <code>num</code> multiple times. Each time, the number of digits reduces by a factor of 10 (since the sum of digits is usually smaller than the original number). So, the loop runs a number of times proportional to the number of digits in <code>num</code>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>, constant space. We&rsquo;re only using a few variables (<code>num</code>, <code>res</code>), regardless of the size of the input number. This makes our solution highly space-efficient. 💡</li>
+</ul>
+<hr>
+<h3 id="-conclusion">
+  🏁 Conclusion
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In this solution, we efficiently compute the digit root of a number by repeatedly summing its digits until only one digit remains. Let&rsquo;s quickly recap the key points:</p>
+<h4 id="key-takeaways">
+  Key Takeaways:
+  <a class="heading-link" href="#key-takeaways">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li><strong>Efficient Calculation</strong>: We use a simple iterative approach to sum digits and reduce the number to a single digit.</li>
+<li><strong>Time Complexity</strong>: The time complexity is <strong>O(d)</strong>, where <code>d</code> is the number of digits in the input number. This makes the solution fast even for larger numbers.</li>
+<li><strong>Space Complexity</strong>: Our solution is space-efficient with <strong>O(1)</strong> space complexity, as we only need a few variables.</li>
+<li><strong>Practical</strong>: This method can be useful for problems involving checksums or reducing numbers to a simpler form. 🌱</li>
+</ol>
+<p>By following this approach, you&rsquo;ll be able to quickly reduce any number to its digit root, making it a powerful tool for many number-based problems! 🎯</p>
+<h3 id="-quick-recap">
+  ✨ Quick Recap:
+  <a class="heading-link" href="#-quick-recap">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity</strong>: (O(\log n)) because the number of digits in <code>num</code> reduces in each iteration.</li>
-<li><strong>Space Complexity</strong>: (O(1)) as no additional space is used other than a few variables.</li>
+<li><strong>Time</strong>: O(d) ⏱️</li>
+<li><strong>Space</strong>: O(1) 💡</li>
+<li><strong>Solution</strong>: Repeated digit summing!</li>
 </ul>
-<h3 id="edge-cases">
-  Edge Cases
-  <a class="heading-link" href="#edge-cases">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ol>
-<li><strong>Single Digit</strong>: If <code>num</code> is already a single digit, it is returned as is.</li>
-<li><strong>Zero</strong>: If <code>num</code> is <code>0</code>, it is also returned immediately.</li>
-</ol>
+<p>Keep practicing, and you&rsquo;ll become a pro at solving such number-based challenges! 💪🎉</p>
  
 </div>
   

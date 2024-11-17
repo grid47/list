@@ -197,7 +197,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -255,7 +255,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer <code>n</code>, representing the length of a 2xN board, determine the number of ways to completely tile the board using 1x2 dominoes and 2x1 trominoes. The result should be returned modulo (10^9 + 7).</p>
+<p>The problem at hand is to calculate the number of ways to tile a <code>2 x n</code> grid using dominoes (2x1 tiles) and trominoes (2x2 tiles). The solution must return the result modulo <code>10^9 + 7</code>. This problem is a variation of the famous &ldquo;domino tiling problem&rdquo; and requires the computation of different ways to tile the grid based on the size of <code>n</code>.</p>
+<p>Given <code>n</code>, the number of columns in the grid, we are tasked with determining the number of ways to fill the entire grid with dominoes and trominoes, under the constraint that the grid dimensions are <code>2 x n</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -263,75 +264,154 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The problem is a classical dynamic programming problem. To break it down efficiently, we observe a pattern in the number of ways to tile grids of different sizes. Let&rsquo;s define a function <code>dp(n)</code> that represents the number of ways to tile a <code>2 x n</code> grid.</p>
+<p>We can approach this problem by considering the following:</p>
 <ol>
 <li>
-<p><strong>Dynamic Programming</strong>:</p>
+<p><strong>Base Cases</strong>:</p>
 <ul>
-<li>Use a dynamic programming array <code>v</code> where <code>v[i]</code> represents the number of ways to tile a 2x(i) board.</li>
-<li>The base cases are:
-<ul>
-<li><code>v[1] = 1</code>: One way to tile a 2x1 board (one domino).</li>
-<li><code>v[2] = 2</code>: Two ways to tile a 2x2 board (two vertical dominoes or two horizontal dominoes).</li>
-<li><code>v[3] = 5</code>: Five ways to tile a 2x3 board.</li>
-</ul>
-</li>
+<li>A <code>2 x 1</code> grid can only be tiled in one way (using a single domino). Thus, <code>dp(1) = 1</code>.</li>
+<li>A <code>2 x 2</code> grid can be tiled in two ways: two dominoes (vertically) or one tromino. Thus, <code>dp(2) = 2</code>.</li>
+<li>A <code>2 x 3</code> grid can be tiled in five ways, using combinations of dominoes and trominoes. Thus, <code>dp(3) = 5</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Recurrence Relation</strong>:</p>
+<p><strong>Recursive Formula</strong>:
+For <code>n &gt; 3</code>, we can deduce that:</p>
 <ul>
-<li>For (i \geq 4), the number of ways to tile a 2x(i) board can be expressed as:
+<li>You can always add a vertical domino to a <code>2 x (n-1)</code> grid.</li>
+<li>Alternatively, you can add two horizontal dominoes to a <code>2 x (n-2)</code> grid.</li>
+<li>You can also add a tromino (which covers a <code>2 x 2</code> area) to a <code>2 x (n-3)</code> grid.</li>
+</ul>
+<p>This leads to the recursive relation:
 [
-v[i] = 2 \cdot v[i - 1] + v[i - 3]
-]</li>
-<li>This relation accounts for the different placements of the last tiles.</li>
+dp(n) = 2 \times dp(n-1) + dp(n-3)
+]
+The reasoning behind this formula is:</p>
+<ul>
+<li>The term <code>2 \times dp(n-1)</code> accounts for placing a vertical domino and then solving the problem for a grid of size <code>2 x (n-1)</code>.</li>
+<li>The term <code>dp(n-3)</code> corresponds to placing a tromino and solving the problem for a grid of size <code>2 x (n-3)</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Modulo Operation</strong>:</p>
+<p><strong>Modulo Operation</strong>:
+Since the result can grow very large, we compute the result modulo <code>10^9 + 7</code> to prevent integer overflow and ensure the result fits within standard integer limits.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s walk through the code line by line to understand how the dynamic programming approach is implemented:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> numTilings(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mod <span style="color:#666">=</span> <span style="color:#666">1e9</span> <span style="color:#666">+</span> <span style="color:#666">7</span>;  <span style="color:#080;font-style:italic">// Define the modulus for large number handling
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> v(<span style="color:#666">10001</span>, <span style="color:#666">0</span>);  <span style="color:#080;font-style:italic">// Create a vector to store the DP values, initialized to 0
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        v[<span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#666">1</span>;  <span style="color:#080;font-style:italic">// Base case: 1 way to tile a 2x1 grid
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        v[<span style="color:#666">2</span>] <span style="color:#666">=</span> <span style="color:#666">2</span>;  <span style="color:#080;font-style:italic">// Base case: 2 ways to tile a 2x2 grid
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        v[<span style="color:#666">3</span>] <span style="color:#666">=</span> <span style="color:#666">5</span>;  <span style="color:#080;font-style:italic">// Base case: 5 ways to tile a 2x3 grid
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">&lt;=</span> <span style="color:#666">3</span>) <span style="color:#a2f;font-weight:bold">return</span> v[n];  <span style="color:#080;font-style:italic">// If n is 3 or less, directly return the precomputed value
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">4</span>; i <span style="color:#666">&lt;=</span> n; i<span style="color:#666">++</span>) {  <span style="color:#080;font-style:italic">// Loop to fill the DP table for values n &gt;= 4
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            v[i] <span style="color:#666">=</span> (<span style="color:#666">2</span> <span style="color:#666">*</span> v[i<span style="color:#666">-</span><span style="color:#666">1</span>] <span style="color:#666">+</span> v[i<span style="color:#666">-</span><span style="color:#666">3</span>]);  <span style="color:#080;font-style:italic">// Apply the recurrence relation
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            v[i] <span style="color:#666">%=</span> mod;  <span style="color:#080;font-style:italic">// Take the result modulo 10^9 + 7 to prevent overflow
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> v[n];  <span style="color:#080;font-style:italic">// Return the result for dp(n)
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h3 id="explanation-of-the-code">
+  Explanation of the Code
+  <a class="heading-link" href="#explanation-of-the-code">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
 <ul>
-<li>Since the result can be large, use modulo (10^9 + 7) during calculations to prevent overflow.</li>
+<li>We define a large modulus value <code>mod = 1e9 + 7</code> to handle large results and prevent overflow.</li>
+<li>We initialize a vector <code>v</code> of size 10001 (which covers all possible values of <code>n</code> up to the maximum value of <code>n = 10000</code>). This vector is used to store the computed results for each <code>n</code>. It is initialized with all zeros.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Case Setup</strong>:</p>
+<ul>
+<li><code>v[1] = 1</code>: There is only one way to tile a <code>2 x 1</code> grid.</li>
+<li><code>v[2] = 2</code>: There are two ways to tile a <code>2 x 2</code> grid (either two vertical dominoes or one tromino).</li>
+<li><code>v[3] = 5</code>: There are five ways to tile a <code>2 x 3</code> grid.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling Small Values of <code>n</code></strong>:</p>
+<ul>
+<li>If <code>n</code> is 1, 2, or 3, the function immediately returns the precomputed value from the <code>v</code> vector.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterative Calculation</strong>:</p>
+<ul>
+<li>The loop iterates from <code>i = 4</code> to <code>n</code>, applying the recurrence relation for each <code>i</code>:
+[
+dp(i) = 2 \times dp(i-1) + dp(i-3)
+]</li>
+<li>The result is taken modulo <code>10^9 + 7</code> after each calculation to prevent the value from growing too large.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Result</strong>:</p>
+<ul>
+<li>After the loop completes, the value <code>v[n]</code> contains the number of ways to tile a <code>2 x n</code> grid, which is then returned.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li><strong>Class</strong>:
-<ul>
-<li><code>class Solution</code>: Contains the method to compute the number of tilings.
-<ul>
-<li><code>int numTilings(int n)</code>: Main function that calculates the number of ways to tile a 2xN board.
-<ul>
-<li><strong>Parameters</strong>:
-<ul>
-<li><code>n</code>: Length of the board.</li>
-</ul>
+<li>
+<p><strong>Time Complexity</strong>:
+The time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the input value. The loop iterates from <code>i = 4</code> to <code>n</code>, and each iteration performs constant-time operations: the recurrence calculation and modulo operation.</p>
+<p>Thus, the overall time complexity is linear in terms of <code>n</code>, i.e., <strong>O(n)</strong>.</p>
 </li>
-<li><strong>Returns</strong>: The number of ways to tile the board modulo (10^9 + 7).</li>
-</ul>
+<li>
+<p><strong>Space Complexity</strong>:
+The space complexity is <strong>O(n)</strong> because the solution uses a vector <code>v</code> of size <code>n</code> to store the results of the dynamic programming computation. Since the size of <code>n</code> is constrained by the problem, this space usage is efficient.</p>
 </li>
 </ul>
-</li>
-</ul>
-</li>
-</ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This solution provides an efficient and elegant way to solve the tiling problem using dynamic programming. By leveraging a recurrence relation and storing intermediate results, we can compute the number of ways to tile a <code>2 x n</code> grid in linear time. The space complexity is also linear, making this solution both time-efficient and space-efficient.</p>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where (n) is the length of the board, as we iterate from 4 to (n) to fill the dynamic programming array.</li>
-<li><strong>Space Complexity</strong>: O(n), due to the storage of the dynamic programming array.</li>
+<li>
+<p><strong>Key Takeaways</strong>:</p>
+<ul>
+<li>The solution uses dynamic programming to build up the number of ways to tile grids of increasing size.</li>
+<li>The recurrence relation is based on adding vertical dominoes, horizontal dominoes, and trominoes to smaller subproblems.</li>
+<li>The result is computed modulo <code>10^9 + 7</code> to handle large values and prevent overflow.</li>
 </ul>
+</li>
+<li>
+<p><strong>Efficiency</strong>:</p>
+<ul>
+<li><strong>Time Complexity</strong>: O(n), where <code>n</code> is the size of the grid.</li>
+<li><strong>Space Complexity</strong>: O(n), storing intermediate results.</li>
+</ul>
+</li>
+</ul>
+<p>This solution is optimal for the problem and works efficiently within the given constraints.</p>
  
 </div>
   

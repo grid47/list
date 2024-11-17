@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              4-minute read
             </span>
           </div>
 
@@ -263,27 +263,160 @@
 
   
   <div class="markdown-body">
-    <p>class Solution {
-public:
-int uniquePathsWithObstacles(vector&lt;vector<!-- raw HTML omitted -->&gt;&amp; grid) {</p>
-<pre><code>    int m = grid.size(), n = grid[0].size();
-    vector&lt;vector&lt;int&gt;&gt; dp(m, vector&lt;int&gt;(n, 0));
-    
-    dp[0][0] = grid[0][0] == 1? 0: 1;
-    
-    for(int i = 0; i &lt; m; i++)
-    for(int j = 0; j &lt; n; j++) {
-        
-        if(grid[i][j] != 1) {
-            dp[i][j] += ((i &gt; 0 &amp;&amp; grid[i - 1][j] == 0)? dp[i - 1][j]: 0) +
-                    ((j &gt; 0 &amp;&amp; grid[i][j - 1] == 0)? dp[i][j - 1]: 0);
-        }
-        
-    }
-    return dp[m - 1][n - 1];
-}
-</code></pre>
-<p>};</p>
+    <h3 id="-unique-paths-with-obstacles">
+  🚶‍♂️ <strong>Unique Paths with Obstacles</strong>
+  <a class="heading-link" href="#-unique-paths-with-obstacles">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is to find the total number of unique paths in an <code>m x n</code> grid from the top-left corner <code>(0, 0)</code> to the bottom-right corner <code>(m-1, n-1)</code>, while avoiding obstacles. In this grid:</p>
+<ul>
+<li>Cells with obstacles are represented by <code>1</code>s and cannot be traversed.</li>
+<li>Cells without obstacles are represented by <code>0</code>s and are free to move through.</li>
+<li>Movement is restricted to either moving down or right at each step.</li>
+</ul>
+<h3 id="-approach">
+  🧠 <strong>Approach</strong>
+  <a class="heading-link" href="#-approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This problem is solved using <strong>dynamic programming (DP)</strong> while considering obstacles in the grid.</p>
+<h4 id="key-observations">
+  Key Observations:
+  <a class="heading-link" href="#key-observations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Starting Point</strong>:</p>
+<ul>
+<li>If the starting cell <code>(0, 0)</code> contains an obstacle, there are <code>0</code> ways to reach any destination, so the function immediately returns <code>0</code> paths.</li>
+</ul>
+</li>
+<li>
+<p><strong>DP Initialization</strong>:</p>
+<ul>
+<li>We create a <code>dp</code> table where <code>dp[i][j]</code> represents the number of unique ways to reach cell <code>(i, j)</code> from the starting point <code>(0, 0)</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Cases</strong>:</p>
+<ul>
+<li>If the starting cell <code>(0, 0)</code> is free of obstacles, initialize it to <code>1</code> in <code>dp</code>, indicating one way to start at that position.</li>
+<li>For cells in the first row and the first column, they can only be reached if there are no obstacles in their respective rows or columns. If any cell has an obstacle, all subsequent cells in that row or column will have <code>0</code> paths.</li>
+</ul>
+</li>
+<li>
+<p><strong>Filling the DP Table</strong>:</p>
+<ul>
+<li>For each cell <code>(i, j)</code>, if it is free of obstacles (i.e., <code>grid[i][j] == 0</code>), the value of <code>dp[i][j]</code> is the sum of the values from the top cell <code>(i-1, j)</code> and the left cell <code>(i, j-1)</code>, as these are the only two directions from which you can arrive.</li>
+<li>If a cell contains an obstacle (<code>grid[i][j] == 1</code>), then <code>dp[i][j]</code> is set to <code>0</code> since it is not reachable.</li>
+</ul>
+</li>
+</ol>
+<h3 id="-code-breakdown">
+  🔍 <strong>Code Breakdown</strong>
+  <a class="heading-link" href="#-code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-initialize-dp-table">
+  Step 1: Initialize DP Table
+  <a class="heading-link" href="#step-1-initialize-dp-table">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> dp(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">0</span>));
+</span></span></code></pre></div><ul>
+<li>A 2D <code>dp</code> table of size <code>m x n</code> is initialized with <code>0</code>s, representing the paths to each cell.</li>
+</ul>
+<h4 id="step-2-set-the-starting-point">
+  Step 2: Set the Starting Point
+  <a class="heading-link" href="#step-2-set-the-starting-point">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>dp[<span style="color:#666">0</span>][<span style="color:#666">0</span>] <span style="color:#666">=</span> grid[<span style="color:#666">0</span>][<span style="color:#666">0</span>] <span style="color:#666">==</span> <span style="color:#666">1</span> <span style="color:#666">?</span> <span style="color:#666">0</span> <span style="color:#666">:</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div><ul>
+<li>The top-left corner <code>dp[0][0]</code> is set to <code>1</code> if there’s no obstacle; otherwise, it is set to <code>0</code>, as no paths are possible.</li>
+</ul>
+<h4 id="step-3-fill-the-dp-table">
+  Step 3: Fill the DP Table
+  <a class="heading-link" href="#step-3-fill-the-dp-table">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">!=</span> <span style="color:#666">1</span>) {
+</span></span><span style="display:flex;"><span>            dp[i][j] <span style="color:#666">+=</span> ((i <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> grid[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j] <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#666">?</span> dp[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j] <span style="color:#666">:</span> <span style="color:#666">0</span>) <span style="color:#666">+</span>
+</span></span><span style="display:flex;"><span>                        ((j <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> grid[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#666">?</span> dp[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">:</span> <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>For each cell <code>(i, j)</code>:
+<ul>
+<li>If there is no obstacle, the number of ways to reach that cell is the sum of the ways from the top (<code>dp[i - 1][j]</code>) and from the left (<code>dp[i][j - 1]</code>), if those cells are also free of obstacles.</li>
+<li>If a cell contains an obstacle (<code>grid[i][j] == 1</code>), the value for that cell in the DP table is set to <code>0</code>, indicating it is not reachable.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-4-return-the-final-answer">
+  Step 4: Return the Final Answer
+  <a class="heading-link" href="#step-4-return-the-final-answer">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> dp[m <span style="color:#666">-</span> <span style="color:#666">1</span>][n <span style="color:#666">-</span> <span style="color:#666">1</span>];
+</span></span></code></pre></div><ul>
+<li>The final result at <code>dp[m-1][n-1]</code> contains the total number of unique paths to the destination, considering any obstacles in the grid.</li>
+</ul>
+<h3 id="-complexity-analysis">
+  📊 <strong>Complexity Analysis</strong>
+  <a class="heading-link" href="#-complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(m * n):</strong> We iterate through every cell in the <code>m x n</code> grid once, resulting in a time complexity of <code>O(m * n)</code>.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(m * n):</strong> The <code>dp</code> table requires <code>O(m * n)</code> space to store the number of unique paths for each cell.</li>
+</ul>
+<h3 id="-conclusion">
+  🌟 <strong>Conclusion</strong>
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This dynamic programming solution efficiently calculates the number of unique paths from the top-left to the bottom-right of a grid, while considering obstacles. By using previously computed paths, the solution avoids redundant calculations, ensuring optimal performance even for grids with obstacles. This approach dynamically adapts based on obstacle positions, providing a robust solution for pathfinding in grid-based problems.</p>
+<hr>
  
 </div>
   

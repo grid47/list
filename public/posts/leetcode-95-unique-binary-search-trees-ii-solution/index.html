@@ -217,7 +217,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -319,81 +319,182 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-overview-generate-unique-binary-search-trees-bsts">
+  🌳 <strong>Problem Overview: Generate Unique Binary Search Trees (BSTs)</strong>
+  <a class="heading-link" href="#-problem-overview-generate-unique-binary-search-trees-bsts">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer <code>n</code>, generate all structurally unique binary search trees (BSTs) that store values from <code>1</code> to <code>n</code>. Each unique BST should maintain the BST property where nodes to the left are smaller and nodes to the right are larger than the root.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>You are asked to generate all unique binary search trees (BSTs) that can be constructed using integers from <code>1</code> to <code>n</code>. A binary search tree is structured such that:</p>
+<ul>
+<li>Each node has at most two children.</li>
+<li>The left child’s value is smaller than the parent node.</li>
+<li>The right child’s value is greater than the parent node.</li>
+</ul>
+<p>Given an integer <code>n</code>, your goal is to return all structurally unique BSTs using the numbers <code>1</code> to <code>n</code>.</p>
+<hr>
+<h3 id="-step-1-treenode-structure">
+  🧑‍💻 <strong>Step 1: TreeNode Structure</strong>
+  <a class="heading-link" href="#-step-1-treenode-structure">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>This solution employs recursion with dynamic generation of subtrees:</p>
+<p>First, define the <code>TreeNode</code> structure to represent each node in the tree. Each node contains a value (<code>val</code>), a pointer to its left child, and a pointer to its right child.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">struct</span> <span style="color:#00f">TreeNode</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> val;           <span style="color:#080;font-style:italic">// Value of the node
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    TreeNode <span style="color:#666">*</span>left;    <span style="color:#080;font-style:italic">// Pointer to the left child node
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    TreeNode <span style="color:#666">*</span>right;   <span style="color:#080;font-style:italic">// Pointer to the right child node
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Constructor with no arguments initializes to 0, nullptr for children
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    TreeNode() <span style="color:#666">:</span> val(<span style="color:#666">0</span>), left(<span style="color:#a2f;font-weight:bold">nullptr</span>), right(<span style="color:#a2f;font-weight:bold">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Constructor with the node&#39;s value
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    TreeNode(<span style="color:#0b0;font-weight:bold">int</span> x) <span style="color:#666">:</span> val(x), left(<span style="color:#a2f;font-weight:bold">nullptr</span>), right(<span style="color:#a2f;font-weight:bold">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Constructor with value, left child, and right child
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    TreeNode(<span style="color:#0b0;font-weight:bold">int</span> x, TreeNode <span style="color:#666">*</span>left, TreeNode <span style="color:#666">*</span>right) <span style="color:#666">:</span> val(x), left(left), right(right) {}
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><hr>
+<h3 id="-step-2-recursive-helper-function-run">
+  🔄 <strong>Step 2: Recursive Helper Function (<code>run</code>)</strong>
+  <a class="heading-link" href="#-step-2-recursive-helper-function-run">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>run</code> function is responsible for generating all possible binary search trees for a given range of values <code>[l, r]</code>. It is a recursive function that splits the range into smaller subranges, choosing each number as the root and recursively generating the left and right subtrees.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> run(<span style="color:#0b0;font-weight:bold">int</span> l, <span style="color:#0b0;font-weight:bold">int</span> r) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> ans, left, right;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Base case: If no numbers in the range, return NULL
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">if</span> (l <span style="color:#666">&gt;=</span> r) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (l <span style="color:#666">==</span> r) ans.push_back(<span style="color:#a2f;font-weight:bold">new</span> TreeNode(l));  <span style="color:#080;font-style:italic">// Single node tree
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">else</span> ans.push_back(<span style="color:#a2f">NULL</span>);  <span style="color:#080;font-style:italic">// No tree possible (empty range)
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Try each number i as the root of the tree
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> l; i <span style="color:#666">&lt;=</span> r; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// Recursively generate all left subtrees for the range [l, i-1]
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        left <span style="color:#666">=</span> run(l, i <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// Recursively generate all right subtrees for the range [i+1, r]
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        right <span style="color:#666">=</span> run(i <span style="color:#666">+</span> <span style="color:#666">1</span>, r);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// Combine each left and right subtree with the root i
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> left.size(); j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> k <span style="color:#666">=</span> <span style="color:#666">0</span>; k <span style="color:#666">&lt;</span> right.size(); k<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>                TreeNode<span style="color:#666">*</span> node <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TreeNode(i);   <span style="color:#080;font-style:italic">// Create a new node with value i
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                node<span style="color:#666">-&gt;</span>left <span style="color:#666">=</span> left[j];                <span style="color:#080;font-style:italic">// Attach the left subtree
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                node<span style="color:#666">-&gt;</span>right <span style="color:#666">=</span> right[k];              <span style="color:#080;font-style:italic">// Attach the right subtree
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                ans.push_back(node);                 <span style="color:#080;font-style:italic">// Add the tree to the result
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;  <span style="color:#080;font-style:italic">// Return all unique trees for the range [l, r]
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
+</span></span></code></pre></div><hr>
+<h3 id="-step-3-main-function-generatetrees">
+  🧑‍💻 <strong>Step 3: Main Function (<code>generateTrees</code>)</strong>
+  <a class="heading-link" href="#-step-3-main-function-generatetrees">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Now, we will define the main function <code>generateTrees</code> that will call the <code>run</code> function to generate all unique BSTs for the numbers from <code>1</code> to <code>n</code>.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> generateTrees(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> ans;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Iterate over each number from 1 to n as the root
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// Generate all left subtrees for the range [1, i-1]
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        vector<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> left <span style="color:#666">=</span> run(<span style="color:#666">1</span>, i <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// Generate all right subtrees for the range [i+1, n]
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        vector<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> right <span style="color:#666">=</span> run(i <span style="color:#666">+</span> <span style="color:#666">1</span>, n);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// Combine each left and right subtree with root i
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> left.size(); j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> k <span style="color:#666">=</span> <span style="color:#666">0</span>; k <span style="color:#666">&lt;</span> right.size(); k<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>                TreeNode<span style="color:#666">*</span> node <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TreeNode(i);  <span style="color:#080;font-style:italic">// Root node with value i
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                node<span style="color:#666">-&gt;</span>left <span style="color:#666">=</span> left[j];               <span style="color:#080;font-style:italic">// Attach the left subtree
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                node<span style="color:#666">-&gt;</span>right <span style="color:#666">=</span> right[k];             <span style="color:#080;font-style:italic">// Attach the right subtree
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                ans.push_back(node);                <span style="color:#080;font-style:italic">// Add the tree to the result
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;  <span style="color:#080;font-style:italic">// Return all unique BSTs for the numbers 1 to n
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
+</span></span></code></pre></div><hr>
+<h3 id="-explanation-of-the-approach">
+  💡 <strong>Explanation of the Approach</strong>
+  <a class="heading-link" href="#-explanation-of-the-approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
 <ol>
-<li><strong>Recursive Helper Function</strong> <code>run(l, r)</code>:
+<li>
+<p><strong>Base Case for Recursion:</strong></p>
 <ul>
-<li>Given a range <code>[l, r]</code>, this function returns all unique BSTs possible with node values in that range.</li>
-<li><strong>Base Case</strong>: If <code>l &gt; r</code>, return a vector containing <code>NULL</code>, representing an empty subtree.</li>
-<li><strong>Single Node Tree</strong>: If <code>l == r</code>, create a single-node tree and return it.</li>
-<li><strong>Recursive Construction</strong>:
-<ul>
-<li>For each <code>i</code> in <code>[l, r]</code>, consider <code>i</code> as the root:
-<ul>
-<li>Recursively generate all possible left subtrees with nodes in <code>[l, i - 1]</code>.</li>
-<li>Recursively generate all possible right subtrees with nodes in <code>[i + 1, r]</code>.</li>
-<li>Combine each left subtree with each right subtree by setting <code>i</code> as the root.</li>
+<li>If the range <code>[l, r]</code> has no numbers (i.e., <code>l &gt;= r</code>), we return a list containing <code>NULL</code> (no tree possible). If there is exactly one number, we create a single node tree.</li>
 </ul>
 </li>
-</ul>
-</li>
-</ul>
-</li>
-<li><strong>Main Function</strong> <code>generateTrees(n)</code>:
+<li>
+<p><strong>Recursive Exploration:</strong></p>
 <ul>
-<li>Loop through each value in <code>[1, n]</code> as a potential root.</li>
-<li>For each root <code>i</code>, generate possible left and right subtrees and connect them to form all unique BSTs.</li>
+<li>For each number <code>i</code> from <code>l</code> to <code>r</code>, treat <code>i</code> as the root of the tree.</li>
+<li>The left subtree is generated recursively from the range <code>[l, i-1]</code>, and the right subtree is generated recursively from the range <code>[i+1, r]</code>.</li>
+<li>Each combination of left and right subtrees is attached to the root <code>i</code>, and the resulting tree is added to the answer.</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Function:</strong></p>
+<ul>
+<li>The main function loops through each number <code>i</code> from <code>1</code> to <code>n</code> and generates all possible left and right subtrees using the <code>run</code> function. For each combination of left and right subtrees, a new tree is formed with <code>i</code> as the root.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<hr>
+<h3 id="-time-and-space-complexity">
+  ⏱️ <strong>Time and Space Complexity</strong>
+  <a class="heading-link" href="#-time-and-space-complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Base Cases in <code>run(l, r)</code></strong>:
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity is approximately <strong>O(4^n / √n)</strong> due to the recursive structure and the number of possible unique BSTs, which is related to the <strong>Catalan number</strong>. The complexity arises from the fact that there are <strong>O(C_n)</strong> unique BSTs for <code>n</code> nodes, where <code>C_n</code> is the nth Catalan number.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is also <strong>O(4^n / √n)</strong>, which accounts for:</p>
 <ul>
-<li>If the range is empty, return <code>NULL</code>.</li>
-<li>If the range has a single node, return a tree with that single node.</li>
+<li>The storage of the generated trees.</li>
+<li>The recursive call stack due to the function calls.</li>
 </ul>
-</li>
-<li><strong>Loop Over Each Root</strong>:
-<ul>
-<li>For each potential root, recursively build left and right subtrees.</li>
-<li>Combine each left and right subtree with the root to form a BST.</li>
-</ul>
-</li>
-<li><strong>Result</strong>: The <code>generateTrees(n)</code> function returns a vector of all unique BSTs for values from <code>1</code> to <code>n</code>.</li>
-</ol>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<hr>
+<h3 id="-conclusion">
+  🏁 <strong>Conclusion</strong>
+  <a class="heading-link" href="#-conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: (O(4^n / \sqrt{n})) due to the recursive generation of Catalan numbers, as each unique BST corresponds to a unique structure.</li>
-<li><strong>Space Complexity</strong>: (O(4^n / \sqrt{n})), considering storage of each unique BST structure.</li>
-</ul>
+<p>This problem is a great exercise in recursive tree construction and combinatorics. By recursively splitting the range of numbers into smaller subranges and using <strong>Catalan numbers</strong> to guide tree generation, we can efficiently compute all unique BSTs for any given <code>n</code>. Although the complexity grows exponentially, this approach is optimal for small to moderate values of <code>n</code>.</p>
+<hr>
  
 </div>
   

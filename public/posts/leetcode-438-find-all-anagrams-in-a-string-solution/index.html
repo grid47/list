@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -216,7 +216,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1150s0hbhb">
+        <h2 id="hahahugoshortcode1158s0hbhb">
   <a href="https://leetcode.com/problems/find-all-anagrams-in-a-string/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -231,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1150s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1158s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -255,7 +255,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1150s2hbhb">
+<h2 id="hahahugoshortcode1158s2hbhb">
   
 
   
@@ -267,7 +267,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given two strings <code>s</code> and <code>p</code>, find all the start indices of <code>p</code>&rsquo;s anagrams in <code>s</code>. You may return the answer in any order.</p>
+<p>The task is to find all the starting indices of anagrams of a string <code>p</code> within another string <code>s</code>. An anagram of a string is a rearrangement of its characters. For example, the anagrams of &ldquo;abc&rdquo; are &ldquo;abc&rdquo;, &ldquo;acb&rdquo;, &ldquo;bac&rdquo;, &ldquo;bca&rdquo;, &ldquo;cab&rdquo;, and &ldquo;cba&rdquo;. Given two strings <code>s</code> and <code>p</code>, you need to return the list of start indices of <code>p</code>&rsquo;s anagrams in <code>s</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -275,83 +275,121 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Character Count Arrays</strong>:</p>
+<p>To solve this problem, we will use a <strong>sliding window</strong> approach combined with <strong>frequency counting</strong>. The sliding window allows us to efficiently check substrings of length <code>p.length()</code> within <code>s</code> as we move across the string. Frequency counting helps us determine whether a substring of <code>s</code> is an anagram of <code>p</code>.</p>
+<p>The core idea is:</p>
 <ul>
-<li>Use two arrays of size 26 to count the frequency of characters in <code>p</code> and the current window in <code>s</code>.</li>
+<li>Both the strings <code>s</code> and <code>p</code> consist of lowercase English letters, so we can use an array of size 26 to count the frequency of each character in the strings.</li>
+<li>The sliding window will check each substring of <code>s</code> that has the same length as <code>p</code>, adjusting the frequency counts as the window slides across the string.</li>
+<li>If the frequency count of the current window matches the frequency count of <code>p</code>, it means the substring is an anagram of <code>p</code>.</li>
 </ul>
-</li>
-<li>
-<p><strong>Sliding Window Technique</strong>:</p>
-<ul>
-<li>Iterate through string <code>s</code> using a sliding window of size equal to the length of <code>p</code>.</li>
-<li>Maintain the frequency count of characters in the current window.</li>
-<li>Adjust the count as the window moves by removing the character that is left behind and adding the new character that enters the window.</li>
-</ul>
-</li>
-<li>
-<p><strong>Comparison</strong>:</p>
-<ul>
-<li>After adjusting the character counts for the current window, compare the counts of <code>s</code> and <code>p</code>. If they match, it means the current window is an anagram of <code>p</code>.</li>
-</ul>
-</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ol>
-<li>
-<p><strong>Count Initialization</strong>:</p>
+<li><strong>Initialization</strong>:
 <ul>
-<li>Count the occurrences of each character in <code>p</code> using the <code>pc</code> array.</li>
-</ul>
-</li>
-<li>
-<p><strong>Sliding Window Execution</strong>:</p>
-<ul>
-<li>Traverse through <code>s</code> with a for loop.</li>
-<li>For each character in <code>s</code>, update the <code>sc</code> array:
-<ul>
-<li>Decrement the count of the character that is sliding out of the window.</li>
-<li>Increment the count of the character that is sliding into the window.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Anagram Check</strong>:</p>
-<ul>
-<li>If the character counts of <code>sc</code> and <code>pc</code> are equal, store the starting index of the anagram in the result vector.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>Return the list of starting indices where anagrams of <code>p</code> are found in <code>s</code>.</li>
+<li>First, we initialize two vectors <code>pc</code> and <code>sc</code> to store the frequency counts of characters for <code>p</code> and the current sliding window in <code>s</code>. Each vector has 26 elements (one for each letter of the alphabet), initialized to 0.</li>
+<li>We also initialize an empty vector <code>ans</code> to store the indices where anagrams are found.</li>
 </ul>
 </li>
 </ol>
-<h3 id="complexity">
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> pc(<span style="color:#666">26</span>, <span style="color:#666">0</span>), sc(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: p)
+</span></span><span style="display:flex;"><span>    pc[x <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;
+</span></span></code></pre></div><ul>
+<li>The above code initializes the frequency vector <code>pc</code> for string <code>p</code>. We loop over each character in <code>p</code> and increment its corresponding index in the <code>pc</code> array (using <code>x - 'a'</code> to map the character to its index in the alphabet).</li>
+</ul>
+<ol start="2">
+<li><strong>Sliding Window</strong>:
+<ul>
+<li>We use a for-loop to iterate through the string <code>s</code> and build the sliding window:</li>
+<li>If the current window size exceeds the length of <code>p</code>, we adjust the sliding window by removing the leftmost character from the window (i.e., decrementing the frequency count of the character that’s leaving the window).</li>
+<li>We then add the new character at the right end of the window.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">&gt;=</span> p.size()) {
+</span></span><span style="display:flex;"><span>        sc[s[i <span style="color:#666">-</span> p.size()] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    sc[s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;
+</span></span></code></pre></div><ul>
+<li>In the above code:
+<ul>
+<li>If the index <code>i</code> is greater than or equal to the length of <code>p</code>, we reduce the count of the character at index <code>i - p.size()</code>, effectively sliding the window.</li>
+<li>We then increment the count of the character at index <code>i</code> to include the new character in the window.</li>
+</ul>
+</li>
+</ul>
+<ol start="3">
+<li><strong>Checking for Anagram</strong>:
+<ul>
+<li>After updating the frequency count for the current window, we check if the frequency count <code>sc</code> of the current window matches the frequency count <code>pc</code> of string <code>p</code>.</li>
+<li>If the counts match, it means that the current window is an anagram of <code>p</code>, so we add the start index of the window to the result vector <code>ans</code>.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (sc <span style="color:#666">==</span> pc)
+</span></span><span style="display:flex;"><span>    ans.push_back(i <span style="color:#666">-</span> p.size() <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span></code></pre></div><ul>
+<li>Here, <code>sc == pc</code> checks if the current window is an anagram of <code>p</code>. If the counts are equal, we push the index of the start of the window (<code>i - p.size() + 1</code>) into the result list <code>ans</code>.</li>
+</ul>
+<ol start="4">
+<li><strong>Return Result</strong>:
+<ul>
+<li>After iterating through the entire string <code>s</code>, we return the <code>ans</code> vector, which contains all the start indices of the anagrams of <code>p</code> found in <code>s</code>.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div><h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(N), where N is the length of string <code>s</code>. Each character is processed at most twice.</li>
-<li><strong>Space Complexity</strong>: O(1), since the size of the character count arrays is constant (26).</li>
+<li><strong>Building the Frequency Count</strong>: The frequency count for <code>p</code> is computed in <code>O(m)</code>, where <code>m</code> is the length of <code>p</code>.</li>
+<li><strong>Sliding Window</strong>: The sliding window runs for every character in <code>s</code>. For each character, the frequency array update takes constant time, <code>O(1)</code>. Thus, iterating over <code>s</code> takes <code>O(n)</code>, where <code>n</code> is the length of <code>s</code>.</li>
+<li><strong>Comparison of Frequency Arrays</strong>: Comparing the frequency arrays <code>sc</code> and <code>pc</code> also takes constant time <code>O(26)</code> because the arrays are of fixed size (26 for the 26 letters of the alphabet).</li>
+<li><strong>Overall Time Complexity</strong>: The total time complexity is <code>O(n + m)</code>, where <code>n</code> is the length of <code>s</code> and <code>m</code> is the length of <code>p</code>. This is efficient because we only need to traverse <code>s</code> once and perform constant-time operations for each character.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We use two arrays of size 26 to store the frequency counts for <code>p</code> and the sliding window in <code>s</code>. Thus, the space complexity is <code>O(26)</code>, which simplifies to <code>O(1)</code> because it is a constant space usage.</li>
+<li>Additionally, we store the result in the <code>ans</code> vector, but the space used by <code>ans</code> depends on the number of anagrams found, which could be up to <code>n - m + 1</code> in the worst case. Thus, the space complexity is <code>O(n)</code> for storing the result.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently finds all starting indices of anagrams of <code>p</code> in <code>s</code> using the sliding window technique with frequency counting. By maintaining frequency counts for both the target string <code>p</code> and the current sliding window in <code>s</code>, the solution checks for anagrams in linear time, making it suitable for large strings. The overall time complexity of <code>O(n + m)</code> ensures that the algorithm can handle typical input sizes effectively. The solution is space-efficient, using only constant extra space for frequency counting, with the result space depending on the number of found anagrams.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1150s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1158s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

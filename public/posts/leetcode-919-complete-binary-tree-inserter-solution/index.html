@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -278,7 +278,11 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Design a complete binary tree inserter, where you can insert values while maintaining the completeness of the tree.</p>
+<p>The goal of this problem is to design a data structure that supports the insertion of nodes in a <strong>Complete Binary Tree (CBT)</strong>. In a complete binary tree, all levels are completely filled except possibly the last level, which is filled from left to right. The data structure should provide methods to:</p>
+<ol>
+<li>Insert a new node in the tree such that the resulting tree remains a complete binary tree.</li>
+<li>Return the root node of the complete binary tree.</li>
+</ol>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -286,52 +290,110 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This solution uses an array (vector) to store and represent the complete binary tree (CBT). We leverage the properties of an array representation of binary trees, where:</p>
+<ul>
+<li>For any node at index <code>i</code>, its left child is located at index <code>2*i + 1</code> and its right child at index <code>2*i + 2</code>.</li>
+<li>Using a vector to store nodes helps us achieve an efficient level-order traversal and insertion in the CBT.</li>
+</ul>
+<p>Here&rsquo;s a breakdown of how this approach works:</p>
 <ol>
 <li>
-<p><strong>Data Structure</strong>:</p>
+<p><strong>Tree Initialization in CBTInserter Constructor</strong>:</p>
 <ul>
-<li>Use a vector <code>tree</code> to keep track of the nodes in level order.</li>
-</ul>
-</li>
-<li>
-<p><strong>Constructor</strong>:</p>
-<ul>
-<li>Initialize the <code>CBTInserter</code> with the root node.</li>
-<li>Use a loop to traverse the tree in level order, adding each node to the <code>tree</code> vector.</li>
+<li>When a <code>CBTInserter</code> object is created with a given tree root, the constructor performs a level-order traversal of the tree. It stores the nodes in a vector <code>tree</code>, which allows us to access any node directly by index.</li>
+<li>By using level-order traversal, the constructor ensures that nodes in <code>tree</code> are stored from top to bottom, left to right, thus aligning with the properties of a CBT.</li>
 </ul>
 </li>
 <li>
 <p><strong>Insert Method</strong>:</p>
 <ul>
-<li>Create a new <code>TreeNode</code> for the value to be inserted.</li>
-<li>Determine the parent index based on the current size of the <code>tree</code>:
+<li>To insert a new value, we create a new node with that value.</li>
+<li>The index of the new node is <code>N</code>, where <code>N</code> is the current size of the <code>tree</code> vector.</li>
+<li>We determine the parent of this new node by its index:
 <ul>
-<li>If the size is even, insert the new node as the left child.</li>
-<li>If odd, insert as the right child.</li>
+<li>If <code>N</code> is odd, the new node is the left child of the parent at index <code>(N - 1) / 2</code>.</li>
+<li>If <code>N</code> is even, the new node is the right child of the parent at index <code>(N - 1) / 2</code>.</li>
 </ul>
 </li>
-<li>Add the new node to the <code>tree</code> vector and return the value of the parent node.</li>
+<li>Finally, we return the value of the parent node after inserting the new node.</li>
 </ul>
 </li>
 <li>
 <p><strong>Get Root Method</strong>:</p>
 <ul>
-<li>Return the root node of the tree, which is always the first element in the <code>tree</code> vector.</li>
+<li>This method simply returns the root of the tree, which is the first element in the <code>tree</code> vector.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The constructor builds the initial vector of nodes by traversing the given binary tree in level order.</li>
-<li>The <code>insert</code> method efficiently places new nodes while ensuring the tree remains complete.</li>
-<li>The <code>get_root</code> method provides quick access to the tree&rsquo;s root.</li>
+<ol>
+<li>
+<p><strong>TreeNode Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">struct</span> <span style="color:#00f">TreeNode</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> val;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#666">*</span>left;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#666">*</span>right;
+</span></span><span style="display:flex;"><span>    TreeNode() <span style="color:#666">:</span> val(<span style="color:#666">0</span>), left(<span style="color:#a2f;font-weight:bold">nullptr</span>), right(<span style="color:#a2f;font-weight:bold">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#0b0;font-weight:bold">int</span> x) <span style="color:#666">:</span> val(x), left(<span style="color:#a2f;font-weight:bold">nullptr</span>), right(<span style="color:#a2f;font-weight:bold">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#0b0;font-weight:bold">int</span> x, TreeNode <span style="color:#666">*</span>left, TreeNode <span style="color:#666">*</span>right) <span style="color:#666">:</span> val(x), left(left), right(right) {}
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>This structure defines a binary tree node with a value (<code>val</code>) and pointers to left and right children.</li>
 </ul>
+</li>
+<li>
+<p><strong>CBTInserter Class Declaration</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">CBTInserter</span> {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> tree;
+</span></span></code></pre></div><ul>
+<li>We declare a vector <code>tree</code> to store the nodes in level-order.</li>
+</ul>
+</li>
+<li>
+<p><strong>CBTInserter Constructor</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>CBTInserter(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>    tree.push_back(root);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> tree.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(tree[i]<span style="color:#666">-&gt;</span>left) tree.push_back(tree[i]<span style="color:#666">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(tree[i]<span style="color:#666">-&gt;</span>right) tree.push_back(tree[i]<span style="color:#666">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The constructor initializes the <code>tree</code> vector by adding the <code>root</code> node and performing level-order traversal to add all nodes to <code>tree</code> in the required order.</li>
+</ul>
+</li>
+<li>
+<p><strong>Insert Method</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">insert</span>(<span style="color:#0b0;font-weight:bold">int</span> val) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> N <span style="color:#666">=</span> tree.size();
+</span></span><span style="display:flex;"><span>    TreeNode<span style="color:#666">*</span> node <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TreeNode(val);
+</span></span><span style="display:flex;"><span>    tree.push_back(node);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(N <span style="color:#666">%</span> <span style="color:#666">2</span>) tree[(N <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>]<span style="color:#666">-&gt;</span>left <span style="color:#666">=</span> node;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span>      tree[(N <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>]<span style="color:#666">-&gt;</span>right <span style="color:#666">=</span> node;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> tree[(N <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>]<span style="color:#666">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We add the new node with value <code>val</code> to <code>tree</code> and determine its parent based on its index.</li>
+<li>If the index is odd, the new node becomes the left child; if even, it becomes the right child.</li>
+<li>The method returns the value of the parent node of the inserted node.</li>
+</ul>
+</li>
+<li>
+<p><strong>Get Root Method</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> <span style="color:#00a000">get_root</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> tree[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This method simply returns the root node of the CBT, which is the first element in <code>tree</code>.</li>
+</ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -339,15 +401,29 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li><strong>Time Complexity</strong>:
-<ul>
-<li><strong>Insert</strong>: O(1) for adding a node, as it directly accesses the last node.</li>
-<li><strong>Get Root</strong>: O(1) since it simply returns the first element.</li>
+<li><strong>Insertion</strong>: The <code>insert</code> method runs in constant time, <strong>O(1)</strong>, because accessing and inserting elements at the end of the vector takes constant time.</li>
+<li><strong>Get Root</strong>: This operation is also <strong>O(1)</strong> because it involves accessing the first element of the vector.</li>
 </ul>
 </li>
-<li><strong>Space Complexity</strong>: O(n) where n is the number of nodes in the tree, as it stores all nodes in the vector.</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the tree. This is because we store a reference to each node in the <code>tree</code> vector.</li>
 </ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently manages insertions and retrievals of the root node for a complete binary tree. By using an array-based structure, it leverages the properties of CBTs to ensure that each insertion is quick and the tree remains complete. The approach is space-efficient and ideal for use cases where frequent insertions are required. This implementation is straightforward, minimizing complexity and achieving O(1) insertion time, making it suitable for dynamic CBT operations.</p>
  
 </div>
   

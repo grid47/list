@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -263,75 +263,197 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
+    <h3 id="-longest-consecutive-sequence-finding-the-longest-chain-of-consecutive-numbers">
+  💡 <strong>Longest Consecutive Sequence: Finding the Longest Chain of Consecutive Numbers</strong>
+  <a class="heading-link" href="#-longest-consecutive-sequence-finding-the-longest-chain-of-consecutive-numbers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <strong>Longest Consecutive Sequence</strong> problem challenges us to find the length of the longest consecutive sequence in an unsorted array of integers. The sequence must consist of elements that follow each other in a continuous manner, i.e., each element must be exactly one more than its predecessor. Our goal is to determine the length of the longest such sequence.</p>
+<hr>
+<h4 id="problem-statement">
+  <strong>Problem Statement</strong>
   <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h3>
-<p>Given an unsorted array of integers, find the length of the longest consecutive elements sequence. The sequence must be consecutive integers and can be in any order.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
+</h4>
+<p>Given:</p>
+<ul>
+<li>An unsorted array of integers <code>nums</code>.</li>
+</ul>
+<p>We need to find the <strong>length of the longest consecutive sequence</strong> where:</p>
 <ol>
-<li><strong>Use a Set</strong>: Store the elements in a set to achieve O(1) time complexity for lookups.</li>
-<li><strong>Iterate Through the Array</strong>:
-<ul>
-<li>For each number in the array, check if it is the start of a new sequence.</li>
-<li>A number is the start of a sequence if the number directly preceding it (i.e., <code>num - 1</code>) is not in the set.</li>
-</ul>
-</li>
-<li><strong>Count Consecutive Elements</strong>:
-<ul>
-<li>If the current number is the start of a sequence, count how many consecutive numbers follow it by incrementing a counter and checking for the next numbers in the set.</li>
-</ul>
-</li>
-<li><strong>Update Maximum Length</strong>: Keep track of the maximum length of consecutive sequences found during the iteration.</li>
+<li>The elements in the sequence are consecutive (i.e., each number is one more than the previous).</li>
+<li>The sequence does not need to be contiguous in the array but must consist of consecutive numbers.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<hr>
+<h4 id="example">
+  <strong>Example</strong>
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>Input</strong>:</p>
+<ul>
+<li><code>nums = [100, 4, 200, 1, 3, 2]</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Output</strong>:</p>
+<ul>
+<li><code>4</code></li>
+</ul>
+<p><strong>Explanation</strong>: The longest consecutive sequence is <code>[1, 2, 3, 4]</code>, so the length is 4.</p>
+</li>
+</ul>
+<hr>
+<h3 id="-approach-efficient-solution-using-a-set">
+  🛠️ <strong>Approach: Efficient Solution Using a Set</strong>
+  <a class="heading-link" href="#-approach-efficient-solution-using-a-set">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Instead of sorting the array, we use a <strong>set</strong> to efficiently check for consecutive numbers and avoid redundant operations. By leveraging the set&rsquo;s O(1) average time complexity for insertion and lookup, we can solve this problem in <strong>O(n)</strong> time, which is optimal for large input sizes.</p>
+<hr>
+<h3 id="-steps-to-solve-the-problem">
+  ✨ <strong>Steps to Solve the Problem</strong>
+  <a class="heading-link" href="#-steps-to-solve-the-problem">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="1-function-definition">
+  1️⃣ <strong>Function Definition</strong>
+  <a class="heading-link" href="#1-function-definition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> longestConsecutive(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums)
+</span></span></code></pre></div><p>This function accepts a vector <code>nums</code> containing integers and returns the length of the longest consecutive sequence.</p>
+<h4 id="2-inserting-elements-into-a-set">
+  2️⃣ <strong>Inserting Elements into a Set</strong>
+  <a class="heading-link" href="#2-inserting-elements-into-a-set">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span> : nums)
+</span></span><span style="display:flex;"><span>    s.insert(x);
+</span></span></code></pre></div><ul>
+<li>A set <code>s</code> is created to store all the unique elements from the array.</li>
+<li>We loop through the array <code>nums</code> and insert each element <code>x</code> into the set. If there are duplicate elements in the array, they are automatically handled by the set.</li>
+</ul>
+<h4 id="3-edge-case-empty-set">
+  3️⃣ <strong>Edge Case: Empty Set</strong>
+  <a class="heading-link" href="#3-edge-case-empty-set">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (s.empty()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div><ul>
+<li>Before proceeding, we check if the set is empty. If it is, there are no elements in the array, and thus no consecutive sequence can exist. We return <code>0</code> in this case.</li>
+</ul>
+<h4 id="4-finding-the-longest-consecutive-sequence">
+  4️⃣ <strong>Finding the Longest Consecutive Sequence</strong>
+  <a class="heading-link" href="#4-finding-the-longest-consecutive-sequence">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> y <span style="color:#666">=</span> nums[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> c <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>s.count(y <span style="color:#666">+</span> <span style="color:#666">1</span>))
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span> (s.count(y <span style="color:#666">-</span> <span style="color:#666">1</span>)) {
+</span></span><span style="display:flex;"><span>            c<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            y <span style="color:#666">=</span> y <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            mx <span style="color:#666">=</span> max(mx, c);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We initialize <code>mx = 1</code> to keep track of the maximum length of the consecutive sequence found.</li>
+<li>We iterate through each element <code>y</code> in the array <code>nums</code>:
+<ul>
+<li>If <code>y + 1</code> is not in the set, it means <code>y</code> could be the start of a new consecutive sequence.</li>
+<li>We then check for consecutive numbers backward from <code>y</code>. If <code>y - 1</code> is found in the set, we keep decrementing <code>y</code> and counting the consecutive numbers.</li>
+<li>The counter <code>c</code> tracks the length of the current sequence. We update <code>mx</code> if the current sequence length <code>c</code> exceeds the previous maximum.</li>
+</ul>
+</li>
+</ul>
+<h4 id="5-returning-the-result">
+  5️⃣ <strong>Returning the Result</strong>
+  <a class="heading-link" href="#5-returning-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> mx;
+</span></span></code></pre></div><ul>
+<li>After iterating through the entire array and finding the longest consecutive sequence, we return <code>mx</code>, which contains the length of the longest sequence.</li>
+</ul>
+<hr>
+<h3 id="-example-walkthrough">
+  🔍 <strong>Example Walkthrough</strong>
+  <a class="heading-link" href="#-example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s walk through the example <strong><code>nums = [100, 4, 200, 1, 3, 2]</code></strong>:</p>
+<ol>
+<li><strong>Insert into Set</strong>: First, insert all elements into the set: <code>{1, 2, 3, 4, 100, 200}</code>.</li>
+<li><strong>Iterate over Array</strong>:
+<ul>
+<li>For <code>100</code>: No smaller consecutive number (<code>100 - 1</code>) exists, so the sequence length is <code>1</code>.</li>
+<li>For <code>4</code>: The set contains <code>3, 2, 1</code>, so the sequence <code>[1, 2, 3, 4]</code> is formed. Length of sequence is <code>4</code>.</li>
+</ul>
+</li>
+<li><strong>Result</strong>: The longest sequence has a length of <code>4</code>.</li>
+</ol>
+<hr>
+<h3 id="-time-and-space-complexity">
+  🧑‍💻 <strong>Time and Space Complexity</strong>
+  <a class="heading-link" href="#-time-and-space-complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li><strong><code>longestConsecutive</code> function</strong>:
+<li>
+<p><strong>Time Complexity:</strong> <code>O(n)</code></p>
 <ul>
-<li><strong>Line 2-4</strong>: Create a set to store the unique numbers from the input vector.</li>
-<li><strong>Line 5</strong>: Check if the set is empty; if it is, return 0 (no elements).</li>
-<li><strong>Line 6</strong>: Initialize a variable <code>mx</code> to track the maximum length of consecutive sequences.</li>
-<li><strong>Line 7-17</strong>: Loop through each number in the input:
+<li>Inserting all elements into the set takes O(n) time, where <code>n</code> is the number of elements in the array.</li>
+<li>Each insertion and lookup in the set takes O(1) time on average. Thus, the overall time complexity is O(n).</li>
+<li>We only iterate through the array once and check consecutive numbers in the set without redundant work.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity:</strong> <code>O(n)</code></p>
 <ul>
-<li><strong>Line 8</strong>: Get the current number and initialize a count <code>c</code> to 1.</li>
-<li><strong>Line 9-14</strong>: Check if the current number is the end of a sequence:
-<ul>
-<li>If <code>y + 1</code> is not in the set, count backwards for consecutive numbers and update the count <code>c</code>.</li>
-<li>Update <code>mx</code> if the count <code>c</code> exceeds the current maximum.</li>
+<li>The space complexity is O(n) due to the set storing the unique elements from the array.</li>
 </ul>
 </li>
 </ul>
-</li>
-<li><strong>Line 16</strong>: Return the maximum length of consecutive elements found.</li>
-</ul>
-</li>
-</ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<hr>
+<h3 id="-conclusion">
+  🏁 <strong>Conclusion</strong>
+  <a class="heading-link" href="#-conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: (O(N)), where (N) is the number of elements in the input array. Each number is processed at most twice (once added to the set and once checked).</li>
-<li><strong>Space Complexity</strong>: (O(N)) for storing the elements in the set.</li>
-</ul> 
+<p>This approach solves the &ldquo;Longest Consecutive Sequence&rdquo; problem efficiently by using a <strong>set</strong>. By checking for consecutive elements directly in the set, we can avoid unnecessary sorting and redundant work, achieving an optimal <strong>O(n)</strong> time complexity. This makes the solution suitable for large input sizes. The space complexity is also <strong>O(n)</strong>, as we store all unique elements in the set. With this solution, you can quickly find the longest consecutive sequence in an unsorted array of integers.</p>
+ 
 </div>
   
 

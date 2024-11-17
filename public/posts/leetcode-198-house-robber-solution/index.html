@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -211,7 +211,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode500s0hbhb">
+        <h2 id="hahahugoshortcode499s0hbhb">
   <a href="https://leetcode.com/problems/house-robber/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -226,7 +226,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode500s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode499s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -245,84 +245,204 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> dp[n<span style="color:#666">-</span><span style="color:#666">1</span>];
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode500s2hbhb">
+<h2 id="hahahugoshortcode499s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-house-robber-problem-dynamic-programming">
+  🌟 House Robber Problem (Dynamic Programming)
+  <a class="heading-link" href="#-house-robber-problem-dynamic-programming">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are a professional robber who wants to maximize the amount of money you can rob tonight. Each house has a certain amount of money, and you cannot rob two adjacent houses. Given an integer array <code>a</code> representing the amount of money at each house, return the maximum amount of money you can rob.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>The problem at hand is a classic dynamic programming problem known as the <strong>House Robber</strong> problem. Given a list of non-negative integers representing the amount of money stored in each house, the goal is to determine the maximum amount of money you can rob tonight without alerting the police. The catch is that you cannot rob two adjacent houses on the same night.</p>
+<h4 id="example">
+  Example:
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Input:</strong> <code>a = [2, 7, 9, 3, 1]</code></li>
+<li><strong>Output:</strong> <code>12</code> (Rob the first, third, and fifth house for a total of 12).</li>
+</ul>
+<h3 id="-approach">
+  💡 Approach
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Dynamic Programming</strong>:</p>
+<p>We solve this problem using <strong>dynamic programming</strong> by deciding for each house whether to rob it or skip it. The decision at each house depends on the maximum amount we can rob up to that point, considering whether we rob the current house or skip it.</p>
+<p><strong>State Definition:</strong></p>
 <ul>
-<li>Use a dynamic programming array <code>dp</code> where <code>dp[i]</code> represents the maximum amount of money that can be robbed from the first <code>i + 1</code> houses.</li>
-<li>The choice at each house is whether to rob it or skip it. If you rob the current house, you cannot rob the previous house.</li>
+<li>Let <code>dp[i]</code> represent the maximum amount of money that can be robbed from the first <code>i</code> houses (i.e., from house <code>0</code> to house <code>i</code>).</li>
 </ul>
-</li>
-<li>
-<p><strong>State Transition</strong>:</p>
+<p><strong>Recurrence Relation:</strong></p>
 <ul>
-<li>Initialize:
+<li>If we rob the <code>i</code>-th house, we cannot rob the <code>(i-1)</code>-th house, but we can take the money from the <code>(i-2)</code>-th house. Therefore, the value will be <code>dp[i-2] + a[i]</code>.</li>
+<li>If we skip the <code>i</code>-th house, we take the value of <code>dp[i-1]</code>.</li>
+<li>Thus, the recurrence relation is:
+[
+dp[i] = \max(dp[i-1], dp[i-2] + a[i])
+]</li>
+<li>Base cases:
 <ul>
-<li><code>dp[0] = a[0]</code> (only one house to rob)</li>
-<li><code>dp[1] = max(a[0], a[1])</code> (choose the maximum between the first and second house)</li>
-</ul>
-</li>
-<li>For each house from the third onward, decide whether to rob the current house or skip it:
-<ul>
-<li><code>dp[i] = max(dp[i-2] + a[i], dp[i-1])</code> (either rob the current house and add its value to the best amount from two houses back, or take the best amount from the previous house).</li>
+<li><code>dp[0] = a[0]</code>: If there is only one house, we rob it.</li>
+<li><code>dp[1] = max(a[0], a[1])</code>: If there are two houses, we rob the one with the higher amount of money.</li>
 </ul>
 </li>
 </ul>
-</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="-code-breakdown">
+  🛠 Code Breakdown
+  <a class="heading-link" href="#-code-breakdown">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Line 1</strong>: Define the class <code>Solution</code>.</li>
-<li><strong>Line 2</strong>: Define the <code>rob</code> function, which takes a vector <code>a</code> of integers.</li>
-<li><strong>Line 3</strong>: Determine the number of houses <code>n</code>.</li>
-<li><strong>Line 4</strong>: Handle the base case when there is only one house.</li>
-<li><strong>Line 5</strong>: Initialize a dynamic programming array <code>dp</code> of size <code>n</code> with zeros.</li>
-<li><strong>Line 6</strong>: Set the values for the first two houses.</li>
-<li><strong>Lines 7-9</strong>: Iterate through the array from the third house onwards, updating the <code>dp</code> array based on the defined state transition.</li>
-<li><strong>Line 10</strong>: Return the maximum amount that can be robbed from all houses (<code>dp[n-1]</code>).</li>
+<h4 id="step-1-handle-small-input-sizes">
+  Step 1: Handle Small Input Sizes
+  <a class="heading-link" href="#step-1-handle-small-input-sizes">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> a[<span style="color:#666">0</span>];
+</span></span></code></pre></div><ul>
+<li>If there is only one house, we can rob it, so we return the value in <code>a[0]</code>.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-2-initialize-the-dp-array">
+  Step 2: Initialize the DP Array
+  <a class="heading-link" href="#step-2-initialize-the-dp-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp(n, <span style="color:#666">0</span>);
+</span></span></code></pre></div><ul>
+<li>We initialize a vector <code>dp</code> of size <code>n</code> (the number of houses) to store the maximum money that can be robbed up to each house.</li>
+</ul>
+<h4 id="step-3-set-base-cases">
+  Step 3: Set Base Cases
+  <a class="heading-link" href="#step-3-set-base-cases">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>dp[<span style="color:#666">0</span>] <span style="color:#666">=</span> a[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>dp[<span style="color:#666">1</span>] <span style="color:#666">=</span> max(a[<span style="color:#666">0</span>], a[<span style="color:#666">1</span>]);
+</span></span></code></pre></div><ul>
+<li>For the first house (<code>dp[0]</code>), the maximum money we can rob is <code>a[0]</code>.</li>
+<li>For the second house (<code>dp[1]</code>), we choose the house with the higher amount of money: <code>max(a[0], a[1])</code>.</li>
+</ul>
+<h4 id="step-4-fill-the-dp-array-for-all-other-houses">
+  Step 4: Fill the DP Array for All Other Houses
+  <a class="heading-link" href="#step-4-fill-the-dp-array-for-all-other-houses">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">2</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    dp[i] <span style="color:#666">=</span> max(dp[i<span style="color:#666">-</span><span style="color:#666">2</span>] <span style="color:#666">+</span> a[i], dp[i<span style="color:#666">-</span><span style="color:#666">1</span>]);
+</span></span></code></pre></div><ul>
+<li>For each house from the third onward, we update <code>dp[i]</code> by choosing the maximum between:
+<ul>
+<li>Robbing the current house (<code>dp[i-2] + a[i]</code>), or</li>
+<li>Skipping the current house and taking the value of <code>dp[i-1]</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-5-return-the-final-result">
+  Step 5: Return the Final Result
+  <a class="heading-link" href="#step-5-return-the-final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> dp[n<span style="color:#666">-</span><span style="color:#666">1</span>];
+</span></span></code></pre></div><ul>
+<li>The final value <code>dp[n-1]</code> contains the maximum money that can be robbed, considering all the houses.</li>
+</ul>
+<h3 id="-complexity-analysis">
+  📊 Complexity Analysis
+  <a class="heading-link" href="#-complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(n)), where (n) is the number of houses.</li>
-<li><strong>Space Complexity</strong>: (O(n)), due to the storage of the dynamic programming array. (Note: This can be optimized to (O(1)) using two variables instead of an array.)</li>
+<li><strong>O(n):</strong> We iterate through the list of houses once, performing constant-time operations for each house (calculating the maximum between two values). Thus, the time complexity is linear in the number of houses, i.e., <strong>O(n)</strong>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n):</strong> We use a dynamic programming array <code>dp</code> of size <code>n</code> to store intermediate results. Therefore, the space complexity is proportional to the number of houses, i.e., <strong>O(n)</strong>.</li>
+</ul>
+<h3 id="-space-complexity-optimization">
+  🚀 Space Complexity Optimization
+  <a class="heading-link" href="#-space-complexity-optimization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>We can reduce the space complexity to <strong>O(1)</strong> by keeping track of only the last two values in the <code>dp</code> array. This is because each state (<code>dp[i]</code>) only depends on the previous two states (<code>dp[i-1]</code> and <code>dp[i-2]</code>).</p>
+<h4 id="optimized-code">
+  Optimized Code:
+  <a class="heading-link" href="#optimized-code">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">rob</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> a) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> a.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> a[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> prev2 <span style="color:#666">=</span> a[<span style="color:#666">0</span>], prev1 <span style="color:#666">=</span> max(a[<span style="color:#666">0</span>], a[<span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">2</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> current <span style="color:#666">=</span> max(prev2 <span style="color:#666">+</span> a[i], prev1);
+</span></span><span style="display:flex;"><span>        prev2 <span style="color:#666">=</span> prev1;
+</span></span><span style="display:flex;"><span>        prev1 <span style="color:#666">=</span> current;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> prev1;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>In this optimized version:</p>
+<ul>
+<li>We use two variables, <code>prev1</code> and <code>prev2</code>, to store the results of the last two houses.</li>
+<li>This reduces the space complexity to <strong>O(1)</strong>, while still maintaining the same time complexity of <strong>O(n)</strong>.</li>
+</ul>
+<h3 id="-conclusion">
+  ✅ Conclusion
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <strong>House Robber</strong> problem is efficiently solved using dynamic programming. The key idea is to make decisions based on previous choices, and the solution can be optimized to use constant space. Here&rsquo;s a recap:</p>
+<ul>
+<li><strong>Time Complexity:</strong> <strong>O(n)</strong>, where <code>n</code> is the number of houses.</li>
+<li><strong>Space Complexity:</strong> <strong>O(1)</strong> after optimization.</li>
+</ul>
+<p>This solution is not only optimal in terms of time and space but also applicable to similar problems that require making decisions based on previous states.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode500s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode499s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -222,7 +222,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -231,7 +231,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1159s0hbhb">
+        <h2 id="hahahugoshortcode1156s0hbhb">
   <a href="https://leetcode.com/problems/sort-characters-by-frequency/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -246,7 +246,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1159s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1156s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -275,7 +275,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1159s2hbhb">
+<h2 id="hahahugoshortcode1156s2hbhb">
   
 
   
@@ -287,7 +287,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a string <code>s</code>, sort it in descending order based on the frequency of characters. Characters with the same frequency should maintain their relative order from the input string.</p>
+<p>The problem asks us to sort the characters in a given string based on their frequency of occurrence. The characters that appear more frequently should come first in the resulting string, and characters with the same frequency should be sorted in any order among themselves. We are to return the resulting string after sorting the characters based on their frequency.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -295,55 +295,88 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve the problem efficiently, we can break down the task into the following steps:</p>
 <ol>
 <li>
-<p><strong>Frequency Counting</strong>:</p>
-<ul>
-<li>Use an unordered map to count the frequency of each character in the string.</li>
-</ul>
+<p><strong>Frequency Count</strong>: The first step is to count how many times each character appears in the string. This will allow us to group characters by their frequency of occurrence.</p>
 </li>
 <li>
-<p><strong>Bucket Sort</strong>:</p>
-<ul>
-<li>Create a vector of strings (<code>bucket</code>) where the index represents the frequency of characters. Each index <code>i</code> will store a string of characters that appear <code>i</code> times.</li>
-<li>Populate this bucket with characters based on their frequencies.</li>
-</ul>
+<p><strong>Bucket Sort by Frequency</strong>: Using the frequency count, we can place characters into &ldquo;buckets,&rdquo; where each bucket represents a different frequency. The index of each bucket will represent the frequency of characters in that bucket. The characters will then be appended to these buckets according to their frequency.</p>
 </li>
 <li>
-<p><strong>Constructing the Result</strong>:</p>
-<ul>
-<li>Iterate through the <code>bucket</code> in reverse order (from highest frequency to lowest) to construct the final sorted string.</li>
-<li>Append the characters from each non-empty bucket to the result string.</li>
-</ul>
+<p><strong>Construct the Resulting String</strong>: Finally, we need to construct the result string by iterating over the buckets in descending order of frequency and appending the characters to the result string based on their frequency.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>This approach leverages the concept of bucket sorting to efficiently group characters by their frequency and then sort them in a manner that respects the problem&rsquo;s requirements.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Frequency Counting</strong>:</p>
+<h4 id="step-1-count-the-frequency-of-each-character">
+  Step 1: Count the Frequency of Each Character
+  <a class="heading-link" href="#step-1-count-the-frequency-of-each-character">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> freq;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span>: s) freq[c]<span style="color:#666">++</span>;
+</span></span></code></pre></div><ul>
+<li>The <code>unordered_map</code> <code>freq</code> is used to store the frequency of each character in the string. The key is the character itself, and the value is the number of times that character appears.</li>
+<li>We iterate over each character <code>c</code> in the string <code>s</code> and update the frequency count for that character.</li>
+</ul>
+<h4 id="step-2-organize-characters-into-frequency-buckets">
+  Step 2: Organize Characters into Frequency Buckets
+  <a class="heading-link" href="#step-2-organize-characters-into-frequency-buckets">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> bucket(s.size() <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#b44">&#34;&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span><span style="color:#666">&amp;</span> <span style="color:#a0a000">it</span>: freq) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> it.second;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">char</span> c <span style="color:#666">=</span> it.first;
+</span></span><span style="display:flex;"><span>    bucket[n].append(n, c);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>vector&lt;string&gt; bucket</code> is initialized with a size of <code>s.size() + 1</code> because the maximum frequency of any character can be at most <code>s.size()</code>, and we want to account for all possible frequencies.</li>
+<li>For each character in the frequency map <code>freq</code>, we extract its frequency <code>n</code> and the character <code>c</code>. We then append <code>n</code> copies of <code>c</code> to the appropriate bucket corresponding to the frequency <code>n</code>.
 <ul>
-<li>Iterate through each character in the string and count its occurrences using an unordered map (<code>freq</code>).</li>
+<li>If a character <code>c</code> appears 3 times, for example, it will be added to <code>bucket[3]</code>, which stores all characters that appear 3 times in the string.</li>
 </ul>
 </li>
-<li>
-<p><strong>Populating the Bucket</strong>:</p>
-<ul>
-<li>For each character in the frequency map, append the character to the corresponding index in the <code>bucket</code> based on its frequency.</li>
 </ul>
-</li>
-<li>
-<p><strong>Building the Result String</strong>:</p>
-<ul>
-<li>Loop through the <code>bucket</code> from the end to the beginning, appending the non-empty strings to the result (<code>res</code>).</li>
+<h4 id="step-3-construct-the-result-string-in-descending-frequency-order">
+  Step 3: Construct the Result String in Descending Frequency Order
+  <a class="heading-link" href="#step-3-construct-the-result-string-in-descending-frequency-order">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string res;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> s.size(); i <span style="color:#666">&gt;</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(bucket[i].size())
+</span></span><span style="display:flex;"><span>        res.append(bucket[i]);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We initialize an empty string <code>res</code> to store the final result.</li>
+<li>We iterate over the <code>bucket</code> array from the highest possible frequency (which is <code>s.size()</code>) to the lowest frequency (1). This ensures that we are appending the most frequent characters first.</li>
+<li>If a bucket contains any characters (i.e., <code>bucket[i].size()</code> is not zero), we append those characters to <code>res</code>. These characters are already grouped by frequency.</li>
 </ul>
-</li>
-</ol>
+<h4 id="step-4-return-the-result">
+  Step 4: Return the Result
+  <a class="heading-link" href="#step-4-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div><ul>
+<li>Once the result string <code>res</code> has been constructed, we return it. This string contains all the characters sorted by frequency, with characters that appear more frequently coming first.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -351,15 +384,44 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where <code>n</code> is the length of the string, as we traverse the string to count frequencies and then again to construct the result.</li>
-<li><strong>Space Complexity</strong>: O(n), for storing the frequency map and the bucket of strings.</li>
+<li><strong>Frequency Count</strong>: The first loop iterates over each character in the string <code>s</code>, which takes <code>O(n)</code> time, where <code>n</code> is the length of the string.</li>
+<li><strong>Bucket Sorting</strong>: The second loop iterates over each entry in the <code>freq</code> map. In the worst case, there could be up to <code>n</code> unique characters, so this loop takes <code>O(n)</code> time.</li>
+<li><strong>Result Construction</strong>: The third loop iterates over the <code>bucket</code> array and appends the characters to <code>res</code>. Since each character in the string is appended exactly once, this step also takes <code>O(n)</code> time.</li>
+<li><strong>Overall Time Complexity</strong>: The overall time complexity of the algorithm is <code>O(n)</code>.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Frequency Map</strong>: The space used by the <code>freq</code> map is proportional to the number of unique characters in the string, which is at most <code>n</code>. Therefore, the space complexity for the frequency map is <code>O(n)</code>.</li>
+<li><strong>Buckets</strong>: The space used by the <code>bucket</code> array is proportional to the length of the string (<code>O(n)</code>), as there is one bucket for each possible frequency.</li>
+<li><strong>Overall Space Complexity</strong>: The overall space complexity is <code>O(n)</code>.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of sorting characters in a string by their frequency of occurrence using a combination of a frequency map and bucket sorting. The algorithm is linear in both time and space complexity, making it highly efficient for handling large strings. The approach is easy to understand and leverages common sorting techniques to provide an optimal solution. By focusing on counting the frequencies and then organizing the characters into buckets, we ensure that the solution works within the constraints and returns the correct result.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1159s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1156s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

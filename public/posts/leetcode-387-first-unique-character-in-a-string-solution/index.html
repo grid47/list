@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -260,64 +260,157 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-statement">
+  🚀 Problem Statement
+  <a class="heading-link" href="#-problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a string, find the index of the first non-repeating character in it. If it doesn&rsquo;t exist, return -1.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>We need to find the <strong>first unique character</strong> in a given string <code>s</code>. A character is considered unique if it appears exactly once in the string. If there&rsquo;s no unique character, we return <code>-1</code>.</p>
+<p>For example, for the input string <code>s = &quot;leetcode&quot;</code>, the output should be <code>0</code> because the first unique character is <code>'l'</code>, which is at index <code>0</code>.</p>
+<hr>
+<h3 id="-approach">
+  🧠 Approach
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we’ll use a <strong>two-pass approach</strong>:</p>
 <ol>
-<li>
-<p><strong>Count Character Frequencies</strong>:</p>
-<ul>
-<li>Use a hash map (or unordered map) to store the frequency of each character in the string.</li>
-</ul>
-</li>
-<li>
-<p><strong>Identify First Unique Character</strong>:</p>
-<ul>
-<li>Iterate through the string a second time to check the frequency of each character. The first character with a frequency of 1 is the first non-repeating character.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Index</strong>:</p>
-<ul>
-<li>If found, return the index of this character; otherwise, return -1.</li>
-</ul>
-</li>
+<li><strong>Count the frequency</strong> of each character in the string.</li>
+<li><strong>Iterate again</strong> to find the first character with a frequency of <code>1</code>.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>The solution uses a <strong>map</strong> (or hash map) to store character frequencies, which allows us to efficiently count occurrences and find the first unique character in linear time.</p>
+<p>Here’s how the solution works step by step:</p>
+<ul>
+<li>In the <strong>first pass</strong>, count how many times each character appears.</li>
+<li>In the <strong>second pass</strong>, go through the string and check the frequency of each character. The first character with a count of <code>1</code> is returned.</li>
+</ul>
+<hr>
+<h3 id="-step-by-step-code-breakdown">
+  🔨 Step-by-Step Code Breakdown
+  <a class="heading-link" href="#-step-by-step-code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Here’s the code that implements this solution:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> firstUniqChar(string s) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: s) mp[x]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(mp[s[i]] <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> i;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h4 id="1-class-declaration">
+  1. <strong>Class Declaration</strong>
+  <a class="heading-link" href="#1-class-declaration">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> firstUniqChar(string s) {
+</span></span></code></pre></div><ul>
+<li>We define the <code>Solution</code> class with a public method <code>firstUniqChar</code> that takes a string <code>s</code> as input.</li>
+</ul>
+<h4 id="2-count-character-occurrences">
+  2. <strong>Count Character Occurrences</strong>
+  <a class="heading-link" href="#2-count-character-occurrences">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: s) mp[x]<span style="color:#666">++</span>;
+</span></span></code></pre></div><ul>
+<li>A <code>map&lt;char, int&gt;</code> named <code>mp</code> is used to store the frequency of each character in the string <code>s</code>.</li>
+<li>We loop through the string and update the map with the frequency of each character.</li>
+</ul>
+<h4 id="3-find-the-first-unique-character">
+  3. <strong>Find the First Unique Character</strong>
+  <a class="heading-link" href="#3-find-the-first-unique-character">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mp[s[i]] <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> i;
+</span></span></code></pre></div><ul>
+<li>We loop through the string again. For each character, we check if its frequency is <code>1</code> in the map.</li>
+<li>If we find such a character, we immediately return its index.</li>
+</ul>
+<h4 id="4-handle-no-unique-character">
+  4. <strong>Handle No Unique Character</strong>
+  <a class="heading-link" href="#4-handle-no-unique-character">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span></code></pre></div><ul>
+<li>If no unique character is found, we return <code>-1</code>, indicating that there is no unique character in the string.</li>
+</ul>
+<hr>
+<h3 id="-complexity-analysis">
+  📈 Complexity Analysis
+  <a class="heading-link" href="#-complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li>The function <code>firstUniqChar</code> first populates the map with character counts.</li>
-<li>It then checks each character in the string against the map. The first character with a count of 1 is returned as the result.</li>
-<li>If no unique character is found by the end of the iteration, the function returns -1.</li>
+<li>
+<p><strong>Time Complexity</strong>: <strong>O(n)</strong>, where <code>n</code> is the length of the string <code>s</code>.</p>
+<ul>
+<li>The first loop takes <strong>O(n)</strong> time to count character occurrences.</li>
+<li>The second loop also takes <strong>O(n)</strong> time to find the first unique character.</li>
+<li>Hence, the total time complexity is <strong>O(n)</strong>, making this an efficient solution for large strings.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+</li>
+<li>
+<p><strong>Space Complexity</strong>: <strong>O(n)</strong>, where <code>n</code> is the number of unique characters in the string.</p>
+<ul>
+<li>The space is used by the map <code>mp</code> to store character frequencies. In the worst case, every character could be unique, requiring <strong>O(n)</strong> space.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="-conclusion">
+  🏁 Conclusion
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of finding the <strong>first unique character</strong> in a string using a <strong>two-pass approach</strong> with a map:</p>
+<ol>
+<li><strong>First pass</strong>: Count the occurrences of each character.</li>
+<li><strong>Second pass</strong>: Find the first character with a frequency of <code>1</code>.</li>
+</ol>
+<p>With a time complexity of <strong>O(n)</strong> and a space complexity of <strong>O(n)</strong>, this solution is both time and space-efficient. It is optimal for handling strings of varying sizes while maintaining clarity and simplicity.</p>
+<h3 id="-key-takeaways">
+  🎯 Key Takeaways:
+  <a class="heading-link" href="#-key-takeaways">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the length of the string. We traverse the string twice: once for counting and once for checking uniqueness.</li>
-<li><strong>Space Complexity</strong>: O(1), since the size of the map is limited to the number of unique characters (at most 26 for lowercase letters).</li>
+<li>The <strong>two-pass approach</strong> ensures we efficiently process the string.</li>
+<li>Using a <strong>map</strong> allows us to count character frequencies and quickly find the first unique character.</li>
+<li>This solution is fast and works well for both small and large inputs.</li>
 </ul>
+<p>Keep up the great work, and keep coding! 💪</p>
  
 </div>
   

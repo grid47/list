@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -211,7 +211,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode120s0hbhb">
+        <h2 id="hahahugoshortcode117s0hbhb">
   <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -226,7 +226,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode120s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode117s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -243,76 +243,223 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> g;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode120s2hbhb">
+<h2 id="hahahugoshortcode117s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-max-profit-from-stock-trading--lets-maximize-your-gains">
+  📈 <strong>Max Profit from Stock Trading</strong> – Let’s Maximize Your Gains!
+  <a class="heading-link" href="#-max-profit-from-stock-trading--lets-maximize-your-gains">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array of stock prices <code>prices</code>, where <code>prices[i]</code> is the price of a given stock on the <code>i</code>-th day, find the maximum profit you can achieve by buying and selling the stock. You may complete at most one transaction (i.e., buy one and sell one share of the stock).</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>The <strong>Max Profit</strong> problem asks you to find the maximum profit you can make from buying and selling a stock, given an array of stock prices where each element represents the stock&rsquo;s price on a particular day. Your objective is to buy at one point and sell later for the highest possible profit. If no profit can be made, return <code>0</code>.</p>
+<h4 id="example-walkthrough">
+  <strong>Example Walkthrough</strong>:
+  <a class="heading-link" href="#example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p><strong>Input</strong>: <code>prices = [7, 1, 5, 3, 6, 4]</code></p>
+</li>
+<li>
+<p><strong>Output</strong>: <code>5</code></p>
+<ul>
+<li><strong>Explanation</strong>: Buy on day 2 (price = 1), sell on day 5 (price = 6), resulting in a profit of <code>6 - 1 = 5</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Input</strong>: <code>prices = [7, 6, 4, 3, 1]</code></p>
+</li>
+<li>
+<p><strong>Output</strong>: <code>0</code></p>
+<ul>
+<li><strong>Explanation</strong>: No transaction can be made as prices are always decreasing.</li>
+</ul>
+</li>
+</ul>
+<h3 id="-approach-to-solve-the-problem">
+  💡 <strong>Approach to Solve the Problem</strong>
+  <a class="heading-link" href="#-approach-to-solve-the-problem">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this efficiently, we need to track the minimum stock price observed so far and calculate the maximum profit by selling at each day’s price. Here’s how we can approach it:</p>
 <ol>
-<li>Initialize <code>l</code> (lowest price seen so far) to the first price and <code>g</code> (maximum profit) to 0.</li>
-<li>Iterate through each price in the <code>prices</code> vector:
-<ul>
-<li>Update <code>l</code> to be the minimum of the current <code>l</code> and the current price.</li>
-<li>Calculate the profit if selling at the current price (<code>x - l</code>) and update <code>g</code> to be the maximum profit found so far.</li>
-</ul>
-</li>
-<li>Return <code>g</code>, which will contain the maximum profit achievable.</li>
+<li><strong>Track the Minimum Price</strong> (<code>l</code>): Start by setting the minimum price to the first price in the array.</li>
+<li><strong>Calculate the Potential Profit</strong>: For each price, subtract the minimum price from the current price to determine the potential profit.</li>
+<li><strong>Track the Maximum Profit</strong> (<code>g</code>): Update the maximum profit whenever we find a higher profit than the previous maximum.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>This approach ensures we only need to traverse the array once.</p>
+<h3 id="-code-breakdown-step-by-step">
+  🖥️ <strong>Code Breakdown (Step-by-Step)</strong>
+  <a class="heading-link" href="#-code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="function-signature">
+  <strong>Function Signature</strong>
+  <a class="heading-link" href="#function-signature">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> maxProfit(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> prices)
+</span></span></code></pre></div><p>This function takes a vector of integers, <code>prices</code>, which represent stock prices over several days, and returns an integer representing the maximum profit from a single buy and sell transaction.</p>
+<h4 id="initialize-variables">
+  <strong>Initialize Variables</strong>
+  <a class="heading-link" href="#initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> prices[<span style="color:#666">0</span>], g <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div><ul>
+<li><code>l</code>: Stores the minimum price observed so far.</li>
+<li><code>g</code>: Stores the maximum profit encountered so far, initialized to <code>0</code>.</li>
+</ul>
+<h4 id="iterate-over-prices">
+  <strong>Iterate Over Prices</strong>
+  <a class="heading-link" href="#iterate-over-prices">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: prices) {
+</span></span><span style="display:flex;"><span>    l <span style="color:#666">=</span> min(l, x); <span style="color:#080;font-style:italic">// Update the minimum price
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    g <span style="color:#666">=</span> max(g, x <span style="color:#666">-</span> l); <span style="color:#080;font-style:italic">// Update the maximum profit
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
+</span></span></code></pre></div><ul>
+<li><strong>Updating <code>l</code></strong>: For each price <code>x</code>, update <code>l</code> to be the minimum of the current price and <code>l</code>.</li>
+<li><strong>Updating <code>g</code></strong>: Calculate the potential profit (<code>x - l</code>) and update <code>g</code> if the current profit is greater than the previous maximum.</li>
+</ul>
+<h4 id="return-the-maximum-profit">
+  <strong>Return the Maximum Profit</strong>
+  <a class="heading-link" href="#return-the-maximum-profit">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> g;
+</span></span></code></pre></div><p>After iterating through all prices, return <code>g</code>, which holds the maximum profit.</p>
+<h3 id="-example-walkthrough">
+  🎬 <strong>Example Walkthrough</strong>
+  <a class="heading-link" href="#-example-walkthrough">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s walk through an example to see the algorithm in action.</p>
+<h4 id="input-prices--7-1-5-3-6-4">
+  <strong>Input</strong>: <code>prices = [7, 1, 5, 3, 6, 4]</code>
+  <a class="heading-link" href="#input-prices--7-1-5-3-6-4">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li><code>l = 7</code>, <code>g = 0</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate Over Prices</strong>:</p>
+<ul>
+<li>
+<p><strong>Price 7</strong>:</p>
+<ul>
+<li><code>l = min(7, 7) = 7</code></li>
+<li><code>g = max(0, 7 - 7) = 0</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Price 1</strong>:</p>
+<ul>
+<li><code>l = min(7, 1) = 1</code></li>
+<li><code>g = max(0, 1 - 1) = 0</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Price 5</strong>:</p>
+<ul>
+<li><code>l = min(1, 5) = 1</code></li>
+<li><code>g = max(0, 5 - 1) = 4</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Price 3</strong>:</p>
+<ul>
+<li><code>l = min(1, 3) = 1</code></li>
+<li><code>g = max(4, 3 - 1) = 4</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Price 6</strong>:</p>
+<ul>
+<li><code>l = min(1, 6) = 1</code></li>
+<li><code>g = max(4, 6 - 1) = 5</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Price 4</strong>:</p>
+<ul>
+<li><code>l = min(1, 4) = 1</code></li>
+<li><code>g = max(5, 4 - 1) = 5</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Output</strong>:</p>
+<ul>
+<li>The maximum profit is <code>5</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="-time-and-space-complexity">
+  ⏱️ <strong>Time and Space Complexity</strong>
+  <a class="heading-link" href="#-time-and-space-complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
 <li>
-<p><strong><code>maxProfit</code> function</strong>:</p>
+<p><strong>Time Complexity</strong>: <code>O(n)</code></p>
 <ul>
-<li><strong>Line 2</strong>: Initialize <code>l</code> to the first element of <code>prices</code> and <code>g</code> to 0.</li>
-<li><strong>Line 3</strong>: Loop through each price <code>x</code> in the <code>prices</code> vector.
-<ul>
-<li><strong>Line 4</strong>: Update <code>l</code> to the minimum of <code>l</code> and <code>x</code>.</li>
-<li><strong>Line 5</strong>: Update <code>g</code> to the maximum of <code>g</code> and the profit calculated as <code>x - l</code>.</li>
-</ul>
-</li>
+<li>We iterate through the array once, performing constant-time operations for each price.</li>
 </ul>
 </li>
 <li>
-<p><strong>Line 6</strong>: Return <code>g</code>, which represents the maximum profit.</p>
+<p><strong>Space Complexity</strong>: <code>O(1)</code></p>
+<ul>
+<li>We only use a few integer variables (<code>l</code> and <code>g</code>), so the space complexity remains constant.</li>
+</ul>
 </li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h3 id="-conclusion">
+  🏆 <strong>Conclusion</strong>
+  <a class="heading-link" href="#-conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: (O(N)), where (N) is the number of days (length of the <code>prices</code> array), as we make a single pass through the array.</li>
-<li><strong>Space Complexity</strong>: (O(1)), since we only use a constant amount of space for the variables <code>l</code> and <code>g</code>.</li>
-</ul>
+<p>This solution efficiently solves the problem of finding the maximum profit from a single buy and sell transaction. By iterating through the prices once and tracking the minimum price and maximum profit encountered, we achieve an optimal solution with time complexity <code>O(n)</code> and space complexity <code>O(1)</code>. This makes the algorithm both <strong>time-efficient</strong> and <strong>space-efficient</strong>, perfect for handling large inputs.</p>
+<hr>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode120s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode117s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

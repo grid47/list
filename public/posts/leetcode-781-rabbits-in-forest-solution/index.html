@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -265,7 +265,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given an array <code>answers</code>, where each element represents the number of rabbits that have the same color as a particular rabbit, and the value indicates how many other rabbits of that color are present. The task is to determine the minimum number of rabbits that could be present based on the answers provided.</p>
+<p>The problem involves determining the minimum number of rabbits that could be in a forest, given a list of answers to a question. Each rabbit in the forest is asked how many rabbits have the same color as them, and the number of rabbits that have the same color is known for each rabbit. The task is to find the minimum number of rabbits required to satisfy all the answers.</p>
+<p>In essence, for each rabbit&rsquo;s answer <code>x</code>, the rabbit claims that there are exactly <code>x</code> other rabbits with the same color. Therefore, a rabbit&rsquo;s answer tells you how many other rabbits share the same color. The goal is to calculate the smallest number of rabbits that satisfies all the answers, taking into account the fact that multiple rabbits may give the same answer.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -273,59 +274,112 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The approach to solving this problem is based on understanding how the answers can be grouped to minimize the number of rabbits. The idea is to consider that each rabbit&rsquo;s answer <code>x</code> tells us how many rabbits with the same color they expect to see. This leads to the conclusion that the number of rabbits with the same color must be at least <code>x + 1</code> (since the rabbit itself is also counted in the total number of rabbits with the same color).</p>
+<p>We can think of it as a process of grouping rabbits with the same answer. For each unique answer <code>x</code>, we need to calculate how many groups of <code>x + 1</code> rabbits we would need to satisfy the answer <code>x</code>.</p>
+<p>To do this, we will count how many times each answer occurs and then, for each answer <code>x</code>, calculate the number of full groups of size <code>x + 1</code> required to accommodate all rabbits who gave that answer. The minimum number of rabbits is the sum of the rabbits in all such groups.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The code below implements the approach described:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> numRabbits(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> answers) {
+</span></span><span style="display:flex;"><span>        unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> c;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">i</span> : answers)
+</span></span><span style="display:flex;"><span>            c[i]<span style="color:#666">++</span>;  <span style="color:#080;font-style:italic">// Count how many times each answer appears
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">i</span> : c) {
+</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">// For each unique answer x, calculate how many groups of size x + 1 we need
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            res <span style="color:#666">+=</span> (i.second <span style="color:#666">+</span> i.first) <span style="color:#666">/</span> (i.first <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">*</span> (i.first <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h4 id="step-by-step-explanation">
+  Step-by-Step Explanation
+  <a class="heading-link" href="#step-by-step-explanation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Counting Responses</strong>:</p>
+<p><strong>Count the Frequency of Answers</strong>:</p>
 <ul>
-<li>Use an unordered map to count how many times each answer appears. This gives insight into how many rabbits reported the same color.</li>
+<li>The <code>unordered_map&lt;int, int&gt; c;</code> is used to store the frequency of each unique answer in the <code>answers</code> array.</li>
+<li>The loop <code>for (int i : answers) c[i]++;</code> iterates through the <code>answers</code> array and counts how many times each answer appears. The key <code>i</code> in the map represents an answer, and the value <code>c[i]</code> represents how many times that answer appears.</li>
 </ul>
 </li>
 <li>
-<p><strong>Calculating Minimum Rabbits</strong>:</p>
+<p><strong>Calculating the Minimum Number of Rabbits</strong>:</p>
 <ul>
-<li>For each unique answer, calculate the minimum number of rabbits that must exist:
+<li>After counting the frequencies, the algorithm needs to calculate the total number of rabbits.</li>
+<li>The loop <code>for (auto i : c)</code> iterates over each unique answer (the key <code>i.first</code>) and its frequency (the value <code>i.second</code>).</li>
+<li>For each answer <code>x</code>, we need to calculate the number of full groups of size <code>x + 1</code> (since each group must consist of at least <code>x + 1</code> rabbits).</li>
+<li>The formula <code>(i.second + i.first) / (i.first + 1) * (i.first + 1)</code> computes how many full groups of size <code>x + 1</code> are required for <code>i.second</code> rabbits who gave answer <code>x</code>.
 <ul>
-<li>If <code>i.first</code> is the answer (indicating that the rabbit says there are <code>i.first</code> other rabbits of the same color), then:
-<ul>
-<li>The total number of rabbits for that color would be the ceiling of the number of responses divided by the group size (i.e., <code>i.first + 1</code>), multiplied by the group size.</li>
-</ul>
-</li>
+<li><code>(i.second + i.first) / (i.first + 1)</code> gives the number of full groups needed to fit all rabbits that gave the answer <code>x</code>.</li>
+<li>Multiplying by <code>(i.first + 1)</code> gives the total number of rabbits in those full groups.</li>
 </ul>
 </li>
 </ul>
 </li>
 <li>
-<p><strong>Summing Up</strong>:</p>
+<p><strong>Summing the Results</strong>:</p>
 <ul>
-<li>Accumulate the results from all unique answers to get the total minimum number of rabbits.</li>
+<li>The total number of rabbits is accumulated in the variable <code>res</code>, which is initialized to 0.</li>
+<li>For each unique answer, the number of rabbits required is added to <code>res</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>After processing all answers, the value of <code>res</code> is returned, which represents the minimum number of rabbits that could satisfy the given answers.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Methods</strong>:
+<li><strong>O(n)</strong>: The algorithm involves iterating through the <code>answers</code> array once to count the frequencies, which takes O(n) time, where <code>n</code> is the number of elements in the array. Then, the second loop iterates over the distinct answers (which can be at most <code>n</code> distinct answers), and for each answer, it performs a constant amount of work (a few arithmetic operations). Therefore, the overall time complexity is O(n), where <code>n</code> is the size of the <code>answers</code> array.</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><code>int numRabbits(vector&lt;int&gt;&amp; answers)</code>: The main function that processes the input <code>answers</code> to compute the minimum number of rabbits.</li>
+<li><strong>O(m)</strong>: The space complexity is determined by the space used to store the frequencies of each answer. In the worst case, all the answers could be distinct, requiring O(n) space to store them in the <code>unordered_map</code>. Therefore, the space complexity is O(m), where <code>m</code> is the number of distinct answers.</li>
 </ul>
-</li>
-</ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the number of elements in the <code>answers</code> array, since we traverse the array and the map of counts.</li>
-<li><strong>Space Complexity</strong>: O(k), where k is the number of unique answers stored in the map.</li>
-</ul>
+<p>The problem asks us to compute the minimum number of rabbits that could satisfy the given answers based on certain constraints. The approach described efficiently solves the problem using a hash map to count the frequencies of each answer, followed by calculating the number of full groups of size <code>x + 1</code> needed to accommodate all rabbits for each answer <code>x</code>.</p>
+<p>The solution operates in linear time, O(n), making it well-suited for large inputs, as it processes the answers array in a single pass. The space complexity is O(m), where <code>m</code> is the number of distinct answers, which is efficient and scalable.</p>
+<p>By understanding how to group rabbits based on their answers and ensuring that each group consists of at least <code>x + 1</code> rabbits, we can derive the minimum number of rabbits required. This approach guarantees an optimal solution to the problem.</p>
  
 </div>
   

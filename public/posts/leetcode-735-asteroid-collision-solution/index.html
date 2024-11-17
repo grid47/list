@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -216,7 +216,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1295s0hbhb">
+        <h2 id="hahahugoshortcode1293s0hbhb">
   <a href="https://leetcode.com/problems/asteroid-collision/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -231,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1295s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1293s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -274,7 +274,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> stk;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1295s2hbhb">
+<h2 id="hahahugoshortcode1293s2hbhb">
   
 
   
@@ -286,7 +286,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Implement a function to simulate the collision of asteroids represented by integers in an array. Positive integers represent moving right, and negative integers represent moving left. When two asteroids collide, the larger one survives, and the smaller one is destroyed. If they are equal, both are destroyed.</p>
+<p>The problem at hand involves simulating the <strong>asteroid collision</strong> phenomenon. Imagine a universe where asteroids are moving in a straight line, either to the left or right. Each asteroid has a size and direction. When two asteroids collide, they destroy each other if their sizes are unequal, or both are destroyed if they are of the same size. The goal is to determine the final configuration of asteroids after all collisions have occurred.</p>
+<p>Given an array <code>ast</code> representing asteroids where each element represents the size and direction of an asteroid, the task is to return an array representing the state of the asteroids after all collisions.</p>
+<ul>
+<li>Positive values indicate asteroids moving right.</li>
+<li>Negative values indicate asteroids moving left.</li>
+<li>When two asteroids collide, the one with the smaller absolute size will be destroyed, or both will be destroyed if they have the same size.</li>
+</ul>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -294,50 +300,96 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The approach to solving this problem involves using a <strong>stack data structure</strong> to simulate the sequence of asteroid movements and collisions. The stack helps track the asteroids that are moving right, and whenever a left-moving asteroid is encountered, a collision is checked.</p>
+<p>Here’s the detailed approach:</p>
 <ol>
 <li>
-<p><strong>Using a Stack</strong>:</p>
+<p><strong>Iterate through the asteroids:</strong></p>
 <ul>
-<li>Utilize a stack to keep track of the asteroids that survive after collisions.</li>
-<li>Iterate through each asteroid and determine its behavior based on the current state of the stack.</li>
+<li>Traverse through each asteroid in the given array one by one.</li>
 </ul>
 </li>
 <li>
-<p><strong>Collision Logic</strong>:</p>
+<p><strong>Handle collisions:</strong></p>
 <ul>
-<li>If the current asteroid is moving left (negative) and the top of the stack is moving right (positive), check for collisions.</li>
-<li>Pop from the stack until the current asteroid either:
+<li>If the asteroid is moving right, it can safely move without any collision. So, simply push it onto the stack.</li>
+<li>If the asteroid is moving left:
 <ul>
-<li>Survives (if it&rsquo;s larger than the top of the stack).</li>
-<li>Collides and is destroyed (if it&rsquo;s smaller).</li>
-<li>Matches the size of the top asteroid (both are destroyed).</li>
+<li>Check the top of the stack (which will be an asteroid moving right). If it’s smaller in size than the current left-moving asteroid, it will be destroyed.</li>
+<li>If both the left-moving and right-moving asteroids are of the same size, both will be destroyed.</li>
+<li>If the right-moving asteroid is larger, the left-moving asteroid will be destroyed, and no collision happens with further asteroids in the stack.</li>
 </ul>
 </li>
-<li>If no collision occurs (i.e., the current asteroid is moving right or the stack is empty), push the current asteroid onto the stack.</li>
+</ul>
+</li>
+<li>
+<p><strong>Collision conditions:</strong></p>
+<ul>
+<li>For each asteroid:
+<ul>
+<li>If it’s moving left, check if it collides with any of the asteroids in the stack (which are moving right).</li>
+<li>A collision happens if the asteroid in the stack is smaller, and the asteroid being processed is moving left. In that case, the smaller asteroid is popped off the stack, and the process is repeated until no more collisions occur or the stack is empty.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the result:</strong></p>
+<ul>
+<li>After processing all asteroids, the stack will contain the final configuration of the asteroids.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>This approach ensures that the solution runs in linear time as each asteroid is processed once and only pushed/popped from the stack once.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
+<ol>
 <li>
-<p><strong>Class</strong>:</p>
-<ul>
-<li><code>class Solution</code>: Contains the method for asteroid collision handling.</li>
-</ul>
-</li>
+<p><strong>Variable Initialization:</strong>
+The function begins by initializing a stack <code>stk</code> to hold the asteroids and a variable <code>dir</code> to help determine the direction (though it&rsquo;s not used in this implementation).</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> stk;  <span style="color:#080;font-style:italic">// Stack to hold the asteroids
+</span></span></span></code></pre></div></li>
 <li>
-<p><strong>Methods</strong>:</p>
+<p><strong>Looping through the Asteroids:</strong>
+The main loop iterates over each asteroid in the given vector <code>ast</code>.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">a</span> : ast) {
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Handling Collisions:</strong>
+Inside the loop, a <code>while</code> loop checks if a collision occurs between the current asteroid <code>a</code> (moving left) and the top of the stack (which contains asteroids moving right). If a collision happens, the stack is modified.</p>
 <ul>
-<li><code>vector&lt;int&gt; asteroidCollision(vector&lt;int&gt;&amp; ast)</code>: Main method that processes the asteroid collisions and returns the resulting array.</li>
+<li><strong>Condition for Collision:</strong> A collision happens when the top of the stack is a right-moving asteroid (i.e., positive), and the current asteroid <code>a</code> is a left-moving asteroid (i.e., negative).</li>
 </ul>
-</li>
-</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> (((<span style="color:#0b0;font-weight:bold">double</span>)stk.back()<span style="color:#666">/</span>a) <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> a <span style="color:#666">&lt;</span> <span style="color:#666">0</span>) <span style="color:#666">&amp;&amp;</span> (abs(stk.back()) <span style="color:#666">&lt;</span> abs(a))) {
+</span></span><span style="display:flex;"><span>    stk.pop_back();  <span style="color:#080;font-style:italic">// Destroy the right-moving asteroid
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Handling Equal-sized Collisions:</strong>
+If an asteroid on the stack has the same size as the incoming asteroid (moving left), both will be destroyed. The asteroid in the stack is popped, and the loop continues.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> (stk.back() <span style="color:#666">==</span> <span style="color:#666">-</span>a <span style="color:#666">&amp;&amp;</span> a <span style="color:#666">&lt;</span> <span style="color:#666">0</span>)) {
+</span></span><span style="display:flex;"><span>    stk.pop_back();  <span style="color:#080;font-style:italic">// Destroy both asteroids of equal size
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">continue</span>;  <span style="color:#080;font-style:italic">// Skip to the next asteroid
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Pushing the Asteroid onto the Stack:</strong>
+If there is no collision or the collision results in the destruction of the incoming asteroid, the current asteroid is added to the stack.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (stk.empty() <span style="color:#666">||</span> ((<span style="color:#0b0;font-weight:bold">double</span>)stk.back()<span style="color:#666">/</span>a <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) <span style="color:#666">||</span> ((<span style="color:#0b0;font-weight:bold">double</span>)stk.back()<span style="color:#666">/</span>a <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> a <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)) {
+</span></span><span style="display:flex;"><span>    stk.push_back(a);  <span style="color:#080;font-style:italic">// No collision, add to stack
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Returning the Result:</strong>
+Finally, the stack is returned, representing the final configuration of the asteroids after all collisions have been resolved.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> stk;
+</span></span></code></pre></div></li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -345,15 +397,41 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(N), where N is the number of asteroids, as each asteroid is processed once.</li>
-<li><strong>Space Complexity</strong>: O(N) in the worst case for the stack when no collisions occur.</li>
+<li><strong>O(n)</strong>, where <code>n</code> is the number of asteroids in the input array.</li>
+<li>Each asteroid is processed once, and every operation (push or pop) on the stack takes constant time, so the time complexity is linear.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>, as we are using a stack to hold the asteroids. In the worst case, when no collisions occur, all asteroids will be placed in the stack, requiring O(n) space.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <strong>asteroid collision problem</strong> is a classic example of how stack data structures can be used to simulate a sequence of events where the order and interactions between elements matter. The solution efficiently handles asteroid collisions in a linear time complexity by using a stack to manage the state of asteroids and handle conflicts between left- and right-moving asteroids.</p>
+<p>By processing each asteroid once and applying the collision logic based on simple comparisons of sizes and directions, this approach ensures correctness and optimal performance. This technique is not only applicable to asteroid problems but can also be extended to other collision-based simulations, making it a versatile solution for related problems.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1295s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1293s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

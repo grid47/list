@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -248,50 +248,169 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-statement">
+  🚀 Problem Statement
+  <a class="heading-link" href="#-problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Determine if a given integer is a power of four.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>In this problem, we&rsquo;re asked to check if a given number <code>num</code> is a power of four. A number is considered a power of four if it can be expressed as <code>4^x</code> where <code>x</code> is a non-negative integer. Essentially, we need to determine if there exists an integer <code>x</code> such that <code>num == 4^x</code>.</p>
+<h4 id="example">
+  Example:
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><code>16</code> is a power of four because it can be expressed as <code>4^2</code>.</li>
+<li><code>5</code> is <strong>not</strong> a power of four because no such integer <code>x</code> exists where <code>4^x == 5</code>.</li>
+</ul>
+<hr>
+<h3 id="-approach">
+  🧠 Approach
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To check if a number is a power of four, we can use bitwise operations:</p>
+<p>We can solve this problem efficiently by leveraging two key properties of numbers:</p>
 <ol>
-<li><strong>Positive Check</strong>: The number must be greater than zero.</li>
-<li><strong>Power of Two Check</strong>: The number must be a power of two. This can be determined using the condition ( (num &amp; (num - 1)) == 0 ), which checks if there is only one bit set in <code>num</code>.</li>
-<li><strong>Power of Four Check</strong>: For a number to be a power of four, if it is a power of two, then the position of the set bit must be even. This can be checked using ( (num - 1) % 3 == 0 ).</li>
+<li>
+<p><strong>Power of Two Property</strong>:</p>
+<ul>
+<li>A power of four is always a power of two. This means that if a number is a power of four, it will have exactly one <code>1</code> bit set in its binary representation.</li>
+<li>You can check if a number is a power of two using the condition <code>num &amp; (num - 1) == 0</code>, which works because numbers that are powers of two have only one <code>1</code> bit.</li>
+</ul>
+</li>
+<li>
+<p><strong>Divisibility by Three</strong>:</p>
+<ul>
+<li>When you subtract 1 from a power of four, the result is always divisible by 3. For example:
+<ul>
+<li><code>4^1 = 4</code>, and <code>4 - 1 = 3</code>, which is divisible by 3.</li>
+<li><code>4^2 = 16</code>, and <code>16 - 1 = 15</code>, which is divisible by 3.</li>
+<li><code>4^3 = 64</code>, and <code>64 - 1 = 63</code>, which is divisible by 3.</li>
+</ul>
+</li>
+<li>So, if <code>num - 1</code> is divisible by 3, it&rsquo;s a good indicator that <code>num</code> is a power of four.</li>
+</ul>
+</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>By combining these properties, we can check if a number is a power of four in a very efficient manner!</p>
+<hr>
+<h3 id="-step-by-step-code-breakdown">
+  🔨 Step-by-Step Code Breakdown
+  <a class="heading-link" href="#-step-by-step-code-breakdown">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The function first checks if <code>num</code> is greater than zero.</li>
-<li>It then verifies that <code>num</code> is a power of two by ensuring that only one bit is set.</li>
-<li>Finally, it checks that the number can be expressed as ( 4^k ) by ensuring that ( (num - 1) ) is divisible by 3.</li>
+<p>Let’s walk through the code that implements this solution:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isPowerOfFour</span>(<span style="color:#0b0;font-weight:bold">int</span> num) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> num <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> (num <span style="color:#666">&amp;</span> (num <span style="color:#666">-</span> <span style="color:#666">1</span>)) <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> (num <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">%</span> <span style="color:#666">3</span> <span style="color:#666">==</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h4 id="step-1-check-if-num-is-positive">
+  Step 1: Check if <code>num</code> is positive
+  <a class="heading-link" href="#step-1-check-if-num-is-positive">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>num <span style="color:#666">&gt;</span> <span style="color:#666">0</span>
+</span></span></code></pre></div><ul>
+<li>We first check if <code>num</code> is greater than zero. Powers of four are always positive, so if <code>num</code> is non-positive, we immediately return <code>false</code>.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-2-check-if-num-is-a-power-of-two">
+  Step 2: Check if <code>num</code> is a power of two
+  <a class="heading-link" href="#step-2-check-if-num-is-a-power-of-two">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>(num <span style="color:#666">&amp;</span> (num <span style="color:#666">-</span> <span style="color:#666">1</span>)) <span style="color:#666">==</span> <span style="color:#666">0</span>
+</span></span></code></pre></div><ul>
+<li>This bitwise operation checks if <code>num</code> is a power of two. It works because numbers that are powers of two have only one <code>1</code> bit in their binary representation.</li>
+<li>For example, <code>16</code> (which is <code>10000</code> in binary) and <code>8</code> (which is <code>1000</code> in binary) will satisfy this condition because subtracting <code>1</code> from these numbers flips all the bits to the right of the highest <code>1</code> bit, leaving no common bits.</li>
+</ul>
+<h4 id="step-3-check-if-num---1-is-divisible-by-3">
+  Step 3: Check if <code>num - 1</code> is divisible by 3
+  <a class="heading-link" href="#step-3-check-if-num---1-is-divisible-by-3">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>(num <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">%</span> <span style="color:#666">3</span> <span style="color:#666">==</span> <span style="color:#666">0</span>
+</span></span></code></pre></div><ul>
+<li>This checks if the number <code>num - 1</code> is divisible by 3. As we mentioned earlier, subtracting 1 from a power of four always results in a number that is divisible by 3.</li>
+</ul>
+<h4 id="final-return-value">
+  Final Return Value:
+  <a class="heading-link" href="#final-return-value">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The function will return <code>true</code> if all three conditions are satisfied:
+<ol>
+<li><code>num</code> is positive.</li>
+<li><code>num</code> is a power of two.</li>
+<li><code>num - 1</code> is divisible by 3.</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h3 id="-complexity-analysis">
+  📈 Complexity Analysis
+  <a class="heading-link" href="#-complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: ( O(1) ) since we only perform a constant number of operations.</li>
-<li><strong>Space Complexity</strong>: ( O(1) ) as no additional space is used.</li>
+<li><strong>O(1)</strong>: The function only performs a few simple operations—each of which runs in constant time. So, the overall time complexity is constant.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: We only use a few variables and a constant amount of space to perform the checks, so the space complexity is constant as well.</li>
+</ul>
+<hr>
+<h3 id="-conclusion">
+  🏁 Conclusion
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>We’ve successfully solved the problem using an efficient approach based on bitwise operations and modular arithmetic. Here’s a recap:</p>
+<h4 id="key-points">
+  Key Points:
+  <a class="heading-link" href="#key-points">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Power of Two</strong>: A power of four is always a power of two. We can check if a number is a power of two using a simple bitwise operation.</li>
+<li><strong>Divisibility by Three</strong>: The difference between any power of four and one is divisible by 3, which helps us identify powers of four specifically.</li>
+<li><strong>Efficiency</strong>: The solution works in constant time and uses constant space, making it optimal.</li>
+</ul>
+<p>By mastering this approach, you&rsquo;ll be able to quickly determine if a number is a power of four—perfect for performance-critical applications or coding interviews! Keep practicing and improving your problem-solving skills! 💪🚀</p>
  
 </div>
   

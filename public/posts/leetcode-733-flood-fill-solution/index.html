@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -221,7 +221,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1294s0hbhb">
+        <h2 id="hahahugoshortcode1292s0hbhb">
   <a href="https://leetcode.com/problems/flood-fill/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -236,7 +236,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1294s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1292s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -263,7 +263,7 @@
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1294s2hbhb">
+<h2 id="hahahugoshortcode1292s2hbhb">
   
 
   
@@ -275,7 +275,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Implement the flood fill algorithm, which replaces the color of a pixel (and any adjacent pixels with the same color) in a 2D image with a new color.</p>
+<p>The problem is based on the classic <strong>Flood Fill</strong> algorithm, commonly used in image processing and computer graphics. The task is to perform a flood fill starting from a given pixel in a 2D grid (image) and fill all connected pixels that have the same initial color with a new color. The flood fill should be performed in four directions: up, down, left, and right. The goal is to return the image after performing the flood fill operation.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -283,41 +283,108 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The flood fill operation can be achieved using either a <strong>Breadth-First Search (BFS)</strong> or a <strong>Depth-First Search (DFS)</strong> algorithm. In this case, the DFS approach is used to explore the connected components starting from the given pixel and recursively fill all connected pixels that share the same initial color.</p>
+<h4 id="steps-involved">
+  Steps Involved:
+  <a class="heading-link" href="#steps-involved">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Initial Check</strong>:</p>
-<ul>
-<li>If the new color is the same as the original color of the pixel at the starting position, return the image immediately to avoid unnecessary processing.</li>
-</ul>
+<p><strong>Check for the base condition:</strong>
+If the color to fill is the same as the color of the starting pixel, then there&rsquo;s no need to modify the image, and we can return the image as is.</p>
 </li>
 <li>
-<p><strong>Depth-First Search (DFS)</strong>:</p>
-<ul>
-<li>Use a recursive DFS function to explore all connected pixels of the same color.</li>
-<li>Change the color of the current pixel and recursively call the DFS function for adjacent pixels (up, down, left, right).</li>
-</ul>
+<p><strong>Depth-First Search (DFS):</strong>
+Start from the given pixel and explore all its neighbors. If the neighboring pixel has the same initial color, change its color to the new color and recursively explore its neighbors. This continues until all connected pixels are filled.</p>
+</li>
+<li>
+<p><strong>Direction of exploration:</strong>
+The flood fill explores the four possible directions (up, down, left, and right) from any pixel. If a neighbor is within the bounds of the image and has the same color as the starting pixel, it is recursively filled.</p>
+</li>
+<li>
+<p><strong>Boundary checks:</strong>
+Ensure that the current pixel is within the valid boundaries of the image (i.e., it should not go out of bounds).</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>By following this approach, we efficiently fill the connected regions in the image, and the solution has a linear time complexity proportional to the size of the image.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="1-the-floodfill-function">
+  1. <strong>The <code>floodFill</code> Function</strong>
+  <a class="heading-link" href="#1-the-floodfill-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li>
-<p><strong>Class</strong>:</p>
-<ul>
-<li><code>class Solution</code>: Contains methods for flood fill.</li>
+<li>This is the main function that initiates the flood fill process.</li>
+<li>It takes the image (a 2D vector), the starting row (<code>sr</code>), starting column (<code>sc</code>), and the new color to fill (<code>color</code>).</li>
+<li>Before starting the DFS, the function checks whether the new color is the same as the current color of the starting pixel (<code>image[sr][sc]</code>). If they are the same, the image is returned as is because no change is needed.</li>
 </ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> floodFill(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> image, <span style="color:#0b0;font-weight:bold">int</span> sr, <span style="color:#0b0;font-weight:bold">int</span> sc, <span style="color:#0b0;font-weight:bold">int</span> color) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(color <span style="color:#666">==</span> image[sr][sc]) <span style="color:#a2f;font-weight:bold">return</span> image;  <span style="color:#080;font-style:italic">// Base case: If the target color is the same as the current color, return the image
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    dfs(image, sr, sc, color, image[sr][sc]);  <span style="color:#080;font-style:italic">// Call DFS to perform the flood fill
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">return</span> image;  <span style="color:#080;font-style:italic">// Return the updated image
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
+</span></span></code></pre></div><ul>
+<li>If the initial pixel&rsquo;s color is different from the new color, the DFS function is called with the starting pixel coordinates, new color, and the current color of the starting pixel.</li>
+</ul>
+<h4 id="2-the-dfs-depth-first-search-function">
+  2. <strong>The <code>dfs</code> (Depth-First Search) Function</strong>
+  <a class="heading-link" href="#2-the-dfs-depth-first-search-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The <code>dfs</code> function is the core of the flood fill process. It recursively explores the neighboring pixels and fills them if they match the initial color.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span> img, <span style="color:#0b0;font-weight:bold">int</span> r, <span style="color:#0b0;font-weight:bold">int</span> c, <span style="color:#0b0;font-weight:bold">int</span> color, <span style="color:#0b0;font-weight:bold">int</span> node) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> img.size(), n <span style="color:#666">=</span> img[<span style="color:#666">0</span>].size();  <span style="color:#080;font-style:italic">// Get the dimensions of the image
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">if</span> (r <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> c <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> r <span style="color:#666">==</span> m <span style="color:#666">||</span> c <span style="color:#666">==</span> n <span style="color:#666">||</span> img[r][c] <span style="color:#666">!=</span> node) <span style="color:#a2f;font-weight:bold">return</span>;  <span style="color:#080;font-style:italic">// Base case: Boundary or mismatched color
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    
+</span></span><span style="display:flex;"><span>    img[r][c] <span style="color:#666">=</span> color;  <span style="color:#080;font-style:italic">// Fill the current pixel with the new color
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    
+</span></span><span style="display:flex;"><span>    dfs(img, r <span style="color:#666">+</span> <span style="color:#666">1</span>, c, color, node);  <span style="color:#080;font-style:italic">// Explore the pixel below (down)
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    dfs(img, r, c <span style="color:#666">+</span> <span style="color:#666">1</span>, color, node);  <span style="color:#080;font-style:italic">// Explore the pixel to the right (right)
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    dfs(img, r <span style="color:#666">-</span> <span style="color:#666">1</span>, c, color, node);  <span style="color:#080;font-style:italic">// Explore the pixel above (up)
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    dfs(img, r, c <span style="color:#666">-</span> <span style="color:#666">1</span>, color, node);  <span style="color:#080;font-style:italic">// Explore the pixel to the left (left)
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Base Condition:</strong>
+The function first checks if the current pixel is out of bounds or if it doesn&rsquo;t match the initial color (i.e., <code>img[r][c] != node</code>). If any of these conditions are true, it simply returns without doing anything.</p>
 </li>
 <li>
-<p><strong>Methods</strong>:</p>
-<ul>
-<li><code>vector&lt;vector&lt;int&gt;&gt; floodFill(...)</code>: Main method that initializes the process.</li>
-<li><code>void dfs(...)</code>: Recursive helper function that performs the flood fill operation.</li>
+<p><strong>Recursion:</strong>
+If the current pixel matches the initial color (<code>node</code>), it is filled with the new color (<code>color</code>). The DFS function is then called recursively for the neighboring pixels in all four directions (up, down, left, and right).</p>
+</li>
+<li>
+<p><strong>Termination:</strong>
+The recursion terminates when all reachable pixels with the same color as the starting pixel are filled.</p>
+</li>
 </ul>
+<h4 id="3-the-recursive-process">
+  3. <strong>The Recursive Process</strong>
+  <a class="heading-link" href="#3-the-recursive-process">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>
+<p>Starting from the pixel at <code>(sr, sc)</code>, the <code>dfs</code> function works recursively to fill all connected pixels that have the same initial color. The recursion explores all directions (up, down, left, and right) until all connected pixels are processed.</p>
+</li>
+<li>
+<p>Once all reachable pixels are filled, the function returns, and the updated image is returned from the <code>floodFill</code> function.</p>
 </li>
 </ul>
 <h3 id="complexity">
@@ -327,15 +394,43 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(M * N), where M is the number of rows and N is the number of columns in the image. In the worst case, all pixels are colored.</li>
-<li><strong>Space Complexity</strong>: O(M * N) for the recursion stack in the worst case (entire image is one connected component).</li>
+<li>The time complexity of the flood fill operation is <strong>O(m * n)</strong>, where <code>m</code> is the number of rows and <code>n</code> is the number of columns in the image.</li>
+<li>In the worst case, all pixels in the image need to be visited, which is why the time complexity is proportional to the total number of pixels.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <strong>O(m * n)</strong> in the worst case, due to the space required by the recursion stack in the DFS. If the entire image is a single connected region, the recursion depth could reach <code>m * n</code>, causing the space complexity to be proportional to the number of pixels.</li>
+<li>In practice, the space complexity may be smaller if fewer pixels are visited.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The flood fill algorithm efficiently modifies a 2D grid by starting from a given pixel and recursively filling all connected pixels with the same color using DFS. This solution is particularly useful in scenarios like image editing, where we need to change the color of a specific region in an image.</p>
+<p>The approach uses recursion to explore all four directions from the starting pixel and fill all connected pixels, ensuring that no pixel is missed. The solution is efficient, with a time complexity of <strong>O(m * n)</strong>, where <code>m</code> and <code>n</code> are the dimensions of the image.</p>
+<p>This code provides a robust method for performing flood fills in grid-based problems and can be extended to various applications such as image processing, game development (e.g., area filling), and other grid-based algorithms.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1294s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1292s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

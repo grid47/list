@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -271,7 +271,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1387s1hbhb">
+<h2 id="hahahugoshortcode1385s1hbhb">
   
 
   
@@ -283,7 +283,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a set of <code>n</code> people and a list of dislikes represented as pairs, determine if it is possible to divide these people into two groups such that no two people in the same group dislike each other.</p>
+<p>The problem asks whether it is possible to divide a group of <code>n</code> people into two groups such that no two people who dislike each other are in the same group. Each person is identified by an integer from 1 to <code>n</code>, and a list of dislikes between pairs of people is provided. The goal is to determine if a valid bipartition (division into two groups) exists such that all pairs of people who dislike each other end up in separate groups.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -291,40 +291,100 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The solution employs a Union-Find (Disjoint Set Union, DSU) data structure to manage the grouping of people:</p>
+<p>This problem is a typical graph bipartition problem, where the goal is to determine whether a graph is bipartite. A graph is bipartite if we can divide its set of vertices into two disjoint sets such that no two vertices within the same set are adjacent.</p>
+<p>In this problem:</p>
+<ul>
+<li>Each person is a node.</li>
+<li>A dislike relationship between two people is represented by an undirected edge between two nodes.</li>
+<li>The task is to check whether it&rsquo;s possible to color this graph with two colors such that no two adjacent nodes (people who dislike each other) have the same color.</li>
+</ul>
+<p>We can solve this problem using a <strong>Union-Find</strong> (also known as <strong>Disjoint Set Union - DSU</strong>) data structure, which efficiently supports the operations of finding the parent of a node and merging two sets. The strategy is:</p>
 <ol>
-<li>
-<p><strong>Initialization</strong>: Create a Union-Find structure to handle the relationships and keep track of the connected components.</p>
-</li>
-<li>
-<p><strong>Graph Representation</strong>:</p>
-<ul>
-<li>Construct an adjacency list representation of the dislikes. Each person is a node, and an edge exists between two nodes if they dislike each other.</li>
-</ul>
-</li>
-<li>
-<p><strong>Union-Find Operations</strong>:</p>
-<ul>
-<li>For each dislike pair, use the <code>find</code> operation to check if both people belong to the same group.</li>
-<li>If they are in the same group, return <code>false</code> as it would create a conflict.</li>
-<li>If they are not in the same group, use the <code>uni</code> operation to merge their groups.</li>
-</ul>
-</li>
-<li>
-<p><strong>Final Check</strong>: If all pairs can be processed without conflicts, return <code>true</code>.</p>
-</li>
+<li>Use Union-Find to track connected components of the graph.</li>
+<li>If two people dislike each other, they must belong to different sets.</li>
+<li>If we ever find that two people who dislike each other are in the same set, then the graph is not bipartite, and we return <code>false</code>.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The <code>UF</code> class implements the union-find structure with path compression to efficiently manage and find components.</li>
-<li>The <code>possibleBipartition</code> function processes the dislike pairs and utilizes union-find to check for possible bipartitioning.</li>
-</ul>
+<h4 id="union-find-data-structure-uf-class">
+  <strong>Union-Find Data Structure (UF Class)</strong>
+  <a class="heading-link" href="#union-find-data-structure-uf-class">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>UF(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>    chd.resize(n, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        chd[i] <span style="color:#666">=</span> i;
+</span></span><span style="display:flex;"><span>    cnt <span style="color:#666">=</span> n;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The <code>UF</code> class is initialized with <code>n</code> elements. The <code>chd</code> vector stores the parent for each node, initially setting each node as its own parent (i.e., each node is its own representative in the set). The <code>cnt</code> variable tracks the number of disjoint sets.</p>
+</li>
+<li>
+<p><strong>Find Operation</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">find</span>(<span style="color:#0b0;font-weight:bold">int</span> x) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">==</span> chd[x]) <span style="color:#a2f;font-weight:bold">return</span> x;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> chd[x] <span style="color:#666">=</span> find(chd[x]);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The <code>find</code> function recursively finds the root of the set that <code>x</code> belongs to. It uses path compression, meaning that it flattens the structure of the tree to make future queries faster.</p>
+</li>
+<li>
+<p><strong>Union Operation</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">uni</span>(<span style="color:#0b0;font-weight:bold">int</span> x, <span style="color:#0b0;font-weight:bold">int</span> y) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> find(x);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> find(y);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">!=</span> j) {
+</span></span><span style="display:flex;"><span>        chd[i] <span style="color:#666">=</span> j;
+</span></span><span style="display:flex;"><span>        cnt<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The <code>uni</code> function connects two nodes <code>x</code> and <code>y</code>. If <code>x</code> and <code>y</code> are not already in the same set, it merges their sets by making <code>x</code>&rsquo;s root point to <code>y</code>&rsquo;s root and decreases the count of disjoint sets. If <code>x</code> and <code>y</code> are already in the same set, it returns <code>false</code>.</p>
+</li>
+</ol>
+<h4 id="main-solution-possiblebipartition-function">
+  <strong>Main Solution (possibleBipartition Function)</strong>
+  <a class="heading-link" href="#main-solution-possiblebipartition-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ol>
+<li>
+<p><strong>Graph Representation</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> gph(n <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> dlk.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    gph[dlk[i][<span style="color:#666">0</span>]].push_back(dlk[i][<span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>    gph[dlk[i][<span style="color:#666">1</span>]].push_back(dlk[i][<span style="color:#666">0</span>]);            
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The function starts by building an adjacency list <code>gph</code> from the list of dislikes. This list represents an undirected graph where each person (node) is connected to other people (nodes) they dislike.</p>
+</li>
+<li>
+<p><strong>Union-Find Traversal</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: gph[i]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(uf<span style="color:#666">-&gt;</span>find(x) <span style="color:#666">==</span> uf<span style="color:#666">-&gt;</span>find(i)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>        uf<span style="color:#666">-&gt;</span>uni(gph[i][<span style="color:#666">0</span>], x);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>The main traversal begins with each person <code>i</code>. For each person <code>i</code>, the algorithm checks all their disliked people (adjacent nodes in the graph). If two people who dislike each other belong to the same set (i.e., they are in the same group), it returns <code>false</code> because this violates the bipartition condition.</p>
+<p>If the two people who dislike each other are in different sets, we use the <code>union</code> operation to connect them, effectively marking them as belonging to opposite groups.</p>
+</li>
+<li>
+<p><strong>Return Statement</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span></code></pre></div><p>If no conflicts are found during the entire traversal, it means that the bipartition is possible, and the function returns <code>true</code>.</p>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -332,15 +392,27 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The time complexity of the solution is <strong>O((n + m) * α(n))</strong>, where:</p>
 <ul>
-<li><strong>Time Complexity</strong>: ( O(N + E) ), where ( N ) is the number of people and ( E ) is the number of dislike pairs. Each union and find operation is almost constant time due to path compression.</li>
-<li><strong>Space Complexity</strong>: ( O(N) ) for the union-find structure and graph representation.</li>
+<li><code>n</code> is the number of people.</li>
+<li><code>m</code> is the number of dislike pairs.</li>
+<li><code>α(n)</code> is the inverse Ackermann function, which grows very slowly, making the union-find operations effectively constant time for practical purposes.</li>
 </ul>
+<p>Thus, the solution is highly efficient, even for larger values of <code>n</code> and <code>m</code>.</p>
+<p>The space complexity is <strong>O(n + m)</strong> due to the adjacency list used to represent the graph and the <code>UF</code> data structure.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively solves the bipartition problem by leveraging the Union-Find data structure, ensuring that it can efficiently track the connected components and check for conflicts in the bipartition. The use of path compression and union by rank in the Union-Find operations makes the solution optimal for large inputs. The approach guarantees that we can determine whether it&rsquo;s possible to divide the group into two disjoint sets where no two people who dislike each other end up in the same set.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1387s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1385s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

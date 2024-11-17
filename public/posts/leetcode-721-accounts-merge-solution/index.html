@@ -226,7 +226,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -235,7 +235,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1287s0hbhb">
+        <h2 id="hahahugoshortcode1285s0hbhb">
   <a href="https://leetcode.com/problems/accounts-merge/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -250,7 +250,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1287s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1285s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -294,7 +294,7 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1287s2hbhb">
+<h2 id="hahahugoshortcode1285s2hbhb">
   
 
   
@@ -306,7 +306,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given a list of accounts, where each account consists of a name and a list of emails. An account is represented as <code>[&quot;name&quot;, &quot;email1&quot;, &quot;email2&quot;, ...]</code>. Two accounts are considered the same if they have the same name and share at least one email. The goal is to merge these accounts into a single account that contains all unique emails associated with that name.</p>
+<p>The problem asks us to <strong>merge accounts</strong> where multiple email addresses can belong to the same account, but may appear in different records. We are tasked with finding all the accounts that should be merged, where an account is merged if any two of its email addresses share a common domain. The final result should return the merged accounts, where each account is represented by a list of emails and the first email should represent the account holder&rsquo;s name.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -314,59 +314,141 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The solution follows a <strong>graph-based approach</strong> to represent the email addresses as nodes and the connections between them as edges. Here’s a step-by-step breakdown of how we can approach the problem:</p>
 <ol>
 <li>
-<p><strong>Mapping and Graph Creation</strong>:</p>
+<p><strong>Graph Representation</strong>: We model the problem as a graph, where each email address is a node. The edges between nodes represent that two email addresses belong to the same account. This is because an account can have multiple email addresses, and if one email address is linked to another, they belong to the same account.</p>
+</li>
+<li>
+<p><strong>Union-Find or DFS</strong>: To merge accounts, we need to group connected components in the graph. This can be done using a <strong>Depth-First Search (DFS)</strong> approach or <strong>Union-Find</strong>. We will use DFS here to explore the connected components (i.e., the accounts).</p>
+</li>
+<li>
+<p><strong>Mapping Emails to Accounts</strong>: We need to ensure that each email address is associated with the correct account holder&rsquo;s name. The first email in each list represents the account holder’s name.</p>
+</li>
+<li>
+<p><strong>Final Sorting</strong>: After collecting the connected components (i.e., all the email addresses that belong to the same account), we sort them lexicographically and insert the account holder&rsquo;s name as the first element in each merged account.</p>
+</li>
+<li>
+<p><strong>Handling Already Seen Accounts</strong>: To avoid revisiting email addresses we’ve already processed, we maintain a <code>seen</code> set, which ensures that we only visit each email once.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let’s dive into the code to understand how it implements this approach:</p>
+<ol>
+<li>
+<p><strong>Data Structures</strong>:</p>
 <ul>
-<li>Use a map <code>mp</code> to associate each email with its corresponding name (the first element of each account).</li>
-<li>Construct a graph <code>gph</code> using a set to represent connections between emails. Each email will be a node, and edges exist between all emails in the same account.</li>
+<li><code>mp</code>: A map to associate each email address with the account holder’s name.</li>
+<li><code>gph</code>: A map representing the graph where each email address points to a set of other email addresses connected to it.</li>
+<li><code>seen</code>: A set to track the email addresses that have already been visited.</li>
+<li><code>ans</code>: A vector of vectors where the final merged accounts will be stored.</li>
 </ul>
 </li>
 <li>
-<p><strong>Depth-First Search (DFS)</strong>:</p>
-<ul>
-<li>Initialize a set <code>seen</code> to keep track of visited emails.</li>
-<li>For each unvisited email, perform a DFS to gather all connected emails into a temporary list <code>tmp</code>. This will effectively find all emails that belong to the same account.</li>
+<p><strong>Building the Graph</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">ac</span>: acc) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> ac.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        mp[ac[i]] <span style="color:#666">=</span> ac[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>        gph[ac[i]].insert(ac[<span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>        gph[ac[<span style="color:#666">1</span>]].insert(ac[i]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The first loop iterates through each account in <code>acc</code>, where each account is represented as a vector of strings (the first element is the name and the rest are the email addresses).</li>
+<li>For each email address, we map it to the account holder’s name using the <code>mp</code> map.</li>
+<li>We also build the graph by inserting edges between the current email and the next one, ensuring both directions (i.e., if <code>a</code> and <code>b</code> are connected, both <code>a</code> points to <code>b</code> and <code>b</code> points to <code>a</code>).</li>
 </ul>
 </li>
 <li>
-<p><strong>Sorting and Storing Results</strong>:</p>
-<ul>
-<li>After gathering emails, sort them, prepend the corresponding name (from the map), and add the result to the final list of merged accounts.</li>
+<p><strong>DFS Traversal</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>tmp, map<span style="color:#666">&lt;</span>string, set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>gph, set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>seen, string node) {
+</span></span><span style="display:flex;"><span>    tmp.push_back(node);
+</span></span><span style="display:flex;"><span>    seen.insert(node);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: gph[node]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>seen.count(it)) {
+</span></span><span style="display:flex;"><span>            dfs(tmp, gph, seen, it);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>dfs</code> function performs a Depth-First Search on the graph starting from the given email address (<code>node</code>).</li>
+<li>It adds the current email to the <code>tmp</code> vector, marks it as seen, and recursively visits all its neighbors (emails connected in the graph).</li>
+<li>This traversal collects all the email addresses that belong to the same account.</li>
+</ul>
+</li>
+<li>
+<p><strong>Building the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: mp) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(seen.count(it.first)) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> tmp;
+</span></span><span style="display:flex;"><span>    dfs(tmp, gph, seen, it.first);
+</span></span><span style="display:flex;"><span>    sort(tmp.begin(), tmp.end());
+</span></span><span style="display:flex;"><span>    tmp.insert(tmp.begin(), it.second);
+</span></span><span style="display:flex;"><span>    ans.push_back(tmp);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The second loop processes each email address in <code>mp</code> (which is the list of all emails encountered).</li>
+<li>If the email has already been seen, it skips to the next one.</li>
+<li>Otherwise, it performs a DFS to collect all emails connected to the current email.</li>
+<li>After the DFS traversal, the emails are sorted lexicographically, and the account holder&rsquo;s name (from <code>mp</code>) is inserted as the first element of the result.</li>
+<li>Finally, the merged account is added to the result vector <code>ans</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>After processing all emails and their connected components, the function returns the merged accounts.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="complexity-analysis">
+  Complexity Analysis
+  <a class="heading-link" href="#complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li><strong>Function</strong>:
+<li>
+<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li><code>accountsMerge(vector&lt;vector&lt;string&gt;&gt;&amp; acc)</code>: Merges the accounts and returns a vector of merged accounts.</li>
-<li><code>dfs(vector&lt;string&gt; &amp;tmp, map&lt;string, set&lt;string&gt;&gt; &amp;gph, set&lt;string&gt; &amp;seen, string node)</code>: A helper function that performs DFS to gather connected emails.</li>
+<li><strong>Building the Graph</strong>: We iterate over each account and each email in it. This takes <strong>O(N * M)</strong> time, where <code>N</code> is the number of accounts and <code>M</code> is the average number of emails per account.</li>
+<li><strong>DFS Traversal</strong>: We visit each email exactly once, so the DFS traversal takes <strong>O(V + E)</strong> time, where <code>V</code> is the number of emails and <code>E</code> is the number of edges (connections between emails). This is also <strong>O(N * M)</strong> in the worst case.</li>
+<li><strong>Sorting the Result</strong>: After the DFS traversal, we sort the emails in each account, which takes <strong>O(K log K)</strong> for each account, where <code>K</code> is the number of emails in the account. In the worst case, the time complexity of sorting all accounts is <strong>O(N * M log M)</strong>.</li>
 </ul>
+<p>The overall time complexity is <strong>O(N * M + N * M log M)</strong>.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>We use a map (<code>mp</code>) to store the account holder’s name for each email, which takes <strong>O(V)</strong> space, where <code>V</code> is the number of unique email addresses.</li>
+<li>We use a graph (<code>gph</code>) to store the adjacency list representation, which also takes <strong>O(V + E)</strong> space.</li>
+<li>The <code>seen</code> set takes <strong>O(V)</strong> space.</li>
+<li>The final result <code>ans</code> takes <strong>O(V)</strong> space.</li>
+</ul>
+<p>The overall space complexity is <strong>O(V + E)</strong>.</p>
 </li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: O(N log N), where N is the total number of emails, due to sorting the emails at the end.</li>
-<li><strong>Space Complexity</strong>: O(N) for storing the graph and the set of seen emails.</li>
-</ul>
+<p>This solution efficiently merges accounts by modeling the problem as a graph and performing a Depth-First Search (DFS) to find connected components. The approach ensures that we group emails belonging to the same account and sort them lexicographically for the final result. The use of a graph with an adjacency list allows us to efficiently check for connections between emails. The time complexity of <strong>O(N * M + N * M log M)</strong> and space complexity of <strong>O(V + E)</strong> makes this solution scalable for large inputs, where <code>N</code> is the number of accounts and <code>M</code> is the average number of emails per account. This approach efficiently solves the problem of merging accounts with multiple email addresses.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1287s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1285s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

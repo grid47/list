@@ -217,7 +217,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -226,7 +226,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1272s0hbhb">
+        <h2 id="hahahugoshortcode1271s0hbhb">
   <a href="https://leetcode.com/problems/max-area-of-island/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -241,7 +241,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1272s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1271s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -272,85 +272,148 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1272s2hbhb">
+<h2 id="hahahugoshortcode1271s2hbhb">
   
 
   
   <div class="markdown-body">
     <h3 id="problem-statement">
-  Problem Statement
+  Problem Statement:
   <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given a 2D grid consisting of <code>0</code>s (water) and <code>1</code>s (land). An island is formed by connecting adjacent lands horizontally or vertically. Your task is to find the maximum area of an island in the grid.</p>
+<p>In this problem, we are given a 2D grid representing a map of water and land. The grid contains values <code>1</code> representing land and <code>0</code> representing water. The task is to find the <strong>maximum area of an island</strong>. An island is defined as a group of connected <code>1</code>s (land), where land pieces are connected either horizontally or vertically (not diagonally).</p>
+<p>We need to return the area of the largest island in the grid, where the area is defined as the total number of <code>1</code>s in the island.</p>
 <h3 id="approach">
-  Approach
+  Approach:
   <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This problem is essentially asking us to identify the largest connected component in the grid. We can break down the task using the following steps:</p>
 <ol>
 <li>
-<p><strong>Input Parameters</strong>:</p>
-<ul>
-<li><code>grid</code>: A 2D vector where each element is either <code>0</code> (water) or <code>1</code> (land).</li>
-</ul>
+<p><strong>Iterate Over the Grid</strong>:
+We will iterate over each cell in the grid to check if the cell is land (<code>1</code>). If a land cell is found, it will be the starting point for a Depth-First Search (DFS) to explore the entire island (all connected <code>1</code>s).</p>
 </li>
 <li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>Define a variable <code>mx</code> to keep track of the maximum area found.</li>
-<li>Get the dimensions of the grid, <code>m</code> (rows) and <code>n</code> (columns).</li>
-</ul>
+<p><strong>Depth-First Search (DFS)</strong>:
+From each land cell, we will perform DFS to explore the connected land cells. The DFS will explore all four directions: up, down, left, and right. For each connected land cell found, we mark it as visited (by changing the cell’s value from <code>1</code> to <code>2</code>) to avoid revisiting it in future searches.</p>
 </li>
 <li>
-<p><strong>Iterate through the Grid</strong>:</p>
-<ul>
-<li>Use nested loops to traverse each cell in the grid.</li>
-<li>For each cell that contains <code>1</code>, call the <code>dfs</code> function to compute the area of the island and update <code>mx</code> accordingly.</li>
-</ul>
+<p><strong>Track the Maximum Island Size</strong>:
+For each DFS traversal, we calculate the area of the island (i.e., the number of connected land cells). The maximum area encountered during all DFS searches will be our result.</p>
 </li>
 <li>
-<p><strong>Depth-First Search (DFS)</strong>:</p>
-<ul>
-<li>The <code>dfs</code> function takes the current cell&rsquo;s coordinates and returns the area of the island.</li>
-<li>If the current cell is out of bounds or is not part of an island (<code>grid[i][j] != 1</code>), return <code>0</code>.</li>
-<li>Mark the current cell as visited by changing its value to <code>2</code>.</li>
-<li>Recursively call <code>dfs</code> on all four adjacent cells (up, down, left, right) and accumulate the area.</li>
-</ul>
+<p><strong>Return the Largest Area</strong>:
+After completing the DFS for all land cells in the grid, the maximum area found will be the size of the largest island.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step):
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="1-main-function-maxareaofisland">
+  1. <strong>Main Function (<code>maxAreaOfIsland</code>)</strong>:
+  <a class="heading-link" href="#1-main-function-maxareaofisland">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">==</span> <span style="color:#666">1</span>)
+</span></span><span style="display:flex;"><span>            mx <span style="color:#666">=</span> max(mx, dfs(grid, i, j));
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> mx;
+</span></span></code></pre></div><ul>
+<li><strong><code>mx</code></strong> is initialized to <code>0</code> to store the maximum area of any island found.</li>
+<li><strong><code>m</code> and <code>n</code></strong> are the dimensions of the grid (number of rows and columns).</li>
+<li>We iterate through every cell in the grid:
 <ul>
-<li>The main function <code>maxAreaOfIsland</code> initializes the maximum area and iterates through the grid.</li>
-<li>When a land cell (<code>1</code>) is found, it invokes the <code>dfs</code> function to explore the entire island.</li>
-<li>The <code>dfs</code> function computes the area by marking visited cells and exploring their neighbors.</li>
+<li>If a cell contains <code>1</code> (representing land), we start a DFS from that cell to find the size of the connected island.</li>
+<li>We then compare the area of the island found with the current maximum (<code>mx</code>) and update it if necessary.</li>
+</ul>
+</li>
+<li>Finally, we return the maximum area found.</li>
+</ul>
+<h4 id="2-depth-first-search-function-dfs">
+  2. <strong>Depth-First Search Function (<code>dfs</code>)</strong>:
+  <a class="heading-link" href="#2-depth-first-search-function-dfs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid, <span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> j <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> i <span style="color:#666">==</span> m <span style="color:#666">||</span> j <span style="color:#666">==</span> n <span style="color:#666">||</span> grid[i][j] <span style="color:#666">!=</span> <span style="color:#666">1</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    grid[i][j] <span style="color:#666">=</span> <span style="color:#666">2</span>; <span style="color:#080;font-style:italic">// mark the current cell as visited
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    ans <span style="color:#666">+=</span> dfs(grid, i <span style="color:#666">+</span> <span style="color:#666">1</span>, j); <span style="color:#080;font-style:italic">// explore down
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    ans <span style="color:#666">+=</span> dfs(grid, i, j <span style="color:#666">+</span> <span style="color:#666">1</span>); <span style="color:#080;font-style:italic">// explore right
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    ans <span style="color:#666">+=</span> dfs(grid, i <span style="color:#666">-</span> <span style="color:#666">1</span>, j); <span style="color:#080;font-style:italic">// explore up
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    ans <span style="color:#666">+=</span> dfs(grid, i, j <span style="color:#666">-</span> <span style="color:#666">1</span>); <span style="color:#080;font-style:italic">// explore left
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The DFS function starts from the cell <code>(i, j)</code> and recursively explores all connected land cells.</li>
+<li><strong>Base Case</strong>: If the current cell is out of bounds or is water (<code>0</code>), we return <code>0</code>, indicating no area can be added from this cell.</li>
+<li>We initialize <strong><code>ans</code></strong> to <code>1</code>, as we start with the current land cell.</li>
+<li><strong>Mark the cell as visited</strong> by setting <code>grid[i][j] = 2</code> to ensure it is not revisited.</li>
+<li>The DFS then proceeds to explore in all four directions (down, right, up, left), adding the areas of all connected cells to <code>ans</code>.</li>
+<li>Finally, we return the total area of the island starting from <code>(i, j)</code>.</li>
 </ul>
 <h3 id="complexity">
-  Complexity
+  Complexity:
   <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(m * n), where <code>m</code> is the number of rows and <code>n</code> is the number of columns. Each cell is visited once.</li>
-<li><strong>Space Complexity</strong>: O(m * n) in the worst case for the recursion stack if the grid is completely filled with land.</li>
+<li><strong>Grid Traversal</strong>: The main function iterates over each cell in the grid. This is an <strong>O(m * n)</strong> operation, where <code>m</code> is the number of rows and <code>n</code> is the number of columns in the grid.</li>
+<li><strong>DFS Traversal</strong>: In the worst case, every cell is visited exactly once. Since every DFS call explores a connected island and marks visited cells, the total time spent in DFS is also <strong>O(m * n)</strong>.</li>
+<li>The overall time complexity is <strong>O(m * n)</strong> because we traverse all cells in the grid and perform DFS for each unvisited land cell.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Space for Grid</strong>: The grid is modified in place by marking visited cells, so no additional space is required for storing the grid.</li>
+<li><strong>Recursive Call Stack</strong>: In the worst case, the entire grid might be part of a single island, and the DFS recursion could go as deep as <code>O(m * n)</code> (for a very large island). Thus, the space complexity is <strong>O(m * n)</strong> due to the recursive stack used by the DFS function.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion:
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution effectively uses <strong>Depth-First Search (DFS)</strong> to explore the connected components (islands) in the grid and calculate their areas. By marking visited cells and recursively exploring all neighboring cells of land, we efficiently calculate the largest island area. The time complexity is <strong>O(m * n)</strong>, which ensures that the solution works efficiently even for large grids. The space complexity is <strong>O(m * n)</strong> due to the recursive stack, which is manageable for most inputs.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1272s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1271s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

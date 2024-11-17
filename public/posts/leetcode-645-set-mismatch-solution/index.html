@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -268,7 +268,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array <code>nums</code> containing <code>n</code> integers where each integer is in the range <code>[1, n]</code>, there is one integer that is duplicated and another that is missing. Your task is to find and return these two integers.</p>
+<p>The problem asks us to identify the two numbers in an array that contain duplicates and a missing number. The array consists of <code>n</code> numbers, where each number is between <code>1</code> and <code>n</code> inclusive, but one number appears twice and one number is missing. Our goal is to return a vector containing two integers:</p>
+<ol>
+<li>The number that appears twice.</li>
+<li>The number that is missing.</li>
+</ol>
+<p>For example, given an array <code>[1, 2, 2, 4]</code>, the output should be <code>[2, 3]</code> because <code>2</code> appears twice and <code>3</code> is missing.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -276,69 +281,88 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we can use a technique that leverages <strong>XOR</strong> and modifies the array in place. The key idea is that:</p>
+<ul>
+<li>We can XOR all the indices and values in the array to identify the difference between the missing and duplicate numbers.</li>
+<li>We can also track the duplicate by marking the elements in the array to help pinpoint which number is missing.</li>
+</ul>
+<p>Here’s a step-by-step breakdown of how the solution works:</p>
 <ol>
-<li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>Create a vector <code>ans</code> to store the duplicated and missing numbers.</li>
-</ul>
-</li>
-<li>
-<p><strong>Iterate through the Array</strong>:</p>
-<ul>
-<li>For each number in the array, determine its absolute value (<code>val</code>).</li>
-<li>Use the value to toggle the corresponding index in the <code>nums</code> array (by negating it).</li>
-<li>Maintain the XOR of the expected index and the current index. This helps in finding the missing number later.</li>
-</ul>
-</li>
-<li>
-<p><strong>Identify the Duplicated Number</strong>:</p>
-<ul>
-<li>If the value at the corresponding index (after negation) is negative, it indicates that the number has been seen before, so store this number as the duplicate.</li>
-</ul>
-</li>
-<li>
-<p><strong>Calculate the Missing Number</strong>:</p>
-<ul>
-<li>After the loop, use the XOR value computed to determine the missing number.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return the Result</strong>:</p>
-<ul>
-<li>The result contains the duplicated and the missing number.</li>
-</ul>
-</li>
+<li><strong>XOR operation</strong>: XORing a number with itself results in <code>0</code>. Thus, by XORing all the values and indices of the array, we can eliminate matching pairs. This allows us to isolate the difference between the duplicate and the missing number.</li>
+<li><strong>Tracking duplicate</strong>: To find the duplicate number, we modify the array during iteration, marking the elements as negative when they are visited. If we encounter a negative number during the iteration, we know that number is the duplicate.</li>
+<li><strong>Finding the missing number</strong>: The XOR result of all numbers gives us a combination of the duplicate and missing number. By XORing the result with the duplicate number, we isolate the missing number.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Loop through the <code>nums</code> Array</strong>:</p>
-<ul>
-<li>For each index <code>i</code>, calculate <code>val</code> as the absolute value of <code>nums[i]</code>.</li>
-<li>XOR the current index (1-based) and <code>val</code> into <code>ans[1]</code> to maintain the running XOR of seen values.</li>
-<li>If the value at the index corresponding to <code>val</code> is negative, assign <code>val</code> to <code>ans[0]</code> (the duplicate). Otherwise, negate it to mark it as seen.</li>
+<p>Let’s now break down the solution code line by line to understand how it works:</p>
+<h4 id="1-function-signature">
+  1. <strong>Function Signature</strong>:
+  <a class="heading-link" href="#1-function-signature">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> findErrorNums(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans(<span style="color:#666">2</span>, <span style="color:#666">0</span>);
+</span></span></code></pre></div><ul>
+<li>The function <code>findErrorNums</code> accepts a reference to a vector <code>nums</code> of size <code>n</code>. It returns a vector of size <code>2</code> to store the duplicate number and the missing number.</li>
+<li>We initialize the answer vector <code>ans</code> with two <code>0</code>s, where <code>ans[0]</code> will store the duplicate number and <code>ans[1]</code> will store the missing number.</li>
 </ul>
-</li>
-<li>
-<p><strong>Finalize the Missing Number</strong>:</p>
-<ul>
-<li>XOR <code>ans[0]</code> with <code>ans[1]</code> to derive the missing number.</li>
+<h4 id="2-iterating-through-the-array">
+  2. <strong>Iterating through the array</strong>:
+  <a class="heading-link" href="#2-iterating-through-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> val <span style="color:#666">=</span> abs(nums[i]);
+</span></span><span style="display:flex;"><span>    ans[<span style="color:#666">1</span>] <span style="color:#666">^=</span> (i<span style="color:#666">+</span><span style="color:#666">1</span>) <span style="color:#666">^</span> val;
+</span></span></code></pre></div><ul>
+<li>We loop through each element of the <code>nums</code> array.</li>
+<li>For each element, we use <code>abs(nums[i])</code> to work with the positive version of the number because, during iteration, some elements might have been marked as negative.</li>
+<li>We XOR the current index <code>(i+1)</code> and the absolute value of the current number <code>val</code>. This helps accumulate the difference between the duplicate and missing numbers.</li>
 </ul>
-</li>
-<li>
-<p><strong>Return the Result</strong>:</p>
-<ul>
-<li>The final vector <code>ans</code> contains the duplicate at index 0 and the missing number at index 1.</li>
+<h4 id="3-marking-visited-numbers">
+  3. <strong>Marking visited numbers</strong>:
+  <a class="heading-link" href="#3-marking-visited-numbers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (nums[val<span style="color:#666">-</span><span style="color:#666">1</span>] <span style="color:#666">&lt;</span> <span style="color:#666">0</span>) ans[<span style="color:#666">0</span>] <span style="color:#666">=</span> val;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">else</span> nums[val<span style="color:#666">-</span><span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#666">-</span>nums[val<span style="color:#666">-</span><span style="color:#666">1</span>];
+</span></span></code></pre></div><ul>
+<li>If the element at index <code>val-1</code> in <code>nums</code> is already negative, it means that the number <code>val</code> has been encountered before and is the duplicate. In that case, we assign <code>val</code> to <code>ans[0]</code>, marking it as the duplicate number.</li>
+<li>If the element at index <code>val-1</code> is positive, we mark it as visited by setting <code>nums[val-1]</code> to its negative value. This helps track which numbers have been seen already.</li>
 </ul>
-</li>
-</ol>
+<h4 id="4-final-xor-to-get-the-missing-number">
+  4. <strong>Final XOR to get the missing number</strong>:
+  <a class="heading-link" href="#4-final-xor-to-get-the-missing-number">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ans[<span style="color:#666">1</span>] <span style="color:#666">^=</span> ans[<span style="color:#666">0</span>];
+</span></span></code></pre></div><ul>
+<li>After the loop completes, <code>ans[1]</code> holds the XOR result of all the indices and values, including both the duplicate and the missing number. By XORing it with <code>ans[0]</code> (the duplicate number), we isolate the missing number.</li>
+</ul>
+<h4 id="5-return-the-result">
+  5. <strong>Return the result</strong>:
+  <a class="heading-link" href="#5-return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>Finally, we return the <code>ans</code> vector, which contains the duplicate and missing numbers.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -346,10 +370,35 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the number of elements in <code>nums</code>.</li>
-<li><strong>Space Complexity</strong>: O(1), since the solution uses a constant amount of extra space for the answer.</li>
+<li>The solution iterates over the array once, performing constant-time operations during each iteration (XOR, absolute value check, array modification). Thus, the time complexity is <code>O(n)</code>, where <code>n</code> is the number of elements in the input array.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is <code>O(1)</code> since we are using only a constant amount of extra space (the answer vector of size 2). The solution modifies the input array in place, so no additional space is required for storing intermediate results.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution provides an efficient way to solve the problem of finding the duplicate and missing numbers in an array using XOR and in-place modifications. By leveraging the properties of XOR, we can reduce the space complexity to constant space and achieve a linear time complexity solution. This makes it an optimal approach for large input arrays.</p>
+<p>The steps outlined above efficiently identify the duplicate and missing numbers without needing extra space for auxiliary arrays or data structures, making this solution both time and space-efficient. The solution is also highly scalable, working for any input size that fits within the problem&rsquo;s constraints.</p>
  
 </div>
   

@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              3-minute read
             </span>
           </div>
 
@@ -249,94 +249,123 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-first-and-last-position-in-sorted-array">
+  🔍 <strong>First and Last Position in Sorted Array</strong>
+  <a class="heading-link" href="#-first-and-last-position-in-sorted-array">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array of integers <code>nums</code> sorted in ascending order, find the starting and ending position of a given target value. If the target is not found in the array, return <code>[-1, -1]</code>.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>The task is to find the <strong>first and last position</strong> of a <strong>target value</strong> in a <strong>sorted array</strong>. If the target is not found, return <code>[-1, -1]</code>.</p>
+<p>For example:</p>
+<ul>
+<li><strong>Input:</strong> <code>nums = [5, 7, 7, 8, 8, 10]</code>, <code>target = 8</code>
+<ul>
+<li><strong>Output:</strong> <code>[3, 4]</code></li>
+</ul>
+</li>
+<li><strong>Input:</strong> <code>nums = [5, 7, 7, 8, 8, 10]</code>, <code>target = 6</code>
+<ul>
+<li><strong>Output:</strong> <code>[-1, -1]</code></li>
+</ul>
+</li>
+</ul>
+<p>The goal is to find the <strong>range</strong> of the target value in a sorted array using an efficient algorithm with <strong>O(log n)</strong> time complexity.</p>
+<h3 id="-approach">
+  🧠 <strong>Approach</strong>
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>We can solve this problem efficiently by leveraging <strong>binary search</strong> and utilizing C++ Standard Library functions <code>lower_bound</code> and <code>upper_bound</code>.</p>
 <ol>
 <li>
-<p><strong>Use of Binary Search</strong>:</p>
+<p><strong>Binary Search with Lower and Upper Bound:</strong></p>
 <ul>
-<li>Utilize <code>lower_bound</code> to find the first occurrence of the target.</li>
-<li>Utilize <code>upper_bound</code> to find the position just after the last occurrence of the target.</li>
+<li><code>lower_bound</code>: Finds the <strong>first occurrence</strong> of an element <strong>greater than or equal to</strong> the target.</li>
+<li><code>upper_bound</code>: Finds the <strong>first occurrence</strong> of an element <strong>greater than</strong> the target.</li>
 </ul>
 </li>
 <li>
-<p><strong>Lower Bound</strong>:</p>
+<p><strong>Finding the Range of the Target:</strong></p>
 <ul>
-<li><code>lower_bound</code> returns an iterator pointing to the first element that is not less than the target.</li>
+<li><code>lower_bound(nums.begin(), nums.end(), target)</code> will return an iterator pointing to the first element <strong>greater than or equal to</strong> the target. If the target exists, this points to the first occurrence of the target.</li>
+<li><code>upper_bound(nums.begin(), nums.end(), target)</code> will return an iterator pointing to the first element <strong>greater than</strong> the target, which helps find the position just after the last occurrence of the target.</li>
+</ul>
+<p>The <strong>range</strong> of indices is then derived:</p>
+<ul>
+<li>The first position is given by the iterator <code>it1</code> from <code>lower_bound</code>.</li>
+<li>The last position is given by the iterator <code>it2</code> from <code>upper_bound</code>, adjusted by subtracting 1.</li>
 </ul>
 </li>
 <li>
-<p><strong>Upper Bound</strong>:</p>
+<p><strong>Edge Case Handling:</strong></p>
 <ul>
-<li><code>upper_bound</code> returns an iterator pointing to the first element that is greater than the target.</li>
-</ul>
-</li>
-<li>
-<p><strong>Check for Existence</strong>:</p>
-<ul>
-<li>If <code>it1</code> (the result of <code>lower_bound</code>) is equal to <code>nums.end()</code> or the element pointed to by <code>it1</code> is not equal to the target, return <code>[-1, -1]</code> indicating the target is not present.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return the Range</strong>:</p>
-<ul>
-<li>Return the indices of the first and last occurrence of the target.</li>
+<li>If the target is not found, both <code>lower_bound</code> and <code>upper_bound</code> will indicate positions where the target would be inserted, but the target value is absent. In this case, we return <code>[-1, -1]</code>.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="-code-breakdown">
+  🧑‍💻 <strong>Code Breakdown</strong>
+  <a class="heading-link" href="#-code-breakdown">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Finding the First Position</strong>:
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">auto</span> it1 <span style="color:#666">=</span> lower_bound(nums.begin(), nums.end(), target);
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">auto</span> it2 <span style="color:#666">=</span> upper_bound(nums.begin(), nums.end(), target);
+</span></span></code></pre></div><ul>
+<li><strong>Step 1:</strong> Use <code>lower_bound</code> to find the first occurrence of <code>target</code> and <code>upper_bound</code> to find the position just past the last occurrence of <code>target</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(it1 <span style="color:#666">==</span> nums.end() <span style="color:#666">||</span> <span style="color:#666">*</span>it1 <span style="color:#666">!=</span> target) <span style="color:#a2f;font-weight:bold">return</span> {<span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#666">-</span><span style="color:#666">1</span>};
+</span></span></code></pre></div><ul>
+<li><strong>Step 2:</strong> Check if the target is found by verifying if <code>it1</code> points to the target. If not, return <code>[-1, -1]</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> {(<span style="color:#0b0;font-weight:bold">int</span>) (it1 <span style="color:#666">-</span> nums.begin()), (<span style="color:#0b0;font-weight:bold">int</span>) (it2 <span style="color:#666">-</span> nums.begin() <span style="color:#666">-</span> <span style="color:#666">1</span>)};
+</span></span></code></pre></div><ul>
+<li><strong>Step 3:</strong> If the target is found, return a <strong>range</strong>:
 <ul>
-<li>Use <code>lower_bound</code> to get the first position of the target.</li>
+<li>The index of the first occurrence is <code>(it1 - nums.begin())</code>.</li>
+<li>The index of the last occurrence is <code>(it2 - nums.begin() - 1)</code> because <code>it2</code> points just past the last occurrence of the target.</li>
 </ul>
 </li>
-<li><strong>Finding the Last Position</strong>:
-<ul>
-<li>Use <code>upper_bound</code> to get the position just after the last occurrence.</li>
 </ul>
-</li>
-<li><strong>Checking Validity</strong>:
-<ul>
-<li>Validate if the target exists in the array.</li>
-</ul>
-</li>
-<li><strong>Index Calculation</strong>:
-<ul>
-<li>Convert iterators to indices to return the required range.</li>
-</ul>
-</li>
-</ol>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h3 id="-time-and-space-complexity">
+  📊 <strong>Time and Space Complexity</strong>
+  <a class="heading-link" href="#-time-and-space-complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  <strong>Time Complexity:</strong>
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity:</strong> (O(\log n)) for both <code>lower_bound</code> and <code>upper_bound</code>.</li>
-<li><strong>Space Complexity:</strong> (O(1)) as no additional space is used.</li>
+<li><strong>O(log n):</strong> Both <code>lower_bound</code> and <code>upper_bound</code> perform binary search, so the time complexity for each function is <strong>O(log n)</strong>. The overall complexity is <strong>O(log n)</strong>.</li>
 </ul>
+<h4 id="space-complexity">
+  <strong>Space Complexity:</strong>
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1):</strong> The algorithm uses constant extra space as it only relies on iterators <code>it1</code> and <code>it2</code>.</li>
+</ul>
+<h3 id="-conclusion">
+  🚀 <strong>Conclusion</strong>
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently finds the <strong>first and last positions</strong> of a target value in a sorted array using <strong>binary search-based</strong> functions <code>lower_bound</code> and <code>upper_bound</code>. The approach ensures an optimal <strong>O(log n)</strong> time complexity, making it suitable for large arrays. By leveraging C++’s built-in binary search functions, the solution achieves excellent performance and minimal space usage, making it ideal for problems with sorted arrays where range searching is required.</p>
  
 </div>
   

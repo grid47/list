@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -240,7 +240,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1428s1hbhb">
+<h2 id="hahahugoshortcode1430s1hbhb">
   
 
   
@@ -252,7 +252,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an array of strings, determine the minimum number of columns that can be deleted to ensure that each row of the strings is lexicographically sorted.</p>
+<p>The problem asks to determine the minimum number of columns to delete from a list of strings such that each string is lexicographically sorted when read column-wise. A lexicographically sorted order means that for any two consecutive strings in the list, the characters in each column must either be in non-decreasing order (from top to bottom). The goal is to return the minimum number of columns that must be deleted to ensure that the remaining columns maintain this lexicographical order across all strings.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -260,48 +260,78 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The solution involves scanning through each column of the strings to determine if any characters violate the lexicographical order. If a column does violate the order, it needs to be deleted. The algorithm proceeds as follows:</p>
 <ol>
-<li>
-<p><strong>Initialize Variables</strong>:</p>
-<ul>
-<li><code>res</code>: Counter for the number of columns to delete.</li>
-<li><code>m</code>: Number of rows (strings).</li>
-<li><code>n</code>: Number of columns (characters in each string).</li>
-<li><code>sorted</code>: A boolean vector to track which rows are sorted based on previous columns.</li>
-</ul>
-</li>
-<li>
-<p><strong>Iterate Over Columns</strong>:</p>
-<ul>
-<li>For each column <code>j</code>, check if it maintains the sorted order:
-<ul>
-<li>Iterate through the rows <code>i</code> to compare adjacent rows (<code>strs[i][j]</code> and <code>strs[i + 1][j]</code>).</li>
-<li>If a row is found that violates the sorted order, increment <code>res</code> and break out of the inner loop.</li>
-</ul>
-</li>
-<li>If no violations are found for the column, update the <code>sorted</code> array to reflect whether the rows are sorted based on the current column.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>The final value of <code>res</code> represents the minimum number of columns that need to be deleted.</li>
-</ul>
-</li>
+<li><strong>Iterate Over Each Column</strong>: Start by checking each column in the given set of strings.</li>
+<li><strong>Identify Violations</strong>: For each column, check if any string at position <code>i</code> is lexicographically greater than the string at position <code>i + 1</code>. If this happens, mark the column for deletion.</li>
+<li><strong>Track Sorted Columns</strong>: If a column does not need deletion, keep track of columns that maintain their order (sorted columns).</li>
+<li><strong>Count Deletions</strong>: Finally, count and return the number of columns that need to be deleted to ensure lexicographical order across the strings.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>The solution uses a greedy approach that minimizes the number of deletions while ensuring that the remaining columns are in the required order. The algorithm efficiently determines which columns violate the condition and immediately counts them as deletions.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The function first initializes necessary variables.</li>
-<li>It iterates through each column and checks if the column maintains the sorted order.</li>
-<li>If it finds a column that disrupts the order, it marks that column for deletion.</li>
-<li>Finally, it returns the count of deleted columns.</li>
+<ol>
+<li>
+<p><strong>Initial Setup</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, m <span style="color:#666">=</span> strs.size(), n <span style="color:#666">=</span> strs[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> i , j;
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> sorted(m <span style="color:#666">-</span> <span style="color:#666">1</span>, <span style="color:#a2f">false</span>);
+</span></span></code></pre></div><ul>
+<li><code>res</code>: This variable will store the number of columns that need to be deleted.</li>
+<li><code>m</code>: The number of strings (rows) in the input <code>strs</code>.</li>
+<li><code>n</code>: The length of each string (number of columns).</li>
+<li><code>sorted</code>: A vector that tracks whether the strings are sorted in the current column. It&rsquo;s initialized to <code>false</code> for all pairs of strings.</li>
 </ul>
+</li>
+<li>
+<p><strong>Iterating Over Columns</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span></code></pre></div><ul>
+<li>The outer loop iterates over each column, denoted by <code>j</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Checking for Violations</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m <span style="color:#666">-</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>sorted[i] <span style="color:#666">&amp;&amp;</span> strs[i][j] <span style="color:#666">&gt;</span> strs[i <span style="color:#666">+</span> <span style="color:#666">1</span>][j]) {
+</span></span><span style="display:flex;"><span>        res<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The inner loop checks each pair of adjacent strings (<code>strs[i]</code> and <code>strs[i+1]</code>) in the current column <code>j</code>.</li>
+<li>If the strings are not yet sorted (<code>!sorted[i]</code>) and the character in the current column <code>strs[i][j]</code> is greater than <code>strs[i+1][j]</code>, it means the column violates the lexicographical order. Therefore, the column is marked for deletion (<code>res++</code>), and the loop breaks early.</li>
+</ul>
+</li>
+<li>
+<p><strong>Skip Columns That Need Deletion</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> m <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span></code></pre></div><ul>
+<li>If a column needs deletion, the <code>continue</code> statement skips the remaining steps for that column and moves to the next one.</li>
+</ul>
+</li>
+<li>
+<p><strong>Mark Columns as Sorted</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m <span style="color:#666">-</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    sorted[i] <span style="color:#666">=</span> sorted[i] <span style="color:#666">||</span> strs[i][j] <span style="color:#666">&lt;</span> strs[i <span style="color:#666">+</span> <span style="color:#666">1</span>][j];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After checking for violations, if no deletions are made for the current column, we update the <code>sorted</code> vector. If any string <code>strs[i]</code> is lexicographically smaller than <code>strs[i+1]</code> in the current column, we mark that pair as sorted.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div><ul>
+<li>The function finally returns the value of <code>res</code>, which represents the minimum number of columns that need to be deleted.</li>
+</ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -309,15 +339,36 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li><strong>Time Complexity</strong>: O(m * n), where <code>m</code> is the number of strings and <code>n</code> is the length of each string. The function iterates through each column and each pair of rows.</li>
-<li><strong>Space Complexity</strong>: O(m) for the <code>sorted</code> vector used to track sorted status.</li>
+<li>The solution involves two nested loops: the outer loop iterates over each column (<code>n</code> columns), and the inner loop compares adjacent strings in each column (<code>m - 1</code> comparisons).</li>
+<li>Therefore, the time complexity of the solution is O(m * n), where <code>m</code> is the number of strings and <code>n</code> is the length of each string.</li>
 </ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is O(m), as the <code>sorted</code> vector stores a boolean value for each adjacent pair of strings, and the space required for this vector is proportional to the number of strings (<code>m</code>).</li>
+<li>The overall space complexity is O(m) in addition to the space needed to store the input strings.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The problem is efficiently solved using a greedy approach that checks each column in the input strings. The algorithm iterates over each column and determines if it is lexicographically sorted across all strings. If not, the column is marked for deletion, and the number of deletions is counted. This solution runs in linear time with respect to the size of the input, making it efficient for larger inputs.</p>
+<p>In summary, the solution efficiently finds the minimum number of columns to delete by checking each column for lexicographical violations and counts how many columns violate the required order. By doing so, it minimizes the deletions needed while ensuring that the remaining columns maintain the lexicographical order.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1428s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1430s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

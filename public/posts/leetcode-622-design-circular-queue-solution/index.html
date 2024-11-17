@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              6-minute read
             </span>
           </div>
 
@@ -313,15 +313,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Design and implement a circular queue that supports the following operations:</p>
-<ul>
-<li><code>enQueue(value)</code>: Adds an item to the rear of the queue. Returns <code>true</code> if the operation is successful.</li>
-<li><code>deQueue()</code>: Removes an item from the front of the queue. Returns <code>true</code> if the operation is successful.</li>
-<li><code>Front()</code>: Gets the front item from the queue. Returns <code>-1</code> if the queue is empty.</li>
-<li><code>Rear()</code>: Gets the last item from the queue. Returns <code>-1</code> if the queue is empty.</li>
-<li><code>isEmpty()</code>: Checks whether the queue is empty.</li>
-<li><code>isFull()</code>: Checks whether the queue is full.</li>
-</ul>
+<p>The problem at hand involves implementing a <strong>circular queue</strong> data structure. A <strong>circular queue</strong> is a type of queue that efficiently handles the operations of adding and removing elements while maintaining a fixed size, such that the first element of the queue can wrap around and reuse space freed by dequeuing elements. The task is to design a class <code>MyCircularQueue</code> that supports the following operations:</p>
+<ol>
+<li><strong>Enqueue (insert):</strong> Adds an element to the rear of the queue.</li>
+<li><strong>Dequeue (remove):</strong> Removes an element from the front of the queue.</li>
+<li><strong>Front:</strong> Retrieves the element at the front of the queue without removing it.</li>
+<li><strong>Rear:</strong> Retrieves the element at the rear of the queue without removing it.</li>
+<li><strong>isEmpty:</strong> Returns whether the queue is empty or not.</li>
+<li><strong>isFull:</strong> Returns whether the queue is full or not.</li>
+</ol>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -329,39 +329,154 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>In a <strong>circular queue</strong>, instead of shifting the elements every time an element is dequeued, we use modular arithmetic to &ldquo;wrap around&rdquo; the queue’s array. The approach follows these steps:</p>
 <ol>
 <li>
-<p><strong>Data Structure</strong>: Use a vector to store the elements of the circular queue. Maintain two pointers, <code>frd</code> and <code>bck</code>, to indicate the front and back of the queue, respectively. Use a counter <code>cnt</code> to keep track of the number of elements in the queue.</p>
+<p><strong>Initialization:</strong></p>
+<ul>
+<li>We initialize a queue with a fixed size (<code>sz</code>) using a vector <code>q</code> of size <code>sz</code>.</li>
+<li>We maintain two pointers: <code>frd</code> (front pointer) and <code>bck</code> (back pointer) to track the positions of the front and rear elements in the queue.</li>
+<li>A counter <code>cnt</code> is used to track the current number of elements in the queue, ensuring that we can check if the queue is full or empty efficiently.</li>
+</ul>
 </li>
 <li>
-<p><strong>Circular Indexing</strong>: When adding or removing elements, use modulo operations to wrap around the indices, allowing for circular behavior.</p>
+<p><strong>Enqueue (Insert Operation):</strong></p>
+<ul>
+<li>We first check if the queue is full using the <code>isFull()</code> function. If it is full, we return <code>false</code>.</li>
+<li>If not full, we increment the rear pointer (<code>bck</code>) by 1 (with modulo operation to handle wrap-around) and add the element at that position in the array.</li>
+<li>We increase the count <code>cnt</code> to reflect the new element.</li>
+</ul>
 </li>
 <li>
-<p><strong>Queue Operations</strong>:</p>
+<p><strong>Dequeue (Remove Operation):</strong></p>
 <ul>
-<li><strong><code>enQueue(value)</code></strong>:
-<ul>
-<li>Check if the queue is full. If it is, return false.</li>
-<li>Increment the <code>bck</code> pointer and insert the value.</li>
-<li>Increment the counter.</li>
+<li>We check if the queue is empty using the <code>isEmpty()</code> function. If the queue is empty, we return <code>false</code>.</li>
+<li>If not empty, we increment the front pointer (<code>frd</code>) by 1 (again with modulo to handle wrap-around) and decrease the counter <code>cnt</code>.</li>
 </ul>
 </li>
-<li><strong><code>deQueue()</code></strong>:
+<li>
+<p><strong>Front and Rear Operations:</strong></p>
 <ul>
-<li>Check if the queue is empty. If it is, return false.</li>
-<li>Increment the <code>frd</code> pointer and decrement the counter.</li>
+<li>The <code>Front()</code> function simply returns the element at the front pointer <code>frd</code>, or <code>-1</code> if the queue is empty.</li>
+<li>The <code>Rear()</code> function returns the element at the rear pointer <code>bck</code>, or <code>-1</code> if the queue is empty.</li>
 </ul>
 </li>
-<li><strong><code>Front()</code></strong> and <strong><code>Rear()</code></strong>:
+<li>
+<p><strong>isEmpty and isFull:</strong></p>
 <ul>
-<li>Check if the queue is empty. If it is, return -1. Otherwise, return the corresponding value.</li>
-</ul>
-</li>
-<li><strong><code>isEmpty()</code></strong>: Returns true if the counter is zero.</li>
-<li><strong><code>isFull()</code></strong>: Returns true if the counter is equal to the size of the queue.</li>
+<li>The <code>isEmpty()</code> function returns <code>true</code> if <code>cnt == 0</code>, indicating that there are no elements in the queue.</li>
+<li>The <code>isFull()</code> function returns <code>true</code> if <code>cnt == sz</code>, indicating that the queue has reached its maximum capacity.</li>
 </ul>
 </li>
 </ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-class-initialization">
+  Step 1: Class Initialization
+  <a class="heading-link" href="#step-1-class-initialization">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>MyCircularQueue(<span style="color:#0b0;font-weight:bold">int</span> k)<span style="color:#666">:</span> sz(k), frd(<span style="color:#666">0</span>), bck(<span style="color:#666">-</span><span style="color:#666">1</span>), q(k, <span style="color:#666">0</span>), cnt(<span style="color:#666">0</span>) {}
+</span></span></code></pre></div><ul>
+<li><strong>sz:</strong> This is the size of the circular queue. We allocate a vector <code>q</code> with <code>k</code> elements initialized to zero.</li>
+<li><strong>frd:</strong> The front pointer, initialized to 0. It tracks the front of the queue.</li>
+<li><strong>bck:</strong> The back pointer, initialized to <code>-1</code>. It tracks the rear of the queue.</li>
+<li><strong>q:</strong> The vector holding the actual elements of the queue.</li>
+<li><strong>cnt:</strong> The counter for the number of elements in the queue, initialized to 0.</li>
+</ul>
+<h4 id="step-2-enqueue-operation">
+  Step 2: Enqueue Operation
+  <a class="heading-link" href="#step-2-enqueue-operation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">enQueue</span>(<span style="color:#0b0;font-weight:bold">int</span> value) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(isFull()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;        
+</span></span><span style="display:flex;"><span>    bck <span style="color:#666">=</span> (bck <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">%</span> sz;
+</span></span><span style="display:flex;"><span>    q[bck] <span style="color:#666">=</span> value;
+</span></span><span style="display:flex;"><span>    cnt<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>isFull():</strong> Checks if the queue is full. If true, it returns <code>false</code>.</li>
+<li><strong>bck = (bck + 1) % sz:</strong> This handles the circular nature of the queue. If the back pointer reaches the end of the queue, it wraps around to the beginning.</li>
+<li><strong>q[bck] = value:</strong> Assigns the given value to the rear of the queue.</li>
+<li><strong>cnt++:</strong> Increments the counter as we added a new element.</li>
+</ul>
+<h4 id="step-3-dequeue-operation">
+  Step 3: Dequeue Operation
+  <a class="heading-link" href="#step-3-dequeue-operation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">deQueue</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(isEmpty()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;        
+</span></span><span style="display:flex;"><span>    frd <span style="color:#666">=</span> (frd <span style="color:#666">+</span><span style="color:#666">1</span>) <span style="color:#666">%</span> sz;
+</span></span><span style="display:flex;"><span>    cnt<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;        
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>isEmpty():</strong> Checks if the queue is empty. If true, it returns <code>false</code>.</li>
+<li><strong>frd = (frd + 1) % sz:</strong> This moves the front pointer forward, wrapping around if necessary.</li>
+<li><strong>cnt&ndash;:</strong> Decreases the counter as we removed an element from the queue.</li>
+</ul>
+<h4 id="step-4-front-operation">
+  Step 4: Front Operation
+  <a class="heading-link" href="#step-4-front-operation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">Front</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(isEmpty()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> q[frd];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>isEmpty():</strong> Checks if the queue is empty. If true, returns <code>-1</code> to indicate no elements.</li>
+<li><strong>q[frd]:</strong> Returns the element at the front of the queue.</li>
+</ul>
+<h4 id="step-5-rear-operation">
+  Step 5: Rear Operation
+  <a class="heading-link" href="#step-5-rear-operation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">Rear</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(isEmpty()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> q[bck];        
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>isEmpty():</strong> Checks if the queue is empty. If true, returns <code>-1</code> to indicate no elements.</li>
+<li><strong>q[bck]:</strong> Returns the element at the rear of the queue.</li>
+</ul>
+<h4 id="step-6-isempty-and-isfull-operations">
+  Step 6: isEmpty and isFull Operations
+  <a class="heading-link" href="#step-6-isempty-and-isfull-operations">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isEmpty</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt <span style="color:#666">==</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isFull</span>() {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> cnt <span style="color:#666">==</span> sz;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>isEmpty():</strong> Returns <code>true</code> if <code>cnt == 0</code>, meaning the queue is empty.</li>
+<li><strong>isFull():</strong> Returns <code>true</code> if <code>cnt == sz</code>, meaning the queue is full.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -369,10 +484,35 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(1) for all operations.</li>
-<li><strong>Space Complexity</strong>: O(k), where k is the size of the queue.</li>
+<li><strong>O(1)</strong> for all operations: <code>enQueue</code>, <code>deQueue</code>, <code>Front</code>, <code>Rear</code>, <code>isEmpty</code>, and <code>isFull</code>. Each operation only involves constant-time arithmetic or indexing operations.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(k):</strong> We store the queue elements in a vector <code>q</code> of size <code>k</code>. Therefore, the space complexity is proportional to the size of the queue.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The <code>MyCircularQueue</code> class effectively implements a circular queue with constant-time operations for enqueue, dequeue, checking the front, and checking the rear. The use of modular arithmetic for wrapping around the front and rear pointers ensures that the queue behaves circularly and efficiently manages memory usage. This implementation also handles edge cases such as empty or full queues, ensuring that the queue operates reliably under various conditions.</p>
+<p>The solution is highly efficient, with <strong>O(1)</strong> time complexity for all major operations, making it suitable for real-time applications where performance and memory efficiency are critical. This approach ensures that the queue operates in a consistent and predictable manner even as elements are added and removed cyclically.</p>
  
 </div>
   

@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -216,7 +216,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode364s0hbhb">
+        <h2 id="hahahugoshortcode351s0hbhb">
   <a href="https://leetcode.com/problems/letter-combinations-of-a-phone-number/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -231,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode364s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode351s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -264,30 +264,43 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode364s2hbhb">
+<h2 id="hahahugoshortcode351s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-phone-number-letter-combinations--a-step-by-step-guide">
+  📞 <strong>Phone Number Letter Combinations</strong> – A Step-by-Step Guide
+  <a class="heading-link" href="#-phone-number-letter-combinations--a-step-by-step-guide">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a string containing digits from 2-9, return all possible letter combinations that the number could represent based on the mapping of digits to letters on a phone keypad.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>This problem requires us to generate all possible letter combinations that a given number sequence on a telephone keypad could represent. Each digit from <code>2</code> to <code>9</code> corresponds to a set of letters, and the task is to return all possible combinations of letters that can be formed from the given string of digits.</p>
+<h4 id="example">
+  Example:
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>For the input <code>digits = &quot;23&quot;</code>, the corresponding combinations are:<br>
+<strong>&ldquo;ad&rdquo;, &ldquo;ae&rdquo;, &ldquo;af&rdquo;, &ldquo;bd&rdquo;, &ldquo;be&rdquo;, &ldquo;bf&rdquo;, &ldquo;cd&rdquo;, &ldquo;ce&rdquo;, &ldquo;cf&rdquo;</strong></p>
+<p>The goal is to generate <strong>all possible combinations</strong> formed from the digits in the order they are provided.</p>
+<hr>
+<h3 id="-approach">
+  🧠 <strong>Approach</strong>
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Use a map to associate each digit with its corresponding letters, then use a combination of loops to generate the letter combinations based on the input digits.</p>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>This problem is based on the <strong>mapping of digits to letters</strong>, similar to what you would find on an old phone keypad. The idea is to iterate through the input digits and use these mappings to generate all possible combinations of letters.</p>
+<p>Let’s break down the approach into clear, manageable steps.</p>
+<hr>
+<h3 id="-key-steps">
+  🔑 <strong>Key Steps</strong>
+  <a class="heading-link" href="#-key-steps">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -296,60 +309,168 @@
 <li>
 <p><strong>Mapping Digits to Letters</strong>:</p>
 <ul>
-<li>Create a map <code>mp</code> where each key is a digit (&lsquo;2&rsquo; to &lsquo;9&rsquo;) and the value is a vector of strings representing the letters corresponding to that digit.</li>
+<li>Each digit from <code>2</code> to <code>9</code> corresponds to a set of letters. For example, <code>2</code> maps to <code>['a', 'b', 'c']</code>.</li>
+<li>We create a mapping to quickly access the corresponding letters for any digit in the input string.</li>
 </ul>
 </li>
 <li>
-<p><strong>Initialization</strong>:</p>
+<p><strong>Start with the First Digit</strong>:</p>
 <ul>
-<li>Create a vector <code>ans</code> to store the resulting combinations. Initialize it with the letters corresponding to the first digit in <code>digits</code>.</li>
+<li>Begin by storing the possible letter combinations for the first digit. These are the initial combinations to work with.</li>
 </ul>
 </li>
 <li>
-<p><strong>Iterate Over Digits</strong>:</p>
+<p><strong>Iterative Combination Building</strong>:</p>
 <ul>
-<li>Loop through the remaining digits in the input string:
-<ul>
-<li>Store the current combinations in a temporary vector <code>tmp</code>.</li>
-<li>Clear <code>ans</code> to prepare for the new combinations.</li>
-</ul>
-</li>
+<li>For each subsequent digit, generate new combinations by appending the letters of the current digit to all existing combinations.</li>
 </ul>
 </li>
 <li>
-<p><strong>Generating Combinations</strong>:</p>
+<p><strong>Return the Result</strong>:</p>
 <ul>
-<li>For each letter corresponding to the current digit:
-<ul>
-<li>Loop through all existing combinations in <code>tmp</code>.</li>
-<li>Concatenate the current letter to each combination and add it to <code>ans</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>After processing all digits, return the vector <code>ans</code> containing all possible letter combinations.</li>
+<li>After processing all digits, the list will contain all possible letter combinations formed from the digits.</li>
 </ul>
 </li>
 </ol>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<hr>
+<h3 id="-code-breakdown-step-by-step">
+  🧑‍💻 <strong>Code Breakdown (Step-by-Step)</strong>
+  <a class="heading-link" href="#-code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="step-1-create-the-digit-to-letter-mapping">
+  Step 1: Create the Digit-to-Letter Mapping
+  <a class="heading-link" href="#step-1-create-the-digit-to-letter-mapping">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&gt;</span> mp;
+</span></span><span style="display:flex;"><span>mp[<span style="color:#b44">&#39;2&#39;</span>] <span style="color:#666">=</span> { <span style="color:#b44">&#34;a&#34;</span>, <span style="color:#b44">&#34;b&#34;</span>, <span style="color:#b44">&#34;c&#34;</span> };
+</span></span><span style="display:flex;"><span>mp[<span style="color:#b44">&#39;3&#39;</span>] <span style="color:#666">=</span> { <span style="color:#b44">&#34;d&#34;</span>, <span style="color:#b44">&#34;e&#34;</span>, <span style="color:#b44">&#34;f&#34;</span> };
+</span></span><span style="display:flex;"><span>mp[<span style="color:#b44">&#39;4&#39;</span>] <span style="color:#666">=</span> { <span style="color:#b44">&#34;g&#34;</span>, <span style="color:#b44">&#34;h&#34;</span>, <span style="color:#b44">&#34;i&#34;</span> };
+</span></span><span style="display:flex;"><span>mp[<span style="color:#b44">&#39;5&#39;</span>] <span style="color:#666">=</span> { <span style="color:#b44">&#34;j&#34;</span>, <span style="color:#b44">&#34;k&#34;</span>, <span style="color:#b44">&#34;l&#34;</span> };
+</span></span><span style="display:flex;"><span>mp[<span style="color:#b44">&#39;6&#39;</span>] <span style="color:#666">=</span> { <span style="color:#b44">&#34;m&#34;</span>, <span style="color:#b44">&#34;n&#34;</span>, <span style="color:#b44">&#34;o&#34;</span> };
+</span></span><span style="display:flex;"><span>mp[<span style="color:#b44">&#39;7&#39;</span>] <span style="color:#666">=</span> { <span style="color:#b44">&#34;p&#34;</span>, <span style="color:#b44">&#34;q&#34;</span>, <span style="color:#b44">&#34;r&#34;</span>, <span style="color:#b44">&#34;s&#34;</span> };
+</span></span><span style="display:flex;"><span>mp[<span style="color:#b44">&#39;8&#39;</span>] <span style="color:#666">=</span> { <span style="color:#b44">&#34;t&#34;</span>, <span style="color:#b44">&#34;u&#34;</span>, <span style="color:#b44">&#34;v&#34;</span> };
+</span></span><span style="display:flex;"><span>mp[<span style="color:#b44">&#39;9&#39;</span>] <span style="color:#666">=</span> { <span style="color:#b44">&#34;w&#34;</span>, <span style="color:#b44">&#34;x&#34;</span>, <span style="color:#b44">&#34;y&#34;</span>, <span style="color:#b44">&#34;z&#34;</span> };
+</span></span></code></pre></div><ul>
+<li>We use a <code>map&lt;char, vector&lt;string&gt;&gt;</code> to store the letter mappings for each digit from <code>2</code> to <code>9</code>.</li>
+<li>Each key represents a digit, and the associated value is a list of strings containing the letters for that digit.</li>
+</ul>
+<h4 id="step-2-initialize-the-answer-list-with-the-first-digit">
+  Step 2: Initialize the Answer List with the First Digit
+  <a class="heading-link" href="#step-2-initialize-the-answer-list-with-the-first-digit">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> ans, tmp;
+</span></span><span style="display:flex;"><span>ans <span style="color:#666">=</span> mp[digits[<span style="color:#666">0</span>]];
+</span></span></code></pre></div><ul>
+<li>Start by initializing the result list <code>ans</code> with the letters corresponding to the first digit in the input string.</li>
+<li>Since the result for the first digit is simply the set of letters mapped to that digit, we directly assign this to <code>ans</code>.</li>
+</ul>
+<h4 id="step-3-build-combinations-iteratively">
+  Step 3: Build Combinations Iteratively
+  <a class="heading-link" href="#step-3-build-combinations-iteratively">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> digits.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    tmp <span style="color:#666">=</span> ans;  <span style="color:#080;font-style:italic">// Temporary copy of the current answer list
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    ans <span style="color:#666">=</span> {};   <span style="color:#080;font-style:italic">// Clear the answer list for new combinations
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> mp[digits[i]].size(); j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> k <span style="color:#666">=</span> <span style="color:#666">0</span>; k <span style="color:#666">&lt;</span> tmp.size(); k<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>            ans.push_back(tmp[k] <span style="color:#666">+</span> mp[digits[i]][j]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We loop through the digits starting from the second one (<code>i = 1</code>).</li>
+<li>For each digit, we take a temporary copy of the current combinations stored in <code>ans</code>. Then, we clear <code>ans</code> to make room for new combinations.</li>
+<li>In the inner loops:
+<ul>
+<li>We iterate over the letters corresponding to the current digit (<code>mp[digits[i]]</code>).</li>
+<li>For each letter, we append it to every string in <code>tmp</code> and store the resulting combination back in <code>ans</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-4-return-the-final-result">
+  Step 4: Return the Final Result
+  <a class="heading-link" href="#step-4-return-the-final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>After processing all digits, the <code>ans</code> list will contain all possible combinations.</li>
+<li>We return this list as the result.</li>
+</ul>
+<hr>
+<h3 id="-time-and-space-complexity">
+  🧑‍💻 <strong>Time and Space Complexity</strong>
+  <a class="heading-link" href="#-time-and-space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>Sorting and iterating through the digits takes <strong>O(d)</strong>, where <code>d</code> is the length of the input string <code>digits</code>.</li>
+<li>For each digit, the number of possible combinations increases exponentially because each digit can have a variable number of letters. For example, most digits map to 3 letters, but <code>7</code> and <code>9</code> map to 4 letters.</li>
+<li>The total number of combinations grows as <strong>O(3^d)</strong>, where <code>d</code> is the number of digits in the input string.</li>
+</ul>
+<p>Thus, the overall time complexity is <strong>O(3^d)</strong>.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>We need space to store all possible combinations, which grows exponentially as well. In the worst case, the number of combinations is <strong>O(3^d)</strong>.</li>
+<li>Therefore, the space complexity is <strong>O(3^d)</strong>.</li>
+</ul>
+<hr>
+<h3 id="-why-this-approach-works">
+  🎯 <strong>Why This Approach Works</strong>
+  <a class="heading-link" href="#-why-this-approach-works">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity:</strong> (O(3^n \cdot 4^m)) where (n) is the number of digits corresponding to 3 letters and (m) is the number corresponding to 4 letters, as this reflects the branching factor of combinations.</li>
-<li><strong>Space Complexity:</strong> (O(1)) for the additional space used, although the output size can be significant depending on the input.</li>
+<li>The <strong>iterative approach</strong> ensures that we build combinations progressively, allowing us to add one digit at a time to the existing combinations.</li>
+<li>The <strong>mapping</strong> enables quick lookups for the letters corresponding to each digit, making the process efficient.</li>
+<li>The solution handles edge cases well and ensures that combinations are generated in the correct order.</li>
 </ul>
+<hr>
+<h3 id="-conclusion">
+  🏁 <strong>Conclusion</strong>
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of generating all possible letter combinations for a given string of digits. By using an <strong>iterative approach</strong> and leveraging the power of the <strong>map</strong> for fast lookups, we ensure the solution is both simple and effective. The time complexity is <strong>O(3^d)</strong>, and the space complexity is also <strong>O(3^d)</strong>, making it feasible for moderate input sizes.</p>
+<p>Happy coding! 🚀</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode364s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode351s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

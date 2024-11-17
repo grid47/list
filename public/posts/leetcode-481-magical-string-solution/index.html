@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -254,7 +254,13 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer <code>n</code>, generate a magical string that starts with &ldquo;122&rdquo; and follows specific rules to generate further characters. Return the number of &lsquo;1&rsquo;s in the first <code>n</code> characters of this string.</p>
+<p>The task is to generate a special sequence known as the &ldquo;magical string&rdquo; for a given integer <code>n</code>. The magical string is defined as follows:</p>
+<ol>
+<li>It begins with &ldquo;122&rdquo;.</li>
+<li>The sequence continues by appending groups of &lsquo;1&rsquo;s and &lsquo;2&rsquo;s based on the values in the sequence itself. For example, if the sequence reaches a position with the value <code>1</code>, it appends a single character (<code>1</code> or <code>2</code>); if it reaches a position with the value <code>2</code>, it appends two characters.</li>
+<li>The sequence toggles between appending &lsquo;1&rsquo;s and &lsquo;2&rsquo;s to create a unique pattern.</li>
+</ol>
+<p>The goal is to generate the first <code>n</code> characters of the magical string and count the number of &lsquo;1&rsquo;s within this range.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -262,53 +268,47 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we use a dynamic approach with a few critical steps:</p>
 <ol>
-<li>
-<p><strong>Initialization</strong>:</p>
+<li><strong>Initialize the Magical String</strong>: Begin with a string <code>s</code> initialized as &ldquo;122&rdquo;, the base pattern.</li>
+<li><strong>Pointer and Toggle Mechanism</strong>: Maintain a pointer <code>i</code> that starts at position 2 (since the first two values are fixed). This pointer helps determine how many characters should be added based on the value at each position in <code>s</code>. The toggle mechanism is handled by alternating between &lsquo;1&rsquo; and &lsquo;2&rsquo; using a bitwise XOR operation.</li>
+<li><strong>Dynamic Construction</strong>: Using a while loop, extend the magical string until it reaches the required length <code>n</code>. For each step, we:
 <ul>
-<li>Start with the magical string initialized to &ldquo;122&rdquo;.</li>
+<li>Append a certain number of characters (<code>1</code> or <code>2</code>) based on the value at <code>s[i]</code>.</li>
+<li>If the value is <code>1</code>, we add a single character (<code>1</code> or <code>2</code>), and if it&rsquo;s <code>2</code>, we add two characters of the alternating value.</li>
 </ul>
 </li>
-<li>
-<p><strong>Generating the String</strong>:</p>
-<ul>
-<li>Use a loop to generate characters based on the current value at the index pointed to by <code>i</code>.</li>
-<li>The character to append is determined by <code>s.back() ^ 3</code>, which alternates between &lsquo;1&rsquo; and &lsquo;2&rsquo;.</li>
-</ul>
-</li>
-<li>
-<p><strong>Counting &lsquo;1&rsquo;s</strong>:</p>
-<ul>
-<li>After generating enough characters (at least <code>n</code>), count how many &lsquo;1&rsquo;s are present in the first <code>n</code> characters of the string.</li>
-</ul>
-</li>
+<li><strong>Counting &lsquo;1&rsquo;s</strong>: After constructing enough of the sequence, we count the number of &lsquo;1&rsquo;s within the first <code>n</code> characters.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>This approach allows the magical string to be generated in a memory-efficient manner, without predefining all elements, by dynamically growing the string as needed.</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The solution code provided accomplishes these steps with simplicity:</p>
 <ol>
 <li>
-<p><strong>Function Definition</strong>:</p>
-<ul>
-<li>The function <code>magicalString()</code> takes an integer <code>n</code> as input.</li>
+<p><strong>Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string s <span style="color:#666">=</span> <span style="color:#b44">&#34;122&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">2</span>;
+</span></span></code></pre></div><p>Here, we initialize <code>s</code> with the starting sequence &ldquo;122&rdquo; and set <code>i</code> to 2. The value at <code>s[i]</code> will be used to control the number of characters appended in each step.</p>
+</li>
+<li>
+<p><strong>Growing the Magical String</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(s.size() <span style="color:#666">&lt;</span> n)
+</span></span><span style="display:flex;"><span>    s <span style="color:#666">+=</span> string(s[i<span style="color:#666">++</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>, s.back() <span style="color:#666">^</span> <span style="color:#666">3</span>);
+</span></span></code></pre></div><ul>
+<li><strong>Loop Condition</strong>: The <code>while</code> loop runs until <code>s</code> contains at least <code>n</code> characters.</li>
+<li><strong>Appending Characters</strong>: Inside the loop, <code>s[i++] - '0'</code> calculates the integer value at position <code>i</code>. The expression <code>s.back() ^ 3</code> toggles the character to be appended. This leverages the bitwise XOR operation, where <code>s.back()</code> gives the last character in <code>s</code> (either &lsquo;1&rsquo; or &lsquo;2&rsquo;), and XORing it with 3 toggles it (&lsquo;1&rsquo; to &lsquo;2&rsquo; or &lsquo;2&rsquo; to &lsquo;1&rsquo;).</li>
 </ul>
 </li>
 <li>
-<p><strong>String Generation</strong>:</p>
-<ul>
-<li>Initialize the magical string with &ldquo;122&rdquo;.</li>
-<li>Loop until the string reaches or exceeds the required length <code>n</code>, appending new characters based on the rules.</li>
-</ul>
-</li>
-<li>
-<p><strong>Count &lsquo;1&rsquo;s</strong>:</p>
-<ul>
-<li>Use the <code>count</code> function to tally the number of &lsquo;1&rsquo;s in the substring from the beginning of the string to <code>n</code>.</li>
-</ul>
+<p><strong>Counting &lsquo;1&rsquo;s</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">count</span>(s.begin(), s.begin() <span style="color:#666">+</span> n, <span style="color:#b44">&#39;1&#39;</span>);
+</span></span></code></pre></div><p>After constructing the string, we use <code>count</code> to determine the number of &lsquo;1&rsquo;s within the first <code>n</code> characters.</p>
 </li>
 </ol>
 <h3 id="complexity">
@@ -318,10 +318,16 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: O(n) for generating the string and counting &lsquo;1&rsquo;s, where <code>n</code> is the input size.</li>
-<li><strong>Space Complexity</strong>: O(n) for storing the string up to <code>n</code> characters.</li>
-</ul>
+<p>The time complexity of this algorithm is approximately O(n), as we are dynamically constructing and growing the string to contain the first <code>n</code> characters. This approach ensures minimal operations by leveraging prefix addition, which results in a linear time complexity for appending characters.</p>
+<p>The space complexity is also O(n) since we are storing the first <code>n</code> characters in the string <code>s</code>. This space usage is necessary to achieve the desired solution within the specified constraints.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>In summary, this solution provides an efficient and elegant way to generate and analyze the magical string up to <code>n</code> characters. By using pointer-based dynamic construction and bitwise operations to toggle characters, we minimize both time and space complexity. The use of the magical string generation technique in this code demonstrates a novel approach to string manipulation and sequence construction, making it well-suited for problems involving dynamic pattern generation.</p>
  
 </div>
   

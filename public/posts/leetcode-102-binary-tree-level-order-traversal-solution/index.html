@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -264,55 +264,180 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-level-order-traversal-of-binary-tree">
+  🌳 <strong>Level Order Traversal of Binary Tree</strong>
+  <a class="heading-link" href="#-level-order-traversal-of-binary-tree">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a binary tree, return the level-order traversal of its nodes&rsquo; values. (i.e., from left to right, level by level).</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>The problem asks us to return the <strong>level order traversal</strong> of a binary tree. In level order traversal, nodes are visited level by level from left to right. The result should be a list of lists, where each inner list contains the values of the nodes at a specific level of the tree.</p>
+<hr>
+<h3 id="-approach">
+  🔑 <strong>Approach:</strong>
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem, we will utilize a <strong>Breadth-First Search (BFS)</strong> algorithm, which is ideal for level-order traversal of trees. This can be efficiently implemented using a <strong>queue</strong>, which processes nodes level by level:</p>
 <ol>
-<li>Use a queue to traverse each level of the binary tree.</li>
-<li>Add the root node to the queue initially.</li>
-<li>For each level, iterate through all nodes currently in the queue, collect their values, and enqueue their child nodes (left and right).</li>
-<li>Append the collected values for each level to the result list.</li>
+<li>Start with the root node in the queue.</li>
+<li>Process all nodes at the current level, dequeueing them from the queue and adding their values to the result.</li>
+<li>For each node, enqueue its left and right children (if they exist).</li>
+<li>Repeat the process until all nodes have been processed, ensuring the nodes are visited in the correct order.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<hr>
+<h3 id="-code-breakdown-step-by-step">
+  💻 <strong>Code Breakdown (Step by Step):</strong>
+  <a class="heading-link" href="#-code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Line 3</strong>: Define a 2D vector <code>ans</code> to store the result and return an empty result if the root is <code>NULL</code>.</li>
-<li><strong>Line 5</strong>: Initialize a queue <code>q</code> and enqueue the <code>root</code> node.</li>
-<li><strong>Line 7</strong>: Enter the main loop which processes nodes level by level.</li>
-<li><strong>Line 8</strong>: Store the size of the current level in <code>sz</code>.</li>
-<li><strong>Line 9</strong>: Initialize a <code>res</code> vector to store values of the current level.</li>
-<li><strong>Line 10-16</strong>: For each node in the current level, add its value to <code>res</code>, enqueue its left and right children if they exist.</li>
-<li><strong>Line 17</strong>: After processing all nodes at this level, add <code>res</code> to <code>ans</code>.</li>
-<li><strong>Line 19</strong>: Return <code>ans</code>, which contains the level-order traversal.</li>
+<h4 id="1-function-definition">
+  <strong>1. Function Definition</strong>
+  <a class="heading-link" href="#1-function-definition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> levelOrder(TreeNode<span style="color:#666">*</span> root) {
+</span></span></code></pre></div><ul>
+<li>The function <code>levelOrder</code> is part of the <code>Solution</code> class. It takes a pointer to the root of the binary tree as input and returns a vector of vectors of integers, where each inner vector represents the values of nodes at each level of the tree.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="2-initializing-the-result-container">
+  <strong>2. Initializing the Result Container</strong>
+  <a class="heading-link" href="#2-initializing-the-result-container">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>root) <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div><ul>
+<li><code>ans</code> is a vector of vectors that will store the result of the level-order traversal.</li>
+<li>The condition checks if the root is <code>NULL</code>. If the root is <code>NULL</code>, it means the tree is empty, and we return an empty result immediately.</li>
+</ul>
+<h4 id="3-initializing-the-queue">
+  <strong>3. Initializing the Queue</strong>
+  <a class="heading-link" href="#3-initializing-the-queue">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        queue<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> q;
+</span></span><span style="display:flex;"><span>        q.push(root);
+</span></span></code></pre></div><ul>
+<li>A queue <code>q</code> is used to manage the nodes during the level-order traversal.</li>
+<li>The root node is pushed into the queue to begin the traversal.</li>
+</ul>
+<h4 id="4-processing-the-tree-level-by-level">
+  <strong>4. Processing the Tree Level by Level</strong>
+  <a class="heading-link" href="#4-processing-the-tree-level-by-level">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
+</span></span><span style="display:flex;"><span>            vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
+</span></span></code></pre></div><ul>
+<li>The <code>while</code> loop continues as long as there are nodes in the queue, meaning there are still levels to process.</li>
+<li><code>sz</code> stores the number of nodes at the current level (i.e., the size of the queue).</li>
+<li><code>res</code> is a temporary vector that will hold the values of nodes at the current level.</li>
+</ul>
+<h4 id="5-processing-each-node-at-the-current-level">
+  <strong>5. Processing Each Node at the Current Level</strong>
+  <a class="heading-link" href="#5-processing-each-node-at-the-current-level">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>                TreeNode<span style="color:#666">*</span> tmp <span style="color:#666">=</span> q.front();
+</span></span><span style="display:flex;"><span>                res.push_back(tmp<span style="color:#666">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>                q.pop();
+</span></span></code></pre></div><ul>
+<li>The inner <code>while</code> loop iterates over all nodes at the current level. The loop runs <code>sz</code> times, corresponding to the number of nodes at the current level.</li>
+<li>For each node, we dequeue it from the front of the queue, add its value to the <code>res</code> vector, and check its left and right children.</li>
+</ul>
+<h4 id="6-enqueueing-the-children-of-the-current-node">
+  <strong>6. Enqueueing the Children of the Current Node</strong>
+  <a class="heading-link" href="#6-enqueueing-the-children-of-the-current-node">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(tmp<span style="color:#666">-&gt;</span>left) q.push(tmp<span style="color:#666">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(tmp<span style="color:#666">-&gt;</span>right) q.push(tmp<span style="color:#666">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>            }
+</span></span></code></pre></div><ul>
+<li>After processing the current node, we enqueue its left and right children (if they exist) to be processed in the next iteration of the outer loop.</li>
+<li>This ensures that the nodes are processed level by level, starting from the root.</li>
+</ul>
+<h4 id="7-adding-the-current-levels-result-to-the-final-answer">
+  <strong>7. Adding the Current Level’s Result to the Final Answer</strong>
+  <a class="heading-link" href="#7-adding-the-current-levels-result-to-the-final-answer">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans.push_back(res);
+</span></span></code></pre></div><ul>
+<li>After processing all nodes at the current level, the <code>res</code> vector, which contains the values of nodes at that level, is added to the <code>ans</code> vector.</li>
+</ul>
+<h4 id="8-returning-the-final-result">
+  <strong>8. Returning the Final Result</strong>
+  <a class="heading-link" href="#8-returning-the-final-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>Once all levels have been processed and the queue is empty, we return the <code>ans</code> vector containing the level-order traversal of the tree.</li>
+</ul>
+<hr>
+<h3 id="-time-and-space-complexity">
+  🧠 <strong>Time and Space Complexity:</strong>
+  <a class="heading-link" href="#-time-and-space-complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: (O(N)), where (N) is the number of nodes, as each node is processed once.</li>
-<li><strong>Space Complexity</strong>: (O(N)), due to the storage required for the queue and the result list.</li>
-</ul> 
+<h4 id="time-complexity">
+  <strong>Time Complexity:</strong>
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the binary tree. Each node is processed exactly once, and each operation (enqueuing and dequeuing a node) takes constant time. Therefore, the overall time complexity is linear in the number of nodes.</p>
+<h4 id="space-complexity">
+  <strong>Space Complexity:</strong>
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The space complexity is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the tree. In the worst case, the queue will store all the nodes at the last level, which could be half of the nodes in a perfectly balanced binary tree. Additionally, the result vector <code>ans</code> stores all the node values, which requires <code>O(n)</code> space.</p>
+<hr>
+<h3 id="-conclusion">
+  🎯 <strong>Conclusion:</strong>
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of level-order traversal by utilizing the <strong>Breadth-First Search (BFS)</strong> algorithm. It uses a queue to process the nodes level by level, ensuring that the nodes are visited in the correct order. The time complexity is <strong>O(n)</strong>, and the space complexity is <strong>O(n)</strong>, making this solution both time and space efficient. By storing the node values at each level, the solution provides the desired output: a list of lists where each inner list represents the values of nodes at a specific level of the tree.</p>
+<hr>
+<p><strong>Happy coding!</strong> 🌱✨</p>
+ 
 </div>
   
 

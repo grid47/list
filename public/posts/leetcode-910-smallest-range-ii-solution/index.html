@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -255,26 +255,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given an array of integers <code>nums</code> and an integer <code>k</code>. Your task is to find the minimum possible value of the range (the difference between the maximum and minimum values) of the array after each number in the array can be increased or decreased by ( k ).</p>
-<h3 id="class-definition">
-  Class Definition
-  <a class="heading-link" href="#class-definition">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ul>
-<li><strong>Class</strong>: <code>Solution</code>
-<ul>
-<li><strong>Method</strong>: <code>int smallestRangeII(vector&lt;int&gt;&amp; nums, int k)</code>
-<ul>
-<li>Takes a vector of integers <code>nums</code> and an integer <code>k</code>.</li>
-<li>Returns the minimum possible range after adjusting the numbers by ( k ).</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<p>In this problem, you are given an array of integers <code>nums</code> and an integer <code>k</code>. Your task is to return the <strong>smallest possible range</strong> that can be obtained by modifying the elements of the array. You can either increase or decrease each element of the array by at most <code>k</code> in order to minimize the difference between the maximum and minimum values in the array.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -282,43 +263,115 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>The main goal is to reduce the difference between the maximum and minimum values of the array by modifying the elements. The most efficient way to do this is to exploit the properties of sorted arrays and the constraints provided by the problem. Below is a step-by-step breakdown of how we can solve this problem:</p>
 <ol>
 <li>
-<p><strong>Sorting</strong>:</p>
+<p><strong>Sort the Array</strong>:
+Sorting the array will allow us to identify the smallest and largest values easily. The main idea behind sorting is that the optimal solution to minimizing the range will involve modifying the largest and smallest elements in the array.</p>
+</li>
+<li>
+<p><strong>Calculate the Initial Range</strong>:
+After sorting, the difference between the largest and smallest element gives the initial range. The goal is to reduce this range by adjusting the numbers with the given <code>k</code>.</p>
+</li>
+<li>
+<p><strong>Modify Elements Within the Range</strong>:
+After sorting the array, the two key actions to minimize the range are:</p>
 <ul>
-<li>Sort the array <code>nums</code> to easily access the minimum and maximum values.</li>
-<li>Define <code>n</code> as the size of the sorted array.</li>
+<li><strong>Increasing the smallest values</strong> by <code>k</code> to push them toward the larger values.</li>
+<li><strong>Decreasing the largest values</strong> by <code>k</code> to pull them down toward the smaller values.
+By adjusting both ends of the sorted array, we can explore possible ranges.</li>
 </ul>
 </li>
 <li>
-<p><strong>Initial Range Calculation</strong>:</p>
+<p><strong>Iterate to Find the Minimum Range</strong>:
+Iterate through the array, adjusting the <code>i-th</code> element and the <code>(i+1)-th</code> element and compute the possible maximum and minimum values. The range for each split is calculated by:</p>
 <ul>
-<li>Calculate the initial maximum (<code>nums[n - 1]</code>) and minimum (<code>nums[0]</code>) of the array, and set the initial result <code>res</code> to the difference <code>nums[n - 1] - nums[0]</code>.</li>
+<li><strong>Maximizing</strong> the current value at position <code>i</code> increased by <code>k</code>, and the last value (position <code>n-1</code>) decreased by <code>k</code>.</li>
+<li><strong>Minimizing</strong> the next value at position <code>i+1</code> decreased by <code>k</code>, and the first value (position <code>0</code>) increased by <code>k</code>.</li>
 </ul>
-</li>
-<li>
-<p><strong>Iterate and Adjust</strong>:</p>
-<ul>
-<li>Iterate through the sorted array (up to the second-to-last element):
-<ul>
-<li>For each element <code>nums[i]</code>, calculate:
-<ul>
-<li><code>maxi</code>: the maximum value after adding ( k ) to the current element or using the adjusted maximum value (considering ( k ) on the largest element).</li>
-<li><code>mini</code>: the minimum value after subtracting ( k ) from the next element or using the adjusted minimum value (considering ( k ) on the smallest element).</li>
-</ul>
-</li>
-<li>Update the result <code>res</code> by comparing the current minimum range with <code>maxi - mini</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>Return the minimum range calculated.</li>
-</ul>
+<p>This approach ensures that we explore all potential ways to adjust the range by modifying elements optimally.</p>
 </li>
 </ol>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="sorting-the-array">
+  <strong>Sorting the Array</strong>
+  <a class="heading-link" href="#sorting-the-array">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(nums.begin(), nums.end());
+</span></span></code></pre></div><ul>
+<li>First, we sort the array <code>nums</code> in ascending order. Sorting allows us to easily work with the smallest and largest elements in the array. The first element (<code>nums[0]</code>) represents the smallest value, and the last element (<code>nums[n-1]</code>) represents the largest value.</li>
+</ul>
+<h4 id="initial-range-calculation">
+  <strong>Initial Range Calculation</strong>
+  <a class="heading-link" href="#initial-range-calculation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size(), left <span style="color:#666">=</span> nums[<span style="color:#666">0</span>] <span style="color:#666">+</span> k, right <span style="color:#666">=</span> nums[n <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">-</span> k;
+</span></span></code></pre></div><ul>
+<li>We initialize <code>n</code> as the size of the array.</li>
+<li>The <code>left</code> value represents the smallest possible value we can achieve by adding <code>k</code> to the smallest element (<code>nums[0]</code>).</li>
+<li>The <code>right</code> value represents the largest possible value we can achieve by subtracting <code>k</code> from the largest element (<code>nums[n-1]</code>).</li>
+</ul>
+<h4 id="initial-range-difference-between-largest-and-smallest-elements">
+  <strong>Initial Range (Difference Between Largest and Smallest Elements)</strong>
+  <a class="heading-link" href="#initial-range-difference-between-largest-and-smallest-elements">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> nums[n <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">-</span> nums[<span style="color:#666">0</span>];
+</span></span></code></pre></div><ul>
+<li>We calculate the initial range as the difference between the largest and smallest elements in the array, <code>nums[n-1] - nums[0]</code>.</li>
+</ul>
+<h4 id="iterate-through-the-array-to-minimize-the-range">
+  <strong>Iterate Through the Array to Minimize the Range</strong>
+  <a class="heading-link" href="#iterate-through-the-array-to-minimize-the-range">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> maxi <span style="color:#666">=</span> max(nums[i] <span style="color:#666">+</span> k, right);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mini <span style="color:#666">=</span> min(nums[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">-</span> k, left);
+</span></span><span style="display:flex;"><span>    res <span style="color:#666">=</span> min(res, maxi <span style="color:#666">-</span> mini);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p>We iterate through the array and consider adjusting each element.</p>
+</li>
+<li>
+<p>For each element <code>i</code>, we calculate:</p>
+<ul>
+<li><strong><code>maxi</code></strong>: The maximum value after adjusting the current element at index <code>i</code>. This is calculated as <code>max(nums[i] + k, right)</code>, where <code>nums[i] + k</code> represents the value of the <code>i-th</code> element increased by <code>k</code>, and <code>right</code> represents the current largest possible value (after adjusting the largest element).</li>
+<li><strong><code>mini</code></strong>: The minimum value after adjusting the next element (<code>i+1</code>). This is calculated as <code>min(nums[i + 1] - k, left)</code>, where <code>nums[i + 1] - k</code> represents the value of the <code>i+1-th</code> element decreased by <code>k</code>, and <code>left</code> represents the current smallest possible value (after adjusting the smallest element).</li>
+</ul>
+</li>
+<li>
+<p>Finally, we update the result <code>res</code> with the minimum of the current <code>res</code> and <code>maxi - mini</code>, which represents the current range.</p>
+</li>
+</ul>
+<h4 id="return-the-result">
+  <strong>Return the Result</strong>
+  <a class="heading-link" href="#return-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After iterating through all possible splits and adjusting the elements optimally, we return <code>res</code>, which holds the minimum possible range that can be achieved.</li>
+</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -326,10 +379,34 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  <strong>Time Complexity</strong>
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n log n), due to the sorting of the array.</li>
-<li><strong>Space Complexity</strong>: O(1), as the space used for calculations is constant.</li>
+<li><strong>O(n log n)</strong>: The time complexity is dominated by the sorting step, which takes (O(n \log n)). After sorting, the iteration through the array takes linear time (O(n)), so the overall time complexity is (O(n \log n)).</li>
 </ul>
+<h4 id="space-complexity">
+  <strong>Space Complexity</strong>
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong>: The space complexity is constant because we are only using a few extra variables (<code>res</code>, <code>left</code>, <code>right</code>) to store intermediate results. The input array is modified in place, so no additional space is required beyond the input.</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach efficiently minimizes the range between the maximum and minimum values of the array by optimally adjusting the elements with the given <code>k</code>. By sorting the array and adjusting both ends of the array, we ensure that we find the smallest possible range with minimal computations. The time complexity of (O(n \log n)) ensures that the solution can handle larger arrays efficiently. This solution provides an elegant and optimal approach to solving the problem of minimizing the range in the Snakes and Ladders game while adhering to the given constraints.</p>
  
 </div>
   

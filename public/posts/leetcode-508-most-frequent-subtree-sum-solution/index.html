@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -221,7 +221,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1184s0hbhb">
+        <h2 id="hahahugoshortcode1187s0hbhb">
   <a href="https://leetcode.com/problems/most-frequent-subtree-sum/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -236,7 +236,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1184s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1187s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -281,7 +281,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1184s2hbhb">
+<h2 id="hahahugoshortcode1187s2hbhb">
   
 
   
@@ -293,7 +293,8 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given the root of a binary tree, find all subtree sums that occur most frequently. A subtree sum is the sum of all node values in a subtree, including the node itself.</p>
+<p>In this problem, you are given the root of a binary tree. Each node in the tree has an integer value. The task is to find the most frequent subtree sums in the binary tree, where a subtree sum is the sum of all node values in a particular subtree (including the root node of that subtree). If multiple subtree sums have the same frequency, return all of them.</p>
+<p>Your task is to return a list of the most frequent subtree sums in the binary tree.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -301,72 +302,137 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we use a <strong>Depth First Search (DFS)</strong> to traverse the binary tree. For each node, we calculate the sum of its subtree, which includes the node itself and the sums of its left and right children. We can store these sums in a <strong>map</strong> (or dictionary) to track their frequencies.</p>
+<p>The steps in the solution are as follows:</p>
 <ol>
 <li>
-<p><strong>Data Structures</strong>:</p>
+<p><strong>DFS Traversal</strong>: Starting from the root, recursively calculate the sum of the subtree for each node.</p>
 <ul>
-<li>Use a map to count the frequency of each subtree sum.</li>
-<li>Use a vector to store the most frequent sums.</li>
+<li>The sum of a leaf node is just the node&rsquo;s value.</li>
+<li>For non-leaf nodes, the sum is the node&rsquo;s value plus the sums of its left and right subtrees.</li>
 </ul>
 </li>
 <li>
-<p><strong>Depth-First Search (DFS)</strong>:</p>
+<p><strong>Tracking Frequencies</strong>: We store the calculated sums in a <code>map</code> where the key is the sum, and the value is its frequency (i.e., how many times the sum has occurred).</p>
 <ul>
-<li>Implement a DFS function to calculate the sum of each subtree.</li>
-<li>For each node, calculate its subtree sum by adding the values of its left and right subtrees along with its own value.</li>
-<li>Record the frequency of each sum in the map.</li>
+<li>After calculating the sum for each node&rsquo;s subtree, we update the frequency of that sum in the map.</li>
 </ul>
 </li>
 <li>
-<p><strong>Tracking Maximum Frequency</strong>:</p>
-<ul>
-<li>Maintain a variable to track the maximum frequency of any subtree sum encountered.</li>
-<li>Update the result vector with subtree sums that have the maximum frequency.</li>
-</ul>
+<p><strong>Finding Maximum Frequency</strong>: As we update the map, we also keep track of the maximum frequency encountered so far. This allows us to identify the most frequent subtree sums.</p>
 </li>
 <li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>After traversing the entire tree, return the vector of sums that occur most frequently.</li>
-</ul>
+<p><strong>Handling Multiple Results</strong>: If multiple sums have the same frequency, we need to return all such sums. To do this, we maintain a list (<code>ans</code>) to store all the sums with the highest frequency.</p>
+</li>
+<li>
+<p><strong>Return Result</strong>: Finally, the result is the list of the most frequent subtree sums.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
+<p>Let&rsquo;s break down the provided code and understand each part of it:</p>
+<h4 id="1-initialization-and-setup">
+  1. Initialization and Setup
+  <a class="heading-link" href="#1-initialization-and-setup">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mx;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> findFrequentTreeSum(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans;
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    mx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    dfs(root, mp, ans);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>mx</code>: This is an integer variable that stores the maximum frequency of any subtree sum.</li>
+<li><code>findFrequentTreeSum</code>: This is the main function that initializes a <code>map&lt;int, int&gt;</code> to store the frequency of subtree sums and a <code>vector&lt;int&gt;</code> to store the most frequent subtree sums.</li>
+<li>Inside <code>findFrequentTreeSum</code>, we call the <code>dfs</code> function to traverse the tree and calculate the subtree sums. After the DFS traversal, we return the <code>ans</code> vector, which contains the most frequent subtree sums.</li>
+</ul>
+<h4 id="2-depth-first-search-dfs">
+  2. Depth First Search (DFS)
+  <a class="heading-link" href="#2-depth-first-search-dfs">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dfs</span>(TreeNode<span style="color:#666">*</span> root, map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> mp, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> ans) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (root<span style="color:#666">-&gt;</span>left <span style="color:#666">==</span> <span style="color:#a2f">NULL</span> <span style="color:#666">&amp;&amp;</span> root<span style="color:#666">-&gt;</span>right <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) {
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> root<span style="color:#666">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> dfs(root<span style="color:#666">-&gt;</span>left, mp, ans);
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> r <span style="color:#666">=</span> dfs(root<span style="color:#666">-&gt;</span>right, mp, ans);
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> l <span style="color:#666">+</span> r <span style="color:#666">+</span> root<span style="color:#666">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    mp[res] <span style="color:#666">+=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (mx <span style="color:#666">&lt;</span> mp[res]) {
+</span></span><span style="display:flex;"><span>        ans.clear();
+</span></span><span style="display:flex;"><span>        ans.push_back(res);
+</span></span><span style="display:flex;"><span>        mx <span style="color:#666">=</span> mp[res];
+</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (mx <span style="color:#666">==</span> mp[res]) {
+</span></span><span style="display:flex;"><span>        ans.push_back(res);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
 <li>
-<p><strong>Class Definition</strong>:</p>
+<p><strong>Base Case</strong>: The DFS function starts by checking if the current node (<code>root</code>) is <code>NULL</code>. If it is <code>NULL</code>, it returns <code>0</code>, indicating that an empty node contributes no value to the sum.</p>
+</li>
+<li>
+<p><strong>Leaf Node Case</strong>: If the node is a leaf (both left and right children are <code>NULL</code>), the sum for this node is just its value (<code>res = root-&gt;val</code>).</p>
+</li>
+<li>
+<p><strong>Non-Leaf Node Case</strong>: For non-leaf nodes, the function recursively calculates the sum of the left subtree (<code>l</code>) and the sum of the right subtree (<code>r</code>). The sum for the current node&rsquo;s subtree is the sum of these left and right sums plus the current node&rsquo;s value (<code>res = l + r + root-&gt;val</code>).</p>
+</li>
+<li>
+<p><strong>Updating Frequency</strong>: The subtree sum (<code>res</code>) is added to the map (<code>mp</code>), and its frequency is incremented by 1 (<code>mp[res] += 1</code>).</p>
+</li>
+<li>
+<p><strong>Tracking Maximum Frequency</strong>:</p>
 <ul>
-<li>The <code>Solution</code> class contains the method <code>findFrequentTreeSum</code>.</li>
+<li>If the current frequency of <code>res</code> is greater than the current maximum frequency (<code>mx</code>), we clear the <code>ans</code> vector and add the current sum <code>res</code> to <code>ans</code>. We also update <code>mx</code> to the new maximum frequency.</li>
+<li>If the current frequency of <code>res</code> is equal to <code>mx</code>, we simply add the current sum <code>res</code> to <code>ans</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Variable Initialization</strong>:</p>
-<ul>
-<li><code>mx</code> stores the maximum frequency of subtree sums.</li>
-<li><code>mp</code> is a map to count occurrences of each subtree sum.</li>
-<li><code>ans</code> is a vector to store the sums with the highest frequency.</li>
-</ul>
+<p><strong>Returning Subtree Sum</strong>: Finally, the function returns the sum of the current node&rsquo;s subtree (<code>res</code>).</p>
 </li>
-<li>
-<p><strong>DFS Function</strong>:</p>
-<ul>
-<li>The <code>dfs</code> function recursively computes subtree sums.</li>
-<li>It updates the map with the frequency of each computed sum.</li>
 </ul>
-</li>
-<li>
-<p><strong>Result Compilation</strong>:</p>
+<h4 id="3-treenode-definition">
+  3. TreeNode Definition
+  <a class="heading-link" href="#3-treenode-definition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">struct</span> <span style="color:#00f">TreeNode</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> val;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#666">*</span>left;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#666">*</span>right;
+</span></span><span style="display:flex;"><span>    TreeNode() <span style="color:#666">:</span> val(<span style="color:#666">0</span>), left(<span style="color:#a2f;font-weight:bold">nullptr</span>), right(<span style="color:#a2f;font-weight:bold">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#0b0;font-weight:bold">int</span> x) <span style="color:#666">:</span> val(x), left(<span style="color:#a2f;font-weight:bold">nullptr</span>), right(<span style="color:#a2f;font-weight:bold">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#0b0;font-weight:bold">int</span> x, TreeNode <span style="color:#666">*</span>left, TreeNode <span style="color:#666">*</span>right) <span style="color:#666">:</span> val(x), left(left), right(right) {}
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>This is the definition of a binary tree node. Each <code>TreeNode</code> contains:</p>
 <ul>
-<li>The function checks and updates the result vector based on the frequency of each sum.</li>
+<li><code>val</code>: The value of the node.</li>
+<li><code>left</code>: A pointer to the left child node.</li>
+<li><code>right</code>: A pointer to the right child node.</li>
 </ul>
-</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -374,15 +440,44 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(n), where n is the number of nodes in the tree, as each node is visited once.</li>
-<li><strong>Space Complexity</strong>: O(n) in the worst case for the map and call stack in the DFS.</li>
+<li><strong>DFS Traversal</strong>: The DFS function visits each node once, so the time complexity of the traversal is <code>O(n)</code>, where <code>n</code> is the number of nodes in the tree.</li>
+<li><strong>Map Operations</strong>: For each node, we perform an insert and lookup operation in the map, which takes <code>O(log k)</code>, where <code>k</code> is the number of unique subtree sums. However, since the number of unique subtree sums is at most <code>n</code>, we can treat this as <code>O(log n)</code> for each node.</li>
 </ul>
+<p>Thus, the overall time complexity is <code>O(n log n)</code>.</p>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is determined by the storage of the map <code>mp</code> and the recursive call stack.</li>
+<li>The map <code>mp</code> stores at most <code>n</code> subtree sums, so it requires <code>O(n)</code> space.</li>
+<li>The recursive call stack for DFS also requires <code>O(n)</code> space in the worst case (i.e., if the tree is a straight line).</li>
+</ul>
+<p>Thus, the overall space complexity is <code>O(n)</code>.</p>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem by leveraging a DFS traversal to calculate subtree sums and using a map to track the frequency of each sum. By maintaining the maximum frequency during the traversal, we can easily identify the most frequent subtree sums. The solution has optimal time and space complexity for the given problem, making it suitable for large binary trees.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1184s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1187s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

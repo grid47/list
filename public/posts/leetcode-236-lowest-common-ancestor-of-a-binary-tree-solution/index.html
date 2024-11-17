@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -216,7 +216,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode723s0hbhb">
+        <h2 id="hahahugoshortcode731s0hbhb">
   <a href="https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -231,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode723s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode731s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -256,67 +256,169 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">!</span>left<span style="color:#666">?</span> <span style="color:#a0a000">right</span>: <span style="color:#666">!</span>right<span style="color:#666">?</span> <span style="color:#a0a000">left</span> : root;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode723s2hbhb">
+<h2 id="hahahugoshortcode731s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-statement">
+  🚀 Problem Statement
+  <a class="heading-link" href="#-problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a binary tree (not necessarily a binary search tree), find the lowest common ancestor (LCA) of two nodes <code>p</code> and <code>q</code>. The LCA is the lowest node in the tree that has both <code>p</code> and <code>q</code> as descendants.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>In a general binary tree, the BST properties do not apply, so we must search both subtrees to determine the LCA.</p>
-<ol>
-<li>If <code>root</code> is <code>null</code>, <code>p</code>, or <code>q</code>, then <code>root</code> is a potential LCA and is returned immediately.</li>
-<li>Recursively search for <code>p</code> and <code>q</code> in both left and right subtrees.</li>
-<li>If both <code>left</code> and <code>right</code> subtrees return non-null values, it means <code>p</code> and <code>q</code> were found in different subtrees, so <code>root</code> is their LCA.</li>
-<li>If only one side returns a non-null value, it means both <code>p</code> and <code>q</code> are located on that side, so return the non-null subtree result as the LCA.</li>
-</ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
+<p>In this problem, we need to find the <strong>Lowest Common Ancestor (LCA)</strong> of two nodes in a <strong>Binary Tree</strong>. The LCA is the deepest node in the tree that is an ancestor of both nodes <code>p</code> and <code>q</code>.</p>
+<p>A binary tree is made up of nodes where each node has:</p>
 <ul>
-<li><strong>Input</strong>: Root of a binary tree and two nodes <code>p</code> and <code>q</code>.</li>
-<li><strong>Output</strong>: The lowest common ancestor node of <code>p</code> and <code>q</code>.</li>
-<li><strong>Base Condition</strong>: If <code>root</code> is <code>null</code>, <code>p</code>, or <code>q</code>, return <code>root</code>.</li>
+<li>A value (<code>val</code>)</li>
+<li>A left child (<code>left</code>)</li>
+<li>A right child (<code>right</code>)</li>
 </ul>
-<ol>
-<li>Recursively call <code>lowestCommonAncestor</code> on <code>root-&gt;left</code> and store the result in <code>left</code>.</li>
-<li>Recursively call <code>lowestCommonAncestor</code> on <code>root-&gt;right</code> and store the result in <code>right</code>.</li>
-<li>If <code>left</code> is <code>null</code>, return <code>right</code>; if <code>right</code> is <code>null</code>, return <code>left</code>.</li>
-<li>If both <code>left</code> and <code>right</code> are non-null, return <code>root</code> as it is the LCA.</li>
-</ol>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<p>Your task is to identify and return the <strong>Lowest Common Ancestor</strong> of nodes <code>p</code> and <code>q</code>.</p>
+<hr>
+<h3 id="-approach">
+  🧠 Approach
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>This problem is a great opportunity to apply <strong>recursion</strong> in a <strong>post-order traversal</strong> style! Here&rsquo;s how we can approach the solution:</p>
+<ol>
+<li>
+<p><strong>Base Case</strong>:</p>
 <ul>
-<li><strong>Time Complexity</strong>: (O(n)), where (n) is the number of nodes in the tree, as each node may be visited once.</li>
-<li><strong>Space Complexity</strong>: (O(h)), where (h) is the height of the tree, due to the recursive call stack.</li>
+<li>If the current node is <code>NULL</code>, or if it matches either <code>p</code> or <code>q</code>, we return the current node.</li>
+<li>This base case is crucial because it tells us when to stop the recursion and start returning nodes.</li>
 </ul>
+</li>
+<li>
+<p><strong>Recursive Case</strong>:</p>
+<ul>
+<li>Search the left and right subtrees of the current node for <code>p</code> and <code>q</code>.</li>
+<li>If one of <code>p</code> or <code>q</code> is found in both subtrees, the current node is their <strong>Lowest Common Ancestor</strong>.</li>
+<li>If one subtree returns a non-<code>NULL</code> node, that node must be the <strong>LCA</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Decision Making</strong>:</p>
+<ul>
+<li>If the left and right recursive calls both return a non-<code>NULL</code> node, it means one node was found in the left and the other in the right, so the current node is the <strong>LCA</strong>.</li>
+<li>If only one of the recursive calls returns a non-<code>NULL</code> node, that node must be the <strong>LCA</strong>.</li>
+</ul>
+</li>
+</ol>
+<p>It&rsquo;s like a treasure hunt in the tree, where we&rsquo;re trying to find the deepest common node between the paths from the root to <code>p</code> and <code>q</code>. 🌳✨</p>
+<hr>
+<h3 id="-step-by-step-code-breakdown">
+  🔨 Step-by-Step Code Breakdown
+  <a class="heading-link" href="#-step-by-step-code-breakdown">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Let&rsquo;s break the code into smaller chunks to understand it clearly:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    TreeNode<span style="color:#666">*</span> lowestCommonAncestor(TreeNode<span style="color:#666">*</span> root, TreeNode<span style="color:#666">*</span> p, TreeNode<span style="color:#666">*</span> q) {
+</span></span></code></pre></div><ul>
+<li>We define the <code>lowestCommonAncestor</code> function within a <code>Solution</code> class. The function accepts three parameters: the <code>root</code> of the tree, and the two nodes <code>p</code> and <code>q</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>root <span style="color:#666">||</span> root <span style="color:#666">==</span> p <span style="color:#666">||</span> root <span style="color:#666">==</span> q) <span style="color:#a2f;font-weight:bold">return</span> root;
+</span></span></code></pre></div><ul>
+<li><strong>Base case</strong>: If the <code>root</code> is <code>NULL</code> (no node to check) or if the <code>root</code> matches either <code>p</code> or <code>q</code>, we return the <code>root</code>. This means we&rsquo;ve either reached a leaf node or found one of the nodes we are searching for.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        TreeNode<span style="color:#666">*</span> left <span style="color:#666">=</span> lowestCommonAncestor(root<span style="color:#666">-&gt;</span>left, p, q);
+</span></span><span style="display:flex;"><span>        TreeNode<span style="color:#666">*</span> right <span style="color:#666">=</span> lowestCommonAncestor(root<span style="color:#666">-&gt;</span>right, p, q);
+</span></span></code></pre></div><ul>
+<li>We recursively search for <code>p</code> and <code>q</code> in the left and right subtrees.</li>
+<li>The result from the left subtree is stored in <code>left</code>, and the result from the right subtree is stored in <code>right</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">!</span>left <span style="color:#666">?</span> <span style="color:#a0a000">right</span> : <span style="color:#666">!</span>right <span style="color:#666">?</span> <span style="color:#a0a000">left</span> : root;
+</span></span></code></pre></div><ul>
+<li><strong>Decision making</strong>: Here&rsquo;s how we decide where the <strong>LCA</strong> is:
+<ul>
+<li>If <code>left</code> is <code>NULL</code>, it means <code>p</code> and <code>q</code> aren&rsquo;t found in the left subtree, so we return <code>right</code>.</li>
+<li>If <code>right</code> is <code>NULL</code>, it means <code>p</code> and <code>q</code> aren&rsquo;t found in the right subtree, so we return <code>left</code>.</li>
+<li>If both <code>left</code> and <code>right</code> are non-<code>NULL</code>, it means <code>p</code> and <code>q</code> were found in both subtrees. Therefore, the current <code>root</code> must be the <strong>Lowest Common Ancestor</strong>.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="-complexity-analysis">
+  📊 Complexity Analysis
+  <a class="heading-link" href="#-complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Now let&rsquo;s analyze the efficiency of our solution:</p>
+<h4 id="-time-complexity">
+  ⏱️ Time Complexity:
+  <a class="heading-link" href="#-time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(n)</strong>, where <code>n</code> is the number of nodes in the tree.
+<ul>
+<li>In the worst case, we may need to visit every single node to find the <strong>LCA</strong>, especially in unbalanced trees.</li>
+<li>In a balanced tree, the time complexity would still be <strong>O(n)</strong>, because we still explore all nodes, but the depth is more manageable.</li>
+</ul>
+</li>
+</ul>
+<h4 id="-space-complexity">
+  💾 Space Complexity:
+  <a class="heading-link" href="#-space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(h)</strong>, where <code>h</code> is the height of the tree.
+<ul>
+<li>This is the space needed for the recursive call stack.</li>
+<li>In the worst case (unbalanced tree), the height <code>h</code> is <strong>O(n)</strong>, so the space complexity would be <strong>O(n)</strong>.</li>
+<li>In the best case (balanced tree), the height <code>h</code> is <strong>O(log n)</strong>, so the space complexity would be <strong>O(log n)</strong>.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="-conclusion">
+  🏁 Conclusion
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>By leveraging recursion, we can efficiently find the <strong>Lowest Common Ancestor (LCA)</strong> of two nodes in a <strong>Binary Tree</strong>. Here&rsquo;s what we&rsquo;ve learned:</p>
+<ul>
+<li><strong>Base Case</strong>: If we reach <code>NULL</code> or find <code>p</code> or <code>q</code>, we return the current node.</li>
+<li><strong>Recursive Search</strong>: We search both the left and right subtrees.</li>
+<li><strong>Decision Making</strong>: The node where the paths to <code>p</code> and <code>q</code> split is the <strong>LCA</strong>.</li>
+</ul>
+<p>This approach is not only intuitive but also powerful, as it works well for both balanced and unbalanced trees. Plus, the time complexity of <strong>O(n)</strong> and space complexity of <strong>O(h)</strong> ensures that it handles even large trees efficiently.</p>
+<h4 id="key-takeaways">
+  Key Takeaways:
+  <a class="heading-link" href="#key-takeaways">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The recursive approach is simple and effective.</li>
+<li>The space complexity is manageable, and the time complexity is linear with respect to the number of nodes in the tree.</li>
+<li>This solution is commonly used in interviews and competitive programming due to its clarity and efficiency.</li>
+</ul>
+<hr>
+<p>Ready to tackle the problem yourself? 🧑‍💻 Try implementing it, and don&rsquo;t forget to test it with different tree shapes! 🌟</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode723s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode731s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

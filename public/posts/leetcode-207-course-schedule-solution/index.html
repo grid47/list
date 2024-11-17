@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -290,87 +290,196 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-statement">
+  🚀 Problem Statement
+  <a class="heading-link" href="#-problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given an integer <code>n</code>, the number of courses, and a list of prerequisite pairs <code>pre</code>. Each pair <code>[a, b]</code> indicates that to take course <code>a</code>, you must first take course <code>b</code>. Return <code>true</code> if it is possible to finish all courses, otherwise return <code>false</code>.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>Imagine you&rsquo;re trying to figure out if you can finish all your courses in a university system. 🎓📚 Each course has prerequisites, and these prerequisites form a directed graph. Each course is a node, and a directed edge from course A to course B means you must take course A before course B.</p>
+<p>Given <code>n</code> courses and a list of prerequisite pairs, we need to determine if it’s possible to finish all the courses. If there&rsquo;s a cycle (i.e., one course depends on another, which depends on the first), it’s impossible to complete all the courses. Your task is to return <code>true</code> if you can finish all courses, and <code>false</code> if a cycle exists or if some courses cannot be completed due to unmet prerequisites. 🚫</p>
+<h4 id="example">
+  Example:
+  <a class="heading-link" href="#example">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Input:</strong> <code>n = 2</code>, <code>pre = [[1, 0]]</code></li>
+<li><strong>Output:</strong> <code>true</code></li>
+</ul>
+<p>In this example, course 0 must be taken before course 1, and there’s no cycle, so it’s possible to finish all courses! ✅</p>
+<hr>
+<h3 id="-approach">
+  🧠 Approach
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this, we’ll use <strong>topological sorting</strong>. The idea is:</p>
 <ol>
-<li>
-<p><strong>Graph Representation</strong>:</p>
-<ul>
-<li>Create a directed graph using an adjacency list where each course points to the courses that depend on it.</li>
-<li>Maintain a count of incoming edges (<code>cnt</code>) for each course to track prerequisites.</li>
-</ul>
-</li>
-<li>
-<p><strong>Building the Graph</strong>:</p>
-<ul>
-<li>Iterate over the <code>pre</code> list to populate the graph and update the dependency counts for each course.</li>
-</ul>
-</li>
-<li>
-<p><strong>Queue for Courses without Dependencies</strong>:</p>
-<ul>
-<li>Use a queue to process courses that have no prerequisites (i.e., <code>cnt[i] == 0</code>).</li>
-</ul>
-</li>
-<li>
-<p><strong>Process Courses</strong>:</p>
-<ul>
-<li>While the queue is not empty:
-<ul>
-<li>For each course, decrement the dependency count of its dependent courses.</li>
-<li>If a dependent course now has no prerequisites, add it to the queue.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Check Completion</strong>:</p>
-<ul>
-<li>After processing, check if all courses have been taken (i.e., if all counts in <code>cnt</code> are zero).</li>
-<li>Return <code>true</code> if all courses can be taken; otherwise, return <code>false</code>.</li>
-</ul>
-</li>
+<li><strong>Build the graph:</strong> Treat the courses as nodes and the prerequisites as directed edges.</li>
+<li><strong>Use Kahn’s Algorithm:</strong> This algorithm helps by removing nodes (courses) with no incoming edges (i.e., no prerequisites). If we can process all courses, there’s no cycle. If some courses remain unprocessed, we have a cycle!</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>Let’s break it down step by step. ⬇️</p>
+<hr>
+<h3 id="-step-by-step-code-breakdown">
+  🔨 Step-by-Step Code Breakdown
+  <a class="heading-link" href="#-step-by-step-code-breakdown">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Line 1</strong>: Define the class <code>Solution</code>.</li>
-<li><strong>Line 2</strong>: Define the function <code>canFinish(int n, vector&lt;vector&lt;int&gt;&gt;&amp; pre)</code>.</li>
-<li><strong>Lines 3-4</strong>: Initialize the graph and dependency counter.</li>
-<li><strong>Lines 6-10</strong>: Build the graph and count prerequisites from the <code>pre</code> list.</li>
-<li><strong>Line 12</strong>: Initialize a queue to process courses without prerequisites.</li>
-<li><strong>Lines 14-30</strong>: Process the queue, decrementing counts and adding new courses to the queue as they become available.</li>
-<li><strong>Lines 32-34</strong>: Check if all courses can be completed by verifying the counts.</li>
+<h4 id="step-1-initialize-data-structures">
+  Step 1: Initialize Data Structures
+  <a class="heading-link" href="#step-1-initialize-data-structures">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> graph(n);
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> cnt(n, <span style="color:#666">0</span>);
+</span></span></code></pre></div><ul>
+<li><strong><code>graph[n]</code></strong>: A vector of vectors to represent the directed graph. Each <code>graph[i]</code> holds the list of courses that depend on course <code>i</code>.</li>
+<li><strong><code>cnt[n]</code></strong>: A vector to store the number of prerequisites (in-degree) for each course.</li>
 </ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-2-build-the-graph-and-count-dependencies">
+  Step 2: Build the Graph and Count Dependencies
+  <a class="heading-link" href="#step-2-build-the-graph-and-count-dependencies">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> pre.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    graph[pre[i][<span style="color:#666">1</span>]].push_back(pre[i][<span style="color:#666">0</span>]);
+</span></span><span style="display:flex;"><span>    cnt[pre[i][<span style="color:#666">0</span>]]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>For each prerequisite pair <code>[a, b]</code>, course <code>b</code> must be taken before course <code>a</code>. So, we add an edge from <code>b</code> to <code>a</code>.</li>
+<li>Also, we increase the dependency count (<code>cnt[a]</code>) for each course <code>a</code> because it depends on another course (<code>b</code>).</li>
+</ul>
+<h4 id="step-3-queue-initialization-courses-with-no-prerequisites">
+  Step 3: Queue Initialization (Courses with No Prerequisites)
+  <a class="heading-link" href="#step-3-queue-initialization-courses-with-no-prerequisites">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(cnt[i] <span style="color:#666">==</span> <span style="color:#666">0</span>)
+</span></span><span style="display:flex;"><span>        q.push(i);
+</span></span></code></pre></div><ul>
+<li>We initialize a queue with courses that have no prerequisites (i.e., <code>cnt[i] == 0</code>). These courses can be taken first! 🎓</li>
+</ul>
+<h4 id="step-4-process-courses-and-reduce-dependencies">
+  Step 4: Process Courses and Reduce Dependencies
+  <a class="heading-link" href="#step-4-process-courses-and-reduce-dependencies">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> size <span style="color:#666">=</span> q.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(size<span style="color:#666">--</span> <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> course <span style="color:#666">=</span> q.front();
+</span></span><span style="display:flex;"><span>        q.pop();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">dep</span>: graph[course]) {
+</span></span><span style="display:flex;"><span>            cnt[dep]<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(cnt[dep] <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>                q.push(dep);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }                
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We process each course in the queue. For each course, we reduce the dependency count for its dependent courses.</li>
+<li>If the dependency count for a dependent course becomes 0, it means all its prerequisites are now completed, so we add it to the queue to process next.</li>
+</ul>
+<h4 id="step-5-check-for-cycles-unprocessed-courses">
+  Step 5: Check for Cycles (Unprocessed Courses)
+  <a class="heading-link" href="#step-5-check-for-cycles-unprocessed-courses">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(cnt[i] <span style="color:#666">!=</span> <span style="color:#666">0</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span></code></pre></div><ul>
+<li>If any course still has a non-zero dependency count, it means we couldn’t process it (due to unmet prerequisites), which indicates a cycle. 🚫 In this case, we return <code>false</code>.</li>
+</ul>
+<h4 id="step-6-return-true-all-courses-can-be-finished">
+  Step 6: Return True (All Courses Can Be Finished)
+  <a class="heading-link" href="#step-6-return-true-all-courses-can-be-finished">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span></code></pre></div><ul>
+<li>If we processed all the courses without encountering a cycle, we return <code>true</code>, meaning it&rsquo;s possible to finish all the courses! 🎉</li>
+</ul>
+<hr>
+<h3 id="-complexity-analysis">
+  📈 Complexity Analysis
+  <a class="heading-link" href="#-complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>Let’s analyze the time and space complexity of this solution. ⏱️💾</p>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: (O(n + p)), where (n) is the number of courses and (p) is the number of prerequisite pairs, as each course and prerequisite is processed once.</li>
-<li><strong>Space Complexity</strong>: (O(n + p)), due to the graph representation and the queue used for processing.</li>
+<li><strong>O(V + E):</strong>
+<ul>
+<li><strong>V (vertices)</strong>: We process each course once, so that’s <code>n</code> courses.</li>
+<li><strong>E (edges)</strong>: For each prerequisite pair, we add an edge, resulting in <code>E</code> edges. We process each edge once when adjusting the in-degrees and when iterating over the course’s dependencies.</li>
+<li>So, the overall time complexity is <strong>O(V + E)</strong>, which is efficient for this problem!</li>
 </ul>
+</li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(V + E):</strong>
+<ul>
+<li><strong>Graph Storage:</strong> We store the graph with <code>V</code> vertices and <code>E</code> edges.</li>
+<li><strong>Dependency Count:</strong> We store the in-degrees for each course, which requires an array of size <code>V</code>.</li>
+<li><strong>Queue:</strong> The queue stores at most <code>V</code> courses at any time, in the worst case.</li>
+<li>Therefore, the space complexity is <strong>O(V + E)</strong>.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="-conclusion">
+  🏁 Conclusion
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>We’ve successfully solved the problem of determining if all courses can be completed using <strong>Kahn’s Algorithm</strong> for <strong>topological sorting</strong>. 🔄🎓 Here’s the recap:</p>
+<ol>
+<li><strong>Time Efficiency:</strong> The algorithm runs in <strong>O(V + E)</strong>, where <code>V</code> is the number of courses and <code>E</code> is the number of prerequisite pairs.</li>
+<li><strong>Space Efficiency:</strong> The space complexity is also <strong>O(V + E)</strong>, which is required to store the graph and auxiliary structures.</li>
+<li><strong>Simplicity:</strong> Using Kahn’s algorithm ensures that the solution is both simple and effective, avoiding recursion and handling large inputs easily.</li>
+</ol>
+<p>This approach is perfect for resolving dependency-related problems like course scheduling or task ordering in a directed acyclic graph (DAG). Keep up the great work, and you’ll be mastering graph algorithms in no time! 🚀💪</p>
  
 </div>
   

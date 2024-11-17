@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              4-minute read
             </span>
           </div>
 
@@ -249,7 +249,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer array <code>nums</code>, the task is to return the minimum number of increments required to make all elements unique.</p>
+<p>The problem asks to determine the minimum number of increments required to make all elements of a given array <code>nums</code> unique. The elements of the array can be increased any number of times to achieve uniqueness, and the goal is to return the smallest possible total number of increments needed.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -257,51 +257,62 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To solve this problem efficiently, we can follow these steps:</p>
 <ol>
 <li>
-<p><strong>Sorting</strong>:</p>
-<ul>
-<li>Start by sorting the array <code>nums</code>. This helps in easily identifying duplicates and determining the necessary increments.</li>
-</ul>
+<p><strong>Sorting the Array</strong>: First, we sort the array to arrange the numbers in increasing order. Sorting helps because if the numbers are in order, we can check each element and ensure that no two consecutive elements are the same. If a duplicate is found, we can increment it to a value that is greater than the previous one.</p>
 </li>
 <li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>Initialize two variables: <code>res</code> to store the total number of increments and <code>need</code> to track the next required unique number.</li>
-</ul>
+<p><strong>Tracking the Next Available Number</strong>: As we traverse the sorted array, we maintain a variable <code>need</code>, which tracks the smallest number that the next element in the array must be greater than. This ensures that each element in the array is unique.</p>
 </li>
 <li>
-<p><strong>Iterate through the Array</strong>:</p>
-<ul>
-<li>Loop through each element in the sorted array:
-<ul>
-<li>Calculate how much we need to increment the current element to make it unique:
-<ul>
-<li>If the current element is less than <code>need</code>, add the difference (<code>need - nums[i]</code>) to <code>res</code>.</li>
-<li>Update <code>need</code> to be the maximum of the current element and <code>need</code>, then increment it by 1 to account for the next unique number.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
+<p><strong>Increments Calculation</strong>: For each element, if it is smaller than <code>need</code>, it means that we have to increment it to <code>need</code>. The difference between <code>need</code> and the current element will contribute to the result. After processing each element, we update <code>need</code> to be the maximum of the current element and <code>need</code> + 1 to ensure the next element is strictly greater.</p>
 </li>
 <li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>After processing all elements, return the total increments stored in <code>res</code>.</li>
-</ul>
+<p><strong>Edge Case Considerations</strong>: If the array is already made up of unique elements, no increments will be needed. The result will be zero in that case.</p>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>This approach ensures that we minimize the number of increments because we only increment each element when absolutely necessary (i.e., when it&rsquo;s smaller than the required value <code>need</code>).</p>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>The function sorts the input array, initializes necessary variables, and iterates through the sorted array to compute the total increments needed for uniqueness.</li>
+<ol>
+<li>
+<p><strong>Sorting the Array</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(nums.begin(), nums.end());
+</span></span></code></pre></div><p>Sorting the array arranges the elements in ascending order, which allows us to process each element to ensure uniqueness more easily.</p>
+</li>
+<li>
+<p><strong>Initialization of Variables</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, n <span style="color:#666">=</span> nums.size(), need <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div><ul>
+<li><code>res</code>: This variable holds the total number of increments needed to make all elements unique.</li>
+<li><code>n</code>: The size of the input array <code>nums</code>.</li>
+<li><code>need</code>: A variable that tracks the next number that an element should be incremented to, ensuring uniqueness.</li>
 </ul>
+</li>
+<li>
+<p><strong>Processing Each Element</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    res <span style="color:#666">+=</span> max(need <span style="color:#666">-</span> nums[i], <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    need <span style="color:#666">=</span> max(nums[i], need) <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The loop iterates through each element of the sorted array.</li>
+<li>For each element <code>nums[i]</code>, we check if it is less than <code>need</code>. If it is, we increment it to match <code>need</code>, and the difference (<code>need - nums[i]</code>) is added to <code>res</code> as the number of increments required.</li>
+<li>After processing the element, we update <code>need</code> to be the maximum of the current element <code>nums[i]</code> and <code>need</code> + 1. This ensures that the next element is always greater than the previous one.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div><p>After processing all elements, <code>res</code> holds the total number of increments needed, which is returned as the final result.</p>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -309,10 +320,31 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li><strong>Time Complexity</strong>: O(n log n), where n is the number of elements in the array due to the sorting step.</li>
-<li><strong>Space Complexity</strong>: O(1), as the algorithm uses a constant amount of extra space.</li>
+<li>The time complexity of the solution is dominated by the sorting step. Sorting an array of size <code>n</code> takes O(n log n) time.</li>
+<li>After sorting, we only perform a single traversal of the array to compute the number of increments, which takes O(n) time.</li>
+<li>Thus, the overall time complexity is O(n log n), which is efficient for this problem.</li>
 </ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is O(1) because we are only using a few extra variables (<code>res</code>, <code>n</code>, and <code>need</code>), and we are modifying the input array <code>nums</code> in place.</li>
+<li>Therefore, the space complexity is constant, O(1).</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently computes the minimum number of increments required to make all elements of an array unique. By sorting the array and keeping track of the next required unique value for each element, we can determine the necessary increments while minimizing the number of operations. The time complexity of O(n log n) due to sorting ensures that the solution is efficient even for larger input sizes. The space complexity of O(1) makes the solution optimal in terms of memory usage, as it only uses a constant amount of additional space. This solution is simple, effective, and well-suited for handling large datasets efficiently.</p>
  
 </div>
   

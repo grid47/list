@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              5-minute read
             </span>
           </div>
 
@@ -268,73 +268,184 @@
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-problem-statement">
+  🚀 Problem Statement
+  <a class="heading-link" href="#-problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>You are given an integer array <code>nums</code>, and you need to design a data structure that supports the following operations:</p>
+<p>The task is to create an efficient solution for picking a random index from an array <code>nums</code> where a specific target value occurs. We need to implement a <code>pick</code> method that, given a target value, randomly returns an index from the array <code>nums</code> where the target exists. The solution should be time and space-efficient, especially when dealing with multiple occurrences of the target value.</p>
+<hr>
+<h3 id="-approach">
+  🧠 Approach
+  <a class="heading-link" href="#-approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>To tackle this problem, we need to focus on:</p>
 <ol>
-<li><strong>Constructor</strong>: Initializes the data structure with the given array <code>nums</code>.</li>
-<li><strong>pick</strong>: Returns a random index of the target number from <code>nums</code>. If the target number does not exist in the array, it should not return anything.</li>
+<li><strong>Efficient Storage</strong>: Storing the indices of all occurrences of each value in the array. This allows us to quickly retrieve all indices corresponding to a target value.</li>
+<li><strong>Efficient Retrieval</strong>: The goal is to pick a random index from the stored list of indices for the target value. By using a random number generator, we can easily select a random index from the list.</li>
+<li><strong>Time Complexity</strong>: The <code>pick</code> method should ideally run in constant time (<code>O(1)</code>), after initializing the storage.</li>
+<li><strong>Space Complexity</strong>: The space required for storing indices must be managed effectively, without consuming excessive memory.</li>
 </ol>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<hr>
+<h3 id="-step-by-step-code-breakdown">
+  🔨 Step-by-Step Code Breakdown
+  <a class="heading-link" href="#-step-by-step-code-breakdown">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>Let’s walk through the code to understand how this problem is solved efficiently:</p>
+<h4 id="step-1-class-definition">
+  Step 1: Class Definition
+  <a class="heading-link" href="#step-1-class-definition">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> mp;
+</span></span></code></pre></div><ul>
+<li>The <code>Solution</code> class contains an unordered map <code>mp</code>. The key is an integer, and the value is a vector that stores the indices where that integer appears in the array.</li>
+</ul>
+<h4 id="step-2-constructor-to-initialize-the-map">
+  Step 2: Constructor to Initialize the Map
+  <a class="heading-link" href="#step-2-constructor-to-initialize-the-map">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    Solution(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>            mp[nums[i]].push_back(i);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The constructor takes a reference to a vector <code>nums</code>, which is the input array.</li>
+<li>The loop iterates over the array, and for each element <code>nums[i]</code>, it adds its index <code>i</code> to the vector corresponding to <code>nums[i]</code> in the <code>mp</code> map.
+<ul>
+<li>Example: For <code>nums = [1, 2, 3, 1, 2]</code>, the map <code>mp</code> will look like:
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>  <span style="color:#666">1</span><span style="color:#666">:</span> [<span style="color:#666">0</span>, <span style="color:#666">3</span>],
+</span></span><span style="display:flex;"><span>  <span style="color:#666">2</span><span style="color:#666">:</span> [<span style="color:#666">1</span>, <span style="color:#666">4</span>],
+</span></span><span style="display:flex;"><span>  <span style="color:#666">3</span><span style="color:#666">:</span> [<span style="color:#666">2</span>]
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-pick-method-to-randomly-select-an-index">
+  Step 3: Pick Method to Randomly Select an Index
+  <a class="heading-link" href="#step-3-pick-method-to-randomly-select-an-index">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">pick</span>(<span style="color:#0b0;font-weight:bold">int</span> target) { 
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> mp[target].size();
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> mp[target][rand() <span style="color:#666">%</span> sz];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The <code>pick</code> method takes an integer <code>target</code> and performs the following:
 <ol>
-<li>
-<p><strong>Store Indices</strong>:</p>
+<li><strong>Find the Size of the Target’s Index List</strong>:
 <ul>
-<li>Use an <code>unordered_map</code> to map each unique number in <code>nums</code> to a vector of indices where that number appears. This allows for efficient lookup of indices for the <code>pick</code> operation.</li>
+<li><code>sz = mp[target].size()</code> gets the number of indices where the target value occurs.</li>
 </ul>
 </li>
-<li>
-<p><strong>Constructor</strong>:</p>
+<li><strong>Generate a Random Index</strong>:
 <ul>
-<li>In the constructor, iterate through the <code>nums</code> array and populate the <code>unordered_map</code> where each key is the number and the value is a vector containing the indices of that number.</li>
+<li><code>rand() % sz</code> generates a random index between <code>0</code> and <code>sz - 1</code>.</li>
 </ul>
 </li>
-<li>
-<p><strong>Pick Operation</strong>:</p>
+<li><strong>Return the Random Index</strong>:
 <ul>
-<li>For the <code>pick</code> method, retrieve the vector of indices for the given target number.</li>
-<li>Use <code>rand() % sz</code> to select a random index from this vector, where <code>sz</code> is the size of the vector. This provides a uniform random selection from the available indices of the target.</li>
+<li>The random index is selected from <code>mp[target]</code>, and that index is returned.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ul>
-<li>The <code>Solution</code> class is initialized with the array <code>nums</code>, and during initialization, it builds the mapping of numbers to their indices.</li>
-<li>The <code>pick</code> method uses the mapping to randomly return an index of the specified target.</li>
-</ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ul>
-<li><strong>Time Complexity</strong>:
-<ul>
-<li>Constructor: O(n), where n is the number of elements in <code>nums</code> (to build the mapping).</li>
-<li>Pick: O(1) for accessing the vector and selecting a random index.</li>
-</ul>
 </li>
-<li><strong>Space Complexity</strong>: O(n), to store the mapping of each number to its indices.</li>
 </ul>
+<h4 id="step-4-example-usage">
+  Step 4: Example Usage
+  <a class="heading-link" href="#step-4-example-usage">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your Solution object will be instantiated and called as such:
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Solution* obj = new Solution(nums);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * int param_1 = obj-&gt;pick(target);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> */</span>
+</span></span></code></pre></div><ul>
+<li>You instantiate the <code>Solution</code> object with <code>nums</code> and then call <code>pick</code> with a target value to get a random index of that target.</li>
+</ul>
+<hr>
+<h3 id="-complexity-analysis">
+  📈 Complexity Analysis
+  <a class="heading-link" href="#-complexity-analysis">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>Constructor</strong>: The constructor iterates through the array <code>nums</code> to build the map. This takes <code>O(n)</code> time, where <code>n</code> is the size of the array.</li>
+<li><strong>Pick Method</strong>: Accessing the list of indices for a target is <code>O(1)</code>, and generating a random index using <code>rand()</code> is also <code>O(1)</code>. So, the <code>pick</code> method runs in constant time, i.e., <code>O(1)</code>.</li>
+</ul>
+<p>Thus, the time complexity is:</p>
+<ul>
+<li><strong>Initialization</strong>: <code>O(n)</code></li>
+<li><strong>Pick Operation</strong>: <code>O(1)</code></li>
+</ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li>The space complexity is determined by the size of the map <code>mp</code>, which stores the indices of each value in the array. In the worst case, the map stores all <code>n</code> indices if all elements in <code>nums</code> are unique.</li>
+</ul>
+<p>Thus, the space complexity is <code>O(n)</code>.</p>
+<hr>
+<h3 id="-conclusion">
+  🏁 Conclusion
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This approach efficiently handles the problem of picking a random index for a target value in an array. By storing all the indices of each value in a map, we can quickly retrieve the list of indices for any target. Using a random number generator allows us to pick a random index in constant time.</p>
+<p>With a time complexity of <code>O(n)</code> for initialization and <code>O(1)</code> for each pick operation, and a space complexity of <code>O(n)</code> to store the indices, this solution is both time-efficient and space-efficient. It’s an ideal choice for large datasets!</p>
+<hr>
+<h3 id="-key-takeaways">
+  🔑 Key Takeaways:
+  <a class="heading-link" href="#-key-takeaways">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>Efficient storage of indices using a map allows fast access and random index selection.</li>
+<li>Time complexity for initialization is linear (<code>O(n)</code>), while each pick operation is constant time (<code>O(1)</code>).</li>
+<li>Space complexity is linear (<code>O(n)</code>), based on the storage of indices in the map.</li>
+</ul>
+<p>With this solution, you&rsquo;re all set to handle any large array and pick random indices with ease! 💡🎯</p>
  
 </div>
   

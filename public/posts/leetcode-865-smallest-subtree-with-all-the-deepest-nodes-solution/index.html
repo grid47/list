@@ -217,7 +217,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              6-minute read
             </span>
           </div>
 
@@ -258,7 +258,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> {root, lft.second <span style="color:#666">+</span> <span style="color:#666">1</span>};
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1373s1hbhb">
+<h2 id="hahahugoshortcode1374s1hbhb">
   
 
   
@@ -270,7 +270,16 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The task is to find the subtree that contains all the deepest nodes in a given binary tree. A subtree is defined as the tree rooted at a particular node.</p>
+<p>The problem asks to find the <strong>smallest subtree</strong> that contains all the deepest nodes in a binary tree. In other words, given a binary tree, you need to determine the node that is the root of the subtree that includes all the deepest nodes (nodes at the maximum depth). The deepest nodes are those at the greatest depth, and the subtree should be the smallest such subtree that includes all of them.</p>
+<h3 id="problem-explanation">
+  Problem Explanation
+  <a class="heading-link" href="#problem-explanation">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>We are given a binary tree, and we need to find a subtree that contains all the deepest nodes. A <strong>subtree</strong> is any node in the tree, along with all of its descendants. A node is considered a <strong>deepest node</strong> if it is at the greatest depth in the tree.</p>
+<p>To solve this problem, we must efficiently traverse the tree, calculate the depth of each node, and identify the deepest nodes. From there, we need to find the <strong>lowest common ancestor</strong> (LCA) of all the deepest nodes. The LCA of a set of nodes in a binary tree is the deepest node that is an ancestor of all of them.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -278,55 +287,95 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>To approach this problem, the following steps are undertaken:</p>
 <ol>
-<li>
-<p><strong>Depth-First Search (DFS)</strong>:</p>
-<ul>
-<li>Implement a recursive function (<code>lcadn</code>) that traverses the binary tree.</li>
-<li>This function returns a pair consisting of:
-<ul>
-<li>The subtree root containing all the deepest nodes.</li>
-<li>The depth of that subtree.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Base Case</strong>:</p>
-<ul>
-<li>If the current node is <code>NULL</code>, return a pair of <code>NULL</code> and depth <code>0</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Recursive Case</strong>:</p>
-<ul>
-<li>Recursively call the function for the left and right child nodes.</li>
-<li>Compare the depths returned from the left and right subtrees:
-<ul>
-<li>If the left subtree is deeper, return the left child and increment its depth.</li>
-<li>If the right subtree is deeper, return the right child and increment its depth.</li>
-<li>If both depths are equal, return the current node as it is the lowest common ancestor of the deepest nodes, and increment the depth.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>The main function (<code>subtreeWithAllDeepest</code>) simply calls the helper function and returns the root of the subtree containing all the deepest nodes.</li>
-</ul>
-</li>
+<li><strong>Depth Calculation</strong>: For each node, calculate the depth of its left and right subtrees.</li>
+<li><strong>Comparison of Depths</strong>: Compare the depths of the left and right subtrees at each node. The node will be part of the answer if the depths of its left and right children are equal and at the maximum depth.</li>
+<li><strong>Lowest Common Ancestor (LCA)</strong>: The solution leverages the concept of LCA to identify the smallest subtree that contains all the deepest nodes. The LCA of the deepest nodes is the root of this smallest subtree.</li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<p>The algorithm involves:</p>
+<ul>
+<li>Recursively calculating the depths of each subtree.</li>
+<li>Tracking the node at each depth level.</li>
+<li>Returning the node that corresponds to the subtree containing all the deepest nodes.</li>
+</ul>
+<h3 id="code-breakdown-step-by-step">
+  Code Breakdown (Step by Step)
+  <a class="heading-link" href="#code-breakdown-step-by-step">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="step-1-define-the-helper-function">
+  Step 1: Define the Helper Function
+  <a class="heading-link" href="#step-1-define-the-helper-function">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<p>The helper function <code>lcadn</code> calculates the <strong>lowest common ancestor</strong> (LCA) of the deepest nodes and also returns the depth of the deepest node.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>pair<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> lcadn(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> {<span style="color:#a2f">NULL</span>, <span style="color:#666">0</span>}; <span style="color:#080;font-style:italic">// Base case: if the node is NULL, the depth is 0
+</span></span></span></code></pre></div><ul>
+<li>We start with the base case: if the current node is <code>NULL</code>, it means we&rsquo;ve reached a leaf&rsquo;s child, so we return <code>NULL</code> as the LCA and <code>0</code> as the depth.</li>
+</ul>
+<h4 id="step-2-recursively-calculate-the-lca-and-depth-for-left-and-right-subtrees">
+  Step 2: Recursively Calculate the LCA and Depth for Left and Right Subtrees
+  <a class="heading-link" href="#step-2-recursively-calculate-the-lca-and-depth-for-left-and-right-subtrees">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">auto</span> lft <span style="color:#666">=</span> lcadn(root<span style="color:#666">-&gt;</span>left);  <span style="color:#080;font-style:italic">// Recursively find the LCA and depth of the left subtree
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">auto</span> rht <span style="color:#666">=</span> lcadn(root<span style="color:#666">-&gt;</span>right); <span style="color:#080;font-style:italic">// Recursively find the LCA and depth of the right subtree
+</span></span></span></code></pre></div><ul>
+<li>We recursively call the helper function <code>lcadn</code> on the left and right children of the current node (<code>root-&gt;left</code> and <code>root-&gt;right</code>). This will allow us to calculate the LCA and the depth for each subtree.</li>
+</ul>
+<h4 id="step-3-compare-the-depths-of-left-and-right-subtrees">
+  Step 3: Compare the Depths of Left and Right Subtrees
+  <a class="heading-link" href="#step-3-compare-the-depths-of-left-and-right-subtrees">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (lft.second <span style="color:#666">&lt;</span> rht.second) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> {rht.first, rht.second <span style="color:#666">+</span> <span style="color:#666">1</span>}; <span style="color:#080;font-style:italic">// If the right subtree is deeper, return the right subtree&#39;s LCA
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> (lft.second <span style="color:#666">&gt;</span> rht.second) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> {lft.first, lft.second <span style="color:#666">+</span> <span style="color:#666">1</span>}; <span style="color:#080;font-style:italic">// If the left subtree is deeper, return the left subtree&#39;s LCA
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
+</span></span></code></pre></div><ul>
+<li>After obtaining the depths of the left and right subtrees, we compare them:
 <ul>
-<li>The <code>subtreeWithAllDeepest</code> function initializes the process by calling <code>lcadn</code> on the root.</li>
-<li>The <code>lcadn</code> function performs the DFS and computes the necessary information to find the desired subtree.</li>
+<li>If the left subtree is deeper, we return the LCA from the left subtree and its depth.</li>
+<li>If the right subtree is deeper, we return the LCA from the right subtree and its depth.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-4-handle-the-case-where-both-subtrees-have-the-same-depth">
+  Step 4: Handle the Case Where Both Subtrees Have the Same Depth
+  <a class="heading-link" href="#step-4-handle-the-case-where-both-subtrees-have-the-same-depth">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> {root, lft.second <span style="color:#666">+</span> <span style="color:#666">1</span>}; <span style="color:#080;font-style:italic">// If both subtrees have the same depth, the current node is the LCA
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
+</span></span></code></pre></div><ul>
+<li>If both the left and right subtrees have the same depth, it means that the current node is the lowest common ancestor of all the deepest nodes in its subtree.</li>
+<li>We return the current node (<code>root</code>) as the LCA and its depth (<code>lft.second + 1</code>, which is the depth of the current node).</li>
+</ul>
+<h4 id="step-5-the-main-function-to-get-the-result">
+  Step 5: The Main Function to Get the Result
+  <a class="heading-link" href="#step-5-the-main-function-to-get-the-result">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> <span style="color:#00a000">subtreeWithAllDeepest</span>(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> lcadn(root).first; <span style="color:#080;font-style:italic">// Return the LCA of the deepest nodes
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
+</span></span></code></pre></div><ul>
+<li>The main function <code>subtreeWithAllDeepest</code> calls the helper function <code>lcadn</code> on the root of the binary tree and returns the first element of the pair, which is the LCA of the deepest nodes. This node represents the root of the subtree containing all the deepest nodes.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -335,15 +384,41 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity</strong>: O(N), where N is the number of nodes in the binary tree. Each node is visited once.</li>
-<li><strong>Space Complexity</strong>: O(H), where H is the height of the tree, due to the recursion stack.</li>
+<li><strong>O(n)</strong>, where <code>n</code> is the number of nodes in the binary tree.</li>
+<li>The function <code>lcadn</code> is called once for each node, and each node is processed a constant number of times (once for left and right children).</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(h)</strong>, where <code>h</code> is the height of the binary tree.</li>
+<li>The space complexity is due to the recursive calls on the function stack. In the worst case (unbalanced tree), the height could be equal to the number of nodes, so the space complexity is O(n). For a balanced tree, the height is O(log n), so the space complexity is O(log n).</li>
+</ul>
+<h3 id="conclusion">
+  Conclusion
+  <a class="heading-link" href="#conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently solves the problem of finding the smallest subtree containing all the deepest nodes by utilizing the concept of the <strong>lowest common ancestor (LCA)</strong>. The recursive helper function calculates both the LCA and the depth of the deepest nodes in the tree. By comparing the depths of the left and right subtrees, the algorithm determines the correct subtree that contains all the deepest nodes, while maintaining an optimal time and space complexity. This approach is efficient and leverages the properties of binary trees and LCA to find the solution in a concise manner.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1373s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1374s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

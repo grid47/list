@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              5-minute read
             </span>
           </div>
 
@@ -216,7 +216,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1292s0hbhb">
+        <h2 id="hahahugoshortcode1290s0hbhb">
   <a href="https://leetcode.com/problems/set-matrix-zeroes/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -231,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1292s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1290s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -270,89 +270,198 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1292s2hbhb">
+<h2 id="hahahugoshortcode1290s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-set-matrix-zeros-in-place-transformation">
+  🧩 <strong>Set Matrix Zeros (In-Place Transformation)</strong>
+  <a class="heading-link" href="#-set-matrix-zeros-in-place-transformation">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a matrix <code>mtx</code>, if an element is <code>0</code>, set its entire row and column to <code>0</code>. Modify the matrix in place and do not use additional space for another matrix.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>In this problem, you are tasked with modifying a given <strong>m x n matrix</strong> such that if any element is <code>0</code>, the entire row and column containing that element should be set to <code>0</code>. This operation must be done <strong>in-place</strong>, meaning you cannot use extra space for another matrix, and the goal is to achieve this with <strong>O(1) additional space</strong> (aside from the input matrix).</p>
+<h3 id="-problem-breakdown">
+  📝 <strong>Problem Breakdown</strong>
+  <a class="heading-link" href="#-problem-breakdown">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>You are given:</p>
+<ul>
+<li>A matrix <code>mtx</code> with dimensions <strong>m x n</strong>.</li>
+<li>The task is to set rows and columns to zero if any element in the matrix is zero.</li>
+</ul>
+<p>The solution must modify the matrix in-place, using <strong>O(1) extra space</strong> (i.e., no additional matrices or data structures except for a couple of flags).</p>
+<h3 id="-approach">
+  💡 <strong>Approach</strong>
+  <a class="heading-link" href="#-approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>The core idea is to <strong>use the input matrix itself</strong> to track which rows and columns should be zeroed out. The first row and first column can act as markers to indicate which rows and columns contain zeros, without requiring extra space.</p>
+<h4 id="key-insights">
+  Key Insights:
+  <a class="heading-link" href="#key-insights">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ol>
 <li>
-<p><strong>Identify Rows and Columns to Zero</strong>:</p>
+<p><strong>Mark Rows and Columns Using the First Row and Column</strong>:</p>
 <ul>
-<li>Use the first row and the first column of the matrix to mark which rows and columns need to be set to zero.</li>
-<li>Use two variables <code>zr</code> and <code>zc</code> to track if the first row or first column itself contains a zero.</li>
+<li>Use the first row to mark which columns should be zeroed.</li>
+<li>Use the first column to mark which rows should be zeroed.</li>
 </ul>
 </li>
 <li>
-<p><strong>Mark Rows and Columns</strong>:</p>
+<p><strong>Handling the First Row and Column</strong>:</p>
 <ul>
-<li>Traverse the matrix starting from the second row and second column (i.e., <code>mtx[1][1]</code>).</li>
-<li>If a cell contains <code>0</code>, set the corresponding cell in the first row and first column to <code>0</code>.</li>
+<li>Since the first row and first column are being used for marking, we need special handling to check if they contain any zeros themselves.</li>
 </ul>
 </li>
 <li>
-<p><strong>Set Rows and Columns to Zero</strong>:</p>
+<p><strong>In-place Zeroing</strong>:</p>
 <ul>
-<li>Iterate through the matrix again, starting from the second row and column.</li>
-<li>If the first cell of the row or the first cell of the column is <code>0</code>, set the cell to <code>0</code>.</li>
+<li>After marking the rows and columns, we can update the matrix by zeroing out the appropriate rows and columns.</li>
 </ul>
 </li>
 <li>
-<p><strong>Zero out the First Row and Column</strong>:</p>
+<p><strong>Restoring the First Row and Column</strong>:</p>
 <ul>
-<li>If <code>zr</code> is <code>1</code>, set the entire first row to <code>0</code>.</li>
-<li>If <code>zc</code> is <code>1</code>, set the entire first column to <code>0</code>.</li>
+<li>Finally, we handle the first row and first column separately, using the flags set earlier.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<h3 id="-code-breakdown">
+  🚀 <strong>Code Breakdown</strong>
+  <a class="heading-link" href="#-code-breakdown">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li><strong>Initialization</strong>: Determine the dimensions of the matrix and set the <code>zr</code> and <code>zc</code> flags based on the first row and first column.</li>
-<li><strong>Marking</strong>:
-<ul>
-<li>For each zero found in the matrix (excluding the first row and column), mark the respective first row and first column.</li>
+<h4 id="step-1-initialize-flags-for-the-first-row-and-column">
+  Step 1: Initialize Flags for the First Row and Column
+  <a class="heading-link" href="#step-1-initialize-flags-for-the-first-row-and-column">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> mtx.size(), n <span style="color:#666">=</span> mtx[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> zr <span style="color:#666">=</span> <span style="color:#666">0</span>, zc <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mtx[<span style="color:#666">0</span>][i] <span style="color:#666">==</span> <span style="color:#666">0</span>) zr <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mtx[i][<span style="color:#666">0</span>] <span style="color:#666">==</span> <span style="color:#666">0</span>) zc <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div><ul>
+<li>We initialize two flags: <code>zr</code> for the first row and <code>zc</code> for the first column.</li>
+<li>We check if there are any zeros in the first row (<code>zr</code>) and the first column (<code>zc</code>). If a zero is found, we set the corresponding flag to <code>1</code>.</li>
 </ul>
-</li>
-<li><strong>Applying Zeroes</strong>: Use the marked positions to set the respective rows and columns to <code>0</code>.</li>
-<li><strong>Final Adjustments</strong>: If necessary, zero out the first row and/or first column based on the flags.</li>
-</ol>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h4 id="step-2-mark-zeros-in-the-matrix-using-the-first-row-and-column">
+  Step 2: Mark Zeros in the Matrix Using the First Row and Column
+  <a class="heading-link" href="#step-2-mark-zeros-in-the-matrix-using-the-first-row-and-column">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mtx[i][j] <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>            mtx[i][<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>            mtx[<span style="color:#666">0</span>][j] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li>Now, we iterate through the matrix starting from the second row and second column.</li>
+<li>If any element <code>mtx[i][j]</code> is <code>0</code>, we mark the corresponding first row (<code>mtx[i][0]</code>) and first column (<code>mtx[0][j]</code>) as <code>0</code>.</li>
+</ul>
+<h4 id="step-3-zero-out-the-rows-and-columns-based-on-the-markers">
+  Step 3: Zero Out the Rows and Columns Based on the Markers
+  <a class="heading-link" href="#step-3-zero-out-the-rows-and-columns-based-on-the-markers">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mtx[i][<span style="color:#666">0</span>] <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> mtx[<span style="color:#666">0</span>][j] <span style="color:#666">==</span> <span style="color:#666">0</span>)
+</span></span><span style="display:flex;"><span>            mtx[i][j] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div><ul>
+<li>After marking the rows and columns, we iterate over the entire matrix again (excluding the first row and first column).</li>
+<li>If the first column or the first row for any element <code>mtx[i][j]</code> is <code>0</code>, we set that element to <code>0</code>.</li>
+</ul>
+<h4 id="step-4-handle-the-first-row-and-first-column">
+  Step 4: Handle the First Row and First Column
+  <a class="heading-link" href="#step-4-handle-the-first-row-and-first-column">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(zr <span style="color:#666">==</span> <span style="color:#666">1</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        mtx[<span style="color:#666">0</span>][i] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(zc <span style="color:#666">==</span> <span style="color:#666">1</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        mtx[i][<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div><ul>
+<li>Finally, we handle the first row and first column.</li>
+<li>If the first row contains a zero (indicated by <code>zr</code>), we set all elements in the first row to <code>0</code>.</li>
+<li>If the first column contains a zero (indicated by <code>zc</code>), we set all elements in the first column to <code>0</code>.</li>
+</ul>
+<h3 id="-complexity-analysis">
+  ⏱️ <strong>Complexity Analysis</strong>
+  <a class="heading-link" href="#-complexity-analysis">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<h4 id="time-complexity">
+  Time Complexity:
+  <a class="heading-link" href="#time-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
 <ul>
-<li><strong>Time Complexity:</strong> ( O(M \times N) ), where ( M ) and ( N ) are the dimensions of the matrix.</li>
-<li><strong>Space Complexity:</strong> ( O(1) ), since the solution modifies the matrix in place without using additional space.</li>
+<li><strong>O(m * n)</strong> — We iterate over the matrix multiple times. Each element is processed a constant number of times, resulting in <strong>O(m * n)</strong> time complexity, where <code>m</code> is the number of rows and <code>n</code> is the number of columns.</li>
 </ul>
+<h4 id="space-complexity">
+  Space Complexity:
+  <a class="heading-link" href="#space-complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<ul>
+<li><strong>O(1)</strong> — We use only a few integer variables (<code>zr</code>, <code>zc</code>) for the flags. The matrix is modified in-place, and no additional space is used.</li>
+</ul>
+<h3 id="-conclusion">
+  🎯 <strong>Conclusion</strong>
+  <a class="heading-link" href="#-conclusion">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>This solution efficiently modifies the matrix in-place to set the entire row and column to zero when any element is zero. By utilizing the first row and column as markers, we achieve <strong>O(1) space complexity</strong> and <strong>O(m * n)</strong> time complexity, making this approach both space and time-efficient.</p>
+<p>This method is particularly useful for problems that require <strong>in-place transformations</strong> while maintaining <strong>optimal space usage</strong>. The clever use of the first row and column as markers is a classic technique for reducing space complexity in matrix manipulation problems.</p>
+<hr>
+<h3 id="-final-thoughts">
+  🌟 <strong>Final Thoughts</strong>
+  <a class="heading-link" href="#-final-thoughts">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<p>Matrix manipulation problems like this one are excellent for testing your understanding of space complexity and in-place transformations. Keep practicing, and you’ll find ways to solve increasingly complex problems with optimal space and time efficiency! 🚀</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1292s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1290s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              2-minute read
+              3-minute read
             </span>
           </div>
 
@@ -211,7 +211,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode276s0hbhb">
+        <h2 id="hahahugoshortcode273s0hbhb">
   <a href="https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -226,7 +226,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode276s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode273s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -256,93 +256,129 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> nums[e];
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode276s2hbhb">
+<h2 id="hahahugoshortcode273s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="problem-statement">
-  Problem Statement
-  <a class="heading-link" href="#problem-statement">
+    <h3 id="-find-minimum-in-rotated-sorted-array">
+  🌐 Find Minimum in Rotated Sorted Array
+  <a class="heading-link" href="#-find-minimum-in-rotated-sorted-array">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a rotated sorted array <code>nums</code> (with no duplicates), find the minimum element in the array.</p>
-<h3 id="approach">
-  Approach
-  <a class="heading-link" href="#approach">
+<p>In this task, we’re given a rotated sorted array, and our goal is to identify the <strong>minimum element</strong> efficiently. This array was originally sorted in ascending order but was then rotated at an unknown pivot point.</p>
+<p>For instance:</p>
+<ul>
+<li>Original array: <code>[1, 2, 3, 4, 5, 6, 7]</code></li>
+<li>After rotating by 3 positions: <code>[4, 5, 6, 7, 1, 2, 3]</code></li>
+</ul>
+<p>In this case, <code>1</code> is the smallest element, and we want to locate it using an optimized approach with <strong>O(log n)</strong> time complexity. Let’s dive into the steps to solve this problem efficiently!</p>
+<hr>
+<h3 id="-approach">
+  💡 Approach
+  <a class="heading-link" href="#-approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>Our approach leverages <strong>binary search</strong> principles but with a twist to account for the rotation:</p>
 <ol>
-<li>
-<p><strong>Binary Search</strong>:</p>
+<li><strong>Rotation Insight</strong>: The minimum element is where the array “rotates” or changes direction. We compare the middle element (<code>nums[mid]</code>) with the last element (<code>nums[e]</code>) to determine which half contains the minimum.</li>
+<li><strong>Binary Search Adjustments</strong>:
 <ul>
-<li>Use a binary search approach to efficiently find the minimum element. The idea is to utilize the properties of a rotated sorted array.</li>
-</ul>
-</li>
-<li>
-<p><strong>Initialize Pointers</strong>:</p>
-<ul>
-<li>Start with two pointers, <code>s</code> (start) initialized to 0 and <code>e</code> (end) initialized to the last index of the array.</li>
-</ul>
-</li>
-<li>
-<p><strong>Iterate Until Pointers Meet</strong>:</p>
-<ul>
-<li>While <code>s</code> is less than <code>e</code>, perform the following:
-<ul>
-<li>Calculate <code>mid</code> as the average of <code>s</code> and <code>e</code>.</li>
-<li>If the element at <code>mid</code> is greater than the element at <code>e</code>, it means the minimum is in the right half, so move the <code>s</code> pointer to <code>mid + 1</code>.</li>
-<li>Otherwise, the minimum must be in the left half, including <code>mid</code>, so move the <code>e</code> pointer to <code>mid</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>When <code>s</code> equals <code>e</code>, return <code>nums[s]</code>, which will be the minimum element in the rotated array.</li>
+<li>If <code>nums[mid]</code> is greater than <code>nums[e]</code>, the minimum element is in the <strong>right half</strong> of the array.</li>
+<li>If <code>nums[mid]</code> is less than or equal to <code>nums[e]</code>, the minimum is in the <strong>left half</strong> or could be <code>mid</code> itself.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-walk-through">
-  Code Walk-through
-  <a class="heading-link" href="#code-walk-through">
+<hr>
+<h3 id="-code-breakdown-step-by-step">
+  📝 Code Breakdown (Step-by-Step)
+  <a class="heading-link" href="#-code-breakdown-step-by-step">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<h4 id="-step-1-initialize-variables">
+  🔹 Step 1: Initialize Variables
+  <a class="heading-link" href="#-step-1-initialize-variables">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> s <span style="color:#666">=</span> <span style="color:#666">0</span>, e <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> nums[<span style="color:#666">0</span>];
+</span></span></code></pre></div><p>Explanation:</p>
+<ul>
+<li><code>n</code>: Size of the input array <code>nums</code>.</li>
+<li><code>s</code> and <code>e</code>: Represent the start and end indices, respectively.</li>
+<li>If there’s only one element (<code>n == 1</code>), it’s trivially the minimum.</li>
+</ul>
+<h4 id="-step-2-binary-search-loop">
+  🔹 Step 2: Binary Search Loop
+  <a class="heading-link" href="#-step-2-binary-search-loop">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(s <span style="color:#666">&lt;</span> e) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> s <span style="color:#666">+</span> (e <span style="color:#666">-</span> s) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span></code></pre></div><p>This <code>while</code> loop will continue as long as <code>s</code> is less than <code>e</code>. It calculates <code>mid</code> using <code>s + (e - s) / 2</code> to prevent overflow.</p>
+<h4 id="-step-3-adjust-search-range-based-on-element-comparison">
+  🔹 Step 3: Adjust Search Range Based on Element Comparison
+  <a class="heading-link" href="#-step-3-adjust-search-range-based-on-element-comparison">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(nums[e] <span style="color:#666">&lt;</span> nums[mid]) {
+</span></span><span style="display:flex;"><span>    s <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>} <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>    e <span style="color:#666">=</span> mid;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Key steps:</p>
+<ul>
+<li>If <code>nums[e] &lt; nums[mid]</code>, the minimum must be in the right half, so we update <code>s</code> to <code>mid + 1</code>.</li>
+<li>Otherwise, the minimum is in the left half, so we update <code>e</code> to <code>mid</code>.</li>
+</ul>
+<h4 id="-step-4-return-the-minimum-element">
+  🔹 Step 4: Return the Minimum Element
+  <a class="heading-link" href="#-step-4-return-the-minimum-element">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> nums[e];
+</span></span></code></pre></div><p>At the end, <code>s</code> and <code>e</code> converge at the minimum element’s index, so we return <code>nums[e]</code>.</p>
+<hr>
+<h3 id="-complexity">
+  🔎 Complexity
+  <a class="heading-link" href="#-complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li><strong>Line 1</strong>: Define the <code>findMin</code> function, accepting a vector of integers as input.</li>
-<li><strong>Line 2</strong>: Initialize variables for size <code>n</code>, starting index <code>s</code>, ending index <code>e</code>, and a placeholder <code>ans</code>.</li>
-<li><strong>Line 4</strong>: Check if the array has only one element and return it.</li>
-<li><strong>Line 6-16</strong>: Implement the binary search:
-<ul>
-<li><strong>Line 8</strong>: Calculate <code>mid</code>.</li>
-<li><strong>Line 11-14</strong>: Check if <code>nums[mid]</code> is greater than <code>nums[e]</code> to decide which half to search in next.</li>
+<li><strong>Time Complexity</strong>: <strong>O(log n)</strong> due to the binary search approach.</li>
+<li><strong>Space Complexity</strong>: <strong>O(1)</strong> since we only use a few extra variables.</li>
 </ul>
-</li>
-<li><strong>Line 17</strong>: Return the minimum element found at <code>nums[e]</code>.</li>
-</ul>
-<h3 id="complexity">
-  Complexity
-  <a class="heading-link" href="#complexity">
+<h3 id="-conclusion">
+  ✅ Conclusion
+  <a class="heading-link" href="#-conclusion">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li><strong>Time Complexity</strong>: (O(\log N)), where (N) is the number of elements in <code>nums</code>, due to the binary search method.</li>
-<li><strong>Space Complexity</strong>: (O(1)) as only a fixed amount of extra space is used.</li>
-</ul>
+<p>This modified binary search provides an optimal solution to locate the minimum element in <strong>O(log n)</strong> time, even when the array is rotated. This method is efficient for large arrays and showcases how binary search can be adapted to solve rotated array problems.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode276s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode273s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
