@@ -146,7 +146,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              4-minute read
+              2-minute read
             </span>
           </div>
 
@@ -211,7 +211,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1166s0hbhb">
+        <h2 id="hahahugoshortcode1165s0hbhb">
   <a href="https://leetcode.com/problems/repeated-substring-pattern/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -226,7 +226,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1166s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1165s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -238,7 +238,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> (str <span style="color:#666">+</span> str).substr(<span style="color:#666">1</span>, str.size() <span style="color:#666">*</span> <span style="color:#666">2</span> <span style="color:#666">-</span> <span style="color:#666">2</span>).find(str)<span style="color:#666">!=-</span><span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1166s2hbhb">
+<h2 id="hahahugoshortcode1165s2hbhb">
   
 
   
@@ -250,7 +250,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem asks us to determine if a given string <code>str</code> can be constructed by repeating a substring multiple times. In other words, we need to check whether there is a non-empty substring that, when repeated multiple times, forms the string <code>str</code>. For example, for the input <code>&quot;abab&quot;</code>, the string can be formed by repeating the substring <code>&quot;ab&quot;</code> twice, so the answer would be <code>true</code>. For a string like <code>&quot;abc&quot;</code>, no such repeating pattern exists, and the answer would be <code>false</code>.</p>
+<p>Given a string <code>str</code>, determine if it can be constructed by taking a substring of it and appending multiple copies of the substring together.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -258,76 +258,56 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem, we need an efficient approach that avoids explicitly checking all possible substrings. A key insight is to utilize the string concatenation technique to check for repeating patterns.</p>
-<p>Here’s how the approach works:</p>
 <ol>
 <li>
-<p><strong>Doubling the String</strong>:</p>
+<p><strong>Understanding the Problem</strong>:</p>
 <ul>
-<li>We first concatenate the string <code>str</code> to itself, forming a new string <code>str + str</code>. By doing this, we effectively create a string that contains all possible rotations of the original string, along with its repetitions.</li>
-<li>For example, if the original string is <code>&quot;abab&quot;</code>, concatenating it with itself would give <code>&quot;abababab&quot;</code>, which contains all possible rotations (<code>&quot;abab&quot;</code>, <code>&quot;baba&quot;</code>, <code>&quot;abab&quot;</code>, <code>&quot;baba&quot;</code>).</li>
+<li>We need to check if the string can be formed by repeating a smaller substring multiple times.</li>
 </ul>
 </li>
 <li>
-<p><strong>Substrings Search</strong>:</p>
+<p><strong>Concatenation Trick</strong>:</p>
 <ul>
-<li>Next, we search for the original string <code>str</code> within the concatenated string <code>str + str</code>, but with some restrictions. The idea is that if <code>str</code> is repeated, it should appear in the concatenated string starting from an index that’s not at the beginning (i.e., starting from index 1 or later).</li>
-<li>We search within the substring from index 1 to <code>2 * str.size() - 2</code>. This substring is the relevant part of the doubled string, excluding the first and last characters, which are redundant for our search.</li>
-<li>If the string <code>str</code> appears within this substring, it indicates that <code>str</code> can be formed by repeating a substring.</li>
+<li>By concatenating the string <code>str</code> with itself (<code>str + str</code>), we can create a new string where all possible repeated patterns of <code>str</code> can be found starting from different positions.</li>
+<li>If <code>str</code> can be formed by repeating a substring, then within the concatenated string (excluding the first and last characters), the original string should appear.</li>
 </ul>
 </li>
 <li>
-<p><strong>Final Decision</strong>:</p>
+<p><strong>Implementation</strong>:</p>
 <ul>
-<li>If we find <code>str</code> in the valid substring, it means the string <code>str</code> can be constructed by repeating a smaller substring, so we return <code>true</code>. Otherwise, we return <code>false</code>.</li>
+<li>Create a new string by concatenating <code>str</code> with itself.</li>
+<li>Use <code>substr</code> to get the portion of the new string that excludes the first and last characters.</li>
+<li>Check if <code>str</code> exists in this substring using the <code>find</code> method.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="step-1-concatenating-the-string-with-itself">
-  Step 1: Concatenating the String with Itself
-  <a class="heading-link" href="#step-1-concatenating-the-string-with-itself">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>(str <span style="color:#666">+</span> str)
-</span></span></code></pre></div><ul>
-<li>This creates a new string that contains two copies of the original string concatenated together.</li>
-<li>For example, if <code>str = &quot;abab&quot;</code>, the result will be <code>&quot;abababab&quot;</code>. This helps in checking all possible rotations and patterns of the string.</li>
+<ol>
+<li>
+<p><strong>Concatenate the String</strong>:</p>
+<ul>
+<li><code>(str + str)</code> creates a new string that contains two copies of <code>str</code>.</li>
 </ul>
-<h4 id="step-2-substring-and-search-for-the-original-string">
-  Step 2: Substring and Search for the Original String
-  <a class="heading-link" href="#step-2-substring-and-search-for-the-original-string">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>.substr(<span style="color:#666">1</span>, str.size() <span style="color:#666">*</span> <span style="color:#666">2</span> <span style="color:#666">-</span> <span style="color:#666">2</span>)
-</span></span></code></pre></div><ul>
-<li>The <code>substr()</code> method is used to extract a part of the doubled string.</li>
-<li>We start at index 1 and extract a substring of length <code>str.size() * 2 - 2</code>. This ensures that we exclude the first and last characters of the doubled string, because the first character would be the same as the original string and the last character would be redundant in the search.</li>
-<li>For example, with <code>str = &quot;abab&quot;</code>, the doubled string is <code>&quot;abababab&quot;</code>, and we extract the substring <code>&quot;bababab&quot;</code>, which contains the relevant parts for checking the repeating pattern.</li>
+</li>
+<li>
+<p><strong>Extract Substring</strong>:</p>
+<ul>
+<li><code>.substr(1, str.size() * 2 - 2)</code> extracts a substring from index <code>1</code> to the length of the original string (minus the first and last character).</li>
 </ul>
-<h4 id="step-3-checking-for-the-repeated-pattern">
-  Step 3: Checking for the Repeated Pattern
-  <a class="heading-link" href="#step-3-checking-for-the-repeated-pattern">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>.find(str) <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>
-</span></span></code></pre></div><ul>
-<li>The <code>find()</code> method searches for the occurrence of <code>str</code> within the extracted substring.</li>
-<li>If <code>find()</code> returns a value other than <code>-1</code>, it means that <code>str</code> can be found in the substring, indicating that <code>str</code> can be constructed by repeating a smaller substring.</li>
-<li>If <code>find()</code> returns <code>-1</code>, it means no repeating pattern exists, and the function returns <code>false</code>.</li>
+</li>
+<li>
+<p><strong>Find Method</strong>:</p>
+<ul>
+<li><code>.find(str) != -1</code> checks if the original string can be found in the substring created in the previous step.</li>
 </ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -335,43 +315,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>Concatenation</strong>: The time complexity of concatenating the string <code>str</code> with itself is <code>O(n)</code>, where <code>n</code> is the length of the string <code>str</code>.</li>
-<li><strong>Substring Extraction</strong>: Extracting the substring of length <code>2n - 2</code> also takes <code>O(n)</code> time.</li>
-<li><strong>Search for Substring</strong>: The <code>find()</code> operation has a time complexity of <code>O(n)</code> in the worst case, as it may need to scan the entire substring to find the original string.</li>
-<li>Overall, the time complexity is <code>O(n)</code>.</li>
+<li><strong>Time Complexity</strong>: O(n), where <code>n</code> is the length of the string <code>str</code>, as concatenation and searching in a string both take linear time.</li>
+<li><strong>Space Complexity</strong>: O(n), due to the space used for the concatenated string.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>The space complexity is <code>O(n)</code> due to the need for the concatenated string <code>str + str</code>, which stores two copies of the original string.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution efficiently checks if a string can be constructed by repeating a smaller substring. By concatenating the string with itself and searching within a carefully selected part of the resulting string, we avoid the need for brute-force checking of every possible substring. The approach runs in linear time (<code>O(n)</code>) and uses linear space (<code>O(n)</code>), making it both time and space efficient for large strings.</p>
-<p>This solution is optimal for this type of problem and avoids unnecessary complexity by leveraging string manipulations in a clever way.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1166s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1165s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

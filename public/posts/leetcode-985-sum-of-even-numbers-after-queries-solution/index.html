@@ -146,7 +146,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -230,7 +230,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1450s1hbhb">
+<h2 id="hahahugoshortcode1449s1hbhb">
   
 
   
@@ -242,8 +242,11 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem asks to calculate the sum of all even numbers in an array <code>A</code> after performing a series of queries. Each query consists of two elements: a number <code>x</code> and an index <code>i</code>. The task is to add <code>x</code> to <code>A[i]</code> and compute the sum of all even numbers in the array after each query.</p>
-<p>The array can contain both even and odd numbers, and after each update, the goal is to efficiently compute and return the sum of all even numbers in the array.</p>
+<p>Given an integer array <code>A</code> and a list of queries <code>qs</code>, where each query contains two integers <code>[val, index]</code>:</p>
+<ol>
+<li>Add <code>val</code> to <code>A[index]</code>.</li>
+<li>Return the sum of all even numbers in <code>A</code> after each query.</li>
+</ol>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -251,88 +254,34 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem, we need to efficiently track the sum of even numbers in the array while performing the updates specified by the queries.</p>
-<p>We use a <strong>greedy approach</strong> combined with a <strong>lazy evaluation strategy</strong> to handle the updates and sum computation:</p>
-<ol>
-<li>
-<p><strong>Initial Sum Calculation</strong>:</p>
 <ul>
-<li>First, we compute the sum of all even numbers in the array <code>A</code> before any updates. This is done using the <code>accumulate</code> function, which iterates through the array and adds up the even numbers.</li>
-<li>The key observation here is that we only need to track the sum of even numbers, which means odd numbers are ignored during the initial calculation.</li>
+<li><strong>Initial Sum Calculation</strong>: Calculate the initial sum of all even numbers in <code>A</code>.</li>
+<li><strong>Query Processing</strong>: For each query:
+<ul>
+<li>If the current number at <code>A[index]</code> is even, subtract it from the even sum.</li>
+<li>Update <code>A[index]</code> by adding <code>val</code>.</li>
+<li>If the updated <code>A[index]</code> is even, add it to the even sum.</li>
 </ul>
 </li>
-<li>
-<p><strong>Query Processing</strong>:</p>
-<ul>
-<li>For each query <code>(x, i)</code>, we first check if <code>A[i]</code> is even. If it is, we subtract it from the current sum, as we are going to modify <code>A[i]</code> by adding <code>x</code> to it.</li>
-<li>After performing the update (<code>A[i] += x</code>), we check if the updated value of <code>A[i]</code> is even. If it is, we add it to the current sum.</li>
-<li>This process allows us to efficiently track the sum of even numbers after each update without needing to re-scan the entire array after every query.</li>
+<li><strong>Result Storage</strong>: Store the even sum after each query in <code>res</code>.</li>
 </ul>
-</li>
-<li>
-<p><strong>Efficient Update and Result Calculation</strong>:</p>
-<ul>
-<li>After processing each query, the sum of even numbers is appended to the result array.</li>
-<li>By maintaining a running sum of even numbers and only updating it when necessary, we avoid redundant computations and achieve an efficient solution.</li>
-</ul>
-</li>
-</ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="1-initial-setup-and-sum-calculation">
-  1. <strong>Initial Setup and Sum Calculation</strong>:
-  <a class="heading-link" href="#1-initial-setup-and-sum-calculation">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res <span style="color:#666">=</span> {};
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> accumulate(begin(A), end(A), <span style="color:#666">0</span>, [](<span style="color:#0b0;font-weight:bold">int</span> s, <span style="color:#0b0;font-weight:bold">int</span> a) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> s <span style="color:#666">+</span> (a <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span><span style="color:#666">?</span> <span style="color:#a0a000">a</span> : <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>});
-</span></span></code></pre></div><ul>
-<li>We start by initializing an empty result vector <code>res</code> to store the sum of even numbers after each query.</li>
-<li>The variable <code>sum</code> is initialized by calculating the sum of all even numbers in the array <code>A</code>. This is done using the <code>accumulate</code> function, which iterates over each element of the array and adds the element to the sum if it is even (checked with <code>a % 2 == 0</code>).</li>
-</ul>
-<h4 id="2-processing-each-query">
-  2. <strong>Processing Each Query</strong>:
-  <a class="heading-link" href="#2-processing-each-query">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">q</span>: qs) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(A[q[<span style="color:#666">1</span>]] <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) sum <span style="color:#666">-=</span> A[q[<span style="color:#666">1</span>]];
-</span></span><span style="display:flex;"><span>    A[q[<span style="color:#666">1</span>]] <span style="color:#666">+=</span> q[<span style="color:#666">0</span>];
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(A[q[<span style="color:#666">1</span>]] <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">0</span>) sum <span style="color:#666">+=</span> A[q[<span style="color:#666">1</span>]];
-</span></span><span style="display:flex;"><span>    res.push_back(sum);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>For each query <code>q</code>, the following steps are performed:
 <ol>
-<li>We check if <code>A[q[1]]</code> (the current value at index <code>q[1]</code>) is even. If it is, we subtract it from the sum, as it is about to be updated.</li>
-<li>The value <code>q[0]</code> (the number to be added) is added to <code>A[q[1]]</code>, effectively updating the element at index <code>q[1]</code>.</li>
-<li>After the update, we check if the new value of <code>A[q[1]]</code> is even. If it is, we add it to the sum.</li>
-<li>Finally, the updated sum is pushed to the <code>res</code> vector.</li>
-</ol>
+<li>Initialize <code>sum</code> with the sum of even numbers in <code>A</code>.</li>
+<li>Loop through each query:
+<ul>
+<li>Adjust the sum if <code>A[index]</code> is even before the addition.</li>
+<li>Apply the addition, and adjust the sum again if the new <code>A[index]</code> is even.</li>
+</ul>
 </li>
-</ul>
-<h4 id="3-returning-the-result">
-  3. <strong>Returning the Result</strong>:
-  <a class="heading-link" href="#3-returning-the-result">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div><ul>
-<li>Once all queries are processed, the result vector <code>res</code> is returned, which contains the sum of all even numbers after each query.</li>
-</ul>
+<li>Append the updated even sum to <code>res</code> after each query.</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -340,42 +289,14 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>Initial Sum Calculation</strong>: The initial sum calculation using <code>accumulate</code> takes <strong>O(n)</strong> time, where <code>n</code> is the size of the array <code>A</code>.</li>
-<li><strong>Processing Each Query</strong>: For each query, we perform constant-time operations to update the array and the sum. Therefore, processing all <code>q</code> queries takes <strong>O(q)</strong> time, where <code>q</code> is the number of queries.</li>
-<li>Overall, the time complexity is <strong>O(n + q)</strong>, where <code>n</code> is the size of the array <code>A</code> and <code>q</code> is the number of queries.</li>
-</ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>Space Complexity</strong>: The space complexity is <strong>O(n + q)</strong> due to the storage required for the result vector <code>res</code> and the array <code>A</code>. The space used by other variables (like <code>sum</code> and the loop variables) is constant, so it does not affect the overall space complexity.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution efficiently computes the sum of even numbers in the array <code>A</code> after each query by maintaining a running sum of even numbers and only updating it when necessary. By using a greedy approach and avoiding redundant computations, the solution ensures optimal time complexity of <strong>O(n + q)</strong>, making it suitable for larger inputs. The space complexity is also efficient, using <strong>O(n + q)</strong> space to store the result and input data.</p>
-<p>This approach provides an elegant and efficient solution to the problem by leveraging the power of accumulation and careful updates to track the sum of even numbers after each query.</p>
- 
+<li><strong>Time Complexity</strong>: O(n + m), where n is the length of <code>A</code> and m is the number of queries, due to the initial even-sum calculation and single pass through the queries.</li>
+<li><strong>Space Complexity</strong>: O(m), where m is the number of queries, for storing the results.</li>
+</ul> 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1450s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1449s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

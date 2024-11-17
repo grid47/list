@@ -147,7 +147,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -216,7 +216,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1149s0hbhb">
+        <h2 id="hahahugoshortcode1152s0hbhb">
   <a href="https://leetcode.com/problems/find-right-interval/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -231,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1149s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1152s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -256,7 +256,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1149s2hbhb">
+<h2 id="hahahugoshortcode1152s2hbhb">
   
 
   
@@ -268,8 +268,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem asks to find the right interval for each interval in a given list of intervals. An interval is represented as a pair <code>[start, end]</code>, and we need to find the index of the smallest interval whose starting point is greater than or equal to the ending point of the current interval. If no such interval exists, the result should be <code>-1</code> for that interval.</p>
-<p>The goal is to efficiently solve this problem using a strategy that avoids brute-force comparisons, ensuring the solution is optimal even for larger datasets.</p>
+<p>Given a set of intervals, for each interval, find the index of the rightmost interval that starts after the current interval ends. If there is no such interval, return -1 for that interval.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -277,97 +276,61 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem, we can take advantage of sorting and binary search. The key steps in the approach are as follows:</p>
 <ol>
 <li>
-<p><strong>Map Intervals with Indices</strong>:</p>
+<p><strong>Mapping Start Times to Indices</strong>:</p>
 <ul>
-<li>First, we create a map <code>mk</code> where the keys are the start points of the intervals, and the values are the indices of the original intervals. This allows us to keep track of the original positions of the intervals after sorting by their start points.</li>
+<li>Use a map to store the start times of intervals as keys and their corresponding indices as values.</li>
 </ul>
 </li>
 <li>
-<p><strong>Sort Intervals by Start Points</strong>:</p>
+<p><strong>Finding Right Intervals</strong>:</p>
 <ul>
-<li>We use a map (which inherently sorts the keys) to store the intervals based on their starting points. This helps in quickly finding the right interval using binary search.</li>
+<li>For each interval, determine if there exists a start time that is greater than or equal to the end time of the current interval.</li>
+<li>Use <code>lower_bound</code> on the map to efficiently find the first interval that starts after the current interval ends.</li>
 </ul>
 </li>
 <li>
-<p><strong>Binary Search for Each Interval</strong>:</p>
+<p><strong>Result Compilation</strong>:</p>
 <ul>
-<li>For each interval <code>iv[j]</code>, we use the <code>lower_bound</code> function of the map <code>mk</code> to find the first interval whose start point is greater than or equal to the end point of <code>iv[j]</code>. This function performs a binary search to efficiently find the desired interval.</li>
-</ul>
-</li>
-<li>
-<p><strong>Handle Edge Cases</strong>:</p>
-<ul>
-<li>If no interval starts after or at the current interval&rsquo;s end point, the answer for that interval is <code>-1</code>.</li>
-<li>If such an interval exists, we store its index in the result array.</li>
+<li>If such an interval exists, retrieve its index; otherwise, assign -1 for that interval.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="step-1-mapping-intervals-to-their-indices">
-  Step 1: Mapping Intervals to Their Indices
-  <a class="heading-link" href="#step-1-mapping-intervals-to-their-indices">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mk;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> iv.size();
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    mk[iv[i][<span style="color:#666">0</span>]] <span style="color:#666">=</span> i;
-</span></span></code></pre></div><ul>
-<li>We initialize a map <code>mk</code>, where the key is the start point of an interval, and the value is its index in the original list.</li>
-<li>Then, we iterate over the input list of intervals <code>iv</code>. For each interval <code>iv[i]</code>, we insert its start point as a key and its index <code>i</code> as the corresponding value in the map. This ensures that the intervals are sorted by their start points.</li>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>A map (<code>mk</code>) is created to hold the start times and their corresponding indices.</li>
+<li>A vector (<code>ans</code>) is initialized to store the results, filled with -1 initially.</li>
 </ul>
-<h4 id="step-2-preparing-the-result-array">
-  Step 2: Preparing the Result Array
-  <a class="heading-link" href="#step-2-preparing-the-result-array">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans(n, <span style="color:#666">-</span><span style="color:#666">1</span>);
-</span></span></code></pre></div><ul>
-<li>We initialize a result array <code>ans</code> with <code>n</code> elements (the number of intervals) and set each element to <code>-1</code> initially. This represents that, by default, each interval has no right interval, and we will update the array as we find valid intervals.</li>
+</li>
+<li>
+<p><strong>Populating the Map</strong>:</p>
+<ul>
+<li>Iterate through the intervals, storing the start times and indices in the map.</li>
 </ul>
-<h4 id="step-3-finding-the-right-interval-for-each-interval">
-  Step 3: Finding the Right Interval for Each Interval
-  <a class="heading-link" href="#step-3-finding-the-right-interval-for-each-interval">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">auto</span> i <span style="color:#666">=</span> iv[j];
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mk.lower_bound(i[<span style="color:#666">1</span>]) <span style="color:#666">!=</span> end(mk))
-</span></span><span style="display:flex;"><span>        ans[j] <span style="color:#666">=</span> mk.lower_bound(i[<span style="color:#666">1</span>])<span style="color:#666">-&gt;</span>second;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>We iterate through each interval <code>iv[j]</code>.</li>
-<li>For each interval, we retrieve its end point <code>i[1]</code>.</li>
-<li>We then use the <code>lower_bound</code> function on the map <code>mk</code>. This function returns an iterator pointing to the first element whose key is greater than or equal to <code>i[1]</code>. This corresponds to the first interval whose start point is greater than or equal to the end point of <code>iv[j]</code>.</li>
-<li>If <code>lower_bound</code> finds such an interval, we update the result array at index <code>j</code> with the index of the interval from the map (<code>mk.lower_bound(i[1])-&gt;second</code>).</li>
+</li>
+<li>
+<p><strong>Checking for Right Intervals</strong>:</p>
+<ul>
+<li>For each interval, use <code>lower_bound</code> to find the first entry in the map where the start time is greater than or equal to the end time of the current interval.</li>
 </ul>
-<h4 id="step-4-returning-the-result">
-  Step 4: Returning the Result
-  <a class="heading-link" href="#step-4-returning-the-result">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span></code></pre></div><ul>
-<li>After processing all intervals, we return the result array <code>ans</code>, which contains the indices of the right intervals (or <code>-1</code> if no such interval exists).</li>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>The populated result vector is returned, containing indices of the right intervals or -1.</li>
 </ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -375,44 +338,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>Building the Map</strong>: In the first loop, we iterate over all <code>n</code> intervals and insert them into the map. The time complexity of each insertion is <code>O(log n)</code> (due to the binary search-based structure of <code>map</code>), so the overall time complexity for this step is <code>O(n log n)</code>.</li>
-<li><strong>Finding the Right Interval</strong>: In the second loop, for each of the <code>n</code> intervals, we perform a <code>lower_bound</code> search on the map, which takes <code>O(log n)</code> time. Thus, the total time complexity for this step is <code>O(n log n)</code>.</li>
-<li><strong>Overall Time Complexity</strong>: Combining both steps, the total time complexity is <code>O(n log n)</code>.</li>
+<li><strong>Time Complexity</strong>: O(N log N) due to the map operations, where N is the number of intervals.</li>
+<li><strong>Space Complexity</strong>: O(N) for storing the intervals and the map.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>We use a map <code>mk</code> to store the intervals, which requires <code>O(n)</code> space.</li>
-<li>We also use an array <code>ans</code> of size <code>n</code> to store the result.</li>
-<li>Thus, the space complexity is <code>O(n)</code>.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution is efficient, with a time complexity of <code>O(n log n)</code>, which is optimal for this type of problem. By using a map to sort the intervals and then applying binary search, we ensure that we can find the right intervals in logarithmic time for each interval, leading to an overall efficient solution.</p>
-<p>The approach leverages key concepts such as sorting, binary search, and efficient data structures (like maps) to solve the problem in an optimal manner, making it suitable for larger datasets and competitive programming challenges.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1149s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1152s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

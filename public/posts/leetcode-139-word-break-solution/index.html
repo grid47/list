@@ -150,7 +150,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -222,7 +222,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -231,7 +231,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode201s0hbhb">
+        <h2 id="hahahugoshortcode205s0hbhb">
   <a href="https://leetcode.com/problems/word-break/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -246,7 +246,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode201s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode205s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -278,178 +278,83 @@
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>    
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode201s2hbhb">
+<h2 id="hahahugoshortcode205s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="-understanding-the-problem-word-break">
-  🧩 <strong>Understanding the Problem: Word Break</strong>
-  <a class="heading-link" href="#-understanding-the-problem-word-break">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem asks us to determine if a string <code>s</code> can be segmented into valid words from a given dictionary <code>dict</code>. This means we need to break down the string into space-separated substrings that all exist in the dictionary.</p>
-<p>For example:</p>
-<ul>
-<li><strong>Input</strong>: <code>s = &quot;leetcode&quot;</code>, <code>dict = [&quot;leet&quot;, &quot;code&quot;]</code></li>
-<li><strong>Output</strong>: <code>true</code> because the string <code>&quot;leetcode&quot;</code> can be segmented into the words <code>&quot;leet&quot;</code> and <code>&quot;code&quot;</code>.</li>
-</ul>
-<hr>
-<h3 id="-approach-dynamic-programming-with-memoization">
-  🔄 <strong>Approach: Dynamic Programming with Memoization</strong>
-  <a class="heading-link" href="#-approach-dynamic-programming-with-memoization">
+<p>Given a string <code>s</code> and a dictionary of strings <code>dict</code>, determine if <code>s</code> can be segmented into a space-separated sequence of one or more dictionary words.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>We can approach this problem using <strong>dynamic programming (DP)</strong> and <strong>memoization</strong> to avoid redundant calculations. This technique will allow us to check all possible segmentations efficiently.</p>
-<p>Here’s how we can break it down:</p>
 <ol>
-<li><strong>Memoization</strong>: We’ll use a <code>memo</code> array to store results for subproblems. If we’ve already computed whether a substring can be segmented, we’ll reuse the result to avoid recalculating.</li>
-<li><strong>Backtracking</strong>: We will iterate through the string, trying to match a substring with any word in the dictionary. Once we find a match, we recursively check the remaining part of the string.</li>
-<li><strong>Dictionary Lookup</strong>: We store the dictionary words in a <strong>map</strong> for constant-time lookup to check if a substring is a valid word.</li>
+<li><strong>HashMap</strong>:
+<ul>
+<li>Use a map to store the dictionary words for quick lookup.</li>
+</ul>
+</li>
+<li><strong>Memoization</strong>:
+<ul>
+<li>Use a vector to memoize results of subproblems, where each index represents the start of a substring in <code>s</code>.</li>
+</ul>
+</li>
+<li><strong>Backtracking</strong>:
+<ul>
+<li>Implement a backtracking function that tries to break the string at different positions and checks if the remaining substring can also be segmented.</li>
+</ul>
+</li>
 </ol>
-<p>By combining memoization and backtracking, we can make this solution more efficient, avoiding redundant checks.</p>
-<hr>
-<h3 id="-code-breakdown-step-by-step">
-  🖥️ <strong>Code Breakdown: Step-by-Step</strong>
-  <a class="heading-link" href="#-code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="1-initialization-of-memoization-and-map">
-  1️⃣ <strong>Initialization of Memoization and Map</strong>
-  <a class="heading-link" href="#1-initialization-of-memoization-and-map">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> memo;
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">wordBreak</span>(string s, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> dict) {
-</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span>string, <span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> mp;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(string <span style="color:#a0a000">d</span>: dict)
-</span></span><span style="display:flex;"><span>        mp[d] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>    memo.resize(s.size(), <span style="color:#666">-</span><span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> bt(s, <span style="color:#666">0</span>, mp);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li><strong>Memo Array</strong>: We initialize a <code>memo</code> array of size <code>s.size()</code>, where each element is initially set to <code>-1</code>, meaning no substring has been processed yet. As we compute the results for each substring, we will update this array with <code>true</code> or <code>false</code> based on whether the substring can be segmented.</li>
-<li><strong>Dictionary Map</strong>: We convert the <code>dict</code> array into a <code>map</code> (<code>mp</code>), where each word from the dictionary is stored as a key for <strong>constant-time lookup</strong>.</li>
-<li><strong>Backtracking</strong>: We start the backtracking function <code>bt</code> from the first index of the string <code>s</code>.</li>
+<ul>
+<li><strong>Line 3</strong>: Define the <code>memo</code> vector to store results for each starting index in <code>s</code>.</li>
+<li><strong>Line 4</strong>: Define the <code>wordBreak</code> function:
+<ul>
+<li><strong>Line 5-7</strong>: Populate the map <code>mp</code> with words from the dictionary.</li>
+<li><strong>Line 8</strong>: Initialize the <code>memo</code> vector with <code>-1</code> (indicating unvisited).</li>
+<li><strong>Line 9</strong>: Call the backtracking function starting from index <code>0</code>.</li>
 </ul>
-<h4 id="2-backtracking-function-bt">
-  2️⃣ <strong>Backtracking Function (<code>bt</code>)</strong>
-  <a class="heading-link" href="#2-backtracking-function-bt">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">bt</span>(string s, <span style="color:#0b0;font-weight:bold">int</span> idx, map<span style="color:#666">&lt;</span>string, <span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>mp) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (idx <span style="color:#666">==</span> s.size()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (memo[idx] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[idx];
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> idx; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (mp.count(s.substr(idx, i <span style="color:#666">-</span> idx <span style="color:#666">+</span> <span style="color:#666">1</span>)) <span style="color:#666">&amp;&amp;</span> bt(s, i <span style="color:#666">+</span> <span style="color:#666">1</span>, mp))
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> memo[idx] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[idx] <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>
-<p><strong>Base Case</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (idx <span style="color:#666">==</span> s.size()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span></code></pre></div><p>If the index <code>idx</code> reaches the end of the string, it means we&rsquo;ve successfully segmented the string, so we return <code>true</code>.</p>
 </li>
-<li>
-<p><strong>Memoization Lookup</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (memo[idx] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[idx];
-</span></span></code></pre></div><p>If we’ve already computed the result for this index, we return it to avoid redundant work.</p>
-</li>
-<li>
-<p><strong>Backtracking Loop</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> idx; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (mp.count(s.substr(idx, i <span style="color:#666">-</span> idx <span style="color:#666">+</span> <span style="color:#666">1</span>)) <span style="color:#666">&amp;&amp;</span> bt(s, i <span style="color:#666">+</span> <span style="color:#666">1</span>, mp))
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> memo[idx] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>We loop through all possible substrings starting from <code>idx</code> and check if it exists in the dictionary. If it does, we recursively call <code>bt</code> for the remaining part of the string starting at index <code>i + 1</code>. This process continues until the string is fully segmented.</p>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> memo[idx] <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
-</span></span></code></pre></div><p>If no valid segmentation is found from index <code>idx</code>, we mark this index as <code>false</code> in the <code>memo</code> array and return <code>false</code>.</p>
-</li>
+<li><strong>Line 11</strong>: Define the <code>bt</code> function:
+<ul>
+<li><strong>Line 12</strong>: If the index is equal to the length of <code>s</code>, return <code>true</code> (base case).</li>
+<li><strong>Line 14</strong>: If the result for the current index is already computed, return it.</li>
+<li><strong>Line 16-19</strong>: Iterate through possible substrings starting from <code>idx</code>. If a valid word is found in the dictionary, recursively check the next part of the string. If successful, memoize and return <code>true</code>.</li>
 </ul>
-<h4 id="3-final-result">
-  3️⃣ <strong>Final Result</strong>
-  <a class="heading-link" href="#3-final-result">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>After backtracking completes, the result will be stored in <code>memo[0]</code>, indicating whether the string can be segmented starting from the first index.</p>
-<hr>
-<h3 id="-time-and-space-complexity">
-  🧮 <strong>Time and Space Complexity</strong>
-  <a class="heading-link" href="#-time-and-space-complexity">
+</li>
+<li><strong>Line 21</strong>: If no valid segmentation is found, memoize <code>false</code> and return it.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="-time-complexity">
-  ⏱️ <strong>Time Complexity</strong>:
-  <a class="heading-link" href="#-time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>O(n²)</strong>: For each index <code>idx</code>, we try all possible substrings from <code>idx</code> to <code>i</code>. Each substring check takes <code>O(n)</code> time. Therefore, the total time complexity is ( O(n^2) ), where <code>n</code> is the length of the string.</li>
-</ul>
-<h4 id="-space-complexity">
-  🧳 <strong>Space Complexity</strong>:
-  <a class="heading-link" href="#-space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>O(n)</strong>: We use an array <code>memo</code> of size <code>n</code> to store results for each index. Additionally, the <code>map</code> for the dictionary takes space proportional to the number of words, but this doesn’t affect the overall complexity.</li>
-</ul>
-<hr>
-<h3 id="-conclusion-efficient-segmentation">
-  🎯 <strong>Conclusion: Efficient Segmentation</strong>
-  <a class="heading-link" href="#-conclusion-efficient-segmentation">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This approach is a very efficient way to determine whether a string can be segmented into valid words from a dictionary. The solution employs:</p>
-<ul>
-<li><strong>Backtracking</strong> to explore all possible ways to segment the string.</li>
-<li><strong>Memoization</strong> to avoid redundant work by storing previously computed results.</li>
-</ul>
-<h4 id="key-insights">
-  Key Insights:
-  <a class="heading-link" href="#key-insights">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>Memoization</strong>: Avoids recalculating results for the same substring, optimizing the time complexity.</li>
-<li><strong>Backtracking</strong>: Explores all potential segmentations while pruning unnecessary computations.</li>
-<li><strong>Constant-Time Dictionary Lookup</strong>: Using a <code>map</code> ensures fast checks when looking for valid words in the dictionary.</li>
-</ul>
-<p>This solution works efficiently for moderate-sized strings with a time complexity of ( O(n^2) ), making it suitable for most practical input sizes.</p>
- 
+<li><strong>Time Complexity</strong>: (O(N^2)), where (N) is the length of the string, as we check each substring.</li>
+<li><strong>Space Complexity</strong>: (O(N)) for the memoization vector.</li>
+</ul> 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode201s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode205s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

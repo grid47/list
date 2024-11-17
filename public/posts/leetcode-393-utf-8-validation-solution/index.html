@@ -146,7 +146,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -211,7 +211,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1128s0hbhb">
+        <h2 id="hahahugoshortcode1127s0hbhb">
   <a href="https://leetcode.com/problems/utf-8-validation/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -226,7 +226,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1128s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1127s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -250,185 +250,85 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> count <span style="color:#666">==</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1128s2hbhb">
+<h2 id="hahahugoshortcode1127s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="-problem-statement">
-  🚀 Problem Statement
-  <a class="heading-link" href="#-problem-statement">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The task is to determine whether a given list of integers represents valid UTF-8 encoded data. UTF-8 is a variable-length encoding used to represent all characters in Unicode. Here&rsquo;s how it works:</p>
-<ul>
-<li>A 1-byte character (ASCII) is represented as <code>0xxxxxxx</code>.</li>
-<li>A 2-byte character is represented as <code>110xxxxx 10xxxxxx</code>.</li>
-<li>A 3-byte character is represented as <code>1110xxxx 10xxxxxx 10xxxxxx</code>.</li>
-<li>A 4-byte character is represented as <code>11110xxx 10xxxxxx 10xxxxxx 10xxxxxx</code>.</li>
-</ul>
-<p>We need to check if a given sequence of bytes follows these rules and is a valid UTF-8 encoded string.</p>
-<hr>
-<h3 id="-approach">
-  🧠 Approach
-  <a class="heading-link" href="#-approach">
+<p>Given an array of integers representing byte values, determine if the data represents a valid UTF-8 encoding. A valid UTF-8 encoding follows specific rules based on the leading bits of the byte sequences.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this, we need to parse the list of integers (which represent the bytes) and validate each byte according to the UTF-8 format. The steps are straightforward and can be broken down as follows:</p>
 <ol>
-<li><strong>Check the Leading Byte</strong>: The first byte in the sequence determines how many continuation bytes follow it.</li>
-<li><strong>Validate Continuation Bytes</strong>: Each continuation byte must start with <code>10xxxxxx</code>.</li>
-<li><strong>End of Sequence</strong>: Ensure that after parsing all the bytes, we haven&rsquo;t left any incomplete characters (i.e., no more continuation bytes should be expected).</li>
+<li>
+<p><strong>Initialize Count</strong>: Use a counter to track how many additional bytes are expected for a multi-byte character.</p>
+</li>
+<li>
+<p><strong>Iterate Through Bytes</strong>: Loop through each byte in the <code>data</code> vector:</p>
+<ul>
+<li><strong>Starting New Character</strong>: If <code>count</code> is zero:
+<ul>
+<li>Check the first three bits to determine the number of bytes in the character:
+<ul>
+<li>If the byte starts with <code>110</code>, expect 1 additional byte (2 bytes total).</li>
+<li>If it starts with <code>1110</code>, expect 2 additional bytes (3 bytes total).</li>
+<li>If it starts with <code>11110</code>, expect 3 additional bytes (4 bytes total).</li>
+<li>If it starts with <code>0</code>, it&rsquo;s a single-byte character; no additional bytes are expected.</li>
+<li>If none of these conditions are met, return false (invalid leading byte).</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Continuation of Character</strong>: If <code>count</code> is greater than zero:
+<ul>
+<li>Check if the byte starts with <code>10</code> (indicating a continuation byte). If not, return false.</li>
+<li>Decrement the <code>count</code> since one continuation byte has been processed.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Check</strong>: After processing all bytes, check if <code>count</code> is zero. If it is, the encoding is valid; otherwise, it is invalid.</p>
+</li>
 </ol>
-<p>Let&rsquo;s dive deeper into how this approach works step-by-step!</p>
-<hr>
-<h3 id="-step-by-step-code-breakdown">
-  🔨 Step-by-Step Code Breakdown
-  <a class="heading-link" href="#-step-by-step-code-breakdown">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="step-1-initialize-the-count-of-continuation-bytes">
-  Step 1: Initialize the Count of Continuation Bytes
-  <a class="heading-link" href="#step-1-initialize-the-count-of-continuation-bytes">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> count <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div><ul>
-<li><code>count</code> keeps track of how many continuation bytes we expect for the current character. Initially, it’s set to 0 because no continuation bytes are expected at the beginning.</li>
-</ul>
-<h4 id="step-2-iterate-over-the-data">
-  Step 2: Iterate Over the Data
-  <a class="heading-link" href="#step-2-iterate-over-the-data">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">c</span> : data) {
-</span></span></code></pre></div><ul>
-<li>We loop through each byte <code>c</code> in the input array <code>data</code>, checking each byte to ensure it&rsquo;s in compliance with the UTF-8 standard.</li>
-</ul>
-<h4 id="step-3-handle-the-first-byte-of-a-character">
-  Step 3: Handle the First Byte of a Character
-  <a class="heading-link" href="#step-3-handle-the-first-byte-of-a-character">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(count <span style="color:#666">==</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>((c <span style="color:#666">&gt;&gt;</span> <span style="color:#666">5</span>) <span style="color:#666">==</span> <span style="color:#666">0b110</span>) count <span style="color:#666">=</span> <span style="color:#666">1</span>;  <span style="color:#080;font-style:italic">// 2-byte character
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> ((c <span style="color:#666">&gt;&gt;</span> <span style="color:#666">4</span>) <span style="color:#666">==</span> <span style="color:#666">0b1110</span>) count <span style="color:#666">=</span> <span style="color:#666">2</span>;  <span style="color:#080;font-style:italic">// 3-byte character
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> ((c <span style="color:#666">&gt;&gt;</span> <span style="color:#666">3</span>) <span style="color:#666">==</span> <span style="color:#666">0b11110</span>) count <span style="color:#666">=</span> <span style="color:#666">3</span>;  <span style="color:#080;font-style:italic">// 4-byte character
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> (c <span style="color:#666">&gt;&gt;</span> <span style="color:#666">7</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;  <span style="color:#080;font-style:italic">// Invalid starting byte
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
-</span></span></code></pre></div><ul>
-<li>When <code>count == 0</code>, we&rsquo;re starting a new character:
 <ul>
-<li>We use bitwise shifts to check the first bits of <code>c</code>.</li>
-<li>If <code>c</code> starts with <code>110</code>, we know it&rsquo;s the start of a 2-byte character (expecting 1 continuation byte).</li>
-<li>If <code>c</code> starts with <code>1110</code>, it’s a 3-byte character (expecting 2 continuation bytes).</li>
-<li>If <code>c</code> starts with <code>11110</code>, it’s a 4-byte character (expecting 3 continuation bytes).</li>
-<li>If <code>c</code> doesn’t match any of these, it’s an invalid byte, and we return <code>false</code>.</li>
+<li>The solution employs bit manipulation to analyze the leading bits of each byte, determining if they conform to UTF-8 standards.</li>
+<li>By managing the <code>count</code> variable effectively, the algorithm ensures that the right number of continuation bytes are present for multi-byte characters.</li>
 </ul>
-</li>
-</ul>
-<h4 id="step-4-handle-continuation-bytes">
-  Step 4: Handle Continuation Bytes
-  <a class="heading-link" href="#step-4-handle-continuation-bytes">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> ((c <span style="color:#666">&gt;&gt;</span> <span style="color:#666">6</span>) <span style="color:#666">!=</span> <span style="color:#666">0b10</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;  <span style="color:#080;font-style:italic">// Continuation byte should start with 10
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    count<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>If <code>count</code> is greater than 0, we expect a continuation byte:
-<ul>
-<li>A continuation byte must start with <code>10</code>, so we use <code>(c &gt;&gt; 6)</code> to check if the first two bits are <code>10</code>. If not, we return <code>false</code>.</li>
-<li>After validating the continuation byte, we decrease <code>count</code> to track the processed continuation byte.</li>
-</ul>
-</li>
-</ul>
-<h4 id="step-5-check-for-unfinished-characters">
-  Step 5: Check for Unfinished Characters
-  <a class="heading-link" href="#step-5-check-for-unfinished-characters">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> count <span style="color:#666">==</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div><ul>
-<li>After processing all bytes, if <code>count</code> is 0, it means all characters were fully processed with the correct number of continuation bytes.</li>
-<li>If <code>count</code> is not 0, it means some characters were incomplete, so we return <code>false</code>.</li>
-</ul>
-<hr>
-<h3 id="-complexity-analysis">
-  📊 Complexity Analysis
-  <a class="heading-link" href="#-complexity-analysis">
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>O(n)</strong>, where <code>n</code> is the number of bytes in the input array. We go through each byte once, performing constant-time bitwise operations for each byte.</li>
+<li><strong>Time Complexity</strong>: O(n), where n is the number of bytes in the input data, as each byte is processed once.</li>
+<li><strong>Space Complexity</strong>: O(1), as no additional data structures are used beyond a few integer variables.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>O(1)</strong>. We only use a constant amount of extra space (the <code>count</code> variable), regardless of the input size.</li>
-</ul>
-<hr>
-<h3 id="-conclusion">
-  🏁 Conclusion
-  <a class="heading-link" href="#-conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>In this solution, we&rsquo;ve used a <strong>bitwise approach</strong> to efficiently verify if a sequence of bytes is valid UTF-8 encoded data. By checking the first byte and the continuation bytes for proper structure, we ensure that the encoding is correct and that there are no incomplete characters.</p>
-<p>With a linear time complexity of <code>O(n)</code> and constant space complexity, this approach is both <strong>time-efficient</strong> and <strong>space-efficient</strong>, making it perfect for large inputs.</p>
-<p>So, if you’re ever working with UTF-8 encoded data and need to validate its correctness, this is the way to go! 👍</p>
-<hr>
-<h3 id="-summary">
-  ✨ Summary
-  <a class="heading-link" href="#-summary">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>To recap, the key steps involve:</p>
-<ul>
-<li>Validating the first byte to determine how many continuation bytes follow.</li>
-<li>Ensuring each continuation byte starts with <code>10</code>.</li>
-<li>Ensuring that all characters are fully completed by the end of the sequence.</li>
-</ul>
-<p>This solution will ensure that your UTF-8 data is correct and can handle all valid (and invalid) cases effectively!</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1128s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1127s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

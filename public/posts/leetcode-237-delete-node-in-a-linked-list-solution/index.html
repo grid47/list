@@ -145,7 +145,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -197,7 +197,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              4-minute read
+              2-minute read
             </span>
           </div>
 
@@ -206,7 +206,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode731s0hbhb">
+        <h2 id="hahahugoshortcode730s0hbhb">
   <a href="https://leetcode.com/problems/delete-node-in-a-linked-list/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -221,7 +221,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode731s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode730s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -244,148 +244,64 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">delete</span> nxt;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode731s2hbhb">
+<h2 id="hahahugoshortcode730s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="-problem-statement">
-  🚀 Problem Statement
-  <a class="heading-link" href="#-problem-statement">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>In this problem, you&rsquo;re given a <strong>singly linked list</strong>, and your task is to delete a specific node, but there’s a twist: you&rsquo;re only given access to the node to be deleted. Normally, to delete a node, you&rsquo;d need access to the previous node to adjust its <code>next</code> pointer. But here, you&rsquo;re restricted to working with just the node you&rsquo;re given, and you need to figure out how to delete it.</p>
-<p>Each node in the list is represented by the following structure:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">struct</span> <span style="color:#00f">ListNode</span> {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> val;
-</span></span><span style="display:flex;"><span>    ListNode<span style="color:#666">*</span> next;
-</span></span><span style="display:flex;"><span>    ListNode(<span style="color:#0b0;font-weight:bold">int</span> x) <span style="color:#666">:</span> val(x), next(<span style="color:#a2f;font-weight:bold">nullptr</span>) {}
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><p>Your goal is to delete the node without having access to the previous node. Let’s dive into the approach to tackle this!</p>
-<hr>
-<h3 id="-approach">
-  🧠 Approach
-  <a class="heading-link" href="#-approach">
+<p>Given a non-tail node in a singly linked list, delete the node from the list. You are only given access to that node, not the head of the list.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>So, how can we delete a node if we don’t have the luxury of modifying the previous node&rsquo;s <code>next</code> pointer? 🤔 Here’s a clever solution:</p>
+<p>Since we do not have access to the previous node and cannot directly change the pointers leading to <code>node</code>, we instead:</p>
 <ol>
-<li>
-<p><strong>Node Copying</strong>:</p>
-<ul>
-<li>Instead of trying to remove the node directly, we can <em>copy the value</em> from the next node into the current node. This effectively &ldquo;overwrites&rdquo; the current node, making it the next node, so it’s as if the current node has been deleted.</li>
-</ul>
-</li>
-<li>
-<p><strong>Update the Next Pointer</strong>:</p>
-<ul>
-<li>After copying the value, we need to make sure the <code>next</code> pointer of the current node skips the next node.</li>
-<li>So, we update the <code>next</code> pointer to point to the node after the next one, effectively removing the next node from the list.</li>
-</ul>
-</li>
-<li>
-<p><strong>Delete the Next Node</strong>:</p>
-<ul>
-<li>Once the current node has taken the place of the next node, we delete the next node. The job is done, and the node has been removed!</li>
-</ul>
-</li>
+<li>Copy the value from the next node (<code>node-&gt;next</code>) into <code>node</code>.</li>
+<li>Update <code>node-&gt;next</code> to point to the next-next node (skipping the original next node).</li>
+<li>Delete the copied next node to free memory.</li>
 </ol>
-<hr>
-<h3 id="-step-by-step-code-breakdown">
-  🔨 Step-by-Step Code Breakdown
-  <a class="heading-link" href="#-step-by-step-code-breakdown">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Let’s look at how this approach works in code!</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> deleteNode(ListNode<span style="color:#666">*</span> node) {
-</span></span></code></pre></div><ul>
-<li>Here we define the function <code>deleteNode</code> in the <code>Solution</code> class, taking a pointer to the node that needs to be deleted.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> nxt <span style="color:#666">=</span> node<span style="color:#666">-&gt;</span>next;
-</span></span></code></pre></div><ul>
-<li>First, we store the pointer to the next node (<code>nxt</code>). This helps us manipulate the next node while working on the current one.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#666">*</span>node <span style="color:#666">=</span> <span style="color:#666">*</span>nxt;
-</span></span></code></pre></div><ul>
-<li>We copy the entire contents (value and <code>next</code> pointer) of the next node into the current node. This effectively &ldquo;moves&rdquo; the next node into the current position, as if the current node has been deleted.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">delete</span> nxt;
-</span></span></code></pre></div><ul>
-<li>Finally, we delete the next node (which is now redundant because its value has already been copied into the current node). This cleans up the memory.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><ul>
-<li>The function ends here, and the node has been deleted successfully!</li>
-</ul>
-<hr>
-<h3 id="-complexity-analysis">
-  📈 Complexity Analysis
-  <a class="heading-link" href="#-complexity-analysis">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>O(1)</strong> — The solution works in constant time! We’re only copying values and deleting a node, no matter how large the list is. These operations don’t depend on the size of the list, so we get a <strong>constant time</strong> complexity.</li>
+<li><strong>Input</strong>: A non-tail node in a linked list.</li>
+<li><strong>Output</strong>: None (modifies the linked list in-place to remove the specified node).</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>O(1)</strong> — We’re using a fixed amount of extra space, which doesn’t grow with the size of the input. Just a couple of pointers are used, so the space complexity is constant.</li>
-</ul>
-<hr>
-<h3 id="-conclusion">
-  🏁 Conclusion
-  <a class="heading-link" href="#-conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution is efficient and clever! 🎉 By copying the value from the next node and adjusting the <code>next</code> pointer, we can &ldquo;delete&rdquo; a node without needing access to the previous one. Here’s a quick recap:</p>
 <ol>
-<li><strong>Node Copying</strong>: Copy the value from the next node into the current node.</li>
-<li><strong>Next Pointer Update</strong>: Adjust the <code>next</code> pointer to skip the next node.</li>
-<li><strong>Delete the Next Node</strong>: Delete the next node since its value is now in the current node.</li>
+<li>Store <code>node-&gt;next</code> in a temporary pointer <code>nxt</code>.</li>
+<li>Copy <code>*nxt</code> (value and next pointer) into <code>*node</code>.</li>
+<li>Delete <code>nxt</code> to free the memory.</li>
 </ol>
-<p>It’s an elegant solution that works in <strong>constant time</strong> and <strong>constant space</strong>, making it a fantastic approach for this problem. 🚀</p>
-<h4 id="key-takeaways">
-  Key Takeaways:
-  <a class="heading-link" href="#key-takeaways">
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h4>
+</h3>
 <ul>
-<li>This approach works even when you don’t have access to the previous node, which is a tricky situation in a singly linked list.</li>
-<li>The solution is efficient with <strong>O(1)</strong> time and <strong>O(1)</strong> space complexity, making it optimal for this problem.</li>
+<li><strong>Time Complexity</strong>: (O(1)) since only a few pointer operations are performed.</li>
+<li><strong>Space Complexity</strong>: (O(1)) as no additional memory is required apart from a temporary pointer.</li>
 </ul>
-<p>Now you’re all set to tackle similar problems with confidence! Keep coding and keep learning! ✨</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode731s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode730s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -150,7 +150,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -230,7 +230,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              4-minute read
+              2-minute read
             </span>
           </div>
 
@@ -239,7 +239,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1101s0hbhb">
+        <h2 id="hahahugoshortcode1100s0hbhb">
   <a href="https://leetcode.com/problems/top-k-frequent-elements/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -254,7 +254,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1101s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1100s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -280,166 +280,69 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1101s2hbhb">
+<h2 id="hahahugoshortcode1100s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="-problem-statement">
-  🚀 Problem Statement
-  <a class="heading-link" href="#-problem-statement">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>In this problem, you&rsquo;re asked to return the <strong>k most frequent elements</strong> from a list of integers. Given an array of integers, your task is to identify and return the elements that appear most frequently. The order of the elements doesn&rsquo;t matter — just make sure to return the top <strong>k</strong> elements with the highest frequency!</p>
-<p>Can you think of an efficient way to find the <strong>top k frequent elements</strong> without running into performance issues? Let’s break it down!</p>
-<hr>
-<h3 id="-approach">
-  🧠 Approach
-  <a class="heading-link" href="#-approach">
+<p>Given an integer array <code>nums</code> and an integer <code>k</code>, return the <code>k</code> most frequent elements.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem efficiently, we can use a combination of a <strong>frequency map</strong> and a <strong>priority queue</strong> (or <strong>max heap</strong>) to help us retrieve the top k frequent elements. Here’s a step-by-step breakdown:</p>
 <ol>
-<li><strong>Count the Frequencies</strong>: Start by counting how many times each element appears in the array.</li>
-<li><strong>Use a Priority Queue</strong>: Push the frequency-element pairs into a priority queue. This will allow us to quickly access the elements with the highest frequencies.</li>
-<li><strong>Extract the Top k Elements</strong>: Once the elements are sorted by frequency, we can pop the top k elements from the queue.</li>
+<li><strong>Count Frequencies</strong>: Use a map (or unordered map) to count the frequency of each element in the array.</li>
+<li><strong>Use a Priority Queue</strong>: Create a max-heap (priority queue) to store elements by their frequencies. The heap will store pairs of the form <code>(frequency, element)</code>.</li>
+<li><strong>Extract Top K Elements</strong>: Pop the top <code>k</code> elements from the heap and store their corresponding keys (elements) in the result array.</li>
 </ol>
-<p>This approach ensures that we can efficiently retrieve the most frequent elements with minimal complexity. 💪</p>
-<hr>
-<h3 id="-step-by-step-code-breakdown">
-  🔨 Step-by-Step Code Breakdown
-  <a class="heading-link" href="#-step-by-step-code-breakdown">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Let’s go over the code to see how each part works!</p>
-<h4 id="step-1-count-the-frequency-of-elements">
-  Step 1: Count the Frequency of Elements
-  <a class="heading-link" href="#step-1-count-the-frequency-of-elements">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ma;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: nums)
-</span></span><span style="display:flex;"><span>    ma[x]<span style="color:#666">++</span>;
-</span></span></code></pre></div><ul>
-<li>We start by using a <code>map&lt;int, int&gt;</code> to count the frequency of each element in the array <code>nums</code>. The key is the element, and the value is its frequency.</li>
-<li>The loop iterates through <code>nums</code> and increments the count of each element in the map.</li>
-</ul>
-<h4 id="step-2-push-the-frequency-pair-into-a-priority-queue">
-  Step 2: Push the Frequency-Pair into a Priority Queue
-  <a class="heading-link" href="#step-2-push-the-frequency-pair-into-a-priority-queue">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>priority_queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> pq;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> [key, val]<span style="color:#666">:</span> ma)
-</span></span><span style="display:flex;"><span>    pq.push(make_pair(val, key));
-</span></span></code></pre></div><ul>
-<li>Next, we create a <strong>priority queue</strong> called <code>pq</code> to store the pairs of (frequency, element).</li>
-<li>The priority queue sorts the pairs in descending order based on frequency, meaning that the element with the highest frequency will always be at the top.</li>
-<li>We iterate through the <code>map</code> and push each <code>(frequency, element)</code> pair into the queue.</li>
-</ul>
-<h4 id="step-3-extract-the-top-k-frequent-elements">
-  Step 3: Extract the Top k Frequent Elements
-  <a class="heading-link" href="#step-3-extract-the-top-k-frequent-elements">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(k<span style="color:#666">--</span>) {
-</span></span><span style="display:flex;"><span>    ans.push_back(pq.top().second);
-</span></span><span style="display:flex;"><span>    pq.pop();
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>Now, we initialize a <code>vector&lt;int&gt;</code> called <code>ans</code> to store the final result.</li>
-<li>The <code>while</code> loop runs <code>k</code> times, each time extracting the top element from the priority queue. We push the <strong>element</strong> (not the frequency) from the pair into <code>ans</code>.</li>
-<li>After each extraction, we remove the top element from the queue using <code>pq.pop()</code>.</li>
-</ul>
-<h4 id="step-4-return-the-result">
-  Step 4: Return the Result
-  <a class="heading-link" href="#step-4-return-the-result">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span></code></pre></div><ul>
-<li>Finally, we return the <code>ans</code> vector, which contains the top k frequent elements.</li>
-</ul>
-<hr>
-<h3 id="-complexity-analysis">
-  📈 Complexity Analysis
-  <a class="heading-link" href="#-complexity-analysis">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>Let’s analyze the time and space complexity to ensure our solution is optimal.</p>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>O(n log n)</strong>: Here’s the breakdown:
-<ol>
-<li><strong>Counting the frequencies</strong>: We iterate over the array once, so this step takes <strong>O(n)</strong>.</li>
-<li><strong>Inserting into the priority queue</strong>: We insert each element into the queue. Each insertion takes <strong>O(log m)</strong>, where <code>m</code> is the number of unique elements in the map. In the worst case, <code>m</code> is equal to <code>n</code>, so the complexity for this step is <strong>O(n log n)</strong>.</li>
-<li><strong>Extracting the top k elements</strong>: Extracting <code>k</code> elements from the queue takes <strong>O(k log n)</strong> time. Since <code>k</code> is often much smaller than <code>n</code>, this step is dominated by the previous steps.</li>
-</ol>
+<li>The frequency of each number is counted using a map.</li>
+<li>Each entry in the map is then pushed into a priority queue, which organizes the pairs in descending order of frequency.</li>
+<li>Finally, the top <code>k</code> elements are extracted from the heap and added to the result vector.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>Counting frequencies takes ( O(n) ) where ( n ) is the number of elements in <code>nums</code>.</li>
+<li>Pushing all elements into the priority queue takes ( O(m \log m) ), where ( m ) is the number of unique elements.</li>
+<li>Extracting the top <code>k</code> elements takes ( O(k \log m) ).</li>
+<li>Overall, the complexity is ( O(n + m \log m) ).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: ( O(m) ) for storing the frequency map and the priority queue.</p>
 </li>
 </ul>
-<p>Thus, the overall time complexity is <strong>O(n log n)</strong>.</p>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>O(n)</strong>: We use a map to store the frequencies of the elements, and the priority queue holds up to <code>n</code> pairs in the worst case. So, the space complexity is proportional to the size of the input array.</li>
-</ul>
-<hr>
-<h3 id="-conclusion">
-  🏁 Conclusion
-  <a class="heading-link" href="#-conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>We’ve successfully solved the problem of finding the <strong>k most frequent elements</strong> in an array with an optimal approach using a frequency map and a priority queue. 🎉</p>
-<h4 id="recap">
-  Recap:
-  <a class="heading-link" href="#recap">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>Time Complexity</strong>: <strong>O(n log n)</strong>, where <code>n</code> is the number of elements in the array.</li>
-<li><strong>Space Complexity</strong>: <strong>O(n)</strong>, where <code>n</code> is the number of elements.</li>
-<li>The solution efficiently handles large arrays and varying frequencies of elements.</li>
-<li>By using a priority queue, we can quickly retrieve the <strong>top k frequent elements</strong>.</li>
-</ul>
-<p>This approach is easy to understand, efficient, and works well for this type of problem. Keep practicing to sharpen your skills in working with heaps and frequency counting — they are powerful tools in algorithm design! 🌟</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1101s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1100s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

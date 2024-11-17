@@ -147,7 +147,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -240,7 +240,7 @@
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1354s1hbhb">
+<h2 id="hahahugoshortcode1356s1hbhb">
   
 
   
@@ -252,8 +252,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem asks whether it is possible to visit all rooms starting from room 0 in a house represented by a 2D array, where each room contains a list of keys to other rooms. Specifically, the problem involves determining whether starting from room 0, we can use the keys in each room to unlock all other rooms. Each key in a room allows you to open a specific other room, and once opened, you can access the keys from that room and continue your exploration.</p>
-<p>The task is to return <code>true</code> if it is possible to visit all rooms starting from room 0, and <code>false</code> otherwise.</p>
+<p>You are given a list of <code>rooms</code>, where <code>rooms[i]</code> contains a list of keys that you can use to access other rooms. Initially, you are in room <code>0</code>, and your goal is to determine if you can visit all rooms.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -261,96 +260,30 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem, we can treat the house as a graph, where each room is a node, and the keys represent edges between the rooms. The goal is to check if, starting from room 0, we can reach all other rooms. This problem can be solved using graph traversal techniques, specifically Depth-First Search (DFS), since it allows us to explore all reachable nodes from a starting node.</p>
-<p>Here’s how we approach the solution:</p>
 <ol>
 <li>
-<p><strong>Graph Representation</strong>:</p>
+<p><strong>Initialization</strong>:</p>
 <ul>
-<li>The rooms are represented as a 2D vector where each index corresponds to a room, and each entry in a room is a list of keys (room indices) that the room provides.</li>
-<li>We start at room 0 and aim to explore all rooms by visiting each room’s keys.</li>
-</ul>
-</li>
-<li>
-<p><strong>Tracking Visited Rooms</strong>:</p>
-<ul>
-<li>To track the rooms we’ve already visited, we use a <code>visited</code> vector initialized to <code>false</code> for all rooms. When we visit a room, we mark it as <code>true</code> in the <code>visited</code> array.</li>
-<li>The traversal is initiated from room 0, and we explore all connected rooms by visiting each room’s keys.</li>
+<li>Create a <code>vector&lt;bool&gt;</code> called <code>vis</code> to track which rooms have been visited. Mark room <code>0</code> as visited since you start there.</li>
 </ul>
 </li>
 <li>
 <p><strong>Depth-First Search (DFS)</strong>:</p>
 <ul>
-<li>The DFS algorithm is ideal for this problem because it explores as far as possible along each branch before backtracking. Starting from room 0, we recursively visit all rooms that can be unlocked by the keys in each room.</li>
-<li>If, at the end of the traversal, all rooms are marked as visited, then all rooms are reachable, and we return <code>true</code>. If any room is not visited, we return <code>false</code>.</li>
+<li>Implement a DFS function that takes the rooms, the visited list, and the current room as parameters.</li>
+<li>Mark the current room as visited and explore each key in that room to access other rooms.</li>
 </ul>
 </li>
 <li>
-<p><strong>Termination</strong>:</p>
+<p><strong>Check All Rooms</strong>:</p>
 <ul>
-<li>After performing DFS, we simply check if all rooms are visited. If any room is unvisited, it means that room is inaccessible from room 0, and the answer should be <code>false</code>.</li>
-</ul>
-</li>
-</ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>Let’s break down the code into its main components:</p>
-<ol>
-<li>
-<p><strong>Function Signature</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> canVisitAllRooms(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> rooms)
-</span></span></code></pre></div><p>This function takes a 2D vector <code>rooms</code>, where each subvector represents the list of keys available in each room. It returns <code>true</code> if all rooms are accessible from room 0, and <code>false</code> otherwise.</p>
-</li>
-<li>
-<p><strong>Initialize Visited Vector</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> vis(rooms.size(), <span style="color:#a2f">false</span>);
-</span></span><span style="display:flex;"><span>vis[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span></code></pre></div><ul>
-<li><code>vis</code> is a boolean vector of size equal to the number of rooms. It tracks whether each room has been visited during DFS.</li>
-<li>We initialize all rooms as not visited (<code>false</code>), and we set room 0 as visited (<code>true</code>) because we start from there.</li>
-</ul>
-</li>
-<li>
-<p><strong>Perform Depth-First Search (DFS)</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>dfs(rooms, vis, <span style="color:#666">0</span>);
-</span></span></code></pre></div><ul>
-<li>We call the DFS function to start the exploration from room 0. This will visit all reachable rooms from room 0.</li>
-</ul>
-</li>
-<li>
-<p><strong>DFS Function</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> rooms, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;&amp;</span> vis, <span style="color:#0b0;font-weight:bold">int</span> cur) {
-</span></span><span style="display:flex;"><span>    vis[cur] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">x</span> : rooms[cur]) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>vis[x]) {
-</span></span><span style="display:flex;"><span>            dfs(rooms, vis, x);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>The DFS function takes the <code>rooms</code> array, the <code>visited</code> vector <code>vis</code>, and the current room index <code>cur</code> as arguments.</li>
-<li>We first mark the current room as visited (<code>vis[cur] = true</code>).</li>
-<li>Then, for each key in the current room (<code>rooms[cur]</code>), we recursively call DFS for any room that has not been visited yet (<code>if (!vis[x])</code>).</li>
-</ul>
-</li>
-<li>
-<p><strong>Check if All Rooms are Visited</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">x</span> : vis)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>x) <span style="color:#a2f;font-weight:bold">return</span> x;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span></code></pre></div><ul>
-<li>After the DFS traversal, we check if all rooms have been visited. If any room is unvisited (<code>!x</code>), we return <code>false</code>. If all rooms have been visited, we return <code>true</code>.</li>
+<li>After performing DFS, iterate through the <code>vis</code> vector to check if all rooms have been visited. If any room is not visited, return <code>false</code>.</li>
 </ul>
 </li>
 <li>
 <p><strong>Return Result</strong>:</p>
 <ul>
-<li>Finally, we return <code>true</code> if all rooms are visited, meaning all rooms can be accessed starting from room 0.</li>
+<li>If all rooms are visited, return <code>true</code>.</li>
 </ul>
 </li>
 </ol>
@@ -361,33 +294,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li>The time complexity of this solution is <strong>O(R + K)</strong>, where <code>R</code> is the number of rooms, and <code>K</code> is the total number of keys (i.e., the total number of elements in all the rooms&rsquo; key lists). This is because, in the worst case, we visit each room once and each key once while performing DFS. Therefore, the time complexity is linear in terms of the number of rooms and keys in total.</li>
+<li><strong>Time Complexity</strong>: O(N), where N is the total number of rooms, as each room and each key is processed at most once.</li>
+<li><strong>Space Complexity</strong>: O(N) for the visited list and the recursion stack.</li>
 </ul>
-</li>
-<li>
-<p><strong>Space Complexity</strong>:</p>
-<ul>
-<li>The space complexity is <strong>O(R + K)</strong> as well because we store the <code>visited</code> vector of size <code>R</code> and the recursive call stack for DFS, which can be at most <code>R</code> deep. Additionally, the space required to store the keys in each room contributes to the total space complexity.</li>
-</ul>
-</li>
-</ol>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>In conclusion, this solution efficiently checks whether all rooms can be visited starting from room 0 using Depth-First Search (DFS). By marking rooms as visited and recursively exploring each room’s keys, we ensure that we only visit each room once. The time and space complexities of the solution are both linear in terms of the number of rooms and keys, making this approach efficient for solving the problem even for large grids. This method leverages standard graph traversal techniques and is well-suited for problems involving connectivity in graphs or grids.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1354s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1356s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

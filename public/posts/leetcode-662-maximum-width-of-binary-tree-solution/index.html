@@ -148,7 +148,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              3-minute read
             </span>
           </div>
 
@@ -221,8 +221,26 @@
 
       <div class="post-content">
         
-        <p><a href="https://leetcode.com/problems/maximum-width-of-binary-tree/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
-<hr>
+        <h2 id="hahahugoshortcode1257s0hbhb">
+  <a href="https://leetcode.com/problems/maximum-width-of-binary-tree/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
+<figure class="remote-image" style="text-align:center; margin: 0;">
+    <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/662.webp" 
+           alt="A binary tree where the maximum width is highlighted, with the width softly glowing as it’s measured." 
+           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    
+      <figcaption style="font-size: 0.8em; font-weight: 300; color:#555; margin-top: 4px; line-height: 1.2;">
+        Solution to LeetCode 662: Maximum Width of Binary Tree Problem
+      </figcaption>
+    
+  </figure>
+  
+  <a class="heading-link" href="#hahahugoshortcode1257s0hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <p><strong>Code:</strong></p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
 </span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Definition for a binary tree node.
@@ -258,7 +276,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> width;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1255s1hbhb">
+<h2 id="hahahugoshortcode1257s2hbhb">
   
 
   
@@ -270,11 +288,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem at hand requires determining the <strong>maximum width of a binary tree</strong>. The width of a binary tree is defined as the number of nodes on the <strong>longest level</strong> of the tree. To calculate this width efficiently, we need to consider both the <strong>level structure</strong> and the <strong>position of nodes</strong> at each level.</p>
-<ul>
-<li>The binary tree nodes are given by the <code>TreeNode</code> struct, which contains three fields: <code>val</code> (the value of the node), <code>left</code> (pointer to the left child), and <code>right</code> (pointer to the right child).</li>
-<li>The goal is to return the maximum width of the binary tree, which is the maximum number of nodes present at any level of the tree.</li>
-</ul>
+<p>You are given the root of a binary tree. Your task is to find the maximum width of the tree. The width of one level is defined as the length between the two furthest non-null nodes in that level. This is the number of nodes present in that level from the leftmost to the rightmost non-null nodes.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -282,100 +296,57 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To calculate the maximum width of a binary tree, we can take advantage of <strong>level-order traversal</strong> (also known as <strong>breadth-first traversal</strong>). The general approach is as follows:</p>
 <ol>
-<li>Use a <strong>queue</strong> to implement the level-order traversal of the binary tree.</li>
-<li>At each level, record the <strong>position of the nodes</strong>. The position can be calculated by assigning each node an index that reflects its relative position within the level.</li>
-<li>For each level, calculate the difference between the first and last node positions and update the width accordingly.</li>
-<li>Track the maximum width observed during the traversal.</li>
+<li>
+<p><strong>Initialize Data Structures</strong>:</p>
+<ul>
+<li>Use a queue to perform a level order traversal of the tree. Each element in the queue is a pair containing a pointer to the <code>TreeNode</code> and its corresponding index.</li>
+<li>Keep a variable <code>width</code> to store the maximum width encountered.</li>
+</ul>
+</li>
+<li>
+<p><strong>Level Order Traversal</strong>:</p>
+<ul>
+<li>Start by pushing the root node into the queue with index 0.</li>
+<li>While the queue is not empty, do the following:
+<ul>
+<li>Record the indices of the first and last nodes at the current level.</li>
+<li>For each node at the current level:
+<ul>
+<li>Calculate the adjusted index based on the first node&rsquo;s index to avoid overflow.</li>
+<li>Push the left child with index <code>2 * idx + 1</code> and the right child with index <code>2 * idx + 2</code> into the queue if they exist.</li>
+</ul>
+</li>
+<li>Update the maximum width by comparing the current width with the difference between the last and first indices plus one.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>After processing all levels of the tree, return the maximum width found.</li>
+</ul>
+</li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The algorithm is implemented in the <code>Solution</code> class with the <code>widthOfBinaryTree</code> function. Let&rsquo;s break down the code step by step.</p>
-<h4 id="1-edge-case-handling-empty-tree">
-  1. <strong>Edge Case Handling (Empty Tree)</strong>
-  <a class="heading-link" href="#1-edge-case-handling-empty-tree">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div><ul>
-<li>Before starting the main logic, we handle the edge case where the root is <code>NULL</code>. In this case, the width is obviously <code>0</code>, and we return <code>0</code>.</li>
-</ul>
-<h4 id="2-queue-initialization">
-  2. <strong>Queue Initialization</strong>
-  <a class="heading-link" href="#2-queue-initialization">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> q;
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> width <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>q.push({root, <span style="color:#666">0</span>});
-</span></span></code></pre></div><ul>
-<li>We declare a queue of pairs: each pair consists of a <code>TreeNode*</code> (the node) and an integer (its index at that level).</li>
-<li>We initialize the queue by pushing the root node with an index of <code>0</code>. This index will represent the position of the root in the tree.</li>
-</ul>
-<h4 id="3-level-order-traversal">
-  3. <strong>Level-Order Traversal</strong>
-  <a class="heading-link" href="#3-level-order-traversal">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> f <span style="color:#666">=</span> q.front().second;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> b <span style="color:#666">=</span> q.back().second;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> q.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> cnt; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        TreeNode<span style="color:#666">*</span> elem <span style="color:#666">=</span> q.front().first;
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> idx <span style="color:#666">=</span> q.front().second <span style="color:#666">-</span> b;
-</span></span><span style="display:flex;"><span>        q.pop();
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(elem<span style="color:#666">-&gt;</span>left <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) q.push({elem<span style="color:#666">-&gt;</span>left, <span style="color:#666">2</span> <span style="color:#666">*</span> idx <span style="color:#666">+</span> <span style="color:#666">1</span>});
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(elem<span style="color:#666">-&gt;</span>right <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) q.push({elem<span style="color:#666">-&gt;</span>right, <span style="color:#666">2</span> <span style="color:#666">*</span> idx <span style="color:#666">+</span> <span style="color:#666">2</span>});
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    width <span style="color:#666">=</span> max(width, b <span style="color:#666">-</span> f <span style="color:#666">+</span> <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>
-<p><strong>While loop</strong>: We perform a level-order traversal using a <code>queue</code> that stores the nodes along with their respective indices. The traversal continues as long as the queue is not empty.</p>
-</li>
-<li>
-<p><strong>f (front) and b (back)</strong>: We extract the <code>front</code> and <code>back</code> elements of the queue to calculate the width at the current level. The index difference between the front and back elements represents the width at that level.</p>
-</li>
-<li>
-<p><strong>cnt (count)</strong>: The number of elements at the current level. This is equal to the size of the queue at the start of the loop.</p>
-</li>
-<li>
-<p><strong>For loop</strong>: For each element in the current level:</p>
+<ol>
+<li><strong>Initialization</strong>: The queue is initialized with the root node and index 0.</li>
+<li><strong>Traversal Loop</strong>: The while loop processes each level of the tree:
 <ul>
-<li>We compute the relative index (<code>idx</code>) of the current node by subtracting the back element&rsquo;s index (<code>b</code>) from the current node&rsquo;s index (<code>q.front().second</code>).</li>
-<li>After processing the current node, we remove it from the queue (<code>q.pop()</code>).</li>
-<li>If the node has a left child, we add it to the queue with the calculated index <code>2 * idx + 1</code>.</li>
-<li>Similarly, if the node has a right child, we add it to the queue with the calculated index <code>2 * idx + 2</code>.</li>
+<li>The first and last indices of the current level are determined.</li>
+<li>Each node is popped from the queue, and its children are added with their respective indices.</li>
 </ul>
 </li>
-<li>
-<p><strong>Width Update</strong>: After processing all nodes at the current level, we calculate the width as <code>b - f + 1</code> (difference between the indices of the back and front nodes plus one), and update the <code>width</code> variable to store the maximum width encountered so far.</p>
-</li>
-</ul>
-<h4 id="4-return-the-result">
-  4. <strong>Return the Result</strong>
-  <a class="heading-link" href="#4-return-the-result">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> width;
-</span></span></code></pre></div><ul>
-<li>Once the level-order traversal is complete, we return the maximum width observed during the process.</li>
-</ul>
+<li><strong>Width Calculation</strong>: The maximum width is updated after each level based on the indices of the first and last nodes.</li>
+<li><strong>Return Statement</strong>: The final maximum width is returned.</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -383,39 +354,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>O(n)</strong>: Each node is processed once in the <code>while</code> loop and within the inner <code>for</code> loop. Since each node is added and removed from the queue exactly once, the overall time complexity is linear with respect to the number of nodes, i.e., <code>O(n)</code>, where <code>n</code> is the number of nodes in the binary tree.</li>
+<li><strong>Time Complexity</strong>: O(n), where n is the number of nodes in the tree. Each node is processed exactly once.</li>
+<li><strong>Space Complexity</strong>: O(w), where w is the maximum width of the tree at any level, due to the storage of nodes in the queue during the traversal.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>O(n)</strong>: The queue can store up to <code>n</code> nodes in the worst case (if the tree is skewed, such as in a degenerate tree). Therefore, the space complexity is proportional to the number of nodes in the tree.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This algorithm efficiently calculates the maximum width of a binary tree using a level-order traversal (breadth-first search). By using the indices of the nodes, it effectively computes the width at each level without the need to explicitly store the positions of all nodes at each level. The algorithm handles all edge cases, such as trees with fewer nodes or skewed trees, and provides an optimal solution with a time complexity of <code>O(n)</code> and a space complexity of <code>O(n)</code>. This approach is well-suited for solving problems involving tree traversal and calculating properties related to the width or levels of binary trees.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1255s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1257s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

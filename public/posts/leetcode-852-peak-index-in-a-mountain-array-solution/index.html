@@ -146,7 +146,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -239,7 +239,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1360s1hbhb">
+<h2 id="hahahugoshortcode1363s1hbhb">
   
 
   
@@ -251,17 +251,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The task is to find the index of the peak element in a <strong>mountain array</strong>. A <strong>mountain array</strong> is an array where:</p>
-<ol>
-<li>The array is strictly increasing up to a peak element.</li>
-<li>The array is strictly decreasing after the peak element.</li>
-</ol>
-<p>Given an array <code>arr</code> of integers, where the length of the array is at least 3, the goal is to find the index of the peak element. The peak element is an element that is greater than both its neighbors.</p>
-<p><strong>Example</strong>:</p>
-<ul>
-<li><strong>Input</strong>: <code>arr = [0, 2, 3, 4, 5, 3, 1]</code></li>
-<li><strong>Output</strong>: <code>4</code> (The peak is <code>5</code> at index <code>4</code>).</li>
-</ul>
+<p>You are given an array that represents a mountain, meaning it is strictly increasing up to a peak and then strictly decreasing. Your task is to find the index of the peak element in the mountain array.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -269,95 +259,35 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve the problem efficiently, we can apply a <strong>binary search</strong> strategy. Since the array is guaranteed to form a mountain, we can exploit the structure to perform a <strong>logarithmic</strong> search. The peak element must satisfy the condition that it is greater than its neighbors. We can use the binary search to efficiently find this peak.</p>
 <ol>
 <li>
-<p><strong>Binary Search Approach</strong>:</p>
+<p><strong>Binary Search</strong>:</p>
 <ul>
-<li>The basic idea is to divide the array into two parts and compare the middle element with its neighbors.</li>
-<li>If the middle element is greater than its neighbors, we have found the peak.</li>
-<li>If the middle element is less than its right neighbor, the peak lies to the right of the middle, so we move the left pointer (<code>l</code>) to <code>mid + 1</code>.</li>
-<li>If the middle element is less than its left neighbor, the peak lies to the left of the middle, so we move the right pointer (<code>r</code>) to <code>mid - 1</code>.</li>
+<li>Since the mountain array has a unique peak, we can efficiently find the peak using a binary search approach.</li>
+<li>Initialize two pointers: <code>l</code> (left) starting at index 1 and <code>r</code> (right) starting at <code>n - 2</code>, where <code>n</code> is the size of the array. This avoids the boundaries, ensuring we can always access <code>arr[mid - 1]</code> and <code>arr[mid + 1]</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Edge Case</strong>:</p>
+<p><strong>Midpoint Evaluation</strong>:</p>
 <ul>
-<li>Since the array is guaranteed to have at least one peak (due to the problem constraints), we don&rsquo;t need to worry about edge cases like arrays of length 2 or non-mountain arrays.</li>
+<li>Calculate the middle index <code>mid</code> using the formula <code>l + (r - l + 1) / 2</code>. The addition of 1 ensures that we favor the upper half in case of a tie.</li>
+<li>Check if <code>arr[mid]</code> is greater than both <code>arr[mid - 1]</code> and <code>arr[mid + 1]</code>. If it is, we have found the peak, so return <code>mid</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Adjust Search Range</strong>:</p>
+<ul>
+<li>If <code>arr[mid]</code> is greater than <code>arr[mid + 1]</code>, it means we are in the descending part of the array. Update <code>r</code> to <code>mid - 1</code> to search the left side.</li>
+<li>If <code>arr[mid]</code> is greater than <code>arr[mid - 1]</code>, it means we are in the ascending part. Update <code>l</code> to <code>mid + 1</code> to search the right side.</li>
+</ul>
+</li>
+<li>
+<p><strong>Continue Until Found</strong>:</p>
+<ul>
+<li>Repeat the process until the peak is found. The search space will narrow down to the peak.</li>
 </ul>
 </li>
 </ol>
-<p>This approach will run in <strong>O(log n)</strong> time, where <code>n</code> is the length of the array, making it optimal for large arrays.</p>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="step-1-initialize-pointers">
-  Step 1: Initialize pointers
-  <a class="heading-link" href="#step-1-initialize-pointers">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">1</span>, r <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">2</span>;
-</span></span></code></pre></div><ul>
-<li>We initialize two pointers, <code>l</code> (left) and <code>r</code> (right), to point to the elements just next to the first and last elements of the array. We exclude the first and last elements since the peak must be somewhere between these two points.</li>
-</ul>
-<h4 id="step-2-binary-search-loop">
-  Step 2: Binary Search Loop
-  <a class="heading-link" href="#step-2-binary-search-loop">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span> (l <span style="color:#666">&lt;=</span> r) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>;
-</span></span></code></pre></div><ul>
-<li>We start a <code>while</code> loop where <code>l</code> is less than or equal to <code>r</code>. In each iteration, we calculate the middle index <code>mid</code> of the current search range. We use the formula <code>l + (r - l + 1) / 2</code> to avoid overflow and ensure that the search space is balanced.</li>
-</ul>
-<h4 id="step-3-peak-condition">
-  Step 3: Peak Condition
-  <a class="heading-link" href="#step-3-peak-condition">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (arr[mid] <span style="color:#666">&gt;</span> arr[mid <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">&amp;&amp;</span> arr[mid] <span style="color:#666">&gt;</span> arr[mid <span style="color:#666">-</span> <span style="color:#666">1</span>]) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mid;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>We check if the current middle element (<code>arr[mid]</code>) is greater than both its left neighbor (<code>arr[mid - 1]</code>) and right neighbor (<code>arr[mid + 1]</code>). If this condition holds, then we have found the peak, and we return the index <code>mid</code>.</li>
-</ul>
-<h4 id="step-4-adjust-search-range">
-  Step 4: Adjust Search Range
-  <a class="heading-link" href="#step-4-adjust-search-range">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (arr[mid] <span style="color:#666">&gt;</span> arr[mid <span style="color:#666">+</span> <span style="color:#666">1</span>]) {
-</span></span><span style="display:flex;"><span>    r <span style="color:#666">=</span> mid <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>} <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> (arr[mid] <span style="color:#666">&gt;</span> arr[mid <span style="color:#666">-</span> <span style="color:#666">1</span>]) {
-</span></span><span style="display:flex;"><span>    l <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>If the middle element is greater than its right neighbor (<code>arr[mid] &gt; arr[mid + 1]</code>), it means the peak lies to the left of <code>mid</code>, so we adjust the right pointer (<code>r = mid - 1</code>) to narrow the search to the left half.</li>
-<li>If the middle element is greater than its left neighbor (<code>arr[mid] &gt; arr[mid - 1]</code>), it means the peak lies to the right of <code>mid</code>, so we adjust the left pointer (<code>l = mid + 1</code>) to narrow the search to the right half.</li>
-</ul>
-<h4 id="step-5-return-the-result">
-  Step 5: Return the Result
-  <a class="heading-link" href="#step-5-return-the-result">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div><ul>
-<li>After the binary search loop completes, if no peak is found (though the problem guarantees that one will exist), we return <code>0</code>. In this case, returning <code>0</code> is more of a fallback, though the loop ensures that we find a peak.</li>
-</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -365,46 +295,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li>The time complexity is <strong>O(log n)</strong> because we reduce the search range by half with each iteration of the binary search. This makes it very efficient, especially for large arrays.</li>
+<li><strong>Time Complexity</strong>: O(log N), where N is the number of elements in the array due to the binary search.</li>
+<li><strong>Space Complexity</strong>: O(1), as no additional space proportional to input size is used.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>The space complexity is <strong>O(1)</strong> because we are only using a constant amount of extra space to store the pointers <code>l</code>, <code>r</code>, and <code>mid</code>. The algorithm does not use any additional data structures that scale with the input size.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution leverages a binary search approach to efficiently find the peak element in a mountain array. By continually halving the search space, we ensure that the algorithm runs in <strong>O(log n)</strong> time, which is optimal for large input sizes. The simplicity and efficiency of the binary search make this solution ideal for this problem.</p>
-<p>Key takeaways:</p>
-<ul>
-<li>The problem guarantees the presence of a peak, making binary search a natural choice.</li>
-<li>The use of binary search ensures that we can find the peak in logarithmic time, making the solution scalable for large inputs.</li>
-<li>The solution only requires constant space, making it space-efficient.</li>
-</ul>
-<p>This method is a perfect example of how to leverage the structure of a problem (in this case, the &ldquo;mountain&rdquo; property) to design an optimal solution.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1360s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1363s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

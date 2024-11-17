@@ -146,7 +146,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              4-minute read
+              2-minute read
             </span>
           </div>
 
@@ -211,8 +211,26 @@
 
       <div class="post-content">
         
-        <p><a href="https://leetcode.com/problems/card-flipping-game/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
-<hr>
+        <h2 id="hahahugoshortcode1344s0hbhb">
+  <a href="https://leetcode.com/problems/card-flipping-game/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
+<figure class="remote-image" style="text-align:center; margin: 0;">
+    <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/822.webp" 
+           alt="A set of cards being flipped, with the correct card glowing softly as it&#39;s flipped over." 
+           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    
+      <figcaption style="font-size: 0.8em; font-weight: 300; color:#555; margin-top: 4px; line-height: 1.2;">
+        Solution to LeetCode 822: Card Flipping Game Problem
+      </figcaption>
+    
+  </figure>
+  
+  <a class="heading-link" href="#hahahugoshortcode1344s0hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <p><strong>Code:</strong></p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
 </span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
@@ -225,7 +243,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res <span style="color:#666">%</span> <span style="color:#666">3000</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1341s1hbhb">
+<h2 id="hahahugoshortcode1344s2hbhb">
   
 
   
@@ -237,7 +255,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem is to determine the smallest number that can appear on a card after flipping any card, given two lists of integers, <code>fronts</code> and <code>backs</code>. Each card has a front and a back side, with the values in <code>fronts</code> and <code>backs</code> representing the numbers on each side of the cards. The task is to flip the cards in such a way that the smallest possible number that is not on both sides of the same card appears. If no such number exists (i.e., all the numbers appear on both the front and back of at least one card), return <code>0</code>.</p>
+<p>You are given two arrays, <code>fronts</code> and <code>backs</code>, representing the numbers on the front and back sides of some cards. Your task is to find the minimum number that is not present on both sides of the same card.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -245,81 +263,40 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve the problem efficiently, the following approach is used:</p>
 <ol>
 <li>
-<p><strong>Identify Matching Numbers</strong>:</p>
+<p><strong>Identify Same Numbers</strong>:</p>
 <ul>
-<li>We start by identifying all the numbers that appear on both the front and back of the same card. These numbers are redundant in terms of flipping because flipping such a card does not change its outcome.</li>
-<li>These redundant numbers are stored in an unordered set called <code>same</code>.</li>
+<li>Use an unordered set to collect numbers that appear on both the front and back of the same card. This helps us quickly identify numbers we cannot choose.</li>
 </ul>
 </li>
 <li>
-<p><strong>Find the Smallest Number Not in <code>same</code></strong>:</p>
+<p><strong>Find Minimum Valid Number</strong>:</p>
 <ul>
-<li>Next, we iterate through both the <code>fronts</code> and <code>backs</code> lists to find the smallest number that is not in the <code>same</code> set. This is done by checking if a number exists in <code>same</code>. If it doesn&rsquo;t, the number is a valid candidate for the result.</li>
+<li>Initialize a variable <code>res</code> with a value larger than any possible card number (e.g., 3000).</li>
+<li>Iterate over the <code>fronts</code> array and update <code>res</code> with the minimum number found that is not in the <code>same</code> set.</li>
+<li>Repeat the same process for the <code>backs</code> array.</li>
 </ul>
 </li>
 <li>
-<p><strong>Return the Result</strong>:</p>
+<p><strong>Return Result</strong>:</p>
 <ul>
-<li>The final result is the smallest such number. If no valid number is found, it means that all numbers appear on both sides of at least one card, and we return <code>0</code>.</li>
+<li>Finally, return <code>res % 3000</code>, which ensures that if no valid number was found, it returns a value consistent with the problem constraints.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Identify Matching Numbers</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> same;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> fronts.size(); i<span style="color:#666">++</span>) 
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(fronts[i] <span style="color:#666">==</span> backs[i]) 
-</span></span><span style="display:flex;"><span>        same.insert(fronts[i]);
-</span></span></code></pre></div><ul>
-<li>This block initializes an unordered set <code>same</code> that will store all the numbers that appear on both the front and back of the same card.</li>
-<li>The <code>for</code> loop iterates through each index <code>i</code> of the <code>fronts</code> and <code>backs</code> lists. If the number at <code>fronts[i]</code> is equal to the number at <code>backs[i]</code>, it means that card has the same number on both sides. This number is then inserted into the <code>same</code> set.</li>
+<ul>
+<li>The <code>flipgame</code> function starts by filling the <code>same</code> set with numbers that appear on both sides of any card.</li>
+<li>Then, it searches for the minimum number not present in the <code>same</code> set from both the <code>fronts</code> and <code>backs</code> arrays.</li>
+<li>The result is returned, ensuring to handle cases where no valid number exists.</li>
 </ul>
-</li>
-<li>
-<p><strong>Initialize the Result</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">3000</span>;
-</span></span></code></pre></div><ul>
-<li>This line initializes <code>res</code> to a large value (3000 in this case, which is guaranteed to be larger than any number on the cards) to represent the smallest possible result. It will be updated as we find smaller valid numbers.</li>
-</ul>
-</li>
-<li>
-<p><strong>Find the Smallest Valid Number on the Fronts</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">num</span>: fronts) 
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>same.count(num)) 
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> min(res, num);
-</span></span></code></pre></div><ul>
-<li>The first <code>for</code> loop iterates over each number in the <code>fronts</code> list. For each number, it checks if it is <strong>not</strong> in the <code>same</code> set. If the number is not in <code>same</code>, it is a valid candidate for the smallest number that can be shown on the card after flipping.</li>
-<li>The result <code>res</code> is updated to be the minimum of <code>res</code> and the current number <code>num</code>, ensuring that <code>res</code> holds the smallest valid number found so far.</li>
-</ul>
-</li>
-<li>
-<p><strong>Find the Smallest Valid Number on the Backs</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">num</span>: backs)  
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>same.count(num)) 
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> min(res, num);
-</span></span></code></pre></div><ul>
-<li>The second <code>for</code> loop does the same for the <code>backs</code> list. It checks each number in <code>backs</code> and updates <code>res</code> if the number is not found in <code>same</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return the Result</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res <span style="color:#666">%</span> <span style="color:#666">3000</span>;
-</span></span></code></pre></div><ul>
-<li>The result <code>res</code> is returned after taking it modulo 3000. This step ensures that if no valid number was found (i.e., <code>res</code> remains 3000), the function will return 0, indicating that no valid number can be flipped to appear.</li>
-</ul>
-</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -328,33 +305,15 @@
   </a>
 </h3>
 <ul>
-<li>
-<p><strong>Time Complexity</strong>:</p>
-<ul>
-<li>The time complexity of this solution is O(n), where <code>n</code> is the number of cards.</li>
-<li>The main time-consuming operations are iterating through the <code>fronts</code> and <code>backs</code> lists, which takes O(n) time. The insertion and lookup operations in the unordered set <code>same</code> take O(1) on average, so the overall complexity remains O(n).</li>
+<li><strong>Time Complexity</strong>: O(N), where N is the number of cards. Each card is processed once to check and collect the valid numbers.</li>
+<li><strong>Space Complexity</strong>: O(N), for storing numbers in the <code>same</code> set.</li>
 </ul>
-</li>
-<li>
-<p><strong>Space Complexity</strong>:</p>
-<ul>
-<li>The space complexity is O(n), where <code>n</code> is the number of cards. This is because we use an unordered set to store at most <code>n</code> elements (the numbers that appear on both sides of the same card).</li>
-</ul>
-</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution efficiently solves the problem by using an unordered set to store redundant numbers that appear on both sides of the same card. By identifying and excluding these redundant numbers, the algorithm calculates the smallest number that can appear on the cards after flipping. The approach works in O(n) time and O(n) space, making it well-suited for handling large inputs efficiently. This method ensures that the smallest valid number is selected while minimizing unnecessary computations.</p>
+<p>This approach efficiently finds the minimum valid number that can be chosen from the cards.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1341s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1344s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

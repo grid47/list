@@ -150,7 +150,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -226,7 +226,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              7-minute read
+              3-minute read
             </span>
           </div>
 
@@ -235,7 +235,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1156s0hbhb">
+        <h2 id="hahahugoshortcode1157s0hbhb">
   <a href="https://leetcode.com/problems/serialize-and-deserialize-bst/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -250,7 +250,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1156s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1157s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -312,7 +312,7 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">// TreeNode* ans = deser-&gt;deserialize(tree);
 </span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">// return ans;
 </span></span></span></code></pre></div>
-<h2 id="hahahugoshortcode1156s2hbhb">
+<h2 id="hahahugoshortcode1157s2hbhb">
   
 
   
@@ -324,17 +324,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>In this problem, you are tasked with implementing a codec for a binary search tree (BST). Specifically, you need to:</p>
-<ol>
-<li><strong>Serialize a binary search tree</strong> into a string, such that the tree structure and its values are preserved in a way that can be stored or transmitted.</li>
-<li><strong>Deserialize the string back into a binary search tree</strong> so that the original structure and values are reconstructed correctly.</li>
-</ol>
-<p>A <strong>binary search tree (BST)</strong> is a binary tree where for every node, all the values in the left subtree are smaller, and all the values in the right subtree are larger. This property makes it easier to perform certain operations like searching and inserting nodes.</p>
-<p>The goal of this problem is to create efficient methods to:</p>
-<ul>
-<li>Convert a tree to a string format (<code>serialize</code> method).</li>
-<li>Convert the string back to the original tree structure (<code>deserialize</code> method).</li>
-</ul>
+<p>Design a codec for serializing and deserializing a binary tree. Serialization is the process of converting a tree into a string, and deserialization is the process of converting that string back into the tree structure.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -342,111 +332,52 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem, we need to take two major steps:</p>
 <ol>
 <li>
-<p><strong>Serialization (Tree to String)</strong>:</p>
+<p><strong>Serialization</strong>:</p>
 <ul>
-<li>We will traverse the tree using <strong>pre-order traversal</strong> (root, left, right) and store the node values in a string. The idea is to serialize the tree structure into a flat string that retains the values and their relationships.</li>
-<li>During serialization, we need to ensure that we capture the values in a fixed format. The values are stored using their raw byte representation (as integers).</li>
+<li>Use a pre-order traversal (root-left-right) to serialize the tree.</li>
+<li>Store the integer values of the nodes in a string by converting them to a byte representation.</li>
 </ul>
 </li>
 <li>
-<p><strong>Deserialization (String to Tree)</strong>:</p>
+<p><strong>Deserialization</strong>:</p>
 <ul>
-<li>The serialized string contains the values of the tree nodes in a sequence, so we need to process this string in a way that re-constructs the tree.</li>
-<li>As we deserialize, we need to maintain the correct bounds for each node’s value. This can be done by passing the <code>left</code> and <code>right</code> bounds for each node during the recursive calls. The bounds will ensure that the left child is smaller than the node value, and the right child is larger.</li>
-<li>The recursive function will build the tree by checking if the current value falls within the valid bounds.</li>
+<li>Reconstruct the tree from the serialized string using a recursive approach.</li>
+<li>Use a position index to keep track of where to read in the serialized string.</li>
+<li>Ensure that the values fall within the valid range for binary search trees (BST) to maintain the correct structure.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="1-serialize-method">
-  1. <strong>Serialize Method</strong>
-  <a class="heading-link" href="#1-serialize-method">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">serialize</span>(TreeNode<span style="color:#666">*</span> root) {
-</span></span><span style="display:flex;"><span>    string str;
-</span></span><span style="display:flex;"><span>    serial(str, root);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> str;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>The <code>serialize</code> method initializes an empty string <code>str</code> and calls the helper function <code>serial</code> to populate the string with the tree’s node values.</li>
-<li>The function <code>serial</code> is a <strong>recursive function</strong> that traverses the tree and appends the values of nodes in a pre-order fashion. It ensures that the tree is properly serialized in the string.</li>
+<ol>
+<li>
+<p><strong>Serialize Function</strong>:</p>
+<ul>
+<li>The <code>serialize</code> method initializes an empty string and calls the helper function <code>serial</code> to populate it.</li>
+<li>The <code>serial</code> function checks if the current node is null; if not, it copies the integer value into a character array and appends it to the string. It then recursively serializes the left and right children.</li>
 </ul>
-<h4 id="2-helper-method-for-serialization-serial">
-  2. <strong>Helper Method for Serialization: <code>serial</code></strong>
-  <a class="heading-link" href="#2-helper-method-for-serialization-serial">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">serial</span>(string<span style="color:#666">&amp;</span> ss, TreeNode<span style="color:#666">*</span> root) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>root) <span style="color:#a2f;font-weight:bold">return</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">char</span> c[<span style="color:#666">4</span>];
-</span></span><span style="display:flex;"><span>    memcpy(c, <span style="color:#666">&amp;</span>(root<span style="color:#666">-&gt;</span>val), <span style="color:#a2f;font-weight:bold">sizeof</span>(<span style="color:#0b0;font-weight:bold">int</span>));
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">4</span>; i<span style="color:#666">++</span>) ss.push_back(c[i]);
-</span></span><span style="display:flex;"><span>    serial(ss, root<span style="color:#666">-&gt;</span>left );
-</span></span><span style="display:flex;"><span>    serial(ss, root<span style="color:#666">-&gt;</span>right);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>The <code>serial</code> method handles the actual tree traversal and string construction.</li>
-<li>If the <code>root</code> is <code>NULL</code>, it returns immediately (base case).</li>
-<li>For non-null nodes, the function serializes the node’s value into a byte array (<code>c[4]</code>) using <code>memcpy</code>. It then appends these bytes to the <code>ss</code> string. Each node&rsquo;s value is stored as 4 bytes (since an integer is typically 4 bytes).</li>
-<li>After appending the node&rsquo;s value, the function recursively calls itself to serialize the left and right children of the current node.</li>
+</li>
+<li>
+<p><strong>Deserialize Function</strong>:</p>
+<ul>
+<li>The <code>deserialize</code> method initializes the position index and calls the helper function <code>deserial</code>.</li>
+<li>The <code>deserial</code> function reads the integer value from the string and checks if it is within the valid range. If it is, a new node is created, and the function recursively constructs the left and right subtrees.</li>
 </ul>
-<h4 id="3-deserialize-method">
-  3. <strong>Deserialize Method</strong>
-  <a class="heading-link" href="#3-deserialize-method">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> <span style="color:#00a000">deserialize</span>(string data) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> pos <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> deserial(data, pos, INT_MIN, INT_MAX);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>The <code>deserialize</code> method initializes a position <code>pos</code> and calls the recursive helper method <code>deserial</code> to reconstruct the tree. The bounds (<code>INT_MIN</code> and <code>INT_MAX</code>) are initially passed to ensure that the root value is within the valid range.</li>
+</li>
+<li>
+<p><strong>Memory Management</strong>:</p>
+<ul>
+<li>The nodes are dynamically allocated using <code>new</code>, and proper memory management practices should be followed to prevent memory leaks.</li>
 </ul>
-<h4 id="4-helper-method-for-deserialization-deserial">
-  4. <strong>Helper Method for Deserialization: <code>deserial</code></strong>
-  <a class="heading-link" href="#4-helper-method-for-deserialization-deserial">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>TreeNode<span style="color:#666">*</span> <span style="color:#00a000">deserial</span>(string<span style="color:#666">&amp;</span> data, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&amp;</span> pos, <span style="color:#0b0;font-weight:bold">int</span> left, <span style="color:#0b0;font-weight:bold">int</span> right) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (pos <span style="color:#666">&gt;=</span> data.size()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">NULL</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> val;
-</span></span><span style="display:flex;"><span>    memcpy(<span style="color:#666">&amp;</span>val, <span style="color:#666">&amp;</span>(data[pos]), <span style="color:#a2f;font-weight:bold">sizeof</span>(<span style="color:#0b0;font-weight:bold">int</span>));
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (val <span style="color:#666">&lt;</span> left <span style="color:#666">||</span> val <span style="color:#666">&gt;</span> right) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">NULL</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    TreeNode<span style="color:#666">*</span> root <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TreeNode(val);
-</span></span><span style="display:flex;"><span>    pos <span style="color:#666">+=</span> <span style="color:#a2f;font-weight:bold">sizeof</span>(<span style="color:#0b0;font-weight:bold">int</span>);
-</span></span><span style="display:flex;"><span>    root<span style="color:#666">-&gt;</span>left  <span style="color:#666">=</span> deserial ( data, pos, left,   val );
-</span></span><span style="display:flex;"><span>    root<span style="color:#666">-&gt;</span>right <span style="color:#666">=</span> deserial ( data, pos,  val, right );
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> root;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>The <code>deserial</code> method processes the string <code>data</code> to reconstruct the tree recursively.</li>
-<li>We start by checking if we have reached the end of the string (<code>pos &gt;= data.size()</code>). If so, it means there are no more nodes to process.</li>
-<li>Using <code>memcpy</code>, we extract a 4-byte integer value (<code>val</code>) from the string starting at the current position (<code>pos</code>).</li>
-<li>If the value of the node is outside the allowed bounds (<code>left</code> and <code>right</code>), we return <code>NULL</code> (invalid subtree).</li>
-<li>A new <code>TreeNode</code> is created with the extracted value.</li>
-<li>We increment the position pointer <code>pos</code> and recursively call the <code>deserial</code> method to reconstruct the left and right subtrees. The bounds for the left and right children are updated based on the node value (<code>left, val</code> for the left subtree and <code>val, right</code> for the right subtree).</li>
-<li>Finally, the root of the current subtree is returned.</li>
-</ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -454,42 +385,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>Serialization</strong>: The <code>serialize</code> function performs a pre-order traversal of the tree. In the worst case, every node in the tree is visited once. Therefore, the time complexity of serialization is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the tree.</li>
-<li><strong>Deserialization</strong>: The <code>deserialize</code> function processes the entire string once, with each recursive call corresponding to a node in the tree. The time complexity of deserialization is also <strong>O(n)</strong>, where <code>n</code> is the number of nodes.</li>
+<li><strong>Time Complexity</strong>: O(n), where <code>n</code> is the number of nodes in the tree, as each node is processed once during serialization and deserialization.</li>
+<li><strong>Space Complexity</strong>: O(n), for storing the serialized string and the recursion stack used during deserialization.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>Serialization</strong>: The space complexity is <strong>O(n)</strong> due to the string used to store the serialized data.</li>
-<li><strong>Deserialization</strong>: The space complexity is <strong>O(n)</strong> for the recursion stack during the tree reconstruction process.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The <strong>Codec</strong> class efficiently handles the serialization and deserialization of a binary search tree (BST). The key idea behind the implementation is to use <strong>pre-order traversal</strong> to serialize the tree, storing node values as byte arrays, and to recursively reconstruct the tree by maintaining the correct bounds for each node during deserialization.</p>
-<p>This solution leverages efficient memory management with <code>memcpy</code> to store and extract integer values, ensuring that the tree can be serialized and deserialized in linear time with respect to the number of nodes. The space complexity is kept minimal, and the approach ensures that both operations (serialization and deserialization) are performed efficiently, making it suitable for use in practical scenarios where BSTs need to be stored or transmitted.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1156s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1157s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

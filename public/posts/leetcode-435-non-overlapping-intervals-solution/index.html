@@ -148,7 +148,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -221,7 +221,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1152s0hbhb">
+        <h2 id="hahahugoshortcode1154s0hbhb">
   <a href="https://leetcode.com/problems/non-overlapping-intervals/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -236,7 +236,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1152s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1154s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -263,7 +263,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1152s2hbhb">
+<h2 id="hahahugoshortcode1154s2hbhb">
   
 
   
@@ -275,7 +275,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem at hand requires us to remove the minimum number of intervals such that no intervals overlap. Given a collection of intervals where each interval is represented by a pair of integers [start, end], our goal is to find the minimum number of intervals to remove to ensure that no two intervals overlap. The intervals are provided as a 2D array, where each subarray contains the start and end time of an interval.</p>
+<p>Given a collection of intervals, determine the minimum number of intervals you need to remove to make the rest of the intervals non-overlapping.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -283,111 +283,60 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem efficiently, we can utilize a greedy algorithm approach. The idea is to always prioritize the intervals that end the earliest. By removing the intervals that overlap with others, we ensure that the remaining intervals are as non-overlapping as possible.</p>
-<h4 id="key-observations">
-  Key Observations:
-  <a class="heading-link" href="#key-observations">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ol>
-<li><strong>Sorting by End Time</strong>: By sorting the intervals based on their end times, we are effectively selecting intervals that leave as much space as possible for subsequent intervals. This helps us minimize the number of removals.</li>
-<li><strong>Greedy Strategy</strong>: Once sorted, we can iterate through the intervals and check if the current interval overlaps with the previously selected interval. If there is an overlap, we increment the count of intervals to remove. If there’s no overlap, we update the previous interval to the current one.</li>
+<li>
+<p><strong>Sorting</strong>:</p>
+<ul>
+<li>Start by sorting the intervals based on their start times. This helps in easily identifying overlapping intervals.</li>
+</ul>
+</li>
+<li>
+<p><strong>Two Pointers Technique</strong>:</p>
+<ul>
+<li>Use two pointers: <code>prv</code> to track the last non-overlapping interval and <code>cur</code> to explore the current interval.</li>
+<li>Initialize <code>prv</code> to the first interval and iterate through the rest.</li>
+</ul>
+</li>
+<li>
+<p><strong>Check for Overlaps</strong>:</p>
+<ul>
+<li>For each interval, check if it overlaps with the last non-overlapping interval:
+<ul>
+<li>If it overlaps (i.e., the start of the current interval is less than the end of the last non-overlapping interval), increment the count of removed intervals (<code>ans</code>).</li>
+<li>If the current interval ends before or at the same time as the last one, update <code>prv</code> to the current interval, which means the current interval is retained.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>The final count of removed intervals is returned.</li>
+</ul>
+</li>
 </ol>
-<h4 id="steps">
-  Steps:
-  <a class="heading-link" href="#steps">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ol>
-<li><strong>Sort the intervals</strong>: Sort the intervals by their end time.</li>
-<li><strong>Iterate through the sorted intervals</strong>: Start from the second interval and compare it with the first one.</li>
-<li><strong>Check for overlap</strong>: If the start time of the current interval is less than the end time of the previous interval, there’s an overlap. Increment the removal counter.</li>
-<li><strong>Update the <code>prv</code> index</strong>: If the current interval ends earlier than the previous interval, update the <code>prv</code> index to point to the current interval.</li>
-</ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="step-1-sorting-the-intervals">
-  Step 1: Sorting the Intervals
-  <a class="heading-link" href="#step-1-sorting-the-intervals">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(ivl.begin(), ivl.end());
-</span></span></code></pre></div><ul>
-<li>We begin by sorting the intervals in increasing order of their end times. This helps in choosing the interval that finishes the earliest, ensuring that we leave room for as many intervals as possible.</li>
-<li>The sorting step is crucial to the greedy strategy, allowing us to compare each interval with the one that finishes before it.</li>
-</ul>
-<h4 id="step-2-initializing-variables">
-  Step 2: Initializing Variables
-  <a class="heading-link" href="#step-2-initializing-variables">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> ivl.size();
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> prv <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div><ul>
-<li><code>ans</code> keeps track of the number of intervals we need to remove.</li>
-<li><code>n</code> is the total number of intervals.</li>
-<li><code>prv</code> is the index of the previously selected interval. We initialize it to 0, assuming that we start with the first interval in the sorted list.</li>
-</ul>
-<h4 id="step-3-iterating-over-the-intervals">
-  Step 3: Iterating Over the Intervals
-  <a class="heading-link" href="#step-3-iterating-over-the-intervals">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> <span style="color:#666">1</span>; cur <span style="color:#666">&lt;</span> n; cur<span style="color:#666">++</span>) {
-</span></span></code></pre></div><ul>
-<li>We begin iterating from the second interval (<code>cur = 1</code>), as the first interval is always considered as selected initially.</li>
-</ul>
-<h4 id="step-4-checking-for-overlap">
-  Step 4: Checking for Overlap
-  <a class="heading-link" href="#step-4-checking-for-overlap">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(ivl[cur][<span style="color:#666">0</span>] <span style="color:#666">&lt;</span> ivl[prv][<span style="color:#666">1</span>]) {
-</span></span><span style="display:flex;"><span>    ans<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(ivl[cur][<span style="color:#666">1</span>] <span style="color:#666">&lt;=</span> ivl[prv][<span style="color:#666">1</span>])
-</span></span><span style="display:flex;"><span>        prv <span style="color:#666">=</span> cur;
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>    prv <span style="color:#666">=</span> cur;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>If the start time of the current interval (<code>ivl[cur][0]</code>) is less than the end time of the previous interval (<code>ivl[prv][1]</code>), it means the intervals overlap. In this case:
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
 <ul>
-<li>We increment the <code>ans</code> variable, indicating that one interval needs to be removed to avoid the overlap.</li>
-<li>If the current interval ends earlier than or at the same time as the previous interval, we update the <code>prv</code> index to the current interval (<code>cur</code>). This ensures that the previous interval is replaced by the one that ends earlier, allowing more room for future intervals.</li>
+<li>Sort the intervals based on the first element (start time).</li>
 </ul>
 </li>
-<li>If there is no overlap (i.e., the start time of the current interval is greater than or equal to the end time of the previous interval), we update the <code>prv</code> index to point to the current interval.</li>
+<li>
+<p><strong>Iterate and Check</strong>:</p>
+<ul>
+<li>Start from the second interval, comparing it with the last non-overlapping interval tracked by <code>prv</code>.</li>
+<li>Update the count of removed intervals and the <code>prv</code> pointer based on the overlap conditions.</li>
 </ul>
-<h4 id="step-5-return-the-result">
-  Step 5: Return the Result
-  <a class="heading-link" href="#step-5-return-the-result">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span></code></pre></div><ul>
-<li>After processing all intervals, we return the <code>ans</code> variable, which contains the minimum number of intervals to remove to make the rest non-overlapping.</li>
-</ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -395,42 +344,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>Sorting</strong>: The time complexity of sorting the intervals is <code>O(n log n)</code>, where <code>n</code> is the number of intervals.</li>
-<li><strong>Iterating Through Intervals</strong>: The iteration through the intervals takes <code>O(n)</code>.</li>
-<li>Therefore, the overall time complexity of the solution is dominated by the sorting step, which is <code>O(n log n)</code>.</li>
+<li><strong>Time Complexity</strong>: O(N log N) due to sorting, where N is the number of intervals.</li>
+<li><strong>Space Complexity</strong>: O(1) for the in-place sorting and pointer tracking.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>The algorithm uses <code>O(1)</code> extra space, as we only store a few variables (<code>ans</code>, <code>n</code>, <code>prv</code>), and the input intervals are modified in-place.</li>
-<li>Therefore, the space complexity is <code>O(1)</code>.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This problem is a classic example of a greedy algorithm. By sorting the intervals based on their end times, we ensure that we are selecting the maximum number of non-overlapping intervals. This approach is optimal, with a time complexity of <code>O(n log n)</code> due to the sorting step, and a space complexity of <code>O(1)</code> because we use only a constant amount of extra space. The solution is efficient and suitable for large inputs, making it a great fit for interval scheduling problems.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1152s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1154s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

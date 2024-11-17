@@ -148,7 +148,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              7-minute read
+              3-minute read
             </span>
           </div>
 
@@ -221,8 +221,26 @@
 
       <div class="post-content">
         
-        <p><a href="https://leetcode.com/problems/replace-words/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
-<hr>
+        <h2 id="hahahugoshortcode1249s0hbhb">
+  <a href="https://leetcode.com/problems/replace-words/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
+<figure class="remote-image" style="text-align:center; margin: 0;">
+    <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/648.webp" 
+           alt="A string where words are replaced with their corresponding replacements, glowing softly as replacements are made." 
+           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    
+      <figcaption style="font-size: 0.8em; font-weight: 300; color:#555; margin-top: 4px; line-height: 1.2;">
+        Solution to LeetCode 648: Replace Words Problem
+      </figcaption>
+    
+  </figure>
+  
+  <a class="heading-link" href="#hahahugoshortcode1249s0hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <p><strong>Code:</strong></p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">TrieNode</span> {
 </span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
@@ -278,7 +296,7 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1249s1hbhb">
+<h2 id="hahahugoshortcode1249s2hbhb">
   
 
   
@@ -290,7 +308,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem asks us to replace words in a given sentence with the shortest possible prefix from a dictionary. For each word in the sentence, if a prefix exists in the dictionary, we should replace the word with this prefix. If no prefix is found in the dictionary, we leave the word as is.</p>
+<p>You are given a dictionary of words and a sentence. The goal is to replace every word in the sentence with the root word from the dictionary that can replace it. If no root word can replace a word in the sentence, the original word should remain unchanged.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -298,139 +316,75 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>We will approach this problem by using a <strong>Trie</strong> (prefix tree) data structure, which is well-suited for problems involving prefix matching. A Trie allows efficient insertion and search operations, making it a perfect fit for this problem where we need to check whether a prefix exists for each word in the sentence.</p>
-<p>Here&rsquo;s the step-by-step breakdown of the approach:</p>
 <ol>
 <li>
 <p><strong>Trie Data Structure</strong>:</p>
 <ul>
-<li>A Trie is a tree-like data structure where each node represents a character of a word. The nodes are connected to form a prefix of the words stored in the Trie.</li>
-<li>For this problem, we need a <strong>TrieNode</strong> class that holds an array of pointers (<code>child[26]</code>) representing the 26 lowercase English characters, and a boolean <code>isEnd</code> to mark if a node represents the end of a word.</li>
+<li>Use a Trie (prefix tree) to efficiently store and search for root words.</li>
+<li>Each node in the Trie represents a character, and nodes are linked to represent words.</li>
 </ul>
 </li>
 <li>
-<p><strong>Inserting Words into the Trie</strong>:</p>
+<p><strong>Insertion into Trie</strong>:</p>
 <ul>
-<li>For each word in the dictionary, we insert it into the Trie character by character. If a character is not already present in the Trie, we create a new node for it. Once we reach the end of the word, we mark that node as an end of a word (<code>isEnd = true</code>).</li>
+<li>Create a method to insert words from the dictionary into the Trie. Each character of a word corresponds to a path in the Trie.</li>
+<li>Mark the end of a word in the Trie using a boolean flag.</li>
 </ul>
 </li>
 <li>
-<p><strong>Checking for Prefix in Trie</strong>:</p>
+<p><strong>Word Replacement</strong>:</p>
 <ul>
-<li>For each word in the sentence, we check if a prefix of the word exists in the Trie. Starting from the root of the Trie, we attempt to traverse the characters of the word. If at any point we encounter a character that doesn&rsquo;t exist in the Trie, we stop and return the original word.</li>
-<li>If we find a prefix that exists in the Trie (i.e., we reach a node where <code>isEnd = true</code>), we return that prefix as the replacement for the word.</li>
+<li>For each word in the sentence, traverse the Trie to find the longest prefix that matches the word.</li>
+<li>If a matching prefix is found (which indicates a root word), replace the word with this prefix; otherwise, keep the original word.</li>
 </ul>
 </li>
 <li>
-<p><strong>Building the Final Sentence</strong>:</p>
+<p><strong>Sentence Construction</strong>:</p>
 <ul>
-<li>After checking each word, we build the final sentence by replacing each word with the corresponding prefix (or the original word if no prefix is found).</li>
+<li>Use a string stream to read the sentence word by word, replacing each word as necessary, and construct the final modified sentence.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Let&rsquo;s break down the code into its key components:</p>
-<h4 id="1-trienode-class">
-  1. <strong>TrieNode Class</strong>:
-  <a class="heading-link" href="#1-trienode-class">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">TrieNode</span> {
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span>    TrieNode<span style="color:#666">*</span> child[<span style="color:#666">26</span>];
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> isEnd;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    TrieNode() {
-</span></span><span style="display:flex;"><span>        isEnd <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>            child[i] <span style="color:#666">=</span> <span style="color:#a2f">NULL</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><ul>
-<li>The <code>TrieNode</code> class represents a single node in the Trie.</li>
-<li><code>child[26]</code> is an array of pointers to other TrieNodes. Each index in the array represents a character from &lsquo;a&rsquo; to &lsquo;z&rsquo;.</li>
-<li><code>isEnd</code> is a boolean that indicates whether the current node marks the end of a valid word.</li>
+<ol>
+<li>
+<p><strong>TrieNode Class</strong>:</p>
+<ul>
+<li>This class represents each node in the Trie, containing an array of child nodes and a boolean indicating the end of a word.</li>
 </ul>
-<h4 id="2-insert-function">
-  2. <strong>Insert Function</strong>:
-  <a class="heading-link" href="#2-insert-function">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">insert</span>(string w) {
-</span></span><span style="display:flex;"><span>    TrieNode<span style="color:#666">*</span> st <span style="color:#666">=</span> root;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span>: w) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>st<span style="color:#666">-&gt;</span>child[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]) st<span style="color:#666">-&gt;</span>child[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>] <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TrieNode();
-</span></span><span style="display:flex;"><span>        st <span style="color:#666">=</span> st<span style="color:#666">-&gt;</span>child[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>];
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    st<span style="color:#666">-&gt;</span>isEnd <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>The <code>insert</code> function inserts a word into the Trie.</li>
-<li>For each character in the word <code>w</code>, we traverse down the Trie. If the character is not already present, we create a new node for it.</li>
-<li>After inserting all characters, we mark the last node of the word as the end of a valid word (<code>isEnd = true</code>).</li>
+</li>
+<li>
+<p><strong>Solution Class</strong>:</p>
+<ul>
+<li>Contains methods to insert words into the Trie and check for root replacements.</li>
+<li><code>replaceWords</code> method handles the sentence processing.</li>
 </ul>
-<h4 id="3-check-function">
-  3. <strong>Check Function</strong>:
-  <a class="heading-link" href="#3-check-function">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">check</span>(string w) {
-</span></span><span style="display:flex;"><span>    TrieNode<span style="color:#666">*</span> st <span style="color:#666">=</span> root;
-</span></span><span style="display:flex;"><span>    string s <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span>: w) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(st<span style="color:#666">-&gt;</span>child[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]) st <span style="color:#666">=</span> st<span style="color:#666">-&gt;</span>child[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>];
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">break</span>;
-</span></span><span style="display:flex;"><span>        s <span style="color:#666">+=</span> c;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(st<span style="color:#666">-&gt;</span>isEnd) <span style="color:#a2f;font-weight:bold">return</span> s;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> w;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>The <code>check</code> function tries to find the shortest prefix of the word <code>w</code> that exists in the Trie.</li>
-<li>Starting from the root, we attempt to traverse down the Trie character by character.</li>
-<li>If we reach a node where <code>isEnd = true</code>, we return the prefix formed so far.</li>
-<li>If we don&rsquo;t find any valid prefix, we return the original word.</li>
+</li>
+<li>
+<p><strong>Insert Method</strong>:</p>
+<ul>
+<li>Iterates through characters of a word and creates nodes in the Trie if they do not already exist.</li>
 </ul>
-<h4 id="4-replacewords-function">
-  4. <strong>ReplaceWords Function</strong>:
-  <a class="heading-link" href="#4-replacewords-function">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">replaceWords</span>(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> dictionary, string sentence) {
-</span></span><span style="display:flex;"><span>    root <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TrieNode();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">w</span>: dictionary) insert(w);  <span style="color:#080;font-style:italic">// Insert all dictionary words into the Trie
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>
-</span></span><span style="display:flex;"><span>    istringstream ss(sentence);
-</span></span><span style="display:flex;"><span>    string word <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>, ans <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(; ss <span style="color:#666">&gt;&gt;</span> word;) {  <span style="color:#080;font-style:italic">// Iterate over each word in the sentence
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        ans <span style="color:#666">+=</span> check(word);  <span style="color:#080;font-style:italic">// Replace the word with the prefix (if any)
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        ans <span style="color:#666">+=</span> <span style="color:#b44">&#39; &#39;</span>;  <span style="color:#080;font-style:italic">// Add space between words
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    ans.pop_back();  <span style="color:#080;font-style:italic">// Remove the last space
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>The <code>replaceWords</code> function is the main function that replaces the words in the sentence with their corresponding prefixes from the dictionary.</li>
-<li>First, we insert all dictionary words into the Trie.</li>
-<li>Then, we iterate over each word in the sentence, replace it using the <code>check</code> function, and build the resulting sentence.</li>
-<li>Finally, we return the modified sentence.</li>
+</li>
+<li>
+<p><strong>Check Method</strong>:</p>
+<ul>
+<li>Traverses the Trie for a given word and returns the shortest prefix if it matches a root word; otherwise, it returns the original word.</li>
 </ul>
+</li>
+<li>
+<p><strong>Final Assembly</strong>:</p>
+<ul>
+<li>After processing all words, the result is constructed by joining the replaced words and returning the final string.</li>
+</ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -438,44 +392,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>Insertion of a word into the Trie</strong>: For each word in the dictionary, we perform an insertion that takes <code>O(m)</code> time, where <code>m</code> is the length of the word. If there are <code>n</code> words in the dictionary, the total time for insertion is <code>O(n * m)</code>, where <code>m</code> is the average length of the words.</li>
-<li><strong>Checking each word in the sentence</strong>: For each word in the sentence, we perform a check operation that takes <code>O(m)</code> time, where <code>m</code> is the length of the word. If there are <code>k</code> words in the sentence, the total time for checking all words is <code>O(k * m)</code>.</li>
-<li>Therefore, the overall time complexity is <strong>O(n * m + k * m)</strong>, where <code>n</code> is the number of words in the dictionary, <code>k</code> is the number of words in the sentence, and <code>m</code> is the average length of the words.</li>
+<li><strong>Time Complexity</strong>: O(N * L), where N is the number of words in the sentence and L is the maximum length of a word in the dictionary. Insertion and search operations in the Trie are efficient due to their prefix nature.</li>
+<li><strong>Space Complexity</strong>: O(M), where M is the total number of characters in all the root words combined, due to the space used by the Trie.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>Trie Storage</strong>: The space required to store the Trie is proportional to the number of nodes in the Trie. The maximum number of nodes is <code>O(n * m)</code>, where <code>n</code> is the number of words in the dictionary and <code>m</code> is the maximum length of a word.</li>
-<li><strong>Other Variables</strong>: The additional space for variables like <code>ss</code>, <code>word</code>, and <code>ans</code> is negligible compared to the space used by the Trie.</li>
-</ul>
-<p>Thus, the space complexity is <strong>O(n * m)</strong>.</p>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution efficiently replaces words in a sentence with the shortest prefix from a dictionary using a Trie data structure. The Trie allows us to quickly check for the existence of prefixes, making the solution both time and space-efficient for this type of problem.</p>
-<p>By leveraging Trie-based prefix matching, we ensure that the algorithm scales well with larger dictionaries and sentences. This solution is optimal for problems where prefix matching and efficient word replacement are required, making it a great example of how Trie-based data structures can solve real-world text processing tasks.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1249s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1249s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

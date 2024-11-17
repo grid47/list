@@ -150,7 +150,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -222,7 +222,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              6-minute read
+              2-minute read
             </span>
           </div>
 
@@ -231,8 +231,26 @@
 
       <div class="post-content">
         
-        <p><a href="https://leetcode.com/problems/my-calendar-ii/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
-<hr>
+        <h2 id="hahahugoshortcode1293s0hbhb">
+  <a href="https://leetcode.com/problems/my-calendar-ii/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
+<figure class="remote-image" style="text-align:center; margin: 0;">
+    <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/731.webp" 
+           alt="A calendar with overlapping events, where conflicts are highlighted and softly glowing to indicate double-booking." 
+           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    
+      <figcaption style="font-size: 0.8em; font-weight: 300; color:#555; margin-top: 4px; line-height: 1.2;">
+        Solution to LeetCode 731: My Calendar II Problem
+      </figcaption>
+    
+  </figure>
+  
+  <a class="heading-link" href="#hahahugoshortcode1293s0hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <p><strong>Code:</strong></p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">MyCalendarTwo</span> {
 </span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
@@ -269,7 +287,7 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * MyCalendarTwo* obj = new MyCalendarTwo();
 </span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * bool param_1 = obj-&gt;book(start,end);
 </span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> */</span></span></span></code></pre></div>
-<h2 id="hahahugoshortcode1305s1hbhb">
+<h2 id="hahahugoshortcode1293s2hbhb">
   
 
   
@@ -281,7 +299,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem involves designing a calendar system where events can be booked, and there are no restrictions on double bookings. However, the challenge arises when trying to handle triple bookings (i.e., when more than two events overlap). Your task is to implement a data structure that supports booking events, with the constraint that no more than two events can overlap at the same time.</p>
+<p>Design a calendar that allows for the booking of events. Your calendar should be able to handle overlapping events, but it should not allow for three events to overlap at the same time.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -289,142 +307,64 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem efficiently, we can use a <strong>map</strong> (or dictionary) to store the changes in the number of active bookings at each time point. The idea is to track the &ldquo;events&rdquo; of when an event starts and ends, and adjust a counter that reflects the number of overlapping events at any given moment.</p>
-<p>The key operations in this approach involve:</p>
 <ol>
-<li><strong>Incrementing a counter when an event starts</strong>.</li>
-<li><strong>Decrementing the counter when an event ends</strong>.</li>
-<li><strong>Checking if the current booking causes three simultaneous bookings at any time</strong>. If it does, we undo the booking attempt.</li>
+<li>
+<p><strong>Event Tracking with a Map</strong>:</p>
+<ul>
+<li>Use a <code>map&lt;int, int&gt;</code> to record the changes in the number of active events at each time point. The key is the timestamp, and the value indicates how many events start or end at that timestamp.</li>
+</ul>
+</li>
+<li>
+<p><strong>Booking Logic</strong>:</p>
+<ul>
+<li>For each booking request, increment the count at the start time and decrement it at the end time.</li>
+<li>Maintain a counter (<code>bkd</code>) to track the number of overlapping events as you iterate through the map.</li>
+<li>If at any point during the iteration the counter reaches 3, it means three events are overlapping. In that case, revert the earlier increment and decrement to cancel the current booking.</li>
+</ul>
+</li>
 </ol>
-<p>We use a <strong>map</strong> to maintain these events, where the keys represent the times (both start and end times), and the values represent the change in the count of overlapping events at that particular time.</p>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="1-class-definition-and-data-structures">
-  1. <strong>Class Definition and Data Structures</strong>
-  <a class="heading-link" href="#1-class-definition-and-data-structures">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li>The class <code>MyCalendarTwo</code> is defined with a private member <code>map&lt;int, int&gt; mp;</code>. The map <code>mp</code> will store the time points (start and end times of events) as keys, and the values will represent the changes in the booking count.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">MyCalendarTwo</span> {
-</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span>    MyCalendarTwo() {}
-</span></span></code></pre></div><ul>
-<li>The map is initialized in the constructor, and we will use it to keep track of the bookings.</li>
-</ul>
-<h4 id="2-the-book-function">
-  2. <strong>The <code>book</code> Function</strong>
-  <a class="heading-link" href="#2-the-book-function">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>The <code>book</code> function is the core of the solution. It handles the task of adding a new booking (with <code>start</code> and <code>end</code> times), and ensuring that no more than two events overlap at any time.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">book</span>(<span style="color:#0b0;font-weight:bold">int</span> start, <span style="color:#0b0;font-weight:bold">int</span> end) {
-</span></span><span style="display:flex;"><span>    mp[start]<span style="color:#666">++</span>;  <span style="color:#080;font-style:italic">// Increment the count at the start time
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    mp[end]<span style="color:#666">--</span>;    <span style="color:#080;font-style:italic">// Decrement the count at the end time
-</span></span></span></code></pre></div><ul>
-<li>The <code>start</code> time is incremented by 1, and the <code>end</code> time is decremented by 1. This effectively marks the beginning and end of an event.</li>
-</ul>
-<h4 id="3-checking-for-triple-bookings">
-  3. <strong>Checking for Triple Bookings</strong>
-  <a class="heading-link" href="#3-checking-for-triple-bookings">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>After updating the map, we need to check if the new event causes any point in time to have more than two overlapping events. We do this by iterating through the map and maintaining a running sum of the bookings.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> bkd <span style="color:#666">=</span> <span style="color:#666">0</span>;  <span style="color:#080;font-style:italic">// To keep track of the current number of active bookings
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> mp.begin(); it <span style="color:#666">!=</span> mp.end(); it<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>    bkd <span style="color:#666">+=</span> it<span style="color:#666">-&gt;</span>second;  <span style="color:#080;font-style:italic">// Update the number of active bookings at the current time
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (bkd <span style="color:#666">==</span> <span style="color:#666">3</span>) {  <span style="color:#080;font-style:italic">// If there are 3 bookings at the same time
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        mp[start]<span style="color:#666">--</span>;  <span style="color:#080;font-style:italic">// Undo the booking by decrementing the start time
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        mp[end]<span style="color:#666">++</span>;    <span style="color:#080;font-style:italic">// Undo the booking by incrementing the end time
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>; <span style="color:#080;font-style:italic">// Return false because triple booking is not allowed
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>The variable <code>bkd</code> tracks the cumulative count of overlapping events as we iterate through the map.</li>
-<li>If at any point the value of <code>bkd</code> reaches 3, it means that three events overlap, and thus we cannot book the current event. In this case, we undo the booking attempt by decrementing the <code>start</code> time and incrementing the <code>end</code> time.</li>
-<li>The function returns <code>false</code> if a triple booking occurs, indicating that the booking could not be completed.</li>
-</ul>
-<h4 id="4-successful-booking">
-  4. <strong>Successful Booking</strong>
-  <a class="heading-link" href="#4-successful-booking">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>If no triple booking occurs during the iteration, the event is successfully booked, and the function returns <code>true</code> to indicate success.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span></code></pre></div><h4 id="5-class-usage">
-  5. <strong>Class Usage</strong>
-  <a class="heading-link" href="#5-class-usage">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>The class can be used by first creating an instance of <code>MyCalendarTwo</code> and then calling the <code>book</code> function for each event to be booked.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>MyCalendarTwo<span style="color:#666">*</span> obj <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> MyCalendarTwo();
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> param_1 <span style="color:#666">=</span> obj<span style="color:#666">-&gt;</span>book(start, end);
-</span></span></code></pre></div><p>The <code>book</code> function is called with the <code>start</code> and <code>end</code> times of the event, and it returns <code>true</code> if the event is successfully booked, or <code>false</code> if the event causes a triple booking.</p>
-<h3 id="complexity-analysis">
-  Complexity Analysis
-  <a class="heading-link" href="#complexity-analysis">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
+<li><strong>Class</strong>:
 <ul>
-<li><strong>O(log n)</strong> for each booking operation, where <code>n</code> is the number of distinct time points in the map. This is because the map is implemented as a balanced binary search tree (e.g., <code>std::map</code> in C++), which allows for logarithmic time complexity for both insertion and iteration operations.</li>
-<li>Specifically:
+<li><code>class MyCalendarTwo</code>: Contains methods to handle the calendar bookings.</li>
+<li><strong>Method</strong>:
 <ul>
-<li>Inserting a new event (incrementing the start time and decrementing the end time) takes O(log n) time.</li>
-<li>Iterating through the map to check the number of overlapping events takes O(log n) time as well, since the map’s size can grow proportionally to the number of events booked.</li>
+<li><code>bool book(int start, int end)</code>:
+<ul>
+<li>Updates the map with the start and end of the event.</li>
+<li>Iterates through the map to check for overlaps.</li>
+<li>If three overlaps are detected, it undoes the changes and returns <code>false</code>.</li>
+<li>Otherwise, returns <code>true</code>.</li>
 </ul>
 </li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>O(n)</strong>, where <code>n</code> is the number of events. In the worst case, each event might introduce a new unique time point in the map, so the space complexity is proportional to the number of events booked.</li>
+</li>
 </ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The <code>MyCalendarTwo</code> class efficiently handles event bookings while ensuring that no more than two events overlap at any given time. By using a map to track the start and end times of events and applying the concept of a running sum to count the number of overlapping events, the class is able to detect and prevent triple bookings in logarithmic time. This approach optimizes both time and space complexity, making it scalable for large numbers of event bookings.</p>
-<p>The use of a <strong>map</strong> ensures that the operations of insertion and iteration are efficient, and the overall time complexity of O(log n) per booking operation is optimal for this type of problem. Additionally, by applying a straightforward check for triple bookings, the algorithm guarantees that no more than two events can overlap at the same time. The <code>book</code> function ensures that users are informed if their booking request cannot be processed due to conflicting events, making the class both efficient and easy to use in scenarios where event scheduling is required.</p>
+<ul>
+<li><strong>Time Complexity</strong>: O(N log N) due to the sorting of events in the map, where N is the number of events.</li>
+<li><strong>Space Complexity</strong>: O(N) for storing the events in the map.</li>
+</ul>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1305s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1293s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

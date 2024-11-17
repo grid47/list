@@ -148,7 +148,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              3-minute read
             </span>
           </div>
 
@@ -221,8 +221,26 @@
 
       <div class="post-content">
         
-        <p><a href="https://leetcode.com/problems/number-of-longest-increasing-subsequence/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
-<hr>
+        <h2 id="hahahugoshortcode1263s0hbhb">
+  <a href="https://leetcode.com/problems/number-of-longest-increasing-subsequence/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
+<figure class="remote-image" style="text-align:center; margin: 0;">
+    <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/673.webp" 
+           alt="A sequence of numbers where the longest increasing subsequence is highlighted and softly glowing." 
+           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    
+      <figcaption style="font-size: 0.8em; font-weight: 300; color:#555; margin-top: 4px; line-height: 1.2;">
+        Solution to LeetCode 673: Number of Longest Increasing Subsequence Problem
+      </figcaption>
+    
+  </figure>
+  
+  <a class="heading-link" href="#hahahugoshortcode1263s0hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <p><strong>Code:</strong></p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
 </span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
@@ -255,170 +273,92 @@
 </span></span><span style="display:flex;"><span>        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1264s1hbhb">
+<h2 id="hahahugoshortcode1263s2hbhb">
   
 
   
   <div class="markdown-body">
     <h3 id="problem-statement">
-  Problem Statement:
+  Problem Statement
   <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an unsorted array of integers <code>nums</code>, the goal is to find the number of longest increasing subsequences (LIS). A subsequence is a sequence that can be derived from the array by deleting some or no elements without changing the order of the remaining elements. The longest increasing subsequence is the subsequence that has the maximum length, and we need to return how many such subsequences exist.</p>
+<p>Given an integer array <code>nums</code>, return the number of longest increasing subsequences (LIS) in the array. An increasing subsequence is defined as a sequence where each element is greater than the previous one.</p>
 <h3 id="approach">
-  Approach:
+  Approach
   <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem is about finding the number of distinct longest increasing subsequences (LIS) in an array. The key observations are:</p>
+<p>The solution uses dynamic programming to find the length of the longest increasing subsequence while also counting how many times this maximum length occurs.</p>
 <ol>
-<li><strong>LIS Length</strong>: A subsequence is considered increasing if each element is greater than the previous one.</li>
-<li><strong>Multiple LIS</strong>: The same LIS may appear in multiple distinct ways. For example, the array <code>[1, 2, 3]</code> has one LIS, but the array <code>[1, 2, 3, 2]</code> has two LIS: <code>[1, 2, 3]</code> and <code>[1, 2, 3]</code> again.</li>
+<li>
+<p><strong>Dynamic Programming Arrays</strong>:</p>
+<ul>
+<li><code>len[i]</code>: Stores the length of the longest increasing subsequence ending at index <code>i</code>.</li>
+<li><code>cnt[i]</code>: Stores the count of the longest increasing subsequences that end at index <code>i</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>For each index <code>i</code>, initialize <code>len[i]</code> and <code>cnt[i]</code> to <code>1</code> since the minimum length of an increasing subsequence that ends with any element is <code>1</code> (the element itself).</li>
+</ul>
+</li>
+<li>
+<p><strong>Building the DP Arrays</strong>:</p>
+<ul>
+<li>For each element <code>nums[i]</code>, iterate through all previous elements <code>nums[j]</code> (where <code>j &lt; i</code>):
+<ul>
+<li>If <code>nums[j] &lt; nums[i]</code>, then:
+<ul>
+<li>If extending the subsequence from <code>j</code> to <code>i</code> gives a subsequence of the same length as <code>len[i]</code>, increment the count at <code>cnt[i]</code> by <code>cnt[j]</code>.</li>
+<li>If extending the subsequence from <code>j</code> to <code>i</code> gives a longer subsequence, update <code>len[i]</code> and set <code>cnt[i]</code> to <code>cnt[j]</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculate the Result</strong>:</p>
+<ul>
+<li>After populating the <code>len</code> and <code>cnt</code> arrays, determine the maximum length of the LIS (<code>max_len</code>).</li>
+<li>Count the total number of subsequences that have this maximum length.</li>
+</ul>
+</li>
 </ol>
-<p>We can solve this problem using dynamic programming to find the length of the LIS and also track the count of different LIS of that length at each index.</p>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step):
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The algorithm uses dynamic programming (DP) with two arrays:</p>
 <ol>
-<li><strong>len[i]</strong>: This array stores the length of the longest increasing subsequence that ends at index <code>i</code>.</li>
-<li><strong>cnt[i]</strong>: This array stores the number of distinct longest increasing subsequences that end at index <code>i</code>.</li>
+<li><strong>Input</strong>: The function takes a vector of integers, <code>nums</code>.</li>
+<li><strong>Dynamic Programming Logic</strong>: Two loops are used to build the <code>len</code> and <code>cnt</code> arrays, checking all previous indices for potential subsequences.</li>
+<li><strong>Output</strong>: The function returns the total count of the longest increasing subsequences.</li>
 </ol>
-<p>We then calculate these values iteratively, ensuring that we properly track the longest subsequence and its frequency.</p>
-<h4 id="step-1-initialize-the-variables">
-  Step 1: Initialize the variables
-  <a class="heading-link" href="#step-1-initialize-the-variables">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, n <span style="color:#666">=</span> nums.size(), max_len <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> len(n, <span style="color:#666">0</span>), cnt(n, <span style="color:#666">0</span>);
-</span></span></code></pre></div><ul>
-<li><code>res</code>: Stores the total count of LIS.</li>
-<li><code>n</code>: The length of the input array <code>nums</code>.</li>
-<li><code>max_len</code>: Tracks the maximum length of the increasing subsequences.</li>
-<li><code>len</code>: A vector initialized to <code>0</code>, representing the LIS length at each index.</li>
-<li><code>cnt</code>: A vector initialized to <code>0</code>, representing the count of LIS of the length <code>len[i]</code> at each index.</li>
-</ul>
-<h4 id="step-2-iterating-through-the-array">
-  Step 2: Iterating through the array
-  <a class="heading-link" href="#step-2-iterating-through-the-array">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>    cnt[i] <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    len[i] <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span></code></pre></div><p>For each element <code>i</code> in the array, we initialize <code>len[i] = 1</code> (the minimum length of LIS ending at <code>i</code> is 1, the element itself) and <code>cnt[i] = 1</code> (initially, there&rsquo;s only one subsequence of length 1, the element itself).</p>
-<h4 id="step-3-finding-subsequences-ending-at-index-i">
-  Step 3: Finding subsequences ending at index <code>i</code>
-  <a class="heading-link" href="#step-3-finding-subsequences-ending-at-index-i">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> i; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(nums[j] <span style="color:#666">&lt;</span> nums[i]) {
-</span></span></code></pre></div><p>For each <code>i</code>, we check all previous elements <code>j</code> (from <code>0</code> to <code>i-1</code>). If <code>nums[j] &lt; nums[i]</code>, it means <code>nums[i]</code> can extend an increasing subsequence that ends at <code>j</code>.</p>
-<h4 id="step-4-updating-leni-and-cnti">
-  Step 4: Updating <code>len[i]</code> and <code>cnt[i]</code>
-  <a class="heading-link" href="#step-4-updating-leni-and-cnti">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(len[j] <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">==</span> len[i]) cnt[i] <span style="color:#666">+=</span> cnt[j];
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(len[j] <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">&gt;</span>  len[i]) {
-</span></span><span style="display:flex;"><span>        len[i] <span style="color:#666">=</span> len[j] <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        cnt[i] <span style="color:#666">=</span> cnt[j];
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>If <code>len[j] + 1 == len[i]</code>, it means <code>nums[i]</code> is part of a subsequence of the same length as <code>len[i]</code>, so we add the number of subsequences ending at <code>j</code> to <code>cnt[i]</code>.</li>
-<li>If <code>len[j] + 1 &gt; len[i]</code>, it means we&rsquo;ve found a longer subsequence ending at <code>i</code>, so we update <code>len[i]</code> to <code>len[j] + 1</code> and reset <code>cnt[i]</code> to <code>cnt[j]</code>, meaning that the count of LIS ending at <code>i</code> is now equal to the count of LIS ending at <code>j</code>.</li>
-</ul>
-<h4 id="step-5-tracking-the-maximum-length-and-the-total-count">
-  Step 5: Tracking the maximum length and the total count
-  <a class="heading-link" href="#step-5-tracking-the-maximum-length-and-the-total-count">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(max_len <span style="color:#666">==</span> len[i]) res <span style="color:#666">+=</span> cnt[i];
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(max_len <span style="color:#666">&lt;</span> len[i]) {
-</span></span><span style="display:flex;"><span>    res <span style="color:#666">=</span> cnt[i];
-</span></span><span style="display:flex;"><span>    max_len <span style="color:#666">=</span> len[i];
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>If <code>len[i] == max_len</code>, it means we&rsquo;ve found another subsequence of the maximum length, so we add the count of such subsequences (<code>cnt[i]</code>) to the result <code>res</code>.</li>
-<li>If <code>len[i] &gt; max_len</code>, we update <code>max_len</code> to <code>len[i]</code> and set <code>res</code> to <code>cnt[i]</code> because we&rsquo;ve found a new longest subsequence, and the count of these subsequences is <code>cnt[i]</code>.</li>
-</ul>
-<h4 id="step-6-return-the-final-result">
-  Step 6: Return the final result
-  <a class="heading-link" href="#step-6-return-the-final-result">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div><p>The function finally returns <code>res</code>, which contains the total count of longest increasing subsequences.</p>
 <h3 id="complexity">
-  Complexity:
+  Complexity
   <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>O(n^2)</strong>: The algorithm iterates through each element <code>i</code> and compares it with every previous element <code>j</code> to find the LIS and count the subsequences. This results in a nested loop, making the time complexity <code>O(n^2)</code>, where <code>n</code> is the length of the array <code>nums</code>.</li>
+<li><strong>Time Complexity</strong>: O(n^2), where <code>n</code> is the length of <code>nums</code>, due to the nested loops for filling <code>len</code> and <code>cnt</code>.</li>
+<li><strong>Space Complexity</strong>: O(n) for the <code>len</code> and <code>cnt</code> arrays, which are used to store intermediate results.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>O(n)</strong>: The space complexity is dominated by the two arrays <code>len</code> and <code>cnt</code>, which each require <code>O(n)</code> space. Thus, the overall space complexity is <code>O(n)</code>.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion:
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This approach uses dynamic programming to efficiently compute the number of distinct longest increasing subsequences (LIS). By maintaining two arrays, <code>len</code> and <code>cnt</code>, we can track the length of the LIS and the number of ways to form such subsequences ending at each index. The algorithm performs well for arrays of moderate size with a time complexity of <code>O(n^2)</code>.</p>
-<p>Key observations include:</p>
-<ul>
-<li>Each element is processed in relation to every previous element to build the longest subsequence ending at that element.</li>
-<li>The algorithm efficiently counts how many distinct LIS can end at each position in the array and tracks the global maximum length.</li>
-</ul>
-<p>This solution works effectively for finding the number of LIS in an array and can handle typical input sizes in competitive programming and real-world applications.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1264s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1263s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

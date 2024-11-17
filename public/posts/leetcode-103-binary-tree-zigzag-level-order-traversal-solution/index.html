@@ -147,7 +147,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -216,7 +216,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode45s0hbhb">
+        <h2 id="hahahugoshortcode44s0hbhb">
   <a href="https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -231,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode45s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode44s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -274,201 +274,89 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode45s2hbhb">
+<h2 id="hahahugoshortcode44s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="-zigzag-level-order-traversal-of-binary-tree">
-  🌳 <strong>Zigzag Level Order Traversal of Binary Tree</strong>
-  <a class="heading-link" href="#-zigzag-level-order-traversal-of-binary-tree">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem asks us to perform a <strong>zigzag level order traversal</strong> of a binary tree. In a traditional level order traversal, nodes are visited level by level from left to right. However, in zigzag level order traversal, the nodes are visited alternately from left to right and right to left for each level, thus creating a zigzag pattern.</p>
-<hr>
-<h3 id="-approach">
-  🔑 <strong>Approach:</strong>
-  <a class="heading-link" href="#-approach">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>To solve this problem, we can break the solution into two main steps:</p>
 <ol>
-<li><strong>Perform level order traversal:</strong> First, we conduct a standard level order traversal of the tree to gather nodes at each level.</li>
-<li><strong>Reversing odd levels:</strong> After obtaining the level order traversal, we reverse the nodes at odd levels (starting from the second level) to achieve the zigzag pattern.</li>
+<li><strong>Level Order Traversal</strong>: Given a binary tree, return the level-order traversal of its nodes&rsquo; values.</li>
+<li><strong>Zigzag Level Order Traversal</strong>: Extend the traversal to alternate the order of levels in a zigzag manner (left-to-right for one level, right-to-left for the next).</li>
 </ol>
-<p>For the level order traversal, we will use a <strong>Breadth-First Search (BFS)</strong> approach. The queue will help us process nodes level by level, and once we have the normal level order traversal, we simply reverse the nodes at alternate levels to create the zigzag effect.</p>
-<hr>
-<h3 id="-code-breakdown-step-by-step">
-  💻 <strong>Code Breakdown (Step by Step):</strong>
-  <a class="heading-link" href="#-code-breakdown-step-by-step">
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="1-the-levelorder-function">
-  <strong>1. The levelOrder Function</strong>
-  <a class="heading-link" href="#1-the-levelorder-function">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> levelOrder(TreeNode<span style="color:#666">*</span> root) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp;
-</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> q;
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span><span style="display:flex;"><span>    q.push(root);
-</span></span></code></pre></div><ul>
-<li>
-<p><strong>Input:</strong> We are given the root node of the binary tree (<code>TreeNode* root</code>).</p>
-</li>
-<li>
-<p><strong>Output:</strong> The function returns a vector of vectors (<code>vector&lt;vector&lt;int&gt;&gt;</code>), where each inner vector contains the values of nodes at a specific level in the tree.</p>
-</li>
-<li>
-<p><strong>Initialization:</strong></p>
+<ol>
+<li><strong>Level Order Traversal</strong>:
 <ul>
-<li><code>ans</code>: A 2D vector to store the result of the level order traversal.</li>
-<li><code>tmp</code>: A temporary vector used to store node values at the current level.</li>
-<li><code>q</code>: A queue to store nodes for level order traversal, starting with the root node.</li>
-<li>If the tree is empty (<code>root == NULL</code>), we return an empty vector immediately.</li>
+<li>Use a queue to perform a breadth-first search (BFS) traversal on the tree.</li>
+<li>For each level, collect nodes&rsquo; values in a temporary list, <code>tmp</code>, and enqueue children for the next level.</li>
+<li>Append <code>tmp</code> to the final answer list and clear it for the next level.</li>
 </ul>
 </li>
-</ul>
-<h4 id="2-breadth-first-search-bfs-for-level-order-traversal">
-  <strong>2. Breadth-First Search (BFS) for Level Order Traversal</strong>
-  <a class="heading-link" href="#2-breadth-first-search-bfs-for-level-order-traversal">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
-</span></span><span style="display:flex;"><span>            TreeNode<span style="color:#666">*</span> it <span style="color:#666">=</span> q.front();
-</span></span><span style="display:flex;"><span>            q.pop();
-</span></span><span style="display:flex;"><span>            tmp.push_back(it<span style="color:#666">-&gt;</span>val);
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(it<span style="color:#666">-&gt;</span>left  <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) q.push(it<span style="color:#666">-&gt;</span>left);
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(it<span style="color:#666">-&gt;</span>right <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) q.push(it<span style="color:#666">-&gt;</span>right);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        ans.push_back(tmp);
-</span></span><span style="display:flex;"><span>        tmp.clear();
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><ul>
-<li><strong>Outer Loop:</strong> The <code>while</code> loop continues as long as there are nodes in the queue, which means we have more levels to process.</li>
-<li><strong>Inner Loop:</strong> For each level:
+<li><strong>Zigzag Level Order</strong>:
 <ul>
-<li>We store the number of nodes at the current level (<code>sz</code>), which is equal to the size of the queue.</li>
-<li>Process each node by dequeuing it, adding its value to <code>tmp</code>, and enqueueing its left and right children (if they exist).</li>
+<li>First, obtain the level order traversal.</li>
+<li>Iterate over the result and reverse the values for every other level (i.e., odd-indexed levels in the list).</li>
 </ul>
 </li>
-<li>After processing all nodes at the current level, we add the <code>tmp</code> vector (containing values for that level) to <code>ans</code> and clear <code>tmp</code> to prepare for the next level.</li>
-</ul>
-<h4 id="3-the-zigzag-level-order-function">
-  <strong>3. The Zigzag Level Order Function</strong>
-  <a class="heading-link" href="#3-the-zigzag-level-order-function">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> zigzagLevelOrder(TreeNode<span style="color:#666">*</span> root) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans <span style="color:#666">=</span> levelOrder(root);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> ans.size(); i <span style="color:#666">+=</span> <span style="color:#666">2</span>) {
-</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp <span style="color:#666">=</span> ans[i];
-</span></span><span style="display:flex;"><span>        reverse(tmp.begin(), tmp.end());
-</span></span><span style="display:flex;"><span>        ans[i] <span style="color:#666">=</span> tmp;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>
-<p><strong>Input:</strong> The function takes the root of the binary tree and returns the zigzag level order traversal.</p>
-</li>
-<li>
-<p><strong>Output:</strong> The function returns a 2D vector representing the zigzag level order traversal of the tree.</p>
-</li>
-<li>
-<p><strong>Process:</strong></p>
-<ul>
-<li>We first call the <code>levelOrder</code> function to get the normal level order traversal of the binary tree, stored in <code>ans</code>.</li>
-<li>Next, we iterate through the <strong>odd-indexed</strong> levels (i.e., levels 2, 4, 6, etc.), reversing the node values for those levels to achieve the zigzag pattern.</li>
-<li>Finally, we return the modified <code>ans</code> vector, which now contains the zigzag level order traversal of the tree.</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="-time-and-space-complexity">
-  🧠 <strong>Time and Space Complexity:</strong>
-  <a class="heading-link" href="#-time-and-space-complexity">
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  <strong>Time Complexity:</strong>
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
+<ol>
+<li><strong>Level Order Traversal</strong>:
 <ul>
-<li>
-<p><strong>Level Order Traversal:</strong></p>
+<li><strong>Lines 4-6</strong>: Initialize the result <code>ans</code>, temporary list <code>tmp</code>, and queue <code>q</code>. Check if the root is <code>NULL</code> and return an empty result if true.</li>
+<li><strong>Line 8</strong>: Enqueue the root.</li>
+<li><strong>Lines 10-19</strong>: For each level:
 <ul>
-<li>The time complexity of the <code>levelOrder</code> function is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the tree. Each node is visited exactly once, and each operation (enqueueing and dequeuing) takes constant time.</li>
-</ul>
-</li>
-<li>
-<p><strong>Zigzag Reversal:</strong></p>
-<ul>
-<li>Reversing the nodes at odd levels takes <strong>O(n)</strong> time as well. In the worst case, each level may contain <code>n</code> nodes, and we reverse each odd-level vector of nodes.</li>
+<li>Determine the number of nodes at the current level (<code>sz</code>).</li>
+<li>Process each node: add its value to <code>tmp</code>, enqueue its children, then move to the next node.</li>
+<li>Append <code>tmp</code> to <code>ans</code> and clear <code>tmp</code> for the next level.</li>
 </ul>
 </li>
 </ul>
-<p>Thus, the overall time complexity is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the binary tree.</p>
-<h4 id="space-complexity">
-  <strong>Space Complexity:</strong>
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
+</li>
+<li><strong>Zigzag Level Order Traversal</strong>:
 <ul>
-<li>
-<p><strong>Level Order Storage:</strong></p>
-<ul>
-<li>We store the level order traversal in the <code>ans</code> vector, which requires <strong>O(n)</strong> space for the <code>n</code> nodes.</li>
+<li><strong>Lines 22-23</strong>: Call <code>levelOrder</code> and store its result in <code>ans</code>.</li>
+<li><strong>Lines 24-28</strong>: Reverse the values for every other level starting from the first level.</li>
+<li><strong>Line 30</strong>: Return the zigzag traversal result.</li>
 </ul>
 </li>
-<li>
-<p><strong>Queue Storage:</strong></p>
-<ul>
-<li>The queue used for BFS can hold at most <strong>O(n)</strong> nodes at a time. The maximum number of nodes at any level is <code>n/2</code> in a balanced tree, so the queue requires <strong>O(n)</strong> space in the worst case.</li>
-</ul>
-</li>
-</ul>
-<p>Thus, the total space complexity is <strong>O(n)</strong>.</p>
-<hr>
-<h3 id="-conclusion">
-  🎯 <strong>Conclusion:</strong>
-  <a class="heading-link" href="#-conclusion">
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>This solution efficiently solves the problem of <strong>zigzag level order traversal</strong>. We first perform a <strong>level order traversal</strong> using BFS, and then reverse the nodes at alternate levels to create the zigzag effect. The time and space complexity of the solution is <strong>O(n)</strong>, making it optimal for solving this problem on a binary tree with <code>n</code> nodes.</p>
-<hr>
-<p><strong>Happy coding!</strong> 🌱✨</p>
+<ul>
+<li><strong>Time Complexity</strong>: (O(N)) for both <code>levelOrder</code> and <code>zigzagLevelOrder</code>, where (N) is the number of nodes.</li>
+<li><strong>Space Complexity</strong>: (O(N)), due to queue storage and result lists.</li>
+</ul>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode45s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode44s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -147,7 +147,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -216,7 +216,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1112s0hbhb">
+        <h2 id="hahahugoshortcode1111s0hbhb">
   <a href="https://leetcode.com/problems/guess-number-higher-or-lower-ii/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -231,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1112s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1111s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -256,165 +256,81 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> dp[s][e] <span style="color:#666">=</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1112s2hbhb">
+<h2 id="hahahugoshortcode1111s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="-problem-statement">
-  🚀 Problem Statement
-  <a class="heading-link" href="#-problem-statement">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Imagine you&rsquo;re playing a guessing game where you need to determine the minimum cost to guess a number correctly within a given range <code>[1, n]</code>. Each guess has a cost, and the goal is to minimize the total cost in the worst-case scenario.</p>
-<p>For every guess you make:</p>
-<ul>
-<li>If it&rsquo;s too high, you narrow the range to <code>[s, guess - 1]</code>.</li>
-<li>If it&rsquo;s too low, you narrow the range to <code>[guess + 1, e]</code>.</li>
-</ul>
-<p>The challenge here is to make guesses efficiently so that you minimize the cost of reaching the correct number in the worst case.</p>
-<hr>
-<h3 id="-approach">
-  🧠 Approach
-  <a class="heading-link" href="#-approach">
+<p>You are playing a game where you have to guess a number between 1 and <code>n</code>. You can ask for the price of guessing a number, and your goal is to minimize the total amount of money spent until you guess the correct number. Your task is to implement a function to determine the minimum amount of money required to guarantee a win.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>This problem is best solved using <strong>Dynamic Programming (DP)</strong>, a technique where we break the problem into smaller subproblems and build up the solution step by step.</p>
-<h4 id="key-insight-">
-  Key Insight 💡
-  <a class="heading-link" href="#key-insight-">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>We can visualize this problem as a decision tree. Each guess splits the current range into two smaller subranges:</p>
 <ol>
-<li>One where the number is too high.</li>
-<li>One where the number is too low.</li>
+<li>
+<p><strong>Dynamic Programming</strong>:</p>
+<ul>
+<li>Use a 2D table (<code>dp</code>) to store the minimum cost required to guess the number correctly in the range from <code>s</code> to <code>e</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive Function</strong>:</p>
+<ul>
+<li>The recursive function <code>dpf</code> calculates the minimum cost to guess the number between <code>s</code> and <code>e</code>.</li>
+<li>If <code>s &gt;= e</code>, it returns 0 since no cost is incurred when there are no numbers to guess.</li>
+</ul>
+</li>
+<li>
+<p><strong>Cost Calculation</strong>:</p>
+<ul>
+<li>For each possible guess <code>x</code> in the range <code>[s, e]</code>, calculate the cost of that guess. The cost is determined by the guess itself plus the maximum cost incurred by the worst-case scenario (either guessing too high or too low).</li>
+<li>Update the minimum cost (<code>res</code>) by considering the cost of each guess.</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization</strong>:</p>
+<ul>
+<li>Store the result in the <code>dp</code> table to avoid redundant calculations and improve efficiency.</li>
+</ul>
+</li>
 </ol>
-<p>The strategy is to minimize the <strong>worst-case cost</strong>. For each range <code>[s, e]</code>, we try every possible guess <code>x</code> and calculate the total cost, which is:</p>
-<ul>
-<li>The cost of guessing <code>x</code>, which is just <code>x</code> itself.</li>
-<li>Plus the maximum cost of the two subranges formed after the guess.</li>
-</ul>
-<p>The goal is to choose the guess that minimizes the total cost in the worst-case scenario.</p>
-<hr>
-<h3 id="-step-by-step-code-breakdown">
-  🔨 Step-by-Step Code Breakdown
-  <a class="heading-link" href="#-step-by-step-code-breakdown">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Let’s walk through the code and break it down into bite-sized steps:</p>
-<h4 id="1-initialization-of-the-dp-table-">
-  1. <strong>Initialization of the DP Table</strong> 🛠️
-  <a class="heading-link" href="#1-initialization-of-the-dp-table-">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> table;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> getMoneyAmount(<span style="color:#0b0;font-weight:bold">int</span> n) {
-</span></span><span style="display:flex;"><span>    table.resize(n <span style="color:#666">+</span> <span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n <span style="color:#666">+</span> <span style="color:#666">1</span>)); <span style="color:#080;font-style:italic">// Initialize the DP table.
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">dpf</span>(table, <span style="color:#666">1</span>, n);  <span style="color:#080;font-style:italic">// Call the recursive function to solve the problem.
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
-</span></span></code></pre></div><ul>
-<li>We start by defining a table (<code>table</code>) to store the minimum cost for each subproblem (range <code>[s, e]</code>).</li>
-<li>The <code>getMoneyAmount</code> function initializes the table and then calls the <code>dpf</code> function to compute the result for the range <code>[1, n]</code>.</li>
+<ul>
+<li>The <code>getMoneyAmount</code> function initializes the DP table and calls the recursive helper function.</li>
+<li>The <code>dpf</code> function computes the minimum amount needed to guess correctly in a given range and stores results in the DP table for reuse.</li>
 </ul>
-<h4 id="2-the-recursive-dp-function-">
-  2. <strong>The Recursive DP Function</strong> 🔄
-  <a class="heading-link" href="#2-the-recursive-dp-function-">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dpf</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>dp, <span style="color:#0b0;font-weight:bold">int</span> s, <span style="color:#0b0;font-weight:bold">int</span> e) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s <span style="color:#666">&gt;=</span> e) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;  <span style="color:#080;font-style:italic">// No cost for invalid or single-number ranges.
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">if</span>(dp[s][e] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> dp[s][e];  <span style="color:#080;font-style:italic">// If the result is already computed, return it.
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> INT_MAX;  <span style="color:#080;font-style:italic">// Initialize the result to a very large value.
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> s; x <span style="color:#666">&lt;=</span> e; x<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> (x <span style="color:#666">+</span> max(dpf(dp, s, x<span style="color:#666">-</span><span style="color:#666">1</span>), dpf(dp, x <span style="color:#666">+</span> <span style="color:#666">1</span>, e)));
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> min(res, tmp);  <span style="color:#080;font-style:italic">// Minimize the worst-case cost.
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp[s][e] <span style="color:#666">=</span> res;  <span style="color:#080;font-style:italic">// Store the result in the DP table.
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
-</span></span></code></pre></div><ul>
-<li>The <code>dpf</code> function is where the magic happens. It computes the minimum cost to guess a number within a given range <code>[s, e]</code>.</li>
-<li>If the range is invalid (<code>s &gt;= e</code>), the cost is zero (no guesses needed).</li>
-<li>If we’ve already computed the cost for the range <code>[s, e]</code>, we return it (memoization).</li>
-<li>We then iterate through all possible guesses <code>x</code> and calculate the cost for each guess.</li>
-<li>The result is stored in the DP table to avoid recalculating the same subproblem multiple times.</li>
-</ul>
-<h4 id="3-main-function-">
-  3. <strong>Main Function</strong> 🏁
-  <a class="heading-link" href="#3-main-function-">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">getMoneyAmount</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
-</span></span><span style="display:flex;"><span>    table.resize(n <span style="color:#666">+</span> <span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n <span style="color:#666">+</span> <span style="color:#666">1</span>));  <span style="color:#080;font-style:italic">// Initialize the DP table.
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">return</span> dpf(table, <span style="color:#666">1</span>, n);  <span style="color:#080;font-style:italic">// Compute and return the result.
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
-</span></span></code></pre></div><ul>
-<li>The <code>getMoneyAmount</code> function initializes the DP table and calls <code>dpf</code> to compute the minimum cost to guess a number within the range <code>[1, n]</code>.</li>
-</ul>
-<hr>
-<h3 id="-complexity-analysis">
-  📈 Complexity Analysis
-  <a class="heading-link" href="#-complexity-analysis">
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity-">
-  Time Complexity ⏱️
-  <a class="heading-link" href="#time-complexity-">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li>The time complexity is <strong>O(n³)</strong>. This comes from the fact that we compute the result for every pair of subproblems <code>[s, e]</code> (which gives us <code>O(n²)</code> subproblems), and for each subproblem, we try every possible guess <code>x</code> (which gives us <code>O(n)</code> iterations per subproblem).</li>
-<li>Thus, the overall time complexity is <strong>O(n³)</strong>.</li>
+<li><strong>Time Complexity</strong>: ( O(n^3) ) because for each range <code>[s, e]</code>, we may iterate through <code>e - s</code> possible guesses and for each guess, we might need to make two further calls.</li>
+<li><strong>Space Complexity</strong>: ( O(n^2) ) for the DP table to store results.</li>
 </ul>
-<h4 id="space-complexity-">
-  Space Complexity 💾
-  <a class="heading-link" href="#space-complexity-">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>The space complexity is <strong>O(n²)</strong>, as we store the results for each subproblem in a DP table of size <code>(n+1) x (n+1)</code>.</li>
-</ul>
-<hr>
-<h3 id="-conclusion">
-  🏁 Conclusion
-  <a class="heading-link" href="#-conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This dynamic programming solution is an efficient way to solve the problem of determining the minimum cost to guess a number correctly. By breaking the problem into smaller subproblems and using memoization, we avoid redundant calculations and can solve even moderately large inputs.</p>
-<p>Although the time complexity is cubic, it’s still feasible for a range of sizes that are typically encountered in competitive programming or real-world applications.</p>
-<p>Remember: This approach ensures that we always choose the best possible guess at each step, minimizing the worst-case cost.</p>
-<p>Keep practicing, and you’ll soon feel comfortable with dynamic programming problems like this one! 🌟</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1112s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1111s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

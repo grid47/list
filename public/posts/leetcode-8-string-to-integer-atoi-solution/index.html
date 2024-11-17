@@ -144,7 +144,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -196,7 +196,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              4-minute read
+              2-minute read
             </span>
           </div>
 
@@ -205,7 +205,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1329s0hbhb">
+        <h2 id="hahahugoshortcode1332s0hbhb">
   <a href="https://leetcode.com/problems/string-to-integer-atoi/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -220,7 +220,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1329s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1332s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -249,203 +249,79 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> sgn <span style="color:#666">*</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1329s2hbhb">
+<h2 id="hahahugoshortcode1332s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="-myatoi-convert-string-to-integer">
-  💡 <strong>myAtoi: Convert String to Integer</strong>
-  <a class="heading-link" href="#-myatoi-convert-string-to-integer">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The <strong><code>myAtoi</code></strong> problem asks us to implement a function that converts a string representing a valid integer into an actual integer. The string may contain leading spaces, an optional sign (<code>+</code> or <code>-</code>), and numeric characters. If the string is invalid or cannot be parsed into an integer, we return <code>0</code>.</p>
-<p>Additionally, we must consider edge cases:</p>
-<ul>
-<li><strong>Overflowing or underflowing</strong> the 32-bit signed integer range (<code>[-2147483648, 2147483647]</code>).</li>
-<li>Ignoring <strong>non-numeric characters</strong> after the valid numeric portion.</li>
-</ul>
-<hr>
-<h3 id="-example">
-  📌 <strong>Example</strong>
-  <a class="heading-link" href="#-example">
+<p>Implement the function <code>myAtoi</code> that converts a string to a 32-bit signed integer. The function should handle leading whitespace, optional signs, and reject invalid characters while adhering to the constraints of a 32-bit signed integer.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ul>
-<li>
-<p><strong>Input</strong>: <code>&quot;42&quot;</code><br>
-<strong>Output</strong>: <code>42</code></p>
-</li>
-<li>
-<p><strong>Input</strong>: <code>&quot;   -42&quot;</code><br>
-<strong>Output</strong>: <code>-42</code></p>
-</li>
-<li>
-<p><strong>Input</strong>: <code>&quot;4193 with words&quot;</code><br>
-<strong>Output</strong>: <code>4193</code></p>
-</li>
-<li>
-<p><strong>Input</strong>: <code>&quot;words and 987&quot;</code><br>
-<strong>Output</strong>: <code>0</code></p>
-</li>
-<li>
-<p><strong>Input</strong>: <code>&quot;-91283472332&quot;</code><br>
-<strong>Output</strong>: <code>-2147483648</code> (since it overflows)</p>
-</li>
-</ul>
-<hr>
-<h3 id="-approach-parsing-the-string">
-  🛠️ <strong>Approach: Parsing the String</strong>
-  <a class="heading-link" href="#-approach-parsing-the-string">
+<p>Parse the string character by character, handling optional leading spaces, a sign, and numeric digits. Ensure the final result does not exceed the bounds of a 32-bit signed integer.</p>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The algorithm can be broken down into several key steps:</p>
 <ol>
-<li><strong>Skip Leading Whitespaces</strong>: Start by skipping any leading spaces in the input string.</li>
-<li><strong>Check for an Optional Sign</strong>: Look for an optional <code>+</code> or <code>-</code> sign to determine the number&rsquo;s sign.</li>
-<li><strong>Convert String to Integer</strong>: Process the string, converting digits into an integer.</li>
-<li><strong>Overflow and Underflow Checks</strong>: During the conversion, check for potential overflow or underflow scenarios.</li>
-<li><strong>Return the Final Result</strong>: Finally, return the result, adjusting for the sign.</li>
+<li>Initialize <code>res</code> to 0 for the result, <code>sgn</code> to 1 for the sign (positive by default), and <code>i</code> to 0 for the index.</li>
+<li>Skip leading whitespace:
+<ul>
+<li>Use a while loop to increment <code>i</code> while the current character is a space.</li>
+</ul>
+</li>
+<li>Check for a sign:
+<ul>
+<li>If the next character is either &lsquo;+&rsquo; or &lsquo;-&rsquo;, set <code>sgn</code> accordingly and increment <code>i</code>.</li>
+</ul>
+</li>
+<li>Parse numeric digits:
+<ul>
+<li>Use a while loop to continue as long as the current character is a digit (<code>'0'</code> to <code>'9'</code>):
+<ul>
+<li>Before updating <code>res</code>, check for overflow conditions:
+<ul>
+<li>If <code>res</code> is greater than <code>INT_MAX/10</code>, return the respective boundary (either <code>INT_MAX</code> or <code>INT_MIN</code>).</li>
+<li>If <code>res</code> is equal to <code>INT_MAX/10</code>, check if the next digit exceeds the allowable range.</li>
+</ul>
+</li>
+<li>Update <code>res</code> by multiplying it by 10 and adding the integer value of the current digit.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Return the final result, multiplied by the sign.</li>
 </ol>
-<p>By processing the string one character at a time, we gradually build the integer, ensuring we handle all edge cases efficiently.</p>
-<hr>
-<h3 id="code-breakdown-step-by-step">
-  <strong>Code Breakdown (Step-by-Step)</strong>
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="step-1-initialize-variables">
-  Step 1: Initialize Variables
-  <a class="heading-link" href="#step-1-initialize-variables">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> sgn <span style="color:#666">=</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div><ul>
-<li><code>res</code>: Holds the result, initialized to <code>0</code>.</li>
-<li><code>sgn</code>: Stores the sign of the number, initialized to <code>1</code> (positive).</li>
-<li><code>i</code>: An index to traverse through the string, initialized to <code>0</code>.</li>
-</ul>
-<h4 id="step-2-skip-leading-whitespaces">
-  Step 2: Skip Leading Whitespaces
-  <a class="heading-link" href="#step-2-skip-leading-whitespaces">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> s.size() <span style="color:#666">&amp;&amp;</span> s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39; &#39;</span>) i<span style="color:#666">++</span>;
-</span></span></code></pre></div><ul>
-<li>This loop skips all leading spaces so we can start processing the number immediately.</li>
-</ul>
-<h4 id="step-3-handle-optional-sign">
-  Step 3: Handle Optional Sign
-  <a class="heading-link" href="#step-3-handle-optional-sign">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> s.size() <span style="color:#666">&amp;&amp;</span> (s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;+&#39;</span> <span style="color:#666">||</span> s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;-&#39;</span>))
-</span></span><span style="display:flex;"><span>    sgn <span style="color:#666">=</span> (s[i<span style="color:#666">++</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;+&#39;</span>) <span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">:</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span></code></pre></div><ul>
-<li>If we encounter a <code>+</code> or <code>-</code>, we adjust the sign (<code>sgn</code>) accordingly. We also increment <code>i</code> to move past the sign.</li>
-</ul>
-<h4 id="step-4-convert-the-string-to-integer">
-  Step 4: Convert the String to Integer
-  <a class="heading-link" href="#step-4-convert-the-string-to-integer">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> s.size() <span style="color:#666">&amp;&amp;</span> s[i] <span style="color:#666">&gt;=</span> <span style="color:#b44">&#39;0&#39;</span> <span style="color:#666">&amp;&amp;</span> s[i] <span style="color:#666">&lt;=</span> <span style="color:#b44">&#39;9&#39;</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(res <span style="color:#666">&gt;</span> INT_MAX <span style="color:#666">/</span> <span style="color:#666">10</span> <span style="color:#666">||</span> (res <span style="color:#666">==</span> INT_MAX <span style="color:#666">/</span> <span style="color:#666">10</span> <span style="color:#666">&amp;&amp;</span> ((s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>) <span style="color:#666">&gt;</span> (INT_MAX <span style="color:#666">%</span> <span style="color:#666">10</span>))))
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> (sgn <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) <span style="color:#666">?</span> <span style="color:#a0a000">INT_MAX</span> : INT_MIN;
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>    res <span style="color:#666">=</span> res <span style="color:#666">*</span> <span style="color:#666">10</span> <span style="color:#666">+</span> (s[i<span style="color:#666">++</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;0&#39;</span>);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>We loop through each character of the string, processing it if it&rsquo;s a digit (<code>'0'</code> to <code>'9'</code>).</li>
-<li><strong>Overflow Check</strong>: Before updating the result, we check whether multiplying <code>res</code> by <code>10</code> and adding the new digit would cause an overflow. If it does, we return <code>INT_MAX</code> or <code>INT_MIN</code>, depending on the sign.</li>
-</ul>
-<h4 id="step-5-return-the-final-result">
-  Step 5: Return the Final Result
-  <a class="heading-link" href="#step-5-return-the-final-result">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> sgn <span style="color:#666">*</span> res;
-</span></span></code></pre></div><ul>
-<li>Finally, we return the result adjusted for the sign (<code>sgn</code>). If the sign was negative, the result will be negative.</li>
-</ul>
-<hr>
-<h3 id="-complexity-analysis">
-  ⏱️ <strong>Complexity Analysis</strong>
-  <a class="heading-link" href="#-complexity-analysis">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="time-complexity-on">
-  Time Complexity: <strong>O(n)</strong>
-  <a class="heading-link" href="#time-complexity-on">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li>The time complexity is <strong>O(n)</strong>, where <code>n</code> is the length of the string. We process each character exactly once.</li>
+<li><strong>Time Complexity:</strong> (O(n)) - where (n) is the length of the input string, since each character is processed once.</li>
+<li><strong>Space Complexity:</strong> (O(1)) - no additional space is used beyond a few variables.</li>
 </ul>
-<h4 id="space-complexity-o1">
-  Space Complexity: <strong>O(1)</strong>
-  <a class="heading-link" href="#space-complexity-o1">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>The space complexity is <strong>O(1)</strong> because we only use a constant amount of extra space, regardless of the input size.</li>
-</ul>
-<hr>
-<h3 id="-conclusion">
-  🚀 <strong>Conclusion</strong>
-  <a class="heading-link" href="#-conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The <code>myAtoi</code> solution efficiently handles the conversion of a string into an integer by following a step-by-step approach:</p>
-<ul>
-<li><strong>Trimming leading spaces</strong>.</li>
-<li><strong>Handling the sign</strong>.</li>
-<li><strong>Converting digits</strong> to an integer, while ensuring no overflow or underflow occurs.</li>
-<li>Returning the result <strong>adjusted for the sign</strong>.</li>
-</ul>
-<p>By using simple arithmetic and overflow checks, we ensure that the result stays within the bounds of a 32-bit signed integer. If the input is invalid, we return <code>0</code>, providing a clean solution for this problem.</p>
-<hr>
-<h3 id="-pro-tip-practice-makes-perfect">
-  🌱 <strong>Pro Tip: Practice Makes Perfect!</strong>
-  <a class="heading-link" href="#-pro-tip-practice-makes-perfect">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This is a great problem for learning how to handle string manipulation and integer conversion. To get better, try implementing similar problems and experiment with different edge cases. <strong>Consistency and practice are key!</strong></p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1329s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1332s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

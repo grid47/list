@@ -146,7 +146,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              4-minute read
+              2-minute read
             </span>
           </div>
 
@@ -211,7 +211,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1068s0hbhb">
+        <h2 id="hahahugoshortcode1065s0hbhb">
   <a href="https://leetcode.com/problems/next-permutation/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -226,7 +226,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1068s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1065s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -255,181 +255,81 @@
 </span></span><span style="display:flex;"><span>        reverse(nums.begin() <span style="color:#666">+</span> idx <span style="color:#666">+</span> <span style="color:#666">1</span>, nums.end());
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1068s2hbhb">
+<h2 id="hahahugoshortcode1065s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="-next-lexicographically-greater-permutation">
-  🌟 <strong>Next Lexicographically Greater Permutation</strong>
-  <a class="heading-link" href="#-next-lexicographically-greater-permutation">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>This problem involves finding the next lexicographically greater permutation of a list of numbers. If no greater permutation exists (i.e., the input is already the largest permutation), the list should be rearranged into the smallest permutation possible (sorted in ascending order).</p>
-<hr>
-<h3 id="-approach-overview">
-  🧠 <strong>Approach Overview</strong>
-  <a class="heading-link" href="#-approach-overview">
+<p>Implement the function to find the next lexicographical permutation of a given sequence of numbers. The algorithm should rearrange the numbers into the next greater permutation of numbers.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To find the next permutation, we use a well-defined approach that optimizes the process. We work by examining the permutation from right to left, identifying a point where the current arrangement can be increased, then making the smallest possible increase to ensure we generate the next permutation in lexicographical order.</p>
-<h4 id="steps-to-solve-the-problem">
-  <strong>Steps to Solve the Problem:</strong>
-  <a class="heading-link" href="#steps-to-solve-the-problem">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ol>
 <li>
-<p><strong>Find the Rightmost Ascending Pair:</strong><br>
-Identify the first position from the right where the sequence stops increasing. This tells us where we can make the permutation larger.</p>
+<p><strong>Identify the Pivot</strong>:</p>
+<ul>
+<li>Traverse the array from right to left to find the first pair of consecutive elements <code>(nums[i], nums[i+1])</code> where <code>nums[i] &lt; nums[i+1]</code>. This index <code>i</code> is the pivot where the next greater permutation can be formed.</li>
+</ul>
 </li>
 <li>
-<p><strong>Find the Next Larger Element:</strong><br>
-Find the smallest element to the right of this position that is larger than the element at that position.</p>
+<p><strong>Check for Last Permutation</strong>:</p>
+<ul>
+<li>If no such pivot is found (i.e., <code>idx</code> remains <code>-1</code>), the current permutation is the largest, and we should reverse the entire array to get the smallest permutation.</li>
+</ul>
 </li>
 <li>
-<p><strong>Swap the Elements:</strong><br>
-Swap the two identified elements to create a larger permutation.</p>
+<p><strong>Find the Successor</strong>:</p>
+<ul>
+<li>Once the pivot is identified, look for the smallest element to the right of <code>idx</code> that is larger than <code>nums[idx]</code>. Swap these two elements.</li>
+</ul>
 </li>
 <li>
-<p><strong>Reverse the Suffix:</strong><br>
-Reverse the elements after the swapped position to ensure the resulting sequence is the smallest possible permutation (sorted in ascending order).</p>
-</li>
-<li>
-<p><strong>Edge Case (Largest Permutation):</strong><br>
-If no such pair exists, the permutation is the largest possible. In this case, simply reverse the entire list to get the smallest permutation.</p>
+<p><strong>Reverse the Suffix</strong>:</p>
+<ul>
+<li>Reverse the sub-array that comes after the pivot index to ensure it is in the lowest possible order.</li>
+</ul>
 </li>
 </ol>
-<hr>
-<h3 id="-breaking-down-the-code">
-  👇 <strong>Breaking Down the Code:</strong>
-  <a class="heading-link" href="#-breaking-down-the-code">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="step-1-find-the-rightmost-ascending-pair">
-  <strong>Step 1: Find the Rightmost Ascending Pair</strong>
-  <a class="heading-link" href="#step-1-find-the-rightmost-ascending-pair">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> idx <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> nums.size() <span style="color:#666">-</span> <span style="color:#666">2</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">&lt;</span> nums[i<span style="color:#666">+</span><span style="color:#666">1</span>]) { 
-</span></span><span style="display:flex;"><span>        idx <span style="color:#666">=</span> i;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">break</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>We scan from right to left to find the first element <code>nums[i]</code> that is smaller than <code>nums[i+1]</code>. This marks the point where the order breaks, indicating that the permutation can still be increased.</li>
-</ul>
-<h4 id="step-2-handle-the-edge-case-largest-permutation">
-  <strong>Step 2: Handle the Edge Case (Largest Permutation)</strong>
-  <a class="heading-link" href="#step-2-handle-the-edge-case-largest-permutation">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span>) {
-</span></span><span style="display:flex;"><span>    reverse(nums.begin(), nums.end());
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>If no such ascending pair is found (i.e., the list is in descending order), we reverse the entire list to obtain the smallest permutation.</li>
-</ul>
-<h4 id="step-3-find-the-next-larger-element">
-  <strong>Step 3: Find the Next Larger Element</strong>
-  <a class="heading-link" href="#step-3-find-the-next-larger-element">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> nums.size() <span style="color:#666">-</span> <span style="color:#666">1</span>; i <span style="color:#666">&gt;</span> idx; i<span style="color:#666">--</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">&gt;</span> nums[idx]) {
-</span></span><span style="display:flex;"><span>        swap(nums[idx], nums[i]);
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">break</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>We now look for the smallest element larger than <code>nums[idx]</code> from the right side. Once found, we swap them to ensure the next permutation is as close as possible to the current one but larger.</li>
-</ul>
-<h4 id="step-4-reverse-the-suffix">
-  <strong>Step 4: Reverse the Suffix</strong>
-  <a class="heading-link" href="#step-4-reverse-the-suffix">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>reverse(nums.begin() <span style="color:#666">+</span> idx <span style="color:#666">+</span> <span style="color:#666">1</span>, nums.end());
-</span></span></code></pre></div><ul>
-<li>After swapping, the sublist from <code>idx+1</code> to the end of the list is in descending order. Reversing this part ensures that the list is in the smallest lexicographical order after the change.</li>
-</ul>
-<hr>
-<h3 id="-complexity-breakdown">
-  ⏳ <strong>Complexity Breakdown</strong>
-  <a class="heading-link" href="#-complexity-breakdown">
+<ol>
+<li><strong>Finding the Pivot</strong>: The first loop iterates backward to locate the pivot index <code>idx</code>.</li>
+<li><strong>Reversing for Last Permutation</strong>: If <code>idx</code> is <code>-1</code>, reverse the entire array and return.</li>
+<li><strong>Swapping Elements</strong>: The second loop finds the element to swap with the pivot and performs the swap.</li>
+<li><strong>Reversing the Suffix</strong>: Finally, reverse the elements after the pivot to ensure the smallest arrangement.</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li>
-<p><strong>Time Complexity: O(n)</strong><br>
-The algorithm involves:</p>
-<ol>
-<li>A linear scan from right to left to find the first ascending pair (O(n)).</li>
-<li>Another linear scan from the right side to find the element to swap with <code>nums[idx]</code> (O(n)).</li>
-<li>A reverse operation (O(n)) on the portion of the list after the swap.</li>
-</ol>
-<p>Thus, the overall time complexity is <strong>O(n)</strong>, where <code>n</code> is the number of elements in the list.</p>
-</li>
-<li>
-<p><strong>Space Complexity: O(1)</strong><br>
-The algorithm uses only a constant amount of extra space (excluding the input list), which is required for the index <code>idx</code> and the loop variables.</p>
-</li>
+<li><strong>Time Complexity:</strong> (O(n)), where (n) is the length of the input array, since each of the main steps (finding the pivot, swapping, and reversing) requires linear time.</li>
+<li><strong>Space Complexity:</strong> (O(1)), as the rearrangement is done in place without requiring additional storage.</li>
 </ul>
-<hr>
-<h3 id="-key-insights">
-  💡 <strong>Key Insights</strong>
-  <a class="heading-link" href="#-key-insights">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ul>
-<li>
-<p><strong>In-Place Algorithm:</strong> The algorithm works by modifying the input list in place, meaning it doesn’t require any additional space beyond the variables needed for the calculation.</p>
-</li>
-<li>
-<p><strong>Efficient:</strong> This solution operates in <strong>O(n)</strong> time, making it suitable for large input sizes. The use of <strong>constant space</strong> ensures minimal memory usage.</p>
-</li>
-<li>
-<p><strong>Edge Case Handling:</strong> The algorithm efficiently handles the case when the input is already the largest permutation by reversing the entire list.</p>
-</li>
-</ul>
-<hr>
-<h3 id="-conclusion">
-  🚀 <strong>Conclusion</strong>
-  <a class="heading-link" href="#-conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution provides an optimal way to generate the next lexicographically greater permutation of a list of numbers. By using an efficient in-place algorithm with a time complexity of <strong>O(n)</strong> and a space complexity of <strong>O(1)</strong>, it ensures that the next permutation is computed quickly and with minimal memory usage.</p>
-<p>This approach is ideal for problems involving permutations or order constraints, and the techniques used here (finding ascending pairs, swapping, and reversing) are commonly applied in various algorithmic challenges related to permutations.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1068s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1065s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

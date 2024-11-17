@@ -146,7 +146,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              4-minute read
+              2-minute read
             </span>
           </div>
 
@@ -260,150 +260,84 @@
 
   
   <div class="markdown-body">
-    <h3 id="-problem-statement">
-  🚀 Problem Statement
-  <a class="heading-link" href="#-problem-statement">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Let’s dive into the <strong>Reversing a Singly Linked List</strong> problem! 🔄 Given the head of a singly linked list, your task is to reverse the list so that the first node becomes the last, and the last node becomes the first. We need to return the head of the reversed list after performing the operation.</p>
-<h4 id="example">
-  Example:
-  <a class="heading-link" href="#example">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>Input:</strong> <code>head = [1, 2, 3, 4, 5]</code></li>
-<li><strong>Output:</strong> <code>head = [5, 4, 3, 2, 1]</code></li>
-</ul>
-<p>This problem is about efficiently reversing the linked list with linear time complexity and constant space. Let&rsquo;s break it down! 💡</p>
-<hr>
-<h3 id="-approach">
-  🔍 Approach
-  <a class="heading-link" href="#-approach">
+<p>Given the head of a singly linked list, reverse the list and return the reversed list&rsquo;s head.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>We can solve this problem using an <strong>iterative approach</strong> by keeping track of three pointers:</p>
 <ol>
-<li><strong><code>head</code></strong>: Initially points to the first node of the list.</li>
-<li><strong><code>prv</code></strong> (previous): Initially set to <code>nullptr</code> since the new tail will point to <code>nullptr</code>.</li>
-<li><strong><code>nxt</code></strong> (next): Temporarily stores the next node while we adjust the <code>next</code> pointers.</li>
-</ol>
-<p>Here’s the game plan:</p>
-<ol>
-<li>Set up the pointers (<code>head</code>, <code>prv</code>, and <code>nxt</code>).</li>
-<li>Traverse the list, reverse the pointers one by one.</li>
-<li>Return the new head when the list is fully reversed.</li>
-</ol>
-<p>Let’s look at the detailed steps! 🧠</p>
-<hr>
-<h3 id="-step-by-step-code-breakdown">
-  🔨 Step-by-Step Code Breakdown
-  <a class="heading-link" href="#-step-by-step-code-breakdown">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="step-1-initialize-pointers">
-  Step 1: Initialize Pointers
-  <a class="heading-link" href="#step-1-initialize-pointers">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ListNode<span style="color:#666">*</span> nxt, <span style="color:#666">*</span>prv <span style="color:#666">=</span> <span style="color:#a2f">NULL</span>;
-</span></span></code></pre></div><ul>
-<li><strong><code>nxt</code></strong>: A temporary pointer to store the next node of the list.</li>
-<li><strong><code>prv</code></strong>: Initially set to <code>nullptr</code>, which will eventually become the new head of the reversed list.</li>
-</ul>
-<h4 id="step-2-traverse-the-list">
-  Step 2: Traverse the List
-  <a class="heading-link" href="#step-2-traverse-the-list">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span> (head) {
-</span></span><span style="display:flex;"><span>    nxt <span style="color:#666">=</span> head<span style="color:#666">-&gt;</span>next;   <span style="color:#080;font-style:italic">// Store the next node temporarily
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    head<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> prv;    <span style="color:#080;font-style:italic">// Reverse the current node&#39;s next pointer
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    prv <span style="color:#666">=</span> head;          <span style="color:#080;font-style:italic">// Move `prv` to the current node
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    head <span style="color:#666">=</span> nxt;          <span style="color:#080;font-style:italic">// Move to the next node in the list
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
-</span></span></code></pre></div><ul>
-<li><strong>Loop condition:</strong> We continue until we reach the end of the list (<code>head</code> becomes <code>nullptr</code>).</li>
-<li><strong><code>nxt = head-&gt;next</code>:</strong> Store the next node so we don&rsquo;t lose the rest of the list.</li>
-<li><strong><code>head-&gt;next = prv</code>:</strong> Reverse the current node&rsquo;s <code>next</code> pointer to point to the previous node.</li>
-<li><strong><code>prv = head</code>:</strong> Move the <code>prv</code> pointer to the current node.</li>
-<li><strong><code>head = nxt</code>:</strong> Move to the next node, stored in <code>nxt</code>.</li>
-</ul>
-<h4 id="step-3-return-the-new-head">
-  Step 3: Return the New Head
-  <a class="heading-link" href="#step-3-return-the-new-head">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> prv;
-</span></span></code></pre></div><ul>
-<li>Once the loop finishes, <code>prv</code> will point to the new head of the reversed list. Return it to complete the process! 🎉</li>
-</ul>
-<hr>
-<h3 id="-complexity-analysis">
-  📊 Complexity Analysis
-  <a class="heading-link" href="#-complexity-analysis">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>Let’s analyze the time and space complexity of this solution. ⏱️💾</p>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
+<li>
+<p><strong>Pointer Initialization</strong>:</p>
 <ul>
-<li><strong>O(n):</strong>
+<li>Use three pointers:
 <ul>
-<li>We traverse the entire list once, visiting each node exactly once. For each node, we perform constant-time operations (updating pointers), so the time complexity is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the list.</li>
+<li><code>head</code> to traverse the list,</li>
+<li><code>nxt</code> to temporarily store the next node,</li>
+<li><code>prv</code> to keep track of the previous node, initially set to <code>NULL</code>.</li>
 </ul>
 </li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
+</li>
+<li>
+<p><strong>Iterate Through the List</strong>:</p>
 <ul>
-<li><strong>O(1):</strong>
+<li>While <code>head</code> is not <code>NULL</code> (meaning there are still nodes to process):
 <ul>
-<li>The space complexity is constant because we only use a few extra pointers (<code>prv</code>, <code>nxt</code>), regardless of the list size. No additional data structures are used, so the space complexity remains <strong>O(1)</strong>.</li>
+<li>Store the next node (<code>nxt = head-&gt;next</code>).</li>
+<li>Reverse the link of the current node (<code>head-&gt;next = prv</code>).</li>
+<li>Move the <code>prv</code> pointer to the current node (<code>prv = head</code>).</li>
+<li>Advance the <code>head</code> pointer to the next node (<code>head = nxt</code>).</li>
 </ul>
 </li>
 </ul>
-<hr>
-<h3 id="-conclusion">
-  🏁 Conclusion
-  <a class="heading-link" href="#-conclusion">
+</li>
+<li>
+<p><strong>Return the New Head</strong>:</p>
+<ul>
+<li>After the loop, <code>prv</code> will be pointing to the new head of the reversed list. Return <code>prv</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>In conclusion, we’ve successfully reversed the singly linked list using an efficient iterative approach! 🚀 Here’s a quick summary:</p>
-<ol>
-<li><strong>Time Efficiency:</strong> The algorithm runs in <strong>O(n)</strong>, which is optimal since we must traverse each node.</li>
-<li><strong>Space Efficiency:</strong> The solution uses constant space <strong>O(1)</strong>, making it perfect for large lists.</li>
-<li><strong>Simplicity:</strong> The iterative approach is easy to implement, avoiding recursion and keeping things simple.</li>
-</ol>
-<p>This solution is perfect when you need to reverse a linked list in the most efficient way possible. Keep practicing, and you’ll become a linked list pro in no time! 💪✨</p>
+<ul>
+<li><strong>Line 1</strong>: Define the <code>ListNode</code> structure.</li>
+<li><strong>Line 2</strong>: Define the class <code>Solution</code>.</li>
+<li><strong>Line 3</strong>: Define the function <code>reverseList(ListNode* head)</code>.</li>
+<li><strong>Lines 4-8</strong>:
+<ul>
+<li>Initialize pointers (<code>nxt</code>, <code>prv</code>) and iterate through the linked list.</li>
+<li>Update the <code>next</code> pointers to reverse the links.</li>
+</ul>
+</li>
+<li><strong>Line 9</strong>: Return the new head of the reversed list (<code>prv</code>).</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: (O(n)), where (n) is the number of nodes in the linked list, as each node is processed once.</li>
+<li><strong>Space Complexity</strong>: (O(1)), since no additional data structures are used that depend on the size of the input list.</li>
+</ul>
  
 </div>
   

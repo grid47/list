@@ -147,7 +147,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              4-minute read
+              2-minute read
             </span>
           </div>
 
@@ -216,7 +216,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1386s0hbhb">
+        <h2 id="hahahugoshortcode1389s0hbhb">
   <a href="https://leetcode.com/problems/gray-code/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -231,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1386s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1389s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -251,155 +251,65 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;        
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1386s2hbhb">
+<h2 id="hahahugoshortcode1389s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="-gray-code-sequence-problem">
-  📝 <strong>Gray Code Sequence Problem</strong>
-  <a class="heading-link" href="#-gray-code-sequence-problem">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given an integer <code>n</code>, the task is to generate the Gray Code sequence for <code>n</code> bits. In this sequence, each number differs from the previous one by exactly one bit.</p>
-<h4 id="example">
-  Example:
-  <a class="heading-link" href="#example">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>For <code>n = 2</code>, the Gray Code sequence is: <code>[0, 1, 3, 2]</code></li>
-<li>For <code>n = 3</code>, the Gray Code sequence is: <code>[0, 1, 3, 2, 6, 7, 5, 4]</code></li>
-</ul>
-<h3 id="-approach">
-  🔍 <strong>Approach</strong>
-  <a class="heading-link" href="#-approach">
+<p>Generate the Gray code sequence of <code>n</code> bits. The Gray code is a binary numeral system where two successive values differ in only one bit.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To generate the Gray Code sequence efficiently, we use an <strong>iterative approach</strong>. The key observation is:</p>
-<ul>
-<li>The Gray Code for <code>n</code> bits can be derived by reflecting the Gray Code for <code>n-1</code> bits and prefixing the original values with <code>0</code> and the reflected values with <code>1</code>.</li>
-</ul>
-<h4 id="step-by-step-process">
-  Step-by-Step Process:
-  <a class="heading-link" href="#step-by-step-process">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ol>
-<li><strong>Base Case</strong>: For <code>n = 0</code>, the Gray Code sequence is simply <code>[0]</code>.</li>
-<li><strong>Iterative Generation</strong>:
+<li><strong>Initialize</strong>: Start with a single element <code>0</code> in the result vector <code>res</code>.</li>
+<li><strong>Iterate through bits</strong>: For each bit position <code>idx</code> (from 0 to <code>n-1</code>):
 <ul>
-<li>For each bit position from <code>1</code> to <code>n</code>, reflect the previous sequence, prefix the original numbers with <code>0</code>, and the reflected numbers with <code>1</code>.</li>
-<li>This step effectively builds the sequence incrementally, adding one bit at a time.</li>
+<li>Determine the current size of <code>res</code>.</li>
+<li>Reverse iterate over <code>res</code> to create new values by setting the <code>idx</code>-th bit to <code>1</code> in each value. This is done using <code>res[jdx] | (1 &lt;&lt; idx)</code>.</li>
+<li>Append each new value to <code>res</code>.</li>
 </ul>
 </li>
+<li><strong>Return Result</strong>: Once all <code>n</code> bits have been processed, <code>res</code> contains the Gray code sequence for <code>n</code> bits.</li>
 </ol>
-<h3 id="-code-breakdown">
-  🧑‍💻 <strong>Code Breakdown</strong>
-  <a class="heading-link" href="#-code-breakdown">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="step-1-initialize-the-result">
-  Step 1: Initialize the Result
-  <a class="heading-link" href="#step-1-initialize-the-result">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res <span style="color:#666">=</span> {<span style="color:#666">0</span>};
-</span></span></code></pre></div><p>We start with the base case where the Gray Code sequence for <code>0</code> bits is just <code>[0]</code>.</p>
-<h4 id="step-2-iterating-over-the-bit-positions">
-  Step 2: Iterating Over the Bit Positions
-  <a class="heading-link" href="#step-2-iterating-over-the-bit-positions">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> idx <span style="color:#666">=</span> <span style="color:#666">0</span>; idx <span style="color:#666">&lt;</span> n; idx<span style="color:#666">++</span>) {
-</span></span></code></pre></div><p>We loop through each bit position (from <code>0</code> to <code>n-1</code>). For each iteration, the sequence is updated to include Gray Code for the current number of bits.</p>
-<h4 id="step-3-reflecting-the-sequence">
-  Step 3: Reflecting the Sequence
-  <a class="heading-link" href="#step-3-reflecting-the-sequence">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> res.size();
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> jdx <span style="color:#666">=</span> sz <span style="color:#666">-</span> <span style="color:#666">1</span>; jdx <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; jdx<span style="color:#666">--</span>)
-</span></span><span style="display:flex;"><span>    res.push_back(res[jdx] <span style="color:#666">|</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> idx));
-</span></span></code></pre></div><ul>
-<li>The <code>sz = res.size()</code> stores the current size of the sequence.</li>
-<li>The inner loop processes the sequence in reverse order. For each element in the current sequence, we add a new value by setting the <code>idx</code>-th bit to <code>1</code> using the bitwise OR operation <code>res[jdx] | (1 &lt;&lt; idx)</code>. This step mirrors the sequence and adds the new bit to the reflected part.</li>
-</ul>
-<h4 id="step-4-return-the-final-result">
-  Step 4: Return the Final Result
-  <a class="heading-link" href="#step-4-return-the-final-result">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div><p>After processing all bit positions, the sequence <code>res</code> contains the Gray Code sequence for <code>n</code> bits, which is returned.</p>
-<h3 id="-complexity-analysis">
-  ⏱ <strong>Complexity Analysis</strong>
-  <a class="heading-link" href="#-complexity-analysis">
+<ol>
+<li><strong>Initialization</strong>: Start with <code>res = {0}</code>.</li>
+<li><strong>Outer Loop</strong>: For each bit position <code>idx</code> from 0 to <code>n-1</code>.</li>
+<li><strong>Inner Loop</strong>: Iterate over <code>res</code> in reverse to generate new values by setting the current bit and append them to <code>res</code>.</li>
+<li><strong>Return Result</strong>: The final <code>res</code> contains the Gray code sequence.</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>The time complexity is <strong>O(2^n)</strong> because:</p>
 <ul>
-<li>The size of the Gray Code sequence for <code>n</code> bits is <code>2^n</code>.</li>
-<li>Each iteration of the outer loop processes the sequence by reflecting it and adding <code>1</code> to each value, so the total number of operations is proportional to the size of the sequence.</li>
-</ul>
-<p>Thus, the time complexity is <strong>O(2^n)</strong>.</p>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>The space complexity is also <strong>O(2^n)</strong>, as we store the Gray Code sequence in a vector of size <code>2^n</code>.</p>
-<h3 id="-conclusion">
-  🎯 <strong>Conclusion</strong>
-  <a class="heading-link" href="#-conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution generates the Gray Code sequence for <code>n</code> bits using an iterative approach. By reflecting the sequence and adjusting each number by adding one bit at a time, the algorithm constructs the sequence efficiently. With both time and space complexities of <strong>O(2^n)</strong>, this approach is optimal for generating the Gray Code sequence, especially for larger values of <code>n</code>.</p>
-<hr>
-<h4 id="-final-thoughts">
-  🌟 <strong>Final Thoughts</strong>:
-  <a class="heading-link" href="#-final-thoughts">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>This solution is highly efficient and can be used to generate Gray Code sequences for a wide range of inputs. Keep practicing these types of problems to further enhance your understanding of bit manipulation and iterative algorithms!</p>
- 
+<li><strong>Time Complexity</strong>: (O(2^n)), since we generate each Gray code value for <code>n</code> bits.</li>
+<li><strong>Space Complexity</strong>: (O(2^n)), as we store each unique Gray code sequence in <code>res</code>.</li>
+</ul> 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1386s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1389s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

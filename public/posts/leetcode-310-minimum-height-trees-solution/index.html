@@ -148,7 +148,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              4-minute read
+              3-minute read
             </span>
           </div>
 
@@ -221,7 +221,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1063s0hbhb">
+        <h2 id="hahahugoshortcode1066s0hbhb">
   <a href="https://leetcode.com/problems/minimum-height-trees/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -236,7 +236,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1063s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1066s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -279,155 +279,98 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1063s2hbhb">
+<h2 id="hahahugoshortcode1066s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="-problem-statement">
-  🚀 Problem Statement
-  <a class="heading-link" href="#-problem-statement">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Let&rsquo;s dive into a fun challenge! 🎉 The goal here is to identify all <strong>Minimum Height Trees (MHTs)</strong> in an undirected graph with <code>n</code> nodes. Each MHT is defined by having the minimum possible height when rooted at a particular node. Here’s the breakdown:</p>
-<ul>
-<li>We have <code>n</code> nodes, labeled from <code>0</code> to <code>n-1</code>.</li>
-<li>The graph is connected, with each edge linking two distinct nodes.</li>
-<li>Your mission: find all the <strong>root nodes</strong> that, when used as the root of the tree, yield the smallest height.</li>
-</ul>
-<hr>
-<h3 id="-key-insights">
-  🔍 Key Insights
-  <a class="heading-link" href="#-key-insights">
+<p>Given an undirected tree with <code>n</code> nodes labeled from <code>0</code> to <code>n-1</code>, and a list of edges that connect the nodes, find all the minimum height trees (MHTs). A minimum height tree is defined as a tree that has the minimum possible height when rooted at any of its nodes.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p><strong>How can we minimize the tree height?</strong> 🌳 The trick is to find the &ldquo;center&rdquo; of the tree. A tree center balances the longest paths to all leaves, keeping the height as low as possible. The center can be one or two nodes, depending on the structure of the tree.</p>
-<p>Here’s our plan:</p>
-<ol>
-<li><strong>Tree Properties</strong>: Trees have unique paths between nodes, and their heights depend on the longest path from the root to the leaves.</li>
-<li><strong>Layered Leaf Removal</strong>: We’ll strip away leaf nodes layer by layer. When only 1 or 2 nodes are left, these will be the centers!</li>
-<li><strong>Efficient BFS Removal</strong>: By removing leaves layer-by-layer with a BFS, we’ll zoom into the tree&rsquo;s core, finding the central node(s) in the process.</li>
-</ol>
-<hr>
-<h3 id="-step-by-step-approach">
-  🛠️ Step-by-Step Approach
-  <a class="heading-link" href="#-step-by-step-approach">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>Let’s break down this solution in easy-to-follow steps:</p>
+<p>The solution uses a breadth-first search (BFS) strategy to find the centers of the tree, which are the nodes that form the minimum height trees. The key steps are as follows:</p>
 <ol>
 <li>
-<p><strong>Build the Adjacency List</strong>: 📋 First, represent the graph using an adjacency list. This way, we can quickly access the neighbors of each node.</p>
-</li>
-<li>
-<p><strong>Track Node Degrees</strong>: 🧩 Each node’s degree (i.e., number of neighbors) is crucial. Nodes with a degree of 1 are leaves. We&rsquo;ll use a degree array to track these values.</p>
-</li>
-<li>
-<p><strong>Identify Initial Leaves</strong>: 🍃 Start by queuing up all leaf nodes (degree = 1). These are our first candidates for removal.</p>
-</li>
-<li>
-<p><strong>Remove Leaves in Layers</strong>: 🌊 Using BFS, remove the outermost leaves first. For each leaf:</p>
+<p><strong>Edge Cases</strong>:</p>
 <ul>
-<li>Reduce the degree of its neighbors.</li>
-<li>If any neighbor’s degree becomes 1, add it to the queue (it’s the next leaf layer).</li>
+<li>If there is only one node (<code>n == 1</code>), return <code>[0]</code> since the single node itself is the only MHT.</li>
 </ul>
-<p>Repeat this until only 1 or 2 nodes remain. These are our centers!</p>
 </li>
 <li>
-<p><strong>Return the Centers</strong>: 🎯 The remaining nodes are the MHT roots!</p>
+<p><strong>Graph Representation</strong>:</p>
+<ul>
+<li>Create an adjacency list <code>adj</code> to represent the tree.</li>
+<li>Maintain a <code>degree</code> array to track the number of edges connected to each node.</li>
+</ul>
+</li>
+<li>
+<p><strong>Build the Graph</strong>:</p>
+<ul>
+<li>For each edge in <code>edges</code>, update the adjacency list and the degree of both connected nodes.</li>
+</ul>
+</li>
+<li>
+<p><strong>Initialize the Queue</strong>:</p>
+<ul>
+<li>Push all leaf nodes (nodes with degree <code>1</code>) into a queue. These nodes are potential candidates for MHTs.</li>
+</ul>
+</li>
+<li>
+<p><strong>BFS to Find MHTs</strong>:</p>
+<ul>
+<li>Perform BFS to gradually remove leaf nodes:
+<ul>
+<li>While the queue is not empty, clear the result vector and process all current leaf nodes.</li>
+<li>For each leaf node, decrement the degree of its neighbors. If any neighbor&rsquo;s degree becomes <code>1</code>, it becomes a new leaf and is added to the queue.</li>
+</ul>
+</li>
+<li>The remaining nodes in the result vector at the end of this process are the roots of the MHTs.</li>
+</ul>
 </li>
 </ol>
-<hr>
-<h3 id="-code-breakdown">
-  🔨 Code Breakdown
-  <a class="heading-link" href="#-code-breakdown">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Here’s the C++ code with step-by-step explanations:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">findMinHeightTrees</span>(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> edges) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> {<span style="color:#666">0</span>}; <span style="color:#080;font-style:italic">// Special case: Only one node means it’s the root by default.
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Step 1: Build the adjacency list and degree array
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> adj(n);
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> degree(n, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">e</span> : edges) {
-</span></span><span style="display:flex;"><span>        adj[e[<span style="color:#666">0</span>]].push_back(e[<span style="color:#666">1</span>]);
-</span></span><span style="display:flex;"><span>        adj[e[<span style="color:#666">1</span>]].push_back(e[<span style="color:#666">0</span>]);
-</span></span><span style="display:flex;"><span>        degree[e[<span style="color:#666">0</span>]]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        degree[e[<span style="color:#666">1</span>]]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Step 2: Initialize the queue with all leaf nodes
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (degree[i] <span style="color:#666">==</span> <span style="color:#666">1</span>) q.push(i);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Step 3: Remove leaves layer by layer
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> (<span style="color:#666">!</span>q.empty()) {
-</span></span><span style="display:flex;"><span>        res.clear();
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size(); <span style="color:#080;font-style:italic">// Current layer size
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">while</span> (sz<span style="color:#666">--</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> leaf <span style="color:#666">=</span> q.front();
-</span></span><span style="display:flex;"><span>            q.pop();
-</span></span><span style="display:flex;"><span>            res.push_back(leaf);
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">nbr</span> : adj[leaf]) {
-</span></span><span style="display:flex;"><span>                degree[nbr]<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span> (degree[nbr] <span style="color:#666">==</span> <span style="color:#666">1</span>) q.push(nbr); <span style="color:#080;font-style:italic">// New leaf
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            }
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Remaining nodes are the centers
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><hr>
-<h3 id="-complexity-analysis">
-  📈 Complexity Analysis
-  <a class="heading-link" href="#-complexity-analysis">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p><strong>Time Complexity</strong>: 🕒 <strong>O(n)</strong> because:</p>
 <ul>
-<li>We process each node and edge a limited number of times (once for building the adjacency list, once for leaf removal).</li>
+<li><strong>Input</strong>: An integer <code>n</code> for the number of nodes, and a vector of edges connecting the nodes.</li>
+<li><strong>Output</strong>: A vector of integers representing the labels of nodes that form the minimum height trees.</li>
 </ul>
-<p><strong>Space Complexity</strong>: 💾 <strong>O(n)</strong>, since we store:</p>
-<ul>
-<li>The adjacency list.</li>
-<li>The degree array.</li>
-<li>A queue for leaf nodes.</li>
-</ul>
-<hr>
-<h3 id="-conclusion">
-  🏁 Conclusion
-  <a class="heading-link" href="#-conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>By repeatedly removing leaves, we zoom in on the central nodes that minimize the tree height. This approach is efficient and perfectly suited to large trees. 🌲✨</p>
-<p><strong>Takeaways</strong>:</p>
 <ol>
-<li><strong>Layered BFS</strong>: Stripping leaves layer-by-layer zeroes in on the tree&rsquo;s center.</li>
-<li><strong>Optimal Center Finding</strong>: Only 1-2 nodes remain as the centers, making them ideal MHT roots.</li>
-<li><strong>Time Efficiency</strong>: Linear time complexity means this solution is fast and scalable!</li>
+<li>Initialize the adjacency list and degree array based on the edges provided.</li>
+<li>Use a queue to start processing leaf nodes and iteratively find the centers of the tree.</li>
+<li>Return the result containing the labels of the minimum height tree nodes.</li>
 </ol>
-<p>Keep up the momentum, and happy coding! 🧑‍💻</p>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: (O(n)), where (n) is the number of nodes. Each edge and node is processed once.</li>
+<li><strong>Space Complexity</strong>: (O(n)) for the adjacency list and degree storage.</li>
+</ul>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1063s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1066s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

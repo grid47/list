@@ -145,7 +145,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -197,7 +197,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -218,7 +218,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> inc <span style="color:#666">||</span> dec;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1389s1hbhb">
+<h2 id="hahahugoshortcode1390s1hbhb">
   
 
   
@@ -230,12 +230,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem asks us to determine if an array is <strong>monotonic</strong>. An array is considered <strong>monotonic</strong> if it is either:</p>
-<ul>
-<li><strong>Non-increasing</strong>: each element is greater than or equal to the next.</li>
-<li><strong>Non-decreasing</strong>: each element is less than or equal to the next.</li>
-</ul>
-<p>Given an array <code>A</code>, the task is to return <code>true</code> if the array is monotonic, and <code>false</code> otherwise.</p>
+<p>Given an array <code>A</code>, determine if it is monotonic. An array is monotonic if it is either entirely non-increasing or non-decreasing.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -243,130 +238,44 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve the problem, we need to verify whether the array satisfies either a <strong>non-decreasing</strong> or <strong>non-increasing</strong> condition. This can be done by iterating through the array and comparing adjacent elements. If the array satisfies one of these conditions throughout the entire iteration, we can confidently declare it as monotonic.</p>
-<p>We use two flags to track whether the array is non-decreasing and non-increasing:</p>
 <ol>
-<li><strong><code>inc</code></strong>: This flag will be <code>true</code> if the array is non-decreasing.</li>
-<li><strong><code>dec</code></strong>: This flag will be <code>true</code> if the array is non-increasing.</li>
+<li>
+<p><strong>Flags</strong>:</p>
+<ul>
+<li>Use two boolean flags, <code>inc</code> and <code>dec</code>, to track if the array is non-decreasing and non-increasing, respectively.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate through the Array</strong>:</p>
+<ul>
+<li>Loop through the array starting from the second element.</li>
+<li>Update the <code>inc</code> flag to check if the current element is greater than or equal to the previous element.</li>
+<li>Update the <code>dec</code> flag to check if the current element is less than or equal to the previous element.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>Return <code>true</code> if either <code>inc</code> or <code>dec</code> remains <code>true</code> after the loop, indicating that the array is monotonic.</li>
+</ul>
+</li>
 </ol>
-<p>If, at the end of the iteration, either the <code>inc</code> or <code>dec</code> flag remains <code>true</code>, it means the array satisfies at least one of the conditions and thus is monotonic.</p>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Let&rsquo;s break down the code and explain each part in detail:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> isMonotonic(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> A) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">bool</span> inc <span style="color:#666">=</span> <span style="color:#a2f">true</span>, dec <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span></code></pre></div><ul>
-<li>The class <code>Solution</code> contains the method <code>isMonotonic</code>, which takes a vector <code>A</code> as input.</li>
-<li>We initialize two boolean variables, <code>inc</code> and <code>dec</code>, both set to <code>true</code> initially. These variables track whether the array is non-decreasing (<code>inc</code>) or non-increasing (<code>dec</code>).</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> A.size(); <span style="color:#666">++</span>i)
-</span></span><span style="display:flex;"><span>            inc <span style="color:#666">&amp;=</span> A[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&lt;=</span> A[i], dec <span style="color:#666">&amp;=</span> A[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&gt;=</span> A[i];
-</span></span></code></pre></div><ul>
-<li>
-<p>The <code>for</code> loop iterates over the elements of the array starting from the second element (index <code>1</code>).</p>
 <ul>
-<li>For each pair of adjacent elements, we perform two checks:
+<li><strong>Class</strong>:
 <ul>
-<li><code>inc &amp;= A[i - 1] &lt;= A[i]</code>: This checks if the current element is greater than or equal to the previous element, which ensures the array is non-decreasing. If any element violates this condition, <code>inc</code> will be set to <code>false</code>.</li>
-<li><code>dec &amp;= A[i - 1] &gt;= A[i]</code>: This checks if the current element is less than or equal to the previous element, which ensures the array is non-increasing. If any element violates this condition, <code>dec</code> will be set to <code>false</code>.</li>
-</ul>
-</li>
-</ul>
-</li>
-<li>
-<p>The logical AND (<code>&amp;=</code>) operator is used in both checks, which means both conditions must hold for <code>inc</code> and <code>dec</code> to remain <code>true</code>. If either of the conditions is violated, the respective flag is set to <code>false</code> for the rest of the iteration.</p>
-</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> inc <span style="color:#666">||</span> dec;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><ul>
-<li>After the loop completes, we return the result of <code>inc || dec</code>. If either <code>inc</code> or <code>dec</code> is <code>true</code>, the array is monotonic, and we return <code>true</code>. Otherwise, the array is neither non-decreasing nor non-increasing, so we return <code>false</code>.</li>
-</ul>
-<h3 id="example-walkthrough">
-  Example Walkthrough
-  <a class="heading-link" href="#example-walkthrough">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>Let&rsquo;s walk through an example to understand how the algorithm works:</p>
-<h4 id="example-1">
-  Example 1:
-  <a class="heading-link" href="#example-1">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>Input: <code>A = [1, 2, 2, 3]</code></p>
+<li><code>class Solution</code>: Contains the method to check monotonicity.
 <ul>
-<li>
-<p><code>inc = true</code>, <code>dec = true</code> (initial state)</p>
-</li>
-<li>
-<p>Iteration through the array:</p>
-<ul>
-<li><code>i = 1</code>: Compare <code>A[0]</code> (1) and <code>A[1]</code> (2). Since 1 &lt;= 2, <code>inc</code> remains <code>true</code>. Since 1 &gt;= 2 is false, <code>dec</code> becomes <code>false</code>.</li>
-<li><code>i = 2</code>: Compare <code>A[1]</code> (2) and <code>A[2]</code> (2). Since 2 &lt;= 2, <code>inc</code> remains <code>true</code>. Since 2 &gt;= 2, <code>dec</code> remains <code>false</code>.</li>
-<li><code>i = 3</code>: Compare <code>A[2]</code> (2) and <code>A[3]</code> (3). Since 2 &lt;= 3, <code>inc</code> remains <code>true</code>. Since 2 &gt;= 3 is false, <code>dec</code> remains <code>false</code>.</li>
+<li><code>bool isMonotonic(vector&lt;int&gt; A)</code>: Checks if the array is monotonic.</li>
 </ul>
 </li>
-<li>
-<p>After the iteration, <code>inc = true</code> and <code>dec = false</code>, so the array is monotonic. The result is <code>true</code>.</p>
-</li>
 </ul>
-<h4 id="example-2">
-  Example 2:
-  <a class="heading-link" href="#example-2">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>Input: <code>A = [6, 5, 4, 4]</code></p>
-<ul>
-<li>
-<p><code>inc = true</code>, <code>dec = true</code> (initial state)</p>
-</li>
-<li>
-<p>Iteration through the array:</p>
-<ul>
-<li><code>i = 1</code>: Compare <code>A[0]</code> (6) and <code>A[1]</code> (5). Since 6 &gt;= 5, <code>dec</code> remains <code>true</code>. Since 6 &lt;= 5 is false, <code>inc</code> becomes <code>false</code>.</li>
-<li><code>i = 2</code>: Compare <code>A[1]</code> (5) and <code>A[2]</code> (4). Since 5 &gt;= 4, <code>dec</code> remains <code>true</code>. Since 5 &lt;= 4 is false, <code>inc</code> remains <code>false</code>.</li>
-<li><code>i = 3</code>: Compare <code>A[2]</code> (4) and <code>A[3]</code> (4). Since 4 &lt;= 4, <code>inc</code> remains <code>false</code>. Since 4 &gt;= 4, <code>dec</code> remains <code>true</code>.</li>
-</ul>
-</li>
-<li>
-<p>After the iteration, <code>inc = false</code> and <code>dec = true</code>, so the array is monotonic. The result is <code>true</code>.</p>
-</li>
-</ul>
-<h4 id="example-3">
-  Example 3:
-  <a class="heading-link" href="#example-3">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>Input: <code>A = [1, 3, 2]</code></p>
-<ul>
-<li>
-<p><code>inc = true</code>, <code>dec = true</code> (initial state)</p>
-</li>
-<li>
-<p>Iteration through the array:</p>
-<ul>
-<li><code>i = 1</code>: Compare <code>A[0]</code> (1) and <code>A[1]</code> (3). Since 1 &lt;= 3, <code>inc</code> remains <code>true</code>. Since 1 &gt;= 3 is false, <code>dec</code> becomes <code>false</code>.</li>
-<li><code>i = 2</code>: Compare <code>A[1]</code> (3) and <code>A[2]</code> (2). Since 3 &lt;= 2 is false, <code>inc</code> becomes <code>false</code>. Since 3 &gt;= 2, <code>dec</code> remains <code>false</code>.</li>
-</ul>
-</li>
-<li>
-<p>After the iteration, both <code>inc = false</code> and <code>dec = false</code>. The array is neither non-decreasing nor non-increasing, so the result is <code>false</code>.</p>
 </li>
 </ul>
 <h3 id="complexity">
@@ -376,39 +285,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li>The algorithm iterates through the array once, making the time complexity <strong>O(n)</strong>, where <code>n</code> is the size of the array <code>A</code>. Each comparison and logical operation inside the loop takes constant time, so the overall complexity is linear with respect to the array length.</li>
+<li><strong>Time Complexity</strong>: O(n), where n is the number of elements in the array (single pass).</li>
+<li><strong>Space Complexity</strong>: O(1), since only a fixed number of additional variables are used.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>The algorithm uses only a constant amount of extra space, as we only store a few boolean flags and an index variable. Therefore, the space complexity is <strong>O(1)</strong>, constant space.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The <code>isMonotonic</code> function efficiently determines whether an array is monotonic by checking if it is either non-decreasing or non-increasing. It uses two boolean flags to track whether the array satisfies either condition and iterates through the array once to make these checks. With a time complexity of <strong>O(n)</strong> and a space complexity of <strong>O(1)</strong>, this solution is optimal for solving the problem.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1389s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1390s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

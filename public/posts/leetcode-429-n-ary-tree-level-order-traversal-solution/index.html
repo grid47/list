@@ -146,7 +146,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -211,7 +211,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1148s0hbhb">
+        <h2 id="hahahugoshortcode1147s0hbhb">
   <a href="https://leetcode.com/problems/n-ary-tree-level-order-traversal/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -226,7 +226,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1148s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1147s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -273,7 +273,7 @@
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1148s2hbhb">
+<h2 id="hahahugoshortcode1147s2hbhb">
   
 
   
@@ -285,7 +285,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem asks us to perform a level-order traversal on an n-ary tree and return the values of nodes at each level in a 2D vector. An n-ary tree is a tree where each node can have an arbitrary number of children. The solution should provide a way to traverse all the nodes in a breadth-first manner, grouping the node values at each level.</p>
+<p>Given an N-ary tree, return the level order traversal of its nodes&rsquo; values. Nary-Tree is a tree data structure where each node can have multiple children.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -293,96 +293,52 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Level-order traversal is a type of breadth-first search (BFS) in which we visit all the nodes at one level before moving to the next. In the case of an n-ary tree, each node can have multiple children, and therefore, the traversal must handle an arbitrary number of children at each level.</p>
-<p>To achieve this, we can use a <strong>recursive depth-first search (DFS)</strong> approach. We will maintain a 2D list where each sublist corresponds to one level of the tree. For each node, we record its value at the correct level based on its depth in the tree.</p>
-<p>Key steps involved:</p>
 <ol>
-<li><strong>Recursive Traversal</strong>: For each node, we traverse its children and append their values at the corresponding level in the result list.</li>
-<li><strong>Tracking Levels</strong>: As we move down the tree, we increase the depth level for each child node. We check if a sublist for that level exists and either append the value or create a new sublist for that level.</li>
-<li><strong>Base Case</strong>: The recursion stops when there are no more child nodes to traverse.</li>
+<li>
+<p><strong>Node Definition</strong>: Each node has:</p>
+<ul>
+<li>An integer <code>val</code> representing the value of the node.</li>
+<li>A vector <code>children</code> containing pointers to its child nodes.</li>
+</ul>
+</li>
+<li>
+<p><strong>Level Order Traversal</strong>:</p>
+<ul>
+<li>Utilize a helper function to perform a recursive depth-first traversal of the tree.</li>
+<li>Maintain the current level as you traverse down the tree, adding node values to the corresponding level in the result.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling Levels</strong>:</p>
+<ul>
+<li>Check if the current level already exists in the result. If not, create a new vector for that level.</li>
+<li>Append the current node&rsquo;s value to the appropriate level vector.</li>
+</ul>
+</li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="step-1-handle-the-base-case">
-  Step 1: Handle the Base Case
-  <a class="heading-link" href="#step-1-handle-the-base-case">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>root) <span style="color:#a2f;font-weight:bold">return</span> {};
-</span></span></code></pre></div><ul>
-<li>We first check if the root is <code>nullptr</code>. If the tree is empty (i.e., <code>root</code> is <code>nullptr</code>), we immediately return an empty result, as there are no nodes to traverse.</li>
+<ol>
+<li>
+<p><strong>Level Order Function</strong>:</p>
+<ul>
+<li>Checks if the root is null. If it is, return an empty vector.</li>
+<li>Initializes the result vector <code>ans</code> and calls the helper function <code>levelOrderT</code>.</li>
 </ul>
-<h4 id="step-2-initialize-the-result-vector">
-  Step 2: Initialize the Result Vector
-  <a class="heading-link" href="#step-2-initialize-the-result-vector">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans;
-</span></span></code></pre></div><ul>
-<li>We initialize a <code>vector</code> of vectors <code>ans</code> to store the node values at each level. Each inner vector will hold the values of nodes at the same depth in the tree.</li>
+</li>
+<li>
+<p><strong>Helper Function (levelOrderT)</strong>:</p>
+<ul>
+<li>Adds the current node&rsquo;s value to the result based on its level.</li>
+<li>Recursively calls itself for each child of the current node, increasing the level by one.</li>
 </ul>
-<h4 id="step-3-begin-the-recursive-traversal">
-  Step 3: Begin the Recursive Traversal
-  <a class="heading-link" href="#step-3-begin-the-recursive-traversal">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>levelOrderT(root, <span style="color:#666">0</span>, ans);
-</span></span></code></pre></div><ul>
-<li>We begin the recursive function <code>levelOrderT</code> with the root node, starting at level 0. The level starts at 0 because the root node is at depth 0.</li>
-</ul>
-<h4 id="step-4-recursive-traversal-function">
-  Step 4: Recursive Traversal Function
-  <a class="heading-link" href="#step-4-recursive-traversal-function">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">levelOrderT</span>(Node<span style="color:#666">*</span> node, <span style="color:#0b0;font-weight:bold">int</span> level, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>ans) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(level <span style="color:#666">==</span> size(ans)) {
-</span></span><span style="display:flex;"><span>        ans.push_back({node<span style="color:#666">-&gt;</span>val});
-</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>        ans[level].push_back(node<span style="color:#666">-&gt;</span>val);
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><ul>
-<li>Inside the recursive function, we first check if the current <code>level</code> already exists in the <code>ans</code> vector. If the current level does not exist (i.e., we are visiting this level for the first time), we create a new sublist for that level and add the node&rsquo;s value to it.</li>
-<li>If the level already exists, we simply append the node&rsquo;s value to the corresponding sublist for that level.</li>
-</ul>
-<h4 id="step-5-traverse-child-nodes">
-  Step 5: Traverse Child Nodes
-  <a class="heading-link" href="#step-5-traverse-child-nodes">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(Node<span style="color:#666">*</span> <span style="color:#a0a000">child</span>: node<span style="color:#666">-&gt;</span>children) {
-</span></span><span style="display:flex;"><span>    levelOrderT(child, level <span style="color:#666">+</span> <span style="color:#666">1</span>, ans);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>After processing the current node, we recursively visit each of its children. The level is incremented by 1 because we are moving one level deeper into the tree.</li>
-<li>This step ensures that each child node is placed at the correct level in the <code>ans</code> vector.</li>
-</ul>
-<h4 id="step-6-return-the-final-answer">
-  Step 6: Return the Final Answer
-  <a class="heading-link" href="#step-6-return-the-final-answer">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span></code></pre></div><ul>
-<li>After the recursive traversal is complete, we return the <code>ans</code> vector, which contains the values of the nodes grouped by their levels.</li>
-</ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -390,45 +346,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li>The time complexity of this algorithm is <code>O(N)</code>, where <code>N</code> is the total number of nodes in the tree. This is because we visit each node exactly once, and each node contributes to one entry in the final result.</li>
+<li><strong>Time Complexity</strong>: O(N) where N is the number of nodes in the tree, as each node is visited exactly once.</li>
+<li><strong>Space Complexity</strong>: O(H) for the recursion stack, where H is the height of the tree. The space required for storing the result is also O(N) in the worst case when the tree is completely unbalanced.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>The space complexity is also <code>O(N)</code>. We store the values of all nodes in the result vector <code>ans</code>, and the recursion uses extra space for the call stack. In the worst case, the depth of the recursion can go up to the height of the tree, which is <code>O(H)</code>. However, since the total number of nodes is <code>N</code>, the overall space complexity is still <code>O(N)</code>.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution efficiently implements the level-order traversal of an n-ary tree using a recursive depth-first search (DFS) approach. It handles the tree&rsquo;s structure with arbitrary branching at each level and returns the result as a 2D vector, where each sublist contains the values of nodes at a specific level.</p>
-<ul>
-<li>The algorithm performs in linear time, visiting each node once.</li>
-<li>It uses additional space to store the result and maintain the recursive call stack, making it efficient for trees of large size.</li>
-<li>This approach provides a clean, elegant solution to the problem of level-order traversal, making use of recursion to simplify the logic for handling arbitrary numbers of children at each node.</li>
-</ul>
-<p>This solution is optimal for scenarios where the tree&rsquo;s structure is irregular (n-ary) and efficiently handles depth-based grouping of node values.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1148s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1147s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

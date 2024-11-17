@@ -147,7 +147,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              4-minute read
+              2-minute read
             </span>
           </div>
 
@@ -246,7 +246,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1418s1hbhb">
+<h2 id="hahahugoshortcode1405s1hbhb">
   
 
   
@@ -258,7 +258,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem requires finding &ldquo;universal&rdquo; words from a list <code>words1</code> that contain all characters in all the words from another list, <code>words2</code>, with the required frequency of each character. Specifically, a word in <code>words1</code> is considered universal if it has at least the maximum number of each character required by any word in <code>words2</code>. Our task is to determine all such universal words from <code>words1</code> efficiently.</p>
+<p>Given two arrays of strings <code>words1</code> and <code>words2</code>, find all the words in <code>words1</code> that are universal words, meaning they can cover all the character frequencies of the words in <code>words2</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -266,84 +266,42 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem, we break down the approach into a few key steps:</p>
 <ol>
 <li>
-<p><strong>Determine the Required Frequency for Each Character</strong>:</p>
+<p><strong>Frequency Array for Words in <code>words2</code></strong>:</p>
 <ul>
-<li>We start by calculating the maximum frequency of each character required by any word in <code>words2</code>. This ensures that we know the minimum character counts needed for a word to be considered universal.</li>
-<li>We achieve this by iterating through each word in <code>words2</code>, calculating the frequency of each character, and storing the maximum required frequency for each character in an array <code>frq</code> (with 26 slots for each letter of the alphabet).</li>
+<li>Initialize a frequency array <code>frq</code> of size 26 (for each letter of the alphabet) to keep track of the maximum frequency of each character needed to cover <code>words2</code>.</li>
+<li>For each word in <code>words2</code>, create a temporary frequency array <code>tmp</code> to count the occurrences of each character.</li>
+<li>Update the <code>frq</code> array with the maximum frequency found for each character across all words in <code>words2</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Check Each Word in <code>words1</code> for Universality</strong>:</p>
+<p><strong>Check Words in <code>words1</code></strong>:</p>
 <ul>
-<li>For each word in <code>words1</code>, we compute the frequency of each character.</li>
-<li>We then compare this frequency to the requirements in <code>frq</code>. If the word has at least as many occurrences of each character as required by <code>frq</code>, it is considered universal, and we add it to the result list.</li>
+<li>Initialize a result vector <code>res</code> to store the universal words.</li>
+<li>For each word in <code>words1</code>, create a temporary frequency array <code>tmp</code> to count the occurrences of each character in the word.</li>
+<li>Check if this word covers all character frequencies required by <code>frq</code>. If it does, add it to the result vector.</li>
 </ul>
 </li>
 <li>
 <p><strong>Return Result</strong>:</p>
 <ul>
-<li>After processing all words in <code>words1</code>, we return the list of universal words.</li>
+<li>Return the <code>res</code> vector containing all universal words.</li>
 </ul>
 </li>
 </ol>
-<p>This approach minimizes redundant calculations by pre-computing the frequency requirements, making the checking process for each word in <code>words1</code> efficient.</p>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Calculate Required Frequencies for <code>words2</code></strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> frq(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">s</span>: words2) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span>: s) {
-</span></span><span style="display:flex;"><span>        tmp[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        frq[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>] <span style="color:#666">=</span> max(frq[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>], tmp[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>We initialize a frequency array <code>frq</code> with 26 elements, all set to 0.</li>
-<li>For each word <code>s</code> in <code>words2</code>, we create a temporary frequency array <code>tmp</code> that calculates the frequency of each character in the current word.</li>
-<li>We update <code>frq</code> so that each element in <code>frq</code> represents the maximum frequency of each character required by any word in <code>words2</code>.</li>
+<ul>
+<li>Loop through each word in <code>words2</code> to populate the frequency requirements in <code>frq</code>.</li>
+<li>Loop through each word in <code>words1</code>, comparing its character counts against <code>frq</code> to determine if it&rsquo;s a universal word.</li>
+<li>Collect and return the qualifying words.</li>
 </ul>
-</li>
-<li>
-<p><strong>Check Each Word in <code>words1</code> Against the Required Frequencies</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> res;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">s</span>: words1) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> tmp(<span style="color:#666">26</span>, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span>: s) tmp[c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> flag <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">26</span>; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(tmp[i] <span style="color:#666">&lt;</span> frq[i]) {
-</span></span><span style="display:flex;"><span>            flag <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">break</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(flag) res.push_back(s);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>We initialize an empty result vector <code>res</code> to store the universal words.</li>
-<li>For each word <code>s</code> in <code>words1</code>, we calculate the frequency of each character in the word and store it in <code>tmp</code>.</li>
-<li>We then compare <code>tmp</code> to <code>frq</code> to verify if <code>s</code> meets the required frequencies.</li>
-<li>If <code>tmp[i]</code> is greater than or equal to <code>frq[i]</code> for all characters, the word <code>s</code> is universal, so we add it to <code>res</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return the Result</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div><ul>
-<li>After processing all words in <code>words1</code>, the result vector <code>res</code> contains all universal words, which we then return.</li>
-</ul>
-</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -351,35 +309,21 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li>The time complexity is <strong>O(n * m + m * k)</strong>, where <code>n</code> is the number of words in <code>words1</code>, <code>m</code> is the average length of words in <code>words1</code>, and <code>k</code> is the number of words in <code>words2</code>.</li>
-<li>We spend <code>O(m * k)</code> time calculating the maximum frequency requirements by iterating through all words in <code>words2</code>.</li>
-<li>For each word in <code>words1</code>, checking it against the frequency requirements takes <code>O(m)</code>. Since there are <code>n</code> words in <code>words1</code>, this step requires <code>O(n * m)</code> time.</li>
+<li><strong>Time Complexity</strong>: O(n * m + k * 26), where:
+<ul>
+<li>n is the number of words in <code>words2</code>,</li>
+<li>m is the average length of the words in <code>words2</code>,</li>
+<li>k is the number of words in <code>words1</code>.</li>
 </ul>
 </li>
-<li>
-<p><strong>Space Complexity</strong>:</p>
-<ul>
-<li>The space complexity is <strong>O(m + n)</strong>, as we store <code>frq</code>, a frequency array of constant size (26 for each character in the alphabet), and a temporary array for each word in <code>words1</code> during checking.</li>
+<li><strong>Space Complexity</strong>: O(26) for the frequency arrays used, which is constant.</li>
 </ul>
-</li>
-</ol>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>In conclusion, this solution provides an efficient way to find universal words in <code>words1</code> that satisfy character requirements from <code>words2</code>. The use of a frequency array enables quick lookups, while the pre-computation of maximum required frequencies streamlines the checking process. This approach is well-suited for large input sizes due to its linear complexity relative to the number of words and characters. The clear structure and logical flow of the solution make it easy to understand and maintain.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1418s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1405s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

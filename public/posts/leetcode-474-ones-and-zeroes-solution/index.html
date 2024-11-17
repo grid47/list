@@ -147,7 +147,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              One-minute read
+              2-minute read
             </span>
           </div>
 
@@ -216,7 +216,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1172s0hbhb">
+        <h2 id="hahahugoshortcode1171s0hbhb">
   <a href="https://leetcode.com/problems/ones-and-zeroes/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -231,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1172s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1171s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -255,36 +255,19 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> dp[zeros][ones];
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1172s2hbhb">
+<h2 id="hahahugoshortcode1171s2hbhb">
   
 
   
   <div class="markdown-body">
-    <p>class Solution {
-public:
-int findMaxForm(vector<!-- raw HTML omitted -->&amp; strs, int zeros, int ones) {
-int i, j, p = strs.size();
-vector&lt;vector<!-- raw HTML omitted -->&gt; dp(zeros + 1, vector<!-- raw HTML omitted -->(ones+1));</p>
-<pre><code>    for(auto &amp;s : strs) {
-        int currOne = count(s.begin(), s.end(), '1');
-        int currZero = s.size() - currOne;
-        for(int j = ones ; j &gt;= currOne; j--) 
-        for(int i = zeros; i &gt;= currZero; i--) {
-           dp[i][j] = max(dp[i][j], 1 + dp[i- currZero ][j-currOne]);
-        }
-    }
-
-    return dp[zeros][ones];
-}
-</code></pre>
-<p>};</p>
-<h3 id="problem-statement">
+    <h3 id="problem-statement">
   Problem Statement
   <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<p>You are given an array of binary strings <code>strs</code> and two integers <code>zeros</code> and <code>ones</code>. Your task is to find the maximum number of strings that can be formed such that the number of <code>0</code>s in the selected strings does not exceed <code>zeros</code> and the number of <code>1</code>s does not exceed <code>ones</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -292,13 +275,72 @@ vector&lt;vector<!-- raw HTML omitted -->&gt; dp(zeros + 1, vector<!-- raw HTML 
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<ol>
+<li>
+<p><strong>Dynamic Programming Table Initialization</strong>:</p>
+<ul>
+<li>Create a 2D DP table <code>dp</code> where <code>dp[i][j]</code> represents the maximum number of binary strings that can be formed using <code>i</code> <code>0</code>s and <code>j</code> <code>1</code>s.</li>
+<li>The table dimensions are <code>(zeros + 1) x (ones + 1)</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Counting Zeros and Ones</strong>:</p>
+<ul>
+<li>For each string <code>s</code> in <code>strs</code>, calculate the count of <code>0</code>s and <code>1</code>s:
+<ul>
+<li><code>currZero</code>: Number of <code>0</code>s in the string.</li>
+<li><code>currOne</code>: Number of <code>1</code>s in the string.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>DP State Transition</strong>:</p>
+<ul>
+<li>Iterate through the DP table in reverse order to avoid overwriting results that are needed in the same iteration:
+<ul>
+<li>For each string, update the DP table based on the current counts of <code>0</code>s and <code>1</code>s.</li>
+<li>The transition is defined as:
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>dp[i][j] <span style="color:#666">=</span> max(dp[i][j], <span style="color:#666">1</span> <span style="color:#666">+</span> dp[i <span style="color:#666">-</span> currZero][j <span style="color:#666">-</span> currOne]);
+</span></span></code></pre></div></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Result</strong>:</p>
+<ul>
+<li>The value at <code>dp[zeros][ones]</code> will give the maximum number of binary strings that can be formed under the given constraints.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
+<ol>
+<li>
+<p><strong>Function Definition</strong>:</p>
+<ul>
+<li>The function <code>findMaxForm()</code> takes the vector of strings and two integers as inputs.</li>
+</ul>
+</li>
+<li>
+<p><strong>Counting and Updating DP Table</strong>:</p>
+<ul>
+<li>For each string, it counts <code>0</code>s and <code>1</code>s and updates the DP table accordingly.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Value</strong>:</p>
+<ul>
+<li>Finally, the function returns the maximum number of strings that can be formed.</li>
+</ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -306,19 +348,15 @@ vector&lt;vector<!-- raw HTML omitted -->&gt; dp(zeros + 1, vector<!-- raw HTML 
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>generate a 350 line SEO friendly explanation of this code.</p>
+<ul>
+<li><strong>Time Complexity</strong>: O(N * Z * O), where <code>N</code> is the number of strings, <code>Z</code> is the maximum number of <code>0</code>s, and <code>O</code> is the maximum number of <code>1</code>s.</li>
+<li><strong>Space Complexity</strong>: O(Z * O), as the DP table size depends on the number of <code>0</code>s and <code>1</code>s.</li>
+</ul>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1172s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1171s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

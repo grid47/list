@@ -145,7 +145,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -197,7 +197,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              7-minute read
+              3-minute read
             </span>
           </div>
 
@@ -258,12 +258,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem at hand involves counting the number of distinct ways a knight can dial a number on a standard keypad after making <code>n</code> moves. The knight starts at any key on a 3x4 keypad (with the keys arranged as follows):</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>1 2 3
-</span></span><span style="display:flex;"><span>4 5 6
-</span></span><span style="display:flex;"><span>7 8 9
-</span></span><span style="display:flex;"><span>  0
-</span></span></code></pre></div><p>The knight can move to a key that is two rows away and one column away, or one row away and two columns away. The task is to determine how many distinct ways the knight can land on a number after <code>n</code> moves, starting from any key on the keypad.</p>
+<p>Given a phone keypad represented as a 4x3 grid (where the last row has only one digit), the goal is to find the number of distinct phone numbers that can be dialed by a knight in <code>n</code> moves, starting from any digit on the keypad. The knight can jump to digits that are valid moves according to its movement pattern.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -271,89 +266,46 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>This problem can be solved efficiently using dynamic programming and memoization. Here&rsquo;s a step-by-step explanation of the approach:</p>
 <ol>
 <li>
-<p><strong>Understanding the Knight&rsquo;s Moves</strong>: The knight in this problem moves in an &ldquo;L&rdquo; shape, i.e., it can either move two rows and one column or one row and two columns. There are a total of 8 possible moves for any given position, except for some boundary conditions (like the bottom row, where the knight cannot move down further).</p>
+<p><strong>Dynamic Programming with Memoization</strong>:</p>
+<ul>
+<li>Use a 3D array to store the results of subproblems, where <code>mem[n][i][j]</code> represents the number of distinct phone numbers that can be formed starting from the digit at position <code>(i, j)</code> with <code>n</code> moves left.</li>
+<li>If the knight reaches an invalid position (like moving out of the keypad or onto the &ldquo;0&rdquo; in the last row), return 0.</li>
+<li>If only one move remains (<code>n == 1</code>), return 1 because the current position itself counts as a valid number.</li>
+</ul>
 </li>
 <li>
-<p><strong>Memoization to Avoid Repetition</strong>: To optimize the solution, we use a memoization technique to store the results of previously computed states. Since there are multiple recursive calls for the same position and the number of moves, we avoid recalculating these states by storing the results in a memoization table.</p>
-</li>
-<li>
-<p><strong>Recursive Function to Explore All Possible Paths</strong>: The recursive function <code>path</code> calculates the number of distinct ways to reach a key after a certain number of moves. Starting from any given key on the keypad, it recursively explores all possible moves and accumulates the results. Each call checks if a move is within the bounds of the keypad, and if not, it returns 0.</p>
-</li>
-<li>
-<p><strong>Base Case</strong>: The base case of the recursion is when <code>n == 1</code>, meaning we have only one move left. In this case, every key on the keypad is reachable from the starting key, so the result is 1 for that specific key.</p>
-</li>
-<li>
-<p><strong>Memoization Table</strong>: The memoization table <code>mem</code> is a 3-dimensional array where the first dimension represents the number of moves left (<code>n</code>), and the second and third dimensions represent the position of the knight on the keypad (<code>i</code> for row and <code>j</code> for column). If a state has been computed before, we return the stored result to avoid recalculating it.</p>
-</li>
-<li>
-<p><strong>Modulo Operation</strong>: Since the result may be a large number, the answer is taken modulo <code>1e9 + 7</code> to ensure the result fits within the constraints and prevents integer overflow.</p>
-</li>
-<li>
-<p><strong>Iterating Over All Keys</strong>: Finally, the <code>knightDialer</code> function iterates over all positions on the keypad (represented by the grid coordinates <code>i</code> and <code>j</code>), and for each position, it computes the number of distinct paths starting from that key by calling the <code>path</code> function.</p>
+<p><strong>Recursive Path Calculation</strong>:</p>
+<ul>
+<li>For each digit <code>(i, j)</code>, calculate the total distinct numbers formed by making a knight&rsquo;s move to valid positions and summing the results recursively for <code>n - 1</code> moves.</li>
+<li>Utilize memoization to avoid redundant calculations for previously computed positions.</li>
+</ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
+<ul>
 <li>
-<p><strong>Initialization</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;&gt;</span> arr(<span style="color:#666">4</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span>(<span style="color:#666">3</span>, <span style="color:#666">-</span><span style="color:#666">1</span>));
-</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;&gt;&gt;</span> mem(n <span style="color:#666">+</span> <span style="color:#666">1</span>, arr);
-</span></span></code></pre></div><ul>
-<li>The variable <code>res</code> holds the result, which is the total number of distinct paths.</li>
-<li><code>arr</code> is a temporary 2D array used to initialize the memoization table <code>mem</code>. This table has dimensions <code>[n+1][4][3]</code>, where <code>n+1</code> is for the number of moves, and <code>4</code> and <code>3</code> represent the number of rows and columns on the keypad.</li>
+<p><strong><code>knightDialer</code> Function</strong>:</p>
+<ul>
+<li>Initializes the result and sets up a memoization table.</li>
+<li>Iterates over all possible starting positions on the keypad and aggregates results from the <code>path</code> function.</li>
 </ul>
 </li>
 <li>
-<p><strong>Iterating Over All Keys</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">4</span>; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> <span style="color:#666">3</span>; j<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    {
-</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> (res <span style="color:#666">+</span> path(i, j, n, mem)) <span style="color:#666">%</span> mod;
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><ul>
-<li>This double loop iterates over each key on the keypad (from <code>(0,0)</code> to <code>(3,2)</code>), calling the <code>path</code> function for each key to compute the number of distinct paths starting from that key.</li>
+<p><strong><code>path</code> Function</strong>:</p>
+<ul>
+<li>Implements the recursive logic to explore all valid knight moves from the current position <code>(i, j)</code> for <code>n</code> moves.</li>
+<li>Uses bounds checking to ensure valid movements within the keypad.</li>
 </ul>
 </li>
-<li>
-<p><strong>Path Calculation with Memoization</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">path</span>(<span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j, <span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;&gt;&gt;</span> <span style="color:#666">&amp;</span>mem) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> j <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> i <span style="color:#666">&gt;=</span> <span style="color:#666">4</span> <span style="color:#666">||</span> j <span style="color:#666">&gt;=</span> <span style="color:#666">3</span> <span style="color:#666">||</span> (i <span style="color:#666">==</span> <span style="color:#666">3</span> <span style="color:#666">&amp;&amp;</span> j <span style="color:#666">!=</span> <span style="color:#666">1</span>))
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mem[n][i][j] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> mem[n][i][j] <span style="color:#666">%</span> mod;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    mem[n][i][j] <span style="color:#666">=</span> path(i <span style="color:#666">-</span> <span style="color:#666">1</span>, j <span style="color:#666">-</span> <span style="color:#666">2</span>, n <span style="color:#666">-</span> <span style="color:#666">1</span>, mem) <span style="color:#666">%</span> mod <span style="color:#666">+</span>
-</span></span><span style="display:flex;"><span>                   path(i <span style="color:#666">-</span> <span style="color:#666">1</span>, j <span style="color:#666">+</span> <span style="color:#666">2</span>, n <span style="color:#666">-</span> <span style="color:#666">1</span>, mem) <span style="color:#666">%</span> mod <span style="color:#666">+</span>
-</span></span><span style="display:flex;"><span>                   path(i <span style="color:#666">-</span> <span style="color:#666">2</span>, j <span style="color:#666">-</span> <span style="color:#666">1</span>, n <span style="color:#666">-</span> <span style="color:#666">1</span>, mem) <span style="color:#666">%</span> mod <span style="color:#666">+</span>
-</span></span><span style="display:flex;"><span>                   path(i <span style="color:#666">-</span> <span style="color:#666">2</span>, j <span style="color:#666">+</span> <span style="color:#666">1</span>, n <span style="color:#666">-</span> <span style="color:#666">1</span>, mem) <span style="color:#666">%</span> mod <span style="color:#666">+</span>
-</span></span><span style="display:flex;"><span>                   path(i <span style="color:#666">+</span> <span style="color:#666">1</span>, j <span style="color:#666">-</span> <span style="color:#666">2</span>, n <span style="color:#666">-</span> <span style="color:#666">1</span>, mem) <span style="color:#666">%</span> mod <span style="color:#666">+</span>
-</span></span><span style="display:flex;"><span>                   path(i <span style="color:#666">+</span> <span style="color:#666">1</span>, j <span style="color:#666">+</span> <span style="color:#666">2</span>, n <span style="color:#666">-</span> <span style="color:#666">1</span>, mem) <span style="color:#666">%</span> mod <span style="color:#666">+</span>
-</span></span><span style="display:flex;"><span>                   path(i <span style="color:#666">+</span> <span style="color:#666">2</span>, j <span style="color:#666">-</span> <span style="color:#666">1</span>, n <span style="color:#666">-</span> <span style="color:#666">1</span>, mem) <span style="color:#666">%</span> mod <span style="color:#666">+</span>
-</span></span><span style="display:flex;"><span>                   path(i <span style="color:#666">+</span> <span style="color:#666">2</span>, j <span style="color:#666">+</span> <span style="color:#666">1</span>, n <span style="color:#666">-</span> <span style="color:#666">1</span>, mem) <span style="color:#666">%</span> mod;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mem[n][i][j];
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li><strong>Base Case</strong>: If the knight moves outside the boundaries of the keypad or tries to move from an invalid key (like the bottom-left or right corners), we return 0.</li>
-<li>If the state has already been computed (<code>mem[n][i][j] != -1</code>), we return the stored value.</li>
-<li>If there is only one move left (<code>n == 1</code>), we return 1 because any key is reachable from the starting key.</li>
-<li>The recursion explores all 8 possible moves and accumulates the results using modulo <code>1e9 + 7</code> to prevent overflow.</li>
 </ul>
-</li>
-<li>
-<p><strong>Returning the Final Result</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div><p>After all calculations, the final result is returned, which is the sum of the distinct paths starting from all keys on the keypad.</p>
-</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -362,21 +314,9 @@
   </a>
 </h3>
 <ul>
-<li>
-<p><strong>Time Complexity</strong>: The time complexity of this solution is O(n * 4 * 3), which simplifies to O(n). This is because for each key on the keypad (12 total), we compute the number of distinct paths by exploring 8 possible moves recursively, and memoization ensures that we only compute each state once.</p>
-</li>
-<li>
-<p><strong>Space Complexity</strong>: The space complexity is O(n * 4 * 3), which simplifies to O(n). This is due to the memoization table <code>mem</code> that stores the results for each key position and the number of remaining moves.</p>
-</li>
+<li><strong>Time Complexity</strong>: O(n * 4 * 3) where <code>n</code> is the number of moves, since for each move the function checks 8 possible positions on the keypad.</li>
+<li><strong>Space Complexity</strong>: O(n * 4 * 3) for the memoization table that stores results for each position and number of moves.</li>
 </ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution leverages dynamic programming and memoization to efficiently count the number of distinct ways a knight can dial a number on a keypad after <code>n</code> moves. By storing previously computed results, the algorithm avoids redundant calculations, ensuring an optimal solution. This approach works well even for large values of <code>n</code> and provides the answer modulo <code>1e9 + 7</code> to handle large outputs.</p>
  
 </div>
   

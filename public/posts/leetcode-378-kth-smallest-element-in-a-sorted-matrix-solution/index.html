@@ -149,7 +149,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -217,7 +217,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -226,7 +226,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1115s0hbhb">
+        <h2 id="hahahugoshortcode1114s0hbhb">
   <a href="https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -241,7 +241,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1115s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1114s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -272,225 +272,80 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> cur[<span style="color:#666">0</span>];
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1115s2hbhb">
+<h2 id="hahahugoshortcode1114s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="-problem-statement">
-  🚀 Problem Statement
-  <a class="heading-link" href="#-problem-statement">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>In this problem, we&rsquo;re tasked with finding the <strong>kth smallest element</strong> in a <strong>sorted 2D matrix</strong>. The matrix is sorted both row-wise and column-wise, meaning:</p>
-<ul>
-<li>Each row is sorted in ascending order.</li>
-<li>Each column is also sorted in ascending order.</li>
-</ul>
-<p>Given the matrix and a number <code>k</code>, we need to return the <strong>kth smallest element</strong> from the entire matrix.</p>
-<p>For example, consider the matrix:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>[[1, 5, 9],
-</span></span><span style="display:flex;"><span> [10, 11, 13],
-</span></span><span style="display:flex;"><span> [12, 13, 15]]
-</span></span></code></pre></div><p>If <code>k = 8</code>, the 8th smallest element is <code>13</code>.</p>
-<hr>
-<h3 id="-approach">
-  🧠 Approach
-  <a class="heading-link" href="#-approach">
+<p>Given a <code>m x n</code> matrix where each of its rows is sorted in ascending order, and an integer <code>k</code>, find the <code>k</code>th smallest element in the matrix.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem efficiently, we’ll use a <strong>min-heap</strong> (priority queue). The key here is to take advantage of the matrix&rsquo;s sorted properties. By pushing the smallest elements into the heap and extracting them one by one, we can track the smallest elements in ascending order.</p>
-<h4 id="key-insights">
-  Key Insights:
-  <a class="heading-link" href="#key-insights">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ol>
 <li>
 <p><strong>Min-Heap (Priority Queue)</strong>:</p>
 <ul>
-<li>The heap allows us to efficiently extract the smallest element.</li>
-<li>Each heap entry is a tuple: the element value, the row index, and the column index.</li>
+<li>Use a min-heap (priority queue) to efficiently extract the smallest elements from the matrix.</li>
 </ul>
 </li>
 <li>
-<p><strong>Efficient Traversal</strong>:</p>
+<p><strong>Initialization</strong>:</p>
 <ul>
-<li>We begin by pushing the first element of each row into the heap. Since each row is sorted, the smallest element in the matrix will always be at the top of the heap.</li>
-<li>After extracting the smallest element, we push the next element from the same row into the heap. This ensures the heap always holds the next smallest element.</li>
+<li>Insert the first element of each row (up to the smaller of <code>m</code> or <code>k</code>) into the min-heap. Each entry in the heap will store a vector containing the value, the row index, and the column index.</li>
 </ul>
 </li>
 <li>
-<p><strong>Heap Size</strong>:</p>
+<p><strong>Heap Operations</strong>:</p>
 <ul>
-<li>The heap will store at most <code>k</code> elements at any time, ensuring that the algorithm remains efficient.</li>
+<li>Extract the smallest element from the heap <code>k-1</code> times. For each extracted element, if the next element in the same row exists (i.e., within bounds), push that next element into the heap.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Extraction</strong>:</p>
+<ul>
+<li>After <code>k-1</code> extractions, the next top element in the heap will be the <code>k</code>th smallest element.</li>
 </ul>
 </li>
 </ol>
-<hr>
-<h3 id="-step-by-step-code-breakdown">
-  🔨 Step-by-Step Code Breakdown
-  <a class="heading-link" href="#-step-by-step-code-breakdown">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="step-1-define-the-solution-class-and-method">
-  Step 1: Define the Solution Class and Method
-  <a class="heading-link" href="#step-1-define-the-solution-class-and-method">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> kthSmallest(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mtx, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> mtx.size(), n <span style="color:#666">=</span> mtx[<span style="color:#666">0</span>].size();
-</span></span></code></pre></div><ul>
-<li>We define a <code>Solution</code> class with a method <code>kthSmallest</code> that takes the matrix <code>mtx</code> and the integer <code>k</code>.</li>
-<li>We first get the number of rows (<code>m</code>) and columns (<code>n</code>) of the matrix.</li>
-</ul>
-<h4 id="step-2-initialize-min-heap-priority-queue">
-  Step 2: Initialize Min-Heap (Priority Queue)
-  <a class="heading-link" href="#step-2-initialize-min-heap-priority-queue">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>priority_queue<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span>, greater<span style="color:#666">&lt;&gt;&gt;</span> pq;
-</span></span></code></pre></div><ul>
-<li>We initialize a <strong>min-heap</strong> using a priority queue. The heap will store vectors containing:
 <ul>
-<li>The element value.</li>
-<li>The row index.</li>
-<li>The column index.</li>
+<li>The <code>kthSmallest</code> function initializes the min-heap and pushes the first element of each row into it.</li>
+<li>A loop runs <code>k-1</code> times, extracting the smallest element each time and pushing the next element from the same row into the heap.</li>
+<li>Finally, the <code>k</code>th smallest element is obtained by peeking the top of the heap after the loop.</li>
 </ul>
-</li>
-</ul>
-<h4 id="step-3-push-first-element-from-each-row">
-  Step 3: Push First Element from Each Row
-  <a class="heading-link" href="#step-3-push-first-element-from-each-row">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> r <span style="color:#666">=</span> <span style="color:#666">0</span>; r <span style="color:#666">&lt;</span> min(m, k); r<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    pq.push({mtx[r][<span style="color:#666">0</span>], r, <span style="color:#666">0</span>});
-</span></span></code></pre></div><ul>
-<li>We push the first element of each row into the heap, along with its row and column indices. This step ensures that the heap will initially hold the smallest elements from each row.</li>
-</ul>
-<h4 id="step-4-extract-elements-from-the-heap">
-  Step 4: Extract Elements from the Heap
-  <a class="heading-link" href="#step-4-extract-elements-from-the-heap">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> cur;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(k<span style="color:#666">--</span> <span style="color:#666">&gt;</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>pq.empty()) {
-</span></span><span style="display:flex;"><span>    cur <span style="color:#666">=</span> pq.top();
-</span></span><span style="display:flex;"><span>    pq.pop();
-</span></span></code></pre></div><ul>
-<li>We begin extracting the smallest element from the heap (<code>pq.top()</code>), storing it in <code>cur</code>. Each extraction brings us one step closer to finding the <code>kth</code> smallest element.</li>
-<li>After each extraction, we decrement <code>k</code>.</li>
-</ul>
-<h4 id="step-5-push-the-next-element-in-the-row-into-the-heap">
-  Step 5: Push the Next Element in the Row into the Heap
-  <a class="heading-link" href="#step-5-push-the-next-element-in-the-row-into-the-heap">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(cur[<span style="color:#666">2</span>] <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">&lt;</span> n)
-</span></span><span style="display:flex;"><span>    pq.push({mtx[cur[<span style="color:#666">1</span>]][cur[<span style="color:#666">2</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>], cur[<span style="color:#666">1</span>], cur[<span style="color:#666">2</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>});
-</span></span></code></pre></div><ul>
-<li>After extracting an element, we check if there’s another element in the same row (i.e., <code>cur[2] + 1 &lt; n</code>). If so, we push the next element from that row into the heap.</li>
-</ul>
-<h4 id="step-6-return-the-kth-smallest-element">
-  Step 6: Return the kth Smallest Element
-  <a class="heading-link" href="#step-6-return-the-kth-smallest-element">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>cur <span style="color:#666">=</span> pq.top();
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> cur[<span style="color:#666">0</span>];
-</span></span></code></pre></div><ul>
-<li>Once we’ve extracted <code>k-1</code> smallest elements, the next element at the top of the heap (<code>pq.top()</code>) will be the <code>kth</code> smallest element in the matrix.</li>
-<li>We return the value of <code>cur[0]</code> as the result.</li>
-</ul>
-<hr>
-<h3 id="-complexity-analysis">
-  📈 Complexity Analysis
-  <a class="heading-link" href="#-complexity-analysis">
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>O(k log m)</strong>, where <code>k</code> is the number of elements to extract and <code>m</code> is the number of rows in the matrix.
-<ul>
-<li>We perform <code>k</code> extractions from the heap, and for each extraction, we may push a new element into the heap.</li>
-<li>The heap can hold at most <code>m</code> elements at any time, and each heap operation (insertion and extraction) takes <strong>O(log m)</strong> time.</li>
-<li>Thus, the time complexity is <strong>O(k log m)</strong>.</li>
+<li><strong>Time Complexity</strong>: ( O(k \log \min(m, k)) ), where ( m ) is the number of rows. Each insertion and extraction operation from the heap takes ( O(\log \text{size}) ).</li>
+<li><strong>Space Complexity</strong>: ( O(\min(m, k)) ) for the heap storage.</li>
 </ul>
-</li>
-</ul>
-<h4 id="space-complexity">
-  Space Complexity
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>O(m)</strong>, where <code>m</code> is the number of rows in the matrix.
-<ul>
-<li>The heap stores at most <code>m</code> elements at any given time, so the space complexity is <strong>O(m)</strong>.</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h3 id="-conclusion">
-  🏁 Conclusion
-  <a class="heading-link" href="#-conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution efficiently finds the <code>kth</code> smallest element in a sorted 2D matrix using a <strong>min-heap</strong>. By pushing and extracting elements from the heap, we ensure that we always have access to the next smallest element in the matrix, and by maintaining a heap of size <code>m</code>, we make sure the solution is both time and space efficient.</p>
-<h4 id="quick-recap">
-  Quick Recap:
-  <a class="heading-link" href="#quick-recap">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>Time Complexity</strong>: O(k log m)</li>
-<li><strong>Space Complexity</strong>: O(m)</li>
-<li><strong>Efficient solution using min-heap</strong></li>
-<li><strong>Great for large matrices with sorted rows and columns!</strong></li>
-</ul>
-<p>This approach is perfect for large matrices, ensuring that we can efficiently find the <code>kth</code> smallest element without having to search the entire matrix. Keep up the great work, and happy coding! 💻✨</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1115s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1114s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

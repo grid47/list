@@ -147,7 +147,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              3-minute read
             </span>
           </div>
 
@@ -216,7 +216,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1146s0hbhb">
+        <h2 id="hahahugoshortcode1145s0hbhb">
   <a href="https://leetcode.com/problems/longest-repeating-character-replacement/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -231,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1146s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1145s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -254,7 +254,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1146s2hbhb">
+<h2 id="hahahugoshortcode1145s2hbhb">
   
 
   
@@ -266,7 +266,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The task is to find the length of the longest substring in a given string <code>s</code> that can be transformed into a substring where all characters are the same, by replacing at most <code>k</code> characters. We are provided a string <code>s</code> and an integer <code>k</code>, representing the maximum number of character replacements allowed. The goal is to determine the length of the longest possible substring after performing the replacements.</p>
+<p>Given a string <code>s</code> and an integer <code>k</code>, find the length of the longest substring that can be obtained by replacing at most <code>k</code> characters in the string with any character of your choice.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -274,92 +274,37 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem efficiently, we can use the <strong>sliding window technique</strong> combined with a frequency count of characters. The idea is to maintain a window of characters such that:</p>
 <ol>
-<li>The number of replacements needed to make all characters within the window identical does not exceed <code>k</code>.</li>
-<li>We aim to maximize the length of the window under this constraint.</li>
+<li><strong>Sliding Window Technique</strong>: Use a two-pointer approach to maintain a window of valid substrings.
+<ul>
+<li>The left pointer <code>j</code> represents the start of the substring.</li>
+<li>The right pointer <code>i</code> expands the window by iterating through the string.</li>
+</ul>
+</li>
+<li><strong>Character Frequency Count</strong>: Utilize a map to keep track of the frequency of characters in the current window.</li>
+<li><strong>Max Frequency Calculation</strong>: For each character added, calculate the maximum frequency of any character within the current window. This helps in determining if the window is valid (i.e., whether it can be made uniform by replacing at most <code>k</code> characters).</li>
+<li><strong>Window Adjustment</strong>: If the size of the current window exceeds <code>mx + k</code> (where <code>mx</code> is the maximum frequency of characters in the window), increment the left pointer <code>j</code> to reduce the window size, thereby maintaining the validity of the substring.</li>
+<li><strong>Result Calculation</strong>: Keep updating the result with the maximum length of valid substrings found during the traversal.</li>
 </ol>
-<p>Here’s how the approach works step by step:</p>
-<ol>
-<li><strong>Sliding Window</strong>: We maintain a window defined by two pointers, <code>j</code> (the start of the window) and <code>i</code> (the end of the window). The window will expand as we iterate over the string with the <code>i</code> pointer, and we adjust the <code>j</code> pointer to maintain the validity of the window.</li>
-<li><strong>Character Count</strong>: As we expand the window by moving <code>i</code>, we count the frequency of each character in the window using a <code>map</code>. The frequency count helps determine how many characters in the current window are not equal to the most frequent character.</li>
-<li><strong>Replacement Condition</strong>: The key observation is that if the number of characters that need to be changed to make all characters the same in the window exceeds <code>k</code>, we adjust the window by moving <code>j</code> to the right, thereby shrinking the window until the condition is satisfied again.</li>
-<li><strong>Max Length Calculation</strong>: During each iteration, we calculate the length of the current window and update the result if the length is greater than the previous maximum.</li>
-</ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="step-1-initialization">
-  Step 1: Initialization
-  <a class="heading-link" href="#step-1-initialization">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ma;
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> <span style="color:#666">0</span>, mx <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div><ul>
-<li>We initialize a map <code>ma</code> to store the frequency count of characters within the current window.</li>
-<li><code>res</code> is used to keep track of the maximum length of the valid substring found.</li>
-<li><code>j</code> is the starting pointer of the sliding window.</li>
-<li><code>mx</code> stores the maximum frequency of any character within the current window.</li>
+<ol>
+<li><strong>Initialization</strong>: Define a map to count character frequencies, variables for the result length (<code>res</code>), the left pointer (<code>j</code>), and the maximum frequency of characters (<code>mx</code>).</li>
+<li><strong>Iterate Through String</strong>: For each character:
+<ul>
+<li>Increment its count in the map.</li>
+<li>Update <code>mx</code> with the maximum frequency of the current character.</li>
+<li>Check if the window is valid. If not, move the left pointer to shrink the window and update the character count.</li>
+<li>Update the result with the current window length.</li>
 </ul>
-<h4 id="step-2-expanding-the-window">
-  Step 2: Expanding the Window
-  <a class="heading-link" href="#step-2-expanding-the-window">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>    ma[s[i]]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>    mx <span style="color:#666">=</span> max(mx, ma[s[i]]);
-</span></span></code></pre></div><ul>
-<li>We start iterating over the string <code>s</code> using the <code>i</code> pointer.</li>
-<li>For each character <code>s[i]</code>, we increment its count in the map <code>ma</code>.</li>
-<li>We also update <code>mx</code> to be the maximum frequency of any character in the current window (from <code>j</code> to <code>i</code>).</li>
-</ul>
-<h4 id="step-3-checking-window-validity">
-  Step 3: Checking Window Validity
-  <a class="heading-link" href="#step-3-checking-window-validity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">-</span> j <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">&gt;</span> mx <span style="color:#666">+</span> k) {
-</span></span><span style="display:flex;"><span>    ma[s[j]]<span style="color:#666">--</span>;
-</span></span><span style="display:flex;"><span>    j<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>The condition <code>i - j + 1 &gt; mx + k</code> checks if the length of the current window exceeds the number of allowed replacements (<code>k</code>). If it does, this means we need more than <code>k</code> replacements to make all characters the same in the window.</li>
-<li>In this case, we shrink the window by incrementing <code>j</code> (move the left pointer of the window) and reducing the frequency count of the character at <code>s[j]</code>.</li>
-</ul>
-<h4 id="step-4-update-maximum-length">
-  Step 4: Update Maximum Length
-  <a class="heading-link" href="#step-4-update-maximum-length">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>res <span style="color:#666">=</span> max(res, i <span style="color:#666">-</span> j <span style="color:#666">+</span> <span style="color:#666">1</span>);
-</span></span></code></pre></div><ul>
-<li>After adjusting the window, we update the result <code>res</code> with the maximum length of the valid substring found so far. The length of the current window is <code>i - j + 1</code>.</li>
-</ul>
-<h4 id="step-5-return-the-result">
-  Step 5: Return the Result
-  <a class="heading-link" href="#step-5-return-the-result">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div><ul>
-<li>Finally, we return the value of <code>res</code>, which is the length of the longest substring where we can make all characters the same with at most <code>k</code> replacements.</li>
-</ul>
+</li>
+<li><strong>Return Result</strong>: After processing all characters, return the maximum length of the substring found.</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -367,40 +312,14 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li>The time complexity of this algorithm is <strong>O(n)</strong>, where <code>n</code> is the length of the string <code>s</code>. This is because both the <code>i</code> and <code>j</code> pointers move from the start to the end of the string, and each pointer moves at most <code>n</code> times. The <code>map</code> operations (insertion and updating the frequency) are efficient with average time complexity of <strong>O(1)</strong>, as the number of unique characters is limited to the alphabet size (which is constant).</li>
-</ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>The space complexity is <strong>O(1)</strong> with respect to the input size, as the map <code>ma</code> stores the frequency of characters, and the maximum number of unique characters in the string is limited (26 lowercase English letters). Therefore, the space used by the map is constant.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The given solution efficiently solves the problem of finding the longest substring that can be transformed into a string with identical characters using at most <code>k</code> replacements. The sliding window technique combined with character frequency counting allows us to explore the solution in linear time, making the algorithm optimal for large inputs. With a space complexity of <strong>O(1)</strong>, the solution is also memory-efficient.</p>
-<p>By utilizing this approach, we ensure that we handle both the constraints of the problem and edge cases, such as strings with all identical characters or strings where replacements are not needed.</p>
- 
+<li><strong>Time Complexity</strong>: O(n), where <code>n</code> is the length of the input string <code>s</code>. Each character is processed at most twice (once by the right pointer and potentially once by the left pointer).</li>
+<li><strong>Space Complexity</strong>: O(1) for the character frequency map since it only stores counts for at most 26 lowercase letters.</li>
+</ul> 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1146s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1145s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

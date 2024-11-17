@@ -147,7 +147,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              4-minute read
+              2-minute read
             </span>
           </div>
 
@@ -216,7 +216,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode530s0hbhb">
+        <h2 id="hahahugoshortcode529s0hbhb">
   <a href="https://leetcode.com/problems/happy-number/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -231,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode530s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode529s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -258,184 +258,97 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> slow <span style="color:#666">==</span> <span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode530s2hbhb">
+<h2 id="hahahugoshortcode529s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="-problem-statement">
-  🚀 Problem Statement
-  <a class="heading-link" href="#-problem-statement">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>We’re tackling the <strong>happy number</strong> problem! A <strong>happy number</strong> follows a unique process:</p>
+<p>A &ldquo;happy number&rdquo; is defined as a number which eventually reaches <code>1</code> when replaced by the sum of the square of each digit. If it does not reach <code>1</code>, it enters a cycle that does not include <code>1</code>. The task is to determine if a given number <code>n</code> is a happy number.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
 <ol>
-<li>Start with any positive integer <code>n</code>.</li>
-<li>Replace <code>n</code> with the sum of the squares of its digits.</li>
-<li>Repeat this until either:
+<li>
+<p><strong>Sum of Squares of Digits</strong>:</p>
 <ul>
-<li>The number becomes <code>1</code> (indicating it’s a happy number!).</li>
-<li>Or the number falls into a never-ending cycle that doesn’t include <code>1</code> (in which case, it’s not a happy number).</li>
+<li>Create a helper function <code>sqr(int n)</code> that computes the sum of the squares of the digits of <code>n</code>.</li>
 </ul>
 </li>
-</ol>
-<p>For example:</p>
+<li>
+<p><strong>Floyd&rsquo;s Cycle Detection</strong>:</p>
 <ul>
-<li><strong>Input:</strong> <code>19</code></li>
-<li><strong>Output:</strong> <code>True</code> (because the sequence of squares eventually reaches <code>1</code>).</li>
-</ul>
-<hr>
-<h3 id="-approach">
-  🧠 Approach
-  <a class="heading-link" href="#-approach">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>To solve this problem, we need to determine if summing the squares of the digits of a number <code>n</code> leads to <code>1</code> or falls into a cycle. If we find a cycle, the number is not happy.</p>
-<p>To detect cycles, we’ll use <strong>Floyd&rsquo;s Cycle-Finding Algorithm</strong> (a.k.a. the <strong>tortoise and hare</strong> algorithm). This algorithm uses two pointers:</p>
+<li>Use the slow and fast pointer technique to detect cycles. This involves two pointers:
 <ul>
-<li><strong>Slow pointer</strong> moves one step at a time.</li>
-<li><strong>Fast pointer</strong> moves two steps at a time.</li>
-</ul>
-<p>If the two pointers meet, a cycle is detected. If they meet at <code>1</code>, the number is happy!</p>
-<h4 id="key-steps">
-  Key Steps:
-  <a class="heading-link" href="#key-steps">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ol>
-<li>Create a helper function <code>sqr(int n)</code> to calculate the sum of the squares of the digits of <code>n</code>.</li>
-<li>Use two pointers (<code>slow</code> and <code>fast</code>) to repeatedly compute the sum of squares and check for a cycle.</li>
-<li>If the two pointers meet at <code>1</code>, the number is happy.</li>
-<li>If they meet at any other value, a cycle exists, and the number is not happy.</li>
-</ol>
-<hr>
-<h3 id="-step-by-step-code-breakdown">
-  🔨 Step-by-Step Code Breakdown
-  <a class="heading-link" href="#-step-by-step-code-breakdown">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>Let’s break it down step by step:</p>
-<h4 id="step-1-helper-function-sqrint-n">
-  Step 1: Helper Function <code>sqr(int n)</code>
-  <a class="heading-link" href="#step-1-helper-function-sqrint-n">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">sqr</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(n) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> n <span style="color:#666">%</span> <span style="color:#666">10</span>;   <span style="color:#080;font-style:italic">// Get the last digit
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        res <span style="color:#666">+=</span> tmp <span style="color:#666">*</span> tmp;    <span style="color:#080;font-style:italic">// Add the square of the digit
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        n <span style="color:#666">=</span> n <span style="color:#666">/</span> <span style="color:#666">10</span>;          <span style="color:#080;font-style:italic">// Remove the last digit
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li><strong>Purpose:</strong> This function computes the sum of the squares of the digits of <code>n</code>.</li>
-<li><strong>How it works:</strong>
-<ul>
-<li>We loop through each digit of <code>n</code>, square it, and add it to the result.</li>
-<li>The last digit is removed after processing with <code>n = n / 10</code>.</li>
-<li>The function returns the sum of the squares.</li>
+<li><code>slow</code> moves one step at a time (calculating the sum of squares).</li>
+<li><code>fast</code> moves two steps at a time (calculating the sum of squares twice).</li>
 </ul>
 </li>
 </ul>
-<h4 id="step-2-main-function-ishappyint-n">
-  Step 2: Main Function <code>isHappy(int n)</code>
-  <a class="heading-link" href="#step-2-main-function-ishappyint-n">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isHappy</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> slow <span style="color:#666">=</span> n;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> fast <span style="color:#666">=</span> n;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">do</span> {
-</span></span><span style="display:flex;"><span>        slow <span style="color:#666">=</span> sqr(slow);   <span style="color:#080;font-style:italic">// Move slow pointer one step
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        fast <span style="color:#666">=</span> sqr(sqr(fast)); <span style="color:#080;font-style:italic">// Move fast pointer two steps
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    } <span style="color:#a2f;font-weight:bold">while</span>(slow <span style="color:#666">!=</span> fast);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> slow <span style="color:#666">==</span> <span style="color:#666">1</span>;  <span style="color:#080;font-style:italic">// If slow reaches 1, it&#39;s a happy number
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
-</span></span></code></pre></div><ul>
-<li><strong>Purpose:</strong> This function checks whether <code>n</code> is a happy number using Floyd’s Cycle-Finding Algorithm.</li>
-<li><strong>How it works:</strong>
+</li>
+<li>
+<p><strong>Loop Until Convergence</strong>:</p>
 <ul>
-<li>Both the slow and fast pointers start at <code>n</code>.</li>
-<li>The slow pointer moves one step at a time, while the fast pointer moves two steps at a time.</li>
-<li>We keep moving the pointers until they meet. If they meet at <code>1</code>, the number is happy, so we return <code>true</code>.</li>
-<li>If they meet at any other value, a cycle is detected, and we return <code>false</code>.</li>
+<li>Continue updating the <code>slow</code> and <code>fast</code> pointers until they meet (indicating a cycle) or until <code>slow</code> reaches <code>1</code>.</li>
 </ul>
 </li>
-</ul>
-<hr>
-<h3 id="-complexity-analysis">
-  📈 Complexity Analysis
-  <a class="heading-link" href="#-complexity-analysis">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
+<li>
+<p><strong>Result</strong>:</p>
 <ul>
-<li><strong>O(log n):</strong> The <code>sqr</code> function runs in <strong>O(log n)</strong> because the number of digits in <code>n</code> is proportional to <code>log n</code>. The <code>do-while</code> loop runs until a cycle is detected or the slow pointer reaches <code>1</code>. In the worst case, the number of iterations is proportional to the number of distinct values that can be reached by summing the squares of the digits, which is small and bounded. So, the time complexity is <strong>O(log n)</strong>.</li>
+<li>If <code>slow</code> equals <code>1</code>, then <code>n</code> is a happy number; otherwise, it is not.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>O(1):</strong> We only use two pointers (<code>slow</code> and <code>fast</code>), so the space complexity is constant. No additional data structures are required.</li>
-</ul>
-<hr>
-<h3 id="-conclusion">
-  🏁 Conclusion
-  <a class="heading-link" href="#-conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>We’ve successfully solved the happy number problem using <strong>Floyd’s Cycle-Finding Algorithm</strong>. This method is:</p>
-<ol>
-<li><strong>Efficient:</strong> The algorithm runs in <strong>O(log n)</strong> time, making it optimal for large inputs.</li>
-<li><strong>Space Optimized:</strong> The space complexity is <strong>O(1)</strong>, which means it uses minimal memory.</li>
-<li><strong>Clever:</strong> By using the tortoise and hare approach, we can efficiently detect cycles without storing all previous values, making this solution both elegant and memory-friendly.</li>
+</li>
 </ol>
-<h3 id="key-takeaways">
-  Key Takeaways:
-  <a class="heading-link" href="#key-takeaways">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li><strong>Cycle detection</strong> ensures we don’t fall into infinite loops.</li>
-<li><strong>Efficiency</strong> is achieved with logarithmic time complexity.</li>
-<li><strong>Space savings</strong> make the solution ideal for memory-constrained environments.</li>
+<li><strong>Line 1</strong>: Define the class <code>Solution</code>.</li>
+<li><strong>Line 2</strong>: Define the helper function <code>sqr(int n)</code> that computes the sum of squares of the digits of <code>n</code>.</li>
+<li><strong>Lines 3-8</strong>:
+<ul>
+<li>Inside the <code>sqr</code> function, calculate the sum of squares by extracting each digit and adding its square to <code>res</code>.</li>
 </ul>
-<p>So, next time you face a number and wonder whether it&rsquo;s happy, you’ve got a smooth, efficient solution ready to go! Keep coding and keep exploring! 🌟</p>
+</li>
+<li><strong>Line 9</strong>: Define the function <code>isHappy(int n)</code>.</li>
+<li><strong>Line 10</strong>: Initialize both <code>slow</code> and <code>fast</code> pointers to <code>n</code>.</li>
+<li><strong>Lines 11-15</strong>:
+<ul>
+<li>Use a do-while loop to update the <code>slow</code> and <code>fast</code> pointers using the <code>sqr</code> function until they are equal.</li>
+</ul>
+</li>
+<li><strong>Line 16</strong>: Return <code>true</code> if <code>slow</code> is <code>1</code>, indicating that <code>n</code> is a happy number.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: The time complexity is not straightforward due to the potential cycles, but in practice, it is (O(\log n)) on average, as the number of digits decreases.</li>
+<li><strong>Space Complexity</strong>: (O(1)) since we use a constant amount of space for variables and do not use any additional data structures.</li>
+</ul>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode530s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode529s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

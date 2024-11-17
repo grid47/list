@@ -148,7 +148,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              4-minute read
+              2-minute read
             </span>
           </div>
 
@@ -221,8 +221,26 @@
 
       <div class="post-content">
         
-        <p><a href="https://leetcode.com/problems/random-pick-with-weight/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
-<hr>
+        <h2 id="hahahugoshortcode1196s0hbhb">
+  <a href="https://leetcode.com/problems/random-pick-with-weight/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
+<figure class="remote-image" style="text-align:center; margin: 0;">
+    <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/528.webp" 
+           alt="A series of objects with different weights, each object softly glowing based on its probability of being picked." 
+           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    
+      <figcaption style="font-size: 0.8em; font-weight: 300; color:#555; margin-top: 4px; line-height: 1.2;">
+        Solution to LeetCode 528: Random Pick with Weight Problem
+      </figcaption>
+    
+  </figure>
+  
+  <a class="heading-link" href="#hahahugoshortcode1196s0hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <p><strong>Code:</strong></p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
 </span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> wc;
@@ -258,7 +276,7 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Solution* obj = new Solution(w);
 </span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * int param_1 = obj-&gt;pickIndex();
 </span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> */</span></span></span></code></pre></div>
-<h2 id="hahahugoshortcode1207s1hbhb">
+<h2 id="hahahugoshortcode1196s2hbhb">
   
 
   
@@ -270,7 +288,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The task is to create a solution where each index of an input array <code>w</code> is chosen with a probability proportional to the value at that index. This requires building a mechanism to select indices according to weighted probabilities. Given an array of positive integers, we need a way to initialize a data structure that, when calling <code>pickIndex</code>, returns an index based on these weights.</p>
+<p>Design a class <code>Solution</code> that accepts an array of weights <code>w</code> and has a method <code>pickIndex()</code> that randomly picks an index such that the probability of picking an index <code>i</code> is proportional to <code>w[i]</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -282,83 +300,47 @@
 <li>
 <p><strong>Prefix Sum Array</strong>:</p>
 <ul>
-<li>First, transform the input weights array <code>w</code> into a prefix sum array. In the prefix sum array, each element at index <code>i</code> will contain the sum of all weights from the start up to index <code>i</code>.</li>
-<li>This transformation allows each index in the prefix sum array to represent cumulative probability bounds for selection.</li>
+<li>Initialize a prefix sum array <code>wc</code> where each element <code>wc[i]</code> represents the sum of weights from the beginning of the array up to index <code>i</code>.</li>
+<li>This allows us to determine the cumulative weights, which helps in simulating the weighted random selection.</li>
 </ul>
 </li>
 <li>
-<p><strong>Random Selection Using Binary Search</strong>:</p>
+<p><strong>Random Selection</strong>:</p>
 <ul>
-<li>To pick an index with the appropriate weight, generate a random integer <code>x</code> within the range <code>[1, wc.back()]</code> where <code>wc.back()</code> represents the total sum of weights.</li>
-<li>Using binary search, locate the smallest index in the prefix sum array <code>wc</code> where <code>wc[i] &gt;= x</code>. This index <code>i</code> represents the randomly selected index based on the weight.</li>
+<li>Generate a random number <code>x</code> between <code>1</code> and <code>wc.back()</code>, which represents the total weight.</li>
+<li>Use binary search to find the first index <code>i</code> in the prefix sum array <code>wc</code> such that <code>wc[i] &gt;= x</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Binary Search Logic</strong>:</p>
+<ul>
+<li>Initialize two pointers, <code>l</code> (left) and <code>r</code> (right), to perform the binary search.</li>
+<li>Calculate the midpoint and check if the value at that index is equal to <code>x</code>. If equal, return the index.</li>
+<li>Adjust the pointers based on whether the value at the midpoint is less than or greater than <code>x</code>.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="step-1-initialize-the-prefix-sum-array">
-  Step 1: Initialize the Prefix Sum Array
-  <a class="heading-link" href="#step-1-initialize-the-prefix-sum-array">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Solution(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> w) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> w.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        w[i] <span style="color:#666">+=</span> w[i <span style="color:#666">-</span> <span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>    wc <span style="color:#666">=</span> w;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>This constructor takes an input weight array <code>w</code> and modifies it to be a prefix sum array.</li>
-<li>By iterating from the second element, we update each element to hold the cumulative sum up to that point. This helps in determining probability boundaries, making it efficient to select indices in proportion to their weights.</li>
-</ul>
-<h4 id="step-2-generate-a-random-index-based-on-weights">
-  Step 2: Generate a Random Index Based on Weights
-  <a class="heading-link" href="#step-2-generate-a-random-index-based-on-weights">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">pickIndex</span>() {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> rand() <span style="color:#666">%</span> wc.back() <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">0</span>, r <span style="color:#666">=</span> wc.size() <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>    
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;</span> r) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mid <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l) <span style="color:#666">/</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(wc[mid] <span style="color:#666">==</span> x) <span style="color:#a2f;font-weight:bold">return</span> mid;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(wc[mid] <span style="color:#666">&lt;</span> x) l <span style="color:#666">=</span> mid <span style="color:#666">+</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span>            r <span style="color:#666">=</span> mid;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> l;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li><strong>Generate Random Number</strong>: <code>rand() % wc.back() + 1</code> produces a random number between <code>1</code> and the sum of all weights (<code>wc.back()</code>).</li>
-<li><strong>Binary Search for Index</strong>: Using binary search, we find the first index in <code>wc</code> where the value is greater than or equal to <code>x</code>.
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
 <ul>
-<li>If <code>wc[mid]</code> equals <code>x</code>, <code>mid</code> is returned immediately.</li>
-<li>Otherwise, the search continues, adjusting <code>l</code> or <code>r</code> to find the smallest <code>mid</code> where <code>wc[mid]</code> is greater than or equal to <code>x</code>.</li>
+<li>Construct the prefix sum array during the instantiation of the <code>Solution</code> class.</li>
 </ul>
 </li>
-</ul>
-<h4 id="example">
-  Example:
-  <a class="heading-link" href="#example">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>Suppose <code>w = [1, 3, 2]</code>. After constructing <code>wc</code>, it becomes <code>[1, 4, 6]</code>. A random value <code>x</code> within the range <code>[1, 6]</code> will land in intervals corresponding to the weights in <code>w</code>:</p>
+<li>
+<p><strong>Pick Index Method</strong>:</p>
 <ul>
-<li>If <code>x</code> is in <code>[1, 1]</code>, index <code>0</code> is selected.</li>
-<li>If <code>x</code> is in <code>[2, 4]</code>, index <code>1</code> is selected.</li>
-<li>If <code>x</code> is in <code>[5, 6]</code>, index <code>2</code> is selected.</li>
+<li>Generate a random number and use binary search to find the appropriate index based on the cumulative weights.</li>
 </ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -367,36 +349,14 @@
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity</strong>:
-<ul>
-<li><strong>Constructor</strong>: Building the prefix sum array has a time complexity of <code>O(n)</code>, where <code>n</code> is the size of <code>w</code>.</li>
-<li><strong>pickIndex</strong>: Each call to <code>pickIndex</code> involves a binary search, which has a time complexity of <code>O(log n)</code>.</li>
+<li><strong>Time Complexity</strong>: O(log n) for the <code>pickIndex()</code> method due to the binary search, and O(n) for initializing the prefix sum array.</li>
+<li><strong>Space Complexity</strong>: O(n) for storing the prefix sum array.</li>
 </ul>
-</li>
-<li><strong>Space Complexity</strong>:
-<ul>
-<li><strong>Constructor</strong>: The constructor requires <code>O(n)</code> space to store the prefix sum array <code>wc</code>.</li>
-</ul>
-</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This approach is efficient and effective for solving the weighted random index selection problem:</p>
-<ul>
-<li>The prefix sum array allows proportional selection by creating probability intervals.</li>
-<li>Binary search provides a fast way to locate the correct index based on a random value, ensuring that each index is selected in proportion to its weight.</li>
-</ul>
-<p>This solution is optimal in both time and space for handling random weighted selections efficiently.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1207s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1196s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

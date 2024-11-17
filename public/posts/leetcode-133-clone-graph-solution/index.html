@@ -148,7 +148,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -221,7 +221,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode169s0hbhb">
+        <h2 id="hahahugoshortcode170s0hbhb">
   <a href="https://leetcode.com/problems/clone-graph/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -236,7 +236,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode169s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode170s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -284,196 +284,76 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode169s2hbhb">
+<h2 id="hahahugoshortcode170s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="-problem-statement">
-  📝 <strong>Problem Statement</strong>
-  <a class="heading-link" href="#-problem-statement">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem asks us to <strong>clone a graph</strong>, where each node has an integer value and a list of neighbors (edges). The goal is to create a <strong>deep copy</strong> (or clone) of the graph, ensuring that each node&rsquo;s value is preserved, and all edges are correctly replicated.</p>
-<p>We are provided with a graph where each node is represented by a <code>Node</code> class, and the graph can contain cycles. The task is to construct an identical graph where each node is a new instance, and no references point to the original nodes.</p>
-<hr>
-<h3 id="-approach">
-  💡 <strong>Approach</strong>
-  <a class="heading-link" href="#-approach">
+<p>Given a reference to a node in a connected undirected graph, clone the entire graph. Each node in the graph contains a value and a list of its neighbors.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve the problem of cloning a graph, we need to ensure:</p>
 <ol>
-<li>Each node&rsquo;s value is copied correctly.</li>
-<li>The edges (connections to neighbors) are also replicated, but without referencing the original nodes.</li>
-<li>We handle cycles properly by avoiding revisiting nodes and preventing infinite recursion.</li>
+<li><strong>Depth-First Search (DFS)</strong>:
+<ul>
+<li>Use a recursive DFS approach to traverse the graph and clone each node and its neighbors.</li>
+<li>Maintain a mapping of original nodes to their corresponding cloned nodes to avoid duplication and ensure the graph structure is preserved.</li>
+</ul>
+</li>
 </ol>
-<p>We&rsquo;ll use a <strong>depth-first search (DFS)</strong> approach to traverse and clone each node. A <strong>map</strong> (or dictionary) will track which nodes have already been cloned to prevent revisiting and infinite recursion.</p>
-<hr>
-<h3 id="-code-breakdown-step-by-step">
-  🔨 <strong>Code Breakdown (Step by Step)</strong>
-  <a class="heading-link" href="#-code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="1-node-class-definition">
-  1️⃣ <strong>Node Class Definition</strong>
-  <a class="heading-link" href="#1-node-class-definition">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>We begin by defining the <code>Node</code> class, which represents each node in the graph. Each node contains:</p>
 <ul>
-<li><code>val</code>: The value of the node.</li>
-<li><code>neighbors</code>: A list of adjacent nodes (neighbors).</li>
-</ul>
-<p>The constructors allow creating nodes with default or specified values and neighbors.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Node</span> {
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> val;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>Node<span style="color:#666">*&gt;</span> neighbors;
-</span></span><span style="display:flex;"><span>    Node() {
-</span></span><span style="display:flex;"><span>        val <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>        neighbors <span style="color:#666">=</span> vector<span style="color:#666">&lt;</span>Node<span style="color:#666">*&gt;</span>();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    Node(<span style="color:#0b0;font-weight:bold">int</span> _val) {
-</span></span><span style="display:flex;"><span>        val <span style="color:#666">=</span> _val;
-</span></span><span style="display:flex;"><span>        neighbors <span style="color:#666">=</span> vector<span style="color:#666">&lt;</span>Node<span style="color:#666">*&gt;</span>();
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    Node(<span style="color:#0b0;font-weight:bold">int</span> _val, vector<span style="color:#666">&lt;</span>Node<span style="color:#666">*&gt;</span> _neighbors) {
-</span></span><span style="display:flex;"><span>        val <span style="color:#666">=</span> _val;
-</span></span><span style="display:flex;"><span>        neighbors <span style="color:#666">=</span> _neighbors;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><hr>
-<h4 id="2-main-solution-class">
-  2️⃣ <strong>Main Solution Class</strong>
-  <a class="heading-link" href="#2-main-solution-class">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>The main <code>Solution</code> class contains the method <code>cloneGraph</code>, which is responsible for cloning the graph.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, Node<span style="color:#666">*&gt;</span> mp; <span style="color:#080;font-style:italic">// Maps node value to its cloned node
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    Node<span style="color:#666">*</span> <span style="color:#00a000">cloneGraph</span>(Node<span style="color:#666">*</span> node) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(node <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> node;  <span style="color:#080;font-style:italic">// Handle the edge case where the node is NULL
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        Node <span style="color:#666">*</span> ans;
-</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> copy(node);  <span style="color:#080;font-style:italic">// Start the graph cloning process by calling the copy function
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">return</span> ans;  <span style="color:#080;font-style:italic">// Return the cloned graph
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><ul>
-<li><strong>cloneGraph Function</strong>:
-<ul>
-<li>Accepts a pointer to a node (<code>Node* node</code>).</li>
-<li>If the node is <code>NULL</code>, it directly returns <code>NULL</code>.</li>
-<li>Calls the helper method <code>copy(node)</code> to initiate the cloning process and returns the root of the cloned graph.</li>
-</ul>
-</li>
-</ul>
-<hr>
-<h4 id="3-recursive-copy-function">
-  3️⃣ <strong>Recursive Copy Function</strong>
-  <a class="heading-link" href="#3-recursive-copy-function">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>The recursive <code>copy</code> function is responsible for copying each node and its neighbors.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Node<span style="color:#666">*</span> <span style="color:#00a000">copy</span>(Node<span style="color:#666">*</span> node) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mp.count(node<span style="color:#666">-&gt;</span>val)) <span style="color:#a2f;font-weight:bold">return</span> mp[node<span style="color:#666">-&gt;</span>val];  <span style="color:#080;font-style:italic">// Return the already cloned node if it exists in the map
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    Node<span style="color:#666">*</span> ans <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> Node(node<span style="color:#666">-&gt;</span>val);  <span style="color:#080;font-style:italic">// Create a new node for the clone
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    mp[node<span style="color:#666">-&gt;</span>val] <span style="color:#666">=</span> ans;  <span style="color:#080;font-style:italic">// Store the cloned node in the map using its value as the key
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: node<span style="color:#666">-&gt;</span>neighbors) {  <span style="color:#080;font-style:italic">// Recursively clone each neighbor of the current node
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        Node<span style="color:#666">*</span> n <span style="color:#666">=</span> copy(it);  <span style="color:#080;font-style:italic">// Call copy for each neighbor
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        ans<span style="color:#666">-&gt;</span>neighbors.push_back(n);  <span style="color:#080;font-style:italic">// Add the cloned neighbor to the current node&#39;s neighbors list
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;  <span style="color:#080;font-style:italic">// Return the cloned node
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
-</span></span></code></pre></div><ul>
 <li>
-<p><strong>Base Case</strong>:</p>
+<p><strong><code>cloneGraph</code> function</strong>:</p>
 <ul>
-<li>If the node has already been cloned (exists in the <code>mp</code> map), return the cloned node to avoid infinite recursion.</li>
+<li><strong>Line 7</strong>: Checks if the input node is <code>NULL</code>. If it is, returns <code>NULL</code>.</li>
+<li><strong>Line 9</strong>: Calls the helper function <code>copy</code> to clone the graph starting from the given node.</li>
 </ul>
 </li>
 <li>
-<p><strong>Cloning the Node</strong>:</p>
+<p><strong><code>copy</code> function</strong>:</p>
 <ul>
-<li>If the node hasn&rsquo;t been cloned, create a new node with the same value as the original node.</li>
-<li>Store the cloned node in the map (<code>mp</code>) using its value as the key.</li>
-</ul>
-</li>
-<li>
-<p><strong>Recursively Cloning Neighbors</strong>:</p>
-<ul>
-<li>For each neighbor, recursively call <code>copy</code> to clone them.</li>
-<li>Add the cloned neighbor to the current node’s neighbors list.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return the Cloned Node</strong>:</p>
-<ul>
-<li>After cloning the node and its neighbors, return the cloned node.</li>
+<li><strong>Line 12</strong>: Checks if the node has already been cloned by checking the map. If it has, returns the cloned node.</li>
+<li><strong>Line 13</strong>: Creates a new node for the clone.</li>
+<li><strong>Line 14</strong>: Stores the mapping of the original node to its clone.</li>
+<li><strong>Line 15-17</strong>: Iterates through the neighbors of the original node, recursively cloning each neighbor and adding it to the cloned node&rsquo;s neighbors.</li>
+<li><strong>Line 18</strong>: Returns the cloned node.</li>
 </ul>
 </li>
 </ul>
-<hr>
-<h3 id="-complexity-analysis">
-  ⏱️ <strong>Complexity Analysis</strong>
-  <a class="heading-link" href="#-complexity-analysis">
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="-time-complexity">
-  🧮 <strong>Time Complexity</strong>:
-  <a class="heading-link" href="#-time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>Time to Clone Each Node</strong>: Each node is visited once, and for each node, we examine all of its neighbors.</li>
-<li><strong>Time to Clone Each Neighbor</strong>: Recursion is called for each neighbor.</li>
-<li>Overall, the time complexity is <strong>O(V + E)</strong>, where <code>V</code> is the number of nodes and <code>E</code> is the number of edges. Each node and edge is processed at most once.</li>
+<li><strong>Time Complexity</strong>: (O(V + E)), where (V) is the number of nodes and (E) is the number of edges, as each node and edge is processed once.</li>
+<li><strong>Space Complexity</strong>: (O(V)) for the map storing the cloned nodes, plus (O(V)) for the recursion stack in the worst case (for deep graphs).</li>
 </ul>
-<h4 id="-space-complexity">
-  💾 <strong>Space Complexity</strong>:
-  <a class="heading-link" href="#-space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>Map for Cloned Nodes</strong>: The <code>map&lt;int, Node*&gt;</code> stores each node’s value and its corresponding cloned node. This requires <strong>O(V)</strong> space.</li>
-<li><strong>Recursive Call Stack</strong>: The recursive calls on the graph nodes can lead to a call stack depth of <strong>O(V)</strong> in the worst case (for graphs that are essentially long chains).</li>
-<li>Thus, the overall space complexity is <strong>O(V)</strong>.</li>
-</ul>
-<hr>
-<h3 id="-conclusion">
-  ✅ <strong>Conclusion</strong>
-  <a class="heading-link" href="#-conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution efficiently clones an undirected graph using a <strong>depth-first search (DFS)</strong> approach with recursion. The <code>map</code> ensures that each node is cloned only once, and the graph&rsquo;s structure is correctly preserved. The solution handles cycles effectively by avoiding revisiting already cloned nodes. The time complexity is linear in terms of the number of nodes and edges, making this approach suitable for large graphs.</p>
-<p>This method can be adapted for other graph-related problems that involve creating deep copies or performing graph traversals. The use of recursion and mapping nodes ensures that the cloned graph is a valid copy with the correct structure and no infinite loops.</p>
-<hr>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode169s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode170s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

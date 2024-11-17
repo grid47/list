@@ -149,7 +149,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -217,7 +217,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -252,7 +252,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1345s1hbhb">
+<h2 id="hahahugoshortcode1348s1hbhb">
   
 
   
@@ -264,13 +264,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>In this problem, you are given three inputs:</p>
-<ol>
-<li><code>difficulty[]</code>: An array where each element represents the difficulty level of a job.</li>
-<li><code>profit[]</code>: An array where each element represents the profit corresponding to the job.</li>
-<li><code>worker[]</code>: An array where each element represents the ability (or skill) level of a worker.</li>
-</ol>
-<p>The goal is to assign jobs to workers such that each worker can only work on jobs that are less than or equal to their ability level, and each worker can complete at most one job. The task is to maximize the total profit from all the workers&rsquo; assignments.</p>
+<p>The goal is to determine the maximum profit that can be earned by workers based on their abilities to handle various jobs with differing difficulty levels and associated profits.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -278,83 +272,29 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem essentially involves pairing workers with jobs in such a way that the workers are able to take on jobs that they can handle based on their ability. The goal is to maximize the total profit from the assignments, and the strategy involves the following steps:</p>
 <ol>
-<li>
-<p><strong>Job Matching</strong>:</p>
+<li><strong>Pair Jobs</strong>: Create a vector of pairs that combine each job&rsquo;s difficulty with its profit.</li>
+<li><strong>Sort</strong>: Sort both the jobs by difficulty and the workers by their abilities. This enables efficient matching.</li>
+<li><strong>Assign Jobs</strong>: Iterate through each worker&rsquo;s ability and, for each worker, determine the most profitable job they can handle.
 <ul>
-<li>Each worker can handle jobs up to their own skill level, and for each job, we have a difficulty level. We need to find the best job for each worker in terms of maximum profit.</li>
+<li>Maintain a variable <code>best</code> to track the maximum profit available for jobs that the current worker can manage.</li>
+<li>For each worker, update <code>best</code> while the worker&rsquo;s ability allows them to handle jobs from the sorted list.</li>
 </ul>
 </li>
-<li>
-<p><strong>Sorting the Jobs and Workers</strong>:</p>
-<ul>
-<li>To facilitate efficient job assignment, it is beneficial to sort both the <code>jobs</code> and <code>workers</code> arrays. Sorting the jobs array by difficulty and the workers array by ability ensures that we can assign jobs to workers in a greedy manner.</li>
-</ul>
-</li>
-<li>
-<p><strong>Greedy Approach</strong>:</p>
-<ul>
-<li>Once the jobs and workers are sorted, we iterate over the workers and attempt to assign them the best job they can perform (i.e., a job that they can handle based on their skill level). We keep track of the best possible profit seen so far and update the total profit for each worker accordingly.</li>
-</ul>
-</li>
-<li>
-<p><strong>Efficiency</strong>:</p>
-<ul>
-<li>The sorting step ensures that the solution runs in (O(N \log N)), where (N) is the size of the larger of the <code>profit[]</code>, <code>difficulty[]</code>, or <code>worker[]</code> arrays. This allows us to find the best job for each worker efficiently.</li>
-</ul>
-</li>
+<li><strong>Accumulate Profit</strong>: Add the best possible profit for each worker to the total result.</li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Create a List of Jobs</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> jobs;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> N; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    jobs.push_back(make_pair(difficulty[i], profit[i]));
-</span></span></code></pre></div><ul>
-<li>We create a vector <code>jobs</code> of pairs where each pair consists of a difficulty level and the corresponding profit of a job. This helps us easily access both values together as we process each job.</li>
+<ul>
+<li>The <code>maxProfitAssignment</code> function first zips the <code>difficulty</code> and <code>profit</code> vectors into a pair vector called <code>jobs</code>.</li>
+<li>Both <code>jobs</code> and <code>worker</code> are sorted to facilitate efficient profit maximization.</li>
+<li>The function then iterates through the sorted workers and checks which jobs they can do, updating the maximum profit accordingly.</li>
 </ul>
-</li>
-<li>
-<p><strong>Sort the Jobs and Workers</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(jobs.begin(), jobs.end());
-</span></span><span style="display:flex;"><span>sort(worker.begin(), worker.end());
-</span></span></code></pre></div><ul>
-<li>First, we sort the <code>jobs</code> vector by difficulty. Sorting ensures that we can iterate through the jobs in increasing order of difficulty and pick the best job for each worker.</li>
-<li>Similarly, we sort the <code>worker</code> array by the worker’s ability level. This allows us to assign jobs in an efficient way where we try to assign the easiest available job that a worker can perform.</li>
-</ul>
-</li>
-<li>
-<p><strong>Greedy Job Assignment</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> best <span style="color:#666">=</span>  <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">eff</span>: worker) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(i <span style="color:#666">&lt;</span> N <span style="color:#666">&amp;&amp;</span> eff <span style="color:#666">&gt;=</span> jobs[i].first) {
-</span></span><span style="display:flex;"><span>        best <span style="color:#666">=</span> max(best, jobs[i<span style="color:#666">++</span>].second);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    res <span style="color:#666">+=</span> best;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>We initialize <code>best</code> to 0, which will hold the best possible profit seen so far for any worker.</li>
-<li>For each worker, we iterate through the sorted jobs and check if the worker can perform the job (i.e., if the worker’s ability <code>eff</code> is greater than or equal to the job’s difficulty <code>jobs[i].first</code>).</li>
-<li>If the worker can perform the job, we update <code>best</code> to be the maximum of the current <code>best</code> and the profit of the job (<code>jobs[i].second</code>), and we move to the next job (<code>i++</code>).</li>
-<li>After processing all jobs that the worker can handle, we add <code>best</code> (the best possible profit for that worker) to the total profit <code>res</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return the Result</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div><ul>
-<li>Once we have processed all workers, we return <code>res</code>, which contains the total maximum profit.</li>
-</ul>
-</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -363,35 +303,13 @@
   </a>
 </h3>
 <ul>
-<li>
-<p><strong>Time Complexity</strong>:</p>
-<ul>
-<li>The sorting of the <code>jobs</code> array takes (O(N \log N)), where (N) is the number of jobs.</li>
-<li>Sorting the <code>worker</code> array takes (O(M \log M)), where (M) is the number of workers.</li>
-<li>The final loop over workers runs in (O(M)), where (M) is the number of workers. Inside this loop, we use a nested loop to check jobs for each worker, but the while loop is guaranteed to only process each job once, so it contributes at most (O(N)) operations in total.</li>
-<li>Therefore, the overall time complexity is (O(N \log N + M \log M)).</li>
-</ul>
-</li>
-<li>
-<p><strong>Space Complexity</strong>:</p>
-<ul>
-<li>The space complexity is (O(N + M)), as we need to store the <code>jobs</code> vector (of size (N)) and the <code>worker</code> vector (of size (M)).</li>
-</ul>
-</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The solution efficiently maximizes the total profit by using a greedy approach to assign jobs to workers based on their ability. By sorting both the jobs and the workers arrays, we ensure that we can easily find the best job for each worker in terms of maximum profit. The greedy nature of the algorithm ensures that we always pick the highest profit job that a worker can handle. The time complexity of (O(N \log N + M \log M)) is optimal for this type of problem, where sorting is necessary to enable efficient processing. This approach is both time-efficient and space-efficient, making it suitable for solving this problem in large-scale scenarios where both the number of jobs and workers can be large.</p>
- 
+<li><strong>Time Complexity</strong>: O(N log N + W log W), where N is the number of jobs (due to sorting) and W is the number of workers.</li>
+<li><strong>Space Complexity</strong>: O(N), for storing the job pairs.</li>
+</ul> 
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1345s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1348s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

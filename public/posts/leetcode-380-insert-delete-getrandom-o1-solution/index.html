@@ -149,7 +149,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -217,7 +217,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -226,7 +226,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1117s0hbhb">
+        <h2 id="hahahugoshortcode1116s0hbhb">
   <a href="https://leetcode.com/problems/insert-delete-getrandom-o1/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -241,7 +241,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1117s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1116s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -281,214 +281,100 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> a[rand()<span style="color:#666">%</span>a.size()];
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1117s2hbhb">
+<h2 id="hahahugoshortcode1116s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="-problem-statement">
-  🚀 Problem Statement
-  <a class="heading-link" href="#-problem-statement">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>In this challenge, we need to implement a data structure called <code>RandomizedSet</code> that supports the following operations:</p>
+<p>Design a data structure that supports the following operations:</p>
 <ol>
-<li><strong>Insert</strong>: Insert a value into the set if it&rsquo;s not already present.</li>
-<li><strong>Remove</strong>: Remove a value from the set if it exists.</li>
-<li><strong>Get Random</strong>: Retrieve a random element from the set.</li>
+<li><code>insert(val)</code>: Inserts an item <code>val</code> into the set if not already present. Returns <code>true</code> if the item was added successfully, or <code>false</code> if it was already present.</li>
+<li><code>remove(val)</code>: Removes an item <code>val</code> from the set if present. Returns <code>true</code> if the item was removed successfully, or <code>false</code> if it was not found.</li>
+<li><code>getRandom()</code>: Returns a random element from the current set of elements. Each element must have the same probability of being returned.</li>
 </ol>
-<p>The real trick here is that we need to make the <strong>Insert</strong> and <strong>Remove</strong> operations <strong>efficient</strong> (constant time), while still being able to randomly pick an element with <strong>O(1)</strong> time complexity.</p>
-<hr>
-<h3 id="-approach">
-  🧠 Approach
-  <a class="heading-link" href="#-approach">
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To build a <code>RandomizedSet</code> that efficiently supports all three operations, we&rsquo;ll use a <strong>combination of a vector</strong> and an <strong>unordered map</strong>:</p>
+<ul>
+<li><strong>Data Structure</strong>:
+<ul>
+<li>Use a dynamic array (<code>vector&lt;int&gt;</code>) to store the elements, allowing O(1) time complexity for adding and removing items.</li>
+<li>Use a hash map (<code>unordered_map&lt;int,int&gt;</code>) to store the index of each element in the array for O(1) time complexity for lookup operations.</li>
+</ul>
+</li>
+</ul>
 <ol>
 <li>
-<p><strong>Vector (<code>a</code>)</strong>:</p>
+<p><strong>Insertion</strong>:</p>
 <ul>
-<li>The vector holds the elements of the set. Since we need <strong>random access</strong> to any element, the vector provides <strong>O(1)</strong> time complexity for accessing an element by its index.</li>
-<li>We will use the <strong>last element</strong> of the vector to replace any removed element. This ensures the <strong>O(1)</strong> complexity for the <code>Remove</code> operation.</li>
+<li>Check if the element is already present using the hash map.</li>
+<li>If not present, add it to the end of the array and store its index in the hash map.</li>
 </ul>
 </li>
 <li>
-<p><strong>Unordered Map (<code>m</code>)</strong>:</p>
+<p><strong>Removal</strong>:</p>
 <ul>
-<li>The map stores the value as the <strong>key</strong> and its corresponding index in the vector as the <strong>value</strong>.</li>
-<li>This allows us to check if an element is present in the set in <strong>O(1)</strong> time and to find its index quickly, which is crucial for efficient removal.</li>
+<li>Check if the element exists in the hash map.</li>
+<li>If present, replace the element to be removed with the last element in the array to maintain the continuity of the array, and update the hash map accordingly.</li>
+<li>Finally, remove the last element from the array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Random Selection</strong>:</p>
+<ul>
+<li>Use <code>rand()</code> to generate a random index and return the element at that index in the array.</li>
 </ul>
 </li>
 </ol>
-<hr>
-<h3 id="-step-by-step-code-breakdown">
-  🔨 Step-by-Step Code Breakdown
-  <a class="heading-link" href="#-step-by-step-code-breakdown">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Let&rsquo;s walk through the implementation!</p>
-<h4 id="step-1-define-the-randomizedset-class">
-  Step 1: Define the <code>RandomizedSet</code> Class
-  <a class="heading-link" href="#step-1-define-the-randomizedset-class">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">RandomizedSet</span> {
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">private</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> a;
-</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> m;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span>    RandomizedSet() {
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><ul>
-<li>We start by defining our class <code>RandomizedSet</code> with two private members:
 <ul>
-<li><code>a</code>: The vector storing elements.</li>
-<li><code>m</code>: The unordered map that maps each element to its index in the vector.</li>
+<li>The <code>RandomizedSet</code> class maintains the dynamic array <code>a</code> and the hash map <code>m</code>.</li>
+<li><code>insert</code> method adds the value if it&rsquo;s not already in the set and updates the map.</li>
+<li><code>remove</code> method swaps the value with the last element and updates the necessary indices in the map before removing the last element.</li>
+<li><code>getRandom</code> method returns a random element from the array.</li>
 </ul>
-</li>
-</ul>
-<hr>
-<h4 id="step-2-insert-method">
-  Step 2: Insert Method
-  <a class="heading-link" href="#step-2-insert-method">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">insert</span>(<span style="color:#0b0;font-weight:bold">int</span> val) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(m.find(val) <span style="color:#666">!=</span> m.end())
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span>{
-</span></span><span style="display:flex;"><span>            a.push_back(val);
-</span></span><span style="display:flex;"><span>            m[val] <span style="color:#666">=</span> a.size() <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><ul>
-<li>The <code>insert</code> method checks if the value is already in the map (<code>m.find(val)</code>). If it&rsquo;s not found, the value is:
-<ul>
-<li>Added to the vector <code>a</code>.</li>
-<li>Its index in <code>a</code> is stored in the map <code>m</code>.</li>
-</ul>
-</li>
-<li>If the insertion is successful, the method returns <strong>true</strong>. If the element is already in the set, it returns <strong>false</strong>.</li>
-</ul>
-<hr>
-<h4 id="step-3-remove-method">
-  Step 3: Remove Method
-  <a class="heading-link" href="#step-3-remove-method">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">remove</span>(<span style="color:#0b0;font-weight:bold">int</span> val) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(m.find(val) <span style="color:#666">==</span> m.end())
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span>{
-</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> last <span style="color:#666">=</span> a.back();
-</span></span><span style="display:flex;"><span>            a[m[val]] <span style="color:#666">=</span> a.back();
-</span></span><span style="display:flex;"><span>            a.pop_back();
-</span></span><span style="display:flex;"><span>            m[last] <span style="color:#666">=</span> m[val];
-</span></span><span style="display:flex;"><span>            m.erase(val);
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><ul>
-<li>The <code>remove</code> method first checks if the element exists in the set using <code>m.find(val)</code>. If it&rsquo;s not in the set, it returns <strong>false</strong>.</li>
-<li>If the element exists:
-<ul>
-<li>The last element in the vector is swapped with the element to be removed.</li>
-<li>The last element is removed, and the map is updated with the new index of the swapped element.</li>
-</ul>
-</li>
-<li>This ensures that the removal is done efficiently in <strong>O(1)</strong> time.</li>
-</ul>
-<hr>
-<h4 id="step-4-get-random-method">
-  Step 4: Get Random Method
-  <a class="heading-link" href="#step-4-get-random-method">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">getRandom</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> a[rand() <span style="color:#666">%</span> a.size()];
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><ul>
-<li>The <code>getRandom</code> method generates a random index using <code>rand() % a.size()</code>. Since the vector allows constant time access to any element, this operation is <strong>O(1)</strong>.</li>
-</ul>
-<hr>
-<h3 id="-complexity-analysis">
-  📈 Complexity Analysis
-  <a class="heading-link" href="#-complexity-analysis">
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>Insert Operation</strong>: <strong>O(1)</strong>. Inserting an element involves checking if it&rsquo;s already in the set (<code>O(1)</code>), adding it to the vector (<code>O(1)</code>), and updating the map (<code>O(1)</code>).</li>
-<li><strong>Remove Operation</strong>: <strong>O(1)</strong>. Removing an element involves finding its index (<code>O(1)</code>), replacing it with the last element (<code>O(1)</code>), and updating both the vector and map (<code>O(1)</code>).</li>
-<li><strong>Get Random Operation</strong>: <strong>O(1)</strong>. Retrieving a random element from the vector takes constant time.</li>
-</ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
+<li>
+<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li><strong>O(n)</strong>, where <code>n</code> is the number of elements in the set. The space is used by the vector <code>a</code> and the unordered map <code>m</code>, both of which store the set elements.</li>
+<li><code>insert</code>: O(1)</li>
+<li><code>remove</code>: O(1)</li>
+<li><code>getRandom</code>: O(1)</li>
 </ul>
-<hr>
-<h3 id="-conclusion">
-  🏁 Conclusion
-  <a class="heading-link" href="#-conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The <code>RandomizedSet</code> class provides a super-efficient way to insert, remove, and retrieve random elements, all in <strong>O(1)</strong> time. Here&rsquo;s why this approach shines:</p>
-<ul>
-<li><strong>Insert</strong> and <strong>Remove</strong> operations are fast, with no need for complex shifts or resizing (thanks to the vector).</li>
-<li><strong>Get Random</strong> is incredibly fast because we directly access an index in the vector in constant time.</li>
-<li>The combination of a <strong>vector</strong> and an <strong>unordered map</strong> is key to achieving this efficiency, ensuring that we can modify and query the set without sacrificing performance.</li>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: O(n), where n is the number of elements in the set, for the array and hash map.</p>
+</li>
 </ul>
-<hr>
-<h4 id="-key-takeaways">
-  🌟 Key Takeaways:
-  <a class="heading-link" href="#-key-takeaways">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>All core operations are implemented in <strong>O(1)</strong> time.</li>
-<li>The <strong>vector</strong> allows efficient indexing, while the <strong>unordered map</strong> keeps track of indices.</li>
-<li>This makes the <code>RandomizedSet</code> both <strong>time-efficient</strong> and <strong>space-efficient</strong> for all operations!</li>
-</ul>
-<p>And there you have it! With this solution, you’ve got a powerful, lightning-fast data structure to handle a dynamic set with random access. 💪</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1117s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1116s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -147,7 +147,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              4-minute read
+              2-minute read
             </span>
           </div>
 
@@ -245,12 +245,12 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem asks us to identify the &ldquo;judge&rdquo; in a town where there are <code>n</code> people. The town judge is defined as follows:</p>
-<ul>
-<li>The judge is trusted by everyone else (i.e., all <code>n-1</code> other people trust the judge).</li>
-<li>The judge trusts no one.
-We are given a list <code>trust</code> where each element <code>[a, b]</code> indicates that person <code>a</code> trusts person <code>b</code>. The task is to find the person who satisfies the above conditions, if such a person exists. If no such person exists, we return <code>-1</code>.</li>
-</ul>
+<p>In a town, there are <code>n</code> people, numbered from <code>1</code> to <code>n</code>. Some people may trust others. A person is considered a &ldquo;judge&rdquo; if:</p>
+<ol>
+<li>The judge does not trust anyone.</li>
+<li>Everyone trusts the judge.</li>
+</ol>
+<p>You are given an array <code>trust</code>, where <code>trust[i] = [a, b]</code> indicates that person <code>a</code> trusts person <code>b</code>. The goal is to determine who the judge is. If no such person exists, return <code>-1</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -258,74 +258,34 @@ We are given a list <code>trust</code> where each element <code>[a, b]</code> in
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem efficiently, we can take advantage of a <strong>degree-based approach</strong>. The idea is to use an array (or list) to track the trust relationship for each person. This can be done by adjusting the &ldquo;trust count&rdquo; for each person:</p>
 <ol>
-<li><strong>Increase the trust count</strong> for person <code>b</code> when <code>a</code> trusts <code>b</code>.</li>
-<li><strong>Decrease the trust count</strong> for person <code>a</code> since they trust someone (indicating they cannot be the judge).</li>
-</ol>
-<p>At the end, the judge will be the person who:</p>
+<li>
+<p><strong>Degree Array</strong>: Use an array <code>deg</code> to track the net trust level for each person:</p>
 <ul>
-<li>Has a trust count of <code>n-1</code> (trusted by everyone except themselves).</li>
-<li>Has a trust value of <code>0</code> for themselves (since they trust no one).</li>
+<li>Increment <code>deg[b]</code> for every trust relationship <code>[a, b]</code>, indicating that <code>b</code> is trusted.</li>
+<li>Decrement <code>deg[a]</code> for every trust relationship <code>[a, b]</code>, indicating that <code>a</code> trusts someone (and thus cannot be the judge).</li>
 </ul>
-<p>If no such person exists, return <code>-1</code>.</p>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+</li>
+<li>
+<p><strong>Check for Judge</strong>:</p>
+<ul>
+<li>After processing all trust relationships, iterate through the <code>deg</code> array.</li>
+<li>A person <code>i</code> is identified as the judge if <code>deg[i]</code> equals <code>n - 1</code>, meaning everyone else trusts <code>i</code>, and <code>i</code> trusts no one.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> findJudge(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> trust) {
-</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> deg(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>);  <span style="color:#080;font-style:italic">// Initialize an array to track trust/degrees of each person
-</span></span></span></code></pre></div><ol>
-<li><strong>Initialization</strong>:
 <ul>
-<li>We create a vector <code>deg</code> of size <code>n + 1</code> (because people are numbered from <code>1</code> to <code>n</code>), where each element represents the &ldquo;trust degree&rdquo; of a person. Initially, all values are set to <code>0</code>.</li>
-<li>The index of the vector corresponds to the person number.</li>
+<li>Initialize a vector <code>deg</code> of size <code>n + 1</code> to keep track of trust levels.</li>
+<li>Iterate through the <code>trust</code> relationships to update the <code>deg</code> values.</li>
+<li>Finally, check which person has a trust level of <code>n - 1</code> and return that person&rsquo;s index. If no such person exists, return <code>-1</code>.</li>
 </ul>
-</li>
-</ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">x</span>: trust) {
-</span></span><span style="display:flex;"><span>            deg[x[<span style="color:#666">1</span>]]<span style="color:#666">++</span>;  <span style="color:#080;font-style:italic">// Person `x[1]` is trusted by `x[0]`, so increase their trust degree
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            deg[x[<span style="color:#666">0</span>]]<span style="color:#666">--</span>;  <span style="color:#080;font-style:italic">// Person `x[0]` trusts someone, so decrease their trust degree
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        }
-</span></span></code></pre></div><ol start="2">
-<li><strong>Updating Trust Degrees</strong>:
-<ul>
-<li>For each pair in the <code>trust</code> array, we do the following:
-<ul>
-<li>We increment <code>deg[x[1]]</code> to indicate that person <code>x[1]</code> is trusted by <code>x[0]</code>.</li>
-<li>We decrement <code>deg[x[0]]</code> to indicate that person <code>x[0]</code> is trusting someone, so they cannot be the judge.</li>
-</ul>
-</li>
-<li>This allows us to track the &ldquo;trust degree&rdquo; for each person — the net trust value (number of people who trust them minus the number of people they trust).</li>
-</ul>
-</li>
-</ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;=</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(deg[i] <span style="color:#666">==</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> i;  <span style="color:#080;font-style:italic">// If a person has trust degree of n-1, they are the judge
-</span></span></span></code></pre></div><ol start="3">
-<li><strong>Identifying the Judge</strong>:
-<ul>
-<li>After processing all trust relationships, we loop through the <code>deg</code> array from <code>1</code> to <code>n</code>.</li>
-<li>If a person has a trust degree of <code>n-1</code> (i.e., they are trusted by everyone except themselves), we return that person as the judge.</li>
-<li>The condition <code>deg[i] == n - 1</code> ensures that the person is trusted by everyone else, and <code>deg[i]</code> is <code>0</code> for the person because they trust no one.</li>
-</ul>
-</li>
-</ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;  <span style="color:#080;font-style:italic">// If no judge is found, return -1
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><ol start="4">
-<li><strong>Return the Result</strong>:
-<ul>
-<li>If we have gone through all the people and found no one who satisfies the conditions of being a judge, we return <code>-1</code>.</li>
-</ul>
-</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -334,26 +294,9 @@ We are given a list <code>trust</code> where each element <code>[a, b]</code> in
   </a>
 </h3>
 <ul>
-<li>
-<p><strong>Time Complexity</strong>: The time complexity of this solution is <strong>O(T + n)</strong>, where <code>T</code> is the number of trust relationships and <code>n</code> is the number of people. This is because:</p>
-<ul>
-<li>We iterate through the <code>trust</code> list once, which takes <code>O(T)</code> time to update the <code>deg</code> array.</li>
-<li>We then iterate through the <code>deg</code> array, which takes <code>O(n)</code> time to check for the judge.</li>
+<li><strong>Time Complexity</strong>: O(t + n), where <code>t</code> is the number of trust relationships and <code>n</code> is the number of people. The solution processes all trust relationships and checks each person.</li>
+<li><strong>Space Complexity</strong>: O(n) for the <code>deg</code> array to store the net trust levels.</li>
 </ul>
-</li>
-<li>
-<p><strong>Space Complexity</strong>: The space complexity is <strong>O(n)</strong>, which comes from the <code>deg</code> array of size <code>n + 1</code> used to track the trust degrees of each person.</p>
-</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The solution efficiently solves the problem by leveraging a degree-based approach to track the trust relationships between people. By updating the &ldquo;trust degree&rdquo; for each person as we process the <code>trust</code> array, we can quickly identify the judge (if one exists) by checking for a person with a trust degree of <code>n-1</code> and a self-trust degree of <code>0</code>. The algorithm has an optimal time complexity of <code>O(T + n)</code> and a space complexity of <code>O(n)</code>, making it well-suited to handle large input sizes.</p>
-<p>This approach avoids the need for complex graph traversal or nested loops, providing a simple and effective solution to the problem.</p>
  
 </div>
   

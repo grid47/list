@@ -148,7 +148,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              6-minute read
+              3-minute read
             </span>
           </div>
 
@@ -221,7 +221,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1147s0hbhb">
+        <h2 id="hahahugoshortcode1146s0hbhb">
   <a href="https://leetcode.com/problems/construct-quad-tree/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -236,7 +236,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1147s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1146s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -311,7 +311,7 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1147s2hbhb">
+<h2 id="hahahugoshortcode1146s2hbhb">
   
 
   
@@ -323,7 +323,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem is to construct a QuadTree from a given 2D grid of binary values (0s and 1s). A QuadTree is a tree data structure where each node represents a 4-way partition of the 2D grid, subdividing it into quadrants. Each internal node has four children: top-left, top-right, bottom-left, and bottom-right. A leaf node represents a single square in the grid and holds a value (either 0 or 1). The goal is to create a QuadTree from the grid where the leaves represent uniform values and internal nodes group similar values.</p>
+<p>Given a <code>n x n</code> grid where each element is either <code>0</code> or <code>1</code>, construct a QuadTree to represent the grid. A QuadTree is a tree data structure in which each internal node has exactly four children corresponding to the four quadrants of a 2D space.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -331,108 +331,52 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem, the approach is based on recursive subdivision of the grid. The key idea is:</p>
 <ol>
-<li><strong>Subdivide the grid</strong>: At each step, divide the grid into 4 smaller quadrants (top-left, top-right, bottom-left, bottom-right).</li>
-<li><strong>Leaf node check</strong>: If all values in a quadrant are the same (either all 0s or all 1s), the corresponding node becomes a leaf node.</li>
-<li><strong>Internal node creation</strong>: If a quadrant has mixed values, it requires further subdivision until leaf nodes are formed.</li>
-<li><strong>Optimization</strong>: If all four sub-quadrants are identical, we can represent them with a single leaf node.</li>
+<li>
+<p><strong>QuadTree Node Definition</strong>: Each node has:</p>
+<ul>
+<li>A boolean value <code>val</code> representing whether the region it covers is filled with <code>1</code> (true) or <code>0</code> (false).</li>
+<li>A boolean <code>isLeaf</code> indicating if the node is a leaf node (i.e., it represents a single color).</li>
+<li>Pointers to its four children: <code>topLeft</code>, <code>topRight</code>, <code>bottomLeft</code>, and <code>bottomRight</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive Construction</strong>:</p>
+<ul>
+<li>Use a helper function to construct the QuadTree recursively.</li>
+<li>Base Case: If the size of the current region (<code>sz</code>) is <code>1</code>, create a leaf node using the value of the single cell.</li>
+<li>Recursive Case:
+<ul>
+<li>Divide the current grid into four quadrants and call the helper function for each quadrant.</li>
+<li>If all four child nodes are leaf nodes and have the same value, merge them into a single leaf node. Otherwise, keep the four children.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Merging Logic</strong>: After constructing the child nodes:</p>
+<ul>
+<li>Check if all children are leaf nodes and have the same value. If so, set the current node as a leaf with that value; otherwise, link the children to the current node.</li>
+</ul>
+</li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="step-1-main-function--construct">
-  Step 1: Main Function – <code>construct</code>
-  <a class="heading-link" href="#step-1-main-function--construct">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>The <code>construct</code> function is the main entry point for the solution. It takes a 2D grid as input and returns the root node of the constructed QuadTree.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Node<span style="color:#666">*</span> <span style="color:#00a000">construct</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> helper(grid, <span style="color:#666">0</span>, <span style="color:#666">0</span>, grid.size());
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>This function simply invokes the recursive helper function <code>helper</code>, starting with the full grid (from index <code>(0, 0)</code> to <code>grid.size()</code>) to begin constructing the QuadTree.</p>
-<h4 id="step-2-recursive-helper-function--helper">
-  Step 2: Recursive Helper Function – <code>helper</code>
-  <a class="heading-link" href="#step-2-recursive-helper-function--helper">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>The helper function is a recursive function that performs the core logic of subdividing the grid and creating nodes for the QuadTree. It works as follows:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Node<span style="color:#666">*</span> <span style="color:#00a000">helper</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid, <span style="color:#0b0;font-weight:bold">int</span> x, <span style="color:#0b0;font-weight:bold">int</span> y, <span style="color:#0b0;font-weight:bold">int</span> sz) {
-</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Base case: If the grid is of size 1x1, create a leaf node.
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">if</span> (sz <span style="color:#666">==</span> <span style="color:#666">1</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f;font-weight:bold">new</span> Node(grid[x][y] <span style="color:#666">!=</span> <span style="color:#666">0</span>, <span style="color:#a2f">true</span>, <span style="color:#a2f">NULL</span>, <span style="color:#a2f">NULL</span>, <span style="color:#a2f">NULL</span>, <span style="color:#a2f">NULL</span>);
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><ul>
-<li><strong>Base Case</strong>: When the size of the current sub-grid is 1x1, it is directly converted into a leaf node. The <code>Node</code> constructor is invoked with the value from the grid (<code>grid[x][y]</code>), and the <code>isLeaf</code> flag is set to <code>true</code>. If the value is <code>0</code>, the <code>val</code> is set to <code>false</code>, otherwise it is <code>true</code>.</li>
-</ul>
-<h4 id="step-3-recursive-subdivision-and-node-creation">
-  Step 3: Recursive Subdivision and Node Creation
-  <a class="heading-link" href="#step-3-recursive-subdivision-and-node-creation">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Node<span style="color:#666">*</span> res <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> Node();
-</span></span><span style="display:flex;"><span>Node<span style="color:#666">*</span> topRight <span style="color:#666">=</span> helper(grid, x , y <span style="color:#666">+</span> sz <span style="color:#666">/</span> <span style="color:#666">2</span>, sz <span style="color:#666">/</span> <span style="color:#666">2</span>);
-</span></span><span style="display:flex;"><span>Node<span style="color:#666">*</span> topLeft <span style="color:#666">=</span> helper(grid, x , y, sz <span style="color:#666">/</span> <span style="color:#666">2</span>);
-</span></span><span style="display:flex;"><span>Node<span style="color:#666">*</span> bottomRight <span style="color:#666">=</span> helper(grid, x <span style="color:#666">+</span> sz <span style="color:#666">/</span> <span style="color:#666">2</span>, y <span style="color:#666">+</span> sz <span style="color:#666">/</span> <span style="color:#666">2</span>, sz <span style="color:#666">/</span> <span style="color:#666">2</span>);
-</span></span><span style="display:flex;"><span>Node<span style="color:#666">*</span> bottomLeft <span style="color:#666">=</span> helper(grid, x <span style="color:#666">+</span> sz <span style="color:#666">/</span> <span style="color:#666">2</span>, y, sz <span style="color:#666">/</span> <span style="color:#666">2</span>);
-</span></span></code></pre></div><ul>
-<li>For grids larger than <code>1x1</code>, the current grid is divided into four smaller quadrants:
+<ol>
+<li><strong>Construct Function</strong>: Initializes the QuadTree construction by calling the helper function with the full grid.</li>
+<li><strong>Helper Function</strong>:
 <ul>
-<li><strong>Top-left</strong>: From <code>(x, y)</code> to <code>(x + sz/2, y + sz/2)</code></li>
-<li><strong>Top-right</strong>: From <code>(x, y + sz/2)</code> to <code>(x + sz/2, y + sz)</code></li>
-<li><strong>Bottom-left</strong>: From <code>(x + sz/2, y)</code> to <code>(x + sz, y + sz/2)</code></li>
-<li><strong>Bottom-right</strong>: From <code>(x + sz/2, y + sz/2)</code> to <code>(x + sz, y + sz)</code></li>
+<li>Checks for base case (single cell) and creates a leaf node if true.</li>
+<li>Recursively creates the four child nodes by dividing the grid.</li>
+<li>Merges nodes if all child nodes are leaf nodes with the same value; otherwise, links the child nodes.</li>
 </ul>
 </li>
-</ul>
-<p>Each of these quadrants is recursively processed using the <code>helper</code> function.</p>
-<h4 id="step-4-merging-the-results">
-  Step 4: Merging the Results
-  <a class="heading-link" href="#step-4-merging-the-results">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (topRight<span style="color:#666">-&gt;</span>isLeaf <span style="color:#666">&amp;&amp;</span> topLeft<span style="color:#666">-&gt;</span>isLeaf <span style="color:#666">&amp;&amp;</span> bottomRight<span style="color:#666">-&gt;</span>isLeaf <span style="color:#666">&amp;&amp;</span> bottomLeft<span style="color:#666">-&gt;</span>isLeaf <span style="color:#666">&amp;&amp;</span> 
-</span></span><span style="display:flex;"><span>    topLeft<span style="color:#666">-&gt;</span>val <span style="color:#666">==</span> topRight<span style="color:#666">-&gt;</span>val <span style="color:#666">&amp;&amp;</span> topRight<span style="color:#666">-&gt;</span>val <span style="color:#666">==</span> bottomRight<span style="color:#666">-&gt;</span>val <span style="color:#666">&amp;&amp;</span> bottomRight<span style="color:#666">-&gt;</span>val <span style="color:#666">==</span> bottomLeft<span style="color:#666">-&gt;</span>val) {
-</span></span><span style="display:flex;"><span>    res<span style="color:#666">-&gt;</span>val <span style="color:#666">=</span> topLeft<span style="color:#666">-&gt;</span>val;
-</span></span><span style="display:flex;"><span>    res<span style="color:#666">-&gt;</span>isLeaf <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>} <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>    res<span style="color:#666">-&gt;</span>topRight <span style="color:#666">=</span> topRight;
-</span></span><span style="display:flex;"><span>    res<span style="color:#666">-&gt;</span>topLeft <span style="color:#666">=</span> topLeft;
-</span></span><span style="display:flex;"><span>    res<span style="color:#666">-&gt;</span>bottomRight <span style="color:#666">=</span> bottomRight;
-</span></span><span style="display:flex;"><span>    res<span style="color:#666">-&gt;</span>bottomLeft <span style="color:#666">=</span> bottomLeft;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>
-<p><strong>Merge Quadrants</strong>: After recursively dividing the grid into quadrants, the next step is to check if all four quadrants are identical and can be merged into a single leaf node. This check is performed using the following conditions:</p>
-<ul>
-<li>If all four quadrants are leaf nodes (<code>isLeaf == true</code>).</li>
-<li>If the values of all four leaf nodes are the same.</li>
-</ul>
-<p>If these conditions are met, the current node (<code>res</code>) becomes a leaf node with the value of the shared quadrants. Otherwise, the current node is an internal node with four children (top-left, top-right, bottom-left, and bottom-right).</p>
-</li>
-</ul>
-<h4 id="step-5-return-the-constructed-node">
-  Step 5: Return the Constructed Node
-  <a class="heading-link" href="#step-5-return-the-constructed-node">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>Finally, after checking and possibly merging the quadrants, the constructed node is returned:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div><p>This node represents the current grid or sub-grid, and the recursive calls continue until the entire grid is processed.</p>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -440,39 +384,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li>The time complexity of this solution is <code>O(n)</code>, where <code>n</code> is the total number of cells in the grid. The recursive approach ensures that every cell is processed once, with each recursive step handling a smaller grid.</li>
+<li><strong>Time Complexity</strong>: O(n^2) where <code>n</code> is the dimension of the grid, since each cell is processed once.</li>
+<li><strong>Space Complexity</strong>: O(log(n)) for the recursive call stack in the worst case, assuming the tree is balanced. The space for the tree itself depends on the number of distinct regions in the grid.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>The space complexity is <code>O(n)</code> due to the space used for the recursive call stack and the additional space required for storing the grid itself. In the worst case, the recursion depth is proportional to the number of grid cells.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution efficiently constructs a QuadTree from a 2D binary grid using recursive subdivision. By leveraging the properties of leaf nodes and internal nodes, it reduces unnecessary subdivisions when all quadrants contain the same value. The approach ensures that the QuadTree is constructed optimally with a time complexity of <code>O(n)</code> and a space complexity of <code>O(n)</code>. This method provides a clean and efficient solution for handling QuadTree construction problems in a binary grid.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1147s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1146s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

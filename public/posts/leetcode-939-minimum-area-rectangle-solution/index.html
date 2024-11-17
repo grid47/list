@@ -149,7 +149,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -217,7 +217,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -271,8 +271,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem asks to find the area of the smallest rectangle that can be formed from a set of points in a 2D plane. Each point is given as a pair of coordinates (x, y), and you need to return the area of the smallest rectangle that can enclose at least four points from the set. If no such rectangle can be formed, return 0.</p>
-<p>The rectangle should be axis-aligned, meaning that its sides must be parallel to the x and y axes. A valid rectangle must have two opposite corners with both their x and y coordinates present in the set of points.</p>
+<p>Given a set of points in a 2D plane, the task is to find the minimum area of a rectangle that can be formed using four of these points as vertices. If there is no such rectangle, return 0.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -280,98 +279,48 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem, the strategy is to check every pair of points and use them as potential opposite corners of a rectangle. If these points can form a rectangle, we calculate its area. Specifically, we need to check whether the other two corners of the rectangle also exist in the set of points.</p>
-<p>The steps involved are:</p>
 <ol>
 <li>
-<p><strong>Storing Points Efficiently</strong>: Store the points in a data structure that allows fast lookup to check if other points lie on the same vertical or horizontal line. We use a hash map (<code>unordered_map</code>) where the key is the x-coordinate and the value is a set of y-coordinates for that x.</p>
-</li>
-<li>
-<p><strong>Iterating Over All Pairs</strong>: Iterate over all pairs of points, and for each pair of points (x1, y1) and (x2, y2), check if they can be opposite corners of a rectangle. To be valid:</p>
+<p><strong>Data Structure</strong>:</p>
 <ul>
-<li>The x-coordinates of the points must be different (<code>x1 != x2</code>).</li>
-<li>The y-coordinates of the points must be different (<code>y1 != y2</code>).</li>
-<li>The other two corners of the rectangle must exist: check if <code>(x1, y2)</code> and <code>(x2, y1)</code> exist in the set of points.</li>
+<li>Use an unordered map to store the points. The map&rsquo;s keys are x-coordinates, and the values are sets of y-coordinates. This allows for quick lookups of points.</li>
 </ul>
 </li>
 <li>
-<p><strong>Calculating the Area</strong>: If the two points can form a rectangle, calculate the area using the formula: <code>area = abs(x1 - x2) * abs(y1 - y2)</code>.</p>
+<p><strong>Iterate Through Pairs</strong>:</p>
+<ul>
+<li>Loop through all pairs of points <code>(pts[i], pts[j])</code>. For each pair:
+<ul>
+<li>Extract the coordinates: <code>x1, y1</code> for the first point and <code>x2, y2</code> for the second point.</li>
+<li>Check if the points can form a rectangle:
+<ul>
+<li>Ensure the x-coordinates are different (<code>x1 != x2</code>) and the y-coordinates are different (<code>y1 != y2</code>).</li>
+<li>Check if the other two corners of the rectangle <code>(x1, y2)</code> and <code>(x2, y1)</code> exist in the map.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </li>
 <li>
-<p><strong>Tracking the Minimum Area</strong>: Track the minimum area encountered while iterating through all pairs of points.</p>
-</li>
-<li>
-<p><strong>Edge Case Handling</strong>: If no rectangle is found (i.e., no valid pair of points can form a rectangle), return 0.</p>
+<p><strong>Calculate Area</strong>:</p>
+<ul>
+<li>If the corners exist, calculate the area of the rectangle formed by the points and update the minimum area found.</li>
+</ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Storing Points in the Hash Map</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> mp;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">it</span>: pts)
-</span></span><span style="display:flex;"><span>    mp[it[<span style="color:#666">0</span>]].insert(it[<span style="color:#666">1</span>]);
-</span></span></code></pre></div><ul>
-<li>Here, we use an unordered map (<code>mp</code>) to store the points. The map’s key is the x-coordinate, and the value is a set of y-coordinates. This structure allows for quick lookup to check if a particular y-coordinate exists for a given x-coordinate.</li>
-</ul>
-</li>
-<li>
-<p><strong>Setting Up Variables</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> pts.size();
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> area <span style="color:#666">=</span> INT_MAX;
-</span></span></code></pre></div><ul>
-<li><code>n</code>: The number of points in the input list <code>pts</code>.</li>
-<li><code>area</code>: Initially set to the largest possible integer (<code>INT_MAX</code>), this variable will track the smallest area of the rectangle that we find. If no rectangle is found, this will remain unchanged, and the function will return 0.</li>
-</ul>
-</li>
-<li>
-<p><strong>Iterating Over All Pairs of Points</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> i <span style="color:#666">+</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> x1 <span style="color:#666">=</span> pts[i][<span style="color:#666">0</span>], y1 <span style="color:#666">=</span> pts[i][<span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> x2 <span style="color:#666">=</span> pts[j][<span style="color:#666">0</span>], y2 <span style="color:#666">=</span> pts[j][<span style="color:#666">1</span>];
-</span></span></code></pre></div><ul>
-<li>We use two nested loops to go through all unique pairs of points in the list <code>pts</code>. The outer loop (<code>i</code>) represents the first point, and the inner loop (<code>j</code>) represents the second point.</li>
-</ul>
-</li>
-<li>
-<p><strong>Checking if Points Can Form a Rectangle</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(x1 <span style="color:#666">!=</span> x2 <span style="color:#666">&amp;&amp;</span> y1 <span style="color:#666">!=</span> y2) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mp[x1].find(y2) <span style="color:#666">!=</span> mp[x1].end() <span style="color:#666">&amp;&amp;</span>
-</span></span><span style="display:flex;"><span>       mp[x2].find(y1) <span style="color:#666">!=</span> mp[x2].end()) {
-</span></span></code></pre></div><ul>
-<li>For each pair of points, we check if the points can form a rectangle. To do so, their x and y coordinates must be different (<code>x1 != x2</code> and <code>y1 != y2</code>).</li>
-<li>If the x and y coordinates are different, we check if the other two potential corners of the rectangle exist in the set of points:
 <ul>
-<li>The point <code>(x1, y2)</code> must exist.</li>
-<li>The point <code>(x2, y1)</code> must exist.</li>
+<li>The function initializes a map and populates it with the given points.</li>
+<li>It then checks all combinations of points to determine potential rectangles and calculates their areas.</li>
+<li>Finally, it returns the minimum area found, or 0 if no rectangle can be formed.</li>
 </ul>
-</li>
-<li>This ensures that the four points form a rectangle with axis-aligned sides.</li>
-</ul>
-</li>
-<li>
-<p><strong>Calculating the Area</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>area <span style="color:#666">=</span> min(area, abs(x1 <span style="color:#666">-</span> x2) <span style="color:#666">*</span> abs(y1 <span style="color:#666">-</span> y2));
-</span></span></code></pre></div><ul>
-<li>If a valid rectangle is formed, we calculate the area using the formula <code>area = abs(x1 - x2) * abs(y1 - y2)</code>. The absolute values are taken to ensure that the area is positive.</li>
-<li>We then update the <code>area</code> variable to track the smallest area encountered.</li>
-</ul>
-</li>
-<li>
-<p><strong>Returning the Result</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> area <span style="color:#666">==</span> INT_MAX <span style="color:#666">?</span> <span style="color:#666">0</span> <span style="color:#666">:</span> area;
-</span></span></code></pre></div><ul>
-<li>If no rectangle was found (i.e., <code>area</code> was never updated), the value of <code>area</code> will still be <code>INT_MAX</code>. In that case, we return 0. Otherwise, we return the smallest area found.</li>
-</ul>
-</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -379,29 +328,10 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li>The time complexity is dominated by the double loop that iterates through all pairs of points. Since there are <code>n</code> points, the number of pairs is approximately <code>n^2</code>.</li>
-<li>For each pair, we perform constant-time operations (lookup in the unordered map and checking the conditions). Thus, the time complexity is O(n^2).</li>
+<li><strong>Time Complexity</strong>: O(N^2), where N is the number of points. The nested loops check all pairs of points.</li>
+<li><strong>Space Complexity</strong>: O(N) for storing the points in the unordered map.</li>
 </ul>
-</li>
-<li>
-<p><strong>Space Complexity</strong>:</p>
-<ul>
-<li>The space complexity is O(n), where <code>n</code> is the number of points. This is because we store the points in the unordered map <code>mp</code>, which requires space proportional to the number of points.</li>
-</ul>
-</li>
-</ol>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution efficiently finds the smallest rectangle that can be formed using a set of points in a 2D plane. By leveraging a hash map with sets for fast lookups and iterating over all pairs of points, we are able to check for the existence of the other two corners of a rectangle. This allows us to compute the area of the smallest rectangle in O(n^2) time. The solution is both time-efficient and space-efficient given the constraints, making it suitable for problems involving larger datasets.</p>
  
 </div>
   

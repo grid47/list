@@ -146,7 +146,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              3-minute read
             </span>
           </div>
 
@@ -211,8 +211,26 @@
 
       <div class="post-content">
         
-        <p><a href="https://leetcode.com/problems/remove-comments/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
-<hr>
+        <h2 id="hahahugoshortcode1288s0hbhb">
+  <a href="https://leetcode.com/problems/remove-comments/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
+<figure class="remote-image" style="text-align:center; margin: 0;">
+    <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/722.webp" 
+           alt="A source code where comments are removed, with the comments fading out and the code glowing softly." 
+           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    
+      <figcaption style="font-size: 0.8em; font-weight: 300; color:#555; margin-top: 4px; line-height: 1.2;">
+        Solution to LeetCode 722: Remove Comments Problem
+      </figcaption>
+    
+  </figure>
+  
+  <a class="heading-link" href="#hahahugoshortcode1288s0hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <p><strong>Code:</strong></p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
 </span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
@@ -253,7 +271,7 @@
 </span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/* */</span>
 </span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">// */ --- //
 </span></span></span></code></pre></div>
-<h2 id="hahahugoshortcode1289s1hbhb">
+<h2 id="hahahugoshortcode1288s2hbhb">
   
 
   
@@ -265,12 +283,11 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem asks us to <strong>remove comments</strong> from a list of strings that represent lines of source code. The comments can either be:</p>
+<p>Given a list of strings <code>source</code>, representing the lines of a C++ program, your task is to remove all comments from the source code. The comments can be of two types:</p>
 <ul>
-<li><strong>Single-line comments</strong> that begin with <code>//</code>.</li>
-<li><strong>Multi-line comments</strong> that begin with <code>/*</code> and end with <code>*/</code>.</li>
+<li>Single-line comments that start with <code>//</code> and continue until the end of the line.</li>
+<li>Multi-line comments that start with <code>/*</code> and end with <code>*/</code>.</li>
 </ul>
-<p>The task is to return the source code without any comments, preserving the structure of the original code. The result should not include any lines that are completely empty due to comment removal.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -278,137 +295,78 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The solution uses a <strong>state-machine-based approach</strong> to handle both single-line and multi-line comments. Here&rsquo;s the breakdown of the approach:</p>
 <ol>
 <li>
-<p><strong>State Management</strong>: The algorithm keeps track of whether we are inside a multi-line comment (<code>is_mul</code> flag) or not. This allows us to differentiate between lines of actual code and comments.</p>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>Create a vector <code>ans</code> to store the resulting lines after comments are removed.</li>
+<li>Use a boolean <code>is_mul</code> to track whether you are currently inside a multi-line comment.</li>
+<li>Initialize a string <code>res</code> to accumulate the current line&rsquo;s valid characters.</li>
+</ul>
 </li>
 <li>
-<p><strong>Handling Single-line Comments</strong>: When the algorithm encounters a <code>//</code>, it skips the rest of the line because it&rsquo;s a single-line comment.</p>
+<p><strong>Iterate Through Each Line</strong>:</p>
+<ul>
+<li>For each line in the source:
+<ul>
+<li>Reset <code>res</code> to an empty string if not in a multi-line comment.</li>
+<li>Iterate through each character in the line:
+<ul>
+<li>If not in a multi-line comment:
+<ul>
+<li>Check for the start of a single-line comment (<code>//</code>). If found, break out of the loop.</li>
+<li>Check for the start of a multi-line comment (<code>/*</code>). If found, set <code>is_mul</code> to true and skip the next character.</li>
+<li>Otherwise, add the character to <code>res</code>.</li>
+</ul>
+</li>
+<li>If in a multi-line comment:
+<ul>
+<li>Check for the end of the multi-line comment (<code>*/</code>). If found, set <code>is_mul</code> to false and skip the next character.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
 </li>
 <li>
-<p><strong>Handling Multi-line Comments</strong>: When the algorithm encounters a <code>/*</code>, it toggles the <code>is_mul</code> flag to indicate that it’s inside a multi-line comment. It continues to skip characters until it encounters a closing <code>*/</code>, at which point the flag is reset.</p>
-</li>
-<li>
-<p><strong>String Construction</strong>: The code constructs the non-commented portions of the string in the <code>res</code> variable. If a line does not contain any code after removing comments, it is skipped; otherwise, the cleaned line is added to the result.</p>
-</li>
-<li>
-<p><strong>Result Construction</strong>: After processing all lines of code, the result is returned as a vector of strings that contains the code with comments removed.</p>
+<p><strong>Store Non-empty Results</strong>:</p>
+<ul>
+<li>After processing each line, if <code>res</code> is not empty and you are not in a multi-line comment, add <code>res</code> to the <code>ans</code> vector.</li>
+</ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="initialization">
-  Initialization
-  <a class="heading-link" href="#initialization">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> ans;
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> is_mul <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
-</span></span></code></pre></div><ul>
-<li><code>ans</code>: A vector that stores the cleaned code lines.</li>
-<li><code>is_mul</code>: A boolean flag that indicates whether the current position in the code is inside a multi-line comment (<code>/*...*/</code>).</li>
-<li><code>res</code>: A temporary string that accumulates the non-comment characters for each line.</li>
-</ul>
-<h4 id="loop-over-each-line-of-code">
-  Loop Over Each Line of Code
-  <a class="heading-link" href="#loop-over-each-line-of-code">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> source.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>    string str <span style="color:#666">=</span> source[i];
-</span></span><span style="display:flex;"><span>    res <span style="color:#666">=</span> is_mul <span style="color:#666">?</span> <span style="color:#a0a000">res</span> : <span style="color:#b44">&#34;&#34;</span>;
-</span></span></code></pre></div><ul>
-<li>The algorithm iterates over each line in the <code>source</code> code. For each line, it checks if we are currently inside a multi-line comment. If so, <code>res</code> retains the characters collected so far; otherwise, it resets <code>res</code> to start collecting the next line’s characters.</li>
-</ul>
-<h4 id="loop-through-each-character-in-the-line">
-  Loop Through Each Character in the Line
-  <a class="heading-link" href="#loop-through-each-character-in-the-line">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> str.size(); j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>is_mul) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (j <span style="color:#666">&lt;</span> str.size() <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> str[j] <span style="color:#666">==</span> <span style="color:#b44">&#39;/&#39;</span> <span style="color:#666">&amp;&amp;</span> str[j <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;/&#39;</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">break</span>;
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span> (j <span style="color:#666">&lt;</span> str.size() <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> str[j] <span style="color:#666">==</span> <span style="color:#b44">&#39;/&#39;</span> <span style="color:#666">&amp;&amp;</span> str[j <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;*&#39;</span>) {
-</span></span><span style="display:flex;"><span>            is_mul <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>            j<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>            res <span style="color:#666">+=</span> str[j];
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(j <span style="color:#666">&lt;</span> str.size() <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> str[j] <span style="color:#666">==</span> <span style="color:#b44">&#39;*&#39;</span> <span style="color:#666">&amp;&amp;</span> str[j <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;/&#39;</span>) {
-</span></span><span style="display:flex;"><span>            is_mul <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>            j<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li><strong>Single-line comments</strong>: If a <code>//</code> is encountered, the algorithm breaks out of the loop because the rest of the line is a comment.</li>
-<li><strong>Multi-line comments</strong>: If a <code>/*</code> is encountered, the algorithm toggles the <code>is_mul</code> flag to <code>true</code> and skips the next character to handle the multi-line comment’s starting point. When <code>*/</code> is encountered inside a multi-line comment, the flag is reset to <code>false</code> and the algorithm continues parsing the remaining code.</li>
-</ul>
-<h4 id="finalizing-the-line">
-  Finalizing the Line
-  <a class="heading-link" href="#finalizing-the-line">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>is_mul <span style="color:#666">&amp;&amp;</span> res <span style="color:#666">!=</span> <span style="color:#b44">&#34;&#34;</span>) ans.push_back(res);
-</span></span></code></pre></div><ul>
-<li>If the algorithm has finished processing the line and is not inside a multi-line comment (<code>is_mul == false</code>), it checks if <code>res</code> contains any non-commented content. If so, the line is added to the <code>ans</code> vector.</li>
-</ul>
-<h4 id="return-the-result">
-  Return the Result
-  <a class="heading-link" href="#return-the-result">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span></code></pre></div><ul>
-<li>After processing all the lines, the function returns the <code>ans</code> vector, which contains the cleaned source code with all comments removed.</li>
-</ul>
-<h3 id="complexity-analysis">
-  Complexity Analysis
-  <a class="heading-link" href="#complexity-analysis">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li>
-<p><strong>Time Complexity</strong>: The algorithm processes each character of the source code once. The outer loop iterates through all the lines, and the inner loop processes every character in each line. Thus, the time complexity is <strong>O(n)</strong>, where <code>n</code> is the total number of characters in the input <code>source</code>.</p>
-</li>
-<li>
-<p><strong>Space Complexity</strong>: The space complexity is <strong>O(n)</strong> as well, where <code>n</code> is the total number of characters in the input. The space is used to store the cleaned code lines in the <code>ans</code> vector and the temporary <code>res</code> string used for building each line.</p>
+<li><strong>Function</strong>:
+<ul>
+<li><code>removeComments(vector&lt;string&gt;&amp; source)</code>: Removes comments from the source code and returns the cleaned lines as a vector of strings.</li>
+</ul>
 </li>
 </ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>This solution efficiently removes both single-line and multi-line comments from a list of source code lines. It uses a simple yet effective approach by managing the state of the algorithm using the <code>is_mul</code> flag to track whether we are inside a multi-line comment. It processes each line and each character once, ensuring that the solution runs efficiently even for larger codebases. The algorithm is both time and space efficient, with complexities of <strong>O(n)</strong> for both time and space, where <code>n</code> is the total number of characters in the input. This makes it scalable for large inputs, while also ensuring correctness by handling nested and unbalanced comments effectively.</p>
+<ul>
+<li><strong>Time Complexity</strong>: O(N), where N is the total number of characters across all lines in <code>source</code>, as each character is processed at most once.</li>
+<li><strong>Space Complexity</strong>: O(K), where K is the number of lines in the output, as we store only the lines that contain valid code without comments.</li>
+</ul>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1289s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1288s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

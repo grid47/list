@@ -145,7 +145,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -197,7 +197,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              4-minute read
+              2-minute read
             </span>
           </div>
 
@@ -206,7 +206,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1116s0hbhb">
+        <h2 id="hahahugoshortcode1115s0hbhb">
   <a href="https://leetcode.com/problems/count-and-say/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -221,7 +221,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1116s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1115s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -252,103 +252,82 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1116s2hbhb">
+<h2 id="hahahugoshortcode1115s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="-problem-statement">
-  📝 Problem Statement
-  <a class="heading-link" href="#-problem-statement">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The task is to generate the <strong>Nth term</strong> of the &ldquo;Count and Say&rdquo; sequence. The sequence starts with:</p>
+<p>The &ldquo;Count and Say&rdquo; sequence is a sequence of integers where each term is derived from the previous term. The first term is &ldquo;1&rdquo;. To generate the next term, read the digits of the current term, counting the number of digits in groups of the same digit. For example:</p>
 <ul>
-<li><code>1</code> (1st term)</li>
-<li><code>11</code> (2nd term)</li>
-<li><code>21</code> (3rd term)</li>
-<li><code>1211</code> (4th term)</li>
-<li><code>111221</code> (5th term)</li>
-<li><code>312211</code> (6th term)</li>
+<li>The term &ldquo;1&rdquo; is read as &ldquo;one 1&rdquo; or &ldquo;11&rdquo;.</li>
+<li>The term &ldquo;11&rdquo; is read as &ldquo;two 1s&rdquo; or &ldquo;21&rdquo;.</li>
+<li>The term &ldquo;21&rdquo; is read as &ldquo;one 2, then one 1&rdquo; or &ldquo;1211&rdquo;.</li>
 </ul>
-<p>The idea is to describe the digits of the previous term, counting consecutive digits. For example:</p>
-<ul>
-<li>&ldquo;1&rdquo; is read as &ldquo;one 1&rdquo; → &ldquo;11&rdquo;</li>
-<li>&ldquo;11&rdquo; is read as &ldquo;two 1s&rdquo; → &ldquo;21&rdquo;</li>
-<li>&ldquo;21&rdquo; is read as &ldquo;one 2, one 1&rdquo; → &ldquo;1211&rdquo;</li>
-</ul>
-<p>We need to generate the <code>n</code>th term of this sequence!</p>
-<h3 id="-approach">
-  💡 Approach
-  <a class="heading-link" href="#-approach">
+<p>The task is to generate the (n^{th}) term of this sequence.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The key idea is simple: we <strong>count and say</strong>. If <code>n == 1</code>, the answer is &ldquo;1&rdquo;. For any higher <code>n</code>, the next term is obtained by processing the previous term, counting consecutive digits, and constructing the new term based on that description.</p>
-<h4 id="step-by-step-breakdown">
-  Step-by-Step Breakdown
-  <a class="heading-link" href="#step-by-step-breakdown">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p><strong>1. Base Case:</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#34;1&#34;</span>;
-</span></span></code></pre></div><p>If <code>n == 1</code>, the sequence starts with &ldquo;1&rdquo;. No need to process anything further!</p>
-<p><strong>2. Generate the Previous Term:</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string tmp <span style="color:#666">=</span> countAndSay(n<span style="color:#666">-</span><span style="color:#666">1</span>);
-</span></span></code></pre></div><p>For any other term, we need to find the term before it by recursively calling the function. It’s like stepping back before you can move forward!</p>
-<p><strong>3. Counting Consecutive Digits:</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> tmp.size(); ) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">char</span> ch <span style="color:#666">=</span> tmp[i];
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div><p>We look at each character in the previous term and count how many times it repeats consecutively. This is like &ldquo;seeing&rdquo; the sequence and describing it in words. If a character repeats, we count it!</p>
-<p><strong>4. Counting the Digits:</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(tmp[i] <span style="color:#666">==</span> ch <span style="color:#666">&amp;&amp;</span> i <span style="color:#666">&lt;</span> tmp.size()) {
-</span></span><span style="display:flex;"><span>    cnt<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>    i<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><p>As long as the next character matches, we keep counting. The key is to move step-by-step, increasing the count, until the sequence changes.</p>
-<p><strong>5. Construct the New Term:</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>ans.push_back(cnt<span style="color:#666">+</span><span style="color:#b44">&#39;0&#39;</span>);
-</span></span><span style="display:flex;"><span>ans.push_back(tmp[i<span style="color:#666">-</span><span style="color:#666">1</span>]);
-</span></span></code></pre></div><p>Once we know how many times a digit repeats, we add the count and the digit to the new term. This is the essence of &ldquo;Count and Say&rdquo;: describing the previous term in terms of consecutive digits.</p>
-<p><strong>6. Return the Result:</strong></p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span></code></pre></div><p>After building the new term, we return it. We’ve built the <code>n</code>th term by repeatedly &ldquo;saying&rdquo; what we saw in the previous term!</p>
-<h3 id="-complexity">
-  🔍 Complexity
-  <a class="heading-link" href="#-complexity">
+<ol>
+<li><strong>Base Case</strong>: If (n) is 1, return &ldquo;1&rdquo; since that&rsquo;s the first term.</li>
+<li><strong>Recursion</strong>: For other values of (n), recursively call the function to get the ((n-1)^{th}) term.</li>
+<li><strong>Count and Say Logic</strong>:
+<ul>
+<li>Initialize an empty string <code>ans</code> to construct the result.</li>
+<li>Traverse the previous term <code>tmp</code>:
+<ul>
+<li>Count consecutive characters (digits) and store their counts.</li>
+<li>Append the count and the digit to <code>ans</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Return the Result</strong>: After constructing the (n^{th}) term, return <code>ans</code>.</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p><strong>Time Complexity:</strong></p>
+<ol>
+<li><strong>Base Case Check</strong>: If (n) is 1, return &ldquo;1&rdquo;.</li>
+<li><strong>Recursive Call</strong>: Call <code>countAndSay(n-1)</code> to get the previous term.</li>
+<li><strong>Counting Logic</strong>:
 <ul>
-<li><strong>O(n * m):</strong> Here, <code>n</code> is the term we’re generating, and <code>m</code> is the average length of the term. The time grows exponentially because each term is roughly twice as long as the previous one. This gives us an approximate complexity of <strong>O(n * 2^n)</strong>.</li>
+<li>Use a loop to traverse <code>tmp</code>, counting occurrences of each digit.</li>
+<li>For each unique digit, append the count and the digit to <code>ans</code>.</li>
 </ul>
-<p><strong>Space Complexity:</strong></p>
-<ul>
-<li><strong>O(m):</strong> The space complexity is influenced by the space required to store the string for the current term. It also includes the recursive call stack, which grows as the sequence length increases.</li>
-</ul>
-<h3 id="-conclusion">
-  🌱 Conclusion
-  <a class="heading-link" href="#-conclusion">
+</li>
+<li><strong>Return Value</strong>: After processing all digits, return <code>ans</code>.</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Think of this approach as building a story from the previous one. You <strong>count</strong> and <strong>say</strong> what you see, and build upon it for the next term. The recursive calls help in going back to the earlier term, and we keep adding more details step by step. While the time complexity grows quickly, this method is efficient for smaller <code>n</code> values and gives us a clear, step-by-step way of constructing the sequence.</p>
-<hr>
-<p><strong>Remember: Practice Makes Perfect!</strong> The more you get comfortable with recursion and building on previous results, the better you&rsquo;ll understand this sequence. 😊</p>
+<ul>
+<li><strong>Time Complexity</strong>: (O(2^n)) in the worst case due to the recursive calls and string manipulations for larger (n).</li>
+<li><strong>Space Complexity</strong>: (O(n)) for the recursion stack and storing the result strings.</li>
+</ul>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1116s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1115s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

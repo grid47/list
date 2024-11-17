@@ -148,7 +148,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              7-minute read
+              3-minute read
             </span>
           </div>
 
@@ -285,12 +285,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem involves finding the shortest bridge between two islands in a 2D grid. Each cell in the grid can be:</p>
-<ul>
-<li><code>1</code> representing land.</li>
-<li><code>0</code> representing water.</li>
-</ul>
-<p>The grid contains two islands, and your task is to connect these islands by flipping the fewest number of <code>0</code>s to <code>1</code>s, i.e., build the shortest bridge. The bridge should connect the two islands through water cells, while the bridge itself is made of the water cells turned into land. You are required to return the minimum number of flips needed to connect the two islands.</p>
+<p>Given a binary grid <code>grid</code> where <code>0</code>s represent water and <code>1</code>s represent land, the goal is to find the length of the shortest bridge that connects two islands. A bridge is formed by changing <code>0</code>s to <code>1</code>s and should be as short as possible.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -298,148 +293,58 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>This problem is typically solved by employing a <strong>Breadth-First Search (BFS)</strong> algorithm in conjunction with <strong>Depth-First Search (DFS)</strong> to identify the two islands and find the shortest path to connect them.</p>
-<h4 id="step-by-step-explanation">
-  Step-by-Step Explanation:
-  <a class="heading-link" href="#step-by-step-explanation">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ol>
 <li>
-<p><strong>Identifying the First Island using DFS</strong>:</p>
+<p><strong>Depth-First Search (DFS)</strong>:</p>
 <ul>
-<li>First, we need to find one of the islands. We can do this by iterating through the grid and performing a DFS search from the first <code>1</code> we encounter. This will allow us to mark all the land cells of this island and store their coordinates in a queue for the next step.</li>
-<li>During the DFS traversal, we mark all the cells of the first island as <code>-1</code> to prevent visiting them again, and we store the coordinates of these cells in a queue. These coordinates will later serve as the starting points for the BFS.</li>
+<li>Start by identifying one of the islands using DFS. This will allow us to traverse all the cells that belong to the first island and mark them as visited (set to <code>-1</code>).</li>
+<li>During the DFS, each cell of the first island is added to a queue for later processing.</li>
 </ul>
 </li>
 <li>
-<p><strong>Expanding the Search using BFS</strong>:</p>
+<p><strong>Breadth-First Search (BFS)</strong>:</p>
 <ul>
-<li>Once the first island is identified, the next step is to start the BFS from the coordinates of the first island&rsquo;s land cells. The BFS will explore the neighboring water cells (<code>0</code>s) and gradually expand the search in all four directions (up, down, left, right).</li>
-<li>The BFS continues until it encounters the second island&rsquo;s land cells. As soon as the second island is reached, the BFS will return the number of water cells (<code>0</code>s) traversed, which corresponds to the number of flips needed to connect the two islands.</li>
+<li>After marking the first island, use BFS to explore the water cells adjacent to the first island&rsquo;s cells stored in the queue.</li>
+<li>For each water cell explored, check its neighbors. If a land cell (<code>1</code>) is found, the search is complete, and the current distance (number of steps taken) is returned as the result.</li>
 </ul>
 </li>
 <li>
-<p><strong>Return the Result</strong>:</p>
+<p><strong>Directional Movement</strong>:</p>
 <ul>
-<li>The result is the number of steps taken by the BFS to connect the two islands, which is the minimal number of flips required to build the bridge.</li>
+<li>The movement is restricted to four directions (up, down, left, right) while ensuring we do not go out of bounds or revisit cells.</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ol>
-<li>
-<p><strong>DFS for the First Island</strong>:
-We start by using DFS to identify and mark the first island in the grid. The DFS function <code>dfs(x, y)</code> explores all connected <code>1</code>s (land cells) and marks them as <code>-1</code> to prevent revisiting them.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(<span style="color:#0b0;font-weight:bold">int</span> x, <span style="color:#0b0;font-weight:bold">int</span> y, queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> q, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> y <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> x <span style="color:#666">&gt;=</span> grid.size() <span style="color:#666">||</span> y <span style="color:#666">&gt;=</span> grid[<span style="color:#666">0</span>].size() <span style="color:#666">||</span> grid[x][y] <span style="color:#666">!=</span> <span style="color:#666">1</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>;
-</span></span><span style="display:flex;"><span>    q.push(make_pair(x, y));  <span style="color:#080;font-style:italic">// Add land cell to the queue for BFS
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    grid[x][y] <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;  <span style="color:#080;font-style:italic">// Mark the land cell as visited
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    dfs(x <span style="color:#666">+</span> <span style="color:#666">1</span>, y, q, grid);  <span style="color:#080;font-style:italic">// Explore down
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    dfs(x <span style="color:#666">-</span> <span style="color:#666">1</span>, y, q, grid);  <span style="color:#080;font-style:italic">// Explore up
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    dfs(x, y <span style="color:#666">+</span> <span style="color:#666">1</span>, q, grid);  <span style="color:#080;font-style:italic">// Explore right
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    dfs(x, y <span style="color:#666">-</span> <span style="color:#666">1</span>, q, grid);  <span style="color:#080;font-style:italic">// Explore left
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
-</span></span></code></pre></div><ul>
-<li>This function is invoked when we first find a <code>1</code> (land) during the grid traversal.</li>
-<li>We then mark all land cells connected to this one, effectively identifying the first island and storing its cells in a queue.</li>
-</ul>
-</li>
-<li>
-<p><strong>BFS to Find the Shortest Bridge</strong>:
-After marking the first island, we use BFS to find the shortest path to the second island. BFS is particularly suited for finding the shortest path in an unweighted grid like this.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> step <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> dir[<span style="color:#666">5</span>] <span style="color:#666">=</span> {<span style="color:#666">0</span>,<span style="color:#666">1</span>,<span style="color:#666">0</span>,<span style="color:#666">-</span><span style="color:#666">1</span>,<span style="color:#666">0</span>};  <span style="color:#080;font-style:italic">// Direction vectors for up, right, down, and left
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();  <span style="color:#080;font-style:italic">// Get the number of elements in the queue
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> sz; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> p <span style="color:#666">=</span> q.front();
-</span></span><span style="display:flex;"><span>        q.pop();  <span style="color:#080;font-style:italic">// Get the next land cell from the queue
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">4</span>; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> p.first <span style="color:#666">+</span> dir[i], y <span style="color:#666">=</span> p.second <span style="color:#666">+</span> dir[i <span style="color:#666">+</span> <span style="color:#666">1</span>];
-</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">// Check if the new position is valid and within bounds
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> y <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> x <span style="color:#666">&gt;=</span> grid.size() <span style="color:#666">||</span> y <span style="color:#666">&gt;=</span> grid[<span style="color:#666">0</span>].size() <span style="color:#666">||</span> grid[x][y] <span style="color:#666">==</span> <span style="color:#666">-</span><span style="color:#666">1</span>)
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">continue</span>;  <span style="color:#080;font-style:italic">// Skip invalid positions or already visited cells
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#a2f;font-weight:bold">if</span>(grid[x][y] <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> step;  <span style="color:#080;font-style:italic">// If we find land of the second island, return the step count
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            q.push({x, y});  <span style="color:#080;font-style:italic">// Add the water cell to the queue for further exploration
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            grid[x][y] <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">1</span>;  <span style="color:#080;font-style:italic">// Mark the water cell as visited
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    step<span style="color:#666">++</span>;  <span style="color:#080;font-style:italic">// Increase the number of steps after expanding one level
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
-</span></span></code></pre></div><ul>
-<li>The BFS starts by processing the first island’s land cells stored in the queue. For each cell, it explores the adjacent cells (up, down, left, right).</li>
-<li>If an adjacent cell is water (<code>0</code>), it is added to the queue, and its value is marked as visited by setting it to <code>-1</code>.</li>
-<li>If an adjacent cell is land (<code>1</code>), the BFS terminates, and the step count is returned.</li>
-</ul>
-</li>
-<li>
-<p><strong>Main Function</strong>:
-The <code>shortestBridge()</code> function initializes the BFS process after identifying the first island using DFS. It sets up the queue and handles the BFS iterations.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">shortestBridge</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
-</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> q;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> flag <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (grid[i][j]) {
-</span></span><span style="display:flex;"><span>                dfs(i, j, q, grid);  <span style="color:#080;font-style:italic">// Find the first island and mark it
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                flag <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">break</span>;
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (flag) <span style="color:#a2f;font-weight:bold">break</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> bfs(grid, q);  <span style="color:#080;font-style:italic">// Perform BFS to find the shortest bridge
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
-</span></span></code></pre></div><ul>
-<li>The function starts by iterating over the grid to find the first <code>1</code> (land). Once found, DFS is invoked to mark all the land cells of the first island.</li>
-<li>After identifying the first island, BFS is used to find the shortest path to the second island, and the result is returned.</li>
-</ul>
-</li>
-</ol>
-<h3 id="time-complexity">
-  Time Complexity
-  <a class="heading-link" href="#time-complexity">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li><strong>DFS</strong>: The DFS function visits every cell of the grid exactly once, so its time complexity is <strong>O(m * n)</strong>, where <code>m</code> is the number of rows and <code>n</code> is the number of columns in the grid.</li>
-<li><strong>BFS</strong>: Similarly, the BFS function also processes each cell of the grid exactly once, making its time complexity <strong>O(m * n)</strong>.</li>
+<li><strong>DFS Function</strong>:
+<ul>
+<li>The <code>dfs</code> function recursively marks all parts of the first island and populates the queue.</li>
 </ul>
-<p>Thus, the overall time complexity is <strong>O(m * n)</strong>, where <code>m</code> is the number of rows and <code>n</code> is the number of columns in the grid.</p>
-<h3 id="space-complexity">
-  Space Complexity
-  <a class="heading-link" href="#space-complexity">
+</li>
+<li><strong>BFS Functionality</strong>:
+<ul>
+<li>The BFS loop processes each cell in the queue, expanding outwards until it reaches another island.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li>The space complexity is <strong>O(m * n)</strong> because the space used by the queue in the BFS can grow to the size of the grid in the worst case.</li>
-<li>Additionally, the DFS modifies the grid in place, which does not require extra space.</li>
+<li><strong>Time Complexity</strong>: O(m * n), where <code>m</code> is the number of rows and <code>n</code> is the number of columns in the grid, as each cell is visited at most twice.</li>
+<li><strong>Space Complexity</strong>: O(m * n) for the queue used in BFS, which can store all the cells of the first island in the worst case.</li>
 </ul>
-<p>Therefore, the space complexity is <strong>O(m * n)</strong> due to the storage used by the grid and the queue.</p>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution efficiently solves the problem of finding the shortest bridge between two islands in a 2D grid using a combination of <strong>DFS</strong> to identify the first island and <strong>BFS</strong> to find the shortest path. The use of BFS ensures that the minimal number of flips is computed in optimal time, and by modifying the grid in place, we minimize space complexity. This approach ensures that the problem is solved efficiently, even for large grids.</p>
  
 </div>
   

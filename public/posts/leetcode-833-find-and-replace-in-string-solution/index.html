@@ -148,7 +148,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              6-minute read
+              2-minute read
             </span>
           </div>
 
@@ -252,7 +252,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> s;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1347s1hbhb">
+<h2 id="hahahugoshortcode1350s1hbhb">
   
 
   
@@ -264,7 +264,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>In this problem, you are given a string <code>s</code> and several other arrays: <code>indices</code>, <code>sources</code>, and <code>targets</code>. The goal is to replace specific parts of the string <code>s</code> according to the given indices, sources, and targets. Specifically, for each index <code>i</code> in <code>indices</code>, if the substring starting at that index matches <code>sources[i]</code>, it should be replaced with <code>targets[i]</code>. If the match doesn&rsquo;t occur, no change should be made for that index.</p>
+<p>The task is to replace substrings in a given string <code>s</code> based on specified indices, sources, and targets. Each substring specified by <code>sources</code> at the corresponding <code>indices</code> should be replaced by the corresponding string in <code>targets</code> if the substring matches.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -272,191 +272,54 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To efficiently perform the required replacements, we need to approach the problem systematically. The key points to consider are:</p>
-<ol>
-<li><strong>Matching substrings</strong>: For each index in <code>indices</code>, check if the corresponding substring in <code>s</code> matches the string in <code>sources</code>.</li>
-<li><strong>Replacing substrings</strong>: If the substring matches, replace it with the corresponding string from <code>targets</code>.</li>
-<li><strong>Order of replacements</strong>: Replacements must be performed from right to left. This ensures that previous replacements do not affect subsequent ones (e.g., modifying earlier parts of the string before modifying later parts).</li>
-<li><strong>Sorting indices</strong>: Sorting the indices in descending order ensures we process replacements starting from the rightmost position in the string, preventing potential conflicts where replacing one part of the string could affect a previous replacement.</li>
-</ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="step-1-initializing-the-index-array">
-  Step 1: Initializing the Index Array
-  <a class="heading-link" href="#step-1-initializing-the-index-array">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ind;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> indices.size(); i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>    ind.push_back({indices[i], i});
-</span></span></code></pre></div><p>Here, we initialize a vector <code>ind</code> which will hold pairs of the form <code>{index, source_index}</code>. This will allow us to associate each index with the corresponding source string from the <code>sources</code> array. Each pair consists of:</p>
-<ul>
-<li><code>indices[i]</code>: the starting index in the string <code>s</code> where the replacement is to occur.</li>
-<li><code>i</code>: the index in the <code>sources</code> and <code>targets</code> arrays that corresponds to the current replacement rule.</li>
-</ul>
-<h4 id="step-2-sorting-the-indices-in-descending-order">
-  Step 2: Sorting the Indices in Descending Order
-  <a class="heading-link" href="#step-2-sorting-the-indices-in-descending-order">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(ind.rbegin(), ind.rend());
-</span></span></code></pre></div><ul>
-<li>To avoid issues with multiple replacements affecting one another (when performing replacements that overlap), we sort the vector <code>ind</code> in <strong>descending order</strong>. This ensures that we always perform replacements starting from the end of the string.</li>
-<li>This prevents any modification of parts of the string that will later be replaced, as earlier replacements (which could change the string structure) are handled after later ones.</li>
-</ul>
-<h4 id="step-3-performing-the-replacements">
-  Step 3: Performing the Replacements
-  <a class="heading-link" href="#step-3-performing-the-replacements">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: ind) {
-</span></span><span style="display:flex;"><span>    string src <span style="color:#666">=</span> sources[it.second], tgt <span style="color:#666">=</span> targets[it.second];
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s.substr(it.first, src.size()) <span style="color:#666">==</span> src)
-</span></span><span style="display:flex;"><span>        s <span style="color:#666">=</span> s.substr(<span style="color:#666">0</span>, it.first) <span style="color:#666">+</span> tgt <span style="color:#666">+</span> s.substr(it.first <span style="color:#666">+</span> src.size());
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>We iterate through the sorted <code>ind</code> array, where each element contains an index and the corresponding source-target pair.</li>
-<li>For each element <code>it</code> in <code>ind</code>, we:
-<ul>
-<li>Extract the <code>src</code> (source) and <code>tgt</code> (target) strings from <code>sources</code> and <code>targets</code> using <code>it.second</code> (the second value of the pair, which is the source index).</li>
-<li>We check if the substring starting from <code>it.first</code> (the index in <code>s</code>) matches <code>src</code> using <code>s.substr(it.first, src.size()) == src</code>.</li>
-<li>If there is a match, we replace the corresponding substring in <code>s</code>:
-<ul>
-<li><code>s.substr(0, it.first)</code> gives us the portion of the string before the match.</li>
-<li><code>tgt</code> is the target string that will replace <code>src</code>.</li>
-<li><code>s.substr(it.first + src.size())</code> gives us the portion of the string after the match.</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="step-4-returning-the-final-string">
-  Step 4: Returning the Final String
-  <a class="heading-link" href="#step-4-returning-the-final-string">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> s;
-</span></span></code></pre></div><ul>
-<li>After performing all the replacements, we return the final modified string <code>s</code>.</li>
-</ul>
-<h3 id="complexity-analysis">
-  Complexity Analysis
-  <a class="heading-link" href="#complexity-analysis">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="time-complexity">
-  Time Complexity
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>Sorting the indices</strong>: Sorting the <code>indices</code> array takes <strong>O(m log m)</strong> time, where <code>m</code> is the number of elements in the <code>indices</code> array.</li>
-<li><strong>Replacement Check and Modification</strong>: For each index in <code>indices</code>, we check if the substring matches and potentially modify the string. This operation involves calling <code>substr()</code> and checking equality, both of which take linear time relative to the length of the source string. Since we are performing this operation for each element in the <code>indices</code> array, this part takes <strong>O(m * k)</strong> time, where <code>k</code> is the average length of the strings being checked.</li>
-</ul>
-<p>Thus, the overall time complexity is <strong>O(m log m + m * k)</strong>.</p>
-<h4 id="space-complexity">
-  Space Complexity
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>We use a vector <code>ind</code> to store the indices and their corresponding source-target pairs. This requires <strong>O(m)</strong> space.</li>
-<li>The string <code>s</code> is modified in place, so the space used for the final result is <strong>O(1)</strong> additional space beyond the input string.</li>
-</ul>
-<p>Thus, the space complexity is <strong>O(m)</strong>.</p>
-<h3 id="example-walkthrough">
-  Example Walkthrough
-  <a class="heading-link" href="#example-walkthrough">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="input">
-  Input
-  <a class="heading-link" href="#input">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string s <span style="color:#666">=</span> <span style="color:#b44">&#34;abcd&#34;</span>;
-</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> indices <span style="color:#666">=</span> {<span style="color:#666">0</span>, <span style="color:#666">2</span>};
-</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> sources <span style="color:#666">=</span> {<span style="color:#b44">&#34;ab&#34;</span>, <span style="color:#b44">&#34;cd&#34;</span>};
-</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> targets <span style="color:#666">=</span> {<span style="color:#b44">&#34;xy&#34;</span>, <span style="color:#b44">&#34;yz&#34;</span>};
-</span></span></code></pre></div><ul>
-<li>The string <code>s</code> is <code>&quot;abcd&quot;</code>.</li>
-<li>The indices are <code>{0, 2}</code>, meaning we need to check for replacements starting at indices 0 and 2.</li>
-<li>The sources are <code>{&quot;ab&quot;, &quot;cd&quot;}</code>, meaning we will try to replace <code>&quot;ab&quot;</code> at index 0 and <code>&quot;cd&quot;</code> at index 2.</li>
-<li>The targets are <code>{&quot;xy&quot;, &quot;yz&quot;}</code>, meaning we will replace <code>&quot;ab&quot;</code> with <code>&quot;xy&quot;</code> and <code>&quot;cd&quot;</code> with <code>&quot;yz&quot;</code>.</li>
-</ul>
-<h4 id="execution">
-  Execution
-  <a class="heading-link" href="#execution">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ol>
 <li>
-<p>First, we sort the <code>indices</code> in descending order: <code>[(2, 1), (0, 0)]</code>. This ensures that we start replacing from the rightmost index.</p>
-</li>
-<li>
-<p><strong>First iteration</strong> (replace <code>&quot;cd&quot;</code> at index 2 with <code>&quot;yz&quot;</code>):</p>
+<p><strong>Preparation</strong>:</p>
 <ul>
-<li>We check if <code>s.substr(2, 2) == &quot;cd&quot;</code>. It is true, so we replace <code>&quot;cd&quot;</code> with <code>&quot;yz&quot;</code>.</li>
-<li>The string becomes <code>&quot;abyz&quot;</code>.</li>
+<li>Create a vector of pairs, <code>ind</code>, where each pair consists of an index and its corresponding position in the <code>indices</code> vector. This helps to keep track of the original index when sorting.</li>
 </ul>
 </li>
 <li>
-<p><strong>Second iteration</strong> (replace <code>&quot;ab&quot;</code> at index 0 with <code>&quot;xy&quot;</code>):</p>
+<p><strong>Sorting</strong>:</p>
 <ul>
-<li>We check if <code>s.substr(0, 2) == &quot;ab&quot;</code>. It is true, so we replace <code>&quot;ab&quot;</code> with <code>&quot;xy&quot;</code>.</li>
-<li>The string becomes <code>&quot;xyyz&quot;</code>.</li>
+<li>Sort the <code>ind</code> vector in descending order based on the indices. This ensures that when we modify the string <code>s</code>, we start from the end, preventing any shifts in indices that would occur if we modified earlier parts of the string.</li>
 </ul>
 </li>
 <li>
-<p>The final string is <code>&quot;xyyz&quot;</code>.</p>
+<p><strong>Replacement</strong>:</p>
+<ul>
+<li>Iterate through the sorted indices and check if the substring in <code>s</code> matches the corresponding <code>src</code> from <code>sources</code>. If it does, replace that substring with the corresponding <code>tgt</code> from <code>targets</code>.</li>
+</ul>
 </li>
 </ol>
-<h4 id="output">
-  Output
-  <a class="heading-link" href="#output">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#b44">&#34;xyyz&#34;</span>
-</span></span></code></pre></div><h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>This solution efficiently replaces substrings in the input string based on given indices, sources, and targets. By sorting the indices in descending order, we ensure that modifications do not interfere with each other, resulting in correct replacements. The approach is both time-efficient and easy to understand, making it suitable for a wide range of input sizes. The space complexity is minimal, making this solution optimal for handling larger strings or larger datasets.</p>
+<ul>
+<li>The function first constructs the <code>ind</code> vector from the <code>indices</code>.</li>
+<li>After sorting <code>ind</code> in reverse order, the function checks each index to see if the corresponding substring in <code>s</code> matches the <code>src</code>. If it matches, it performs the replacement.</li>
+<li>Finally, the modified string <code>s</code> is returned.</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h3>
+<ul>
+<li><strong>Time Complexity</strong>: O(M + K log K), where M is the length of the string <code>s</code> and K is the number of indices, sources, and targets. The log K arises from the sorting step.</li>
+<li><strong>Space Complexity</strong>: O(K) for the additional storage of the <code>ind</code> vector.</li>
+</ul>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1347s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1350s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

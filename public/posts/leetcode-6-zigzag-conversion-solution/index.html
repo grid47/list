@@ -144,7 +144,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -196,7 +196,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              2-minute read
             </span>
           </div>
 
@@ -205,7 +205,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1226s0hbhb">
+        <h2 id="hahahugoshortcode1228s0hbhb">
   <a href="https://leetcode.com/problems/zigzag-conversion/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -220,7 +220,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1226s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1228s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -257,153 +257,66 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1226s2hbhb">
+<h2 id="hahahugoshortcode1228s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="-zigzag-conversion">
-  💡 <strong>Zigzag Conversion</strong>
-  <a class="heading-link" href="#-zigzag-conversion">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>Given a string <code>str</code>, convert it to a &ldquo;zigzag&rdquo; pattern across <code>n</code> rows and then read it row by row to produce the final string.</p>
-<h4 id="-example">
-  ✨ <strong>Example</strong>
-  <a class="heading-link" href="#-example">
+<p>Given a string <code>s</code>, find the longest palindromic substring within it.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h4>
-<p>For <code>str = &quot;PAYPALISHIRING&quot;</code> and <code>n = 3</code>, the zigzag pattern would look like:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>P   A   H   N
-</span></span><span style="display:flex;"><span>A P L S I I G
-</span></span><span style="display:flex;"><span>Y   I   R
-</span></span></code></pre></div><p>The final output, reading row-by-row, is <code>&quot;PAHNAPLSIIGYIR&quot;</code>.</p>
-<hr>
-<h3 id="-approach-simulating-the-zigzag-pattern">
-  ⚙️ <strong>Approach: Simulating the Zigzag Pattern</strong>
-  <a class="heading-link" href="#-approach-simulating-the-zigzag-pattern">
+</h3>
+<p>Utilize a center-expansion technique to check for palindromes by expanding around potential centers. Each character (or pair of characters) serves as a possible center of a palindrome, and the expansion continues outward as long as the characters on both sides match.</p>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ol>
-<li>
-<p><strong>Special Case (<code>n == 1</code>):</strong> If there&rsquo;s only one row, the result is the original string since no zigzag pattern can form.</p>
-</li>
-<li>
-<p><strong>Set Up Rows:</strong> Use a vector of strings to represent each row. Each element in the vector corresponds to one row in the zigzag pattern.</p>
-</li>
-<li>
-<p><strong>Simulate Zigzag Movement:</strong> Traverse through <code>str</code>:</p>
+<li>Initialize <code>lo</code> and <code>len</code> to track the starting index and length of the longest palindrome found.</li>
+<li>Loop through each character in the string:
 <ul>
-<li>Place each character in the current row.</li>
-<li>Move &ldquo;down&rdquo; to the next row if we&rsquo;re descending; move &ldquo;up&rdquo; if ascending.</li>
-<li>Switch directions upon reaching the top or bottom row.</li>
+<li>Call <code>pal</code> to check for odd-length palindromes (single character center).</li>
+<li>Call <code>pal</code> to check for even-length palindromes (two-character center).</li>
 </ul>
 </li>
-<li>
-<p><strong>Form the Result String:</strong> Concatenate the rows to produce the final string.</p>
+<li>In the <code>pal</code> function:
+<ul>
+<li>Expand outwards as long as the characters at indices <code>i</code> and <code>j</code> match, while also checking bounds.</li>
+<li>If a longer palindrome is found (i.e., <code>len &lt; j - i - 1</code>), update <code>lo</code> and <code>len</code>.</li>
+</ul>
 </li>
+<li>After the loop, return the longest palindromic substring using <code>s.substr(lo, len)</code>.</li>
 </ol>
-<hr>
-<h3 id="-code-explanation">
-  📘 <strong>Code Explanation</strong>
-  <a class="heading-link" href="#-code-explanation">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="step-1-handle-special-case-for-single-row">
-  Step 1: Handle Special Case for Single Row
-  <a class="heading-link" href="#step-1-handle-special-case-for-single-row">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (n <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> str;
-</span></span></code></pre></div><ul>
-<li>If <code>n == 1</code>, the zigzag pattern is just the original string, so we can return it immediately.</li>
-</ul>
-<h4 id="step-2-initialize-rows">
-  Step 2: Initialize Rows
-  <a class="heading-link" href="#step-2-initialize-rows">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> rows(n, <span style="color:#b44">&#34;&#34;</span>);
-</span></span></code></pre></div><ul>
-<li>Create a vector <code>rows</code> with <code>n</code> empty strings, one for each row.</li>
-</ul>
-<h4 id="step-3-simulate-the-zigzag-pattern">
-  Step 3: Simulate the Zigzag Pattern
-  <a class="heading-link" href="#step-3-simulate-the-zigzag-pattern">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> going_down <span style="color:#666">=</span> <span style="color:#a2f">true</span>; 
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> row_index <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span> : str) {
-</span></span><span style="display:flex;"><span>    rows[row_index] <span style="color:#666">+=</span> c;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (row_index <span style="color:#666">==</span> <span style="color:#666">0</span>) going_down <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (row_index <span style="color:#666">==</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>) going_down <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>    row_index <span style="color:#666">+=</span> going_down <span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">:</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li><strong>Direction Control (<code>going_down</code>)</strong>: <code>true</code> when moving downward, <code>false</code> when moving upward.</li>
-<li><strong>Row Update</strong>:
-<ul>
-<li>For each character <code>c</code>, place it in <code>rows[row_index]</code>.</li>
-<li>Toggle <code>going_down</code> at the top (<code>row_index == 0</code>) and bottom (<code>row_index == n - 1</code>) rows to change direction.</li>
-<li>Adjust <code>row_index</code> based on <code>going_down</code>.</li>
-</ul>
-</li>
-</ul>
-<h4 id="step-4-combine-the-rows-for-the-result">
-  Step 4: Combine the Rows for the Result
-  <a class="heading-link" href="#step-4-combine-the-rows-for-the-result">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string result <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">const</span> string<span style="color:#666">&amp;</span> <span style="color:#a0a000">row</span> : rows)
-</span></span><span style="display:flex;"><span>    result <span style="color:#666">+=</span> row;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> result;
-</span></span></code></pre></div><ul>
-<li>After filling <code>rows</code>, concatenate them to create the final zigzag string.</li>
-</ul>
-<hr>
-<h3 id="-complexity-analysis">
-  📊 <strong>Complexity Analysis</strong>
-  <a class="heading-link" href="#-complexity-analysis">
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li><strong>Time Complexity:</strong> <strong>O(n)</strong>, where <code>n</code> is the length of <code>str</code>. Each character is processed once and concatenated in the end.</li>
-<li><strong>Space Complexity:</strong> <strong>O(n)</strong>, as we store each character in one of the rows, resulting in <code>n</code> characters in total across all rows.</li>
+<li><strong>Time Complexity:</strong> (O(n^2)) - as the expansion may need to check each substring.</li>
+<li><strong>Space Complexity:</strong> (O(1)) - no additional space is used aside from a few variables.</li>
 </ul>
-<hr>
-<h3 id="-key-insights">
-  🔑 <strong>Key Insights</strong>
-  <a class="heading-link" href="#-key-insights">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>Simulating the zigzag pattern with directional control is effective and uses optimal space. This straightforward approach ensures we avoid unnecessary data structures, making it both clean and efficient for larger inputs.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1226s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1228s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -148,7 +148,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              6-minute read
+              2-minute read
             </span>
           </div>
 
@@ -252,7 +252,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> n;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1428s1hbhb">
+<h2 id="hahahugoshortcode1429s1hbhb">
   
 
   
@@ -264,12 +264,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>In this problem, we are tasked with simulating a prison cell system for <code>n</code> days. Each prison cell can either be open or closed. Initially, the state of each cell is given in the form of a binary vector <code>cells</code>. After each day, the state of each cell changes based on the following rules:</p>
-<ol>
-<li>A cell becomes open (represented by 1) if both of its neighbors are in the same state (either both open or both closed).</li>
-<li>A cell becomes closed (represented by 0) otherwise (i.e., if the neighbors are in different states).</li>
-</ol>
-<p>The challenge is to determine the state of the prison cells after <code>n</code> days. However, since the transformation could repeat in cycles after a certain number of days, the problem asks for an optimized solution to handle cases where <code>n</code> is large.</p>
+<p>Given an array representing the state of prison cells, where each cell can either be occupied (1) or unoccupied (0), the goal is to determine the state of the cells after <code>n</code> days. The state of a cell on the next day is determined by its neighboring cells: a cell becomes occupied if both neighboring cells are occupied or both are unoccupied.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -277,85 +272,40 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve the problem efficiently, we need to avoid simulating all <code>n</code> days directly. Since the sequence of prison cell configurations may repeat periodically, we can leverage this periodicity to minimize the number of steps we need to take.</p>
-<p>The solution follows these main steps:</p>
 <ol>
 <li>
-<p><strong>Cycle Detection</strong>: Instead of simulating all <code>n</code> days, we detect cycles in the transformations. If a configuration repeats, we know the cycle has started over. Once a cycle is detected, we can skip the unnecessary steps by reducing the problem to just a few days (the remainder when <code>n</code> is divided by the cycle length).</p>
+<p><strong>Cycle Detection</strong>:</p>
+<ul>
+<li>The function uses a set to track previously seen configurations of the cells to identify cycles in the state transitions.</li>
+<li>By storing each state, the algorithm can determine when the states begin to repeat, which allows it to skip redundant calculations.</li>
+</ul>
 </li>
 <li>
-<p><strong>Simulating the Transition</strong>: We simulate the transition of the cells for each day. A helper function <code>getNext</code> is used to calculate the state of the next day based on the current state of the cells. This function checks each cell&rsquo;s neighbors and updates its state accordingly.</p>
+<p><strong>State Transition</strong>:</p>
+<ul>
+<li>The state of the cells is updated daily by applying the rules defined for the next day&rsquo;s state using the <code>getNext</code> helper function.</li>
+<li>If a previously seen state is encountered, the algorithm computes how many days remain and applies the transitions for the remaining days using modulo arithmetic.</li>
+</ul>
 </li>
 <li>
-<p><strong>Efficient Calculation</strong>: The solution uses a set to store previously seen configurations of cells. If a configuration repeats, we can break out of the loop and handle the remaining days by taking advantage of the cycle length.</p>
+<p><strong>Helper Function</strong>:</p>
+<ul>
+<li>The <code>getNext</code> function calculates the state of the cells for the next day based on the current state, following the specified rules.</li>
+</ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Initialization</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>set<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> seen;
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, flag <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> c;
-</span></span></code></pre></div><ul>
-<li>A <code>set</code> called <code>seen</code> is used to store unique configurations of the prison cells. A set is chosen because it allows fast membership checks and ensures that we only store unique configurations.</li>
-<li>The variable <code>i</code> is used to iterate through the days, and <code>flag</code> is a placeholder to control the cycle detection logic.</li>
-<li><code>vector&lt;int&gt; c</code> is used as a temporary storage to hold the current configuration of cells.</li>
-</ul>
-</li>
-<li>
-<p><strong>Simulating the Days</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> v <span style="color:#666">=</span> getNext(cells);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>seen.count(v)) {
-</span></span><span style="display:flex;"><span>        seen.insert(v);
-</span></span><span style="display:flex;"><span>        cells <span style="color:#666">=</span> v;
-</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n <span style="color:#666">%</span> i; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            cells <span style="color:#666">=</span> getNext(cells);
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> cells;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> cells;
-</span></span></code></pre></div><ul>
-<li>The loop iterates over <code>n</code> days. In each iteration:
 <ul>
-<li>The <code>getNext</code> function is called to compute the state of the cells for the next day.</li>
-<li>If the configuration of cells <code>v</code> has not been seen before, it is inserted into the <code>seen</code> set, and <code>cells</code> is updated to the new configuration.</li>
-<li>If the configuration has been seen before (i.e., a cycle is detected), the loop exits. To handle the remaining days efficiently, the program calculates how many days are left to simulate using <code>n % i</code>. This allows the program to skip over repeated cycles and directly compute the final state of the cells.</li>
+<li>The main function initializes a set to store seen states and iterates through the number of days.</li>
+<li>If a new state is generated, it updates the current state; if a state repeats, it uses the modulo of the remaining days to determine the final state after <code>n</code> days.</li>
+<li>The final state of the cells is returned.</li>
 </ul>
-</li>
-</ul>
-</li>
-<li>
-<p><strong>Transition Function (getNext)</strong>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> getNext(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>cells) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> n(cells.size(), <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> cells.size() <span style="color:#666">-</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        n[i] <span style="color:#666">=</span> cells[i<span style="color:#666">-</span><span style="color:#666">1</span>] <span style="color:#666">==</span> cells[i<span style="color:#666">+</span><span style="color:#666">1</span>] <span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">:</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> n;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>This function computes the next configuration of the cells based on the rules.</li>
-<li>A new vector <code>n</code> is created to store the next state of the cells. Initially, all cells in <code>n</code> are set to 0.</li>
-<li>The loop goes through each cell (except the first and last ones, since they have no neighbors on both sides). For each cell, it checks if its two neighbors have the same state (either both open or both closed). If they do, the cell in the next configuration is set to 1 (open); otherwise, it is set to 0 (closed).</li>
-<li>The function returns the new configuration <code>n</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Cycle Detection</strong>:</p>
-<ul>
-<li>The key optimization in this solution is the use of a set to track previously seen configurations of the cells. If a configuration is encountered more than once, we know that the system has started repeating itself, and we can calculate how many remaining steps need to be simulated using the modulus of the cycle length.</li>
-</ul>
-</li>
-</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -363,35 +313,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<ol>
-<li>
-<p><strong>Time Complexity</strong>:</p>
 <ul>
-<li>The time complexity of the solution depends on the number of unique cell configurations and the number of steps required to simulate the prison system.</li>
-<li>In the worst case, the number of unique configurations is bounded by the number of possible combinations of the 8 cells, which is <code>2^8 = 256</code> (since each cell can either be open or closed). Therefore, we can detect cycles after at most 256 steps.</li>
-<li>The total time complexity is <code>O(min(n, C))</code>, where <code>C</code> is the number of unique configurations (256 in this case). Each step involves computing the next state, which is <code>O(k)</code>, where <code>k</code> is the number of cells (fixed at 8).</li>
+<li><strong>Time Complexity</strong>: O(n), where <code>n</code> is the number of days until a repeated state is detected, and transitions are computed accordingly.</li>
+<li><strong>Space Complexity</strong>: O(n), for storing the states in the set to detect cycles.</li>
 </ul>
-</li>
-<li>
-<p><strong>Space Complexity</strong>:</p>
-<ul>
-<li>The space complexity is dominated by the <code>set</code> used to store the unique configurations of the cells. In the worst case, we store all possible configurations, which is <code>O(256)</code>.</li>
-</ul>
-</li>
-</ol>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The solution efficiently simulates the prison cell system by detecting cycles in the transformations of the cells. By using a set to store previously seen configurations, we avoid unnecessary computations for repeated states, significantly reducing the number of steps required when <code>n</code> is large. This approach allows us to handle even large values of <code>n</code> while ensuring that the program runs efficiently. The solution leverages cycle detection to optimize the simulation and guarantees that the final state of the prison cells is computed in an optimal time complexity.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1428s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1429s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

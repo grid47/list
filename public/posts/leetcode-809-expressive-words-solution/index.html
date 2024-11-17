@@ -147,7 +147,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              6-minute read
+              3-minute read
             </span>
           </div>
 
@@ -216,8 +216,26 @@
 
       <div class="post-content">
         
-        <p><a href="https://leetcode.com/problems/expressive-words/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
-<hr>
+        <h2 id="hahahugoshortcode1336s0hbhb">
+  <a href="https://leetcode.com/problems/expressive-words/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
+<figure class="remote-image" style="text-align:center; margin: 0;">
+    <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/809.webp" 
+           alt="A string of words where expressive words glow softly, highlighting their expressive nature." 
+           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    
+      <figcaption style="font-size: 0.8em; font-weight: 300; color:#555; margin-top: 4px; line-height: 1.2;">
+        Solution to LeetCode 809: Expressive Words Problem
+      </figcaption>
+    
+  </figure>
+  
+  <a class="heading-link" href="#hahahugoshortcode1336s0hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <p><strong>Code:</strong></p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
 </span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
@@ -240,7 +258,7 @@
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1334s1hbhb">
+<h2 id="hahahugoshortcode1336s2hbhb">
   
 
   
@@ -252,7 +270,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem asks to determine how many words from a list of strings are &ldquo;expressive&rdquo; words compared to a given string <code>s</code>. An expressive word is defined as one where characters in <code>s</code> can be &ldquo;stretched&rdquo; or &ldquo;compressed&rdquo; to match a word in the list. The stretching rule allows a character in <code>s</code> to appear one or more times, while compressing allows it to appear exactly once. The goal is to find the number of words in the list that can be transformed into <code>s</code> by applying these rules.</p>
+<p>Given a string <code>s</code> and a list of words, the goal is to count how many of the words can be formed from <code>s</code> by stretching some characters. A character can be stretched if it appears consecutively in <code>s</code> at least three times.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -260,109 +278,78 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem, we need to check if each word in the list of words can be formed by stretching or compressing the string <code>s</code>. The check involves iterating over each character in the string <code>s</code> and trying to match it with the characters of the word. If a character in <code>s</code> repeats, it should correspond to one or more occurrences of the same character in the word. If the string <code>s</code> has a character that is compressed, it must match exactly once in the word.</p>
-<h4 id="key-insights">
-  Key Insights:
-  <a class="heading-link" href="#key-insights">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ol>
-<li><strong>Character Matching</strong>: We need to match the characters in both <code>s</code> and each word in the list, but allow for stretching (repeating characters in <code>s</code>).</li>
-<li><strong>Matching Criteria</strong>:
+<li>
+<p><strong>Iterate Through Words</strong>:</p>
 <ul>
-<li>If two adjacent characters in <code>s</code> are the same, they can be stretched into one or more of the same character in the word.</li>
-<li>If a character in <code>s</code> appears more than once consecutively, it should match that character appearing consecutively in the word.</li>
-<li>If a character in <code>s</code> appears only once and the corresponding character in the word appears more than once, the word is not valid.</li>
+<li>For each word in the list, check if it can be formed from <code>s</code> by calling the <code>check</code> function.</li>
 </ul>
 </li>
-<li><strong>Validation Function</strong>: We define a function <code>check()</code> that validates whether a word can be formed from <code>s</code> by checking each character’s match with stretching or compression.</li>
+<li>
+<p><strong>Check Function</strong>:</p>
+<ul>
+<li>Compare each character in <code>s</code> with the characters in the word <code>w</code>.</li>
+<li>Use two pointers, <code>i</code> for <code>s</code> and <code>j</code> for <code>w</code>, to traverse both strings.</li>
+<li>For each character in <code>s</code>:
+<ul>
+<li>If the current characters match, move both pointers forward.</li>
+<li>If characters do not match, check if the current character in <code>s</code> can be stretched:
+<ul>
+<li>If the previous two characters in <code>s</code> are the same as the current character, the character can be stretched.</li>
+<li>If the current character is part of a triplet (e.g., <code>aaa</code>), it can also be stretched.</li>
+<li>If neither condition holds, return <code>false</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>After traversing <code>s</code>, check if all characters in <code>w</code> have been matched.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Result</strong>:</p>
+<ul>
+<li>Return the count of words that can be formed from <code>s</code>.</li>
+</ul>
+</li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="step-1-initialize-the-result-variable">
-  Step 1: Initialize the Result Variable
-  <a class="heading-link" href="#step-1-initialize-the-result-variable">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div><ul>
-<li><strong><code>res</code></strong> keeps track of the number of valid expressive words. It is initialized to 0.</li>
-</ul>
-<h4 id="step-2-iterate-over-each-word-in-the-list">
-  Step 2: Iterate Over Each Word in the List
-  <a class="heading-link" href="#step-2-iterate-over-each-word-in-the-list">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span><span style="color:#a0a000">w</span> : words)
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (check(s, w))
-</span></span><span style="display:flex;"><span>        res<span style="color:#666">++</span>;
-</span></span></code></pre></div><ul>
-<li>We iterate over each word <code>w</code> in the list of words <code>words</code>. For each word, we call the <code>check()</code> function to validate if the word can be transformed into <code>s</code> based on the stretching rules.</li>
-<li>If <code>check()</code> returns <code>true</code>, it means the word is expressive, so we increment <code>res</code>.</li>
-</ul>
-<h4 id="step-3-define-the-check-function">
-  Step 3: Define the Check Function
-  <a class="heading-link" href="#step-3-define-the-check-function">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">check</span>(string s, string w) {
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s.size(), m <span style="color:#666">=</span> w.size(), j <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (j <span style="color:#666">&lt;</span> m <span style="color:#666">&amp;&amp;</span> s[i] <span style="color:#666">==</span> w[j]) j<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">&gt;</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> s[i <span style="color:#666">-</span> <span style="color:#666">2</span>] <span style="color:#666">==</span> s[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&amp;&amp;</span> s[i <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">==</span> s[i]);
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> i <span style="color:#666">&lt;</span> n <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> s[i <span style="color:#666">-</span><span style="color:#666">1</span>] <span style="color:#666">==</span> s[i] <span style="color:#666">&amp;&amp;</span> s[i] <span style="color:#666">==</span> s[i <span style="color:#666">+</span><span style="color:#666">1</span>]);
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> j <span style="color:#666">==</span> m;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>
-<p><strong>Parameters</strong>: The function <code>check</code> takes two strings, <code>s</code> (the given string) and <code>w</code> (the word to be checked).</p>
-</li>
-<li>
-<p><strong>Variables</strong>:</p>
 <ul>
-<li><code>n</code> is the size of <code>s</code>.</li>
-<li><code>m</code> is the size of <code>w</code>.</li>
-<li><code>j</code> is an index to track the current character in <code>w</code>.</li>
-</ul>
-</li>
-<li>
-<p><strong>Iterate Through <code>s</code></strong>:</p>
+<li><strong>Class</strong>:
 <ul>
-<li>The function iterates through each character of <code>s</code> (indexed by <code>i</code>).</li>
-<li><strong>Matching Characters</strong>: If the current character <code>s[i]</code> matches the current character in <code>w[j]</code>, we increment <code>j</code> to move to the next character of <code>w</code>.</li>
-<li><strong>Stretching Check</strong>: If the previous two characters in <code>s</code> are the same (<code>s[i-2] == s[i-1]</code> and <code>s[i-1] == s[i]</code>), this indicates a stretch, and we allow it to match in <code>w</code>.</li>
-<li><strong>Compression Check</strong>: If the current character <code>s[i]</code> is surrounded by the same character (<code>s[i-1] == s[i] == s[i+1]</code>), it can be compressed into exactly one character in <code>w</code>, allowing it to match.</li>
-<li><strong>Return False</strong>: If none of the conditions above are satisfied, the word <code>w</code> cannot be formed from <code>s</code>, so we return <code>false</code>.</li>
+<li><code>class Solution</code>: Contains methods to compute the count of expressive words.
+<ul>
+<li><code>int expressiveWords(string s, vector&lt;string&gt;&amp; words)</code>: The main function to count the expressive words.
+<ul>
+<li><strong>Parameters</strong>:
+<ul>
+<li><code>s</code>: The string to stretch.</li>
+<li><code>words</code>: A list of words to check against <code>s</code>.</li>
 </ul>
 </li>
-<li>
-<p><strong>End of Loop</strong>: After the loop finishes, we check if the entire word <code>w</code> has been matched (<code>j == m</code>). If it has, we return <code>true</code>; otherwise, <code>false</code>.</p>
+<li><strong>Returns</strong>: An integer representing the count of expressive words.</li>
+</ul>
+</li>
+<li><code>bool check(string s, string w)</code>: A helper function to check if a word can be formed by stretching <code>s</code>.
+<ul>
+<li><strong>Parameters</strong>:
+<ul>
+<li><code>s</code>: The string to stretch.</li>
+<li><code>w</code>: The word to check.</li>
+</ul>
+</li>
+<li><strong>Returns</strong>: A boolean indicating whether the word can be formed from <code>s</code>.</li>
+</ul>
 </li>
 </ul>
-<h4 id="step-4-return-the-final-result">
-  Step 4: Return the Final Result
-  <a class="heading-link" href="#step-4-return-the-final-result">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span></code></pre></div><ul>
-<li>After checking all words in the list, we return the value of <code>res</code>, which represents the count of expressive words.</li>
+</li>
+</ul>
+</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -371,45 +358,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong><code>O(n * m)</code></strong>, where <code>n</code> is the size of the given string <code>s</code> and <code>m</code> is the average length of the words in the list.
-<ul>
-<li>For each word, the function <code>check()</code> performs a linear scan of the string <code>s</code> and the word <code>w</code>, making the time complexity for each check linear in terms of the length of <code>s</code>.</li>
-<li>The <code>for</code> loop iterates through all words in the list, and for each word, we call <code>check()</code>. Therefore, the overall time complexity is <strong>O(n * m)</strong> where <code>n</code> is the length of <code>s</code> and <code>m</code> is the average length of the words.</li>
+<li><strong>Time Complexity</strong>: O(n * m), where <code>n</code> is the length of <code>s</code> and <code>m</code> is the average length of words in the list, due to the nested iteration over the words.</li>
+<li><strong>Space Complexity</strong>: O(1), since no additional space is used other than variables for iteration.</li>
 </ul>
-</li>
-</ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong><code>O(1)</code></strong>: The algorithm uses a constant amount of space apart from the input strings and the list of words. The result is stored in a simple integer variable, and no extra memory is required for each word check.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution efficiently solves the problem of counting expressive words by employing a character matching strategy with support for stretching and compression. The approach works by comparing each word in the list to the string <code>s</code> character by character, handling the stretching/compressing cases. The solution utilizes a simple and effective validation function (<code>check()</code>) to determine whether a word can be transformed into <code>s</code>. The time complexity is manageable, and the space complexity is minimal, making this solution suitable for problems where the input size is large.</p>
-<p>By iterating over the list of words and applying the check for each one, we can determine how many words are expressive in relation to the given string <code>s</code>. The implementation ensures that all edge cases, including consecutive repeated characters and compressions, are handled efficiently.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1334s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1336s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

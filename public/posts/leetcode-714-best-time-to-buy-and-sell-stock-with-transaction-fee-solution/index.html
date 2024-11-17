@@ -147,7 +147,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -216,8 +216,26 @@
 
       <div class="post-content">
         
-        <p><a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
-<hr>
+        <h2 id="hahahugoshortcode1283s0hbhb">
+  <a href="https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
+<figure class="remote-image" style="text-align:center; margin: 0;">
+    <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/714.webp" 
+           alt="A stock price chart where the best time to buy and sell is highlighted, with the optimal prices softly glowing." 
+           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    
+      <figcaption style="font-size: 0.8em; font-weight: 300; color:#555; margin-top: 4px; line-height: 1.2;">
+        Solution to LeetCode 714: Best Time to Buy and Sell Stock with Transaction Fee Problem
+      </figcaption>
+    
+  </figure>
+  
+  <a class="heading-link" href="#hahahugoshortcode1283s0hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <p><strong>Code:</strong></p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
 </span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
@@ -233,7 +251,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> sell[days <span style="color:#666">-</span> <span style="color:#666">1</span>];
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1284s1hbhb">
+<h2 id="hahahugoshortcode1283s2hbhb">
   
 
   
@@ -245,8 +263,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem is about maximizing profit from a series of stock prices, where each price is given as an array <code>prices</code>. The goal is to determine the maximum profit that can be earned by completing multiple transactions, but with the restriction that each transaction incurs a fee (<code>fee</code>).</p>
-<p>A transaction involves buying one stock and selling it later. The challenge is to determine the maximum profit that can be obtained by performing any number of transactions, subject to the fee on each sale.</p>
+<p>You are given an array <code>prices</code> where <code>prices[i]</code> is the price of a given stock on the <code>i-th</code> day. You want to maximize your profit by performing at most one transaction (i.e., buy one and sell one share of the stock) while paying a transaction fee <code>fee</code> for each buy transaction. Return the maximum profit you can achieve.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -254,130 +271,77 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem optimally, we can use <strong>dynamic programming</strong> (DP). The idea is to track two states for each day:</p>
-<ul>
-<li><strong>Buy state</strong>: The maximum profit if we bought the stock on that day (or carried over from a previous transaction).</li>
-<li><strong>Sell state</strong>: The maximum profit if we sold the stock on that day.</li>
-</ul>
-<p>We can use two arrays:</p>
-<ul>
-<li><code>buy[i]</code>: Maximum profit on day <code>i</code> if we have bought the stock.</li>
-<li><code>sell[i]</code>: Maximum profit on day <code>i</code> if we have sold the stock.</li>
-</ul>
-<p>The two core transitions are:</p>
 <ol>
 <li>
-<p><strong>Buy State</strong>: On day <code>i</code>, we can either:</p>
+<p><strong>Dynamic Programming</strong>:</p>
 <ul>
-<li>Stay in the same &ldquo;buy&rdquo; state (carry over from the previous day).</li>
-<li>Buy the stock on day <code>i</code> after selling the stock on day <code>i-1</code>. This means we subtract the stock price and the fee from the profit made by selling on day <code>i-1</code>.</li>
+<li>Use two arrays, <code>buy</code> and <code>sell</code>, to keep track of the maximum profit on each day when holding a stock (<code>buy[i]</code>) and when not holding a stock (<code>sell[i]</code>).</li>
 </ul>
 </li>
 <li>
-<p><strong>Sell State</strong>: On day <code>i</code>, we can either:</p>
+<p><strong>State Initialization</strong>:</p>
 <ul>
-<li>Stay in the same &ldquo;sell&rdquo; state (carry over the previous day&rsquo;s profit from selling).</li>
-<li>Sell the stock on day <code>i</code> after buying it on day <code>i-1</code>. This adds the price of the stock on day <code>i</code> to the profit made by buying on day <code>i-1</code>.</li>
+<li>Set <code>buy[0]</code> to <code>-prices[0] - fee</code>, indicating the initial state of buying on the first day (including the transaction fee).</li>
+</ul>
+</li>
+<li>
+<p><strong>State Transition</strong>:</p>
+<ul>
+<li>For each day <code>i</code> from 1 to <code>days - 1</code>:
+<ul>
+<li><code>buy[i]</code>: Maximum profit of holding stock after day <code>i</code>, which can come from:
+<ul>
+<li>Not buying any stock (i.e., staying in the previous state <code>buy[i - 1]</code>).</li>
+<li>Selling stock on day <code>i - 1</code> and buying stock on day <code>i</code> (accounting for the fee).</li>
+</ul>
+</li>
+<li><code>sell[i]</code>: Maximum profit of not holding stock after day <code>i</code>, which can come from:
+<ul>
+<li>Not selling any stock (i.e., staying in the previous state <code>sell[i - 1]</code>).</li>
+<li>Buying stock on day <code>i - 1</code> and selling it on day <code>i</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Result</strong>:</p>
+<ul>
+<li>The maximum profit at the end of the last day is stored in <code>sell[days - 1]</code>.</li>
 </ul>
 </li>
 </ol>
-<p>By maintaining these two states, we can compute the maximum profit possible by day <code>n</code> (the last day).</p>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>Here’s the detailed step-by-step breakdown of the solution:</p>
-<ol>
-<li>
-<p><strong>Base Case</strong>:</p>
-<ul>
-<li>First, we check if the length of the <code>prices</code> array is less than or equal to 1. If so, we return 0 because no transaction can be made. This avoids unnecessary computations for edge cases:</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(prices.size() <span style="color:#666">&lt;=</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div></li>
-<li>
-<p><strong>Initialization</strong>:</p>
-<ul>
-<li>We initialize the number of days (<code>days</code>) to the length of the <code>prices</code> array.</li>
-<li>We create two arrays <code>buy</code> and <code>sell</code> of size <code>days</code> initialized to 0. These will hold the maximum profit on each day for the respective states (buy and sell):</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> buy(days, <span style="color:#666">0</span>), sell(days, <span style="color:#666">0</span>);
-</span></span></code></pre></div></li>
-<li>
-<p><strong>Initial Values</strong>:</p>
-<ul>
-<li>On day 0, if we buy the stock, our profit is negative because we spent money on buying the stock, and we also incur the fee. Hence, we set:</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>buy[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">-</span>prices[<span style="color:#666">0</span>] <span style="color:#666">-</span> fee;
-</span></span></code></pre></div></li>
-<li>
-<p><strong>Dynamic Programming Transition</strong>:</p>
-<ul>
-<li>From day 1 onwards, we compute the <code>buy</code> and <code>sell</code> values for each day using the previously mentioned transitions:</li>
-<li>The <code>buy[i]</code> on day <code>i</code> can either be:
-<ul>
-<li>The previous day&rsquo;s <code>buy[i-1]</code> value (i.e., carrying over the previous buy state).</li>
-<li>Or the profit from selling on day <code>i-1</code> (i.e., <code>sell[i-1]</code>), minus the cost of buying on day <code>i</code> and the transaction fee.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>buy[i] <span style="color:#666">=</span> max(buy[i<span style="color:#666">-</span><span style="color:#666">1</span>], sell[i<span style="color:#666">-</span><span style="color:#666">1</span>] <span style="color:#666">-</span> prices[i] <span style="color:#666">-</span> fee);
-</span></span></code></pre></div></li>
-<li>The <code>sell[i]</code> on day <code>i</code> can either be:
-<ul>
-<li>The previous day&rsquo;s <code>sell[i-1]</code> value (i.e., carrying over the previous sell state).</li>
-<li>Or the profit from buying on day <code>i-1</code> (i.e., <code>buy[i-1]</code>), plus the price of selling on day <code>i</code>.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sell[i] <span style="color:#666">=</span> max(sell[i<span style="color:#666">-</span><span style="color:#666">1</span>], buy[i<span style="color:#666">-</span><span style="color:#666">1</span>] <span style="color:#666">+</span> prices[i]);
-</span></span></code></pre></div></li>
-</ul>
-</li>
-<li>
-<p><strong>Final Answer</strong>:</p>
-<ul>
-<li>After filling out the <code>buy</code> and <code>sell</code> arrays, the maximum profit that can be obtained by the last day is stored in <code>sell[days - 1]</code>. This is because the last action should be selling the stock, so the maximum profit will be in the <code>sell</code> state on the last day.</li>
-</ul>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> sell[days <span style="color:#666">-</span> <span style="color:#666">1</span>];
-</span></span></code></pre></div></li>
-</ol>
-<h3 id="complexity-analysis">
-  Complexity Analysis
-  <a class="heading-link" href="#complexity-analysis">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li>
-<p><strong>Time Complexity</strong>:</p>
+<li><strong>Function</strong>:
 <ul>
-<li>The algorithm iterates over the <code>prices</code> array once, performing constant-time operations for each element. Therefore, the time complexity is <strong>O(n)</strong>, where <code>n</code> is the number of days (length of the <code>prices</code> array). This is optimal for this type of problem.</li>
+<li><code>maxProfit(vector&lt;int&gt;&amp; prices, int fee)</code>: Calculates the maximum profit achievable with the given prices and transaction fee.</li>
 </ul>
 </li>
-<li>
-<p><strong>Space Complexity</strong>:</p>
-<ul>
-<li>The space complexity is <strong>O(n)</strong> due to the two arrays <code>buy</code> and <code>sell</code>, each of size <code>n</code>. This space is required to store the maximum profit states for each day.</li>
 </ul>
-<p>If we wanted to optimize space further, we could use two variables instead of the arrays, reducing the space complexity to <strong>O(1)</strong>. However, the time complexity would remain <strong>O(n)</strong>.</p>
-</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>This solution provides an efficient way to compute the maximum profit from stock transactions with a fee using dynamic programming. By maintaining the <code>buy</code> and <code>sell</code> states for each day, the algorithm computes the optimal solution in linear time. This is much more efficient than the brute-force approach, which would involve checking all possible subarrays or combinations of buy and sell days, leading to a higher time complexity.</p>
-<p>The algorithm&rsquo;s simplicity and efficiency make it suitable for large input sizes, and it leverages dynamic programming to avoid redundant calculations. It ensures that we can handle complex scenarios such as fees on each transaction while still maintaining optimal performance.</p>
-<p>In summary, the dynamic programming approach used here is optimal for the problem, ensuring that the solution is both time-efficient and space-efficient. This makes it ideal for solving real-world stock trading problems where performance and scalability are critical.</p>
+<ul>
+<li><strong>Time Complexity</strong>: O(n), where <code>n</code> is the length of the <code>prices</code> array, since we iterate through the prices once.</li>
+<li><strong>Space Complexity</strong>: O(n), for the <code>buy</code> and <code>sell</code> arrays to store profits for each day.</li>
+</ul>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1284s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1283s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

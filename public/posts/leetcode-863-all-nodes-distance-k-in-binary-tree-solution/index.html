@@ -149,7 +149,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -217,7 +217,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -279,7 +279,7 @@
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1408s1hbhb">
+<h2 id="hahahugoshortcode1372s1hbhb">
   
 
   
@@ -291,9 +291,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem requires finding all nodes that are at a distance <code>k</code> from a given target node in a binary tree. The binary tree is represented by a root node and has an arbitrary structure with child nodes connected by edges. A target node is provided, and you need to determine all the nodes that are exactly <code>k</code> edges away from the target. The nodes can be traversed by moving up or down the tree.</p>
-<p>For example:
-Given a binary tree and a target node, you are tasked with returning all nodes that are at a distance <code>k</code> from the target node.</p>
+<p>Given a binary tree and a target node, the goal is to find all nodes that are exactly <code>k</code> distance away from the target node. The distance between two nodes is defined as the number of edges in the path connecting them.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -301,114 +299,40 @@ Given a binary tree and a target node, you are tasked with returning all nodes t
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem, we need to approach it in a systematic way that considers both the traversal of the tree and the relationship between nodes. We will break down the solution into several key components:</p>
 <ol>
 <li>
-<p><strong>Parent Mapping</strong>: Since the problem allows traversal in both directions (up and down), we need a way to navigate from any node to its parent. We can achieve this by creating a mapping from child nodes to their respective parents.</p>
+<p><strong>Mapping Parent Nodes</strong>:</p>
+<ul>
+<li>Utilize a map to associate each child node with its parent. This allows traversal back to the parent node when necessary.</li>
+<li>A helper function <code>parents(TreeNode* node)</code> performs a depth-first traversal of the tree to populate this map.</li>
+</ul>
 </li>
 <li>
-<p><strong>Depth-First Search (DFS)</strong>: To find all nodes at a distance <code>k</code> from the target, we perform a DFS starting from the target node. We will visit nodes at increasing levels of depth while keeping track of the nodes we&rsquo;ve already visited.</p>
+<p><strong>Depth-First Search (DFS)</strong>:</p>
+<ul>
+<li>Perform a DFS starting from the target node. Keep track of visited nodes using a set to avoid revisiting.</li>
+<li>When reaching a node that is <code>k</code> distance from the target, add its value to the result list.</li>
+<li>The DFS explores left and right child nodes as well as the parent node using the previously created map.</li>
+</ul>
 </li>
 <li>
-<p><strong>Set of Visited Nodes</strong>: We must ensure that we do not revisit the same node while traversing the tree. For this purpose, we will use a set to store the nodes we have already visited.</p>
-</li>
-<li>
-<p><strong>Tracking Distance</strong>: While performing DFS, we maintain the depth and stop when we reach a distance <code>k</code> from the target node.</p>
+<p><strong>Edge Cases</strong>:</p>
+<ul>
+<li>Handle scenarios where the tree is empty or the target node is null.</li>
+</ul>
 </li>
 </ol>
-<p>The approach is efficient and leverages both DFS and the parent-child relationship in the tree to solve the problem.</p>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="step-1-parent-mapping">
-  Step 1: Parent Mapping
-  <a class="heading-link" href="#step-1-parent-mapping">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">parents</span>(TreeNode<span style="color:#666">*</span> node) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>node) <span style="color:#a2f;font-weight:bold">return</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>left) {
-</span></span><span style="display:flex;"><span>        mp[node<span style="color:#666">-&gt;</span>left] <span style="color:#666">=</span> node;
-</span></span><span style="display:flex;"><span>        parents(node<span style="color:#666">-&gt;</span>left);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>right) {
-</span></span><span style="display:flex;"><span>        mp[node<span style="color:#666">-&gt;</span>right] <span style="color:#666">=</span> node;
-</span></span><span style="display:flex;"><span>        parents(node<span style="color:#666">-&gt;</span>right);
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>
-<p>The <code>parents</code> function builds a mapping of each node to its parent. We traverse the tree starting from the root, and for every node that has a left or right child, we add an entry in the map <code>mp</code> where the child is the key and the parent is the value.</p>
-</li>
-<li>
-<p>This function ensures that we can traverse upwards in the tree, allowing us to move from a child node to its parent if needed during our search for nodes at distance <code>k</code>.</p>
-</li>
-</ul>
-<h4 id="step-2-depth-first-search-dfs-implementation">
-  Step 2: Depth-First Search (DFS) Implementation
-  <a class="heading-link" href="#step-2-depth-first-search-dfs-implementation">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(TreeNode<span style="color:#666">*</span> node, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(st.count(node)) <span style="color:#a2f;font-weight:bold">return</span>;
-</span></span><span style="display:flex;"><span>    st.insert(node);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(k <span style="color:#666">==</span> <span style="color:#666">0</span>) {
-</span></span><span style="display:flex;"><span>        ans.push_back(node<span style="color:#666">-&gt;</span>val);
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>left) dfs(node<span style="color:#666">-&gt;</span>left, k <span style="color:#666">-</span> <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>right) dfs(node<span style="color:#666">-&gt;</span>right, k <span style="color:#666">-</span> <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mp[node]) dfs(mp[node], k <span style="color:#666">-</span> <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>
-<p>The <code>dfs</code> function is a recursive helper function that performs a DFS to find all nodes at distance <code>k</code> from the target node.</p>
-</li>
-<li>
-<p>We first check if the current node has been visited by checking if it exists in the set <code>st</code>. If it has, we return immediately to avoid revisiting nodes.</p>
-</li>
-<li>
-<p>If the distance <code>k</code> reaches 0, it means we have found a node that is exactly <code>k</code> steps away from the target. We add this node&rsquo;s value to the result vector <code>ans</code>.</p>
-</li>
-<li>
-<p>The DFS explores the left and right children of the current node. Additionally, it checks if the parent of the node (using the <code>mp</code> map) should be explored. This allows us to traverse both upwards and downwards in the tree.</p>
-</li>
-</ul>
-<h4 id="step-3-initializing-the-process">
-  Step 3: Initializing the Process
-  <a class="heading-link" href="#step-3-initializing-the-process">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> distanceK(TreeNode<span style="color:#666">*</span> root, TreeNode<span style="color:#666">*</span> target, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>root) <span style="color:#a2f;font-weight:bold">return</span> {};
-</span></span><span style="display:flex;"><span>    parents(root);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    dfs(target, k);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>
-<p>The <code>distanceK</code> function is the main function called to find all nodes at distance <code>k</code> from the target node.</p>
-</li>
-<li>
-<p>First, we build the parent-child mapping by calling <code>parents(root)</code>. This prepares the <code>mp</code> map so that each node is associated with its parent.</p>
-</li>
-<li>
-<p>Then, we start the DFS search from the target node, looking for nodes that are exactly <code>k</code> distance away. The result is stored in the <code>ans</code> vector, which is returned at the end.</p>
-</li>
+<ul>
+<li>The <code>parents</code> function recursively maps each child to its parent.</li>
+<li>The <code>distanceK</code> function initializes the process by mapping parents and then calling the DFS from the target node.</li>
+<li>The <code>dfs</code> function explores the tree and collects nodes at distance <code>k</code>.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -417,52 +341,15 @@ Given a binary tree and a target node, you are tasked with returning all nodes t
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>O(N)</strong> where <code>N</code> is the number of nodes in the tree.
-<ul>
-<li>Building the parent map requires a traversal of the entire tree, which is O(N).</li>
-<li>The DFS traversal visits each node at most once, which is also O(N).</li>
+<li><strong>Time Complexity</strong>: O(N), where <code>N</code> is the number of nodes in the tree. Each node is visited once during the mapping and once during the DFS.</li>
+<li><strong>Space Complexity</strong>: O(N) for storing the parent mapping and visited nodes, as well as for the result list.</li>
 </ul>
-</li>
-</ul>
-<p>Thus, the total time complexity is <strong>O(N)</strong>, where <code>N</code> is the number of nodes in the tree.</p>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>O(N)</strong> due to the following reasons:
-<ul>
-<li>The parent map <code>mp</code> stores entries for each node, requiring O(N) space.</li>
-<li>The set <code>st</code> stores the nodes that have been visited during DFS, requiring O(N) space in the worst case.</li>
-<li>The result vector <code>ans</code> can also store up to O(N) elements if all nodes are at a distance <code>k</code> from the target.</li>
-</ul>
-</li>
-</ul>
-<p>Therefore, the space complexity is <strong>O(N)</strong>.</p>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution efficiently solves the problem of finding all nodes at distance <code>k</code> from a target node in a binary tree. By using a parent-child mapping and performing a DFS traversal, we are able to navigate both upwards and downwards in the tree while keeping track of visited nodes to avoid revisits. The time and space complexities are both optimal, making this approach suitable for large trees.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1408s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1372s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

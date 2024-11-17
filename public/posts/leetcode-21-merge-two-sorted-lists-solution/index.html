@@ -146,7 +146,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              3-minute read
+              2-minute read
             </span>
           </div>
 
@@ -261,106 +261,69 @@
 
   
   <div class="markdown-body">
-    <h3 id="-merging-two-sorted-linked-lists--a-simple-and-elegant-approach">
-  🌟 <strong>Merging Two Sorted Linked Lists</strong> – A Simple and Elegant Approach!
-  <a class="heading-link" href="#-merging-two-sorted-linked-lists--a-simple-and-elegant-approach">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>When you&rsquo;re faced with merging two sorted linked lists into a single sorted list, don’t worry—it’s simpler than it sounds! By breaking the problem into smaller steps, we can easily solve this in an efficient manner. Let’s dive in! 🚀</p>
-<hr>
-<h4 id="-the-problem">
-  📝 <strong>The Problem</strong>
-  <a class="heading-link" href="#-the-problem">
+<p>Given two sorted linked lists <code>l1</code> and <code>l2</code>, merge them into a single sorted linked list. The merged list should be made by splicing together the nodes of the first two lists.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h4>
-<p>We are given two <strong>sorted singly linked lists</strong>, <code>l1</code> and <code>l2</code>, and our goal is to <strong>merge</strong> them into a single, sorted linked list. Both lists are already in non-decreasing order, so we just need to combine them while preserving that order.</p>
-<hr>
-<h4 id="-key-idea-think-recursively">
-  🔑 <strong>Key Idea: Think Recursively!</strong>
-  <a class="heading-link" href="#-key-idea-think-recursively">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>We’ll approach this problem using <strong>recursion</strong>—a technique that breaks a complex problem into simpler subproblems. The idea is to always pick the smaller value between the two lists and recursively merge the remaining elements. By doing this, we ensure that the merged list remains sorted.</p>
-<hr>
-<h4 id="-step-by-step-breakdown">
-  🧩 <strong>Step-by-Step Breakdown</strong>
-  <a class="heading-link" href="#-step-by-step-breakdown">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
+</h3>
 <ol>
-<li>
-<p><strong>Base Case</strong>: If one of the lists is <code>NULL</code>, simply return the other list. This is because if one list is empty, there’s nothing to merge, so we just return the other sorted list.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(l1 <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> l2;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(l2 <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> l1;
-</span></span></code></pre></div></li>
-<li>
-<p><strong>Recursive Case</strong>: Now, we compare the values of the current nodes in <code>l1</code> and <code>l2</code>. We then take the smaller node and recursively merge the rest of the lists.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(l1<span style="color:#666">-&gt;</span>val <span style="color:#666">&lt;</span> l2<span style="color:#666">-&gt;</span>val) {
-</span></span><span style="display:flex;"><span>    l1<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> mergeTwoLists(l1<span style="color:#666">-&gt;</span>next, l2);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> l1;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li><strong>Explanation Simply</strong>: If the current node in <code>l1</code> has a smaller value, we attach it to the merged list and continue merging the remaining <code>l1</code> with <code>l2</code>.</li>
+<li><strong>Base Cases</strong>: Check if either list is empty:
+<ul>
+<li>If <code>l1</code> is <code>NULL</code>, return <code>l2</code>.</li>
+<li>If <code>l2</code> is <code>NULL</code>, return <code>l1</code>.</li>
 </ul>
 </li>
-<li>
-<p><strong>If the Current Node of <code>l2</code> is Smaller</strong>: If <code>l2</code> has a smaller or equal value, we do the same thing for <code>l2</code>:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>l2<span style="color:#666">-&gt;</span>next <span style="color:#666">=</span> mergeTwoLists(l1, l2<span style="color:#666">-&gt;</span>next);
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> l2;
-</span></span></code></pre></div></li>
+<li><strong>Recursive Comparison</strong>: Compare the values of the nodes:
+<ul>
+<li>If the value of <code>l1</code>&rsquo;s node is less than <code>l2</code>&rsquo;s node, set <code>l1-&gt;next</code> to the result of merging the rest of <code>l1</code> and all of <code>l2</code>. Return <code>l1</code>.</li>
+<li>Otherwise, set <code>l2-&gt;next</code> to the result of merging all of <code>l1</code> and the rest of <code>l2</code>. Return <code>l2</code>.</li>
+</ul>
+</li>
 </ol>
-<hr>
-<h4 id="-time-and-space-complexity">
-  🧠 <strong>Time and Space Complexity</strong>
-  <a class="heading-link" href="#-time-and-space-complexity">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h4>
+</h3>
+<ol>
+<li><strong>Function Definition</strong>: Define the function <code>mergeTwoLists</code> that takes two pointers <code>l1</code> and <code>l2</code> as input.</li>
+<li><strong>Base Case Handling</strong>:
 <ul>
-<li>
-<p><strong>Time Complexity</strong>:<br>
-<strong>O(n + m)</strong> — where <code>n</code> and <code>m</code> are the lengths of <code>l1</code> and <code>l2</code>, respectively. We traverse both lists once, making this solution linear.</p>
-</li>
-<li>
-<p><strong>Space Complexity</strong>:<br>
-<strong>O(n + m)</strong> — due to the recursion call stack. In the worst case, the maximum depth of the recursion is the total number of nodes in both lists.</p>
-</li>
+<li>If <code>l1</code> is <code>NULL</code>, return <code>l2</code>.</li>
+<li>If <code>l2</code> is <code>NULL</code>, return <code>l1</code>.</li>
 </ul>
-<hr>
-<h4 id="-why-recursion-rocks">
-  💡 <strong>Why Recursion Rocks!</strong>
-  <a class="heading-link" href="#-why-recursion-rocks">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
+</li>
+<li><strong>Recursive Logic</strong>:
 <ul>
-<li>
-<p><strong>Elegant Solution</strong>: The recursive approach is clean and intuitive, especially when merging sorted lists. It follows the principle of &ldquo;divide and conquer&rdquo; by breaking down the problem into smaller subproblems.</p>
-</li>
-<li>
-<p><strong>Optimal Performance</strong>: We make sure to visit each node once and do a simple comparison at each step, making this solution both <strong>efficient</strong> and <strong>easy to understand</strong>.</p>
-</li>
+<li>Compare the values at the heads of <code>l1</code> and <code>l2</code>.</li>
+<li>Recursively merge the next nodes and link them appropriately based on the comparison.</li>
 </ul>
-<hr>
-<h4 id="-practice-makes-perfect">
-  🌱 <strong>Practice Makes Perfect!</strong>
-  <a class="heading-link" href="#-practice-makes-perfect">
+</li>
+<li><strong>Return the Head of the Merged List</strong>: Finally, return the node that starts the merged list.</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
-</h4>
-<p>By applying this recursive method, you’ll not only master this problem but also enhance your understanding of linked lists and recursion. The more you practice, the more you’ll see the elegance in recursive solutions. Keep going, coder! 💪</p>
- 
+</h3>
+<ul>
+<li><strong>Time Complexity:</strong> (O(N + M)), where (N) and (M) are the lengths of the two lists. Every node from both lists is processed once.</li>
+<li><strong>Space Complexity:</strong> (O(N + M)) for the recursive call stack in the worst case (if both lists are merged completely).</li>
+</ul> 
 </div>
   
 

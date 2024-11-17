@@ -146,7 +146,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              4-minute read
+              2-minute read
             </span>
           </div>
 
@@ -211,8 +211,26 @@
 
       <div class="post-content">
         
-        <p><a href="https://leetcode.com/problems/valid-square/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
-<hr>
+        <h2 id="hahahugoshortcode1227s0hbhb">
+  <a href="https://leetcode.com/problems/valid-square/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
+<figure class="remote-image" style="text-align:center; margin: 0;">
+    <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/593.webp" 
+           alt="A square being validated, with each corner softly glowing as the square is checked for correctness." 
+           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    
+      <figcaption style="font-size: 0.8em; font-weight: 300; color:#555; margin-top: 4px; line-height: 1.2;">
+        Solution to LeetCode 593: Valid Square Problem
+      </figcaption>
+    
+  </figure>
+  
+  <a class="heading-link" href="#hahahugoshortcode1227s0hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <p><strong>Code:</strong></p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
 </span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
@@ -224,7 +242,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">!</span>s.count(<span style="color:#666">0</span>) <span style="color:#666">&amp;&amp;</span> s.size() <span style="color:#666">==</span> <span style="color:#666">2</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1225s1hbhb">
+<h2 id="hahahugoshortcode1227s2hbhb">
   
 
   
@@ -236,12 +254,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>In this problem, we are given the coordinates of four points in a 2D plane. The task is to determine whether these points can form a valid square. A valid square is one where:</p>
-<ol>
-<li>All four sides are of equal length.</li>
-<li>The diagonals are of equal length, and they intersect at right angles (i.e., they are perpendicular).</li>
-</ol>
-<p>The input consists of four points, each represented by a vector of two integers indicating the x and y coordinates of the points. The goal is to return <code>true</code> if the points form a valid square, and <code>false</code> otherwise.</p>
+<p>Determine if four points in a 2D plane form a square.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -249,80 +262,42 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem, we can break it down into the following steps:</p>
 <ol>
 <li>
-<p><strong>Distance Calculation</strong>: For a valid square, we need to calculate the distances between the points. This includes the distances between adjacent points (sides of the square) and the distances between opposite points (diagonals).</p>
-</li>
-<li>
-<p><strong>Set of Distances</strong>: We can utilize a set to store the distances. A valid square will have exactly two unique distances in the set:</p>
+<p><strong>Distance Calculation</strong>:</p>
 <ul>
-<li>The shorter distance will correspond to the sides of the square.</li>
-<li>The longer distance will correspond to the diagonals of the square.</li>
+<li>Create a helper function <code>d</code> that calculates the squared distance between two points to avoid dealing with floating-point precision. The squared distance is calculated as:
+[
+d(p, q) = (p[0] - q[0])^2 + (p[1] - q[1])^2
+]</li>
+<li>This function takes two vectors representing the coordinates of the points.</li>
 </ul>
 </li>
 <li>
-<p><strong>Conditions for Valid Square</strong>:</p>
+<p><strong>Using a Set for Distances</strong>:</p>
 <ul>
-<li>The distance between two points cannot be zero (i.e., no two points can coincide).</li>
-<li>There should only be two distinct distances in the set: one for the sides and one for the diagonals.</li>
-<li>The diagonals should be longer than the sides.</li>
+<li>Calculate the squared distances between all pairs of the four points. Store these distances in a set to automatically handle duplicates.</li>
+<li>There should be no zero distance (indicating that points are not distinct), and the set should contain exactly two unique distances: one for the sides of the square and one for the diagonals.</li>
+</ul>
+</li>
+<li>
+<p><strong>Validation</strong>:</p>
+<ul>
+<li>Check if the set has a size of 2 (indicating two unique distances).</li>
+<li>Ensure that the zero distance is not present in the set (indicating that the points are distinct).</li>
 </ul>
 </li>
 </ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="step-1-distance-calculation">
-  Step 1: Distance Calculation
-  <a class="heading-link" href="#step-1-distance-calculation">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">d</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> p, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (p[<span style="color:#666">0</span>] <span style="color:#666">-</span> q[<span style="color:#666">0</span>]) <span style="color:#666">*</span> (p[<span style="color:#666">0</span>] <span style="color:#666">-</span> q[<span style="color:#666">0</span>]) <span style="color:#666">+</span> (p[<span style="color:#666">1</span>] <span style="color:#666">-</span> q[<span style="color:#666">1</span>]) <span style="color:#666">*</span> (p[<span style="color:#666">1</span>] <span style="color:#666">-</span> q[<span style="color:#666">1</span>]);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>
-<p>The function <code>d</code> computes the squared distance between two points <code>p</code> and <code>q</code> in the 2D plane. The squared distance formula is:
-[
-\text{distance}^2 = (x_2 - x_1)^2 + (y_2 - y_1)^2
-]
-This avoids calculating the square root, which is computationally expensive and unnecessary for this problem since we are only interested in comparing distances.</p>
-</li>
-<li>
-<p>This function is called multiple times in the solution to calculate the distance between pairs of points.</p>
-</li>
-</ul>
-<h4 id="step-2-valid-square-check">
-  Step 2: Valid Square Check
-  <a class="heading-link" href="#step-2-valid-square-check">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">validSquare</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> p1, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> p2, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> p3, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> p4) {
-</span></span><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> s({d(p1, p2), d(p2, p3), d(p3, p4), d(p4, p1), d(p1, p3), d(p2, p4)});
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">!</span>s.count(<span style="color:#666">0</span>) <span style="color:#666">&amp;&amp;</span> s.size() <span style="color:#666">==</span> <span style="color:#666">2</span>;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>In this step, the function <code>validSquare</code> checks if the four points form a valid square:
 <ul>
-<li>We compute the distances between all pairs of points: <code>d(p1, p2)</code>, <code>d(p2, p3)</code>, <code>d(p3, p4)</code>, <code>d(p4, p1)</code>, <code>d(p1, p3)</code>, and <code>d(p2, p4)</code>. These represent the distances between adjacent points (sides) and opposite points (diagonals).</li>
-<li>These distances are stored in a <code>set&lt;int&gt; s</code>. A set automatically removes duplicates, ensuring that we only store unique distances. If there are no duplicate distances, the set will contain exactly two unique distances — one for the sides and one for the diagonals.</li>
-<li>The function then checks two conditions:
-<ol>
-<li><code>!s.count(0)</code>: This ensures that there are no duplicate points, as a distance of <code>0</code> would indicate that two points coincide.</li>
-<li><code>s.size() == 2</code>: This ensures that there are exactly two unique distances — one for the sides and one for the diagonals.</li>
-</ol>
-</li>
-</ul>
-</li>
+<li>The function <code>validSquare</code> computes the squared distances for all combinations of the four points.</li>
+<li>It uses a set to keep track of the unique squared distances and checks the conditions outlined.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -331,46 +306,15 @@ This avoids calculating the square root, which is computationally expensive and 
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>O(1)</strong>: The time complexity is constant because we are always working with exactly six distances (the six unique pairs of points), regardless of the specific values of the points. The set operations (insertion and checking size) are constant time because the set has a maximum of two distinct distances.</li>
+<li><strong>Time Complexity</strong>: O(1), as the number of distance calculations is constant regardless of the input (always four points).</li>
+<li><strong>Space Complexity</strong>: O(1), since the set size is limited to at most 2 unique squared distances.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>O(1)</strong>: The space complexity is constant because we are only storing six distances in the set, which does not grow with the size of the input. Therefore, the space complexity is fixed.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution provides an efficient way to determine whether four points can form a valid square. By leveraging the properties of distances between points and utilizing a set to store unique distances, the code is able to quickly and accurately check the conditions for a valid square.</p>
-<p>The key steps include:</p>
-<ol>
-<li><strong>Calculating the distances</strong> between all pairs of points.</li>
-<li><strong>Storing the distances in a set</strong> to ensure uniqueness and checking if there are exactly two distinct distances (sides and diagonals).</li>
-<li><strong>Checking for duplicate points</strong> to ensure no two points overlap.</li>
-</ol>
-<p>This approach ensures correctness while maintaining optimal time and space complexity, making it an ideal solution for this problem.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1225s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1227s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

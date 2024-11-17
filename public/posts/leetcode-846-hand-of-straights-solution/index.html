@@ -148,7 +148,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -242,7 +242,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1357s1hbhb">
+<h2 id="hahahugoshortcode1360s1hbhb">
   
 
   
@@ -254,35 +254,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem at hand requires us to determine if a given hand of cards can be divided into groups of a specified size, where each group is a consecutive sequence of cards. The cards are represented by integers, and the task is to verify if the hand can be partitioned into groups of consecutive integers of the given size, without any leftovers.</p>
-<h3 id="example">
-  Example:
-  <a class="heading-link" href="#example">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ul>
-<li>
-<p><strong>Input</strong>: <code>hand = [1,2,3,6,2,3,4,7,8]</code>, <code>groupSize = 3</code></p>
-</li>
-<li>
-<p><strong>Output</strong>: <code>True</code></p>
-</li>
-<li>
-<p><strong>Explanation</strong>: The cards can be divided into the following groups: <code>[1,2,3]</code>, <code>[2,3,4]</code>, and <code>[6,7,8]</code>.</p>
-</li>
-<li>
-<p><strong>Input</strong>: <code>hand = [1,2,3,4,5]</code>, <code>groupSize = 4</code></p>
-</li>
-<li>
-<p><strong>Output</strong>: <code>False</code></p>
-</li>
-<li>
-<p><strong>Explanation</strong>: It is impossible to divide the cards into groups of size 4.</p>
-</li>
-</ul>
-<p>The problem ensures that the cards in the hand can be used to form multiple consecutive groups, where each group must consist of exactly <code>groupSize</code> consecutive numbers.</p>
+<p>You are given an array <code>hand</code> representing a set of cards, where each card is represented by an integer. You are also given an integer <code>groupSize</code>. The goal is to determine if you can rearrange the cards into groups of size <code>groupSize</code> such that each group consists of consecutive cards.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -290,124 +262,50 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem, we can use a <strong>greedy algorithm</strong> that iteratively checks if it is possible to form a group starting from the smallest available card. The steps for the solution are as follows:</p>
 <ol>
 <li>
-<p><strong>Frequency Counting</strong>: The first step is to count the frequency of each card in the hand using a <strong>map</strong> (or hash map). This helps us quickly access the number of available cards of each value.</p>
+<p><strong>Count Card Frequencies</strong>: Use a <code>map</code> to count the occurrences of each card in the <code>hand</code>. This allows for efficient access and modification of card counts.</p>
 </li>
 <li>
-<p><strong>Forming Consecutive Groups</strong>:</p>
+<p><strong>Iterate Through Cards</strong>: For each unique card in the sorted <code>map</code>, check if it can start a new group:</p>
 <ul>
-<li>Starting with the smallest card, we attempt to form a consecutive sequence of length <code>groupSize</code>. This involves checking if there are enough cards to form a complete group.</li>
-<li>If a group can be formed, we decrement the frequency of those cards and move on to the next group.</li>
-<li>If at any point we cannot form a group of size <code>groupSize</code>, we return <code>false</code>.</li>
+<li>If the count of the current card (<code>mp[it.first]</code>) is greater than zero, it means that there are still cards of that value left to be grouped.</li>
 </ul>
 </li>
 <li>
-<p><strong>Edge Case Handling</strong>: If at any point the group formation fails (i.e., a card is needed to form a consecutive sequence but is not available), the function should immediately return <code>false</code>.</p>
+<p><strong>Form Groups</strong>:</p>
+<ul>
+<li>For each card value, attempt to form a group of consecutive cards:
+<ul>
+<li>For <code>i</code> from 1 to <code>groupSize - 1</code>, decrement the count of the next consecutive cards (<code>it.first + i</code>) by the count of the current card.</li>
+<li>If the count of any required consecutive card becomes negative, return <code>false</code>, as it indicates that there are not enough cards to form a complete group.</li>
+</ul>
+</li>
+</ul>
 </li>
 <li>
-<p><strong>Return Result</strong>: If all groups can be formed, return <code>true</code>.</p>
+<p><strong>Mark Current Card as Used</strong>: Once a group has been formed, set the count of the current card to 0, indicating that it has been used.</p>
+</li>
+<li>
+<p><strong>Final Check</strong>: If all groups can be formed, return <code>true</code>.</p>
 </li>
 </ol>
-<p>The algorithm operates greedily by always trying to use the smallest available card to start a sequence, ensuring that the number of groups formed is maximized with the smallest values first.</p>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="step-1-count-the-frequency-of-each-card">
-  Step 1: Count the Frequency of Each Card
-  <a class="heading-link" href="#step-1-count-the-frequency-of-each-card">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>The first operation in the code is to create a map that counts how many times each card appears in the hand.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: hand) mp[x]<span style="color:#666">++</span>;
-</span></span></code></pre></div><p>This map will allow us to efficiently check how many times each card appears, so we can decide whether we can form a valid group starting from a particular card.</p>
-<h4 id="step-2-iterate-over-the-map-to-form-groups">
-  Step 2: Iterate Over the Map to Form Groups
-  <a class="heading-link" href="#step-2-iterate-over-the-map-to-form-groups">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>After counting the frequency of each card, we iterate over the keys in the map (the card values). The algorithm works by starting with the smallest available card and attempting to create a sequence of consecutive cards. For each card, it checks if there are enough cards to form a complete group of size <code>groupSize</code>.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: mp) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mp[it.first] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) <span style="color:#080;font-style:italic">// Only process cards that still have remaining frequency
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> groupSize; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>        mp[it.first <span style="color:#666">+</span> i] <span style="color:#666">-=</span> mp[it.first];
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp[it.first <span style="color:#666">+</span> i] <span style="color:#666">&lt;</span> <span style="color:#666">0</span>)
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>    mp[it.first] <span style="color:#666">=</span> <span style="color:#666">0</span>; <span style="color:#080;font-style:italic">// Mark this card as fully used
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
-</span></span></code></pre></div><ul>
-<li><code>mp[it.first] &gt; 0</code>: We check if the current card (i.e., <code>it.first</code>) is still available to be used in a group.</li>
-<li>We then attempt to form a group by checking the next <code>groupSize - 1</code> consecutive cards (<code>it.first + 1</code>, <code>it.first + 2</code>, &hellip;, <code>it.first + groupSize - 1</code>).</li>
-<li>For each of these cards, we decrement their count in the map (<code>mp[it.first + i] -= mp[it.first]</code>).</li>
-<li>If at any point we find that a card cannot be used (i.e., <code>mp[it.first + i] &lt; 0</code>), we immediately return <code>false</code>.</li>
-<li>Finally, after using the current card to form a group, we set its frequency to zero (<code>mp[it.first] = 0</code>), indicating it has been used up.</li>
-</ul>
-<h4 id="step-3-return-the-result">
-  Step 3: Return the Result
-  <a class="heading-link" href="#step-3-return-the-result">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>If the function has not returned <code>false</code> during the loop, then all cards have been successfully used to form consecutive groups. Therefore, the function returns <code>true</code> to indicate that the hand can be divided into valid groups.</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span></code></pre></div><h3 id="complexity">
+<h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li>The time complexity of this solution is <strong>O(n log n)</strong>, where <code>n</code> is the number of cards in the hand. This complexity arises from:
-<ul>
-<li>Building the map, which takes O(n) time.</li>
-<li>Iterating through the map, where the map keys (card values) are sorted in ascending order. Thus, each operation involves iterating over the map and performing constant time updates, leading to a total time complexity of O(n log n) due to the sorting step inherent in the map&rsquo;s implementation.</li>
+<li><strong>Time Complexity</strong>: O(N log N), where N is the number of cards in <code>hand</code>. The logarithmic factor comes from the operations on the <code>map</code> during insertion and access.</li>
+<li><strong>Space Complexity</strong>: O(N) for storing the frequencies of the cards in the <code>map</code>.</li>
 </ul>
-</li>
-</ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>The space complexity of this solution is <strong>O(n)</strong>, as we use a map to store the frequency of each card in the hand. The size of the map will be proportional to the number of unique cards in the hand.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution is an efficient way to determine if a hand of cards can be split into consecutive groups of a specified size. By leveraging a map to count the frequency of each card, and then applying a greedy approach to form groups starting from the smallest card, we can solve the problem in <code>O(n log n)</code> time and <code>O(n)</code> space. This approach ensures that we can handle large input sizes effectively, making it a suitable solution for this problem.</p>
-<p>The algorithm is easy to understand and implements a clear strategy for forming consecutive sequences of cards. By utilizing the properties of maps (sorted keys and efficient lookups), it ensures that the process of checking for valid groups is optimized.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1357s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1360s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

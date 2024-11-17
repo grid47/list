@@ -147,7 +147,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              6-minute read
+              2-minute read
             </span>
           </div>
 
@@ -216,7 +216,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1157s0hbhb">
+        <h2 id="hahahugoshortcode1149s0hbhb">
   <a href="https://leetcode.com/problems/minimum-genetic-mutation/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -231,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1157s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1149s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -271,7 +271,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1157s2hbhb">
+<h2 id="hahahugoshortcode1149s2hbhb">
   
 
   
@@ -283,7 +283,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem is to find the minimum number of mutations required to convert one DNA string into another, where the transformation can only be made by changing one character at a time, and each new string must be in a provided list of allowed genetic sequences (the bank). The goal is to determine the fewest transformations needed to convert the <code>startGene</code> into the <code>endGene</code>, if possible, using only the allowed mutations in the <code>bank</code>.</p>
+<p>Given a start gene string and an end gene string, along with a bank of valid gene mutations, determine the minimum number of mutations needed to transform the start gene into the end gene. If it is not possible, return -1.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -291,131 +291,63 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem is essentially a shortest path problem where each gene sequence is a node, and each mutation (changing one character) is an edge connecting nodes. This can be solved efficiently using <strong>Breadth-First Search (BFS)</strong>, which explores all possible mutations level by level and guarantees the shortest path (i.e., the minimum number of mutations).</p>
-<h3 id="key-concepts">
-  Key Concepts
-  <a class="heading-link" href="#key-concepts">
+<ol>
+<li>
+<p><strong>Use of Unordered Set</strong>:</p>
+<ul>
+<li>Store the gene bank in an unordered set for O(1) average time complexity during lookup.</li>
+</ul>
+</li>
+<li>
+<p><strong>Breadth-First Search (BFS)</strong>:</p>
+<ul>
+<li>Implement BFS to explore all possible mutations level by level.</li>
+<li>Start with the <code>startGene</code>, and at each level, attempt to mutate each character in the gene.</li>
+</ul>
+</li>
+<li>
+<p><strong>Mutation Generation</strong>:</p>
+<ul>
+<li>For each character in the current gene, generate all possible mutations by replacing it with &lsquo;A&rsquo;, &lsquo;T&rsquo;, &lsquo;G&rsquo;, or &lsquo;C&rsquo;.</li>
+<li>If a generated mutation exists in the bank, add it to the queue for further exploration.</li>
+</ul>
+</li>
+<li>
+<p><strong>Termination</strong>:</p>
+<ul>
+<li>If the <code>endGene</code> is reached, return the current mutation step count.</li>
+<li>If the queue is exhausted without reaching the <code>endGene</code>, return -1.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ol>
-<li><strong>Valid Mutation</strong>: A valid mutation means changing exactly one character in the gene sequence, and the new gene sequence must exist in the provided <code>bank</code>.</li>
-<li><strong>BFS for Shortest Path</strong>: BFS is ideal for this problem because it explores all sequences at the current mutation level before moving on to the next level, ensuring that the first time we reach the target <code>endGene</code>, we do so with the minimum number of mutations.</li>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>Convert the bank into an unordered set and check if the <code>endGene</code> is in the set.</li>
+</ul>
+</li>
+<li>
+<p><strong>BFS Implementation</strong>:</p>
+<ul>
+<li>Use a queue to keep track of the current gene strings being processed and their corresponding mutation steps.</li>
+<li>For each gene processed, generate all possible mutations and enqueue valid ones that exist in the bank.</li>
+</ul>
+</li>
+<li>
+<p><strong>Step Count</strong>:</p>
+<ul>
+<li>Maintain a step counter to track the number of mutations taken to reach the <code>endGene</code>.</li>
+</ul>
+</li>
 </ol>
-<h3 id="steps">
-  Steps:
-  <a class="heading-link" href="#steps">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<ol>
-<li><strong>Initial Checks</strong>: If the <code>endGene</code> is not in the <code>bank</code>, it is impossible to transform the <code>startGene</code> into the <code>endGene</code>, so return <code>-1</code>.</li>
-<li><strong>BFS Setup</strong>: Use a queue to keep track of the current gene sequence and the number of steps taken to reach it.</li>
-<li><strong>Queue Exploration</strong>: For each sequence in the queue, try all possible mutations by changing one character at a time. If a mutation exists in the <code>bank</code>, enqueue the new sequence.</li>
-<li><strong>Terminate on Target</strong>: If we reach the <code>endGene</code>, return the number of mutations (steps).</li>
-<li><strong>Return -1 if No Solution</strong>: If BFS completes without reaching the target, return <code>-1</code>.</li>
-</ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="step-1-initialize-data-structures">
-  Step 1: Initialize Data Structures
-  <a class="heading-link" href="#step-1-initialize-data-structures">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> st{bank.begin(), bank.end()};
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>st.count(endGene)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span></code></pre></div><ul>
-<li>We first convert the <code>bank</code> into an unordered set (<code>st</code>) for fast lookup. This allows us to quickly check if a mutated gene sequence exists in the <code>bank</code>.</li>
-<li>If the <code>endGene</code> is not in the <code>bank</code>, it&rsquo;s impossible to reach it, so we immediately return <code>-1</code>.</li>
-</ul>
-<h4 id="step-2-bfs-setup">
-  Step 2: BFS Setup
-  <a class="heading-link" href="#step-2-bfs-setup">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>queue<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> q;
-</span></span><span style="display:flex;"><span>q.push(startGene);
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> step <span style="color:#666">=</span> <span style="color:#666">0</span>, s;
-</span></span><span style="display:flex;"><span>string cur, t;
-</span></span></code></pre></div><ul>
-<li>We initialize a queue <code>q</code> and push the <code>startGene</code> into it. The queue will hold sequences that are currently being explored.</li>
-<li>We also initialize a variable <code>step</code> to keep track of the number of mutations (steps) taken so far. The variable <code>s</code> stores the size of the current level in the queue, i.e., how many sequences we are currently exploring.</li>
-<li><code>cur</code> will store the current gene sequence being processed, and <code>t</code> will temporarily hold mutated sequences.</li>
-</ul>
-<h4 id="step-3-explore-all-mutations">
-  Step 3: Explore All Mutations
-  <a class="heading-link" href="#step-3-explore-all-mutations">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span> (<span style="color:#666">!</span>q.empty()) {
-</span></span><span style="display:flex;"><span>    s <span style="color:#666">=</span> q.size();
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> (s<span style="color:#666">--</span>) {
-</span></span><span style="display:flex;"><span>        cur <span style="color:#666">=</span> q.front();
-</span></span><span style="display:flex;"><span>        q.pop();
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (cur <span style="color:#666">==</span> endGene) <span style="color:#a2f;font-weight:bold">return</span> step;
-</span></span><span style="display:flex;"><span>        st.erase(cur);
-</span></span></code></pre></div><ul>
-<li>We begin processing the queue using a while loop. For each level of BFS, we process all sequences at that level (this ensures we are processing all mutations for the current number of steps).</li>
-<li>If the current sequence <code>cur</code> is equal to <code>endGene</code>, we immediately return the current <code>step</code> as it represents the minimum number of mutations.</li>
-<li>We then erase <code>cur</code> from the set <code>st</code> to avoid revisiting it.</li>
-</ul>
-<h4 id="step-4-try-all-possible-mutations">
-  Step 4: Try All Possible Mutations
-  <a class="heading-link" href="#step-4-try-all-possible-mutations">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> <span style="color:#666">8</span>; i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>    t <span style="color:#666">=</span> cur;
-</span></span><span style="display:flex;"><span>    t[i] <span style="color:#666">=</span> <span style="color:#b44">&#39;A&#39;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (st.count(t)) q.push(t);
-</span></span><span style="display:flex;"><span>    t[i] <span style="color:#666">=</span> <span style="color:#b44">&#39;T&#39;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (st.count(t)) q.push(t);
-</span></span><span style="display:flex;"><span>    t[i] <span style="color:#666">=</span> <span style="color:#b44">&#39;G&#39;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (st.count(t)) q.push(t);
-</span></span><span style="display:flex;"><span>    t[i] <span style="color:#666">=</span> <span style="color:#b44">&#39;C&#39;</span>;
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (st.count(t)) q.push(t);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>For each position <code>i</code> in the gene sequence (the gene length is always 8), we try changing the character at position <code>i</code> to one of the four possible DNA bases: &lsquo;A&rsquo;, &lsquo;T&rsquo;, &lsquo;G&rsquo;, or &lsquo;C&rsquo;.</li>
-<li>If the mutated sequence <code>t</code> exists in the <code>bank</code> (i.e., it’s in the set <code>st</code>), we add it to the queue for further exploration.</li>
-</ul>
-<h4 id="step-5-increment-steps-and-continue">
-  Step 5: Increment Steps and Continue
-  <a class="heading-link" href="#step-5-increment-steps-and-continue">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>step<span style="color:#666">++</span>;
-</span></span></code></pre></div><ul>
-<li>After processing all sequences at the current level (i.e., all mutations for the current number of steps), we increment the <code>step</code> counter and continue exploring the next level.</li>
-</ul>
-<h4 id="step-6-return--1-if-no-solution">
-  Step 6: Return -1 if No Solution
-  <a class="heading-link" href="#step-6-return--1-if-no-solution">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
-</span></span></code></pre></div><ul>
-<li>If the queue becomes empty and we haven&rsquo;t found the <code>endGene</code>, it means there&rsquo;s no valid sequence of mutations that leads to the target, so we return <code>-1</code>.</li>
-</ul>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -423,40 +355,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>Queue Processing</strong>: We can potentially visit each sequence once. Since each sequence is 8 characters long and there are 4 possible mutations for each character, the number of possible mutations is small (4^8). However, we&rsquo;re constrained by the bank size.</li>
-<li>The BFS will process each sequence at most once, and for each sequence, we try four possible mutations for each of the 8 characters, so the time complexity is approximately <code>O(4 * 8 * N)</code> where <code>N</code> is the number of sequences in the bank. This simplifies to <code>O(N)</code>.</li>
+<li><strong>Time Complexity</strong>: O(N * 4^L) where N is the number of genes in the bank and L is the length of the gene (8 in this case). Each gene can have 4 possible mutations for each of its 8 positions.</li>
+<li><strong>Space Complexity</strong>: O(N) for storing the gene bank and O(N) for the queue in the worst case.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>Queue and Set</strong>: We need to store the set of sequences (<code>st</code>) and the queue. Both can store up to <code>N</code> sequences. Therefore, the space complexity is <code>O(N)</code>.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>The solution efficiently finds the minimum number of mutations required to transform the <code>startGene</code> into the <code>endGene</code> using BFS. It leverages the power of BFS to guarantee the shortest path and utilizes an unordered set for efficient lookup of valid mutations. This approach ensures that we explore all possible transformations level by level and ensures optimal performance for reasonable input sizes.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1157s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1149s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

@@ -148,7 +148,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -271,208 +271,65 @@
 
   
   <div class="markdown-body">
-    <h3 id="-problem-statement-find-all-root-to-leaf-paths-that-sum-to-a-target">
-  🌲 <strong>Problem Statement: Find All Root-to-Leaf Paths That Sum to a Target</strong>
-  <a class="heading-link" href="#-problem-statement-find-all-root-to-leaf-paths-that-sum-to-a-target">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>We need to find all the paths in a binary tree where the sum of node values along each path equals a given target sum. The paths should start at the root and end at any leaf node. Each valid path should be returned as a list of integers.</p>
-<p>For example, consider the following binary tree:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>          5
-</span></span><span style="display:flex;"><span>         / \
-</span></span><span style="display:flex;"><span>        4   8
-</span></span><span style="display:flex;"><span>       /   / \
-</span></span><span style="display:flex;"><span>      11  13  4
-</span></span><span style="display:flex;"><span>     /  \      \
-</span></span><span style="display:flex;"><span>    7    2      1
-</span></span></code></pre></div><p>Given the target sum of 22, the solution should return:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>[ [5, 4, 11, 2], [5, 8, 4, 1] ]
-</span></span></code></pre></div><hr>
-<h3 id="-approach-to-solve-the-problem">
-  🧠 <strong>Approach to Solve the Problem</strong>
-  <a class="heading-link" href="#-approach-to-solve-the-problem">
+<p>Given a binary tree and a target sum, return all root-to-leaf paths where the sum of the node values equals the target sum.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this, we will use a <strong>Depth-First Search (DFS)</strong> strategy. We traverse the tree recursively, accumulating the node values along the current path. At each step, we check if we’ve reached a leaf node with the target sum. If we have, we add that path to the result. Here’s a step-by-step breakdown:</p>
 <ol>
-<li>
-<p><strong>Initialize Data Structures:</strong></p>
-<ul>
-<li>A <code>vector&lt;vector&lt;int&gt;&gt;</code> called <code>paths</code> to store all valid root-to-leaf paths.</li>
-<li>A <code>vector&lt;int&gt;</code> called <code>path</code> to keep track of the current path from the root to a leaf node.</li>
-</ul>
-</li>
-<li>
-<p><strong>DFS Traversal:</strong></p>
-<ul>
-<li>Start from the root and recursively traverse the tree.</li>
-<li>For each node, add its value to the <code>path</code>.</li>
-<li>When a leaf node is reached (i.e., both left and right children are <code>NULL</code>), check if the accumulated sum equals the target sum. If it does, add the current path to the result.</li>
-<li>After exploring the left and right subtrees, backtrack by removing the last node from the path.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return the Result:</strong></p>
-<ul>
-<li>After exploring all paths, return the <code>paths</code> vector containing all valid paths.</li>
-</ul>
-</li>
+<li>Use a depth-first search (DFS) strategy to explore each path from the root to the leaves.</li>
+<li>Maintain a current path and the remaining sum as you traverse the tree.</li>
+<li>When a leaf node is reached, check if the current path&rsquo;s sum equals the target sum.</li>
+<li>If it does, add the current path to the result list.</li>
 </ol>
-<hr>
-<h3 id="-code-breakdown-step-by-step">
-  🔧 <strong>Code Breakdown (Step by Step)</strong>
-  <a class="heading-link" href="#-code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="1-pathsum-function">
-  1. <code>pathSum</code> Function:
-  <a class="heading-link" href="#1-pathsum-function">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> pathSum(TreeNode<span style="color:#666">*</span> root, <span style="color:#0b0;font-weight:bold">int</span> sum) {
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> paths;
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> path;
-</span></span><span style="display:flex;"><span>    findPaths(root, sum, path, paths);
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> paths;
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>This function is the main entry point. It initializes two vectors: <code>paths</code> for storing the valid paths and <code>path</code> for keeping track of the current path.</li>
-<li>It calls the <code>findPaths</code> helper function to perform the DFS and populate the <code>paths</code> vector.</li>
-<li>Finally, it returns the list of valid paths.</li>
-</ul>
-<h4 id="2-findpaths-helper-function">
-  2. <code>findPaths</code> Helper Function:
-  <a class="heading-link" href="#2-findpaths-helper-function">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">findPaths</span>(TreeNode<span style="color:#666">*</span> node, <span style="color:#0b0;font-weight:bold">int</span> sum, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> path, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> paths) {
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>node) <span style="color:#a2f;font-weight:bold">return</span>;
-</span></span><span style="display:flex;"><span>    path.push_back(node<span style="color:#666">-&gt;</span>val);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>(node<span style="color:#666">-&gt;</span>left) <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>(node<span style="color:#666">-&gt;</span>right) <span style="color:#666">&amp;&amp;</span> sum <span style="color:#666">==</span> node<span style="color:#666">-&gt;</span>val)
-</span></span><span style="display:flex;"><span>        paths.push_back(path);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    findPaths(node<span style="color:#666">-&gt;</span>left, sum <span style="color:#666">-</span> node<span style="color:#666">-&gt;</span>val, path, paths);
-</span></span><span style="display:flex;"><span>    findPaths(node<span style="color:#666">-&gt;</span>right, sum <span style="color:#666">-</span> node<span style="color:#666">-&gt;</span>val, path, paths);
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    path.pop_back();
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>This is the recursive function that traverses the binary tree.</li>
-<li>First, we check if the current node is <code>NULL</code>. If it is, we return.</li>
-<li>We add the current node&rsquo;s value to the <code>path</code>.</li>
-<li>If the current node is a <strong>leaf node</strong> (both left and right children are <code>NULL</code>) and the remaining sum matches the target, we add the current <code>path</code> to the <code>paths</code> vector.</li>
-<li>We then recursively explore both the left and right subtrees, adjusting the target sum by subtracting the node’s value.</li>
-<li>Finally, we backtrack by removing the last node from the <code>path</code>, which allows us to explore other potential paths.</li>
-</ul>
-<h4 id="3-backtracking">
-  3. Backtracking:
-  <a class="heading-link" href="#3-backtracking">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>The core idea here is <strong>backtracking</strong>. As we explore paths from the root to the leaves, we build up a path (from the root to the current node). Once we explore the left and right subtrees, we remove the last node from the path. This ensures that the <code>path</code> always reflects the current exploration.</p>
-<hr>
-<h3 id="-time-and-space-complexity">
-  ⏱️ <strong>Time and Space Complexity</strong>
-  <a class="heading-link" href="#-time-and-space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="time-complexity-on">
-  <strong>Time Complexity: O(n)</strong>
-  <a class="heading-link" href="#time-complexity-on">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li>The time complexity is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the binary tree. This is because we visit each node exactly once during the DFS traversal.</li>
+<li>
+<p><strong><code>pathSum</code> function</strong>:</p>
+<ul>
+<li><strong>Line 5</strong>: Initialize the result vector <code>paths</code> and the current <code>path</code>.</li>
+<li><strong>Line 6</strong>: Call the helper function <code>findPaths</code> to explore paths from the root.</li>
+<li><strong>Line 7</strong>: Return the collected paths.</li>
 </ul>
-<h4 id="space-complexity-oh">
-  <strong>Space Complexity: O(h)</strong>
-  <a class="heading-link" href="#space-complexity-oh">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
+</li>
+<li>
+<p><strong><code>findPaths</code> function</strong>:</p>
 <ul>
-<li>The space complexity is <strong>O(h)</strong>, where <code>h</code> is the height of the tree. This accounts for the space used by the recursion stack.
-<ul>
-<li>In the worst case (unbalanced tree), the recursion stack can have a depth of <code>h = n</code>, so the space complexity is <strong>O(n)</strong>.</li>
-<li>In the best case (balanced tree), the recursion stack depth will be <strong>O(log n)</strong>.</li>
+<li><strong>Line 10</strong>: If the current node is <code>NULL</code>, return (base case).</li>
+<li><strong>Line 12</strong>: Add the current node&rsquo;s value to the <code>path</code>.</li>
+<li><strong>Line 14</strong>: Check if the current node is a leaf and if the remaining sum equals the node&rsquo;s value. If true, add the <code>path</code> to <code>paths</code>.</li>
+<li><strong>Lines 16-17</strong>: Recursively call <code>findPaths</code> for the left and right children, reducing the sum by the current node&rsquo;s value.</li>
+<li><strong>Line 19</strong>: Remove the current node from <code>path</code> to backtrack for the next exploration.</li>
 </ul>
 </li>
 </ul>
-<hr>
-<h3 id="-example-walkthrough">
-  🔍 <strong>Example Walkthrough</strong>
-  <a class="heading-link" href="#-example-walkthrough">
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="example-1-a-balanced-binary-tree">
-  Example 1: A Balanced Binary Tree
-  <a class="heading-link" href="#example-1-a-balanced-binary-tree">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>Consider the following tree:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>        1
-</span></span><span style="display:flex;"><span>       / \
-</span></span><span style="display:flex;"><span>      2   3
-</span></span><span style="display:flex;"><span>     / \
-</span></span><span style="display:flex;"><span>    4   5
-</span></span></code></pre></div><ul>
-<li>Start from the root node <code>1</code>.</li>
-<li>The left subtree (rooted at <code>2</code>) has valid paths: <code>1 → 2 → 4</code> and <code>1 → 2 → 5</code>.</li>
-<li>The right subtree rooted at <code>3</code> does not contribute to valid paths (no leaf nodes that match the sum).</li>
+<ul>
+<li><strong>Time Complexity</strong>: (O(N)), where (N) is the number of nodes, as each node is visited once.</li>
+<li><strong>Space Complexity</strong>: (O(H)), where (H) is the height of the tree, due to the recursion stack and the path storage.</li>
 </ul>
-<p>The valid paths are <code>[[1, 2, 4], [1, 2, 5]]</code>.</p>
-<h4 id="example-2-an-unbalanced-binary-tree">
-  Example 2: An Unbalanced Binary Tree
-  <a class="heading-link" href="#example-2-an-unbalanced-binary-tree">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<p>Consider this tree:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-fallback" data-lang="fallback"><span style="display:flex;"><span>        1
-</span></span><span style="display:flex;"><span>       /
-</span></span><span style="display:flex;"><span>      2
-</span></span><span style="display:flex;"><span>     /
-</span></span><span style="display:flex;"><span>    3
-</span></span><span style="display:flex;"><span>   /
-</span></span><span style="display:flex;"><span>  4
-</span></span></code></pre></div><ul>
-<li>Starting from the root node <code>1</code>, the only valid path is <code>1 → 2 → 3 → 4</code>.</li>
-</ul>
-<p>The valid path is <code>[[1, 2, 3, 4]]</code>.</p>
-<hr>
-<h3 id="-conclusion">
-  🚀 <strong>Conclusion</strong>
-  <a class="heading-link" href="#-conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution efficiently finds all root-to-leaf paths in a binary tree that sum to a given target using <strong>Depth-First Search (DFS)</strong>. The time complexity is <strong>O(n)</strong>, and the space complexity is <strong>O(h)</strong>, making it suitable for large binary trees. The recursive backtracking approach ensures that we correctly explore all possible paths while maintaining an efficient solution.</p>
-<p>This approach is both simple and powerful, providing a clean solution to the problem of finding all root-to-leaf paths that match a target sum.</p>
-<hr>
  
 </div>
   

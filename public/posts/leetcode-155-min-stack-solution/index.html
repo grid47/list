@@ -146,7 +146,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              3-minute read
             </span>
           </div>
 
@@ -211,7 +211,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode287s0hbhb">
+        <h2 id="hahahugoshortcode286s0hbhb">
   <a href="https://leetcode.com/problems/min-stack/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -226,7 +226,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode287s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode286s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -280,216 +280,122 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * int param_3 = obj-&gt;top();
 </span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * int param_4 = obj-&gt;getMin();
 </span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> */</span></span></span></code></pre></div>
-<h2 id="hahahugoshortcode287s2hbhb">
+<h2 id="hahahugoshortcode286s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="-min-stack-a-stack-with-constant-time-minimum-retrieval">
-  🌐 Min Stack: A Stack with Constant Time Minimum Retrieval
-  <a class="heading-link" href="#-min-stack-a-stack-with-constant-time-minimum-retrieval">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>In this problem, we are tasked with implementing a <strong>Min Stack</strong> that supports four operations, each performed in constant time <strong>O(1)</strong>:</p>
+<p>Design a stack that supports the following operations in constant time:</p>
 <ol>
-<li><strong><code>push(x)</code></strong>: Push an integer <code>x</code> onto the stack.</li>
-<li><strong><code>pop()</code></strong>: Remove the top element from the stack.</li>
-<li><strong><code>top()</code></strong>: Retrieve the top element from the stack.</li>
-<li><strong><code>getMin()</code></strong>: Retrieve the minimum element from the stack.</li>
+<li><code>push</code>: Push an element onto the stack.</li>
+<li><code>pop</code>: Remove the element on the top of the stack.</li>
+<li><code>top</code>: Retrieve the top element of the stack.</li>
+<li><code>getMin</code>: Retrieve the minimum element in the stack.</li>
 </ol>
-<p>The challenge is to ensure that <strong><code>getMin()</code></strong> is also executed in constant time, even as elements are added or removed from the stack.</p>
-<hr>
-<h3 id="-approach">
-  💡 Approach
-  <a class="heading-link" href="#-approach">
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this, we use a stack with an enhancement where each node contains:</p>
+<ol>
+<li>
+<p><strong>Node Structure</strong>:</p>
 <ul>
-<li>The <strong>value</strong> of the element itself (<code>val</code>).</li>
-<li>The <strong>minimum value</strong> encountered so far in the stack (<code>mn</code>).</li>
-<li>A pointer to the <strong>next node</strong> in the stack (<code>node</code>), forming a linked list structure.</li>
-</ul>
-<p>By storing the minimum value at each level, we can access the minimum element in <strong>O(1)</strong> time without needing to traverse the entire stack every time.</p>
-<hr>
-<h3 id="-code-breakdown-step-by-step">
-  📝 Code Breakdown (Step-by-Step)
-  <a class="heading-link" href="#-code-breakdown-step-by-step">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="-step-1-define-the-node-class">
-  🔹 Step 1: Define the <code>Node</code> Class
-  <a class="heading-link" href="#-step-1-define-the-node-class">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Node</span> {
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> val;  <span style="color:#080;font-style:italic">// Value of the current element in the stack
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#0b0;font-weight:bold">int</span> mn;   <span style="color:#080;font-style:italic">// Minimum value of the stack up to this point
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    Node<span style="color:#666">*</span> node;  <span style="color:#080;font-style:italic">// Reference to the next node in the stack
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>
-</span></span><span style="display:flex;"><span>    Node(<span style="color:#0b0;font-weight:bold">int</span> val, <span style="color:#0b0;font-weight:bold">int</span> mn, Node<span style="color:#666">*</span> node) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>val <span style="color:#666">=</span> val;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>mn <span style="color:#666">=</span> mn;
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>node <span style="color:#666">=</span> node;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><ul>
-<li>The <code>Node</code> class represents each element in the stack.</li>
-<li>Each node stores:
+<li>Create a <code>Node</code> class that stores:
 <ul>
-<li><code>val</code>: The value of the current element.</li>
-<li><code>mn</code>: The minimum value up to this point.</li>
-<li><code>node</code>: A reference to the next node in the stack.</li>
+<li><code>val</code>: The value of the current node.</li>
+<li><code>mn</code>: The minimum value in the stack up to this node.</li>
+<li><code>node</code>: A pointer to the next node in the stack.</li>
 </ul>
 </li>
 </ul>
-<h4 id="-step-2-define-the-minstack-class">
-  🔹 Step 2: Define the <code>MinStack</code> Class
-  <a class="heading-link" href="#-step-2-define-the-minstack-class">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">MinStack</span> {
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span>    Node<span style="color:#666">*</span> head;  <span style="color:#080;font-style:italic">// Head of the stack (top of the stack)
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>
-</span></span><span style="display:flex;"><span>    MinStack() {
-</span></span><span style="display:flex;"><span>        head <span style="color:#666">=</span> <span style="color:#a2f">NULL</span>;  <span style="color:#080;font-style:italic">// Initially, the stack is empty
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
-</span></span></code></pre></div><ul>
-<li>The <code>MinStack</code> class contains a <code>head</code> pointer that refers to the top of the stack.</li>
-</ul>
-<h4 id="-step-3-implement-the-push-method">
-  🔹 Step 3: Implement the <code>push</code> Method
-  <a class="heading-link" href="#-step-3-implement-the-push-method">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">push</span>(<span style="color:#0b0;font-weight:bold">int</span> val) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>head) {
-</span></span><span style="display:flex;"><span>            head <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> Node(val, val, <span style="color:#a2f">NULL</span>);  <span style="color:#080;font-style:italic">// If the stack is empty, create a new node with the value
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        } <span style="color:#a2f;font-weight:bold">else</span> {
-</span></span><span style="display:flex;"><span>            head <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> Node(val, min(head<span style="color:#666">-&gt;</span>mn, val), head);  <span style="color:#080;font-style:italic">// Create a new node with the current value and the minimum value so far
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        }
-</span></span><span style="display:flex;"><span>    }
-</span></span></code></pre></div><ul>
-<li>If the stack is empty, create a new node with the value <code>val</code> and set the minimum value as <code>val</code> itself.</li>
-<li>If the stack is not empty, create a new node where:
+</li>
+<li>
+<p><strong>MinStack Class</strong>:</p>
 <ul>
-<li><code>val</code> is the current value.</li>
-<li><code>mn</code> is the smaller of the current minimum (<code>head-&gt;mn</code>) and the new value (<code>val</code>).</li>
-<li>The new node points to the current <code>head</code>, making it the new top of the stack.</li>
+<li>Maintain a pointer <code>head</code> that points to the top of the stack.</li>
+</ul>
+</li>
+<li>
+<p><strong>Operations</strong>:</p>
+<ul>
+<li><strong>Push</strong>:
+<ul>
+<li>If the stack is empty, initialize the <code>head</code> with a new node containing the value and its own minimum.</li>
+<li>If not, create a new node with the current value and the minimum of the new value and the minimum of the previous node. Update <code>head</code> to point to the new node.</li>
+</ul>
+</li>
+<li><strong>Pop</strong>:
+<ul>
+<li>Simply move the <code>head</code> pointer to the next node, effectively removing the top element.</li>
+</ul>
+</li>
+<li><strong>Top</strong>:
+<ul>
+<li>Return the value of the node pointed to by <code>head</code>.</li>
+</ul>
+</li>
+<li><strong>GetMin</strong>:
+<ul>
+<li>Return the minimum value stored in the <code>head</code> node.</li>
 </ul>
 </li>
 </ul>
-<h4 id="-step-4-implement-the-pop-method">
-  🔹 Step 4: Implement the <code>pop</code> Method
-  <a class="heading-link" href="#-step-4-implement-the-pop-method">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">pop</span>() {
-</span></span><span style="display:flex;"><span>        head <span style="color:#666">=</span> head<span style="color:#666">-&gt;</span>node;  <span style="color:#080;font-style:italic">// Move the head pointer to the next node (pop the top element)
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
-</span></span></code></pre></div><ul>
-<li>The <code>pop</code> method removes the top element by updating the <code>head</code> pointer to the next node (<code>head-&gt;node</code>).</li>
-</ul>
-<h4 id="-step-5-implement-the-top-method">
-  🔹 Step 5: Implement the <code>top</code> Method
-  <a class="heading-link" href="#-step-5-implement-the-top-method">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">top</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> head<span style="color:#666">-&gt;</span>val;  <span style="color:#080;font-style:italic">// Return the value of the current top element
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
-</span></span></code></pre></div><ul>
-<li>The <code>top</code> method simply returns the value stored in the <code>head</code> node.</li>
-</ul>
-<h4 id="-step-6-implement-the-getmin-method">
-  🔹 Step 6: Implement the <code>getMin</code> Method
-  <a class="heading-link" href="#-step-6-implement-the-getmin-method">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">getMin</span>() {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> head<span style="color:#666">-&gt;</span>mn;  <span style="color:#080;font-style:italic">// Return the minimum value stored at the top of the stack
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><ul>
-<li>The <code>getMin</code> method returns the minimum value stored in the <code>mn</code> field of the <code>head</code> node.</li>
-</ul>
-<hr>
-<h3 id="-complexity">
-  🔎 Complexity
-  <a class="heading-link" href="#-complexity">
+</li>
+</ol>
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong><code>push</code></strong>: <strong>O(1)</strong> – Each <code>push</code> operation involves creating a new node and setting the minimum value, both of which are constant-time operations.</li>
-<li><strong><code>pop</code></strong>: <strong>O(1)</strong> – The <code>pop</code> operation only updates the <code>head</code> pointer, which is done in constant time.</li>
-<li><strong><code>top</code></strong>: <strong>O(1)</strong> – The <code>top</code> operation simply returns the value of the top node, which is done in constant time.</li>
-<li><strong><code>getMin</code></strong>: <strong>O(1)</strong> – The <code>getMin</code> operation returns the minimum value stored at the top of the stack, which is done in constant time.</li>
-</ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
+<li><strong>Node Class</strong>:
 <ul>
-<li><strong>O(n)</strong>, where <code>n</code> is the number of elements in the stack. Each element is stored in a <code>Node</code> object, which includes three fields (<code>val</code>, <code>mn</code>, <code>node</code>).</li>
+<li><strong>Line 1-7</strong>: Defines the <code>Node</code> structure with its constructor.</li>
 </ul>
-<h3 id="-conclusion">
-  ✅ Conclusion
-  <a class="heading-link" href="#-conclusion">
+</li>
+<li><strong>MinStack Class</strong>:
+<ul>
+<li><strong>Line 9</strong>: Defines the <code>MinStack</code> class and initializes <code>head</code> to <code>NULL</code>.</li>
+<li><strong>Line 12-22</strong>: Implements the <code>push</code> method:
+<ul>
+<li><strong>Line 14-15</strong>: Handles the case for an empty stack.</li>
+<li><strong>Line 16-18</strong>: Handles adding new nodes while updating the minimum.</li>
+</ul>
+</li>
+<li><strong>Line 24-26</strong>: Implements the <code>pop</code> method.</li>
+<li><strong>Line 28-30</strong>: Implements the <code>top</code> method.</li>
+<li><strong>Line 32-34</strong>: Implements the <code>getMin</code> method.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>This <strong>Min Stack</strong> solution ensures that all operations, including <code>push</code>, <code>pop</code>, <code>top</code>, and <code>getMin</code>, are executed in <strong>constant time</strong>. The key idea is storing the minimum value at each level in the stack, so it can be efficiently retrieved without traversing the entire stack.</p>
-<h4 id="key-insights">
-  Key Insights:
-  <a class="heading-link" href="#key-insights">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li>Storing the minimum value at each level of the stack ensures that we can retrieve it in <strong>O(1)</strong> time.</li>
-<li>This approach provides an optimal solution for problems that require frequent access to the minimum element in a stack.</li>
-<li>The space complexity is linear in terms of the number of elements, as each element is stored in a node with additional metadata.</li>
+<li><strong>Time Complexity</strong>: (O(1)) for all operations (<code>push</code>, <code>pop</code>, <code>top</code>, and <code>getMin</code>).</li>
+<li><strong>Space Complexity</strong>: (O(N)), where (N) is the number of elements in the stack, due to the storage required for the nodes.</li>
 </ul>
-<p>This implementation is highly efficient and suitable for applications requiring constant-time minimum retrieval, such as dynamic programming problems or scenarios involving stack-based algorithms.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode287s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode286s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

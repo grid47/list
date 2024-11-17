@@ -147,7 +147,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -235,7 +235,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1442s1hbhb">
+<h2 id="hahahugoshortcode1443s1hbhb">
   
 
   
@@ -247,7 +247,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem is to find the total number of <strong>subarrays</strong> within a given array <code>nums</code> where the sum of the elements in each subarray is divisible by a given integer <code>k</code>. A subarray is defined as a contiguous portion of the array.</p>
+<p>Given an integer array <code>nums</code> and an integer <code>k</code>, return the number of non-empty subarrays that have a sum divisible by <code>k</code>.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -255,102 +255,49 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem efficiently, we can utilize the <strong>prefix sum</strong> technique combined with <strong>modulo arithmetic</strong> and a <strong>hash map (or array)</strong> to keep track of remainders. This approach avoids the need to explicitly calculate the sum of every possible subarray, which would be inefficient for large arrays.</p>
-<h4 id="key-insights">
-  Key Insights:
-  <a class="heading-link" href="#key-insights">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ol>
 <li>
-<p><strong>Prefix Sum</strong>:</p>
+<p><strong>Prefix Sum and Remainders</strong>:</p>
 <ul>
-<li>A prefix sum for an array is the sum of elements from the start of the array up to a given index.</li>
-<li>If we know the prefix sum up to two indices <code>i</code> and <code>j</code>, we can calculate the sum of the subarray <code>nums[i...j]</code> as:</li>
-</ul>
-<p>[
-\text{sum}(nums[i&hellip;j]) = \text{prefix_sum}[j] - \text{prefix_sum}[i]
-]</p>
-</li>
-<li>
-<p><strong>Modulo Operation</strong>:</p>
-<ul>
-<li>To determine whether a subarray sum is divisible by <code>k</code>, we check if the sum modulo <code>k</code> equals 0.</li>
-<li>If <code>prefix_sum[i] % k == prefix_sum[j] % k</code>, then the sum of the subarray <code>nums[i...j]</code> is divisible by <code>k</code>.</li>
+<li>Use a prefix sum to keep track of the cumulative sum of elements as we iterate through the array.</li>
+<li>Calculate the remainder of the prefix sum when divided by <code>k</code> to determine if a subarray sum is divisible by <code>k</code>.</li>
 </ul>
 </li>
 <li>
-<p><strong>Using a Frequency Array</strong>:</p>
+<p><strong>Frequency Array</strong>:</p>
 <ul>
-<li>As we traverse the array and compute prefix sums, we track how often each possible remainder (from the modulo operation) occurs using a frequency array <code>frq</code>. This allows us to count subarrays that satisfy the condition without explicitly checking all subarrays.</li>
-<li>The key observation is that, for any index <code>j</code>, if there exists an index <code>i</code> such that <code>prefix_sum[i] % k == prefix_sum[j] % k</code>, then the sum of the subarray from <code>i+1</code> to <code>j</code> is divisible by <code>k</code>.</li>
+<li>Maintain a frequency array <code>frq</code> where <code>frq[i]</code> counts how many times a remainder <code>i</code> has occurred.</li>
+<li>Initialize <code>frq[0]</code> to <code>1</code> to account for the case where a prefix sum itself is divisible by <code>k</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate through <code>nums</code></strong>:</p>
+<ul>
+<li>For each element, update the prefix sum and compute the current remainder.</li>
+<li>Adjust the remainder to ensure it is non-negative (i.e., <code>rm = (sum % k + k) % k</code>).</li>
+<li>Increment the result <code>res</code> by the frequency of the current remainder.</li>
+<li>Update the frequency array with the current remainder.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>After processing all elements, <code>res</code> will contain the count of subarrays whose sums are divisible by <code>k</code>.</li>
 </ul>
 </li>
 </ol>
-<h4 id="algorithm">
-  Algorithm:
-  <a class="heading-link" href="#algorithm">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ol>
-<li>Start by initializing the total result (<code>res</code>) to 0 and the prefix sum (<code>sum</code>) to 0.</li>
-<li>Use an array <code>frq</code> to store the frequencies of remainders (modulo <code>k</code>), where <code>frq[rem]</code> stores the number of times a remainder <code>rem</code> has occurred.</li>
-<li>Traverse the array, update the prefix sum, and calculate the remainder of the prefix sum modulo <code>k</code>. If this remainder has been encountered before, it means that there are subarrays ending at the current index whose sum is divisible by <code>k</code>.</li>
-<li>For each remainder, increment the corresponding entry in the frequency array.</li>
-</ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> subarraysDivByK(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> k) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, n <span style="color:#666">=</span> nums.size(), sum <span style="color:#666">=</span> <span style="color:#666">0</span>;        
-</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> frq(k, <span style="color:#666">0</span>);
-</span></span><span style="display:flex;"><span>        frq[<span style="color:#666">0</span>] <span style="color:#666">=</span> <span style="color:#666">1</span>; <span style="color:#080;font-style:italic">// To count subarrays that are divisible by k from the beginning
-</span></span></span></code></pre></div><ol>
-<li><strong>Initialization</strong>:
+<ol>
+<li><strong><code>subarraysDivByK</code> Method</strong>:
 <ul>
-<li><code>res</code>: This variable holds the result, which is the total number of subarrays whose sum is divisible by <code>k</code>.</li>
-<li><code>n</code>: The size of the input array <code>nums</code>.</li>
-<li><code>sum</code>: This keeps track of the cumulative sum of elements from the start to the current position in the array.</li>
-<li><code>frq</code>: An array that stores the frequency of each remainder when the prefix sum is divided by <code>k</code>. We initialize <code>frq[0] = 1</code> to account for the subarrays that are divisible by <code>k</code> starting from the first element.</li>
-</ul>
-</li>
-</ol>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            sum <span style="color:#666">+=</span> nums[j];
-</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> rm <span style="color:#666">=</span> sum <span style="color:#666">%</span> k;
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(rm <span style="color:#666">&lt;</span> <span style="color:#666">0</span>) rm <span style="color:#666">+=</span> k;            
-</span></span><span style="display:flex;"><span>            res <span style="color:#666">+=</span> frq[rm];
-</span></span><span style="display:flex;"><span>            frq[rm]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><ol start="2">
-<li>
-<p><strong>Main Loop</strong>:</p>
-<ul>
-<li>We iterate through the array <code>nums</code> with the index <code>j</code>.</li>
-<li><code>sum += nums[j]</code>: We accumulate the prefix sum at the current index.</li>
-<li><code>rm = sum % k</code>: We compute the remainder when the current prefix sum is divided by <code>k</code>.</li>
-<li>If <code>rm &lt; 0</code>: This step ensures that we handle negative remainders correctly. Since the remainder of a negative number in C++ can be negative, we adjust it by adding <code>k</code> to ensure all remainders are positive.</li>
-<li><code>res += frq[rm]</code>: This is the core of the solution. If the remainder <code>rm</code> has been encountered before, it means that there are subarrays whose sum is divisible by <code>k</code> (because the difference of their prefix sums would be divisible by <code>k</code>).</li>
-<li><code>frq[rm]++</code>: We update the frequency of the remainder <code>rm</code> in the frequency array.</li>
-</ul>
-</li>
-<li>
-<p><strong>Return Result</strong>:</p>
-<ul>
-<li>Finally, we return <code>res</code>, which contains the total number of subarrays whose sum is divisible by <code>k</code>.</li>
+<li>Initializes variables for the result, prefix sum, and frequency array.</li>
+<li>Loops through the <code>nums</code> array, updating the prefix sum and using the frequency array to count valid subarrays.</li>
 </ul>
 </li>
 </ol>
@@ -362,34 +309,14 @@
   </a>
 </h3>
 <ul>
-<li>
-<p><strong>Time Complexity</strong>:</p>
-<ul>
-<li>The algorithm only loops through the array once, and each operation inside the loop (such as computing the sum and updating the frequency array) takes constant time.</li>
-<li>Therefore, the time complexity is <strong>O(n)</strong>, where <code>n</code> is the size of the input array <code>nums</code>.</li>
+<li><strong>Time Complexity</strong>: O(n), where <code>n</code> is the number of elements in <code>nums</code>, as we traverse the array once.</li>
+<li><strong>Space Complexity</strong>: O(k), for the frequency array.</li>
 </ul>
-</li>
-<li>
-<p><strong>Space Complexity</strong>:</p>
-<ul>
-<li>The space complexity is <strong>O(k)</strong>, where <code>k</code> is the divisor. This is because we only need an array of size <code>k</code> to store the frequency of each possible remainder.</li>
-<li>Additionally, the space for the input array <code>nums</code> is not considered here as it is part of the input.</li>
-</ul>
-</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution uses the <strong>prefix sum</strong> technique combined with <strong>modulo arithmetic</strong> to efficiently count subarrays whose sum is divisible by <code>k</code>. By tracking the frequency of each remainder modulo <code>k</code>, we avoid explicitly checking every possible subarray, resulting in an efficient solution with a time complexity of <strong>O(n)</strong>. The approach is optimal for solving problems related to divisibility of subarray sums, especially when the input array is large.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1442s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1443s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

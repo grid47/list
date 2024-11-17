@@ -148,7 +148,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              4-minute read
+              2-minute read
             </span>
           </div>
 
@@ -265,133 +265,74 @@
 
   
   <div class="markdown-body">
-    <h3 id="-problem-statement">
-  🚀 Problem Statement
-  <a class="heading-link" href="#-problem-statement">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The goal of this problem is to find the minimal length of a contiguous subarray within an array of integers that has a sum greater than or equal to a given target value. If no such subarray exists, we should return <code>0</code>. This is a classic problem that can be tackled efficiently with the <strong>sliding window technique</strong>, which is designed to handle such dynamic range problems.</p>
-<hr>
-<h3 id="-approach">
-  🧠 Approach
-  <a class="heading-link" href="#-approach">
+<p>Given an array of positive integers <code>nums</code> and a positive integer <code>target</code>, find the minimal length of a contiguous subarray of which the sum is greater than or equal to <code>target</code>. If there is no such subarray, return 0.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem, we can apply the <strong>sliding window technique</strong>, which involves maintaining a variable-sized window (or subarray) of elements. The key idea here is to <strong>expand</strong> the window by adding new elements and <strong>contract</strong> the window by removing elements from the left side when necessary, all while ensuring the sum of elements within the window is at least the target value.</p>
-<p>By tracking the sum of the elements within the window, we can quickly check if the sum meets or exceeds the target. When it does, we attempt to shrink the window from the left to minimize its size, ensuring we find the smallest possible subarray that satisfies the condition.</p>
-<hr>
-<h3 id="-step-by-step-code-breakdown">
-  🔨 Step-by-Step Code Breakdown
-  <a class="heading-link" href="#-step-by-step-code-breakdown">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>Let’s break down the code step by step to see how we can implement this approach:</p>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> minSubArrayLen(<span style="color:#0b0;font-weight:bold">int</span> target, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>, idx <span style="color:#666">=</span> <span style="color:#666">0</span>, g <span style="color:#666">=</span> INT_MAX, bdx <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div><ul>
-<li><strong>sum</strong>: This keeps track of the current sum of the elements within our sliding window.</li>
-<li><strong>idx</strong>: This is the &ldquo;right&rdquo; pointer, which will be used to expand the window by iterating over the array.</li>
-<li><strong>g</strong>: This variable holds the length of the smallest valid subarray. It’s initially set to <code>INT_MAX</code> to indicate that we haven’t found any valid subarray yet.</li>
-<li><strong>bdx</strong>: The &ldquo;left&rdquo; pointer, used to shrink the window once the sum meets or exceeds the target.</li>
-</ul>
-<hr>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(idx <span style="color:#666">&lt;</span> nums.size()) {
-</span></span><span style="display:flex;"><span>            sum <span style="color:#666">+=</span> nums[idx];
-</span></span></code></pre></div><ul>
-<li>The outer <code>while</code> loop runs through the entire array using the <code>idx</code> index.</li>
-<li>For each element in the array, we add it to the <code>sum</code>, expanding our window by including the current element.</li>
-</ul>
-<hr>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(sum <span style="color:#666">&gt;=</span> target) {
-</span></span><span style="display:flex;"><span>                g <span style="color:#666">=</span> min(g, idx <span style="color:#666">-</span> bdx <span style="color:#666">+</span> <span style="color:#666">1</span>);
-</span></span><span style="display:flex;"><span>                sum <span style="color:#666">-=</span> nums[bdx];
-</span></span><span style="display:flex;"><span>                bdx<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>            }
-</span></span></code></pre></div><ul>
-<li>The inner <code>while</code> loop checks whether the sum of the current window is greater than or equal to the target.</li>
-<li>If the condition is satisfied, we:
 <ol>
-<li>Calculate the length of the current subarray (<code>idx - bdx + 1</code>) and update <code>g</code> with the smallest length between the current <code>g</code> and the length of the current subarray.</li>
-<li>Shrink the window by subtracting the value at <code>nums[bdx]</code> from <code>sum</code> and moving the <code>bdx</code> pointer to the right. This effectively removes the leftmost element from the subarray.</li>
+<li>
+<p><strong>Sliding Window Technique</strong>: Use two pointers to maintain a window of the current subarray.</p>
+<ul>
+<li><code>idx</code>: Pointer to expand the window by adding elements to the sum.</li>
+<li><code>bdx</code>: Pointer to shrink the window from the left when the sum is greater than or equal to the target.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sum Calculation</strong>:</p>
+<ul>
+<li>Incrementally add elements to <code>sum</code> using <code>idx</code>.</li>
+<li>Once <code>sum</code> is greater than or equal to <code>target</code>, try to minimize the length of the window by incrementing <code>bdx</code> and subtracting the leftmost element from <code>sum</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Result Storage</strong>: Maintain a variable <code>g</code> to store the minimum length found. If no valid subarray is found by the end of the iteration, return 0.</p>
+</li>
 </ol>
-</li>
-</ul>
-<hr>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            idx<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span></code></pre></div><ul>
-<li>After processing the current element, we increment <code>idx</code> to expand the window and move on to the next element in the array.</li>
-</ul>
-<hr>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> g <span style="color:#666">==</span> INT_MAX <span style="color:#666">?</span> <span style="color:#666">0</span> <span style="color:#666">:</span> g;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><ul>
-<li>Finally, if <code>g</code> is still <code>INT_MAX</code>, it means we haven’t found any subarray that meets the target sum, so we return <code>0</code>.</li>
-<li>Otherwise, we return the value of <code>g</code>, which represents the length of the smallest subarray that satisfies the condition.</li>
-</ul>
-<hr>
-<h3 id="-complexity-analysis">
-  📊 Complexity Analysis
-  <a class="heading-link" href="#-complexity-analysis">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>O(n)</strong>, where <code>n</code> is the length of the input array <code>nums</code>.
+<li><strong>Line 2</strong>: Initialize variables <code>sum</code>, <code>idx</code>, <code>g</code> (to store the minimum length), and <code>bdx</code> (for the start of the window).</li>
+<li><strong>Line 3-4</strong>: Begin iterating through the array with <code>idx</code>.</li>
+<li><strong>Line 5</strong>: Add the current element to <code>sum</code>.</li>
+<li><strong>Line 7-10</strong>: Check if <code>sum</code> is greater than or equal to <code>target</code>:
 <ul>
-<li>The <code>idx</code> pointer moves through the array exactly once, and for each <code>idx</code>, the <code>bdx</code> pointer only moves forward. Thus, both pointers together traverse the array at most once, resulting in a linear time complexity.</li>
+<li>If true, update the minimum length <code>g</code> and adjust <code>sum</code> by removing the element at <code>bdx</code> while moving <code>bdx</code> forward.</li>
 </ul>
 </li>
+<li><strong>Line 11</strong>: Increment <code>idx</code> to expand the window.</li>
+<li><strong>Line 12</strong>: Return <code>g</code> if it was updated; otherwise, return 0.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>O(1)</strong>, since we only use a constant amount of extra space for variables like <code>sum</code>, <code>g</code>, <code>bdx</code>, and <code>idx</code>. No additional data structures like arrays or hashmaps are used.</li>
-</ul>
-<hr>
-<h3 id="-conclusion">
-  🏁 Conclusion
-  <a class="heading-link" href="#-conclusion">
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The sliding window technique is an optimal and efficient approach for finding the minimal length subarray with a sum greater than or equal to a target value. This solution achieves <strong>O(n)</strong> time complexity and <strong>O(1)</strong> space complexity, making it suitable for large inputs and real-time applications where performance is crucial.</p>
-<h4 id="key-steps">
-  Key Steps:
-  <a class="heading-link" href="#key-steps">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>Expand the window</strong> by adding elements to the sum.</li>
-<li><strong>Contract the window</strong> by removing elements from the left as long as the sum meets the target.</li>
-<li><strong>Track the smallest valid subarray</strong> to get the optimal result.</li>
+<li>
+<p><strong>Time Complexity</strong>: (O(n)), where (n) is the length of the input array. Each element is processed at most twice (once by <code>idx</code> and once by <code>bdx</code>).</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: (O(1)), as no additional space is used that scales with input size.</p>
+</li>
 </ul>
-<p>This approach is ideal for problems involving contiguous subarrays or sliding windows, providing a flexible and efficient way to solve a range of similar problems.</p>
  
 </div>
   

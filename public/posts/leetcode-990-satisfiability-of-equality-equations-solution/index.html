@@ -148,7 +148,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -212,7 +212,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              6-minute read
+              2-minute read
             </span>
           </div>
 
@@ -272,7 +272,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1451s1hbhb">
+<h2 id="hahahugoshortcode1452s1hbhb">
   
 
   
@@ -284,12 +284,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem asks to determine if a set of equations involving letters can be satisfied, given certain equality and inequality constraints. The equations involve characters from &lsquo;a&rsquo; to &lsquo;z&rsquo;, and the constraints are either equality (denoted as <code>==</code>) or inequality (denoted as <code>!=</code>).</p>
-<p>You are given an array of strings, each representing an equation. You need to determine whether it is possible to satisfy all of the equations. Specifically, you need to check if it&rsquo;s possible to assign letters such that:</p>
-<ul>
-<li>For every equality equation <code>a == b</code>, the characters &lsquo;a&rsquo; and &lsquo;b&rsquo; belong to the same group.</li>
-<li>For every inequality equation <code>a != b</code>, the characters &lsquo;a&rsquo; and &lsquo;b&rsquo; belong to different groups.</li>
-</ul>
+<p>Given an array of strings <code>equations</code> that represent equality and inequality relations between lowercase characters, determine if it&rsquo;s possible to assign values to each character so that all equations are satisfied.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -297,133 +292,34 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>This problem can be efficiently solved using the <strong>Union-Find (Disjoint Set Union, DSU)</strong> data structure, which allows for quick union and find operations. The goal is to use the Union-Find structure to group characters that must be equal and to check for any contradictions with the inequality equations.</p>
-<h4 id="key-concepts">
-  Key Concepts:
-  <a class="heading-link" href="#key-concepts">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ol>
-<li>
-<p><strong>Union-Find Data Structure</strong>: This data structure is used to keep track of a partition of elements into disjoint sets. Each element starts in its own set, and we can perform the following operations:</p>
 <ul>
-<li><strong>Find</strong>: Determine which set an element belongs to.</li>
-<li><strong>Union</strong>: Merge two sets into one.</li>
+<li>Use Union-Find (Disjoint Set Union) to group variables that are specified as equal.</li>
+<li>If two variables are in the same group but an inequality equation requires them to be unequal, the equations are unsatisfiable.</li>
 </ul>
-</li>
-<li>
-<p><strong>Path Compression and Union by Rank</strong>: These are optimizations to make the Union-Find operations efficient. Path compression ensures that the tree representing the sets remains flat, and union by rank keeps the smaller set under the larger set during union operations.</p>
-</li>
-</ol>
-<h4 id="plan">
-  Plan:
-  <a class="heading-link" href="#plan">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ol>
-<li>
-<p><strong>First Pass (Equality Constraints)</strong>:</p>
-<ul>
-<li>Iterate over the equations. For every equation <code>a == b</code>, perform a union operation to group &lsquo;a&rsquo; and &lsquo;b&rsquo; together.</li>
-</ul>
-</li>
-<li>
-<p><strong>Second Pass (Inequality Constraints)</strong>:</p>
-<ul>
-<li>For every equation <code>a != b</code>, check if &lsquo;a&rsquo; and &lsquo;b&rsquo; are in the same set using the find operation. If they are, it means a contradiction is found (since they should be different groups), and we return <code>false</code>.</li>
-</ul>
-</li>
-<li>
-<p>If no contradictions are found, return <code>true</code> as the equations are satisfiable.</p>
-</li>
-</ol>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="1-union-find-class-uf">
-  1. <strong>Union-Find Class (<code>UF</code>)</strong>:
-  <a class="heading-link" href="#1-union-find-class-uf">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">UF</span> {
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> chd;  <span style="color:#080;font-style:italic">// Array to store the parent of each node (or representative of the set)
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#0b0;font-weight:bold">int</span> cnt;  <span style="color:#080;font-style:italic">// The number of disjoint sets
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>
-</span></span><span style="display:flex;"><span>    UF(<span style="color:#0b0;font-weight:bold">int</span> n) {
-</span></span><span style="display:flex;"><span>        chd.resize(n, <span style="color:#666">0</span>);  <span style="color:#080;font-style:italic">// Initialize the array with 0
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
-</span></span><span style="display:flex;"><span>            chd[i] <span style="color:#666">=</span> i;  <span style="color:#080;font-style:italic">// Each node is its own parent initially
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        cnt <span style="color:#666">=</span> n;  <span style="color:#080;font-style:italic">// Number of disjoint sets
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">uni</span>(<span style="color:#0b0;font-weight:bold">int</span> x, <span style="color:#0b0;font-weight:bold">int</span> y) {
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> find(x);  <span style="color:#080;font-style:italic">// Find the parent of &#39;x&#39;
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> find(y);  <span style="color:#080;font-style:italic">// Find the parent of &#39;y&#39;
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">!=</span> j) {
-</span></span><span style="display:flex;"><span>            chd[i] <span style="color:#666">=</span> j;  <span style="color:#080;font-style:italic">// Union the two sets by making one root point to the other
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            cnt<span style="color:#666">--</span>;  <span style="color:#080;font-style:italic">// Decrease the number of disjoint sets
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
-</span></span><span style="display:flex;"><span>        }
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;  <span style="color:#080;font-style:italic">// Return false if they are already in the same set
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
-</span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">find</span>(<span style="color:#0b0;font-weight:bold">int</span> x) {
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">==</span> chd[x]) <span style="color:#a2f;font-weight:bold">return</span> x;  <span style="color:#080;font-style:italic">// If &#39;x&#39; is its own parent, return &#39;x&#39;
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">return</span> chd[x] <span style="color:#666">=</span> find(chd[x]);  <span style="color:#080;font-style:italic">// Path compression: flatten the tree
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><ul>
-<li>The <strong>Union-Find</strong> class manages the disjoint sets. The <code>chd</code> array stores the parent for each element, and <code>cnt</code> keeps track of the number of disjoint sets.</li>
-<li><strong><code>uni(int x, int y)</code></strong>: This method connects two elements &lsquo;x&rsquo; and &lsquo;y&rsquo;. If they are in different sets, it merges them and reduces the number of disjoint sets.</li>
-<li><strong><code>find(int x)</code></strong>: This method returns the root or representative of the set that contains &lsquo;x&rsquo;. It uses path compression to flatten the tree for more efficient future operations.</li>
-</ul>
-<h4 id="2-main-logic-equations-checking">
-  2. <strong>Main Logic (Equations Checking)</strong>:
-  <a class="heading-link" href="#2-main-logic-equations-checking">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> equationsPossible(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> eqn) {
-</span></span><span style="display:flex;"><span>        UF<span style="color:#666">*</span> uf <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> UF(<span style="color:#666">26</span>);  <span style="color:#080;font-style:italic">// Create a Union-Find data structure for 26 letters
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> eqn.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> a <span style="color:#666">=</span> eqn[i][<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;  <span style="color:#080;font-style:italic">// Convert &#39;a&#39; to 0, &#39;b&#39; to 1, ..., &#39;z&#39; to 25
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#0b0;font-weight:bold">int</span> b <span style="color:#666">=</span> eqn[i][<span style="color:#666">3</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;  <span style="color:#080;font-style:italic">// Same conversion for the second character
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#a2f;font-weight:bold">if</span>(eqn[i][<span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;=&#39;</span>)
-</span></span><span style="display:flex;"><span>                uf<span style="color:#666">-&gt;</span>uni(a, b);  <span style="color:#080;font-style:italic">// If the equation is &#39;a == b&#39;, union the two sets
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        }
-</span></span><span style="display:flex;"><span>        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> eqn.size(); i<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> a <span style="color:#666">=</span> eqn[i][<span style="color:#666">0</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;  <span style="color:#080;font-style:italic">// Convert the characters to indices again
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#0b0;font-weight:bold">int</span> b <span style="color:#666">=</span> eqn[i][<span style="color:#666">3</span>] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(eqn[i][<span style="color:#666">1</span>] <span style="color:#666">==</span> <span style="color:#b44">&#39;!&#39;</span>)  <span style="color:#080;font-style:italic">// If the equation is &#39;a != b&#39;
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                <span style="color:#a2f;font-weight:bold">if</span>(uf<span style="color:#666">-&gt;</span>find(a) <span style="color:#666">==</span> uf<span style="color:#666">-&gt;</span>find(b))  <span style="color:#080;font-style:italic">// If they are in the same set, return false
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
-</span></span><span style="display:flex;"><span>        }        
-</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;  <span style="color:#080;font-style:italic">// If no contradictions were found, return true
-</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><ul>
-<li><strong>Main Logic</strong>:
+<ol>
+<li>
+<p><strong>Union-Find Class (<code>UF</code>)</strong>:</p>
 <ul>
-<li><strong>First Pass (Equality Constraints)</strong>: We loop through all the equations. For each equation <code>a == b</code>, we call the <code>uni()</code> method to unite the two sets containing &lsquo;a&rsquo; and &lsquo;b&rsquo;.</li>
-<li><strong>Second Pass (Inequality Constraints)</strong>: We then loop through all the equations again. For each inequality equation <code>a != b</code>, we check if &lsquo;a&rsquo; and &lsquo;b&rsquo; belong to the same set using the <code>find()</code> method. If they are in the same set, it implies a contradiction, and we return <code>false</code>. If no contradiction is found, the function returns <code>true</code>.</li>
+<li><strong>Initialization</strong>: Initializes a parent array (<code>chd</code>) to track connected components, setting each element as its own parent initially.</li>
+<li><strong>Union (<code>uni</code>)</strong>: Connects two components by updating the parent of one component to another.</li>
+<li><strong>Find (<code>find</code>)</strong>: Uses path compression to efficiently find the root of a component.</li>
 </ul>
 </li>
+<li>
+<p><strong>Solution Class</strong>:</p>
+<ul>
+<li><strong>Union Equalities</strong>: For equations of the form <code>a==b</code>, connect the components of <code>a</code> and <code>b</code> using the <code>uni</code> method.</li>
+<li><strong>Check Inequalities</strong>: For equations of the form <code>a!=b</code>, check if <code>a</code> and <code>b</code> belong to the same component. If they do, return false, as it contradicts the inequality.</li>
 </ul>
+</li>
+</ol>
 <h3 id="complexity">
   Complexity
   <a class="heading-link" href="#complexity">
@@ -431,43 +327,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li><strong>Union and Find Operations</strong>: Both union and find operations take <strong>O(α(n))</strong> time, where α is the <strong>inverse Ackermann function</strong> (which grows extremely slowly). For all 26 letters (fixed size), these operations can be considered nearly constant time.</li>
-<li><strong>Iterating Through Equations</strong>: We process each equation twice, once for equality and once for inequality. Each loop iteration involves performing union or find operations. Thus, the time complexity is <strong>O(E)</strong>, where <code>E</code> is the number of equations.</li>
+<li><strong>Time Complexity</strong>: O(n * α(n)), where n is the number of equations and α is the inverse Ackermann function, due to efficient union-find operations.</li>
+<li><strong>Space Complexity</strong>: O(26), fixed for the number of lowercase letters.</li>
 </ul>
-<p>Thus, the overall time complexity is <strong>O(E)</strong>.</p>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>The Union-Find structure uses an array of size 26 to store the parent of each element, leading to a space complexity of <strong>O(26) = O(1)</strong> (since the number of letters is fixed).</li>
-<li>The additional space used for the <code>UF</code> object and the input list is <strong>O(E)</strong>.</li>
-</ul>
-<p>Thus, the overall space complexity is <strong>O(1)</strong> for the Union-Find structure and <strong>O(E)</strong> for the input.</p>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This approach efficiently solves the problem using the Union-Find data structure, which is ideal for handling dynamic connectivity problems such as this one. By separating the processing of equality and inequality constraints, we ensure that we can check if the equations can be satisfied in linear time with respect to the number of equations. The space complexity is constant with respect to the size of the input (as the number of letters is fixed), making this solution both time and space efficient.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1451s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1452s1hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

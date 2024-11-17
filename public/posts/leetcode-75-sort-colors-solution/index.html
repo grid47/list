@@ -147,7 +147,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -207,7 +207,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              4-minute read
+              2-minute read
             </span>
           </div>
 
@@ -216,7 +216,7 @@
 
       <div class="post-content">
         
-        <h2 id="hahahugoshortcode1302s0hbhb">
+        <h2 id="hahahugoshortcode1303s0hbhb">
   <a href="https://leetcode.com/problems/sort-colors/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
 <figure class="remote-image" style="text-align:center; margin: 0;">
     <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
@@ -231,7 +231,7 @@
     
   </figure>
   
-  <a class="heading-link" href="#hahahugoshortcode1302s0hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1303s0hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
@@ -254,165 +254,87 @@
 </span></span><span style="display:flex;"><span>        }
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1302s2hbhb">
+<h2 id="hahahugoshortcode1303s2hbhb">
   
 
   
   <div class="markdown-body">
-    <h3 id="-dutch-national-flag-problem---sort-array-of-0s-1s-and-2s">
-  🏳️ <strong>Dutch National Flag Problem</strong> - Sort Array of 0s, 1s, and 2s
-  <a class="heading-link" href="#-dutch-national-flag-problem---sort-array-of-0s-1s-and-2s">
+    <h3 id="problem-statement">
+  Problem Statement
+  <a class="heading-link" href="#problem-statement">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>In this problem, we are tasked with sorting an array of integers that only contains the values <code>0</code>, <code>1</code>, and <code>2</code>. The goal is to rearrange the array such that all the <code>0</code>s come first, followed by all the <code>1</code>s, and then all the <code>2</code>s, using a single pass through the array. The challenge is to do this efficiently, in <strong>O(n)</strong> time complexity, and <strong>without extra space</strong> (i.e., sorting <strong>in-place</strong>).</p>
-<h3 id="-approach">
-  🚀 <strong>Approach</strong>
-  <a class="heading-link" href="#-approach">
+<p>Given an array <code>nums</code> consisting of <code>n</code> elements where each element is either <code>0</code>, <code>1</code>, or <code>2</code>, sort the array in place so that all <code>0</code>s come first, followed by all <code>1</code>s, and all <code>2</code>s at the end.</p>
+<h3 id="approach">
+  Approach
+  <a class="heading-link" href="#approach">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem efficiently, we can use a <strong>three-pointer technique</strong>. This technique is well-suited for problems where we need to partition an array into multiple categories. In our case, the three categories are <code>0</code>s, <code>1</code>s, and <code>2</code>s.</p>
-<p>We will use three pointers to help us manage these partitions:</p>
 <ol>
-<li><strong><code>i</code> (beginning of the array)</strong>: This pointer tracks where the next <code>0</code> should be placed.</li>
-<li><strong><code>j</code> (end of the array)</strong>: This pointer tracks where the next <code>2</code> should be placed.</li>
-<li><strong><code>k</code> (current element)</strong>: This pointer will iterate through the array, inspecting each element one by one.</li>
+<li>
+<p><strong>Two-Pointer Technique</strong>: Use two pointers to efficiently sort the colors in one pass.</p>
+<ul>
+<li><code>i</code>: Pointer for the next position to place a <code>0</code>.</li>
+<li><code>j</code>: Pointer for the next position to place a <code>2</code>.</li>
+<li>Iterate through the array with a third pointer <code>k</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate through the array</strong>:</p>
+<ul>
+<li>If the current element <code>nums[k]</code> is <code>0</code>, swap it with the element at <code>i</code> and increment both <code>i</code> and <code>k</code>.</li>
+<li>If the current element <code>nums[k]</code> is <code>2</code>, swap it with the element at <code>j</code> and decrement <code>j</code>.</li>
+<li>If the current element is <code>1</code>, just increment <code>k</code> without any swaps.</li>
+</ul>
+</li>
+<li>
+<p><strong>Continue until <code>k</code> reaches the end of the array</strong>:</p>
+<ul>
+<li>The pointers will ensure that all <code>0</code>s are moved to the front, and all <code>2</code>s are pushed to the back.</li>
+</ul>
+</li>
 </ol>
-<p>The key idea is to use these pointers to swap elements into their correct positions:</p>
-<ul>
-<li>If we encounter a <code>0</code>, it is swapped to the front (<code>i</code> pointer).</li>
-<li>If we encounter a <code>2</code>, it is swapped to the end (<code>j</code> pointer).</li>
-<li>If we encounter a <code>1</code>, it is already in the correct position, and we move on.</li>
-</ul>
-<h3 id="-code-breakdown">
-  📝 <strong>Code Breakdown</strong>
-  <a class="heading-link" href="#-code-breakdown">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="step-1-initialize-pointers">
-  Step 1: Initialize Pointers
-  <a class="heading-link" href="#step-1-initialize-pointers">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
-</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>, j <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>;
-</span></span></code></pre></div><ul>
-<li>We first determine the size of the array, <code>n</code>, and initialize two pointers: <code>i</code> (set to the beginning of the array) and <code>j</code> (set to the end of the array).</li>
-</ul>
-<h4 id="step-2-iterating-through-the-array">
-  Step 2: Iterating through the Array
-  <a class="heading-link" href="#step-2-iterating-through-the-array">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> k <span style="color:#666">=</span> <span style="color:#666">0</span>; k <span style="color:#666">&lt;</span> n; k<span style="color:#666">++</span>) {
-</span></span></code></pre></div><ul>
-<li>We use a for loop to iterate over the array, with the <code>k</code> pointer acting as the iterator for each element in the array.</li>
-</ul>
-<h4 id="step-3-handling-the-case-for-2">
-  Step 3: Handling the Case for <code>2</code>
-  <a class="heading-link" href="#step-3-handling-the-case-for-2">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(nums[k] <span style="color:#666">==</span> <span style="color:#666">2</span> <span style="color:#666">&amp;&amp;</span> k <span style="color:#666">&lt;</span> j) {
-</span></span><span style="display:flex;"><span>    swap(nums[k], nums[j<span style="color:#666">--</span>]);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>If the current element is <code>2</code>, we swap it with the element at the <code>j</code> pointer (which points to the last unprocessed element). After swapping, we decrement <code>j</code> to move it toward the left.</li>
-</ul>
-<h4 id="step-4-handling-the-case-for-0">
-  Step 4: Handling the Case for <code>0</code>
-  <a class="heading-link" href="#step-4-handling-the-case-for-0">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(nums[k] <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> k <span style="color:#666">&gt;</span> i) {
-</span></span><span style="display:flex;"><span>    swap(nums[k], nums[i<span style="color:#666">++</span>]);
-</span></span><span style="display:flex;"><span>}
-</span></span></code></pre></div><ul>
-<li>If the current element is <code>0</code>, we swap it with the element at the <code>i</code> pointer (which points to the first unprocessed element). After swapping, we increment <code>i</code> to move it toward the right.</li>
-</ul>
-<h4 id="step-5-loop-continuation-and-finalization">
-  Step 5: Loop Continuation and Finalization
-  <a class="heading-link" href="#step-5-loop-continuation-and-finalization">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
+<ol>
+<li><strong>Initialization</strong>: Start with pointers <code>i</code> at the beginning and <code>j</code> at the end of the array.</li>
+<li><strong>Loop through the array</strong>:
 <ul>
-<li>The loop continues, ensuring all elements are processed and the array is sorted in-place.</li>
-</ul>
-<h3 id="-complexity-analysis">
-  📊 <strong>Complexity Analysis</strong>
-  <a class="heading-link" href="#-complexity-analysis">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
+<li>For each element:
 <ul>
-<li><strong>O(n)</strong>: The algorithm iterates through the array once using the <code>k</code> pointer. Each element is processed once — either being swapped into the correct position for <code>0</code>s, <code>1</code>s, or <code>2</code>s. There are no nested loops, so the time complexity is <strong>O(n)</strong>, where <code>n</code> is the size of the input array.</li>
+<li>Swap with <code>j</code> if it’s <code>2</code> and decrement <code>j</code>.</li>
+<li>Swap with <code>i</code> if it’s <code>0</code> and increment <code>i</code>.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li><strong>O(1)</strong>: The algorithm uses only a constant amount of space for the pointers (<code>i</code>, <code>j</code>, and <code>k</code>). There are no additional arrays or data structures used, so the space complexity is <strong>O(1)</strong>. The array is sorted <strong>in-place</strong>.</li>
+</li>
 </ul>
-<h3 id="-conclusion">
-  🎯 <strong>Conclusion</strong>
-  <a class="heading-link" href="#-conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution leverages the <strong>three-pointer technique</strong> to efficiently solve the <strong>Dutch National Flag problem</strong>. By using the <code>i</code>, <code>j</code>, and <code>k</code> pointers, we are able to sort the array in-place with <strong>O(n)</strong> time complexity and <strong>O(1)</strong> space complexity.</p>
-<p>This approach is optimal because:</p>
-<ul>
-<li>It processes each element only once.</li>
-<li>It avoids extra space usage, making it suitable for memory-constrained environments.</li>
-</ul>
-<p>This solution is especially effective when sorting arrays that contain a limited set of distinct values (such as <code>0</code>, <code>1</code>, and <code>2</code>). The algorithm is both <strong>time-efficient</strong> and <strong>space-efficient</strong>, making it ideal for large datasets or situations with limited memory resources.</p>
-<hr>
-<h3 id="-key-takeaways">
-  🌟 <strong>Key Takeaways</strong>
-  <a class="heading-link" href="#-key-takeaways">
+</li>
+<li><strong>End of sorting</strong>: By the end of the loop, the array will be sorted as required.</li>
+</ol>
+<h3 id="complexity">
+  Complexity
+  <a class="heading-link" href="#complexity">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
 <ul>
-<li>The <strong>three-pointer technique</strong> is great for partitioning an array into multiple categories.</li>
-<li>Sorting with <strong>O(n)</strong> time and <strong>O(1)</strong> space is optimal when dealing with arrays containing a small number of distinct values.</li>
-<li>The algorithm sorts the array <strong>in-place</strong>, making it efficient for memory usage.</li>
+<li><strong>Time Complexity:</strong> ( O(n) ), where ( n ) is the number of elements in the array, as we make a single pass through the array.</li>
+<li><strong>Space Complexity:</strong> ( O(1) ), since sorting is done in place without using extra space.</li>
 </ul>
-<hr>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1302s2hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1303s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>

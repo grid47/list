@@ -146,7 +146,7 @@
             </li>
           
             <li class="navigation-item">
-              <a class="navigation-link " href="/terms/">Terms</a>
+              <a class="navigation-link " href="/terms/">Terms &amp; Policy</a>
             </li>
           
             <li class="navigation-item">
@@ -202,7 +202,7 @@
             </span>
             <span class="reading-time">
               <i class="fa-solid fa-clock" aria-hidden="true"></i>
-              5-minute read
+              2-minute read
             </span>
           </div>
 
@@ -211,8 +211,26 @@
 
       <div class="post-content">
         
-        <p><a href="https://leetcode.com/problems/brick-wall/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a></p>
-<hr>
+        <h2 id="hahahugoshortcode1212s0hbhb">
+  <a href="https://leetcode.com/problems/brick-wall/description/"  class="external-link" target="_blank" rel="noopener"><code>Problem Link</code></a>
+<figure class="remote-image" style="text-align:center; margin: 0;">
+    <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:8px;">
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/554.webp" 
+           alt="A wall made of bricks where the minimum number of bricks to be removed is calculated, with the optimal brick removals glowing." 
+           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    
+      <figcaption style="font-size: 0.8em; font-weight: 300; color:#555; margin-top: 4px; line-height: 1.2;">
+        Solution to LeetCode 554: Brick Wall Problem
+      </figcaption>
+    
+  </figure>
+  
+  <a class="heading-link" href="#hahahugoshortcode1212s0hbhb">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
+    <span class="sr-only">Link to heading</span>
+  </a>
+</h2>
 <p><strong>Code:</strong></p>
 <div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
 </span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
@@ -231,7 +249,7 @@
 </span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> wall.size() <span style="color:#666">-</span> max_freq;
 </span></span><span style="display:flex;"><span>    }
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
-<h2 id="hahahugoshortcode1212s1hbhb">
+<h2 id="hahahugoshortcode1212s2hbhb">
   
 
   
@@ -243,11 +261,7 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>The problem involves a wall made up of bricks, where each brick has a certain length. The goal is to find the least number of bricks that a vertical line can intersect. In other words, a vertical line can be drawn through the wall, and we want to minimize the number of bricks it crosses. The optimal solution minimizes the intersections by finding the positions where the vertical line crosses through the least number of bricks.</p>
-<p>For example:</p>
-<ul>
-<li>A wall of size <code>[[1, 2, 2], [3, 1, 2], [2, 3], [2, 2, 3]]</code> would have the least number of bricks intersected by drawing a vertical line at the position where the most brick edges align.</li>
-</ul>
+<p>Given a wall represented as a 2D array, where each element is the width of the bricks in each row, the task is to find the least number of bricks that need to be crossed by a vertical line drawn from the top of the wall to the bottom.</p>
 <h3 id="approach">
   Approach
   <a class="heading-link" href="#approach">
@@ -255,85 +269,45 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<p>To solve this problem efficiently, we can use the following approach:</p>
 <ol>
-<li><strong>Identify Brick Edges</strong>: Each brick in the wall has an edge that defines its position. A vertical line will intersect a brick if it crosses its boundary (an edge).</li>
-<li><strong>Track Edge Frequencies</strong>: For each row in the wall, calculate the cumulative position of the brick edges, and keep a frequency count of how many rows share the same edge position. The more rows that share the same edge, the fewer bricks a vertical line will intersect at that position.</li>
-<li><strong>Maximize Edge Alignment</strong>: The position with the highest frequency of edges indicates the optimal place to draw the vertical line, as it minimizes the number of bricks intersected. The fewer the edges crossed, the fewer the bricks intersected.</li>
-<li><strong>Calculate the Result</strong>: The minimum number of bricks crossed is equal to the total number of rows minus the maximum frequency of edge alignments. This is because the vertical line intersects all rows except the ones where the edges align perfectly.</li>
+<li>
+<p><strong>Understanding the Problem</strong>:</p>
+<ul>
+<li>A vertical line can cross multiple bricks in each row. The goal is to minimize the number of bricks that the line crosses.</li>
+<li>Each row of the wall can have different brick widths, and the position where the vertical line intersects can vary.</li>
+</ul>
+</li>
+<li>
+<p><strong>Using a Hash Map to Track Edges</strong>:</p>
+<ul>
+<li>Iterate through each row of the wall and calculate the positions of the edges of the bricks.</li>
+<li>For every edge position, keep a count of how many rows have that edge position using a hash map (<code>edge_freq</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculating Maximum Frequency</strong>:</p>
+<ul>
+<li>Determine the maximum frequency of any edge position across all rows. This value represents the maximum number of rows that can be aligned without crossing a brick.</li>
+</ul>
+</li>
+<li>
+<p><strong>Result Calculation</strong>:</p>
+<ul>
+<li>The result is the total number of rows minus the maximum frequency, which gives the minimum number of bricks crossed by the vertical line.</li>
+</ul>
+</li>
 </ol>
-<p>By following this approach, we can efficiently determine the optimal position for the vertical line.</p>
-<h3 id="code-breakdown-step-by-step">
-  Code Breakdown (Step by Step)
-  <a class="heading-link" href="#code-breakdown-step-by-step">
+<h3 id="code-walk-through">
+  Code Walk-through
+  <a class="heading-link" href="#code-walk-through">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="1-class-and-function-definition">
-  1. <strong>Class and Function Definition</strong>
-  <a class="heading-link" href="#1-class-and-function-definition">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
-</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
-</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> leastBricks(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> wall) {
-</span></span></code></pre></div><ul>
-<li>The solution is encapsulated in the <code>Solution</code> class, and the main function <code>leastBricks</code> is defined.</li>
-<li>The function takes <code>wall</code>, a vector of vectors of integers, which represents the dimensions of the bricks in the wall.</li>
-</ul>
-<h4 id="2-initialize-edge-frequency-map">
-  2. <strong>Initialize Edge Frequency Map</strong>
-  <a class="heading-link" href="#2-initialize-edge-frequency-map">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> edge_freq;
-</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> max_freq <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span></code></pre></div><ul>
-<li><code>edge_freq</code> is an unordered map (hash table) that will store the frequency of each edge position (the cumulative position where a brick edge occurs).</li>
-<li><code>max_freq</code> keeps track of the maximum frequency of edges at any given position.</li>
-</ul>
-<h4 id="3-iterating-over-rows-and-calculating-edge-positions">
-  3. <strong>Iterating Over Rows and Calculating Edge Positions</strong>
-  <a class="heading-link" href="#3-iterating-over-rows-and-calculating-edge-positions">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> row <span style="color:#666">=</span> <span style="color:#666">0</span>; row <span style="color:#666">&lt;</span> wall.size(); row<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> edge_pos <span style="color:#666">=</span> <span style="color:#666">0</span>;
-</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> brick_no <span style="color:#666">=</span> <span style="color:#666">0</span>; brick_no <span style="color:#666">&lt;</span> wall[row].size() <span style="color:#666">-</span> <span style="color:#666">1</span>; brick_no<span style="color:#666">++</span>) {
-</span></span><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> curr_brick_length <span style="color:#666">=</span> wall[row][brick_no];
-</span></span><span style="display:flex;"><span>                edge_pos <span style="color:#666">=</span> edge_pos <span style="color:#666">+</span> curr_brick_length;
-</span></span><span style="display:flex;"><span>                edge_freq[edge_pos]<span style="color:#666">++</span>;
-</span></span><span style="display:flex;"><span>                max_freq <span style="color:#666">=</span> max(edge_freq[edge_pos], max_freq);
-</span></span><span style="display:flex;"><span>            }
-</span></span><span style="display:flex;"><span>        }
-</span></span></code></pre></div><ul>
-<li>The outer loop iterates through each row of the wall.</li>
-<li>The <code>edge_pos</code> variable tracks the cumulative position of brick edges along the row.</li>
-<li>The inner loop iterates through each brick in the row, but skips the last brick (<code>wall[row].size() - 1</code>), as we only care about the edges between bricks.</li>
-<li>For each brick, we update <code>edge_pos</code> by adding the current brick&rsquo;s length, then we increment the frequency of the <code>edge_pos</code> in the <code>edge_freq</code> map.</li>
-<li>We also update <code>max_freq</code> to reflect the maximum frequency of edge alignments, which tells us the most optimal vertical line position (where the least number of bricks will be intersected).</li>
-</ul>
-<h4 id="4-calculate-the-result">
-  4. <strong>Calculate the Result</strong>
-  <a class="heading-link" href="#4-calculate-the-result">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> wall.size() <span style="color:#666">-</span> max_freq;
-</span></span><span style="display:flex;"><span>    }
-</span></span><span style="display:flex;"><span>};
-</span></span></code></pre></div><ul>
-<li>Finally, the result is calculated by subtracting <code>max_freq</code> from the total number of rows in the wall (<code>wall.size()</code>).</li>
-<li>The reason we subtract <code>max_freq</code> is that the rows where the edges align perfectly with the vertical line will not have any bricks intersected. Thus, the fewer the number of rows that intersect with the line, the fewer the bricks that will be crossed.</li>
-<li>The function returns this value as the result.</li>
+<ul>
+<li>The <code>leastBricks</code> function iterates over each row of the wall.</li>
+<li>For each brick in the row (except the last one), it calculates the cumulative edge position and updates the frequency in the hash map.</li>
+<li>Finally, it calculates the number of rows that need to be crossed and returns the result.</li>
 </ul>
 <h3 id="complexity">
   Complexity
@@ -342,47 +316,15 @@
     <span class="sr-only">Link to heading</span>
   </a>
 </h3>
-<h4 id="time-complexity">
-  Time Complexity:
-  <a class="heading-link" href="#time-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
 <ul>
-<li>The time complexity of the algorithm is <strong>O(N * M)</strong>, where <code>N</code> is the number of rows in the wall (<code>wall.size()</code>) and <code>M</code> is the average number of bricks in each row (<code>wall[i].size()</code>). This is because we iterate through each brick in the wall once.</li>
-<li>The operations within the loops (updating the <code>edge_freq</code> map and calculating the cumulative positions) are constant-time operations on average, due to the efficient lookup and update times of an unordered map (hash table).</li>
+<li><strong>Time Complexity</strong>: O(N), where N is the total number of bricks in all rows combined, since each brick width is processed once.</li>
+<li><strong>Space Complexity</strong>: O(M), where M is the number of unique edge positions tracked in the hash map.</li>
 </ul>
-<h4 id="space-complexity">
-  Space Complexity:
-  <a class="heading-link" href="#space-complexity">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h4>
-<ul>
-<li>The space complexity is <strong>O(K)</strong>, where <code>K</code> is the number of unique edge positions encountered during the iterations. This corresponds to the number of different cumulative positions of the brick edges across all rows. Since in the worst case, each brick could have a different edge position, this is proportional to the number of bricks in the wall.</li>
-</ul>
-<h3 id="conclusion">
-  Conclusion
-  <a class="heading-link" href="#conclusion">
-    <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
-    <span class="sr-only">Link to heading</span>
-  </a>
-</h3>
-<p>This solution efficiently computes the least number of bricks a vertical line intersects by focusing on the cumulative positions of brick edges across the rows. By tracking these positions and their frequencies, the algorithm determines the optimal line placement that minimizes intersections.</p>
-<p><strong>Key Points:</strong></p>
-<ul>
-<li>The problem is solved by analyzing brick edges and finding the optimal vertical line placement.</li>
-<li>The frequency of edge positions helps identify the best position for the vertical line.</li>
-<li>The solution is both time and space efficient, with a time complexity of <strong>O(N * M)</strong> and space complexity of <strong>O(K)</strong>.</li>
-</ul>
-<p>This approach provides a clear, optimal, and efficient way to solve the problem by leveraging hash maps and frequency counting, making it a great example of how to optimize problems involving spatial arrangements.</p>
  
 </div>
   
 
-  <a class="heading-link" href="#hahahugoshortcode1212s1hbhb">
+  <a class="heading-link" href="#hahahugoshortcode1212s2hbhb">
     <i class="fa-solid fa-link" aria-hidden="true" title="Link to heading"></i>
     <span class="sr-only">Link to heading</span>
   </a>
