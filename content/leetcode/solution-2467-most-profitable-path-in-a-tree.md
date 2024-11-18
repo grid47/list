@@ -10,6 +10,8 @@ categories = [
     "Medium"
 ]
 series = ["Leetcode"]
+youtube = "MCp9k0kKQqc"
+img_src = ""
 +++
 
 

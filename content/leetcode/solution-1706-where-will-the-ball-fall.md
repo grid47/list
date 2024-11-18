@@ -10,6 +10,8 @@ categories = [
     "Medium"
 ]
 series = ["Leetcode"]
+youtube = "QydaN-AVEAA"
+img_src = ""
 +++
 
 

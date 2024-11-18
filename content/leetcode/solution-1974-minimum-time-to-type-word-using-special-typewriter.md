@@ -10,6 +10,8 @@ categories = [
     "Easy"
 ]
 series = ["Leetcode"]
+youtube = "DEMUS-1tq-0"
+img_src = ""
 +++
 
 

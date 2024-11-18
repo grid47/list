@@ -10,6 +10,8 @@ categories = [
     "Medium"
 ]
 series = ["Leetcode"]
+youtube = "c90k-5HigWs"
+img_src = ""
 +++
 
 
