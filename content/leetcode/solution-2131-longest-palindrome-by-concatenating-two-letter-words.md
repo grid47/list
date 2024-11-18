@@ -10,8 +10,10 @@ categories = [
     "Medium"
 ]
 series = ["Leetcode"]
-youtube = "kBMf-m5we-8"
 img_src = ""
+youtube = "kBMf-m5we-8"
+youtube_upload_date="2022-01-08"
+youtube_thumbnail="https://i.ytimg.com/vi_webp/kBMf-m5we-8/maxresdefault.webp"
 +++
 
 

@@ -10,8 +10,10 @@ categories = [
     "Medium"
 ]
 series = ["Leetcode"]
-youtube = "edP4gaMO80E"
 img_src = ""
+youtube = "edP4gaMO80E"
+youtube_upload_date="2022-04-16"
+youtube_thumbnail="https://i.ytimg.com/vi/edP4gaMO80E/maxresdefault.jpg"
 +++
 
 

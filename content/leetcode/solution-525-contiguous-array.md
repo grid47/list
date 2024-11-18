@@ -10,8 +10,10 @@ categories = [
     "Medium"
 ]
 series = ["Leetcode"]
-youtube = "3dRoRxipjhY"
 img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/525.webp"
+youtube = "3dRoRxipjhY"
+youtube_upload_date="2020-04-13"
+youtube_thumbnail="https://i.ytimg.com/vi_webp/3dRoRxipjhY/maxresdefault.webp"
 +++
 
 
