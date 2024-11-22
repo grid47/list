@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/XbPJhrkROfI/maxresdefault.webp"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/add-strings/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/415.webp" 
     alt="Two strings being added together, with each character gently illuminating to show the sum."
@@ -56,9 +54,103 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/415.md" >}}
+### Problem Statement
+
+The problem at hand involves adding two non-negative integers, represented as strings, and returning the sum as a string. Since the numbers are provided as strings, there is no direct support for large integer arithmetic, especially if the sum exceeds the bounds of typical integer data types. Therefore, we need to perform the addition manually by simulating the standard column addition approach.
+
+### Approach
+
+The solution involves performing the addition of two numbers digit by digit from the least significant to the most significant digit. This is similar to how we perform addition by hand, starting from the rightmost digits, handling carry-over, and moving towards the leftmost digits. The approach is broken down into the following steps:
+
+1. **Reverse Traversal**: Start from the least significant digit (rightmost) and move left. This allows us to handle carry-over easily, just like how we add digits from the right side in traditional addition.
+
+2. **Carry Handling**: While adding, if the sum of two digits exceeds 9, we need to carry over the extra value to the next column. For instance, if the sum of two digits is 15, we store 5 in the current position and carry over 1 to the next digit.
+
+3. **End Condition**: If one number is shorter than the other, we continue processing the remaining digits of the longer number, along with any carry from previous additions.
+
+4. **Final Result**: Once the addition is complete, we reverse the result to get the sum in the correct order since we've been building the sum from right to left.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Initialize Variables
+
+```cpp
+int carry = 0, i = num1.length() - 1, j = num2.length() - 1;
+string ans = "";
+```
+
+- We initialize a `carry` variable to store the carry-over from each addition.
+- `i` and `j` are set to the last indices of `num1` and `num2` respectively, since we want to start adding from the rightmost digits (least significant digits).
+- `ans` is an empty string that will hold the result of the addition.
+
+#### Step 2: Loop Through the Digits
+
+```cpp
+while (i >= 0 || j >= 0 || carry > 0) {
+```
+
+- The `while` loop continues as long as there are more digits to add from either `num1`, `num2`, or there is still a carry left. The loop ensures that we process every digit, even if one of the numbers has fewer digits than the other.
+  
+#### Step 3: Add Digits from `num1`
+
+```cpp
+if (i >= 0) {
+    carry = carry + num1[i] - '0';  // Convert char to int and add to carry
+    i--;
+}
+```
+
+- If there are remaining digits in `num1` (i.e., `i >= 0`), we convert the character `num1[i]` to an integer by subtracting `'0'` (since ASCII values of digits are contiguous, and `'0'` corresponds to 48 in ASCII). We then add this value to `carry`, which holds the accumulated sum and carry-over from previous digits.
+
+#### Step 4: Add Digits from `num2`
+
+```cpp
+if (j >= 0) {
+    carry = carry + num2[j] - '0';  // Convert char to int and add to carry
+    j--;
+}
+```
+
+- Similarly, if there are remaining digits in `num2` (i.e., `j >= 0`), we perform the same conversion and addition to `carry`.
+
+#### Step 5: Handle the Result for This Digit
+
+```cpp
+ans += char(carry % 10 + '0');  // Store the current digit in the result
+carry = carry / 10;  // Update the carry for the next iteration
+```
+
+- After adding the digits and the carry, we compute the digit to store in the result. Since we are adding digits, the result might exceed 9, so we use `carry % 10` to get the last digit of the current sum.
+- We then convert this digit back into a character and append it to `ans`.
+- The carry for the next digit is updated by dividing `carry` by 10 (essentially, removing the last digit).
+
+#### Step 6: Reverse the Result
+
+```cpp
+reverse(ans.begin(), ans.end());  // Reverse the result to correct the order
+return ans;
+```
+
+- After exiting the loop, the `ans` string contains the sum, but in reverse order. We use the `reverse` function to reverse the string and return the final result.
+
+### Complexity
+
+#### Time Complexity:
+- **Iterating Through the Digits**: We loop through both `num1` and `num2` once, processing each digit. Since the maximum number of iterations is determined by the length of the longer string, the time complexity is `O(max(n, m))`, where `n` and `m` are the lengths of `num1` and `num2`, respectively.
+- **Reversing the Result**: After building the result, we reverse it, which takes `O(n + m)` time. Thus, the overall time complexity is `O(max(n, m))`.
+
+#### Space Complexity:
+- **Storing the Result**: We use an additional string `ans` to store the result, which can be at most `max(n, m) + 1` characters long (to account for the carry). Therefore, the space complexity is `O(max(n, m))`.
+
+### Conclusion
+
+This approach efficiently adds two large numbers represented as strings. The key idea is to simulate the manual addition process, handling the carry and digit-by-digit addition. The solution is optimal with a time complexity of `O(max(n, m))`, which is linear with respect to the length of the input strings. The space complexity is also linear in terms of the size of the input, making this solution both time and space-efficient for large numbers. The solution is easy to understand, follows the standard algorithm for adding numbers, and handles edge cases, such as different-length inputs and carry-over, effectively.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/add-strings/description/)
+
 ---
 {{< youtube XbPJhrkROfI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #416: Partition Equal Subset Sum](https://grid47.xyz/leetcode/solution-416-partition-equal-subset-sum/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

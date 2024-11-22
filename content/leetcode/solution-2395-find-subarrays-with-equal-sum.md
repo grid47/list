@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/1v-XTlRvUvU/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/find-subarrays-with-equal-sum/description/)
-
 ---
 **Code:**
 
@@ -35,9 +33,111 @@ public:
   }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2395.md" >}}
+### Problem Statement
+
+You are given an integer array `nums`, and the task is to determine if there exists a pair of consecutive subarrays (two consecutive elements) whose sums are equal. Specifically, you need to check if any two adjacent subarrays, each consisting of two consecutive elements, have the same sum. If such a pair of subarrays exists, return `true`; otherwise, return `false`.
+
+For example:
+- Input: `nums = [4, 2, 4]`
+- Output: `true`
+  - Explanation: The sums of consecutive pairs are `4 + 2 = 6` and `2 + 4 = 6`. Since these two sums are equal, the answer is `true`.
+
+- Input: `nums = [1, 2, 3, 4, 5]`
+- Output: `false`
+  - Explanation: The sums of consecutive pairs are `1 + 2 = 3`, `2 + 3 = 5`, `3 + 4 = 7`, and `4 + 5 = 9`. None of these sums are equal, so the answer is `false`.
+
+### Approach
+
+To solve this problem, the goal is to efficiently determine whether any two consecutive subarrays (each consisting of two adjacent elements) have the same sum. Here's how we can break down the approach:
+
+1. **Iterate Through Pairs of Consecutive Elements**: For each pair of consecutive elements, we calculate their sum and check if this sum has been encountered before.
+
+2. **Store Sums in a Set**: As we traverse the array, we can use a hash set (`unordered_set`) to store the sums of the consecutive pairs. The hash set allows us to check if a sum already exists in constant time.
+
+3. **Check for Duplicate Sums**: Each time we compute the sum of a pair of consecutive elements, we check if that sum already exists in the hash set. If it does, it means we have found two subarrays with the same sum, and we return `true`. If not, we add the sum to the set and continue.
+
+4. **Early Termination**: If we find two equal sums early in the traversal, we can immediately return `true`, avoiding unnecessary computation. If we finish processing all pairs without finding any duplicates, we return `false`.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Initialize the Set
+We begin by declaring an unordered set `s` to store the sums of the consecutive pairs. The unordered set allows for average constant-time insertions and lookups.
+
+```cpp
+unordered_set<int> s;
+```
+
+#### Step 2: Iterate Through the Array
+Next, we start iterating through the array `nums` from the second element (index 1), as we are interested in consecutive pairs. For each element `nums[i]`, we consider the pair formed by `nums[i-1]` and `nums[i]`.
+
+```cpp
+for (int i = 1; i < nums.size(); ++i)
+```
+
+#### Step 3: Calculate the Sum of Consecutive Elements
+Inside the loop, we calculate the sum of the current pair of consecutive elements `nums[i-1]` and `nums[i]`.
+
+```cpp
+nums[i - 1] + nums[i]
+```
+
+#### Step 4: Check for Duplicate Sums
+Next, we attempt to insert this sum into the unordered set `s`. If the insertion fails (i.e., the sum is already in the set), it means we have found a pair of consecutive subarrays with equal sums. In this case, we immediately return `true`.
+
+```cpp
+if(!s.insert(nums[i - 1] + nums[i]).second)
+    return true;
+```
+
+The `insert` function returns a pair, and the second element of the pair (`.second`) is a boolean indicating whether the insertion was successful. If `.second` is `false`, it means the sum already exists in the set.
+
+#### Step 5: Add the Sum to the Set
+If the sum is not already in the set, we add it to the set for future checks.
+
+```cpp
+s.insert(nums[i - 1] + nums[i]);
+```
+
+#### Step 6: Return the Result
+If the loop finishes without finding any duplicate sums, we return `false`, indicating that no two consecutive subarrays with equal sums were found.
+
+```cpp
+return false;
+```
+
+### Complexity
+
+#### Time Complexity
+The time complexity of this solution is **O(n)**, where `n` is the length of the array `nums`.
+
+- **Iteration**: We iterate through the array once, so the loop runs in **O(n)** time.
+- **Set Operations**: In each iteration, the set operations (`insert` and lookup) have an average time complexity of **O(1)** due to the underlying hash table implementation of the unordered set.
+  
+Thus, the overall time complexity is **O(n)**.
+
+#### Space Complexity
+The space complexity of the solution is **O(n)**, where `n` is the number of elements in the array.
+
+- **Set Storage**: In the worst case, the set may contain all the sums of consecutive pairs, which would require **O(n)** space.
+  
+Thus, the overall space complexity is **O(n)**.
+
+### Conclusion
+
+This solution efficiently checks whether any two consecutive subarrays have equal sums by utilizing a hash set to track the sums of consecutive pairs. The use of the set allows us to perform constant-time lookups and insertions, making the solution highly efficient. With a time complexity of **O(n)** and space complexity of **O(n)**, this approach is optimal for large inputs.
+
+Key points to highlight:
+- The unordered set ensures fast lookup and insertion of sums.
+- We can return early if we detect two equal sums, improving the efficiency.
+- The solution works in linear time, making it suitable for large arrays.
+
+This approach offers a concise and efficient way to solve the problem while maintaining clarity and simplicity.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/find-subarrays-with-equal-sum/description/)
+
 ---
 {{< youtube 1v-XTlRvUvU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2396: Strictly Palindromic Number](https://grid47.xyz/leetcode/solution-2396-strictly-palindromic-number/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

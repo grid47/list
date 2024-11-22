@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/lTHTR_jsqAQ/maxresdefault.webp"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/rotate-array/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/189.webp" 
     alt="An array gently rotating, with the elements shifting in a calming, circular motion."
@@ -53,9 +51,92 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/189.md" >}}
+### 🌟 Rotate Array by `k` Steps
+
+The problem requires us to rotate an array of integers to the right by `k` steps, meaning that we shift every element of the array to the right by `k` positions, with the last elements wrapping around to the beginning.
+
+#### Example:
+- **Input**: `nums = [1, 2, 3, 4, 5, 6, 7]`, `k = 3`
+- **Output**: `[5, 6, 7, 1, 2, 3, 4]`
+  
+- **Input**: `nums = [-1, -100, 3, 99]`, `k = 2`
+- **Output**: `[3, 99, -1, -100]`
+
+### 💡 Approach
+
+To solve this efficiently, we can use the **Reverse Subarray Approach**. The idea is to rotate the array in-place by reversing parts of the array to achieve the desired rotation.
+
+#### Key Steps:
+1. **Modulo Operation**: Since rotating an array of length `n` by `k` steps is the same as rotating it by `k % n` steps, we first reduce `k` if it's larger than the array size. This avoids unnecessary rotations.
+   
+2. **Reverse the Entire Array**: By reversing the entire array, the elements that should be moved to the front are placed at the end.
+
+3. **Reverse the First `k` Elements**: After reversing the entire array, reverse the first `k` elements to place them in the correct order at the beginning.
+
+4. **Reverse the Remaining Elements**: Finally, reverse the rest of the array (from index `k` to the end) to restore their original order.
+
+This method ensures that we rotate the array in-place with a time complexity of **O(n)** and a space complexity of **O(1)**.
+
+### 🛠 Code Breakdown
+
+#### 1. The `rotate` Function:
+
+```cpp
+void rotate(vector<int>& nums, int k) {
+    k = k % nums.size();  // Step 1: Adjust k to be within the array size
+    rev(nums, 0, nums.size() - 1);  // Step 2: Reverse the entire array
+    rev(nums, 0, k - 1);  // Step 3: Reverse the first k elements
+    rev(nums, k, nums.size() - 1);  // Step 4: Reverse the remaining elements
+}
+```
+
+- **Step 1**: `k = k % nums.size()` ensures that `k` is within the range of the array size. For example, rotating an array of length 5 by 7 positions is equivalent to rotating it by 2 positions.
+
+- **Step 2**: Reverse the entire array using the helper function `rev`.
+
+- **Step 3**: Reverse the first `k` elements to place them at the front.
+
+- **Step 4**: Reverse the remaining elements from index `k` to the end of the array to restore their original order.
+
+#### 2. The `rev` Helper Function:
+
+```cpp
+void rev(vector<int>& nums, int i, int j) {
+    while(i <= j) {
+        int tmp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = tmp;
+        i++;
+        j--;
+    }
+}
+```
+- This helper function reverses the elements of the array from index `i` to index `j`. It swaps the elements at the two ends (`i` and `j`) and moves towards the center until all elements are reversed.
+
+### 📊 Complexity Analysis
+
+#### Time Complexity:
+- **O(n)**: The time complexity is **O(n)**, where `n` is the length of the array. The total number of operations is proportional to the array size since each reverse operation takes linear time.
+
+#### Space Complexity:
+- **O(1)**: The solution uses constant space since we only need a few variables for the indices and no additional data structures. The reversal is done in-place.
+
+### ✅ Conclusion
+
+The **Reverse Subarray Approach** is an elegant and efficient solution for rotating an array in-place. By reversing parts of the array, we can achieve the rotation with a time complexity of **O(n)** and constant space **O(1)**.
+
+#### Key Insights:
+- **Efficient In-place Operation**: The solution avoids additional space usage by modifying the array in place.
+- **Modulo Optimization**: The modulo operation ensures we handle cases where `k` is larger than the array size effectively.
+- **Reversal Trick**: By performing three reversal operations, we achieve the desired rotation in an intuitive and efficient way.
+
+This approach is optimal for rotating arrays in competitive programming and technical interviews due to its simplicity and efficiency.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/rotate-array/description/)
+
 ---
 {{< youtube lTHTR_jsqAQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #190: Reverse Bits](https://grid47.xyz/leetcode/solution-190-reverse-bits/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

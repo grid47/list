@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/pHgWf79hNoY/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/airplane-seat-assignment-probability/description/)
-
 ---
 **Code:**
 
@@ -32,9 +30,62 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1227.md" >}}
+
+### Problem Statement
+The problem involves a scenario where there are \( n \) seats on a bus, and \( n \) passengers each have a ticket for a specific seat. The first passenger, however, does not have a preference and randomly chooses a seat upon boarding. Each subsequent passenger either takes their assigned seat if it is available or picks a random empty seat if it is taken.
+
+The objective is to determine the probability that the last passenger (the \( n \)-th person) will sit in their designated seat. This problem poses an interesting challenge in understanding randomness and probability.
+
+### Approach
+To solve the problem, we can analyze the situation by considering the following scenarios:
+1. If the first passenger sits in their own seat (seat 1), then everyone else will sit in their assigned seat, including the last passenger.
+2. If the first passenger sits in the last passenger’s seat (seat \( n \)), then the last passenger will not be able to sit in their designated seat.
+3. If the first passenger sits in any other seat (seat \( k \)), then the problem is reduced to the same scenario for \( k-1 \) remaining passengers and their respective seats.
+
+From this analysis, it becomes evident that the first passenger has two critical choices:
+- Sitting in their own seat leads to a probability of 1 for the last passenger to sit in their own seat.
+- Sitting in the last passenger’s seat leads to a probability of 0 for the last passenger to sit in their own seat.
+
+However, these choices ultimately balance out, leading us to deduce that the probability of the last passenger sitting in their own seat is always \( \frac{1}{2} \) for \( n > 1 \). For \( n = 1 \), the probability is obviously 1 since there is only one passenger and one seat.
+
+### Code Breakdown (Step by Step)
+
+```cpp
+class Solution {
+public:
+    double nthPersonGetsNthSeat(int n) {
+```
+- **Lines 1-3**: The `Solution` class is defined, and the public method `nthPersonGetsNthSeat` is declared, which takes an integer \( n \) representing the number of passengers and seats.
+
+```cpp
+        if(n == 1) return 1;
+```
+- **Line 4**: A conditional check is performed to see if \( n \) is equal to 1. If there is only one passenger, the probability that this passenger sits in their designated seat (which is the only seat available) is 1. Thus, the function immediately returns 1.
+
+```cpp
+        return 1/2.0;
+```
+- **Line 5**: If \( n \) is greater than 1, the function returns \( \frac{1}{2.0} \). The use of `2.0` ensures that the division is performed in floating-point arithmetic, returning a precise double value of 0.5.
+
+```cpp
+    }
+};
+```
+- **Lines 6-7**: The method and class definitions are closed.
+
+### Complexity
+1. **Time Complexity**: The time complexity of this function is \( O(1) \) because the function simply checks a condition and performs a constant number of operations regardless of the size of \( n \).
+   
+2. **Space Complexity**: The space complexity is also \( O(1) \) since no additional data structures are used that scale with input size.
+
+### Conclusion
+The `nthPersonGetsNthSeat` function elegantly solves the problem of determining the probability that the last passenger will sit in their designated seat. By analyzing the seating arrangement and the decisions made by the first passenger, we derive that the probability is \( 1 \) for one passenger and \( \frac{1}{2} \) for more than one passenger. This solution exemplifies how probability can simplify complex situations into manageable results, showcasing the power of mathematical reasoning in programming challenges. The function is efficient with constant time complexity, making it a straightforward yet insightful contribution to algorithmic problem-solving in competitive programming and technical interviews.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/airplane-seat-assignment-probability/description/)
+
 ---
 {{< youtube pHgWf79hNoY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1232: Check If It Is a Straight Line](https://grid47.xyz/leetcode/solution-1232-check-if-it-is-a-straight-line/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

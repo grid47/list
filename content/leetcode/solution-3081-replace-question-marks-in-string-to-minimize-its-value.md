@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/dYPKJ4Kelxw/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/replace-question-marks-in-string-to-minimize-its-value/description/)
-
 ---
 **Code:**
 
@@ -55,9 +53,117 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3081.md" >}}
+### Problem Statement:
+
+In this problem, we are given a string `s` that may contain lowercase English letters and a few wildcard characters denoted by `?`. Our goal is to replace each `?` with a lowercase English letter such that the "value" of the string is minimized. The value of the string is defined as the maximum frequency of any character in the string after replacing all `?` characters. We need to return the modified string where the value is minimized, i.e., the maximum frequency of any character is as small as possible.
+
+### Approach:
+
+To minimize the string value, we need to replace the `?` characters in a way that balances the frequency of characters in the string. The strategy is as follows:
+
+1. **Count Existing Frequencies:** First, we need to know the frequency of each character (except `?`) in the string. This will help us identify which characters are less frequent and which are more frequent.
+  
+2. **Distribute `?` Characters:** For each `?` in the string, we will replace it with the character that has the smallest frequency so far. This way, we avoid creating a situation where one character’s frequency becomes much larger than the others.
+
+3. **Keep Track of Changes:** After replacing a `?`, we increment the frequency of that character to keep track of the number of times it has been used.
+
+4. **Sort the Used Characters:** Once we know which characters to use for the replacements, we will sort them to ensure that we replace the `?` characters in the most balanced way, starting from the least frequent character.
+
+5. **Final String Construction:** After replacing all `?` characters, the string will be the one with the smallest possible maximum character frequency.
+
+### Code Breakdown (Step by Step):
+
+#### Step 1: Frequency Calculation
+
+```cpp
+vector<int> frq(26, 0), taken;
+int n = s.size();
+for(char c: s) if(c != '?') frq[c - 'a']++;
+```
+
+- We initialize a vector `frq` of size 26 to store the frequency of each character in the string. The index of the vector corresponds to the character (`'a'` maps to index 0, `'b'` to index 1, and so on).
+- We iterate through the string `s` and for every character `c` that is not a `?`, we increment its frequency in the `frq` vector.
+
+#### Step 2: Replace `?` with Minimum Frequency Characters
+
+```cpp
+for(int i = 0; i < n; i++) {
+    if(s[i] != '?') continue;
+
+    int mn = 0;
+    for(int j = 0; j < 26; j++)
+        if(frq[j] < frq[mn]) mn = j;
+
+    taken.push_back(mn);
+    frq[mn]++;
+}
+```
+
+- We iterate through the string again and focus on the `?` characters. For each `?`, we need to replace it with the character that has the smallest frequency.
+- We initialize `mn` to 0 and iterate through the `frq` vector to find the index `mn` that has the minimum frequency.
+- After identifying the character with the smallest frequency (`mn`), we append it to the `taken` list and increment the frequency of that character in the `frq` vector.
+
+#### Step 3: Sort the Replacements
+
+```cpp
+sort(taken.begin(), taken.end());
+```
+
+- After collecting all the characters that we will use to replace the `?`, we sort them. This ensures that the replacement happens in a balanced way, with the least frequent characters being used first.
+
+#### Step 4: Construct the Final String
+
+```cpp
+int idx = 0;
+for(int i = 0; i < n; i++) {
+    if(s[i] == '?')
+        s[i] = taken[idx++] + 'a';
+}
+```
+
+- We iterate through the string one final time. For each `?`, we replace it with the next character from the `taken` list (which has been sorted).
+- We use the variable `idx` to keep track of the current position in the `taken` list. For each replacement, we convert the integer index back to a character by adding `'a'` and update the string.
+
+#### Step 5: Return the Modified String
+
+```cpp
+return s;
+```
+
+- After all replacements are done, we return the modified string `s` with the minimized value.
+
+### Complexity:
+
+#### Time Complexity:
+
+- **O(n + 26 * n log n + n)** where `n` is the length of the string.
+  - The first loop over the string to calculate frequencies runs in **O(n)** time.
+  - The second loop where we replace the `?` characters involves finding the minimum frequency character, which requires checking all 26 letters (constant time). Sorting the list of replacements takes **O(n log n)** time, as there are at most `n` `?` characters to replace.
+  - The final pass over the string to replace the characters takes **O(n)** time.
+
+Thus, the time complexity is dominated by the sorting step, making it **O(n log n)** in the worst case.
+
+#### Space Complexity:
+
+- **O(26 + n)** where `n` is the length of the string.
+  - We use a fixed-size array of 26 integers to store the frequencies of each character.
+  - The `taken` list can store up to `n` characters, which results in a space complexity of **O(n)**.
+  - Therefore, the total space complexity is **O(n)**.
+
+### Conclusion:
+
+This approach solves the problem efficiently by minimizing the maximum frequency of any character after replacing all `?` characters. The strategy is both time-efficient and space-efficient, and it ensures that the resulting string has the smallest possible "value."
+
+- **Time Complexity:** O(n log n)
+- **Space Complexity:** O(n)
+
+By iterating over the string twice and using a frequency array, we manage to distribute the `?` characters optimally. Sorting the replacements ensures that the characters are assigned in a balanced manner, ultimately minimizing the maximum frequency in the string. This method is well-suited for solving the problem with large input sizes.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/replace-question-marks-in-string-to-minimize-its-value/description/)
+
 ---
 {{< youtube dYPKJ4Kelxw >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #3099: Harshad Number](https://grid47.xyz/leetcode/solution-3099-harshad-number/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

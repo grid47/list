@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/8VPIrqwQ8sQ/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/min-cost-to-connect-all-points/description/)
-
 ---
 **Code:**
 
@@ -89,9 +87,145 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1584.md" >}}
+### Problem Statement
+
+The problem at hand is to find the minimum cost to connect all points in a 2D plane, where the cost to connect two points is defined as the Manhattan distance between them. This is a classic example of the Minimum Spanning Tree (MST) problem, which can be efficiently solved using algorithms like Kruskal's or Prim's. Here, we will use Kruskal's algorithm along with the Union-Find (Disjoint Set Union) data structure.
+
+### Approach
+
+To achieve the desired solution, we will follow these steps:
+
+1. **Calculate Distances**: Compute the Manhattan distance for every pair of points and store the distances along with the corresponding point indices in a list.
+
+2. **Sort Edges**: Sort the edges (i.e., the distances between points) in ascending order, as we want to connect points starting from the smallest distances.
+
+3. **Union-Find Structure**: Utilize a Union-Find data structure to efficiently manage and merge different components (connected points) as we iterate through the sorted distances.
+
+4. **Kruskal’s Algorithm**: Iterate over the sorted edges, using the Union-Find structure to check whether two points are already connected. If they are not connected, add the cost of the edge to the total cost and merge the two components.
+
+5. **Termination Condition**: Stop the process when we have connected all points.
+
+This method ensures that we connect all points with the minimum total cost while avoiding cycles.
+
+### Code Breakdown (Step by Step)
+
+Let’s go through the code and explain its functionality in detail:
+
+```cpp
+class UF {
+public:
+    vector<int> ch; // Array to track the parent of each node
+    int cnt; // Number of connected components
+    UF(int n) {
+        cnt = n; // Initialize the number of components
+        ch.resize(n, 0);
+        for(int i = 0; i < n; i++)
+            ch[i] = i; // Each node is its own parent initially
+    }
+```
+
+- **Union-Find Class Initialization**: The `UF` class is defined to manage the connected components. It initializes the `ch` vector, where each index represents a point and its value is the parent index. The variable `cnt` tracks the number of connected components.
+
+```cpp
+    bool uni(int a, int b) {
+        int x = find(a); // Find the root of the first point
+        int y = find(b); // Find the root of the second point
+        if(x != y) {
+            cnt--; // Decrease the count of components if they are different
+            ch[x] = y; // Union the two components
+            return true;
+        }
+        return false; // If they are already connected
+    }
+```
+
+- **Union Function**: This function attempts to unite two points. If they belong to different components, it merges them and returns true; otherwise, it returns false.
+
+```cpp
+    int find(int x) {
+        if(x == ch[x]) return x; // If x is its own parent, return x
+        return ch[x] = find(ch[x]); // Path compression optimization
+    }
+};
+```
+
+- **Find Function**: This function finds the root of a point and employs path compression for efficiency, allowing the structure to maintain a flat tree.
+
+#### The Solution Class and Main Functionality
+
+```cpp
+class Solution {
+public:
+    static bool cmp(array<int, 3> &a, array<int, 3> &b) {
+        return a[0] < b[0]; // Custom comparator for sorting edges
+    }
+```
+
+- **Comparison Function**: A static function `cmp` is defined to sort the edges based on their distances in ascending order.
+
+```cpp
+    int minCostConnectPoints(vector<vector<int>>& pts) {
+        vector<array<int, 3>> q; // Array to hold edges as {distance, point1, point2}
+```
+
+- **Edge Initialization**: The function initializes an array `q` to hold edges represented as arrays containing the distance and the indices of the two points.
+
+```cpp
+        for(int i = 0; i < pts.size(); i++) {
+            for(int j = i + 1; j < pts.size(); j++)
+                q.push_back({ abs(pts[i][0]-pts[j][0]) + abs(pts[i][1]-pts[j][1]), i, j});
+        }
+```
+
+- **Distance Calculation**: The nested loop calculates the Manhattan distance between each pair of points and populates the `q` array with these distances and their corresponding indices.
+
+```cpp
+        sort(q.begin(), q.end(), cmp); // Sort edges by distance
+        UF* uf = new UF(pts.size()); // Initialize Union-Find structure
+```
+
+- **Sorting Edges**: The edges are sorted using the previously defined comparison function. A new instance of the Union-Find class is created for managing the components.
+
+```cpp
+        int cost = 0, n = pts.size(); // Total cost and number of points
+        for(int i = 0; i < q.size(); i++) {
+            if(uf->uni(q[i][1], q[i][2])) { // If the points can be united
+                cost += q[i][0]; // Add the cost of the edge to the total
+                n--; // Decrease the number of components
+                if(n == 1) return cost; // If all points are connected, return the cost
+            }
+        }
+```
+
+- **Building the MST**: The algorithm iterates through the sorted edges. If two points can be united (i.e., they are not already connected), the distance is added to the total cost, and the number of remaining components is decremented. The process stops when all points are connected.
+
+```cpp
+        return 0; // Return 0 if we fail to connect all points (should not happen with valid input)
+    }
+};
+```
+
+- **Return Statement**: The function returns 0 if, for some reason, not all points are connected. This condition shouldn't happen with valid inputs.
+
+### Complexity
+
+- **Time Complexity**: The time complexity of this algorithm is \(O(P^2 \log P)\), where \(P\) is the number of points. The \(P^2\) factor comes from calculating the distances between all pairs, while \(\log P\) comes from sorting the edges.
+
+- **Space Complexity**: The space complexity is \(O(P)\) for the Union-Find structure and the array holding the edges.
+
+### Conclusion
+
+The provided solution effectively solves the problem of finding the minimum cost to connect all points in a 2D space using the Manhattan distance metric. By leveraging Kruskal's algorithm along with a Union-Find structure, the solution efficiently manages connectivity checks and minimizes the total cost.
+
+The clear and modular design of the code, along with the use of efficient data structures, ensures that the solution is both maintainable and performant. This approach is robust and can handle a variety of input sizes within reasonable limits, making it suitable for competitive programming and real-world applications. 
+
+In summary, this algorithm demonstrates how to effectively manage and optimize connections in a set of points using a combination of sorting, distance calculation, and disjoint set union operations.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/min-cost-to-connect-all-points/description/)
+
 ---
 {{< youtube 8VPIrqwQ8sQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1589: Maximum Sum Obtained of Any Permutation](https://grid47.xyz/leetcode/solution-1589-maximum-sum-obtained-of-any-permutation/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

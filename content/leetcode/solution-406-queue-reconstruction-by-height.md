@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/6plztg2nnjY/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/queue-reconstruction-by-height/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/406.webp" 
     alt="A series of people with heights, arranging themselves in a queue with each step glowing as they are positioned."
@@ -51,9 +49,41 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/406.md" >}}
+class Solution {
+public:
+    vector<vector<int>> reconstructQueue(vector<vector<int>>& people) {
+        
+        sort( people.begin(), people.end(), [] (vector<int> a, vector<int> b) {
+            
+            return a[0] > b[0] || ((a[0] == b[0]) && a[1] < b[1]);
+            
+        });
+        
+        vector<vector<int>> ans;
+        for(auto p: people) 
+            ans.insert(ans.begin() + p[1], p);
+        
+        return ans;
+        
+    }
+};
+
+
+
+### Problem Statement
+### Approach
+### Code Breakdown (Step by Step)
+### Complexity
+### Conclusion
+
+generate a 350 line SEO friendly explanation of this code.
+
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/queue-reconstruction-by-height/description/)
+
 ---
 {{< youtube 6plztg2nnjY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #409: Longest Palindrome](https://grid47.xyz/leetcode/solution-409-longest-palindrome/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

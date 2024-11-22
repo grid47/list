@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/N_iV4VXnq6g/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/minimum-number-of-operations-to-convert-time/description/)
-
 ---
 **Code:**
 
@@ -39,9 +37,82 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2224.md" >}}
+### Problem Statement
+
+The problem asks to convert a given `current` time to a `correct` time by applying a series of time adjustments. The allowed operations are:
+- Add 60 minutes
+- Add 15 minutes
+- Add 5 minutes
+- Add 1 minute
+
+The goal is to determine the minimum number of operations required to convert the `current` time to the `correct` time. 
+
+### Approach
+
+To solve this problem, we can break it down into a few simple steps:
+1. **Calculate the Time Difference**: The first step is to find the difference in minutes between the `current` time and the `correct` time.
+2. **Apply Operations**: We then use the available operations (60, 15, 5, and 1 minute) to reduce the time difference to zero, while minimizing the number of operations.
+3. **Count the Operations**: For each available operation, divide the remaining time difference by the operation value to determine how many times that operation can be performed, and then update the remaining time difference.
+
+By starting with the largest operation (60 minutes) and working our way down to the smallest (1 minute), we ensure that the number of operations is minimized.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Convert Time String to Minutes
+```cpp
+int getTime(string &s) {
+    return stoi(s.substr(0, 2)) * 60 + stoi(s.substr(3));
+}
+```
+- This helper function `getTime` converts the time string `s` in the format `"hh:mm"` into the total number of minutes since midnight. 
+- `stoi(s.substr(0, 2))` extracts the hour part of the time string, and `stoi(s.substr(3))` extracts the minute part. 
+- The total time is calculated by multiplying the hours by 60 (to convert hours into minutes) and adding the minutes.
+
+#### Step 2: Calculate the Difference Between Times
+```cpp
+int diff = getTime(correct) - getTime(current), ops[4] = {60, 15, 5, 1}, ans = 0;
+```
+- The variable `diff` represents the difference in minutes between `correct` and `current` times, calculated by calling `getTime` on both `correct` and `current`.
+- The array `ops` contains the allowed operations: 60 minutes, 15 minutes, 5 minutes, and 1 minute.
+- `ans` is initialized to 0 and will store the total number of operations needed.
+
+#### Step 3: Apply Operations to Minimize the Difference
+```cpp
+for (int op : ops) {
+    ans += diff / op;
+    diff %= op;
+}
+```
+- The loop iterates through each operation in the `ops` array.
+  - For each operation `op`, we calculate how many times that operation can be applied to the remaining `diff` by performing integer division (`diff / op`).
+  - The result is added to `ans`, which keeps track of the total number of operations.
+  - After applying the operation, the remaining difference is updated using the modulus operation (`diff %= op`), which calculates the remainder after applying that operation.
+
+#### Step 4: Return the Result
+```cpp
+return ans;
+```
+- Finally, we return `ans`, which contains the total number of operations required to convert `current` to `correct` using the available operations.
+
+### Complexity
+
+#### Time Complexity:
+- **O(1)**: The time complexity of this solution is constant. 
+  - The helper function `getTime` takes constant time (as it only processes the time string), and the loop iterates through a fixed number of operations (4 operations: 60, 15, 5, and 1).
+  - Therefore, the overall time complexity is **O(1)**, which means it runs in constant time regardless of the input size.
+
+#### Space Complexity:
+- **O(1)**: The space complexity is also constant, **O(1)**, because the solution uses only a fixed amount of extra space: a few integer variables and an array of size 4 to store the operations.
+
+### Conclusion
+
+This solution is both time-efficient and space-efficient, with constant time and space complexity. The key idea is to reduce the time difference between the `current` and `correct` times by applying the largest possible operations first. By iterating through the available operations (60, 15, 5, 1), we minimize the number of operations needed to reach the correct time. The solution is optimal for this problem, ensuring that we efficiently calculate the required number of operations in a minimal amount of time and space.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-operations-to-convert-time/description/)
+
 ---
 {{< youtube N_iV4VXnq6g >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2225: Find Players With Zero or One Losses](https://grid47.xyz/leetcode/solution-2225-find-players-with-zero-or-one-losses/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

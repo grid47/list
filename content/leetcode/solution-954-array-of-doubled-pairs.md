@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/Q0WKzdpR74o/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/array-of-doubled-pairs/description/)
-
 ---
 **Code:**
 
@@ -50,9 +48,85 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/954.md" >}}
+### Problem Statement
+
+Given an array of integers `arr`, the task is to determine if it is possible to reorder the elements such that each element `x` has a corresponding `2 * x` in the array. More specifically, for every element `x` in the array, we need to check if there exists a `2 * x` in the array, and if so, we need to "pair" them. The goal is to return `true` if the array can be rearranged in such a way, and `false` otherwise. This problem is commonly encountered when dealing with pairing elements with double relationships in a dataset.
+
+### Approach
+
+To solve this problem, we can follow a greedy approach. We need to ensure that for each element `x` in the array, there is a corresponding `2 * x` that can be paired with it. The approach involves:
+
+1. **Counting Elements**: We first count the occurrences of each element in the array using a hash map (unordered map).
+  
+2. **Sorting by Absolute Value**: Since the problem involves pairs of numbers where one is double the other, we need to consider numbers based on their absolute values. Sorting the keys (unique values of the array) based on their absolute values allows us to process smaller values first. This helps to handle potential conflicts when larger elements depend on smaller elements to form pairs.
+
+3. **Greedy Pairing**: We attempt to pair each element `x` with its double `2 * x`. If there are more occurrences of `x` than `2 * x`, then it is impossible to form valid pairs, so we return `false`. We decrement the count of `2 * x` as we successfully pair it with `x`.
+
+4. **Final Check**: After attempting to pair all elements, if any unpaired elements are left, we return `false`. If all elements can be paired successfully, we return `true`.
+
+### Code Breakdown (Step by Step)
+
+1. **Counting Element Occurrences**:
+   ```cpp
+   unordered_map<int, int> c;
+   for(int i : arr)
+       c[i]++;
+   ```
+   - We use an unordered map `c` to store the count of each element in the array `arr`. The key is the element, and the value is its frequency in the array.
+
+2. **Storing Unique Keys**:
+   ```cpp
+   vector<int> keys;
+   for(auto it: c)
+       keys.push_back(it.first);
+   ```
+   - We extract all the unique keys (elements) from the map into the vector `keys`.
+
+3. **Sorting the Keys by Absolute Value**:
+   ```cpp
+   sort(keys.begin(), keys.end(), [&](int a, int b){
+       return abs(a) < abs(b);
+   });
+   ```
+   - We sort the keys by their absolute values in ascending order. This ensures that we handle smaller values first, which is important because we need to find and pair each element `x` with `2 * x`.
+
+4. **Greedy Pairing Process**:
+   ```cpp
+   for(int x: keys) {
+       if(c[x] > c[2 * x])
+           return false;
+       c[2 * x] -= c[x];
+   }
+   ```
+   - For each element `x` in the sorted list, we check if there are more occurrences of `x` than its double `2 * x`. If so, it’s impossible to form pairs, and we return `false`.
+   - If we can form valid pairs, we decrement the count of `2 * x` by the number of occurrences of `x` because those occurrences of `x` are now paired with `2 * x`.
+
+5. **Final Result**:
+   ```cpp
+   return true;
+   ```
+   - If the entire process completes without encountering any issues, we return `true`, indicating that the array can be rearranged to satisfy the condition.
+
+### Complexity
+
+1. **Time Complexity**:
+   - Counting the occurrences of each element takes O(n), where `n` is the size of the array `arr`.
+   - Sorting the unique keys based on their absolute values takes O(k log k), where `k` is the number of unique elements in `arr`.
+   - The final loop where we pair elements takes O(k), as we process each unique element once.
+   - Overall, the time complexity is dominated by the sorting step, so it is O(k log k). Since `k` is at most `n`, the total time complexity is O(n log n).
+
+2. **Space Complexity**:
+   - The space complexity is O(n), as we store the counts of each element in the unordered map, and the list of unique keys requires space proportional to the number of distinct elements in the array.
+
+### Conclusion
+
+This solution efficiently solves the problem by using a greedy approach with a hash map to count element occurrences and a sorting step to ensure that smaller elements are processed first. By sorting the array based on absolute values and processing each element in increasing order, we ensure that the pairing is done optimally. The overall time complexity of O(n log n) is efficient enough for large inputs, and the space complexity of O(n) is also manageable. The solution is both intuitive and effective for solving the problem of pairing elements with their doubles in an array.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/array-of-doubled-pairs/description/)
+
 ---
 {{< youtube Q0WKzdpR74o >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #955: Delete Columns to Make Sorted II](https://grid47.xyz/leetcode/solution-955-delete-columns-to-make-sorted-ii/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

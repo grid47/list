@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/h7FESSswnR8/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/total-distance-traveled/description/)
-
 ---
 **Code:**
 
@@ -43,9 +41,95 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2739.md" >}}
+### Problem Statement
+
+The task is to calculate the total distance traveled by a vehicle based on the amount of fuel (`mt`) and the number of available refills (`at`). The vehicle consumes fuel in chunks, where each chunk (up to 5 units) contributes 10 units of distance per fuel unit. When the vehicle uses a full chunk of 5 units of fuel, and if refills are available, it can refill 1 unit of fuel from the available refills. The goal is to compute the total distance traveled given these conditions.
+
+### Approach
+
+The approach involves repeatedly consuming fuel in chunks and adjusting the total distance covered accordingly. For each iteration, we calculate the amount of fuel to be used (up to 5 units). If we use a full chunk of 5 units and refills are still available, we increment the fuel by 1 from the refill count (`at`) and decrease the refill count. This process continues until we exhaust the available fuel (`mt`). 
+
+### Code Breakdown (Step by Step)
+
+```cpp
+class Solution {
+public:
+    int distanceTraveled(int mt, int at) {        
+        int net = 0;                   // Step 1: Initialize total distance covered to zero.
+        
+        while(mt > 0) {                // Step 2: Continue until all fuel is consumed.
+            int red = min(5, mt);      // Step 3: Consume up to 5 units of fuel or remaining fuel.
+            mt -= red;                 // Step 4: Reduce the available fuel by `red`.
+            net += red * 10;           // Step 5: Increase total distance by `red * 10`.
+            
+            if(red == 5 && at > 0) {   // Step 6: If a full 5-unit chunk is used and refills are available:
+                mt += 1;               //         - Add 1 unit of fuel from refill.
+                at--;                  //         - Decrease the refill count.
+            }
+        }
+        
+        return net;                    // Step 7: Return the total distance traveled.
+    }
+};
+```
+
+#### Step-by-Step Breakdown
+
+1. **Initialize Variables**:
+   ```cpp
+   int net = 0;
+   ```
+   The `net` variable will hold the total distance traveled. It starts at zero.
+
+2. **Loop Until Fuel is Depleted**:
+   ```cpp
+   while(mt > 0)
+   ```
+   This loop iterates as long as there is fuel (`mt > 0`).
+
+3. **Calculate Fuel Consumed in Current Iteration**:
+   ```cpp
+   int red = min(5, mt);
+   ```
+   The variable `red` holds the amount of fuel to consume, which is the smaller of 5 units or the remaining fuel (`mt`).
+
+4. **Update Fuel and Distance**:
+   ```cpp
+   mt -= red;
+   net += red * 10;
+   ```
+   - The total distance is updated based on the fuel consumed (`red * 10`).
+   - The fuel is reduced by the amount consumed in this iteration.
+
+5. **Refill if Possible**:
+   ```cpp
+   if(red == 5 && at > 0)
+   ```
+   - If a full chunk of 5 units was used and refills are still available (`at > 0`), 1 unit of fuel is added back to `mt`, and the refill count is decreased by 1.
+
+6. **Return Total Distance**:
+   ```cpp
+   return net;
+   ```
+   After the loop ends, the function returns the total distance traveled (`net`).
+
+### Complexity Analysis
+
+#### Time Complexity
+- The time complexity is **O(mt / 5)** because each iteration reduces the fuel by up to 5 units. This makes the loop iterate at most `mt / 5` times.
+
+#### Space Complexity
+- The space complexity is **O(1)**, as we are only using a fixed amount of additional space to store variables.
+
+### Conclusion
+
+This solution efficiently calculates the total distance traveled by consuming fuel in chunks and leveraging refills when available. By limiting each iteration to at most 5 units of fuel and only refilling under specific conditions, the solution ensures minimal operations and handles large inputs effectively. The approach balances the need for accurate distance calculation with fuel management, providing an optimal solution in linear time relative to the available fuel.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/total-distance-traveled/description/)
+
 ---
 {{< youtube h7FESSswnR8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2740: Find the Value of the Partition](https://grid47.xyz/leetcode/solution-2740-find-the-value-of-the-partition/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

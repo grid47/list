@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/b46PWRWHFp4/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/check-if-strings-can-be-made-equal-with-operations-i/description/)
-
 ---
 **Code:**
 
@@ -39,9 +37,69 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2839.md" >}}
+### Problem Statement
+
+The problem requires us to determine if two strings `s1` and `s2` can be made equal by performing a specific set of swap operations. You are allowed to swap two characters within each string under the following conditions:
+1. Swap the first and third characters of `s1`.
+2. Swap the second and fourth characters of `s1`.
+
+The goal is to check if after these operations (or no operation at all), the two strings `s1` and `s2` can become equal.
+
+### Approach
+
+The solution revolves around checking if the strings `s1` and `s2` can be made equal through a series of swaps. There are a few considerations to keep in mind:
+1. **Direct Equality**: If `s1` is already equal to `s2`, no swaps are needed.
+2. **First Swap Check**: If the first and third characters of `s1` are not equal to the corresponding characters of `s2`, we attempt to swap these characters in `s1` and then check for equality.
+3. **Second Swap Check**: If the second and fourth characters are different between the two strings, we attempt to swap these and again check for equality.
+4. **Final Check**: After attempting the necessary swaps, if the two strings are still not equal, then it is impossible to make them equal through the allowed swap operations.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Initial Equality Check
+```cpp
+if(s1 == s2) return true;
+```
+- The first step is to check if the strings `s1` and `s2` are already equal. If they are, no swaps are necessary, so we immediately return `true`.
+
+#### Step 2: Swap the First and Third Characters
+```cpp
+if(s1[0] != s2[0]) swap(s1[0], s1[2]);
+if(s1 == s2) return true;
+```
+- If the first character of `s1` is not equal to the first character of `s2`, we perform the first swap: swapping the first and third characters of `s1`.
+- After the swap, we check if the two strings are equal. If they are, we return `true`.
+
+#### Step 3: Swap the Second and Fourth Characters
+```cpp
+if(s1[1] != s2[1]) swap(s1[1], s1[3]);
+if(s1 == s2) return true;
+```
+- If the second character of `s1` is not equal to the second character of `s2`, we perform the second swap: swapping the second and fourth characters of `s1`.
+- Again, after performing this swap, we check if the strings are now equal. If they are, we return `true`.
+
+#### Step 4: Final Check
+```cpp
+return false;
+```
+- If none of the conditions above resulted in the strings becoming equal, we return `false`, as it means the two strings cannot be made equal through the allowed swap operations.
+
+### Complexity
+
+#### Time Complexity:
+- **O(1)**, because we are only performing a constant number of comparisons and swaps. The strings `s1` and `s2` are assumed to have a fixed length of 4 characters, so the operations do not depend on the size of the input.
+
+#### Space Complexity:
+- **O(1)**, because we are using only a fixed amount of extra space to perform the swaps and comparisons.
+
+### Conclusion
+
+This solution solves the problem in constant time and space, making it highly efficient. The algorithm performs a few key swap checks and equality comparisons to determine if the two strings can be made equal using the allowed swap operations. If neither of the two swaps results in equality, it returns `false`, indicating that the two strings cannot be made identical. This approach is optimal for small-sized strings like the ones in this problem, where the length is limited to 4 characters.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-strings-can-be-made-equal-with-operations-i/description/)
+
 ---
 {{< youtube b46PWRWHFp4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2840: Check if Strings Can be Made Equal With Operations II](https://grid47.xyz/leetcode/solution-2840-check-if-strings-can-be-made-equal-with-operations-ii/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

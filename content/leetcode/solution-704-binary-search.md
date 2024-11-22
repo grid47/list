@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/PissfOvEH7Q/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/binary-search/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/704.webp" 
     alt="A sorted array where binary search is applied, each step softly glowing to highlight the search process."
@@ -47,9 +45,91 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/704.md" >}}
+### Problem Statement:
+The problem is to implement a function `search` that performs a binary search on a sorted array of integers `nums` to find a target element. The function should return the index of the target element if found, or `-1` if the target is not present in the array. Binary search is an efficient algorithm that allows us to search for an element in a sorted array in **O(log n)** time complexity.
+
+### Approach:
+This problem leverages the **binary search algorithm**, which works by repeatedly dividing the search interval in half. The basic idea is to start with the entire array, check the middle element, and then decide whether to continue searching in the left half or the right half based on the comparison between the middle element and the target. The key advantage of binary search is its logarithmic time complexity, making it very efficient for large datasets.
+
+#### Steps:
+1. **Initialization**: Define two pointers, `l` (left) and `r` (right), to represent the boundaries of the current search range.
+2. **Middle Element**: Calculate the middle index `mid` of the current search range.
+3. **Comparison**:
+   - If `nums[mid]` is equal to the target, return the index `mid`.
+   - If `nums[mid]` is less than the target, adjust the left pointer `l` to `mid + 1`, narrowing the search to the right half.
+   - If `nums[mid]` is greater than the target, adjust the right pointer `r` to `mid - 1`, narrowing the search to the left half.
+4. **Termination**: The loop continues as long as `l <= r`, and the search ends when the target is found or the search range becomes invalid (`l > r`).
+5. **Return -1**: If the target is not found after the loop terminates, return `-1`.
+
+### Code Breakdown (Step by Step):
+
+#### Step 1: Define the Function Signature
+```cpp
+int search(vector<int>& nums, int target) {
+```
+The function `search` takes two parameters:
+- A vector `nums` representing the sorted array of integers.
+- An integer `target` representing the element we need to search for.
+
+#### Step 2: Initialize Left and Right Pointers
+```cpp
+int l = 0, r = nums.size() - 1;
+```
+We initialize two pointers:
+- `l` (left) starts at index `0`, which represents the beginning of the array.
+- `r` (right) starts at index `nums.size() - 1`, representing the end of the array.
+
+#### Step 3: Implement the Binary Search Loop
+```cpp
+while(l <= r) {
+```
+We enter a `while` loop, which continues as long as `l` is less than or equal to `r`. The loop keeps halving the search range until the target is found or the range becomes invalid (i.e., `l > r`).
+
+#### Step 4: Calculate the Middle Element
+```cpp
+int mid = l + (r - l) / 2;
+```
+To prevent potential overflow issues when calculating the middle index, we use the formula `mid = l + (r - l) / 2`. This ensures that we correctly calculate the middle index without exceeding the bounds of the array.
+
+#### Step 5: Compare the Middle Element with the Target
+```cpp
+if(nums[mid] == target) return mid;
+```
+We compare `nums[mid]` with `target`. If they are equal, we return the index `mid`, which represents the position of the target element in the array.
+
+#### Step 6: Adjust the Left or Right Pointer
+```cpp
+if(nums[mid] < target) l = mid + 1;
+else r = mid - 1;
+```
+- If `nums[mid]` is less than `target`, it means the target must be in the right half of the array, so we adjust `l` to `mid + 1`.
+- If `nums[mid]` is greater than `target`, the target must be in the left half of the array, so we adjust `r` to `mid - 1`.
+
+#### Step 7: Return -1 if Target is Not Found
+```cpp
+return -1;
+```
+If the loop terminates without finding the target (i.e., `l > r`), we return `-1` to indicate that the target is not in the array.
+
+### Complexity Analysis:
+
+#### Time Complexity:
+- **O(log n)**: In each iteration of the binary search, we cut the search range in half. Therefore, the time complexity is logarithmic in terms of the size of the input array. If the array has `n` elements, the binary search algorithm takes **O(log n)** time to search for the target.
+
+#### Space Complexity:
+- **O(1)**: The space complexity is constant because the algorithm only uses a fixed amount of extra space (i.e., the variables `l`, `r`, and `mid`), regardless of the size of the input array. No additional data structures (like stacks or queues) are used.
+
+### Conclusion:
+
+The binary search algorithm is a highly efficient method for searching in sorted arrays. By repeatedly halving the search space, it quickly narrows down the possible locations of the target element. This implementation achieves **O(log n)** time complexity, making it suitable for large datasets. Its constant space complexity ensures minimal memory usage. This approach is widely used in problems involving sorted arrays or ranges, and it is a fundamental algorithm in computer science. 
+
+This code is ideal for applications that require quick lookups in sorted data, such as search engines, databases, and other systems where fast access to information is critical.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/binary-search/description/)
+
 ---
 {{< youtube PissfOvEH7Q >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #705: Design HashSet](https://grid47.xyz/leetcode/solution-705-design-hashset/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

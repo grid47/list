@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/NNSzElew804/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/length-of-the-longest-subsequence-that-sums-to-target/description/)
-
 ---
 **Code:**
 
@@ -49,9 +47,88 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2915.md" >}}
+### Problem Statement
+The task is to find the longest subsequence within a given array of integers `nums` where the sum of the subsequence elements equals a specified target value `sum`. A subsequence is a sequence derived from the array by deleting some or no elements without changing the order of the remaining elements. The goal is to maximize the length of the subsequence while ensuring its sum equals `sum`.
+
+### Approach
+
+The solution leverages a dynamic programming approach to efficiently solve this problem. Here's how we can think about the problem:
+
+1. **Dynamic Programming Table (DP Table)**: 
+   - We will create a DP table, `dp[i][j]`, where `i` represents the number of elements considered so far from the array `nums`, and `j` represents the target sum.
+   - The value stored at `dp[i][j]` will represent the length of the longest subsequence that can be formed using the first `i` elements of the array such that the sum of the subsequence is equal to `j`.
+
+2. **Base Case**:
+   - If the target sum `j = 0`, then the longest subsequence with sum 0 is the empty subsequence, so `dp[i][0] = 0` for all `i`. This is because the sum of zero can always be achieved by an empty subsequence.
+   
+3. **Transition (Recurrence)**:
+   - For each element `nums[i - 1]` in the array, we have two choices:
+     1. We can **exclude** the current element from the subsequence. In this case, the best result is the same as the result from the previous element, i.e., `dp[i][j] = dp[i - 1][j]`.
+     2. We can **include** the current element in the subsequence if it doesn’t exceed the target sum. If `nums[i - 1] <= j`, and if including this element leads to a valid subsequence (i.e., `dp[i - 1][j - nums[i - 1]] != -1`), we can update the DP value as: `dp[i][j] = max(1 + dp[i - 1][j - nums[i - 1]], dp[i][j])`. The `1 + dp[i - 1][j - nums[i - 1]]` part indicates that we are including the current element, hence we add `1` to the length of the subsequence.
+
+4. **Final Answer**:
+   - The final value of `dp[n][sum]` will contain the length of the longest subsequence whose sum equals the target `sum`. If no such subsequence exists, the value will remain `-1`.
+
+### Code Breakdown (Step by Step)
+
+1. **Initialization**:
+   - We start by defining `n`, the size of the `nums` array. 
+   - A 2D DP array `dp` of size `(n + 1) x (sum + 1)` is created, and all entries are initialized to `-1`. This signifies that initially, no subsequence sum has been found.
+   
+   ```cpp
+   int n = nums.size();
+   vector<vector<int>> dp(n + 1, vector<int>(sum + 1, -1));
+   ```
+
+2. **Base Case Handling**:
+   - We then initialize the first column of the DP table (where the sum is `0`) to `0`. This is because a subsequence of length `0` always has a sum of `0`.
+   
+   ```cpp
+   for (int i = 0; i < n + 1; i++)
+       dp[i][0] = 0;
+   ```
+
+3. **Filling the DP Table**:
+   - We loop through each element of the array (`i` from `1` to `n`) and for each element, we loop through possible sums (`j` from `1` to `sum`). 
+   - For each pair `(i, j)`, we check two possibilities:
+     1. The current element is excluded from the subsequence.
+     2. The current element is included, and we update the DP value accordingly.
+   
+   ```cpp
+   for (int i = 1; i < n + 1; i++) {
+       for (int j = 1; j < sum + 1; j++) {
+           dp[i][j] = dp[i - 1][j];
+           if (j >= nums[i - 1] && dp[i - 1][j - nums[i - 1]] != -1)
+               dp[i][j] = max(1 + dp[i - 1][j - nums[i - 1]], dp[i][j]);
+       }
+   }
+   ```
+
+4. **Returning the Result**:
+   - After the table is completely filled, the value at `dp[n][sum]` represents the length of the longest subsequence with sum equal to `sum`.
+   
+   ```cpp
+   return dp[n][sum];
+   ```
+
+### Complexity Analysis
+
+1. **Time Complexity**:
+   - The time complexity is dominated by the double loop iterating over all elements of the array and all possible sums from `1` to `sum`. 
+   - Thus, the time complexity is `O(n * sum)`, where `n` is the number of elements in the `nums` array and `sum` is the target sum.
+
+2. **Space Complexity**:
+   - The space complexity is also `O(n * sum)` due to the 2D DP table that stores intermediate results for all subproblems. This is the space required to store the DP table.
+
+### Conclusion
+
+The provided solution uses dynamic programming to efficiently find the length of the longest subsequence with a given sum. The solution correctly handles both the inclusion and exclusion of each element in the array for all possible sums and updates the DP table accordingly. The approach ensures that the problem is solved within the time and space limits for reasonably large inputs. By utilizing a DP table, the solution avoids brute-forcing through all possible subsequences, which would be computationally expensive.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/length-of-the-longest-subsequence-that-sums-to-target/description/)
+
 ---
 {{< youtube NNSzElew804 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2917: Find the K-or of an Array](https://grid47.xyz/leetcode/solution-2917-find-the-k-or-of-an-array/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

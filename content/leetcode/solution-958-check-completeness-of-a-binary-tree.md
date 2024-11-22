@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/9Jhtrwxp9ME/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/check-completeness-of-a-binary-tree/description/)
-
 ---
 **Code:**
 
@@ -52,9 +50,74 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/958.md" >}}
+### Problem Statement
+
+The problem is to determine if a binary tree is a **complete binary tree**. A complete binary tree is defined as a binary tree in which every level, except possibly the last, is completely filled, and all nodes are as far left as possible. In other words, all nodes on every level, except the last, must have two children, and the last level must be filled from left to right.
+
+### Approach
+
+To check if a binary tree is complete, we can perform a **level-order traversal** using a **queue** (Breadth-First Search). The key idea is to traverse the tree level by level and ensure that there are no missing nodes in between. The steps of the approach are as follows:
+
+1. **Start with the root node**: We begin by pushing the root node of the tree into the queue.
+2. **Perform a level-order traversal**: For each node in the tree, we check its left and right children. We push the left and right children into the queue if they exist.
+3. **Null node handling**: If a node is missing (i.e., null), it indicates a potential violation of the complete binary tree property. However, we can only tolerate such null nodes if they occur at the end of the traversal, after all nodes on the current level have been processed.
+4. **Validation**: After filling the queue, we continue to traverse the remaining nodes in the queue. If any non-null node appears after encountering a null node, the tree is not complete. If no such violations occur, then the tree is a complete binary tree.
+
+By using this method, we ensure that the tree's nodes are processed in a way that checks for completeness, and we can easily return whether the tree is complete or not.
+
+### Code Breakdown (Step by Step)
+
+```cpp
+class Solution {
+public:
+    bool isCompleteTree(TreeNode* root) {
+        vector<TreeNode*> q;  // Initialize a queue to store nodes of the tree
+        q.push_back(root);     // Push the root node to the queue
+        int i = 0;             // Initialize an index to track the nodes in the queue
+```
+
+1. **Initialize the queue**: The `q` vector is used as a queue to perform a level-order traversal of the tree. We start by pushing the root node into the queue.
+   
+```cpp
+        while(i < q.size() && q[i]) {  // Traverse the tree while there are nodes in the queue
+            q.push_back(q[i]->left);   // Push the left child of the current node
+            q.push_back(q[i]->right);  // Push the right child of the current node
+            i++;  // Increment the index to move to the next node
+        }
+```
+
+2. **Level-order traversal**: The first `while` loop iterates through the queue, checking each node and pushing its children (left and right) into the queue. If a node is non-null, its children are added to the queue for the next iteration.
+
+```cpp
+        while(i < q.size() && !q[i])  // Check if the current node is null
+            i++;  // Increment the index to skip null nodes
+```
+
+3. **Handle null nodes**: The second `while` loop skips any null nodes in the queue. These null nodes are allowed only if they are at the end of the queue. If they appear in the middle of the queue, it means the tree is not complete.
+
+```cpp
+        return i == q.size();  // If the index matches the size of the queue, the tree is complete
+    }
+};
+```
+
+4. **Final check**: Finally, the function checks if the index `i` matches the size of the queue. If they are equal, it means no nodes are left after a null node, and the tree is complete. Otherwise, the tree is not complete.
+
+### Complexity
+
+- **Time Complexity**: The time complexity of this solution is **O(n)**, where `n` is the number of nodes in the tree. The reason for this is that we visit each node in the tree exactly once during the level-order traversal. Each node is pushed and popped from the queue once, and the while loops run for all nodes.
+  
+- **Space Complexity**: The space complexity is also **O(n)** due to the queue, which stores all the nodes of the tree at most once. In the worst case, the queue will store all the nodes of the last level, which is `n/2` nodes, leading to an overall space complexity of **O(n)**.
+
+### Conclusion
+
+This solution leverages a level-order traversal to efficiently determine whether a binary tree is a complete binary tree. The approach ensures that we traverse the tree in a systematic way while adhering to the properties of completeness. By using a queue to handle the nodes and their children, we can efficiently check for missing nodes and determine if the tree is complete or not. This method is optimal in terms of time and space complexity for this problem.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/check-completeness-of-a-binary-tree/description/)
+
 ---
 {{< youtube 9Jhtrwxp9ME >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #959: Regions Cut By Slashes](https://grid47.xyz/leetcode/solution-959-regions-cut-by-slashes/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

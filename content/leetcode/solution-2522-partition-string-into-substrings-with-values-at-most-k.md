@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/XQh9V8PEIiI/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/partition-string-into-substrings-with-values-at-most-k/description/)
-
 ---
 **Code:**
 
@@ -55,9 +53,111 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2522.md" >}}
+### Problem Statement
+
+Given a string `s` consisting of digits, and an integer `k`, the task is to partition the string into the minimum number of parts such that each part represents a number less than or equal to `k`. In each partition, the number formed by the digits should be valid (i.e., no leading zeros), and the goal is to minimize the number of partitions needed. If it's impossible to partition the string in such a way that each part is less than or equal to `k`, return `-1`.
+
+### Approach
+
+To solve this problem, we can approach it using **Dynamic Programming (DP)**. Here's the detailed breakdown of the approach:
+
+1. **Representation of the Problem**:
+   - We will traverse the string `s` from left to right, at each step considering if we can form a valid partition from the current position `idx` up to some further position `j`.
+   - For each partition, we will check if the number formed by the substring is less than or equal to `k`. If yes, we will consider it as a valid partition and continue the search for the next partitions.
+
+2. **Recursive DP Approach**:
+   - The idea is to use a recursive function `dp(idx, k, num)` where `idx` represents the current index in the string, `k` is the maximum allowable value for each number, and `num` is the number formed by the substring so far.
+   - The recursion will try to extend the number by including more digits, checking if the number stays within the bounds of `k`. If not, it will start a new partition.
+
+3. **Memoization**:
+   - We use memoization to store the results of previously computed subproblems. This will help avoid redundant calculations and speed up the process, especially for overlapping subproblems.
+
+4. **Base Case and Recursive Case**:
+   - The base case occurs when `idx` reaches the end of the string, which means we’ve found a valid partitioning, so we return `1` (indicating that one more partition is added).
+   - For each index, we try to either extend the current partition or start a new one if the number exceeds the allowed limit `k`.
+
+5. **Early Exit for Invalid Numbers**:
+   - If a digit in the string is greater than `k`, it's impossible to form a valid number, and we immediately return `-1`.
+
+### Code Breakdown (Step by Step)
+
+#### Class and Member Variables:
+
+```cpp
+class Solution {
+public:
+    string str;
+    vector<map<int, int>> mem;
+```
+- We define a class `Solution`, which contains a string `str` representing the input string, and `mem` which is a vector of maps used for memoization. Each map at index `i` stores the results for various numbers that can be formed starting from position `i` in the string.
+
+#### Recursive DP Function:
+
+```cpp
+    int dp(int idx, int k, int num) {
+        if(idx == str.size()) return 1;
+        if(mem[idx].count(num)) return mem[idx][num];
+```
+- The function `dp` is called with `idx` representing the current index in the string, `k` representing the maximum allowable number, and `num` representing the current number formed by the digits processed so far.
+- If we reach the end of the string (`idx == str.size()`), it means we've successfully partitioned the string, so we return `1`.
+- If the result for the current subproblem (starting from `idx` and forming a number `num`) is already computed, we return the stored result from the memoization map.
+
+```cpp
+        int ans = 1 + dp(idx + 1, k, str[idx] - '0');
+```
+- We attempt to form a partition starting from the current index. The recursive call `dp(idx + 1, k, str[idx] - '0')` checks the number formed by just the current digit (this is the smallest partition we can form).
+- We increment the answer by 1, since we are considering a new partition.
+
+```cpp
+        long long net = (long long)num * 10 + (str[idx] - '0');
+        if(net <= k) {
+            ans = min(ans, dp(idx + 1, k, net));
+        }
+```
+- We attempt to extend the current number by adding the next digit (`str[idx]`). The value of `net` is calculated as the number formed by the current number `num` multiplied by 10 (to shift the digits left) plus the current digit (`str[idx] - '0'`).
+- If `net` is less than or equal to `k`, we make a recursive call to `dp(idx + 1, k, net)` to continue building the current number. We update the `ans` by taking the minimum of the current `ans` and the result of the recursive call, ensuring that we are minimizing the number of partitions.
+
+```cpp
+        return mem[idx][num] = ans;
+    }
+```
+- After exploring both options (continuing with the current number or starting a new one), we store the result for the current subproblem in `mem[idx][num]`.
+
+#### Main Function:
+
+```cpp
+    int minimumPartition(string s, int k) {
+        str = s;
+        for(char x: s)
+            if(x - '0' > k) return -1;
+        mem.resize(s.size());
+        int ans = dp(0, k, 0);
+        return ans;
+    }
+```
+- The function `minimumPartition` starts by initializing the string `str` with the input string `s`.
+- It checks if any digit in the string is greater than `k`. If such a digit exists, it’s impossible to form a valid partition, and we return `-1` immediately.
+- We then initialize the memoization table `mem` to store the results for each position in the string.
+- Finally, we call the `dp` function starting from index 0 with an initial `num` of 0, which represents the initial state with no digits processed yet. The result of `dp(0, k, 0)` is returned as the answer.
+
+### Complexity
+
+#### Time Complexity:
+- The time complexity is driven by the number of recursive calls and the size of the memoization table. The function `dp` explores each index `idx` and each possible value of `num` that can be formed from that position.
+- Since the recursion is bounded by the length of the string `n` and the number of possible values for `num` is limited (because `num` can be at most `k`), the time complexity is \( O(n \times k) \), where `n` is the length of the string and `k` is the maximum allowable value for each partition.
+
+#### Space Complexity:
+- The space complexity is \( O(n \times k) \), where `n` is the length of the string and `k` is the maximum value for each partition. This space is used for storing the memoization table `mem` and recursive function calls.
+
+### Conclusion
+
+This solution uses dynamic programming with memoization to minimize the number of partitions needed to break the string `s` into valid parts, each less than or equal to `k`. By recursively trying to extend the current number or start a new partition, we efficiently compute the minimum number of partitions. Memoization helps optimize the solution by storing results of overlapping subproblems, reducing redundant computations. The approach works well within the problem constraints, providing an optimal solution with a time complexity of \( O(n \times k) \).
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/partition-string-into-substrings-with-values-at-most-k/description/)
+
 ---
 {{< youtube XQh9V8PEIiI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2523: Closest Prime Numbers in Range](https://grid47.xyz/leetcode/solution-2523-closest-prime-numbers-in-range/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

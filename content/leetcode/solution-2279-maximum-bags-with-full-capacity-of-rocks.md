@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/8s25uCT7vhY/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/maximum-bags-with-full-capacity-of-rocks/description/)
-
 ---
 **Code:**
 
@@ -46,9 +44,152 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2279.md" >}}
+### Problem Statement
+
+In this problem, we are given two lists: `cap` and `rock`. `cap[i]` represents the capacity of the `i`-th bag, and `rock[i]` represents the number of rocks already present in that `i`-th bag. We are also given an integer `cnt` that denotes the number of additional rocks we can place into the bags.
+
+Our task is to find the maximum number of bags that can be completely filled using the available `cnt` rocks. We need to determine the maximum number of bags we can fill by utilizing the rocks, with the condition that the number of rocks we place in a bag should not exceed the capacity of the bag.
+
+### Approach
+
+The key idea behind solving this problem is to first determine the number of available spaces in each bag, which is the difference between the bag's capacity and the number of rocks already in it. After calculating the available space in each bag, we want to prioritize filling the bags that require fewer rocks to be filled.
+
+We can achieve this by sorting the bags based on the available space and trying to fill the bags starting from the one that requires the least amount of rocks. By doing so, we can maximize the number of bags filled with the available rocks.
+
+The steps for solving this problem are as follows:
+
+1. **Calculate the space left in each bag**: For each bag, calculate the difference between its capacity and the number of rocks already in it. This will give us the space available in each bag for more rocks.
+
+2. **Use a priority queue (min-heap)**: A priority queue can help efficiently retrieve the bags with the least space required. By using a min-heap, we can always pop the smallest available space, ensuring that we fill the bags with fewer requirements first.
+
+3. **Fill the bags**: While there are still rocks left (`cnt > 0`), we continue filling the bags in the order of the available space, as long as the number of rocks we have is enough to fill the current bag.
+
+4. **Return the result**: Once we have exhausted the available rocks or filled all possible bags, we return the number of bags filled.
+
+### Code Breakdown (Step by Step)
+
+Let’s go through the code step by step to understand how the solution is implemented.
+
+#### Step 1: Initialize the Priority Queue
+
+```cpp
+priority_queue<int, vector<int>, greater<int>> pq;
+```
+
+- We use a **priority queue** (min-heap) to efficiently manage the available spaces in the bags. In C++, the default behavior of `priority_queue` is a max-heap. To make it a min-heap (which allows us to access the smallest element first), we use `greater<int>` as the comparison function.
+
+#### Step 2: Populate the Priority Queue with Available Spaces
+
+```cpp
+for(int i = 0; i < n; i++)
+    pq.push(cap[i] - rock[i]);
+```
+
+- We iterate through all the bags (`i` from `0` to `n-1`).
+- For each bag, we calculate the available space as `cap[i] - rock[i]`, which is the number of rocks that can still be added to the bag.
+- We push this available space into the priority queue `pq`. The priority queue will store the available spaces in increasing order, with the smallest available space at the top.
+
+#### Step 3: Fill the Bags
+
+```cpp
+int res = 0;
+
+while(!pq.empty() && cnt >= pq.top()) {
+    res++;
+    cnt -= pq.top();
+    pq.pop();
+}
+```
+
+- We initialize a variable `res` to track the number of bags we can fill.
+- In the `while` loop, we check whether there are still bags with available space (`pq.empty()`), and whether we have enough rocks to fill the smallest bag (`cnt >= pq.top()`).
+- If both conditions are true, we:
+  - Increment `res` to indicate that we are filling one more bag.
+  - Decrease the number of available rocks (`cnt -= pq.top()`).
+  - Remove the current bag from the priority queue (`pq.pop()`).
+- This loop continues until we run out of bags or we no longer have enough rocks to fill the next smallest bag.
+
+#### Step 4: Return the Result
+
+```cpp
+return res;
+```
+
+- After the loop finishes, we return the value of `res`, which represents the maximum number of bags that can be filled.
+
+### Complexity
+
+#### Time Complexity
+
+1. **Filling the priority queue**: In the first loop, we iterate over all the bags to calculate the available space and push it into the priority queue. This takes **O(n log n)** time, where `n` is the number of bags, because each insertion into the priority queue takes **O(log n)** time.
+   
+2. **Popping from the priority queue**: In the second loop, we pop elements from the priority queue while we still have rocks and can fill bags. In the worst case, we will pop all the bags from the priority queue, which also takes **O(n log n)** time.
+
+Thus, the total time complexity is:
+- **O(n log n)** due to both the insertion and popping operations on the priority queue.
+
+#### Space Complexity
+
+- The space complexity is determined by the size of the priority queue, which stores the available spaces for each bag. Therefore, the space complexity is:
+- **O(n)**, where `n` is the number of bags.
+
+### Example Walkthrough
+
+Let’s go through an example to understand how the solution works.
+
+#### Example 1
+
+```cpp
+vector<int> cap = {5, 7, 3};
+vector<int> rock = {2, 5, 1};
+int cnt = 6;
+```
+
+1. First, we calculate the available space in each bag:
+   - Bag 1: `cap[0] - rock[0] = 5 - 2 = 3`
+   - Bag 2: `cap[1] - rock[1] = 7 - 5 = 2`
+   - Bag 3: `cap[2] - rock[2] = 3 - 1 = 2`
+
+2. We then push these available spaces into the priority queue: `pq = [2, 2, 3]`.
+
+3. We start filling the bags:
+   - First, we fill the bag with 2 available spaces. We have enough rocks (`cnt = 6`), so we fill the bag, reducing `cnt` to 4.
+   - Next, we fill another bag with 2 available spaces. We have enough rocks (`cnt = 4`), so we fill the bag, reducing `cnt` to 2.
+   - Finally, we fill the bag with 3 available spaces. We have enough rocks (`cnt = 2`), so we cannot fill this bag, and the process stops here.
+
+4. The result is `res = 2` because we were able to fill two bags.
+
+#### Example 2
+
+```cpp
+vector<int> cap = {10, 20, 30};
+vector<int> rock = {1, 2, 3};
+int cnt = 50;
+```
+
+1. We calculate the available space:
+   - Bag 1: `cap[0] - rock[0] = 10 - 1 = 9`
+   - Bag 2: `cap[1] - rock[1] = 20 - 2 = 18`
+   - Bag 3: `cap[2] - rock[2] = 30 - 3 = 27`
+
+2. We push these available spaces into the priority queue: `pq = [9, 18, 27]`.
+
+3. We fill the bags:
+   - We fill the first bag with 9 available spaces (`cnt = 50`), reducing `cnt` to 41.
+   - We fill the second bag with 18 available spaces (`cnt = 41`), reducing `cnt` to 23.
+   - We fill the third bag with 27 available spaces (`cnt = 23`), reducing `cnt` to -4.
+
+4. The result is `res = 3` because we successfully filled all three bags.
+
+### Conclusion
+
+The solution efficiently calculates the maximum number of bags that can be filled using the available rocks by leveraging a priority queue (min-heap). This ensures that we always prioritize filling the bags with the least amount of required rocks. The solution has a time complexity of **O(n log n)**, making it scalable for larger input sizes. The space complexity is **O(n)** due to the priority queue used to store the available spaces of the bags. This solution is both efficient and easy to understand.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-bags-with-full-capacity-of-rocks/description/)
+
 ---
 {{< youtube 8s25uCT7vhY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2280: Minimum Lines to Represent a Line Chart](https://grid47.xyz/leetcode/solution-2280-minimum-lines-to-represent-a-line-chart/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

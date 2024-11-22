@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/lGxiqzurnNU/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/power-of-two/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/231.webp" 
     alt="A series of glowing numbers doubling, each number expanding into the next power of two."
@@ -40,9 +38,85 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/231.md" >}}
+### 🚀 Problem Statement
+
+In this problem, you need to check if a given integer `n` is a power of two. A number is a power of two if it can be expressed as \( 2^k \) where \( k \) is a non-negative integer. For example, the numbers 1, 2, 4, 8, 16, 32, etc., are all powers of two. Your task is to find an efficient way to determine if the number `n` is one of these powers.
+
+---
+
+### 🧠 Approach
+
+We can solve this problem efficiently using **binary manipulation**. Powers of two have a very distinct property in their binary representation: they only have **one bit set to 1**. For example:
+- \( 1 \) in binary is `0001`
+- \( 2 \) in binary is `0010`
+- \( 4 \) in binary is `0100`
+- \( 8 \) in binary is `1000`
+
+This pattern holds true for all powers of two. When you subtract 1 from any of these numbers, all the bits to the right of the leftmost `1` bit (including the leftmost `1` bit) become `1`. For example:
+- \( 4 - 1 = 3 \), which is `0011` in binary.
+- A bitwise **AND** between `4` (binary `0100`) and `3` (binary `0011`) gives `0000`.
+
+This property can be leveraged in our solution. Specifically:
+- If `n` is a power of two, the result of `n & (n - 1)` will be `0`. This is because the number `n` will only have one `1` bit in its binary form.
+
+So, the steps to solve the problem are:
+1. Check if `n` is greater than 0 (because powers of two are always positive integers).
+2. Perform the bitwise operation `n & (n - 1)`.
+3. If the result is `0`, then `n` is a power of two. Otherwise, it's not.
+
+---
+
+### 🔨 Step-by-Step Code Breakdown
+
+Let’s break down the code to make sure it’s crystal clear:
+
+```cpp
+class Solution {
+public:
+    bool isPowerOfTwo(int n) {
+```
+- The function `isPowerOfTwo` takes an integer `n` and returns `true` if `n` is a power of two, otherwise it returns `false`.
+
+```cpp
+        if(n <= 0) return false;
+```
+- First, we handle the edge case where `n` is less than or equal to 0. Since powers of two are always positive integers, any non-positive number cannot be a power of two, so we return `false`.
+
+```cpp
+        return !(n & (n - 1));
+```
+- Here comes the magic! The **bitwise AND** operation `n & (n - 1)` checks if `n` is a power of two. If the result is `0`, we return `true` (indicating that `n` is indeed a power of two). If it's not `0`, we return `false`.
+
+---
+
+### 📈 Complexity Analysis
+
+#### Time Complexity:
+- **Time Complexity**: `O(1)`
+  - The solution performs a single bitwise operation (`n & (n - 1)`) and a comparison. These are constant-time operations, meaning the algorithm runs in **constant time** regardless of the size of `n`.
+
+#### Space Complexity:
+- **Space Complexity**: `O(1)`
+  - We only use a fixed amount of space (the integer `n`). There are no additional data structures or recursion involved, so the space complexity is constant.
+
+---
+
+### 🏁 Conclusion
+
+This solution is both **simple** and **efficient**, checking if a number is a power of two in **constant time** and with **constant space**. The trick lies in the binary representation of powers of two, which can be detected using the **bitwise AND** operation. It’s an elegant way to solve the problem without the need for loops or complex logic.
+
+#### Key Takeaways:
+- **Fast and Efficient**: This approach runs in constant time `O(1)` and uses constant space.
+- **Simplicity**: The logic is based on a straightforward binary property that’s easy to implement.
+- **Practical**: This method is ideal for checking powers of two, which appears frequently in problems involving binary manipulation, computer science, and competitive programming.
+
+This solution is a **great example of leveraging bitwise operations** to create compact and fast solutions for common computational problems! 🚀
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/power-of-two/description/)
+
 ---
 {{< youtube lGxiqzurnNU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #232: Implement Queue using Stacks](https://grid47.xyz/leetcode/solution-232-implement-queue-using-stacks/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

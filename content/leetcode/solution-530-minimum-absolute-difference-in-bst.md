@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/NttA_NC_ZhI/maxresdefault.webp"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/minimum-absolute-difference-in-bst/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/530.webp" 
     alt="A binary search tree where nodes light up showing the minimum absolute difference between node values."
@@ -66,9 +64,80 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/530.md" >}}
+### Problem Statement
+
+Given a binary search tree (BST), the task is to find the minimum absolute difference between the values of any two nodes. This difference must be as small as possible. 
+
+### Approach
+
+The structure of a BST ensures that for any given node, all nodes in its left subtree have values less than the node’s value, while nodes in its right subtree have values greater. Thus, performing an in-order traversal (visiting nodes in ascending order) allows us to sequentially access the node values in sorted order. 
+
+In this solution, we use an in-order traversal to examine consecutive node values and calculate the differences. The smallest of these differences is the answer.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Initialize Variables
+
+```cpp
+TreeNode* prv = NULL; int ans = INT_MAX;
+stack<TreeNode*> stk;
+```
+
+- `prv`: A pointer to track the previously visited node during traversal. We initialize it to `NULL` as there is no "previous node" before the traversal starts.
+- `ans`: An integer to store the minimum difference. It's initialized to `INT_MAX`, which is the largest possible integer, ensuring any actual difference will be smaller.
+- `stk`: A stack to facilitate iterative in-order traversal of the tree, as recursion could be replaced with stack usage in iterative approaches.
+
+#### Step 2: Start the In-Order Traversal Loop
+
+```cpp
+while(!stk.empty() || root) {
+    if(root) {
+        stk.push(root);
+        root = root->left;
+    } else {
+        root = stk.top();
+        stk.pop();
+        if(prv != NULL) {
+            ans = min(ans, root->val - prv->val);
+        }
+        prv = root;
+        root = root->right;
+    }
+}
+```
+
+- This loop handles in-order traversal iteratively.
+    - If `root` is not `NULL`, it means we have not yet reached the leftmost node in the current subtree. We push `root` onto the stack and move to `root->left`.
+    - If `root` is `NULL`, it means we have reached the leftmost node of the subtree or completed processing the left subtree of a node.
+        - We set `root` to the top of the stack, representing the current node we are visiting.
+        - We then pop this node from the stack as we are about to process it.
+        
+- We compute the difference between the current node’s value (`root->val`) and the previous node’s value (`prv->val`) only if `prv` is not `NULL`.
+    - Update `ans` with the minimum of `ans` and this difference.
+- After processing the current node, `prv` is updated to the current `root`, and `root` is moved to `root->right` to continue the in-order traversal on the right subtree.
+
+#### Step 3: Return the Result
+
+```cpp
+return ans;
+```
+
+- The minimum difference computed, stored in `ans`, is returned as the final answer.
+
+### Complexity
+
+- **Time Complexity**: `O(n)`, where `n` is the number of nodes in the binary search tree. This is because each node is visited once during the traversal.
+- **Space Complexity**: `O(h)`, where `h` is the height of the tree. In the worst case (for a completely unbalanced tree), this can be `O(n)` if the tree is a linked list. For a balanced tree, it is `O(log n)`.
+
+### Conclusion
+
+This solution provides an efficient way to find the minimum absolute difference between values in a BST using in-order traversal. By leveraging BST properties, we only compare consecutive nodes in sorted order, which minimizes unnecessary comparisons and optimizes the process. The approach effectively handles even large BSTs due to its `O(n)` time complexity and efficient memory use.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-absolute-difference-in-bst/description/)
+
 ---
 {{< youtube NttA_NC_ZhI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #532: K-diff Pairs in an Array](https://grid47.xyz/leetcode/solution-532-k-diff-pairs-in-an-array/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

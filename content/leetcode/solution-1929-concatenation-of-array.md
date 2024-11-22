@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/68isPRHgcFQ/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/concatenation-of-array/description/)
-
 ---
 **Code:**
 
@@ -36,9 +34,96 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1929.md" >}}
+### Problem Statement
+
+The problem at hand is to concatenate an array with itself. Given an integer array `nums`, the task is to create a new array that consists of two copies of `nums` placed one after the other. For example, if the input is `nums = [1, 2, 3]`, the output should be `[1, 2, 3, 1, 2, 3]`. The goal is to implement this functionality in an efficient manner, maintaining the original array while creating the concatenated version.
+
+### Approach
+
+To solve this problem, we can follow a straightforward approach:
+
+1. **Initialize the Length**: First, we determine the size of the original array `nums`, which we will use to guide the concatenation.
+
+2. **Concatenation Logic**: We can iterate over the original array and append each element to the end of the same array. By using the `push_back` method of the vector, we effectively double the size of the array.
+
+3. **Return the Result**: Finally, we will return the modified array that now contains two concatenated copies of the original array.
+
+### Code Breakdown (Step by Step)
+
+Here’s the step-by-step breakdown of the provided code:
+
+```cpp
+class Solution {
+public:
+    vector<int> getConcatenation(vector<int>& nums) {
+```
+In this part of the code, we define a class named `Solution` and declare a public method `getConcatenation`, which takes a reference to a vector of integers named `nums`.
+
+```cpp
+        int n = nums.size();
+```
+Here, we initialize an integer `n` that holds the size of the input vector `nums`. This value will be used to control the iteration and ensure we append the correct number of elements.
+
+```cpp
+        for(int i = 0; i < n; i++)
+        {
+            nums.push_back(nums[i]);
+        }
+```
+We loop through the original array using a for loop, where `i` ranges from `0` to `n - 1`. Inside the loop, we use the `push_back` method to append each element of the original array to its end. By doing this, we effectively concatenate the array to itself.
+
+```cpp
+        return nums;
+    }
+};
+```
+After the loop finishes, the array `nums` now contains the concatenated version. We then return `nums` as the result of the function.
+
+### Complexity
+
+- **Time Complexity**: The time complexity of this approach is \(O(n)\), where \(n\) is the number of elements in the original array. This is because we traverse the array once to append each element to the end.
+
+- **Space Complexity**: The space complexity is \(O(n)\) as well, due to the additional storage required for the concatenated array. However, since we modify the original array in place, the overall memory usage is effectively doubled, resulting in \(O(n)\) space complexity.
+
+### Conclusion
+
+The `getConcatenation` method efficiently concatenates an array with itself using straightforward logic. By leveraging the properties of vectors in C++, the solution is both concise and effective, demonstrating a simple yet powerful technique for array manipulation.
+
+### Key Features
+
+1. **Dynamic Array Management**: The implementation takes advantage of C++ vectors, which can dynamically resize to accommodate new elements.
+
+2. **In-Place Modification**: The method modifies the original array directly, making it a memory-efficient solution compared to alternatives that might require the creation of a separate array.
+
+3. **Simplicity and Clarity**: The straightforward use of a loop and the `push_back` method makes the code easy to read and understand.
+
+### Use Cases
+
+1. **Data Processing**: This technique can be useful in applications where data needs to be replicated for further processing or analysis.
+
+2. **Game Development**: In gaming scenarios, you might want to create duplicate arrays of game entities to manage their states or behaviors.
+
+3. **Image Processing**: Concatenating pixel data in image manipulation can help in creating effects or overlays.
+
+4. **Numerical Simulations**: In simulations that require repeated measurements or iterations, duplicating data sets may be necessary.
+
+5. **Algorithm Testing**: The method can serve as a building block for more complex algorithms that require working with expanded datasets.
+
+### Implementation Considerations
+
+When using this method, it’s essential to consider the following:
+
+- **Input Constraints**: Ensure that the input array is within acceptable bounds to prevent excessive memory usage.
+- **Data Types**: Since the implementation relies on C++ vectors, it is adaptable to various data types as long as they support copying and assignment.
+- **Performance**: For very large datasets, be aware of the implications of doubling the array size in terms of memory consumption and potential impacts on performance.
+
+By mastering this simple yet effective approach to array concatenation, developers can enhance their problem-solving toolkit for a variety of programming challenges. This solution showcases fundamental concepts of data manipulation in C++, providing a robust framework for building more complex applications.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/concatenation-of-array/description/)
+
 ---
 {{< youtube 68isPRHgcFQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1930: Unique Length-3 Palindromic Subsequences](https://grid47.xyz/leetcode/solution-1930-unique-length-3-palindromic-subsequences/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/3JIMkdeoF1c/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/find-all-good-indices/description/)
-
 ---
 **Code:**
 
@@ -43,9 +41,96 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2420.md" >}}
+### Problem Statement
+
+The problem asks to find the "good indices" in an array `a`, where an index `i` is considered "good" if:
+1. The subarray from index `i - k` to `i` is non-increasing.
+2. The subarray from index `i` to `i + k` is non-decreasing.
+Here, `k` is a given parameter, and we are to find all indices that satisfy the above conditions. We are required to return the indices of these "good" positions.
+
+### Approach
+
+The approach to solve this problem efficiently uses dynamic programming (DP) to compute two auxiliary arrays:
+1. **`dp1[i]`**: Represents the length of the longest non-increasing subarray ending at index `i`.
+2. **`dp2[i]`**: Represents the length of the longest non-decreasing subarray starting at index `i`.
+
+Using these two arrays, we can quickly check if the index `i` satisfies the "good" condition by verifying:
+- `dp1[i-1] >= k`: Ensures the subarray from index `i-k` to `i-1` is non-increasing.
+- `dp2[i+1] >= k`: Ensures the subarray from index `i+1` to `i+k` is non-decreasing.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Initialize Variables
+
+```cpp
+int n = a.size();
+vector<int> dp1(n + 1, 1), dp2(n + 1, 1), ans;
+```
+
+- **`n`**: Stores the size of the input array `a`.
+- **`dp1`**: A dynamic programming array where `dp1[i]` holds the length of the longest non-increasing subarray ending at index `i`. We initialize it to 1 for all elements, assuming each element forms a subarray of length 1.
+- **`dp2`**: A dynamic programming array where `dp2[i]` holds the length of the longest non-decreasing subarray starting at index `i`. This is also initialized to 1 for all elements.
+- **`ans`**: A vector to store the resulting "good" indices.
+
+#### Step 2: Fill `dp1` (Longest Non-Increasing Subarray Ending at Each Index)
+
+```cpp
+for(int i = 1; i < n; i++)
+    if(a[i - 1] >= a[i]) dp1[i] = dp1[i - 1] + 1;
+```
+
+- We iterate through the array `a` from index 1 to `n - 1`.
+- If the current element `a[i]` is less than or equal to the previous element `a[i-1]`, it means the subarray from `i-1` to `i` is non-increasing, so we increment `dp1[i]` based on `dp1[i-1]`. Otherwise, `dp1[i]` remains 1 (indicating a new subarray starts at `i`).
+
+#### Step 3: Fill `dp2` (Longest Non-Decreasing Subarray Starting at Each Index)
+
+```cpp
+for(int i = n - 2; i > 0; i--)
+    if(a[i] <= a[i + 1]) dp2[i] = dp2[i + 1] + 1;
+```
+
+- We iterate backward through the array `a` from index `n-2` to index 1.
+- If the current element `a[i]` is less than or equal to the next element `a[i+1]`, it means the subarray from `i` to `i+1` is non-decreasing, so we increment `dp2[i]` based on `dp2[i+1]`. Otherwise, `dp2[i]` remains 1.
+
+#### Step 4: Find "Good" Indices
+
+```cpp
+for(int i = k; i < n - k; i++)
+    if(dp1[i - 1] >= k && dp2[i + 1] >= k)
+        ans.push_back(i);
+```
+
+- We iterate through the array starting from index `k` to `n - k - 1` (ensuring there is space for both subarrays of length `k` before and after `i`).
+- For each index `i`, we check if:
+  - The subarray from `i - k` to `i - 1` is non-increasing (`dp1[i - 1] >= k`).
+  - The subarray from `i + 1` to `i + k` is non-decreasing (`dp2[i + 1] >= k`).
+- If both conditions are satisfied, we add the index `i` to the `ans` vector.
+
+#### Step 5: Return the Result
+
+```cpp
+return ans;
+```
+
+- Finally, we return the `ans` vector containing the indices that are "good" according to the problem's definition.
+
+### Complexity
+
+#### Time Complexity:
+- **O(N)**: The time complexity of the solution is linear, O(N), where `N` is the length of the array `a`. This is because we iterate through the array a constant number of times (three times in total: once for filling `dp1`, once for `dp2`, and once for checking the good indices).
+
+#### Space Complexity:
+- **O(N)**: We use three arrays: `dp1`, `dp2`, and `ans`, each of size `N`. Hence, the space complexity is O(N).
+
+### Conclusion
+
+This solution efficiently solves the problem by using dynamic programming to preprocess the information required for each index. By maintaining two auxiliary arrays `dp1` and `dp2` that store the lengths of the longest non-increasing and non-decreasing subarrays, we can determine if an index satisfies the "good" condition in constant time. The time complexity of O(N) ensures that the solution scales well with large inputs, making it an optimal solution for this problem.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/find-all-good-indices/description/)
+
 ---
 {{< youtube 3JIMkdeoF1c >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2423: Remove Letter To Equalize Frequency](https://grid47.xyz/leetcode/solution-2423-remove-letter-to-equalize-frequency/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

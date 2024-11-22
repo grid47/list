@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/pmD2HCKaqRQ/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/k-th-symbol-in-grammar/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/779.webp" 
     alt="A sequence where the kth symbol is found, glowing softly as it is located."
@@ -41,9 +39,99 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/779.md" >}}
+### Problem Statement
+
+The problem asks to find the `k`-th character in the `n`-th row of a specific grammar sequence. The sequence is defined as follows:
+
+- Row 1 is `0`.
+- Row 2 is `01`.
+- Row 3 is `0110`.
+- Row 4 is `01101001`.
+- Row 5 is `0110100110010110`.
+- The pattern continues, and each new row is created by taking the previous row, flipping each bit (0 becomes 1 and 1 becomes 0), and appending it to the original row.
+
+Given an integer `n` and an integer `k`, the goal is to find the `k`-th character in the `n`-th row of this sequence, where `1 ≤ k ≤ 2^(n-1)`.
+
+### Approach
+
+The problem can be approached using **recursion**. Here's a breakdown of the logic behind the solution:
+
+- The pattern generation for each row can be viewed as a recursive process. The `n`-th row is constructed from the `(n-1)`-th row, and the characters of the `n`-th row are derived from the characters of the `(n-1)`-th row using a flipping rule.
+  
+- The key observation here is that the first half of the `n`-th row is exactly the same as the `(n-1)`-th row, and the second half is the flipped version of the first half. This allows us to determine the value of any `k`-th character by recursively analyzing the position of `k` in the sequence.
+
+### Detailed Steps
+
+1. **Recursive Base Case:**
+   - If `n = 1`, the sequence is simply `[0]`. Therefore, the `k`-th element is always `0` because there is only one element in the first row.
+
+2. **Recursive Step:**
+   - For rows where `n > 1`, the sequence is split into two parts:
+     - The first part is identical to the `(n-1)`-th row.
+     - The second part is the flipped version of the first part.
+     
+   Based on the position of `k`:
+   - If `k` is in the first half of the row, then the result is the same as the `k`-th element in the `(n-1)`-th row.
+   - If `k` is in the second half of the row, then the result is the flipped value of the corresponding position in the first half. This flipping behavior is handled by checking if `k` is odd or even.
+
+   Specifically:
+   - If `k` is odd, you are in the first half, and you continue the search in the `(n-1)`-th row with the same `k`.
+   - If `k` is even, you're in the second half, and the value of the character at that position is the flipped value of the character at the corresponding position in the first half.
+
+### Code Breakdown (Step by Step)
+
+Here’s a step-by-step explanation of the provided code:
+
+```cpp
+class Solution {
+public:
+    int kthGrammar(int n, int k) {
+        if (n == 1)   return 0;
+        if (k % 2 == 0) return kthGrammar(n - 1, k / 2) == 0 ? 1 : 0;
+        else          return kthGrammar(n - 1, (k + 1) / 2) == 0 ? 0 : 1;
+    }
+};
+```
+
+1. **Base Case:**
+   ```cpp
+   if (n == 1) return 0;
+   ```
+   - The base case handles when `n == 1`, which means we are looking at the first row. The first row is always `[0]`, so the `k`-th character is 0 for any `k`.
+
+2. **Even Position Handling:**
+   ```cpp
+   if (k % 2 == 0) return kthGrammar(n - 1, k / 2) == 0 ? 1 : 0;
+   ```
+   - If `k` is even, it corresponds to the second half of the sequence. To find the value of this character, we recursively calculate the value for the `k/2`-th position in the `(n-1)`-th row and flip it (0 becomes 1 and 1 becomes 0). The condition `kthGrammar(n - 1, k / 2) == 0 ? 1 : 0` flips the result.
+
+3. **Odd Position Handling:**
+   ```cpp
+   else return kthGrammar(n - 1, (k + 1) / 2) == 0 ? 0 : 1;
+   ```
+   - If `k` is odd, it corresponds to the first half of the sequence. We recursively calculate the value of the `(k + 1)/2`-th position in the `(n-1)`-th row (since the first half corresponds directly to the previous row). No flipping is needed for odd positions, so the result remains the same.
+
+### Complexity
+
+#### Time Complexity:
+- The recursive calls are made by halving `k` at each step (either by dividing by 2 or adjusting by `(k+1)/2`). This means the recursion depth is proportional to `n`, and each recursive call takes constant time.
+  
+- The time complexity is **O(n)** because the recursion depth is determined by the row number, and the operations inside each recursive call (checking `k % 2`, making recursive calls, and flipping the value) are constant.
+
+#### Space Complexity:
+- The space complexity is **O(n)** due to the recursive stack, which can go as deep as `n` in the worst case.
+
+### Conclusion
+
+The `kthGrammar` function efficiently computes the `k`-th character in the `n`-th row of the sequence using a recursive approach. The key insight is that the sequence is generated by appending a flipped version of the previous row to itself, and the position of the character can be determined recursively by examining whether `k` falls in the first or second half of the sequence.
+
+This approach is both time-efficient and space-efficient, with the time complexity being proportional to `n` and the space complexity being proportional to the depth of the recursion.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/k-th-symbol-in-grammar/description/)
+
 ---
 {{< youtube pmD2HCKaqRQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #781: Rabbits in Forest](https://grid47.xyz/leetcode/solution-781-rabbits-in-forest/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

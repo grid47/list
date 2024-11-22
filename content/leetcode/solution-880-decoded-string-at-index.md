@@ -18,8 +18,6 @@ youtube_thumbnail=""
 
 
 
-[`Problem Link`](https://leetcode.com/problems/decoded-string-at-index/description/)
-
 ---
 **Code:**
 
@@ -49,9 +47,121 @@ class Solution {
     
 };
 {{< /highlight >}}
-
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/880.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #881: Boats to Save People](https://grid47.xyz/leetcode/solution-881-boats-to-save-people/) |
+### Problem Statement
+
+The problem asks us to decode a string `s` and find the character at the `k`-th position of the decoded string. The string `s` consists of letters and digits. Each digit `x` in the string represents a repetition of the preceding substring `x` times. Our task is to determine the character at the `k`-th position of the fully decoded string without fully decoding it, which could result in a large memory footprint.
+
+For example, given `s = "leet2code3"`, the decoded string would be `"leetleetcodeleetcode"`. If `k = 10`, the character at the 10th position is `"o"`, and that is what we should return.
+
+### Approach
+
+The challenge in this problem is to avoid fully decoding the string since it can become very large, especially if the string contains large numbers. Instead of building the entire decoded string, we simulate the decoding process using the length of the decoded string. We maintain a running total of the length of the string as it would be after decoding. This allows us to find the `k`-th character without ever explicitly constructing the decoded string.
+
+We employ the following approach:
+
+1. **Calculate the total length of the decoded string**: 
+   First, we iterate over the string `s` to calculate the total length `N` of the decoded string. During this pass, we handle characters and digits accordingly:
+   - If the character is a letter, we increment the length by 1 (since letters are added as is).
+   - If the character is a digit, it means the previous substring is repeated `x` times, and we multiply the current length `N` by this digit.
+
+2. **Backtrack to find the k-th character**:
+   Once we have the total length `N`, we start from the end of the string and backtrack:
+   - If the current character is a digit, it means we have just encountered a repetition. We divide the length `N` by the digit and update `k` as `k % N` (this effectively reduces the position relative to the new size of the current substring).
+   - If the character is a letter, we check if it corresponds to the `k`-th position in the string. If `k % N == 0`, this means we have found the position, and we return the character.
+
+3. **Edge Cases**: 
+   - If the string does not contain any digits, the problem simplifies, and we can directly access the `k`-th character in the string.
+   - If `k` is larger than the total length of the decoded string, we continue adjusting `k` as we backtrack until we reach the correct position.
+
+### Code Breakdown (Step by Step)
+
+Here is a step-by-step breakdown of the code implementation:
+
+```cpp
+class Solution {
+    
+public:
+    string decodeAtIndex(string s, int k) {
+        
+        long N = 0, i;  // Initialize the total length of the decoded string (N) and index (i)
+        
+        // Calculate the total length of the decoded string
+        for(i = 0; N < k; i++) {
+            if (isdigit(s[i])) {  // If the current character is a digit
+                N = (s[i] - '0') * N;  // Multiply the total length by the digit (repetition factor)
+            } else {
+                N += 1;  // If the character is a letter, increase the length by 1
+            }
+        }
+        
+        // Backtrack to find the k-th character
+        while(i--) {
+            if(isdigit(s[i])) {  // If the current character is a digit
+                N /= (s[i] - '0');  // Reduce the total length by dividing by the repetition factor
+                k %= N;  // Update the position of k relative to the reduced length
+            } else if (k % N-- == 0) {  // If the character is a letter and k corresponds to the position
+                return string(1, s[i]);  // Return the letter as the result
+            }
+        }
+        
+        return "hello yasir";  // Default return (should not reach here for valid input)
+    }
+};
+```
+
+Let's break down the key sections:
+
+1. **Initial Setup and Loop for Total Length Calculation**:
+   ```cpp
+   for(i = 0; N < k; i++)
+       N = isdigit(s[i]) ? (s[i] - '0') * N : N + 1;
+   ```
+   This loop runs until the total length `N` of the decoded string is at least `k`. As it processes the string `s`:
+   - If the character `s[i]` is a digit, we multiply the current total length `N` by the value of the digit. This simulates the effect of repeating the previous part of the string.
+   - If it's a letter, we simply increment the total length `N` by 1.
+
+2. **Backtracking to Find the k-th Character**:
+   ```cpp
+   while(i--) {
+       if(isdigit(s[i])) {
+           N /= (s[i] - '0');
+           k %= N;
+       }
+       else if (k % N-- == 0) {
+           return string(1, s[i]);
+       }
+   }
+   ```
+   After calculating the total decoded length `N`, we backtrack through the string:
+   - If the current character is a digit, it means we're in a repeated section. We divide `N` by the digit to simulate reducing the length of the substring.
+   - We update `k` by taking `k % N`, which gives the relative position within the current substring.
+   - If the current character is a letter and `k % N == 0`, it means the current character is at the `k`-th position in the decoded string, and we return it.
+
+3. **Final Return**:
+   ```cpp
+   return "hello yasir";
+   ```
+   This line is effectively a fallback in case of unexpected behavior, though it should never be hit given valid input.
+
+### Complexity
+
+**Time Complexity**:
+- **O(n)** where `n` is the length of the string `s`. We traverse the string twice: once to calculate the total decoded length and once to backtrack and find the k-th character. Both passes are linear in terms of the number of characters in `s`.
+
+**Space Complexity**:
+- **O(1)**. We only use a few variables for tracking the length and the current position in the string. There is no additional space used that grows with the size of the input.
+
+### Conclusion
+
+This solution is highly efficient for finding the k-th character in a potentially very large decoded string without explicitly decoding the entire string. By simulating the decoding process using the total length and backtracking, we manage to determine the correct character in an optimal manner. This approach works particularly well when the string contains large repetition factors, making it ideal for solving large-scale problems in a time-efficient way.
+
+
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/decoded-string-at-index/description/)
+
+---
+
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

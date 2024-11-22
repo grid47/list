@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/uTt6XMDPPIg/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/maximize-number-of-subsequences-in-a-string/description/)
-
 ---
 **Code:**
 
@@ -44,9 +42,119 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2207.md" >}}
+### Problem Statement
+
+Given a string `text` and a `pattern` of length 2, the task is to calculate the number of subsequences in `text` that match the `pattern`. A subsequence is defined as a sequence that can be derived from `text` by deleting some or no characters without changing the order of the remaining characters. We need to find how many subsequences of `text` match the pattern where the pattern consists of two characters.
+
+**Input:**
+- A string `text` of length `n`.
+- A string `pattern` of length 2, which consists of two characters.
+
+**Output:**
+- Return the number of subsequences of `text` that match the `pattern`.
+
+### Approach
+
+To solve this problem efficiently, we must process the string `text` in a way that avoids redundant computations. The key insight here is to iterate through the `text` string while counting potential subsequences. The solution leverages two counters:
+
+- `cnt1`: Counts how many times the first character of the pattern has appeared so far.
+- `cnt2`: Counts how many subsequences matching the pattern's second character have been formed.
+
+We also keep track of the total number of matching subsequences (`res`).
+
+The process can be described as follows:
+1. Traverse the `text` string from left to right.
+2. For each character in `text`:
+   - If it matches the second character of the pattern (`pattern[1]`), increment `cnt2` (indicating the formation of subsequences that could end with this character). Additionally, add `cnt1` to `res` (because each occurrence of `pattern[0]` before this `pattern[1]` can form a valid subsequence).
+   - If the character matches the first character of the pattern (`pattern[0]`), increment `cnt1` (because this character can serve as the start of a valid subsequence).
+3. Finally, add the larger of `cnt1` or `cnt2` to `res` to account for additional subsequences where the characters appear at the start or end.
+
+### Code Breakdown (Step by Step)
+
+```cpp
+long long maximumSubsequenceCount(string text, string pattern) {
+    long long cnt1 = 0, cnt2 = 0, res = 0, n = text.length();
+
+    // Iterate through the string 'text'.
+    for(int i = 0; i < n; i++) {
+        // If the current character matches the second character of the pattern.
+        if(text[i] == pattern[1]) {
+            cnt2++; // Increment cnt2 to count subsequences ending with pattern[1].
+            res += cnt1; // Add cnt1 to res, since each occurrence of pattern[0] before can form a valid subsequence.
+        }
+
+        // If the current character matches the first character of the pattern.
+        if(text[i] == pattern[0]) cnt1++; // Increment cnt1 to count potential subsequences starting with pattern[0].
+    }
+
+    // Add the maximum of cnt1 or cnt2 to res for any remaining subsequences that are yet to be counted.
+    res += max(cnt1, cnt2);
+
+    return res; // Return the total number of valid subsequences.
+}
+```
+
+**Step-by-step breakdown of the code:**
+
+1. **Variable Initialization**:
+   ```cpp
+   long long cnt1 = 0, cnt2 = 0, res = 0, n = text.length();
+   ```
+   - `cnt1` keeps track of how many times the first character of the pattern (`pattern[0]`) has appeared.
+   - `cnt2` counts how many subsequences have been formed with the second character of the pattern (`pattern[1]`).
+   - `res` stores the total number of subsequences that match the pattern.
+   - `n` stores the length of the `text` string.
+
+2. **Loop Over the Text String**:
+   ```cpp
+   for(int i = 0; i < n; i++) {
+       if(text[i] == pattern[1]) {
+           cnt2++; 
+           res += cnt1;
+       }
+       if(text[i] == pattern[0]) cnt1++;
+   }
+   ```
+   - This loop iterates through each character of the string `text`.
+   - If the character at `text[i]` matches `pattern[1]`, `cnt2` is incremented, and `cnt1` (the number of possible starting subsequences) is added to `res`.
+   - If the character at `text[i]` matches `pattern[0]`, `cnt1` is incremented, as it signifies a potential starting point for subsequences.
+
+3. **Final Step**:
+   ```cpp
+   res += max(cnt1, cnt2);
+   ```
+   - After the loop, we add the maximum of `cnt1` or `cnt2` to `res`. This step ensures that any remaining subsequences are counted. It accounts for cases where subsequences could still be formed after the main iteration.
+
+4. **Return the Result**:
+   ```cpp
+   return res;
+   ```
+   - Finally, the function returns the total number of subsequences that match the given `pattern`.
+
+### Complexity
+
+#### Time Complexity:
+- **O(n)**, where `n` is the length of the string `text`. We iterate through the string once and perform constant-time operations inside the loop.
+
+#### Space Complexity:
+- **O(1)**, as we use only a fixed amount of extra space (for `cnt1`, `cnt2`, and `res`), regardless of the size of the input.
+
+### Conclusion
+
+This solution efficiently calculates the number of subsequences in the string `text` that match the two-character `pattern`. By keeping track of the number of occurrences of `pattern[0]` and `pattern[1]`, we can quickly compute the result in linear time. This approach avoids the need for nested loops or complex string manipulations, making it suitable for large inputs.
+
+Key points:
+- **Efficiency**: The algorithm runs in linear time, making it suitable for larger strings.
+- **Edge Cases**: The code gracefully handles cases where no valid subsequences exist or where characters do not match the pattern.
+- **Clarity**: The solution uses simple counters and an incremental approach to track valid subsequences, making it both easy to understand and implement.
+
+This solution is ideal for problems involving pattern matching within a string, where we need to count subsequences or combinations efficiently.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/maximize-number-of-subsequences-in-a-string/description/)
+
 ---
 {{< youtube uTt6XMDPPIg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2208: Minimum Operations to Halve Array Sum](https://grid47.xyz/leetcode/solution-2208-minimum-operations-to-halve-array-sum/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

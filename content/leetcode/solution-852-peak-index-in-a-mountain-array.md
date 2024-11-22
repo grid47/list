@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/yeYhFWpIus4/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/peak-index-in-a-mountain-array/description/)
-
 ---
 **Code:**
 
@@ -50,9 +48,97 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/852.md" >}}
+### Problem Statement
+
+The task is to find the index of the peak element in a **mountain array**. A **mountain array** is an array where:
+1. The array is strictly increasing up to a peak element.
+2. The array is strictly decreasing after the peak element.
+
+Given an array `arr` of integers, where the length of the array is at least 3, the goal is to find the index of the peak element. The peak element is an element that is greater than both its neighbors.
+
+**Example**:
+- **Input**: `arr = [0, 2, 3, 4, 5, 3, 1]`
+- **Output**: `4` (The peak is `5` at index `4`).
+
+### Approach
+
+To solve the problem efficiently, we can apply a **binary search** strategy. Since the array is guaranteed to form a mountain, we can exploit the structure to perform a **logarithmic** search. The peak element must satisfy the condition that it is greater than its neighbors. We can use the binary search to efficiently find this peak.
+
+1. **Binary Search Approach**: 
+   - The basic idea is to divide the array into two parts and compare the middle element with its neighbors.
+   - If the middle element is greater than its neighbors, we have found the peak.
+   - If the middle element is less than its right neighbor, the peak lies to the right of the middle, so we move the left pointer (`l`) to `mid + 1`.
+   - If the middle element is less than its left neighbor, the peak lies to the left of the middle, so we move the right pointer (`r`) to `mid - 1`.
+   
+2. **Edge Case**:
+   - Since the array is guaranteed to have at least one peak (due to the problem constraints), we don't need to worry about edge cases like arrays of length 2 or non-mountain arrays.
+
+This approach will run in **O(log n)** time, where `n` is the length of the array, making it optimal for large arrays.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Initialize pointers
+```cpp
+int l = 1, r = n - 2;
+```
+- We initialize two pointers, `l` (left) and `r` (right), to point to the elements just next to the first and last elements of the array. We exclude the first and last elements since the peak must be somewhere between these two points.
+
+#### Step 2: Binary Search Loop
+```cpp
+while (l <= r) {
+    int mid = l + (r - l + 1) / 2;
+```
+- We start a `while` loop where `l` is less than or equal to `r`. In each iteration, we calculate the middle index `mid` of the current search range. We use the formula `l + (r - l + 1) / 2` to avoid overflow and ensure that the search space is balanced.
+
+#### Step 3: Peak Condition
+```cpp
+if (arr[mid] > arr[mid + 1] && arr[mid] > arr[mid - 1]) {
+    return mid;
+}
+```
+- We check if the current middle element (`arr[mid]`) is greater than both its left neighbor (`arr[mid - 1]`) and right neighbor (`arr[mid + 1]`). If this condition holds, then we have found the peak, and we return the index `mid`.
+
+#### Step 4: Adjust Search Range
+```cpp
+if (arr[mid] > arr[mid + 1]) {
+    r = mid - 1;
+} else if (arr[mid] > arr[mid - 1]) {
+    l = mid + 1;
+}
+```
+- If the middle element is greater than its right neighbor (`arr[mid] > arr[mid + 1]`), it means the peak lies to the left of `mid`, so we adjust the right pointer (`r = mid - 1`) to narrow the search to the left half.
+- If the middle element is greater than its left neighbor (`arr[mid] > arr[mid - 1]`), it means the peak lies to the right of `mid`, so we adjust the left pointer (`l = mid + 1`) to narrow the search to the right half.
+
+#### Step 5: Return the Result
+```cpp
+return 0;
+```
+- After the binary search loop completes, if no peak is found (though the problem guarantees that one will exist), we return `0`. In this case, returning `0` is more of a fallback, though the loop ensures that we find a peak.
+
+### Complexity
+
+#### Time Complexity:
+- The time complexity is **O(log n)** because we reduce the search range by half with each iteration of the binary search. This makes it very efficient, especially for large arrays.
+
+#### Space Complexity:
+- The space complexity is **O(1)** because we are only using a constant amount of extra space to store the pointers `l`, `r`, and `mid`. The algorithm does not use any additional data structures that scale with the input size.
+
+### Conclusion
+
+This solution leverages a binary search approach to efficiently find the peak element in a mountain array. By continually halving the search space, we ensure that the algorithm runs in **O(log n)** time, which is optimal for large input sizes. The simplicity and efficiency of the binary search make this solution ideal for this problem. 
+
+Key takeaways:
+- The problem guarantees the presence of a peak, making binary search a natural choice.
+- The use of binary search ensures that we can find the peak in logarithmic time, making the solution scalable for large inputs.
+- The solution only requires constant space, making it space-efficient.
+
+This method is a perfect example of how to leverage the structure of a problem (in this case, the "mountain" property) to design an optimal solution.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/peak-index-in-a-mountain-array/description/)
+
 ---
 {{< youtube yeYhFWpIus4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #853: Car Fleet](https://grid47.xyz/leetcode/solution-853-car-fleet/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

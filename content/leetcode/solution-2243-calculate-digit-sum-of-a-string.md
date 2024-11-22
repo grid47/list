@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/Lyesi93Z6_A/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/calculate-digit-sum-of-a-string/description/)
-
 ---
 **Code:**
 
@@ -38,9 +36,87 @@ public:
 }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2243.md" >}}
+### Problem Statement
+The problem asks us to repeatedly reduce a string of digits by summing up groups of `k` digits until the string's length becomes less than or equal to `k`. After each sum operation, the resulting string should be formed by concatenating the sums as strings. The task is to return the final reduced string when its length is no longer greater than `k`.
+
+For example:
+- **Input**: `s = "11111222223"`, `k = 3`
+- **Output**: `"27"`
+  
+### Approach
+To solve this problem, we can break the string down into smaller groups of `k` characters, compute the sum of the digits in each group, and concatenate the sums into a new string. This process is repeated until the string's length is reduced to `k` or fewer characters.
+
+Here’s how we approach the solution:
+1. **Repeated Summation**: We need to break the string into chunks of `k` characters. For each chunk, we compute the sum of the digits.
+2. **String Update**: After computing the sums for all chunks, we concatenate the results into a new string.
+3. **Stop When Length is Less Than or Equal to `k`**: We continue performing the above operation until the string’s length becomes less than or equal to `k`.
+4. **Edge Case Handling**: If the string length is already smaller than or equal to `k`, we simply return the string.
+
+### Code Breakdown (Step by Step)
+
+1. **Function Definition**:
+   ```cpp
+   string digitSum(string s, int k) {
+   ```
+   - The function `digitSum` takes two parameters: `s`, the string of digits, and `k`, the group size for summing digits.
+
+2. **Loop Until the Length is Less Than or Equal to `k`**:
+   ```cpp
+   while(s.size() > k) {
+   ```
+   - We continue iterating as long as the length of the string `s` is greater than `k`. Each iteration reduces the size of the string.
+
+3. **Initialize a Temporary String**:
+   ```cpp
+   string s1;
+   ```
+   - We initialize a new string `s1` to store the result of the sum operations for the current iteration.
+
+4. **Break String Into Chunks of Size `k` and Compute Sums**:
+   ```cpp
+   for (int i = 0; i < s.size(); i += k)
+       s1 += to_string(accumulate(begin(s) + i, begin(s) + min((int)s.size(), i + k), 0, 
+           [](int n, char ch){ return n + ch - '0'; }));
+   ```
+   - We loop through the string `s` in increments of `k` and extract each chunk. The `accumulate` function is used to sum the digits of each chunk:
+     - `begin(s) + i` starts the chunk from index `i`.
+     - `begin(s) + min((int)s.size(), i + k)` ensures the chunk does not extend beyond the string's length.
+     - The lambda function `[](int n, char ch){ return n + ch - '0'; }` converts each character to an integer (`ch - '0'`), and the `accumulate` function calculates the sum of the digits in the chunk.
+   - The sum of each chunk is then converted to a string using `to_string` and added to `s1`.
+
+5. **Swap the New String to `s`**:
+   ```cpp
+   swap(s1, s);
+   ```
+   - After processing all chunks, `s1` contains the new string formed by concatenating the sums. We swap the contents of `s` with `s1`, so that `s` is updated with the reduced string.
+
+6. **Return the Final String**:
+   ```cpp
+   return s;
+   }
+   ```
+   - Once the loop finishes, meaning the length of the string `s` is less than or equal to `k`, we return `s` as the result.
+
+### Complexity
+
+#### Time Complexity:
+- The main work is done inside the `while` loop. In each iteration, we process the string in chunks of size `k`, so the time complexity of one iteration is proportional to the length of the string, `O(n)`, where `n` is the current length of the string.
+- The string length decreases in each iteration, but we do not have a direct formula for how many iterations will occur. In the worst case, each iteration reduces the string length significantly. However, since the string length can only decrease, the total number of iterations will be logarithmic with respect to the length of the string, i.e., `O(log n)`, where `n` is the original length of the string.
+- Hence, the overall time complexity is approximately `O(n * log n)`, where `n` is the initial length of the string.
+
+#### Space Complexity:
+- The space complexity is `O(n)` because in the worst case, we are storing an intermediate string `s1` that is the same length as the input string `s`.
+
+### Conclusion
+This approach is efficient for reducing a string by summing groups of `k` digits until the string becomes sufficiently small. The use of the `accumulate` function for summing the digits in each chunk simplifies the process, and the loop reduces the string length iteratively. The solution runs in `O(n * log n)` time and uses `O(n)` space, making it suitable for moderately large strings. The solution is both intuitive and concise, leveraging built-in functions like `accumulate` and `to_string` for clarity and efficiency.
+
+In summary, this problem demonstrates how to manipulate strings by performing repeated transformations, and this approach efficiently handles the task while adhering to the constraints provided.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/calculate-digit-sum-of-a-string/description/)
+
 ---
 {{< youtube Lyesi93Z6_A >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2245: Maximum Trailing Zeros in a Cornered Path](https://grid47.xyz/leetcode/solution-2245-maximum-trailing-zeros-in-a-cornered-path/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/dHAsYTvbbj4/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/jump-game-vi/description/)
-
 ---
 **Code:**
 
@@ -46,9 +44,100 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1696.md" >}}
+### Problem Statement
+
+The problem at hand involves finding the maximum score obtainable from a sequence of numbers while following specific movement constraints. Given an integer array `nums` and an integer `k`, the task is to determine the maximum score one can achieve by starting from the first element and moving to the last element of the array. You can move from index `i` to any index `j` where \(i < j \leq i + k\). Each score is the sum of values at these indices. The goal is to return the maximum score that can be achieved at the last index.
+
+### Approach
+
+To solve this problem, we can utilize a dynamic programming approach combined with a deque (double-ended queue) to maintain the maximum scores efficiently as we iterate through the array. The approach can be broken down into the following steps:
+
+1. **Initialization**: Start with the first element in the deque since the maximum score at the beginning is simply the value of the first element.
+
+2. **Iterate Through the Array**: For each index starting from 1 to the end of the array, compute the score by adding the current element to the maximum score from the previous valid range (determined by `k`).
+
+3. **Maintain the Deque**: While iterating, ensure that the deque maintains indices in a way that the score values at these indices are in decreasing order. This allows us to efficiently retrieve the maximum score from the previous valid range.
+
+4. **Pop Invalid Indices**: If the index at the front of the deque is out of the allowable range defined by `k`, remove it from the front of the deque.
+
+5. **Return the Result**: The last element in the modified `nums` array will hold the maximum score achievable at the last index, which we will return.
+
+### Code Breakdown (Step by Step)
+
+Here’s a detailed breakdown of the code implementation:
+
+```cpp
+class Solution {
+public:
+    int maxResult(vector<int>& nums, int k) {
+```
+- **Class Definition**: The `Solution` class contains the method `maxResult`, which takes a vector of integers `nums` and an integer `k` as input.
+
+```cpp
+        int n = nums.size();
+        
+        deque<int> dq = {0};
+```
+- **Initialization**: We initialize `n` to represent the size of the input array and create a deque `dq` initialized with 0, which represents the index of the first element of `nums`.
+
+```cpp
+        for(int i = 1; i < n; i++) {
+```
+- **Iterate Through the Array**: We start a loop that iterates over the array from index 1 to `n - 1`.
+
+```cpp
+            nums[i] = nums[dq.front()] + nums[i];
+```
+- **Compute Score**: At each index `i`, we calculate the maximum score to reach that index by adding the current element `nums[i]` to the maximum score obtainable from the previous valid indices stored in `dq`, which is represented by `nums[dq.front()]`.
+
+```cpp
+            while(!dq.empty() && nums[dq.back()] <= nums[i])
+                dq.pop_back();
+```
+- **Maintain Deque Order**: We enter a while loop that removes elements from the back of the deque as long as the score at those indices is less than or equal to the current score. This ensures that the deque only contains indices of potential maximum scores.
+
+```cpp
+            dq.push_back(i);
+```
+- **Add Current Index**: After adjusting the deque, we add the current index `i` to the back of the deque.
+
+```cpp
+            if(i - dq.front() >= k) dq.pop_front();
+```
+- **Pop Invalid Indices**: We check if the index at the front of the deque is no longer valid (i.e., it is out of the range defined by `k`). If it is, we remove it from the front of the deque.
+
+```cpp
+        }
+        
+        return nums[n - 1];
+    }
+};
+```
+- **Return the Result**: After iterating through the entire array, we return the maximum score at the last index, which is now stored in `nums[n - 1]`.
+
+### Complexity
+
+- **Time Complexity**: The time complexity of this algorithm is \(O(N)\), where \(N\) is the number of elements in the input array. Each index is processed a constant number of times as we add and remove elements from the deque.
+
+- **Space Complexity**: The space complexity is \(O(K)\) in the worst case, where \(K\) is the number of indices stored in the deque. Since `K` can be at most equal to the size of the input array, we can consider it as \(O(N)\) for the upper limit.
+
+### Conclusion
+
+The provided solution efficiently calculates the maximum score obtainable from the given sequence of numbers while adhering to the movement constraints specified. Here are the key points to summarize:
+
+1. **Dynamic Programming with Deque**: The algorithm leverages dynamic programming principles along with a deque to maintain maximum scores dynamically, allowing for efficient lookups and updates.
+
+2. **Sliding Window Technique**: The usage of a sliding window defined by `k` enables the algorithm to operate within the specified movement constraints without unnecessary recalculations.
+
+3. **Optimal Complexity**: The linear time complexity ensures that the solution is efficient even for larger input sizes, making it suitable for competitive programming scenarios.
+
+This code serves as an excellent example of using data structures like deques to enhance performance in dynamic programming problems, and it can be applied to various similar challenges in algorithm design.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/jump-game-vi/description/)
+
 ---
 {{< youtube dHAsYTvbbj4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1700: Number of Students Unable to Eat Lunch](https://grid47.xyz/leetcode/solution-1700-number-of-students-unable-to-eat-lunch/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

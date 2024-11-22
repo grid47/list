@@ -17,8 +17,6 @@ youtube_thumbnail=""
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/complex-number-multiplication/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/537.webp" 
     alt="Two complex numbers multiplying, with each step of the calculation softly glowing as the result is formed."
@@ -60,9 +58,114 @@ public:
     }
 };
 {{< /highlight >}}
-
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/537.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #538: Convert BST to Greater Tree](https://grid47.xyz/leetcode/solution-538-convert-bst-to-greater-tree/) |
+### Problem Statement
+
+Given two complex numbers as strings in the format `"a+bi"`, where `a` and `b` are integers, the task is to multiply them and return the result as a string in the same format. A complex number has two parts: the real part and the imaginary part. For example, in `3+2i`, `3` is the real part and `2` is the imaginary part.
+
+### Approach
+
+To solve this problem, we break down the multiplication of complex numbers and implement it step-by-step:
+
+1. **Extract Real and Imaginary Parts**:
+   - We first need to separate the real and imaginary components of each complex number.
+   - For a given complex number like `"a+bi"`, we split around the `'+'` symbol to isolate the real part (`a`) and the imaginary part (`b`).
+
+2. **Convert Parts to Integers**:
+   - Once separated, we convert both the real and imaginary parts from strings to integers for numerical computation.
+
+3. **Multiply Using Complex Number Multiplication Formula**:
+   - For two complex numbers, `(a + bi)` and `(c + di)`, the formula for their product is:
+     \[
+     (a + bi) \times (c + di) = (a \times c - b \times d) + (a \times d + b \times c)i
+     \]
+   - Here, the result consists of a new real part calculated as `(a * c - b * d)` and a new imaginary part calculated as `(a * d + b * c)`.
+
+4. **Format the Result**:
+   - We then convert the calculated real and imaginary parts back into a string in the format `"a+bi"` and return it.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Parse `num1` and `num2`
+
+```cpp
+string r1, img1, r2, img2;
+int i = 0;
+while(num1[i] != '+') {
+    r1 += num1[i];
+    i++;
+}
+img1 = num1.substr(i + 1, num1.size() - 1);
+```
+
+- We initialize `r1` and `img1` to store the real and imaginary parts of `num1`.
+- We iterate over `num1` until we reach the `'+'` symbol, appending each character to `r1` to build the real part.
+- After reaching `'+'`, we extract the imaginary part (`img1`) using `substr(i + 1)` to get the portion of `num1` starting after `'+'` up to the last character (ignoring the trailing `'i'`).
+
+#### Step 2: Parse `num2` Similarly
+
+```cpp
+i = 0;
+while(num2[i] != '+') {
+    r2 += num2[i];
+    i++;
+}
+img2 = num2.substr(i + 1, num2.size() - 1);
+```
+
+- We repeat the parsing for `num2`, storing its real and imaginary parts in `r2` and `img2`, respectively.
+
+#### Step 3: Convert Parts to Integers
+
+```cpp
+int re1 = stoi(r1);
+int re2 = stoi(r2);
+int ig1 = stoi(img1);
+int ig2 = stoi(img2);
+```
+
+- Using `stoi`, we convert the string representations of the real and imaginary parts into integers for numerical calculations.
+
+#### Step 4: Apply Complex Number Multiplication Formula
+
+```cpp
+i = re1 * re2 - ig1 * ig2;
+int g = re1 * ig2 + re2 * ig1;
+```
+
+- We calculate the new real part as `re1 * re2 - ig1 * ig2` and store it in `i`.
+- The new imaginary part is `re1 * ig2 + re2 * ig1`, stored in `g`.
+
+#### Step 5: Format and Return the Result
+
+```cpp
+return to_string(i) + "+" + to_string(g) + "i";
+```
+
+- Finally, we convert the calculated real and imaginary parts back into a string in the desired format `"a+bi"` and return it.
+
+### Complexity
+
+#### Time Complexity
+- Parsing each complex number takes `O(n)`, where `n` is the length of each input string (since each character is checked once). The calculations are done in constant time.
+- **Overall Time Complexity**: `O(n)`.
+
+#### Space Complexity
+- The space complexity is `O(1)` since we are only using a fixed amount of additional space for storing intermediate values.
+
+### Conclusion
+
+This solution effectively multiplies two complex numbers by:
+1. Parsing the input strings to extract the real and imaginary parts.
+2. Using the complex number multiplication formula to compute the product.
+3. Formatting the result into the required format.
+
+The solution is efficient, with a linear time complexity in terms of the length of the input strings, making it suitable for larger inputs as well. This method provides a straightforward, structured approach to multiplying complex numbers in C++.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/complex-number-multiplication/description/)
+
+---
+
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

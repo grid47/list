@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/A8NUOmlwOlM/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/insert-interval/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/57.webp" 
     alt="A glowing new interval gently being inserted into an existing flow of light."
@@ -57,9 +55,128 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/57.md" >}}
+### 🚀 **Insert Interval**
+
+The problem asks to insert a new interval into a list of non-overlapping intervals while maintaining the sorted order. After insertion, we may need to merge overlapping intervals.
+
+For example, given the list of intervals:
+```
+[[1, 3], [6, 9]]
+```
+and a new interval `[2, 5]`, after inserting the new interval and merging the overlapping intervals, the result should be:
+```
+[[1, 5], [6, 9]]
+```
+
+### 🧑‍💻 **Approach**
+
+The solution involves the following steps:
+
+1. **Insert the new interval** into the list of existing intervals.
+2. **Merge overlapping intervals** if necessary.
+3. **Return the resulting list** after insertion and merging.
+
+We can break the solution into three main steps:
+- Add intervals that are completely before the new interval.
+- Merge overlapping intervals with the new interval.
+- Add intervals that are completely after the new merged interval.
+
+### 📝 **Code Breakdown**
+
+#### Step 1: Initialize Variables
+
+```cpp
+vector<vector<int>> ans;
+int i = 0;
+```
+
+- **`ans`:** This vector stores the final list of intervals after insertion and merging.
+- **`i`:** This variable is used to iterate through the existing intervals list `it`.
+
+#### Step 2: Add Intervals Before the New Interval
+
+```cpp
+while(i < it.size() && it[i][1] < n[0]) {
+    ans.push_back(it[i]);
+    i++;
+}
+```
+
+- We iterate through the list of intervals `it` and add all intervals that are completely before the new interval `n`.
+- An interval `[a, b]` is considered before `n` if its end time `b` is less than the start of `n`, i.e., `it[i][1] < n[0]`.
+- These intervals are directly added to `ans`.
+
+#### Step 3: Merge Overlapping Intervals
+
+```cpp
+while(i < it.size() && it[i][0] <= n[1]) {
+    n = {
+        min(it[i][0], n[0]),
+        max(it[i][1], n[1])
+    };
+    i++;
+}
+```
+
+- Now, we check for overlapping intervals. An interval `[a, b]` overlaps with `n` if its start time `a` is less than or equal to the end time of `n` (`it[i][0] <= n[1]`).
+- If there is an overlap, we update `n` by taking the minimum of the start times and the maximum of the end times between `n` and the overlapping interval.
+- The `i++` ensures we move to the next interval after merging.
+
+#### Step 4: Add the Merged Interval
+
+```cpp
+ans.push_back(n);
+```
+
+- After merging all overlapping intervals, we add the final merged interval `n` to the result list `ans`.
+
+#### Step 5: Add Intervals After the Merged Interval
+
+```cpp
+while(i < it.size()) {
+    ans.push_back(it[i++]);
+}
+```
+
+- Finally, we add all intervals that come after the newly inserted and merged interval. These intervals do not overlap, so they are added as-is to `ans`.
+
+#### Step 6: Return the Result
+
+```cpp
+return ans;
+```
+
+- After processing all intervals, we return the final list `ans`.
+
+### 📊 **Complexity Analysis**
+
+#### Time Complexity:
+
+- **O(n):** The time complexity is linear, O(n), where `n` is the number of intervals in the input list `it`. We iterate through each interval exactly once to either add it to the result or merge it with the new interval.
+- **No sorting required:** The input intervals are already assumed to be sorted, so no additional sorting step is needed.
+
+#### Space Complexity:
+
+- **O(n):** The space complexity is O(n), where `n` is the number of intervals in the input list `it`. The result list `ans` will store at most `n+1` intervals, which in the worst case occurs when no intervals overlap with the new interval.
+
+### 🌟 **Conclusion**
+
+This problem is efficiently solved using a linear scan of the existing intervals. By following these steps:
+1. Adding intervals before the new interval.
+2. Merging overlapping intervals.
+3. Adding intervals after the merged interval.
+
+We achieve an optimal solution with **O(n)** time complexity, where `n` is the number of intervals. The algorithm runs in linear time due to the sorted input and avoids the need for sorting. The space complexity is also linear because the result is stored in a new list.
+
+This solution is simple to implement and provides an optimal way to insert a new interval and merge any overlaps.
+
+---
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/insert-interval/description/)
+
 ---
 {{< youtube A8NUOmlwOlM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #59: Spiral Matrix II](https://grid47.xyz/leetcode/solution-59-spiral-matrix-ii/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

@@ -18,8 +18,6 @@ youtube_thumbnail=""
 
 
 
-[`Problem Link`](https://leetcode.com/problems/print-in-order/description/)
-
 ---
 **Code:**
 
@@ -67,9 +65,102 @@ public:
     }
 };
 {{< /highlight >}}
-
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1114.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1115: Print FooBar Alternately](https://grid47.xyz/leetcode/solution-1115-print-foobar-alternately/) |
+
+### Problem Statement
+The task is to implement a class `Foo` that can synchronize the execution of three methods: `first`, `second`, and `third`. The goal is to ensure that:
+1. The `first` method prints "first".
+2. The `second` method prints "second".
+3. The `third` method prints "third".
+
+The challenge is to ensure that these methods are called in the correct order: `first` must be called before `second`, and `second` must be called before `third`. The class must be thread-safe, meaning that multiple threads may call these methods concurrently without leading to race conditions or incorrect ordering.
+
+### Approach
+To solve this problem, we can utilize a mutex for synchronization and an integer to keep track of the current method being executed. The main steps involved in the implementation are:
+1. **Initialization**: A mutex is used to protect shared state, and an integer variable (`curVal`) is initialized to 1 to indicate that the `first` method should be called first.
+2. **Method Implementations**:
+   - In the `first` method, the thread will lock the mutex, execute the provided function to print "first", increment the tracking variable, and unlock the mutex.
+   - In the `second` method, the thread will lock the mutex and check whether it is its turn to execute. If not, it will repeatedly unlock and relock the mutex until it is allowed to print "second".
+   - In the `third` method, a similar approach is taken, ensuring that it waits until `second` has been executed.
+3. **Synchronization**: Proper locking and unlocking of the mutex ensures that the shared variable is accessed in a thread-safe manner, preventing race conditions.
+
+### Code Breakdown (Step by Step)
+
+1. **Class Definition**: The `Foo` class is defined with private members to manage state and synchronization.
+
+   ```cpp
+   class Foo {
+       int curVal;      // Tracks the current method that can execute
+       std::mutex mtx;  // Mutex for synchronizing access
+   ```
+
+2. **Constructor**: The constructor initializes `curVal` to 1, indicating that the `first` method should be executed first.
+
+   ```cpp
+       public:
+           Foo() {
+               curVal = 1;  // Start with curVal set to 1
+           }
+   ```
+
+3. **First Method**: The `first` method locks the mutex, prints "first", increments `curVal`, and then unlocks the mutex.
+
+   ```cpp
+           void first(function<void()> printFirst) {
+               mtx.lock();          // Lock the mutex
+               printFirst();        // Print "first"
+               curVal++;            // Move to the next method
+               mtx.unlock();        // Unlock the mutex
+           }
+   ```
+
+4. **Second Method**: The `second` method locks the mutex and uses a while loop to check whether it's the correct turn to execute. If not, it releases the lock and rechecks.
+
+   ```cpp
+           void second(function<void()> printSecond) {
+               mtx.lock();          // Lock the mutex
+               while(curVal != 2) { // Wait until it's this method's turn
+                   mtx.unlock();    // Unlock and wait
+                   mtx.lock();      // Lock again for rechecking
+               }
+               mtx.unlock();        // Unlock the mutex
+               printSecond();       // Print "second"
+               curVal++;            // Move to the next method
+           }
+   ```
+
+5. **Third Method**: The `third` method follows the same pattern as `second`, waiting for `curVal` to equal 3 before proceeding.
+
+   ```cpp
+           void third(function<void()> printThird) {
+               mtx.lock();          // Lock the mutex
+               while(curVal != 3) { // Wait until it's this method's turn
+                   mtx.unlock();    // Unlock and wait
+                   mtx.lock();      // Lock again for rechecking
+               }
+               mtx.unlock();        // Unlock the mutex
+               printThird();        // Print "third"
+               curVal++;            // Increment to finish
+           }
+   };
+   ```
+
+### Complexity Analysis
+- **Time Complexity**: The time complexity of each method is \(O(n)\) in the worst-case scenario, where \(n\) is the number of threads waiting for the mutex to be available. However, since the methods are executed sequentially in a correct order, the average time is effectively constant per call.
+- **Space Complexity**: The space complexity is \(O(1)\) since we are using a fixed amount of space for variables like `curVal` and `mtx`, regardless of the number of threads or method calls.
+
+### Conclusion
+The provided C++ code effectively implements a solution to synchronize the execution order of three methods using a mutex and an integer to track the current state. The design ensures that `first` is always called before `second`, and `second` is always called before `third`, achieving the desired output sequence without any race conditions or deadlocks.
+
+This implementation serves as a practical example of how to handle synchronization in multithreaded programming. The use of mutexes and condition checks demonstrates an essential pattern in concurrent programming, making it a valuable reference for developers dealing with similar challenges.
+
+Overall, the solution is both efficient and straightforward, showcasing effective synchronization techniques in C++. Readers interested in thread management and method synchronization will find this example beneficial for understanding key concepts in concurrent programming.
+
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/print-in-order/description/)
+
+---
+
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/gAzUiJ1ylQc/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/minimize-maximum-pair-sum-in-array/description/)
-
 ---
 **Code:**
 
@@ -35,9 +33,80 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1877.md" >}}
+### Problem Statement
+
+The task is to find the minimum pair sum from a given array of integers. The minimum pair sum is defined as the maximum sum of pairs formed from the elements of the array, where each pair consists of one element from the beginning of the sorted array and one element from the end. The goal is to form pairs such that the maximum of all pair sums is minimized.
+
+### Approach
+
+To achieve this, the solution follows a systematic approach involving the following steps:
+
+1. **Sort the Array**: Start by sorting the input array. Sorting helps in easily pairing the smallest elements with the largest elements to minimize the maximum pair sum.
+
+2. **Initialize Variables**: Set up a variable `res` to keep track of the maximum sum found among all pairs, and a variable `n` to hold the size of the array.
+
+3. **Iterate to Form Pairs**: Use a loop to form pairs:
+   - Pair the smallest available element with the largest available element.
+   - Calculate the sum of each pair and update `res` to store the maximum of these sums.
+
+4. **Return the Result**: Finally, return the value of `res`, which represents the minimum pair sum after processing all possible pairs.
+
+### Code Breakdown (Step by Step)
+
+1. **Class Definition**: The solution is encapsulated in a class named `Solution`, adhering to the common structure found in competitive programming challenges.
+
+    ```cpp
+    class Solution {
+    public:
+    ```
+
+2. **Function Declaration**: The function `minPairSum` is declared, taking a vector of integers \( A \) as input and returning an integer.
+
+    ```cpp
+    int minPairSum(vector<int>& A) {
+    ```
+
+3. **Sort the Array**: Inside the function, the first step is to sort the input array \( A \). This is essential for pairing elements effectively.
+
+    ```cpp
+    sort(A.begin(), A.end());
+    ```
+
+4. **Initialization**: Initialize the result variable `res` to zero and get the size of the array \( n \).
+
+    ```cpp
+    int res = 0, n = A.size();
+    ```
+
+5. **Iterate to Form Pairs**: Set up a loop to iterate through the first half of the sorted array. For each index \( i \), compute the sum of the element at index \( i \) and the element at index \( n - i - 1 \) (the corresponding element from the end of the array).
+
+    ```cpp
+    for (int i = 0; i < n / 2; ++i)
+        res = max(res, A[i] + A[n - i - 1]);
+    ```
+
+6. **Return the Result**: After the loop completes, return the maximum sum stored in `res`.
+
+    ```cpp
+    return res;        
+    }
+    ```
+
+### Complexity
+
+The time complexity of this solution is \( O(n \log n) \), where \( n \) is the number of elements in the input array. This is primarily due to the sorting step. The subsequent iteration to compute the pair sums runs in \( O(n) \), making the overall complexity dominated by the sorting operation. The space complexity is \( O(1) \) if we disregard the space used for input, as we only use a fixed number of extra variables.
+
+### Conclusion
+
+In summary, the `minPairSum` function effectively computes the minimum pair sum from an array of integers by sorting the array and pairing elements strategically. This method not only ensures the maximum of the sums is minimized but also provides a clear and efficient solution to the problem. The approach highlights the importance of sorting in optimization problems, particularly when dealing with pairs or combinations.
+
+This solution serves as an excellent example of how to tackle array-related challenges in competitive programming and algorithm design. By understanding the principles applied here, one can gain valuable insights into solving similar problems involving pairing and optimization strategies in various contexts. The clear and concise nature of the code also emphasizes best practices in coding, ensuring maintainability and readability. Overall, this problem exemplifies foundational concepts in algorithmic thinking, making it a beneficial exercise for programmers looking to enhance their skills.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/minimize-maximum-pair-sum-in-array/description/)
+
 ---
 {{< youtube gAzUiJ1ylQc >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1878: Get Biggest Three Rhombus Sums in a Grid](https://grid47.xyz/leetcode/solution-1878-get-biggest-three-rhombus-sums-in-a-grid/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

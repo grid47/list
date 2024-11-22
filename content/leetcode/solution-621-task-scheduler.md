@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/s8p8ukTyA2I/maxresdefault.webp"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/task-scheduler/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/621.webp" 
     alt="A glowing task list where tasks are scheduled, with optimal scheduling steps softly illuminating."
@@ -66,9 +64,110 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/621.md" >}}
+### Problem Statement
+
+The problem is to determine the least amount of time required to complete a set of tasks with cooling periods between the same tasks. You are given a list of tasks, each represented by a character, and a cooling period `n`. The goal is to schedule the tasks in such a way that no two identical tasks are executed within `n` units of time. 
+
+The cooling period `n` defines the minimum number of units of time that must pass between two consecutive executions of the same task. If there are idle times when no tasks are available to schedule, they should be accounted for as well. 
+
+Your task is to calculate the least interval (time) required to complete all tasks.
+
+### Approach
+
+This problem can be efficiently solved using a **greedy approach** combined with a **priority queue** (max-heap). Here's the breakdown of the approach:
+
+1. **Task Frequency Calculation:** We first count the frequency of each task. The higher the frequency, the higher its priority in the scheduling process.
+
+2. **Max-Heap to Select Tasks:** We use a max-heap to always pick the most frequent task available to execute. The heap ensures that tasks with higher frequencies are processed first, and tasks that still need to be executed are moved to the heap again after the cooling period.
+
+3. **Time Simulation:** Each cycle consists of executing the most frequent tasks and then waiting for a cooling period. The cycle runs until all tasks are completed. If there are idle times (when no task is available to schedule), they are accounted for as well.
+
+4. **Cooling Period Management:** After each cycle, the tasks that are processed are decremented (one execution), and those tasks that still need to be executed are put back into the heap for future cycles. If tasks have no remaining executions left, they are discarded.
+
+By simulating this process, we can compute the minimum time required to complete all tasks.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Count Task Frequencies
+```cpp
+map<char, int> mp;
+for(char x: tasks)
+    mp[x]++;
+```
+- We use a map to count how many times each task occurs in the `tasks` list. Each key represents a task, and the value is the number of times that task appears.
+
+#### Step 2: Create a Max-Heap for Task Prioritization
+```cpp
+priority_queue<pair<int, char>> pq;
+for(auto it: mp) {
+    pq.push({it.second, it.first});
+}
+```
+- We create a priority queue (max-heap) to prioritize tasks based on their frequency. The heap stores pairs of `<frequency, task>`. The task with the highest frequency will always be at the top of the heap, ensuring that we schedule the most frequent tasks first.
+
+#### Step 3: Time Simulation Loop
+```cpp
+int time = 0, net = 0;
+while(!pq.empty()) {
+    vector<pair<int, char>> tmp;
+    time = 0;
+    for(int i = 0; i < n + 1; i++) {
+        if(!pq.empty()) {
+            tmp.push_back(pq.top());
+            pq.pop();
+            time++;
+        }
+    }
+```
+- We simulate each unit of time using a loop that continues as long as there are tasks in the heap. For each unit of time, we attempt to execute up to `n + 1` tasks (since we can process up to `n + 1` tasks within each cooling period).
+- We push the most frequent tasks from the heap into the `tmp` vector and increment the `time` for each task processed.
+
+#### Step 4: Update Task Frequency After Execution
+```cpp
+for(auto it: tmp) {
+    it.first--;
+    if(it.first)
+        pq.push(it);
+}
+```
+- After executing a task, we decrement its frequency by 1 (`it.first--`). If a task still needs to be executed (its frequency is greater than 0), we push it back into the heap for future scheduling.
+
+#### Step 5: Calculate Time for Each Cycle
+```cpp
+net += !pq.empty()? n + 1: time;
+```
+- After each cycle, if there are still tasks left in the heap, we account for the full cooling period `n + 1`. If there are no tasks left to process, we use the actual `time` spent in that cycle.
+
+#### Step 6: Return the Total Time
+```cpp
+return net;
+```
+- Once all tasks are completed and the heap is empty, we return the total time spent to complete all tasks.
+
+### Complexity
+
+#### Time Complexity:
+- **O(N log K)**, where `N` is the number of tasks and `K` is the number of unique tasks. The main operations involving the priority queue are the insertions and extractions, both of which take **O(log K)** time. In the worst case, every task will be pushed and popped from the heap, resulting in a time complexity of **O(N log K)**.
+
+#### Space Complexity:
+- **O(K)**, where `K` is the number of unique tasks. We use a map to store the frequency of each task, and the priority queue stores each unique task with its frequency. Hence, the space complexity is proportional to the number of unique tasks.
+
+### Conclusion
+
+This solution efficiently calculates the least amount of time needed to complete all tasks while respecting the cooling period between identical tasks. By using a greedy approach with a priority queue, we ensure that tasks are scheduled in an optimal order, prioritizing the most frequent tasks. The use of the max-heap allows us to select the tasks with the highest frequency, ensuring that we always work on tasks that require the most attention.
+
+The solution handles various edge cases, including:
+- Tasks with different frequencies.
+- Scenarios where there are fewer tasks than the available cooling time.
+- Edge cases where no cooling period is required (`n = 0`).
+
+The time and space complexity are efficient enough for large inputs, making this approach suitable for solving problems with large task lists and cooling periods. This solution strikes a balance between clarity and efficiency, ensuring both correctness and optimal performance for a variety of test cases.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/task-scheduler/description/)
+
 ---
 {{< youtube s8p8ukTyA2I >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #622: Design Circular Queue](https://grid47.xyz/leetcode/solution-622-design-circular-queue/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

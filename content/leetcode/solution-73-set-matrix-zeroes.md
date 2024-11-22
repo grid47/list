@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/T41rL0L3Pnw/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/set-matrix-zeroes/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/73.webp" 
     alt="A calm matrix with soft light illuminating areas that need to be reset to zero."
@@ -66,9 +64,117 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/73.md" >}}
+### 🧩 **Set Matrix Zeros (In-Place Transformation)**
+
+In this problem, you are tasked with modifying a given **m x n matrix** such that if any element is `0`, the entire row and column containing that element should be set to `0`. This operation must be done **in-place**, meaning you cannot use extra space for another matrix, and the goal is to achieve this with **O(1) additional space** (aside from the input matrix).
+
+### 📝 **Problem Breakdown**
+
+You are given:
+- A matrix `mtx` with dimensions **m x n**.
+- The task is to set rows and columns to zero if any element in the matrix is zero.
+
+The solution must modify the matrix in-place, using **O(1) extra space** (i.e., no additional matrices or data structures except for a couple of flags).
+
+### 💡 **Approach**
+
+The core idea is to **use the input matrix itself** to track which rows and columns should be zeroed out. The first row and first column can act as markers to indicate which rows and columns contain zeros, without requiring extra space.
+
+#### Key Insights:
+1. **Mark Rows and Columns Using the First Row and Column**:
+   - Use the first row to mark which columns should be zeroed.
+   - Use the first column to mark which rows should be zeroed.
+
+2. **Handling the First Row and Column**:
+   - Since the first row and first column are being used for marking, we need special handling to check if they contain any zeros themselves.
+
+3. **In-place Zeroing**:
+   - After marking the rows and columns, we can update the matrix by zeroing out the appropriate rows and columns.
+
+4. **Restoring the First Row and Column**:
+   - Finally, we handle the first row and first column separately, using the flags set earlier.
+
+### 🚀 **Code Breakdown**
+
+#### Step 1: Initialize Flags for the First Row and Column
+
+```cpp
+int m = mtx.size(), n = mtx[0].size();
+int zr = 0, zc = 0;
+for(int i = 0; i < n; i++)
+    if(mtx[0][i] == 0) zr = 1;
+for(int i = 0; i < m; i++)
+    if(mtx[i][0] == 0) zc = 1;
+```
+
+- We initialize two flags: `zr` for the first row and `zc` for the first column. 
+- We check if there are any zeros in the first row (`zr`) and the first column (`zc`). If a zero is found, we set the corresponding flag to `1`.
+
+#### Step 2: Mark Zeros in the Matrix Using the First Row and Column
+
+```cpp
+for(int i = 1; i < m; i++)
+    for(int j = 1; j < n; j++)
+        if(mtx[i][j] == 0) {
+            mtx[i][0] = 0;
+            mtx[0][j] = 0;
+        }
+```
+
+- Now, we iterate through the matrix starting from the second row and second column. 
+- If any element `mtx[i][j]` is `0`, we mark the corresponding first row (`mtx[i][0]`) and first column (`mtx[0][j]`) as `0`.
+
+#### Step 3: Zero Out the Rows and Columns Based on the Markers
+
+```cpp
+for(int i = 1; i < m; i++)
+    for(int j = 1; j < n; j++)
+        if(mtx[i][0] == 0 || mtx[0][j] == 0)
+            mtx[i][j] = 0;
+```
+
+- After marking the rows and columns, we iterate over the entire matrix again (excluding the first row and first column).
+- If the first column or the first row for any element `mtx[i][j]` is `0`, we set that element to `0`.
+
+#### Step 4: Handle the First Row and First Column
+
+```cpp
+if(zr == 1)
+    for(int i = 0; i < n; i++)
+        mtx[0][i] = 0;
+if(zc == 1)
+    for(int i = 0; i < m; i++)
+        mtx[i][0] = 0;
+```
+
+- Finally, we handle the first row and first column.
+- If the first row contains a zero (indicated by `zr`), we set all elements in the first row to `0`.
+- If the first column contains a zero (indicated by `zc`), we set all elements in the first column to `0`.
+
+### ⏱️ **Complexity Analysis**
+
+#### Time Complexity:
+- **O(m * n)** — We iterate over the matrix multiple times. Each element is processed a constant number of times, resulting in **O(m * n)** time complexity, where `m` is the number of rows and `n` is the number of columns.
+
+#### Space Complexity:
+- **O(1)** — We use only a few integer variables (`zr`, `zc`) for the flags. The matrix is modified in-place, and no additional space is used.
+
+### 🎯 **Conclusion**
+
+This solution efficiently modifies the matrix in-place to set the entire row and column to zero when any element is zero. By utilizing the first row and column as markers, we achieve **O(1) space complexity** and **O(m * n)** time complexity, making this approach both space and time-efficient.
+
+This method is particularly useful for problems that require **in-place transformations** while maintaining **optimal space usage**. The clever use of the first row and column as markers is a classic technique for reducing space complexity in matrix manipulation problems.
+
+---
+
+### 🌟 **Final Thoughts**
+Matrix manipulation problems like this one are excellent for testing your understanding of space complexity and in-place transformations. Keep practicing, and you’ll find ways to solve increasingly complex problems with optimal space and time efficiency! 🚀
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/set-matrix-zeroes/description/)
+
 ---
 {{< youtube T41rL0L3Pnw >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #74: Search a 2D Matrix](https://grid47.xyz/leetcode/solution-74-search-a-2d-matrix/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

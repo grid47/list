@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/VyBOaboQLGc/maxresdefault.webp"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/encode-and-decode-tinyurl/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/535.webp" 
     alt="A URL being encoded into a short link, with each transformation step gently glowing to indicate the encoding process."
@@ -64,9 +62,86 @@ public:
 // Solution solution;
 // solution.decode(solution.encode(url));
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/535.md" >}}
+### Problem Statement
+
+The problem is to design a URL shortening service similar to TinyURL. Given a long URL, we need to generate a unique, shortened URL that can be shared and accessed, redirecting users to the original URL. The system should also allow decoding the shortened URL back to the original long URL.
+
+### Approach
+
+This solution uses a randomized approach to generate a short code, ensuring it’s unique and provides an efficient encoding and decoding mechanism.
+
+1. **Encoding Process**:
+   - To encode a long URL into a shortened one, we generate a 6-character code using a character set that includes lowercase letters, uppercase letters, and digits.
+   - This 6-character code will serve as the unique identifier for the URL.
+   - If the long URL has already been encoded, we retrieve the existing code from the map instead of generating a new one.
+   
+2. **Decoding Process**:
+   - The decoding process extracts the unique 6-character code from the shortened URL and looks it up in a map to retrieve the corresponding original URL.
+   - If the code does not exist or is invalid, we return an empty string to indicate an error.
+
+### Code Breakdown (Step by Step)
+
+#### Encoding the URL
+
+1. **Charset Declaration**:
+   ```cpp
+   const string charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+   ```
+   - This character set of 62 characters is used to generate a random, unique code for each URL.
+
+2. **Generate Unique Code for URL**:
+   ```cpp
+   string code;
+   for(int i = 0; i < 6; i++)
+       code.push_back(charset[rd() % charset.size()]);
+   ```
+   - A loop generates a 6-character code by selecting random characters from `charset`.
+   - A map `url_code` stores each long URL and its corresponding short code, while `code_url` allows reverse lookup.
+
+3. **Returning Shortened URL**:
+   ```cpp
+   return "http://tinyurl.com/" + code;
+   ```
+   - After generating or retrieving a code, the shortened URL is returned by appending the code to the base URL.
+
+#### Decoding the URL
+
+1. **Extract Code from Short URL**:
+   ```cpp
+   string code = shortUrl.substr(19, 6);
+   ```
+   - We extract the 6-character code from the short URL using `substr(19, 6)`.
+
+2. **Retrieve Original URL**:
+   ```cpp
+   return code_url[code];
+   ```
+   - The code is looked up in `code_url` to retrieve the original URL.
+   - If the code doesn’t exist, an empty string is returned to indicate an invalid or non-existent URL.
+
+### Complexity
+
+#### Time Complexity
+- **Encoding**: Generating a 6-character code and inserting it into the map takes `O(1)` average time, assuming efficient hashing.
+- **Decoding**: Retrieving the original URL by looking up the code in `code_url` also takes `O(1)` time.
+
+#### Space Complexity
+- **Maps `url_code` and `code_url`**: Both maps store URLs and codes, using `O(n)` space for `n` unique URLs.
+
+### Conclusion
+
+This code provides an efficient and scalable solution for URL shortening by:
+- Using randomized codes to prevent collisions and ensure uniqueness.
+- Leveraging maps to enable quick lookup for both encoding and decoding.
+- Maintaining a straightforward and user-friendly interface with a `6-character` code.
+
+The solution is effective for creating unique short URLs while ensuring that each can be quickly and accurately decoded. This approach is practical for real-world URL shortening applications due to its time efficiency and simple code management.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/encode-and-decode-tinyurl/description/)
+
 ---
 {{< youtube VyBOaboQLGc >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #537: Complex Number Multiplication](https://grid47.xyz/leetcode/solution-537-complex-number-multiplication/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

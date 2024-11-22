@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/bahebearrDc/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/detect-squares/description/)
-
 ---
 **Code:**
 
@@ -56,9 +54,111 @@ public:
  * int param_2 = obj->count(point);
  */
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2013.md" >}}
+### Problem Statement
+
+The goal of this problem is to design a data structure that efficiently detects the number of squares that can be formed using a set of points in a 2D plane. A square is defined by its four corners, and we are interested in identifying the number of squares that can be formed given a specific point in the plane. 
+
+The operations supported by our data structure are:
+
+1. **Adding a Point**: We can add points to our data structure.
+2. **Counting Squares**: Given a point, we need to count how many squares can be formed using that point as one of the corners.
+
+### Approach
+
+To achieve efficient operations, we can use the following approach:
+
+1. **Data Storage**: We maintain a 2D array `cnt` to count occurrences of points in the plane, where `cnt[x][y]` represents the number of times the point `(x, y)` has been added. Additionally, we maintain a vector `pts` to store the points that have been added.
+
+2. **Adding a Point**: When we add a point `(x, y)`, we increment `cnt[x][y]` and store the point in the `pts` vector.
+
+3. **Counting Squares**: To count the number of squares for a given point `(x1, y1)`:
+   - Iterate through all previously added points `(x3, y3)`.
+   - For each point, check if it can form a square with the point `(x1, y1)`.
+   - The conditions for forming a square are that the x-coordinates should differ by the same amount as the y-coordinates.
+   - If the conditions are met, calculate the number of squares that can be formed using the counts from the `cnt` array and add it to the answer.
+
+### Code Breakdown (Step by Step)
+
+Let’s take a closer look at the implementation of this approach:
+
+1. **Class Definition**: We define a class `DetectSquares` to encapsulate our methods and data.
+
+    ```cpp
+    class DetectSquares {
+    ```
+
+2. **Data Members**: We declare a 2D array `cnt` of size 1001x1001 to hold counts of points. We also create a vector `pts` to store the coordinates of the added points.
+
+    ```cpp
+    int cnt[1001][1001] = {};
+    vector<pair<int, int>> pts;
+    ```
+
+3. **Constructor**: The constructor initializes the data structure. In this case, we don’t need any special initialization beyond what is provided by default.
+
+    ```cpp
+    public:
+    DetectSquares() {
+    ```
+
+4. **Add Method**: The `add` method takes a vector `point`, increments the count for that point in the `cnt` array, and adds the point to the `pts` vector.
+
+    ```cpp
+    void add(vector<int> point) {
+        cnt[point[0]][point[1]]++;
+        pts.emplace_back(point[0], point[1]);
+    }
+    ```
+
+5. **Count Method**: The `count` method takes a vector `point` as input and calculates the number of squares that can be formed using that point as one of the corners.
+
+    ```cpp
+    int count(vector<int> point) {
+        int x1 = point[0], y1 = point[1];
+        int ans = 0;
+    ```
+
+   - We then loop through each point `(x3, y3)` in the `pts` vector:
+
+    ```cpp
+        for(auto [x3, y3] : pts) {
+    ```
+
+   - We check if `(x3, y3)` can potentially form a square with `(x1, y1)`. The conditions for a valid square are checked using the absolute differences:
+
+    ```cpp
+            if(abs(x3 - x1) == 0 || abs(x1 - x3) != abs(y1 - y3))
+                continue;
+    ```
+
+   - If the conditions are satisfied, we calculate the number of squares that can be formed using the counts stored in the `cnt` array:
+
+    ```cpp
+            ans += cnt[x1][y3] * cnt[x3][y1];
+        }
+        return ans;
+    }
+    ```
+
+### Complexity
+
+The time complexity for adding a point is O(1), as it involves simple increments and push operations. However, the time complexity for counting squares can be O(n) in the worst case, where `n` is the number of points added, since we may need to iterate through all points. The space complexity is O(1) for the counts array and O(n) for the vector that stores the points.
+
+### Conclusion
+
+In conclusion, the `DetectSquares` class provides an efficient way to manage and query a set of points in a 2D space for square detection. This solution effectively combines a straightforward data storage approach with logical conditions to identify valid squares. 
+
+This implementation is particularly useful in scenarios where we frequently need to add points and count the number of squares, as it allows for quick updates and queries. 
+
+The use of a 2D array for point counts ensures that we can quickly access the number of occurrences of specific points, while the vector of points enables us to iterate through potential square corners efficiently. 
+
+This code serves as an excellent reference for anyone interested in geometric problems, data structures, or algorithm design, showcasing how to leverage arrays and vectors in a meaningful way to solve complex queries effectively. Whether you're a novice or an experienced developer, understanding this implementation can deepen your appreciation of geometric algorithms and their applications in real-world scenarios.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/detect-squares/description/)
+
 ---
 {{< youtube bahebearrDc >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2016: Maximum Difference Between Increasing Elements](https://grid47.xyz/leetcode/solution-2016-maximum-difference-between-increasing-elements/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

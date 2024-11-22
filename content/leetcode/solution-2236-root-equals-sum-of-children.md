@@ -18,8 +18,6 @@ youtube_thumbnail=""
 
 
 
-[`Problem Link`](https://leetcode.com/problems/root-equals-sum-of-children/description/)
-
 ---
 **Code:**
 
@@ -42,9 +40,92 @@ public:
     }
 };
 {{< /highlight >}}
-
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2236.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2239: Find Closest Number to Zero](https://grid47.xyz/leetcode/solution-2239-find-closest-number-to-zero/) |
+### Problem Statement
+
+The problem requires us to check whether a given binary tree satisfies a specific condition: the value of the root node must be equal to the sum of the values of its left and right child nodes. Specifically, for a given binary tree with root node `root`, we need to verify if:
+
+```
+root->val == root->left->val + root->right->val
+```
+
+If the condition holds true, return `true`; otherwise, return `false`. This problem tests our understanding of basic tree traversal and node value comparison.
+
+### Approach
+
+The solution to this problem is straightforward:
+1. We are given a binary tree represented by the root node `root`.
+2. The root node has two child nodes: a left child and a right child.
+3. The task is to check whether the sum of the left child's value and the right child's value is equal to the value of the root node.
+4. If the sum of the values of the left and right child nodes equals the root node's value, return `true`. Otherwise, return `false`.
+
+This problem is simple because we are only concerned with the root node and its immediate children, without needing to traverse the entire tree. The solution requires direct access to the root's left and right children to perform the comparison.
+
+### Code Breakdown (Step by Step)
+
+```cpp
+class Solution {
+public:
+    bool checkTree(TreeNode* root) {
+        return (root->left->val) + (root->right->val) == root->val;
+    }
+};
+```
+
+#### 1. **Class Declaration**:
+```cpp
+class Solution {
+```
+- We begin by declaring a class `Solution`. The class encapsulates the solution for this problem. In C++, class declarations group related functions and variables together.
+- We define the `checkTree` function inside this class, which will be used to solve the problem.
+
+#### 2. **Function Definition**:
+```cpp
+bool checkTree(TreeNode* root) {
+```
+- The function `checkTree` is defined with a single parameter `root`, which is a pointer to the root of the binary tree (`TreeNode*`).
+- The return type of this function is `bool`, indicating that it will return either `true` or `false` based on the condition evaluated inside the function.
+
+#### 3. **Node Value Comparison**:
+```cpp
+return (root->left->val) + (root->right->val) == root->val;
+```
+- This line performs the core operation of the solution: it checks whether the sum of the values of the left and right children of the root node is equal to the value of the root node.
+- `root->left->val`: accesses the value of the left child node.
+- `root->right->val`: accesses the value of the right child node.
+- `root->val`: accesses the value of the root node.
+- The condition compares whether the sum of the left and right child values equals the root node's value.
+- If the condition holds true, the function will return `true`; otherwise, it will return `false`.
+
+#### 4. **Conclusion of Function**:
+```cpp
+};
+```
+- The function is complete after this line. If the condition is met, the function returns `true`, and if it is not met, the function returns `false`.
+
+### Complexity
+
+#### Time Complexity:
+- The time complexity of this function is **O(1)**, which means it takes constant time to execute.
+- This is because the function simply accesses the left and right children of the root node and compares their sum with the root node's value, which takes a constant amount of time.
+
+#### Space Complexity:
+- The space complexity is also **O(1)**, as the function does not use any additional space that scales with the size of the input. It only uses a constant amount of space for the comparison.
+
+### Conclusion
+
+This solution efficiently solves the problem of checking if the root node’s value equals the sum of its children’s values. The approach is simple and optimal because:
+- The problem only requires us to examine the root node and its immediate children.
+- The function is direct and uses constant time and space, making it an optimal solution for this problem.
+
+In a broader context, this problem is an example of basic tree manipulation and traversal, where we focus on accessing specific nodes in the tree (in this case, the root and its children) and performing a comparison. Understanding this problem is essential for developing familiarity with binary trees and solving more complex tree-based problems.
+
+This solution works in constant time and space, which is highly efficient for the given task.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/root-equals-sum-of-children/description/)
+
+---
+
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

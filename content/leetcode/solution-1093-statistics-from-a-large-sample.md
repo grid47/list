@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/05WQZvhYcAg/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/statistics-from-a-large-sample/description/)
-
 ---
 **Code:**
 
@@ -62,9 +60,104 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1093.md" >}}
+
+### Problem Statement
+The task is to compute statistical measures from a frequency array, where each index represents a number (from 0 to 255) and the value at that index represents the count of occurrences of that number. The goal is to determine the minimum, maximum, mean, median, and mode of the numbers based on their frequency.
+
+### Approach
+To solve this problem, we can utilize a systematic approach that involves iterating through the frequency array to gather necessary statistics. The solution is divided into two main functions: `getKth` to retrieve the k-th number based on its frequency and `sampleStats` to compute the desired statistics. Here’s a breakdown of the approach:
+
+1. **Initialize Variables**: Set up variables to track the minimum and maximum values, the total sum of all numbers, frequency of occurrences (for mode), and the count of total elements.
+
+2. **Iterate Through the Frequency Array**: Loop through the frequency array to update the minimum, maximum, sum, mode, and count of elements.
+
+3. **Calculate the Median**: Depending on whether the total count of elements is even or odd, compute the median using the `getKth` function.
+
+4. **Return Results**: Compile the computed statistics into a vector and return it.
+
+### Code Breakdown (Step by Step)
+
+1. **Class Definition**: The code defines a class `Solution` containing the public method `sampleStats`.
+
+   ```cpp
+   class Solution {
+   public:
+   ```
+
+2. **Helper Function**: The `getKth` function is defined to find the k-th number based on the cumulative counts from the frequency array.
+
+   ```cpp
+       double getKth(vector<int> &cnt, int k) {
+           int x = 0;
+           for(int i = 0; i < 256; i++) {
+               x += cnt[i];
+               if(x >= k) return i;
+           }
+           return 256;
+       }
+   ```
+
+3. **Main Function**: The `sampleStats` function begins by initializing variables for statistical calculations.
+
+   ```cpp
+       vector<double> sampleStats(vector<int>& cnt) {
+           double mn = 257, mx = -1, sum = 0, mode, frq = 0, median;
+           int x = 0;
+   ```
+
+4. **Frequency Array Iteration**: Loop through the frequency array from 0 to 255 to find the minimum and maximum values, compute the total sum, track the mode, and count the total elements.
+
+   ```cpp
+           for(int i = 0; i < 256; i++) {
+               if(cnt[i] > 0) {
+                   mn = min(mn, (double)i);
+                   mx = i;
+                   sum += (double)cnt[i] * i;
+                   if(frq < cnt[i]) {
+                       frq = cnt[i];
+                       mode = i;
+                   }
+                   x += cnt[i];                 
+               }
+           }
+   ```
+
+5. **Calculate the Median**: Determine if the total count of numbers (`x`) is even or odd. If even, retrieve the two middle values using `getKth` and calculate the median; otherwise, find the middle value.
+
+   ```cpp
+           if(x % 2 == 0) {
+               double a = getKth(cnt, x / 2);
+               double b = getKth(cnt, x / 2 + 1);
+               median = (a + b) / 2;
+           } else median = getKth(cnt, x / 2 + 1);
+   ```
+
+6. **Return Results**: The computed statistics (minimum, maximum, mean, median, and mode) are collected into a vector and returned.
+
+   ```cpp
+           return vector<double> {mn, mx, sum / x, median, mode };
+       }
+   };
+   ```
+
+### Complexity Analysis
+- **Time Complexity**: The overall time complexity of the `sampleStats` function is \(O(1)\), as the operations depend on fixed array size (256), making it effectively constant time. Each loop through the frequency array runs a fixed number of iterations.
+
+- **Space Complexity**: The space complexity is also \(O(1)\) because the additional space used (for variables) does not depend on the input size. The returned vector containing the statistics is of fixed size (5).
+
+### Conclusion
+The provided C++ code efficiently computes various statistical measures from a frequency count of numbers ranging from 0 to 255. By utilizing two main functions—`getKth` to find the k-th number based on frequency and `sampleStats` to derive the desired statistics—the code achieves its goal in a clear and organized manner.
+
+This solution is well-optimized for speed and memory usage, making it suitable for scenarios where performance is critical. The approach showcases how simple loops and mathematical operations can yield insightful statistical information, applicable in numerous fields such as data analysis, algorithm design, and statistical modeling.
+
+In conclusion, the code demonstrates an effective method for deriving key statistics from a frequency distribution, positioning it as a reliable solution for similar statistical problems.
+
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/statistics-from-a-large-sample/description/)
+
 ---
 {{< youtube 05WQZvhYcAg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1104: Path In Zigzag Labelled Binary Tree](https://grid47.xyz/leetcode/solution-1104-path-in-zigzag-labelled-binary-tree/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

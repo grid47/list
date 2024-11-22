@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/qL4UaMAdPts/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/description/)
-
 ---
 **Code:**
 
@@ -58,9 +56,124 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1466.md" >}}
+### Problem Statement
+
+The goal of the problem is to determine the minimum number of roads that need to be reversed in order to ensure that all paths lead from a given starting city (city `0`) to all other cities in a directed graph. The input consists of an integer `n`, representing the number of cities, and a list of connections, where each connection represents a bidirectional road between two cities. The problem can be visualized as a graph traversal challenge, where we must count how many edges need to be reversed to create a path from the starting city to every other city.
+
+### Approach
+
+The solution involves a breadth-first search (BFS) approach to traverse the graph from the starting city. Here's the high-level overview of the approach:
+
+1. **Graph Representation**: The cities and their connections are represented using an adjacency list (`grid`). Additionally, a mapping (`mp`) is used to keep track of which connections are directed (i.e., which way they need to be reversed).
+
+2. **BFS Traversal**: A BFS algorithm is initiated from city `0`. As we traverse through the cities, we keep track of visited cities and count how many roads would need to be reversed to reach each city.
+
+3. **Counting Reversals**: While traversing, whenever we reach a city through a directed road (as per our mapping), we increment the count of roads that need to be reversed.
+
+4. **Result**: Finally, the count of reversed roads is returned, representing the minimum number of roads to reverse in order to connect all cities back to city `0`.
+
+### Code Breakdown (Step by Step)
+
+Here’s a detailed breakdown of the code:
+
+1. **Class Declaration**:
+   ```cpp
+   class Solution {
+   public:
+   ```
+
+   - The solution is encapsulated within a class named `Solution`.
+
+2. **Function Definition**:
+   ```cpp
+   int minReorder(int n, vector<vector<int>>& conn) {
+   ```
+
+   - The `minReorder` function takes an integer `n` (the number of cities) and a vector of vectors `conn` (the connections between cities) as inputs and returns the minimum number of roads to reverse.
+
+3. **Graph Representation**:
+   ```cpp
+   vector<vector<int>> grid(n);
+   map<int, map<int, bool>> mp;
+   ```
+
+   - An adjacency list `grid` is created with `n` empty vectors, where each vector will hold the connected cities. A nested map `mp` is also initialized to track the directed roads.
+
+4. **Building the Graph**:
+   ```cpp
+   for(auto it: conn) {
+       grid[it[0]].push_back(it[1]);
+       grid[it[1]].push_back(it[0]);
+       mp[it[0]][it[1]] = true;
+   }
+   ```
+
+   - For each connection in `conn`, we update the adjacency list and populate the mapping to indicate that there is a direct road from `it[0]` to `it[1]`.
+
+5. **BFS Initialization**:
+   ```cpp
+   int cnt = 0;
+   queue<int> q;
+   q.push(0);
+   vector<int> vis(n, 0);
+   vis[0] = true;
+   ```
+
+   - A counter `cnt` is initialized to count the number of roads that need to be reversed. A queue `q` is initialized for BFS, starting with city `0`. A `vis` vector keeps track of visited cities.
+
+6. **BFS Traversal**:
+   ```cpp
+   while(!q.empty()) {
+       int sz = q.size();
+       while(sz--) {
+           int tmp = q.front();
+           q.pop();
+           for(int it: grid[tmp]) {
+               if(vis[it]) continue;
+               vis[it] = true;
+               if(mp.count(tmp) && mp[tmp].count(it)) cnt++;
+               q.push(it);
+           }
+       }
+   }
+   ```
+
+   - The outer while loop continues until there are no more cities to explore. The inner while loop processes each city in the queue:
+     - Each connected city is checked to see if it has already been visited.
+     - If it has not been visited, it is marked as visited.
+     - If there is a direct road leading to it (as per the `mp` mapping), the count of roads to reverse is incremented.
+     - The city is then added to the queue for further exploration.
+
+7. **Returning the Result**:
+   ```cpp
+   return cnt;
+   ```
+
+   - The function returns the count of roads that need to be reversed to ensure all paths lead back to city `0`.
+
+### Complexity
+
+- **Time Complexity**: The time complexity of this solution is \(O(n + e)\), where \(n\) is the number of cities and \(e\) is the number of roads (or connections). This is due to the BFS traversal through the graph.
+
+- **Space Complexity**: The space complexity is \(O(n + e)\) as well, due to the storage of the graph in the adjacency list and the visited vector.
+
+### Conclusion
+
+The presented solution efficiently determines the minimum number of road reversals needed to ensure that all paths lead back to the starting city using a breadth-first search strategy. Key aspects of the solution include:
+
+1. **Graph Traversal**: The use of BFS allows for efficient exploration of all connected cities from the starting point.
+
+2. **Directed Connection Tracking**: By maintaining a mapping of connections, the solution effectively counts the necessary reversals, ensuring correctness.
+
+3. **Clarity and Structure**: The structured approach of separating graph construction, traversal, and counting enhances the readability and maintainability of the code.
+
+Overall, this solution demonstrates effective use of graph theory concepts and algorithmic design to solve a practical problem, making it a valuable reference for similar challenges in competitive programming and algorithm studies.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/reorder-routes-to-make-all-paths-lead-to-the-city-zero/description/)
+
 ---
 {{< youtube qL4UaMAdPts >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1471: The k Strongest Values in an Array](https://grid47.xyz/leetcode/solution-1471-the-k-strongest-values-in-an-array/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

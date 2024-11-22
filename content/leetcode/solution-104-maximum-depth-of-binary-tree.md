@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/ScvTcU2Aifs/maxresdefault.webp"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/maximum-depth-of-binary-tree/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/104.webp" 
     alt="A deep, glowing tree with rays of light expanding downwards to symbolize depth."
@@ -51,9 +49,130 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/104.md" >}}
+### 🌳 **Maximum Depth of Binary Tree**
+
+The task is to compute the **maximum depth** (or height) of a binary tree. The depth of a binary tree is the length of the longest path from the root node down to the farthest leaf node, including both the root and all nodes along the path.
+
+---
+
+### 🔑 **Approach:**
+
+To solve this problem, a **recursive depth-first search (DFS)** approach is ideal. The depth of the tree can be computed by exploring both left and right subtrees and taking the maximum depth of both subtrees at each node.
+
+Here’s how we can break it down:
+
+1. **Base Case:** If the current node is `NULL` (i.e., the tree is empty or we've reached the leaf node's child), the depth is `0`.
+2. **Recursive Case:** If the current node is not `NULL`, the maximum depth of the tree is **1 plus** the maximum depth of its left and right subtrees.
+
+This translates to:
+- **Maximum Depth = 1 + max(maxDepth(left), maxDepth(right))**
+
+---
+
+### 💻 **Code Breakdown (Step by Step):**
+
+#### **Step 1: Base Case**
+
+```cpp
+if(root == NULL) return 0;
+```
+
+- The first step is to check if the `root` is `NULL`. This represents the case where the tree is empty or we've reached beyond a leaf node.
+- If the node is `NULL`, the function returns `0`, indicating that the depth has reached its end.
+
+#### **Step 2: Recursive Case**
+
+```cpp
+return 1 + max(maxDepth(root->left), maxDepth(root->right));
+```
+
+- If the node is not `NULL`, we recursively call the `maxDepth` function on the left and right child nodes (`root->left` and `root->right`).
+- The `max` function is used to find the maximum depth between the left and right subtrees. 
+- We then add `1` to account for the current node’s depth, thus ensuring we are calculating the full path from the root to the leaf.
+
+---
+
+### 📊 **Complexity Analysis:**
+
+#### **Time Complexity:**
+
+The time complexity of this solution is **O(n)**, where `n` is the number of nodes in the tree. This is because the function visits each node exactly once to compute the depth of both the left and right subtrees.
+
+- Each node is processed once, making the time complexity proportional to the number of nodes.
+
+#### **Space Complexity:**
+
+The space complexity is **O(h)**, where `h` is the height of the binary tree. This space is used by the recursive call stack during the depth-first traversal.
+
+- In the worst case, the tree could be skewed (like a linked list), so the height `h` would be equal to `n`, and the space complexity would be **O(n)**.
+- In the best case, where the tree is balanced, the height `h` would be **O(log n)**, and the space complexity would be **O(log n)**.
+
+Thus, space complexity depends on the height of the tree.
+
+---
+
+### 🔍 **Example Walkthrough:**
+
+#### **Example 1: Balanced Binary Tree**
+
+Consider the binary tree:
+
+```
+        1
+       / \
+      2   3
+     / \
+    4   5
+```
+
+- Starting at the root (`1`), we compute the depths of the left and right subtrees:
+  - The left subtree, with root `2`, has a maximum depth of `1 + max(2, 2)` where `2` is the depth of nodes `4` and `5`. So, the depth of the left subtree is `2`.
+  - The right subtree with root `3` has a depth of `1` (no children).
+- The overall tree depth is `1 + max(2, 1) = 3`.
+
+Thus, the maximum depth of the tree is `3`.
+
+#### **Example 2: Skewed Binary Tree**
+
+Consider the binary tree:
+
+```
+    1
+     \
+      2
+       \
+        3
+         \
+          4
+```
+
+- Starting at the root (`1`), we calculate the depth of the left and right subtrees:
+  - The left subtree is `NULL`, so its depth is `0`.
+  - The right subtree has root `2`, and we continue the same process for its right child, and so on.
+- The maximum depth of the tree is `1 + max(0, 3) = 4`.
+
+Thus, the maximum depth of the skewed tree is `4`.
+
+---
+
+### 🎯 **Conclusion:**
+
+This solution efficiently computes the **maximum depth** of a binary tree using a **recursive depth-first search (DFS)** approach. 
+
+- **Time Complexity:** **O(n)**, where `n` is the number of nodes in the tree.
+- **Space Complexity:** **O(h)**, where `h` is the height of the tree, due to the recursive call stack.
+
+This approach is optimal and handles both balanced and skewed trees effectively.
+
+---
+
+**Happy coding!** 🌱✨
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-depth-of-binary-tree/description/)
+
 ---
 {{< youtube ScvTcU2Aifs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #105: Construct Binary Tree from Preorder and Inorder Traversal](https://grid47.xyz/leetcode/solution-105-construct-binary-tree-from-preorder-and-inorder-traversal/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

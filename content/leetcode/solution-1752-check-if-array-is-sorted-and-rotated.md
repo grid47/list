@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/uoEJ3FXr56w/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/check-if-array-is-sorted-and-rotated/description/)
-
 ---
 **Code:**
 
@@ -41,9 +39,84 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1752.md" >}}
+### Problem Statement
+
+The problem at hand involves determining whether a given array of integers can be considered "sorted" in a circular manner. Specifically, we want to check if the array can be sorted in non-decreasing order by making at most one rotation. A rotation involves moving elements from the front of the array to the end, or vice versa. For instance, the array `[3, 4, 5, 1, 2]` can be viewed as a rotated version of `[1, 2, 3, 4, 5]`.
+
+### Approach
+
+To solve this problem, we will utilize the following approach:
+
+1. **Count Descending Pairs**: We will traverse through the array and count how many times an element is greater than the subsequent element. This will help us identify any 'breaks' in the sorted order.
+
+2. **Check Circular Condition**: Since the array is circular, we need to check if the last element is greater than the first element. If it is, we count that as an additional break.
+
+3. **Determine Validity**: If the total number of breaks (descents) is less than or equal to 1, then the array can be considered a rotated sorted array. If there are more than one breaks, the array cannot be sorted with a single rotation.
+
+### Code Breakdown (Step by Step)
+
+Here’s a step-by-step breakdown of the implementation in the `check` function:
+
+1. **Class Definition**: The function is encapsulated within a class named `Solution`.
+
+   ```cpp
+   class Solution {
+   ```
+
+2. **Public Method**: The `check` method takes a vector of integers as input and returns a boolean value indicating whether the array meets the criteria.
+
+   ```cpp
+   public:
+       bool check(vector<int>& nums) {
+   ```
+
+3. **Initialization**: We determine the size of the array and initialize a counter for the number of descents.
+
+   ```cpp
+   int n = nums.size();
+   int cnt = 0;
+   ```
+
+4. **Iterate Through the Array**: We loop through the array, checking each pair of consecutive elements to see if a descent occurs (where the previous element is greater than the current element).
+
+   ```cpp
+   for(int i = 1; i < n; i++) {
+       if(nums[i-1] > nums[i]) {
+           cnt++;
+       }
+   }
+   ```
+
+5. **Check the Circular Condition**: After checking all pairs, we need to evaluate the relationship between the last and the first element to account for the circular nature of the array.
+
+   ```cpp
+   if(nums[n-1] > nums[0]) {
+       cnt++;
+   }
+   ```
+
+6. **Return Result**: Finally, we return whether the number of descents is less than or equal to one, indicating that the array can be sorted with at most one rotation.
+
+   ```cpp
+   return cnt <= 1;
+   }
+   ```
+
+### Complexity
+
+- **Time Complexity**: The overall time complexity of this solution is \(O(n)\), where \(n\) is the number of elements in the array. This is because we make a single pass through the array to count the descents.
+
+- **Space Complexity**: The space complexity is \(O(1)\) since we are using a constant amount of additional space for the counter and do not use any data structures that scale with the size of the input.
+
+### Conclusion
+
+In conclusion, this solution efficiently checks if an array can be sorted in a circular manner by utilizing a straightforward approach that counts the number of descending pairs. The use of a single traversal of the array ensures optimal performance, making this solution both effective and efficient. The algorithm handles edge cases effectively, such as when the array consists of all identical elements or is already sorted in a circular manner. Overall, this method provides a clear and concise way to determine the circular sorted condition of an array, making it a valuable technique in competitive programming and algorithm design.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-array-is-sorted-and-rotated/description/)
+
 ---
 {{< youtube uoEJ3FXr56w >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1753: Maximum Score From Removing Stones](https://grid47.xyz/leetcode/solution-1753-maximum-score-from-removing-stones/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

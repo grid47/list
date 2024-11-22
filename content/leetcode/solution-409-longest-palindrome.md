@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/_g9jrLuAphs/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/longest-palindrome/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/409.webp" 
     alt="A string where the longest palindrome is highlighted, with characters mirroring in a soft glow."
@@ -48,9 +46,92 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/409.md" >}}
+### Problem Statement
+
+The problem asks us to find the length of the longest palindrome that can be formed by rearranging the characters in a given string. A palindrome is a string that reads the same forwards and backwards. The goal is to determine the length of the longest possible palindrome that can be formed using the characters of the input string.
+
+### Approach
+
+To solve this problem, we need to focus on understanding the structure of palindromes and how to maximize the number of characters used to form a palindrome.
+
+1. **Palindrome Structure**: 
+   - A palindrome has the property that characters appear in pairs. For example, in the string "abba", the characters 'a' and 'b' appear twice.
+   - The key observation here is that for a string to form a palindrome, every character except at most one must appear an even number of times. The character that appears an odd number of times can be placed in the center of the palindrome (if necessary), but it can only contribute one occurrence to the palindrome.
+
+2. **Steps to Solve**:
+   - **Count Character Frequencies**: We begin by counting the frequency of each character in the string.
+   - **Use Characters with Even Frequencies**: For each character that appears an even number of times, we can use all of its occurrences to form pairs in the palindrome.
+   - **Handle Odd Frequency Characters**: If a character appears an odd number of times, we can use the largest even number of occurrences (i.e., the count minus one) to form pairs, and at most one such character can be placed at the center of the palindrome.
+
+3. **Result Calculation**:
+   - The total length of the palindrome is calculated by summing the lengths of pairs formed by even-frequency characters.
+   - If there are characters with odd frequencies, one character can be placed at the center, contributing 1 additional character to the palindrome.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Count Character Frequencies
+
+```cpp
+map<char, int> mp;
+for(char x: s)
+    mp[x]++;
+```
+
+- We first initialize a `map` called `mp` to store the frequency of each character in the string `s`. The `map` automatically sorts the characters by their keys (i.e., characters in lexicographical order).
+- Then, we iterate over each character `x` in the string `s` and update its count in the map. After this step, `mp` contains each character and its corresponding frequency in the string.
+
+#### Step 2: Calculate the Length of the Palindrome
+
+```cpp
+bool odd = false;
+int res = 0;
+for(auto [key, val]: mp) {
+    if(val % 2) odd = true;
+    res += (val/2) * 2;
+}
+```
+
+- We initialize two variables: 
+  - `odd`, a boolean flag to track whether we have encountered any characters with an odd frequency.
+  - `res`, an integer to accumulate the total length of the longest palindrome that can be formed.
+- We then iterate over the `map` of character frequencies (`mp`), where `key` is the character and `val` is its frequency.
+  - If `val` is odd (`val % 2`), we set the `odd` flag to `true`, indicating that we have encountered at least one character with an odd frequency.
+  - For each character, we add the largest even number of occurrences to the result. This is achieved by calculating `(val / 2) * 2`, which ensures that we only count the even occurrences of each character (for example, if a character appears 5 times, we add 4 to the result).
+
+#### Step 3: Final Adjustment for Center Character
+
+```cpp
+return odd ? res + 1 : res;
+```
+
+- After processing all characters, we check if we have encountered any character with an odd frequency (`odd` is `true`). If so, we can place one character in the center of the palindrome, contributing 1 additional character to the result.
+- If there is at least one character with an odd frequency, we add 1 to `res` to account for this center character.
+- Finally, we return the result, which is the length of the longest palindrome that can be formed.
+
+### Complexity
+
+#### Time Complexity:
+- **Counting Frequencies**: The first step, counting the frequency of characters in the string, takes `O(n)` time, where `n` is the length of the string.
+- **Iterating Over the Map**: The second step involves iterating over the map of character frequencies. The number of distinct characters in the string is at most 26 (if the string contains only lowercase English letters). Therefore, this step takes `O(26)` time, which simplifies to `O(1)` as it is a constant time operation.
+- **Overall Time Complexity**: The overall time complexity of the algorithm is dominated by the time it takes to count character frequencies, which is `O(n)`.
+
+#### Space Complexity:
+- We are using a `map` to store the frequencies of characters. In the worst case, if all characters in the string are distinct, the map will contain `n` entries. Therefore, the space complexity is `O(n)`.
+
+### Conclusion
+
+The solution effectively solves the problem of finding the length of the longest palindrome that can be formed from a given string by:
+- Counting the frequencies of characters in the string.
+- Summing up the largest even counts of characters to form pairs in the palindrome.
+- Adding 1 character in the center if there are characters with odd frequencies.
+
+This approach is optimal, with a time complexity of `O(n)` and space complexity of `O(n)`, making it efficient even for larger strings. The solution is easy to implement and leverages simple principles of palindrome construction to efficiently calculate the result.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/longest-palindrome/description/)
+
 ---
 {{< youtube _g9jrLuAphs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #415: Add Strings](https://grid47.xyz/leetcode/solution-415-add-strings/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

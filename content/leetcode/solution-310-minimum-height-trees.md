@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/wQGQnyv_9hI/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/minimum-height-trees/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/310.webp" 
     alt="A series of tree structures, with each one growing taller or shorter as the minimum height tree is highlighted."
@@ -70,9 +68,120 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/310.md" >}}
+### 🚀 Problem Statement
+
+Let's dive into a fun challenge! 🎉 The goal here is to identify all **Minimum Height Trees (MHTs)** in an undirected graph with `n` nodes. Each MHT is defined by having the minimum possible height when rooted at a particular node. Here’s the breakdown:
+- We have `n` nodes, labeled from `0` to `n-1`.
+- The graph is connected, with each edge linking two distinct nodes.
+- Your mission: find all the **root nodes** that, when used as the root of the tree, yield the smallest height.
+
+---
+
+### 🔍 Key Insights
+
+**How can we minimize the tree height?** 🌳 The trick is to find the "center" of the tree. A tree center balances the longest paths to all leaves, keeping the height as low as possible. The center can be one or two nodes, depending on the structure of the tree.
+
+Here’s our plan:
+1. **Tree Properties**: Trees have unique paths between nodes, and their heights depend on the longest path from the root to the leaves.
+2. **Layered Leaf Removal**: We’ll strip away leaf nodes layer by layer. When only 1 or 2 nodes are left, these will be the centers!
+3. **Efficient BFS Removal**: By removing leaves layer-by-layer with a BFS, we’ll zoom into the tree's core, finding the central node(s) in the process.
+
+---
+
+### 🛠️ Step-by-Step Approach
+
+Let’s break down this solution in easy-to-follow steps:
+
+1. **Build the Adjacency List**: 📋 First, represent the graph using an adjacency list. This way, we can quickly access the neighbors of each node.
+
+2. **Track Node Degrees**: 🧩 Each node’s degree (i.e., number of neighbors) is crucial. Nodes with a degree of 1 are leaves. We'll use a degree array to track these values.
+
+3. **Identify Initial Leaves**: 🍃 Start by queuing up all leaf nodes (degree = 1). These are our first candidates for removal.
+
+4. **Remove Leaves in Layers**: 🌊 Using BFS, remove the outermost leaves first. For each leaf:
+   - Reduce the degree of its neighbors.
+   - If any neighbor’s degree becomes 1, add it to the queue (it’s the next leaf layer).
+   
+   Repeat this until only 1 or 2 nodes remain. These are our centers!
+
+5. **Return the Centers**: 🎯 The remaining nodes are the MHT roots!
+
+---
+
+### 🔨 Code Breakdown
+
+Here’s the C++ code with step-by-step explanations:
+
+```cpp
+int findMinHeightTrees(int n, vector<vector<int>>& edges) {
+    if (n == 1) return {0}; // Special case: Only one node means it’s the root by default.
+
+    // Step 1: Build the adjacency list and degree array
+    vector<vector<int>> adj(n);
+    vector<int> degree(n, 0);
+    for (auto e : edges) {
+        adj[e[0]].push_back(e[1]);
+        adj[e[1]].push_back(e[0]);
+        degree[e[0]]++;
+        degree[e[1]]++;
+    }
+
+    // Step 2: Initialize the queue with all leaf nodes
+    queue<int> q;
+    for (int i = 0; i < n; i++)
+        if (degree[i] == 1) q.push(i);
+
+    // Step 3: Remove leaves layer by layer
+    vector<int> res;
+    while (!q.empty()) {
+        res.clear();
+        int sz = q.size(); // Current layer size
+        while (sz--) {
+            int leaf = q.front();
+            q.pop();
+            res.push_back(leaf);
+            for (auto nbr : adj[leaf]) {
+                degree[nbr]--;
+                if (degree[nbr] == 1) q.push(nbr); // New leaf
+            }
+        }
+    }
+
+    // Remaining nodes are the centers
+    return res;
+}
+```
+
+---
+
+### 📈 Complexity Analysis
+
+**Time Complexity**: 🕒 **O(n)** because:
+- We process each node and edge a limited number of times (once for building the adjacency list, once for leaf removal).
+  
+**Space Complexity**: 💾 **O(n)**, since we store:
+- The adjacency list.
+- The degree array.
+- A queue for leaf nodes.
+
+---
+
+### 🏁 Conclusion
+
+By repeatedly removing leaves, we zoom in on the central nodes that minimize the tree height. This approach is efficient and perfectly suited to large trees. 🌲✨
+
+**Takeaways**:
+1. **Layered BFS**: Stripping leaves layer-by-layer zeroes in on the tree's center.
+2. **Optimal Center Finding**: Only 1-2 nodes remain as the centers, making them ideal MHT roots.
+3. **Time Efficiency**: Linear time complexity means this solution is fast and scalable!
+
+Keep up the momentum, and happy coding! 🧑‍💻
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-height-trees/description/)
+
 ---
 {{< youtube wQGQnyv_9hI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #316: Remove Duplicate Letters](https://grid47.xyz/leetcode/solution-316-remove-duplicate-letters/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

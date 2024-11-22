@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/0qep3f9cqVs/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/spiral-matrix-iii/description/)
-
 ---
 **Code:**
 
@@ -42,9 +40,82 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/885.md" >}}
+### Problem Statement
+
+The problem requires generating a list of coordinates representing a spiral path starting from a given point `(rStart, cStart)` in a matrix of size `rows x cols`. The spiral traversal should visit each cell in the matrix exactly once, and the movement should continue until all cells are covered. The challenge is to implement the traversal in such a way that the program can efficiently and correctly handle the specified conditions. The solution should keep track of all visited coordinates and return them in the order they are visited.
+
+### Approach
+
+The solution to this problem can be broken down into the following steps:
+
+1. **Initialization**: Start by defining the direction of movement (right, down, left, up) and initializing a result array that will store all visited coordinates.
+
+2. **Spiral Traversal**: The key idea is to iterate over the matrix in a spiral pattern, adjusting the direction of movement after each complete loop around the matrix. We achieve this by using a series of directional changes:
+   - Initially, we start by moving right, then down, left, and up in a repeating pattern.
+   - Each time the movement completes a full side of the spiral, the direction is updated by rotating the direction vector (dx, dy).
+   - The traversal continues until all cells in the matrix are visited.
+
+3. **Boundary Checking**: As we traverse the matrix, we need to ensure that we stay within the matrix boundaries. If the next step goes out of bounds, we skip that movement and continue in the current direction. 
+
+4. **Stopping Condition**: The process continues until all cells in the matrix are visited. This is ensured by checking that the size of the result array is equal to `rows * cols`.
+
+5. **Result**: Once all the coordinates are visited, the result array is returned, which contains the list of coordinates in the order they were traversed.
+
+This approach leverages the simplicity of direction vectors to manage the traversal efficiently, ensuring a smooth spiral motion around the matrix.
+
+### Code Breakdown (Step by Step)
+
+1. **Function Signature and Initial Setup**:
+   ```cpp
+   vector<vector<int>> spiralMatrixIII(int rows, int cols, int rStart, int cStart) {
+       vector<vector<int>> res = {{rStart, cStart}};
+       int dx = 0, dy = 1, tmp;
+   ```
+   The function `spiralMatrixIII` takes the number of rows and columns, along with the starting position `(rStart, cStart)`. We initialize a result vector `res` to store the coordinates starting with the given starting position. The variables `dx` and `dy` represent the direction of movement in the x (row) and y (column) axes, respectively. Initially, the direction is set to move right (dx = 0, dy = 1).
+
+2. **Outer Loop for Spiral Expansion**:
+   ```cpp
+   for(int n = 0; res.size() < rows * cols; n++) {
+   ```
+   The outer loop runs until all cells in the matrix are visited, i.e., until the size of the result vector equals `rows * cols`. The variable `n` is used to control the number of steps taken in each direction, increasing as the spiral expands.
+
+3. **Inner Loop for Directional Movement**:
+   ```cpp
+   for(int i = 0; i < n / 2 + 1; i++) {
+       rStart += dx, cStart += dy;
+       if(rStart >= 0 && rStart < rows && cStart >= 0 && cStart < cols)
+           res.push_back({rStart, cStart});
+   }
+   ```
+   The inner loop iterates `n / 2 + 1` times, which corresponds to the number of steps to take in the current direction. We update the `rStart` and `cStart` coordinates by adding the directional values `dx` and `dy`. After updating the coordinates, we check if the new position is within the matrix bounds. If it is, we add the position to the result array `res`.
+
+4. **Updating Direction**:
+   ```cpp
+   tmp = dx, dx = dy, dy = -tmp;
+   ```
+   After completing the steps in one direction, we update the direction by rotating the direction vector `(dx, dy)`. The vector `(dx, dy)` is rotated in the order right → down → left → up, ensuring that the traversal continues spirally.
+
+5. **Returning the Result**:
+   ```cpp
+   return res;
+   ```
+   Once all cells are visited, the result vector `res` is returned, containing the list of coordinates in the order they were visited.
+
+### Complexity
+
+The time complexity of this algorithm is **O(rows * cols)**. The reason for this is that every cell in the matrix is visited exactly once, and each visit involves only a constant amount of work (i.e., checking bounds and adding a coordinate to the result list). Therefore, the total time spent is proportional to the number of cells in the matrix.
+
+The space complexity is also **O(rows * cols)** because we store the coordinates of all the cells in the result array `res`.
+
+### Conclusion
+
+In conclusion, this solution efficiently computes the spiral traversal of a matrix starting from a given position, ensuring all cells are visited once. The use of direction vectors and boundary checks makes the algorithm both simple and effective. The approach guarantees that the traversal continues until all cells in the matrix are covered, and the solution efficiently handles matrices of varying sizes. The time and space complexity of O(rows * cols) make it suitable for large matrices, while the implementation remains straightforward and easy to understand.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/spiral-matrix-iii/description/)
+
 ---
 {{< youtube 0qep3f9cqVs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #886: Possible Bipartition](https://grid47.xyz/leetcode/solution-886-possible-bipartition/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

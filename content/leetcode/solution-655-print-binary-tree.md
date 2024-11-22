@@ -17,8 +17,6 @@ youtube_thumbnail=""
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/print-binary-tree/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/655.webp" 
     alt="A binary tree where nodes are printed visually, with the structure softly glowing as it is printed."
@@ -76,9 +74,119 @@ public:
 };
 
 {{< /highlight >}}
-
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/655.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #658: Find K Closest Elements](https://grid47.xyz/leetcode/solution-658-find-k-closest-elements/) |
+### Problem Statement
+
+Given a **binary tree**, we are tasked with printing the binary tree in a **2D array** format. The goal is to represent the tree such that each level of the tree is printed on a new row and the nodes are aligned in the appropriate positions within their respective rows. For nodes that do not exist at a given position, the space should be filled with an empty string.
+
+The challenge involves:
+1. Computing the dimensions of the 2D array to fit the entire tree structure.
+2. Filling out the array with node values, ensuring proper alignment for each node.
+3. Handling cases where a node may not have a child on one side (left or right).
+
+### Approach
+
+To solve this problem, we need to approach it in the following way:
+
+1. **Calculate the Height and Width of the Tree:**
+   - **Height** of the tree is the number of levels in the binary tree.
+   - **Width** of the tree corresponds to the number of columns required to fit the largest level, considering the placement of child nodes between each parent node.
+   
+2. **Store Tree Representation in a 2D Array:**
+   - Using a **2D vector**, we will store the tree nodes level by level. Each level will be a new row in the array, and each node will be placed in its corresponding position within that row.
+
+3. **Recursive Tree Traversal (DFS):**
+   - We will perform a **depth-first search (DFS)** to traverse the tree and fill in the 2D array. The recursive function will visit each node and place it at its correct position based on the level and the left-right position within that level.
+
+### Code Breakdown (Step by Step)
+
+#### 1. **TreeNode Definition:**
+```cpp
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+};
+```
+- This `TreeNode` structure is used to represent each node in the binary tree. It holds an integer value (`val`), a pointer to the left child (`left`), and a pointer to the right child (`right`).
+
+#### 2. **Main Function:**
+```cpp
+vector<vector<string>> printTree(TreeNode* root) {
+    int h = get_height(root), w = get_width(root);
+    vector<vector<string>> ans(h, vector<string>(w, ""));
+    helper(ans, root, 0, 0, w - 1);
+    return ans;
+}
+```
+- **`get_height(root)`** and **`get_width(root)`** are helper functions that calculate the height and width of the binary tree, respectively.
+- A **2D vector `ans`** is initialized to store the tree's values. The size of the vector is based on the tree's height and width, with each cell initialized to an empty string.
+- The function **`helper()`** is then called to fill in the 2D vector with the appropriate node values.
+
+#### 3. **Calculating the Height of the Tree:**
+```cpp
+int get_height(TreeNode *p) {
+    if (!p) return 0;
+    int left = get_height(p->left);
+    int right = get_height(p->right);
+    return max(left, right) + 1;
+}
+```
+- The `get_height` function calculates the height of the tree recursively. It returns 0 for a `null` node (base case). Otherwise, it calculates the height of the left and right subtrees and returns the greater of the two, plus 1 for the current node.
+
+#### 4. **Calculating the Width of the Tree:**
+```cpp
+int get_width(TreeNode *p) {
+    if (!p) return 0;
+    int left = get_width(p->left);
+    int right = get_width(p->right);
+    return max(left, right) * 2 + 1;
+}
+```
+- The `get_width` function computes the width of the tree. It works similarly to the height function, recursively calculating the width of the left and right subtrees. The width is determined by the maximum width between the left and right subtrees, multiplied by 2, and adding 1 for the current node.
+
+#### 5. **Populating the 2D Array:**
+```cpp
+void helper(vector<vector<string>> &ans, TreeNode *p, int level, int l, int r) {
+    if (!p) return;
+    int mid = l + (r - l) / 2;
+    ans[level][mid] = to_string(p->val);
+    helper(ans, p->left, level + 1, l, mid - 1);
+    helper(ans, p->right, level + 1, mid + 1, r);
+}
+```
+- The `helper` function is responsible for recursively placing the nodes in their correct positions in the 2D vector `ans`.
+- The base case is when the node is `null`, in which case the function returns immediately.
+- For each node, it calculates the **middle position** (`mid`) within the current range `[l, r]` and assigns the node's value to that position.
+- It then recursively processes the left and right subtrees, updating the `level` and adjusting the left and right bounds for the subtree placement.
+
+### Complexity
+
+#### Time Complexity:
+- **Height and Width Calculation:**
+   - The `get_height` and `get_width` functions each visit every node in the tree once. Therefore, both functions have a time complexity of **O(n)**, where `n` is the number of nodes in the binary tree.
+
+- **Tree Population:**
+   - The `helper` function also visits each node exactly once and fills in the 2D array with the node's value. Thus, its time complexity is also **O(n)**.
+
+- **Overall Time Complexity:** 
+   - Since both height and width calculations and the tree population involve linear traversals of the tree, the overall time complexity of the solution is **O(n)**.
+
+#### Space Complexity:
+- The space complexity is determined by the space used for the 2D array, which has a size of **O(h * w)**, where `h` is the height and `w` is the width of the tree. In the worst case, the width could be proportional to the number of nodes, and the height is proportional to the depth of the tree.
+- Therefore, the space complexity is **O(n)**.
+
+### Conclusion
+
+This solution efficiently prints a binary tree in a 2D format by calculating its height and width, followed by a depth-first traversal to fill in the tree’s values at the correct positions. By leveraging recursive tree traversal and calculating the necessary dimensions beforehand, the solution optimizes both time and space complexity to provide an elegant approach to the problem. The time complexity of **O(n)** makes it suitable for large trees, while the space complexity of **O(n)** ensures that the solution is memory-efficient. This approach is both simple and effective, providing a clean solution for visualizing binary trees in a 2D grid-like format.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/print-binary-tree/description/)
+
+---
+
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

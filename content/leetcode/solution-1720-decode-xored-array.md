@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/sthGfBi890o/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/decode-xored-array/description/)
-
 ---
 **Code:**
 
@@ -35,9 +33,89 @@ vector<int> decode(vector<int>& encoded, int first) {
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1720.md" >}}
+### Problem Statement
+
+The problem requires us to decode an encoded integer array using the bitwise XOR operation. Given an encoded array and an initial integer known as `first`, we need to reconstruct the original array. The encoding is performed such that each element in the encoded array represents the XOR of consecutive elements in the original array. Specifically, for an original array `arr`:
+
+\[ \text{encoded}[i] = \text{arr}[i] \oplus \text{arr}[i + 1] \]
+
+The goal is to retrieve the original array from the encoded array using the given initial value `first`, which corresponds to `arr[0]`.
+
+### Approach
+
+To solve this problem, we can leverage the properties of the XOR operation. The XOR operation has two important properties:
+
+1. **Identity**: \( x \oplus 0 = x \)
+2. **Self-Inverse**: \( x \oplus x = 0 \)
+
+Using these properties, we can derive each element of the original array as follows:
+
+- Start with the `first` value which is `arr[0]`.
+- For each element in the encoded array, we can calculate the next original element using:
+
+\[ \text{arr}[i + 1] = \text{encoded}[i] \oplus \text{arr}[i] \]
+
+This allows us to iteratively build the original array from the encoded values, starting with the known initial value.
+
+### Code Breakdown (Step by Step)
+
+The provided code implements the above approach in a clear and efficient manner. Let's break it down:
+
+1. **Class Declaration**: The solution is encapsulated within a class named `Solution`.
+
+    ```cpp
+    class Solution {
+    ```
+
+2. **Public Method**: The public method `decode` takes two parameters: the encoded integer vector and the integer `first`.
+
+    ```cpp
+    public:
+    vector<int> decode(vector<int>& encoded, int first) {
+    ```
+
+3. **Result Vector Initialization**: A vector `res` is initialized to hold the resulting original array. The first element is directly set to `first`.
+
+    ```cpp
+    vector<int> res;
+    res.push_back(first);
+    ```
+
+4. **Iterating through the Encoded Array**: A for loop iterates over the encoded array to calculate each original array element using the XOR operation.
+
+    ```cpp
+    for(int i = 0; i < encoded.size(); i++)
+        res.push_back(res[i] ^ encoded[i]);
+    ```
+
+   - The loop runs from `0` to `encoded.size()`, and for each index `i`, the next original value is computed as:
+     - `res[i]` (the current original element) XOR `encoded[i]` gives `res[i + 1]`.
+   - This process effectively reconstructs the original array.
+
+5. **Returning the Result**: Finally, the constructed original array is returned.
+
+    ```cpp
+    return res;
+    }
+    ```
+
+### Complexity
+
+- **Time Complexity**: The time complexity of this solution is \( O(n) \), where \( n \) is the size of the `encoded` array. This is because we are performing a single pass through the encoded array to construct the original array.
+
+- **Space Complexity**: The space complexity is also \( O(n) \), as we are creating a new vector `res` to store the original array elements.
+
+### Conclusion
+
+In conclusion, the provided code efficiently decodes an encoded array using the properties of the XOR operation. The approach leverages the relationship between the original and encoded arrays to iteratively reconstruct the original values starting from a known initial value. This method is both time-efficient and space-efficient, making it suitable for competitive programming and similar applications where performance is crucial. 
+
+The implementation is straightforward, easy to understand, and effectively demonstrates the power of bitwise operations in manipulating and decoding data. With a time complexity of \( O(n) \) and a space complexity of \( O(n) \), this solution stands out for its simplicity and efficiency, providing a robust method for solving the problem at hand.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/decode-xored-array/description/)
+
 ---
 {{< youtube sthGfBi890o >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1721: Swapping Nodes in a Linked List](https://grid47.xyz/leetcode/solution-1721-swapping-nodes-in-a-linked-list/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

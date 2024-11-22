@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/Dle_SpjHTio/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/the-number-of-beautiful-subsets/description/)
-
 ---
 **Code:**
 
@@ -50,9 +48,97 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2597.md" >}}
+### Problem Statement
+
+Given an array `nums` and a positive integer `k`, the goal is to find the number of "beautiful subsets" of `nums`. A subset is defined as beautiful if for every two elements `a` and `b` in the subset, the difference `|a - b|` is greater than or equal to `k`. 
+
+### Approach
+
+The problem boils down to counting subsets that satisfy the condition that the absolute difference between any two elements in the subset is at least `k`. A direct approach of checking all possible subsets is inefficient, especially as the size of the input array grows. Therefore, a more efficient strategy using **dynamic programming (DP)** and **backtracking** is employed to efficiently explore all possible subsets.
+
+1. **Sorting the Array**:
+   - We begin by sorting the array `nums`. Sorting ensures that as we explore subsets, we can efficiently check the condition for each number in relation to the previous ones. By sorting, we can use a recursive approach to explore subsets, ensuring that no duplicates are created.
+
+2. **Dynamic Programming with Backtracking**:
+   - A recursive function (`dp`) is defined to explore all subsets starting from index `0` and consider whether to include each element in the current subset.
+   - For each element, we decide whether to include it in the subset or not. When including an element, we check if it satisfies the condition `|nums[i] - nums[j]| >= k` for all previously included elements. If the condition holds, we continue the exploration.
+
+3. **Memoization with Count Array**:
+   - To avoid recomputing solutions for overlapping subproblems, a memoization technique is employed using a count array (`cnt`) that tracks the number of times a number has been included in the subset. This helps to maintain subsets that meet the required condition without recalculating them repeatedly.
+   - The count array (`cnt`) ensures that we track the number of times a number appears in the subset and ensure that the difference condition `|a - b| >= k` holds by checking whether `cnt[nums[i] - k]` is greater than zero.
+
+4. **Base Case**:
+   - The base case occurs when the recursive function reaches the end of the array. At this point, we return 1, indicating that a valid subset has been found. We also need to subtract 1 at the end to exclude the empty subset, which is counted as a valid subset by default.
+
+### Code Breakdown (Step by Step)
+
+#### 1. **Initialization**:
+   ```cpp
+   vector<int> cnt, nums;
+   ```
+   - We define two vectors: `cnt` (a count array to track the occurrences of numbers) and `nums` (to store the input array).
+
+#### 2. **The Recursive DP Function**:
+   ```cpp
+   int dp(int idx, int k) {
+       if(idx == nums.size()) return 1;
+       int ans = 0;
+   ```
+   - The `dp` function takes two parameters: `idx`, the current index in the `nums` array, and `k`, the required difference between elements in the subset.
+   - The base case occurs when `idx` reaches the size of `nums`, indicating that we’ve considered all elements. At this point, we return 1, representing a valid subset.
+
+#### 3. **Exploring the Current Element**:
+   ```cpp
+   if(nums[idx] - k >= 0 && (cnt[nums[idx] - k] > 0)) {
+       ans += dp(idx + 1, k);
+   } else {
+       ans += dp(idx + 1, k);
+       cnt[nums[idx]]++;
+       ans += dp(idx + 1, k);
+       cnt[nums[idx]]--;
+   }
+   ```
+   - If the current element `nums[idx]` can form a valid subset (i.e., `nums[idx] - k >= 0` and `cnt[nums[idx] - k] > 0`), we continue exploring the next index with `dp(idx + 1, k)`, without including the current element in the subset.
+   - If the element cannot form a valid subset (either because it would violate the difference condition or we haven’t yet included the appropriate element), we consider two possibilities:
+     1. Skip the current element and proceed to the next index.
+     2. Include the current element in the subset, incrementing its count in `cnt`, and then proceed to the next index. After the recursive call, we decrement the count to backtrack and explore the next possibilities.
+
+#### 4. **Return the Result**:
+   ```cpp
+   return ans;
+   ```
+   - Finally, the function returns the count of valid subsets that include or exclude the current element at `idx`.
+
+#### 5. **Main Function**:
+   ```cpp
+   int beautifulSubsets(vector<int>& nums, int k) {
+       sort(nums.begin(), nums.end());
+       cnt.resize(1001, 0);
+       this->nums = nums;
+       return dp(0, k) - 1; // excluding none selected
+   }
+   ```
+   - We begin by sorting the input array `nums`. Sorting simplifies the process of checking the difference condition between elements.
+   - The count array `cnt` is initialized with 1001 elements (to handle all possible values of `nums`), and we set the size of `nums` to the class-level `nums` vector.
+   - We call the recursive `dp` function starting from index `0` with the difference `k`. Since the `dp` function counts the empty subset as valid, we subtract `1` to exclude it from the final result.
+
+### Complexity Analysis
+
+- **Time Complexity**: 
+  The recursive function explores each element in the array, and for each element, we make two recursive calls (one for including the element and one for excluding it). In the worst case, this leads to an exponential time complexity of \(O(2^n)\), where `n` is the size of the array. However, the use of the count array (`cnt`) helps to memoize overlapping subproblems, reducing the redundant work. While the exact complexity depends on the specific values of `nums` and `k`, it remains exponential in nature due to the large number of possible subsets.
+
+- **Space Complexity**: 
+  The space complexity is \(O(n)\) for the recursive call stack and \(O(1001)\) for the count array `cnt` (since the possible values of `nums` are limited to 1001 distinct numbers). Thus, the overall space complexity is \(O(n + 1001)\), which simplifies to \(O(n)\) if we ignore the constant factor.
+
+### Conclusion
+
+This solution efficiently explores all subsets of the array `nums` that satisfy the condition that the absolute difference between any two elements in the subset is at least `k`. Using dynamic programming and backtracking, the function effectively counts the number of valid subsets. The recursive approach, along with memoization using the count array `cnt`, ensures that we avoid redundant calculations, although the time complexity remains exponential. This approach is optimal for small to moderate-sized inputs but may face performance issues for very large arrays due to the inherent exponential complexity. Nonetheless, the method is effective for typical use cases in competitive programming and other algorithmic challenges.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/the-number-of-beautiful-subsets/description/)
+
 ---
 {{< youtube Dle_SpjHTio >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2598: Smallest Missing Non-negative Integer After Operations](https://grid47.xyz/leetcode/solution-2598-smallest-missing-non-negative-integer-after-operations/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

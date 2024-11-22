@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/ZHJDwbfqoa8/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/summary-ranges/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/228.webp" 
     alt="A range of numbers with each segment gently highlighted, showing the summarized range."
@@ -51,9 +49,124 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/228.md" >}}
+### 🚀 Problem Statement
+
+The problem asks us to return the summary of a given list of sorted integers as ranges. A range is a sequence of consecutive integers. The goal is to group consecutive integers together and represent them as a range, such as `"1->5"` instead of listing all the integers individually (`"1", "2", "3", "4", "5"`). If the integers are not consecutive, they should be listed individually.
+
+---
+
+### 🧠 Approach
+
+To solve this problem, we will iterate through the sorted list of integers and group consecutive numbers together as ranges. For any number that is not part of a range, we will list it as an individual number.
+
+Here's the strategy:
+
+1. **Edge Case Handling:**
+   - If the input list is empty, we return an empty result immediately.
+   
+2. **Iterate Through the List:**
+   - We initialize a pointer `i` to iterate through the list, identifying consecutive sequences and representing them as ranges.
+   
+3. **Range Construction:**
+   - When we detect consecutive integers, we will create a range in the format `"start->end"`. For isolated numbers, we’ll simply list the number.
+   
+4. **Update Pointer:**
+   - After processing a range or a number, we update the pointer to continue from the next element.
+
+5. **Return Result:**
+   - Finally, we return the summarized list of ranges or individual numbers.
+
+---
+
+### 🔨 Step-by-Step Code Breakdown
+
+#### Step 1: Handle Edge Case for Empty Input
+
+```cpp
+const int size_n = nums.size();
+vector<string> res;
+if (0 == size_n) return res;
+```
+
+- First, we check if the input list `nums` is empty. If so, we return an empty result (`res`). This is important to avoid unnecessary processing for an empty list.
+
+#### Step 2: Initialize the Iteration Variables
+
+```cpp
+for (int i = 0; i < size_n;) {
+    int start = i, end = i;
+```
+
+- We begin iterating through the list, where `i` keeps track of the current position. The `start` and `end` variables mark the beginning and end of a potential range.
+
+#### Step 3: Find Consecutive Numbers in the List
+
+```cpp
+while (end + 1 < size_n && nums[end + 1] == nums[end] + 1) end++;
+```
+
+- Inside the `while` loop, we check if the current number is consecutive to the next. If so, we move the `end` pointer forward to extend the range. The condition ensures that we don’t go out of bounds and that the numbers are consecutive.
+
+#### Step 4: Construct the Range
+
+```cpp
+if (end > start) res.push_back(to_string(nums[start]) + "->" + to_string(nums[end]));
+else res.push_back(to_string(nums[start]));
+```
+
+- After identifying the range, we check if it contains more than one number. If so, we create a range in the format `"start->end"`. If the range consists of just one number, we add the number itself.
+
+#### Step 5: Move to the Next Range or Number
+
+```cpp
+i = end + 1;
+```
+
+- Once a range or number is processed, we update `i` to `end + 1`, which moves the pointer past the current range to continue processing the next sequence.
+
+#### Step 6: Return the Result
+
+```cpp
+return res;
+```
+
+- Finally, after processing all elements, we return the `res` vector containing the summarized ranges or individual numbers.
+
+---
+
+### 📈 Complexity Analysis
+
+#### Time Complexity:
+The time complexity is **O(n)**, where `n` is the number of elements in the input list. 
+
+- The main loop iterates through each element exactly once, and the inner `while` loop only iterates for consecutive numbers. Therefore, every element is visited once, resulting in a linear time complexity.
+
+#### Space Complexity:
+The space complexity is **O(n)**, as the result list `res` can contain up to `n` elements, where `n` is the number of integers in the input list.
+
+---
+
+### 🏁 Conclusion
+
+In this solution, we efficiently summarize ranges of consecutive integers in a sorted list. By iterating through the list and checking for consecutive numbers, we can group them into ranges or list individual numbers as needed.
+
+This algorithm is optimal with a time complexity of **O(n)** and a space complexity of **O(n)**, making it well-suited for large lists of integers. The edge case handling for empty inputs also ensures the solution is robust and ready for all scenarios.
+
+---
+
+### ✨ Quick Recap
+
+- The algorithm iterates through the list to identify and group consecutive numbers into ranges.
+- Each range is represented as `"start->end"`, and isolated numbers are listed individually.
+- The solution has a linear time complexity, making it both efficient and scalable!
+
+Let’s keep practicing and mastering these problem-solving techniques! 💪
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/summary-ranges/description/)
+
 ---
 {{< youtube ZHJDwbfqoa8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #229: Majority Element II](https://grid47.xyz/leetcode/solution-229-majority-element-ii/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

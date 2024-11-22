@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/xvwTd19SncE/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/cousins-in-binary-tree-ii/description/)
-
 ---
 **Code:**
 
@@ -74,9 +72,117 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2641.md" >}}
+### Problem Statement
+
+The problem asks us to modify a binary tree such that each node's value is replaced by the sum of all node values in its subtree except for its own value. Specifically, the value of each node should be updated to the sum of the values of all its descendants, excluding the node itself. The tree is represented by a binary tree structure with `left` and `right` child pointers.
+
+### Approach
+
+To solve the problem, we need to perform a level-order traversal (breadth-first search, BFS) of the tree, processing each level of the tree at a time and updating the values of the child nodes based on their parent nodes. The key idea is to accumulate the values of the left and right children for each node and update their values accordingly.
+
+The approach is broken down as follows:
+
+1. **Level-Order Traversal (BFS)**:
+   - We traverse the tree level by level. For each node at a given level, we calculate the sum of all nodes at that level and update their children's values.
+   
+2. **Tracking Sum of Child Values**:
+   - While traversing each node, we accumulate the sum of its left and right children into a map. This helps us to efficiently compute the sum of all child values for each node.
+   
+3. **Updating Node Values**:
+   - After processing all nodes at a level, we update the values of the children (left and right) of each node in that level to be the sum of all other nodes in their respective subtrees.
+
+4. **Iterating Through All Levels**:
+   - We continue this process for all levels of the tree, ensuring each node’s value is updated correctly based on its subtree sum.
+
+### Code Breakdown (Step by Step)
+
+#### 1. **Initial Setup**
+
+We begin by initializing a queue (`q`) to store nodes while performing the level-order traversal. A `map` called `mp` is used to track the sum of child values for each node. We set the root’s value to 0 as part of the tree transformation.
+
+```cpp
+list<TreeNode*> q;
+q.push_back(root);  // Start with the root node
+root->val = 0;  // Set the root value to 0
+map<TreeNode*, int> mp;  // Map to track the sum of child values for each node
+```
+
+#### 2. **Level-Order Traversal Loop**
+
+We perform a loop over the queue `q` that processes each level of the tree. For each level, we calculate the sum of child node values (`sum`) for all nodes at that level.
+
+```cpp
+while(!q.empty()) {
+    int sz = q.size();  // Size of the current level
+    long long sum = 0;  // Initialize the sum of child values for this level
+```
+
+#### 3. **Processing Nodes in the Current Level**
+
+For each node in the current level:
+- We pop the node from the queue and check if it has left or right children.
+- If a child exists, we add its value to the sum of child values for that node and enqueue the child for the next level.
+
+```cpp
+while(sz--) {
+    auto it = q.front();  // Get the front node
+    q.pop_front();
+    if(it->left != NULL) {
+        mp[it] += it->left->val;  // Add left child's value to the map
+        q.push_back(it->left);  // Enqueue left child
+    }
+    if(it->right != NULL) {
+        mp[it] += it->right->val;  // Add right child's value to the map
+        q.push_back(it->right);  // Enqueue right child
+    }
+    sum += mp[it];  // Add the node's child sum to the total sum
+}
+```
+
+#### 4. **Updating Child Node Values**
+
+After processing all nodes at the current level, we update the left and right child values based on the sum calculated previously. We subtract the stored value from the sum (this excludes the current node itself), and assign this new value to the children.
+
+```cpp
+for(auto it: mp) {
+    if(it.first->left != NULL) {
+        it.first->left->val = sum - it.second;  // Update left child's value
+    }
+    if(it.first->right != NULL) {
+        it.first->right->val = sum - it.second;  // Update right child's value
+    }    
+}
+mp.clear();  // Clear the map for the next level
+```
+
+#### 5. **Returning the Modified Tree**
+
+Once the entire tree has been processed and all node values have been updated, we return the modified root node.
+
+```cpp
+return root;  // Return the modified root
+```
+
+### Complexity
+
+#### Time Complexity:
+- **BFS Traversal**: We perform a level-order traversal of the tree, processing each node once. Since we process every node exactly once, the time complexity is \(O(n)\), where \(n\) is the number of nodes in the tree.
+- **Sum Calculation and Updates**: The operations inside the BFS loop (such as checking children, adding to the map, and updating child values) are constant-time operations. Thus, the overall time complexity remains \(O(n)\).
+
+#### Space Complexity:
+- **Queue**: The space required for the queue is proportional to the number of nodes at the widest level of the tree, which is \(O(n)\) in the worst case (for a completely unbalanced tree). Thus, the space complexity for the queue is \(O(n)\).
+- **Map**: The map `mp` stores values for each node, so the space complexity for the map is \(O(n)\) in the worst case.
+- **Total Space Complexity**: The overall space complexity is \(O(n)\) due to the queue and the map.
+
+### Conclusion
+
+The solution effectively handles the problem using a breadth-first search (BFS) traversal of the binary tree. By maintaining a map to track the sum of child values for each node and updating child node values after processing each level, the algorithm ensures that the tree is modified as required. The time complexity is linear in the number of nodes, and the space complexity is also linear, making this solution efficient for large trees. This approach avoids unnecessary recalculations and ensures that each node's value is updated efficiently based on its descendants.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/cousins-in-binary-tree-ii/description/)
+
 ---
 {{< youtube xvwTd19SncE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2643: Row With Maximum Ones](https://grid47.xyz/leetcode/solution-2643-row-with-maximum-ones/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

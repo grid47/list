@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/fLjeVALxzjg/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/split-a-string-into-the-max-number-of-unique-substrings/description/)
-
 ---
 **Code:**
 
@@ -56,9 +54,102 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1593.md" >}}
+### Problem Statement
+
+The problem at hand involves determining the maximum number of unique substrings that can be obtained from a given string `s` by splitting it into distinct parts. Each part must be a non-empty substring of `s`, and we want to maximize the count of these unique substrings.
+
+### Approach
+
+To solve this problem, we can employ a backtracking approach, which allows us to explore all possible ways to split the string while keeping track of the unique substrings we have encountered. The steps are as follows:
+
+1. **Initialize Variables**: Set up necessary variables including a maximum counter `mx` to keep track of the maximum number of unique substrings found so far, and a string `tmp` to build substrings during backtracking.
+
+2. **Backtracking Function**: Create a backtracking function that takes the current index in the string, the temporary substring being built, and a set to keep track of the unique substrings.
+
+3. **Recursive Exploration**: In the backtracking function:
+   - Check if we have reached the end of the string. If so, update the maximum counter with the size of the set.
+   - Loop through the string to build substrings and check if they are unique (i.e., not already present in the set).
+   - If a substring is unique, add it to the set and recursively call the function for the next index.
+   - After returning from the recursive call, remove the substring from the set (backtrack) to explore other possibilities.
+
+4. **Return the Result**: After exploring all possible splits, return the maximum number of unique substrings found.
+
+### Code Breakdown (Step by Step)
+
+Here’s a detailed breakdown of the code:
+
+```cpp
+class Solution {
+public:
+    int mx = 1, n;
+    string s;
+```
+
+- **Class and Variable Initialization**: The `Solution` class defines two public variables, `mx` to track the maximum number of unique substrings found, and `n` to store the length of the input string. The variable `s` holds the string itself.
+
+```cpp
+    int maxUniqueSplit(string s) {
+        set<string> cnt; // Set to store unique substrings
+        string tmp = ""; // Temporary string to build substrings
+        n = s.size(); // Get the length of the string
+        this->s = s; // Store the input string for access in the backtracking function
+        bt(0, tmp, cnt); // Start the backtracking process
+        return mx; // Return the maximum count of unique substrings
+    }
+```
+
+- **Main Function**: The `maxUniqueSplit` function initializes a set `cnt` for storing unique substrings and a temporary string `tmp`. It sets the size of the string and invokes the backtracking function starting from index 0.
+
+```cpp
+    void bt(int idx, string tmp, set<string> cnt) {
+        if(idx == n) {
+            mx = max(mx, (int)cnt.size()); // Update maximum count if at end of string
+            return;
+        }
+```
+
+- **Backtracking Function**: The `bt` function is responsible for exploring all possible substring splits. If the index `idx` reaches the length of the string `n`, it means we've considered one possible splitting; thus, we update `mx` with the maximum size of unique substrings found.
+
+```cpp
+        for(int i = idx; i < n; i++) {
+            tmp += s[i]; // Build the substring
+            if(!cnt.count(tmp)) { // Check if the substring is unique
+                cnt.insert(tmp); // Add to set if unique
+                bt(i + 1, "", cnt); // Recur for the next index
+                cnt.erase(tmp); // Backtrack: remove the substring
+            }
+        }
+    }
+};
+```
+
+- **Exploring Substrings**: The loop iterates over the string, building substrings by appending characters. It checks if the substring is already in the set `cnt`:
+  - If it is unique, the substring is added to the set, and we recursively call the function to continue checking for subsequent substrings starting from the next index.
+  - After returning from the recursive call, the substring is removed from the set to backtrack and explore other potential splits.
+
+### Complexity
+
+- **Time Complexity**: The time complexity for this approach is \(O(2^n)\), where \(n\) is the length of the string. This is due to the exponential number of possible substring splits that need to be explored. The complexity arises because for each character, we have the choice to either include it in a substring or not.
+
+- **Space Complexity**: The space complexity is \(O(n)\) for storing the current unique substrings in the set and the maximum substring length temporarily held during the recursion. 
+
+### Conclusion
+
+This solution effectively utilizes backtracking to explore the space of possible substring splits while maintaining uniqueness through the use of a set. The approach is intuitive, allowing for a clear method to achieve the desired outcome. 
+
+Key takeaways include:
+
+- **Backtracking Strategy**: The use of backtracking enables thorough exploration of all substring combinations, allowing us to find the maximum number of unique substrings efficiently.
+- **Utilization of Sets**: Using a set for tracking unique substrings ensures that operations for checking and inserting are handled in average constant time, making our solution more efficient than naive approaches.
+- **Dynamic Programming Consideration**: While this solution is straightforward, there are considerations for optimizing the process, such as memoization or pruning paths that do not lead to valid splits.
+
+This method serves as a good example of how recursive strategies can be applied to string manipulation problems, particularly those involving uniqueness constraints.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/split-a-string-into-the-max-number-of-unique-substrings/description/)
+
 ---
 {{< youtube fLjeVALxzjg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1594: Maximum Non Negative Product in a Matrix](https://grid47.xyz/leetcode/solution-1594-maximum-non-negative-product-in-a-matrix/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

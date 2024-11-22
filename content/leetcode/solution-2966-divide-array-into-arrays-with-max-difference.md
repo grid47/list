@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/XleOio1oJeo/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/divide-array-into-arrays-with-max-difference/description/)
-
 ---
 **Code:**
 
@@ -48,9 +46,95 @@ public:
     }
 }; 
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2966.md" >}}
+### Problem Statement:
+Given an array of integers `nums` and an integer `k`, the task is to divide the array into groups of three elements such that:
+1. Each group contains exactly three elements.
+2. The difference between the maximum and minimum elements in each group does not exceed `k`.
+
+If it's possible to divide the array in such a way, return the groups as a 2D vector where each group is represented by a sub-array containing the three elements. If it's not possible, return an empty 2D vector.
+
+### Approach:
+The approach to solve this problem relies on sorting the array and then checking consecutive elements to form valid groups. Here's the detailed step-by-step explanation:
+
+1. **Check for divisibility by 3**: 
+   Since the requirement is to form groups of three, the first step is to check if the length of the array (`nums.size()`) is divisible by 3. If it's not divisible by 3, it's impossible to divide the array into groups of three, so we return an empty vector.
+
+2. **Sort the array**:
+   Sorting the array helps to easily check whether consecutive triplets can be grouped together. Once the array is sorted, it is easier to compare the smallest and largest elements in each group. Sorting will ensure that the difference between the maximum and minimum of any valid triplet will be the difference between the last and the first elements of the triplet.
+
+3. **Divide into groups of 3**:
+   After sorting the array, we iterate over the array in steps of 3 to form the groups. For each triplet of elements (say `nums[i]`, `nums[i+1]`, `nums[i+2]`), we check if the difference between the largest and smallest element (`nums[i+2] - nums[i]`) is less than or equal to `k`. If it is, we add this triplet to the result. If not, we return an empty vector since it's not possible to group the elements according to the condition.
+
+4. **Return the result**:
+   If we successfully create all the groups, we return the result. If at any point we encounter a triplet that doesn't satisfy the condition, we return an empty vector.
+
+### Code Breakdown (Step by Step):
+
+#### Step 1: Initial check for divisibility by 3
+```cpp
+int size = nums.size();
+if (size % 3 != 0)
+    return vector<vector<int>>();
+```
+- This step ensures that the length of the array is divisible by 3. If not, it's impossible to create groups of 3, and we return an empty 2D vector.
+
+#### Step 2: Sort the array
+```cpp
+sort(nums.begin(), nums.end());
+```
+- Sorting the array ensures that the elements within each group will be in increasing order, making it easier to check if the difference between the largest and smallest elements of a triplet is within the given threshold `k`.
+
+#### Step 3: Create the result 2D vector
+```cpp
+vector<vector<int>> result(size / 3, vector<int>(3));
+int groupIndex = 0;
+```
+- We initialize the `result` 2D vector with the appropriate number of rows (`size / 3`), each containing exactly 3 columns. This will hold the valid triplets.
+- `groupIndex` is used to keep track of the current position in the `result` array.
+
+#### Step 4: Form the groups of 3
+```cpp
+for (int i = 0; i < size; i += 3) {
+    if (i + 2 < size && nums[i + 2] - nums[i] <= k) {
+        result[groupIndex] = { nums[i], nums[i + 1], nums[i + 2] };
+        groupIndex++;
+    }
+    else {
+        return vector<vector<int>>();
+    }
+}
+```
+- We iterate over the array in steps of 3, starting from `i = 0`.
+- For each triplet of elements (i.e., `nums[i]`, `nums[i+1]`, `nums[i+2]`), we check if the difference between the largest and smallest elements is within the given limit `k` by comparing `nums[i + 2] - nums[i]`.
+- If the condition is satisfied, we add the triplet to the `result` and increment `groupIndex` to move to the next group.
+- If the condition is violated (i.e., the difference exceeds `k`), we return an empty vector since it is impossible to form a valid group.
+
+#### Step 5: Return the result
+```cpp
+return result;
+```
+- After successfully forming all the groups, we return the `result` vector, which contains the groups of 3 elements each.
+
+### Complexity Analysis:
+
+#### Time Complexity:
+- **Sorting the array**: Sorting the array takes `O(n log n)` time, where `n` is the size of the array.
+- **Iterating through the array**: Iterating through the array in steps of 3 takes `O(n)` time.
+- Overall, the time complexity is dominated by the sorting step, so the total time complexity is **O(n log n)**.
+
+#### Space Complexity:
+- **Result storage**: We store the result as a 2D vector that holds `n / 3` groups, each containing 3 elements. Therefore, the space complexity for storing the result is **O(n)**.
+- The space complexity for auxiliary variables is constant, i.e., **O(1)**.
+- Overall, the space complexity is **O(n)** due to the storage of the result.
+
+### Conclusion:
+This solution effectively solves the problem of dividing the array into valid groups of 3 elements by utilizing sorting and checking the differences between the largest and smallest elements in each potential group. The time complexity of **O(n log n)** due to sorting is optimal for this problem, and the space complexity is linear with respect to the size of the input array. This makes the solution both efficient and easy to understand.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/divide-array-into-arrays-with-max-difference/description/)
+
 ---
 {{< youtube XleOio1oJeo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2971: Find Polygon With the Largest Perimeter](https://grid47.xyz/leetcode/solution-2971-find-polygon-with-the-largest-perimeter/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

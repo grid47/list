@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/EZSNwFnWaV8/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/count-alternating-subarrays/description/)
-
 ---
 **Code:**
 
@@ -40,9 +38,94 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3101.md" >}}
+### Problem Statement
+
+In this problem, we are given an array `nums` consisting of integers, and we need to count the number of alternating subarrays in the given array. An alternating subarray is defined as a contiguous segment of the array where the values alternate between odd and even numbers. For example, in an array `[1, 2, 3, 4, 5]`, the alternating subarrays are `[1, 2]`, `[2, 3]`, `[3, 4]`, `[4, 5]`.
+
+Our goal is to compute the total number of alternating subarrays in the array.
+
+### Approach
+
+The key to solving this problem efficiently is to use dynamic programming (DP). We can maintain a DP array to keep track of the length of alternating subarrays that end at each index in the array. By iterating through the array and updating the DP array, we can efficiently count the total number of alternating subarrays.
+
+#### Step-by-Step Approach:
+
+1. **Initialization:**
+   - We initialize a DP array where `dp[i]` represents the length of the longest alternating subarray that ends at index `i`.
+   - We start by setting `dp[0] = 1` because the first element forms an alternating subarray by itself.
+
+2. **Iterate Through the Array:**
+   - For each subsequent element, we check whether it forms an alternating pair with the previous element:
+     - If `nums[i]` and `nums[i - 1]` alternate (i.e., one is odd and the other is even), then `dp[i]` will be `dp[i - 1] + 1`, as it extends the alternating subarray that ends at `i - 1`.
+     - If `nums[i]` and `nums[i - 1]` do not alternate (both are odd or both are even), we reset `dp[i]` to 1 because the subarray starting at index `i` is a single-element alternating subarray.
+   
+3. **Accumulate the Results:**
+   - After updating the DP array, we accumulate the values in the DP array. The value of `dp[i]` tells us how many alternating subarrays end at index `i`. So, we add `dp[i]` to the total result.
+
+4. **Return the Final Count:**
+   - After processing all elements, the accumulated result will give us the total number of alternating subarrays in the given array.
+
+### Code Breakdown (Step by Step)
+
+Let's break down the code step by step:
+
+#### Step 1: Initialize the DP Array and Variables
+
+```cpp
+int n = nums.size();
+vector<long long> dp(n, 0);
+dp[0] = 1;
+long long res = 1;
+```
+
+- **`n`**: This stores the size of the `nums` array.
+- **`dp`**: This vector is initialized with zeros. It stores the length of the longest alternating subarray ending at each index.
+- **`dp[0] = 1`**: The first element is always considered an alternating subarray of length 1.
+- **`res = 1`**: This stores the total count of alternating subarrays, starting with the first element.
+
+#### Step 2: Iterate Over the Array
+
+```cpp
+for (int i = 1; i < n; i++) {
+    dp[i] = nums[i] == nums[i - 1] ? 1 : dp[i - 1] + 1;
+    res += dp[i];
+}
+```
+
+- **`for (int i = 1; i < n; i++)`**: We start from the second element and loop through the array.
+- **`dp[i] = nums[i] == nums[i - 1] ? 1 : dp[i - 1] + 1;`**:
+  - This checks if `nums[i]` and `nums[i - 1]` alternate.
+  - If they alternate, `dp[i]` is set to `dp[i - 1] + 1`, extending the alternating subarray from the previous element.
+  - If they do not alternate (i.e., both are even or both are odd), `dp[i]` is reset to `1`, indicating that we start a new alternating subarray from index `i`.
+- **`res += dp[i];`**: Add the value of `dp[i]` to the total result, as `dp[i]` represents the number of alternating subarrays that end at index `i`.
+
+#### Step 3: Return the Result
+
+```cpp
+return res;
+```
+
+- After completing the iteration over all elements, the `res` variable will contain the total count of alternating subarrays. This value is returned as the final result.
+
+### Complexity
+
+#### Time Complexity:
+- **O(n)**: The time complexity is **O(n)** because we iterate through the array only once. In each iteration, we perform constant-time operations (comparisons and updates), so the overall time complexity is linear with respect to the size of the input array.
+
+#### Space Complexity:
+- **O(n)**: The space complexity is **O(n)** due to the storage required for the `dp` array, which stores the length of alternating subarrays for each element. This is the only significant data structure used in the solution.
+
+### Conclusion
+
+In this problem, we efficiently count the number of alternating subarrays using dynamic programming. The algorithm processes each element of the input array once, updating the DP array based on whether the current element alternates with the previous one. By accumulating the results from the DP array, we can count the total number of alternating subarrays in linear time.
+
+This approach ensures that we can handle large arrays efficiently, with a time complexity of **O(n)** and a space complexity of **O(n)**. The solution provides a clear and optimal way to solve the problem while maintaining good performance even for large inputs.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/count-alternating-subarrays/description/)
+
 ---
 {{< youtube EZSNwFnWaV8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #3110: Score of a String](https://grid47.xyz/leetcode/solution-3110-score-of-a-string/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

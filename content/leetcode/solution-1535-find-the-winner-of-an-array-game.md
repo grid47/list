@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/v6On1TQfMTU/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/find-the-winner-of-an-array-game/description/)
-
 ---
 **Code:**
 
@@ -44,9 +42,99 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1535.md" >}}
+### Problem Statement
+
+The problem involves determining the winner in a game based on a series of comparisons between elements in an array. Given an array of integers, we need to find the winning number after a sequence of comparisons defined by the following rules:
+
+1. Start with the first element as the current winner.
+2. Compare the current winner with the next element in the array.
+3. If the next element is greater than the current winner, the next element becomes the new winner, and the comparison count resets.
+4. If the next element is less than or equal to the current winner, the current winner remains the same, and the count of consecutive wins for the current winner increases.
+5. If the current winner wins `k` consecutive comparisons, that winner is declared the overall winner.
+6. If the loop completes and no one has won `k` consecutive comparisons, the last standing winner is declared the overall winner.
+
+### Approach
+
+To efficiently solve this problem, we will iterate through the array while maintaining a counter for consecutive wins. The strategy involves:
+
+- Initializing the first element of the array as the current winner.
+- Using a counter to track how many times the current winner has won consecutively against subsequent elements.
+- As we iterate through the array, we check each element against the current winner:
+  - If the next element is greater, we update the winner and reset the counter.
+  - If the next element is less than or equal, we increment the counter.
+- If the counter reaches `k`, we return the current winner immediately.
+- If we reach the end of the array without any winner achieving `k` consecutive wins, we return the last known winner.
+
+### Code Breakdown (Step by Step)
+
+Here’s a detailed breakdown of the provided code:
+
+```cpp
+class Solution {
+public:
+    int getWinner(vector<int>& arr, int k) {
+        int n = arr.size(); // Get the size of the array
+```
+- We start by defining the class `Solution` and declaring the function `getWinner`, which takes in an array of integers `arr` and an integer `k`.
+- We retrieve the size of the array and store it in `n`.
+
+```cpp
+        int cnt = 0; // Counter for consecutive wins
+        int j = 0; // Index of the current winner
+```
+- We initialize `cnt` to count how many times the current winner has won consecutively.
+- We set `j` to the index of the current winner, initially starting with the first element at index `0`.
+
+```cpp
+        for(int i = 1; i < n; i++) {
+            if(arr[i] < arr[j]) {
+                cnt++; // Increment the win count for the current winner
+            } else {
+                cnt = 1; // Reset count and update the winner index
+                j = i; // Update the winner to the current element
+            }
+```
+- We iterate through the array starting from the second element (index `1`).
+- If the current element is less than the current winner (`arr[j]`), we increment the win count for the current winner.
+- If the current element is greater than the current winner, we reset the count to `1` (indicating the new winner has won) and update the winner's index to the current element's index.
+
+```cpp
+            if(cnt == k) return arr[j]; // Return the winner if it wins k times
+        }
+```
+- After updating the counts, we check if the count of consecutive wins has reached `k`. If so, we return the current winner (`arr[j]`).
+
+```cpp
+        return arr[j]; // If no winner achieved k wins, return the last known winner
+    }
+};
+```
+- If we finish the loop and no element has reached `k` wins, we return the last known winner, which is the element at `arr[j]`.
+
+### Complexity
+
+#### Time Complexity
+- The time complexity of this algorithm is \(O(n)\), where \(n\) is the number of elements in the array. We traverse the array once, making a constant amount of work for each element.
+
+#### Space Complexity
+- The space complexity is \(O(1)\) since we are using a fixed amount of additional space regardless of the input size (only a few integer variables are used).
+
+### Conclusion
+
+The solution to the problem efficiently determines the winner of the game based on the specified rules. By maintaining a simple count of consecutive wins and updating the current winner accordingly, we achieve an optimal solution.
+
+**Key Takeaways**:
+- **Iterative Comparison**: The algorithm leverages an iterative approach to handle comparisons and updates in a single pass through the array.
+- **Early Exit**: The early return mechanism allows for quick results as soon as a winner achieves the required number of consecutive wins.
+- **Simplicity and Efficiency**: The overall simplicity of the approach, combined with its efficiency, makes it a suitable solution for problems involving sequential comparisons in arrays.
+
+This method serves as an excellent example of applying straightforward logic to solve a competitive programming problem, showcasing the ability to track and compare values efficiently within a linear time frame.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/find-the-winner-of-an-array-game/description/)
+
 ---
 {{< youtube v6On1TQfMTU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1536: Minimum Swaps to Arrange a Binary Grid](https://grid47.xyz/leetcode/solution-1536-minimum-swaps-to-arrange-a-binary-grid/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

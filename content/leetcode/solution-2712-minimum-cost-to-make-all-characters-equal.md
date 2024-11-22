@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/8MHnlNroHaU/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/minimum-cost-to-make-all-characters-equal/description/)
-
 ---
 **Code:**
 
@@ -91,9 +89,96 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2712.md" >}}
+### Problem Statement
+
+The problem requires calculating the minimum cost to change a given binary string to a string with alternating 0s and 1s. The string should have an alternating pattern of "010101..." or "101010...", and we need to compute how much it would cost to convert the given string into one of these patterns. The cost is measured as the total number of changes required. The goal is to determine the minimum number of changes necessary to convert the string into a valid alternating pattern.
+
+### Approach
+
+The main challenge here is to calculate the minimum cost efficiently by finding an alternating pattern for the given string. There are two possible alternating patterns:
+1. "010101..." (starts with '0')
+2. "101010..." (starts with '1')
+
+To solve this problem, we can approach it by splitting the string into two halves and checking each half against the two alternating patterns. Specifically:
+- If the string length is odd, we focus on the middle element to decide which pattern to use.
+- We then check each half of the string, comparing it to the corresponding half of each alternating pattern.
+- The idea is to count how many changes are required for each half to match the two alternating patterns and then return the minimum cost.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Handle special case where the string has length 1
+```cpp
+if(n == 1) return 0;
+```
+- If the string has only one character, there is no need for any changes, so the cost is `0`.
+
+#### Step 2: Initialize variables
+```cpp
+long long res = 0;
+char k = s[n / 2];
+int i, j;
+```
+- `res` stores the total cost for converting the string into an alternating pattern.
+- `k` represents the middle character of the string. This will help determine which pattern to choose.
+- `i` and `j` are pointers used to traverse the string from the middle outward, with `i` starting from the middle moving right and `j` starting from the middle moving left.
+
+#### Step 3: Determine starting points for pointers based on string length (even or odd)
+```cpp
+if(n % 2)
+    i = n/2 + 1, j = n/2 - 1;
+else
+    i = n/2, j = n / 2 - 1;
+```
+- If the string length `n` is odd, the pointers are set so that they start one step away from the middle.
+- If the string length `n` is even, the pointers start exactly at the middle and its left neighbor.
+
+#### Step 4: Traverse the string from the middle and compare it with the alternating patterns
+```cpp
+bool ltog = true, rtog = true;
+while(i < n && j >= 0) {
+    if(s[i] == k && rtog || s[i] != k && !rtog) {
+    } else {
+        rtog = !rtog;
+        res += n - i;
+    }
+    i++;
+    if((s[j] == k && ltog) || (s[j] != k && !ltog)) {
+    } else {
+        ltog = !ltog;
+        res += j + 1;
+    }
+    j--;
+}
+```
+- We use two flags, `ltog` and `rtog`, to track whether we are currently comparing the left half of the string (`ltog`) or the right half (`rtog`) against the alternating patterns.
+- As we traverse the string from the middle towards both ends:
+  - If the current character `s[i]` matches the corresponding alternating pattern for the right half (i.e., `k` for the starting character), we do nothing.
+  - If it doesn't match, we flip the direction (i.e., change `rtog` or `ltog`) and add to the result the number of changes needed to flip the section.
+- This process effectively counts how many changes are required to match the alternating patterns on both the left and right sides of the string.
+
+#### Step 5: Return the result
+```cpp
+return res;
+```
+- After the loop finishes, the variable `res` contains the total number of changes required to convert the string into an alternating binary string with the minimum cost. The function then returns this result.
+
+### Complexity
+
+#### Time Complexity
+- **O(n)**: The solution only requires a single pass over the string, where `n` is the length of the string. Each character is processed once, and the traversal happens from the center of the string outward.
+
+#### Space Complexity
+- **O(1)**: The space complexity is constant because we only use a few integer variables (`res`, `k`, `i`, `j`, `ltog`, `rtog`) and do not require any additional data structures that grow with the size of the input string. The algorithm operates in-place.
+
+### Conclusion
+
+This solution efficiently computes the minimum cost to transform a binary string into one of the two possible alternating patterns "010101..." or "101010...". By leveraging the middle element to guide the transformation and using two pointers to traverse the string, we minimize the number of changes required. The solution operates in linear time and constant space, making it scalable for large input sizes.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-cost-to-make-all-characters-equal/description/)
+
 ---
 {{< youtube 8MHnlNroHaU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2716: Minimize String Length](https://grid47.xyz/leetcode/solution-2716-minimize-string-length/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

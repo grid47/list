@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/0lK_WWukTyA/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/maximum-number-of-alloys/description/)
-
 ---
 **Code:**
 
@@ -65,9 +63,115 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2861.md" >}}
+### Problem Statement
+
+In this problem, we are tasked with determining the maximum number of alloys that can be produced given certain constraints. The production of alloys requires specific compositions of ingredients, each with a limited stock, and each ingredient has a certain cost. Given a budget, the goal is to figure out how many alloys we can create without exceeding the budget.
+
+### Approach
+
+The key idea is to perform a **binary search** on the maximum number of alloys we can produce (`mid`) and verify if it is feasible to produce that many alloys within the given budget. For each number of alloys (`mid`), we check whether the total cost of acquiring the missing ingredients exceeds the available budget.
+
+We will break down the solution into two main parts:
+1. **Feasibility Check**: A function (`func`) that checks if we can produce `mid` alloys within the budget.
+2. **Binary Search**: A binary search over the number of alloys to determine the maximum number we can produce.
+
+### Code Breakdown (Step by Step)
+
+```cpp
+using ll = long long;
+```
+- First, we define `ll` as a shorthand for `long long`, which helps with handling large numbers efficiently, as the values involved (such as the number of alloys or costs) could exceed the typical integer range.
+
+```cpp
+bool func(ll mid, int budget, vector<vector<int>>& composition, vector<int>& stock, vector<int>& cost)
+{
+    ll minCost = INT_MAX;
+    for (int i = 0; i < composition.size(); ++i)
+    {
+        ll currCost = 0;
+        for (int j = 0; j < composition[i].size(); ++j)
+        {
+            ll curr = mid * composition[i][j];
+            if (stock[j] >= curr)
+                continue;
+            else
+            {
+                ll extra = (curr - stock[j]) * cost[j];
+                currCost += extra;
+            }
+        }
+        minCost = min(currCost, minCost);
+    }
+    return (minCost <= budget);
+}
+```
+- The `func` function takes in several parameters: `mid` (the number of alloys we are trying to produce), `budget` (the available budget), `composition` (the required amounts of ingredients for each alloy), `stock` (the current stock of ingredients), and `cost` (the cost per unit of each ingredient).
+- Inside the function:
+  - We initialize `minCost` to `INT_MAX`, which will store the minimum cost required to produce `mid` alloys.
+  - For each alloy (represented by the `composition[i]` vector), we calculate how much of each ingredient is needed and how much more we need to buy (if the stock is insufficient). 
+  - If we need more of an ingredient than we have, we calculate the extra cost and add it to `currCost`.
+  - After processing all ingredients for the current alloy type, we update `minCost` to the minimum of the current `currCost` and the previous `minCost`.
+- Finally, we return `true` if the total `minCost` is within the available `budget`, and `false` otherwise.
+
+```cpp
+int maxNumberOfAlloys(int n, int k, int budget, vector<vector<int>>& composition, vector<int>& stock, vector<int>& cost) {
+    ll low = 0, high = 1e9, ans = 0;
+    while (low <= high)
+    {
+        ll mid = low + (high - low) / 2;
+        if (func(mid, budget, composition, stock, cost))
+        {
+            ans = mid;
+            low = mid + 1;
+        }
+        else
+            high = mid - 1;
+    }
+    return ans;
+}
+```
+- The `maxNumberOfAlloys` function uses binary search to find the maximum number of alloys (`mid`) that can be produced within the budget.
+  - We initialize `low` to 0 and `high` to `1e9` (a large number representing the upper bound for the possible number of alloys).
+  - In the `while` loop, we perform binary search. We calculate the middle value `mid` between `low` and `high`.
+  - We call `func(mid, budget, composition, stock, cost)` to check if it's feasible to produce `mid` alloys within the given budget.
+  - If it is feasible, we update `ans` to `mid` and adjust the `low` bound to `mid + 1`, to search for a potentially larger valid value of `mid`.
+  - If it's not feasible, we adjust the `high` bound to `mid - 1` to search for a smaller valid value of `mid`.
+- Finally, we return `ans`, which will store the maximum number of alloys that can be produced within the budget.
+
+### Complexity
+
+#### Time Complexity:
+
+1. **Binary Search**: The binary search runs over a range from `0` to `1e9`, meaning it will take approximately `O(log(1e9))` iterations, or about 30 iterations.
+2. **Feasibility Check (func)**: For each call to `func`, we iterate over the `composition` matrix and the `stock` and `cost` arrays, which takes `O(n * k)` time, where `n` is the number of alloys and `k` is the number of ingredients.
+   
+Thus, the overall time complexity of the solution is:
+
+\[
+O(\log(1e9) \times n \times k) = O(n \times k \times \log(1e9))
+\]
+
+Given that `n` and `k` are typically much smaller than `1e9`, the binary search efficiently narrows down the search space.
+
+#### Space Complexity:
+- The space complexity is dominated by the input data structures: `composition`, `stock`, and `cost`, each of which takes `O(n * k)` space.
+- The space used by variables such as `minCost`, `currCost`, and `mid` is constant (`O(1)`).
+  
+Thus, the space complexity is:
+
+\[
+O(n \times k)
+\]
+
+### Conclusion
+
+This solution efficiently solves the problem of determining the maximum number of alloys that can be produced within a given budget. By using binary search, we minimize the number of checks required, making the solution scalable even for large input sizes. The feasibility function checks whether the budget can support the production of a given number of alloys by calculating the total cost of acquiring missing ingredients. The time complexity of **O(n * k * log(1e9))** ensures that the solution is efficient for the problem constraints.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-alloys/description/)
+
 ---
 {{< youtube 0lK_WWukTyA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2864: Maximum Odd Binary Number](https://grid47.xyz/leetcode/solution-2864-maximum-odd-binary-number/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

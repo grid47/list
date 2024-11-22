@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/T8f9ppAJHbY/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/ways-to-split-array-into-good-subarrays/description/)
-
 ---
 **Code:**
 
@@ -45,9 +43,114 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2750.md" >}}
+### Problem Statement
+
+We are given an array `nums` consisting of 0's and 1's. Our task is to calculate the number of ways to split the array into contiguous subarrays, such that each subarray contains exactly one `1`. The result should be returned modulo \(10^9 + 7\).
+
+A split is defined as a division of the array into contiguous subarrays. A valid split has the following properties:
+- Each subarray contains exactly one `1`.
+- Each subarray can contain any number of `0`s.
+
+### Approach
+
+We approach this problem by iterating through the array and counting the number of valid ways to form subarrays between consecutive `1`s. Specifically, we will keep track of the number of `0`s between each pair of `1`s because these zeros can be distributed in any way across the subarrays.
+
+1. **Initial Step**:
+   - If the array consists only of `0`s (i.e., there are no `1`s), then no valid split is possible, and we should return 0.
+   
+2. **Count the Zeros Between `1`s**:
+   - For each contiguous segment of `0`s between two `1`s, we can distribute those `0`s in several ways.
+   - For a block of `m` zeros between two `1`s, there are \( m + 1 \) ways to divide those zeros between the two `1`s (either placing some of the zeros before the first `1`, some after the second `1`, or any distribution in between).
+   
+3. **Multiplicative Count**:
+   - Multiply the number of ways for each block of zeros between `1`s. This will give us the total number of valid subarray splits for the given input.
+
+4. **Modulo Operation**:
+   - Since the answer can be large, we take the result modulo \(10^9 + 7\) at each step to ensure the result stays within manageable limits and adheres to the problem's constraints.
+
+5. **Edge Case**:
+   - If the entire array consists only of zeros (`cnt == n`), it is impossible to form a valid split, so return 0.
+
+### Code Breakdown (Step by Step)
+
+#### 1. **Initial Setup and Modulo Declaration**
+
+```cpp
+int mod = (int) 1e9 + 7;
+long ans = 1, cnt = 0;
+int i = 0, n = nums.size();
+```
+
+- `mod`: The modulo value \(10^9 + 7\), which is used to keep the result within bounds.
+- `ans`: This will store the final result of the number of valid subarray splits.
+- `cnt`: This is used to count the number of consecutive zeros between `1`s.
+- `i`: The index for iterating through the `nums` array.
+- `n`: The size of the array `nums`.
+
+#### 2. **Check for All Zeros**
+
+```cpp
+while(i < n && nums[i] == 0) cnt++, i++;
+if(cnt == n) return 0;
+cnt = 0;
+```
+
+- This loop counts how many leading zeros are present at the beginning of the array.
+- If all the elements in the array are `0`s (`cnt == n`), we immediately return 0, as no valid split can be formed.
+
+#### 3. **Iterate Through the Array**
+
+```cpp
+for(; i < n; i++) {
+    if(nums[i]) {
+        ans = (ans * (cnt + 1)) % mod;
+        cnt = 0;
+    } else cnt++;
+}
+```
+
+- We start iterating through the array from the first `1` (after the leading zeros).
+- Whenever we encounter a `1`:
+  - We multiply `ans` by the number of ways to distribute the `0`s between the previous `1` and the current `1`. This is `cnt + 1`, as there are `cnt + 1` ways to split `cnt` zeros between the two `1`s.
+  - After processing a `1`, we reset `cnt` to 0, as we start counting the zeros between the next `1` (if any).
+- If the current element is `0`, we increment `cnt`, which keeps track of the number of consecutive zeros between the current `1` and the next `1`.
+
+#### 4. **Return the Final Answer**
+
+```cpp
+return ans;
+```
+
+- After processing all the `1`s in the array, the variable `ans` will contain the total number of valid splits. This value is returned as the result.
+
+### Complexity Analysis
+
+#### Time Complexity
+
+1. **Iterating Through the Array**:
+   - The main loop iterates through the array exactly once, making the time complexity \(O(n)\), where \(n\) is the size of the array `nums`.
+
+2. **Modulo Operation**:
+   - The modulo operation is applied at each step to ensure the result stays within the bounds, and it takes constant time \(O(1)\).
+
+Thus, the overall time complexity is \(O(n)\), where \(n\) is the number of elements in the input array `nums`.
+
+#### Space Complexity
+
+1. **Auxiliary Variables**:
+   - We use a few integer variables (`mod`, `ans`, `cnt`, `i`, `n`) to store intermediate values, all of which take constant space.
+
+Thus, the space complexity is \(O(1)\) because we are only using a constant amount of extra space.
+
+### Conclusion
+
+This solution efficiently calculates the number of valid subarray splits by counting the zeros between consecutive `1`s and leveraging the fact that zeros can be distributed in multiple ways. The solution uses a single pass through the array and handles the result using modular arithmetic to avoid overflow, ensuring optimal time and space complexity. The overall time complexity of \(O(n)\) makes it highly efficient for large input sizes, while the space complexity of \(O(1)\) ensures that the solution uses minimal memory.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/ways-to-split-array-into-good-subarrays/description/)
+
 ---
 {{< youtube T8f9ppAJHbY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2760: Longest Even Odd Subarray With Threshold](https://grid47.xyz/leetcode/solution-2760-longest-even-odd-subarray-with-threshold/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

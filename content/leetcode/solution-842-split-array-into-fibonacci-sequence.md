@@ -18,8 +18,6 @@ youtube_thumbnail=""
 
 
 
-[`Problem Link`](https://leetcode.com/problems/split-array-into-fibonacci-sequence/description/)
-
 ---
 **Code:**
 
@@ -52,9 +50,88 @@ public:
     }
 };
 {{< /highlight >}}
-
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/842.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #844: Backspace String Compare](https://grid47.xyz/leetcode/solution-844-backspace-string-compare/) |
+### Problem Statement
+
+The problem asks to find a way to split a string of digits into a Fibonacci-like sequence. The string `num` represents a number, and the task is to split it into a sequence of integers where each integer is formed from a contiguous substring of `num`. The sequence must satisfy the condition that each number (starting from the third) is the sum of the previous two numbers. We need to return the resulting Fibonacci sequence as a list of integers, or an empty list if no such sequence exists.
+
+### Approach
+
+To solve this problem, we can use a **backtracking** approach. The idea is to try all possible ways of splitting the string into integers and check if the sequence formed follows the Fibonacci-like property: each number must be the sum of the previous two. 
+
+The key steps in the approach are:
+
+1. **Recursive Backtracking**: The backtracking function explores different ways of splitting the string, trying each substring starting from the current index. For each valid substring, we try to build the Fibonacci sequence.
+   
+2. **Valid Substrings**: For each split, we need to ensure that:
+   - The substring doesn't have a leading zero unless it is just '0'.
+   - The number formed by the substring doesn't exceed the maximum integer limit (`INT_MAX`).
+   
+3. **Fibonacci Sequence Validation**: Once we have at least two numbers in the sequence, we check if the next number in the sequence is the sum of the previous two numbers. If the sequence violates this property at any point, we backtrack and try another split.
+
+4. **Stopping Conditions**: The recursion stops if the end of the string is reached and at least three numbers are in the sequence, indicating we’ve found a valid Fibonacci-like sequence.
+
+### Code Breakdown (Step by Step)
+
+1. **Main Function (`splitIntoFibonacci`)**:
+   ```cpp
+   vector<int> splitIntoFibonacci(string num) {
+       vector<int> res;
+       split(0, res, num);
+       return res;
+   }
+   ```
+   - This function initializes an empty result vector `res` and calls the helper function `split` to start the backtracking process from the 0th index.
+   - Once the recursion completes, the `res` vector will contain the Fibonacci-like sequence if it is possible, and the function returns this sequence.
+
+2. **Backtracking Function (`split`)**:
+   ```cpp
+   bool split(int idx, vector<int> &res, string num) {
+       if(idx == num.size() && res.size() >= 3) return true;
+       for(int i = idx; i < num.size(); i++) {
+           if(num[idx] == '0' && i > idx) break;
+           int sz = i - idx + 1;
+           long n = stol("0" + num.substr(idx, sz));
+           if(n > INT_MAX) break;
+           if(res.size() <= 1 || (n == (long)res.back() + res[res.size() - 2])) {
+               res.push_back(n);
+               if(split(i + 1, res, num)) return true;
+               res.pop_back();
+           }
+       }
+       return false;
+   }
+   ```
+   - **Base Case**: The recursion continues as long as `idx` (the current index) is not equal to the size of the string, and we ensure that the sequence has at least three numbers (`res.size() >= 3`). If this condition is met, we return `true`, indicating we've found a valid Fibonacci-like sequence.
+   
+   - **Loop Over Possible Splits**: We use a loop to consider all substrings starting at index `idx`. For each possible substring, we:
+     - **Skip Invalid Substrings**: We skip any substring that starts with '0' unless it is just '0' (to avoid leading zeroes).
+     - **Convert the Substring to a Number**: We use `stol` to convert the substring into a number (`n`). We ensure that the number doesn't exceed the integer limit (`INT_MAX`).
+     
+   - **Fibonacci Validation**: If the sequence already has at least two numbers, we check if the current number `n` is the sum of the last two numbers in the sequence: `n == res.back() + res[res.size() - 2]`. If this condition is met, we push `n` to the sequence and recursively try to continue building the sequence.
+   
+   - **Backtracking**: If adding the current number doesn’t lead to a valid sequence, we pop the last number from `res` and try the next possible split.
+
+   - **Termination**: The function returns `true` if a valid sequence is found, and `false` if no valid sequence exists for the current split.
+
+### Complexity
+
+1. **Time Complexity**:
+   - The time complexity is driven by the recursive backtracking function, which tries all possible ways of splitting the string into integers. For each recursive call, we check substrings starting from the current index `idx`, and in the worst case, we try every possible substring.
+   - Since each recursive call handles a different substring and there are approximately `O(2^n)` potential splits, where `n` is the length of the string, the time complexity can be considered exponential in the worst case. However, in practice, pruning through invalid splits (such as those with leading zeros or exceeding `INT_MAX`) reduces the number of recursive calls significantly.
+
+2. **Space Complexity**:
+   - The space complexity is determined by the size of the recursion stack and the storage for the result. At any point, the recursion stack can hold up to `O(n)` calls, where `n` is the length of the string.
+   - Additionally, the result vector `res` can hold up to `O(n)` integers (since in the worst case, we would split the entire string into individual Fibonacci-like numbers). Therefore, the space complexity is `O(n)`.
+
+### Conclusion
+
+In conclusion, the provided solution efficiently solves the problem of finding a Fibonacci-like sequence from a string of digits using a backtracking approach. The key to the solution is trying different valid splits of the string and validating whether the formed numbers follow the Fibonacci property: each number is the sum of the previous two numbers. The use of recursion ensures that all possible valid sequences are explored, and backtracking ensures that invalid paths are pruned early. Despite the exponential worst-case time complexity, the pruning mechanisms in the algorithm significantly improve performance in practice. This solution is optimal for solving problems related to string partitioning and sequence validation.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/split-array-into-fibonacci-sequence/description/)
+
+---
+
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/GVecnelW8mA/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/fruit-into-baskets/description/)
-
 ---
 **Code:**
 
@@ -47,9 +45,98 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/904.md" >}}
+### Problem Statement
+
+The problem requires finding the **length of the longest subarray** in a list of integers (representing fruits) such that the subarray contains **at most two different types of fruits**. The goal is to return the length of this longest subarray.
+
+This is a common problem related to sliding window techniques where the aim is to find a contiguous subarray that satisfies a certain condition, in this case, containing at most two distinct elements.
+
+### Approach
+
+The key idea behind the solution is to use the **sliding window technique** combined with a **hash map (or dictionary)** to keep track of the frequency of each element in the current window.
+
+1. **Sliding Window**:
+   - We maintain a sliding window defined by two pointers (`j` and `i`), where `j` is the starting point and `i` is the current position in the array.
+   - The window expands as `i` increases and shrinks when there are more than two types of fruits in the window (tracked using the `map`).
+
+2. **Tracking the Window**:
+   - We use a map (`mp`) where the keys are the fruit types and the values are the counts of each fruit type in the current window.
+   - The number of distinct fruits (`dst`) in the window is tracked. If the window contains more than two distinct fruits, we move the start pointer `j` forward to reduce the number of distinct fruits.
+
+3. **Max Length Calculation**:
+   - As we expand the window by moving `i`, we check if the current window contains at most two distinct fruits. If it does, we update the result (`res`) to the maximum length of the valid window found so far.
+   - If the window exceeds two distinct types of fruits, we shrink it by moving `j` forward until the window is valid again (i.e., contains at most two distinct fruits).
+
+4. **Optimization**:
+   - By using the sliding window technique, we ensure that each element is processed only once. Therefore, the time complexity is linear with respect to the size of the input array, making this approach very efficient.
+
+### Code Breakdown (Step by Step)
+
+#### **Class Definition**
+```cpp
+class Solution {
+public:
+    int totalFruit(vector<int>& fruits) {
+        map<int, int> mp;
+        int j = 0, res = 0, dst = 0;
+```
+- **Initialization**:
+  - `mp`: A map to store the count of each fruit in the current window.
+  - `j`: The left pointer of the sliding window.
+  - `res`: The variable to store the maximum length of the subarray with at most two different fruits.
+  - `dst`: The count of distinct fruit types in the current window.
+
+#### **Iterate Through the Array**
+```cpp
+for(int i = 0; i < fruits.size(); i++) {
+    mp[fruits[i]]++;
+    if(mp[fruits[i]] == 1) dst++;
+```
+- **Expand the Window**: For each fruit in the array (represented by `fruits[i]`), we increment its count in the map `mp`. If it's the first time this fruit appears in the window (`mp[fruits[i]] == 1`), we increment the `dst` counter (the number of distinct fruit types in the window).
+
+#### **Check Validity of the Window**
+```cpp
+if(dst <= 2) res = max(res, i - j + 1);
+```
+- **Valid Window**: If the number of distinct fruit types (`dst`) is less than or equal to 2, we update the result `res` to the maximum of the current `res` and the length of the window (`i - j + 1`).
+
+#### **Shrink the Window If Necessary**
+```cpp
+while(dst > 2 && j < i) {
+    mp[fruits[j]]--;
+    if(mp[fruits[j]] == 0) dst--;
+    j++;
+}
+```
+- **Reduce the Window Size**: If the number of distinct fruits (`dst`) exceeds 2, we shrink the window from the left by incrementing `j` and adjusting the count of the fruit at `fruits[j]` in the map `mp`. If the count of a fruit becomes zero, we decrement the `dst` counter.
+
+#### **Return the Result**
+```cpp
+return res;
+```
+- **Final Answer**: After iterating through the entire array, the variable `res` contains the length of the longest subarray with at most two distinct fruit types. We return this value.
+
+### Complexity
+
+#### **Time Complexity**
+
+- **O(n)**: We iterate through the array once, processing each element either by expanding or shrinking the window. Since each element is added and removed from the map at most once, the overall time complexity is linear with respect to the size of the input array (`n`).
+
+#### **Space Complexity**
+
+- **O(k)**, where `k` is the number of distinct types of fruits in the array. In the worst case, the map `mp` will store one entry for each distinct fruit type. Since there are at most `k` distinct fruits, the space complexity is proportional to the number of distinct fruit types.
+
+### Conclusion
+
+This solution efficiently finds the length of the longest subarray with at most two distinct elements using the sliding window technique. By using a map to keep track of the count of each fruit and a counter to track the number of distinct fruits in the window, we can ensure that the solution runs in linear time, making it scalable for large inputs.
+
+The use of the sliding window ensures that we process each fruit only once, and the shrinking of the window when necessary ensures that we always maintain a valid subarray with at most two distinct fruit types. This makes the approach both time-efficient and space-efficient, handling cases with many distinct fruit types in a straightforward manner.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/fruit-into-baskets/description/)
+
 ---
 {{< youtube GVecnelW8mA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #907: Sum of Subarray Minimums](https://grid47.xyz/leetcode/solution-907-sum-of-subarray-minimums/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

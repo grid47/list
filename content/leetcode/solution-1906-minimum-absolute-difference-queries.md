@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/H_Nrt9dOwLM/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/minimum-absolute-difference-queries/description/)
-
 ---
 **Code:**
 
@@ -54,9 +52,130 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1906.md" >}}
+### Problem Statement
+
+The problem requires finding the minimum absolute difference between any two distinct elements within specified subarrays of a given array. Each query provides two indices, and the goal is to compute the minimum difference between unique elements in the specified range.
+
+### Approach
+
+The solution employs a prefix sum technique to preprocess the input data and efficiently answer multiple queries. The following steps outline the approach:
+
+1. **Preprocessing the Input**: We maintain a frequency count of numbers in the input array using a 2D prefix sum array. The prefix array allows us to quickly determine the counts of numbers in any subarray defined by the queries.
+
+2. **Processing Queries**: For each query, we compute the frequency of each number in the specified subarray range. Then, we iterate through the frequency counts to find the minimum absolute difference between any two distinct numbers.
+
+3. **Returning Results**: Finally, we collect and return the results for each query.
+
+### Code Breakdown (Step by Step)
+
+Let’s analyze the provided code in detail to understand how the solution is implemented:
+
+1. **Class Definition**: The solution is encapsulated within a class named `Solution`.
+
+   ```cpp
+   class Solution {
+   public:
+   ```
+
+2. **Function Signature**: The primary function `minDifference` takes two parameters: a vector of integers `nums` and a 2D vector of queries `q`. The function returns a vector of integers representing the results for each query.
+
+   ```cpp
+       vector<int> minDifference(vector<int>& nums, vector<vector<int>>& q) {
+   ```
+
+3. **Variable Initialization**: We initialize a 2D prefix array `prefix` to hold the frequency counts for numbers ranging from 1 to 100. We also initialize a `cnt` array to keep track of counts of each number.
+
+   ```cpp
+           int prefix[100001][101] = {}, cnt[101] = {};
+   ```
+
+4. **Input Size**: We store the sizes of `nums` (n) and `q` (m) for later use.
+
+   ```cpp
+           int n = nums.size(), m = q.size();
+   ```
+
+5. **Building the Prefix Array**: We iterate through the `nums` array, updating the `cnt` array with the count of each number. For each number encountered, we update the prefix array to reflect the counts up to the current index.
+
+   ```cpp
+           for(int i = 0; i < n; i++) {
+               cnt[nums[i]]++;
+               for(int j = 1; j < 101; j++) prefix[i + 1][j] = cnt[j];
+           }
+   ```
+
+6. **Result Vector**: We initialize a vector `ans` to store the results of each query.
+
+   ```cpp
+           vector<int> ans;
+   ```
+
+7. **Processing Each Query**: For each query, we extract the left (`l`) and right (`r`) indices and compute the frequency of each number in the range specified by the query using the prefix array.
+
+   ```cpp
+           for(int i = 0; i < m; i++) {
+               int l = q[i][0], r = q[i][1];
+               int frq[101] = {};
+               for(int j = 1; j < 101; j++) frq[j] = prefix[r + 1][j] - prefix[l][j];
+   ```
+
+8. **Finding Minimum Difference**: We use a loop to check the frequency counts. If the frequency of a number is greater than zero, we check if it forms a pair with the previous distinct number to find the minimum difference.
+
+   ```cpp
+               int prv = -1, mn = INT_MAX;
+               for(int j = 1; j < 101; j++) {
+                   if(frq[j] == 0) continue;
+                   if(prv != -1 && j - prv < mn) mn = j - prv;
+                   prv = j;
+               }
+   ```
+
+9. **Handling No Valid Pair**: If no valid pair is found (mn remains INT_MAX), we push -1 to indicate the absence of such a pair.
+
+   ```cpp
+               ans.push_back(mn == INT_MAX? -1: mn);
+           }
+   ```
+
+10. **Returning Results**: Finally, we return the result vector containing the minimum differences for each query.
+
+    ```cpp
+           return ans;
+       }
+   ```
+
+### Complexity
+
+- **Time Complexity**: 
+   - **Preprocessing**: O(n) where n is the size of `nums`, as we traverse through the array once to fill the prefix sum array.
+   - **Query Processing**: O(m * 100) where m is the number of queries. We iterate over each query and check the frequency of each number (up to 100).
+   - Overall, the time complexity is O(n + m * 100).
+
+- **Space Complexity**: O(n) for the prefix array, which has dimensions (n+1) x 101. Additionally, we have the `cnt` and `frq` arrays that are constant in size (101), so the total space complexity is O(n).
+
+### Conclusion
+
+The `minDifference` function efficiently computes the minimum absolute difference between any two distinct elements in specified subarrays of the input array `nums`. By leveraging a prefix sum approach, the solution optimizes the query response time, allowing for quick lookups of frequency counts for each range. This makes it well-suited for scenarios involving multiple queries on the same dataset.
+
+### Use Cases
+
+This algorithm can be useful in various scenarios, including:
+
+1. **Data Analysis**: Analyzing frequency distributions within subsets of data to derive meaningful insights.
+  
+2. **Statistical Queries**: Applications that require efficient computation of statistics (like minimum difference) across multiple ranges.
+
+3. **Game Development**: In games where players can select items or numbers, finding the closest pair can enhance gameplay mechanics.
+
+4. **Financial Analysis**: Analyzing price fluctuations within defined time frames can assist in making informed investment decisions.
+
+By integrating such functionality, applications can efficiently handle large datasets and respond promptly to user queries while providing accurate results.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-absolute-difference-queries/description/)
+
 ---
 {{< youtube H_Nrt9dOwLM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1910: Remove All Occurrences of a Substring](https://grid47.xyz/leetcode/solution-1910-remove-all-occurrences-of-a-substring/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

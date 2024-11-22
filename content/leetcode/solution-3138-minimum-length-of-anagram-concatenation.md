@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/T64iR68Fxng/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/minimum-length-of-anagram-concatenation/description/)
-
 ---
 **Code:**
 
@@ -44,9 +42,87 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3138.md" >}}
+### Problem Statement
+
+The problem asks to determine the minimum length of the string required to rearrange it into an **anagram**. An anagram involves rearranging the characters of the string such that the result can be evenly partitioned into groups where each group contains the same characters. The goal is to find the minimum length such that the string can be split into equal-sized partitions, with each partition being a valid anagram of the others.
+
+### Approach
+
+To solve the problem efficiently, we need to focus on the frequency of characters in the given string and use the concept of **greatest common divisor (GCD)** to determine the minimal partition size that can still be rearranged into an anagram.
+
+The key idea here is:
+1. **Count Character Frequencies**: First, count how often each character appears in the string.
+2. **Calculate GCD of Frequencies**: The optimal way to partition the string into equal parts is determined by the **GCD of the frequencies** of all characters in the string. The reason we use the GCD is that it represents the largest possible number by which the frequencies of all characters can be evenly divided. This ensures that the string can be divided into equal parts, each being a valid anagram of the other.
+3. **Compute Minimum Length**: Once the GCD is found, the minimum length of the rearranged string that can be split into equal partitions is the length of the string divided by the GCD.
+
+### Code Breakdown (Step by Step)
+
+1. **Input Parsing**:
+   The input string `s` is provided, and its length `n` is calculated. This length will be used to determine how many groups the string can be split into.
+
+   ```cpp
+   int n = s.size();
+   ```
+
+2. **Character Frequency Counting**:
+   A map `mp` is used to store the frequency of each character in the string. The `for` loop iterates through the string and updates the map by incrementing the count for each character `x`.
+
+   ```cpp
+   map<char, int> mp;        
+   for(char x: s)
+       mp[x]++;
+   ```
+
+   For example, for the input string `"aaxxbb"`, the map `mp` will look like this:
+   ```
+   mp = {'a': 2, 'x': 2, 'b': 2}
+   ```
+
+3. **Finding the Minimum Frequency**:
+   After counting the frequencies of each character, the goal is to find the greatest common divisor (GCD) of these frequencies. The first step is to initialize `mn` with the frequency of the first character, `mp[s[0]]`.
+
+   ```cpp
+   int mn = mp[s[0]];
+   ```
+
+4. **Computing the GCD of All Frequencies**:
+   The next step is to compute the GCD of all the frequencies in the map `mp`. We iterate over the map using a `for` loop and update the value of `mn` by computing the GCD of `mn` and the current frequency `it.second`. The GCD is computed using the built-in `__gcd` function.
+
+   ```cpp
+   for(auto it: mp)
+       mn = __gcd(mn, it.second);
+   ```
+
+   For the input `"aaxxbb"`, the frequencies are `2, 2, 2`. The GCD of `2, 2, 2` is `2`.
+
+5. **Calculating the Minimum Anagram Length**:
+   Once we have the GCD of all the frequencies, we compute the minimum length of the rearranged string that can be divided into valid anagram partitions. This is simply the total length of the string `n` divided by the GCD `mn`.
+
+   ```cpp
+   return n / mn;
+   ```
+
+   In the example, the total length of the string is 6, and the GCD of the frequencies is 2. Therefore, the minimum length is `6 / 2 = 3`.
+
+### Complexity
+
+#### Time Complexity:
+- **O(n)**: The time complexity is linear in terms of the length of the string, where `n` is the length of the string. This is because:
+  - Counting the frequency of each character in the string takes O(n) time.
+  - Calculating the GCD of all frequencies involves iterating through the map of character frequencies. Since the number of unique characters is bounded by the alphabet size (26 for lowercase English letters), this operation is essentially constant in practice.
+
+#### Space Complexity:
+- **O(1)**: The space complexity is constant because the number of unique characters is fixed (26 lowercase English letters). The space used for the map `mp` will at most require space for 26 entries, which is a constant.
+
+### Conclusion
+
+This solution efficiently computes the minimum length of the string that can be rearranged into an anagram by leveraging character frequency counts and the greatest common divisor. The solution is optimal with a time complexity of O(n), where `n` is the length of the string, and it uses a constant amount of space for storing the character frequencies. This approach is well-suited for handling strings of varying sizes and ensures that the rearranged string can be split into the smallest number of equal-length anagram groups.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-length-of-anagram-concatenation/description/)
+
 ---
 {{< youtube T64iR68Fxng >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #3146: Permutation Difference between Two Strings](https://grid47.xyz/leetcode/solution-3146-permutation-difference-between-two-strings/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

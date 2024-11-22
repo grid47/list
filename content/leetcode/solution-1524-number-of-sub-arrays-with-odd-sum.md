@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/B5affGy4mCs/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/number-of-sub-arrays-with-odd-sum/description/)
-
 ---
 **Code:**
 
@@ -44,9 +42,100 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1524.md" >}}
+### Problem Statement
+
+The problem at hand is to count the number of subarrays in a given array of integers that have an odd sum. A subarray is defined as a contiguous portion of the array. The challenge is to efficiently determine how many of these subarrays exist without explicitly generating all possible subarrays, which would be computationally expensive.
+
+### Approach
+
+To tackle this problem, we will use a mathematical observation regarding the sum of numbers based on their parity (odd or even). 
+
+#### Key Concepts
+
+1. **Sum Parity**: 
+   - An odd number added to an even number results in an odd sum.
+   - An even number added to another even number or an odd number added to another odd number results in an even sum.
+
+2. **Prefix Sums and Counting**:
+   - As we traverse the array, we maintain counts of how many subarrays end at each index with odd and even sums. 
+   - For each element, based on its parity, we update our counts and determine how many valid subarrays can be formed ending at that index.
+
+3. **Modulo Operation**: Since the result can be large, we will use the modulo operation to keep our sum within limits, specifically \(10^9 + 7\).
+
+### Code Breakdown (Step by Step)
+
+Here is a detailed breakdown of the provided code:
+
+```cpp
+class Solution {
+public:
+    int numOfSubarrays(vector<int>& arr) {
+        int odd = 0, even = 0, sum = 0;
+```
+- We define the class `Solution` with a public method `numOfSubarrays` that takes a vector of integers as input.
+- We initialize three integer variables:
+  - `odd`: Counts the number of subarrays with an odd sum.
+  - `even`: Counts the number of subarrays with an even sum.
+  - `sum`: This will store the total number of subarrays with an odd sum.
+
+```cpp
+        for(int x : arr) {
+```
+- We iterate through each element `x` in the input array `arr`.
+
+```cpp
+            if (x % 2) {
+                swap(odd, even);
+                odd++;
+            } else {
+                even++;
+            }
+```
+- For each element, we check its parity:
+  - If `x` is odd (`x % 2` evaluates to true), we perform the following:
+    - We swap the counts of `odd` and `even`. This is because adding an odd number flips the parity of all previous subarray sums:
+      - All subarrays that had an even sum will now have an odd sum after adding this odd number.
+      - All subarrays that had an odd sum will now have an even sum after adding this odd number.
+    - We then increment the `odd` count by one to account for the subarray that consists solely of the odd number `x`.
+  - If `x` is even, we simply increment the `even` count since adding an even number does not change the parity of the sums.
+
+```cpp
+            sum = (sum + odd) % 1000000007;
+```
+- After processing each element, we update our `sum` variable by adding the current count of `odd` subarrays. The modulo operation ensures that `sum` does not exceed \(10^9 + 7\).
+
+```cpp
+        }
+        return sum;
+    }
+};
+```
+- Once all elements have been processed, we return the total count of subarrays with odd sums stored in `sum`.
+
+### Complexity
+
+#### Time Complexity
+- The time complexity of this solution is \(O(n)\), where \(n\) is the number of elements in the input array. We only make a single pass through the array.
+
+#### Space Complexity
+- The space complexity is \(O(1)\), as we only use a fixed number of integer variables for counting.
+
+### Conclusion
+
+This solution efficiently counts the number of subarrays with an odd sum by leveraging the properties of number parity. 
+
+**Key Insights**:
+- **Parity Logic**: Understanding how the parity of sums works allows us to dynamically count subarrays without generating them explicitly.
+- **Space Efficiency**: The algorithm operates in constant space, making it highly efficient for large datasets.
+- **Scalability**: This approach is easily scalable to other similar problems involving sums and counts, showcasing the versatility of parity-based methods in competitive programming.
+
+In summary, by using an iterative counting approach combined with properties of odd and even sums, we can solve the problem effectively and efficiently, demonstrating a solid understanding of both algorithm design and numerical properties.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-sub-arrays-with-odd-sum/description/)
+
 ---
 {{< youtube B5affGy4mCs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1525: Number of Good Ways to Split a String](https://grid47.xyz/leetcode/solution-1525-number-of-good-ways-to-split-a-string/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

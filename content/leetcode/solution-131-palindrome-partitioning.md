@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/7GlqVABgjJU/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/palindrome-partitioning/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/131.webp" 
     alt="A string being gently split into palindrome segments, with each partition glowing softly."
@@ -67,9 +65,130 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/131.md" >}}
+### 🌟 **Palindrome Partitioning Problem: Breaking Down the String into Palindromes**
+
+The "Palindrome Partitioning" problem is an interesting challenge where we need to split a given string into several substrings such that each substring is a palindrome. This problem is a perfect example of how we can use **backtracking** to explore all possible ways of partitioning a string and check if each substring is a palindrome.
+
+#### **Problem Statement**
+
+We are given a string, and our goal is to find all possible ways to partition the string such that each part is a palindrome. A palindrome is a string that reads the same forward and backward. For example, for the string `"aab"`, the possible palindrome partitions are:
+```
+[["a", "a", "b"], ["aa", "b"]]
+```
+
+---
+
+### 💡 **Approach: Backtracking to Find Palindrome Partitions**
+
+To solve this problem efficiently, we will use a **backtracking** approach. The idea is to explore each possible substring and check if it forms a palindrome. If it does, we will add it to the current partition and continue exploring. Once we reach the end of the string, we will have found a valid partition.
+
+#### Key Concepts:
+1. **Backtracking**:
+   - We will use a backtracking function to try different partitions of the string.
+   - At each step, we explore all possible end indices for substrings starting from a given position.
+   - If a substring is a palindrome, we recursively continue with the next part of the string.
+
+2. **Palindrome Checking**:
+   - To check if a substring is a palindrome, we compare characters at both ends and move toward the center. If all characters match, the substring is a palindrome.
+
+---
+
+### 🧑‍💻 **Code Breakdown**
+
+#### Step 1: **Main Function**
+```cpp
+vector<vector<string>> partition(string s) {
+    vector<vector<string>> ans;
+    vector<string> tmp;
+    bt(ans, tmp, s, 0);
+    return ans;
+}
+```
+- **Parameters**:
+  - `s`: The input string.
+- **Variables**:
+  - `ans`: A 2D vector to store all valid palindrome partitions.
+  - `tmp`: A temporary vector that stores the current partition being formed during backtracking.
+- **Logic**:
+  - We call the backtracking function `bt` to start exploring all possible palindrome partitions.
+  - The function will eventually populate the `ans` vector with all valid partitions.
+
+#### Step 2: **Backtracking Function**
+```cpp
+void bt(vector<vector<string>> &ans, vector<string> &tmp, string s, int idx) {
+    if(idx == s.size()) {
+        ans.push_back(tmp);
+        return;
+    }
+    
+    for(int i = idx; i < s.size(); i++) {
+        if(isPal(s, idx, i)) {
+            tmp.push_back(s.substr(idx, i - idx + 1));
+            bt(ans, tmp, s, i + 1);
+            tmp.pop_back();
+        }
+    }
+}
+```
+- **Parameters**:
+  - `ans`: The 2D vector to store the final palindrome partitions.
+  - `tmp`: The current partition being formed.
+  - `s`: The input string.
+  - `idx`: The starting index for the next potential palindrome substring.
+- **Base Case**:
+  - If `idx == s.size()`, it means we have processed the entire string. The current partition `tmp` is valid, so we add it to `ans`.
+- **Recursive Step**:
+  - For each position `i` from `idx` to `s.size()`, check if the substring from `idx` to `i` is a palindrome.
+  - If it is, we add it to `tmp`, recursively call the backtracking function to continue with the rest of the string, and backtrack by removing the last palindrome substring.
+
+#### Step 3: **Palindrome Checking Function**
+```cpp
+bool isPal(string s, int i, int j) {
+    while(i <= j) {
+        if(s[i] != s[j])
+            return false;
+        i++, j--;
+    }
+    return true;
+}
+```
+- **Parameters**:
+  - `s`: The string to check.
+  - `i`: The starting index of the substring.
+  - `j`: The ending index of the substring.
+- **Logic**:
+  - The function checks if the substring from `i` to `j` is a palindrome.
+  - It compares characters at both ends of the substring. If they match, it moves towards the center. If any mismatch is found, it returns `false`. If the entire substring is checked without mismatches, it returns `true`.
+
+---
+
+### 🚀 **Time and Space Complexity**
+
+#### Time Complexity:
+- **Backtracking**: The number of possible partitions grows exponentially. For a string of length `n`, there are about `2^(n-1)` possible ways to partition it.
+- **Palindrome Checking**: For each substring, we check if it's a palindrome, which takes `O(k)` time, where `k` is the length of the substring. In the worst case, we check every possible substring, which could take `O(n^2)` time.
+- **Overall Time Complexity**: The time complexity is `O(2^n * n)`, where `n` is the length of the string. The exponential factor comes from generating all possible partitions, and the polynomial factor comes from palindrome checking.
+
+#### Space Complexity:
+- **Recursive Stack**: The recursive call stack can have a maximum depth of `n` (one call per substring), leading to a space complexity of `O(n)`.
+- **Storage for Result**: The result `ans` stores all valid palindrome partitions. In the worst case, the number of partitions could be `O(2^n)`.
+- **Overall Space Complexity**: The space complexity is `O(n^2)` due to the result storage and the recursive stack.
+
+---
+
+### 🏁 **Conclusion**
+
+The solution effectively solves the "Palindrome Partitioning" problem using **backtracking** to generate all valid partitions and checking if each substring is a palindrome. While the solution works efficiently for smaller strings, it may not be suitable for very large strings due to the exponential growth in the number of partitions.
+
+This approach not only gives us all possible palindromic partitions but also does so in a manner that ensures we explore all potential partitions incrementally, pruning non-palindromic substrings early. It’s a great solution for this problem, and the backtracking approach allows for clear, understandable code.
+
+Keep practicing this problem-solving technique, and soon you’ll be able to apply backtracking confidently to a variety of other challenges! Keep up the great work! 🎉✨
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/palindrome-partitioning/description/)
+
 ---
 {{< youtube 7GlqVABgjJU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #133: Clone Graph](https://grid47.xyz/leetcode/solution-133-clone-graph/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

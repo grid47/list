@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/-upnA7dVDU0/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/minimum-number-of-groups-to-create-a-valid-assignment/description/)
-
 ---
 **Code:**
 
@@ -51,9 +49,95 @@ public:
 };
 
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2910.md" >}}
+### Problem Statement
+
+The problem at hand asks us to determine the minimum number of groups needed to assign a list of integers such that every group has a valid distribution of integers. The goal is to ensure that each group is as balanced as possible based on the frequencies of the integers in the list, and we want to minimize the total number of groups required. Specifically, the frequency distribution of the integers must meet the conditions for valid assignments, and the task is to find the least number of groups needed to accomplish this.
+
+### Approach
+
+To solve this problem, we need to perform the following steps:
+
+1. **Count the Frequency of Each Number**: The first task is to determine how many times each number appears in the given array. This is essential because it dictates how we can group the numbers in a valid way.
+
+2. **Determine the Minimum Group Size**: The next step is to evaluate the minimum group size (`g`) where the numbers can be split into valid groups. A valid group has to respect the condition that no number can appear more times than it is allowed in a group. We aim to minimize the group size while still being able to create valid groupings.
+
+3. **Optimize Group Splitting**: Once we know the frequency distribution of the numbers, we attempt to split the numbers into as few groups as possible while adhering to the frequency constraints. The `split()` function will help us determine the number of groups needed for a given group size.
+
+4. **Iterative Search for the Optimal Group Size**: Starting with a relatively large group size and iteratively decreasing it, we check if the numbers can still be grouped validly. The goal is to find the smallest group size where a valid grouping can still be made.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Frequency Count of Each Number
+
+```cpp
+unordered_map<int, int> cnt;
+for (auto n : nums)
+    ++cnt[n];
+```
+
+- We first create an `unordered_map` called `cnt` to store the frequency of each number in the list `nums`.
+- We iterate through the input array `nums`, incrementing the count for each number. This step essentially builds a frequency map where the keys are the unique numbers in the array, and the values are their respective frequencies.
+
+#### Step 2: Determine the Minimum Group Size
+
+```cpp
+int g = min_element(begin(cnt), end(cnt), [](const auto &p1, const auto &p2){
+    return p1.second < p2.second;
+})->second;
+```
+
+- In this step, we find the number with the minimum frequency by using the `min_element` function. We look for the element with the smallest count, and `g` is assigned that count.
+- This value `g` is the minimum frequency among the numbers, which sets an initial threshold for the smallest valid group size.
+
+#### Step 3: Split Numbers into Groups
+
+```cpp
+int groups = 0, g = g1 - 1;
+for (const auto &[_, c] : cnt) {
+    int group_cnt = c / g1, last_group = c % g1;
+    if (last_group && last_group + group_cnt < g)
+        return INT_MAX;
+    groups += group_cnt + (last_group > 0);
+}
+return groups;
+```
+
+- The function `split()` attempts to split the numbers into groups of size `g1`. The parameters passed to the function are the frequency map `cnt` and the group size `g1`.
+- We calculate how many full groups (`group_cnt`) can be made for each number's frequency (`c / g1`), and whether there is any leftover group (`last_group = c % g1`).
+- If there is a leftover group and the number of groups formed is insufficient to meet the criteria (i.e., the leftover group is too small to form a valid group), the function returns `INT_MAX`, indicating that the group size `g1` is not feasible.
+- Otherwise, we update the `groups` counter to reflect the number of groups formed for the given group size `g1`.
+
+#### Step 4: Iterative Search for the Optimal Group Size
+
+```cpp
+for (; split(cnt, g + 1) == INT_MAX; --g) ;
+return split(cnt, g + 1);
+```
+
+- The loop iteratively decreases the group size `g` starting from the initial value and tries to find the smallest valid group size. If the `split()` function returns `INT_MAX`, it means the group size is not valid, so we continue decreasing the group size.
+- The loop stops when we find the smallest group size that allows the numbers to be split into valid groups, and the result is returned.
+
+### Complexity
+
+#### Time Complexity:
+- **Counting Frequencies**: The time complexity of building the frequency map `cnt` is `O(n)`, where `n` is the number of elements in the input list `nums`.
+- **Finding the Minimum Group Size**: The time complexity of finding the minimum frequency using `min_element` is `O(k)`, where `k` is the number of unique elements in `cnt`.
+- **Splitting into Groups**: The time complexity of the `split()` function depends on the number of unique elements `k` and involves iterating over the frequency map. The worst-case time complexity for splitting is `O(k)`.
+- **Iterative Search for the Optimal Group Size**: In the worst case, the group size can range from `1` to `g1` (the maximum frequency), which leads to a total complexity of `O(g1 * k)` for the iterative search.
+- **Overall Time Complexity**: The overall time complexity is dominated by the iterative search, leading to a total time complexity of `O(g1 * k)`.
+
+#### Space Complexity:
+- The space complexity is primarily determined by the space used to store the frequency map `cnt`, which has a space complexity of `O(k)`, where `k` is the number of unique elements in `nums`.
+
+### Conclusion
+
+The solution efficiently solves the problem of determining the minimum number of groups required for valid assignments of the input numbers. By leveraging frequency counting, group size optimization, and iterative search, the algorithm minimizes the number of groups while ensuring that the groupings adhere to the constraints. The approach is both time-efficient and space-efficient, making it suitable for larger input sizes. The use of `unordered_map` and `min_element` ensures that the frequency count and the search for valid group sizes are performed optimally. This solution provides an optimal balance between accuracy and efficiency, achieving the desired result with a manageable time complexity.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-groups-to-create-a-valid-assignment/description/)
+
 ---
 {{< youtube -upnA7dVDU0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2913: Subarrays Distinct Element Sum of Squares I](https://grid47.xyz/leetcode/solution-2913-subarrays-distinct-element-sum-of-squares-i/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

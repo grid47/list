@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/AdiW8KjFiyg/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/find-resultant-array-after-removing-anagrams/description/)
-
 ---
 **Code:**
 
@@ -48,9 +46,82 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2273.md" >}}
+### Problem Statement
+Given a list of strings `A`, the task is to **remove anagrams** such that only the first occurrence of each group of anagrams remains in the list. An anagram is defined as two strings that can be rearranged to form one another, meaning they have the same characters in the same frequencies, but possibly in different orders. The goal is to return a new list where no two strings are anagrams of each other.
+
+### Approach
+The approach revolves around identifying and removing all subsequent occurrences of anagrams while preserving the first occurrence in the result. This is done by iterating through the list of strings, comparing each string with the others to see if they are anagrams. The core of the solution is the use of an efficient function to check if two strings are anagrams. Once an anagram is found, we skip further checks for that group of anagrams and continue processing the remaining strings.
+
+### Detailed Breakdown of the Code
+
+#### Step 1: Define the `removeAnagrams` Function
+```cpp
+vector<string> removeAnagrams(vector<string>& A) {
+    vector<string> ans;
+    int n = size(A);
+```
+- **`ans`**: This vector will hold the resulting list of strings, where all anagrams are removed, leaving only the first string from each group of anagrams.
+- **`n`**: This variable stores the size of the input vector `A`, representing the total number of strings.
+
+#### Step 2: Iterating Through the List of Strings
+```cpp
+for(int i = 0; i < n;){
+    int j = i + 1;
+    while(j < n and isang(A[i], A[j])) j++;
+    ans.push_back(A[i]);
+    i = j;
+}
+```
+- The outer loop starts by setting `i` to 0, iterating over each string in the list.
+- **`j`** is initialized to `i + 1` and is used to check subsequent strings that might be anagrams of the string at index `i`.
+- The inner `while` loop checks whether the current string at index `i` is an anagram of the string at index `j` by calling the function `isang(A[i], A[j])`. If they are anagrams, the loop continues to increment `j` to check the next strings.
+- When an anagram is not found, or all anagrams have been skipped, we add `A[i]` (the first string of the group of anagrams) to the result vector `ans`.
+- **`i = j;`** ensures that we skip over all the strings that are anagrams of `A[i]`, and move to the next possible non-anagram string.
+
+#### Step 3: Define the `isang` Function (Anagram Check)
+```cpp
+bool isang(string p, string q) {
+    vector<int> cnt(26);
+    int res = 0;
+    for(auto i : p) cnt[i - 'a']++;
+    for(auto i : q) cnt[i - 'a']--;
+    for(auto i : cnt) if(i != 0) return false;
+    return true;
+}
+```
+- **`cnt`**: A vector of size 26 is used to count the occurrences of each character in both strings `p` and `q`. Since we are working with lowercase English letters, there are 26 possible characters (`'a'` to `'z'`), hence the size of the `cnt` vector is 26.
+- **First loop**: For each character `i` in string `p`, we increment the corresponding count in the `cnt` vector.
+- **Second loop**: For each character `i` in string `q`, we decrement the corresponding count in the `cnt` vector.
+- **Third loop**: After both strings have been processed, if any value in the `cnt` vector is non-zero, it means the strings are not anagrams (i.e., they do not have the same characters in the same frequencies), and we return `false`.
+- If all counts in the `cnt` vector are zero, the strings are anagrams, and we return `true`.
+
+#### Step 4: Return the Result
+```cpp
+return ans;
+```
+- Once the iteration is complete and the anagrams are removed, the function returns the `ans` vector, which contains only the first occurrence of each group of anagrams.
+
+### Complexity Analysis
+
+#### Time Complexity
+- **O(n * m)**: Here, `n` is the number of strings in the input list `A`, and `m` is the average length of each string. The outer loop iterates over each string once, and for each string, the `isang` function is called to compare it with others. The `isang` function checks if two strings are anagrams by comparing their character frequencies, which takes **O(m)** time for each pair of strings. Therefore, the overall time complexity is **O(n * m)**.
+
+#### Space Complexity
+- **O(m)**: The space complexity is dominated by the space used to store the count of characters in the `isang` function, which requires an array of size 26 (`vector<int> cnt(26)`). Therefore, the space complexity is **O(m)**, where `m` is the maximum length of the strings being compared.
+
+### Conclusion
+
+This solution efficiently removes anagrams from a list of strings while ensuring that only the first occurrence of each anagram group remains. By utilizing the `isang` function to check for anagrams by comparing character frequencies, the solution ensures that we accurately and quickly identify anagram groups. The use of a greedy approach in the `removeAnagrams` function ensures that once we encounter a non-anagram string, we add it to the result and skip all subsequent anagrams.
+
+The algorithm has a time complexity of **O(n * m)**, where `n` is the number of strings in the list, and `m` is the average length of the strings, making it efficient for most practical inputs. The space complexity is **O(m)** due to the space needed to store character counts for comparison.
+
+This approach can be useful in various scenarios where we need to filter out anagrams, such as when processing lists of words in dictionaries, or when trying to find unique permutations of strings. The solution demonstrates an effective use of character counting and greedy algorithms to solve the problem efficiently.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/find-resultant-array-after-removing-anagrams/description/)
+
 ---
 {{< youtube AdiW8KjFiyg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2274: Maximum Consecutive Floors Without Special Floors](https://grid47.xyz/leetcode/solution-2274-maximum-consecutive-floors-without-special-floors/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

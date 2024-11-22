@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/aIR3Iem0jQM/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/count-the-number-of-special-characters-ii/description/)
-
 ---
 **Code:**
 
@@ -60,9 +58,109 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3121.md" >}}
+### Problem Statement
+
+The task is to determine how many characters in a given string appear both in uppercase and lowercase forms. These characters are termed "special characters". For example, if a string contains both 'a' and 'A', 'a' is a special character. We need to count how many such "special characters" exist in the string.
+
+Given the string `word`, the function should return the count of characters that appear both in their lowercase and uppercase forms.
+
+For example:
+- For the string `"aAabB"`, the answer is `2` because `'a'` and `'b'` both appear in both lowercase and uppercase forms.
+- For the string `"abc"`, the answer is `0` because no characters appear in both forms.
+
+### Approach
+
+The approach is to use an array (or vector) to track whether a character has appeared in its lowercase or uppercase form. Here's a step-by-step breakdown of the approach:
+
+1. **Character Tracking**: For each character in the string, we track whether its lowercase version or uppercase version has been encountered:
+    - When we encounter an uppercase letter, we check if its lowercase version has been seen. If both the uppercase and lowercase versions have been seen, we mark the character as "special".
+    - Similarly, when we encounter a lowercase letter, we check if its uppercase counterpart has already been seen.
+    
+2. **Marking and Checking**: We use a `vector` of size 26 (corresponding to the 26 letters in the English alphabet) to track the state of each character:
+    - `1` indicates that the lowercase version of the character has been encountered.
+    - `2` indicates that both the lowercase and uppercase versions have been encountered, making it a "special character".
+    - `-1` indicates that the character cannot be part of a special character pair.
+    
+3. **Count Special Characters**: After processing the string, we count how many characters are marked as `2`, which indicates that both the uppercase and lowercase versions of that character exist in the string.
+
+### Code Breakdown
+
+#### Step 1: Initialize a Vector to Track Character States
+```cpp
+vector<int> ch(26, 0);
+```
+- We initialize a vector `ch` of size 26, with all elements set to 0. This vector will track the state of each letter in the alphabet. Each element corresponds to a letter, with the index `0` representing 'a', `1` representing 'b', and so on up to `25` for 'z'.
+
+#### Step 2: Iterate Over the String to Update Character States
+```cpp
+for(char x: word) {
+    if(isupper(x)) {
+        if(ch[x - 'A'] == -1) continue;
+        if(ch[x - 'A'] != 1 && ch[x - 'A'] != 2) {
+            ch[x - 'A'] = -1;
+            continue;
+        }
+        ch[x - 'A'] = 2;
+    } else {
+        if(ch[x - 'a'] == -1) continue;                
+        if(ch[x - 'a'] == 2) {
+            ch[x - 'a'] = -1;
+            continue;
+        } 
+        ch[x - 'a'] = 1;
+    }
+}
+```
+- We iterate through each character `x` in the string `word`.
+- **Handling Uppercase Letters**:
+  - If the character is uppercase (checked using `isupper(x)`), we check the corresponding index in the `ch` array.
+  - If its lowercase counterpart has already been encountered (i.e., `ch[x - 'A'] == 1`), we mark it as a special character by setting `ch[x - 'A'] = 2`.
+  - If the uppercase version appears before its lowercase counterpart or if the character is not yet valid, we mark it as invalid (`ch[x - 'A'] = -1`).
+- **Handling Lowercase Letters**:
+  - If the character is lowercase, we perform similar checks:
+    - If the uppercase counterpart has already been encountered (i.e., `ch[x - 'a'] == 2`), we mark it as invalid (`ch[x - 'a'] = -1`).
+    - If it is the first appearance of the lowercase version, we mark it as seen (`ch[x - 'a'] = 1`).
+
+#### Step 3: Count Special Characters
+```cpp
+int cnt = 0;
+for(int i = 0; i < 26; i++) {
+    if(ch[i] == 2)
+        cnt++;
+}
+```
+- After processing the entire string, we iterate through the `ch` array to count how many characters have been marked with `2`, indicating that both their lowercase and uppercase versions were found.
+- The variable `cnt` is incremented each time a special character is encountered.
+
+#### Step 4: Return the Result
+```cpp
+return cnt;
+```
+- Finally, the function returns the count of special characters, stored in `cnt`.
+
+### Complexity
+
+#### Time Complexity:
+- **O(n)**, where `n` is the length of the input string `word`.
+  - We iterate through each character in the string once and perform constant-time operations (array lookups, assignments, and condition checks) for each character. Therefore, the time complexity is **O(n)**.
+
+#### Space Complexity:
+- **O(1)**, as the space used by the `ch` vector is constant (it always has 26 elements). The space complexity does not depend on the size of the input string but on the fixed size of the alphabet (26 characters).
+- The space complexity is **O(1)** because the additional space required does not grow with the input size.
+
+### Conclusion
+
+This solution efficiently counts the number of special characters in a string, where a special character is defined as a character that appears both in its lowercase and uppercase forms. The algorithm runs in linear time relative to the size of the input string, making it highly efficient. 
+
+The use of a vector of fixed size (26) to track character states ensures that the solution is space-efficient, requiring constant space regardless of the input string length. This solution is optimal for this problem and works well within the constraints typically found in such problems.
+
+By leveraging simple state tracking and condition checking for each character, the solution provides an intuitive and effective approach to solving the problem of counting special characters.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/count-the-number-of-special-characters-ii/description/)
+
 ---
 {{< youtube aIR3Iem0jQM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #3122: Minimum Number of Operations to Satisfy Conditions](https://grid47.xyz/leetcode/solution-3122-minimum-number-of-operations-to-satisfy-conditions/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

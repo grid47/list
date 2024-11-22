@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/yVDIm1IfG2c/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/vowels-of-all-substrings/description/)
-
 ---
 **Code:**
 
@@ -35,9 +33,76 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2063.md" >}}
+### Problem Statement
+
+The task is to count the total number of substrings of a given string `word` that contain at least one vowel. A substring is defined as any contiguous sequence of characters within a string. The vowels in consideration are 'a', 'e', 'i', 'o', and 'u'. The challenge is to compute this count efficiently without generating all possible substrings explicitly.
+
+### Approach
+
+The approach to solving this problem relies on understanding how many substrings can be formed that include each vowel in the string. Instead of generating every possible substring, we can determine the contribution of each vowel in the string to the total count of substrings that contain it.
+
+For each vowel found at position `i` in the string:
+1. The number of ways to choose a starting point for a substring that includes the vowel is `i + 1`. This represents all the characters from the start of the string up to the current vowel position.
+2. The number of ways to choose an endpoint for a substring that includes the vowel is `n - i`, where `n` is the length of the string. This counts all characters from the vowel to the end of the string.
+
+Therefore, the contribution of each vowel to the total count of substrings is given by the product of these two values: \((i + 1) \times (n - i)\). By iterating through the string and summing up these contributions for each vowel, we can compute the total number of substrings containing at least one vowel.
+
+### Code Breakdown (Step by Step)
+
+1. **Initialization**:
+   - We declare a variable `res` to hold the cumulative count of substrings containing vowels, initialized to zero.
+   - The variable `n` is assigned the size of the input string `word`.
+
+   ```cpp
+   long long res = 0, n = word.size();
+   ```
+
+2. **Iterate Through the String**:
+   - A loop runs through each character of the string using the index `i`.
+
+   ```cpp
+   for(int i = 0; i < n; i++)
+   ```
+
+3. **Check for Vowel**:
+   - Inside the loop, we check if the current character is a vowel by searching for it in the string "aeiou". The `find` method returns the position of the character if found, or `string::npos` if not.
+
+   ```cpp
+   if(string("aeiou").find(word[i]) != string::npos)
+   ```
+
+4. **Calculate Contribution**:
+   - If the character is a vowel, we calculate the contribution to the total count of substrings:
+     - The count of valid starting positions is `i + 1`.
+     - The count of valid ending positions is `n - i`.
+   - We then add the product of these two values to `res`.
+
+   ```cpp
+   res += (i + 1) * (n - i);
+   ```
+
+5. **Return the Result**:
+   - Finally, after iterating through all characters in the string, we return the total count stored in `res`.
+
+   ```cpp
+   return res;
+   ```
+
+### Complexity
+
+- **Time Complexity**: O(N), where N is the length of the string. The solution requires a single pass through the string to check each character and determine if it is a vowel, leading to a linear time complexity.
+  
+- **Space Complexity**: O(1), as we are using a fixed amount of space regardless of the input size. The only variables used are for counting and indexing.
+
+### Conclusion
+
+This implementation efficiently counts the total number of substrings containing vowels without needing to generate each substring explicitly. By leveraging the mathematical relationship between the positions of vowels and substring boundaries, we obtain a solution that is both time-efficient and space-efficient. The use of a linear scan through the string ensures that our approach can handle large strings effectively, while the simple arithmetic calculations minimize computational overhead. Overall, this method provides a robust and effective solution to the problem of counting vowel-containing substrings in a given word.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/vowels-of-all-substrings/description/)
+
 ---
 {{< youtube yVDIm1IfG2c >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2064: Minimized Maximum of Products Distributed to Any Store](https://grid47.xyz/leetcode/solution-2064-minimized-maximum-of-products-distributed-to-any-store/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/l28OqpotdbU/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/check-if-word-can-be-placed-in-crossword/description/)
-
 ---
 **Code:**
 
@@ -71,9 +69,146 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2018.md" >}}
+### Problem Statement
+
+The problem at hand is to determine whether a given word can be placed into a crossword puzzle represented by a board, adhering to certain constraints. The board is a grid of characters where empty spaces are represented by `' '` (spaces) and filled spaces by `'#'`. The word can be placed horizontally or vertically, and it must either fit entirely in the space without exceeding the boundaries or match the existing characters in the grid where it overlaps. Additionally, the placement should respect the following conditions:
+
+1. The word can replace spaces but cannot replace any filled characters.
+2. The word should fit entirely within a continuous sequence of spaces, or if it overlaps with existing letters, those letters must match the corresponding letters in the word.
+
+### Approach
+
+To solve this problem, we will follow a systematic approach:
+
+1. **Define Helper Functions**:
+   - A helper function `same()` that checks whether a given word can fit into a segment of the row, either starting from the beginning of that segment or from the end.
+   - A helper function `match()` that checks all rows (both horizontally and vertically) of the grid to see if the word can fit according to the rules defined above.
+
+2. **Transpose the Board**:
+   - Since the word can be placed horizontally or vertically, we will create a transposed version of the board. This allows us to check for potential placements without duplicating the logic for both orientations.
+
+3. **Check Each Orientation**:
+   - Use the `match()` function on both the original and transposed board to determine if the word can be placed in any valid configuration.
+
+4. **Return the Result**:
+   - If the word can be placed in either orientation, we return `true`; otherwise, we return `false`.
+
+### Code Breakdown (Step by Step)
+
+Here’s a detailed breakdown of the code implementation:
+
+```cpp
+class Solution {
+public:
+```
+- We define a class `Solution` that contains all the necessary methods to solve the problem.
+
+```cpp
+    bool same(vector<char> &row, int start, int end, string &s) {
+```
+- The `same()` function checks if the word can fit into the given segment of the row defined by `start` and `end`.
+
+```cpp
+        if(end - start + 1 != s.size()) return false;
+```
+- We first check if the length of the segment matches the length of the word. If not, we return `false`.
+
+```cpp
+        int i = 0, n = s.size();
+        while(i < n && (row[start + i] == ' ' || row[start + i] == s[i])) {
+            i++;
+        }
+```
+- This loop checks from the start of the segment if each character matches the word's character or if it's an empty space. If we reach the end of the word, we return `true`.
+
+```cpp
+        if(i == n) return true;
+        i = 0;
+        while(i < n && (row[end - i] == ' ' || row[end - i] == s[i]))
+              i++;
+        if(i == n) return true;             
+             
+        return false;
+    }
+```
+- If we don't find a match from the start, we check from the end of the segment. If either check succeeds, we can place the word in that segment.
+
+```cpp
+    bool match(vector<vector<char>> &mtx, string &word) {
+```
+- The `match()` function checks each row in the matrix `mtx` to see if the word can fit.
+
+```cpp
+        int n = mtx[0].size();
+        for(auto &row: mtx) {
+            for(int i = 0; i < n; ) {
+```
+- We iterate through each row and process it to find segments of continuous spaces.
+
+```cpp
+                int start;
+                while(i < n && row[i] == '#') i++;
+                start = i;
+                while(i < n && row[i] != '#') i++;
+```
+- We skip over filled cells (`'#'`) and note the start of a segment of empty cells.
+
+```cpp
+                if(same(row, start, i - 1, word))
+                    return true;
+            }
+        }
+```
+- For each segment of empty cells found, we call the `same()` function to check if the word can fit. If it can, we return `true`.
+
+```cpp
+        return false;
+    }
+```
+- If no suitable segment is found in the current matrix, we return `false`.
+
+```cpp
+    bool placeWordInCrossword(vector<vector<char>>& board, string word) {
+```
+- The main function `placeWordInCrossword` is defined to handle the overall logic of the word placement.
+
+```cpp
+        int m = board.size(), n = board[0].size();
+        vector<vector<char>> trns(n, vector<char>(m));
+```
+- We determine the size of the board and create a transposed matrix `trns` to check vertical placements.
+
+```cpp
+        for(int i = 0; i < m; i++)
+        for(int j = 0; j < n; j++)
+            trns[j][i] = board[i][j];
+```
+- The nested loop fills the transposed matrix with the corresponding values from the original board.
+
+```cpp
+        return match(trns, word) || match(board, word);
+    }
+};
+```
+- Finally, we check both the transposed and the original board for a valid placement of the word and return the result.
+
+### Complexity
+
+The time complexity of this solution is O(m * n), where m is the number of rows and n is the number of columns in the board. This is because we need to traverse each cell in the board for checking valid placements. The space complexity is O(m * n) for the transposed board.
+
+### Conclusion
+
+In conclusion, this implementation effectively determines if a word can be placed in a crossword board by leveraging helper functions for clarity and efficiency. The approach of transposing the board allows us to use the same logic for both horizontal and vertical placements without duplicating code.
+
+This solution not only handles the core functionality required but also adheres to best practices by maintaining clear separation of concerns with helper methods. Such techniques are valuable in real-world applications, especially in scenarios involving grid manipulations and word placements, such as in puzzles, games, or layout designs.
+
+By encapsulating the placement logic within well-defined functions, we enhance the readability and maintainability of the code, making it easier to extend or modify in the future if needed. This is a great example of how a systematic approach can lead to elegant solutions in programming challenges.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-word-can-be-placed-in-crossword/description/)
+
 ---
 {{< youtube l28OqpotdbU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2022: Convert 1D Array Into 2D Array](https://grid47.xyz/leetcode/solution-2022-convert-1d-array-into-2d-array/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

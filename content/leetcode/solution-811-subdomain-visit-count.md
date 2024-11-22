@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/oe_eXlH5dUM/maxresdefault.webp"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/subdomain-visit-count/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/811.webp" 
     alt="A set of web domains where subdomains are counted, with each subdomain glowing softly as it’s identified."
@@ -54,9 +52,111 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/811.md" >}}
+### Problem Statement
+
+The task involves counting the number of visits to various subdomains from a given list of domain visit counts. Each element in the list contains a domain and the number of times it was visited. The challenge is to break down these domain visits into subdomains and tally the total number of visits to each subdomain. For instance, for a domain "sports.yahoo.com", we should also consider visits to "yahoo.com" and "com", and aggregate the visit counts accordingly.
+
+We are required to return the total visit count for each subdomain in the format: `count subdomain`. Subdomains include not only the full domain name but also any part of it (e.g., for the domain "sports.yahoo.com", the subdomains would include "yahoo.com", "com").
+
+### Approach
+
+To solve this problem efficiently, we need to:
+1. Parse each domain visit string to extract the count and domain.
+2. Split each domain into its respective subdomains.
+3. Aggregate the visit counts for each subdomain.
+4. Format the result by returning each subdomain with its total count.
+
+We can leverage the following approach:
+- **Use a HashMap**: The problem naturally fits the use of a hash map (`unordered_map`) to store and accumulate the visit counts for each subdomain.
+- **String Manipulation**: For each domain, we break it down by iterating through the segments separated by periods ('.'), counting the visits for the full domain as well as its subdomains.
+- **Efficiency**: Using a hash map allows us to efficiently store and update the visit counts. Given that we will be processing each domain string and its subdomains only once, the solution is optimal in terms of time complexity.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Declare a HashMap to Track Subdomain Visits
+```cpp
+unordered_map<string, int> count;
+```
+- We use an unordered map `count` to store the number of visits for each subdomain. The key is the subdomain string, and the value is the count of visits.
+
+#### Step 2: Parse the Input List of Domain Visits
+```cpp
+for(auto cp: cpdomains) {
+    int i = cp.find(" ");
+    int n = stoi(cp.substr(0, i)); // Extract the visit count
+    string s = cp.substr(i + 1); // Extract the domain part
+}
+```
+- We iterate over each domain visit string in `cpdomains`. 
+- `cp.find(" ")` finds the space that separates the visit count from the domain name.
+- `n` stores the number of visits, which is extracted by taking the substring before the space and converting it to an integer using `stoi`.
+- `s` contains the domain name, which is extracted from the part of the string after the space.
+
+#### Step 3: Split the Domain into Subdomains
+```cpp
+for(int i = 0; i < s.size(); i++) {
+    if(s[i] == '.')
+        count[s.substr(i + 1)] += n;
+}
+```
+- For each domain `s`, we iterate over its characters and check if the character is a dot ('.').
+- Every time we encounter a dot, we consider the substring starting from the character after the dot as a subdomain.
+- We update the count for this subdomain in the map `count`, adding the visit count `n` for each occurrence of a subdomain.
+
+#### Step 4: Include the Full Domain in the Count
+```cpp
+count[s] += n;
+```
+- After processing all subdomains, we also increment the count for the full domain (`s`).
+
+#### Step 5: Generate the Result
+```cpp
+vector<string> res;
+for(auto it: count)
+    res.push_back(to_string(it.second) + " " + it.first);
+```
+- We create an empty vector `res` to store the final result.
+- We iterate over the entries in `count` and for each subdomain, we append a string to the result in the format `"count subdomain"`, where `count` is the total number of visits and `subdomain` is the domain.
+- `to_string(it.second)` converts the count (an integer) into a string, and `it.first` is the subdomain.
+
+#### Step 6: Return the Final Result
+```cpp
+return res;
+```
+- Finally, we return the `res` vector, which contains the visit counts for all subdomains.
+
+### Complexity
+
+#### Time Complexity:
+- **O(n * m)**: 
+   - Here, `n` is the number of domain visit entries in the `cpdomains` list, and `m` is the average length of the domain strings. 
+   - We process each domain string once and perform a substring operation for each segment of the domain (which is bounded by the number of dots in the domain).
+   - Thus, the time complexity is linear in terms of the number of domain visit entries and the average length of the domain strings.
+
+#### Space Complexity:
+- **O(k)**: 
+   - Where `k` is the number of unique subdomains in the input list.
+   - We store each subdomain in the hash map `count`, so the space complexity depends on the number of unique subdomains. 
+   - In the worst case, the space complexity is proportional to the number of distinct subdomains across all domain visit entries.
+
+### Conclusion
+
+The solution efficiently counts the visits to each subdomain by leveraging string manipulation and hash maps. By processing each domain string once, breaking it down into subdomains, and aggregating the counts, we ensure that the solution is both time and space efficient. 
+
+The key steps in the algorithm are:
+1. Extracting the visit count and domain name from each entry.
+2. Iterating through the domain to identify subdomains and accumulate the visit counts.
+3. Storing the results in a hash map and then formatting the final output.
+
+This approach guarantees that the solution runs in linear time with respect to the number of domain entries and their lengths. The use of an unordered map ensures that subdomain visits are counted efficiently, providing an optimal solution for the problem. 
+
+Overall, this solution is well-suited for handling large input sizes due to its simplicity and efficiency. The problem combines the concepts of string manipulation and hash maps, which are common in real-world software engineering tasks such as web analytics and domain tracking.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/subdomain-visit-count/description/)
+
 ---
 {{< youtube oe_eXlH5dUM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #813: Largest Sum of Averages](https://grid47.xyz/leetcode/solution-813-largest-sum-of-averages/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/DMBWjfh33wY/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/find-three-consecutive-integers-that-sum-to-a-given-number/description/)
-
 ---
 **Code:**
 
@@ -33,9 +31,84 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2177.md" >}}
+### Problem Statement
+
+Given a positive integer `num`, the task is to find three consecutive integers whose sum is equal to `num`. Specifically, we are looking for three integers `x-1`, `x`, and `x+1` such that:
+
+\[
+(x-1) + x + (x+1) = num
+\]
+
+If such a triplet of consecutive integers exists, return them as a vector of integers `[x-1, x, x+1]`. If no such triplet exists, return an empty vector.
+
+### Approach
+
+The solution relies on a simple mathematical observation: for three consecutive integers to sum up to a given number `num`, the number `num` must be divisible by 3. If `num % 3 != 0`, it is impossible to divide `num` into three equal parts and hence, we return an empty vector. Otherwise, we calculate the three consecutive integers by dividing `num` by 3 and adjusting for the three integers:
+
+1. The integer `x` can be found by dividing `num` by 3 (`num / 3`).
+2. The three consecutive integers are: `x-1`, `x`, and `x+1`.
+
+### Code Breakdown (Step by Step)
+
+1. **Function Declaration**:
+   ```cpp
+   vector<long long> sumOfThree(long long num) {
+   ```
+   - The function `sumOfThree` is defined to return a vector of `long long` integers, and it takes a `long long` number `num` as input.
+
+2. **Check Divisibility by 3**:
+   ```cpp
+   if(num % 3 != 0) return ans;
+   ```
+   - Before proceeding with calculations, the first check ensures that `num` is divisible by 3 (`num % 3 != 0`).
+   - If `num` is not divisible by 3, there is no valid triplet of consecutive integers, so an empty vector `ans` is returned.
+
+3. **Calculate the Consecutive Integers**:
+   ```cpp
+   return {num / 3 - 1, num / 3, num / 3 + 1};
+   ```
+   - If `num` is divisible by 3, the triplet is calculated. 
+   - First, `num / 3` gives the middle value `x` of the three consecutive integers.
+   - The three consecutive integers are `x-1`, `x`, and `x+1`. These are returned as a vector: `{num / 3 - 1, num / 3, num / 3 + 1}`.
+
+4. **Return the Result**:
+   - The vector containing the three consecutive integers is returned if `num` is divisible by 3. Otherwise, an empty vector is returned.
+
+### Example Walkthrough
+
+#### Example 1: `num = 9`
+
+- **Step 1**: Check if `num % 3 == 0`. Since `9 % 3 == 0`, we proceed.
+- **Step 2**: Calculate `x = 9 / 3 = 3`.
+- **Step 3**: The three consecutive integers are: `x-1 = 2`, `x = 3`, and `x+1 = 4`.
+- **Step 4**: Return the result as `{2, 3, 4}`.
+
+#### Example 2: `num = 10`
+
+- **Step 1**: Check if `num % 3 == 0`. Since `10 % 3 != 0`, we return an empty vector `[]`.
+
+#### Example 3: `num = 15`
+
+- **Step 1**: Check if `num % 3 == 0`. Since `15 % 3 == 0`, we proceed.
+- **Step 2**: Calculate `x = 15 / 3 = 5`.
+- **Step 3**: The three consecutive integers are: `x-1 = 4`, `x = 5`, and `x+1 = 6`.
+- **Step 4**: Return the result as `{4, 5, 6}`.
+
+### Time Complexity
+
+- **Time Complexity**: The time complexity is **O(1)**. This solution involves a constant number of arithmetic operations and conditional checks, making it a constant-time solution regardless of the input value of `num`.
+  
+- **Space Complexity**: The space complexity is **O(1)** as well. The solution only uses a fixed amount of space to store the result, which is a vector of three integers. No additional space is used that scales with the input size.
+
+### Conclusion
+
+The problem of finding three consecutive integers whose sum equals a given number `num` is solved efficiently in constant time and space. The approach leverages the divisibility of `num` by 3 to quickly determine whether a valid triplet exists. If `num` is divisible by 3, the solution computes the three consecutive integers using basic arithmetic. If not, it returns an empty vector to indicate that no such triplet exists. The algorithm’s simplicity and efficiency make it well-suited for handling a wide range of inputs.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/find-three-consecutive-integers-that-sum-to-a-given-number/description/)
+
 ---
 {{< youtube DMBWjfh33wY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2178: Maximum Split of Positive Even Integers](https://grid47.xyz/leetcode/solution-2178-maximum-split-of-positive-even-integers/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

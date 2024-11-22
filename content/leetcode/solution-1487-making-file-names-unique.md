@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/B9hKZonstN0/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/making-file-names-unique/description/)
-
 ---
 **Code:**
 
@@ -47,9 +45,91 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1487.md" >}}
+### Problem Statement
+
+The task is to create a unique list of folder names based on the input array of folder names, which may contain duplicates. If a duplicate folder name is encountered, the solution must append a number to the folder name in the format `(k)` where `k` is the smallest integer that makes the name unique. For example, if the input folder name is `"doc"` and it appears again, it should be renamed to `"doc(1)"`, and if `"doc(1)"` also exists, it should be renamed to `"doc(2)"`, and so on.
+
+### Approach
+
+To achieve this, we can use a hash map (or a `std::map` in C++) to keep track of the occurrences of folder names. The main steps of the approach are as follows:
+
+1. **Iterate through the Names**: Loop through each folder name in the input list.
+  
+2. **Check for Duplicates**: For each name, check if it already exists in the hash map. If it does, we need to create a unique version of that name.
+
+3. **Generate Unique Names**: If a duplicate is found, append `(k)` where `k` is the smallest integer that ensures uniqueness. Continue incrementing `k` until we find a name that does not exist in the map.
+
+4. **Store Unique Names**: Update the map with the new unique name and store it in the result list.
+
+5. **Return the Result**: Once all names are processed, return the list of unique folder names.
+
+### Code Breakdown (Step by Step)
+
+Here is a detailed breakdown of the code implementation:
+
+```cpp
+class Solution {
+public:
+    vector<string> getFolderNames(vector<string>& names) {
+        map<string, int> mp;  // Map to store folder names and their counts
+        
+        for(int i = 0; i < names.size(); i++) {
+            if(mp.count(names[i])) {  // Check if the name already exists
+                int k = mp[names[i]];  // Get the current count for the name
+                // Find the next available unique name
+                while(mp.count(names[i] + "(" + to_string(k) + ")")) {
+                    k++;  // Increment k if the generated name already exists
+                    mp[names[i]]++;  // Update the count for the original name
+                }
+                // Update the folder name to the unique version
+                mp[names[i]]++;  // Increment for the original name
+                names[i] = names[i] + "(" + to_string(k) + ")";  // Create unique name
+            }
+            // Register the original or new name in the map
+            mp[names[i]] = 1;  // Set the count to 1 for the new/updated name
+        }
+        return names;  // Return the final list of unique names
+    }
+};
+```
+
+1. **Data Structure**: A `std::map<string, int>` named `mp` is used to track the number of times each folder name has been encountered. The key is the folder name, and the value is the integer indicating how many duplicates have been found.
+
+2. **Loop Through Names**: The outer loop goes through each name in the `names` vector.
+
+3. **Duplicate Check**: The `if(mp.count(names[i]))` condition checks if the current name has been seen before.
+
+4. **Finding Unique Names**: If a name is duplicated, we initiate a counter `k` starting from the count of the name in the map. A nested `while` loop generates the new name by appending `(k)`. It checks if this new name already exists in `mp`. If it does, it increments `k` until a unique name is found.
+
+5. **Update Map and List**: After generating a unique name, the map is updated, and the current name in the list is replaced with its unique version.
+
+6. **Final Result**: After processing all names, the updated list of unique names is returned.
+
+### Complexity
+
+- **Time Complexity**: The time complexity of this approach is \(O(n \cdot m)\), where \(n\) is the number of folder names and \(m\) is the average length of the folder names. In the worst case, we may have to append several integers to find a unique name, leading to the multiplication by \(m\).
+
+- **Space Complexity**: The space complexity is \(O(n)\) due to the storage of folder names in the map.
+
+### Conclusion
+
+The `getFolderNames` function effectively resolves the challenge of creating unique folder names from a potentially non-unique list by leveraging a hash map to track occurrences. It systematically generates unique names using an efficient strategy, ensuring that no two folder names clash in the final output.
+
+Key points of interest include:
+
+1. **Robust Duplicate Handling**: The method efficiently addresses duplicate folder names by using a counter to append the appropriate integer suffix.
+
+2. **Use of Data Structures**: The choice of `std::map` enables quick lookups and inserts, crucial for maintaining performance, especially with larger input sizes.
+
+3. **Practical Applications**: This algorithm is applicable not only in file management systems but also in any context where unique identifiers are necessary, such as user registrations, resource naming in programming, or even task management systems.
+
+Overall, the solution highlights a fundamental approach to solving name uniqueness problems in a clear and maintainable way, demonstrating effective use of C++ features and data structures.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/making-file-names-unique/description/)
+
 ---
 {{< youtube B9hKZonstN0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1488: Avoid Flood in The City](https://grid47.xyz/leetcode/solution-1488-avoid-flood-in-the-city/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

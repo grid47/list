@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/gKDmO8ZLRD8/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/append-characters-to-string-to-make-subsequence/description/)
-
 ---
 **Code:**
 
@@ -35,9 +33,80 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2486.md" >}}
+### Problem Statement
+
+In this problem, you are given two strings `s` and `t`. Your task is to determine how many characters you need to append to the end of `s` to make `s` contain all the characters of `t` in the same order (a subsequence of `t`). The characters in `s` are already in order, and we want to append the minimum number of characters from `t` to `s` to make `s` a subsequence of `t`.
+
+For example:
+- Given `s = "abc"` and `t = "acdbc"`, we can see that the characters 'a' and 'c' are already in the correct order in `s`, so we need to append 'd' and 'b' from `t` to make `s` a subsequence of `t`.
+
+The task is to compute how many characters need to be appended to the end of `s` for it to become a subsequence of `t`.
+
+### Approach
+
+The main idea behind solving this problem efficiently is by utilizing the concept of subsequence matching. A subsequence is a sequence that appears in the same relative order, but not necessarily consecutively. The goal is to traverse through both strings and check how much of `t` is already matched in `s`. Once we know how much of `t` is matched in `s`, the number of characters that need to be appended will simply be the difference between the length of `t` and the number of matched characters.
+
+The approach is as follows:
+1. **Two-pointer technique**: Use two pointers, one for string `s` and another for string `t`.
+2. Traverse string `s` from left to right and try to match characters in `t`. Each time a character in `s` matches a character in `t`, move the pointer for `t` to the next character.
+3. The goal is to count how many characters from `t` can be matched in `s`. The number of characters we need to append to `s` will be the number of characters in `t` that we were unable to match.
+
+### Code Breakdown (Step by Step)
+
+#### 1. **Variable Initialization**
+
+```cpp
+int j = 0;
+```
+
+- Here, `j` is initialized to `0` and will be used as the pointer to traverse through the string `t`.
+
+#### 2. **Iterating Through String `s`**
+
+```cpp
+for(int i = 0; i < s.size() && j < t.size(); i++) {
+    j += s[i] == t[j];
+}
+```
+
+- This loop iterates through the string `s` with index `i`.
+- The loop runs as long as `i` is less than the size of `s` and `j` is less than the size of `t`.
+- In each iteration, the condition `s[i] == t[j]` checks if the current character in `s` matches the current character in `t`.
+- If the characters match, `j` is incremented by 1. This means we successfully matched the `j`-th character of `t` with a character in `s`.
+
+#### 3. **Calculating the Result**
+
+```cpp
+return t.size() - j;
+```
+
+- Once the loop finishes, `j` will represent the number of characters from `t` that have been matched with characters from `s`.
+- The difference `t.size() - j` gives the number of characters from `t` that were not matched and need to be appended to `s`.
+- We return this difference as the result, which is the minimum number of characters that need to be appended to `s` to make it a subsequence of `t`.
+
+### Complexity Analysis
+
+#### Time Complexity:
+
+The time complexity of the algorithm is **O(n)**, where `n` is the length of the string `s`. This is because we are iterating through the string `s` exactly once, performing constant-time operations in each iteration (comparing characters and updating the pointer `j`).
+
+- The loop runs for at most `min(s.size(), t.size())` iterations, but since we are only traversing through `s`, the complexity is determined by the length of `s`.
+
+#### Space Complexity:
+
+The space complexity is **O(1)**. This is because the algorithm uses only a fixed number of variables (`j` and `i`), regardless of the size of the input strings `s` and `t`. There is no additional space used for data structures that grow with the input size.
+
+### Conclusion
+
+This solution efficiently solves the problem using the two-pointer technique to match characters from string `s` to string `t`. The main idea is to check how much of `t` is already matched by `s`, and then calculate how many characters need to be appended to make `s` a subsequence of `t`. The time complexity of this solution is linear in terms of the length of `s`, making it highly efficient. The space complexity is constant, as no extra space is needed except for a few variables.
+
+This approach ensures that the problem is solved in the optimal time and space, which is important when dealing with large strings.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/append-characters-to-string-to-make-subsequence/description/)
+
 ---
 {{< youtube gKDmO8ZLRD8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2487: Remove Nodes From Linked List](https://grid47.xyz/leetcode/solution-2487-remove-nodes-from-linked-list/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

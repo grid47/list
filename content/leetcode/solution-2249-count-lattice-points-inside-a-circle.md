@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/HCLinlC-JWY/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/count-lattice-points-inside-a-circle/description/)
-
 ---
 **Code:**
 
@@ -41,9 +39,100 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2249.md" >}}
+### Problem Statement
+
+The problem asks to count the number of lattice points (points with integer coordinates) that lie inside or on the boundary of a set of circles. Each circle is defined by its center `(x, y)` and its radius `r`. You are given a list of circles, and for each circle, you need to count how many lattice points lie within the circle.
+
+### Approach
+
+To solve this problem, the key steps involve iterating over each circle and checking the grid points (lattice points) that fall within or on the boundary of the circle. The circle's equation is:
+\[
+(x - x_0)^2 + (y - y_0)^2 \leq r^2
+\]
+Where:
+- \((x_0, y_0)\) is the center of the circle.
+- \(r\) is the radius of the circle.
+- The inequality ensures that a point is inside or on the boundary of the circle.
+
+The goal is to determine how many distinct lattice points satisfy this condition for any of the circles.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Initializing a Set for Distinct Points
+
+```cpp
+set<int> cnt;
+```
+
+- We use a set to store the lattice points. The reason we use a set is that it automatically handles duplicates. If a lattice point lies inside multiple circles, the set ensures that the point is counted only once.
+
+#### Step 2: Iterating Over Each Circle
+
+```cpp
+for(auto it: cir) {
+```
+
+- We iterate over each circle in the input `cir`, where each circle is represented by an array of three integers: `[x, y, r]`, where:
+  - `x` is the x-coordinate of the circle's center.
+  - `y` is the y-coordinate of the circle's center.
+  - `r` is the radius of the circle.
+
+#### Step 3: Checking Points Within the Circle
+
+```cpp
+for(int i = it[0] - it[2]; i <= it[0] + it[2]; i++)
+for(int j = it[1] - it[2]; j <= it[1] + it[2]; j++)                
+    if((i - it[0]) * (i - it[0]) + (j - it[1]) * (j - it[1]) <= (it[2] * it[2]))
+        cnt.insert(i * 1000 + j);
+```
+
+- **Nested Loops for x and y**: The two nested `for` loops iterate over the possible integer values of `i` and `j` that could lie within the bounding box of the circle. 
+  - For the x-coordinate, `i` ranges from `it[0] - it[2]` to `it[0] + it[2]`, which covers all integer values within the horizontal span of the circle.
+  - Similarly, for the y-coordinate, `j` ranges from `it[1] - it[2]` to `it[1] + it[2]`, covering all integer values within the vertical span of the circle.
+
+- **Check if the Point is Inside the Circle**: 
+  - The condition:
+  ```cpp
+  if((i - it[0]) * (i - it[0]) + (j - it[1]) * (j - it[1]) <= (it[2] * it[2]))
+  ```
+  checks if the point `(i, j)` lies within or on the circle. The equation calculates the square of the distance from the point `(i, j)` to the circle's center `(it[0], it[1])`. If this distance is less than or equal to the square of the radius `r^2`, the point is inside the circle.
+
+- **Store Points in the Set**: 
+  - If the point lies within the circle, it is inserted into the set using:
+  ```cpp
+  cnt.insert(i * 1000 + j);
+  ```
+  - We use `i * 1000 + j` to store each point as a unique integer key in the set. The multiplication by `1000` ensures that the x-coordinate and y-coordinate are combined into a unique value. Since x and y values are typically integers, this ensures that the combination of `(i, j)` is unique in the set.
+
+#### Step 4: Return the Count of Distinct Points
+
+```cpp
+return cnt.size();
+```
+
+- Finally, the size of the set `cnt` is returned, which represents the total number of distinct lattice points that lie inside or on the boundary of the circles.
+
+### Complexity
+
+#### Time Complexity
+
+- **Iterating Over Circles**: There are `m` circles, where `m` is the size of the `cir` array. 
+- **Checking Lattice Points for Each Circle**: For each circle, we iterate over all integer points in its bounding box. The bounding box of a circle with radius `r` contains roughly a square of size `(2r+1) x (2r+1)` grid points. Thus, for each circle, we perform \( O((2r+1)^2) \) operations, where `r` is the radius of the circle.
+- Therefore, the overall time complexity is \( O(m \times (2r+1)^2) \), where `m` is the number of circles and `r` is the average radius of the circles.
+
+#### Space Complexity
+
+- **Set for Distinct Points**: The space complexity is dominated by the size of the set `cnt`, which stores the distinct lattice points. In the worst case, the number of distinct lattice points could be proportional to the total number of points inside all circles. Therefore, the space complexity is \( O(n) \), where `n` is the total number of distinct lattice points.
+
+### Conclusion
+
+The solution efficiently counts the number of distinct lattice points within or on the boundary of multiple circles using a set for storing unique points. By iterating over all potential grid points within the bounding box of each circle and checking if the points satisfy the circle's equation, the algorithm ensures accurate counting while leveraging the properties of a set to handle duplicates. The approach is clear, leveraging geometric properties to solve the problem in a manageable time complexity, given the constraints.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/count-lattice-points-inside-a-circle/description/)
+
 ---
 {{< youtube HCLinlC-JWY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2250: Count Number of Rectangles Containing Each Point](https://grid47.xyz/leetcode/solution-2250-count-number-of-rectangles-containing-each-point/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

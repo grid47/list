@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/p92_kEjyJAo/hqdefault.jpg?sqp=-oaymwEm
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/repeated-substring-pattern/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/459.webp" 
     alt="A string where repeated substrings softly glow, showing the patterns and repetitions clearly."
@@ -39,9 +37,81 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/459.md" >}}
+### Problem Statement
+
+The problem asks us to determine if a given string `str` can be constructed by repeating a substring multiple times. In other words, we need to check whether there is a non-empty substring that, when repeated multiple times, forms the string `str`. For example, for the input `"abab"`, the string can be formed by repeating the substring `"ab"` twice, so the answer would be `true`. For a string like `"abc"`, no such repeating pattern exists, and the answer would be `false`.
+
+### Approach
+
+To solve this problem, we need an efficient approach that avoids explicitly checking all possible substrings. A key insight is to utilize the string concatenation technique to check for repeating patterns. 
+
+Here’s how the approach works:
+
+1. **Doubling the String**:
+   - We first concatenate the string `str` to itself, forming a new string `str + str`. By doing this, we effectively create a string that contains all possible rotations of the original string, along with its repetitions.
+   - For example, if the original string is `"abab"`, concatenating it with itself would give `"abababab"`, which contains all possible rotations (`"abab"`, `"baba"`, `"abab"`, `"baba"`).
+  
+2. **Substrings Search**:
+   - Next, we search for the original string `str` within the concatenated string `str + str`, but with some restrictions. The idea is that if `str` is repeated, it should appear in the concatenated string starting from an index that’s not at the beginning (i.e., starting from index 1 or later).
+   - We search within the substring from index 1 to `2 * str.size() - 2`. This substring is the relevant part of the doubled string, excluding the first and last characters, which are redundant for our search.
+   - If the string `str` appears within this substring, it indicates that `str` can be formed by repeating a substring.
+
+3. **Final Decision**:
+   - If we find `str` in the valid substring, it means the string `str` can be constructed by repeating a smaller substring, so we return `true`. Otherwise, we return `false`.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Concatenating the String with Itself
+
+```cpp
+(str + str)
+```
+
+- This creates a new string that contains two copies of the original string concatenated together.
+- For example, if `str = "abab"`, the result will be `"abababab"`. This helps in checking all possible rotations and patterns of the string.
+
+#### Step 2: Substring and Search for the Original String
+
+```cpp
+.substr(1, str.size() * 2 - 2)
+```
+
+- The `substr()` method is used to extract a part of the doubled string.
+- We start at index 1 and extract a substring of length `str.size() * 2 - 2`. This ensures that we exclude the first and last characters of the doubled string, because the first character would be the same as the original string and the last character would be redundant in the search.
+- For example, with `str = "abab"`, the doubled string is `"abababab"`, and we extract the substring `"bababab"`, which contains the relevant parts for checking the repeating pattern.
+
+#### Step 3: Checking for the Repeated Pattern
+
+```cpp
+.find(str) != -1
+```
+
+- The `find()` method searches for the occurrence of `str` within the extracted substring.
+- If `find()` returns a value other than `-1`, it means that `str` can be found in the substring, indicating that `str` can be constructed by repeating a smaller substring.
+- If `find()` returns `-1`, it means no repeating pattern exists, and the function returns `false`.
+
+### Complexity
+
+#### Time Complexity:
+- **Concatenation**: The time complexity of concatenating the string `str` with itself is `O(n)`, where `n` is the length of the string `str`.
+- **Substring Extraction**: Extracting the substring of length `2n - 2` also takes `O(n)` time.
+- **Search for Substring**: The `find()` operation has a time complexity of `O(n)` in the worst case, as it may need to scan the entire substring to find the original string.
+- Overall, the time complexity is `O(n)`.
+
+#### Space Complexity:
+- The space complexity is `O(n)` due to the need for the concatenated string `str + str`, which stores two copies of the original string.
+
+### Conclusion
+
+This solution efficiently checks if a string can be constructed by repeating a smaller substring. By concatenating the string with itself and searching within a carefully selected part of the resulting string, we avoid the need for brute-force checking of every possible substring. The approach runs in linear time (`O(n)`) and uses linear space (`O(n)`), making it both time and space efficient for large strings.
+
+This solution is optimal for this type of problem and avoids unnecessary complexity by leveraging string manipulations in a clever way.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/repeated-substring-pattern/description/)
+
 ---
 {{< youtube p92_kEjyJAo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #467: Unique Substrings in Wraparound String](https://grid47.xyz/leetcode/solution-467-unique-substrings-in-wraparound-string/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

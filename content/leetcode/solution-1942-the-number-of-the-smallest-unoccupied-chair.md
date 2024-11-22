@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/LqhxcaCctCc/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/the-number-of-the-smallest-unoccupied-chair/description/)
-
 ---
 **Code:**
 
@@ -60,9 +58,132 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1942.md" >}}
+### Problem Statement
+
+The problem requires us to determine the smallest numbered chair available for a person arriving at a given time `t` in a sequence of events defined by their arrival and departure times. Each person has a designated arrival time and a departure time, and once they leave, their chair becomes available for someone else. The goal is to ensure that each arriving person sits in the smallest numbered chair that is available when they arrive.
+
+### Approach
+
+To solve this problem, we can utilize a priority queue (min-heap) to efficiently manage the availability of chairs. The approach consists of the following steps:
+
+1. **Sorting Events**: First, we sort the events based on their arrival times. This allows us to process each arrival in the order they occur.
+
+2. **Using Priority Queues**: We will maintain two priority queues:
+   - One for reserving chairs (`reserve`), which stores the departure time along with the chair number.
+   - Another for available chairs (`avail`), which keeps track of the chair numbers that have become available.
+
+3. **Processing Each Event**: For each person:
+   - We check if any chairs have become available by comparing their departure times with the current arrival time. If so, we add those chairs to the available queue.
+   - If the current person is the one we are interested in (based on their arrival time), we stop processing further since we want to find the chair for this specific person.
+   - We assign a chair to the current person, either from the available chairs or a new chair if none are available.
+
+4. **Returning the Result**: Finally, we return the chair number assigned to the person arriving at time `t`.
+
+### Code Breakdown (Step by Step)
+
+Let's analyze the provided code in detail:
+
+```cpp
+class Solution {
+public:
+    int smallestChair(vector<vector<int>>& a, int t) {
+```
+We define a class named `Solution` and a public method called `smallestChair` that takes a 2D vector `a` representing the arrival and departure times of people and an integer `t`, which is the index of the person we are interested in.
+
+```cpp
+        int tt = a[t][0];
+        priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> reserve;
+        priority_queue<int, vector<int>, greater<int>> avail;
+```
+We extract the arrival time `tt` of the target person (the one indexed by `t`). We then initialize two priority queues:
+- `reserve`: This will store pairs of departure times and chair numbers.
+- `avail`: This will keep track of the chair numbers that are available for use.
+
+```cpp
+        sort(a.begin(), a.end());
+```
+Next, we sort the vector `a` based on the arrival times. This ensures that we process each person in the correct order.
+
+```cpp
+        for(auto &t : a) {
+```
+We start iterating over each person's arrival and departure times.
+
+```cpp
+            while(!reserve.empty() && reserve.top().first <= t[0]) {
+                avail.push(reserve.top().second);
+                reserve.pop();
+            }
+```
+In this loop, we check if there are any chairs that have become available due to people leaving. If the earliest departure time (the top of the `reserve` queue) is less than or equal to the current person's arrival time `t[0]`, we add that chair number to the `avail` queue and remove it from the `reserve` queue.
+
+```cpp
+            if(t[0] == tt) break;
+```
+We check if the current person's arrival time is the same as our target person's arrival time. If it is, we break out of the loop since we only need the chair number for this specific person.
+
+```cpp
+            if (!avail.empty()) {
+                reserve.push({t[1], avail.top()});
+                avail.pop();
+            } else {
+                reserve.push({t[1], reserve.size()});
+            }
+```
+Here, we determine which chair to assign to the current person:
+- If there are available chairs, we assign the smallest available chair (top of the `avail` queue) to the current person and push their departure time along with the chair number into the `reserve` queue.
+- If no chairs are available, we allocate a new chair (which is simply the current size of the `reserve` queue) and push its departure time into the `reserve` queue.
+
+```cpp
+        return avail.empty()? reserve.size() : avail.top();
+    }
+};
+```
+Finally, after processing all people, we check if there are any chairs available. If not, we return the total number of chairs (which is the same as the size of the `reserve` queue). Otherwise, we return the smallest available chair from the `avail` queue.
+
+### Complexity
+
+- **Time Complexity**: The time complexity of this solution is \(O(n \log n)\) due to the sorting of the array `a` and the use of priority queues, where \(n\) is the number of people.
+
+- **Space Complexity**: The space complexity is \(O(n)\) to store the chairs and the events in the priority queues.
+
+### Conclusion
+
+The provided solution efficiently determines the smallest numbered chair for a specified person arriving at a given time using priority queues to manage the availability of chairs. By leveraging sorting and heap operations, this approach ensures that the assignment of chairs is optimal and meets the problem's requirements.
+
+### Key Features
+
+1. **Dynamic Chair Management**: The use of priority queues allows for dynamic management of chair availability based on real-time events (arrival and departure).
+
+2. **Efficient Sorting**: Sorting the input array simplifies the logic for managing arrivals and departures, allowing for a straightforward implementation of the chair assignment logic.
+
+3. **Optimal Chair Assignment**: By always selecting the smallest available chair, the solution adheres to the problem's requirements and maintains fairness in chair allocation.
+
+### Use Cases
+
+This algorithm can be applied in various scenarios, including:
+
+- **Event Management Systems**: Where chairs or seats need to be allocated dynamically based on arrival and departure times (e.g., for concerts, theaters, or conferences).
+
+- **Resource Allocation**: In systems where limited resources (like meeting rooms, equipment, etc.) need to be assigned to users based on their schedules.
+
+### Implementation Considerations
+
+When implementing this solution, consider the following:
+
+- **Input Validations**: Ensure that the input is well-formed, with valid arrival and departure times.
+
+- **Concurrency**: If this system is to be used in a multi-threaded environment, ensure that the access to shared data structures is properly synchronized to avoid race conditions.
+
+- **Scalability**: Test the implementation with a large number of events to ensure that the performance remains acceptable under heavy load.
+
+This detailed explanation provides a comprehensive understanding of the code, its functioning, and its potential applications, making it an excellent resource for anyone interested in implementing similar functionality.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/the-number-of-the-smallest-unoccupied-chair/description/)
+
 ---
 {{< youtube LqhxcaCctCc >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1943: Describe the Painting](https://grid47.xyz/leetcode/solution-1943-describe-the-painting/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/yubRKwixN-U/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/palindrome-number/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/9.webp" 
     alt="A number with mirrored halves, radiating a soothing glow as it reflects symmetrically."
@@ -45,9 +43,116 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/9.md" >}}
+### 🧠 **Palindrome Number Check**
+
+The problem asks us to determine whether a given integer is a palindrome. A number is a **palindrome** if it reads the same forwards and backwards. For instance, `121` is a palindrome, but `123` is not.
+
+Our goal is to **check if a number is a palindrome** without converting the number into a string. Let's dive into an efficient approach to solve this problem!
+
+---
+
+### 📌 **Example**
+
+- **Input**: `isPalindrome(121)`  
+  **Output**: `true`  
+  (Explanation: `121` reads the same forwards and backwards.)
+
+- **Input**: `isPalindrome(-121)`  
+  **Output**: `false`  
+  (Explanation: Negative numbers can't be palindromes due to the negative sign.)
+
+- **Input**: `isPalindrome(10)`  
+  **Output**: `false`  
+  (Explanation: `10` is not a palindrome since it does not read the same backward.)
+
+---
+
+### 🛠️ **Approach: Palindrome Check Without String Conversion**
+
+To determine if an integer `x` is a palindrome, follow these steps:
+
+1. **Handle Negative Numbers**: If the number is negative, immediately return `false`. Negative numbers can never be palindromes because the negative sign doesn’t reflect in the reversed number.
+   
+2. **Reverse the Number**: We can reverse the digits of the number and compare the reversed version with the original number. If they match, it's a palindrome.
+
+3. **Overflow Concerns**: Since reversing could potentially overflow, we’ll work with a `long long int` to handle large numbers safely.
+
+---
+
+### 💻 **Code Breakdown (Step-by-Step)**
+
+#### Step 1: Handle Negative Numbers
+
+```cpp
+if(x < 0) return false;
+```
+
+- If the number is negative, we return `false` because a negative number cannot be a palindrome.
+
+#### Step 2: Set Up Variables for Reversal
+
+```cpp
+long long int y = x, z = 0;
+```
+
+- `y`: This variable stores the original number, which will be used later to compare with the reversed number.
+- `z`: This is where we store the reversed number. Initially, it's set to `0`.
+
+#### Step 3: Reverse the Digits of the Number
+
+```cpp
+while(x) {
+    z = z * 10 + x % 10;
+    x /= 10;
+}
+```
+
+- The loop extracts the last digit of the number using the modulus operator (`x % 10`), then adds it to `z` while shifting `z` by one digit to the left (`z * 10`).
+- The number `x` is divided by `10` to remove the last digit, and this continues until all digits are processed.
+
+#### Step 4: Compare the Reversed Number with the Original
+
+```cpp
+return y == z;
+```
+
+- After reversing the number, we compare the reversed number (`z`) with the original number (`y`).
+- If they are the same, it means the number is a palindrome, and we return `true`. Otherwise, we return `false`.
+
+---
+
+### 📈 **Complexity Analysis**
+
+#### Time Complexity: **O(log(x))**
+- The time complexity is logarithmic because we divide the number by `10` in each iteration. The number of iterations depends on the number of digits in `x`, which is proportional to `log(x)`.
+
+#### Space Complexity: **O(1)**
+- The space complexity is constant because we only use a fixed amount of extra space (for the variables `y` and `z`), regardless of the input size.
+
+---
+
+### 🚀 **Conclusion**
+
+This solution efficiently checks if a number is a palindrome by reversing the number and comparing it to the original:
+
+- **Negative numbers are immediately rejected** as palindromes.
+- **Digit reversal** is used to check if the number reads the same forwards and backwards.
+- The solution works in **logarithmic time** with **constant space**, making it ideal for large numbers.
+
+This approach is simple, effective, and avoids unnecessary string conversions, providing an optimal solution for checking palindrome numbers.
+
+---
+
+### 🌱 **Pro Tip: Keep Practicing!**
+To master problems like this, practice with different types of number manipulations and think about how you can optimize each step. **Consistent practice is the key** to improving your problem-solving skills!
+
+
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/palindrome-number/description/)
+
 ---
 {{< youtube yubRKwixN-U >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #11: Container With Most Water](https://grid47.xyz/leetcode/solution-11-container-with-most-water/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

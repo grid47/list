@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/VgyrTbLZie8/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/minimum-deletions-to-make-array-beautiful/description/)
-
 ---
 **Code:**
 
@@ -35,9 +33,66 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2216.md" >}}
+### Problem Statement
+
+The problem asks to minimize the number of deletions in an array `nums` so that the remaining array satisfies the following condition: every two consecutive elements in the array should not be the same, and the length of the remaining array should be even. Specifically, you are required to return the minimum number of deletions needed to make the array satisfy these conditions.
+
+### Approach
+
+To solve this problem efficiently, we need to iterate through the array and check for pairs of consecutive elements that are the same. If two consecutive elements are the same, we need to delete one of them. Additionally, we need to ensure that after all deletions, the remaining number of elements in the array is even.
+
+This problem can be broken down into two main tasks:
+1. **Handling consecutive duplicate elements**: Whenever two consecutive elements are the same, we need to delete one of them to ensure no two consecutive elements are equal.
+2. **Ensuring even length**: After deleting duplicates, we may be left with an odd number of elements. In that case, we need to delete one more element to make the length even.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Initialize Variables
+```cpp
+int ans = 0;
+```
+- `ans` will hold the count of deletions needed to remove consecutive duplicate elements.
+
+#### Step 2: Iterate Through the Array to Find Consecutive Duplicates
+```cpp
+for(int i = 0; i < nums.size() - 1; i++)
+    if(nums[i] == nums[i + 1] && (i - ans) % 2 == 0) ans++;
+```
+- This loop iterates through the array from index `0` to `nums.size() - 2`.
+- For each element, it checks whether the current element `nums[i]` is equal to the next element `nums[i + 1]`. If they are equal, it indicates that a deletion is required.
+- We also check the condition `(i - ans) % 2 == 0`. This ensures that we only count deletions for every second pair of consecutive duplicates, as we need the remaining array to have an even number of elements. The subtraction `i - ans` accounts for the deletions that have already been made, ensuring the correct indexing after deletions.
+
+#### Step 3: Handle the Even Length Condition
+```cpp
+return ans + (nums.size() - ans) % 2;
+```
+- After iterating through the array and counting the deletions needed to remove consecutive duplicates, the next task is to ensure the length of the remaining array is even.
+- The expression `(nums.size() - ans) % 2` calculates whether the number of remaining elements is even or odd. If it is odd, we need to delete one more element to make it even, so we add `1` to `ans` in this case.
+- The final result is returned as `ans + (nums.size() - ans) % 2`, which gives the total number of deletions needed to meet both conditions (removing consecutive duplicates and ensuring the array length is even).
+
+### Complexity Analysis
+
+#### Time Complexity:
+- **O(n)**, where `n` is the length of the array `nums`.
+  - The solution involves a single loop that iterates over the array once. Each comparison and calculation within the loop is O(1), making the total time complexity linear with respect to the size of the input array.
+
+#### Space Complexity:
+- **O(1)**, constant space.
+  - The space complexity is constant because the solution only uses a few extra variables (`ans`), and the space used does not depend on the size of the input array. No additional data structures (such as arrays or hash maps) are used.
+
+### Conclusion
+
+This solution efficiently solves the problem with a time complexity of O(n) and space complexity of O(1). The approach is straightforward and leverages a single pass through the array to identify consecutive duplicates and adjust the array's length to be even.
+
+By iterating through the array and counting the deletions needed for consecutive duplicates, and ensuring that the final array has an even length, the algorithm effectively minimizes the number of deletions required. The check for even-length arrays ensures that the solution accounts for edge cases where removing duplicates leaves an odd number of elements.
+
+This method is optimal for large input sizes, as it processes the array in linear time, and the constant space usage makes it memory-efficient. Overall, this approach provides a clear, concise, and efficient solution to the problem.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-deletions-to-make-array-beautiful/description/)
+
 ---
 {{< youtube VgyrTbLZie8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2217: Find Palindrome With Fixed Length](https://grid47.xyz/leetcode/solution-2217-find-palindrome-with-fixed-length/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

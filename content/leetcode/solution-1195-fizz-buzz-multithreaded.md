@@ -18,8 +18,6 @@ youtube_thumbnail=""
 
 
 
-[`Problem Link`](https://leetcode.com/problems/fizz-buzz-multithreaded/description/)
-
 ---
 **Code:**
 
@@ -135,9 +133,128 @@ public:
     }
 };
 {{< /highlight >}}
-
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1195.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1201: Ugly Number III](https://grid47.xyz/leetcode/solution-1201-ugly-number-iii/) |
+
+
+### Problem Statement
+The FizzBuzz problem is a classic programming challenge often used in technical interviews. The task is to print the numbers from `1` to `n`, but for multiples of `3`, print `"fizz"` instead of the number, for multiples of `5`, print `"buzz"`, and for numbers that are multiples of both `3` and `5`, print `"fizzbuzz"`. The challenge is to implement this in a concurrent manner, allowing multiple threads to print their respective outputs correctly.
+
+### Approach
+To solve this problem in a concurrent environment, the `FizzBuzz` class utilizes synchronization mechanisms to ensure that the correct outputs are printed in the right order. The main components of the approach are:
+
+1. **Mutex Locks**: Four mutexes are used to control access to printing based on the current number's divisibility by `3` and `5`.
+2. **Shared State**: A shared variable `i` tracks the current number being processed, ensuring that threads do not interfere with one another.
+3. **Thread Coordination**: Each function (`fizz`, `buzz`, `fizzbuzz`, and `number`) checks conditions and releases locks appropriately to allow other threads to proceed when it's their turn.
+
+### Code Breakdown (Step by Step)
+
+```cpp
+class FizzBuzz {
+private:
+    int n, i;
+    mutex f, b, fz, num;
+public:
+    FizzBuzz(int n) {
+        f.lock();
+        b.lock();
+        fz.lock();
+        i = 1;
+        this->n = n;
+    }
+```
+- **Lines 1-8**: The `FizzBuzz` class is defined with private member variables `n` (the upper limit), `i` (the current number), and four mutexes (`f`, `b`, `fz`, and `num`). The constructor initializes the mutexes and sets `i` to `1`.
+
+```cpp
+    void fizz(function<void()> printFizz) {
+        while(i <= n) {
+            f.lock();
+            if(i <= n)            
+                printFizz();
+            i++;
+            // Unlock logic follows...
+        }
+    }
+```
+- **Lines 10-22**: The `fizz` method is defined. It loops while `i` is less than or equal to `n`. It locks the `f` mutex to ensure that only one thread can execute this section at a time. If the current number `i` is a valid output (not exceeding `n`), it calls `printFizz()` to print `"fizz"`, then increments `i`.
+
+```cpp
+            if(i % 3== 0 && i % 5 == 0 ) {
+                fz.unlock();
+            } else if(i % 3 == 0) {
+                f.unlock();
+            } else if(i % 5 == 0) {
+                b.unlock();
+            } else if(i <= n) {
+                num.unlock();
+            } else {
+                fz.unlock();
+                f.unlock();
+                b.unlock();
+                num.unlock();
+            }
+        }
+    }
+```
+- **Lines 23-35**: The method then checks the divisibility of `i`. Depending on the result:
+  - If `i` is divisible by both `3` and `5`, it unlocks `fz`.
+  - If `i` is divisible by `3`, it unlocks `f`.
+  - If `i` is divisible by `5`, it unlocks `b`.
+  - If `i` does not match any of these conditions and is still valid, it unlocks `num`.
+  - The last case ensures that if the current number exceeds `n`, it unlocks all mutexes.
+
+```cpp
+    void buzz(function<void()> printBuzz) {
+        while(i <= n) {
+            b.lock();
+            if(i <= n)            
+                printBuzz();
+            i++;
+            // Unlock logic follows...
+        }
+    }
+```
+- **Lines 37-49**: The `buzz` method works similarly to `fizz`. It locks the `b` mutex to print `"buzz"` for numbers divisible by `5`, then checks the conditions to unlock the appropriate mutexes.
+
+```cpp
+    void fizzbuzz(function<void()> printFizzBuzz) {
+        while(i <= n) {
+            fz.lock();
+            if(i <= n)
+                printFizzBuzz();
+            i++;
+            // Unlock logic follows...
+        }
+    }
+```
+- **Lines 51-63**: The `fizzbuzz` method locks the `fz` mutex and prints `"fizzbuzz"` for numbers divisible by both `3` and `5`, similarly unlocking the necessary mutexes afterward.
+
+```cpp
+    void number(function<void(int)> printNumber) {
+        while(i <= n) {
+            num.lock();
+            if(i <= n)
+                printNumber(i);
+            i++;
+            // Unlock logic follows...
+        }
+    }
+```
+- **Lines 65-77**: The `number` method locks the `num` mutex and prints the current number `i`, following the same unlocking logic.
+
+### Complexity
+1. **Time Complexity**:
+   - The time complexity is \(O(n)\), as the algorithm needs to process each number from `1` to `n`. Each thread will execute in a loop, performing a constant amount of work for each number.
+
+2. **Space Complexity**:
+   - The space complexity is \(O(1)\), not accounting for the input size since only a fixed number of variables are used (i.e., mutexes and counters).
+
+### Conclusion
+The `FizzBuzz` class implementation demonstrates a robust approach to solving the FizzBuzz problem in a multithreaded context. By utilizing mutexes for synchronization, it ensures that the output remains correct even when multiple threads are attempting to print at the same time. This design highlights the importance of thread safety in concurrent programming, making it an excellent example for understanding synchronization mechanisms and their practical applications in real-world scenarios.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/fizz-buzz-multithreaded/description/)
+
+---
+
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

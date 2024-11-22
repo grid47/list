@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/0J1aVGfArWs/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/substring-xor-queries/description/)
-
 ---
 **Code:**
 
@@ -77,9 +75,140 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2564.md" >}}
+### Problem Statement
+
+Given a binary string `m`, we need to process multiple queries. Each query contains two integers, `a` and `b`, and the goal is to find the starting and ending indices of the substring in `m` that represents the binary number equal to `a XOR b`. If no such substring exists, return `[-1, -1]`.
+
+### Approach
+
+1. **Binary String Conversion**: Convert each number to binary to match substrings in the main string. By precomputing substrings in `m` that represent specific binary values, we can quickly answer each query.
+
+2. **Mapping Substring Values**:
+   - For each position in `m`, build substrings up to 32 bits (to avoid integer overflow in large numbers).
+   - For each substring, calculate the integer value represented by its binary form. Use a map to store the integer value as a key and its starting and ending indices as the value.
+   - This mapping (`mp`) allows us to directly retrieve the position of any target value by searching for the XOR result of each query in `mp`.
+
+3. **Handling Queries**:
+   - For each query, calculate the XOR result (`a XOR b`). This result is the target integer that we need to find as a substring in `m`.
+   - If the target exists in `mp`, use the mapped indices for the result. If not, return `[-1, -1]`.
+
+### Code Breakdown (Step by Step)
+
+#### Helper Method: `str`
+
+The `str` function converts an integer to a binary string representation.
+
+1. **Initialize**:
+   ```cpp
+   string ans = "";
+   ```
+   The answer string is initialized as empty.
+
+2. **Handle Edge Case of Zero**:
+   ```cpp
+   if(n == 0) return "0";
+   ```
+   If the input `n` is `0`, return `"0"` since the binary representation of zero is just `0`.
+
+3. **Convert Number to Binary**:
+   ```cpp
+   while(n) {
+       if(n & 1) {
+           ans = "1" + ans;
+       } else {
+           ans = "0" + ans;
+       }
+       n >>= 1;
+   }
+   return ans;
+   ```
+   For each bit in `n`, prepend either `"1"` or `"0"` based on the current least significant bit. Right-shift `n` after each iteration until all bits are processed.
+
+#### Helper Method: `substr`
+
+The `substr` method manually finds a substring `s` in a string `m`.
+
+1. **Edge Case Check**:
+   ```cpp
+   if(m.size() < s.size()) return vector<int>{-1, -1};
+   ```
+   If `m` is smaller than `s`, return `[-1, -1]` since `s` can’t be a substring of `m`.
+
+2. **Iterate to Find Matching Substring**:
+   ```cpp
+   for(int i = 0; i < m.size(); i++) {
+       int j = 0;
+       while(j < s.size() && i + j < m.size() && m[i + j] == s[j]) j++;
+       if(j == s.size()) return vector<int>{i, i + j - 1};
+   }
+   return vector<int>{-1, -1};
+   ```
+   This loop attempts to match `s` to each possible substring starting from every position `i` in `m`. If `s` is found, it returns the start and end indices of the match.
+
+#### Main Method: `substringXorQueries`
+
+The `substringXorQueries` method handles the main logic of the problem.
+
+1. **Initialize Map for Storing Substring Positions**:
+   ```cpp
+   map<int, vector<int>> mp;
+   ```
+   Use a map to store the binary values of all substrings in `m` as keys, with their starting and ending positions as values.
+
+2. **Build Substring Integer Values**:
+   ```cpp
+   int k = m.size();
+   for(int j = 0; j < k; j++) {
+       if(m[j] == '0') {
+           if(!mp.count(0)) mp[0] = {j, j};
+           continue;
+       }
+       int num = 0;
+       for(int i = j; i <= min(j + 31, k - 1); i++) {
+           num = (num << 1) + (m[i] - '0');
+           if(!mp.count(num)) mp[num] = {j, i};
+       }
+   }
+   ```
+   - Loop through each character in `m` starting from `j`.
+   - If `m[j]` is `0`, map `0` to the position `[j, j]`.
+   - For non-zero starting characters, form binary numbers of substrings up to 32 bits from position `j`. For each unique binary integer, map its indices in `mp`.
+
+3. **Process Each Query**:
+   ```cpp
+   vector<vector<int>> ans(n, vector<int>{-1, -1});
+   for(int i = 0; i < n; i++) {
+       int num = (q[i][0] ^ q[i][1]);
+       if(mp.count(num)) ans[i] = mp[num];
+   }
+   return ans;
+   ```
+   For each query:
+   - Calculate the XOR result (`a XOR b`) to get the target integer.
+   - If `num` exists in `mp`, the mapped value gives the substring indices in `m`.
+   - Store the result in `ans`.
+
+### Complexity Analysis
+
+- **Time Complexity**:
+  - Mapping each substring takes \(O(k)\) for iterating through `m` and up to 32 iterations for each `j`. Thus, this portion is \(O(k)\).
+  - Each query is processed in \(O(1)\) lookup time, resulting in \(O(n)\) for all queries.
+  - Total time complexity is \(O(k + n)\).
+
+- **Space Complexity**:
+  - The map `mp` uses \(O(k)\) space in the worst case for unique binary values.
+  - `ans` uses \(O(n)\) space for storing query results.
+  - Overall, the solution has a space complexity of \(O(k + n)\).
+
+### Conclusion
+
+This approach allows efficient handling of substring-based XOR queries by using a map to precompute binary representations for all potential substrings. The map enables quick lookups for each XOR result, providing a time-efficient solution.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/substring-xor-queries/description/)
+
 ---
 {{< youtube 0J1aVGfArWs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2566: Maximum Difference by Remapping a Digit](https://grid47.xyz/leetcode/solution-2566-maximum-difference-by-remapping-a-digit/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

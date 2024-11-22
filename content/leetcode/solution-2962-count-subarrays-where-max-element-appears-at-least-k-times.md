@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/CZ-z1ViskzE/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/count-subarrays-where-max-element-appears-at-least-k-times/description/)
-
 ---
 **Code:**
 
@@ -39,9 +37,80 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2962.md" >}}
+### Problem Statement:
+The task is to find the number of subarrays in the array `A` that contain at least `k` occurrences of the maximum element of `A`. A subarray is a contiguous part of the array, and the goal is to count how many subarrays meet this condition.
+
+### Approach:
+To solve this problem efficiently, we utilize a sliding window technique along with a count of the occurrences of the maximum element within the window. The sliding window approach allows us to avoid the inefficient solution of checking each subarray individually. The window is adjusted dynamically based on the number of occurrences of the maximum element, and the result is accumulated efficiently.
+
+### Code Breakdown (Step by Step):
+
+#### Step 1: Find the Maximum Element in the Array
+```cpp
+int a = *max_element(A.begin(), A.end());
+```
+- The first step in solving the problem is to find the maximum element of the array `A`. This is done using the `max_element` function, which scans the entire array to find the largest element. This element is stored in the variable `a`.
+
+#### Step 2: Initialize Variables
+```cpp
+int n = A.size(), cur = 0, i = 0;
+long long res = 0;
+```
+- `n`: The size of the array `A`.
+- `cur`: A counter that tracks how many times the maximum element `a` appears in the current sliding window.
+- `i`: The starting index of the sliding window.
+- `res`: A variable to accumulate the total number of valid subarrays. It will eventually store the result.
+
+#### Step 3: Sliding Window Setup (Outer Loop)
+```cpp
+for (int j = 0; j < n; ++j) {
+    cur += A[j] == a;
+```
+- The outer loop runs through each element of the array. The index `j` represents the current element of the array being considered for the window.
+- Inside the loop, we check if the current element `A[j]` is equal to the maximum element `a`. If so, we increment the `cur` variable by 1, indicating that we've found one more occurrence of the maximum element within the window.
+
+#### Step 4: Shrink the Window (Inner While Loop)
+```cpp
+while (cur >= k)
+    cur -= A[i++] == a;
+```
+- This part of the code ensures that the window contains at least `k` occurrences of the maximum element `a`.
+- The `while` loop checks if `cur`, the count of occurrences of the maximum element in the window, is greater than or equal to `k`. If it is, we shrink the window from the left by incrementing the start index `i`. Each time we remove an element from the left of the window, we decrement `cur` if the element at `A[i]` was the maximum element.
+- This shrinking process continues until the window contains fewer than `k` occurrences of the maximum element.
+
+#### Step 5: Accumulate the Result
+```cpp
+res += i;
+```
+- After adjusting the window to ensure it contains at least `k` occurrences of the maximum element, we add the value of `i` to the result. This is because every subarray starting from index `i` to the current index `j` contains at least `k` occurrences of the maximum element. Since there are `i` possible starting points for such subarrays, we add `i` to `res`.
+
+#### Step 6: Return the Result
+```cpp
+return res;
+```
+- After iterating through all elements of the array, the variable `res` contains the total count of subarrays that contain at least `k` occurrences of the maximum element. We return this value as the final result.
+
+### Complexity Analysis:
+
+#### Time Complexity:
+1. **Finding the Maximum Element**: The `max_element` function runs in **O(n)** time, where `n` is the number of elements in the array.
+2. **Outer Loop**: The outer loop runs `n` times, iterating over each element of the array once.
+3. **Inner While Loop**: The `while` loop ensures that the sliding window is adjusted as needed. Although the inner loop runs multiple times in some cases, each element is processed at most once by the `i` index. Therefore, the total number of iterations of the inner loop across all iterations of the outer loop is **O(n)**.
+
+Overall, the total time complexity is **O(n)**, where `n` is the number of elements in the array.
+
+#### Space Complexity:
+- The solution only uses a constant amount of extra space for the variables `cur`, `i`, and `res`, regardless of the input size.
+- Therefore, the space complexity is **O(1)**, i.e., constant space.
+
+### Conclusion:
+This solution leverages an efficient sliding window technique to count the number of valid subarrays in a single pass through the array, achieving a time complexity of **O(n)**. The key idea is to maintain a dynamic window that contains at least `k` occurrences of the maximum element, and to count how many valid subarrays can be formed from the current position. This approach avoids the need to check all subarrays explicitly, resulting in a highly efficient solution that scales well with large inputs.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/count-subarrays-where-max-element-appears-at-least-k-times/description/)
+
 ---
 {{< youtube CZ-z1ViskzE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2965: Find Missing and Repeated Values](https://grid47.xyz/leetcode/solution-2965-find-missing-and-repeated-values/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

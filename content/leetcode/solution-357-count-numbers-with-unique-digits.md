@@ -17,8 +17,6 @@ youtube_thumbnail=""
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/count-numbers-with-unique-digits/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/357.webp" 
     alt="A sequence of numbers with each unique digit softly illuminated, showing how many unique digits are present."
@@ -49,9 +47,111 @@ class Solution {
     }
 }
 {{< /highlight >}}
-
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/357.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #365: Water and Jug Problem](https://grid47.xyz/leetcode/solution-365-water-and-jug-problem/) |
+### 🌟 Problem Statement
+
+The task at hand is to count how many numbers with **unique digits** can be formed with `n` digits, using digits from 0 to 9, and ensuring that no digit is repeated.
+
+- **For example**:
+  - When `n = 2`, the valid numbers with unique digits are 12, 13, 21, etc., but not 11, 22, or 33.
+  - When `n = 3`, valid 3-digit numbers include 123, 132, 231, but not 101, 121, etc.
+
+---
+
+### 🔍 Approach
+
+To solve this problem efficiently, we'll break it down step-by-step:
+
+1. **Single Digit Numbers**:
+   - When `n = 1`, all digits from 0 to 9 are possible. So, we have 10 such numbers.
+
+2. **For Numbers with More than One Digit**:
+   - We start by calculating the number of valid choices for each digit:
+     - The **first digit** has 9 valid choices (1 to 9, because 0 cannot be the leading digit).
+     - The **second digit** has 9 valid choices (0 to 9, excluding the first digit).
+     - The **third digit** has 8 valid choices (excluding the first two digits).
+     - This pattern continues until we fill all `n` digits.
+
+3. **Edge Case**:
+   - If `n = 0`, the problem specifies returning 1, as there is exactly one way to have "zero digits" (the empty number).
+
+---
+
+### 🔨 Step-by-Step Code Breakdown
+
+Let’s look at the code, which follows the approach outlined above:
+
+#### Step 1: Handle Base Case (`n = 0`)
+
+```java
+if (n == 0) return 1;  // If n is 0, return 1 (one valid number: the empty number)
+```
+
+- When `n = 0`, we simply return 1 since the empty number is considered valid.
+
+#### Step 2: Initialize Variables
+
+```java
+int res = 10;      // Start with 10 valid 1-digit numbers (0 to 9)
+int available = 9;  // 9 choices for the first digit (1 to 9)
+int unqNums = 9;   // The number of valid numbers for the first digit
+```
+
+- We initialize `res` to 10 because there are 10 valid 1-digit numbers (0 through 9).
+- `available` represents the number of valid choices for the first digit, which is 9 (since the leading digit can't be 0).
+- `unqNums` stores the number of valid numbers formed up to the current digit.
+
+#### Step 3: Loop Through Remaining Digits
+
+```java
+while (n-- > 1 && available > 0) {
+    unqNums = unqNums * available;  // Calculate possible numbers for current digit count
+    res += unqNums;                 // Add the count to the result
+    available--;                    // Decrease available choices for the next digit
+}
+```
+
+- For each digit from 2 to `n`, we:
+  - Multiply `unqNums` by the number of available choices for the current digit.
+  - Add the result to `res` to accumulate the total count of valid numbers.
+  - Decrease `available` by 1 for the next digit.
+
+#### Step 4: Return the Result
+
+```java
+return res;
+```
+
+- After the loop finishes, we return `res`, which holds the total number of valid unique-digit numbers.
+
+---
+
+### 📈 Complexity Analysis
+
+#### Time Complexity:
+- The time complexity of this solution is **O(n)** because we iterate from 2 up to `n` in the loop, with constant-time operations inside the loop (multiplication and addition).
+
+#### Space Complexity:
+- The space complexity is **O(1)** because we only use a few integer variables (`res`, `available`, `unqNums`), which don't grow with the size of `n`.
+
+---
+
+### 🏁 Conclusion
+
+This solution is efficient and easy to understand. By calculating the number of possible numbers step-by-step for each digit, we avoid the need to explicitly generate all possible numbers. The approach ensures we have an optimal solution in terms of both **time** and **space** complexity. 
+
+---
+
+### 🎯 Quick Summary:
+- For `n = 1`, the count of valid numbers is 10.
+- For higher values of `n`, we calculate the possibilities for each digit, progressively reducing the available choices.
+- The solution has **O(n)** time complexity, making it fast even for large `n`.
+
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/count-numbers-with-unique-digits/description/)
+
+---
+
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

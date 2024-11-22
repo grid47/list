@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/U3VJjmvRVLY/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/shortest-path-in-binary-matrix/description/)
-
 ---
 **Code:**
 
@@ -51,9 +49,114 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1091.md" >}}
+
+
+### Problem Statement
+The objective of this problem is to find the shortest path from the top-left corner to the bottom-right corner of a binary matrix. The matrix consists of `0`s and `1`s, where `0` represents an open cell and `1` represents a blocked cell. The path can only be taken through `0`s, and you can move in eight possible directions (horizontally, vertically, or diagonally). If there is no valid path, the function should return `-1`.
+
+### Approach
+To solve this problem, we will utilize the Breadth-First Search (BFS) algorithm, which is particularly well-suited for finding the shortest path in an unweighted graph, such as our binary matrix. Here’s the approach broken down into key steps:
+
+1. **Initial Checks**: Start by checking if the starting cell (top-left) is blocked. If it is, return `-1` immediately, as no path can start from a blocked cell.
+
+2. **BFS Setup**: Use a queue to facilitate the BFS process. Initialize the queue with the starting cell and set the distance (or path length) to `1`.
+
+3. **Explore Neighbors**: While there are cells in the queue, explore all possible neighboring cells. If a neighbor is within bounds and open (i.e., a `0`), update its distance and enqueue it for further exploration.
+
+4. **Terminate on Destination**: If the destination cell (bottom-right) is reached during exploration, return the distance to that cell as it represents the shortest path.
+
+5. **Return Failure**: If the queue is exhausted without reaching the destination, return `-1`.
+
+### Code Breakdown (Step by Step)
+
+1. **Class Definition**: The code defines a class `Solution` with a public method `shortestPathBinaryMatrix`.
+
+   ```cpp
+   class Solution {
+   public:
+       int shortestPathBinaryMatrix(vector<vector<int>>& grid) {
+   ```
+
+2. **Matrix Dimensions**: Extract the dimensions of the grid, `m` for rows and `n` for columns.
+
+   ```cpp
+           int m = grid.size(), n = grid[0].size();
+   ```
+
+3. **Initial Condition Check**: Check if the starting cell is blocked. If so, return `-1`.
+
+   ```cpp
+           if(grid[0][0] == 1) return -1;
+   ```
+
+4. **Queue Initialization**: Declare a queue to manage the BFS process and a direction vector for the 8 possible moves.
+
+   ```cpp
+           queue<pair<int, int>> q;
+           vector<vector<int>> dir = {{0, 1}, {0,-1}, {1, 0}, {1,1}, {1,-1}, {-1,0}, {-1,1}, {-1,-1}};
+   ```
+
+5. **Enqueue Start Position**: Push the starting cell (0,0) into the queue and mark it as visited by setting its value to `1`.
+
+   ```cpp
+           q.push(make_pair(0,0));
+           grid[0][0] = 1;
+   ```
+
+6. **BFS Loop**: Begin the BFS loop, which continues until the queue is empty.
+
+   ```cpp
+           while(!q.empty()) {
+   ```
+
+7. **Dequeue Cell**: Extract the front cell from the queue and check if it is the destination cell.
+
+   ```cpp
+               auto p = q.front();
+               int x = p.first, y = p.second;
+               if(x == m -1 && y == n -1) return grid[x][y];
+   ```
+
+8. **Explore Neighbors**: For each possible direction, calculate the neighbor’s coordinates. If the neighbor is valid (within bounds and not blocked), mark it as visited and enqueue it.
+
+   ```cpp
+               for(auto d: dir) {
+                   int i = x + d[0], j = y + d[1];
+                   if(i < 0 || j < 0 || i >= m || j >= n || grid[i][j] != 0)
+                       continue;
+                   grid[i][j] = grid[x][y] + 1;
+                   q.push(make_pair(i, j));
+               }
+               q.pop();
+           }
+   ```
+
+9. **Return Failure**: If the queue is exhausted and the destination has not been reached, return `-1`.
+
+   ```cpp
+           return -1;
+       }
+   };
+   ```
+
+### Complexity Analysis
+- **Time Complexity**: The time complexity of this algorithm is \(O(M \times N)\), where \(M\) is the number of rows and \(N\) is the number of columns in the matrix. This is because, in the worst case, we may need to explore every cell in the matrix.
+
+- **Space Complexity**: The space complexity is also \(O(M \times N)\) due to the queue used for BFS. In the worst case, the queue could store all cells of the matrix if they are all valid.
+
+### Conclusion
+The provided C++ code effectively finds the shortest path in a binary matrix using the BFS algorithm. It efficiently navigates through the matrix while handling potential obstacles represented by `1`s and ensuring that all valid paths are explored.
+
+This method demonstrates how BFS can be applied to problems involving grid traversal, making it suitable for various applications such as pathfinding in games, navigation systems, and robotics. The algorithm's clear structure and well-defined steps make it easy to follow and implement in different contexts.
+
+In conclusion, this solution not only fulfills the requirements of the problem but also exemplifies best practices in coding for clarity and efficiency, positioning itself as a reliable approach for similar grid-based pathfinding challenges.
+
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/shortest-path-in-binary-matrix/description/)
+
 ---
 {{< youtube U3VJjmvRVLY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1093: Statistics from a Large Sample](https://grid47.xyz/leetcode/solution-1093-statistics-from-a-large-sample/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

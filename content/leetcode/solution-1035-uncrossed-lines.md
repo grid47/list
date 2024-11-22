@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/TFBZKlASq3g/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/uncrossed-lines/description/)
-
 ---
 **Code:**
 
@@ -54,9 +52,96 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1035.md" >}}
+
+
+### Problem Statement
+The problem at hand is to determine the maximum number of uncrossed lines that can be drawn between two integer arrays. Two lines can be drawn between elements of the arrays if they connect the same values and do not intersect each other. In other words, if we consider two arrays `nums1` and `nums2`, we want to find pairs of indices `(i, j)` such that `nums1[i] == nums2[j]`, with the condition that the pairs must maintain their relative order.
+
+### Approach
+To tackle this problem, we can utilize dynamic programming (DP) to efficiently compute the solution. The key steps in our approach include:
+
+1. **Initialization**: We define a DP table (memoization array) to store intermediate results, preventing redundant calculations.
+2. **Recursive DP Function**: We create a recursive function that takes the current indices of both arrays as arguments and explores the possibilities:
+   - If the elements at the current indices match, we can increase the count of uncrossed lines by 1 and move to the next indices of both arrays.
+   - If they do not match, we explore two options: either skip the current index of `nums1` or skip the current index of `nums2`, and take the maximum of the two results.
+3. **Base Case**: The recursion ends when we reach the end of either array, returning 0 since there are no further elements to connect.
+4. **Final Result**: The final result is derived from the recursive function called with the initial indices of both arrays.
+
+### Code Breakdown (Step by Step)
+
+1. **Class Definition**: The solution is implemented within a class named `Solution`.
+
+2. **Member Variables**:
+   - `m` and `n`: These store the sizes of `nums1` and `nums2`, respectively.
+   - `nums1` and `nums2`: These are vectors to hold the input arrays.
+   - `memo`: This is a 2D vector used for memoization to store the results of subproblems.
+
+3. **Dynamic Programming Function**: 
+   - The function `dp(int i, int j)` is defined to perform the recursive calculations.
+   - It first checks if either index has reached the end of its respective array. If so, it returns 0, as no further lines can be drawn.
+   - Next, it checks if the result for the current indices is already computed (i.e., if `memo[i][j]` is not -1). If it is computed, the function returns the stored result.
+
+   ```cpp
+   int dp(int i, int j) {
+       if(i == m || j == n) return 0;
+       if(memo[i][j] != -1) return memo[i][j];
+       //...
+   }
+   ```
+
+4. **Matching Elements**:
+   - If the elements at indices `i` and `j` are equal (`nums1[i] == nums2[j]`), we increment the count of lines by 1 and call the `dp` function recursively for the next indices.
+   - If they are not equal, we compute the maximum result from the two possible paths: moving to the next index in `nums1` or `nums2`.
+
+   ```cpp
+   int ans = INT_MIN;
+   if(nums1[i] == nums2[j]) {
+       ans = 1 + dp(i + 1, j + 1);
+   } else {
+       ans = max(dp(i + 1, j), dp(i, j + 1));
+   }
+   ```
+
+5. **Storing Results**: 
+   - The result for the current indices is stored in the memoization table before returning it.
+   ```cpp
+   return memo[i][j] = ans;
+   ```
+
+6. **Main Function**: 
+   - The `maxUncrossedLines` function initializes the member variables and resizes the memoization table to accommodate the dimensions based on the sizes of the input arrays.
+   - It then calls the `dp` function starting from index 0 for both arrays to begin the computation.
+
+   ```cpp
+   int maxUncrossedLines(vector<int>& nums1, vector<int>& nums2) {
+       this->nums1 = nums1;
+       this->nums2 = nums2;
+       m = nums1.size(), n = nums2.size();
+       memo.resize(m+1, vector<int>(n+1, -1));
+       return dp(0, 0);
+   }
+   ```
+
+### Complexity Analysis
+- **Time Complexity**: The time complexity of this approach is \(O(m \times n)\), where \(m\) is the length of `nums1` and \(n\) is the length of `nums2`. This is because each pair of indices `(i, j)` is processed at most once, thanks to memoization.
+  
+- **Space Complexity**: The space complexity is also \(O(m \times n)\) due to the memoization table used to store results for subproblems. Additionally, the recursive call stack may take up to \(O(m + n)\) space in the worst case.
+
+### Conclusion
+The provided code effectively calculates the maximum number of uncrossed lines that can be drawn between two integer arrays using a dynamic programming approach. By leveraging memoization, it optimizes the recursive calculations and avoids redundant computations.
+
+This solution is both efficient and easy to understand, making it applicable to various scenarios where finding relationships between pairs of elements in sequences is required. 
+
+The ability to maximize uncrossed lines has applications in fields like bioinformatics, data analysis, and algorithmic problem-solving, where establishing connections without intersections is crucial. The clarity and organization of the code enhance its maintainability and adaptability for further enhancements or modifications.
+
+In summary, the `maxUncrossedLines` function provides a robust solution to the problem, demonstrating the power of dynamic programming in tackling complex algorithmic challenges.
+
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/uncrossed-lines/description/)
+
 ---
 {{< youtube TFBZKlASq3g >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1038: Binary Search Tree to Greater Sum Tree](https://grid47.xyz/leetcode/solution-1038-binary-search-tree-to-greater-sum-tree/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

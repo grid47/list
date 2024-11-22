@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/QBLw9bVFIDQ/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/maximum-value-of-an-ordered-triplet-ii/description/)
-
 ---
 **Code:**
 
@@ -38,9 +36,151 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2874.md" >}}
+### Problem Statement
+
+The task is to find the maximum value of a triplet `(a, b, c)` such that `a < b < c` in an array `nums`. The triplet value is defined as:
+
+\[ \text{Triplet Value} = (b - a) \times (c - b) \]
+
+Where:
+- `a`, `b`, and `c` are elements from the array `nums`.
+- `a`, `b`, and `c` must be chosen such that their indices satisfy `i < j < k` for elements `a = nums[i]`, `b = nums[j]`, and `c = nums[k]`.
+
+We are asked to maximize this triplet value.
+
+### Approach
+
+To solve the problem efficiently, we need to avoid brute-forcing through all possible triplets, which would have a time complexity of **O(n^3)**. Instead, we can solve the problem in linear time, **O(n)**, by using a greedy approach and iterating through the array while keeping track of relevant intermediate results.
+
+### Key Insights for the Solution
+
+- The problem asks us to maximize the triplet value based on differences between elements. For a triplet `(a, b, c)`, the value is computed as `(b - a) * (c - b)`. 
+- We can track the maximum values of `(b - a)` and `(c - b)` using dynamic updating of intermediate values. This avoids explicitly checking every triplet.
+- By iterating through the array, we can progressively compute the value of triplets as we encounter new elements and keep track of the best triplet found.
+
+### Key Variables
+1. **`res`**: This variable will store the maximum triplet value found during the iteration. Initially, it is set to `0`.
+2. **`maxa`**: This is the maximum value encountered in the array so far. It represents the maximum value of `a` (which will be used in computing `b - a`).
+3. **`maxab`**: This stores the maximum value of `maxa - a`, which is used in computing `c - b`.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Initialize Variables
+
+```cpp
+long res = 0, n = nums.size();
+long maxa = 0, maxab = 0;
+```
+
+- **`res`**: It stores the maximum triplet value found. We initialize it to `0`.
+- **`maxa`**: This stores the maximum value of the array up to the current element. Initially, it is set to `0`.
+- **`maxab`**: This stores the maximum value of `maxa - nums[i]` for each element `i`. Initially, it is set to `0`.
+- **`n`**: This stores the size of the input array `nums`.
+
+#### Step 2: Iterate Over the Array
+
+```cpp
+for (int a: nums) {
+    res = max(res, 1L * maxab * a);
+    maxab = max(maxab, (long) maxa - a);
+    maxa = max(maxa, (long) a);
+}
+```
+
+- **Iterate through each element in the array (`a`)**:
+  - For each element `a`, we compute the potential value of the triplet where `a` acts as `c`. This is done by calculating the product `maxab * a`, where `maxab` represents the maximum value of `(b - a)` up to the current index. We update `res` to store the maximum of the previous value of `res` and the newly calculated product.
+  - **`res = max(res, 1L * maxab * a);`**: This computes the value of the triplet `(b - a) * (c - b)` where `a` is treated as the `c` element, and `maxab` represents the maximum `(b - a)` value found so far.
+  - **`maxab = max(maxab, (long) maxa - a);`**: This updates `maxab`, which tracks the maximum value of `(b - a)`, by considering the current element `a` and subtracting it from `maxa`. The idea here is that `maxa` is the maximum value found so far, and `maxab` tracks the best possible value of `(b - a)` that can be paired with the current element.
+  - **`maxa = max(maxa, (long) a);`**: This updates `maxa` to be the maximum of the current value of `maxa` and the current element `a`. This ensures that `maxa` always holds the largest value encountered in the array up to the current index.
+
+#### Step 3: Return the Result
+
+```cpp
+return res;
+```
+
+- After iterating through the entire array, the maximum value of the triplet `(b - a) * (c - b)` is stored in `res`. This value is then returned.
+
+### Example Walkthrough
+
+#### Example 1: `nums = [1, 2, 3]`
+
+1. **Initialize**:
+   - `res = 0`, `maxa = 0`, `maxab = 0`
+
+2. **First Iteration (a = 1)**:
+   - `res = max(0, 0 * 1) = 0`
+   - `maxab = max(0, 0 - 1) = 0`
+   - `maxa = max(0, 1) = 1`
+
+3. **Second Iteration (a = 2)**:
+   - `res = max(0, 0 * 2) = 0`
+   - `maxab = max(0, 1 - 2) = -1`
+   - `maxa = max(1, 2) = 2`
+
+4. **Third Iteration (a = 3)**:
+   - `res = max(0, -1 * 3) = 0`
+   - `maxab = max(-1, 2 - 3) = -1`
+   - `maxa = max(2, 3) = 3`
+
+5. **Final Result**:
+   - `res = 0`
+
+**Output:**
+```cpp
+0
+```
+
+#### Example 2: `nums = [4, 3, 2, 1]`
+
+1. **Initialize**:
+   - `res = 0`, `maxa = 0`, `maxab = 0`
+
+2. **First Iteration (a = 4)**:
+   - `res = max(0, 0 * 4) = 0`
+   - `maxab = max(0, 0 - 4) = 0`
+   - `maxa = max(0, 4) = 4`
+
+3. **Second Iteration (a = 3)**:
+   - `res = max(0, 0 * 3) = 0`
+   - `maxab = max(0, 4 - 3) = 1`
+   - `maxa = max(4, 3) = 4`
+
+4. **Third Iteration (a = 2)**:
+   - `res = max(0, 1 * 2) = 2`
+   - `maxab = max(1, 4 - 2) = 2`
+   - `maxa = max(4, 2) = 4`
+
+5. **Fourth Iteration (a = 1)**:
+   - `res = max(2, 2 * 1) = 2`
+   - `maxab = max(2, 4 - 1) = 3`
+   - `maxa = max(4, 1) = 4`
+
+6. **Final Result**:
+   - `res = 2`
+
+**Output:**
+```cpp
+2
+```
+
+### Time Complexity
+
+- **Time Complexity**: The solution iterates through the array once, making it **O(n)**, where `n` is the size of the array. Each iteration involves constant-time operations, so the overall time complexity is linear.
+  
+### Space Complexity
+
+- **Space Complexity**: The solution uses a constant amount of extra space, **O(1)**. It only requires a few variables (`res`, `maxa`, `maxab`), independent of the size of the input array.
+
+### Conclusion
+
+This solution efficiently computes the maximum triplet value using a greedy approach that tracks intermediate values. By iterating through the array just once, we are able to compute the maximum value of the triplet without explicitly checking every combination. This results in a time complexity of **O(n)**, which is optimal for this problem. The space complexity is **O(1)** since we only use a few variables to store intermediate results.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-value-of-an-ordered-triplet-ii/description/)
+
 ---
 {{< youtube QBLw9bVFIDQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2875: Minimum Size Subarray in Infinite Array](https://grid47.xyz/leetcode/solution-2875-minimum-size-subarray-in-infinite-array/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

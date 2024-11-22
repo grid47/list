@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/qxt7_HD8Cag/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/number-of-steps-to-reduce-a-number-in-binary-representation-to-one/description/)
-
 ---
 **Code:**
 
@@ -50,9 +48,118 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1404.md" >}}
+### Problem Statement
+
+The objective of this problem is to find the minimum number of steps required to reduce a given binary number (represented as a string) to zero. The operations allowed are:
+1. If the current number is even, you can perform a division by two.
+2. If the current number is odd, you can either:
+   - Subtract one to make it even, then proceed to divide by two.
+   - This means that every odd number requires at least one step to become even.
+
+The binary string is processed from the least significant bit (rightmost) to the most significant bit (leftmost), counting the steps required to reduce it to zero.
+
+### Approach
+
+To solve this problem, we use a simple iterative approach that:
+- Starts from the least significant bit of the binary number and works its way to the most significant bit.
+- Counts the number of operations needed based on whether the current bit is '0' or '1':
+  - For each '0', we simply count the step since it indicates that the number is still even.
+  - For each '1', we must subtract one (to make it even) and then perform the subsequent divisions, counting how many bits are traversed in the process.
+
+The algorithm keeps track of the total number of operations until the entire binary string has been processed and the number has been reduced to zero.
+
+### Code Breakdown (Step by Step)
+
+Here’s a detailed explanation of the provided C++ code that implements the above approach:
+
+1. **Class Definition**:
+   ```cpp
+   class Solution {
+   public:
+   ```
+   - We define a class named `Solution` that will contain our method for calculating the number of steps.
+
+2. **Method Signature**:
+   ```cpp
+       int numSteps(string s) {
+   ```
+   - The method `numSteps` takes a string `s` as an input, which represents the binary number.
+
+3. **Variable Initialization**:
+   ```cpp
+           int idx = s.size() - 1, cnt = 0;
+   ```
+   - `idx` is initialized to the index of the last character in the string, representing the least significant bit of the binary number.
+   - `cnt` is initialized to 0 to keep track of the number of steps required to reduce the number to zero.
+
+4. **Main Loop**:
+   ```cpp
+           while(idx > 0) {
+   ```
+   - The loop continues until we have processed all the bits in the string (until `idx` is greater than 0).
+
+5. **Handling Even Bits**:
+   ```cpp
+               if(s[idx] == '0') {
+                   cnt++;
+                   idx--;
+               }
+   ```
+   - If the current bit at `idx` is '0', we simply increment the `cnt` by 1 because this means we are performing a division by 2 (since the number is even), and move to the previous bit (`idx--`).
+
+6. **Handling Odd Bits**:
+   ```cpp
+               } else {
+                   int tmp = idx;
+                   while(idx >= 0 && s[idx] == '1') idx--;
+                   cnt++; // add one
+                   if(idx >= 0) {
+                       s[idx] = '1';
+                       cnt += (tmp-idx); // divide by 2
+                   } else {
+                       cnt += (tmp-idx);
+                   }
+               }
+   ```
+   - If the current bit is '1', we first save the current index in `tmp`.
+   - Then, we move backward through the string while the bits are '1', effectively counting how many '1's there are before we hit a '0' (if any).
+   - We increment `cnt` by 1 for the operation of subtracting one (to make it even).
+   - If we find a '0' (i.e., `idx` is still valid), we set this bit to '1' (which is not strictly necessary but helps conceptualize that we are making it an even number), and add the number of '1's we skipped to `cnt` as these represent the divisions we will perform.
+   - If there are no more bits left (i.e., `idx` becomes less than 0), we just add the count of '1's skipped to `cnt`.
+
+7. **Return Statement**:
+   ```cpp
+           return cnt;
+       }
+   };
+   ```
+   - After the loop concludes, the total count of operations required to reduce the binary number to zero is returned.
+
+### Complexity
+
+- **Time Complexity**: 
+  - The time complexity of this solution is \( O(n) \), where \( n \) is the length of the input string `s`. Each bit is processed at most twice (once when evaluating its value and once when moving back through the '1's).
+
+- **Space Complexity**:
+  - The space complexity is \( O(1) \) since we only use a fixed amount of additional space for variables (no additional data structures are used that scale with input size).
+
+### Conclusion
+
+This solution provides an efficient method to determine the number of steps required to reduce a binary number to zero. The iterative approach, combined with a clear understanding of binary arithmetic, allows us to effectively manage the operations required based on the characteristics of binary numbers.
+
+#### Key Takeaways:
+
+- **Understanding Binary Arithmetic**: Recognizing how binary numbers behave during division and subtraction is crucial for solving similar problems in computational mathematics.
+- **Efficiency**: The solution operates within linear time complexity, making it suitable for even large binary strings.
+- **Simplicity in Logic**: The straightforward logic behind handling odd and even bits demonstrates the effectiveness of using simple conditions to solve complex problems.
+
+This code serves as a prime example of how to approach problems involving binary representation in a programming context, emphasizing both clarity and efficiency in design.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-steps-to-reduce-a-number-in-binary-representation-to-one/description/)
+
 ---
 {{< youtube qxt7_HD8Cag >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1405: Longest Happy String](https://grid47.xyz/leetcode/solution-1405-longest-happy-string/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

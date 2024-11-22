@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/1egOQhIT9Gg/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/node-with-highest-edge-score/description/)
-
 ---
 **Code:**
 
@@ -44,9 +42,86 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2374.md" >}}
+### Problem Statement
+
+In this problem, we are given an array `edges` of size `n`, where `edges[i]` represents a directed edge from node `i` to node `edges[i]`. Our task is to find the node with the largest sum of indices of nodes that point to it. If multiple nodes have the same sum, we return the node with the smallest index.
+
+### Approach
+
+To solve this problem, we can use a hashmap (or in this case, a `map` from the C++ Standard Library) to keep track of the sum of indices of the nodes pointing to each node. The general approach is as follows:
+
+1. **Initialize a Map**: We will use a `map<int, long long>` to store the sum of indices for each node. The key will be the destination node, and the value will be the sum of indices of the nodes that point to it.
+2. **Iterate through the Array**: We will loop through the array `edges` and for each node `i`, we will add `i` to the sum of the destination node `edges[i]`. This will keep track of the sum of indices of the nodes pointing to each destination node.
+3. **Track the Maximum Sum**: As we iterate through the `edges` array, we keep track of the node with the maximum sum of indices. If we encounter a new sum that is larger than the previous maximum, we update the result. If the sum is equal to the current maximum, we select the node with the smaller index.
+4. **Return the Result**: After processing all the nodes, we return the node that has the largest sum of indices pointing to it. If there are ties (multiple nodes with the same sum), we return the node with the smallest index.
+
+### Code Breakdown (Step by Step)
+
+1. **Class Definition**:
+    ```cpp
+    class Solution {
+    public:
+        int edgeScore(vector<int>& edges) {
+    ```
+    The class `Solution` contains the method `edgeScore`, which takes the array `edges` as an argument and returns the node with the largest score.
+
+2. **Initialize the Map and Variables**:
+    ```cpp
+        map<int, long long> mp;  // A map to store the sum of indices for each node
+        int n = edges.size();     // Get the size of the edges array
+        int mx = -1, idx = -1;    // Variables to keep track of the maximum score and corresponding node
+    ```
+    - `mp` is a map where the key is the destination node, and the value is the sum of indices of the nodes pointing to it.
+    - `n` is the size of the `edges` array.
+    - `mx` is used to store the maximum sum found so far, and `idx` stores the node corresponding to this maximum sum.
+
+3. **Iterate through the `edges` Array**:
+    ```cpp
+        for(int i = 0; i < n; i++) {
+            mp[edges[i]] += i;  // Add the index 'i' to the destination node 'edges[i]'
+    ```
+    - The loop iterates through the array `edges` where `i` represents the index of the node.
+    - For each node `i`, we update the sum of indices for the destination node `edges[i]` by adding `i` to it: `mp[edges[i]] += i`.
+
+4. **Check and Update the Maximum Score**:
+    ```cpp
+            if(mp[edges[i]] > mx) {
+                idx = edges[i];  // If a new maximum score is found, update the node
+                mx = mp[edges[i]];  // Update the maximum score
+            } else if(mp[edges[i]] == mx) {
+                if(edges[i] < idx)  // If there is a tie, select the node with the smaller index
+                    idx = edges[i];
+            }
+    ```
+    - After updating the sum of indices for `edges[i]`, we check if the new sum is greater than the current maximum score `mx`. If so, we update both the maximum score and the corresponding node (`idx`).
+    - If the new sum is equal to the current maximum score, we compare the indices of the nodes. In case of a tie, we select the node with the smaller index to ensure the smallest node is returned in case of equal scores.
+
+5. **Return the Result**:
+    ```cpp
+        return idx;  // Return the node with the largest sum of indices pointing to it
+    }
+    ```
+    After the loop finishes, the node with the largest score is stored in `idx`. We return this node as the result.
+
+### Complexity
+
+1. **Time Complexity**:
+    - The time complexity of this algorithm is **O(n)**, where `n` is the number of elements in the `edges` array. This is because we are iterating through the array `edges` once and performing constant-time operations (map insertions and comparisons) inside the loop. The `map` operations (insertion and update) are logarithmic with respect to the number of unique nodes, but since there are at most `n` unique nodes, the overall time complexity remains **O(n)**.
+
+2. **Space Complexity**:
+    - The space complexity is **O(n)**, where `n` is the size of the `edges` array. This is because we are using a map to store the sum of indices for each unique destination node. In the worst case, there can be up to `n` unique destination nodes, leading to a space usage of **O(n)**.
+
+### Conclusion
+
+The given solution provides an efficient way to determine the node with the largest sum of indices in a directed graph represented by the `edges` array. By using a map to keep track of the sum of indices for each destination node, and using a straightforward comparison strategy to find the node with the largest sum (or the smallest index in case of ties), the solution works efficiently with a time complexity of **O(n)**.
+
+This approach is well-suited for problems involving graphs or arrays where we need to aggregate values based on certain conditions (in this case, the sum of indices). The space complexity of **O(n)** is manageable, and the solution is scalable for larger input sizes. The careful handling of ties ensures that we return the correct node even in edge cases.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/node-with-highest-edge-score/description/)
+
 ---
 {{< youtube 1egOQhIT9Gg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2375: Construct Smallest Number From DI String](https://grid47.xyz/leetcode/solution-2375-construct-smallest-number-from-di-string/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

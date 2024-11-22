@@ -17,8 +17,6 @@ youtube_thumbnail=""
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/water-and-jug-problem/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/365.webp" 
     alt="A set of water jugs being filled and emptied, with the optimal solution softly glowing as it reaches the target amount."
@@ -45,9 +43,101 @@ public:
     }
 };
 {{< /highlight >}}
-
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/365.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #368: Largest Divisible Subset](https://grid47.xyz/leetcode/solution-368-largest-divisible-subset/) |
+### 🚀 Problem Statement
+
+In this problem, we are given two jugs with capacities `x` and `y`, and we need to determine if it's possible to measure exactly `z` liters of water. You can perform the following operations:
+
+- Fill a jug to its full capacity.
+- Empty a jug.
+- Pour water from one jug into the other until one of them is either full or empty.
+
+The goal is to return `true` if it is possible to measure exactly `z` liters, and `false` otherwise.
+
+---
+
+### 🧠 Key Insights
+
+To solve this, here are some important insights:
+- **GCD (Greatest Common Divisor)**: If the greatest common divisor (gcd) of the jug capacities `x` and `y` divides `z`, then it's possible to measure `z` liters. This is because of the properties of Diophantine equations, which tell us that we can only measure quantities that are multiples of the gcd of the two jugs.
+- **Capacity Check**: The combined capacity of both jugs (`x + y`) must be greater than or equal to `z`, since you can't measure more water than the total capacity of the jugs.
+
+---
+
+### 🛠️ Approach
+
+We can solve this problem in a few steps:
+
+1. **Initial Checks**:
+   - If the total capacity of the jugs (`x + y`) is less than `z`, it's immediately impossible to measure `z` liters. In this case, return `false`.
+   - If either jug already contains exactly `z` liters (i.e., `x == z` or `y == z`), we can immediately return `true`.
+   - If the sum of both jugs equals `z` (i.e., `x + y == z`), we can also return `true`, because we can simply combine both jugs to reach the target.
+
+2. **GCD Condition**:
+   - If none of the above conditions are true, we calculate the greatest common divisor (gcd) of `x` and `y`.
+   - If `z` is divisible by the gcd of `x` and `y` (`z % gcd(x, y) == 0`), it means it's possible to measure exactly `z` liters. Otherwise, return `false`.
+
+---
+
+### 🔨 Step-by-Step Code Breakdown
+
+Let’s break it down:
+
+#### Step 1: Initial Checks
+
+```cpp
+if(x + y < z) return false;
+if(x == z || y == z || x + y == z) return true;
+```
+- **Step 1a**: Check if the total capacity of both jugs is less than `z`. If so, return `false`.
+- **Step 1b**: Check if either jug contains exactly `z` liters (i.e., `x == z` or `y == z`), or if the sum of both jugs equals `z`. If so, return `true`.
+
+#### Step 2: GCD Condition
+
+```cpp
+return z % gcd(x, y) == 0;
+```
+- If none of the above conditions hold, calculate the gcd of `x` and `y`. If `z` is divisible by this gcd, return `true`, otherwise return `false`.
+
+#### Step 3: GCD Calculation
+
+```cpp
+int gcd(int a, int b) {
+    return b == 0 ? a : gcd(b, a % b);
+}
+```
+- The gcd function uses the Euclidean algorithm to calculate the greatest common divisor. If `b` is zero, `a` is the gcd. Otherwise, we recursively compute `gcd(b, a % b)` until `b` becomes zero.
+
+---
+
+### 📈 Complexity Analysis
+
+- **Time Complexity**: The most time-consuming operation is the calculation of the gcd. Using the Euclidean algorithm, the time complexity is **O(log(min(x, y)))**, where `x` and `y` are the capacities of the jugs.
+- **Space Complexity**: The space complexity is **O(1)** since we only use a few integer variables and no additional data structures.
+
+---
+
+### 🏁 Conclusion
+
+This solution efficiently solves the water jug problem by leveraging the mathematical properties of the greatest common divisor. By breaking the problem down into a series of simple checks and using the gcd to determine whether `z` liters can be measured, we ensure optimal performance with minimal space usage.
+
+**In a nutshell**: If the sum of the jugs is greater than or equal to `z` and `z` is divisible by the gcd of the two jugs, it’s possible to measure exactly `z` liters. This approach guarantees a solution in logarithmic time and constant space.
+
+---
+
+### 🌟 Quick Recap
+
+- Check if the combined capacity of the jugs is sufficient.
+- Verify if the target amount `z` is directly achievable via one of the jugs.
+- Use the gcd to check if `z` is a multiple of the gcd of `x` and `y`.
+- Time complexity is **O(log(min(x, y)))** and space complexity is **O(1)**.
+
+Now you’re ready to tackle similar problems with confidence! 😊
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/water-and-jug-problem/description/)
+
+---
+
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

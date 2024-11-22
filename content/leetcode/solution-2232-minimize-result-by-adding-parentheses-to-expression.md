@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/8Nt7G6bIkSI/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/minimize-result-by-adding-parentheses-to-expression/description/)
-
 ---
 **Code:**
 
@@ -78,9 +76,122 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2232.md" >}}
+### Problem Statement
+
+The problem requires you to minimize the result of an arithmetic expression of the form `"A+B"`, where `A` and `B` are non-negative integers. You can insert parentheses around one of the subexpressions to minimize the overall result.
+
+The goal is to minimize the result by placing parentheses at an appropriate location in the expression. Your task is to return the modified expression as a string.
+
+### Example:
+For input expression `"12+34"`, the minimum result occurs when you place the parentheses around `"12+34"`. The resulting expression is `"12+(34)"`, which evaluates to `12 + 34 = 46`.
+
+### Approach
+
+To solve this problem, the main idea is to iterate over all possible positions for placing parentheses. We want to test different ways of splitting the expression into two parts: one before the addition (`+`) and one after. For each split, we will compute the result of the expression and track the smallest result.
+
+Here's the step-by-step approach:
+
+1. **Parse the Expression**:
+   - First, we separate the left and right parts of the equation using the `+` sign.
+   - We need to separate the digits of both parts of the expression so we can compute the result.
+
+2. **Try All Possible Parentheses Placements**:
+   - Iterate over all possible positions of the parentheses, trying each combination.
+   - For each position, calculate the result after evaluating the expression with the parentheses.
+   - Track the minimum result, keeping track of the corresponding placement of the parentheses.
+
+3. **Compute the Result**:
+   - For each potential parentheses placement, evaluate the result and keep track of the smallest result. If a better placement is found, update the result.
+
+4. **Return the Modified Expression**:
+   - After determining the optimal position for the parentheses, we reconstruct the string by adding the parentheses and returning the modified expression.
+
+### Code Breakdown (Step by Step)
+
+```cpp
+class Solution {
+public:
+    string minimizeResult(string exp) {
+        int pos = -1;
+        int x = 0, y = 0, p = 0, q = 0;        
+```
+- The `minimizeResult` function starts by declaring variables to store the left and right parts of the expression, as well as intermediate values used during the calculation. `pos` is used to store the position of the `+` symbol, and `x`, `y`, `p`, `q` are used to store the digits of the two parts of the expression.
+
+```cpp
+        for(int i = 0; i < exp.size(); i++) {
+            if(exp[i] == '+') pos = i;  // Find the position of the plus sign
+            if(pos == -1) {
+                y = y * 10 + exp[i] - '0';  // Collect digits for the left part of the expression
+            } else if (exp[i] != '+'){
+                q = q * 10 + exp[i] - '0';  // Collect digits for the right part of the expression
+            }
+        }
+```
+- We iterate over the expression to identify the position of the `+` symbol. While iterating, we separate the digits before and after the `+` sign, using the variables `y` and `q` to accumulate the left and right parts of the expression, respectively.
+
+```cpp
+        int tmp = q;  // Store the original value of q for later use.
+        vector<int> res = {-1, -1};  // Initialize a result array to store the best parentheses placement
+        int ans = INT_MAX;  // Initialize the answer to the maximum possible integer value
+```
+- We store the current value of `q` (right part) to `tmp` to reset it later. `res` will store the optimal indices for placing the parentheses, and `ans` will store the smallest result found.
+
+```cpp
+        for(int i = 0; i < pos; i++) {
+            x = x * 10 + (i > 0? exp[i - 1] - '0': 0);  // Collect digits before the plus sign
+            y = y % (int)pow(10, pos - i);  // Extract the digits for evaluation
+```
+- We begin iterating over the digits before the `+` symbol to test different positions for the parentheses. `x` is used to accumulate the digits before `i`, and `y` is modified to focus on the digits after `i`.
+
+```cpp
+            for(int j = pos + 1; j < exp.size(); j++) {
+                p = p * 10 + (exp[j] - '0');  // Collect digits after the plus sign
+                q = q % (int)pow(10, exp.size() - 1 - j);  // Extract the digits for evaluation
+```
+- Inside the loop for `i`, we iterate over the digits after the `+` symbol, storing them in `p` and adjusting `q` as we explore different parentheses placements.
+
+```cpp
+                if((x == 0 ? 1 : x) * (y + p) * (q == 0 ? 1 : q) < ans) {
+                    ans = (x == 0 ? 1 : x) * (y + p) * (q == 0 ? 1 : q);  // Calculate the result and check if it’s the smallest
+                    res = {i, j};  // Update the best parentheses placement
+                }
+            }
+            p = 0;  // Reset p for the next iteration
+            q = tmp;  // Reset q to its original value
+        }
+```
+- We calculate the result for each possible placement of parentheses. The result is calculated by multiplying `x`, `(y + p)`, and `q`. If the calculated result is smaller than the current `ans`, we update `ans` and store the current positions of the parentheses in `res`.
+
+```cpp
+        string ret = "";  // Initialize the result string
+        int i = 0;
+        while(i < res[0]) ret += exp[i++];  // Add the digits before the first parentheses position
+        ret += '(';  // Add the opening parenthesis
+        while(i <= res[1]) ret += exp[i++];  // Add the digits inside the parentheses
+        ret += ')';  // Add the closing parenthesis
+        while(i < exp.size()) ret += exp[i++];  // Add the remaining digits after the parentheses
+        
+        return ret;  // Return the final modified expression
+    }
+};
+```
+- We reconstruct the expression by adding the parentheses around the optimal split identified earlier. The digits before the first parentheses are added first, followed by the digits inside the parentheses, and finally, the remaining digits after the parentheses.
+
+### Complexity
+
+- **Time Complexity**: O(n^2), where `n` is the length of the input string `exp`. The nested loops iterate over all possible pairs of parentheses placements, making the time complexity quadratic in the size of the input string.
+
+- **Space Complexity**: O(n), where `n` is the length of the input string. We use a few additional variables to store intermediate results, and the space used by these variables does not exceed the input size.
+
+### Conclusion
+
+This approach efficiently handles the problem of minimizing the result by trying all possible placements of parentheses around the addition operator. It iterates over the expression and computes the result for each possible configuration, ensuring that we find the optimal one. The solution is both straightforward and efficient for this problem.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/minimize-result-by-adding-parentheses-to-expression/description/)
+
 ---
 {{< youtube 8Nt7G6bIkSI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2233: Maximum Product After K Increments](https://grid47.xyz/leetcode/solution-2233-maximum-product-after-k-increments/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

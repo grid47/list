@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/cGgG0A__wNQ/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/reconstruct-original-digits-from-english/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/423.webp" 
     alt="A sequence of English words forming digits, with each word gently transforming into its corresponding digit."
@@ -53,9 +51,107 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/423.md" >}}
+### Problem Statement
+
+The problem is to reconstruct the original digits (0-9) from a scrambled string containing letters that represent these digits' names. The goal is to return a string of digits in ascending order, using the letters in the given string exactly once.
+
+### Approach
+
+To approach this problem, we need to leverage the unique characters found in the English words representing each digit. By focusing on characters that only appear in one digit's name, we can uniquely identify and count occurrences of each digit.
+
+1. **Distinct Characters in Digit Names**: 
+   - Each number from 0 to 9 is represented by a word in English. Some of these words have unique characters that appear only in one number's name.
+     - For example, the letter 'z' only appears in "zero" (0), 'w' only appears in "two" (2), 'u' only appears in "four" (4), etc.
+   - By iterating through the string and focusing on these distinct characters, we can isolate the counts of each digit.
+
+2. **Step-by-Step Process**:
+   - First, count the occurrences of each letter in the input string.
+   - Then, for each digit from 0 to 9, use the count of the distinct characters to identify how many times that digit appears in the input string.
+   - After identifying a digit, subtract the letters that form that digit's name from the letter count.
+   - Repeat the process until all digits are identified.
+
+3. **Sorting the Result**:
+   - Once we have identified and recorded all the digits, sort them in ascending order to return the final answer.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Initialize Required Variables
+
+```cpp
+vector<string> words = {"zero", "two", "four", "six", "eight", "one", "three", "five", "seven", "nine"};
+vector<int> nums = {0, 2, 4, 6, 8, 1, 3, 5, 7, 9};
+vector<int> distinct_char = {'z', 'w', 'u', 'x', 'g', 'o', 'r', 'f', 'v', 'i'};
+vector<int> counts(26, 0);
+```
+
+- **`words`**: A vector containing the English names for the digits 0 through 9.
+- **`nums`**: A vector mapping the indices to their corresponding digits.
+- **`distinct_char`**: A vector of characters that appear uniquely in the names of each digit (e.g., 'z' for "zero", 'w' for "two").
+- **`counts`**: A vector initialized to zero, used to store the frequency of each character (from 'a' to 'z') in the input string.
+
+#### Step 2: Count Character Occurrences
+
+```cpp
+for(auto ch : s){ counts[ch-'a']++;}
+```
+
+- This loop iterates over the input string `s` and counts the occurrences of each character by updating the `counts` vector. The character 'a' corresponds to index 0, 'b' to index 1, and so on.
+
+#### Step 3: Identify and Count Each Digit
+
+```cpp
+for(int i = 0; i < 10; i++){
+    int count = counts[distinct_char[i]-'a'];
+    for(int j = 0; j < words[i].size(); j++)
+        counts[words[i][j]-'a'] -= count;
+    while(count--)
+        result += to_string(nums[i]);
+}
+```
+
+- This loop iterates through each digit from 0 to 9.
+- For each digit, we use the `distinct_char` array to find the number of occurrences of the unique character for that digit. This tells us how many times the digit appears.
+- Then, for each character in the word corresponding to that digit, we decrement the count in the `counts` vector to ensure we don't recount those letters.
+- The `while(count--)` loop adds the current digit to the result string as many times as it appears in the input string.
+
+#### Step 4: Sort the Result
+
+```cpp
+sort(result.begin(), result.end());
+```
+
+- After accumulating the digits in the result string, we sort them to ensure the digits appear in ascending order.
+
+#### Step 5: Return the Result
+
+```cpp
+return result;
+```
+
+- Finally, the sorted result string is returned as the output.
+
+### Complexity
+
+#### Time Complexity:
+- **Counting Characters**: The first step counts the occurrences of each character in the string, which takes `O(n)`, where `n` is the length of the string `s`.
+- **Identifying Digits**: The second step involves iterating over each of the 10 digits and processing the letters in each word. Each word contains a constant number of characters, so the time complexity for this step is `O(10)`, or effectively `O(1)`.
+- **Sorting the Result**: The sorting step involves sorting a string of digits, which at most has a length of 10 (since there are only 10 digits). Sorting a string of length 10 takes `O(10 log 10)`, which simplifies to `O(1)`.
+- **Overall Time Complexity**: The overall time complexity is dominated by the counting step, which is `O(n)`.
+
+#### Space Complexity:
+- **Character Count Array**: The `counts` array has a fixed size of 26, representing the 26 letters of the alphabet, so it takes `O(1)` space.
+- **Result String**: The result string stores the digits, which at most has a length of 10, so it takes `O(1)` space.
+- **Overall Space Complexity**: The space complexity is `O(1)`.
+
+### Conclusion
+
+This solution efficiently reconstructs the original digits from a scrambled string by focusing on unique characters in the English words representing each digit. By counting the occurrences of these unique characters, we can identify the digits and reconstruct them in the correct order. The time complexity of `O(n)` makes this approach highly efficient, even for large input strings. The space complexity is also optimal, using only a constant amount of additional space. This solution is both simple and effective for solving the problem.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/reconstruct-original-digits-from-english/description/)
+
 ---
 {{< youtube cGgG0A__wNQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #424: Longest Repeating Character Replacement](https://grid47.xyz/leetcode/solution-424-longest-repeating-character-replacement/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/rl_hXXzvTiM/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/array-nesting/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/565.webp" 
     alt="An array where elements are nested, each valid nesting glowing softly as it is processed."
@@ -49,9 +47,72 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/565.md" >}}
+### Problem Statement:
+The problem requires finding the largest set of indices such that each index points to the next index in the set. More formally, we are given an array `nums` where each element `nums[i]` represents a pointer to another index in the array. We need to find the largest cycle of elements where starting from any element, we keep following the next index until we revisit an element. The task is to find the maximum length of such a cycle in the array.
+
+### Approach:
+This problem is often referred to as an array nesting problem. The challenge is to identify the longest cycle of indices where each index points to another within the array. This is achieved through the following approach:
+
+1. **Cycle Detection:** The goal is to detect the cycles in the array where each element points to another index. Once an index is visited, we mark it as visited to avoid revisiting it.
+2. **Modification of Input:** The given array is modified in-place to mark visited elements by setting them to `-1`. This helps in detecting cycles effectively while traversing through the array.
+3. **Iterating Over Each Element:** For each unvisited index, we start a new cycle and count the length of the cycle by following the pointers until we reach a previously visited index.
+4. **Track Maximum Cycle Size:** We continuously track the largest cycle encountered during the traversal and return the size of the largest cycle.
+
+By following this approach, the problem can be efficiently solved with a time complexity of O(n), where n is the size of the array. This is because each element is visited at most once, and we are updating the array in-place to track the visited elements.
+
+### Code Breakdown (Step by Step):
+
+#### Step 1: Initialize Variables
+```cpp
+int mxsize = 0;  // Variable to store the size of the largest cycle found
+```
+Here, `mxsize` will be used to keep track of the maximum size of the cycle encountered during the traversal of the array. It starts at 0, and as we find larger cycles, it will be updated.
+
+#### Step 2: Loop Over the Array Elements
+```cpp
+for(int i = 0; i < nums.size(); i++) {
+    int size = 0;  // Variable to store the size of the current cycle
+```
+We start a loop that iterates over all elements in the array `nums`. For each element, we check whether it has already been visited (if its value is `-1`), and if it hasn’t, we start a new cycle from that element. `size` is used to count the number of elements in the current cycle.
+
+#### Step 3: Inner Loop for Cycle Detection
+```cpp
+for(int k = i; nums[k] >= 0; size++) {
+    int ak = nums[k];  // Store the next index to visit
+    nums[k] = -1;  // Mark the current index as visited by setting it to -1
+    k = ak;  // Move to the next index in the cycle
+}
+```
+Within this inner loop, we follow the cycle starting from the current index `i`. We update the value of `nums[k]` to `-1` to mark it as visited. The next index to visit is stored in `ak`. We then set `k = ak` to move to the next index in the cycle. The loop continues until we revisit an already visited index, i.e., until `nums[k]` is less than 0.
+
+#### Step 4: Update Maximum Cycle Size
+```cpp
+mxsize = max(size, mxsize);  // Update the maximum cycle size found so far
+```
+After the inner loop finishes (i.e., after we have counted the size of the current cycle), we update `mxsize` to store the larger of the current cycle size (`size`) and the previously found largest cycle size.
+
+#### Step 5: Return the Result
+```cpp
+return mxsize;  // Return the size of the largest cycle found
+```
+Once the outer loop finishes iterating through all elements, the function returns `mxsize`, which holds the size of the largest cycle encountered during the traversal of the array.
+
+### Complexity:
+
+#### Time Complexity:
+- **O(n):** We iterate through each element in the array exactly once. For each unvisited element, we traverse its cycle, marking each element in the cycle as visited (i.e., setting it to `-1`). Each element is part of exactly one cycle, and therefore, we visit each element once. The total number of operations is proportional to the size of the array, so the time complexity is O(n), where `n` is the number of elements in the array.
+
+#### Space Complexity:
+- **O(1):** The algorithm modifies the input array `nums` in place by marking visited elements with `-1`. Therefore, no additional space is required beyond the input array, and the space complexity is O(1).
+
+### Conclusion:
+This approach provides an efficient solution to the array nesting problem. By using cycle detection and modifying the input array in place, we avoid the need for additional data structures like hash maps, resulting in a solution with linear time complexity and constant space complexity. The algorithm ensures that we only visit each element once, making it highly efficient for large arrays. This technique is particularly useful for problems that involve finding cycles in arrays or graphs, where in-place modification and efficient traversal are key to achieving optimal performance.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/array-nesting/description/)
+
 ---
 {{< youtube rl_hXXzvTiM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #567: Permutation in String](https://grid47.xyz/leetcode/solution-567-permutation-in-string/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

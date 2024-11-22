@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/GS9BQo3-1mg/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/ways-to-make-a-fair-array/description/)
-
 ---
 **Code:**
 
@@ -48,9 +46,96 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1664.md" >}}
+### Problem Statement
+
+The problem at hand is to determine the number of ways to remove one element from a given integer array `nums` such that the remaining elements can be split into two groups with equal sums. The indices of the elements in these groups must be considered. Specifically, elements at even indices form one group, and elements at odd indices form another. The goal is to find the number of valid removals that maintain the fairness of the sums between these two groups.
+
+### Approach
+
+To solve this problem, we will use a two-pointer technique to keep track of the cumulative sums of the elements at even and odd indices, both before and after a potential removal. 
+
+1. **Initialize Sums**: First, we need to calculate the total sums for both even and odd indexed elements. 
+2. **Iterate through the Array**: As we traverse the array:
+   - Before removing an element, update the left side sums.
+   - Check if the sums on both sides (after removing the current element) are equal.
+   - Update the right side sums accordingly.
+3. **Count Valid Removals**: If the two sides are equal after removing an element, increment the count of valid removals.
+
+### Code Breakdown (Step by Step)
+
+Here's the code with explanations:
+
+```cpp
+class Solution {
+public:
+    
+    int waysToMakeFair(vector<int>& nums) {
+```
+- We define a class `Solution` that contains the public method `waysToMakeFair`. This method accepts a vector of integers `nums`.
+
+```cpp
+        vector<int> left(2, 0), right(2, 0);
+```
+- We initialize two vectors, `left` and `right`, each with two elements initialized to zero. `left[0]` and `left[1]` will store the cumulative sums of the even and odd indexed elements on the left side, while `right[0]` and `right[1]` will store the same for the right side.
+
+```cpp
+        int n = nums.size(), res = 0;
+```
+- We calculate the size of `nums` and initialize a variable `res` to count the number of valid removals.
+
+```cpp
+        for(int i = 0; i < n; i++)
+            right[i % 2] += nums[i];
+```
+- This loop calculates the total sums for both even and odd indices and stores them in the `right` vector. The `i % 2` operator is used to alternate between even and odd indices.
+
+```cpp
+        for(int i = 0; i < n; i++) {
+            right[i % 2] -= nums[i];
+```
+- In this second loop, we begin by adjusting the `right` sums to account for the removal of the current element `nums[i]`.
+
+```cpp
+            if(left[0] + right[1] == right[0] + left[1]) res++;
+```
+- We check if the remaining sums are equal after the removal. If they are, we increment the result counter `res`. The equation checks if the sum of the left even index plus the right odd index is equal to the sum of the right even index plus the left odd index.
+
+```cpp
+            left[i % 2] += nums[i];
+```
+- We then update the `left` sums by adding the current element `nums[i]` to the appropriate index (even or odd) based on `i % 2`.
+
+```cpp
+        }
+
+        return res;
+    }
+};
+```
+- After iterating through all elements, we return the count of valid removals stored in `res`.
+
+### Complexity
+
+- **Time Complexity**: The time complexity of this solution is \(O(n)\), where \(n\) is the length of the input array `nums`. We traverse the array a constant number of times, leading to linear complexity.
+  
+- **Space Complexity**: The space complexity is \(O(1)\), as we are only using a fixed amount of additional space for the `left` and `right` vectors, regardless of the input size.
+
+### Conclusion
+
+The `waysToMakeFair` method effectively counts the number of ways to remove an element from an integer array while maintaining an equal sum condition between the two groups formed by the remaining elements.
+
+**Key Takeaways**:
+1. **Efficient Sum Calculation**: The solution demonstrates an efficient method for maintaining and updating sums as elements are considered for removal, making it suitable for large arrays.
+2. **Use of Modulo**: The use of modulo in indexing helps in managing the odd/even index distinction cleanly without additional conditions.
+3. **Problem-Solving Technique**: This method illustrates how to leverage cumulative sums to solve problems involving partitioning or balancing conditions in arrays.
+
+Overall, this approach provides a clear and efficient solution to the problem of determining the number of valid removals, highlighting the importance of cumulative sums in algorithm design and implementation.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/ways-to-make-a-fair-array/description/)
+
 ---
 {{< youtube GS9BQo3-1mg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1668: Maximum Repeating Substring](https://grid47.xyz/leetcode/solution-1668-maximum-repeating-substring/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/jrWEsrkfBjg/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/minimum-operations-to-convert-number/description/)
-
 ---
 **Code:**
 
@@ -66,9 +64,94 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2059.md" >}}
+### Problem Statement
+
+The task is to determine the minimum number of operations required to transform a given integer `start` into a target integer `goal` using a list of integers `nums`. The allowed operations include adding, subtracting, or performing a bitwise XOR with any number from the `nums` array. The solution should return the minimum number of operations required to achieve this transformation, or `-1` if it is not possible. Additionally, the results must stay within the bounds of `[0, 1000]`.
+
+### Approach
+
+The problem can be effectively solved using a breadth-first search (BFS) approach, which is ideal for finding the shortest path or minimum steps in unweighted scenarios. In this case, each possible transformation (addition, subtraction, XOR) can be thought of as a step in a state space. The BFS will explore all reachable states from `start`, tracking how many operations are taken to reach each state, until it finds the `goal`.
+
+### Code Breakdown (Step by Step)
+
+1. **Initialization**:
+   - We declare a queue `q` for BFS to keep track of the current state (value) and a set `seen` to track which states have already been visited to avoid cycles.
+   - We start by pushing the initial state `start` onto the queue and marking it as seen.
+   - An operation counter `op` is initialized to zero, representing the number of operations taken.
+
+    ```cpp
+    queue<int> q;
+    set<int> seen;
+    q.push(start);
+    seen.insert(start);
+    int op = 0;
+    ```
+
+2. **BFS Loop**:
+   - The outer while loop continues until the queue is empty.
+   - We increase the operation counter `op` at the start of each level in the BFS, indicating that we are exploring all possible transformations for the current depth.
+   - The inner loop processes all nodes at the current level, keeping track of the number of elements in the queue (which corresponds to how many states are being explored).
+
+    ```cpp
+    while(!q.empty()) {
+        int sz = q.size();
+        op++;
+        while(sz--) {
+            int x = q.front();
+            q.pop();
+    ```
+
+3. **Exploring Transformations**:
+   - For each value `x` taken from the queue, we iterate through each number `it` in `nums` and perform the three operations:
+     - **Addition**: `x + it`
+     - **Subtraction**: `x - it`
+     - **Bitwise XOR**: `x ^ it`
+   - For each operation, we check if the result matches the `goal`. If it does, we immediately return the number of operations taken so far.
+   - We also check if the new state is valid (within `[0, 1000]`) and has not been seen before. If valid, we mark it as seen and add it to the queue for further exploration.
+
+    ```cpp
+    for(auto it: nums) {
+        if((x + it) == goal || (x - it) == goal || (x ^ it) == goal)
+            return op;
+        
+        if(!seen.count(x + it) && x + it <= 1000 && x + it >= 0) {
+            seen.insert(x + it);                        
+            q.push(x + it);
+        }
+        
+        if(!seen.count(x - it) && x - it <= 1000 && x - it >= 0) {
+            seen.insert(x - it);
+            q.push(x - it);
+        }             
+        
+        if(!seen.count(x ^ it) && (x ^ it) <= 1000 && (x ^ it) >= 0) {
+            seen.insert(x ^ it);
+            q.push(x ^ it);
+        }                    
+    }
+    ```
+
+4. **Returning Result**:
+   - If the BFS completes and the queue is exhausted without finding the `goal`, we return `-1`, indicating that it is impossible to reach the target value.
+
+    ```cpp
+    return -1;
+    ```
+
+### Complexity
+
+- **Time Complexity**: O(N * M), where N is the number of elements in `nums` and M is the number of unique values we can reach within the bounds of `[0, 1000]`. In the worst case, each operation can lead to a new state that needs to be evaluated.
+- **Space Complexity**: O(M), for the queue and the set storing seen states.
+
+### Conclusion
+
+The implementation efficiently determines the minimum number of operations to transform `start` into `goal` using a breadth-first search approach. This method ensures that we explore all possible paths and operations systematically while avoiding cycles through the use of a `seen` set. The BFS structure naturally lends itself to tracking the minimum operations due to its level-wise exploration, making it an optimal solution for the given problem. The careful handling of state transitions and boundary checks ensures that the solution remains valid and efficient within the defined constraints.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-operations-to-convert-number/description/)
+
 ---
 {{< youtube jrWEsrkfBjg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2063: Vowels of All Substrings](https://grid47.xyz/leetcode/solution-2063-vowels-of-all-substrings/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/xZRozZEjizg/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/remove-zero-sum-consecutive-nodes-from-linked-list/description/)
-
 ---
 **Code:**
 
@@ -60,9 +58,92 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1171.md" >}}
+
+
+### Problem Statement
+The task is to remove consecutive nodes in a singly-linked list that sum up to zero. Given a linked list represented by its head node, we need to modify the list such that any contiguous sequence of nodes that sums to zero is removed. The modified list should preserve the order of remaining nodes.
+
+### Approach
+To solve this problem, we can use a hashmap (or an unordered map) to keep track of the cumulative sums (prefix sums) encountered while traversing the linked list. The main steps of the approach are:
+
+1. **Cumulative Sum Calculation**: As we traverse the linked list, we calculate the cumulative sum of the nodes.
+2. **Map to Track Prefix Sums**: Store each prefix sum along with the corresponding node in a map. If we encounter the same prefix sum again, it indicates that the sum of the nodes between these two nodes equals zero.
+3. **Removing Zero-Sum Sublists**: When we find a duplicate prefix sum, we remove all nodes between the previous occurrence of that prefix sum and the current node.
+
+### Code Breakdown (Step by Step)
+
+Let’s break down the implementation step by step:
+
+```cpp
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+class Solution {
+public:
+    ListNode* removeZeroSumSublists(ListNode* head) {
+        ListNode* dummy = new ListNode(0), *cur = dummy;
+        dummy->next = head;
+        int prefix = 0;
+        map<int, ListNode*> mp;
+```
+
+- **Lines 1-9**: The `ListNode` struct defines a node in a singly linked list. The `Solution` class contains the method `removeZeroSumSublists`, which takes the head of the linked list as input.
+- A dummy node is created to simplify operations on the linked list, especially for cases where the head node might be part of a zero-sum sequence. The current pointer (`cur`) starts at the dummy node.
+- The variable `prefix` is initialized to store cumulative sums as we traverse the list. The map `mp` is used to track the prefix sums and their corresponding nodes.
+
+```cpp
+        while(cur) {
+            prefix += cur->val;
+            if(mp.count(prefix)) {
+                cur = mp[prefix]->next;
+                int p = prefix + cur->val;
+                while(p != prefix) {
+                    mp.erase(p);
+                    cur = cur->next;
+                    p += cur->val;
+                }
+                mp[prefix]->next = cur->next;
+            } else mp[prefix]  = cur;
+
+            cur = cur->next;
+        }
+```
+
+- **Lines 11-29**: This `while` loop continues as long as the current node (`cur`) is not null.
+- The cumulative sum `prefix` is updated by adding the value of the current node (`cur->val`).
+- If the prefix sum already exists in the map (`mp`), it means there is a zero-sum sublist. The next steps involve:
+  - **Moving Current Pointer**: Set `cur` to the next node of the node corresponding to the last occurrence of this prefix sum.
+  - **Erasing Intermediate Prefix Sums**: A new sum `p` is calculated by adding the value of the node at the new `cur`. We then enter a loop that continues until `p` equals the current `prefix`, erasing entries in the map for each prefix sum encountered during this process.
+  - After removing the zero-sum nodes, the next pointer of the node where the duplicate prefix sum was found is updated to skip over the removed nodes.
+- If the prefix sum is not in the map, we simply add the current prefix sum and its corresponding node to the map.
+
+```cpp
+        return dummy->next;
+    }
+};
+```
+
+- **Line 31**: Finally, the method returns the modified linked list, starting from the node following the dummy node, effectively skipping any zero-sum sublists.
+
+### Complexity
+1. **Time Complexity**: \(O(n)\), where \(n\) is the number of nodes in the linked list. Each node is processed once, and operations with the map (insertions and deletions) are average \(O(1)\).
+2. **Space Complexity**: \(O(n)\) in the worst case, where every prefix sum is unique and stored in the map.
+
+### Conclusion
+The `removeZeroSumSublists` function efficiently identifies and removes zero-sum sublists from a singly-linked list using prefix sums and a hashmap. This method is optimal for the problem, leveraging the properties of cumulative sums to streamline the process. The result is a modified linked list that maintains the order of nodes while excluding any contiguous nodes that sum to zero, making it a practical solution for similar linked list manipulation problems.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/remove-zero-sum-consecutive-nodes-from-linked-list/description/)
+
 ---
 {{< youtube xZRozZEjizg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1177: Can Make Palindrome from Substring](https://grid47.xyz/leetcode/solution-1177-can-make-palindrome-from-substring/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

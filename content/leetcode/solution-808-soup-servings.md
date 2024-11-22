@@ -17,8 +17,6 @@ youtube_thumbnail=""
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/soup-servings/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/808.webp" 
     alt="Bowls of soup where servings are poured, glowing softly as each serving is calculated."
@@ -50,9 +48,101 @@ public:
     }
 };
 {{< /highlight >}}
-
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/808.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #809: Expressive Words](https://grid47.xyz/leetcode/solution-809-expressive-words/) |
+### Problem Statement
+The problem revolves around a simulation where we are given two soups, and we can serve portions from both soups in different amounts. Initially, each soup has `n` milliliters, and the goal is to determine the probability that after a series of operations, soup 1 runs out of liquid before soup 2. In each operation, we perform one of the following actions:
+
+- Pour 100 milliliters from soup 1 and 0 milliliters from soup 2.
+- Pour 75 milliliters from soup 1 and 25 milliliters from soup 2.
+- Pour 50 milliliters from soup 1 and 50 milliliters from soup 2.
+- Pour 25 milliliters from soup 1 and 75 milliliters from soup 2.
+
+The task is to find the probability that soup 1 will run out of liquid before soup 2. The problem can be approached using dynamic programming and memoization.
+
+### Approach
+The problem is a probabilistic dynamic programming (DP) problem where we need to track the probabilities of certain outcomes based on the remaining amounts of the two soups. Each state is defined by the amounts of soup 1 and soup 2 remaining, and for each state, we can perform the above operations with associated probabilities.
+
+1. **Recursive Function**:
+   - For each state `(a, b)` representing the amounts of soup 1 and soup 2 remaining, we recursively calculate the probability of soup 1 running out first (or not) after performing one of the four operations.
+   - The recursive calls handle the four possible transitions:
+     - Pouring 100ml from soup 1 and 0ml from soup 2.
+     - Pouring 75ml from soup 1 and 25ml from soup 2.
+     - Pouring 50ml from both soups.
+     - Pouring 25ml from soup 1 and 75ml from soup 2.
+   
+2. **Memoization**:
+   - To avoid redundant calculations and optimize performance, we use memoization to store the results of previously computed states. This helps to avoid recalculating the probability for the same state multiple times.
+   - The memoization table is a 2D matrix `mem[a][b]`, where `a` represents the remaining amount of soup 1, and `b` represents the remaining amount of soup 2.
+
+3. **Base Cases**:
+   - If both soups run out at the same time (`a <= 0 && b <= 0`), the probability is 0.5 (since it is equally likely that either soup 1 or soup 2 will run out first).
+   - If only soup 1 runs out (`a <= 0`), the probability is 1 (since soup 1 is exhausted first).
+   - If only soup 2 runs out (`b <= 0`), the probability is 0 (since soup 2 is exhausted first).
+
+4. **Optimizations**:
+   - If the input `n` is larger than a threshold (4800 in this case), the probability is considered to be 1, as it is highly unlikely that soup 1 will run out before soup 2 when the initial amounts are large.
+   - The function `f(a, b)` is called recursively to compute the probability for smaller subproblems, with results stored in the `mem` array to optimize performance.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Initialization
+```cpp
+vector<vector<double>> mem;
+```
+- **`mem`**: A 2D vector to store the probabilities of each state. The size is initially set to 200x200 to handle cases where `n` is large.
+
+#### Step 2: Main Function (soupServings)
+```cpp
+double soupServings(int n) {
+    mem.resize(200, vector<double>(200, 0));
+    return n > 4800 ? 1 : f((n + 24) / 25, (n + 24) / 25);
+}
+```
+- **`mem.resize(200, vector<double>(200, 0))`**: Resizes the memoization table to store results for all possible states. The grid size is set to 200x200, as it handles the ranges of values for `a` and `b` (representing the remaining amounts of soup 1 and 2).
+- **`f((n + 24) / 25, (n + 24) / 25)`**: The function `soupServings` calls the recursive helper function `f` with adjusted values of `a` and `b`. The expression `(n + 24) / 25` ensures the value of `n` is properly scaled to match the recursive function’s state size. If `n` exceeds 4800, the function immediately returns 1, indicating that soup 1 is very likely to run out before soup 2 in such large cases.
+
+#### Step 3: Recursive Function (f)
+```cpp
+double f(int a, int b) {
+    if (a <= 0 && b <= 0) return 0.5;
+    if (a <= 0) return 1;
+    if (b <= 0) return 0;
+    if (mem[a][b] > 0) return mem[a][b];
+    mem[a][b] = 0.25 * (f(a - 4, b) + f(a - 3, b - 1) + f(a - 2, b - 2) + f(a - 1, b - 3));
+    return mem[a][b];
+}
+```
+- **Base cases**:
+  - If both `a` and `b` are less than or equal to zero, return 0.5 (equal probability for either soup running out).
+  - If `a` is less than or equal to zero, return 1 (soup 1 is exhausted first).
+  - If `b` is less than or equal to zero, return 0 (soup 2 is exhausted first).
+  
+- **Memoization**:
+  - If the result for the current state `(a, b)` is already stored in `mem[a][b]`, simply return the stored value to avoid redundant calculations.
+  
+- **Recursive calculation**:
+  - The recursive formula `mem[a][b] = 0.25 * (f(a-4, b) + f(a-3, b-1) + f(a-2, b-2) + f(a-1, b-3))` computes the probability by considering the four possible operations and averaging their results (multiplied by 0.25 to account for equal probabilities for each operation).
+
+#### Step 4: Return the Result
+- Once the recursive function `f(a, b)` is computed, the result is returned and stored in `mem[a][b]`.
+
+### Complexity
+
+#### Time Complexity:
+The time complexity of this solution is **O(n^2)**, where:
+- **n** is the size of the grid (scaled by dividing by 25). In the worst case, we will need to calculate the probabilities for each state, which requires at most **O(n^2)** recursive calls. However, memoization ensures that each state is calculated at most once.
+
+#### Space Complexity:
+The space complexity is **O(n^2)** due to the memoization table (`mem`), which stores the results for each state. The size of this table is proportional to the number of unique states `(a, b)` that can be reached.
+
+### Conclusion
+
+This solution efficiently calculates the probability that soup 1 runs out before soup 2 by leveraging dynamic programming with memoization. By considering all possible transitions and using a memoization table to store previously computed results, the solution avoids redundant calculations and ensures optimal performance. The recursive function captures the probabilistic nature of the problem and provides the correct results even for large values of `n` by adjusting the state size and directly handling large cases with a threshold. This approach offers both time and space efficiency, making it a suitable solution for this complex problem.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/soup-servings/description/)
+
+---
+
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

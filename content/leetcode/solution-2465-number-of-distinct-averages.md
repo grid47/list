@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/2sWoLnBzuKw/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/number-of-distinct-averages/description/)
-
 ---
 **Code:**
 
@@ -40,9 +38,78 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2465.md" >}}
+### Problem Statement:
+
+The problem asks us to calculate the number of distinct averages that can be formed from pairs of elements in the array `nums`. The number of distinct averages is determined by pairing the largest element with the smallest, the second largest with the second smallest, and so on, and then calculating the sum of each pair. The result should be the number of distinct values obtained by these sums.
+
+Given an array `nums` of `n` integers, the task is to find the number of distinct sums that can be made by pairing one element from the left side of the sorted array with one element from the right side.
+
+### Approach:
+
+To solve the problem, we need to perform the following steps:
+
+1. **Sort the Array**: Start by sorting the array `nums`. Sorting is important because it allows us to pair the smallest element with the largest, the second smallest with the second largest, and so on.
+
+2. **Pairing Elements**: After sorting the array, pair the first element with the last element, the second element with the second last element, and so on. Each pair will produce a sum.
+
+3. **Store Distinct Sums**: Use a data structure that allows storing distinct sums, such as a `map` (or `unordered_set` in some cases). We will store the sums of each pair of elements.
+
+4. **Return the Count of Distinct Sums**: The size of the data structure will represent the number of distinct averages or sums that have been computed.
+
+### Code Breakdown (Step by Step):
+
+1. **Initial Setup**:
+   ```cpp
+   map<long, int> mp;
+   sort(nums.begin(), nums.end());
+   int i = 0, j = nums.size() - 1;
+   ```
+   - **map<long, int> mp**: A map (or hash table) is used to store the sums of pairs. The key is the sum of the pair, and the value is set to `1` (though the value is not used here, it's a standard way to represent stored keys).
+   - **sort(nums.begin(), nums.end())**: The array is sorted to facilitate pairing the smallest and largest elements.
+   - **int i = 0, j = nums.size() - 1**: Two pointers, `i` and `j`, are initialized to point to the beginning and the end of the sorted array, respectively.
+
+2. **Pairing the Elements**:
+   ```cpp
+   while(i < j){
+       int a = nums[j--];
+       int b = nums[i++];
+       long c = a + b;
+       mp[c] = 1;
+   }
+   ```
+   - **while(i < j)**: The loop continues as long as the two pointers `i` and `j` do not meet.
+   - **int a = nums[j--]**: `a` is set to the element at the end of the array (`nums[j]`), and `j` is decremented.
+   - **int b = nums[i++]**: `b` is set to the element at the beginning of the array (`nums[i]`), and `i` is incremented.
+   - **long c = a + b**: The sum of the pair `(a, b)` is computed and stored in `c`.
+   - **mp[c] = 1**: The sum `c` is inserted into the map `mp`. If the sum `c` already exists, the map does not store it again, ensuring that only distinct sums are stored.
+
+3. **Return the Count of Distinct Averages**:
+   ```cpp
+   return mp.size();
+   ```
+   - After all pairs are processed, the number of distinct sums (or averages) is simply the size of the map `mp`. This is returned as the final result.
+
+### Complexity:
+
+1. **Time Complexity**:
+   - Sorting the array `nums` takes \(O(n \log n)\), where `n` is the size of the array.
+   - Iterating through the array with two pointers takes \(O(n)\) because we are processing each element once.
+   - Inserting the sums into the map takes \(O(\log k)\) for each insertion, where `k` is the number of distinct sums. In the worst case, this is \(O(n \log n)\) because in the worst case, all pairs may have distinct sums.
+   - Therefore, the overall time complexity is dominated by the sorting step, which is \(O(n \log n)\).
+
+2. **Space Complexity**:
+   - We are using a map to store the distinct sums. In the worst case, all sums might be distinct, requiring \(O(n)\) space to store the sums.
+   - Therefore, the space complexity is \(O(n)\).
+
+### Conclusion:
+
+The solution efficiently calculates the number of distinct sums that can be formed by pairing the smallest and largest elements, the second smallest and second largest, and so on. The sorting of the array ensures that we can pair the elements in the required manner, and the use of a map ensures that we only count distinct sums. With a time complexity of \(O(n \log n)\) and a space complexity of \(O(n)\), this approach is optimal for handling large input sizes.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-distinct-averages/description/)
+
 ---
 {{< youtube 2sWoLnBzuKw >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2466: Count Ways To Build Good Strings](https://grid47.xyz/leetcode/solution-2466-count-ways-to-build-good-strings/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

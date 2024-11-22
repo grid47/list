@@ -18,17 +18,19 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/spiwTAuz1_4/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/maximize-sum-of-array-after-k-negations/description/)
-
 ---
 **Code:**
 
 {{< highlight cpp >}}
 
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1005.md" >}}
+
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/maximize-sum-of-array-after-k-negations/description/)
+
 ---
 {{< youtube spiwTAuz1_4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1006: Clumsy Factorial](https://grid47.xyz/leetcode/solution-1006-clumsy-factorial/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

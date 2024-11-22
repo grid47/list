@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/Rdie0uPp7e8/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/target-sum/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/494.webp" 
     alt="A set of numbers being combined to reach a target sum, with each valid combination softly glowing."
@@ -54,9 +52,92 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/494.md" >}}
+### Problem Statement
+
+The problem is to find the number of ways to assign symbols (either `+` or `-`) to each number in a given array `nums` so that the resulting sum equals a target value. This is known as the "Target Sum" problem. Given an array `nums` of positive integers and an integer `target`, the task is to compute how many different ways you can achieve `target` by assigning either `+` or `-` to each element of `nums`.
+
+For instance, if `nums = [1, 1, 1, 1, 1]` and `target = 3`, then there are 5 different ways to assign symbols to reach the target of 3.
+
+### Approach
+
+The solution uses a recursive dynamic programming (DP) approach with memoization. The main idea is to use recursion to try all possible combinations of `+` and `-` signs for each element in the array and count the ways that reach the `target`. By storing previously computed results in a memoization table, we avoid redundant calculations and significantly improve efficiency.
+
+Here’s a breakdown of the approach:
+
+1. **Recursive Decision-Making**:
+   - For each number in `nums`, we make two recursive calls: one that subtracts the current number from the target and another that adds it to the target.
+   - This generates all possible sums using the numbers in `nums`, with each call exploring a different combination of `+` and `-` symbols for each number.
+
+2. **Memoization to Avoid Redundant Calculations**:
+   - A `map<int, map<int, int>>` structure, `mp`, is used to store intermediate results. Here, `mp[target][idx]` represents the number of ways to reach the `target` with elements starting from the index `idx` in `nums`.
+   - If we encounter a subproblem (defined by a specific `target` and `idx`) that has already been solved, we retrieve the result from `mp` instead of recalculating it, reducing the time complexity.
+
+3. **Base Case**:
+   - When we reach the end of the array (`idx == nums.size()`), we check if the `target` is zero. If it is, we have found a valid combination, so we return `1`. Otherwise, we return `0` to indicate an invalid combination.
+
+4. **Count the Number of Ways**:
+   - The recursive calls accumulate the count of valid combinations that result in the `target`, and this count is stored in `mp[target][idx]` for later use.
+
+### Code Breakdown (Step by Step)
+
+The solution code is implemented with a recursive helper function `dp` and a main function `findTargetSumWays` that initializes the process.
+
+1. **Member Variables**:
+   ```cpp
+   map<int, map<int, int>> mp;
+   vector<int> nums;
+   ```
+   - `mp` serves as the memoization table, where each `target` and `idx` pair stores the computed result for that subproblem.
+   - `nums` stores the input array, allowing it to be accessible in the `dp` function.
+
+2. **Recursive Function (`dp`)**:
+   ```cpp
+   int dp(int target, int idx) {
+       if(idx == nums.size()) return target == 0;
+       
+       if(mp.count(target))
+           if(mp[target].count(idx)) return mp[target][idx];
+       
+       int res = dp(target - nums[idx], idx + 1);
+       res += dp(target + nums[idx], idx + 1);
+       
+       return mp[target][idx] = res;
+   }
+   ```
+   - **Base Case**: If `idx` equals the size of `nums`, we’ve reached the end of the array. We return `1` if `target` is `0`, indicating a valid combination, and `0` otherwise.
+   - **Memoization Check**: Before performing the recursive calls, we check if `mp` already contains the result for `target` and `idx`. If it does, we return that result directly.
+   - **Recursive Calls**: We make two recursive calls:
+     - One where the current element is subtracted from `target`.
+     - Another where the current element is added to `target`.
+   - **Memoization Storage**: The result of both recursive calls is stored in `mp[target][idx]`.
+
+3. **Main Function (`findTargetSumWays`)**:
+   ```cpp
+   int findTargetSumWays(vector<int>& nums, int target) {
+       this->nums = nums;
+       return dp(target, 0);
+   }
+   ```
+   - **Initialization**: `nums` is assigned to the class variable, making it accessible within the `dp` function.
+   - **Recursive Call**: The main function starts the recursion by calling `dp` with the initial `target` and `idx = 0`, representing the full array.
+
+### Complexity
+
+1. **Time Complexity**:
+   - The time complexity is approximately `O(n * T)`, where `n` is the size of `nums` and `T` is the range of possible values for `target`. The memoization table limits the number of recursive calls, as we reuse results for previously computed subproblems.
+
+2. **Space Complexity**:
+   - The space complexity is also `O(n * T)`, accounting for the memoization table that stores intermediate results.
+
+### Conclusion
+
+This solution efficiently solves the "Target Sum" problem by combining recursion with memoization. The approach leverages dynamic programming to avoid redundant calculations, which is particularly useful for problems involving combinatorial choices, as we have here with the `+` and `-` signs. This recursive strategy provides an optimal and reliable solution for computing the number of ways to achieve the target sum, demonstrating the power of memoization in reducing the time complexity of recursive solutions.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/target-sum/description/)
+
 ---
 {{< youtube Rdie0uPp7e8 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #497: Random Point in Non-overlapping Rectangles](https://grid47.xyz/leetcode/solution-497-random-point-in-non-overlapping-rectangles/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

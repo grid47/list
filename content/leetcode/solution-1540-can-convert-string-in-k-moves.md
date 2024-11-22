@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/3psLUZqiGx0/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/can-convert-string-in-k-moves/description/)
-
 ---
 **Code:**
 
@@ -52,9 +50,98 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1540.md" >}}
+### Problem Statement
+
+The problem requires us to determine whether it is possible to convert one string `s` into another string `t` using a specified number of operations, `k`. Each operation consists of incrementing the character at any index in `s` by one (where 'z' wraps around to 'a'). The main constraints are that both strings must be of the same length, and the number of character increments needed should not exceed `k`. 
+
+### Approach
+
+The solution involves calculating how many operations are needed to convert each character of `s` to the corresponding character in `t`. For each character, we determine the number of increments required, taking into account the circular nature of the alphabet. After calculating the increments needed for all characters, we then check if the total required increments can be accomplished within the allowed operations `k`.
+
+### Code Breakdown (Step by Step)
+
+Let’s break down the code snippet into smaller parts for a better understanding:
+
+```cpp
+class Solution {
+public:
+    bool canConvertString(string s, string t, int k) {
+        if(s.size() != t.size()) return false; // Step 1: Check lengths
+```
+
+- **Length Check**: The first step is to check if both strings `s` and `t` are of equal length. If not, conversion is impossible, so we immediately return `false`.
+
+```cpp
+        int n = s.size(); // Step 2: Get size of the strings
+        vector<int> cnt(n, 0); // Step 3: Create a vector to hold operations needed for each character
+        vector<int> frq(26, 0); // Step 4: Frequency array for counting increments
+```
+
+- **Initialization**: We initialize `n` to store the size of the strings and create two vectors:
+  - `cnt`: This will hold the number of increments needed for each character in `s` to match the corresponding character in `t`.
+  - `frq`: This will count how many characters require the same number of increments.
+
+```cpp
+        for(int i = 0; i < n; i++) {
+            if(t[i] > s[i]) {
+                cnt[i] = t[i] - s[i]; // Step 5: Calculate direct increments needed
+            } else if(t[i] < s[i]) {
+                cnt[i] = 26 - (s[i] - t[i]); // Step 6: Calculate wrap-around increments
+            }
+            frq[cnt[i] % 26]++; // Step 7: Increment frequency of needed operations
+        }
+```
+
+- **Calculate Increments**: In this loop, we calculate the increments needed for each character:
+  - If the character in `t` is greater than that in `s`, we take the difference directly.
+  - If the character in `t` is less than in `s`, we account for the circular nature of the alphabet by calculating how many increments wrap around from `z` to `a`. 
+  - We then update the `frq` array to count how many characters require each specific increment.
+
+```cpp
+        for(int i = 1; i < 26; i++) { // Step 8: Check each increment frequency
+            if(frq[i] == 0) continue; // Skip if no character requires this increment
+            long net = (long) (i + (frq[i] - 1)  * 26); // Step 9: Calculate total operations needed
+            if( net > k) return false; // Step 10: Check against k
+        }
+```
+
+- **Check Against `k`**: In this loop, we check if the total increments required for each frequency of increments can fit within `k`. 
+  - For each increment value `i`, if any characters require it (`frq[i] != 0`), we calculate the total operations needed:
+    - The formula `i + (frq[i] - 1) * 26` computes the net operations required for all characters needing that increment. 
+    - If this value exceeds `k`, we return `false`.
+
+```cpp
+        return true; // Step 11: If all checks pass, return true
+    }
+};
+```
+
+- **Final Return**: If all frequency checks pass without exceeding `k`, we conclude that conversion is possible and return `true`.
+
+### Complexity
+
+#### Time Complexity
+- The time complexity of this solution is \(O(n)\), where \(n\) is the length of the input strings. This is because we iterate through each character of the strings to calculate the increments and frequencies.
+
+#### Space Complexity
+- The space complexity is \(O(1)\) with respect to the input size since the vectors `cnt` and `frq` have fixed sizes (26 for `frq` and `n` for `cnt`), which is not dependent on the input size.
+
+### Conclusion
+
+This code provides an efficient solution to determine if one string can be transformed into another using a limited number of operations. By carefully calculating the necessary increments for each character and counting how many characters require each increment, we can quickly ascertain whether the transformation can be accomplished within the specified constraints.
+
+**Key Takeaways**:
+- **String Manipulation**: Understanding character manipulation, especially in circular sequences like alphabets, is essential for problems like this.
+- **Efficient Counting**: Using frequency counting allows us to reduce the number of checks required, leading to a more efficient solution.
+- **Handling Edge Cases**: The solution includes an initial check for string length equality, which is crucial for ensuring valid comparisons.
+
+Overall, this approach ensures that we have a comprehensive and efficient method for determining the feasibility of transforming string `s` into string `t` within the allowed operations.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/can-convert-string-in-k-moves/description/)
+
 ---
 {{< youtube 3psLUZqiGx0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1541: Minimum Insertions to Balance a Parentheses String](https://grid47.xyz/leetcode/solution-1541-minimum-insertions-to-balance-a-parentheses-string/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

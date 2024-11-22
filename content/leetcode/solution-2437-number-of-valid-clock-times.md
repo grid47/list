@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/LDYuUXRGMzE/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/number-of-valid-clock-times/description/)
-
 ---
 **Code:**
 
@@ -46,9 +44,120 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2437.md" >}}
+### Problem Statement
+
+The problem asks us to determine how many valid times can be formed from a given string `time`, which represents a 24-hour time format `"HH:MM"`. In this format, the hours are represented by `HH` and the minutes by `MM`. The input string may contain the character `'?'` in place of some digits, and our task is to calculate how many possible valid times can be formed by replacing all occurrences of `'?'` with digits such that the resulting time is a valid 24-hour time.
+
+A valid 24-hour time is structured as:
+- `HH` must be between 00 and 23 (inclusive).
+- `MM` must be between 00 and 59 (inclusive).
+
+For example:
+- Input: `"1?:4?"` 
+- Output: `20`
+  - Explanation: The possible valid times are `10:40`, `10:41`, ..., `10:49`, `11:40`, `11:41`, ..., `11:49`, ..., `19:40`, `19:41`, ..., `19:49`. There are 20 possible valid times.
+
+### Approach
+
+We need to analyze each part of the time string (`HH` and `MM`) and count how many valid values can be assigned to each `'?'`. Here's the plan:
+
+1. **Minutes (`MM`)**:
+   - The minutes range from `00` to `59`, so if the character in the minutes place (`time[4]` or `time[5]`) is `'?'`, we must account for all possible digits that can replace the `'?'`.
+   - For example, if `time[4] == '?'`, the tens digit can be any value from 0 to 5, resulting in 6 possible values.
+
+2. **Hours (`HH`)**:
+   - The hours are more complex because they can only be between `00` and `23`. Thus, depending on the digits in `time[0]` and `time[1]`, the possible values for `'?'` in these positions will differ.
+   - If both `time[0]` and `time[1]` are `'?'`, we can form any number between `00` and `23`, resulting in 24 possibilities.
+   - If `time[0] == '?'`, the value of `time[1]` determines the range of valid values for the hour. For example:
+     - If `time[1]` is between `'0'` and `'3'`, `time[0]` can be `0`, `1`, or `2` (3 options).
+     - If `time[1]` is between `'4'` and `'9'`, `time[0]` can only be `1` or `2` (2 options).
+   - If `time[1] == '?'`, the value of `time[0]` will influence how many valid values are possible for `time[1]`.
+     - If `time[0] == '2'`, `time[1]` can only be from `0` to `3`, which gives 4 possibilities.
+     - If `time[0]` is less than `2`, `time[1]` can range from `0` to `9`, which gives 10 possibilities.
+
+3. **Combining the Possibilities**:
+   - Once we compute the number of possibilities for the hours and minutes, we multiply them to get the total number of valid times.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Initialize the Result
+We start by initializing the result variable `ans` to 1, as we will multiply it by the number of possibilities for each part of the time string.
+
+```cpp
+int ans = 1;
+```
+
+#### Step 2: Handle the Minutes (`MM`)
+First, we check if `time[4]` (the tens place of the minutes) is a `'?'`. If it is, we multiply `ans` by 10, since any digit from `0` to `9` can be placed in this position.
+
+```cpp
+if(time[4] == '?') ans = ans * 10;
+```
+
+Next, we check if `time[3]` (the ones place of the minutes) is a `'?'`. If it is, we multiply `ans` by 6, since the valid digits for the ones place are `0-5` for the minutes range `00-59`.
+
+```cpp
+if(time[3] == '?') ans = ans * 6;
+```
+
+#### Step 3: Handle the Hours (`HH`)
+Now, we move on to handle the hours part of the time (`time[0]` and `time[1]`):
+
+- If both `time[0]` and `time[1]` are `'?'`, we multiply `ans` by 24, as any hour from `00` to `23` is valid.
+
+```cpp
+if(time[0] == '?' && time[1] == '?') ans = ans * 24;
+```
+
+- If only `time[1]` is `'?'`, we handle it based on the value of `time[0]`. If `time[0] == '2'`, then `time[1]` can be `0-3` (4 options), otherwise, `time[1]` can be `0-9` (10 options).
+
+```cpp
+else {
+    if(time[1] == '?'){ 
+        if(time[0] == '2') ans = ans * 4;
+        else ans = ans * 10;
+    }
+```
+
+- If only `time[0]` is `'?'`, we handle it based on the value of `time[1]`. If `time[1]` is less than `'4'`, then `time[0]` can be `0`, `1`, or `2` (3 options). Otherwise, `time[0]` can only be `1` or `2` (2 options).
+
+```cpp
+    if(time[0] == '?'){
+        if(time[1] < '4') ans = ans * 3;
+        else ans = ans * 2;
+    }
+}
+```
+
+#### Step 4: Return the Result
+Finally, we return the total number of valid times by returning the value of `ans`.
+
+```cpp
+return ans;
+```
+
+### Complexity
+
+#### Time Complexity
+The time complexity of this solution is **O(1)** because the solution only involves checking a fixed number of positions in the string (`time[0]`, `time[1]`, `time[3]`, `time[4]`), and the operations are constant-time.
+
+- There are no loops or recursive calls in this solution.
+- The operations inside the function are all constant-time checks and multiplications.
+
+Thus, the overall time complexity is **O(1)**.
+
+#### Space Complexity
+The space complexity is **O(1)** as well, since the solution only uses a constant amount of space for the `ans` variable and performs all operations in place without requiring additional memory allocation.
+
+### Conclusion
+
+This problem requires calculating the number of valid times that can be formed by replacing the `'?'` characters in a time string in the format `"HH:MM"`. By systematically checking the possible valid digits for each position in the time string and considering the constraints of valid hours and minutes, we can efficiently compute the result in constant time. The solution operates with **O(1)** time and space complexity, making it highly efficient for any valid input.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-valid-clock-times/description/)
+
 ---
 {{< youtube LDYuUXRGMzE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2438: Range Product Queries of Powers](https://grid47.xyz/leetcode/solution-2438-range-product-queries-of-powers/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

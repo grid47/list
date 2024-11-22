@@ -18,8 +18,6 @@ youtube_thumbnail=""
 
 
 
-[`Problem Link`](https://leetcode.com/problems/word-subsets/description/)
-
 ---
 **Code:**
 
@@ -52,9 +50,90 @@ public:
     }
 };
 {{< /highlight >}}
-
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/916.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #918: Maximum Sum Circular Subarray](https://grid47.xyz/leetcode/solution-918-maximum-sum-circular-subarray/) |
+### Problem Statement
+
+The problem requires finding "universal" words from a list `words1` that contain all characters in all the words from another list, `words2`, with the required frequency of each character. Specifically, a word in `words1` is considered universal if it has at least the maximum number of each character required by any word in `words2`. Our task is to determine all such universal words from `words1` efficiently.
+
+### Approach
+
+To solve this problem, we break down the approach into a few key steps:
+
+1. **Determine the Required Frequency for Each Character**: 
+   - We start by calculating the maximum frequency of each character required by any word in `words2`. This ensures that we know the minimum character counts needed for a word to be considered universal. 
+   - We achieve this by iterating through each word in `words2`, calculating the frequency of each character, and storing the maximum required frequency for each character in an array `frq` (with 26 slots for each letter of the alphabet).
+
+2. **Check Each Word in `words1` for Universality**:
+   - For each word in `words1`, we compute the frequency of each character.
+   - We then compare this frequency to the requirements in `frq`. If the word has at least as many occurrences of each character as required by `frq`, it is considered universal, and we add it to the result list.
+
+3. **Return Result**: 
+   - After processing all words in `words1`, we return the list of universal words.
+
+This approach minimizes redundant calculations by pre-computing the frequency requirements, making the checking process for each word in `words1` efficient.
+
+### Code Breakdown (Step by Step)
+
+1. **Calculate Required Frequencies for `words2`**:
+   ```cpp
+   vector<int> frq(26, 0);
+   for(auto s: words2) {
+       vector<int> tmp(26, 0);
+       for(char c: s) {
+           tmp[c - 'a']++;
+           frq[c - 'a'] = max(frq[c - 'a'], tmp[c - 'a']);
+       }
+   }
+   ```
+   - We initialize a frequency array `frq` with 26 elements, all set to 0.
+   - For each word `s` in `words2`, we create a temporary frequency array `tmp` that calculates the frequency of each character in the current word.
+   - We update `frq` so that each element in `frq` represents the maximum frequency of each character required by any word in `words2`.
+
+2. **Check Each Word in `words1` Against the Required Frequencies**:
+   ```cpp
+   vector<string> res;
+   for(auto s: words1) {
+       vector<int> tmp(26, 0);
+       for(char c: s) tmp[c - 'a']++;
+       int flag = true;
+       for(int i = 0; i < 26; i++) {
+           if(tmp[i] < frq[i]) {
+               flag = false;
+               break;
+           }
+       }
+       if(flag) res.push_back(s);
+   }
+   ```
+   - We initialize an empty result vector `res` to store the universal words.
+   - For each word `s` in `words1`, we calculate the frequency of each character in the word and store it in `tmp`.
+   - We then compare `tmp` to `frq` to verify if `s` meets the required frequencies.
+   - If `tmp[i]` is greater than or equal to `frq[i]` for all characters, the word `s` is universal, so we add it to `res`.
+
+3. **Return the Result**:
+   ```cpp
+   return res;
+   ```
+   - After processing all words in `words1`, the result vector `res` contains all universal words, which we then return.
+
+### Complexity
+
+1. **Time Complexity**:
+   - The time complexity is **O(n * m + m * k)**, where `n` is the number of words in `words1`, `m` is the average length of words in `words1`, and `k` is the number of words in `words2`.
+   - We spend `O(m * k)` time calculating the maximum frequency requirements by iterating through all words in `words2`.
+   - For each word in `words1`, checking it against the frequency requirements takes `O(m)`. Since there are `n` words in `words1`, this step requires `O(n * m)` time.
+
+2. **Space Complexity**:
+   - The space complexity is **O(m + n)**, as we store `frq`, a frequency array of constant size (26 for each character in the alphabet), and a temporary array for each word in `words1` during checking. 
+
+### Conclusion
+
+In conclusion, this solution provides an efficient way to find universal words in `words1` that satisfy character requirements from `words2`. The use of a frequency array enables quick lookups, while the pre-computation of maximum required frequencies streamlines the checking process. This approach is well-suited for large input sizes due to its linear complexity relative to the number of words and characters. The clear structure and logical flow of the solution make it easy to understand and maintain.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/word-subsets/description/)
+
+---
+
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

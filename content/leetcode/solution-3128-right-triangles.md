@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/SgwaC6fRCSE/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/right-triangles/description/)
-
 ---
 **Code:**
 
@@ -70,9 +68,111 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/3128.md" >}}
+### Problem Statement
+
+The problem asks us to find the number of right-angled triangles that can be formed using cells in a 2D grid. The grid consists of `1`s and `0`s, where `1` represents a valid cell, and `0` represents an empty cell. A right-angled triangle can be formed when three points lie in a right-angled relationship in the grid. Specifically, the triangle's right angle must align with the grid axes, either horizontally or vertically.
+
+The goal is to determine how many such right-angled triangles can be formed based on the given grid.
+
+### Approach
+
+To solve this problem efficiently, we can break down the task into several sub-problems:
+
+1. **Precompute Horizontal and Vertical Sums**: First, we compute two auxiliary grids:
+   - `hr[i][j]`: The cumulative sum of `1`s from the leftmost column to column `j` in row `i`. This tells us how many `1`s there are to the left of a given cell in a particular row.
+   - `vr[i][j]`: The cumulative sum of `1`s from the topmost row to row `i` in column `j`. This tells us how many `1`s there are above a given cell in a particular column.
+
+2. **Count Right-Angled Triangles**: Once we have the horizontal and vertical sums, we can calculate the number of triangles that can be formed with each cell `(i, j)` as the right-angle vertex. The formula for calculating the number of triangles at a point `(i, j)` is:
+   \[
+   \text{Triangles at }(i, j) = (\text{number of 1s in row i to the right of } j) \times (\text{number of 1s in column j below } i)
+   \]
+   This formula accounts for the potential triangles that could be formed by using the current cell as the right-angle corner of the triangle.
+
+3. **Accumulate the Results**: We then accumulate the number of triangles for each valid cell `(i, j)` where there is a `1`.
+
+### Code Breakdown
+
+#### Step 1: Initialize and Precompute Horizontal and Vertical Sums
+
+```cpp
+vector<vector<int>> hr = grid;
+vector<vector<int>> vr = grid;
+```
+- Here, `hr` and `vr` are copies of the original grid `grid`. We will use these grids to store the cumulative counts of `1`s in the rows and columns, respectively.
+
+```cpp
+for(int i = 0; i < m; i++) {
+    for(int j = 1; j < n; j++) {
+        hr[i][j] += hr[i][j - 1];
+    }
+}
+```
+- This loop precomputes the cumulative sum of `1`s in each row.
+- For each row `i`, starting from column `1`, we accumulate the values of `grid[i][j]` into `hr[i][j]`.
+
+```cpp
+for(int i = 1; i < m; i++) {
+    for(int j = 0; j < n; j++) {
+        vr[i][j] += vr[i - 1][j];
+    }
+}
+```
+- This loop precomputes the cumulative sum of `1`s in each column.
+- For each column `j`, starting from row `1`, we accumulate the values of `grid[i][j]` into `vr[i][j]`.
+
+#### Step 2: Calculate the Number of Right-Angled Triangles
+
+```cpp
+long long cnt = 0, net;
+```
+- We initialize `cnt` to accumulate the total number of right-angled triangles.
+
+```cpp
+for(int i = 0; i < m; i++)
+for(int j = 0; j < n; j++) {
+    if(grid[i][j]) {
+        net = (hr[i][n - 1] - 1) * ((vr[m - 1][j] - vr[i][j]) + (i > 0? vr[i - 1][j]: 0));
+        cnt += net;
+    }
+}
+```
+- We loop through every cell `(i, j)` in the grid.
+- If `grid[i][j] == 1`, we calculate the number of possible right-angled triangles with `(i, j)` as the right angle using the precomputed `hr` and `vr` arrays.
+- The formula used for `net` computes the number of possible triangles:
+  - `hr[i][n - 1] - 1` gives the number of `1`s to the right of column `j` in row `i` (since we need to exclude the current cell).
+  - `(vr[m - 1][j] - vr[i][j]) + (i > 0? vr[i - 1][j]: 0)` gives the number of `1`s below cell `(i, j)` in column `j`. If `i > 0`, we add the number of `1`s above cell `(i, j)` to account for all `1`s in the same column.
+- We add the result to `cnt`.
+
+#### Step 3: Return the Final Result
+
+```cpp
+return cnt;
+```
+- After iterating through the entire grid and counting the triangles for every valid `(i, j)`, we return the total count `cnt` as the result.
+
+### Complexity
+
+#### Time Complexity:
+- **O(m * n)**: 
+  - We iterate over the entire grid to compute the cumulative horizontal and vertical sums in two separate loops, each with a time complexity of O(m * n).
+  - We also iterate over the entire grid again to calculate the number of triangles, which is another O(m * n) operation.
+  - Therefore, the overall time complexity is O(m * n).
+
+#### Space Complexity:
+- **O(m * n)**: 
+  - We use additional `m * n` space to store the `hr` and `vr` grids, which are used to calculate the number of triangles.
+
+### Conclusion
+
+This solution efficiently computes the number of right-angled triangles that can be formed in the given grid by leveraging precomputation techniques. The use of cumulative sums (`hr` and `vr`) ensures that we can quickly calculate the number of possible triangles at each cell. The overall time complexity of O(m * n) ensures that the solution works efficiently even for larger grids. 
+
+The approach is both time-efficient and space-efficient, making it suitable for use in competitive programming and real-world scenarios where similar grid-based problems arise. By handling the precomputation and applying the triangle-counting formula efficiently, the solution provides a robust and optimized way to solve the problem.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/right-triangles/description/)
+
 ---
 {{< youtube SgwaC6fRCSE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #3129: Find All Possible Stable Binary Arrays I](https://grid47.xyz/leetcode/solution-3129-find-all-possible-stable-binary-arrays-i/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

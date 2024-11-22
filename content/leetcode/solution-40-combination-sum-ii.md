@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/FAjCxGNlxgk/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/combination-sum-ii/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/40.webp" 
     alt="A more intricate set of glowing paths, representing different combinations, gently overlapping."
@@ -63,9 +61,106 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/40.md" >}}
+### 🌟 **Combination Sum II** – Find Unique Combinations That Add Up to Target
+
+In this problem, you are given a list of candidate numbers and a target sum. The goal is to find **all unique combinations** from the list that sum up to the target. Each number can only be used **once** per combination, and no duplicates should appear in the results. 
+
+---
+
+#### 🧩 **Approach: Backtracking with Duplicate Handling**
+
+This problem is best solved using the **backtracking** technique, where we systematically explore all potential combinations of numbers. The challenge here is handling **duplicates** effectively. Here’s how we can break it down:
+
+1. **Sorting the candidates** helps us handle duplicates more easily.
+2. **Backtracking** allows us to explore every combination, either including or excluding a candidate.
+3. **Skipping duplicates** during backtracking ensures that we don’t generate redundant combinations.
+
+---
+
+#### ✨ **Key Steps in the Algorithm**
+
+1. **Sort the candidates**: This helps in skipping duplicates by ensuring they are adjacent.
+2. **Backtracking Function**: We recursively explore the possible combinations, checking if the sum becomes zero, and backtrack when necessary.
+3. **Skip duplicates**: If a number is the same as the previous one, we skip it to avoid repeating combinations.
+
+---
+
+#### 🧠 **Code Breakdown**
+
+Let’s walk through the code that implements this solution:
+
+##### Main Function: `combinationSum2`
+
+```cpp
+vector<vector<int>> combinationSum2(vector<int>& cand, int target) {
+    vector<vector<int>> ans;
+    vector<int> tmp;
+    mp.clear();
+    sort(cand.begin(), cand.end());  // Sorting candidates
+    bt(ans, cand, 0, target, tmp);   // Start backtracking
+    return ans;
+}
+```
+
+- **Sorting**: The list is sorted to make skipping duplicates easier.
+- **Backtracking Call**: The function `bt` is invoked to explore all possible combinations.
+
+##### Backtracking Function: `bt`
+
+```cpp
+void bt(vector<vector<int>> &ans, vector<int> &nums, int idx, int sum, vector<int> &tmp) {
+    if(sum == 0) {
+        ans.push_back(tmp);  // Found a valid combination
+        return;
+    }
+    if(sum < 0 || idx == nums.size()) return;  // No valid combination
+
+    for(int i = idx; i < nums.size(); i++) {
+        // Skip duplicates
+        if(i && i > idx && nums[i] == nums[i-1]) continue;
+        tmp.push_back(nums[i]);  // Include the current candidate
+        bt(ans, nums, i + 1, sum - nums[i], tmp);  // Recursive call
+        tmp.pop_back();  // Backtrack
+    }
+}
+```
+
+- **Base Case**: If the remaining sum (`sum`) is zero, we’ve found a valid combination and add it to the result.
+- **Skip Duplicate Candidates**: If the current number is the same as the previous one, we skip it to avoid redundant combinations.
+- **Backtracking**: We try each candidate, making recursive calls with updated values and backtrack when necessary.
+
+---
+
+#### 📈 **Complexity Analysis**
+
+1. **Time Complexity**:
+   - **Sorting**: Sorting the list takes **O(n log n)**, where `n` is the number of candidates.
+   - **Backtracking**: In the worst case, we explore all possible combinations, which gives us an **O(2^n)** complexity due to the binary decision (include or exclude) for each candidate.
+   - Overall, **Time Complexity**: **O(2^n + n log n)**
+
+2. **Space Complexity**:
+   - **Auxiliary Space**: The depth of the recursion stack can go up to `n`, so the recursive space complexity is **O(n)**.
+   - **Result Storage**: The space needed to store the result depends on the number of valid combinations, which can be exponential in the worst case. Hence, the space complexity is **O(n + 2^n)**.
+
+---
+
+#### 🎯 **Key Takeaways**
+
+- **Sorting and Skipping Duplicates**: By sorting the candidates and skipping duplicates during backtracking, we avoid redundant combinations and ensure that we only generate unique results.
+- **Efficient Backtracking**: The recursive approach efficiently explores all combinations, with backtracking ensuring we don't explore invalid paths.
+- **Exponential Time Complexity**: Although the time complexity is exponential, this approach works well for smaller inputs and avoids redundant calculations.
+
+---
+
+#### 🚀 **Practice Makes Perfect!**
+
+This backtracking approach is both **elegant** and **efficient** in handling problems like this. By practicing, you’ll get more comfortable with the technique of backtracking and learn how to optimize it in various scenarios. Keep up the good work! 💪
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/combination-sum-ii/description/)
+
 ---
 {{< youtube FAjCxGNlxgk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #43: Multiply Strings](https://grid47.xyz/leetcode/solution-43-multiply-strings/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

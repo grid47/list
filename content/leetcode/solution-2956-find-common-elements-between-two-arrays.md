@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/jb1IbKe3bPE/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/find-common-elements-between-two-arrays/description/)
-
 ---
 **Code:**
 
@@ -38,9 +36,84 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2956.md" >}}
+### Problem Statement:
+The problem asks to find how many numbers from two arrays, `nums1` and `nums2`, are common between the two arrays. Specifically, we need to calculate two values:
+1. The number of elements in `nums1` that also exist in `nums2`.
+2. The number of elements in `nums2` that also exist in `nums1`.
+
+### Approach:
+This problem can be solved using set-based operations for fast lookups and comparisons. The idea is to leverage the properties of sets to count how many numbers from one array appear in the other array. By using sets, we can ensure efficient membership checks and avoid duplicate elements.
+
+Here’s a breakdown of the approach:
+
+1. **Convert Both Arrays to Sets**: By converting both arrays into sets (`n1` and `n2`), we can ensure that there are no duplicate elements in each array. This is crucial because we want to count distinct numbers that appear in both arrays.
+   
+2. **Count Common Elements from `nums1` in `nums2`**: Loop through each element of `nums1` and check if it exists in `n2` (the set created from `nums2`). If it does, we increment the count `cnt1`.
+
+3. **Count Common Elements from `nums2` in `nums1`**: Similarly, loop through each element of `nums2` and check if it exists in `n1` (the set created from `nums1`). If it does, we increment the count `cnt2`.
+
+4. **Return the Results**: After counting the common elements in both directions, we return the two counts as a vector.
+
+This approach ensures we don’t count duplicate elements, and by using sets, membership checks are efficient (average time complexity of O(1) for `count()` operations).
+
+### Code Breakdown:
+
+#### 1. **Initialize Sets**:
+The first step is to create two sets, `n1` and `n2`, which will hold the unique elements of `nums1` and `nums2`, respectively. By using a set, we automatically ensure that each element appears only once, thus avoiding any duplicates in the final count.
+
+```cpp
+set<int> n1, n2;
+for (int x : nums1) n1.insert(x);
+for (int x : nums2) n2.insert(x);
+```
+- We use a for-loop to iterate through each element in `nums1` and `nums2` and insert them into their respective sets.
+
+#### 2. **Count Elements from `nums1` in `nums2`**:
+Next, we iterate over `nums1` and for each element, we check if it is present in `n2` using the `count()` method of the set. If it is, we increment the counter `cnt1`.
+
+```cpp
+int cnt1 = 0;
+for (int x : nums1) if (n2.count(x)) cnt1++;
+```
+- For each element `x` in `nums1`, `n2.count(x)` checks if `x` exists in `n2`. If the element is found, we increment `cnt1`.
+
+#### 3. **Count Elements from `nums2` in `nums1`**:
+Similarly, we now check for elements in `nums2` that are present in `n1`.
+
+```cpp
+int cnt2 = 0;
+for (int x : nums2) if (n1.count(x)) cnt2++;
+```
+- For each element `x` in `nums2`, `n1.count(x)` checks if `x` exists in `n1`. If the element is found, we increment `cnt2`.
+
+#### 4. **Return the Results**:
+Finally, we return the two counts as a vector.
+
+```cpp
+return vector<int>{cnt1, cnt2};
+```
+- We return a vector containing the counts `cnt1` and `cnt2`, which represent the number of common elements in `nums1` that are in `nums2`, and the number of common elements in `nums2` that are in `nums1`.
+
+### Complexity:
+
+#### Time Complexity:
+- **Insertion into sets (`n1.insert(x)` and `n2.insert(x)`)**: The time complexity for inserting an element into a set is O(log n), where `n` is the number of elements in the set. Since we are iterating over `nums1` and `nums2` and inserting each element into the respective sets, the total time complexity for this step is O(n1 log n1 + n2 log n2), where `n1` and `n2` are the sizes of `nums1` and `nums2`, respectively.
+  
+- **Counting common elements**: For each element in `nums1`, we check if it is present in `n2` (which takes O(log n2) time for each lookup), and similarly for each element in `nums2` with `n1`. Therefore, the time complexity for counting is O(n1 log n2 + n2 log n1).
+
+Thus, the total time complexity is O(n1 log n1 + n2 log n2 + n1 log n2 + n2 log n1), which simplifies to O(n1 log n1 + n2 log n2) due to the logarithmic lookups in the sets.
+
+#### Space Complexity:
+- The space complexity is dominated by the space used to store the sets `n1` and `n2`. Each set stores at most `n1` and `n2` elements, so the space complexity is O(n1 + n2).
+
+### Conclusion:
+This solution efficiently finds the number of common elements between two arrays by leveraging the properties of sets. The use of sets ensures that each element is counted only once, and the time complexity is dominated by the sorting operations in the set insertions and lookups. This approach guarantees correctness while maintaining a reasonable time and space complexity.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/find-common-elements-between-two-arrays/description/)
+
 ---
 {{< youtube jb1IbKe3bPE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2957: Remove Adjacent Almost-Equal Characters](https://grid47.xyz/leetcode/solution-2957-remove-adjacent-almost-equal-characters/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

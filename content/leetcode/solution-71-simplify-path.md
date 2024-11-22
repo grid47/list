@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/4e1gVeQ0AEs/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/simplify-path/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/71.webp" 
     alt="A smooth, glowing path being simplified, with unnecessary elements fading away."
@@ -56,9 +54,94 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/71.md" >}}
+### 🧳 **Simplifying Absolute File Paths**
+
+The problem requires simplifying an absolute file path, given as a string, to its canonical form. For instance, given a path like `/a/./b/../../c/`, the canonical path should be `/c`. The simplification should remove redundant components, including:
+- Single dots (`.`) representing the current directory.
+- Double dots (`..`) representing moving up to the parent directory.
+- Extra slashes (`/`) treated as a single separator.
+
+### 🧠 **Approach**
+
+This solution uses a **stack-based approach** to process each component in the path. Here’s a step-by-step breakdown:
+
+1. **Initialize Set for Skipping Components**:
+   - We define a set `dot` containing values `{"..", ".", ""}` to identify parts of the path that should be ignored or handled specifically:
+     - The empty string (`""`) handles consecutive slashes.
+     - `"."` represents the current directory, which can be ignored.
+     - `".."` means moving up one directory.
+
+2. **Tokenize the Path**:
+   - A `stringstream` splits the `path` string by each `/` delimiter. Each extracted component is stored in `tmp`, which is then examined to check if it’s a directory or a special token (`..`, `.`, or empty).
+
+3. **Process Each Component Using a Stack**:
+   - For each component `tmp`:
+     - If `tmp` is `".."`, we move up one directory by popping the top element from the stack (unless the stack is empty).
+     - If `tmp` is not in the `dot` set (i.e., it's a valid directory), we push it onto the stack.
+   - At the end of this loop, the stack contains the simplified sequence of directories.
+
+4. **Construct the Result**:
+   - We pop each element from the stack and prepend it to `res` with a `/` to rebuild the canonical path.
+   - If `res` is empty after processing, return `/`, representing the root directory.
+
+### 💻 **Code Breakdown**
+
+#### Step 1: Initialize the Set, Stream, and Stack
+
+```cpp
+set<string> dot = {"..", ".", ""};
+string res = "", tmp;
+stringstream ss(path);
+stack<string> stk;
+```
+- `dot` helps manage special path components like `".."`, `"."`, and empty strings.
+- `res` will store the final canonical path.
+- `tmp` holds each part of the path as we process it.
+- `stk` manages directories as we build the simplified path.
+
+#### Step 2: Process the Path Using `stringstream` and Stack
+
+```cpp
+while(getline(ss, tmp, '/')) {
+    if(tmp == ".." && !stk.empty()) stk.pop();
+    else if (!dot.count(tmp)) stk.push(tmp);
+}
+```
+- We iterate through each part of `path`, splitting by `/`.
+- If `tmp` is `".."` and the stack isn't empty, we pop from the stack (move up one directory).
+- If `tmp` is not in the `dot` set (i.e., it’s a valid directory name), we push it onto the stack.
+
+#### Step 3: Construct the Result from the Stack
+
+```cpp
+while(!stk.empty()) {
+    res = "/" + stk.top() + res;
+    stk.pop();
+}
+return res == ""? "/": res;
+```
+- We construct the result path by adding each directory to `res`, ensuring each one is prefixed by `/`.
+- If `res` is empty after processing, we return `/`, indicating the root directory.
+
+### 📊 **Complexity Analysis**
+
+#### Time Complexity:
+- **O(n)**: We process each part of the input `path` string once, and stack operations (push and pop) take constant time.
+
+#### Space Complexity:
+- **O(n)**: We use a stack to store the directories, which can hold all directories in the worst case.
+
+### 🌟 **Conclusion**
+
+This stack-based approach efficiently simplifies absolute file paths. It ensures that `..` correctly backtracks, and valid directories are added to the canonical path. This method is optimal for problems involving hierarchical paths and is especially suitable for file system path simplification.
+
+---
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/simplify-path/description/)
+
 ---
 {{< youtube 4e1gVeQ0AEs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #72: Edit Distance](https://grid47.xyz/leetcode/solution-72-edit-distance/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

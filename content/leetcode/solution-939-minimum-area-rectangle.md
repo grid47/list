@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/pFgBZFKJ2Co/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/minimum-area-rectangle/description/)
-
 ---
 **Code:**
 
@@ -55,9 +53,101 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/939.md" >}}
+### Problem Statement
+
+The problem asks to find the area of the smallest rectangle that can be formed from a set of points in a 2D plane. Each point is given as a pair of coordinates (x, y), and you need to return the area of the smallest rectangle that can enclose at least four points from the set. If no such rectangle can be formed, return 0.
+
+The rectangle should be axis-aligned, meaning that its sides must be parallel to the x and y axes. A valid rectangle must have two opposite corners with both their x and y coordinates present in the set of points.
+
+### Approach
+
+To solve this problem, the strategy is to check every pair of points and use them as potential opposite corners of a rectangle. If these points can form a rectangle, we calculate its area. Specifically, we need to check whether the other two corners of the rectangle also exist in the set of points.
+
+The steps involved are:
+
+1. **Storing Points Efficiently**: Store the points in a data structure that allows fast lookup to check if other points lie on the same vertical or horizontal line. We use a hash map (`unordered_map`) where the key is the x-coordinate and the value is a set of y-coordinates for that x.
+
+2. **Iterating Over All Pairs**: Iterate over all pairs of points, and for each pair of points (x1, y1) and (x2, y2), check if they can be opposite corners of a rectangle. To be valid:
+   - The x-coordinates of the points must be different (`x1 != x2`).
+   - The y-coordinates of the points must be different (`y1 != y2`).
+   - The other two corners of the rectangle must exist: check if `(x1, y2)` and `(x2, y1)` exist in the set of points.
+
+3. **Calculating the Area**: If the two points can form a rectangle, calculate the area using the formula: `area = abs(x1 - x2) * abs(y1 - y2)`.
+
+4. **Tracking the Minimum Area**: Track the minimum area encountered while iterating through all pairs of points.
+
+5. **Edge Case Handling**: If no rectangle is found (i.e., no valid pair of points can form a rectangle), return 0.
+
+### Code Breakdown (Step by Step)
+
+1. **Storing Points in the Hash Map**:
+   ```cpp
+   unordered_map<int, set<int>> mp;
+   for(auto &it: pts)
+       mp[it[0]].insert(it[1]);
+   ```
+   - Here, we use an unordered map (`mp`) to store the points. The map’s key is the x-coordinate, and the value is a set of y-coordinates. This structure allows for quick lookup to check if a particular y-coordinate exists for a given x-coordinate.
+
+2. **Setting Up Variables**:
+   ```cpp
+   int n = pts.size();
+   int area = INT_MAX;
+   ```
+   - `n`: The number of points in the input list `pts`.
+   - `area`: Initially set to the largest possible integer (`INT_MAX`), this variable will track the smallest area of the rectangle that we find. If no rectangle is found, this will remain unchanged, and the function will return 0.
+
+3. **Iterating Over All Pairs of Points**:
+   ```cpp
+   for(int i = 0; i < n; i++)
+       for(int j = i + 1; j < n; j++) {
+           int x1 = pts[i][0], y1 = pts[i][1];
+           int x2 = pts[j][0], y2 = pts[j][1];
+   ```
+   - We use two nested loops to go through all unique pairs of points in the list `pts`. The outer loop (`i`) represents the first point, and the inner loop (`j`) represents the second point.
+
+4. **Checking if Points Can Form a Rectangle**:
+   ```cpp
+   if(x1 != x2 && y1 != y2) {
+       if(mp[x1].find(y2) != mp[x1].end() &&
+          mp[x2].find(y1) != mp[x2].end()) {
+   ```
+   - For each pair of points, we check if the points can form a rectangle. To do so, their x and y coordinates must be different (`x1 != x2` and `y1 != y2`).
+   - If the x and y coordinates are different, we check if the other two potential corners of the rectangle exist in the set of points:
+     - The point `(x1, y2)` must exist.
+     - The point `(x2, y1)` must exist.
+   - This ensures that the four points form a rectangle with axis-aligned sides.
+
+5. **Calculating the Area**:
+   ```cpp
+   area = min(area, abs(x1 - x2) * abs(y1 - y2));
+   ```
+   - If a valid rectangle is formed, we calculate the area using the formula `area = abs(x1 - x2) * abs(y1 - y2)`. The absolute values are taken to ensure that the area is positive.
+   - We then update the `area` variable to track the smallest area encountered.
+
+6. **Returning the Result**:
+   ```cpp
+   return area == INT_MAX ? 0 : area;
+   ```
+   - If no rectangle was found (i.e., `area` was never updated), the value of `area` will still be `INT_MAX`. In that case, we return 0. Otherwise, we return the smallest area found.
+
+### Complexity
+
+1. **Time Complexity**:
+   - The time complexity is dominated by the double loop that iterates through all pairs of points. Since there are `n` points, the number of pairs is approximately `n^2`.
+   - For each pair, we perform constant-time operations (lookup in the unordered map and checking the conditions). Thus, the time complexity is O(n^2).
+   
+2. **Space Complexity**:
+   - The space complexity is O(n), where `n` is the number of points. This is because we store the points in the unordered map `mp`, which requires space proportional to the number of points.
+
+### Conclusion
+
+This solution efficiently finds the smallest rectangle that can be formed using a set of points in a 2D plane. By leveraging a hash map with sets for fast lookups and iterating over all pairs of points, we are able to check for the existence of the other two corners of a rectangle. This allows us to compute the area of the smallest rectangle in O(n^2) time. The solution is both time-efficient and space-efficient given the constraints, making it suitable for problems involving larger datasets.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-area-rectangle/description/)
+
 ---
 {{< youtube pFgBZFKJ2Co >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #945: Minimum Increment to Make Array Unique](https://grid47.xyz/leetcode/solution-945-minimum-increment-to-make-array-unique/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

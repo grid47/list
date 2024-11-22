@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/cY-wxEdhSAY/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/remove-trailing-zeros-from-a-string/description/)
-
 ---
 **Code:**
 
@@ -38,9 +36,71 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2710.md" >}}
+### Problem Statement
+
+The problem requires removing all trailing zeros from a given string `num`. The string represents a non-negative integer, and trailing zeros are defined as any number of zeros occurring at the end of the string. For instance, for the string `"1234500"`, the trailing zeros are `"00"`, and the desired output would be `"12345"`. The task is to return the number without its trailing zeros.
+
+### Approach
+
+The problem can be approached by iterating through the string from the end and counting how many trailing zeros exist. Once the count is determined, we can return the substring of the original string that excludes these zeros.
+
+1. **Count Trailing Zeros**: Start from the last character of the string and move backwards, counting zeros until a non-zero character is encountered.
+2. **Remove Zeros**: Once the count of trailing zeros is determined, return a substring of the original string that excludes these zeros.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Initial Setup
+```cpp
+int n = num.size();
+int cnt = 0;
+int len;
+```
+- `n` stores the length of the string `num`.
+- `cnt` is used to count how many trailing zeros are present in the string.
+- `len` is used to keep track of the current position while iterating through the string from the end.
+
+#### Step 2: Count Trailing Zeros
+```cpp
+for(len = 1; len <= n; len++) {
+    if(num[n - len] == '0') cnt++;
+    else break;
+}
+```
+- The loop starts from the last character (`n - 1`) and checks each character to see if it's a zero. 
+- If the character is `'0'`, increment the `cnt` variable, which keeps track of the number of trailing zeros.
+- If a non-zero character is encountered (i.e., a character other than `'0'`), the loop breaks.
+- The loop runs at most `n` times but will stop early if a non-zero character is encountered.
+
+#### Step 3: Return the Substring Without Trailing Zeros
+```cpp
+return num.substr(0, n - cnt);
+```
+- Once the number of trailing zeros (`cnt`) is determined, the function returns the substring of `num` from the beginning up to the length `n - cnt`. This effectively removes all trailing zeros from the original string.
+- The `substr` function in C++ returns a substring starting from index `0` up to `n - cnt`.
+
+### Complexity
+
+#### Time Complexity
+
+- The loop runs through the string starting from the end and counts the trailing zeros. In the worst case, the string consists entirely of zeros, and the loop runs `n` times where `n` is the length of the string.
+- The `substr` function is also linear in complexity, as it involves copying a portion of the string.
+
+Thus, the overall time complexity is **O(n)**, where `n` is the length of the input string.
+
+#### Space Complexity
+
+- The space complexity is **O(1)**, since we are only using a few integer variables (`n`, `cnt`, `len`) and not storing any additional data structures that scale with the input size.
+- The space complexity does not depend on the size of the input string, making it very efficient in terms of space.
+
+### Conclusion
+
+This solution efficiently removes trailing zeros from a string representation of a number. By iterating from the end of the string, counting the zeros, and using the `substr` function to return the desired substring, we achieve an optimal solution. The time complexity of **O(n)** is efficient for large strings, and the space complexity of **O(1)** ensures that the solution remains memory-efficient. This approach is simple, direct, and works well for the problem's constraints.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/remove-trailing-zeros-from-a-string/description/)
+
 ---
 {{< youtube cY-wxEdhSAY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2711: Difference of Number of Distinct Values on Diagonals](https://grid47.xyz/leetcode/solution-2711-difference-of-number-of-distinct-values-on-diagonals/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

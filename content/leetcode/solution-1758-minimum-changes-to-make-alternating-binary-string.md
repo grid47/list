@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/9vAQdmVU2ds/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/minimum-changes-to-make-alternating-binary-string/description/)
-
 ---
 **Code:**
 
@@ -39,9 +37,97 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1758.md" >}}
+### Problem Statement
+
+The problem is to determine the minimum number of operations required to convert a binary string into a string where no two adjacent characters are the same. An operation can be defined as flipping a character from `0` to `1` or vice versa. For example, given the string `s = "1001"`, the output should be `1`, as we can flip the last `0` to `1` to obtain the alternating string `1010`.
+
+### Approach
+
+To solve this problem, the solution uses a systematic approach that involves counting the number of flips required to convert the input binary string into two potential valid patterns:
+
+1. **Pattern Starting with `0`**: The first valid pattern starts with `0` and alternates between `0` and `1`.
+2. **Pattern Starting with `1`**: The second valid pattern starts with `1` and alternates similarly.
+
+The algorithm iterates through the input string and counts how many flips are required for each pattern. At the end, it returns the minimum of the two counts.
+
+### Code Breakdown (Step by Step)
+
+Here's a detailed breakdown of the `minOperations` function:
+
+1. **Class Definition**: The function is defined inside a class called `Solution`.
+
+   ```cpp
+   class Solution {
+   ```
+
+2. **Public Method**: The `minOperations` method takes a single binary string `s` as input and returns an integer.
+
+   ```cpp
+   public:
+       int minOperations(string s) {
+   ```
+
+3. **Variable Initialization**: Four variables are initialized:
+   - `zero` counts the number of flips needed to match the pattern starting with `0`.
+   - `one` counts the number of flips needed to match the pattern starting with `1`.
+   - `zf` (zero flag) keeps track of whether the last expected character was `0` for the pattern starting with `0`.
+   - `of` (one flag) does the same for the pattern starting with `1`.
+
+   ```cpp
+   int zero = 0, one = 0, zf = false, of = false;
+   ```
+
+4. **Loop Through the String**: A loop iterates through each character of the input string `s`.
+
+   ```cpp
+   for(int i = 0; i < s.size(); i++) {
+   ```
+
+5. **Count Flips for Pattern Starting with `0`**: Inside the loop:
+   - If the last expected character for the pattern starting with `0` was `0` (`zf` is true) and the current character is also `0`, it means a flip is needed; hence `zero` is incremented.
+   - If `zf` is false and the current character is `1`, it means a flip is needed for the first `1`; thus `zero` is incremented.
+   
+   ```cpp
+   if(zf && s[i] == '0') zero++;
+   if(!zf && s[i] == '1') zero++;
+   ```
+
+6. **Count Flips for Pattern Starting with `1`**: Similarly:
+   - If the last expected character for the pattern starting with `1` was `1` (`of` is true) and the current character is `1`, it means a flip is needed; thus `one` is incremented.
+   - If `of` is false and the current character is `0`, it means a flip is needed for the first `0`; thus `one` is incremented.
+   
+   ```cpp
+   if(!of && s[i] == '0') one++;
+   if(of && s[i] == '1') one++;
+   ```
+
+7. **Toggle Flags**: After counting flips for both patterns, toggle the flags for the next iteration.
+
+   ```cpp
+   zf = !zf, of = !of;
+   ```
+
+8. **Return Minimum Flips**: Finally, the function returns the minimum of the two counts, which represents the least number of operations required to achieve an alternating binary string.
+
+   ```cpp
+   return min(zero, one);
+   ```
+
+### Complexity
+
+- **Time Complexity**: The time complexity is \(O(n)\), where \(n\) is the length of the input string `s`. This is because the algorithm makes a single pass through the string to count the necessary flips.
+  
+- **Space Complexity**: The space complexity is \(O(1)\) since only a constant amount of extra space is used to store the counters and flags, regardless of the input size.
+
+### Conclusion
+
+In summary, the `minOperations` function effectively counts the number of flips required to convert a binary string into a valid alternating string. By systematically comparing the characters of the input string against two possible valid patterns, the solution provides an efficient way to compute the result in linear time. This approach showcases how counting and toggling flags can simplify problems related to patterns and sequences, making it a valuable technique in algorithm design. The method is not only optimal but also easy to understand and implement, which makes it a great choice for similar problems involving string manipulations.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-changes-to-make-alternating-binary-string/description/)
+
 ---
 {{< youtube 9vAQdmVU2ds >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1759: Count Number of Homogenous Substrings](https://grid47.xyz/leetcode/solution-1759-count-number-of-homogenous-substrings/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

@@ -18,8 +18,6 @@ youtube_thumbnail=""
 
 
 
-[`Problem Link`](https://leetcode.com/problems/largest-1-bordered-square/description/)
-
 ---
 **Code:**
 
@@ -51,9 +49,100 @@ public:
     }
 };
 {{< /highlight >}}
-
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1139.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1140: Stone Game II](https://grid47.xyz/leetcode/solution-1140-stone-game-ii/) |
+
+### Problem Statement
+The problem is to find the largest square sub-grid in a binary matrix (grid) that is fully bordered by 1s. A square is defined as having all four sides formed by 1s, meaning it must have a solid border around it. The function should return the area of the largest such square, which is calculated as the side length squared.
+
+### Approach
+To efficiently determine the largest bordered square, the algorithm uses dynamic programming (DP) to precompute the number of consecutive 1s in the top and left directions for each cell in the grid. By maintaining these counts, the algorithm can quickly verify whether a square of a given size can be formed with the required borders:
+
+1. **Dynamic Programming Tables**: Two tables are created:
+   - `top[i][j]`: Stores the number of consecutive 1s from the top to the cell `(i, j)`.
+   - `left[i][j]`: Stores the number of consecutive 1s from the left to the cell `(i, j)`.
+
+2. **Filling the Tables**: The tables are filled in a single pass over the grid, allowing for efficient computation of these values.
+
+3. **Finding the Largest Square**: The algorithm then iterates over possible square sizes, starting from the largest possible size down to 1. For each size, it checks if there exists a top-left corner such that a square of that size can be formed with the required border. The first valid square found will be the largest due to the order of iteration.
+
+### Code Breakdown (Step by Step)
+Here’s a detailed breakdown of the code:
+
+```cpp
+class Solution {
+public:
+    int largest1BorderedSquare(vector<vector<int>>& grid) {
+```
+- **Line 1-2**: A class named `Solution` is defined, with a public member function `largest1BorderedSquare` that takes a 2D vector `grid` as input. This function calculates the area of the largest square bordered by 1s.
+
+```cpp
+        int m = grid.size(), n = grid[0].size();
+```
+- **Line 3**: The variables `m` and `n` are initialized to the number of rows and columns in the grid, respectively.
+
+```cpp
+        vector<vector<int>> top(m, vector<int>(n, 0)), left(m, vector<int>(n, 0));
+```
+- **Line 4**: Two 2D vectors, `top` and `left`, are created and initialized to 0. These will store the number of consecutive 1s encountered from the top and left sides for each cell.
+
+```cpp
+        for(int i = 0; i < m; i++)
+        for(int j = 0; j < n; j++)
+            if(grid[i][j] > 0) {
+                top[i][j] = i > 0? 1 + top[i - 1][j]: 1;
+                left[i][j] = j > 0? 1 + left[i][j - 1]: 1;
+            }
+```
+- **Lines 5-10**: This nested loop fills the `top` and `left` tables:
+  - For each cell in the grid, if the cell contains a 1, it updates the `top` table with the count of consecutive 1s from the top.
+  - It does the same for the `left` table, updating it with the count of consecutive 1s from the left.
+  - The conditions ensure that we are not accessing out-of-bounds indices.
+
+```cpp
+        for(int l = min(m, n); l >= 1; l--) {
+```
+- **Line 11**: This for loop starts at the minimum of the grid's dimensions (either rows or columns) and decrements down to 1. This means we are checking the largest possible square first.
+
+```cpp
+            for(int i = 0; i < m - l + 1; i++)
+            for(int j = 0; j < n - l + 1; j++)
+```
+- **Lines 12-14**: These nested loops iterate over all potential top-left corners `(i, j)` for squares of size `l`.
+
+```cpp
+                if(top[i + l - 1][j] >= l &&
+                   top[i + l - 1][j + l - 1] >= l &&
+                  left[i][j + l - 1] >= l &&
+                  left[i + l - 1][j + l - 1] >= l)
+```
+- **Lines 15-19**: This conditional checks if a square of size `l` can be formed with 1s as borders:
+  - It verifies that the bottom side (from top table) and right side (from left table) of the square meet the required length `l`.
+  - If all conditions are satisfied, a valid bordered square exists.
+
+```cpp
+                    return l * l;
+```
+- **Line 20**: If a valid square is found, the area (which is \( l \times l \)) is returned immediately, ensuring that this is the largest square found due to the order of iteration.
+
+```cpp
+        return 0;
+    }
+};
+```
+- **Lines 21-22**: If no bordered square is found, the function returns 0, and the class definition is closed.
+
+### Complexity
+- **Time Complexity**: The time complexity of this algorithm is \( O(m \times n) \), as it involves a single pass through the grid to fill the `top` and `left` tables, followed by a nested iteration over potential squares.
+- **Space Complexity**: The space complexity is also \( O(m \times n) \) due to the additional storage for the `top` and `left` tables.
+
+### Conclusion
+The provided C++ solution efficiently determines the area of the largest square bordered by 1s in a binary grid using dynamic programming. By precomputing the number of consecutive 1s from the top and left sides of each cell, the algorithm can quickly verify potential square borders. This method ensures that the solution is optimal for larger grids and maintains clarity in implementation, making it suitable for algorithmic challenges involving matrix manipulations.
+
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/largest-1-bordered-square/description/)
+
+---
+
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

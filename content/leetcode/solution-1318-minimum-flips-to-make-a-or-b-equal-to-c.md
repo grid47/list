@@ -18,8 +18,6 @@ youtube_thumbnail=""
 
 
 
-[`Problem Link`](https://leetcode.com/problems/minimum-flips-to-make-a-or-b-equal-to-c/description/)
-
 ---
 **Code:**
 
@@ -55,9 +53,79 @@ public:
     }
 };
 {{< /highlight >}}
-
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1318.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1319: Number of Operations to Make Network Connected](https://grid47.xyz/leetcode/solution-1319-number-of-operations-to-make-network-connected/) |
+
+### Problem Statement
+Given three integers, `a`, `b`, and `c`, find the minimum number of bit flips required to make the result of `a | b` (bitwise OR of `a` and `b`) equal to `c`. A bit flip is defined as changing a 0 to 1 or a 1 to 0 in either `a` or `b`. The goal is to determine the minimum operations needed.
+
+### Approach
+To solve this problem, we need to examine each bit position of `a`, `b`, and `c` (from the 0th to the 30th bit, given the constraints). For each bit position:
+1. **Check the current bits** in `a`, `b`, and `c`.
+2. **Determine the number of flips required** to make the OR result of bits from `a` and `b` match the corresponding bit in `c`:
+   - **Case 1**: If the result of `(a | b)` is `0` but `c` has a `1` at that position, only one bit flip is required (flip either `a` or `b` bit from `0` to `1`).
+   - **Case 2**: If the result of `(a | b)` is `1` but `c` has `0` at that position:
+     - If only one of `a` or `b` has a `1`, only one bit needs to be flipped.
+     - If both `a` and `b` have `1`s, then two flips are needed to make both bits `0`.
+
+### Code Breakdown (Step by Step)
+
+1. **Helper Function for Bit Extraction**:
+   The `bit()` function is defined to return the ith bit of a number `n` by right-shifting `n` by `i` bits and performing a bitwise AND with `1`.
+
+   ```cpp
+   int bit(int n, int i) {
+       return (n >> i) & 1;
+   }
+   ```
+
+2. **Main Function (minFlips)**:
+   - Initialize `cnt` to count the required flips.
+   - Iterate through 31 bits (assuming integers are represented with a maximum of 32 bits).
+   
+   ```cpp
+   int minFlips(int a, int b, int c) {
+       int cnt = 0;
+       for(int i = 0; i < 31; i++) {
+   ```
+
+3. **Determine Necessary Bit Flips**:
+   - For each bit position, check the bits of `a`, `b`, and `c` using the `bit()` function.
+   - Increment `cnt` based on the conditions:
+     - If both `a` and `b` have `0` and `c` has `1`, only one flip is needed.
+     - If one of `a` or `b` has `1` and `c` has `0`, one flip is needed.
+     - If both `a` and `b` have `1` and `c` has `0`, two flips are needed.
+
+   ```cpp
+           if((!bit(a, i) && !bit(b, i) && bit(c, i)) ||
+              (!bit(a, i) && bit(b, i) && !bit(c, i)) ||
+              (bit(a, i) && !bit(b, i) && !bit(c, i))) {
+               cnt++;
+           } else if((bit(a, i) && bit(b, i) && !bit(c, i))) {
+               cnt += 2;
+           }
+       }
+   ```
+
+4. **Return the Total Count**:
+   - After looping through all bit positions, `cnt` will contain the minimum number of bit flips needed.
+
+   ```cpp
+       return cnt;
+   }
+   ```
+
+### Complexity Analysis
+
+- **Time Complexity**: \(O(1)\) because the code iterates through a constant number of bits (31 bits), regardless of the input size.
+- **Space Complexity**: \(O(1)\) since the function uses a fixed amount of memory for variables and does not require any additional data structures.
+
+### Conclusion
+This solution efficiently calculates the minimum bit flips needed to match a target OR result for integers `a` and `b`. By analyzing each bit position individually, we avoid unnecessary calculations and achieve an optimal solution. The `bit()` helper function simplifies the process of bit extraction, while the conditions ensure accurate flip counting based on logical requirements. This approach is optimal for integer operations on fixed-size bit fields and uses a constant amount of memory and processing time.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-flips-to-make-a-or-b-equal-to-c/description/)
+
+---
+
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

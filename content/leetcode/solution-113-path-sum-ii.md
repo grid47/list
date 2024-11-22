@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/MwLDG-WNOjM/maxresdefault.webp"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/path-sum-ii/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/113.webp" 
     alt="A radiant path of numbers, showing multiple possible paths with gentle branches leading to different sums."
@@ -57,9 +55,163 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/113.md" >}}
+### 🌲 **Problem Statement: Find All Root-to-Leaf Paths That Sum to a Target**
+
+We need to find all the paths in a binary tree where the sum of node values along each path equals a given target sum. The paths should start at the root and end at any leaf node. Each valid path should be returned as a list of integers.
+
+For example, consider the following binary tree:
+
+```
+          5
+         / \
+        4   8
+       /   / \
+      11  13  4
+     /  \      \
+    7    2      1
+```
+
+Given the target sum of 22, the solution should return:
+
+```
+[ [5, 4, 11, 2], [5, 8, 4, 1] ]
+```
+
+---
+
+### 🧠 **Approach to Solve the Problem**
+
+To solve this, we will use a **Depth-First Search (DFS)** strategy. We traverse the tree recursively, accumulating the node values along the current path. At each step, we check if we’ve reached a leaf node with the target sum. If we have, we add that path to the result. Here’s a step-by-step breakdown:
+
+1. **Initialize Data Structures:**
+   - A `vector<vector<int>>` called `paths` to store all valid root-to-leaf paths.
+   - A `vector<int>` called `path` to keep track of the current path from the root to a leaf node.
+
+2. **DFS Traversal:**
+   - Start from the root and recursively traverse the tree.
+   - For each node, add its value to the `path`.
+   - When a leaf node is reached (i.e., both left and right children are `NULL`), check if the accumulated sum equals the target sum. If it does, add the current path to the result.
+   - After exploring the left and right subtrees, backtrack by removing the last node from the path.
+
+3. **Return the Result:**
+   - After exploring all paths, return the `paths` vector containing all valid paths.
+
+---
+
+### 🔧 **Code Breakdown (Step by Step)**
+
+#### 1. `pathSum` Function:
+
+```cpp
+vector<vector<int>> pathSum(TreeNode* root, int sum) {
+    vector<vector<int>> paths;
+    vector<int> path;
+    findPaths(root, sum, path, paths);
+    return paths;
+}
+```
+
+- This function is the main entry point. It initializes two vectors: `paths` for storing the valid paths and `path` for keeping track of the current path.
+- It calls the `findPaths` helper function to perform the DFS and populate the `paths` vector.
+- Finally, it returns the list of valid paths.
+
+#### 2. `findPaths` Helper Function:
+
+```cpp
+void findPaths(TreeNode* node, int sum, vector<int>& path, vector<vector<int>>& paths) {
+    if (!node) return;
+    path.push_back(node->val);
+
+    if (!(node->left) && !(node->right) && sum == node->val)
+        paths.push_back(path);
+
+    findPaths(node->left, sum - node->val, path, paths);
+    findPaths(node->right, sum - node->val, path, paths);
+
+    path.pop_back();
+}
+```
+
+- This is the recursive function that traverses the binary tree.
+- First, we check if the current node is `NULL`. If it is, we return.
+- We add the current node's value to the `path`.
+- If the current node is a **leaf node** (both left and right children are `NULL`) and the remaining sum matches the target, we add the current `path` to the `paths` vector.
+- We then recursively explore both the left and right subtrees, adjusting the target sum by subtracting the node’s value.
+- Finally, we backtrack by removing the last node from the `path`, which allows us to explore other potential paths.
+
+#### 3. Backtracking:
+
+The core idea here is **backtracking**. As we explore paths from the root to the leaves, we build up a path (from the root to the current node). Once we explore the left and right subtrees, we remove the last node from the path. This ensures that the `path` always reflects the current exploration.
+
+---
+
+### ⏱️ **Time and Space Complexity**
+
+#### **Time Complexity: O(n)**
+
+- The time complexity is **O(n)**, where `n` is the number of nodes in the binary tree. This is because we visit each node exactly once during the DFS traversal.
+
+#### **Space Complexity: O(h)**
+
+- The space complexity is **O(h)**, where `h` is the height of the tree. This accounts for the space used by the recursion stack.
+  - In the worst case (unbalanced tree), the recursion stack can have a depth of `h = n`, so the space complexity is **O(n)**.
+  - In the best case (balanced tree), the recursion stack depth will be **O(log n)**.
+
+---
+
+### 🔍 **Example Walkthrough**
+
+#### Example 1: A Balanced Binary Tree
+
+Consider the following tree:
+
+```
+        1
+       / \
+      2   3
+     / \
+    4   5
+```
+
+- Start from the root node `1`.
+- The left subtree (rooted at `2`) has valid paths: `1 → 2 → 4` and `1 → 2 → 5`.
+- The right subtree rooted at `3` does not contribute to valid paths (no leaf nodes that match the sum).
+
+The valid paths are `[[1, 2, 4], [1, 2, 5]]`.
+
+#### Example 2: An Unbalanced Binary Tree
+
+Consider this tree:
+
+```
+        1
+       /
+      2
+     /
+    3
+   /
+  4
+```
+
+- Starting from the root node `1`, the only valid path is `1 → 2 → 3 → 4`.
+
+The valid path is `[[1, 2, 3, 4]]`.
+
+---
+
+### 🚀 **Conclusion**
+
+This solution efficiently finds all root-to-leaf paths in a binary tree that sum to a given target using **Depth-First Search (DFS)**. The time complexity is **O(n)**, and the space complexity is **O(h)**, making it suitable for large binary trees. The recursive backtracking approach ensures that we correctly explore all possible paths while maintaining an efficient solution.
+
+This approach is both simple and powerful, providing a clean solution to the problem of finding all root-to-leaf paths that match a target sum.
+
+---
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/path-sum-ii/description/)
+
 ---
 {{< youtube MwLDG-WNOjM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #114: Flatten Binary Tree to Linked List](https://grid47.xyz/leetcode/solution-114-flatten-binary-tree-to-linked-list/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

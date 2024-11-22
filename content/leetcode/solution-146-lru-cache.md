@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/7ABFKPK2hD4/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/lru-cache/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/146.webp" 
     alt="A cache where items are gently shifting in and out, with the most recently used glowing brightly."
@@ -73,9 +71,130 @@ public:
  * obj->put(key,value);
  */
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/146.md" >}}
+### 📝 **Problem Understanding: LRU Cache**
+
+The **Least Recently Used (LRU) Cache** is a data structure that:
+- Stores key-value pairs.
+- Retrieves values based on keys.
+- Inserts new key-value pairs.
+- Evicts the least recently used (LRU) item when the cache exceeds its capacity.
+
+#### Operations:
+1. **get(key)**: Retrieves the value associated with `key` if it exists; otherwise, returns `-1`.
+2. **put(key, value)**: Inserts a key-value pair. If the key exists, it updates the value and makes the key the most recently used. If the cache exceeds its capacity, it evicts the least recently used key.
+
+### **Example**:
+- **Input**: `LRUCache(2)`, `put(1, 1)`, `put(2, 2)`, `get(1)`, `put(3, 3)`, `get(2)`, `put(4, 4)`, `get(1)`, `get(3)`, `get(4)`
+- **Output**: `1, -1, 3, 4`
+
+---
+
+### 🔧 **Approach: Efficient LRU Cache Implementation**
+
+The key challenge is to efficiently:
+- Access values using keys.
+- Track the usage order of keys.
+- Evict the least recently used element when the cache exceeds its capacity.
+
+#### **Solution Using Doubly Linked List & Hash Map**:
+- **Doubly Linked List**: Allows us to reorder items efficiently. The most recently used items are at the front, and the least recently used items are at the back.
+- **Hash Map**: Provides **O(1)** access time for key-value lookups. It stores each key's corresponding node in the doubly linked list.
+
+---
+
+### 🧑‍💻 **Code Breakdown: Step-by-Step**
+
+#### **Step 1: Data Structures**
+
+```cpp
+map<int, list<pair<int, int>>::iterator> mp;
+list<pair<int, int>> q;
+```
+- **`mp`**: A **map** stores the association of keys to their corresponding nodes in the doubly linked list.
+- **`q`**: A **doubly linked list** holds the key-value pairs, with the most recently used items at the front and the least recently used ones at the back.
+
+#### **Step 2: Constructor**
+
+```cpp
+LRUCache(int capacity) {
+    cap = capacity;
+}
+```
+- Initializes the cache with the specified capacity and prepares the `map` and `list`.
+
+#### **Step 3: `get` Method**
+
+```cpp
+int get(int key) {
+    if (!mp.count(key)) return -1;
+    auto it = *mp[key];
+    q.erase(mp[key]);
+    q.push_front(make_pair(key, it.second));
+    mp[key] = q.begin();
+    return it.second;
+}
+```
+- **Check for existence**: If the key doesn't exist in the cache, return `-1`.
+- **Move to front**: If the key exists, retrieve the value, erase it from the list, and move it to the front to mark it as most recently used.
+- **Return value**: Return the value of the key.
+
+#### **Step 4: `put` Method**
+
+```cpp
+void put(int key, int value) {
+    if (mp.count(key)) {
+        q.erase(mp[key]);
+        q.push_front(make_pair(key, value));
+        mp[key] = q.begin();
+    } else {
+        q.push_front(make_pair(key, value));
+        mp[key] = q.begin();
+        if (q.size() > cap) {
+            mp.erase(q.back().first);
+            q.pop_back();
+        }
+    }
+}
+```
+- **Update existing key**: If the key exists, update its value and move it to the front.
+- **Insert new key**: If the key doesn’t exist, add it to the front of the list.
+- **Evict LRU**: If the cache exceeds its capacity, evict the least recently used key (remove from the back of the list).
+
+#### **Step 5: Eviction Logic**
+
+```cpp
+if (q.size() > cap) {
+    mp.erase(q.back().first);
+    q.pop_back();
+}
+```
+- When the cache exceeds its capacity, remove the least recently used element by erasing it from both the map and the list.
+
+---
+
+### ⏱️ **Time and Space Complexity**
+
+#### **Time Complexity**:
+- **get(key)**: **O(1)** – Accessing an element in the map and moving it to the front of the list both take constant time.
+- **put(key, value)**: **O(1)** – Insertion and removal operations in the map and list both take constant time. Eviction also takes constant time.
+
+#### **Space Complexity**:
+- **O(capacity)** – The space is proportional to the cache's capacity. The map stores key-value pairs and their corresponding list iterators, while the list stores the actual data.
+
+---
+
+### 🎯 **Conclusion**
+
+This **LRU Cache** solution is highly efficient, providing **O(1)** time complexity for both `get` and `put` operations. By combining a **doubly linked list** and a **hash map**, the solution effectively manages cache access and eviction, ensuring the most recently used items are kept while the least recently used items are evicted when the cache is full.
+
+- **Efficient Caching**: The algorithm ensures that the cache operates with optimal time and space complexity.
+- **Real-World Use Case**: This approach is ideal for scenarios requiring real-time cache management, such as web browsers, databases, or memory management systems.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/lru-cache/description/)
+
 ---
 {{< youtube 7ABFKPK2hD4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #150: Evaluate Reverse Polish Notation](https://grid47.xyz/leetcode/solution-150-evaluate-reverse-polish-notation/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

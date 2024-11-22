@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/V-ecDfY5xEw/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/description/)
-
 ---
 **Code:**
 
@@ -40,9 +38,108 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1438.md" >}}
+### Problem Statement
+
+The task is to find the length of the longest contiguous subarray in a given list of integers such that the difference between the maximum and minimum elements in the subarray does not exceed a specified limit. This problem can be understood as a sliding window problem, where we want to maintain a window of numbers that satisfies a certain condition regarding their maximum and minimum values.
+
+### Approach
+
+To solve this problem, we will use a sliding window technique combined with a multiset data structure to keep track of the elements in the current window. The general steps involved in the approach are as follows:
+
+1. **Initialize Variables**: We will use a multiset to store the elements of the current window. We also maintain pointers to define the start and end of the window and a variable to store the maximum length of valid subarrays found so far.
+
+2. **Iterate Over the Array**: We will traverse through the array using a loop, expanding the window by adding elements to the multiset.
+
+3. **Check Validity of the Window**: For each new element added, we will check if the condition (difference between max and min elements in the window) is violated. If it is, we will shrink the window from the left by removing elements from the multiset until the condition is satisfied again.
+
+4. **Update Result**: After adjusting the window, we will compute the length of the current valid window and update our maximum length variable if needed.
+
+5. **Return the Result**: Finally, we return the maximum length of the valid subarrays found.
+
+### Code Breakdown (Step by Step)
+
+Let’s break down the provided code step by step:
+
+1. **Class Declaration**:
+   ```cpp
+   class Solution {
+   public:
+   ```
+
+   - We define a class named `Solution` which will contain our method to compute the result.
+
+2. **Function Declaration**:
+   ```cpp
+   int longestSubarray(vector<int>& nums, int limit) {
+   ```
+
+   - The function `longestSubarray` takes two parameters: a vector of integers `nums` and an integer `limit` which defines the maximum allowed difference between the maximum and minimum elements in a valid subarray.
+
+3. **Variable Initialization**:
+   ```cpp
+   multiset<int> ms;
+   int res = 0, j = 0;
+   ```
+
+   - We declare a `multiset<int>` named `ms` to store the elements of the current subarray. The integer `res` will store the maximum length of valid subarrays found, and `j` is used as a pointer to the start of the current window.
+
+4. **Iterate Over the Array**:
+   ```cpp
+   for(int i = 0; i < nums.size(); i++) {
+       ms.insert(nums[i]);
+   ```
+
+   - A loop iterates over each element in the `nums` array. The current element `nums[i]` is inserted into the multiset.
+
+5. **Check Window Validity**:
+   ```cpp
+   while(!ms.empty() && *ms.rbegin() - *ms.begin() > limit) {
+       ms.erase(ms.find(nums[j++]));
+   }
+   ```
+
+   - We check if the difference between the maximum element (`*ms.rbegin()`) and the minimum element (`*ms.begin()`) in the multiset exceeds the specified `limit`. If it does, we remove the leftmost element from the window (pointed to by `j`) until the condition is satisfied.
+
+6. **Update Maximum Length**:
+   ```cpp
+   res = max(res, i - j + 1);
+   ```
+
+   - After ensuring the window is valid, we calculate the current length of the window (`i - j + 1`) and update `res` if this length is greater than the previously recorded maximum.
+
+7. **Return the Result**:
+   ```cpp
+   return res;
+   }
+   ```
+
+   - Finally, we return the maximum length of the valid subarray stored in `res`.
+
+### Complexity
+
+- **Time Complexity**: The time complexity of this algorithm is \(O(n \log n)\), where \(n\) is the number of elements in the input array. This complexity arises from the insertion and deletion operations on the multiset, which take \(O(\log n)\) time.
+
+- **Space Complexity**: The space complexity is \(O(n)\) in the worst case, as we may store all elements in the multiset if the entire array satisfies the condition.
+
+### Conclusion
+
+This solution effectively finds the longest contiguous subarray that meets the specified condition using a sliding window approach and a multiset for dynamic maintenance of the window's elements. It showcases the power of combining data structures with algorithmic strategies to solve complex problems efficiently.
+
+#### Key Takeaways:
+
+1. **Sliding Window Technique**: The sliding window technique is a common pattern for solving problems related to subarrays, allowing for efficient tracking of conditions over a range of elements.
+
+2. **Multiset Usage**: Using a multiset provides an easy way to maintain a sorted order of elements and allows quick access to the maximum and minimum elements, which is crucial for this problem.
+
+3. **Dynamic Problem Solving**: The method illustrates how to dynamically adjust the size of the solution set (the window) based on the input conditions, demonstrating an effective approach to managing constraints in array problems.
+
+Overall, this implementation serves as a practical example of leveraging data structures to achieve efficient algorithms in solving array-related challenges.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/longest-continuous-subarray-with-absolute-diff-less-than-or-equal-to-limit/description/)
+
 ---
 {{< youtube V-ecDfY5xEw >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1441: Build an Array With Stack Operations](https://grid47.xyz/leetcode/solution-1441-build-an-array-with-stack-operations/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

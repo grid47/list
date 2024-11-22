@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/wH9FIi-39-w/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/minimum-sum-of-four-digit-number-after-splitting-digits/description/)
-
 ---
 **Code:**
 
@@ -34,9 +32,68 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2160.md" >}}
+### Problem Statement
+Given a four-digit integer `num`, the task is to split its digits into two new numbers such that the sum of these two numbers is minimized. The solution should return the minimum possible sum after forming and summing the two numbers from the original digits.
+
+### Approach
+To solve this problem, the approach involves:
+1. Extracting the digits of the input number.
+2. Sorting these digits in ascending order.
+3. Arranging the sorted digits to form two new numbers that yield the minimum sum when added together.
+
+### Code Breakdown (Step by Step)
+1. **Convert the Number to a String:**
+   ```cpp
+   string s = to_string(num);
+   ```
+   - The integer `num` is converted to a string `s` to easily manipulate and access individual digits.
+
+2. **Sort the Digits:**
+   ```cpp
+   sort(s.begin(), s.end());
+   ```
+   - The string `s` is sorted in ascending order. Sorting ensures that the smallest digits appear first, which helps in forming the two numbers that will produce the minimum possible sum.
+
+3. **Calculate the Resultant Sum:**
+   ```cpp
+   int res = (s[0] - '0' + s[1] - '0') * 10 + s[2] - '0' + s[3] - '0';
+   ```
+   - The sorted digits are used to construct two numbers:
+     - The first number uses the smallest and second smallest digits (`s[0]` and `s[1]`), combined to form a tens place.
+     - The second number uses the remaining two digits (`s[2]` and `s[3]`), forming individual ones places.
+   - The expression `(s[0] - '0' + s[1] - '0') * 10` calculates the tens place sum.
+   - Adding `s[2] - '0'` and `s[3] - '0'` gives the full sum of the two numbers.
+
+4. **Return the Result:**
+   ```cpp
+   return res;
+   ```
+   - The function returns `res`, which holds the minimum possible sum of the two numbers formed from the digits of `num`.
+
+### Example Walkthrough
+Suppose `num = 2931`:
+- Convert `num` to a string: `s = "2931"`.
+- Sort `s`: `s = "1239"`.
+- Form the two numbers using the sorted digits:
+  - First number: `12` (formed using `1` and `2`).
+  - Second number: `39` (formed using `3` and `9`).
+- Calculate the sum: `(1 + 2) * 10 + 3 + 9 = 30 + 12 = 42`.
+- Return `42` as the minimum sum.
+
+### Complexity
+- **Time Complexity**:
+  - The code runs in O(1) time because the maximum number of digits is fixed at four (constant time). Sorting and basic operations on a constant number of elements are performed in constant time.
+- **Space Complexity**:
+  - The space complexity is O(1) as only a small string and a few integer variables are used, regardless of input size.
+
+### Conclusion
+This solution is efficient and straightforward for minimizing the sum when forming two numbers from the digits of a four-digit integer. By sorting the digits and distributing them in an optimal pattern, the minimum sum is achieved. The algorithm handles edge cases and provides a reliable way to achieve minimal sums in O(1) time. This makes the approach highly suitable for any practical scenario involving four-digit numbers. The code is concise, easy to understand, and performs optimally without needing any additional data structures.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-sum-of-four-digit-number-after-splitting-digits/description/)
+
 ---
 {{< youtube wH9FIi-39-w >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2161: Partition Array According to Given Pivot](https://grid47.xyz/leetcode/solution-2161-partition-array-according-to-given-pivot/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

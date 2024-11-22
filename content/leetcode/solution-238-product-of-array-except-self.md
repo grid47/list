@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/yKZFurr4GQA/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/product-of-array-except-self/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/238.webp" 
     alt="A sequence of glowing numbers representing the product of elements except the current one, showing a smooth transition"
@@ -52,9 +50,132 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/238.md" >}}
+### 🚀 Problem Statement
+
+We are given an array `nums`, and our task is to compute a new array `output` where each element `output[i]` is the product of all elements in the original array except for the element at index `i`. The twist? We cannot use division, and we need to solve this in **O(n)** time complexity.
+
+Here's an example to help visualize the problem:
+```cpp
+Input:  [1, 2, 3, 4]
+Output: [24, 12, 8, 6]
+```
+Explanation:
+- `output[0] = 2 * 3 * 4 = 24`
+- `output[1] = 1 * 3 * 4 = 12`
+- `output[2] = 1 * 2 * 4 = 8`
+- `output[3] = 1 * 2 * 3 = 6`
+
+---
+
+### 🧠 Approach
+
+To solve this problem in **O(n)** time, we'll use two main concepts: **prefix products** and **suffix products**. Let's break it down step by step.
+
+1. **Prefix Products**:
+    - A prefix product for an index `i` is the product of all the elements before index `i`. For example, for `i = 3`, the prefix product would be `nums[0] * nums[1] * nums[2]`.
+    - We'll store the prefix products in an array called `pre`, where `pre[i]` holds the product of all elements before `i`.
+
+2. **Suffix Products**:
+    - A suffix product for an index `i` is the product of all elements after index `i`. For example, for `i = 3`, the suffix product would be `nums[4] * nums[5]`.
+    - We'll store the suffix products in an array called `suf`, where `suf[i]` holds the product of all elements after `i`.
+
+3. **Final Product**:
+    - For each index `i`, the result will be the product of `pre[i - 1]` and `suf[i + 1]`. This gives us the product of all elements except the current one.
+    - For the first element, we consider only the suffix product, and for the last element, we consider only the prefix product.
+
+---
+
+### 🔨 Step-by-Step Code Breakdown
+
+Now, let's break down the code to see how we implement this approach:
+
+```cpp
+class Solution {
+public:
+    vector<int> productExceptSelf(vector<int>& nums) {
+```
+- We start by defining a class `Solution` with the method `productExceptSelf`, which accepts a vector `nums` representing the input array.
+
+```cpp
+        int n = nums.size();
+```
+- We get the size of the input array `nums` and store it in `n`.
+
+```cpp
+        vector<int> pre(n, 1), suf(n, 1);
+```
+- We create two arrays `pre` and `suf`, both of size `n`, to store the prefix and suffix products. We initialize both arrays with `1` since multiplying by `1` won't affect the results.
+
+```cpp
+        pre[0] = nums[0];
+        suf[n - 1] = nums[n - 1];
+```
+- The first element of the prefix product is simply `nums[0]`, and the last element of the suffix product is `nums[n-1]`.
+
+```cpp
+        for(int i = 1; i < n; i++)
+            pre[i] = pre[i - 1] * nums[i];
+```
+- We calculate the prefix products for each element starting from the second element. The prefix product at `i` is the product of `nums[i]` and the previous prefix product `pre[i - 1]`.
+
+```cpp
+        for(int i = n - 2; i >= 0; i--)
+            suf[i] = suf[i + 1] * nums[i];
+```
+- Similarly, we calculate the suffix products in reverse order, starting from the second-to-last element. The suffix product at `i` is the product of `nums[i]` and the next suffix product `suf[i + 1]`.
+
+```cpp
+        vector<int> ans(n, 1);
+        for(int i = 0; i < n; i++)
+            ans[i] = (i > 0? pre[i - 1]: 1) * (i < n - 1? suf[i + 1]: 1);
+```
+- Finally, we calculate the product for each index `i` by multiplying the corresponding prefix and suffix products. For the first index (`i = 0`), the prefix product is `1` because there are no elements before it. Similarly, for the last index (`i = n - 1`), the suffix product is `1` because there are no elements after it.
+
+```cpp
+        return ans;
+    }
+};
+```
+- The method returns the resulting array `ans`, which contains the product of all elements except for the current element at each index.
+
+---
+
+### 📈 Complexity Analysis
+
+#### Time Complexity:
+- **O(n)**: We loop over the array three times (once for prefix, once for suffix, and once for the final result). Since each loop processes the array once, the time complexity is linear, or **O(n)**.
+
+#### Space Complexity:
+- **O(n)**: We use three arrays (`pre`, `suf`, and `ans`), each of size `n`. So, the space complexity is also **O(n)**.
+
+---
+
+### 🏁 Conclusion
+
+This approach effectively solves the problem in **O(n)** time and **O(n)** space by using prefix and suffix products. It’s a clever way to calculate the product of all elements except for the current element without needing division or nested loops.
+
+#### Key Takeaways:
+- **Efficiency**: This solution efficiently handles the problem in linear time and space, which is optimal.
+- **No Division**: We avoid division altogether by using prefix and suffix products.
+- **Edge Cases**: The algorithm works for arrays of various sizes, including very small ones (e.g., arrays of length 1 or 2).
+
+This method is a great example of optimizing solutions using extra space (for the prefix and suffix products) to reduce time complexity!
+
+---
+
+### 🎯 Quick Summary:
+- **Problem**: Compute the product of all elements except for the current element.
+- **Solution**: Use prefix and suffix products to get the desired result in linear time and space.
+- **Time Complexity**: O(n)
+- **Space Complexity**: O(n)
+
+This solution is simple, elegant, and efficient! Keep practicing to master these kinds of tricks! 💪✨
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/product-of-array-except-self/description/)
+
 ---
 {{< youtube yKZFurr4GQA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #242: Valid Anagram](https://grid47.xyz/leetcode/solution-242-valid-anagram/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

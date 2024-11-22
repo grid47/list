@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/KT1iUciJr4g/maxresdefault.webp"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/partition-list/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/86.webp" 
     alt="A glowing line dividing a list into two perfect sections."
@@ -67,9 +65,134 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/86.md" >}}
+### 📝 **Partitioning a Singly Linked List**
+
+In this problem, we are given a singly linked list and an integer `x`. The task is to partition the list such that:
+
+- All nodes with values less than `x` appear before nodes with values greater than or equal to `x`.
+- The relative order of nodes in each partition should remain unchanged.
+
+The goal is to return the head of the newly partitioned linked list.
+
+### 🔍 **Approach**
+
+To solve this problem efficiently, we use a **two-pointer approach** by maintaining two separate linked lists:
+1. One list will store nodes with values **less than `x`**.
+2. The other list will store nodes with values **greater than or equal to `x`**.
+
+At the end of the partitioning process, we merge the two lists into one, maintaining the order as required.
+
+### 🧑‍💻 **Step-by-Step Code Breakdown**
+
+#### Step 1: Define the `ListNode` Structure
+
+```cpp
+struct ListNode {
+    int val;
+    ListNode *next;
+    ListNode() : val(0), next(nullptr) {}
+    ListNode(int x) : val(x), next(nullptr) {}
+    ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
+```
+
+- The `ListNode` structure represents a node in the singly linked list.
+- It has two fields:
+  - `val`: stores the value of the node.
+  - `next`: a pointer to the next node in the list.
+- There are three constructors:
+  - The default constructor initializes `val` to 0 and `next` to `nullptr`.
+  - The second constructor initializes `val` to the given value and sets `next` to `nullptr`.
+  - The third constructor initializes both `val` and `next` with the given arguments.
+
+#### Step 2: Create Two New Lists to Partition the Original List
+
+```cpp
+ListNode* p1 = new ListNode(0);
+ListNode* p2 = new ListNode(0);
+ListNode* ans = p1, *r = p2;
+```
+
+- Two new dummy nodes, `p1` and `p2`, are created. These will help us build two separate lists:
+  - `p1`: Stores nodes with values **less than `x`**.
+  - `p2`: Stores nodes with values **greater than or equal to `x`**.
+- `ans` is a pointer to `p1`, which will eventually point to the head of the resulting partitioned list.
+- `r` is a pointer to `p2`, used to link the second list to the first.
+
+#### Step 3: Traverse the Input List and Partition the Nodes
+
+```cpp
+while(head) {
+    if(head->val < x) {
+        p1->next = new ListNode(head->val);
+        p1 = p1->next;
+    } else {
+        p2->next = new ListNode(head->val);
+        p2 = p2->next;
+    }
+    head = head->next;
+}
+```
+
+- We iterate through the input list starting from the `head` pointer.
+- For each node:
+  - If the node's value is less than `x`, it’s added to the list represented by `p1` (nodes with values less than `x`).
+  - If the node's value is greater than or equal to `x`, it’s added to the list represented by `p2` (nodes with values greater than or equal to `x`).
+- After adding the node, the corresponding pointer (`p1` or `p2`) is moved to the next node in the respective list.
+
+#### Step 4: Merge the Two Lists
+
+```cpp
+p1->next = r->next;
+```
+
+- After traversing the entire input list, we merge the two partitions.
+- We link `p1->next` to `r->next`, which points to the head of the second list (`p2`).
+- This connects the two lists together, with all nodes less than `x` appearing before nodes greater than or equal to `x`.
+
+#### Step 5: Return the New Head of the Partitioned List
+
+```cpp
+return ans->next;
+```
+
+- The result list is now starting from `ans->next`, because `ans` is a dummy node.
+- We return `ans->next` as the new head of the partitioned list.
+
+### ⏱️ **Time and Space Complexity**
+
+#### Time Complexity:
+- **O(n)**, where `n` is the number of nodes in the linked list.
+  - We traverse the entire list once to partition it into two separate lists.
+  - Merging the two lists is a constant-time operation.
+  - Thus, the time complexity is linear in terms of the number of nodes.
+
+#### Space Complexity:
+- **O(n)**, where `n` is the number of nodes in the linked list.
+  - We create two new linked lists (one for nodes less than `x` and one for nodes greater than or equal to `x`).
+  - Each new node requires additional space, so the space complexity is proportional to the number of nodes in the input list.
+
+### 🎯 **Conclusion**
+
+This solution efficiently partitions a singly linked list around a given value `x` using a two-pointer approach. By maintaining two separate lists and merging them at the end, we ensure that the order of nodes is preserved, and the time and space complexity remain linear (`O(n)`), making this approach both optimal and scalable.
+
+**Key Takeaways:**
+- The algorithm efficiently partitions the linked list into two parts.
+- The relative order of nodes is maintained within each partition.
+- A dummy node is used to simplify list manipulation.
+- The solution operates in linear time and space, making it ideal for large lists.
+
+---
+
+#### 🌟 **Final Thoughts**: Keep practicing, keep coding!
+
+Solving problems like these not only sharpens your problem-solving skills but also enhances your ability to implement efficient algorithms. Keep learning and improving every day! ✨
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/partition-list/description/)
+
 ---
 {{< youtube KT1iUciJr4g >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #89: Gray Code](https://grid47.xyz/leetcode/solution-89-gray-code/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

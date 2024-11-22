@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/Gso3ss4daQI/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/count-total-number-of-colored-cells/description/)
-
 ---
 **Code:**
 
@@ -61,9 +59,117 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2579.md" >}}
+### Problem Statement
+
+The problem requires finding the number of colored cells in a pattern of cells arranged in a square grid, where the coloring pattern follows a specific formula based on an input number `n`. The cells are added progressively, with each additional layer expanding the previous one. Specifically, for each increase in `n`, a new row and column are added, and the number of colored cells is determined by a simple arithmetic progression. The task is to determine the total number of colored cells after `n` steps.
+
+### Approach
+
+The solution has two main components:
+1. **Mathematical Formula Approach** (the primary method).
+2. **Breadth-First Search (BFS) Approach** (used for validation or understanding).
+
+The mathematical formula approach is efficient and solves the problem directly using an arithmetic series, which calculates the total number of colored cells without explicitly simulating the process of coloring. The BFS approach is an alternative and simulates the coloring process step by step, ensuring each step of coloring is counted as a unique action.
+
+### Code Breakdown (Step by Step)
+
+#### 1. **Mathematical Formula Approach**:
+```cpp
+long long x = 1;
+long long y = 4;
+while (--n) {
+    x += y;
+    y += 4;
+}
+return x;
+```
+- **Initialization**: 
+  - `x = 1` represents the initial colored cell (the center or starting point). 
+  - `y = 4` represents the number of additional cells added for each successive layer (the cells in the first layer surrounding the initial cell).
+  
+- **Main Loop**: 
+  - The loop runs for `n-1` times (since we already count the first colored cell).
+  - For each iteration:
+    - `x += y`: This adds the number of cells in the current layer (`y`) to the total number of colored cells `x`.
+    - `y += 4`: The number of cells added in the next layer increases by 4. This follows the pattern where each subsequent layer adds 4 more cells than the previous one.
+
+- **Final Result**: 
+  - After `n` iterations, the total number of colored cells is stored in `x`. This is the answer returned.
+
+#### 2. **Breadth-First Search (BFS) Approach** (Alternative Approach):
+```cpp
+queue<pair<int, int>> q;
+unordered_map<int, unordered_map<int, int>> mp;
+long long cnt = 1;
+q.push({0, 0});
+mp[0][0] = true;
+int dir[] = {0, 1, 0, -1, 0};
+while (--n) {
+    int sz = q.size();
+    while (sz--) {
+        auto it = q.front();
+        q.pop();
+        for (int i = 0; i < 4; i++) {
+            int x = it.first + dir[i], y = it.second + dir[i + 1];
+            if (mp.count(x) && mp[x].count(y)) continue;
+            mp[x][y] = true;
+            cnt++;
+            q.push({x, y});
+        }
+    }
+}
+return cnt;
+```
+- **Initialization**:
+  - A queue `q` is initialized, which will hold pairs of `(x, y)` coordinates representing the cells that are being colored.
+  - A map `mp` is used to track the visited cells. It ensures that a cell is colored only once. 
+  - The `cnt` variable tracks the number of colored cells, initialized to 1 (the starting cell).
+  - The queue is initialized with the starting point `(0, 0)`.
+
+- **Main BFS Loop**: 
+  - The outer `while` loop runs `n-1` times, corresponding to each step of the coloring process.
+  - Inside the loop:
+    - `sz = q.size()`: This represents the number of cells that will be colored in this step.
+    - A second `while` loop processes each cell in the current layer:
+      - For each cell, four possible directions are checked (up, down, left, and right).
+      - If a neighboring cell has already been visited (exists in `mp`), it's skipped to avoid re-coloring.
+      - If a neighboring cell hasn't been visited, it is added to the queue and marked as visited in the `mp` map.
+      - The `cnt` variable is incremented to count the newly colored cell.
+
+- **Final Result**:
+  - The BFS approach ensures that after `n` steps, the total number of colored cells is tracked in `cnt`, which is returned as the result.
+
+### Complexity Analysis
+
+#### Time Complexity:
+- **Mathematical Formula Approach**:
+  - The time complexity is **O(n)** due to the loop that runs `n-1` times, where `n` is the input number. This is because we update the count of colored cells and the number of cells added for each layer in constant time.
+
+- **BFS Approach**:
+  - The BFS approach processes each cell once. In the worst case, the queue will contain all the cells in the grid, and the program needs to check each neighboring cell for each step.
+  - Since we are using a grid-like structure, the BFS time complexity can be considered **O(n)**, where `n` represents the number of steps (each step corresponds to a layer of cells).
+  - The inner loops check each direction for each cell, but they operate in constant time, making the overall time complexity proportional to the number of colored cells.
+
+#### Space Complexity:
+- **Mathematical Formula Approach**:
+  - The space complexity is **O(1)** because no extra data structures are used. We are only storing a few variables for tracking the counts of cells and iterations.
+
+- **BFS Approach**:
+  - The space complexity is **O(m * m)**, where `m` is the maximum size of the grid that can be formed based on the value of `n`. The space complexity is due to the storage of visited cells in the `mp` map and the queue holding the cells that are currently being processed.
+
+### Conclusion
+
+The problem can be efficiently solved using a mathematical formula, where the number of colored cells follows an arithmetic progression. This approach has a time complexity of **O(n)** and a space complexity of **O(1)**, making it highly efficient.
+
+Alternatively, the BFS approach can be used to simulate the coloring process step by step. This method, while valid, has a higher space complexity due to the need for additional data structures and has a time complexity of **O(n)**, where `n` is the number of layers.
+
+The mathematical formula solution is preferable for large inputs due to its simplicity and efficiency. The BFS approach provides an alternative method that may be helpful for understanding the problem conceptually or when working with smaller grids.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/count-total-number-of-colored-cells/description/)
+
 ---
 {{< youtube Gso3ss4daQI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2580: Count Ways to Group Overlapping Ranges](https://grid47.xyz/leetcode/solution-2580-count-ways-to-group-overlapping-ranges/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

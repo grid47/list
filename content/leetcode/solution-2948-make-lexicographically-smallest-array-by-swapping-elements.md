@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/r0981xS7CjY/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/make-lexicographically-smallest-array-by-swapping-elements/description/)
-
 ---
 **Code:**
 
@@ -60,9 +58,121 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2948.md" >}}
+### Problem Statement:
+The problem asks to lexicographically rearrange the array `nums` such that elements are as small as possible, with the condition that two adjacent elements in the rearranged array can only differ by a value less than or equal to a given limit. The goal is to return the lexicographically smallest array possible under this constraint.
+
+### Approach:
+The problem can be approached by sorting and grouping adjacent elements whose differences do not exceed the given `limit`. After grouping such elements, each group is sorted individually, and the final array is reconstructed based on these sorted groups.
+
+#### Step-by-Step Approach:
+1. **Pairing Elements with Indices**: 
+   - We first pair each element in the input array with its original index. This allows us to later reconstruct the original positions after sorting and transforming the array.
+   
+2. **Sorting the Pairs**: 
+   - We sort the pairs primarily by the value of the elements. This ensures that the elements are processed in ascending order, allowing us to find adjacent groups of elements that can be rearranged.
+
+3. **Grouping Elements by Differences**:
+   - We iterate through the sorted array and group elements where the difference between consecutive elements is less than or equal to the given `limit`. Each group represents a contiguous subsequence of numbers that can be sorted individually without violating the constraint.
+   
+4. **Sorting Groups Individually**:
+   - Once the elements are grouped, each group is sorted based on their values. Sorting each group ensures that the elements within the group are as lexicographically small as possible.
+   
+5. **Reconstructing the Final Array**:
+   - Finally, we reconstruct the original array by placing the sorted values back into their original positions based on the indices stored during the pairing process.
+
+### Code Breakdown:
+
+#### 1. **Pairing Elements with Indices**:
+In the beginning, we create an array of pairs, where each pair consists of an element from `nums` and its original index. This allows us to keep track of the original positions when sorting and rearranging the elements later.
+
+```cpp
+vector<pair<int, int>> b;
+int n = nums.size();
+for (int i = 0; i < n; ++i)
+    b.push_back(make_pair(nums[i], i));
+```
+
+Here, `b` is a vector of pairs where each pair contains:
+- `nums[i]`: The element from the input array.
+- `i`: The original index of the element in the array.
+
+#### 2. **Sorting the Array by Element Values**:
+The next step is to sort the array of pairs. The sorting criterion is the value of the elements, not the indices. This step ensures that we can process the elements in ascending order.
+
+```cpp
+sort(b.begin(), b.end(), [](const auto& x, const auto& y) {
+    return x.first < y.first;
+});
+```
+
+The lambda function `[](const auto& x, const auto& y)` sorts the pairs based on the element values (`x.first < y.first`).
+
+#### 3. **Grouping Elements**:
+Next, we group elements whose values differ by no more than `limit`. We start with the first element as the first group. As we iterate through the sorted list, if the difference between the current element and the previous one is less than or equal to `limit`, we add the element to the current group. Otherwise, we start a new group.
+
+```cpp
+vector<vector<pair<int, int>>> c = {{b[0]}};
+for (int i = 1; i < n; ++i) {
+    if (b[i].first - b[i - 1].first <= limit)
+        c.back().push_back(b[i]);
+    else
+        c.push_back({b[i]});
+}
+```
+
+Here, `c` is a 2D vector where each sub-vector represents a group of elements that can be rearranged without violating the `limit` constraint. We check if the difference between consecutive elements in the sorted list is less than or equal to `limit`. If so, we add the element to the current group; otherwise, we start a new group.
+
+#### 4. **Sorting Each Group**:
+After grouping the elements, we need to sort each group individually to make them lexicographically as small as possible. This is achieved by sorting the indices of the elements in each group.
+
+```cpp
+for (const auto& t : c) {
+    vector<int> ind;
+    for (const auto& p : t)
+        ind.push_back(p.second);
+    
+    sort(ind.begin(), ind.end());
+    
+    for (int i = 0; i < ind.size(); ++i)
+        nums[ind[i]] = t[i].first;
+}
+```
+
+Here:
+- `t` is a group of pairs representing a group of elements.
+- We extract the indices of the elements in the group and store them in `ind`.
+- We sort `ind`, which ensures that the elements in each group are placed in the lexicographically smallest order.
+- Finally, we use these sorted indices to place the sorted elements back into their original positions in the `nums` array.
+
+#### 5. **Returning the Final Array**:
+Once all the groups are sorted and the original array is reconstructed, we return the modified array `nums`.
+
+```cpp
+return nums;
+```
+
+### Complexity:
+
+#### Time Complexity:
+1. **Sorting the Pairs**: Sorting the pairs based on the values takes `O(n log n)`, where `n` is the size of the array `nums`.
+2. **Grouping Elements**: The grouping step involves iterating over the array once, so it takes `O(n)`.
+3. **Sorting Each Group**: Sorting each group takes `O(n log n)` in the worst case if all elements are in one group. The total time for sorting all groups is at most `O(n log n)`.
+4. **Final Array Reconstruction**: Reconstructing the final array by sorting the indices and placing elements back into their original positions takes `O(n log n)`.
+
+Thus, the overall time complexity is dominated by the sorting step, resulting in **O(n log n)**.
+
+#### Space Complexity:
+- The space complexity is `O(n)` due to the additional storage used for the vector `b` (pairs of elements and their indices) and the vector `c` (groups of pairs). 
+- The space complexity is linear because we store all elements and their indices at different stages.
+
+### Conclusion:
+This solution efficiently finds the lexicographically smallest rearranged array by grouping elements that can be swapped without violating the `limit` constraint and sorting those groups individually. It leverages sorting and grouping techniques to maintain the necessary constraints while ensuring optimal performance. The solution's time complexity of `O(n log n)` is efficient for typical input sizes, and its space complexity is linear in the size of the input.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/make-lexicographically-smallest-array-by-swapping-elements/description/)
+
 ---
 {{< youtube r0981xS7CjY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2951: Find the Peaks](https://grid47.xyz/leetcode/solution-2951-find-the-peaks/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

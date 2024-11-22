@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/dEwKOofWa3U/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/number-of-pairs-of-strings-with-concatenation-equal-to-target/description/)
-
 ---
 **Code:**
 
@@ -43,9 +41,99 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2023.md" >}}
+### Problem Statement
+
+The goal of this problem is to count the number of pairs of strings from a given list that can be concatenated to form a specified target string. For example, given an array of strings and a target string, we want to determine how many unique pairs (i, j) exist such that the concatenation of `nums[i]` and `nums[j]` equals the target string. The pairs should be counted in both orders (i.e., (i, j) and (j, i) should be treated as distinct if they are different).
+
+### Approach
+
+To solve this problem efficiently, we can use the following approach:
+
+1. **Frequency Map**: Create a frequency map to count how many times each string appears in the input list. We only include strings that are shorter than the target string, as only those can potentially form valid pairs.
+
+2. **Iterate Through the Frequency Map**: For each unique string in the frequency map, we check if it can be the prefix of the target string. If it is, we further analyze whether the rest of the target string can be formed using the frequency map.
+
+3. **Count Valid Pairs**:
+    - If a string can concatenate with itself to form the target string (e.g., "abc" + "abc" = "abcabc"), we calculate the number of such pairs using combinations.
+    - If a string and its complement (the remaining part of the target string) exist in the frequency map, we count the valid pairs formed by these two strings.
+
+4. **Return the Result**: Finally, we return the total count of valid pairs.
+
+### Code Breakdown (Step by Step)
+
+Here’s a detailed breakdown of the code implementation:
+
+```cpp
+class Solution {
+public:
+```
+- The `Solution` class encapsulates the method for solving the problem.
+
+```cpp
+    int numOfPairs(vector<string>& nums, string target) {
+```
+- We define a public method `numOfPairs` that takes a vector of strings `nums` and a target string `target`.
+
+```cpp
+        unordered_map<string, int> freq;
+```
+- We initialize an unordered map `freq` to store the frequency of each string from `nums`.
+
+```cpp
+        for(auto num : nums) if(num.size() < target.size()) freq[num]++;
+```
+- We iterate through each string in `nums`. If the length of the string is less than the length of the target string, we increment its count in the frequency map. This is important as we only want to consider strings that can be potential prefixes of the target.
+
+```cpp
+        int res = 0;
+```
+- We initialize a variable `res` to hold the count of valid pairs.
+
+```cpp
+        for(auto [s, frq]: freq) {
+```
+- We iterate through each entry in the frequency map, where `s` is the string and `frq` is its frequency.
+
+```cpp
+            if(target.find(s) == 0) {
+```
+- For each string `s`, we check if it is a prefix of `target` by verifying if `target` starts with `s`.
+
+```cpp
+                if(s + s == target) 
+                    res += frq * (frq - 1);
+```
+- If `s` concatenated with itself equals `target`, we calculate the number of valid pairs that can be formed using this string. The number of ways to choose 2 strings from `frq` is `frq * (frq - 1)` because we can form pairs in both orders.
+
+```cpp
+                else
+                    res += frq * freq[target.substr(s.size())];
+```
+- If `s` is not the same as its complement (the part of the target string after `s`), we calculate the number of valid pairs formed by the frequency of `s` and the frequency of the complement string, which is obtained by taking the substring of `target` starting from the length of `s`.
+
+```cpp
+            }
+        }
+        return res;
+    }
+};
+```
+- After checking all strings, we return the total count of valid pairs stored in `res`.
+
+### Complexity
+
+- **Time Complexity**: The time complexity of this solution is O(n + m), where `n` is the number of strings in `nums` and `m` is the average length of the strings. The frequency map construction takes O(n), and iterating through the map takes O(m).
+- **Space Complexity**: The space complexity is O(n) as we store each unique string from `nums` in the frequency map.
+
+### Conclusion
+
+In conclusion, the `numOfPairs` method efficiently counts the number of pairs of strings that can be concatenated to form a given target string by utilizing a frequency map. This approach minimizes the need for nested loops, thus improving performance compared to a naive implementation. The method handles edge cases gracefully, such as ensuring that only valid prefixes are considered for concatenation, and it returns the correct count of unique pairs. This solution is not only optimized for performance but also demonstrates the power of hash maps in solving combinatorial problems effectively.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-pairs-of-strings-with-concatenation-equal-to-target/description/)
+
 ---
 {{< youtube dEwKOofWa3U >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2024: Maximize the Confusion of an Exam](https://grid47.xyz/leetcode/solution-2024-maximize-the-confusion-of-an-exam/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

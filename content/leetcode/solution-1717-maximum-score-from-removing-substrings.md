@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/9wZ-TWBreTg/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/maximum-score-from-removing-substrings/description/)
-
 ---
 **Code:**
 
@@ -50,9 +48,102 @@ public:
     
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1717.md" >}}
+### Problem Statement
+
+The problem involves maximizing the gain from removing pairs of characters from a given string based on specified point values for the pairs. The character pairs that can be removed are specified by two characters, \( a \) and \( b \). Each time a pair \( (a, b) \) is removed, the gain is \( x \), and each time a pair \( (b, a) \) is removed, the gain is \( y \). The goal is to determine the maximum gain possible by optimally removing these character pairs from the string.
+
+For example, given the string `"ababcb"`, if \( x = 5 \) and \( y = 3 \), and the pairs to consider are \( a = 'a' \) and \( b = 'b' \), the solution will find how many pairs can be removed and calculate the total gain accordingly.
+
+### Approach
+
+To solve this problem, we can adopt the following strategy:
+
+1. **Identify the Character Gain Order**: First, determine whether to prioritize removing pairs of \( (a, b) \) or \( (b, a) \) based on the gain values \( x \) and \( y \). If \( y \) is greater than \( x \), swap the characters and their respective gain values.
+
+2. **Greedily Remove Pairs**: Use a greedy approach to remove pairs from the string. The greedy function will iterate through the string, maintaining a stack where it pushes characters unless it finds a removable pair. When it encounters the characters \( a \) followed by \( b \), it pops \( a \) from the stack, effectively removing the pair.
+
+3. **Calculate Total Gain**: The total gain is calculated based on the number of pairs removed and their respective gain values. The process involves running the greedy function twice: first to remove \( (a, b) \) pairs, and then to remove \( (b, a) \) pairs from the resulting string.
+
+4. **Return Result**: Finally, return the total calculated gain as the result.
+
+### Code Breakdown (Step by Step)
+
+Let’s analyze the provided code to understand its functionality in detail:
+
+1. **Class Declaration**: The solution is encapsulated within a class named `Solution`.
+
+    ```cpp
+    class Solution {
+    ```
+
+2. **Method Declaration**: The public method `maximumGain` takes the input string `s`, the gain values `x` and `y`, and two optional characters \( a \) and \( b \) (defaulting to 'a' and 'b').
+
+    ```cpp
+    public:
+    int maximumGain(string s, int x, int y, char a = 'a', char b = 'b') {
+    ```
+
+3. **Prioritize Gain Values**: The first step inside the method is to compare \( x \) and \( y \). If \( y \) is greater than \( x \), swap the characters and their corresponding gains to ensure that we always start with the highest priority pair.
+
+    ```cpp
+    if(y > x) {
+        swap(a, b);
+        swap(x, y);
+    }
+    ```
+
+4. **Greedy Removal of Pairs**: The first call to the `greedy` function attempts to remove pairs \( (a, b) \). The resulting string `s1` will contain the characters that remain after all possible \( (a, b) \) pairs have been removed.
+
+    ```cpp
+    auto s1 = greedy(s, a, b), s2 = greedy(s1,  b, a);
+    ```
+
+5. **Second Pass for Remaining Pairs**: A second call to the `greedy` function is made to remove any remaining pairs \( (b, a) \) from the intermediate string `s1`, resulting in `s2`.
+
+6. **Calculate Total Gain**: The total gain is calculated based on how many pairs were removed. The formula for calculating the gain is as follows:
+   - For pairs \( (a, b) \): The number of pairs removed is \( \frac{s.size() - s1.size()}{2} \), which is multiplied by \( x \).
+   - For pairs \( (b, a) \): The number of pairs removed is \( \frac{s1.size() - s2.size()}{2} \), which is multiplied by \( y \).
+
+    ```cpp
+    return ((s.size() - s1.size()) / 2) * x + ((s1.size() - s2.size()) / 2) * y;
+    ```
+
+7. **Greedy Function Implementation**: The `greedy` function processes the string to remove pairs as described.
+
+    ```cpp
+    string greedy(string s, char a, char b) {
+        string st;
+        
+        for(char c : s) {
+            if(!st.empty() && st.back() == a && c == b)
+                st.pop_back();
+            else st.push_back(c);
+        }
+        return st;
+    }
+    ```
+
+    - The function uses a string `st` as a stack to hold characters.
+    - For each character in the string `s`, it checks if the last character in the stack is \( a \) and the current character is \( b \). If so, it pops \( a \) from the stack, effectively removing the pair.
+    - If not, the current character is pushed onto the stack.
+
+8. **Return to Class Scope**: After the greedy method completes its execution, the control returns to the main method, leading to the final result.
+
+### Complexity
+
+- **Time Complexity**: The time complexity of the solution is \(O(n)\), where \(n\) is the length of the string \(s\). The greedy algorithm processes each character in the string once.
+
+- **Space Complexity**: The space complexity is also \(O(n)\) due to the use of a stack to store characters during the greedy process.
+
+### Conclusion
+
+In conclusion, this solution efficiently maximizes the gain from removing character pairs from a string by strategically prioritizing the removal based on given gain values. The use of a greedy algorithm ensures that the solution is optimal while maintaining clarity and efficiency. The implementation is straightforward and can handle a variety of cases effectively. Overall, the code demonstrates a solid understanding of string manipulation and algorithm design, providing a robust solution to the problem of maximizing gains from character removals.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-score-from-removing-substrings/description/)
+
 ---
 {{< youtube 9wZ-TWBreTg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1718: Construct the Lexicographically Largest Valid Sequence](https://grid47.xyz/leetcode/solution-1718-construct-the-lexicographically-largest-valid-sequence/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/_tfiTQNZCbs/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/check-if-it-is-a-straight-line/description/)
-
 ---
 **Code:**
 
@@ -36,9 +34,78 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1232.md" >}}
+
+
+### Problem Statement
+The task is to determine if a given set of points, represented as coordinates in a 2D space, lies on a straight line. Each point is provided as a pair of integers corresponding to its \(x\) and \(y\) coordinates. The challenge is to efficiently ascertain whether all these points share the same slope when compared to each other, thus confirming they lie on a linear path.
+
+### Approach
+To solve the problem, we utilize the properties of slopes in geometry. The slope between any two points \((x_1, y_1)\) and \((x_2, y_2)\) can be calculated using the formula:
+
+\[
+\text{slope} = \frac{y_2 - y_1}{x_2 - x_1}
+\]
+
+For all the points to lie on a straight line, the slopes formed between the first point and all other points should be equal. However, directly comparing slopes could lead to division by zero errors when dealing with vertical lines (where \(x_1 = x_2\)). Therefore, we can circumvent this by comparing the cross products instead, which avoids division and provides a reliable way to determine collinearity.
+
+1. Calculate the slope between the first two points to establish a reference slope.
+2. For each subsequent point, calculate its slope with the first point and compare it to the reference slope.
+3. If any point has a different slope, return false. If all points share the same slope, return true.
+
+### Code Breakdown (Step by Step)
+
+```cpp
+class Solution {
+public:
+```
+- **Lines 1-2**: The `Solution` class is defined, and the public method `checkStraightLine` is declared, which takes a vector of vectors (2D array) representing coordinates.
+
+```cpp
+    bool checkStraightLine(vector<vector<int>>& cord) {
+```
+- **Line 3**: The method `checkStraightLine` begins its implementation, accepting a reference to a 2D vector named `cord`.
+
+```cpp
+        double slopt = (cord[1][0] - cord[0][0]) == 0? INT_MAX: (double)(cord[1][1] - cord[0][1]) / (double)(cord[1][0] - cord[0][0]);
+```
+- **Line 4**: The slope between the first two points is calculated. If the \(x\) coordinates of the first two points are the same (indicating a vertical line), `slopt` is set to `INT_MAX` to represent an undefined slope. Otherwise, the slope is calculated as the change in \(y\) divided by the change in \(x\).
+
+```cpp
+        for(int i = 2; i < cord.size(); i++) {
+```
+- **Line 5**: A loop is initiated that iterates from the third point (index 2) to the last point in the coordinates list.
+
+```cpp
+            double slp = (cord[i][0] - cord[0][0]) == 0?INT_MAX: (double)(cord[i][1] - cord[0][1]) / (double)(cord[i][0] - cord[0][0]);
+```
+- **Line 6**: Inside the loop, the slope for the current point (with respect to the first point) is calculated using the same logic as before. If the \(x\) coordinates match, `slp` is set to `INT_MAX`, otherwise it is computed.
+
+```cpp
+            if(slp != slopt) return false;
+```
+- **Line 7**: A comparison is made between the current slope (`slp`) and the reference slope (`slopt`). If they are not equal, it indicates that the points do not lie on the same straight line, and the function immediately returns `false`.
+
+```cpp
+        }
+        return true;
+    }
+};
+```
+- **Lines 8-10**: If the loop completes without finding any differing slopes, the function returns `true`, indicating that all points are collinear. The method and class definitions are closed.
+
+### Complexity
+1. **Time Complexity**: The time complexity of this function is \( O(n) \), where \( n \) is the number of points in the input vector. The function iterates through the list of points once to check their slopes.
+   
+2. **Space Complexity**: The space complexity is \( O(1) \) since only a constant amount of additional space is used for variables, regardless of the input size.
+
+### Conclusion
+The `checkStraightLine` function effectively determines whether a given set of coordinates forms a straight line by analyzing the slopes between points in a systematic way. Utilizing cross products avoids the pitfalls of division by zero and ensures accurate comparisons of slopes. This solution is efficient, with linear time complexity and constant space usage, making it suitable for handling large datasets of points in Cartesian space. Understanding the geometry of points and lines is crucial for solving such problems, and this implementation serves as an excellent example of applying mathematical concepts in programming.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-it-is-a-straight-line/description/)
+
 ---
 {{< youtube _tfiTQNZCbs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1233: Remove Sub-Folders from the Filesystem](https://grid47.xyz/leetcode/solution-1233-remove-sub-folders-from-the-filesystem/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/LN7KjRszjk4/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/asteroid-collision/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/735.webp" 
     alt="Asteroids moving in space, where collisions are detected, and the remaining asteroids glow softly after the impact."
@@ -70,9 +68,115 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/735.md" >}}
+### Problem Statement
+
+The problem at hand involves simulating the **asteroid collision** phenomenon. Imagine a universe where asteroids are moving in a straight line, either to the left or right. Each asteroid has a size and direction. When two asteroids collide, they destroy each other if their sizes are unequal, or both are destroyed if they are of the same size. The goal is to determine the final configuration of asteroids after all collisions have occurred.
+
+Given an array `ast` representing asteroids where each element represents the size and direction of an asteroid, the task is to return an array representing the state of the asteroids after all collisions.
+
+- Positive values indicate asteroids moving right.
+- Negative values indicate asteroids moving left.
+- When two asteroids collide, the one with the smaller absolute size will be destroyed, or both will be destroyed if they have the same size.
+
+### Approach
+
+The approach to solving this problem involves using a **stack data structure** to simulate the sequence of asteroid movements and collisions. The stack helps track the asteroids that are moving right, and whenever a left-moving asteroid is encountered, a collision is checked.
+
+Here’s the detailed approach:
+
+1. **Iterate through the asteroids:**
+   - Traverse through each asteroid in the given array one by one.
+   
+2. **Handle collisions:**
+   - If the asteroid is moving right, it can safely move without any collision. So, simply push it onto the stack.
+   - If the asteroid is moving left:
+     - Check the top of the stack (which will be an asteroid moving right). If it’s smaller in size than the current left-moving asteroid, it will be destroyed.
+     - If both the left-moving and right-moving asteroids are of the same size, both will be destroyed.
+     - If the right-moving asteroid is larger, the left-moving asteroid will be destroyed, and no collision happens with further asteroids in the stack.
+
+3. **Collision conditions:**
+   - For each asteroid:
+     - If it’s moving left, check if it collides with any of the asteroids in the stack (which are moving right).
+     - A collision happens if the asteroid in the stack is smaller, and the asteroid being processed is moving left. In that case, the smaller asteroid is popped off the stack, and the process is repeated until no more collisions occur or the stack is empty.
+   
+4. **Return the result:**
+   - After processing all asteroids, the stack will contain the final configuration of the asteroids.
+
+This approach ensures that the solution runs in linear time as each asteroid is processed once and only pushed/popped from the stack once.
+
+### Code Breakdown (Step by Step)
+
+1. **Variable Initialization:**
+   The function begins by initializing a stack `stk` to hold the asteroids and a variable `dir` to help determine the direction (though it's not used in this implementation).
+
+   ```cpp
+   vector<int> stk;  // Stack to hold the asteroids
+   ```
+
+2. **Looping through the Asteroids:**
+   The main loop iterates over each asteroid in the given vector `ast`.
+
+   ```cpp
+   for(int a : ast) {
+   ```
+
+3. **Handling Collisions:**
+   Inside the loop, a `while` loop checks if a collision occurs between the current asteroid `a` (moving left) and the top of the stack (which contains asteroids moving right). If a collision happens, the stack is modified.
+
+   - **Condition for Collision:** A collision happens when the top of the stack is a right-moving asteroid (i.e., positive), and the current asteroid `a` is a left-moving asteroid (i.e., negative).
+   
+   ```cpp
+   while(!stk.empty() && (((double)stk.back()/a) < 0 && a < 0) && (abs(stk.back()) < abs(a))) {
+       stk.pop_back();  // Destroy the right-moving asteroid
+   }
+   ```
+
+4. **Handling Equal-sized Collisions:**
+   If an asteroid on the stack has the same size as the incoming asteroid (moving left), both will be destroyed. The asteroid in the stack is popped, and the loop continues.
+
+   ```cpp
+   if(!stk.empty() && (stk.back() == -a && a < 0)) {
+       stk.pop_back();  // Destroy both asteroids of equal size
+       continue;  // Skip to the next asteroid
+   }
+   ```
+
+5. **Pushing the Asteroid onto the Stack:**
+   If there is no collision or the collision results in the destruction of the incoming asteroid, the current asteroid is added to the stack.
+
+   ```cpp
+   if (stk.empty() || ((double)stk.back()/a > 0) || ((double)stk.back()/a < 0 && a > 0)) {
+       stk.push_back(a);  // No collision, add to stack
+   }
+   ```
+
+6. **Returning the Result:**
+   Finally, the stack is returned, representing the final configuration of the asteroids after all collisions have been resolved.
+
+   ```cpp
+   return stk;
+   ```
+
+### Complexity
+
+#### Time Complexity:
+- **O(n)**, where `n` is the number of asteroids in the input array.
+- Each asteroid is processed once, and every operation (push or pop) on the stack takes constant time, so the time complexity is linear.
+
+#### Space Complexity:
+- **O(n)**, as we are using a stack to hold the asteroids. In the worst case, when no collisions occur, all asteroids will be placed in the stack, requiring O(n) space.
+
+### Conclusion
+
+The **asteroid collision problem** is a classic example of how stack data structures can be used to simulate a sequence of events where the order and interactions between elements matter. The solution efficiently handles asteroid collisions in a linear time complexity by using a stack to manage the state of asteroids and handle conflicts between left- and right-moving asteroids.
+
+By processing each asteroid once and applying the collision logic based on simple comparisons of sizes and directions, this approach ensures correctness and optimal performance. This technique is not only applicable to asteroid problems but can also be extended to other collision-based simulations, making it a versatile solution for related problems.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/asteroid-collision/description/)
+
 ---
 {{< youtube LN7KjRszjk4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #738: Monotone Increasing Digits](https://grid47.xyz/leetcode/solution-738-monotone-increasing-digits/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

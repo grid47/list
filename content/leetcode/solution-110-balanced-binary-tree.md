@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/BrnZDIoScEA/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/balanced-binary-tree/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/110.webp" 
     alt="A tree where branches gently balance on either side, with glowing nodes symbolizing equilibrium."
@@ -61,9 +59,122 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/110.md" >}}
+### 🌳 **Problem Statement: Check if a Binary Tree is Height-Balanced**
+
+The task is to determine whether a binary tree is **height-balanced**. A tree is considered balanced if, for every node, the difference in the heights of its left and right subtrees is at most 1. The **height** of a node is the number of edges on the longest path from that node to a leaf. This problem is important because a balanced binary tree ensures optimal performance in operations like insertion, deletion, and traversal.
+
+---
+
+### 🧠 **Approach: Checking Tree Balance Efficiently**
+
+To solve the problem of checking if a binary tree is height-balanced, we can break down the solution into two key tasks:
+
+1. **Recursive Balance Check:**
+   - For each node, check if the difference in heights between its left and right subtrees is at most 1. This ensures balance at every level of the tree.
+   
+2. **Height Calculation During Recursion:**
+   - The height of a node is the longest path from that node to any leaf in its subtree. By calculating the height and checking balance in a single recursive pass, we can achieve both goals efficiently.
+
+3. **Optimization:**
+   - By combining the height calculation and balance check in one function, we avoid redundant recalculations and make the process more efficient.
+
+---
+
+### 🔧 **Code Breakdown: Step-by-Step**
+
+#### **Step 1: `isBalanced` Function**
+
+```cpp
+bool isBalanced(TreeNode* root) {
+    if (!root) return true;
+    int l = h(root->left);
+    int r = h(root->right);
+    return abs(l - r) <= 1 &&
+           isBalanced(root->left) &&
+           isBalanced(root->right);
+}
+```
+
+- **Base Case:** If the current node (`root`) is `NULL`, return `true` because an empty tree is considered balanced.
+- **Height Calculation:** The heights of the left and right subtrees are calculated using the helper function `h()`. This is explained in the next step.
+- **Balance Check:** The absolute difference between the heights of the left and right subtrees is checked. If it exceeds 1, return `false` since the tree is unbalanced.
+- **Recursive Check:** The function recursively checks the balance of both the left and right subtrees. If either subtree is unbalanced, the tree is unbalanced.
+
+#### **Step 2: `h` Function (Height Calculation)**
+
+```cpp
+int h(TreeNode* node) {
+    if (node == NULL) return 0;
+    int l = h(node->left);
+    int r = h(node->right);
+    return 1 + max(l, r);
+}
+```
+
+- **Base Case:** If the node is `NULL`, return `0` because there’s no height to calculate.
+- **Recursive Height Calculation:** The function recursively calculates the heights of the left and right subtrees of the current node.
+- **Return Height:** The height of the current node is `1 + max(l, r)`, where `l` and `r` are the heights of the left and right subtrees, respectively. The `max` ensures we take the longer path.
+
+---
+
+### ⏱️ **Time and Space Complexity**
+
+#### **Time Complexity: O(n)**
+
+- The `isBalanced` function recursively visits each node in the tree.
+- The `h` function is also called for each node to compute the height of its subtrees.
+- Each node is visited once, and the height is computed in constant time for each node once its subtrees have been calculated. Therefore, the time complexity is **O(n)**, where `n` is the number of nodes in the tree.
+
+#### **Space Complexity: O(h)**
+
+- The space complexity is determined by the recursion stack. In the worst case, the tree could be unbalanced, leading to a recursion depth of **O(n)**.
+- In the best case (a perfectly balanced tree), the height `h` is **O(log n)**, resulting in a space complexity of **O(log n)**.
+
+---
+
+### 🔍 **Example Walkthrough**
+
+Let’s consider an example of a binary tree to understand how the solution works:
+
+```
+        3
+       / \
+      9   20
+         /  \
+        15   7
+```
+
+1. **Step 1:** Start at the root node `3`. Calculate the heights of its left and right subtrees:
+   - The left subtree is just `9`, with a height of `0`.
+   - The right subtree has `20`, whose left and right subtrees are `15` and `7`, both with heights of `0`. So, the height of node `20` is `1`.
+   - The height of node `3` is `1 + max(0, 2) = 3`.
+
+2. **Step 2:** Check if the tree is balanced at node `3`:
+   - The left subtree has a height of `0`, and the right subtree has a height of `2`. The absolute difference is `2`, which is greater than `1`, so the tree is **not balanced**.
+
+Thus, the function will return `false`, indicating that the tree is unbalanced.
+
+---
+
+### 🚀 **Conclusion**
+
+This solution efficiently checks whether a binary tree is balanced by:
+- Recursively calculating the height of each subtree.
+- Checking the balance condition (the height difference between left and right subtrees) at each node.
+- Returning `true` if the tree is balanced and `false` if it is unbalanced.
+
+The time complexity is **O(n)**, and the space complexity is **O(h)**, making the solution optimal for most binary tree problems. It handles both balanced and unbalanced trees efficiently and uses recursion to traverse the tree while calculating heights.
+
+Happy coding! 🌱
+
+---
+
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/balanced-binary-tree/description/)
+
 ---
 {{< youtube BrnZDIoScEA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #111: Minimum Depth of Binary Tree](https://grid47.xyz/leetcode/solution-111-minimum-depth-of-binary-tree/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

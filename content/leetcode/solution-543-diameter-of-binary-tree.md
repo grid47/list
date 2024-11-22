@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/6lJZ_xj1mEo/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/diameter-of-binary-tree/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/543.webp" 
     alt="A binary tree where the longest path between two nodes is highlighted, glowing softly to show the tree's diameter."
@@ -60,9 +58,108 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/543.md" >}}
+### Problem Statement
+
+The problem asks us to calculate the **diameter** of a binary tree. The diameter of a binary tree is the length of the longest path between any two nodes in the tree. This path may or may not pass through the root of the tree. We are tasked with finding this diameter efficiently.
+
+### Approach
+
+To solve this problem, we can utilize a **depth-first search (DFS)** approach that calculates the depth of each node while simultaneously updating the diameter. The key observation here is that the longest path between any two nodes in a binary tree can be represented as the sum of the depths of the left and right subtrees of a node.
+
+1. **Depth Calculation**: 
+   - The depth of a node is defined as the length of the longest path from that node to a leaf node.
+   - The depth of any node is `1 + max(left_depth, right_depth)`, where `left_depth` and `right_depth` represent the depths of the left and right subtrees, respectively.
+
+2. **Diameter Calculation**:
+   - The diameter of the tree at any node is defined as the sum of the depths of its left and right subtrees.
+   - The overall diameter of the tree will be the maximum diameter found at any node.
+
+By using a recursive function that calculates the depth of each node, we can simultaneously update the diameter by comparing the sum of the left and right subtree depths at each node.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Define the `TreeNode` structure
+
+The problem statement provides a definition of the `TreeNode` structure. Each node in the binary tree contains:
+- An integer value (`val`).
+- Pointers to the left and right child nodes (`left` and `right`).
+
+The constructor of the `TreeNode` structure allows for easy initialization of each node, with the option to set its value and child pointers.
+
+```cpp
+struct TreeNode {
+    int val;
+    TreeNode *left;
+    TreeNode *right;
+    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+};
+```
+
+#### Step 2: Define the `diameterOfBinaryTree` function
+
+```cpp
+int diameterOfBinaryTree(TreeNode* root) {
+    int d = 0;
+    dep(d, root);
+    return d;
+}
+```
+
+- This function is the main entry point for the solution. It takes the root of the binary tree as an argument and initializes the `d` variable to 0. The variable `d` will store the diameter of the tree.
+- The function then calls the helper function `dep(d, root)` to calculate the diameter and update the value of `d`.
+- Finally, the function returns the value of `d`, which represents the diameter of the binary tree.
+
+#### Step 3: Define the `dep` (depth) function
+
+```cpp
+int dep(int &d, TreeNode* node) {
+    if (node == NULL) return 0;
+    int l = dep(d, node->left);
+    int r = dep(d, node->right);
+    d = max(d, l + r);
+    return 1 + max(l, r);
+}
+```
+
+- This is a helper function that calculates the depth of the current node while also updating the diameter of the tree.
+- **Base case**: If the current node is `NULL` (i.e., we have reached a leaf), the function returns 0, representing a depth of 0 for a non-existent node.
+- **Recursive case**:
+  - The function recursively calculates the depth of the left and right subtrees by calling `dep(d, node->left)` and `dep(d, node->right)`, respectively. These calls return the depths of the left and right subtrees.
+  - The diameter of the current node is calculated as the sum of the depths of the left and right subtrees (`l + r`). If this sum is greater than the current diameter `d`, we update `d` to reflect the new maximum.
+  - The function then returns the depth of the current node, which is `1 + max(l, r)`, where `l` and `r` are the depths of the left and right subtrees.
+
+#### Step 4: Update the Diameter
+
+```cpp
+d = max(d, l + r);
+```
+
+- At each node, after calculating the depths of the left and right subtrees, we check if the sum of the two depths (`l + r`) is larger than the current `d`. If so, we update `d` to the new value.
+- This ensures that `d` always stores the diameter of the tree, which is the maximum path length between any two nodes.
+
+#### Step 5: Return the Result
+
+The final result, the diameter of the binary tree, is stored in the variable `d`, which is returned after the DFS traversal is complete.
+
+### Complexity
+
+#### Time Complexity:
+- The time complexity of the algorithm is **O(n)**, where `n` is the number of nodes in the binary tree. This is because we visit each node exactly once during the DFS traversal and compute the depth for each node in constant time.
+
+#### Space Complexity:
+- The space complexity is **O(h)**, where `h` is the height of the binary tree. This is due to the recursive function call stack used during the DFS traversal. In the worst case, the height of the tree is equal to the number of nodes (`h = n`), so the space complexity can be up to **O(n)** for a skewed tree. For a balanced tree, the space complexity is **O(log n)**.
+
+### Conclusion
+
+The problem of finding the diameter of a binary tree is efficiently solved using a depth-first search (DFS) approach that computes the depth of each node and simultaneously updates the diameter of the tree. By leveraging recursion, we calculate the depth of both subtrees for each node, updating the diameter if a longer path is found. The solution has a time complexity of **O(n)**, making it suitable for large binary trees. The code is concise, easy to understand, and optimal in terms of both time and space complexity for the given problem.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/diameter-of-binary-tree/description/)
+
 ---
 {{< youtube 6lJZ_xj1mEo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #547: Number of Provinces](https://grid47.xyz/leetcode/solution-547-number-of-provinces/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

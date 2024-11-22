@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/lslcc0tumpU/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/count-of-matches-in-tournament/description/)
-
 ---
 **Code:**
 
@@ -38,9 +36,96 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1688.md" >}}
+### Problem Statement
+
+The problem involves determining the total number of matches played in a knockout tournament where `n` teams compete. In each round, each match results in one team being eliminated. The objective is to calculate how many matches are played until only one team remains, given that:
+
+- If there is an odd number of teams, one team automatically advances to the next round without playing a match.
+- If there is an even number of teams, all teams participate in matches.
+
+### Approach
+
+To solve this problem, we can use a recursive approach:
+
+1. **Base Cases**:
+   - If there are `0` teams (`n == 0`), no matches can occur, so the result is `0`.
+   - If there is `1` team (`n == 1`), again, no matches can be played, resulting in `0`.
+
+2. **Recursive Calculation**:
+   - For each round, if `n` teams participate:
+     - If `n` is even, all teams will play in pairs, resulting in `n / 2` matches, and the tournament continues with `n / 2` teams advancing.
+     - If `n` is odd, there will be `n / 2` matches, and one team automatically advances, leading to `(n / 2 + 1)` teams in the next round.
+
+3. **Combine Results**:
+   - The total number of matches played is the sum of matches from the current round and matches played in subsequent rounds.
+
+### Code Breakdown (Step by Step)
+
+Here is a detailed breakdown of the implementation:
+
+```cpp
+class Solution {
+public:
+    int numberOfMatches(int n) {
+```
+- **Class Definition**: We define a class `Solution` with a public method `numberOfMatches` that accepts an integer `n`, representing the number of teams.
+
+```cpp
+        if(n==0) return 0;
+        if(n==1) return 0;
+```
+- **Base Case Checks**:
+  - If `n` is `0`, the method returns `0`, indicating no matches can be played.
+  - If `n` is `1`, the method also returns `0`, as a single team cannot compete.
+
+```cpp
+        int ans = n / 2;
+```
+- **Matches Calculation**: 
+  - The variable `ans` is initialized to `n / 2`, representing the number of matches that can be played in the current round if `n` is even.
+
+```cpp
+        if(n & 1)
+            ans += numberOfMatches(n/2 + 1);
+        else
+            ans += numberOfMatches(n/2);
+```
+- **Recursive Call**:
+  - If `n` is odd (checked using the bitwise AND operation `n & 1`), we add the matches from the next round where `(n / 2 + 1)` teams advance.
+  - If `n` is even, we add the matches from the next round where `(n / 2)` teams advance.
+
+```cpp
+        return ans;
+    }
+};
+```
+- **Return Statement**: Finally, the method returns the total number of matches played.
+
+### Complexity
+
+- **Time Complexity**: The time complexity of this recursive solution is \(O(\log n)\). Each call reduces the problem size roughly by half, resulting in logarithmic depth of recursion.
+
+- **Space Complexity**: The space complexity is also \(O(\log n)\) due to the recursive call stack. 
+
+### Conclusion
+
+The recursive solution effectively computes the total number of matches in a knockout tournament, leveraging the properties of even and odd team counts. 
+
+Key takeaways include:
+
+1. **Efficient Match Counting**: The solution provides an elegant way to calculate matches without explicitly simulating each match, making it efficient for large values of `n`.
+
+2. **Clear Recursive Logic**: The recursive approach is intuitive and clearly illustrates how matches are counted in rounds.
+
+3. **Understanding of Knockout Tournaments**: This code encapsulates the fundamental mechanics of knockout tournaments, where teams are eliminated in each round, leading to a simple yet powerful mathematical model.
+
+In summary, this code efficiently calculates the number of matches played in a knockout tournament through a recursive breakdown of team eliminations, providing a solid understanding of tournament dynamics and match counting.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/count-of-matches-in-tournament/description/)
+
 ---
 {{< youtube lslcc0tumpU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1690: Stone Game VII](https://grid47.xyz/leetcode/solution-1690-stone-game-vii/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

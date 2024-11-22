@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/YQ_8I9TmsyA/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/count-number-of-distinct-integers-after-reverse-operations/description/)
-
 ---
 **Code:**
 
@@ -47,9 +45,103 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2442.md" >}}
+### Problem Statement
+
+The problem asks to count the number of distinct integers in an array `nums` where each number can be reversed, and both the original number and its reversed version are considered. Essentially, the task is to find out how many distinct numbers there are in the set formed by taking each number in the array and its reverse.
+
+For example:
+- Input: `[123, 321, 212]`
+- Output: `2`
+
+In this example, the distinct numbers are `123` and `212`. The reverse of `123` is `321`, which is already in the array, so the total distinct numbers are `123` and `212`.
+
+### Approach
+
+The approach for solving this problem can be outlined as follows:
+
+1. **Reverse Numbers**: For each number in the array, calculate its reverse. The reversed number is also considered as a valid distinct number.
+  
+2. **Track Distinct Values**: Use a data structure like a set to keep track of distinct values. Since sets automatically handle duplicates, adding both the original number and its reverse will ensure that only distinct values are counted.
+
+3. **Final Count**: After processing all the numbers and their reverses, the size of the set will give the number of distinct integers.
+
+This approach is straightforward and relies on the properties of sets to manage duplicates automatically.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Reverse Function Implementation
+
+First, we define a helper function `rev` that reverses a given integer. This function iterates through the digits of the number and constructs the reversed number by repeatedly taking the last digit and appending it to the result.
+
+```cpp
+int rev(int num) {
+    int res = 0;
+    while(num > 0) {
+        res = res * 10 + num % 10;  // Get the last digit and append it to the result
+        num /= 10;  // Remove the last digit from num
+    }
+    return res;  // Return the reversed number
+}
+```
+
+- `res = res * 10 + num % 10`: This line takes the last digit of `num` (`num % 10`) and adds it to the current `res`, shifting the previous digits left by one position (multiplying by 10).
+- `num /= 10`: This removes the last digit from `num`, so the loop continues until all digits are processed.
+
+#### Step 2: Counting Distinct Integers
+
+In the main function `countDistinctIntegers`, we initialize a set `cnt` to store the distinct values. The set automatically handles duplicates, so any number or its reverse will only be stored once.
+
+```cpp
+int countDistinctIntegers(vector<int>& nums) {
+    set<int> cnt;  // Set to store distinct numbers
+    int n = nums.size();  // Get the size of the input array
+    for(int i = 0; i < n; i++) {
+        cnt.insert(nums[i]);  // Insert the original number into the set
+        cnt.insert(rev(nums[i]));  // Insert the reversed number into the set
+    }
+    
+    return cnt.size();  // Return the number of distinct elements
+}
+```
+
+- **Insert Original Number**: `cnt.insert(nums[i]);` adds the original number to the set.
+- **Insert Reversed Number**: `cnt.insert(rev(nums[i]));` adds the reversed version of the number to the set.
+  
+The set `cnt` ensures that only unique numbers (whether original or reversed) are stored. After processing all the numbers in the array, the size of the set `cnt.size()` gives the total count of distinct integers.
+
+#### Step 3: Return the Result
+
+Finally, the size of the set `cnt` is returned as the result, which gives the number of distinct integers formed by considering both the original numbers and their reversals.
+
+```cpp
+return cnt.size();
+```
+
+### Complexity
+
+#### Time Complexity
+
+The time complexity of the solution is **O(n * m)**, where `n` is the size of the input array `nums` and `m` is the average number of digits in the numbers in the array. This is because:
+- For each number in the array, we perform the reversal operation, which takes time proportional to the number of digits in that number (`O(m)`).
+- The insert operation on the set is **O(1)** on average, but since we are doing this for two numbers (the original and the reversed), it still remains efficient.
+
+Thus, the overall time complexity is **O(n * m)**.
+
+#### Space Complexity
+
+The space complexity of the solution is **O(n)**, as the set `cnt` stores the distinct values. In the worst case, if all numbers and their reversals are distinct, the set will store `2n` distinct values. However, the space complexity depends on the number of distinct integers, so it is at most **O(n)**.
+
+### Conclusion
+
+This solution efficiently counts the number of distinct integers in an array, considering both the original numbers and their reversed versions. The approach uses a set to automatically manage duplicates and ensure that only unique values are counted. The time complexity of **O(n * m)**, where `m` is the number of digits in the largest number in the array, ensures that the solution performs well even for larger inputs. The space complexity of **O(n)** makes the solution space-efficient, as it only stores the distinct integers.
+
+This solution is optimal for this problem and leverages the power of sets in C++ to handle the distinct counting efficiently.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/count-number-of-distinct-integers-after-reverse-operations/description/)
+
 ---
 {{< youtube YQ_8I9TmsyA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2443: Sum of Number and Its Reverse](https://grid47.xyz/leetcode/solution-2443-sum-of-number-and-its-reverse/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

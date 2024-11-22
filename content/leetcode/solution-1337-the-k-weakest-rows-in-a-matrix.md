@@ -18,8 +18,6 @@ youtube_thumbnail=""
 
 
 
-[`Problem Link`](https://leetcode.com/problems/the-k-weakest-rows-in-a-matrix/description/)
-
 ---
 **Code:**
 
@@ -40,9 +38,78 @@ public:
     }
 };
 {{< /highlight >}}
-
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1337.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1338: Reduce Array Size to The Half](https://grid47.xyz/leetcode/solution-1338-reduce-array-size-to-the-half/) |
+
+### Problem Statement
+The objective is to find the k weakest rows in a binary matrix (or 2D array), where each row represents soldiers in a military unit. In the matrix, `1`s represent soldiers and `0`s represent civilians. The strength of a row is determined by the number of soldiers present (the count of `1`s). If two rows have the same number of soldiers, the row that appears first in the matrix is considered weaker. The task is to return the indices of the k weakest rows in ascending order.
+
+### Approach
+To solve the problem, we follow these steps:
+
+1. **Count Soldiers**: For each row in the matrix, count the number of soldiers (the number of `1`s).
+
+2. **Attach Row Index**: Append the original index of each row to help identify the original position after sorting.
+
+3. **Sorting**: Sort the rows based on the number of soldiers. If two rows have the same number of soldiers, the row with the smaller index should come first.
+
+4. **Extract Indices**: Once sorted, extract the indices of the first k weakest rows.
+
+### Code Breakdown (Step by Step)
+
+```cpp
+class Solution {
+public:
+    vector<int> kWeakestRows(vector<vector<int>>& mat, int k) {
+```
+- The `Solution` class is defined with a public method `kWeakestRows` that takes a matrix `mat` and an integer `k` as inputs. 
+
+```cpp
+        int n = mat[0].size();
+        for(int i = 0; i < mat.size(); i++) {
+            mat[i].push_back(i);
+        }
+```
+- Here, we first store the number of columns in `n`. 
+- We then iterate over each row of the matrix. For each row, we append its index (i) to the end of the row. This allows us to keep track of the original indices after sorting.
+
+```cpp
+        sort(mat.begin(), mat.end());
+```
+- We sort the matrix. The default sort behavior in C++ sorts primarily by the first element of each row (the count of `1`s). If the counts are equal, it uses the second element (the index we just appended) to maintain order. Hence, this operation effectively sorts the rows by their soldier count and their original position.
+
+```cpp
+        vector<int> ans(k);
+        for(int i = 0; i < k; i++) {
+            ans[i] = mat[i][n];            
+        }
+```
+- We create a vector `ans` to store the indices of the k weakest rows. 
+- We iterate through the first k rows of the sorted matrix and extract the indices (stored in the last column of each row) into the `ans` vector.
+
+```cpp
+        return ans;
+    }
+};
+```
+- Finally, the function returns the vector containing the indices of the k weakest rows.
+
+### Complexity Analysis
+- **Time Complexity**: The time complexity of the solution is \(O(m \cdot n + m \log m)\), where \(m\) is the number of rows in the matrix, and \(n\) is the number of columns. The \(O(m \cdot n)\) comes from appending indices to each row, and \(O(m \log m)\) is the complexity for sorting the rows.
+  
+- **Space Complexity**: The space complexity is \(O(1)\) for the sorting in-place, plus \(O(k)\) for storing the result vector, where \(k\) is the number of weakest rows required.
+
+### Conclusion
+The provided code efficiently identifies the k weakest rows in a binary matrix by utilizing a straightforward counting and sorting strategy. By augmenting the original rows with their indices, we preserve the necessary order for resolving ties in soldier counts. This method demonstrates effective use of C++ STL features such as vectors and the sort function, making it an elegant solution to the problem.
+
+The approach is not only efficient in terms of time complexity but also maintains clarity in logic and implementation. Understanding this code enhances problem-solving skills related to matrix manipulation and sorting in competitive programming and algorithmic challenges.
+
+The code is applicable in various scenarios, such as military simulations, resource allocation tasks, and any context where strength or efficiency needs to be measured and compared across multiple units or entities.
+
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/the-k-weakest-rows-in-a-matrix/description/)
+
+---
+
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

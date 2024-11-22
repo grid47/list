@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/uGnRaCqWflI/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/longest-mountain-in-array/description/)
-
 ---
 **Code:**
 
@@ -59,9 +57,122 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/845.md" >}}
+### Problem Statement
+
+The problem asks us to find the length of the longest mountain in a given array of integers. A **mountain** is defined as a subarray that first strictly increases and then strictly decreases. Specifically, for a subarray to be a mountain:
+- There must be at least one element that is strictly smaller than the one before it (the peak of the mountain).
+- The subarray must contain at least three elements: one increasing, one peak element, and one decreasing.
+
+For example:
+- The array `[2, 1, 1, 5, 6, 2, 3, 1]` contains a mountain of length 5, where the peak is `5`.
+
+The goal is to find the length of the longest mountain, or to return 0 if no such mountain exists.
+
+### Approach
+
+To solve this problem, we use an efficient approach that leverages two auxiliary arrays to track the longest increasing and decreasing subsequences for each element. Specifically, we maintain:
+1. `pre[i]` — the length of the increasing subsequence ending at index `i`.
+2. `suf[i]` — the length of the decreasing subsequence starting at index `i`.
+
+With these two arrays, the length of the mountain at any index `i` can be determined as:
+- `pre[i] > 0` — there is an increasing subsequence before `i`.
+- `suf[i] > 0` — there is a decreasing subsequence after `i`.
+
+We then combine these two values to calculate the length of the mountain, ensuring the condition of having a valid peak (`pre[i] > 0` and `suf[i] > 0`).
+
+Finally, the length of the longest mountain is the maximum value found from all the indices in the array.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Handle Edge Case
+We begin by checking if the array contains fewer than 3 elements. If the array is too short to form a mountain, we return 0 immediately.
+
+```cpp
+if (n < 3) return 0;
+```
+
+#### Step 2: Initialize Helper Arrays
+We create two arrays `pre` and `suf` to store the length of the increasing and decreasing subsequences for each index, respectively.
+
+```cpp
+vector<int> pre(n, 0), suf(n, 0);
+```
+
+Here, `pre[i]` will store the length of the increasing subsequence that ends at index `i`, and `suf[i]` will store the length of the decreasing subsequence that starts at index `i`.
+
+#### Step 3: Populate `pre` Array
+We iterate over the array from left to right. If the current element is greater than the previous one (`arr[i] > arr[i - 1]`), we increment the count of the increasing subsequence at that index. Otherwise, we reset the count to 0.
+
+```cpp
+int cur = 0;
+for (int i = 1; i < n; i++) {
+    if (arr[i] > arr[i - 1])
+        cur++;
+    else
+        cur = 0;
+    pre[i] = cur;
+}
+```
+
+At the end of this loop, `pre[i]` will contain the length of the increasing subsequence that ends at index `i`.
+
+#### Step 4: Populate `suf` Array
+We perform a similar loop, but this time we iterate from right to left. If the current element is greater than the next one (`arr[i] > arr[i + 1]`), we increment the count of the decreasing subsequence at that index. Otherwise, we reset the count to 0.
+
+```cpp
+cur = 0;
+for (int i = n - 2; i >= 0; i--) {
+    if (arr[i] > arr[i + 1])
+        cur++;
+    else
+        cur = 0;
+    suf[i] = cur;
+}
+```
+
+At the end of this loop, `suf[i]` will contain the length of the decreasing subsequence that starts at index `i`.
+
+#### Step 5: Calculate the Longest Mountain
+Now that we have the `pre` and `suf` arrays populated, we can compute the length of the longest mountain. We iterate over each element of the array. If there is both an increasing subsequence before the index (`pre[i] > 0`) and a decreasing subsequence after the index (`suf[i] > 0`), we calculate the potential mountain length as `pre[i] + suf[i] + 1`. This is because `pre[i]` counts the elements before the peak and `suf[i]` counts the elements after the peak, but we need to add 1 to count the peak itself.
+
+We then update the result with the maximum length found.
+
+```cpp
+int res = 0;
+for (int i = 0; i < n; i++) {
+    if (pre[i] > 0 && suf[i] > 0) {
+        res = max(pre[i] + suf[i] + 1, res);
+    }
+}
+```
+
+#### Step 6: Return the Result
+Finally, we return the result. If no valid mountain was found, the result will remain 0. If the result is 1, it means the length of the mountain was just 1 (which is invalid since a mountain must have at least 3 elements), so we return 0.
+
+```cpp
+return res == 1 ? 0 : res;
+```
+
+### Complexity
+
+#### Time Complexity:
+- **Building `pre` and `suf` Arrays**: Both arrays are filled in linear time (`O(n)`), where `n` is the length of the array.
+- **Final Comparison Loop**: The final loop runs once over all elements (`O(n)`).
+Thus, the overall time complexity is `O(n)`.
+
+#### Space Complexity:
+- We use two additional arrays `pre` and `suf` to store the lengths of increasing and decreasing subsequences. This requires `O(n)` space, where `n` is the length of the input array.
+Thus, the space complexity is `O(n)`.
+
+### Conclusion
+
+This approach efficiently solves the problem of finding the longest mountain in an array with a time complexity of `O(n)` and a space complexity of `O(n)`. By leveraging the `pre` and `suf` arrays, we simulate the process of identifying increasing and decreasing subsequences, which allows us to calculate the length of the longest mountain. This solution is both time and space-efficient, making it suitable for large input sizes.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/longest-mountain-in-array/description/)
+
 ---
 {{< youtube uGnRaCqWflI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #846: Hand of Straights](https://grid47.xyz/leetcode/solution-846-hand-of-straights/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

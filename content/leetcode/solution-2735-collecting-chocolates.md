@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/FPkaxgatwoI/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/collecting-chocolates/description/)
-
 ---
 **Code:**
 
@@ -41,9 +39,110 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2735.md" >}}
+### Problem Statement
+
+Given an array `A` of size `n` and an integer `x`, we are tasked with finding the minimum cost of performing a series of operations on the array. The cost is computed as follows:
+
+1. For each element in the array, we can perform an operation that shifts the element's value.
+2. The value is shifted by choosing the minimum between the element and a previous element in the array.
+3. The operation incurs a cost, which is based on the index of the element being modified, as well as the integer `x`.
+
+The goal is to find the minimum total cost for applying these operations to all elements in the array.
+
+### Approach
+
+The problem can be solved efficiently by considering the cost calculation for each element and utilizing dynamic programming to avoid redundant calculations. Here’s a breakdown of the approach:
+
+1. **Initialization**:
+   - We are given an array `A` and an integer `x`. The goal is to compute the cost of modifying each element and then select the smallest possible cost.
+   
+2. **Cost Calculation**:
+   - The cost for modifying the element at index `i` is influenced by both the index itself (multiplied by `x`) and the smallest element encountered in the array as we iterate over it. This means that for each index, we compute the minimum value encountered up to that index, and we adjust the cost accordingly.
+
+3. **Iterating Over the Array**:
+   - For each element `A[i]`, we first calculate the base cost of modifying this element. Then, we calculate the effect of each subsequent operation by considering the previous elements in the array and determining the smallest possible value for each index.
+
+4. **Dynamic Programming**:
+   - Instead of recomputing the costs for each element repeatedly, we store the result of each computation in a vector `res`. This way, we can avoid recalculating values that have already been computed for previous indices.
+
+5. **Final Result**:
+   - Once the costs have been computed for all elements, the result is the minimum value in the `res` vector, which represents the least cost required to perform the operations.
+
+### Code Breakdown (Step by Step)
+
+Let’s break down the code to understand how it works:
+
+```cpp
+int n = A.size();
+vector<long long> res(n);
+```
+
+- `n` stores the size of the input array `A`.
+- `res` is a vector of size `n`, initialized to store the result of the cost calculations. Each entry in this vector will store the accumulated cost for each element.
+
+```cpp
+for (int i = 0; i < n; i++) {
+    res[i] += 1L * i * x;
+```
+
+- This loop iterates over each element in the array `A`. For each element at index `i`, we add the base cost of modifying this element. The base cost is calculated as `i * x`, where `i` is the index of the element, and `x` is the given parameter.
+
+```cpp
+    int cur = A[i];
+```
+
+- The variable `cur` is initialized to the value of the current element `A[i]`. This variable will be used to track the minimum value encountered as we iterate over the array.
+
+```cpp
+    for (int k = 0; k < n; k++) {
+        cur = min(cur, A[(i - k + n) % n]);
+        res[k] += cur;
+    }
+```
+
+- The inner loop calculates the effect of each operation on the cost. It starts from the current element `A[i]` and looks at each subsequent element, comparing it to the current minimum value. The goal is to update `cur` with the smallest value encountered in the array, starting from `A[i]` and wrapping around using modulo arithmetic to handle the circular nature of the array.
+  
+- The result vector `res[k]` is updated by adding the current value of `cur` to it, which represents the accumulated cost for the modification of the element at index `k`.
+
+```cpp
+return *std::min_element(res.begin(), res.end());
+```
+
+- Finally, the function returns the smallest element in the `res` vector, which represents the minimum total cost for performing the operations on the array.
+
+### Complexity Analysis
+
+#### Time Complexity
+
+To analyze the time complexity, let’s look at the loops:
+
+1. **Outer Loop (Iterating Over Array)**:
+   - The outer loop iterates over each element in the array `A`. Since the size of the array is `n`, this loop runs `n` times.
+
+2. **Inner Loop (Updating Results for Each Element)**:
+   - For each element in the outer loop, the inner loop iterates `n` times as well. This is because we check the effect of each previous element in the array, which is wrapped around using modulo arithmetic.
+
+Thus, the time complexity is \(O(n^2)\), where `n` is the size of the input array `A`.
+
+#### Space Complexity
+
+The space complexity is determined by the space used to store the results:
+
+- We use an array `res` of size `n` to store the accumulated costs for each element. Therefore, the space complexity is \(O(n)\).
+
+### Conclusion
+
+The algorithm successfully computes the minimum cost required to transform the array according to the given rules. By using dynamic programming and storing intermediate results, it avoids redundant calculations, ensuring an efficient solution.
+
+However, the time complexity of \(O(n^2)\) may not be optimal for very large arrays, especially when `n` is large. For such cases, further optimizations may be necessary to reduce the complexity.
+
+The solution efficiently handles the problem by considering both the index-based cost and the minimum value encountered during the transformation, making it a good approach for handling arrays of moderate size.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/collecting-chocolates/description/)
+
 ---
 {{< youtube FPkaxgatwoI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2739: Total Distance Traveled](https://grid47.xyz/leetcode/solution-2739-total-distance-traveled/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/mFFtmUdq2jI/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/bitwise-xor-of-all-pairings/description/)
-
 ---
 **Code:**
 
@@ -54,9 +52,119 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2425.md" >}}
+### Problem Statement
+
+The problem asks us to compute the result of applying the XOR operation to all elements of two arrays (`nums1` and `nums2`), but the XOR operation must be performed differently depending on the sizes of these arrays. The goal is to figure out how the sizes of `nums1` and `nums2` impact the final result.
+
+To solve this problem, we need to determine the XOR of all elements in `nums1` and `nums2`, but the challenge lies in the fact that the final XOR will depend on whether the sizes of the arrays are even or odd.
+
+### Approach
+
+The core of this problem revolves around understanding how XOR works and how it interacts with the size of the arrays. Let's break down the approach:
+
+#### Key Observations:
+
+1. **XOR Properties**:
+   - XOR is a bitwise operation that has the following important properties:
+     - \( a \oplus a = 0 \) for any integer \( a \).
+     - \( a \oplus 0 = a \) for any integer \( a \).
+     - XOR is both commutative and associative, which means the order of applying XOR doesn't matter.
+
+2. **Effect of Even and Odd Array Sizes**:
+   - If we XOR an even number of identical values, the result will be `0`. 
+   - If we XOR an odd number of identical values, the result will be the value itself.
+
+   This means:
+   - If the size of `nums1` is even, XORing all elements in `nums1` will result in `0`.
+   - If the size of `nums2` is even, XORing all elements in `nums2` will result in `0`.
+   - Therefore, the final result of the XOR operation will depend on the parity (odd or even) of the sizes of `nums1` and `nums2`.
+
+#### Steps to Solve the Problem:
+
+1. **XOR all elements of `nums1` and `nums2`**:
+   - First, calculate the XOR of all elements in both `nums1` and `nums2`. This gives us two values, `xr1` (for `nums1`) and `xr2` (for `nums2`).
+
+2. **Determine the final result based on array sizes**:
+   - If both arrays have even sizes, the result will be `0`.
+   - If `nums1` is even and `nums2` is odd, the result will be `xr2`.
+   - If `nums1` is odd and `nums2` is even, the result will be `xr1`.
+   - If both arrays have odd sizes, the result will be the XOR of `xr1` and `xr2`.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Initialize the XOR values for both arrays
+
+```cpp
+int m = nums1.size(), n = nums2.size();
+int xr1 = nums1[0], xr2 = nums2[0];
+```
+
+- We first obtain the sizes of both `nums1` (`m`) and `nums2` (`n`).
+- Then, initialize `xr1` to the first element of `nums1` and `xr2` to the first element of `nums2`. This will allow us to accumulate the XOR of all elements in the arrays.
+
+#### Step 2: Calculate the XOR for all elements in `nums1` and `nums2`
+
+```cpp
+for(int i = 1; i < m; i++)
+    xr1 ^= nums1[i];
+
+for(int i = 1; i < n; i++)
+    xr2 ^= nums2[i];
+```
+
+- We loop over the remaining elements of `nums1` and `nums2` and apply XOR to each element. This results in `xr1` being the XOR of all elements in `nums1` and `xr2` being the XOR of all elements in `nums2`.
+
+#### Step 3: Handle the parity of the sizes of `nums1` and `nums2`
+
+```cpp
+if((n % 2) == 0) {
+    if((m % 2) == 0) {
+        return 0;
+    } else {
+        return xr2;
+    }
+} else {
+    if((m % 2) == 0) {
+        return xr1;
+    } else {
+        return xr1 ^ xr2;
+    }            
+}
+```
+
+- The core logic of the solution is here. We check the parity (even or odd) of `n` (size of `nums2`) and `m` (size of `nums1`).
+  - If `n` is even:
+    - If `m` is also even, return `0` because the XOR of an even number of elements will cancel out.
+    - If `m` is odd, return `xr2`, the XOR of all elements in `nums2`, because only the elements from `nums2` matter.
+  - If `n` is odd:
+    - If `m` is even, return `xr1`, the XOR of all elements in `nums1`, because only the elements from `nums1` matter.
+    - If both `m` and `n` are odd, return the XOR of `xr1` and `xr2`.
+
+#### Step 4: Return the final result
+
+```cpp
+return -1;
+```
+
+- This line is technically unnecessary, because all the return conditions above will exit the function, but it is a safety net in case something goes wrong.
+
+### Complexity
+
+#### Time Complexity:
+- **O(m + n)**: We perform two loops: one to compute the XOR for `nums1` and one for `nums2`. Each loop iterates through the entire array, so the overall time complexity is linear with respect to the sizes of `nums1` and `nums2`.
+
+#### Space Complexity:
+- **O(1)**: We only use a few integer variables to store the XOR results (`xr1` and `xr2`) and the sizes of the arrays, so the space complexity is constant.
+
+### Conclusion
+
+This solution efficiently computes the XOR of all elements in two arrays based on the sizes of those arrays. The XOR operation's properties allow us to quickly determine the result without performing the XOR on all elements multiple times. The solution is optimal in both time and space, making it suitable for large input sizes. The main insight is that the parity of the array sizes determines the final result, allowing us to reduce the problem to simple condition checks after calculating the XORs.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/bitwise-xor-of-all-pairings/description/)
+
 ---
 {{< youtube mFFtmUdq2jI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2427: Number of Common Factors](https://grid47.xyz/leetcode/solution-2427-number-of-common-factors/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

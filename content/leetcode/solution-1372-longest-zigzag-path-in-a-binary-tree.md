@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/hbzdyIlvBKI/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/longest-zigzag-path-in-a-binary-tree/description/)
-
 ---
 **Code:**
 
@@ -66,9 +64,65 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1372.md" >}}
+### Problem Statement
+
+The problem at hand involves finding the longest ZigZag path in a binary tree. A ZigZag path starts at any node and alternates between left and right children. The objective is to return the length of the longest such path in the tree. The length is defined as the number of edges traversed in this alternating pattern.
+
+### Approach
+
+To tackle this problem, we can utilize a depth-first search (DFS) strategy combined with dynamic programming techniques to efficiently compute the lengths of ZigZag paths originating from each node in the binary tree. The solution can be divided into several key components:
+
+1. **Understanding ZigZag Movement**: The ZigZag path is defined such that from any node, we can move left and then right or right and then left. This means at each step, the direction of the traversal will alternate.
+
+2. **Recursive Traversal**: We'll employ a recursive function that takes a node and a boolean variable indicating the current direction of the ZigZag movement. The function will return the maximum length of the ZigZag path starting from that node in the given direction.
+
+3. **Memoization**: To avoid recalculating the lengths for nodes we've already processed, we will use a memoization technique. We will store the results of previously computed ZigZag lengths in a map, allowing us to retrieve them in constant time.
+
+4. **Two Possible Directions**: From each node, we will consider both possible starting directions (left and right) and compute the maximum ZigZag path length from both. The overall result will be the maximum of these values.
+
+5. **Final Computation**: After initiating the recursive process for the root node, we will traverse both left and right children of the tree to ensure that all possible ZigZag paths are considered.
+
+### Code Breakdown (Step by Step)
+
+The provided C++ code implements the above approach. Here's a detailed breakdown of the code:
+
+1. **TreeNode Structure**: 
+   The structure `TreeNode` defines the binary tree nodes, each having a value, a left child, and a right child. It includes constructors to initialize these values.
+
+2. **Solution Class**:
+   The `Solution` class contains two primary methods: `zigzag` and `longestZigZag`.
+
+3. **Zigzag Method**:
+   - **Parameters**: The method `zigzag(TreeNode* root, bool dir)` takes a pointer to the current node (`root`) and a boolean (`dir`) indicating the direction of traversal.
+   - **Base Case**: If the current node is `nullptr`, it returns `-1`, indicating no path can be formed.
+   - **Memoization Check**: The code checks if the ZigZag length for the current node and direction has been computed before. If so, it returns the stored result.
+   - **Recursive Calls**: Depending on the direction:
+     - If moving left (`dir = true`), it recursively calls `zigzag` on the left child, changing the direction to right (`!dir`).
+     - If moving right (`dir = false`), it recursively calls `zigzag` on the right child, changing the direction to left.
+   - **Result Storage**: The result is stored in the map `mp` for future reference.
+
+4. **LongestZigZag Method**:
+   - **Parameters**: The method `longestZigZag(TreeNode* root)` computes the longest ZigZag path in the binary tree rooted at `root`.
+   - **Base Case**: It first checks if the `root` is `nullptr`, returning `0` as the length.
+   - **Max Calculation**: It computes the maximum ZigZag lengths starting in both directions from the root and updates the `ans` variable.
+   - **Recursive Traversal**: It recursively computes the longest ZigZag path for the left and right subtrees of the current node.
+   - **Return Value**: The method returns the overall maximum ZigZag length.
+
+### Complexity
+
+- **Time Complexity**: The time complexity of the solution is \(O(N)\), where \(N\) is the number of nodes in the binary tree. Each node is visited once, and the memoization ensures that we do not recompute ZigZag lengths unnecessarily.
+
+- **Space Complexity**: The space complexity is also \(O(N)\) due to the storage requirements of the memoization map and the recursive call stack. In the worst case, the depth of the recursion can go up to the height of the tree, which can be \(O(N)\) for a skewed tree.
+
+### Conclusion
+
+The solution efficiently calculates the longest ZigZag path in a binary tree by employing a combination of depth-first search and memoization techniques. By systematically exploring each node and considering both directions of movement, we ensure that all potential paths are evaluated. The approach not only optimizes performance through memoization but also provides a clear and understandable structure for tackling similar tree traversal problems in the future. This makes it a valuable reference for developers and computer science enthusiasts seeking to enhance their algorithmic problem-solving skills in binary trees.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/longest-zigzag-path-in-a-binary-tree/description/)
+
 ---
 {{< youtube hbzdyIlvBKI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1376: Time Needed to Inform All Employees](https://grid47.xyz/leetcode/solution-1376-time-needed-to-inform-all-employees/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

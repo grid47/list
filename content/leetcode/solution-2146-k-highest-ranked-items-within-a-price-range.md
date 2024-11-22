@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/OOBGOENJLYo/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/k-highest-ranked-items-within-a-price-range/description/)
-
 ---
 **Code:**
 
@@ -95,9 +93,143 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2146.md" >}}
+### Problem Statement
+
+The problem involves navigating a grid to find the highest-ranked items based on their prices and the distances from a starting position. The grid is composed of various integer values, each representing an item's price. The goal is to find the `k` highest-ranked items within a specified price range, considering the distance from a starting point in the grid.
+
+### Approach
+
+To tackle this problem, we utilize a breadth-first search (BFS) approach combined with a priority queue. The BFS allows us to explore the grid level by level, while the priority queue helps us maintain the highest-ranked items based on price and distance.
+
+Here’s a step-by-step outline of the approach:
+
+1. **Initialization**: Set up the grid dimensions, initialize a queue for BFS, and create a priority queue to store the potential items that meet the criteria.
+
+2. **BFS Exploration**: Starting from the specified coordinates in the grid, explore all four possible directions (up, down, left, right). 
+
+3. **Distance Calculation**: Maintain a distance counter to track how far we are from the starting position. Items found within the price range are pushed into the priority queue with their respective distance and price.
+
+4. **Price Range Filtering**: Only consider items whose prices fall within the specified price range.
+
+5. **Result Compilation**: Extract the top `k` items from the priority queue based on the highest rank (price first, then distance) and compile them into the result list.
+
+### Code Breakdown (Step by Step)
+
+1. **Comparator Class Definition**:
+   ```cpp
+   class cmp {
+       public:
+       bool operator()(vector<int> &a, vector<int> &b) {
+           // Logic for comparing two vectors
+       }
+   };
+   ```
+   - A custom comparator class is defined to sort vectors based on specific criteria: price, distance, and grid position.
+
+2. **Main Class and Function**:
+   ```cpp
+   class Solution {
+   public:
+       vector<vector<int>> highestRankedKItems(vector<vector<int>>& grid, vector<int>& price, vector<int>& start, int k) {
+   ```
+   - The `Solution` class contains the method `highestRankedKItems`, which takes the grid, price range, starting coordinates, and number of items `k` to find.
+
+3. **Variable Initialization**:
+   ```cpp
+   int m = grid.size(), n = grid[0].size();
+   queue<vector<int>> q;
+   q.push(start);
+   ```
+   - The dimensions of the grid are obtained, and a queue is initialized to store the positions to explore, starting with the initial position.
+
+4. **Distance and Priority Queue Setup**:
+   ```cpp
+   int dist = 0;
+   priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;        
+   if(grid[start[0]][start[1]] >= price[0] && grid[start[0]][start[1]] <= price[1])
+       pq.push({dist, grid[start[0]][start[1]], start[0], start[1]});
+   ```
+   - A distance variable is initialized, and a priority queue is set up to store valid items. If the starting item is within the price range, it is added to the priority queue.
+
+5. **Marking Visited Cells**:
+   ```cpp
+   grid[start[0]][start[1]] = 0;
+   ```
+   - The starting position in the grid is marked as visited by setting it to `0`.
+
+6. **Direction Array**:
+   ```cpp
+   int dir[] = {0, 1, 0, -1, 0};
+   ```
+   - An array of integers is defined to facilitate movement in the four cardinal directions.
+
+7. **BFS Loop**:
+   ```cpp
+   while(!q.empty() && pq.size() < k) {
+       int sz = q.size();
+       dist++;
+       while(sz--) {
+           auto it = q.front();
+           q.pop();
+   ```
+   - The outer loop continues as long as there are positions to explore in the queue and fewer than `k` items in the priority queue. The inner loop processes each position in the queue.
+
+8. **Exploring Neighbors**:
+   ```cpp
+   for(int i = 0; i < 4; i++) {
+       int x = it[0] + dir[i], y = it[1] + dir[i + 1];
+       if(x < 0 || y < 0 || x >= m || y >= n || grid[x][y] == 0)
+           continue;
+   ```
+   - For each position, the algorithm checks all four potential neighbor cells. It skips cells that are out of bounds or have already been visited.
+
+9. **Price Check and Queue Updates**:
+   ```cpp
+   if(grid[x][y] > 1 && grid[x][y] >= price[0] && grid[x][y] <= price[1]) {
+       pq.push({dist, grid[x][y], x, y});
+   }
+   q.push({x, y});
+   grid[x][y] = 0;                                        
+   ```
+   - If a neighbor's price is within the specified range, it is added to the priority queue. Regardless of price, the neighbor is also pushed to the BFS queue and marked as visited.
+
+10. **Collecting Results**:
+   ```cpp
+   vector<vector<int>> ans;        
+   while((ans.size() < k) && !pq.empty()) {
+       auto it = pq.top();
+       ans.push_back({it[2], it[3]});
+       pq.pop();
+   }                
+   ```
+   - After BFS completion, the algorithm collects the top `k` items from the priority queue and stores their coordinates in the result vector.
+
+11. **Return Statement**:
+   ```cpp
+   return ans;
+   }
+   ```
+   - Finally, the function returns the list of the highest-ranked items found.
+
+### Complexity Analysis
+
+- **Time Complexity**: \(O(k \log k + mn)\)
+  - The BFS will run in \(O(mn)\) in the worst case, exploring all cells of the grid. The priority queue operations for inserting items and popping the top item will occur at most \(k\) times, leading to \(O(k \log k)\).
+
+- **Space Complexity**: \(O(mn)\)
+  - The algorithm utilizes a queue to store cells for BFS exploration, which can grow to the size of the grid in the worst case. The priority queue could also hold up to \(k\) items, leading to a substantial space requirement depending on grid size and `k`.
+
+### Conclusion
+
+The `highestRankedKItems` function efficiently finds the top `k` items in a grid based on their prices and proximity to a starting point. By leveraging BFS for exploration and a priority queue for item selection, this approach balances efficiency with clarity. 
+
+Understanding this methodology provides insights into pathfinding algorithms, priority management, and grid navigation, which are valuable skills in algorithm design and competitive programming. This technique can be applied to various problems that require distance-based filtering and priority selection from a set of items, reinforcing the importance of both breadth-first search and data structures like priority queues in solving complex algorithmic challenges.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/k-highest-ranked-items-within-a-price-range/description/)
+
 ---
 {{< youtube OOBGOENJLYo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2148: Count Elements With Strictly Smaller and Greater Elements ](https://grid47.xyz/leetcode/solution-2148-count-elements-with-strictly-smaller-and-greater-elements/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

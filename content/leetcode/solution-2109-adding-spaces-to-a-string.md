@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/HhsyccqLHDw/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/adding-spaces-to-a-string/description/)
-
 ---
 **Code:**
 
@@ -38,9 +36,74 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2109.md" >}}
+### Problem Statement
+
+The problem requires inserting spaces into a given string `s` at specified indices provided in the `spaces` vector. The goal is to return a new string with the appropriate spaces added while retaining the original characters of `s`. If there are multiple spaces specified at the same index, only one space should be added.
+
+### Approach
+
+The approach to solve this problem is straightforward:
+
+1. **Iterate Over Space Indices**: Loop through the indices in the `spaces` vector, inserting spaces at the correct positions in the output string.
+2. **Build the Result String**: Maintain a result string (`res`) to which the characters from `s` and the spaces will be appended.
+3. **Handle Remaining Characters**: After inserting all specified spaces, append any remaining characters from the original string `s` to the result string.
+
+### Code Breakdown (Step by Step)
+
+1. **Initialize Variables**:
+   ```cpp
+   int i = 0;
+   string res = "";
+   ```
+   - The variable `i` is used to track the current index in the original string `s`, and `res` is initialized as an empty string to build the resulting string.
+
+2. **Loop Through Space Indices**:
+   ```cpp
+   for(int idx : spaces) {
+   ```
+   - This loop iterates over each index specified in the `spaces` vector.
+
+3. **Add Characters Until the Current Space Index**:
+   ```cpp
+   while(i < idx) res += s[i++];
+   ```
+   - The inner `while` loop continues to append characters from `s` to `res` until the current index `i` reaches the specified space index `idx`.
+
+4. **Add Space at the Specified Index**:
+   ```cpp
+   if(i == idx) res += ' ';
+   ```
+   - Once the loop reaches the index `idx`, a space is appended to the result string.
+
+5. **Handle Remaining Characters After Last Space**:
+   ```cpp
+   while(i < s.size()) res += s[i++];
+   ```
+   - After all space indices have been processed, this final `while` loop appends any remaining characters from the original string `s` to `res`.
+
+6. **Return the Result String**:
+   ```cpp
+   return res;
+   ```
+   - Finally, the constructed string `res`, which now contains the original characters and the added spaces, is returned.
+
+### Complexity Analysis
+
+- **Time Complexity**: \(O(n + m)\), where \(n\) is the length of the string `s` and \(m\) is the number of space indices provided in `spaces`.
+  - The algorithm traverses the original string and the space indices list once, leading to linear time complexity.
+
+- **Space Complexity**: \(O(n)\) for storing the resulting string.
+  - The space required for the result string is proportional to the size of the input string, as a new string is constructed based on it.
+
+### Conclusion
+
+This solution effectively inserts spaces into the string `s` at the specified indices, preserving the order of characters while maintaining efficiency. The approach is both clear and concise, making it easy to understand and implement. It handles edge cases, such as when no spaces need to be added or when all spaces are at the end of the string, ensuring robustness in different scenarios. By utilizing simple loops and string concatenation, the solution demonstrates an efficient way to manipulate strings in C++.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/adding-spaces-to-a-string/description/)
+
 ---
 {{< youtube HhsyccqLHDw >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2110: Number of Smooth Descent Periods of a Stock](https://grid47.xyz/leetcode/solution-2110-number-of-smooth-descent-periods-of-a-stock/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

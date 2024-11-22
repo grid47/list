@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/ZNAJbQTv3yk/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/number-of-ways-where-square-of-number-is-equal-to-product-of-two-numbers/description/)
-
 ---
 **Code:**
 
@@ -52,9 +50,100 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1577.md" >}}
+### Problem Statement
+
+The problem requires calculating the number of triplets that can be formed from two arrays, `nums1` and `nums2`, such that for each triplet \( (a, b, c) \), the condition \( a \times b = c^2 \) is satisfied. The triplets can be formed from elements in both arrays, where each triplet consists of two elements from one array and one from the other.
+
+### Approach
+
+To solve this problem, we will take the following approach:
+
+1. **Understanding Triplet Formation**:
+   - We need to find pairs of numbers from one array whose product equals the square of a number from the other array.
+   - For each number in `nums1`, we will consider its square and find pairs in `nums2` whose product equals that square. Similarly, we will do this for each number in `nums2`.
+
+2. **Using a Helper Function**:
+   - A helper function `twoProd` will be defined to count how many pairs can be formed in an array whose product equals a given value.
+   - The helper function will maintain a frequency map to store occurrences of numbers, enabling efficient pair counting.
+
+3. **Iterating Through Arrays**:
+   - We will iterate through each number in `nums1`, calculate its square, and call the helper function with `nums2` to count valid pairs.
+   - We will perform the same operation for each number in `nums2` with `nums1`.
+
+4. **Combining Results**:
+   - The results from both iterations will be summed to get the final count of valid triplets.
+
+### Code Breakdown (Step by Step)
+
+Let’s analyze the code provided to understand how it implements this approach.
+
+- **Class Declaration**: The solution is encapsulated within a class named `Solution`.
+
+```cpp
+class Solution {
+public:
+```
+
+- **Main Function**: The `numTriplets` function initializes the result variable `res` to zero and iterates over each element of `nums1` and `nums2`.
+
+```cpp
+int numTriplets(vector<int>& nums1, vector<int>& nums2) {
+    long res = 0;
+
+    for(int v: nums1)
+        res += twoProd((long)v * v, nums2);
+    for(int v: nums2)
+        res += twoProd((long)v * v, nums1);
+
+    return res;
+}
+```
+
+- **Calculating Squares**: For each value \( v \) in `nums1`, it computes \( v^2 \) and calls `twoProd` with this square and `nums2`. The same is done for values in `nums2`.
+
+- **Helper Function**: The `twoProd` function counts pairs that multiply to a given product.
+
+```cpp
+long twoProd(long i, vector<int> &nums) {
+    map<long, long> mp;
+    
+    int cnt = 0;
+    for(int n : nums) {
+        if(i % n == 0)
+            cnt += mp[i / n]; // Count valid pairs
+        mp[n]++;
+    }
+    
+    return cnt;
+}
+```
+
+- **Using a Frequency Map**:
+  - A frequency map `mp` is created to keep track of how many times each number has appeared as we iterate through `nums`.
+  - For each number `n` in `nums`, it checks if \( i \) (the square value) is divisible by `n`. If it is, the code calculates the complementary value \( \frac{i}{n} \) and adds the count of that value from the map to `cnt`.
+  - Finally, it increments the count of the current number `n` in the map.
+
+### Complexity
+
+- **Time Complexity**:
+  - The time complexity for this solution is \( O(n \times m) \), where \( n \) is the length of `nums1` and \( m \) is the length of `nums2`. This is because for each element in one array, we potentially check all elements in the other array using the `twoProd` helper function.
+  
+- **Space Complexity**:
+  - The space complexity is \( O(m) \) due to the storage used for the frequency map in the `twoProd` function. In the worst case, the map can grow to contain all distinct elements in `nums2`.
+
+### Conclusion
+
+The `numTriplets` function efficiently counts the number of valid triplets that can be formed under the given condition by leveraging a nested iteration approach combined with a hash map for counting pairs. This results in a clear and concise implementation that balances readability with performance.
+
+This solution demonstrates important techniques in algorithm design, particularly in counting problems where combinations of elements from multiple arrays need to be considered. The use of a hash map for efficient lookups and pair counting showcases an effective method to handle potential duplicates and large input sizes.
+
+In summary, the `numTriplets` function serves not only as a solution to the triplet counting problem but also as a valuable reference for algorithmic techniques involving counting pairs, hash maps, and iterative algorithms. Its clear structure and efficient methodology make it an exemplary solution for similar problems in competitive programming and technical interviews. Understanding this solution will equip developers with the skills necessary to approach a variety of combinatorial problems effectively.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-ways-where-square-of-number-is-equal-to-product-of-two-numbers/description/)
+
 ---
 {{< youtube ZNAJbQTv3yk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1578: Minimum Time to Make Rope Colorful](https://grid47.xyz/leetcode/solution-1578-minimum-time-to-make-rope-colorful/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

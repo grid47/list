@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/n6svsUO6X8g/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/determine-if-string-halves-are-alike/description/)
-
 ---
 **Code:**
 
@@ -46,9 +44,97 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1704.md" >}}
+### Problem Statement
+
+The problem requires determining if two halves of a given string are "alike." In this context, two halves are considered alike if they contain the same number of vowels (a, e, i, o, u). The string can contain both uppercase and lowercase letters, and the goal is to treat them equivalently. 
+
+For example, the string "book" would be considered alike because both halves contain one vowel each. However, the string "textbook" would not be considered alike, as the first half has one vowel (e) while the second half has two (o).
+
+### Approach
+
+To solve this problem, we can take the following approach:
+
+1. **Normalize the String**: Convert all characters in the string to lowercase to ensure that the comparison is case insensitive.
+  
+2. **Count Vowels in Halves**: Use a counter to keep track of the difference in the number of vowels between the first half and the second half of the string. 
+
+3. **Iterate Through the String**: Traverse through the string, incrementing the counter when a vowel is found in the first half and decrementing it when a vowel is found in the second half.
+
+4. **Check for Equality**: After iterating through the string, if the counter is zero, it indicates that both halves have an equal number of vowels, and we return true. Otherwise, we return false.
+
+### Code Breakdown (Step by Step)
+
+Let's break down the provided code for better understanding:
+
+1. **Class Declaration**: We define a class called `Solution`, which contains the function we will use to solve the problem.
+
+    ```cpp
+    class Solution {
+    public:
+    ```
+
+2. **Function Declaration**: We declare a public method named `halvesAreAlike` that takes a string `s` as input and returns a boolean indicating whether the halves of the string are alike.
+
+    ```cpp
+    bool halvesAreAlike(string s) {
+    ```
+
+3. **Variable Initialization**: We initialize a counter `t` to zero, which will help track the difference in vowel counts between the two halves.
+
+    ```cpp
+    int t=0;
+    ```
+
+4. **Iterating Through the String**: We use a for loop to iterate through each character of the string `s`.
+
+    ```cpp
+    for(int i=0; i<s.size(); i++) {
+    ```
+
+5. **Convert to Lowercase**: Inside the loop, we convert the current character to lowercase using `tolower`. This is essential for consistent comparison regardless of the original case.
+
+    ```cpp
+    s[i]=tolower(s[i]);
+    ```
+
+6. **Counting Vowels in the First Half**: We check if the current index is less than half the size of the string. If it is, we check if the character is a vowel (specifically 'a', 'e', 'i', 'o', 'u'). If it is, we increment `t`.
+
+    ```cpp
+    if(i<s.size()/2) {
+        if(s[i]==97 || s[i]==101 || s[i]==105 || s[i]==111 || s[i]==117)
+            t++; // Count vowels in the first half
+    }
+    ```
+
+7. **Counting Vowels in the Second Half**: If the current index is in the second half of the string, we perform a similar check. If we encounter a vowel, we decrement `t`.
+
+    ```cpp
+    else {
+        if(s[i]==97 || s[i]==101 || s[i]==105 || s[i]==111 || s[i]==117)
+            t--; // Reduce count for vowels in the second half
+    }
+    ```
+
+8. **Return the Result**: After finishing the loop, we check if `t` is equal to zero. If it is, this means both halves contain the same number of vowels, and we return true. If not, we return false.
+
+    ```cpp
+    return (t==0);
+    }
+    ```
+
+### Complexity
+
+The time complexity of this solution is O(n), where n is the length of the string. This is because we iterate through the string exactly once to count the vowels. The space complexity is O(1) as we are using only a fixed number of integer variables and no additional data structures that grow with input size.
+
+### Conclusion
+
+In conclusion, this code effectively checks whether the two halves of a string contain the same number of vowels. By normalizing the string to lowercase and using a simple counting mechanism, we can efficiently determine if the halves are alike. This approach is both optimal and straightforward, making it well-suited for practical applications where such string comparisons are required. The solution is clear and concise, demonstrating an effective use of string manipulation and counting techniques in programming. Overall, this method can be particularly useful in scenarios where vowel counts in strings play a critical role, such as in linguistics or natural language processing tasks.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/determine-if-string-halves-are-alike/description/)
+
 ---
 {{< youtube n6svsUO6X8g >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1705: Maximum Number of Eaten Apples](https://grid47.xyz/leetcode/solution-1705-maximum-number-of-eaten-apples/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/pvj8WQMPlGY/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/design-browser-history/description/)
-
 ---
 **Code:**
 
@@ -66,9 +64,121 @@ public:
  * string param_3 = obj->forward(steps);
  */
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1472.md" >}}
+### Problem Statement
+
+The task is to implement a `BrowserHistory` class that simulates the behavior of a web browser's history. The class should allow users to visit new pages, go back a certain number of steps in history, and move forward a certain number of steps. The requirements for the class methods are as follows:
+
+1. **Initialization**: The browser history should start with a single homepage.
+2. **Visit**: When a user visits a new URL, it should be added to the browsing history, and the forward history should be cleared.
+3. **Back**: The user should be able to go back in history by a specified number of steps, ensuring they cannot go further back than the homepage.
+4. **Forward**: The user should also be able to move forward in history by a specified number of steps, ensuring they cannot go beyond the most recently visited page.
+
+### Approach
+
+To effectively implement the browser history functionality, we can use two stacks (or vectors in this case) to manage the back and forward history:
+
+- **Backward History (bwd)**: This will store all the URLs visited in the order they were accessed, allowing us to go back in history.
+- **Forward History (fwd)**: This will store the URLs that the user can navigate forward to after going back.
+
+The basic operations can be described as follows:
+
+1. **Visit**: Add a new URL to the backward history and clear the forward history.
+2. **Back**: Remove the last URL from the backward history (if not at the homepage) and add it to the forward history.
+3. **Forward**: Remove the last URL from the forward history (if available) and add it back to the backward history.
+
+### Code Breakdown (Step by Step)
+
+Here’s a step-by-step breakdown of the provided code for the `BrowserHistory` class:
+
+1. **Class Declaration**:
+   ```cpp
+   class BrowserHistory {
+   ```
+   - The `BrowserHistory` class is defined to encapsulate the browser's history functionalities.
+
+2. **Member Variables**:
+   ```cpp
+   vector<string> fwd, bwd;
+   ```
+   - Two vectors are declared:
+     - `fwd`: To store URLs available for forward navigation.
+     - `bwd`: To store the browsing history for backward navigation.
+
+3. **Constructor**:
+   ```cpp
+   BrowserHistory(string homepage) {
+       bwd.push_back(homepage);
+       fwd.resize(0);
+   }
+   ```
+   - The constructor initializes the browsing history by adding the homepage to the backward vector and ensuring the forward vector is empty.
+
+4. **Visit Method**:
+   ```cpp
+   void visit(string url) {
+       bwd.push_back(url);
+       fwd.resize(0);
+   }
+   ```
+   - The `visit` method is responsible for:
+     - Adding the new `url` to the end of the `bwd` vector.
+     - Clearing the `fwd` vector since the user cannot go forward after visiting a new page.
+
+5. **Back Method**:
+   ```cpp
+   string back(int steps) {
+       int x = bwd.size();
+       while(steps-- > 0 && bwd.size() > 1) {
+           string p = bwd.back();
+           fwd.push_back(p);
+           bwd.pop_back();
+       }
+       return bwd.back();
+   }
+   ```
+   - The `back` method allows the user to navigate backward:
+     - A loop runs for the number of steps specified or until the user reaches the homepage (when there is only one URL in `bwd`).
+     - The last URL is removed from `bwd`, added to `fwd`, and the method returns the current page after all valid back operations.
+
+6. **Forward Method**:
+   ```cpp
+   string forward(int steps) {
+       int x = fwd.size();
+       while(steps-- > 0 && fwd.size() > 0) {
+           string p = fwd.back();
+           bwd.push_back(p);
+           fwd.pop_back();
+       }
+       return bwd.back();        
+   }
+   ```
+   - The `forward` method allows the user to move forward in history:
+     - Similar to `back`, a loop runs for the specified steps or until there are no more URLs in `fwd`.
+     - The last URL is removed from `fwd`, added back to `bwd`, and the current page is returned.
+
+### Complexity
+
+- **Time Complexity**:
+  - The time complexity for each of the methods (`visit`, `back`, and `forward`) is \(O(1)\) on average. However, in the worst case, the `back` and `forward` methods can take \(O(n)\) if all URLs are traversed, where \(n\) is the number of URLs in the respective history.
+
+- **Space Complexity**:
+  - The space complexity is \(O(n)\) for storing the browsing history in the backward and forward vectors.
+
+### Conclusion
+
+The provided implementation of the `BrowserHistory` class effectively simulates the basic functionalities of a web browser's history. Key features of this implementation include:
+
+1. **Two-Pointer Approach**: By using two vectors to manage forward and backward navigation, the code remains clean and efficient.
+2. **Dynamic Size Management**: The vectors dynamically resize as URLs are added or removed, maintaining optimal performance without fixed-size limitations.
+3. **Robustness**: The code correctly handles edge cases such as navigating back from the homepage or forward when no forward history exists.
+
+This solution serves as an excellent reference for understanding how to implement a history management system for a browser-like application, providing insights into stack-based data management and user navigation logic. The clear structure and efficient handling of browser actions make it a strong candidate for educational purposes in data structures and algorithms.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/design-browser-history/description/)
+
 ---
 {{< youtube pvj8WQMPlGY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1476: Subrectangle Queries](https://grid47.xyz/leetcode/solution-1476-subrectangle-queries/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/sOV1nRhmsMQ/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/spiral-matrix-iv/description/)
-
 ---
 **Code:**
 
@@ -51,9 +49,204 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2326.md" >}}
+### Problem Statement
+
+The problem asks us to take a singly linked list with integer values and place its values in a matrix in a spiral order. The matrix is of size `m` by `n` (with `m` rows and `n` columns), and we are given the head of the singly linked list. Our task is to fill the matrix with the values from the linked list in a spiral order, starting from the top-left corner.
+
+The matrix should be filled in the following spiral pattern:
+- Start at the top-left corner of the matrix.
+- Move right, then down, left, and up, filling each cell with the next value from the linked list.
+- Continue this pattern until all values from the linked list have been used.
+- If there are any leftover cells in the matrix, they should remain as `-1`.
+
+### Approach
+
+To solve this problem, we will:
+1. **Initialize the matrix**: First, create a matrix with the dimensions `m` by `n`, and initialize all its values to `-1`, indicating that they are empty.
+2. **Track the current position and direction**: We need to iterate through the matrix in a spiral order. This involves updating the current direction at each step and ensuring we do not go out of bounds or overwrite any previously filled cells.
+3. **Spiral traversal**: Starting from the top-left corner of the matrix, we will insert the linked list values into the matrix in the spiral order by using a direction vector. The directions for moving are: right, down, left, and up. If we hit the boundaries of the matrix or a filled cell, we change direction clockwise.
+4. **Linked list traversal**: Traverse the linked list, inserting its values into the matrix one by one. Once we reach the end of the linked list, we stop filling the matrix.
+5. **Return the matrix**: After filling the matrix, return it as the result.
+
+### Code Breakdown (Step by Step)
+
+Let’s walk through the code in detail to understand how it implements this approach:
+
+```cpp
+class Solution {
+public:
+    vector<vector<int>> spiralMatrix(int m, int n, ListNode* head) {
+```
+
+- The function `spiralMatrix` takes three parameters: `m`, `n`, and `head`, which represent the number of rows, columns, and the head of the linked list respectively.
+- The function will return a 2D vector (`vector<vector<int>>`) representing the matrix with the values from the linked list inserted in a spiral order.
+
+```cpp
+        vector<vector<int>> res(m, vector<int>(n, -1));
+```
+
+- We initialize the result matrix `res` with dimensions `m` by `n`, filling every cell initially with `-1` to represent empty cells.
+
+```cpp
+        int i = 0, j = 0, cur_dir = 0, d[5] = {0, 1, 0, -1, 0};
+```
+
+- We initialize `i` and `j` to `0`, representing the starting position at the top-left corner of the matrix.
+- `cur_dir` is initialized to `0`, which will track the current direction of traversal (right, down, left, or up).
+- `d` is an array that defines the movement directions in the spiral traversal. The directions are defined as pairs of changes to `i` and `j`: `{0, 1}` for moving right, `{1, 0}` for moving down, `{0, -1}` for moving left, and `{-1, 0}` for moving up.
+
+```cpp
+        for (; head != nullptr; head = head->next) {
+```
+
+- This loop iterates through the linked list, starting from the `head`. For each node in the linked list, we will insert its value into the matrix at the current position.
+
+```cpp
+            res[i][j] = head->val;
+```
+
+- We set the current matrix position `res[i][j]` to the value of the current node in the linked list.
+
+```cpp
+            int ni = i + d[cur_dir], nj = j + d[cur_dir + 1];
+```
+
+- We calculate the next position (`ni`, `nj`) based on the current direction `cur_dir`. We use `d[cur_dir]` for the change in the `i` (row) index and `d[cur_dir + 1]` for the change in the `j` (column) index.
+
+```cpp
+            if (min(ni, nj) < 0 || ni >= m || nj >= n || res[ni][nj] != -1)
+                cur_dir = (cur_dir + 1) % 4;
+```
+
+- We check if the next position (`ni`, `nj`) is out of bounds or if the cell is already filled (i.e., not `-1`).
+- If either condition is true, it means we need to change direction (turn 90 degrees clockwise). We update `cur_dir` to the next direction in the cycle, using modulo 4 to ensure it stays within the range `[0, 3]`.
+
+```cpp
+            i += d[cur_dir];
+            j += d[cur_dir + 1];
+```
+
+- After checking if the next position is valid, we move to the next position in the current direction by updating `i` and `j`.
+
+```cpp
+        }
+        return res;
+    }
+};
+```
+
+- The loop continues until all nodes in the linked list have been processed.
+- After filling the matrix, the function returns the result matrix `res`.
+
+### Example Walkthrough
+
+Let’s consider a simple example to understand how the code works:
+
+#### Input:
+- `m = 3`, `n = 3` (matrix dimensions)
+- `head = 1 -> 2 -> 3 -> 4 -> 5 -> 6 -> 7 -> 8 -> 9` (linked list values)
+
+#### Steps:
+
+1. Initialize a 3x3 matrix filled with `-1`:
+   ```
+   [-1, -1, -1]
+   [-1, -1, -1]
+   [-1, -1, -1]
+   ```
+
+2. Start at the top-left corner (position `i = 0`, `j = 0`), and move right:
+   - Insert `1` at `[0][0]`, matrix becomes:
+     ```
+     [1, -1, -1]
+     [-1, -1, -1]
+     [-1, -1, -1]
+     ```
+   - Move right to `[0][1]`, insert `2`, matrix becomes:
+     ```
+     [1, 2, -1]
+     [-1, -1, -1]
+     [-1, -1, -1]
+     ```
+   - Move right to `[0][2]`, insert `3`, matrix becomes:
+     ```
+     [1, 2, 3]
+     [-1, -1, -1]
+     [-1, -1, -1]
+     ```
+
+3. Change direction to move down:
+   - Move down to `[1][2]`, insert `4`, matrix becomes:
+     ```
+     [1, 2, 3]
+     [-1, -1, 4]
+     [-1, -1, -1]
+     ```
+   - Move down to `[2][2]`, insert `5`, matrix becomes:
+     ```
+     [1, 2, 3]
+     [-1, -1, 4]
+     [-1, -1, 5]
+     ```
+
+4. Change direction to move left:
+   - Move left to `[2][1]`, insert `6`, matrix becomes:
+     ```
+     [1, 2, 3]
+     [-1, -1, 4]
+     [-1, 6, 5]
+     ```
+
+5. Change direction to move up:
+   - Move up to `[1][1]`, insert `7`, matrix becomes:
+     ```
+     [1, 2, 3]
+     [-1, 7, 4]
+     [-1, 6, 5]
+     ```
+
+6. Change direction to move right:
+   - Move right to `[1][0]`, insert `8`, matrix becomes:
+     ```
+     [1, 2, 3]
+     [8, 7, 4]
+     [-1, 6, 5]
+     ```
+
+7. Change direction to move down:
+   - Move down to `[2][0]`, insert `9`, matrix becomes:
+     ```
+     [1, 2, 3]
+     [8, 7, 4]
+     [9, 6, 5]
+     ```
+
+#### Output:
+The final matrix after filling all values from the linked list:
+```
+[1, 2, 3]
+[8, 7, 4]
+[9, 6, 5]
+```
+
+### Time Complexity
+
+- The time complexity of the solution is **O(m * n)**, where `m` is the number of rows and `n` is the number of columns of the matrix.
+- Each cell in the matrix is filled once, and each node in the linked list is processed once.
+
+### Space Complexity
+
+- The space complexity is **O(m * n)**, as we store the matrix of size `m` by `n`.
+
+### Conclusion
+
+This solution efficiently fills the matrix with values from the linked list in a spiral order. By using direction vectors and handling boundary checks, the algorithm ensures that the matrix is filled correctly and avoids overwriting cells. The overall complexity of the solution is optimal for the given problem, making it suitable for larger matrix sizes and linked lists.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/spiral-matrix-iv/description/)
+
 ---
 {{< youtube sOV1nRhmsMQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2327: Number of People Aware of a Secret](https://grid47.xyz/leetcode/solution-2327-number-of-people-aware-of-a-secret/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

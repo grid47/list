@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/Ok0jYAMnvQI/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/people-whose-list-of-favorite-companies-is-not-a-subset-of-another-list/description/)
-
 ---
 **Code:**
 
@@ -48,9 +46,129 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1452.md" >}}
+### Problem Statement
+
+The task is to find the indexes of individuals whose preferences are not subsets of other individuals' preferences in a given collection. Each individual's preferences are represented as a vector of strings, and an individual is considered "unique" if their preferences do not completely fall within the preferences of any other individual.
+
+### Approach
+
+To solve the problem, we can follow these steps:
+
+1. **Sorting Preferences**: Sort the preferences of each individual to facilitate subset checking.
+2. **Checking Subset Inclusion**: For each individual's preferences, check if they are a subset of any other individual's preferences.
+3. **Collect Unique Indexes**: If an individual's preferences are not a subset of any other individual's preferences, their index will be collected in the result vector.
+
+### Code Breakdown (Step by Step)
+
+Let’s analyze the provided code to understand how it implements this approach:
+
+1. **Class Declaration**:
+   ```cpp
+   class Solution {
+   ```
+
+   - The solution is defined within a class named `Solution`, which is typical for coding challenges.
+
+2. **Function Declaration**:
+   ```cpp
+   public:
+       vector<int> peopleIndexes(vector<vector<string>>& comp) {
+   ```
+
+   - The function `peopleIndexes` takes a reference to a 2D vector `comp`, where each inner vector contains strings representing an individual's preferences.
+
+3. **Initialization**:
+   ```cpp
+       int n = comp.size();
+   ```
+
+   - We first determine the number of individuals (i.e., the number of preference lists) by checking the size of the `comp` vector.
+
+4. **Sorting Preferences**:
+   ```cpp
+       for(auto &c : comp)
+           sort(c.begin(), c.end());
+   ```
+
+   - We loop through each individual's preferences (each inner vector in `comp`) and sort them. This sorting step is crucial because it allows us to easily check for subset inclusion later.
+
+5. **Result Vector**:
+   ```cpp
+       vector<int> res;
+   ```
+
+   - We initialize an empty vector `res` to store the indexes of individuals whose preferences are unique.
+
+6. **Checking for Unique Preferences**:
+   ```cpp
+       for(int i = 0; i < n; i++) {
+           int notSubset = true;
+   ```
+
+   - We iterate over each individual's preferences using index `i`. The variable `notSubset` is set to `true` initially, assuming that the current individual's preferences might be unique.
+
+7. **Subset Comparison Loop**:
+   ```cpp
+           for(int j = 0; j < n && notSubset; j++) {
+               if(i == j) continue;
+   ```
+
+   - We have a nested loop where we compare the preferences of the current individual (indexed by `i`) with every other individual (indexed by `j`). If `i` is equal to `j`, we skip the comparison to avoid self-comparison.
+
+8. **Subset Inclusion Check**:
+   ```cpp
+               notSubset = !includes(comp[j].begin(), comp[j].end(), comp[i].begin(), comp[i].end());
+           }
+   ```
+
+   - We use the `includes` function from the C++ Standard Library to check if the preferences of the current individual (from `comp[i]`) are a subset of the preferences of the other individual (from `comp[j]`). If they are, we set `notSubset` to `false`. This indicates that the preferences of individual `i` are not unique.
+
+9. **Storing Unique Indexes**:
+   ```cpp
+           if(notSubset)
+               res.push_back(i);
+       }
+   ```
+
+   - After checking against all other individuals, if `notSubset` remains `true`, we append the index `i` to the result vector `res`.
+
+10. **Returning the Result**:
+    ```cpp
+       return res;
+   }
+   ```
+
+   - Finally, the function returns the result vector containing the indexes of unique individuals.
+
+### Complexity
+
+- **Time Complexity**: The time complexity of this solution can be approximated as \(O(n^2 \cdot m \log m)\), where:
+  - \(n\) is the number of individuals (the size of `comp`).
+  - \(m\) is the maximum length of an individual's preferences. This accounts for the sorting of preferences (\(O(m \log m)\)) and the subset checking, which is done for every pair of individuals.
+
+- **Space Complexity**: The space complexity is \(O(n \cdot m)\) for storing the sorted preferences in the `comp` vector, where \(m\) is the average number of preferences for an individual.
+
+### Conclusion
+
+The provided code efficiently identifies individuals whose preferences are not subsets of any other individuals' preferences by utilizing sorting and subset checking. 
+
+#### Key Takeaways:
+
+1. **Subset Checking**: The use of the `includes` function is a powerful way to determine if one collection is a subset of another, simplifying the subset logic.
+
+2. **Sorting**: Sorting is essential in this solution as it enables easier comparison of preferences, making subset checking straightforward.
+
+3. **Efficiency**: While the approach has a polynomial time complexity due to nested loops, it is structured in a way that clearly separates concerns (sorting, checking, and collecting results).
+
+4. **Data Structures**: The choice of using vectors to store preferences and results is appropriate given the nature of the data, allowing for easy iteration and manipulation.
+
+In summary, this solution exemplifies a methodical approach to a problem involving comparisons among collections, showcasing both the utility of C++ STL functions and effective coding practices.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/people-whose-list-of-favorite-companies-is-not-a-subset-of-another-list/description/)
+
 ---
 {{< youtube Ok0jYAMnvQI >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1456: Maximum Number of Vowels in a Substring of Given Length](https://grid47.xyz/leetcode/solution-1456-maximum-number-of-vowels-in-a-substring-of-given-length/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

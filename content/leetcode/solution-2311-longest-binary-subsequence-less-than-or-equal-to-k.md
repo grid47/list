@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/xgpPuMjET9c/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/longest-binary-subsequence-less-than-or-equal-to-k/description/)
-
 ---
 **Code:**
 
@@ -39,9 +37,100 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2311.md" >}}
+### Problem Statement
+
+The task is to find the longest subsequence in a binary string `s` such that the subsequence, when interpreted as a binary number, is less than or equal to a given integer `k`. A subsequence is formed by deleting some or no elements from the string, without changing the order of the remaining characters. The goal is to return the length of the longest subsequence that can be selected, which satisfies the condition that its binary representation is less than or equal to `k`.
+
+### Approach
+
+The main challenge of this problem is to find the longest subsequence where the binary number formed by the subsequence is less than or equal to `k`. To achieve this, we can take advantage of the binary representation of `k` and consider each character of the string from the rightmost side (starting from the least significant bit) to maximize the subsequence length.
+
+Here’s the approach step-by-step:
+
+1. **Binary Representation of `k`:**
+   - Since we are working with binary numbers, the key observation is that the binary representation of `k` plays an important role in determining which bits can be part of the subsequence.
+
+2. **Iterate from the Rightmost Bit:**
+   - We start by iterating through the string `s` from right to left. This allows us to consider the least significant bits first, which gives us more flexibility in adding bits to the subsequence.
+   
+3. **Construct the Binary Number:**
+   - As we iterate, we maintain a variable `val` that stores the current value of the binary number formed by the subsequence considered so far.
+   - We also maintain a variable `pow`, which represents the value of the current bit position. This is initialized as 1 and doubled at each step (i.e., shifted left) as we move from right to left through the string.
+
+4. **Add `1` Bits:**
+   - Each time we encounter a '1' in the string, we try to add it to the subsequence, increasing the subsequence value. If adding this '1' results in the binary number exceeding `k`, we stop considering further bits and move to the next part of the string.
+
+5. **Count `0` Bits:**
+   - The '0' bits in the string can always be included in the subsequence because they do not increase the binary number’s value. Therefore, we simply count the '0' bits in the string and add them to the final subsequence length.
+
+6. **Return the Result:**
+   - The length of the longest subsequence is the sum of the number of '0' bits and the number of '1' bits that were successfully added to the subsequence.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Initialize Variables
+
+```cpp
+int val = 0, cnt = 0, pow = 1;
+```
+
+- `val` is used to store the current value of the subsequence as we build it from right to left. It starts at 0.
+- `cnt` counts how many '1' bits are successfully added to the subsequence.
+- `pow` represents the value of the current bit position (starts at 1 for the least significant bit).
+
+#### Step 2: Iterate Through the String
+
+```cpp
+for(int i = s.size() - 1; i >= 0 && val + pow <= k; i--) {
+    if(s[i] == '1') {
+        ++cnt;
+        val += pow;
+    }
+    pow <<= 1;
+}
+```
+
+- The loop starts from the rightmost character of the string `s` and moves to the left. The condition `val + pow <= k` ensures that we do not exceed the value of `k` while building the subsequence.
+- For each bit, if it is '1', we increment the count `cnt` (indicating that this '1' is part of the subsequence) and add its corresponding value (`pow`) to `val`.
+- `pow <<= 1` shifts the value of `pow` to the next bit position (multiplying by 2).
+
+#### Step 3: Count `0` Bits
+
+```cpp
+return count(s.begin(), s.end(), '0') + cnt;
+```
+
+- The function `count(s.begin(), s.end(), '0')` counts the number of '0' bits in the string `s`. Since '0' bits can always be included in the subsequence without changing its value, we add this count to `cnt` to get the total length of the longest subsequence.
+- The total subsequence length is returned as the final result.
+
+### Complexity
+
+#### Time Complexity:
+- **Iterating Over the String:**
+  - The main loop iterates over the string `s` once, starting from the last character and moving to the first. This loop runs in `O(n)` time, where `n` is the length of the string `s`.
+  
+- **Counting `0` Bits:**
+  - The `count(s.begin(), s.end(), '0')` function also iterates over the string once to count the number of '0' bits, which takes `O(n)` time.
+  
+- **Overall Time Complexity:**
+  - Since both operations (iterating over the string and counting '0' bits) are linear, the overall time complexity of the solution is `O(n)`.
+
+#### Space Complexity:
+- **Auxiliary Variables:**
+  - The solution uses a constant amount of extra space for the variables `val`, `cnt`, and `pow`, which are all scalar values.
+  
+- **Overall Space Complexity:**
+  - The space complexity is `O(1)` since the amount of extra space used does not depend on the size of the input string.
+
+### Conclusion
+
+This solution efficiently calculates the longest subsequence of a binary string whose binary representation is less than or equal to a given integer `k`. The algorithm makes a single pass through the string to construct the valid subsequence and counts the '0' bits, ensuring optimal performance. The time complexity of `O(n)` makes this approach suitable for large input sizes, and the space complexity of `O(1)` ensures minimal memory usage. The solution is both time-efficient and space-efficient, making it well-suited for practical use cases involving binary strings.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/longest-binary-subsequence-less-than-or-equal-to-k/description/)
+
 ---
 {{< youtube xgpPuMjET9c >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2315: Count Asterisks](https://grid47.xyz/leetcode/solution-2315-count-asterisks/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

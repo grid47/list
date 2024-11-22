@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/lFYPPPTp8qE/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/filling-bookcase-shelves/description/)
-
 ---
 **Code:**
 
@@ -47,9 +45,89 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1105.md" >}}
+
+### Problem Statement
+The problem requires us to arrange a given list of books on shelves in such a way that the total height of the shelves is minimized. Each book has a width and a height, and we have a specified width limit for each shelf. If the total width of books placed on a shelf exceeds this limit, the shelf cannot hold those books.
+
+**Input:**
+- A vector of books, where each book is represented as a vector with two integers: width and height.
+- An integer representing the maximum width allowed for each shelf.
+
+**Output:**
+- An integer representing the minimum height of shelves required to accommodate all the books under the given constraints.
+
+### Approach
+To tackle this problem, we utilize dynamic programming. The key ideas are:
+1. **Dynamic Programming Array**: Use an array `dp` where `dp[i]` represents the minimum height of shelves needed to accommodate the first `i` books.
+2. **Iterate Over Books**: For each book, determine how many books can be placed on the current shelf without exceeding the shelf width.
+3. **Calculate Heights**: For each arrangement of books on a shelf, compute the height and update the `dp` array accordingly.
+4. **Update Minimum Height**: Continuously track the minimum shelf height required for various combinations of books.
+
+### Code Breakdown (Step by Step)
+
+1. **Class Definition**: The `Solution` class contains the method to calculate the minimum height of shelves.
+
+   ```cpp
+   class Solution {
+   public:
+   ```
+
+2. **Method Declaration**: The method `minHeightShelves` takes a vector of books and an integer shelfWidth as parameters.
+
+   ```cpp
+       int minHeightShelves(vector<vector<int>>& books, int shelfWidth) {
+           int n = books.size();
+           vector<int> dp(n + 1, 0);
+           dp[0] = 0;  // Base case: 0 height for 0 books
+   ```
+
+3. **Main Loop**: Loop through each book, updating the `dp` array.
+
+   ```cpp
+           for(int i = 0; i < n; i++) {
+               dp[i + 1] = dp[i] + books[i][1];  // Start by adding current book height
+               int sum = 0, height = 0;  // Initialize variables for width and height
+   ```
+
+4. **Nested Loop**: For each book `i`, check how many previous books can fit on the current shelf.
+
+   ```cpp
+               for(int j = i; j >= 0; j--) {
+                   sum += books[j][0];  // Add the width of the current book to the sum
+                   if(sum > shelfWidth) break;  // If the width exceeds the shelf limit, break
+                   else {
+                       height = max(height, books[j][1]);  // Track the maximum height on the shelf
+                       dp[i + 1] = min(dp[j] + height, dp[i + 1]);  // Update dp array
+                   }
+               }
+           }
+   ```
+
+5. **Return Result**: Finally, return the minimum height required to accommodate all books.
+
+   ```cpp
+           return dp[n];        
+       }
+   };
+   ```
+
+### Complexity Analysis
+- **Time Complexity**: The time complexity of this solution is \(O(n^2)\) where \(n\) is the number of books. This is because for each book, we may need to check all previous books to see how many can fit on the current shelf.
+- **Space Complexity**: The space complexity is \(O(n)\) due to the storage used for the `dp` array that holds the minimum heights for each subset of books.
+
+### Conclusion
+The provided C++ code effectively calculates the minimum height of shelves required to hold a collection of books under the specified width constraint using a dynamic programming approach. By iterating through each book and determining how many can fit on each shelf, we can compute the optimal arrangement that minimizes shelf height.
+
+This algorithm showcases how dynamic programming can be utilized to solve optimization problems in a structured and efficient manner. By breaking down the problem into smaller subproblems and solving them iteratively, we ensure that we explore all possible arrangements while maintaining a manageable computational complexity.
+
+In summary, this solution not only demonstrates an effective application of dynamic programming techniques but also provides insight into how thoughtful problem-solving can lead to efficient algorithms in real-world scenarios involving spatial constraints.
+
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/filling-bookcase-shelves/description/)
+
 ---
 {{< youtube lFYPPPTp8qE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1109: Corporate Flight Bookings](https://grid47.xyz/leetcode/solution-1109-corporate-flight-bookings/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

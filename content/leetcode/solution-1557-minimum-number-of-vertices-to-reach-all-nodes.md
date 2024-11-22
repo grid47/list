@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/oEy0bzfioG4/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/minimum-number-of-vertices-to-reach-all-nodes/description/)
-
 ---
 **Code:**
 
@@ -38,9 +36,92 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1557.md" >}}
+### Problem Statement
+
+The problem is to find the smallest set of vertices from a directed graph that can reach all other vertices. This is commonly known as the "Minimum Starting Vertices" problem. In other words, we want to identify all vertices that have no incoming edges. These vertices serve as the starting points for traversing the entire graph since all other vertices can be reached from them.
+
+### Approach
+
+To solve this problem, we can follow a straightforward approach that involves counting the incoming edges for each vertex. By maintaining an array that tracks the count of incoming edges for each vertex, we can easily identify which vertices have no incoming edges.
+
+1. **Initialize Count Array**: Create an array `ca` of size `n` initialized to zero. This array will keep track of the number of incoming edges for each vertex.
+
+2. **Count Incoming Edges**: Iterate through the list of edges, and for each edge directed from vertex `u` to vertex `v`, increment the count for vertex `v` in the `ca` array. 
+
+3. **Identify Starting Vertices**: After counting the incoming edges, iterate through the count array. Any vertex with a count of zero is a starting vertex, meaning it has no incoming edges.
+
+4. **Return Result**: Collect all starting vertices in a result vector and return it.
+
+### Code Breakdown (Step by Step)
+
+Here’s a detailed breakdown of the code:
+
+```cpp
+class Solution {
+public:
+    vector<int> findSmallestSetOfVertices(int n, vector<vector<int>>& edges) {
+        // Step 1: Initialize a count array to keep track of incoming edges
+        vector<int> ca(n, 0); // ca[i] will hold the count of incoming edges to vertex i
+        vector<int> ans; // This will store the result, i.e., the vertices with no incoming edges
+        
+        // Step 2: Count incoming edges for each vertex
+        for(auto e: edges) {
+            ca[e[1]]++; // Increment the count for the destination vertex of the edge
+        }
+        
+        // Step 3: Identify vertices with zero incoming edges
+        for(int i = 0; i < n; i++) {
+            if(ca[i] == 0) // Check if there are no incoming edges to vertex i
+                ans.push_back(i); // If so, add it to the result
+        }
+        
+        // Step 4: Return the result vector containing all starting vertices
+        return ans;
+    }
+};
+```
+
+#### Step-by-Step Explanation:
+
+1. **Initialization**: 
+   - The vector `ca` is initialized to store counts of incoming edges for `n` vertices. Each index corresponds to a vertex, and each value at that index counts how many edges point to it.
+   - The result vector `ans` will store the vertices with zero incoming edges.
+
+2. **Counting Edges**: 
+   - The code iterates over the `edges` vector, where each edge is represented as a pair `[u, v]`. The vertex `u` points to vertex `v`. 
+   - For each edge, the count of incoming edges for vertex `v` is incremented by 1.
+
+3. **Finding Vertices with No Incoming Edges**: 
+   - A loop runs through each vertex (from 0 to n-1). For each vertex, it checks if the incoming edge count (`ca[i]`) is zero.
+   - If a vertex has no incoming edges, it is added to the result vector `ans`.
+
+4. **Return Statement**: 
+   - Finally, the function returns the vector `ans`, which contains all the vertices that can be starting points for reaching the rest of the graph.
+
+### Complexity
+
+#### Time Complexity
+- **O(n + e)**: The time complexity is linear with respect to the number of vertices (`n`) and edges (`e`) in the graph. The counting of edges takes O(e) time, and the subsequent checks for vertices take O(n) time.
+
+#### Space Complexity
+- **O(n)**: The space complexity is O(n) due to the storage of the incoming edge counts in the array `ca`, as well as the output vector `ans`.
+
+### Conclusion
+
+The `findSmallestSetOfVertices` function efficiently identifies all starting vertices in a directed graph that can reach all other vertices. By leveraging an array to count incoming edges, the algorithm provides a clear and efficient solution to this problem.
+
+**Key Insights**:
+- **Graph Representation**: Understanding how directed graphs are represented using edges is crucial. Each directed edge contributes to the incoming edge count of the target vertex.
+- **Direct Counting**: The method of counting incoming edges simplifies the process of identifying starting points.
+- **Practical Applications**: This solution has practical applications in network flow problems, dependency resolution in tasks, and many graph-related problems in computer science.
+
+This algorithm illustrates how to approach graph problems systematically by using counting methods, ensuring efficiency and clarity in implementation. By following the steps outlined in the approach and breaking down the code methodically, we achieve a comprehensive understanding of finding the smallest set of vertices in a directed graph.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-vertices-to-reach-all-nodes/description/)
+
 ---
 {{< youtube oEy0bzfioG4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1559: Detect Cycles in 2D Grid](https://grid47.xyz/leetcode/solution-1559-detect-cycles-in-2d-grid/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

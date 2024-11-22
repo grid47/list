@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/M_OB20n4hfo/maxresdefault.webp"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/is-subsequence/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/392.webp" 
     alt="A sequence of characters gently forming into a subsequence, glowing as each match is found."
@@ -47,9 +45,104 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/392.md" >}}
+### 🚀 Problem Statement
+
+We are tasked with checking whether a string `s` is a **subsequence** of another string `t`. A subsequence is a sequence derived from another sequence by deleting some or no characters without changing the order of the remaining characters. In this case, we want to determine if `s` can be formed as a subsequence of `t`. That means, all characters of `s` must appear in `t` in the same order, though not necessarily consecutively.
+
+---
+
+### 🧠 Approach
+
+To solve this problem efficiently, we can utilize a **two-pointer technique**. The idea is simple: traverse through string `t` while trying to match each character of string `s` in order. The two pointers will help us track our position in both strings, allowing us to efficiently determine if `s` is a subsequence of `t`.
+
+#### Key Steps:
+1. **Initial Check for Empty String**: If string `s` is empty, it is trivially a subsequence of any string, so we return `true` immediately.
+   
+2. **Two-Pointer Technique**: We initialize two pointers:
+   - `sdx` for string `s` (starting at 0).
+   - `tdx` for string `t` (also starting at 0).
+   
+   We will iterate over `t` and try to match the characters of `s` one by one.
+
+3. **Matching Characters**: As we iterate through `t`, whenever we find a character in `t` that matches the current character in `s`, we move the pointer `sdx` forward (to match the next character in `s`).
+
+4. **Check Completion**: If we have matched all characters of `s` (i.e., `sdx` reaches the end of `s`), then `s` is a subsequence of `t`, and we return `true`.
+
+5. **Return False**: If we finish the loop without matching all characters of `s`, we return `false`.
+
+---
+
+### 🔨 Step-by-Step Code Breakdown
+
+Here’s the code implementing the approach:
+
+```cpp
+class Solution {
+public:
+    bool isSubsequence(string s, string t) {
+        if (s == "") return true;  // If s is empty, it's trivially a subsequence
+
+        int sdx = 0, tdx = 0;  // Pointers for s and t
+        while (tdx < t.size()) {
+            if (t[tdx] == s[sdx]) {  // If characters match
+                sdx++;  // Move to the next character in s
+            }
+            tdx++;  // Always move to the next character in t
+            if (sdx == s.size()) {  // If we've matched all characters of s
+                return true;
+            }
+        }
+        return false;  // If we couldn't match all characters of s
+    }
+};
+```
+
+#### Explanation of Code:
+1. **Base Case for Empty String**:  
+   - If `s` is empty, we return `true` because an empty string is a subsequence of any string.
+   
+2. **Initialize Pointers**:  
+   - `sdx` tracks the current character of `s` we are trying to match.
+   - `tdx` tracks the current character of `t` we are comparing with.
+
+3. **Loop through `t`**:
+   - We loop through `t` with `tdx`. If we find a character in `t` that matches the character in `s[sdx]`, we move `sdx` forward to check the next character in `s`.
+
+4. **Match Completion**:
+   - If `sdx` reaches the length of `s`, it means we've found all characters of `s` in `t`, and we return `true`.
+
+5. **Return False**:  
+   - If we finish the loop and haven't matched all characters of `s`, we return `false`.
+
+---
+
+### 📈 Complexity Analysis
+
+#### Time Complexity:
+- **Best Case**: If `s` is empty, we return `true` immediately, which takes **O(1)** time.
+- **Worst Case**: In the worst case, we iterate over all characters in `t` once. Since we are only moving forward in both strings, the time complexity is **O(n)**, where `n` is the length of string `t`. This is the time it takes to check all characters of `t` and possibly match all characters of `s`.
+
+#### Space Complexity:
+- The space complexity is **O(1)** since we only use a constant amount of space for the two pointers (`sdx` and `tdx`). No additional space is used regardless of the size of `s` or `t`.
+
+---
+
+### 🏁 Conclusion
+
+This solution efficiently checks whether string `s` is a subsequence of string `t` using the two-pointer technique. It runs in **O(n)** time where `n` is the length of `t` and uses **O(1)** space, making it highly efficient and scalable even for large input sizes.
+
+### 🎯 Key Takeaways:
+- **Optimal Time Complexity**: The algorithm runs in linear time, **O(n)**, making it suitable for large strings.
+- **Constant Space**: The space complexity is constant (**O(1)**), which ensures minimal memory usage.
+- **Simple Logic**: The two-pointer approach is intuitive and efficient for solving the subsequence problem.
+
+Keep coding and optimizing! 🚀 You’ve got this!
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/is-subsequence/description/)
+
 ---
 {{< youtube M_OB20n4hfo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #393: UTF-8 Validation](https://grid47.xyz/leetcode/solution-393-utf-8-validation/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

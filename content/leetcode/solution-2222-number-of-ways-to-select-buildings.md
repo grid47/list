@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/EcQ0uhiF3HU/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/number-of-ways-to-select-buildings/description/)
-
 ---
 **Code:**
 
@@ -63,9 +61,101 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2222.md" >}}
+### Problem Statement
+The problem is to determine how many ways we can divide a binary string `s` into three non-empty contiguous substrings such that the first substring contains only `'0'`s, the second substring contains only `'1'`s, and the third substring contains only `'0'`s. This means the substrings must follow the pattern `0...1...0` in terms of order and type of characters.
+
+Given the string `s`, the goal is to return the total number of ways such divisions can be made.
+
+### Approach
+To solve this problem efficiently, we need to track the number of `0` and `1` characters in the string while iterating through it. The main idea is to calculate, for each position where the string has a `'0'` or `'1'`, how many valid ways exist to partition the string into three parts: a part with only `0`s, a part with only `1`s, and another part with only `0`s.
+
+We maintain counts of:
+- The total number of `0`s (`z`) and `1`s (`o`) in the entire string.
+- How many `0`s (`zl`) and `1`s (`ol`) we have encountered as we iterate through the string.
+
+For each encountered `0`, we calculate how many valid ways we can form a valid partition using previously encountered `1`s. Similarly, for each encountered `1`, we calculate how many valid ways we can form a valid partition using previously encountered `0`s.
+
+By calculating these values and summing them up as we iterate through the string, we get the total number of valid partitions.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Initialize Variables
+```cpp
+typedef long long ll;
+
+int z = 0, o = 0;
+int n = s.length();
+```
+- `ll` is defined as a shorthand for `long long` to manage large numbers.
+- `z` and `o` store the total number of `0`s and `1`s in the string, respectively.
+- `n` is the length of the string `s`.
+
+#### Step 2: Count Total Number of `0`s and `1`s
+```cpp
+for(int i = 0; i < n; i++) {
+    if(s[i] == '0') z++;
+    if(s[i] == '1') o++;
+}
+```
+- The loop counts the total number of `0`s (`z`) and `1`s (`o`) in the entire string.
+
+#### Step 3: Initialize Local Variables
+```cpp
+int zl = 0, ol = 0;
+ll res = 0;
+```
+- `zl` and `ol` are counters to track the number of `0`s and `1`s encountered up to the current position while iterating through the string.
+- `res` will hold the result—the total number of valid ways to partition the string into the desired format.
+
+#### Step 4: Iterate Through the String and Compute the Number of Valid Partitions
+```cpp
+for(int i = 0; i < n; i++) {
+    if(s[i] == '0') {
+        res += (ol * (o - ol));
+        zl++;
+    }
+    else if(s[i] == '1') {
+        res += (zl * (z - zl));
+        ol++;
+    }
+}
+```
+- The loop iterates through each character in the string `s`.
+- If the character is `'0'`, the number of valid partitions is incremented by the product of:
+  - `ol`: the number of `1`s encountered so far.
+  - `(o - ol)`: the remaining number of `1`s that can form the middle part of the partition.
+  - `zl` is then incremented to count the `0`s encountered.
+  
+- If the character is `'1'`, the number of valid partitions is incremented by the product of:
+  - `zl`: the number of `0`s encountered so far.
+  - `(z - zl)`: the remaining number of `0`s that can form the right part of the partition.
+  - `ol` is then incremented to count the `1`s encountered.
+
+#### Step 5: Return the Result
+```cpp
+return res;
+```
+- After the loop, `res` contains the total number of valid partitions, which is returned as the final result.
+
+### Complexity
+
+#### Time Complexity:
+- The time complexity of this solution is **O(n)**, where `n` is the length of the string `s`. 
+  - The first loop counts the total number of `0`s and `1`s in the string, which takes O(n) time.
+  - The second loop iterates over the string once more and performs constant-time calculations for each character. Therefore, the total time complexity is linear, O(n).
+
+#### Space Complexity:
+- The space complexity is **O(1)** because only a constant amount of extra space is used. The space usage does not depend on the size of the input string; we only store a few integer variables and use them to accumulate the result.
+
+### Conclusion
+
+This solution efficiently calculates the number of ways to partition a binary string into three parts: a segment of `0`s, a segment of `1`s, and another segment of `0`s. By maintaining running totals of the encountered `0`s and `1`s, and leveraging simple multiplication at each step, the solution achieves optimal time complexity of **O(n)**. This makes it suitable for handling strings of moderate to large sizes. The space complexity is constant, making it memory-efficient as well. This method effectively combines string manipulation and combinatorial counting to solve the problem in a streamlined manner.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-ways-to-select-buildings/description/)
+
 ---
 {{< youtube EcQ0uhiF3HU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2224: Minimum Number of Operations to Convert Time](https://grid47.xyz/leetcode/solution-2224-minimum-number-of-operations-to-convert-time/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

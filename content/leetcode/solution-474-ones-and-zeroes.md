@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/miZ3qV04b1g/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/ones-and-zeroes/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/474.webp" 
     alt="A sequence of ones and zeroes gently forming various combinations, with each valid combination glowing softly."
@@ -51,9 +49,41 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/474.md" >}}
+class Solution {
+public:
+    int findMaxForm(vector<string>& strs, int zeros, int ones) {
+        int i, j, p = strs.size();
+        vector<vector<int>> dp(zeros + 1, vector<int>(ones+1));
+
+        for(auto &s : strs) {
+            int currOne = count(s.begin(), s.end(), '1');
+            int currZero = s.size() - currOne;
+            for(int j = ones ; j >= currOne; j--) 
+            for(int i = zeros; i >= currZero; i--) {
+               dp[i][j] = max(dp[i][j], 1 + dp[i- currZero ][j-currOne]);
+            }
+        }
+
+        return dp[zeros][ones];
+    }
+};
+
+
+
+### Problem Statement
+### Approach
+### Code Breakdown (Step by Step)
+### Complexity
+### Conclusion
+
+generate a 350 line SEO friendly explanation of this code.
+
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/ones-and-zeroes/description/)
+
 ---
 {{< youtube miZ3qV04b1g >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #475: Heaters](https://grid47.xyz/leetcode/solution-475-heaters/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

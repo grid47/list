@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/lf1Pxg7IrzQ/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/minimize-the-maximum-difference-of-pairs/description/)
-
 ---
 **Code:**
 
@@ -51,9 +49,107 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2616.md" >}}
+### Problem Statement
+
+The problem asks to minimize the maximum difference between any two adjacent numbers in the array after performing exactly `p` operations. In each operation, you can select two adjacent numbers and remove them from the array. The task is to determine the smallest possible maximum difference between the remaining adjacent numbers after removing `p` pairs.
+
+### Approach
+
+This problem can be efficiently solved using a **binary search** technique combined with a **greedy approach**. Here's a step-by-step breakdown of the approach:
+
+1. **Sorting**:
+   - We begin by sorting the array `nums`. Sorting ensures that adjacent elements are as close to each other as possible, which helps minimize the maximum difference between any two adjacent numbers in the array.
+
+2. **Binary Search**:
+   - We use binary search to find the smallest possible maximum difference between adjacent numbers after removing `p` pairs. The key idea is to minimize the largest difference between any two consecutive numbers in the modified array.
+
+3. **Greedy Check**:
+   - For each middle value (`mid`) during the binary search, we check if it's possible to remove `p` pairs such that the maximum difference between the remaining adjacent numbers is less than or equal to `mid`. This is done using a greedy approach, where we iterate through the array and try to pair up adjacent numbers that have a difference less than or equal to `mid`.
+
+### Code Breakdown (Step by Step)
+
+1. **Sorting the Input Array**:
+   - First, the array is sorted in ascending order. This helps us efficiently check the smallest differences between adjacent numbers.
+
+```cpp
+sort(nums.begin(), nums.end());
+```
+
+2. **Initializing Variables**:
+   - `n`: The size of the array `nums`.
+   - `l`: The left boundary of our binary search range (starting from 0).
+   - `r`: The right boundary of our binary search range, which is initially set to the difference between the maximum and minimum values in the sorted array (`nums[n - 1] - nums[0]`).
+   - `ans`: This variable holds the answer and is initialized to the initial maximum difference (`nums[n - 1] - nums[0]`).
+
+```cpp
+int n = nums.size(), l = 0, r = nums[n - 1] - nums[0], ans = nums[n - 1] - nums[0];
+```
+
+3. **Binary Search Loop**:
+   - We perform binary search on the possible values of the maximum difference (`mid`), where `l` is the lower bound and `r` is the upper bound. We keep adjusting the bounds based on whether we can remove `p` pairs or not.
+
+```cpp
+while(l <= r) {
+    int mid = l + (r - l) / 2;
+    int k = p;
+```
+
+4. **Greedy Pair Removal**:
+   - In the inner loop, for each value of `mid`, we greedily check if it's possible to remove `p` pairs where the difference between the adjacent numbers is less than or equal to `mid`. If we can remove a pair, we decrement `k` (the count of pairs we still need to remove) and skip the next element since it’s part of the pair.
+   
+```cpp
+for(int i = 1; i < n && k > 0; i++) {
+    if(nums[i] - nums[i - 1] <= mid) {
+        k--;
+        i++;  // Skip the next element since we've paired it with the current one
+    }
+}
+```
+
+5. **Updating the Binary Search Bounds**:
+   - If we are able to remove all `p` pairs (`k == 0`), we update the `ans` variable to `mid` and try to search for smaller values of `mid` by setting the upper bound `r = mid - 1`. Otherwise, we increase the lower bound `l = mid + 1` to try larger differences.
+
+```cpp
+if(k == 0) {
+    ans = mid;
+    r = mid - 1;
+} else l = mid + 1;
+```
+
+6. **Returning the Result**:
+   - Once the binary search is complete, the variable `ans` will hold the smallest possible maximum difference between adjacent numbers after removing `p` pairs.
+
+```cpp
+return ans;
+```
+
+### Complexity Analysis
+
+#### Time Complexity:
+- **Sorting**: Sorting the array takes \(O(n \log n)\), where `n` is the number of elements in the array.
+- **Binary Search**: The binary search operates on the range of possible maximum differences, which is between 0 and `nums[n - 1] - nums[0]`. In the worst case, the binary search takes \(O(\log(\text{max} - \text{min}))\) iterations.
+- **Greedy Check for Each `mid`**: For each iteration of the binary search, we perform a greedy check by iterating through the array once, which takes \(O(n)\).
+  
+Thus, the overall time complexity is:
+
+\[
+O(n \log n + n \log(\text{max} - \text{min}))
+\]
+
+Since the binary search is logarithmic in nature, it’s efficient enough for large values of `n`.
+
+#### Space Complexity:
+- The space complexity is \(O(1)\) since the algorithm uses a constant amount of extra space, apart from the input array.
+
+### Conclusion
+
+This solution leverages **binary search** combined with a **greedy approach** to minimize the maximum difference between adjacent elements in the array after removing `p` pairs. By sorting the array first and performing a binary search on the possible maximum differences, we efficiently find the optimal solution in \(O(n \log n)\) time. This makes the approach scalable for large input sizes, ensuring it works well even for larger values of `n`.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/minimize-the-maximum-difference-of-pairs/description/)
+
 ---
 {{< youtube lf1Pxg7IrzQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2639: Find the Width of Columns of a Grid](https://grid47.xyz/leetcode/solution-2639-find-the-width-of-columns-of-a-grid/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

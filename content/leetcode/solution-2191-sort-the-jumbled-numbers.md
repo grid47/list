@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/rmkF2mxPoZM/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/sort-the-jumbled-numbers/description/)
-
 ---
 **Code:**
 
@@ -55,9 +53,86 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2191.md" >}}
+### Problem Statement
+You are given an array of integers `nums` and a mapping of digits represented by the array `mapping`. The task is to sort the `nums` array based on the transformed values of each number according to the provided digit mapping. The digit mapping works by replacing each digit in a number with the corresponding value from the `mapping` array. After transforming all the numbers, sort them in ascending order and return the sorted list.
+
+### Approach
+To solve the problem efficiently, the solution transforms each number in `nums` based on the digit mapping and then sorts these transformed values. We can achieve this by following these steps:
+
+1. **Transform each number**: For each number in `nums`, convert it to a string to easily access its individual digits. Replace each digit with its corresponding value from the `mapping` array.
+2. **Sort by transformed values**: The transformed number is then compared for sorting. To maintain the original indices after sorting, we store each transformed number alongside its original index.
+3. **Return the sorted array**: After sorting the transformed numbers, use the stored indices to place the original numbers in the sorted order.
+
+### Code Breakdown (Step by Step)
+1. **Initialize Temporary Storage for Transformation Results:**
+   ```cpp
+   vector<pair<int, int>> tmp;
+   ```
+   - A vector of pairs `tmp` is used to store the transformed number and its original index in `nums`. Each pair is of the form `(transformed_value, original_index)`.
+
+2. **Iterate Through Each Number in `nums`:**
+   ```cpp
+   int n = nums.size();
+   for(int i = 0; i < n; i++) {
+       int num = nums[i];
+       string str = to_string(num);
+       string formed = "";
+   ```
+   - We loop through the `nums` array. For each number `num`, it is converted to a string `str` so that we can access each digit individually.
+   - We initialize an empty string `formed` to construct the transformed number as we process each digit.
+
+3. **Transform Each Digit According to `mapping`:**
+   ```cpp
+   for(int j = 0; j < str.size(); j++)
+       formed += to_string(mapping[str[j] - '0']);
+   ```
+   - Each digit of the string `str` is processed. The character `str[j]` represents a digit, and `str[j] - '0'` converts this character to its integer value. Using this value as an index, we retrieve the corresponding transformed digit from `mapping` and append it to the `formed` string.
+
+4. **Convert the Transformed String Back to an Integer:**
+   ```cpp
+   int val = stoi(formed);
+   tmp.push_back({ val, i });
+   ```
+   - After the transformation, the `formed` string represents the transformed number. We convert this back to an integer using `stoi()` and store the result in the pair `(val, i)`, where `val` is the transformed number and `i` is the original index of `nums[i]`.
+
+5. **Sort the Temporary Vector:**
+   ```cpp
+   sort(tmp.begin(), tmp.end());
+   ```
+   - The vector `tmp` is sorted based on the transformed values. Since each element in `tmp` is a pair, the default sorting behavior will sort by the first element of each pair (i.e., the transformed number).
+
+6. **Construct the Final Sorted Array:**
+   ```cpp
+   vector<int> ans;
+   for(int i = 0; i < n; i++)
+       ans.push_back(nums[tmp[i].second]);
+   ```
+   - After sorting, we extract the original numbers in the sorted order by using the stored indices. The `tmp[i].second` gives the original index, and `nums[tmp[i].second]` retrieves the corresponding number from `nums`.
+
+7. **Return the Sorted Result:**
+   ```cpp
+   return ans;
+   ```
+   - The `ans` vector now contains the numbers from `nums`, sorted based on their transformed values according to the `mapping`. This is returned as the final result.
+
+### Complexity
+- **Time Complexity**: 
+  - The time complexity of this solution is O(n * m * log n), where:
+    - `n` is the size of the input array `nums`.
+    - `m` is the maximum number of digits in any number in `nums` (since we process each digit of the number during transformation).
+    - Sorting the `tmp` array of size `n` takes O(n log n) time. The transformation of each number takes O(m) time, where `m` is the number of digits in the number (since we loop over each digit). Therefore, the overall time complexity is O(n * m * log n).
+  
+- **Space Complexity**: 
+  - The space complexity is O(n * m), where `n` is the size of the input array `nums` and `m` is the maximum number of digits in any number in `nums`. This space is required to store the `tmp` vector and the `formed` string.
+
+### Conclusion
+This solution efficiently sorts the array `nums` based on a transformed version of each number, where the transformation is governed by the provided `mapping`. The approach is both simple and effective, using string manipulation and sorting with custom keys. The solution’s time complexity is dominated by the sorting step and is manageable for most practical input sizes. The space complexity is also reasonable, primarily used for storing the transformed values and their corresponding indices. This approach is optimal for the problem and can be easily extended or adapted to similar problems involving transformations and sorting.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/sort-the-jumbled-numbers/description/)
+
 ---
 {{< youtube rmkF2mxPoZM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2192: All Ancestors of a Node in a Directed Acyclic Graph](https://grid47.xyz/leetcode/solution-2192-all-ancestors-of-a-node-in-a-directed-acyclic-graph/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

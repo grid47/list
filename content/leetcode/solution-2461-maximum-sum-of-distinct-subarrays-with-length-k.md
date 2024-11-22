@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/o8XmnEBQrLs/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/maximum-sum-of-distinct-subarrays-with-length-k/description/)
-
 ---
 **Code:**
 
@@ -51,9 +49,100 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2461.md" >}}
+### Problem Statement:
+In this problem, we are given an array of integers `nums` and an integer `k`. Our task is to find the maximum sum of a subarray of length `k` in the array, where the subarray does not contain any duplicate elements. We need to return the maximum sum of such subarrays.
+
+### Approach:
+The approach to solving this problem involves using the sliding window technique combined with a hash map (or a map in C++) to keep track of the frequency of elements in the current subarray. The window is adjusted to ensure that no duplicate elements are present within the subarray. Here's how we can solve this efficiently:
+
+1. **Sliding Window Technique**: 
+   - The sliding window helps us to explore subarrays of length `k` efficiently. Instead of recalculating the sum for every subarray from scratch, we maintain a running sum for the current window and adjust it as the window slides.
+   
+2. **Tracking Duplicates**:
+   - We need to ensure that the current subarray has no duplicates. This can be easily tracked using a map where the key is the number and the value is the frequency of that number in the current subarray. If any number appears more than once, the subarray is invalid, and we shrink the window until it becomes valid again.
+
+3. **Maximizing the Sum**:
+   - As we slide the window through the array, we keep track of the maximum sum encountered while maintaining a valid subarray.
+
+### Code Breakdown (Step by Step):
+
+Let’s break down the code to understand each part:
+
+1. **Function Definition**:
+   ```cpp
+   long long maximumSubarraySum(vector<int>& nums, int k) {
+   ```
+   - The function `maximumSubarraySum` takes a vector `nums` of integers and an integer `k` as inputs and returns a `long long` value representing the maximum sum of a subarray of length `k` with no duplicates.
+
+2. **Initialization**:
+   ```cpp
+   long long sum = 0, ans = 0;
+   int n = nums.size(), j = 0;
+   map<int, int> mp;
+   ```
+   - `sum`: This variable stores the running sum of the current subarray.
+   - `ans`: This variable stores the maximum sum encountered so far.
+   - `n`: The size of the input array `nums`.
+   - `j`: This is the starting index of the sliding window.
+   - `mp`: A map that tracks the frequency of elements in the current subarray.
+
+3. **Iterating Through the Array**:
+   ```cpp
+   for(int i = 0; i < n; i++) {
+       sum += nums[i];
+       mp[nums[i]]++;
+   ```
+   - We iterate over the array using the index `i`, which represents the current end of the sliding window.
+   - For each element `nums[i]`, we add it to the running sum `sum` and update its count in the map `mp`.
+
+4. **Shrinking the Window for Invalid Subarrays**:
+   ```cpp
+   while(i - j + 1 > k || mp[nums[i]] > 1) {
+       mp[nums[j]]--;
+       sum -= nums[j];
+       j++;
+   }
+   ```
+   - The condition `i - j + 1 > k` ensures that the window size remains at most `k`. If the window size exceeds `k`, we shrink it by moving the start index `j` forward.
+   - The condition `mp[nums[i]] > 1` ensures that there are no duplicate elements in the window. If a duplicate element is found (i.e., the count of `nums[i]` exceeds 1), we move `j` forward to shrink the window until it becomes valid again.
+
+5. **Updating the Maximum Sum**:
+   ```cpp
+   if((i - j + 1) == k) {
+       ans = max(sum, ans);
+   }
+   ```
+   - After ensuring that the window is valid (with no duplicates and size exactly `k`), we check if the current window has exactly `k` elements.
+   - If so, we update the `ans` variable to store the maximum sum encountered so far by comparing `sum` with `ans`.
+
+6. **Return the Result**:
+   ```cpp
+   return ans;
+   }
+   ```
+   - Finally, the function returns `ans`, which holds the maximum sum of any subarray of length `k` that contains no duplicates.
+
+### Complexity:
+
+1. **Time Complexity**:
+   - The time complexity of the algorithm is \( O(n) \), where \( n \) is the number of elements in the input array `nums`.
+   - This is because the sliding window only moves the start index `j` and the end index `i` once over the array. The inner `while` loop ensures that the window is valid and does not cause repeated traversal of any element in the array.
+   - The map operations (insertion, deletion, and lookup) all take \( O(\log k) \) time, but since we only use a fixed amount of space for tracking frequencies (at most `k` elements), the complexity remains linear with respect to the number of elements in the array.
+
+2. **Space Complexity**:
+   - The space complexity is \( O(k) \), where \( k \) is the size of the sliding window. The map `mp` stores the frequency of elements in the current window, and the maximum number of distinct elements in the window is `k`. Therefore, the space complexity is proportional to `k`.
+
+### Conclusion:
+
+The `maximumSubarraySum` function efficiently solves the problem of finding the maximum sum of a subarray of length `k` with no duplicates using the sliding window technique. By maintaining a running sum and using a map to track the frequencies of elements in the current window, the algorithm ensures that we can efficiently find the result in linear time.
+
+This approach is optimal for solving the problem, as it processes each element of the array at most twice (once when expanding the window and once when shrinking it), leading to a time complexity of \( O(n) \). The space complexity is \( O(k) \), as we only need to store at most `k` elements in the map. This makes the solution both time and space efficient, suitable for large inputs.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-sum-of-distinct-subarrays-with-length-k/description/)
+
 ---
 {{< youtube o8XmnEBQrLs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2462: Total Cost to Hire K Workers](https://grid47.xyz/leetcode/solution-2462-total-cost-to-hire-k-workers/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

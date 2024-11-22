@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/A8-_z6gurGc/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/beautiful-arrangement-ii/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/667.webp" 
     alt="A set of arrangements where the beautiful ones glow softly, based on the rules of arrangement."
@@ -45,9 +43,79 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/667.md" >}}
+### Problem Statement
+
+The problem asks us to construct an array of integers from `1` to `n` such that:
+1. The array contains exactly `n` elements.
+2. The difference between consecutive elements is as large as possible for exactly `k` times.
+3. For the remaining elements, the difference between consecutive elements can be one.
+
+The goal is to construct the array in such a way that the first `k` differences are maximized, followed by the regular increments of one.
+
+### Approach
+
+To solve this problem, we can use a two-pointer approach where one pointer starts from the beginning of the array (`i = 1`) and the other pointer starts from the end (`j = n`). The strategy is to alternate between the two pointers for the first `k` steps, maximizing the difference between consecutive elements. After these `k` steps, we simply fill the remaining positions in a linear increasing order, starting from `i`.
+
+#### Key Insights:
+1. **Maximizing Differences**: To maximize the difference, we alternate between the smallest available value and the largest available value. This is done by choosing either `i++` (the current smallest available number) or `j--` (the current largest available number) based on whether `k` is odd or even.
+2. **Filling the Remaining Positions**: After `k` steps, we simply add numbers in increasing order to fill the remaining spots in the array.
+3. **Two-pointer Strategy**: The two-pointer strategy allows us to efficiently alternate between `i` and `j`, and then move `i` alone when no more alternating steps are needed.
+
+### Code Breakdown (Step by Step)
+
+The implementation is done in the `constructArray` function. Let's go through the code step by step.
+
+#### 1. **Function Definition and Initial Setup**
+
+```cpp
+vector<int> constructArray(int n, int k) {
+    vector<int> res;
+```
+- The function `constructArray` takes two parameters: `n` (the number of elements in the result array) and `k` (the number of maximum differences to generate).
+- A `vector<int> res` is declared to store the result array that will be returned.
+
+#### 2. **Loop to Generate the Result Array**
+
+```cpp
+for(int i = 1, j = n; i <= j; ) {
+    if(k > 0) {
+        res.push_back(k--%2? i++: j--);
+    } else res.push_back(i++);
+}
+```
+- **Two Pointers Initialization**: We initialize two pointers `i` and `j`. `i` starts at `1` and represents the smallest available number, while `j` starts at `n` and represents the largest available number.
+- **Loop Condition**: The loop runs as long as `i <= j`, meaning we continue filling the array until all elements are placed.
+- **Maximizing Differences**: 
+  - If `k > 0`, the code alternates between adding `i++` (incrementing the smallest value) and `j--` (decrementing the largest value). This alternation ensures that the difference between consecutive elements is maximized.
+  - The `k-- % 2` condition is used to alternate between picking `i` and `j`. The modulo operation helps in alternating between odd and even steps.
+- **Remaining Positions**: Once `k` reaches zero, the loop simply adds the next smallest number (`i++`) without any alternation, as no further maximization of differences is needed.
+
+#### 3. **Returning the Result**
+
+```cpp
+return res;
+```
+- After the loop finishes, the array `res` contains the constructed array, which is then returned as the result.
+
+### Complexity
+
+#### Time Complexity:
+- The time complexity is **O(n)**, where `n` is the size of the array. This is because we are iterating through the array once, with each operation inside the loop taking constant time.
+  
+#### Space Complexity:
+- The space complexity is **O(n)**, as we are storing the result array `res`, which has `n` elements.
+
+### Conclusion
+
+This solution efficiently constructs the array with alternating maximum differences using a two-pointer approach. By alternating between the smallest and largest available numbers for the first `k` steps and then simply filling in the remaining elements in increasing order, we achieve the desired result. The time complexity of **O(n)** ensures that the solution scales well with larger inputs, and the space complexity of **O(n)** is optimal for the task.
+
+The key to this problem is recognizing that maximizing differences can be efficiently achieved by alternating between the smallest and largest available values, and this approach avoids unnecessary complexity while ensuring correctness.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/beautiful-arrangement-ii/description/)
+
 ---
 {{< youtube A8-_z6gurGc >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #669: Trim a Binary Search Tree](https://grid47.xyz/leetcode/solution-669-trim-a-binary-search-tree/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

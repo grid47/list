@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/XJ1pYgzimYo/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/maximum-product-of-two-elements-in-an-array/description/)
-
 ---
 **Code:**
 
@@ -43,9 +41,106 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1464.md" >}}
+### Problem Statement
+
+The task is to find the maximum product of two distinct integers from a given list of integers, where the product is defined as \((a - 1) \times (b - 1)\), with \(a\) and \(b\) being the two largest integers in the array. This can be used in scenarios where you want to maximize the output after reducing the integers by one.
+
+### Approach
+
+To solve this problem efficiently, we can utilize a single-pass algorithm to identify the two largest integers in the input array. The algorithm works as follows:
+
+1. **Initialization**: Start by defining two variables, `max1` and `max2`, to keep track of the largest and second-largest integers encountered in the array. Initialize these variables to the minimum integer value (`INT_MIN`) to ensure that any number in the input will be larger.
+
+2. **Single Pass Calculation**:
+   - Iterate through each integer in the input list.
+   - During each iteration, check if the current integer is greater than `max1`. If it is, update `max2` to hold the value of `max1`, and then update `max1` with the current integer.
+   - If the current integer is not greater than `max1` but is greater than `max2`, update `max2` to the current integer.
+
+3. **Calculate the Result**: Once the loop is complete, the two largest integers will be stored in `max1` and `max2`. The maximum product can then be calculated using the formula \((max1 - 1) \times (max2 - 1)\).
+
+### Code Breakdown (Step by Step)
+
+Here is a detailed breakdown of the provided code:
+
+1. **Class Declaration**:
+   ```cpp
+   class Solution {
+   public:
+   ```
+
+   - The solution is encapsulated within a class named `Solution`, which is standard in competitive programming.
+
+2. **Function Definition**:
+   ```cpp
+   int maxProduct(vector<int>& nums) {
+   ```
+
+   - The `maxProduct` function takes a reference to a vector of integers as input and returns an integer, which is the maximum product of two distinct integers.
+
+3. **Variable Initialization**:
+   ```cpp
+   int max1 = INT_MIN;
+   int max2 = INT_MIN;
+   ```
+
+   - Two variables, `max1` and `max2`, are initialized to the smallest possible integer value to ensure they can accommodate any number in the input vector.
+
+4. **Iterating Through the Array**:
+   ```cpp
+   for (int num : nums) {
+   ```
+
+   - A range-based for loop is used to iterate through each integer in the `nums` vector.
+
+5. **Finding the Largest Integer**:
+   ```cpp
+   if (num >= max1) {
+       max2 = max1;
+       max1 = num;
+   }
+   ```
+
+   - If the current integer `num` is greater than or equal to `max1`, we update `max2` to the value of `max1` before assigning `num` to `max1`. This ensures that `max1` always holds the largest integer and `max2` the second largest.
+
+6. **Finding the Second Largest Integer**:
+   ```cpp
+   else if (num > max2) {
+       max2 = num;
+   }
+   ```
+
+   - If `num` is not greater than `max1` but is greater than `max2`, we update `max2` with `num`. This step ensures that `max2` holds the second largest integer in the array.
+
+7. **Calculating the Maximum Product**:
+   ```cpp
+   return (max1 - 1) * (max2 - 1);
+   ```
+
+   - After completing the iteration, the function calculates the maximum product using the formula \((max1 - 1) \times (max2 - 1)\) and returns the result.
+
+### Complexity
+
+- **Time Complexity**: The time complexity of this solution is \(O(n)\), where \(n\) is the number of integers in the input vector. The algorithm makes a single pass through the array to find the two largest integers.
+
+- **Space Complexity**: The space complexity is \(O(1)\) since we only use a constant amount of extra space (for `max1` and `max2`) regardless of the input size.
+
+### Conclusion
+
+This solution is efficient and effective for the problem of finding the maximum product of two distinct integers with the specified formula. Key features of this approach include:
+
+1. **Single-Pass Algorithm**: By only traversing the list once, we minimize the time complexity to \(O(n)\), making it suitable for large datasets.
+
+2. **Constant Space Usage**: The algorithm uses a fixed amount of space, which is optimal and ensures scalability.
+
+3. **Clear Logic**: The algorithm's logic is straightforward, making it easy to understand and implement. 
+
+Overall, this solution exemplifies good practices in algorithm design by focusing on efficiency and clarity, making it an excellent choice for competitive programming and real-world applications.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-product-of-two-elements-in-an-array/description/)
+
 ---
 {{< youtube XJ1pYgzimYo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1465: Maximum Area of a Piece of Cake After Horizontal and Vertical Cuts](https://grid47.xyz/leetcode/solution-1465-maximum-area-of-a-piece-of-cake-after-horizontal-and-vertical-cuts/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

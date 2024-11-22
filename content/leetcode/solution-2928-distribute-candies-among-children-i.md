@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/hVNcZKh8r40/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/distribute-candies-among-children-i/description/)
-
 ---
 **Code:**
 
@@ -39,9 +37,102 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2928.md" >}}
+### Problem Statement:
+The problem asks us to find the number of ways to distribute `n` candies to three people, subject to a maximum limit on the number of candies any person can receive. The number of candies each person can receive is bounded by the integer `limit`. Specifically, we need to find how many ways the total number of candies, `n`, can be split between three people such that each person gets no more than `limit` candies.
+
+This is essentially a combinatorial problem where the goal is to count the number of valid distributions of `n` candies to three players, given the constraints on the maximum number of candies any player can receive.
+
+### Approach:
+The key idea is to use brute force to explore all possible ways to distribute the candies while respecting the given limit. Since each person can receive from `0` to `limit` candies, we can use three nested loops to check all possible combinations of candies for the three players.
+
+#### Step-by-Step Breakdown of the Solution:
+
+1. **Understanding the Problem:**
+   The problem requires us to distribute `n` candies among three players such that no player gets more than `limit` candies. The goal is to count how many ways we can allocate candies while respecting the upper limit.
+
+   In mathematical terms, we need to find all possible combinations of three non-negative integers `i`, `j`, and `k` such that:
+   - `i + j + k = n`
+   - `0 <= i, j, k <= limit`
+
+   This means that the sum of candies allocated to all three players must equal `n`, and each player can get between `0` and `limit` candies.
+
+2. **Brute Force Method:**
+   Given that `n` and `limit` are finite, a brute force approach is feasible. We will iterate through all possible values of `i`, `j`, and `k` where `i`, `j`, and `k` represent the number of candies received by each of the three players. The range of values for `i`, `j`, and `k` is from `0` to `limit`. For each combination, we check if the sum of candies equals `n`. If it does, we increment a counter that keeps track of valid distributions.
+
+3. **Algorithm:**
+   - Initialize a variable `res` to 0, which will store the count of valid distributions.
+   - Iterate over all possible values of `i`, `j`, and `k` from `0` to `limit` using three nested loops.
+   - In each iteration, check if the sum of `i + j + k` equals `n`. If so, increment `res`.
+   - Return the value of `res` as the final answer, which represents the number of valid ways to distribute the candies.
+
+### Code Breakdown (Step by Step):
+
+1. **Function Definition:**
+   The function `distributeCandies` takes two arguments:
+   - `n`: The total number of candies.
+   - `limit`: The maximum number of candies any player can receive.
+
+   ```cpp
+   int distributeCandies(int n, int limit) {
+   ```
+
+2. **Initialize the Result Variable:**
+   The variable `res` will be used to count the number of valid ways to distribute the candies.
+
+   ```cpp
+   int res = 0;
+   ```
+
+3. **Iterate Over All Possible Distributions:**
+   The outermost loop iterates over all possible values for `i` (candies given to the first player). The second loop iterates over all possible values for `j` (candies given to the second player), and the third loop iterates over all possible values for `k` (candies given to the third player).
+
+   ```cpp
+   for(int i = 0; i <= limit; ++i){
+       for(int j = 0; j <= limit; ++j){
+           for(int k = 0; k <= limit; ++k){
+   ```
+
+4. **Check If the Total Equals `n`:**
+   Inside the innermost loop, check if the sum of `i`, `j`, and `k` equals `n`. If the condition holds, it means this is a valid way to distribute the candies, so we increment the result counter `res`.
+
+   ```cpp
+   if(i + j + k == n) { res++; }
+   ```
+
+5. **Return the Result:**
+   After all loops have completed, the result `res` will hold the number of valid distributions. Return this value as the output of the function.
+
+   ```cpp
+   return res;
+   }
+   ```
+
+### Complexity:
+
+1. **Time Complexity:**
+   The time complexity of this solution is \(O(\text{limit}^3)\). This is because we have three nested loops, each iterating over all possible values of `i`, `j`, and `k` from `0` to `limit`, so the total number of iterations is \((\text{limit} + 1)^3\). Thus, the time complexity is cubic in terms of the `limit`.
+
+   Specifically, the time complexity can be expressed as:
+   \[
+   O(\text{limit}^3)
+   \]
+   This means that as the `limit` increases, the time required to compute the result grows very quickly, which makes this solution suitable for small values of `limit` but potentially inefficient for large values.
+
+2. **Space Complexity:**
+   The space complexity of this solution is \(O(1)\), because the algorithm uses only a fixed amount of extra space to store the result variable `res` and a few loop variables. There are no data structures that grow with the input size, so the space complexity is constant.
+
+### Conclusion:
+This brute force approach to distributing candies works well for small values of `limit` and `n`. By iterating over all possible combinations of candies for the three players, it checks each potential distribution to see if the sum matches `n`. While this solution is easy to implement and understand, it is not optimal for large values of `limit` or `n`, as the time complexity grows cubicly with `limit`.
+
+The main strength of this solution is its simplicity and clarity, but it can be improved for larger inputs by employing more advanced mathematical or combinatorial techniques, such as dynamic programming, to avoid brute force iteration over all possible combinations. However, for typical constraints found in competitive programming, this brute force approach may suffice for solving the problem within the given time limits.
+
+The time complexity of \(O(\text{limit}^3)\) ensures that the approach is manageable for relatively small inputs, and the constant space complexity of \(O(1)\) makes the solution memory efficient. Thus, this solution is an effective choice for this problem in scenarios where the input sizes are not excessively large.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/distribute-candies-among-children-i/description/)
+
 ---
 {{< youtube hVNcZKh8r40 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2932: Maximum Strong Pair XOR I](https://grid47.xyz/leetcode/solution-2932-maximum-strong-pair-xor-i/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

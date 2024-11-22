@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/XQlxCCx2vI4/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/path-with-minimum-effort/description/)
-
 ---
 **Code:**
 
@@ -63,9 +61,122 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1631.md" >}}
+### Problem Statement
+
+The problem requires us to find the path in a grid that minimizes the maximum effort required to traverse from the top-left corner to the bottom-right corner. The effort to move from one cell to another is defined as the absolute difference in heights between the two cells. Given a 2D grid representing the heights of cells, our task is to find the path that minimizes the maximum effort among all the cells along the path.
+
+### Approach
+
+To solve this problem, we can use a graph traversal algorithm, specifically a priority queue (min-heap), to explore the grid efficiently. The algorithm follows these key steps:
+
+1. **Data Structure**: Use a priority queue to always expand the least effort path first.
+2. **Tracking Efforts**: Maintain a 2D vector `sz` to track the minimum effort needed to reach each cell.
+3. **Exploration**: Start from the top-left corner and explore neighboring cells, updating their effort as necessary.
+4. **Termination Condition**: The search continues until we reach the bottom-right corner, at which point we return the minimum maximum effort required.
+
+### Code Breakdown (Step by Step)
+
+Here's a detailed breakdown of the provided code:
+
+```cpp
+class cmp {
+public:
+    bool operator() (array<int, 3> &a, array<int, 3> &b) {
+        return a[2] > b[2];
+    }
+};
+```
+- This class defines a custom comparator for the priority queue, allowing it to order elements based on the third element (the current maximum effort) in ascending order. This ensures that the path with the least effort is always expanded first.
+
+```cpp
+class Solution {
+public:
+    int minimumEffortPath(vector<vector<int>>& h) {
+```
+- The `Solution` class contains the method `minimumEffortPath`, which takes a 2D vector `h` representing the heights of cells as input.
+
+```cpp
+        int dir[] = {0, 1, 0, -1, 0};
+        int m = h.size(), n = h[0].size();
+```
+- We define an array `dir` to facilitate movement in four directions (right, down, left, up).
+- `m` and `n` represent the dimensions of the grid (number of rows and columns).
+
+```cpp
+        vector<vector<int>> sz(m, vector<int>(n, INT_MAX));
+        priority_queue<array<int, 3>, vector<array<int, 3>>, cmp> pq;
+        pq.push({0, 0, 0});
+```
+- A 2D vector `sz` is initialized to store the minimum efforts to reach each cell, starting with `INT_MAX` (infinity).
+- A priority queue `pq` is created to manage our exploration of cells based on the current maximum effort.
+- We start by pushing the starting cell `(0, 0)` with an effort of `0`.
+
+```cpp
+        while(!pq.empty()) {
+            array<int, 3> r = pq.top();
+            pq.pop();
+            int i = r[0], j = r[1], d = r[2];
+```
+- The main loop continues as long as there are cells to explore in the priority queue.
+- We extract the top element, which contains the current cell's coordinates and its associated effort.
+
+```cpp
+            if(d > sz[i][j]) continue;
+            if((i == (m - 1)) && (j == (n - 1))) return d;
+```
+- If the current effort `d` is greater than the recorded effort for cell `(i, j)`, we skip further processing.
+- If we reach the bottom-right corner `(m - 1, n - 1)`, we return the current maximum effort, which is our desired result.
+
+```cpp
+            for(int k = 0; k < 4; k++) {
+                int ni = i + dir[k], nj = j + dir[k + 1];
+                if(min(ni, nj) < 0 || ni >= m || nj >= n) continue;
+```
+- This nested loop iterates over the four possible directions to explore neighboring cells.
+- We calculate the new coordinates `(ni, nj)` and check for boundary conditions to ensure they are valid indices.
+
+```cpp
+                int nxt = sz[ni][nj];
+                int nd  = max(abs(h[i][j] - h[ni][nj]), d);
+                if (nxt > nd) {
+                    sz[ni][nj] = nd;
+                    pq.push({ni, nj, nd});
+                }
+```
+- We calculate the next effort `nd` as the maximum of the current effort and the difference in heights between the current cell and the neighbor.
+- If the calculated effort `nd` is less than the previously recorded effort for `(ni, nj)`, we update it and push the neighbor into the priority queue for further exploration.
+
+```cpp
+        return 0;
+    }
+};
+```
+- If the loop completes without finding a path (which theoretically should not happen with the given constraints), we return `0`. This line serves as a safety net.
+
+### Complexity
+
+- **Time Complexity**:
+    - The algorithm runs in \(O(m \cdot n \log(m \cdot n))\), where \(m\) is the number of rows and \(n\) is the number of columns in the grid. The logarithmic factor comes from the operations performed on the priority queue.
+  
+- **Space Complexity**:
+    - The space complexity is \(O(m \cdot n)\) due to the storage of the `sz` vector and the priority queue which can potentially store all cells in the grid.
+
+### Conclusion
+
+The provided solution effectively utilizes a priority queue to ensure that we always explore paths with the least effort first. This greedy approach allows for optimal pathfinding in a weighted grid where the weights are defined by the absolute height differences between adjacent cells.
+
+**Key Takeaways**:
+1. **Graph Traversal Techniques**: Understanding how to use priority queues can significantly improve the efficiency of pathfinding algorithms.
+2. **Handling Weights**: This problem demonstrates how to deal with weights that vary between nodes, leading to non-uniform costs in pathfinding.
+3. **Optimization Strategies**: By prioritizing paths with the least effort, we ensure that we find the optimal solution without unnecessary computations.
+
+Overall, this approach provides a solid foundation for tackling similar pathfinding problems in weighted grids, making it a valuable technique in competitive programming and algorithm design.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/path-with-minimum-effort/description/)
+
 ---
 {{< youtube XQlxCCx2vI4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1637: Widest Vertical Area Between Two Points Containing No Points](https://grid47.xyz/leetcode/solution-1637-widest-vertical-area-between-two-points-containing-no-points/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

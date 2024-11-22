@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/0E8Xxu6LV9o/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/109.webp" 
     alt="A flowing list of sorted numbers seamlessly transforming into a calm, glowing binary search tree."
@@ -59,9 +57,143 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/109.md" >}}
+### 🌟 **Problem Statement: Convert a Sorted Linked List to a Balanced BST**
+
+Given a **sorted singly linked list**, the goal is to convert it into a **balanced binary search tree (BST)**. A balanced BST is one where the height difference between the left and right subtrees of any node is at most one. The challenge is to preserve the sorted order of the linked list while ensuring that the tree remains balanced.
+
+---
+
+### 🧠 **Approach: Turning a Sorted List into a Balanced BST**
+
+To solve this problem, we need to construct the BST in a way that ensures:
+- The **middle element** of the linked list becomes the **root** of the tree, ensuring balance.
+- The **left subtree** contains elements smaller than the root, and the **right subtree** contains elements larger than the root.
+
+Here’s how we can break it down:
+
+#### 1. **Divide and Conquer:**
+   - Select the **middle element** of the linked list as the root. This guarantees balance, as it divides the list into two equal halves for the left and right subtrees.
+   
+#### 2. **Recursive Approach:**
+   - Recursively apply the same logic to both the left and right halves of the list to build the left and right subtrees.
+
+#### 3. **Linked List Traversal:**
+   - Use the **slow and fast pointer technique** (tortoise and hare algorithm) to efficiently find the middle node. This helps us traverse the list while maintaining references to the start and end nodes.
+
+---
+
+### 🔧 **Code Breakdown: Step-by-Step**
+
+#### **Step 1: Helper Function `toBST`**
+
+```cpp
+TreeNode* toBST(ListNode* start, ListNode* end) {
+    if(start == end) return NULL;
+    ListNode* slw = start;
+    ListNode* fst = start;
+```
+
+- **`toBST`** takes `start` and `end` pointers as input and recursively divides the linked list into halves to construct the BST.
+- The **slow pointer** (`slw`) and **fast pointer** (`fst`) help us find the middle node of the list.
+
+#### **Step 2: Finding the Middle Node**
+
+```cpp
+    while(fst != end && fst->next != end) {
+        slw = slw->next;
+        fst = fst->next->next;
+    }
+```
+
+- The **slow and fast pointers** traverse the list. The **slow pointer** moves one step at a time, while the **fast pointer** moves two steps at a time.
+- By the time the fast pointer reaches the end, the slow pointer will be at the middle node. This node becomes the root of the current subtree.
+
+#### **Step 3: Constructing the Node and Recursive Calls**
+
+```cpp
+    TreeNode* node = new TreeNode(slw->val);
+    node->left = toBST(start, slw);
+    node->right = toBST(slw->next, end);
+    return node;
+}
+```
+
+- Create a new `TreeNode` with the value of the middle node.
+- Recursively build the left subtree (`start` to `slw`) and the right subtree (`slw->next` to `end`).
+- Return the newly created node.
+
+#### **Step 4: Main Function `sortedListToBST`**
+
+```cpp
+TreeNode* sortedListToBST(ListNode* head) {
+    if(head == NULL) return NULL;
+    return toBST(head, NULL);
+}
+```
+
+- **`sortedListToBST`** initiates the process by calling `toBST` with the head of the linked list.
+- If the linked list is empty, return `NULL`.
+
+---
+
+### 💡 **Time and Space Complexity**
+
+#### **Time Complexity: O(n)**
+
+- Each node in the linked list is visited once. The **slow and fast pointer technique** allows us to find the middle node in **O(n)** time.
+- The tree is built recursively for each half of the list. Since each node is processed once, the total time complexity is **O(n)**.
+
+#### **Space Complexity: O(log n)**
+
+- The space is used by the **recursive call stack**. In the case of a balanced tree, the maximum recursion depth is **O(log n)**, where `n` is the number of nodes in the linked list.
+
+---
+
+### 🔍 **Example Walkthrough**
+
+Let’s walk through an example with the following sorted linked list:
+
+```
+-10 -> -3 -> 0 -> 5 -> 9
+```
+
+1. **Step 1:** The `toBST` function is called with the entire list. The slow and fast pointers find `0` as the middle node, which becomes the root.
+2. **Step 2:** We recursively call `toBST` for the left half (`-10 -> -3`) and right half (`5 -> 9`):
+   - The middle of the left half is `-3`, which becomes the left child of `0`.
+   - The middle of the right half is `5`, which becomes the right child of `0`.
+3. **Step 3:** Continue recursively for the sublists:
+   - For the left subtree (`-10`), `-10` becomes the left child of `-3`.
+   - For the right subtree (`9`), `9` becomes the right child of `5`.
+4. **Step 4:** The recursion terminates when the sublist is empty, and the tree is fully constructed.
+
+The resulting BST is:
+
+```
+         0
+       /   \
+     -3     5
+    /       \
+  -10        9
+```
+
+---
+
+### 🚀 **Conclusion**
+
+This approach efficiently converts a **sorted singly linked list** into a **balanced binary search tree**. By leveraging the **divide and conquer** strategy, the tree remains balanced, and the in-order traversal of the tree will yield the original sorted list. The solution is both **time-efficient** (O(n)) and **space-efficient** (O(log n)), making it suitable for large inputs.
+
+The **slow and fast pointer technique** ensures that we find the middle node in a single pass through the list, guaranteeing optimal performance.
+
+Happy coding, and enjoy building your BST! 🌱
+
+--- 
+
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/convert-sorted-list-to-binary-search-tree/description/)
+
 ---
 {{< youtube 0E8Xxu6LV9o >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #110: Balanced Binary Tree](https://grid47.xyz/leetcode/solution-110-balanced-binary-tree/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

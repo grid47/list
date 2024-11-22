@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/skEtLRG05RQ/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/find-good-days-to-rob-the-bank/description/)
-
 ---
 **Code:**
 
@@ -58,9 +56,111 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2100.md" >}}
+### Problem Statement
+
+The task is to identify days on which it would be optimal to "rob a bank" based on security patterns, represented as an array `sec`. Given a non-negative integer `time`, a day is deemed "good" if there are at least `time` days before it with non-increasing security levels and at least `time` days after it with non-decreasing security levels. The goal is to return a list of such "good days" to rob the bank.
+
+### Approach
+
+To solve this problem, we’ll break down the solution into three main steps:
+
+1. **Compute Non-Increasing Prefixes**:
+   - For each day in `sec`, we’ll calculate the number of consecutive previous days with non-increasing security levels. This will give us a prefix array `pre` where each element `pre[i]` holds the count of non-increasing days ending at `i`.
+   
+2. **Compute Non-Decreasing Suffixes**:
+   - Similarly, for each day in `sec`, we calculate the number of consecutive days after `i` with non-decreasing security levels. This will result in a suffix array `suf` where each element `suf[i]` holds the count of non-decreasing days starting from `i`.
+
+3. **Identify "Good Days"**:
+   - Finally, we iterate over the array and check each day `i` to see if it satisfies both conditions:
+     - `pre[i] >= time`: the number of non-increasing days ending at `i` meets or exceeds `time`.
+     - `suf[i] >= time`: the number of non-decreasing days starting from `i` meets or exceeds `time`.
+   - If both conditions are met, `i` is a "good day," and we add it to the result list.
+
+This approach allows us to preprocess the data in two passes to build the prefix and suffix arrays and then perform a single pass to identify "good days," making the solution efficient and easy to understand.
+
+### Code Breakdown (Step by Step)
+
+Let’s walk through each part of the code to understand how the solution is implemented.
+
+1. **Initialize Arrays and Variables**:
+   ```cpp
+   int n = sec.size();
+   vector<int> pre(n, 0), suf(n, 0);
+   pre[0] = 0;
+   int cnt = 0;
+   ```
+   - Here, we initialize `n` as the size of the security array `sec`.
+   - We then create two vectors `pre` and `suf` of size `n` to store non-increasing and non-decreasing counts, respectively.
+   - `cnt` is used to keep track of consecutive days that meet the required conditions.
+
+2. **Calculate Non-Increasing Prefix Array**:
+   ```cpp
+   for(int i = 1; i < n; i++) {
+       if(sec[i] <= sec[i - 1])
+           cnt++;
+       else 
+           cnt = 0;
+       pre[i] = cnt;
+   }
+   ```
+   - Starting from day 1, we check if the current day `sec[i]` has a non-increasing relationship with the previous day `sec[i - 1]`.
+   - If `sec[i]` is less than or equal to `sec[i - 1]`, we increment `cnt`.
+   - If not, we reset `cnt` to 0.
+   - We store the value of `cnt` in `pre[i]`, representing the number of consecutive non-increasing days up to and including `i`.
+
+3. **Calculate Non-Decreasing Suffix Array**:
+   ```cpp
+   suf[n - 1] = 0;
+   cnt = 0;
+   for (int i = n - 2; i >= 0; i--) {
+       if(sec[i] <= sec[i + 1])
+           cnt++;
+       else 
+           cnt = 0;
+       suf[i] = cnt;
+   }
+   ```
+   - Starting from the second-last day (`n-2`) and moving backward, we calculate the number of non-decreasing days.
+   - If the current day `sec[i]` is less than or equal to the next day `sec[i + 1]`, we increment `cnt`.
+   - Otherwise, we reset `cnt` to 0.
+   - We store the result in `suf[i]`, representing the count of non-decreasing days starting from `i`.
+
+4. **Identify and Store Good Days**:
+   ```cpp
+   vector<int> ans;
+   for (int i = 0; i < n; i++) {
+       if (pre[i] >= time && suf[i] >= time)
+           ans.push_back(i);
+   }
+   ```
+   - We initialize an empty vector `ans` to store the indices of good days.
+   - For each day `i`, we check if both `pre[i]` and `suf[i]` meet or exceed `time`.
+   - If both conditions are met, `i` is added to `ans`, indicating it is a good day for a bank robbery.
+
+5. **Return the Result**:
+   ```cpp
+   return ans;
+   ```
+   - Finally, we return `ans`, containing all days that satisfy the conditions.
+
+### Complexity
+
+- **Time Complexity**: This solution has a time complexity of O(n) because we make three separate passes over the array `sec`:
+  - One pass to build the prefix array `pre`.
+  - One pass to build the suffix array `suf`.
+  - A final pass to check the conditions and gather results.
+
+- **Space Complexity**: The space complexity is O(n), as we use two additional arrays (`pre` and `suf`) of size `n` to store the counts of non-increasing and non-decreasing days.
+
+### Conclusion
+
+This solution efficiently identifies "good days" for a hypothetical bank robbery by leveraging the concepts of prefix and suffix arrays to calculate non-increasing and non-decreasing patterns in a single pass. By storing these values, we can quickly determine if each day meets the conditions specified, ensuring that the algorithm performs optimally even with larger input sizes. This method highlights the effectiveness of preprocessing in problem-solving and the importance of maintaining clean, organized code to tackle complex conditions in a manageable way.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/find-good-days-to-rob-the-bank/description/)
+
 ---
 {{< youtube skEtLRG05RQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2101: Detonate the Maximum Bombs](https://grid47.xyz/leetcode/solution-2101-detonate-the-maximum-bombs/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

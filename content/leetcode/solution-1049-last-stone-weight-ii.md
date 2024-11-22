@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/gdXkkmzvR3c/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/last-stone-weight-ii/description/)
-
 ---
 **Code:**
 
@@ -45,9 +43,91 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1049.md" >}}
+
+### Problem Statement
+The Last Stone Weight II problem involves a scenario where you have a set of stones, each with a positive integer weight. When two stones collide, the heavier stone's weight is reduced by the lighter stone's weight. If the weights are equal, both stones are destroyed. The challenge is to determine the minimum possible weight of the remaining stone after all possible collisions.
+
+More formally, given an array of integers representing the weights of the stones, the goal is to find the smallest possible weight of a single stone that can remain after optimally performing all collisions.
+
+### Approach
+To tackle this problem, we can utilize a dynamic programming approach similar to the "subset sum problem." The key idea is to find two subsets of stones such that their weights are as close as possible to each other. The difference in their weights will ultimately determine the minimum weight of the remaining stone.
+
+The approach can be broken down into the following steps:
+1. **Calculate the Total Weight**: First, compute the total weight of all stones.
+2. **Dynamic Programming Setup**: Use a 2D dynamic programming table to keep track of the maximum weight that can be achieved with subsets of the stones up to a certain weight.
+3. **Iterate Over Stones**: Fill the DP table by considering each stone and its possible contributions to the maximum weights of the subsets.
+4. **Compute Result**: The minimum remaining weight will be the difference between the total weight and twice the maximum weight of the closest subset to half of the total weight.
+
+### Code Breakdown (Step by Step)
+
+1. **Class Definition**: The code begins with the definition of the `Solution` class.
+
+   ```cpp
+   class Solution {
+   public:
+   ```
+
+2. **Function Declaration**: The main function `lastStoneWeightII` takes a vector of integers `stones` as input, representing the weights of the stones.
+
+   ```cpp
+   int lastStoneWeightII(vector<int>& stones) {
+   ```
+
+3. **Calculating Total Weight**: The total weight of the stones is computed using a loop.
+
+   ```cpp
+   int sum = 0;
+   for(int x: stones) sum += x;
+   ```
+
+4. **Initializing the DP Table**: The size of the DP table is determined based on the number of stones and the maximum weight we need to consider, which is half of the total weight. The DP table is initialized with zeros.
+
+   ```cpp
+   int n = stones.size();
+   vector<vector<int>> dp(n + 1, vector<int>(sum / 2 + 1, 0));
+   ```
+
+5. **Filling the DP Table**: Two nested loops iterate through the stones and potential weights to fill the DP table.
+   - The outer loop iterates over each stone.
+   - The inner loop checks each possible weight from 0 up to half of the total weight.
+   - If the current stone can be included in the subset (i.e., its weight is less than or equal to the current target weight), the DP value is updated to be the maximum of including the stone or excluding it.
+
+   ```cpp
+   for (int i = 1; i < n + 1  ; i++)
+       for (int j = 0; j < sum / 2 + 1; j++) {
+           if(j >= stones[i - 1]) 
+                dp[i][j] = max(dp[i - 1][j], dp[i - 1][j - stones[i - 1]] + stones[i - 1]);
+           else dp[i][j] = dp[i - 1][j];
+       }
+   ```
+
+6. **Calculating the Result**: The final result is computed by subtracting twice the maximum weight achievable with the closest subset to half of the total weight from the total weight. This effectively gives the minimum weight of the remaining stone.
+
+   ```cpp
+   return sum - 2 * dp[n][sum / 2];
+   }
+   ```
+
+### Complexity Analysis
+- **Time Complexity**: The time complexity of the solution is \(O(n \times \frac{\text{sum}}{2})\), where \(n\) is the number of stones, and \(\text{sum}\) is the total weight of the stones. This is due to the nested loops that fill the DP table based on the number of stones and the weight limits.
+  
+- **Space Complexity**: The space complexity is \(O(n \times \frac{\text{sum}}{2})\) as well, due to the storage used for the DP table. However, since we only need the previous row to compute the current row, this can be optimized to \(O(\frac{\text{sum}}{2})\) using a 1D array.
+
+### Conclusion
+The `lastStoneWeightII` function efficiently determines the minimum weight of the remaining stone after all possible collisions. By employing a dynamic programming approach, the solution balances between the weights of the stones in such a way that the difference between the two resulting subsets is minimized.
+
+This code exemplifies a practical application of dynamic programming in a combinatorial optimization problem, showcasing both the strategy of subset selection and the ability to navigate through weights effectively.
+
+The clarity and efficiency of this implementation make it suitable for competitive programming and interviews, demonstrating a solid understanding of dynamic programming techniques and problem-solving strategies.
+
+Overall, the solution not only solves the problem effectively but also illustrates fundamental concepts in algorithm design that are crucial for anyone aspiring to master coding interviews and algorithmic challenges.
+
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/last-stone-weight-ii/description/)
+
 ---
 {{< youtube gdXkkmzvR3c >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1051: Height Checker](https://grid47.xyz/leetcode/solution-1051-height-checker/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

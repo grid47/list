@@ -18,8 +18,6 @@ youtube_thumbnail=""
 
 
 
-[`Problem Link`](https://leetcode.com/problems/minimum-number-of-steps-to-make-two-strings-anagram/description/)
-
 ---
 **Code:**
 
@@ -39,9 +37,87 @@ public:
     }
 };
 {{< /highlight >}}
-
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1347.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1348: Tweet Counts Per Frequency](https://grid47.xyz/leetcode/solution-1348-tweet-counts-per-frequency/) |
+
+### Problem Statement
+The problem at hand is to determine the minimum number of steps required to convert one string, \(s\), into another string, \(t\). Each step allows you to delete a character from \(s\). The goal is to make the two strings anagrams, meaning they contain the same characters in the same frequency, albeit possibly in a different order. 
+
+### Approach
+To solve this problem, we can use the following approach:
+
+1. **Character Count**:
+   - We will maintain a count of the occurrences of each character in both strings.
+   - We can utilize an array of size 26 (for the 26 letters of the English alphabet) to store these counts, where the index corresponds to each character ('a' corresponds to index 0, 'b' to index 1, and so forth).
+
+2. **Count Differences**:
+   - For each character in both strings, we will increment the count for the characters in \(s\) and decrement for those in \(t\).
+   - After processing both strings, the array will reflect how many characters are in excess in \(s\) that need to be removed to make the strings anagrams.
+
+3. **Calculate Minimum Steps**:
+   - The minimum steps required to convert \(s\) to an anagram of \(t\) can be determined by summing up the positive counts in our character count array, as these represent the characters that need to be deleted from \(s\).
+
+### Code Breakdown (Step by Step)
+
+```cpp
+class Solution {
+public:
+    int minSteps(string s, string t) {
+```
+- The `Solution` class is defined, and the method `minSteps` is declared, which takes two string parameters, \(s\) and \(t\).
+
+```cpp
+        vector<int> count(26, 0);
+```
+- A vector `count` of size 26 is initialized with zeros. This vector will be used to store the frequency of each character.
+
+```cpp
+        for(int i = 0; i < s.length(); i++) {
+            count[s[i] - 'a']++;
+            count[t[i] - 'a']--;
+        }
+```
+- This loop iterates over the length of the strings (assuming both strings are of equal length). 
+  - For each character in \(s\), we increment its corresponding index in the `count` vector.
+  - For each character in \(t\), we decrement its corresponding index in the `count` vector.
+- This results in a vector where each index represents the difference in frequency between the two strings for each character.
+
+```cpp
+        int step = 0;
+```
+- A variable `step` is initialized to zero. This variable will hold the total number of deletions needed.
+
+```cpp
+        for(int num : count)
+            if(num > 0) step += num;
+```
+- This loop iterates over the `count` vector, and for each positive value (indicating excess characters in \(s\)), it adds that value to `step`. 
+
+```cpp
+        return step;
+    }
+};
+```
+- Finally, the function returns the `step` value, representing the minimum number of deletions required to make \(s\) an anagram of \(t\).
+
+### Complexity Analysis
+- **Time Complexity**: The time complexity of this solution is \(O(n)\), where \(n\) is the length of the strings. This is because we make a single pass through each string to compute character counts and then a second pass through the character count array.
+  
+- **Space Complexity**: The space complexity is \(O(1)\) since the size of the `count` vector is fixed at 26 regardless of the input size.
+
+### Conclusion
+The provided code effectively calculates the minimum number of steps required to convert string \(s\) into an anagram of string \(t\) using a straightforward and efficient approach. By employing character counting techniques, it efficiently determines the necessary deletions required in linear time.
+
+This problem not only emphasizes string manipulation and character frequency analysis but also demonstrates how simple data structures like arrays or vectors can be leveraged to achieve optimal solutions. The clear organization and logic in the code make it suitable for both competitive programming and educational purposes, showcasing essential skills in algorithm design.
+
+By mastering such problems, one can enhance their problem-solving abilities in coding interviews and programming contests, where efficient solutions are crucial for success.
+
+Overall, the solution is optimized for performance and clarity, making it both an instructive example and a practical tool for developers looking to handle similar challenges in their work.
+
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-number-of-steps-to-make-two-strings-anagram/description/)
+
+---
+
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

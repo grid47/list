@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/EIBRvGNsG64/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/arithmetic-subarrays/description/)
-
 ---
 **Code:**
 
@@ -40,9 +38,99 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1630.md" >}}
+### Problem Statement
+
+The problem requires us to check whether specified subarrays of a given array `nums` form arithmetic sequences. An arithmetic sequence is defined as a sequence of numbers in which the difference between any two consecutive terms is constant. For this problem, we are given multiple queries, each defined by two indices `l` and `r`, which specify the start and end indices of the subarrays. The objective is to return a boolean vector indicating whether each subarray is an arithmetic sequence.
+
+### Approach
+
+To solve this problem, we will:
+1. Extract the specified subarrays from `nums` using the indices provided in `l` and `r`.
+2. Sort the extracted subarrays.
+3. Check if the sorted subarray forms an arithmetic sequence by verifying if the difference between consecutive elements is constant.
+4. Store the result (true or false) for each query in a result vector and return it.
+
+### Code Breakdown (Step by Step)
+
+Here’s a detailed explanation of the provided code:
+
+```cpp
+class Solution {
+public:
+    vector<bool> checkArithmeticSubarrays(vector<int>& nums, vector<int>& l, vector<int>& r) {
+```
+- The `Solution` class contains the method `checkArithmeticSubarrays`, which takes three parameters: `nums`, `l`, and `r`. 
+- `nums` is the array to be checked, while `l` and `r` are vectors containing the start and end indices for the subarrays.
+
+```cpp
+        vector<bool> res;
+```
+- We declare a vector `res` that will hold the results for each query.
+
+```cpp
+        for (auto i = 0, j = 0; i < l.size(); ++i) {
+```
+- A loop iterates over the indices of the `l` vector, which indicates the number of queries we need to process.
+
+```cpp
+            vector<int> n(begin(nums) + l[i], begin(nums) + r[i] + 1);
+```
+- For each query defined by the indices `l[i]` and `r[i]`, we create a subarray `n` from `nums` that contains elements from `l[i]` to `r[i]`. The use of `begin(nums) + l[i]` and `begin(nums) + r[i] + 1` allows us to extract the correct range of elements.
+
+```cpp
+            sort(begin(n), end(n));
+```
+- The extracted subarray `n` is sorted. Sorting is essential because it allows us to easily check for the common difference of an arithmetic sequence.
+
+```cpp
+            for (j = 2; j < n.size(); ++j)
+                if (n[j] - n[j - 1] != n[1] - n[0])
+                    break;
+```
+- This loop starts from the third element (index 2) of the sorted subarray `n` and checks if the difference between consecutive elements is consistent.
+- The difference between the first two elements (`n[1] - n[0]`) is stored as the reference difference.
+- If any consecutive pair of elements has a difference that does not match the reference difference, the loop breaks.
+
+```cpp
+            res.push_back(j == n.size());
+```
+- After the inner loop, we check if `j` has reached the size of `n`. If it has, it means all consecutive differences matched, indicating that `n` is an arithmetic sequence. We append `true` to `res`; otherwise, we append `false`.
+
+```cpp
+        return res;
+    }
+};
+```
+- Finally, we return the result vector `res`, which contains boolean values for each query indicating whether the corresponding subarray is an arithmetic sequence.
+
+### Complexity
+
+- **Time Complexity**:
+    - For each query, extracting the subarray takes \(O(k)\), where \(k\) is the size of the subarray (from `l[i]` to `r[i]`).
+    - Sorting the subarray takes \(O(k \log k)\).
+    - The subsequent loop that checks for constant differences runs in \(O(k)\).
+    - Therefore, the total complexity for each query is \(O(k \log k)\).
+    - If there are \(q\) queries and assuming the average size of subarrays is \(k\), the total time complexity is approximately \(O(q \cdot k \log k)\).
+
+- **Space Complexity**:
+    - The space complexity is \(O(k)\) for storing the extracted subarray for each query. Thus, the overall space complexity can also be considered \(O(k)\) for each query separately.
+
+### Conclusion
+
+This solution efficiently checks whether specified subarrays of an array form arithmetic sequences by leveraging sorting and a straightforward difference-checking mechanism. By encapsulating the logic within a loop that iterates through the specified ranges, we maintain clarity and organization in the code. 
+
+**Key Takeaways**:
+1. **Sorting for Sequence Checking**: Sorting the subarrays simplifies the checking process for arithmetic properties.
+2. **Use of Vectors**: Vectors are utilized effectively to manage dynamic arrays and store results.
+3. **Time Complexity Awareness**: Understanding the implications of sorting on time complexity is critical, especially for larger datasets.
+
+This approach can be adapted to similar problems involving sequence checks, making it a valuable technique in algorithm design and competitive programming.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/arithmetic-subarrays/description/)
+
 ---
 {{< youtube EIBRvGNsG64 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1631: Path With Minimum Effort](https://grid47.xyz/leetcode/solution-1631-path-with-minimum-effort/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

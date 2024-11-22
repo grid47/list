@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/0BNHd7a_ozc/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/map-of-highest-peak/description/)
-
 ---
 **Code:**
 
@@ -62,9 +60,134 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1765.md" >}}
+### Problem Statement
+
+The problem is to find the heights of a grid based on the location of water cells. Given a 2D grid `isWater`, where cells containing `1` represent water and cells containing `0` represent land, the goal is to compute the height of each cell such that:
+1. Water cells are at height `0`.
+2. Each land cell's height is defined as the minimum distance to any water cell. 
+3. The height increases by `1` for each step away from a water cell.
+
+### Approach
+
+To solve this problem, we can use a breadth-first search (BFS) algorithm. BFS is suitable for this scenario because it explores all cells at the current height before moving on to the next height level. This guarantees that each land cell will receive its correct height based on the shortest distance to the nearest water cell.
+
+The steps of the approach are as follows:
+
+1. **Initialization**: 
+   - Create a result matrix `ans` initialized to zero for all cells, which will eventually hold the heights.
+   - Create a visitation matrix `vis` to track whether a cell has been processed.
+   - Initialize a queue to hold the coordinates of the water cells.
+
+2. **Enqueue Water Cells**: 
+   - Traverse the grid and enqueue the coordinates of all water cells into the queue. These will serve as the starting points for BFS.
+
+3. **BFS Exploration**: 
+   - While the queue is not empty, perform the following:
+     - For each cell in the queue, retrieve its coordinates and mark it as visited.
+     - Set the height of this cell in the `ans` matrix to the current BFS level.
+     - For each of the four possible directions (up, down, left, right), check if the neighboring cell is within bounds and not yet visited. If valid, enqueue the neighboring cell for further exploration.
+   
+4. **Height Increment**: 
+   - After processing all cells at the current level, increment the height level for the next iteration.
+
+5. **Return Result**: 
+   - Finally, return the populated `ans` matrix, which now contains the heights of all cells.
+
+### Code Breakdown (Step by Step)
+
+The code is implemented in the `Solution` class with a public method `highestPeak`. Below is a detailed breakdown of the code:
+
+```cpp
+class Solution {
+public:
+    vector<vector<int>> highestPeak(vector<vector<int>>& isWater) {
+```
+- The class `Solution` is defined, and the method `highestPeak` is declared, taking the `isWater` grid as input.
+
+```cpp
+        int m = isWater.size(), n = isWater[0].size();
+        
+        vector<vector<int>> ans(m, vector<int>(n, 0)), vis(m, vector<int>(n, 0));
+```
+- The dimensions of the grid are stored in `m` and `n`.
+- Two matrices are created:
+  - `ans` to store the heights, initialized to zero.
+  - `vis` to keep track of visited cells, also initialized to zero.
+
+```cpp
+        queue<vector<int>> q;
+        for(int i = 0; i < m; i++)
+        for(int j = 0; j < n; j++)
+            if(isWater[i][j] == 1)
+                q.push({i, j});
+```
+- A queue `q` is declared to facilitate BFS.
+- A nested loop is used to identify all water cells, which are then enqueued with their coordinates.
+
+```cpp
+        int rot[] = {0, 1, 0, -1, 0};
+```
+- An array `rot` is defined to assist with the movement in the four possible directions (down, right, up, left).
+
+```cpp
+        int cur = 0;
+        while(!q.empty()) {
+            int sz = q.size();
+            while(sz--) {
+                auto it = q.front();
+                q.pop();
+                if(vis[it[0]][it[1]]) continue;
+                vis[it[0]][it[1]] = 1;
+                
+                ans[it[0]][it[1]] = cur;
+```
+- A variable `cur` is initialized to zero, representing the current height level.
+- The outer while loop continues until the queue is empty.
+- The size of the queue is stored in `sz`, and an inner loop processes each cell in the queue:
+  - The current cell's coordinates are retrieved from the front of the queue, and the cell is popped from the queue.
+  - If the cell has already been visited, it is skipped.
+  - Mark the cell as visited and set its height in the `ans` matrix to `cur`.
+
+```cpp
+                for(int i = 0; i < 4; i++) {
+                    int x = it[0] + rot[i], y = it[1] + rot[i + 1];
+                    if(x < 0 || y < 0 || x == m || y == n || vis[x][y]) continue;
+                    q.push({x, y});
+                }
+            }
+            cur++;
+        }
+```
+- After processing the current cell, the algorithm checks each of the four possible neighboring cells:
+  - If a neighboring cell is valid (within bounds and not visited), it is enqueued for further processing.
+- Once all cells at the current height have been processed, the height `cur` is incremented for the next iteration.
+
+```cpp
+        return ans;
+    }
+};
+```
+- The method returns the populated `ans` matrix containing the heights of all cells.
+
+### Complexity
+
+- **Time Complexity**: The time complexity of this algorithm is \(O(m \times n)\), where \(m\) is the number of rows and \(n\) is the number of columns in the grid. Each cell is processed once in the BFS.
+
+- **Space Complexity**: The space complexity is also \(O(m \times n)\) due to the `ans`, `vis`, and queue structures used during the BFS process.
+
+### Conclusion
+
+The `highestPeak` method effectively computes the height of each cell in a grid based on the proximity to water cells using a breadth-first search approach. By leveraging BFS, the algorithm guarantees that each land cell is assigned the correct height corresponding to its distance from the nearest water cell, ensuring that the heights increase appropriately.
+
+This solution is efficient and straightforward, making it suitable for similar problems involving grid traversal and distance calculations. Understanding and implementing BFS in this context not only solves the problem at hand but also reinforces valuable concepts applicable to a wide range of graph-based problems in computer science. 
+
+Overall, this implementation illustrates the power of breadth-first search as a method for exploring grid-based problems and provides an optimal solution for calculating cell heights in a structured manner.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/map-of-highest-peak/description/)
+
 ---
 {{< youtube 0BNHd7a_ozc >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1768: Merge Strings Alternately](https://grid47.xyz/leetcode/solution-1768-merge-strings-alternately/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

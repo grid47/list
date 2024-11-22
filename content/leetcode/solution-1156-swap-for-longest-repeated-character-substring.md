@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/0kfkOm4b-8I/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/swap-for-longest-repeated-character-substring/description/)
-
 ---
 **Code:**
 
@@ -47,9 +45,90 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1156.md" >}}
+
+
+### Problem Statement
+The function `maxRepOpt1` is designed to find the longest contiguous block of identical characters in a given string `text`, with the option of swapping two identical characters at most once to achieve the longest possible block. The task is to maximize the length of this block, utilizing up to one swap, if needed. This is useful for applications like text pattern matching, substring analysis, and optimal grouping of similar items.
+
+The function has the signature:
+```cpp
+int maxRepOpt1(string text)
+```
+where `text` is a non-empty string containing only lowercase English letters. The function returns the maximum number of repeated characters in a contiguous block with the optimal arrangement.
+
+### Approach
+This function uses an **index tracking approach** combined with **two-pointer sliding window** logic to identify the longest contiguous block of identical characters. The goal is to take advantage of any potential swap to further extend contiguous blocks. The approach is broken down as follows:
+
+1. **Index Tracking**: Each character's index positions are stored in a vector of vectors, `idx`. This allows us to efficiently locate positions of each character in `text` and assess the potential for extending contiguous blocks by checking adjacent positions.
+  
+2. **Looping Through Character Indices**:
+   - For each character in the alphabet (26 letters), the code iterates through its occurrence positions in the string, aiming to find the maximum contiguous segment of that character.
+   - It maintains two counters:
+     - `cnt`: Counts consecutive occurrences in a segment.
+     - `cnt1`: Tracks if a single character gap can be filled by a swap to extend the block.
+   - If consecutive characters are interrupted by a single character, the code checks if this gap can be filled by a swap. This allows the function to consider the potential of a longer contiguous block with only one swap.
+
+3. **Update Maximum Block Length**:
+   - The maximum block length (`mx`) is updated as each segment is analyzed, taking into account potential swaps.
+   - The result (`res`) is updated for each character to keep track of the largest contiguous block found for any character.
+
+4. **Result Adjustment**: Finally, if the maximum block for any character (`mx`) is smaller than the total occurrences of that character, the result is incremented by 1. This adjustment accounts for the possibility of extending the block by swapping one character occurrence from elsewhere.
+
+### Code Breakdown (Step by Step)
+Let’s walk through the code line by line for a clearer understanding.
+
+```cpp
+class Solution {
+public:
+    int maxRepOpt1(string text, int res = 1) {
+        vector<vector<int>> idx(26);
+        for(int i = 0; i < text.size(); i++)
+            idx[text[i] - 'a'].push_back(i);
+```
+- **Lines 3-6**: The function begins by initializing `idx`, a vector of vectors to store the positions of each character in `text`. Each character’s occurrences are indexed by subtracting 'a' from the character to map it to an array index (0-25).
+
+```cpp
+        for(int n = 0; n < 26; n++) {
+            auto cnt = 1, cnt1 = 0, mx = 0;
+            for(auto i = 1; i < idx[n].size(); i++) {
+                if(idx[n][i] == idx[n][i - 1]+ 1) ++cnt;
+                else {
+                    cnt1 = idx[n][i] == idx[n][i-1] + 2? cnt:0;
+                    cnt = 1;
+                }
+                mx = max(mx, cnt + cnt1);
+            }
+```
+- **Outer Loop (Lines 7-9)**: For each character (represented by `n`), the function initializes `cnt` to 1 (tracking consecutive characters), `cnt1` to 0 (for counting the gap potential), and `mx` to track the maximum segment length for the current character.
+- **Inner Loop (Lines 10-18)**: Iterates through all occurrences of the character in `text`:
+  - If consecutive occurrences are found (distance of 1), it increments `cnt`.
+  - Otherwise, if there is a gap of exactly one character, it checks if this gap can be filled (updating `cnt1`), and resets `cnt`.
+  - After each segment, `mx` is updated to reflect the maximum contiguous block length with a potential swap.
+
+```cpp
+            res = max(res, mx + ( idx[n].size() > mx ? 1 : 0) );
+        }
+        return res;
+    }
+};
+```
+- **Result Update (Line 19-21)**:
+  - For each character, `res` is updated by comparing it with the calculated maximum segment `mx` and adding 1 if additional occurrences are available for potential swapping.
+  - Finally, the function returns `res`, the length of the longest contiguous block found.
+
+### Complexity
+- **Time Complexity**: \(O(N)\), where \(N\) is the length of `text`. The code loops through the string once to build `idx`, and each character’s occurrences are processed individually. The operations within each loop are efficient, making this solution optimized.
+  
+- **Space Complexity**: \(O(26 + N) = O(N)\) for storing the occurrences of each character. Given that there are only 26 lowercase letters, the space complexity depends mainly on the size of `text`.
+
+### Conclusion
+The `maxRepOpt1` function is an efficient and optimized solution for finding the maximum contiguous block of identical characters in a string with an optional swap. Using an index-based approach to track positions and two-pointer logic for gap-checking, it efficiently identifies the best possible arrangement for each character’s occurrences, ensuring the optimal result. The algorithm is well-suited for handling longer strings and provides quick, reliable results with minimal space complexity. This approach is ideal for applications where optimizing grouping and arranging similar items is essential, such as data segmentation or text pattern analysis.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/swap-for-longest-repeated-character-substring/description/)
+
 ---
 {{< youtube 0kfkOm4b-8I >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1160: Find Words That Can Be Formed by Characters](https://grid47.xyz/leetcode/solution-1160-find-words-that-can-be-formed-by-characters/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

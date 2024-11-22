@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/ajl13jUxfdM/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/number-of-rectangles-that-can-form-the-largest-square/description/)
-
 ---
 **Code:**
 
@@ -40,9 +38,94 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1725.md" >}}
+### Problem Statement
+
+The problem is to count how many rectangles can form a "good rectangle" of maximum area. A rectangle is defined by its width and height, and the area of a rectangle is given by multiplying its width and height. A "good rectangle" is defined as a rectangle that can form a square with the maximum side length among all rectangles given. Specifically, given a list of rectangles defined by their width and height, the goal is to determine how many rectangles have the maximum possible square side length.
+
+### Approach
+
+To solve the problem, we can follow these steps:
+
+1. **Initialize a Data Structure**: Use an unordered map (or dictionary) to count the occurrences of rectangles with different side lengths.
+
+2. **Iterate Through Each Rectangle**: For each rectangle, determine its potential maximum square side length, which is the minimum of its width and height.
+
+3. **Update Maximum Side Length**: Keep track of the largest square side length found so far.
+
+4. **Count Rectangles with Maximum Side Length**: After determining the maximum side length, count how many rectangles can form squares with that side length.
+
+### Code Breakdown (Step by Step)
+
+Here's a detailed breakdown of the code implementation:
+
+1. **Class Definition**: The solution is encapsulated in the `Solution` class.
+
+   ```cpp
+   class Solution {
+   ```
+
+2. **Public Method**: The `countGoodRectangles` method is defined, which takes a 2D vector of integers representing the dimensions of the rectangles.
+
+   ```cpp
+   public:
+       int countGoodRectangles(vector<vector<int>>& rectangles) {
+   ```
+
+3. **Initialize Data Structures**: An unordered map `mp` is created to keep track of the counts of different maximum square side lengths. An integer `ans` is initialized to zero to hold the maximum side length found.
+
+   ```cpp
+   unordered_map<int,int> mp;
+   int ans = 0;
+   ```
+
+4. **Iterate Through Each Rectangle**: A loop is used to iterate through each rectangle in the `rectangles` vector.
+
+   ```cpp
+   for(auto i : rectangles) {
+   ```
+
+5. **Calculate Minimum Side Length**: For each rectangle, calculate the minimum side length, which represents the largest possible square that can be formed with this rectangle. This is done using the `min` function.
+
+   ```cpp
+   int m = min(i[0], i[1]);
+   ```
+
+6. **Update Maximum Side Length**: Update the maximum side length (`ans`) found so far by comparing it with the current rectangle's minimum side length.
+
+   ```cpp
+   ans = max(ans, m);
+   ```
+
+7. **Count Rectangles**: Increment the count in the unordered map for the current minimum side length. This tracks how many rectangles can form squares with this side length.
+
+   ```cpp
+   mp[m]++;
+   ```
+
+8. **Return the Count**: After iterating through all rectangles, return the count of rectangles that can form squares with the maximum side length found. This is accessed directly from the unordered map using `mp[ans]`.
+
+   ```cpp
+   return mp[ans];
+   }
+   ```
+
+### Complexity
+
+- **Time Complexity**: The time complexity is \( O(n) \), where \( n \) is the number of rectangles. This is because we are iterating through each rectangle exactly once.
+
+- **Space Complexity**: The space complexity is \( O(k) \), where \( k \) is the number of unique minimum side lengths encountered. In the worst case, this could be up to \( n \), but generally, it is much smaller since many rectangles can have the same dimensions.
+
+### Conclusion
+
+In summary, the code effectively counts the number of "good rectangles" that can form the maximum square side length from a given list of rectangles. The implementation utilizes a straightforward approach, leveraging an unordered map to keep track of counts, while also maintaining a maximum side length. 
+
+This solution is both efficient and easy to understand, making it suitable for use in similar problems involving geometric shapes and their properties. The algorithm runs in linear time relative to the number of rectangles, and the use of a hash map allows for efficient counting of rectangles based on their dimensions. By carefully managing the maximum square side length and its corresponding count, the solution provides a clear and optimal path to finding the desired result.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/number-of-rectangles-that-can-form-the-largest-square/description/)
+
 ---
 {{< youtube ajl13jUxfdM >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1726: Tuple with Same Product](https://grid47.xyz/leetcode/solution-1726-tuple-with-same-product/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

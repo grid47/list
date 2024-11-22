@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/jpK7Bpf8wgk/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/tweet-counts-per-frequency/description/)
-
 ---
 **Code:**
 
@@ -61,9 +59,96 @@ public:
  * vector<int> param_2 = obj->getTweetCountsPerFrequency(freq,tweetName,startTime,endTime);
  */
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1348.md" >}}
+
+### Problem Statement
+The goal is to create a system that can efficiently track the number of tweets recorded over different time intervals, such as minutes, hours, and days. The system should allow users to record a tweet with a timestamp and query how many tweets occurred within a specified range for a particular frequency. 
+
+### Approach
+To solve this problem, we will:
+
+1. **Data Storage**:
+   - Use a hash map (`unordered_map`) to store tweet timestamps associated with each tweet name. The key will be the tweet name (a string), and the value will be a vector of integers representing the timestamps when the tweets were recorded.
+
+2. **Frequency Mapping**:
+   - Create a second hash map to define the time intervals for each frequency (i.e., "minute", "hour", "day"). This mapping will help in determining the size of the bins for counting tweets.
+
+3. **Recording Tweets**:
+   - Implement a method to record the timestamp of a tweet. This method will simply push the timestamp into the corresponding vector for that tweet name.
+
+4. **Counting Tweets**:
+   - Implement a method to retrieve the count of tweets within specified start and end times, grouped by the specified frequency. This will involve calculating the appropriate index for the vector based on the given frequency and counting the occurrences of tweets in the specified range.
+
+### Code Breakdown (Step by Step)
+
+```cpp
+class TweetCounts {
+    unordered_map<string, vector<int>> mp;
+    unordered_map<string, int> frq = {
+        {"minute", 60}, {"hour", 3600}, {"day", 86400}
+    };
+public:
+    TweetCounts() {
+        
+    }
+```
+- The `TweetCounts` class is defined with two member variables: `mp`, which is a hash map to store tweet timestamps, and `frq`, another hash map that maps frequency types ("minute", "hour", "day") to their corresponding time intervals in seconds.
+
+```cpp
+    void recordTweet(string name, int time) {
+        mp[name].push_back(time);
+    }
+```
+- The `recordTweet` method accepts a `name` (the tweet name) and a `time` (the timestamp). It records the tweet by appending the timestamp to the vector associated with the tweet name in the `mp` map.
+
+```cpp
+    vector<int> getTweetCountsPerFrequency(string fq, string name, int start, int end) {
+        vector<int> res;
+        for(int i = 0; i <= (end - start) / frq[fq]; i++)
+            res.push_back(0);
+```
+- The `getTweetCountsPerFrequency` method is defined to retrieve the number of tweets within a specific frequency (`fq`), for a specific tweet name (`name`), within a time range defined by `start` and `end`.
+- It initializes a result vector `res` to store the count of tweets in each frequency interval. The size of `res` is determined by the number of intervals in the range.
+
+```cpp
+        for(int i = 0; i < mp[name].size(); i++) {
+            int t = mp[name][i];
+            if(t >= start && t <= end) {
+            int idx = (t - start) / frq[fq];
+            res[idx]++;
+            }
+        }
+        return res;
+    }
+};
+```
+- This loop iterates through all recorded tweet timestamps for the specified tweet name.
+  - It checks if the timestamp `t` falls within the given `start` and `end` bounds.
+  - If it does, it calculates the appropriate index in the `res` vector based on the frequency interval and increments the count for that index.
+- Finally, the method returns the populated result vector containing the counts of tweets in each specified frequency.
+
+### Complexity Analysis
+- **Time Complexity**:
+  - The `recordTweet` method runs in \(O(1)\) since it simply appends a timestamp to a vector.
+  - The `getTweetCountsPerFrequency` method runs in \(O(N)\), where \(N\) is the number of tweets recorded for the specified name, as it iterates through the timestamps to count them. The vector `res` creation is \(O(M)\), where \(M\) is the number of frequency intervals calculated.
+  
+- **Space Complexity**:
+  - The space complexity is \(O(N)\) for storing the timestamps of the tweets in the hash map.
+
+### Conclusion
+The `TweetCounts` class effectively implements a straightforward yet efficient system for tracking and analyzing tweet timestamps. By using hash maps for fast access and storage, combined with vectors for maintaining timestamp order, the solution provides a robust approach to query tweet frequencies over specified time intervals. 
+
+This implementation can be particularly useful for applications that require monitoring and analyzing user interactions on social media platforms, providing insights into tweet activity over time. 
+
+Overall, the solution exemplifies good practices in algorithm design and data structure utilization, making it an excellent reference for similar challenges involving time-series data handling in programming interviews and competitive coding scenarios.
+
+By mastering such implementations, developers can enhance their proficiency in managing dynamic data efficiently, leading to better software solutions that can scale with user activity and data growth.
+
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/tweet-counts-per-frequency/description/)
+
 ---
 {{< youtube jpK7Bpf8wgk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1351: Count Negative Numbers in a Sorted Matrix](https://grid47.xyz/leetcode/solution-1351-count-negative-numbers-in-a-sorted-matrix/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

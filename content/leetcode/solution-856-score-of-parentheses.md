@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/iO0zA-N575k/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/score-of-parentheses/description/)
-
 ---
 **Code:**
 
@@ -43,9 +41,122 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/856.md" >}}
+### Problem Statement
+
+The problem at hand is to calculate the score of a given string that consists of parentheses. The score of a balanced parentheses string is computed using the following rules:
+
+1. `"()"` has a score of `1`.
+2. If `S` is a balanced parentheses string, then `S = "(A)"`, where `A` is another balanced parentheses string, has a score of `2 * score(A)`.
+3. If `S` is a concatenation of two balanced parentheses strings `A` and `B`, i.e., `S = "AB"`, then `score(S) = score(A) + score(B)`.
+
+Given a string `s` consisting only of `'('` and `')'`, we are tasked with computing the score of this string.
+
+### Approach
+
+To calculate the score of a balanced parentheses string, we can leverage a **stack** data structure. Here's the general approach:
+
+- **Iterate through the string**: We need to scan through the entire string and calculate the score based on the parenthesis structure.
+  
+- **Use a Stack for Parentheses Matching**: A stack will help us keep track of nested structures and calculate scores for those structures in a bottom-up fashion.
+
+- **Maintain a running score**: As we encounter different elements (either `(` or `)`), we need to adjust the running score based on the nesting and structure of the parentheses.
+
+Here’s how the approach works in detail:
+
+1. **Opening Parenthesis `(`**: When encountering an opening parenthesis, we push the current score onto the stack. This serves as a marker for the score at the current level of nesting, and we reset the current score to `0` to start calculating the score of the new nested section.
+   
+2. **Closing Parenthesis `)`**: Upon encountering a closing parenthesis, we:
+   - Calculate the score for the current level based on whether we have an empty nested structure or not.
+   - If the current score is `0` (i.e., we just encountered an empty `()`), we set the score to `1`.
+   - If the current score is greater than `0`, we double it to account for the nested structure.
+   - We then pop the previous score from the stack and add it to the current score to accumulate the result for the outer structure.
+
+3. **Final Score**: After processing the entire string, the final score is stored in the `scr` variable.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Declare and Initialize Variables
+
+```cpp
+int scr = 0;
+stack<int> stk;
+```
+
+- `scr`: This variable holds the running score for the parentheses string.
+- `stk`: The stack is used to store the score at each level of nesting.
+
+#### Step 2: Iterate Through the String
+
+```cpp
+for(char &a : s) {
+```
+
+- We loop through each character in the string `s`.
+
+#### Step 3: Handle Opening Parenthesis `(`
+
+```cpp
+if(a == '(') {
+    stk.push(scr);
+    scr = 0;
+}
+```
+
+- When we encounter an opening parenthesis `(`, we push the current running score (`scr`) onto the stack, as we will need to calculate the score for the next nested section.
+- We then reset the current score `scr` to `0` to start calculating the score for this new level of parentheses.
+
+#### Step 4: Handle Closing Parenthesis `)`
+
+```cpp
+else {
+    scr = stk.top() + max( 2 * scr, 1);
+    stk.pop();
+}
+```
+
+- Upon encountering a closing parenthesis `)`, we compute the score for the current section:
+  - If `scr == 0` (i.e., the current section is an empty `()`), we set `scr = 1` since `()` has a score of `1`.
+  - If `scr > 0`, we double the score to account for the nested structure (e.g., `()()` becomes `2 * score`).
+- After updating the score, we pop the previous score from the stack and add it to `scr`. This ensures that we account for the accumulated score from previous sections at the higher level of nesting.
+
+#### Step 5: Return the Final Score
+
+```cpp
+return scr;
+```
+
+- After processing all characters in the string, the value of `scr` represents the total score for the entire parentheses string.
+
+### Complexity Analysis
+
+#### Time Complexity:
+
+The time complexity of the solution is **O(n)**, where `n` is the length of the input string `s`. 
+
+- We only iterate through the string once, processing each character in constant time.
+- Each operation on the stack (push and pop) also takes constant time.
+- Thus, the overall time complexity is **O(n)**.
+
+#### Space Complexity:
+
+The space complexity is **O(n)**, where `n` is the length of the input string.
+
+- The space used by the stack is proportional to the depth of nesting in the parentheses string. In the worst case (all opening parentheses), the stack will contain up to `n/2` elements.
+- Therefore, the space complexity is **O(n)** in the worst case.
+
+### Conclusion
+
+This solution efficiently calculates the score of a balanced parentheses string using a stack. By iterating through the string once and using the stack to keep track of nested scores, we are able to compute the final score in linear time. This approach handles various nested structures correctly and computes the score in a straightforward manner.
+
+The **time complexity** of the solution is **O(n)**, where `n` is the length of the string, making it efficient even for large input sizes. The **space complexity** is also **O(n)**, as the stack needs to store scores for each level of nested parentheses.
+
+This approach is both time and space-efficient and can handle all valid input cases as specified in the problem statement.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/score-of-parentheses/description/)
+
 ---
 {{< youtube iO0zA-N575k >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #858: Mirror Reflection](https://grid47.xyz/leetcode/solution-858-mirror-reflection/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

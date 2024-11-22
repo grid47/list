@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/5IGbZyPgjP0/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/valid-tic-tac-toe-state/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/794.webp" 
     alt="A Tic-Tac-Toe board where valid states are checked, with valid states softly glowing as they’re found."
@@ -68,9 +66,104 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/794.md" >}}
+### Problem Statement
+In this problem, we are given a Tic-Tac-Toe board represented by a 3x3 grid of characters. The objective is to determine whether the given board configuration is valid according to the rules of Tic-Tac-Toe. In a valid board, 'X' and 'O' alternately mark their moves, with the following rules:
+
+1. The game starts with player 'X' making the first move.
+2. A player wins by having three of their marks in a row, column, or diagonal.
+3. The game can end in a draw if all squares are filled without any player winning.
+
+We need to validate whether the given board represents a possible configuration of a Tic-Tac-Toe game. The board may not necessarily represent a completed game, so we also need to consider whether the number of moves made is consistent with the game's rules.
+
+### Approach
+To solve this problem, we need to validate the board using the following observations:
+
+1. The number of 'X's should always be equal to or one greater than the number of 'O's. This is because 'X' always goes first.
+2. If a player wins, the other player should not have made their move after the win.
+3. Both players cannot win simultaneously, as only one player can win the game.
+
+### Code Breakdown (Step by Step)
+The code provided uses a few key components to check the board's validity. Let's break it down step by step.
+
+#### Step 1: Initialize Variables
+We begin by initializing a few boolean flags, arrays, and counters:
+```cpp
+bool xwin = false, owin = false;
+vector<int> rows(3, 0), cols(3, 0);
+int diag = 0, antidiag = 0, turns = 0;
+```
+- `xwin` and `owin`: These flags keep track of whether 'X' or 'O' has won the game.
+- `rows` and `cols`: These vectors hold the count of 'X's and 'O's in each row and column, respectively.
+- `diag` and `antidiag`: These counters track the diagonals (from top-left to bottom-right and top-right to bottom-left).
+- `turns`: This counter keeps track of how many 'X' and 'O' moves have been made.
+
+#### Step 2: Iterate Through the Board
+Next, we loop over each position on the board:
+```cpp
+for(int i = 0; i < 3; i++)
+    for(int j = 0; j < 3; j++) {
+        if(board[i][j] == 'X') {
+            turns++, cols[j]++, rows[i]++;
+            if(i == j) diag++;
+            if(i + j == 2) antidiag++;
+        } else if(board[i][j] == 'O') {
+            turns--, cols[j]--, rows[i]--;
+            if(i == j) diag--;
+            if(i + j == 2) antidiag--;
+        }
+    }
+```
+- We iterate over the 3x3 grid and check each cell to determine whether it is 'X' or 'O'.
+- For each 'X', we increment `turns` and update the row, column, diagonal, and anti-diagonal counters.
+- For each 'O', we decrement `turns` and update the counters similarly.
+
+#### Step 3: Check for Wins
+After updating the counters, we check if either 'X' or 'O' has won the game. A win is determined if any row, column, or diagonal contains three of the same marks (either 'X' or 'O').
+```cpp
+xwin =  rows[0] == 3 || cols[0] == 3 || 
+        rows[1] == 3 || cols[1] == 3 ||
+        rows[2] == 3 || cols[2] == 3 ||
+        diag == 3 || antidiag == 3;
+owin =  rows[0] == -3 || cols[0] == -3 || 
+        rows[1] == -3 || cols[1] == -3 ||
+        rows[2] == -3 || cols[2] == -3 ||
+        diag == -3 || antidiag == -3;
+```
+- `xwin`: Set to `true` if any row, column, or diagonal contains three 'X's.
+- `owin`: Set to `true` if any row, column, or diagonal contains three 'O's.
+
+#### Step 4: Validate the Game Rules
+Now that we know whether either player has won, we validate the board based on the following conditions:
+
+1. If 'X' wins, the number of 'X's must be one more than the number of 'O's (since 'X' moves first).
+2. If 'O' wins, the number of 'X's must be equal to the number of 'O's.
+3. Both players cannot win simultaneously.
+4. The game must not have too many or too few moves for the players.
+
+The following checks ensure that these conditions are met:
+```cpp
+if(xwin && turns == 0 || owin && turns == 1)
+    return false;
+    
+return (turns == 0 || turns == 1) && (!xwin || !owin);
+```
+- If 'X' has won but the number of 'X' moves is not exactly one greater than the number of 'O' moves, or if 'O' has won but the number of 'X' moves is not equal to the number of 'O' moves, we return `false`.
+- Finally, we ensure that the number of moves is valid (either 0 or 1 turn difference between 'X' and 'O'), and that only one player has won (or neither).
+
+### Complexity
+The time complexity of this solution is O(1) because we are simply iterating over a fixed-size 3x3 board, which takes constant time. Therefore, the solution is highly efficient and operates in constant time.
+
+- **Time Complexity**: O(1), as we always process 9 cells regardless of the input.
+- **Space Complexity**: O(1), as we are using a constant amount of extra space to store the counters and flags.
+
+### Conclusion
+This code provides an efficient solution for validating the state of a Tic-Tac-Toe board. By using counters for rows, columns, and diagonals, we can easily determine if the board configuration is valid, whether one player has won, and if the number of moves is correct. The solution adheres to the rules of the game and ensures that no invalid configurations are accepted, making it both concise and efficient.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/valid-tic-tac-toe-state/description/)
+
 ---
 {{< youtube 5IGbZyPgjP0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #795: Number of Subarrays with Bounded Maximum](https://grid47.xyz/leetcode/solution-795-number-of-subarrays-with-bounded-maximum/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

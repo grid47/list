@@ -17,8 +17,6 @@ youtube_thumbnail=""
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/421.webp" 
     alt="A glowing sequence of numbers where the XOR result is softly highlighted, showing the maximum possible value."
@@ -75,9 +73,74 @@ public:
     }
 };
 {{< /highlight >}}
-
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/421.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #423: Reconstruct Original Digits from English](https://grid47.xyz/leetcode/solution-423-reconstruct-original-digits-from-english/) |
+### Problem Statement:
+The problem at hand involves finding the maximum XOR value between two numbers in a given list of integers. XOR, or exclusive OR, is a binary operation where the bits of the two operands are compared and return 1 if the bits are different and 0 if they are the same. The task is to find two numbers in the array such that their XOR is the maximum possible, and then return this maximum value.
+
+### Approach:
+The brute force approach would involve comparing every possible pair of numbers in the list, computing their XOR values, and keeping track of the maximum XOR. However, this would result in a time complexity of \(O(n^2)\), which can be inefficient for large arrays.
+
+Instead, a more optimal approach involves using a **Trie (prefix tree)** data structure, which allows for efficient storage and querying of the binary representations of the numbers. A **TrieNode** stores an array of child nodes corresponding to the binary digits (0 and 1). The main idea is to build the Trie with the binary representations of the numbers and then, for each number, traverse the Trie to maximize the XOR value by trying to take the opposite bit at each step (since 1 XOR 0 = 1, which gives the highest contribution to the XOR result).
+
+The overall approach uses the Trie structure to efficiently perform the XOR maximization by exploiting the properties of binary numbers and the Trie’s ability to represent and traverse bitwise data.
+
+### Code Breakdown (Step by Step):
+1. **TrieNode Class**:
+   - **Attributes**:
+     - `children[2]`: This array stores two children for each node: one for bit 0 and the other for bit 1. It represents the binary structure.
+   
+   - **Methods**:
+     - `add(int num)`: This method inserts the binary representation of the number `num` into the Trie. Starting from the most significant bit (MSB), it iteratively checks if the current bit exists. If it doesn't, a new TrieNode is created. This builds the Trie for all numbers in the array.
+   
+     - `max(int num)`: This method calculates the maximum XOR of a given number with any number already inserted into the Trie. Starting from the MSB, it attempts to take the opposite bit (1 - bit) at each level if possible. If not, it takes the same bit. This process maximizes the XOR by trying to diverge from the current number.
+
+2. **Solution Class**:
+   - **Methods**:
+     - `findMaximumXOR(vector<int>& nums)`: This is the main method that handles the process of building the Trie and computing the maximum XOR. It initializes the Trie, inserts all numbers, and then computes the XOR for each number, updating the result with the maximum value encountered.
+
+   - **Algorithm Flow**:
+     - The method iterates over all the numbers in the input list `nums`, inserting them into the Trie.
+     - It then computes the maximum XOR value for each number by calling the `max` method of the `TrieNode` class, which tries to get the maximum possible XOR by traversing the Trie.
+     - Finally, it returns the largest XOR value found.
+
+### Code Explanation:
+#### TrieNode Class:
+The `TrieNode` class represents each node in the Trie, where each node corresponds to a bit in the binary representation of a number. Each node has two children:
+- One for bit 0.
+- One for bit 1.
+
+#### add Method:
+- The method begins by processing the number from the most significant bit (31st bit for a 32-bit integer).
+- It checks each bit and ensures that the appropriate child node is created. If a child node for a given bit doesn’t exist, it creates a new node. This process constructs the Trie.
+
+#### max Method:
+- For a given number, the method traverses the Trie to find the maximum XOR possible by attempting to take the opposite bit wherever possible.
+- This is done by checking the child corresponding to the opposite bit (1 - bit). If it exists, it traverses that path, setting the respective bit in the result (`ans`), since this gives a higher XOR value.
+- If the opposite bit doesn’t exist, it takes the same bit as the current number.
+
+#### Solution Class:
+- The `findMaximumXOR` method initializes the Trie and adds all numbers from the input array.
+- After inserting the numbers, it computes the maximum XOR value by iterating through the numbers and calling the `max` method.
+
+### Complexity Analysis:
+- **Time Complexity**:
+  - The `add` method runs in \(O(32)\) time for each number because it processes 32 bits for each integer (assuming 32-bit integers).
+  - The `max` method also runs in \(O(32)\) time for each number since it traverses the Trie bit by bit.
+  - Overall, for \(n\) numbers, the time complexity is \(O(32n)\), which simplifies to \(O(n)\).
+  
+- **Space Complexity**:
+  - The space complexity is \(O(32n)\) for storing the Trie, where \(n\) is the number of integers in the input array, and each number requires at most 32 nodes (one for each bit).
+  - Simplified, the space complexity is \(O(n)\).
+
+### Conclusion:
+The solution utilizes the Trie data structure to efficiently compute the maximum XOR between any two numbers in the given list. The time complexity of \(O(n)\) (where \(n\) is the number of integers) makes this approach far superior to the brute force method, which has a time complexity of \(O(n^2)\). The Trie-based method not only optimizes the process of finding the maximum XOR but also leverages bitwise operations to maximize the XOR value efficiently.
+
+This approach can be generalized to similar problems that involve bitwise operations, such as finding the maximum OR, AND, or other bitwise combinations in an array. By using a Trie, one can reduce the problem's complexity and handle large input sizes more effectively. The solution is ideal for competitive programming scenarios or real-world applications where performance is critical.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/description/)
+
+---
+
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/TqKDnzkRsh0/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/coordinate-with-maximum-network-quality/description/)
-
 ---
 **Code:**
 
@@ -58,9 +56,108 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1620.md" >}}
+### Problem Statement
+
+The problem involves determining the best coordinate in a 2D grid (with dimensions ranging from \(0\) to \(50\) in both x and y directions) to maximize the sum of signals received from a set of towers located at given coordinates. Each tower has a specified signal strength, and the signal received from each tower decreases with distance, influenced by a given radius. Specifically, if a point is within the radius of a tower, the signal received is calculated based on the distance from the tower to the point. The goal is to find the coordinate that yields the highest total signal strength from all towers.
+
+### Approach
+
+To solve the problem, the algorithm follows these steps:
+
+1. **Initialize Variables**: We keep track of the maximum signal strength and the coordinates that produce this strength.
+
+2. **Iterate Over Possible Coordinates**: We loop through all possible coordinates in the grid from \((0, 0)\) to \((50, 50)\).
+
+3. **Calculate Signal Strength for Each Coordinate**:
+    - For each tower, calculate the distance to the current coordinate.
+    - If the distance is within the specified radius, compute the signal strength using the formula: \[ \text{signal} = \frac{\text{strength}}{1 + \text{distance}} \]
+    - Sum the signals from all towers for the current coordinate.
+
+4. **Track Maximum Signal Strength**: If the computed signal strength is greater than the previously recorded maximum, update the maximum and reset the list of best coordinates. If it equals the maximum, add the current coordinate to the list.
+
+5. **Return the Result**: After checking all coordinates, return the first coordinate from the list of best coordinates.
+
+### Code Breakdown (Step by Step)
+
+Here's the detailed breakdown of the code:
+
+```cpp
+class Solution {
+public:
+    vector<int> bestCoordinate(vector<vector<int>>& tow, int rad) {
+        int n = tow.size();
+        int mx = INT_MIN;
+        vector<vector<int>> res;
+```
+- The `bestCoordinate` function takes a list of towers and the radius as input.
+- We initialize `n` to hold the number of towers, `mx` to track the maximum signal strength, and `res` to hold the best coordinates.
+
+```cpp
+        for(int i = 0; i <= 50; i++)
+        for(int j = 0; j <= 50; j++) {
+```
+- We loop through all possible coordinates \( (i, j) \) from \( (0, 0) \) to \( (50, 50) \).
+
+```cpp
+            int sum = 0;
+            for(int k = 0; k < n; k++) {
+                int x = tow[k][0], y = tow[k][1];
+                float r = sqrt((x - i) * (x - i) + (y - j) * (y - j));
+                int ss = 0;
+```
+- For each coordinate \( (i, j) \), we initialize `sum` to accumulate the signal strength.
+- We iterate through each tower, extracting its coordinates \( (x, y) \) and calculating the Euclidean distance \( r \) to the current coordinate.
+
+```cpp
+                if(r <= rad) {
+                    ss = tow[k][2]/(1 + r);
+                }
+                sum += ss;
+            }
+```
+- If the distance \( r \) is within the specified radius, we compute the signal strength \( ss \) using the formula provided and add it to `sum`.
+
+```cpp
+            if(mx < sum) {
+                mx = sum;
+                res = {{i, j}};
+            } else if(mx == sum) {
+                res.push_back({i, j});
+            }
+        }
+```
+- After calculating the total signal strength for the coordinate, we compare it to the current maximum. If it is greater, we update `mx` and reset `res` to only contain the current coordinate. If it matches the maximum, we append the current coordinate to `res`.
+
+```cpp
+        sort(res.begin(), res.end());
+        return res[0];
+    }
+};
+```
+- Finally, we sort the list of best coordinates and return the first one.
+
+### Complexity
+
+- **Time Complexity**: The time complexity of this algorithm is \( O(n \cdot (51^2)) \), where \( n \) is the number of towers. This is because we iterate over each tower for every coordinate in a \( 51 \times 51 \) grid, resulting in a significant number of calculations as the number of towers increases.
+  
+- **Space Complexity**: The space complexity is \( O(1) \) as we only use a fixed amount of additional space for variables and do not require data structures that grow with the input size. The output is stored in a fixed-size vector that will hold a maximum of two coordinates in the worst case.
+
+### Conclusion
+
+This solution efficiently finds the best coordinate in a specified grid to maximize the signal received from a set of towers. The algorithm's nested loop structure allows it to compute signal strengths for all possible coordinates, ensuring that the optimal solution is found.
+
+**Key Takeaways**:
+1. **Signal Decay with Distance**: The approach demonstrates how to factor in the decay of signal strength with increasing distance, a common problem in fields like telecommunications.
+2. **Brute Force Feasibility**: Given the constraints (with a maximum grid size of \(51 \times 51\)), a brute force solution is feasible and effective for finding the optimal coordinate.
+3. **Sorting for Consistency**: Sorting the resulting coordinates ensures that in cases of ties, the smallest coordinate (in terms of x and y) is returned, which is a common requirement in programming challenges.
+
+This algorithm can be applied in scenarios where optimizing reception or signal strength is crucial, such as in wireless networks, IoT device placement, and more. By systematically evaluating potential locations, it provides a clear path to identifying the best configuration.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/coordinate-with-maximum-network-quality/description/)
+
 ---
 {{< youtube TqKDnzkRsh0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1621: Number of Sets of K Non-Overlapping Line Segments](https://grid47.xyz/leetcode/solution-1621-number-of-sets-of-k-non-overlapping-line-segments/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

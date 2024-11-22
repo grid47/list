@@ -17,8 +17,6 @@ youtube_thumbnail=""
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/longest-absolute-file-path/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/388.webp" 
     alt="A file path glowing as it grows, showing the longest path as it is traced step by step."
@@ -64,9 +62,105 @@ public:
     }
 };
 {{< /highlight >}}
-
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/388.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #390: Elimination Game](https://grid47.xyz/leetcode/solution-390-elimination-game/) |
+### 🚀 Problem Statement
+
+The task is to find the **length of the longest absolute path to a file** in a file system, represented as a string. The string includes file and directory names, with each level of the file system being separated by a newline (`\n`). Directories are represented by names with possible tabs (`\t`) indicating their depth. A file is identified by the presence of a dot (`.`) in its name. 
+
+We need to compute the longest path to any file, where the path is the sum of the lengths of directory and file names along the way from the root.
+
+For example, given `s = "dir\n\tsubdir1\n\tsubdir2\n\t\tfile.ext"`, the longest path is `"dir/subdir2/file.ext"`, which has a length of 18.
+
+---
+
+### 🧠 Approach
+
+We can solve this problem by simulating a **file system traversal**. Here's the step-by-step breakdown:
+
+1. **Track Depth Levels**: 
+   Every directory or file name is indented by tabs (`\t`). The number of tabs tells us the depth of the item in the file system hierarchy.
+   
+2. **Accumulate Path Lengths**: 
+   As we process each line, we maintain the cumulative length of the path up to that level in the file system using an array called `levels`. This array keeps track of the path length at each depth level.
+
+3. **Detect Files**: 
+   Files are identified by the presence of a dot (`.`) in their name. Whenever we encounter a file, we compute the total path length by summing the path lengths of its parent directories and adding the length of the file name itself.
+
+4. **Track Maximum Length**: 
+   The key goal is to find the longest possible path. So, we continuously update the maximum path length as we encounter files.
+
+---
+
+### 🔨 Step-by-Step Code Breakdown
+
+Here’s the code that implements the above approach:
+
+```cpp
+class Solution {
+public:
+    int lengthLongestPath(string input) {
+        vector<int> levels(300, 0);  // Array to store path lengths at each level
+        int level = 0;  // Current depth level in the file system
+        int ans = 0;  // Store the longest path length found
+        int len = 0;  // Length of the current directory or file name
+        bool isFile = false;  // Flag to check if the current item is a file
+
+        // Iterate through each character of the input string
+        for (char c : input) {
+            switch (c) {
+                case '\n':  // Newline indicates a new entry
+                    level = 0, isFile = false, len = 0;  // Reset for new line
+                    break;
+                case '\t':  // Tab indicates a deeper level
+                    level++;  // Increase the depth level
+                    break;
+                case '.':  // Dot indicates a file
+                    isFile = true;  // Mark as a file
+                    // No need for default case here
+                default:
+                    len++;  // Increment the length of the current name
+                    levels[level] = len;  // Update the path length at this level
+                    // If it's a file, calculate the total path length
+                    if (isFile) {
+                        ans = max(ans, accumulate(levels.begin(), levels.begin() + level + 1, 0) + level);
+                    }
+            }
+        }
+        return ans;  // Return the longest path length found
+    }
+};
+```
+
+---
+
+### 📈 Complexity Analysis
+
+- **Time Complexity**: **O(n)**, where `n` is the length of the input string. 
+  - We loop through each character in the input string once. 
+  - The `accumulate` function is called only when a file is encountered, and since there are at most `O(n)` files, the total time complexity remains linear.
+
+- **Space Complexity**: **O(1)** (constant space).
+  - The `levels` array is fixed in size (`300`), so its space usage does not depend on the input size.
+  - The input string takes up `O(n)` space, but this space is provided by the problem and does not count toward the algorithm’s space complexity.
+
+---
+
+### 🏁 Conclusion
+
+This solution efficiently finds the **longest absolute path to a file** in a file system represented as a string. The key idea is to simulate a file system traversal while maintaining cumulative path lengths for each directory level. By updating the longest path each time we encounter a file, we ensure that the solution remains efficient with a time complexity of **O(n)**.
+
+### 🎯 Key Takeaways:
+- **Two main operations**: Track depth with tabs and accumulate path lengths dynamically.
+- **File detection** is easy with the dot (`.`) character.
+- **Optimal Time Complexity** of **O(n)** for large inputs.
+- **Constant Space Complexity** of **O(1)** due to the fixed-size array used for path tracking.
+
+With this approach, you’re ready to tackle any file system structure efficiently! 🚀 Happy coding! 💻
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/longest-absolute-file-path/description/)
+
+---
+
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

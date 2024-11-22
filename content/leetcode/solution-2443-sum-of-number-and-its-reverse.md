@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/ESqVFCHtAGg/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/sum-of-number-and-its-reverse/description/)
-
 ---
 **Code:**
 
@@ -46,9 +44,119 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2443.md" >}}
+### Problem Statement
+
+The problem asks to determine if a given number `num` can be represented as the sum of some integer `i` and its reversed version. Specifically, for a given integer `num`, we need to check whether there exists an integer `i` such that:
+
+\[ i + \text{rev}(i) = \text{num} \]
+
+Where `rev(i)` represents the reverse of the integer `i`.
+
+For example:
+- Input: `num = 443`
+- Output: `true`
+
+Explanation: The number `i = 440` and its reverse `rev(440) = 44`, and indeed:
+
+\[ 440 + 44 = 443 \]
+
+Thus, the function should return `true`.
+
+### Approach
+
+To solve this problem, we need to follow a brute-force approach by checking each integer `i` from `0` to `num`. For each `i`, we compute its reverse using the helper function `rev(i)` and check if the sum of `i` and `rev(i)` equals `num`. If we find such a pair, we return `true`, otherwise, we return `false`.
+
+The algorithm proceeds with the following steps:
+1. **Reverse the Numbers**: For each number `i`, reverse its digits and check if the sum of `i` and `rev(i)` equals `num`.
+2. **Brute-Force Search**: Iterate through all values of `i` starting from `0` to `num`. For each number, calculate `rev(i)` and check if the sum equals `num`.
+3. **Return the Result**: If any such pair is found, return `true`, otherwise return `false`.
+
+This approach guarantees that we explore all possible integer values that could sum up with their reversed form to give the number `num`.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Helper Function `rev`
+
+The first part of the code is the helper function `rev(int num)` that calculates the reverse of the integer `num`.
+
+```cpp
+int rev(int num) {
+    int tmp = 0;
+    while(num) {
+        tmp = tmp * 10 + num % 10;  // Extract the last digit and add it to tmp
+        num /= 10;  // Remove the last digit from num
+    }
+    return tmp;
+}
+```
+
+- `tmp = tmp * 10 + num % 10`: This operation extracts the last digit of `num` (i.e., `num % 10`) and appends it to the reversed number `tmp`. Initially, `tmp` is `0`, and each subsequent operation shifts `tmp` one place to the left (multiplying by 10) and adds the last digit of `num`.
+- `num /= 10`: This operation removes the last digit from `num`, so that we can process the next digit.
+
+For example, if `num = 123`, the function will reverse it to `321`.
+
+#### Step 2: Main Function `sumOfNumberAndReverse`
+
+Now, let's look at the main function `sumOfNumberAndReverse(int num)` which performs the check for all possible values of `i` from `0` to `num`.
+
+```cpp
+bool sumOfNumberAndReverse(int num) {
+    for(int i = 0; i <= num; i++) {
+        if((i + rev(i)) == num) {  // Check if i + rev(i) equals num
+            return true;
+        }
+    }
+    return false;  // Return false if no such pair is found
+}
+```
+
+- **For Loop**: The loop iterates over all integers from `0` to `num`. For each integer `i`, the reversed version of `i` is calculated using the helper function `rev(i)`.
+- **Condition Check**: If the sum of `i` and its reverse `rev(i)` equals `num`, the function returns `true`.
+- **Return `false`**: If the loop finishes without finding any such pair, the function returns `false`.
+
+For example, for `num = 443`, the loop will check:
+- For `i = 0`, `rev(0) = 0`, `0 + 0 = 0`.
+- For `i = 1`, `rev(1) = 1`, `1 + 1 = 2`.
+- ...
+- For `i = 440`, `rev(440) = 44`, `440 + 44 = 443`. The function returns `true` here.
+
+#### Step 3: Return the Result
+
+After the loop completes, if no such pair is found, the function returns `false`. This ensures that we return the correct result based on whether or not a valid pair was found.
+
+```cpp
+return false;
+```
+
+### Complexity
+
+#### Time Complexity
+
+The time complexity of this solution is **O(n * m)**, where `n` is the value of the input number `num` and `m` is the average number of digits in the numbers from `0` to `num`.
+
+1. **Loop Iterations**: We loop through all integers `i` from `0` to `num`, which gives `num` iterations.
+2. **Reversing the Number**: For each iteration, we reverse the number `i`. The reverse operation takes time proportional to the number of digits in `i`. The number of digits in `i` is proportional to `log(i)` (i.e., **O(m)**, where `m` is the number of digits in `i`).
+
+Thus, the total time complexity is **O(n * m)**, where `n` is the input number and `m` is the average number of digits in the numbers from `0` to `num`.
+
+#### Space Complexity
+
+The space complexity of the solution is **O(1)**. We are only using a few variables to store intermediate results (like `tmp` for the reversed number and `i` for the loop), so no additional space is needed apart from the input.
+
+### Conclusion
+
+This approach provides a simple and direct solution to check if a number `num` can be expressed as the sum of an integer `i` and its reverse. The solution uses a brute-force approach, iterating over all possible values of `i` from `0` to `num` and checking if their sum with the reverse of `i` equals `num`. 
+
+- **Time Complexity**: **O(n * m)**, where `n` is the input number and `m` is the average number of digits in the numbers.
+- **Space Complexity**: **O(1)**, as we use constant extra space.
+
+This solution works efficiently for smaller numbers but may not be optimal for larger inputs, where more sophisticated approaches may be required. However, it guarantees correctness by checking all possible numbers and their reversals systematically.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/sum-of-number-and-its-reverse/description/)
+
 ---
 {{< youtube ESqVFCHtAGg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2446: Determine if Two Events Have Conflict](https://grid47.xyz/leetcode/solution-2446-determine-if-two-events-have-conflict/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

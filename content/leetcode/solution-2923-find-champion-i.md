@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/23vlLuh_v6c/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/find-champion-i/description/)
-
 ---
 **Code:**
 
@@ -34,9 +32,94 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2923.md" >}}
+### Problem Statement:
+The problem requires finding a "champion" in a directed graph where each node represents a player, and directed edges represent a win or loss in a game between two players. A champion is defined as a player who has won against every other player in the graph, meaning that there is a directed edge from the champion to every other player, but no directed edge back to the champion from any other player. The task is to identify this champion player if they exist, or return `-1` if no champion exists.
+
+The problem is essentially about finding a node in a graph that has out-degree of `n - 1` (where `n` is the number of players, or size of the graph) and in-degree of `0`. In simpler terms, the champion should have a directed edge to all other players, but no directed edges pointing back to them.
+
+### Approach:
+The approach to solving this problem is straightforward and involves iterating through the given matrix representing the graph and checking if any player meets the criteria for being a champion.
+
+1. **Understanding the Input:**
+   The graph is represented by a 2D vector `g`, where `g[i][j] = 1` means player `i` won against player `j` (there is a directed edge from `i` to `j`), and `g[i][j] = 0` means player `i` did not win against player `j` (no directed edge from `i` to `j`).
+
+2. **Champion Criteria:**
+   For a player to be a champion:
+   - The player should have won against all other players, i.e., the sum of the `i`th row in the matrix should be equal to `n - 1`, where `n` is the number of players. This is because they must have won against every other player (thus having `n - 1` wins).
+   - Additionally, there should be no directed edge pointing back to the champion from any other player. This condition is inherently met because if the sum of the row is `n - 1`, the remaining entries must be `0`, which implies that no other player won against the champion.
+
+3. **Algorithm:**
+   - Iterate over each row of the matrix.
+   - For each row, sum the elements. If the sum equals `n - 1`, then that player is the champion.
+   - If no such player exists after checking all rows, return `-1`.
+
+### Code Breakdown (Step by Step):
+
+1. **Function Definition:**
+   The function `findChampion` takes a 2D vector `g` as an argument, which represents the directed graph of wins and losses between players.
+
+   ```cpp
+   int findChampion(vector<vector<int>>& g) {
+   ```
+
+2. **Iterating Over Each Player:**
+   We iterate through each player in the graph (i.e., each row in the 2D vector). The index `i` represents a particular player.
+
+   ```cpp
+   for (int i = 0; i < g.size(); ++i)
+   ```
+
+3. **Checking the Sum of Wins for Each Player:**
+   For each player `i`, we calculate the sum of their row. The `accumulate` function is used here to sum up the elements of the row, which represent the outcomes of games against all other players.
+
+   - `begin(g[i])` gives the iterator to the first element of row `i`.
+   - `end(g[i])` gives the iterator to the last element of row `i`.
+   - `accumulate(begin(g[i]), end(g[i]), 0)` sums all the values in row `i`.
+
+   ```cpp
+   if (accumulate(begin(g[i]), end(g[i]), 0) == g.size() - 1)
+   ```
+
+   The `accumulate` function returns the total number of wins player `i` has. If this total equals `g.size() - 1` (i.e., they have won against all other players), then player `i` is the champion.
+
+4. **Returning the Champion:**
+   If the condition is met, the index `i` (representing the champion player) is returned.
+
+   ```cpp
+   return i;
+   ```
+
+5. **Return -1 if No Champion is Found:**
+   If no player meets the condition (i.e., no player has won against every other player), we return `-1`, indicating that there is no champion in the graph.
+
+   ```cpp
+   return -1;
+   ```
+
+### Complexity:
+
+1. **Time Complexity:**
+   The time complexity of this solution is \(O(n^2)\), where `n` is the number of players (or the size of the graph). This is because we iterate through each row in the matrix (`n` rows), and for each row, we calculate the sum of its elements (which takes \(O(n)\) time). Therefore, the overall complexity is \(O(n \times n) = O(n^2)\).
+
+   Specifically, the `accumulate` function processes each element of the row, and since there are `n` elements in each row, we perform \(O(n)\) work for each of the `n` rows.
+
+2. **Space Complexity:**
+   The space complexity of this solution is \(O(1)\) since the algorithm only uses a constant amount of extra space. The input graph `g` is the only space used, and we don't require any additional data structures that scale with the input size. We only store a few integer variables (`i`, the iterator for rows, and `dp` for the sum), making the space complexity constant.
+
+### Conclusion:
+This solution efficiently identifies the champion in a directed graph, where the players' wins are represented in a 2D matrix. The problem boils down to checking each row in the matrix to see if the player has won against all other players, which is done using the `accumulate` function.
+
+The algorithm works by iterating over the graph, checking the sum of wins for each player, and identifying if any player meets the criteria for being the champion. If no such player exists, the function returns `-1`.
+
+The time complexity of \(O(n^2)\) makes this solution feasible for moderate-sized graphs, and the space complexity of \(O(1)\) ensures that the algorithm can handle large inputs without excessive memory usage.
+
+This approach is simple, clear, and optimal for the problem at hand, making it a strong solution for identifying the champion in a directed graph.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/find-champion-i/description/)
+
 ---
 {{< youtube 23vlLuh_v6c >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2924: Find Champion II](https://grid47.xyz/leetcode/solution-2924-find-champion-ii/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

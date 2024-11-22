@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/pTLNHVWiQk0/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/goat-latin/description/)
-
 ---
 **Code:**
 
@@ -43,9 +41,94 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/824.md" >}}
+### Problem Statement
+
+The problem requires transforming a given sentence into a new format known as **Goat Latin**. Goat Latin follows these simple rules:
+
+1. If a word starts with a vowel (a, e, i, o, u), we append "ma" to the end of the word.
+2. If a word starts with a consonant, we remove the first letter, move it to the end of the word, and then append "ma".
+3. After applying the rule to each word, we append an increasing number of 'a' characters corresponding to each word’s position in the sentence (1 'a' for the first word, 2 'a's for the second, and so on).
+
+### Approach
+
+To achieve this transformation efficiently, we can break down the task into a series of straightforward steps:
+
+1. **Identifying the Vowels**:
+   - First, identify the vowels in both lowercase and uppercase. This can be done by using a set for quick look-up.
+   
+2. **Processing Each Word**:
+   - For each word, check if it starts with a vowel or consonant.
+   - If it starts with a vowel, simply append "ma" followed by the appropriate number of 'a' characters for that word's position.
+   - If it starts with a consonant, move the first letter to the end of the word, append "ma", and then append the appropriate number of 'a's.
+
+3. **Word Position and Transformation**:
+   - Keep track of the position of each word to determine how many 'a' characters should be appended.
+
+4. **Efficient String Construction**:
+   - Use a `stringstream` to efficiently process and construct the result string. This is better than using simple string concatenation in a loop since `stringstream` is optimized for such tasks.
+   
+5. **Final Formatting**:
+   - After processing all words, ensure that the final result does not start with a space, which can be achieved by removing the first space using `substr(1)`.
+
+### Code Breakdown (Step by Step)
+
+1. **Initialize Key Data Structures**:
+   ```cpp
+   stringstream iss(str), oss;
+   set<char> s = {'a', 'e', 'i', 'o', 'u', 'A', 'E', 'I', 'O', 'U'};
+   string word;
+   string a;
+   ```
+   - `iss`: A stringstream object used to read individual words from the input string.
+   - `oss`: A stringstream object used to build the resulting Goat Latin string.
+   - `s`: A set that contains all the vowels (both lowercase and uppercase) for quick lookup.
+   - `word`: A string used to hold each word as it is read from `str`.
+   - `a`: A string used to append the correct number of 'a' characters for each word.
+
+2. **Iterate Through Words in the Input String**:
+   ```cpp
+   while(iss >> word) {
+       a.push_back('a');
+   ```
+   - This loop processes each word in the input string. The `iss >> word` operation extracts one word at a time.
+   - `a.push_back('a')` ensures that for each word processed, the appropriate number of 'a's is added to `a`.
+
+3. **Check if the Word Starts with a Vowel or Consonant**:
+   ```cpp
+   if(s.count(word[0])) {
+       oss << ' ' << word << "ma" << a;
+   } else {
+       oss << ' ' << word.substr(1) << word[0]  << "ma" << a;
+   }
+   ```
+   - If the first character of the word is a vowel (checked using `s.count(word[0])`), we append the word followed by "ma" and the string `a` (the correct number of 'a' characters).
+   - If the word starts with a consonant, we move the first character to the end of the word (`word.substr(1) + word[0]`), then append "ma" and the appropriate number of 'a's.
+
+4. **Construct and Return the Result**:
+   ```cpp
+   return oss.str().substr(1);
+   ```
+   - Once all words are processed, `oss.str()` gives the entire result string with an extra leading space. We remove this space by calling `substr(1)`.
+
+### Complexity
+
+- **Time Complexity**: 
+  - The time complexity of this solution is \(O(n)\), where \(n\) is the number of characters in the input string `str`.
+  - The key operations—splitting the string into words, checking the first character for vowels, and constructing the result—are linear in terms of the number of characters.
+
+- **Space Complexity**: 
+  - The space complexity is \(O(n)\), where \(n\) is the number of characters in the input string.
+  - We use additional space for the stringstream objects and the resulting string, both of which can be at most of size \(O(n)\).
+
+### Conclusion
+
+This solution efficiently transforms a given sentence into Goat Latin by processing each word based on whether it starts with a vowel or consonant. The approach leverages the power of the `stringstream` class to handle string manipulation in a clean and efficient manner, ensuring that the time and space complexities remain optimal. By using a set for vowel lookup, we can quickly check whether a word starts with a vowel or consonant. This solution meets the problem requirements while ensuring that the format of the output string adheres to the rules of Goat Latin.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/goat-latin/description/)
+
 ---
 {{< youtube pTLNHVWiQk0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #825: Friends Of Appropriate Ages](https://grid47.xyz/leetcode/solution-825-friends-of-appropriate-ages/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

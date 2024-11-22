@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/M9foA9gcL98/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/add-binary/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/67.webp" 
     alt="Two radiant binary sequences gently merging into a new, illuminated result."
@@ -55,9 +53,84 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/67.md" >}}
+### ➕ **Add Two Binary Strings**
+
+The task is to add two binary strings, `a` and `b`, and return their sum as a binary string. In binary addition, `1 + 1` results in `10`, carrying `1` to the next bit position. This problem requires managing the binary addition of digits from the two strings, taking care of carry values between bit positions.
+
+### 🧠 **Approach**
+
+The solution performs binary addition by working from the least significant bit (rightmost) to the most significant bit (leftmost) in each string. This approach ensures that all bits are added accurately with the correct carry. The algorithm maintains a carry (`cr`) initialized to zero and iterates through both strings until all bits are processed and there’s no carry left. The resulting binary string is built by appending each computed binary digit at the start of a result string.
+
+### 🔍 **Code Breakdown (Step by Step)**
+
+#### Step 1: Initialize Variables
+
+```cpp
+int cr = 0;
+string res = "";
+```
+- `cr` (carry) is set to `0`, representing the initial carry for binary addition.
+- `res` is an empty string to accumulate the binary result.
+
+#### Step 2: Loop Until Both Strings Are Exhausted and No Carry Left
+
+```cpp
+while(!a.empty() || !b.empty() || cr) {
+```
+- The loop continues until both strings are empty and there is no carry left.
+- This ensures that all bits from both strings and any remaining carry are fully processed.
+
+#### Step 3: Extract and Add Bits from the End of Each String
+
+```cpp
+if(!a.empty()) {
+    cr += a.back() - '0';
+    a.pop_back();
+}
+if(!b.empty()) {
+    cr += b.back() - '0';
+    b.pop_back();
+}
+```
+- If `a` is not empty, the last character (rightmost bit) is extracted, converted to an integer, and added to `cr`.
+- Similarly, if `b` is not empty, the last character is extracted and added to `cr`.
+- The `pop_back()` function removes the processed bit from the string for the next iteration.
+
+#### Step 4: Calculate the Current Bit and Update Carry
+
+```cpp
+res = to_string(cr % 2) + res;
+cr /= 2;
+```
+- The current bit is calculated by taking `cr % 2` and appending this value to the beginning of `res`.
+- The carry (`cr`) is updated by dividing it by `2` (`cr /= 2`), so it becomes `0` if there's no carry, or `1` if the addition produced a carry.
+
+#### Step 5: Return the Result
+
+```cpp
+return res;
+```
+- After the loop finishes, the resulting binary sum is returned as a string.
+
+### 📊 **Complexity Analysis**
+
+#### Time Complexity:
+- **O(max(m, n))**: The algorithm processes each bit in both strings, where `m` and `n` are the lengths of strings `a` and `b`.
+
+#### Space Complexity:
+- **O(max(m, n))**: The space needed for the result string `res` is proportional to the length of the longer input string plus one for potential carry.
+
+### 🌟 **Conclusion**
+
+This solution efficiently handles binary addition with carry management by iterating through each bit from right to left. It combines both strings bit-by-bit, ensuring accurate calculation with minimal space overhead. The approach is optimal for binary addition, providing a solution that scales well with input size and produces a correctly formatted binary output string even for cases where one string is significantly longer than the other. This code exemplifies efficient handling of bit manipulation and carry propagation in binary arithmetic.
+
+---
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/add-binary/description/)
+
 ---
 {{< youtube M9foA9gcL98 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #70: Climbing Stairs](https://grid47.xyz/leetcode/solution-70-climbing-stairs/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

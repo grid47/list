@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/HZVMmKR0jZw/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/beautiful-towers-ii/description/)
-
 ---
 **Code:**
 
@@ -58,9 +56,113 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2866.md" >}}
+### Problem Statement
+
+The problem requires us to calculate the maximum sum of heights of a subsequence derived from an array `A`. In this problem, the height of any subsequence is the sum of elements, where the contribution of each element is adjusted by the minimum height to the left and right of it. The task is to find the maximum sum of such a subsequence considering every element in the array and adjusting the heights in a way that maximizes the sum.
+
+### Approach
+
+To solve this problem efficiently, we employ the **monotonic stack** technique. The idea is to iterate over the array and for each element, calculate the maximum sum of heights considering it as the peak of the subsequence. We maintain two passes over the array to compute the sum of heights to the left and right of each element.
+
+The stack helps in maintaining the minimum value at any point by efficiently determining which elements can "extend" the height subsequence. The goal is to compute the maximum sum possible for any subsequence formed by these heights.
+
+### Code Breakdown
+
+#### Step 1: Initialize Variables
+```cpp
+int n = A.size();
+vector<long long> left(n), stack = {-1};
+long long res = 0, cur = 0;
+```
+- `n` stores the size of the input array `A`.
+- `left` is a vector used to store the sum of heights to the left of each index.
+- `stack` is initialized with `-1` to represent the boundary for processing elements.
+- `res` will store the final result, i.e., the maximum sum of heights found during the iterations.
+- `cur` keeps track of the current sum as we iterate through the array.
+
+#### Step 2: Compute Left Heights Using Monotonic Stack
+```cpp
+for (int i = 0; i < n; i++) {
+    while (stack.size() > 1 && A[stack.back()] > A[i]) {
+        int j = stack.back();
+        stack.pop_back();
+        cur -= 1L * (j - stack.back()) * A[j];
+    }
+    cur += 1L * (i - stack.back()) * A[i];
+    stack.push_back(i);
+    left[i] = cur;
+}
+```
+- The first loop is responsible for calculating the heights to the left of each index. This is done by iterating from left to right across the array.
+- For each element `A[i]`, we adjust the stack by popping elements from the stack that are greater than `A[i]`. This ensures that the stack always maintains elements in increasing order.
+- The `cur` value is updated with the contribution of each element. The `1L * (i - stack.back()) * A[i]` term calculates the area (height * width) formed by the current element as a "rectangle."
+- We then store the current sum of heights for the left side in `left[i]`.
+
+#### Step 3: Compute Right Heights and Maximize Result
+```cpp
+stack = {n};
+cur = 0;
+for (int i = n - 1; i >= 0; i--) {
+    while (stack.size() > 1 && A[stack.back()] > A[i]) {
+        int j = stack.back();
+        stack.pop_back();
+        cur -= 1L * -(j - stack.back()) * A[j];
+    }
+    cur += 1L * -(i - stack.back()) * A[i];
+    stack.push_back(i);
+    res = max(res, left[i] + cur - A[i]);
+}
+```
+- In the second pass, we calculate the heights to the right of each index. This loop iterates from right to left across the array.
+- Similarly to the left pass, we maintain a stack and update the current sum (`cur`). The negative signs in the terms are used to handle the right side and maintain a correct calculation of heights.
+- The key step here is to calculate `left[i] + cur - A[i]`. This combines the sum of heights to the left of `i` with the sum to the right, adjusting for the contribution of the current element `A[i]` (as it was already considered in both directions).
+
+#### Step 4: Return the Result
+```cpp
+return res;
+```
+- After both passes, `res` contains the maximum sum of heights that can be achieved. We return this as the final answer.
+
+### Example Walkthrough
+
+Let's go through an example to illustrate the process.
+
+**Example 1**:
+Input: `A = [1, 3, 2, 4]`
+
+- **First Pass (Left Heights)**:
+  - We start with the stack initialized to `[-1]`.
+  - For `i = 0` (A[0] = 1), the stack becomes `[-1, 0]`. The left height sum is `1`.
+  - For `i = 1` (A[1] = 3), the stack becomes `[-1, 0, 1]`. The left height sum is updated to `1 + 3 = 4`.
+  - For `i = 2` (A[2] = 2), we pop elements until the stack contains `[0]`. The left height sum is updated to `1 + 3 + 2 = 6`.
+  - For `i = 3` (A[3] = 4), the stack becomes `[0, 1, 2, 3]`. The left height sum is updated to `1 + 3 + 2 + 4 = 10`.
+
+- **Second Pass (Right Heights)**:
+  - We start with the stack initialized to `[n]`.
+  - For `i = 3` (A[3] = 4), the stack becomes `[4, 3]`. The right height sum is `4`.
+  - For `i = 2` (A[2] = 2), the stack becomes `[4, 2]`. The right height sum is updated to `4 + 2 = 6`.
+  - For `i = 1` (A[1] = 3), the stack becomes `[4, 1]`. The right height sum is updated to `6 + 3 = 9`.
+  - For `i = 0` (A[0] = 1), the stack becomes `[4, 0]`. The right height sum is updated to `9 + 1 = 10`.
+
+- **Final Result**: The maximum sum of heights is `10`.
+
+### Complexity
+
+#### Time Complexity:
+- **O(n)**: Both passes over the array each take linear time. The use of the monotonic stack ensures that each element is pushed and popped from the stack at most once, making each pass linear in complexity.
+
+#### Space Complexity:
+- **O(n)**: The space used by the stack and the `left` array is proportional to the size of the input array.
+
+### Conclusion
+
+The solution efficiently computes the maximum sum of heights by utilizing a monotonic stack to keep track of the minimum heights on both the left and right of each element in the array. This allows us to calculate the sum of heights in linear time, making the solution optimal for large input sizes. The two-pass approach ensures that we can calculate the contribution of each element in both directions, and the overall complexity is kept to **O(n)**, which is optimal for this type of problem.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/beautiful-towers-ii/description/)
+
 ---
 {{< youtube HZVMmKR0jZw >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2869: Minimum Operations to Collect Elements](https://grid47.xyz/leetcode/solution-2869-minimum-operations-to-collect-elements/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

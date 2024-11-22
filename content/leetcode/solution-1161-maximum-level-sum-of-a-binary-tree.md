@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/v3e5uYmzyxs/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/maximum-level-sum-of-a-binary-tree/description/)
-
 ---
 **Code:**
 
@@ -63,9 +61,103 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1161.md" >}}
+
+### Problem Statement
+The objective of the `maxLevelSum` function is to find the level in a binary tree where the sum of the node values is the highest. The function takes the root of the binary tree as input and returns the level with the maximum sum, where the root level is defined as level 1.
+
+### Approach
+The function uses a breadth-first search (BFS) approach to traverse the binary tree level by level, calculating the sum of node values at each level. By comparing the sum at each level, the function identifies the level with the maximum sum and returns it. This method is effective because BFS naturally processes nodes level by level, making it straightforward to calculate each level's sum.
+
+### Code Breakdown (Step by Step)
+Here's a detailed explanation of each part of the function:
+
+```cpp
+class Solution {
+public:
+    int maxLevelSum(TreeNode* root) {
+```
+- **Lines 2-3**: This is the main function `maxLevelSum`, which takes in a pointer `root` to the root node of the binary tree. It is implemented as part of the `Solution` class.
+
+```cpp
+        int ans = 1, mx = root->val;
+```
+- **Line 4**: We initialize two variables:
+  - `ans`: Tracks the level with the maximum sum. It's initially set to 1, assuming the root level has the highest sum until proven otherwise.
+  - `mx`: Stores the maximum sum found so far, initially set to the root node’s value.
+
+```cpp
+        queue<TreeNode*> q;
+        q.push(root);
+```
+- **Lines 5-6**: A queue `q` is created to facilitate the BFS traversal. We enqueue the root node to start traversing from the top of the tree.
+
+```cpp
+        int lvl = 1;
+```
+- **Line 7**: The variable `lvl` tracks the current level of the tree. We initialize it to 1 because the root is at level 1.
+
+```cpp
+        while(!q.empty()) {
+            int sz = q.size();
+            int sum = 0;
+```
+- **Lines 8-10**: The `while` loop continues until there are no more nodes in the queue. Inside the loop:
+  - `sz`: Holds the number of nodes at the current level.
+  - `sum`: Tracks the sum of node values for the current level.
+
+```cpp
+            while(sz--) {
+                TreeNode* n = q.front();
+                q.pop();
+                sum += n->val;
+```
+- **Lines 11-14**: A nested `while` loop iterates over each node at the current level:
+  - `n`: Represents the current node at the front of the queue.
+  - `sum` is incremented by the node’s value to accumulate the level sum.
+
+```cpp
+                if(n->left) q.push(n->left);
+                if(n->right) q.push(n->right);
+```
+- **Lines 15-16**: We check if the current node `n` has left and right children. If it does, we enqueue these children to process them in the next level.
+
+```cpp
+            }
+            if(sum > mx) {
+                ans = lvl;
+                mx = sum;
+            }
+            lvl++;
+```
+- **Lines 17-21**: After processing all nodes at the current level:
+  - We compare `sum` with `mx`:
+    - If `sum` is greater than `mx`, we update `ans` to the current `lvl` and set `mx` to the new `sum`.
+  - `lvl` is incremented to reflect moving down to the next level in the tree.
+
+```cpp
+        }
+        return ans;
+    }
+};
+```
+- **Lines 22-25**: Once all levels are processed, the function returns `ans`, which is the level with the maximum sum of node values.
+
+### Complexity
+1. **Time Complexity**:
+   - The time complexity is \(O(N)\), where \(N\) is the number of nodes in the tree. This is because each node is visited once during the BFS traversal.
+2. **Space Complexity**:
+   - The space complexity is \(O(W)\), where \(W\) is the maximum width of the tree. This represents the maximum number of nodes stored in the queue at any one time.
+
+### Conclusion
+The `maxLevelSum` function provides an efficient solution for finding the level with the highest sum in a binary tree. By using BFS, we efficiently handle level-by-level processing, making it easy to track sums at each level. The function’s approach, leveraging a queue to maintain the BFS traversal order, makes it scalable for large trees. The implementation is optimal, ensuring minimal time and space complexity while providing an accurate result.
+
+This function is useful in contexts where we need to evaluate tree structures and analyze patterns in hierarchical data. By identifying the level with the highest sum, this function can help pinpoint where certain values are concentrated, making it valuable for tree-based data analysis in fields like database indexing and organizational structure evaluation.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-level-sum-of-a-binary-tree/description/)
+
 ---
 {{< youtube v3e5uYmzyxs >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1162: As Far from Land as Possible](https://grid47.xyz/leetcode/solution-1162-as-far-from-land-as-possible/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

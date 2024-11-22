@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/wB-B8tVXaGU/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/largest-divisible-subset/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/368.webp" 
     alt="A sequence of numbers with the largest divisible subset glowing, showing the optimal group."
@@ -76,9 +74,161 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/368.md" >}}
+### 🚀 Problem Statement
+
+In this problem, we are tasked with finding the largest subset of a given array of integers such that for every pair of integers `a` and `b` in the subset, either `a` divides `b` or `b` divides `a`. The goal is to return this largest divisible subset from the array. Let’s break it down and find the most efficient way to solve this!
+
+---
+
+### 🧠 Key Insights
+
+- A **divisible subset** consists of elements where every pair of elements satisfies the divisibility condition. That is, for any two elements `a` and `b`, either `a` divides `b` or `b` divides `a`.
+- Sorting the array helps to easily check the divisibility condition in increasing order.
+- The **dynamic programming (DP)** approach is a powerful technique to solve this efficiently. By iterating over the sorted array, we can track the largest divisible subset for each element.
+
+---
+
+### 🛠️ Approach
+
+Let’s walk through how we can solve this problem using dynamic programming:
+
+1. **Sorting**:
+   - We begin by sorting the array in ascending order. This makes it easier to check the divisibility condition: once sorted, any valid subset will have elements in increasing order.
+   
+2. **Dynamic Programming Table**:
+   - We maintain a DP table where each entry `dp[i]` will store:
+     - `dp[i][0]`: The size of the largest divisible subset that ends at element `i`.
+     - `dp[i][1]`: The index of the next element in the subset (this helps us reconstruct the subset later).
+   
+3. **Constructing the Result**:
+   - After processing the elements, we find the maximum size of the divisible subsets and then trace back to identify the elements that form this largest subset.
+
+---
+
+### 🔨 Step-by-Step Code Breakdown
+
+#### Step 1: Initial Setup and Sorting
+```cpp
+if(nums.size() == 0) return nums;
+sort(nums.begin(), nums.end()); 
+```
+- First, we check if the input array `nums` is empty. If it is, we simply return the empty array because no subset can be formed.
+- We then sort the array in ascending order to make checking divisibility easier.
+
+---
+
+#### Step 2: DP Initialization
+```cpp
+int n = nums.size();
+vector<vector<int>> dp(n, vector<int>(2, 0));
+```
+- We initialize the DP table with `n` rows (one for each element of the array). Each row has two columns:
+  - `dp[i][0]`: The size of the largest divisible subset ending at element `i`.
+  - `dp[i][1]`: The index of the next element in the subset (for later reconstruction).
+
+---
+
+#### Step 3: Filling the DP Table
+```cpp
+for(int i = n - 1; i >= 0; i--) {
+    dp[i][0] = 0;
+    dp[i][1] = i;
+    for(int j = i + 1; j < n; j++) {
+        if((nums[j] % nums[i]) == 0) {
+            if(dp[i][0] < dp[j][0]) {
+                dp[i][0] = dp[j][0];
+                dp[i][1] = j;
+            }
+        }
+    }
+    dp[i][0]++;
+}
+```
+- For each element `nums[i]`, we initialize the size of the largest divisible subset at `i` as `0` and set `dp[i][1]` to `i` (i.e., the next element is initially itself).
+- We then check each subsequent element `nums[j]` (where `j > i`) to see if `nums[j] % nums[i] == 0`. If true, it means `nums[i]` divides `nums[j]`.
+- If the subset ending at `i` is smaller than the subset ending at `j`, we update `dp[i][0]` and set `dp[i][1]` to `j` (indicating that the next element in the subset is `nums[j]`).
+- Finally, we increment `dp[i][0]` by 1 to account for `nums[i]` itself.
+
+---
+
+#### Step 4: Finding the Maximum Divisible Subset
+```cpp
+int mx = 0, mxi = 0;
+for(int i = 0; i < n; i++) {
+    if(mx <= dp[i][0]) {
+        mxi = i;
+        mx = dp[i][0];
+    }
+}
+```
+- We then find the largest divisible subset by checking which entry in the DP table has the maximum size (`dp[i][0]`).
+- We keep track of both the size of the largest subset (`mx`) and the index (`mxi`) where this subset ends.
+
+---
+
+#### Step 5: Reconstructing the Subset
+```cpp
+vector<int> ans;
+int i = mxi;
+ans.push_back(nums[i]);
+while(dp[i][1] != i) {
+    i = dp[i][1];
+    ans.push_back(nums[i]);
+}
+```
+- Now, we reconstruct the largest divisible subset. Starting from the index `mxi`, we add `nums[i]` to the result vector `ans`.
+- We then follow the `dp[i][1]` (the index of the next element in the subset) until we reach the end of the subset.
+
+---
+
+#### Step 6: Return the Result
+```cpp
+return ans;
+```
+- Finally, we return the reconstructed largest divisible subset.
+
+---
+
+### 📈 Time Complexity
+
+The time complexity of this solution is **O(n^2)**, where `n` is the size of the input array. This is because for each element `i`, we check every subsequent element `j` to determine divisibility. Thus, there are `O(n^2)` checks in total.
+
+- Sorting the array takes **O(n log n)** time.
+- Filling the DP table involves a double loop over the array, which takes **O(n^2)** time.
+
+So, the overall time complexity is dominated by the **O(n^2)** term.
+
+---
+
+### 💡 Space Complexity
+
+The space complexity is **O(n)** because:
+- We store the DP table, which has `n` rows and 2 columns.
+- We store the final result in a vector of size `n`.
+
+---
+
+### 🏁 Conclusion
+
+This solution efficiently finds the largest divisible subset using dynamic programming. By sorting the array and using a DP table to track the largest subset for each element, we can solve the problem in **O(n^2)** time, which is manageable for typical input sizes. The space complexity is **O(n)**, making the solution both time-efficient and space-efficient.
+
+---
+
+### 🌟 Summary
+
+To summarize:
+- **Step 1**: Sort the array in ascending order.
+- **Step 2**: Use a DP table to track the largest divisible subset for each element.
+- **Step 3**: Find the largest subset by looking for the maximum DP entry.
+- **Step 4**: Reconstruct and return the largest divisible subset.
+
+With these steps, we can efficiently solve the problem of finding the largest divisible subset! Keep up the great work, and happy coding! 😄
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/largest-divisible-subset/description/)
+
 ---
 {{< youtube wB-B8tVXaGU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #371: Sum of Two Integers](https://grid47.xyz/leetcode/solution-371-sum-of-two-integers/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

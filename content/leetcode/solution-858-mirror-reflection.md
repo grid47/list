@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/fUa0LRtSlz0/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/mirror-reflection/description/)
-
 ---
 **Code:**
 
@@ -32,9 +30,82 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/858.md" >}}
+### Problem Statement
+
+The problem at hand involves simulating the reflection of light in a room with a square shape. We are given a room with dimensions `p` by `q`, where the light starts at one of the corners. The goal is to determine which corner the light will eventually reach after bouncing off the walls of the room.
+
+The light beam will be reflected in a manner similar to how light behaves in a coordinate system. The corners are numbered as follows:
+
+- Corner 0: The top-left corner of the room (starting point).
+- Corner 1: The top-right corner of the room.
+- Corner 2: The bottom-left corner of the room.
+- Corner 3: The bottom-right corner of the room.
+
+The light beam starts at the top-left corner and travels at a 45-degree angle, bouncing off the walls until it reaches one of the corners. We are tasked with determining which corner the light reaches first, given the dimensions of the room.
+
+### Approach
+
+The key observation here is that we can avoid simulating the light's path step-by-step by instead thinking in terms of how the light would behave if the walls of the room were "unfolded" and extended indefinitely. This way, the light's path forms a straight line through multiple rooms, instead of bouncing back and forth in a confined space.
+
+#### Key Insights:
+1. **Handling Even and Odd Values**:
+   - If both `p` (width) and `q` (height) are even, then the light will eventually reach the corner 0.
+   - If `p` is even and `q` is odd, the light will reach corner 2.
+   - If `p` is odd and `q` is even, the light will reach corner 1.
+   - If both `p` and `q` are odd, the light will reach corner 3.
+
+2. **Greatest Common Divisor (GCD)**:
+   - We could compute the GCD of `p` and `q`, and then look for how the light will "fold" back. But a more efficient way to solve this problem uses bit manipulation to repeatedly divide both `p` and `q` by 2 until at least one of them becomes odd.
+
+3. **Modulo Arithmetic**:
+   - Since we need to determine the behavior of the light when it bounces, we can use the modulo operator to help us figure out which corner the light reaches. The behavior of the light can be simplified into checking whether `p` and `q` are odd or even after some basic transformations.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Simplifying the Problem
+
+We begin by simplifying the problem using bitwise operations. Specifically, we use the `p >>= 1` and `q >>= 1` operations to divide both `p` and `q` by 2 (shift right) as long as they are both even. This reduces the problem to a case where either `p` or `q` is odd.
+
+```cpp
+while( p % 2 == 0 && q % 2 == 0) p >>= 1, q >>= 1;
+```
+
+- This loop ensures that we eliminate any factors of 2 from both `p` and `q`. By dividing by 2 repeatedly, we can reduce the problem to smaller values of `p` and `q` where at least one of them is odd.
+
+#### Step 2: Determining the Corner
+
+Once we have reduced `p` and `q` such that at least one of them is odd, the next step is to determine which corner the light reaches. This can be done by examining the parity (odd or even) of `p` and `q`:
+
+```cpp
+return 1 - p % 2 + q % 2;
+```
+
+- If both `p` and `q` are odd (`p % 2 == 1` and `q % 2 == 1`), the light reaches corner 3.
+- If `p` is even and `q` is odd, the light reaches corner 2.
+- If `p` is odd and `q` is even, the light reaches corner 1.
+- If both `p` and `q` are even, the light reaches corner 0.
+
+### Complexity Analysis
+
+#### Time Complexity:
+
+- The time complexity of this approach is **O(log p + log q)**, which is the time required to repeatedly divide `p` and `q` by 2 until at least one of them becomes odd. Since the number of divisions is proportional to the number of bits in the binary representation of `p` and `q`, the time complexity is logarithmic with respect to the size of the inputs.
+
+#### Space Complexity:
+
+- The space complexity of this approach is **O(1)** since we are only using a few variables to store the values of `p`, `q`, and the result. No additional data structures are needed.
+
+### Conclusion
+
+This solution efficiently determines the corner where the light will eventually reach by using bitwise operations and modulo arithmetic. By reducing the problem to simpler terms with repeated division by 2, we avoid the need for simulating the light's path and make the solution run in logarithmic time.
+
+The time complexity of **O(log p + log q)** ensures that this approach will run efficiently even for large values of `p` and `q`. The constant space complexity **O(1)** further contributes to the overall efficiency of the solution. This approach provides an optimal solution for the problem by leveraging simple and efficient bit manipulation techniques.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/mirror-reflection/description/)
+
 ---
 {{< youtube fUa0LRtSlz0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #859: Buddy Strings](https://grid47.xyz/leetcode/solution-859-buddy-strings/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

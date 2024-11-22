@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/eanwa3ht3YQ/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/implement-queue-using-stacks/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/232.webp" 
     alt="A series of stacks transforming into a queue, with elements gently flowing between them."
@@ -80,9 +78,134 @@ public:
  * bool param_4 = obj->empty();
  */
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/232.md" >}}
+### 🚀 Problem Statement
+
+In this problem, you’re asked to implement a **queue** using **two stacks**. A queue follows the **First In, First Out (FIFO)** principle, meaning the first element added is the first one to be removed. But here's the twist: you must simulate the queue operations using stacks, which work on the **Last In, First Out (LIFO)** principle.
+
+The queue must support the following operations:
+1. **push(x)**: Push element `x` to the back of the queue.
+2. **pop()**: Removes and returns the element from the front of the queue.
+3. **peek()**: Returns the element at the front of the queue without removing it.
+4. **empty()**: Returns `true` if the queue is empty, otherwise `false`.
+
+---
+
+### 🧠 Approach
+
+To simulate a queue with stacks, we need to **adapt the LIFO behavior** of stacks to mimic FIFO behavior. We can use **two stacks**, where:
+- **Stack `s1`** is used for **pushing** elements (adding to the queue).
+- **Stack `s2`** is used for **popping** and **peeking** elements (removing or viewing the front of the queue).
+
+#### Here’s how it works:
+
+1. **Push Operation**:
+   - When we push an element, it’s simply added to the first stack (`s1`).
+   
+2. **Pop Operation**:
+   - If `s2` is empty, we need to **transfer all elements from `s1` to `s2`**. This transfer ensures the oldest element (the one added first) is now at the top of `s2`.
+   - Once the elements are transferred, popping from `s2` gives us the front of the queue.
+   
+3. **Peek Operation**:
+   - Similar to the pop operation, but instead of removing the element, we just return the top element of `s2` without popping it.
+
+4. **Empty Operation**:
+   - The queue is empty if both stacks `s1` and `s2` are empty.
+
+---
+
+### 🔨 Step-by-Step Code Breakdown
+
+Let’s break down the code in detail:
+
+```cpp
+class MyQueue {
+public:
+    stack<int> s1, s2;  // Two stacks to simulate the queue
+```
+- We declare the class `MyQueue` and define two stacks: `s1` (for pushing elements) and `s2` (for popping and peeking elements).
+
+```cpp
+    MyQueue() { }  // Constructor initializes the stacks (empty at the start)
+```
+- The constructor is simple; it doesn’t require any additional setup since both stacks start empty.
+
+```cpp
+    void push(int x) {
+        s1.push(x);  // Push the element to the back of the queue (to stack s1)
+    }
+```
+- The `push` operation is straightforward: we add `x` to `s1`.
+
+```cpp
+    int pop() {
+        if(s2.empty()) {  // If s2 is empty, transfer elements from s1 to s2
+            while(!s1.empty()) {
+                s2.push(s1.top());
+                s1.pop();
+            }
+        }
+        int x = s2.top();  // Pop from s2 (this is the front of the queue)
+        s2.pop();
+        return x;  // Return the popped element
+    }
+```
+- The `pop` operation checks if `s2` is empty. If it is, we transfer all elements from `s1` to `s2`. After the transfer, popping from `s2` gives us the front element of the queue.
+
+```cpp
+    int peek() {
+        if(s2.empty()) {  // Transfer elements from s1 to s2 if s2 is empty
+            while(!s1.empty()) {
+                s2.push(s1.top());
+                s1.pop();
+            }
+        }
+        return s2.top();  // Return the top of s2 (front of the queue)
+    }
+```
+- The `peek` operation works similarly to `pop`, but we only return the top element of `s2` without removing it.
+
+```cpp
+    bool empty() {
+        return s1.empty() && s2.empty();  // The queue is empty if both stacks are empty
+    }
+};
+```
+- The `empty` operation checks if both stacks are empty. If they are, the queue is empty; otherwise, it’s not.
+
+---
+
+### 📈 Complexity Analysis
+
+#### Time Complexity:
+- **push(x)**: The `push` operation is **O(1)** because it simply adds an element to `s1`.
+  
+- **pop()**: The worst-case time complexity of the `pop` operation is **O(n)**, where `n` is the number of elements in the queue. This happens when we need to transfer all elements from `s1` to `s2`. Once the transfer is done, popping from `s2` takes **O(1)** time.
+
+- **peek()**: The time complexity of `peek` is also **O(n)** in the worst case (when `s2` is empty and we need to transfer all elements from `s1` to `s2`). After that, peeking is **O(1)**.
+
+- **empty()**: The `empty` operation is **O(1)** because it simply checks if both stacks are empty.
+
+#### Space Complexity:
+- **Space Complexity**: The space complexity is **O(n)**, where `n` is the number of elements in the queue. We store all elements in the two stacks, and the space used grows linearly with the number of elements.
+
+---
+
+### 🏁 Conclusion
+
+This solution efficiently simulates a queue using two stacks, providing all the required operations (`push`, `pop`, `peek`, and `empty`). The key idea is to use two stacks to reverse the order of elements, ensuring that the **First In, First Out (FIFO)** principle of a queue is maintained. 
+
+#### Key Highlights:
+- **Simple and Elegant**: The solution uses a clever method of transferring elements between two stacks to simulate queue behavior.
+- **Time Complexity**: The time complexity for `pop` and `peek` operations can be **O(n)** in the worst case, but the `push` and `empty` operations are very efficient at **O(1)**.
+- **Space Complexity**: The space used is proportional to the number of elements in the queue, making it efficient in terms of space usage.
+
+This solution is a great example of how to leverage stack properties to simulate queue operations. It's perfect for situations where you need to work with queues but only have access to stacks, such as in coding challenges or interviews! 🚀
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/implement-queue-using-stacks/description/)
+
 ---
 {{< youtube eanwa3ht3YQ >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #235: Lowest Common Ancestor of a Binary Search Tree](https://grid47.xyz/leetcode/solution-235-lowest-common-ancestor-of-a-binary-search-tree/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

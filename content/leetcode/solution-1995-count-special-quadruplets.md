@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/H06N-OsxpoE/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/count-special-quadruplets/description/)
-
 ---
 **Code:**
 
@@ -50,9 +48,103 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1995.md" >}}
+### Problem Statement
+
+The problem involves finding the number of quadruplets in a given list of integers, `nums`, such that the sum of the first three integers in the quadruplet equals the fourth integer. A quadruplet is defined as a collection of four integers \((a, b, c, d)\) from the list, with the condition that the indices satisfy \(i < j < k < l\). The challenge is to compute the count of such valid quadruplets efficiently, especially when the input size can be large.
+
+### Approach
+
+To solve this problem, we utilize a combination of hash maps and nested loops to efficiently count potential quadruplets:
+
+1. **Use of Hash Map**: We maintain a frequency map that keeps track of how many times each number appears in the portion of the array we are currently considering. This allows us to quickly look up how many valid pairs of numbers can sum to a specific target.
+
+2. **Iterate from Right to Left**: We iterate through the array in reverse order, considering each number as a potential fourth element of the quadruplet. For each potential fourth element, we calculate all possible sums of the two preceding elements, checking if that sum exists in our frequency map.
+
+3. **Triple Nested Loops**: The approach involves three nested loops to consider every combination of the first three numbers in the quadruplet. For each combination, we check if their sum matches the value stored in the frequency map.
+
+### Code Breakdown (Step by Step)
+
+Let's break down the provided code step by step:
+
+```cpp
+class Solution {
+public:
+    int countQuadruplets(vector<int>& nums) {
+        const auto n = nums.size(); // Store the size of the input vector
+        unordered_map<int, int> freq; // Initialize a hash map to count occurrences
+```
+- We define a class `Solution` with a method `countQuadruplets` that takes a vector of integers, `nums`.
+- The size of `nums` is stored in `n`, and we create an unordered map `freq` to keep track of the frequencies of numbers.
+
+```cpp
+        freq[nums[n - 1]] = 1; // Initialize the frequency map with the last element
+        size_t answ = 0; // Variable to store the count of valid quadruplets
+```
+- We start by initializing the frequency map with the last element of `nums` since it will be considered as the fourth element of our quadruplets.
+- The variable `answ` is used to accumulate the total number of valid quadruplets found.
+
+```cpp
+        for (int i = n - 2; i > 1; --i) // Iterate from the second last element to the third element
+        {
+            for (int j = i - 1; j > 0; --j) // Iterate through the elements to the left of `i`
+            {
+                for (int k = j - 1; k >= 0; --k) // Iterate through the elements to the left of `j`
+                {
+                    if (freq.count(nums[i] + nums[j] + nums[k])) // Check if the sum exists in the map
+                    {
+                        answ += freq[nums[i] + nums[j] + nums[k]]; // Update the count of valid quadruplets
+                    }
+                }
+            }
+            freq[nums[i]] += 1; // Update the frequency map with the current element
+        }
+        return answ; // Return the total count of quadruplets
+    }
+};
+```
+- The outermost loop iterates over each potential fourth element of the quadruplet, starting from the second last element and moving left.
+- The second nested loop iterates through the elements to the left of `i`, treating each as a potential second element.
+- The innermost loop iterates through elements to the left of `j`, treating them as potential first elements.
+- For each combination of `nums[i]`, `nums[j]`, and `nums[k]`, we check if their sum exists in our frequency map. If it does, we add the corresponding frequency to our answer.
+- After processing the combinations for a given `i`, we update the frequency map to include the current number `nums[i]`.
+
+### Complexity
+
+- **Time Complexity**: The time complexity of this algorithm is \(O(n^3)\), where \(n\) is the length of the input array. This is due to the three nested loops iterating through the array, leading to a cubic number of combinations being checked. Although this seems high, the constraints of the problem (size of the input) may allow for this approach in many competitive programming scenarios.
+
+- **Space Complexity**: The space complexity is \(O(n)\) due to the hash map storing the frequencies of numbers in the array. This space will be used to store potentially all unique numbers in the array.
+
+### Conclusion
+
+The provided solution efficiently counts the number of quadruplets in an integer array where the sum of the first three numbers equals the fourth number. By leveraging a frequency map and iterating through the array in reverse, we can quickly determine valid combinations without needing to check all possible quadruplets explicitly. This method, while having a cubic time complexity, is straightforward and works within the constraints typically given in competitive programming challenges. 
+
+The code effectively demonstrates how to utilize hash maps for counting occurrences and efficiently compute the required sums, showcasing an effective application of nested loops and combinatorial logic.
+
+### Example Usage
+
+Here’s an example of how to use the `Solution` class to count quadruplets in a given list of integers:
+
+```cpp
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    Solution sol;
+    vector<int> nums = {1, 2, 3, 6}; // Example input
+    int result = sol.countQuadruplets(nums);
+    cout << "Number of valid quadruplets: " << result << endl; // Should print the count of valid quadruplets
+    return 0;
+}
+```
+
+This simple example initializes the `Solution` object and passes an array of integers to count the valid quadruplets, demonstrating practical usage of the method.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/count-special-quadruplets/description/)
+
 ---
 {{< youtube H06N-OsxpoE >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1996: The Number of Weak Characters in the Game](https://grid47.xyz/leetcode/solution-1996-the-number-of-weak-characters-in-the-game/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

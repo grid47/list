@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/pI775VutBxg/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/merge-in-between-linked-lists/description/)
-
 ---
 **Code:**
 
@@ -47,9 +45,101 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1669.md" >}}
+### Problem Statement
+
+The problem at hand is to merge two singly-linked lists in such a way that the second list is inserted in the first list at a specified position. Specifically, given two linked lists, `list1` and `list2`, along with two integers `a` and `b`, we want to remove all nodes from `list1` starting at position `a` up to and including position `b` and insert `list2` in that position. The positions are zero-indexed, meaning that the first node of `list1` is at index 0.
+
+### Approach
+
+The approach to solving this problem involves the following steps:
+
+1. **Locate the Nodes**: First, we need to find the node in `list1` just before the starting index `a` (let's call it `f`), and the node at index `b` (let's call it `s`).
+2. **Disconnect the Nodes**: After locating these nodes, we will disconnect the section of `list1` that goes from index `a` to index `b`.
+3. **Link List2**: Next, we will connect `list2` to the `next` of the `f` node (the node before the segment we are removing).
+4. **Connect the Tail of List2**: Finally, we will find the tail of `list2` and connect it to the node that follows `s` in `list1`, effectively merging the two lists.
+
+### Code Breakdown (Step by Step)
+
+```cpp
+/**
+ * Definition for singly-linked list.
+ * struct ListNode {
+ *     int val;
+ *     ListNode *next;
+ *     ListNode() : val(0), next(nullptr) {}
+ *     ListNode(int x) : val(x), next(nullptr) {}
+ *     ListNode(int x, ListNode *next) : val(x), next(next) {}
+ * };
+ */
+```
+- The `ListNode` structure defines the building blocks of our linked list, with each node containing a value (`val`) and a pointer to the next node (`next`).
+
+```cpp
+class Solution {
+public:
+    ListNode* mergeInBetween(ListNode* list1, int a, int b, ListNode* list2) {
+```
+- We define a class `Solution` with a public method `mergeInBetween`. This method takes four parameters: two linked lists (`list1` and `list2`), and two integers `a` and `b`.
+
+```cpp
+        ListNode* f = list1, *s = list1;
+```
+- We create two pointers, `f` and `s`, both initialized to point to the head of `list1`. These will be used to find the relevant nodes for merging.
+
+```cpp
+        for(int i = 0; i < a-1; i++) f = f->next;
+```
+- We move the `f` pointer to the node just before the index `a`. This loop runs `a-1` times to position `f` correctly.
+
+```cpp
+        for(int i = 0; i < b; i++) s = s->next;
+```
+- We advance the `s` pointer `b` times to reach the node at index `b` in `list1`.
+
+```cpp
+        f->next = list2;
+```
+- We link the `next` of the `f` node to the head of `list2`, effectively connecting the first part of `list1` with `list2`.
+
+```cpp
+        while(list2->next) list2 = list2->next;
+```
+- We traverse `list2` to find its tail node. This loop continues until `list2` points to the last node of `list2`.
+
+```cpp
+        list2->next = s->next;
+```
+- We link the tail of `list2` to the node that comes after the `s` node in `list1`, effectively connecting the second part of `list1` back to `list2`.
+
+```cpp
+        return list1;
+    }
+};
+```
+- Finally, we return `list1`, which now contains the merged result.
+
+### Complexity
+
+- **Time Complexity**: The time complexity of this algorithm is \(O(n + m)\), where \(n\) is the length of `list1` and \(m\) is the length of `list2`. We need to traverse parts of `list1` to locate the necessary nodes and also traverse `list2` to find its tail.
+  
+- **Space Complexity**: The space complexity is \(O(1)\) because we are not using any additional data structures that grow with input size; we are only using a fixed amount of space for our pointers.
+
+### Conclusion
+
+The `mergeInBetween` function provides a clear and efficient solution to merging two singly-linked lists by removing a specified segment from the first list and inserting the second list in its place. 
+
+**Key Insights**:
+1. **Pointer Manipulation**: The solution effectively utilizes pointer manipulation to achieve the desired merging without needing to create new nodes or lists.
+2. **Efficiency**: The approach maintains efficiency in terms of both time and space, making it suitable for larger lists.
+3. **Readability**: The code is structured in a way that is easy to follow, with clear separation of steps that contribute to the overall merging process.
+
+Overall, this code demonstrates a solid understanding of linked list operations and provides a straightforward implementation for merging lists based on specified indices.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/merge-in-between-linked-lists/description/)
+
 ---
 {{< youtube pI775VutBxg >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1670: Design Front Middle Back Queue](https://grid47.xyz/leetcode/solution-1670-design-front-middle-back-queue/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

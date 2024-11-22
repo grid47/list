@@ -17,8 +17,6 @@ youtube_thumbnail=""
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/712.webp" 
     alt="Two strings where the minimum ASCII sum for deletion is calculated, with each deleted character softly glowing."
@@ -68,9 +66,102 @@ public:
     }
 };
 {{< /highlight >}}
-
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/712.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #713: Subarray Product Less Than K](https://grid47.xyz/leetcode/solution-713-subarray-product-less-than-k/) |
+### Problem Statement:
+The problem at hand is the **Minimum Delete Sum for Two Strings**, where you are given two strings `s1` and `s2`. The task is to delete characters from both strings such that the sum of the ASCII values of the deleted characters is minimized, while ensuring that the remaining characters of the two strings form the longest common subsequence (LCS). Specifically, the goal is to compute the **minimum ASCII sum** of deleted characters from both strings.
+
+The problem is essentially about finding the LCS of the two strings, and then calculating how much must be deleted from both strings to make them identical, while minimizing the cost in terms of ASCII values.
+
+### Approach:
+To solve this problem efficiently, we can apply **Dynamic Programming (DP)**. The idea is to maintain a table `mem[i][j]` that stores the result of the minimum ASCII delete sum for the substrings `s1[i...]` and `s2[j...]`.
+
+#### High-level Approach:
+1. **Longest Common Subsequence (LCS)**: The key observation here is that the solution involves calculating the LCS of the two strings. Once the LCS is known, the minimum delete sum can be calculated by subtracting twice the sum of the LCS characters from the total sum of all characters in both strings (since the characters in the LCS will not be deleted).
+  
+2. **Recursive with Memoization**: The problem can be broken down into subproblems, where `dp(i, j)` represents the minimum delete sum for the substrings `s1[i...]` and `s2[j...]`. Using a recursive approach, we solve these subproblems by comparing characters of `s1` and `s2`. If the characters are equal, we include that character in the LCS, otherwise, we explore both options of deleting one character from either `s1` or `s2`.
+
+3. **Base Case**: If either string has been completely traversed (i.e., `i == s1.size()` or `j == s2.size()`), then the delete sum is 0 for the remaining characters in the other string.
+
+4. **Memoization**: To avoid redundant calculations and improve the efficiency, we store intermediate results in a 2D memoization table `mem[i][j]`.
+
+### Code Breakdown (Step by Step):
+
+#### Step 1: Data Members
+```cpp
+string s1, s2;
+vector<vector<int>> mem;
+```
+- `s1` and `s2` are the two input strings.
+- `mem` is a 2D vector used for memoization. It stores the minimum delete sum for every pair of substrings of `s1` and `s2`.
+
+#### Step 2: Helper Function `dp(i, j)`
+```cpp
+int dp(int i, int j) {
+    if(i == s1.size() || j == s2.size()) return 0;
+    if(mem[i][j] != -1) return mem[i][j];
+    
+    int ans = max(dp(i + 1, j), dp(i, j + 1));
+    if(s1[i] == s2[j]) {
+        ans = max(ans, dp(i + 1, j + 1) + s1[i]);
+    }
+    
+    return mem[i][j] = ans;
+}
+```
+- **Base Case**: If either `i == s1.size()` or `j == s2.size()`, it means one of the strings has been completely traversed, and there are no characters left to compare. Hence, we return `0`.
+  
+- **Memoization Check**: Before solving a subproblem, we check if it has already been solved by checking `mem[i][j]`. If the value is not `-1`, we return the stored result to avoid redundant calculations.
+
+- **Recursion**: We calculate the maximum of two possible cases:
+    - **Case 1**: We explore deleting the character from `s1` and move to the next character in `s1` (i.e., `dp(i + 1, j)`).
+    - **Case 2**: We explore deleting the character from `s2` and move to the next character in `s2` (i.e., `dp(i, j + 1)`).
+    
+- If the characters `s1[i]` and `s2[j]` are equal, we consider including that character in the LCS and recursively calculate the minimum delete sum for the remaining substrings (i.e., `dp(i + 1, j + 1) + s1[i]`).
+
+- We store the result of `dp(i, j)` in `mem[i][j]` to use it for future calls.
+
+#### Step 3: Function `minimumDeleteSum()`
+```cpp
+int minimumDeleteSum(string s1, string s2) {
+    this->s1 = s1;
+    this->s2 = s2;
+    
+    int ans = 0;
+    for(int i = 0; i < s1.size(); i++)
+        ans += s1[i];
+    for(int i = 0; i < s2.size(); i++)
+        ans += s2[i];
+    
+    mem.resize(s1.size() + 1, vector<int>(s2.size(), -1));
+    
+    return ans - 2 * dp(0, 0);
+}
+```
+- **Initialization**: First, we assign `s1` and `s2` to the class variables.
+
+- **Calculate Total ASCII Sum**: We initialize a variable `ans` to store the total sum of ASCII values of all characters in both `s1` and `s2`.
+
+- **Memoization Table**: We resize the `mem` table to have dimensions `(s1.size() + 1) x (s2.size())`, initializing all values to `-1`, which indicates that the subproblem has not been computed yet.
+
+- **Return the Final Result**: Finally, we calculate the result by subtracting twice the LCS sum (calculated by the `dp` function) from the total sum of ASCII values of the characters. This ensures that the minimum delete sum is obtained by removing all characters except those that belong to the LCS.
+
+### Complexity Analysis:
+
+#### Time Complexity:
+- **Time Complexity**: The `dp` function is called once for each pair of indices `(i, j)` where `0 <= i < s1.size()` and `0 <= j < s2.size()`. Thus, the time complexity is **O(m * n)**, where `m` is the length of `s1` and `n` is the length of `s2`. Each recursive call performs a constant amount of work, and the memoization ensures that each subproblem is computed at most once.
+  
+- **Space Complexity**: The space complexity is dominated by the memoization table, which has dimensions `(m+1) x (n+1)`. Hence, the space complexity is **O(m * n)**.
+
+#### Space Complexity:
+- **Space Complexity**: **O(m * n)**, where `m` and `n` are the lengths of the two strings. This is due to the storage of the memoization table `mem` which has dimensions `(m + 1) x (n + 1)`.
+
+### Conclusion:
+The solution efficiently computes the minimum delete sum for two strings by leveraging the concept of **Dynamic Programming**. It builds the solution by solving smaller subproblems using memoization, avoiding redundant computations and optimizing performance. The time and space complexities are both manageable for typical input sizes, making this solution an effective approach for solving the problem of minimizing the delete sum for two strings.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-ascii-delete-sum-for-two-strings/description/)
+
+---
+
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

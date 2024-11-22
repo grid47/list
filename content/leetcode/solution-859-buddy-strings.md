@@ -18,8 +18,6 @@ youtube_thumbnail=""
 
 
 
-[`Problem Link`](https://leetcode.com/problems/buddy-strings/description/)
-
 ---
 **Code:**
 
@@ -48,9 +46,111 @@ public:
     }
 };
 {{< /highlight >}}
-
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/859.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #860: Lemonade Change](https://grid47.xyz/leetcode/solution-860-lemonade-change/) |
+### Problem Statement
+
+The problem asks us to determine if two given strings, `s` and `goal`, can be made equal by swapping exactly **two characters** in the string `s`. In addition, we need to check if the two strings can already be considered "buddy strings" (i.e., strings that are identical after swapping two characters in `s`).
+
+**Buddy strings** are defined as two strings where:
+1. Both strings must have the same length.
+2. The strings must differ in exactly two positions.
+3. The two characters at these differing positions in `s` must be swapped to make `s` equal to `goal`.
+
+The task is to implement a function that returns `true` if `s` and `goal` are buddy strings, and `false` otherwise.
+
+### Approach
+
+To solve this problem, we can approach it step-by-step with the following key observations:
+
+1. **Length Check**: If the strings `s` and `goal` have different lengths, they cannot be buddy strings. This is the first quick check we can do.
+  
+2. **Counting Differing Characters**: We need to count how many positions `i` in `s` and `goal` have different characters. If there are:
+   - **0 differences**: The strings `s` and `goal` are already equal. In this case, we only need to check if there are any repeating characters in `s`, because if there is a repeat, we could swap them to form the same string.
+   - **2 differences**: Check if swapping the two differing characters in `s` would make `s` equal to `goal`.
+   - **Any other number of differences**: The strings cannot be made equal by a single swap, so return `false`.
+
+3. **Tracking the Positions of Differences**: When we find differing characters, we need to track their positions. This will allow us to check if swapping those two positions will result in two strings that are equal.
+
+4. **Handling Identical Strings**: If `s` and `goal` are already identical and there are repeated characters in `s`, we can swap those repeated characters, and they will still be considered buddy strings.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Initial Checks and Setup
+
+```cpp
+if (s.size() != goal.size()) return false;
+```
+
+- We begin by checking if `s` and `goal` have the same length. If they don't, it's impossible for them to be buddy strings, and we immediately return `false`.
+
+Next, we initialize a few variables that will help us track the differences between the strings:
+```cpp
+int cnt = 0, fst = -1, scd = -1, cl = 0, fg = 0, t = 0;
+```
+- `cnt`: This will count the number of positions where `s` and `goal` differ.
+- `fst` and `scd`: These will store the indices of the first and second differing positions, respectively.
+- `cl`: This is used to count if there are any repeated characters in `s`.
+- `fg`: This bitmask helps track which characters have been seen in `s`.
+- `t`: This flag is used to indicate if there is a duplicate character in `s`.
+
+#### Step 2: Iterate Through the Strings
+
+```cpp
+for (int i = 0; i < s.size(); i++) {
+    if (s[i] != goal[i]) {
+        cnt++;
+        if (fst == -1) fst = i;
+        else if (scd == -1) scd = i;
+    }
+    if ((fg >> (s[i] - 'a')) & 1) t = 1;
+    fg |= (1 << (s[i] - 'a'));
+}
+```
+
+- We loop through the characters of `s` and `goal` to compare them.
+- If `s[i]` is not equal to `goal[i]`, we increment `cnt` and store the positions of the first and second differing characters in `fst` and `scd`.
+- We also update the `fg` bitmask to track the characters we've seen so far. If a character has already been seen, we set `t` to `1`, indicating that there are repeated characters in `s`.
+
+#### Step 3: Handle Identical Strings
+
+```cpp
+if (cnt == 0) {
+    if (t) return true;
+    return false;
+}
+```
+
+- If `cnt == 0`, the strings `s` and `goal` are already identical. In this case, we return `true` if there are repeated characters in `s` (since we could swap the repeated characters), and `false` otherwise.
+
+#### Step 4: Check for Exactly Two Differences
+
+```cpp
+return (cnt == 2 && (s[fst] == goal[scd]) && (s[scd] == goal[fst]));
+```
+
+- If there are exactly two differing positions (`cnt == 2`), we check if swapping the characters at these positions in `s` would make `s` equal to `goal`.
+- We do this by checking if `s[fst] == goal[scd]` and `s[scd] == goal[fst]`.
+
+If this condition is satisfied, we return `true`, meaning the strings are buddy strings. Otherwise, we return `false`.
+
+### Complexity
+
+#### Time Complexity:
+- The time complexity is **O(n)**, where `n` is the length of the strings `s` and `goal`. We only loop through the strings once to compare their characters and to track differences.
+
+#### Space Complexity:
+- The space complexity is **O(1)**, as we only use a fixed amount of extra space (the variables `cnt`, `fst`, `scd`, etc.). No extra space proportional to the size of the input is required.
+
+### Conclusion
+
+The solution efficiently checks whether two strings are buddy strings by following a simple, linear-time approach. By counting differences, tracking positions, and checking if a swap can make the strings identical, we determine whether a swap is possible. The approach also handles edge cases such as identical strings and repeated characters in `s`.
+
+This solution runs in **O(n)** time, making it optimal for even large input sizes, and it uses constant space, making it space-efficient.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/buddy-strings/description/)
+
+---
+
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

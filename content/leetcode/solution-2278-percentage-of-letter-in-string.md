@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/aVeeYs2bSzY/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/percentage-of-letter-in-string/description/)
-
 ---
 **Code:**
 
@@ -31,9 +29,143 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2278.md" >}}
+### Problem Statement
+
+In this problem, we are tasked with finding the percentage of a specific letter that appears in a given string. The function takes a string `s` and a character `letter` as input. Our goal is to return the percentage of how often the character `letter` appears in the string `s`. The result should be returned as an integer, and the percentage should be calculated as:
+\[ \text{percentage} = \frac{\text{count of letter in string} \times 100}{\text{length of the string}} \]
+
+### Approach
+
+The approach to solving this problem can be broken down into the following steps:
+
+1. **Counting the occurrences of the target letter**: First, we need to count how many times the character `letter` appears in the string `s`.
+  
+2. **Calculating the percentage**: Once we know the number of occurrences, we can calculate the percentage by dividing the count by the total number of characters in the string and multiplying by 100 to convert it to a percentage.
+
+3. **Returning the result**: Finally, we return the integer value of the percentage.
+
+We are given that the percentage should be returned as an integer, so rounding is done implicitly by truncating the decimal part when performing integer division.
+
+### Code Breakdown (Step by Step)
+
+Let's walk through the code step by step to understand how the solution works.
+
+#### Step 1: Count Occurrences of the Letter
+
+```cpp
+count(begin(s), end(s), letter)
+```
+
+In this step, we use the `count` function from the C++ Standard Library to count how many times the character `letter` appears in the string `s`. 
+
+- `begin(s)` returns an iterator to the start of the string `s`.
+- `end(s)` returns an iterator to the end of the string `s`.
+- `letter` is the character we are searching for.
+
+The `count` function counts how many times `letter` appears between `begin(s)` and `end(s)`.
+
+#### Step 2: Calculate the Percentage
+
+```cpp
+100 * count(begin(s), end(s), letter) / s.size()
+```
+
+Once we have the count of the target letter, we multiply this value by 100 to get the percentage. Then, we divide by `s.size()`, which gives us the length of the string. This ensures that the calculation is done in terms of the total number of characters in the string.
+
+The result of this division will be an integer, as `s.size()` and the count of `letter` are both integers. Since we are working with integers, any fractional part will be discarded automatically due to integer division.
+
+#### Step 3: Return the Result
+
+Finally, the result is returned as the output of the function:
+
+```cpp
+return 100 * count(begin(s), end(s), letter) / s.size();
+```
+
+The return statement returns the computed percentage as an integer value.
+
+### Complexity
+
+#### Time Complexity
+
+Let's analyze the time complexity of this function:
+
+1. **Counting occurrences**: The `count` function iterates through the entire string `s` once to count the occurrences of the `letter`. This takes **O(n)** time, where `n` is the length of the string `s`.
+  
+2. **Calculating the percentage**: The division and multiplication operations are constant time operations, so they take **O(1)** time.
+
+Thus, the total time complexity is dominated by the **O(n)** operation to count the occurrences, making the overall time complexity:
+
+- **O(n)**, where `n` is the size of the input string `s`.
+
+#### Space Complexity
+
+The space complexity of this solution is:
+
+- **O(1)**: We only use a constant amount of extra space for storing intermediate values, such as the count of occurrences and the result.
+
+### Example Walkthrough
+
+Let's go through an example to illustrate how the code works in practice.
+
+#### Example 1
+```cpp
+string s = "hello";
+char letter = 'l';
+```
+
+- We are given the string `"hello"` and the letter `'l'`.
+- Using `count(begin(s), end(s), letter)`, we find that the letter `'l'` appears **2 times** in the string.
+- The length of the string `s.size()` is `5`.
+- The percentage is then calculated as:
+  \[
+  \frac{2 \times 100}{5} = 40
+  \]
+- The function will return `40`.
+
+#### Example 2
+```cpp
+string s = "abcabcabc";
+char letter = 'a';
+```
+
+- We are given the string `"abcabcabc"` and the letter `'a'`.
+- Using `count(begin(s), end(s), letter)`, we find that the letter `'a'` appears **3 times** in the string.
+- The length of the string `s.size()` is `9`.
+- The percentage is then calculated as:
+  \[
+  \frac{3 \times 100}{9} = 33
+  \]
+- The function will return `33`.
+
+#### Example 3
+```cpp
+string s = "abcdefgh";
+char letter = 'z';
+```
+
+- We are given the string `"abcdefgh"` and the letter `'z'`.
+- Using `count(begin(s), end(s), letter)`, we find that the letter `'z'` does **not appear** in the string, so the count is `0`.
+- The length of the string `s.size()` is `8`.
+- The percentage is then calculated as:
+  \[
+  \frac{0 \times 100}{8} = 0
+  \]
+- The function will return `0`.
+
+### Conclusion
+
+The function `percentageLetter` efficiently computes the percentage of occurrences of a specified letter in a given string. It does so by using the `count` function from the C++ Standard Library to count how many times the letter appears and then calculates the percentage based on the length of the string.
+
+This solution has a time complexity of **O(n)**, where `n` is the size of the string, making it well-suited for handling large strings efficiently. The space complexity is **O(1)**, meaning the function uses a constant amount of extra space. This ensures that the function is both time-efficient and space-efficient.
+
+The solution is simple, concise, and leverages built-in C++ functions to achieve the desired result in an optimal manner. It is a perfect example of how basic string manipulation techniques, like counting character occurrences and performing arithmetic operations, can be combined to solve a real-world problem in an elegant and efficient way.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/percentage-of-letter-in-string/description/)
+
 ---
 {{< youtube aVeeYs2bSzY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2279: Maximum Bags With Full Capacity of Rocks](https://grid47.xyz/leetcode/solution-2279-maximum-bags-with-full-capacity-of-rocks/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

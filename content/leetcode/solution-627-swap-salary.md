@@ -17,8 +17,6 @@ youtube_thumbnail=""
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/swap-salary/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/627.webp" 
     alt="A group of people with salaries, where the swap is visually shown with glowing connections between the swapped values."
@@ -35,9 +33,14 @@ youtube_thumbnail=""
 # Write your MySQL query statement below
 UPDATE Salary SET sex=IF(sex='m','f','m');
 {{< /highlight >}}
-
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/627.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #633: Sum of Square Numbers](https://grid47.xyz/leetcode/solution-633-sum-of-square-numbers/) |
+# Write your MySQL query statement below
+UPDATE Salary SET sex=IF(sex='m','f','m');
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/swap-salary/description/)
+
+---
+
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/edP4gaMO80E/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/design-an-atm-machine/description/)
-
 ---
 **Code:**
 
@@ -94,9 +92,106 @@ public:
  * vector<int> param_2 = obj->withdraw(amount);
  */
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2241.md" >}}
+### Problem Statement
+The problem involves implementing an ATM system where the ATM has a limited supply of five types of currency notes: 20, 50, 100, 200, and 500. Users can deposit a given number of each type of note into the ATM and withdraw an exact amount of money. The goal is to create an ATM object that can:
+1. **Deposit** a list of currency notes into the ATM.
+2. **Withdraw** a specific amount of money, ensuring that the money dispensed matches the requested amount. The ATM should dispense the smallest possible number of notes, and if it’s not possible to fulfill the withdrawal request, it should return an error signal.
+
+### Approach
+The approach to solving this problem involves simulating a basic ATM transaction system. The ATM has an internal record of the available currency notes, and the operations include:
+- **Depositing notes**: This involves simply increasing the number of available notes of each type.
+- **Withdrawing money**: The withdrawal process aims to minimize the number of notes dispensed by starting with the largest denomination (500) and working down to the smallest (20). The amount requested is broken down into the largest possible number of notes, while ensuring that the ATM has enough notes to fulfill the request.
+
+The key challenges include:
+1. Ensuring that the ATM does not dispense more notes than it has available.
+2. Returning `-1` if it is impossible to dispense the requested amount using the available notes.
+
+### Code Breakdown (Step by Step)
+
+1. **ATM Class Initialization:**
+   ```cpp
+   class ATM {
+   public:
+       vector<long long> note;
+       ATM() {
+           note.resize(5, 0);
+       }
+   ```
+   - The `ATM` class has a member variable `note`, which is a vector of 5 integers, initialized to 0. Each index of this vector corresponds to a denomination: `note[0]` for 20, `note[1]` for 50, `note[2]` for 100, `note[3]` for 200, and `note[4]` for 500.
+   - The `ATM()` constructor initializes the `note` vector with zeros, signifying that initially, there are no notes in the ATM.
+
+2. **Deposit Method:**
+   ```cpp
+   void deposit(vector<int> cnt) {
+       for(int i = 0; i < 5; i++)
+           note[i] += cnt[i];
+   }
+   ```
+   - The `deposit` method takes a `vector<int> cnt` as an argument. This vector contains the number of each denomination of notes being deposited into the ATM.
+   - For each denomination, the method increments the corresponding entry in the `note` vector by the number of notes being deposited.
+
+3. **Withdraw Method:**
+   ```cpp
+   vector<int> withdraw(int amnt) {
+       int cnt500 = 0, cnt200 = 0, cnt100 = 0, cnt50 = 0, cnt20 = 0;
+       int taken = 0;
+   ```
+   - The `withdraw` method takes an integer `amnt` as input, representing the amount to be withdrawn.
+   - We initialize counters for each denomination (`cnt500`, `cnt200`, `cnt100`, `cnt50`, and `cnt20`), which track how many notes of each denomination will be dispensed.
+
+4. **Dispensing Notes:**
+   ```cpp
+   if(amnt >= 500) {
+       cnt500 = amnt / 500;
+       if(cnt500 > note[4]) {
+           cnt500 = note[4];
+       }
+       amnt -= (cnt500 * 500);
+   }
+   ```
+   - First, the method checks if the requested amount (`amnt`) is greater than or equal to 500. If so, it calculates how many 500 denomination notes can be dispensed.
+   - The method checks whether the ATM has enough 500 denomination notes by comparing `cnt500` with `note[4]`, the available number of 500 notes. If there are fewer available notes than needed, the method adjusts `cnt500` accordingly.
+   - The amount to be withdrawn is then reduced by the value of the notes dispensed (`cnt500 * 500`).
+   - The same logic applies for other denominations (200, 100, 50, and 20). For each denomination, we calculate how many notes can be dispensed, check if there are enough notes in the ATM, and reduce the amount accordingly.
+
+5. **Error Handling:**
+   ```cpp
+   if(amnt != 0) return vector<int>{-1};
+   ```
+   - If after trying to dispense notes of all denominations, the requested amount (`amnt`) is still not zero, it means that the withdrawal request cannot be fulfilled using the available notes. In this case, the method returns `-1` as a signal of failure.
+
+6. **Updating ATM Notes:**
+   ```cpp
+   note[4] -= cnt500;
+   note[3] -= cnt200;
+   note[2] -= cnt100;
+   note[1] -= cnt50;
+   note[0] -= cnt20;
+   ```
+   - If the withdrawal is successful, the ATM's internal note record is updated by subtracting the dispensed notes from the corresponding entries in the `note` vector.
+
+7. **Returning the Result:**
+   ```cpp
+   return vector<int>{cnt20, cnt50, cnt100, cnt200, cnt500};
+   ```
+   - The method returns a vector containing the number of each denomination dispensed in the order: [20, 50, 100, 200, 500].
+
+### Complexity
+- **Time Complexity:**
+  - The time complexity of both the `deposit` and `withdraw` operations is **O(1)**. The `deposit` method simply iterates over the 5 denominations to update the note counts, while the `withdraw` method makes a constant number of comparisons and arithmetic operations for each denomination. 
+  - Overall, the time complexity for each operation is constant, O(1), due to the fixed number of denominations.
+
+- **Space Complexity:**
+  - The space complexity of the solution is also **O(1)**. The ATM only uses a fixed-size vector (`note`) to store the count of each denomination and a few integer variables for temporary calculations. Since the space usage does not grow with the size of the input, the space complexity remains constant.
+
+### Conclusion
+This ATM system efficiently handles both deposit and withdrawal operations. The key feature of this implementation is that it attempts to minimize the number of notes dispensed by prioritizing larger denominations first. The solution also includes error handling to ensure that withdrawals can only proceed if the requested amount can be fully dispensed with the available notes. With constant time complexity for both operations, this solution is highly optimized for performance. The simplicity of the design, combined with its efficient handling of edge cases (like insufficient notes or impossible withdrawals), makes it a robust choice for implementing ATM functionality.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/design-an-atm-machine/description/)
+
 ---
 {{< youtube edP4gaMO80E >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2243: Calculate Digit Sum of a String](https://grid47.xyz/leetcode/solution-2243-calculate-digit-sum-of-a-string/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

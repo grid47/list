@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/l7O_4za547A/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/check-if-matrix-is-x-matrix/description/)
-
 ---
 **Code:**
 
@@ -40,9 +38,129 @@ public:
 }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2319.md" >}}
+### Problem Statement
+
+The task is to check if a given matrix `g` is an "X-Matrix". An "X-Matrix" has the following properties:
+
+- All elements on the main diagonal (top-left to bottom-right) and the anti-diagonal (top-right to bottom-left) must be non-zero.
+- All elements that are not on the diagonals must be zero.
+
+For example, the matrix:
+```
+[
+  [2, 0, 0, 1],
+  [0, 3, 3, 0],
+  [0, 3, 3, 0],
+  [1, 0, 0, 2]
+]
+```
+is a valid "X-Matrix", but the matrix:
+```
+[
+  [1, 0, 0, 0],
+  [0, 0, 0, 0],
+  [0, 0, 0, 0],
+  [0, 0, 0, 1]
+]
+```
+is not, because the middle element is zero, which violates the "X-Matrix" condition.
+
+### Approach
+
+To solve this problem, we need to verify two conditions for each element in the matrix:
+1. If the element is on the main diagonal or the anti-diagonal, it should be non-zero.
+2. If the element is not on either diagonal, it should be zero.
+
+**Steps for solving:**
+- Traverse through each element of the matrix.
+- For each element, check its position relative to the main diagonal and anti-diagonal:
+  - **Main diagonal**: If the row index and column index are the same (`i == j`), it's on the main diagonal.
+  - **Anti-diagonal**: If the sum of the row and column indices equals the size of the matrix minus one (`i + j == n - 1`), it's on the anti-diagonal.
+- If the element is not on either diagonal, check that the value is zero. If it's not, return `false`.
+- If any element on the diagonals is zero, return `false`.
+- If all checks pass, return `true`.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Initialize the Loop for Traversing the Matrix
+```cpp
+for (int i = 0; i < g.size(); ++i)
+    for (int j = 0; j < g[i].size(); ++j) {
+```
+- We start by iterating over all elements in the matrix `g`. The outer loop iterates over the rows (`i`), and the inner loop iterates over the columns (`j`).
+
+#### Step 2: Check Diagonal Elements
+```cpp
+if (i == j || i + j == g.size() - 1) {
+    if (g[i][j] == 0)
+        return false;
+}
+```
+- Inside the loops, we check if the current element `g[i][j]` lies on either the **main diagonal** (`i == j`) or the **anti-diagonal** (`i + j == g.size() - 1`).
+- If the element is on either diagonal, it should be non-zero. If it is zero, we immediately return `false`.
+
+#### Step 3: Check Non-Diagonal Elements
+```cpp
+else if (g[i][j] > 0)
+    return false;
+```
+- If the current element is not on the diagonal, we check if the value is greater than zero. Any non-zero element outside the diagonals makes the matrix invalid, so we return `false`.
+
+#### Step 4: Return True if All Checks Pass
+```cpp
+return true;
+```
+- If the loops finish without returning `false`, it means the matrix satisfies all conditions for being an "X-Matrix", so we return `true`.
+
+### Example Walkthrough
+
+Let's walk through an example to better understand how the code works:
+
+#### Example 1: Valid "X-Matrix"
+- Input:
+  ```
+  [
+    [2, 0, 0, 1],
+    [0, 3, 3, 0],
+    [0, 3, 3, 0],
+    [1, 0, 0, 2]
+  ]
+  ```
+- The matrix has non-zero elements on both the main diagonal (elements at positions `[0,0]`, `[1,1]`, `[2,2]`, and `[3,3]`) and the anti-diagonal (elements at positions `[0,3]`, `[1,2]`, `[2,1]`, and `[3,0]`).
+- All other elements are zero, so the matrix satisfies the "X-Matrix" condition and the function returns `true`.
+
+#### Example 2: Invalid "X-Matrix"
+- Input:
+  ```
+  [
+    [1, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 0],
+    [0, 0, 0, 1]
+  ]
+  ```
+- The matrix has zeros on the main diagonal, specifically at `[1,1]`, which violates the "X-Matrix" condition.
+- The function detects this violation and returns `false`.
+
+### Complexity Analysis
+
+#### Time Complexity:
+- The time complexity is **O(n^2)**, where `n` is the number of rows (and columns) in the matrix. This is because we are iterating through each element of the matrix once, performing constant-time operations for each element.
+
+#### Space Complexity:
+- The space complexity is **O(1)** because we are not using any additional data structures that depend on the size of the input matrix. We are only using a few variables for traversal and checks, so the space complexity is constant.
+
+### Conclusion
+
+This solution efficiently checks whether a given matrix is an "X-Matrix" by using a two-step condition check for each element in the matrix. The approach is straightforward, and the algorithm runs in **O(n^2)** time, which is optimal for matrix-related problems of this type. The space complexity is **O(1)**, making this solution both time and space efficient.
+
+By iterating through all elements and checking if they meet the criteria for the diagonals and off-diagonal positions, the algorithm ensures correctness while minimizing complexity. This makes the solution suitable for matrices of any reasonable size, ensuring it can handle a wide range of inputs efficiently.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/check-if-matrix-is-x-matrix/description/)
+
 ---
 {{< youtube l7O_4za547A >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2320: Count Number of Ways to Place Houses](https://grid47.xyz/leetcode/solution-2320-count-number-of-ways-to-place-houses/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

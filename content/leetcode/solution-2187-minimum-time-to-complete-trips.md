@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/M5moLQ_6Xs4/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/minimum-time-to-complete-trips/description/)
-
 ---
 **Code:**
 
@@ -47,9 +45,89 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2187.md" >}}
+### Problem Statement
+The problem asks us to determine the minimum time required to complete a given number of trips using a set of machines (represented by an array `time`). Each machine takes a certain amount of time to complete one trip, and the goal is to calculate the minimum time needed to achieve at least `totalTrips` trips using these machines. 
+
+To solve this, we are given an array `time` where each element `a[i]` indicates the time required by the `i-th` machine to complete one trip. The task is to find the minimum time such that the total number of trips completed by all machines is at least `totalTrips`.
+
+### Approach
+This problem is best solved using binary search, since the relationship between the time and number of trips is monotonic (i.e., as time increases, the number of trips also increases). The key observation here is:
+- If we know the total number of trips completed within a certain time `T`, we can adjust the value of `T` based on whether it meets or exceeds the required `totalTrips`.
+
+By using binary search, we can efficiently find the minimum time required to achieve at least `totalTrips` trips.
+
+The approach can be broken down into the following steps:
+1. **Binary Search Setup**: Set the initial search range for time (`low = 1` and `high = 10^14`, a very large number) since we need to find a feasible time within this range.
+2. **Total Trips Calculation**: For a given time `mid`, calculate the total number of trips made by all machines in that time using the helper function `numberOfTripsForAGivenTime`.
+3. **Adjust Search Bounds**: If the total number of trips for the current time `mid` is greater than or equal to `totalTrips`, we try smaller times by setting `high = mid`. Otherwise, we increase the time by setting `low = mid + 1`.
+4. **Convergence**: The binary search continues until `low` equals `high`, at which point we have found the minimum time required.
+
+### Code Breakdown (Step by Step)
+
+#### 1. Helper Function `numberOfTripsForAGivenTime`
+```cpp
+long long numberOfTripsForAGivenTime(vector<int> &a, long long int givenTime) {
+    long long int totalTrips = 0;
+    for(int &x : a) {
+        long long int y = x;
+        totalTrips += givenTime / y;
+    }
+    return totalTrips;
+}
+```
+- This function calculates the total number of trips completed by all machines within a given time `givenTime`.
+- It iterates over each machine's time in the array `a`, and for each machine, calculates how many trips can be completed within the `givenTime` by performing integer division (`givenTime / x`).
+- The result is accumulated into `totalTrips`, which is then returned.
+
+#### 2. Main Function `minimumTime`
+```cpp
+long long minimumTime(vector<int>& time, int totalTrips) {
+    long long int low = 1, high = 1e14;
+    while(low < high) {
+        long long int mid = low + (high - low) / 2;
+        if(numberOfTripsForAGivenTime(time, mid) >= totalTrips) {
+            high = mid;
+        } else low = mid + 1;
+    }
+    return low;
+}
+```
+- The binary search begins with `low = 1` and `high = 1e14`, where `low` is the minimum possible time and `high` is an arbitrarily large value to ensure the search range is sufficiently wide.
+- In each iteration, the middle value `mid` is computed as `low + (high - low) / 2`. This helps to prevent overflow that might occur when directly calculating `(low + high) / 2`.
+- The function `numberOfTripsForAGivenTime(time, mid)` is then called to check how many trips can be completed in `mid` time.
+  - If the total trips for `mid` is greater than or equal to `totalTrips`, we know that `mid` is a valid candidate for the minimum time, but we try to find a smaller time by setting `high = mid`.
+  - Otherwise, we increase the time by setting `low = mid + 1`.
+- The loop continues until `low` equals `high`, at which point the minimum time required to achieve `totalTrips` trips is found, and it is returned.
+
+### Complexity
+
+#### Time Complexity:
+- The time complexity of this solution is dominated by the binary search loop and the helper function:
+  - The binary search runs in `O(log(high - low))` iterations. Since `high` is set to `1e14`, the number of iterations will be at most `log(1e14) ≈ 47`.
+  - In each iteration, the helper function `numberOfTripsForAGivenTime` iterates over all elements in the `time` array, making the complexity of each iteration `O(n)`, where `n` is the number of machines.
+  
+Thus, the overall time complexity is:
+\[
+O(n \cdot \log(high - low)) = O(n \cdot \log(1e14)) = O(n \cdot 47) = O(n)
+\]
+where `n` is the number of machines (length of the `time` array).
+
+#### Space Complexity:
+- The space complexity is `O(1)` because we only use a few integer variables (`low`, `high`, `mid`, `totalTrips`), and the input array `time` is not modified.
+
+### Conclusion
+This solution efficiently solves the problem of finding the minimum time to achieve at least `totalTrips` using binary search. By leveraging the monotonic nature of the problem, where more time results in more trips, the binary search optimally narrows down the possible values for the minimum time. 
+
+- **Binary Search**: The use of binary search allows the solution to run in logarithmic time relative to the large potential range of time values (up to `1e14`), making it scalable even for large inputs.
+- **Time Calculation**: The helper function accurately counts the total number of trips that can be completed by all machines in a given time, allowing us to efficiently compare and adjust the search bounds.
+  
+This solution is optimal for large-scale inputs, offering a clear and efficient way to compute the minimum time required to achieve the desired number of trips.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/minimum-time-to-complete-trips/description/)
+
 ---
 {{< youtube M5moLQ_6Xs4 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2190: Most Frequent Number Following Key In an Array](https://grid47.xyz/leetcode/solution-2190-most-frequent-number-following-key-in-an-array/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

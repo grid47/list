@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/1vRYTJqaZ8s/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/maximum-number-of-eaten-apples/description/)
-
 ---
 **Code:**
 
@@ -52,9 +50,114 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1705.md" >}}
+### Problem Statement
+
+The problem at hand involves managing the consumption of apples over a specified number of days. Each apple has a certain expiration time, after which it cannot be eaten. Given two vectors, `apples` and `days`, where `apples[i]` represents the number of apples available on day `i`, and `days[i]` indicates how many days those apples can be eaten, the task is to calculate the maximum number of apples that can be consumed within the given constraints.
+
+The goal is to consume apples efficiently, considering their availability and expiration times, to maximize the total number of apples eaten.
+
+### Approach
+
+To solve this problem, we can utilize a min-heap (priority queue) to keep track of the apples that are available to eat along with their expiration dates. The approach can be summarized in the following steps:
+
+1. **Initialize Variables**: We start by determining the total number of days (length of the `days` array) and initializing a priority queue to manage the apples based on their expiration date.
+
+2. **Simulate Each Day**: For each day, we will:
+   - Add the apples available that day to the priority queue, along with their expiration date (which is the current day plus the number of days they can be eaten).
+   - Remove any apples from the priority queue that have already expired.
+   - If there are still apples available, consume one apple, decrease its count, and if there are any remaining, reinsert it back into the queue with the same expiration date.
+
+3. **Continue Until All Days Are Processed**: This process continues until we either exhaust the number of days or the priority queue becomes empty.
+
+4. **Return the Result**: Finally, we return the total count of apples eaten.
+
+### Code Breakdown (Step by Step)
+
+Let’s break down the provided code to better understand how it implements this approach:
+
+1. **Class Declaration**: We define a class named `Solution` that contains our method.
+
+    ```cpp
+    class Solution {
+    public:
+    ```
+
+2. **Method Declaration**: We declare a public method called `eatenApples`, which takes two vectors of integers (`apples` and `days`) as input and returns an integer representing the total number of apples eaten.
+
+    ```cpp
+    int eatenApples(vector<int>& apples, vector<int>& days) {
+    ```
+
+3. **Variable Initialization**: We initialize several variables:
+   - `n` to store the number of days.
+   - `pq` as a priority queue to manage apples based on their expiration dates.
+   - `res` to accumulate the total number of apples eaten.
+   - `i` to represent the current day.
+
+    ```cpp
+    int n = days.size();
+    priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;
+    int res = 0, i = 0;
+    ```
+
+4. **Loop Through Days**: We enter a while loop that continues as long as there are days left (`i < n`) or there are still apples in the priority queue (`!pq.empty()`).
+
+    ```cpp
+    while(i < n || !pq.empty()) {
+    ```
+
+5. **Add Available Apples**: Inside the loop, we check if there are apples available for the current day (`i < n` and `apples[i] > 0`). If so, we push them into the priority queue, storing the expiration date (the current day plus the days they can last) and the count of apples.
+
+    ```cpp
+    if(i < n && apples[i] > 0) 
+        pq.push({i + days[i] - 1, apples[i]});
+    ```
+
+6. **Remove Expired Apples**: Next, we need to ensure we are only dealing with non-expired apples. We do this by removing any entries from the priority queue where the expiration date is less than the current day (`i`).
+
+    ```cpp
+    while(!pq.empty() && pq.top()[0] < i)
+        pq.pop(); // Remove expired apples
+    ```
+
+7. **Consume Apples**: If there are still apples in the queue, we consume one. We increment the result count, pop the top of the priority queue to get the apple details, and if there are remaining apples, we push them back into the queue with an updated count.
+
+    ```cpp
+    if(!pq.empty()) {
+        res++;
+        auto it = pq.top(); // Get the apple info
+        pq.pop();
+        if(it[1] > 1) 
+            pq.push({it[0], it[1] - 1}); // Push back if more apples are left
+    }
+    ```
+
+8. **Increment Day**: After processing for the current day, we increment `i` to move to the next day.
+
+    ```cpp
+    i++;
+    ```
+
+9. **Return the Result**: Finally, we return the total number of apples eaten.
+
+    ```cpp
+    return res;
+    }
+    ```
+
+### Complexity
+
+The time complexity of this solution is O(n log n), where n is the number of days, due to the operations on the priority queue. Each insertion and deletion operation on the priority queue takes O(log k) time, where k is the number of apples in the queue. The space complexity is O(k), where k is the maximum number of apples stored in the priority queue at any given time.
+
+### Conclusion
+
+In conclusion, the provided code efficiently calculates the maximum number of apples that can be eaten given the constraints of availability and expiration dates. By utilizing a priority queue to manage the apples, the algorithm ensures that we always consume the freshest apples available while keeping track of their expiration. This method is optimal and well-suited for scenarios where resource management is critical, demonstrating effective use of data structures to solve complex problems efficiently. Overall, the solution is clear, concise, and adheres to the principles of algorithmic design, making it a valuable approach to similar resource allocation challenges.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/maximum-number-of-eaten-apples/description/)
+
 ---
 {{< youtube 1vRYTJqaZ8s >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1706: Where Will the Ball Fall](https://grid47.xyz/leetcode/solution-1706-where-will-the-ball-fall/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

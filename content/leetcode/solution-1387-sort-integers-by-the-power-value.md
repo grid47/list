@@ -18,8 +18,6 @@ youtube_thumbnail=""
 
 
 
-[`Problem Link`](https://leetcode.com/problems/sort-integers-by-the-power-value/description/)
-
 ---
 **Code:**
 
@@ -47,9 +45,97 @@ public:
     }
 };
 {{< /highlight >}}
-
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1387.md" >}}
 ---
 
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1389: Create Target Array in the Given Order](https://grid47.xyz/leetcode/solution-1389-create-target-array-in-the-given-order/) |
+### Problem Statement
+
+The problem involves finding the k-th integer in a specified range \([lo, hi]\) based on a sequence derived from the Collatz conjecture. The Collatz sequence for a number \(n\) follows these rules:
+- If \(n\) is even, divide it by 2.
+- If \(n\) is odd, multiply it by 3 and add 1.
+- Repeat the process until reaching 1.
+
+The challenge is to determine the number of steps it takes for each integer in the range to reach 1 and then return the k-th integer with the lowest number of steps. If two integers take the same number of steps, they should be sorted by their value.
+
+### Approach
+
+The solution consists of the following steps:
+
+1. **Memoization for Efficiency**: Since the number of steps for many integers may overlap (as they could reach the same numbers through different paths), we will use memoization to store previously computed results for quick lookups.
+
+2. **Calculating Steps**: For each integer in the specified range, compute the number of steps to reach 1 using the rules of the Collatz conjecture.
+
+3. **Sorting Results**: Store the results in a list, sort this list first by the number of steps and then by the integer value itself.
+
+4. **Returning the Result**: Finally, extract and return the k-th integer from the sorted list.
+
+### Code Breakdown (Step by Step)
+
+Here's a detailed breakdown of the provided C++ code:
+
+1. **Class Definition**:
+   ```cpp
+   class Solution {
+   public:
+       map<int, int> memo;
+   ```
+   - The `Solution` class contains a method to calculate the k-th integer based on the Collatz conjecture. A `map<int, int>` named `memo` is used to store the number of steps for each integer.
+
+2. **Collatz Function (dig)**:
+   ```cpp
+       int dig(int num) {
+           if(num == 1) return 0;
+           if(memo.count(num)) return memo[num];
+           if(num % 2 == 0)
+               return memo[num] = dig(num / 2) + 1;
+           return memo[num] = dig(3 * num + 1) + 1;        
+       }
+   ```
+   - The `dig` function calculates the number of steps required for a given number \(num\) to reach 1.
+   - If \(num\) is 1, it returns 0, indicating no steps are needed.
+   - If the number has already been computed (exists in `memo`), it retrieves and returns the stored value.
+   - If \(num\) is even, it calls itself with \(num / 2\) and adds 1 (for the step taken).
+   - If \(num\) is odd, it calls itself with \(3 \times num + 1\) and adds 1.
+
+3. **Main Function (getKth)**:
+   ```cpp
+       int getKth(int lo, int hi, int k) {
+           vector<pair<int,int>> ans;
+           for(int i = lo; i <= hi; i++) {
+               int tmp = dig(i);
+               ans.push_back({tmp, i});
+           }
+   ```
+   - The `getKth` function accepts three parameters: the lower bound \(lo\), the upper bound \(hi\), and \(k\).
+   - It initializes a vector of pairs `ans` to store the number of steps alongside the integer itself.
+   - A loop iterates through all integers from \(lo\) to \(hi\), calculating the number of steps for each integer using the `dig` function, and stores the results in `ans`.
+
+4. **Sorting and Returning the Result**:
+   ```cpp
+           sort(ans.begin(), ans.end());
+           return ans[k - 1].second;
+       }
+   };
+   ```
+   - After populating the `ans` vector, it is sorted based on the first element (number of steps) and, in case of a tie, by the integer value itself.
+   - Finally, the k-th integer (0-indexed) is accessed from the sorted list and returned.
+
+### Complexity
+
+- **Time Complexity**:
+  - The time complexity is \(O(n \log n)\) for sorting the list of integers, where \(n\) is the number of integers in the range \([lo, hi]\). The `dig` function itself has an average complexity of \(O(\log n)\) per integer due to the nature of the Collatz sequence.
+
+- **Space Complexity**:
+  - The space complexity is \(O(n)\) for storing the pairs in the `ans` vector and for the memoization map, which can potentially hold values for each integer in the range.
+
+### Conclusion
+
+The provided solution efficiently computes the k-th integer in a range based on the steps required to reach 1 using the Collatz conjecture. By leveraging memoization, the algorithm reduces redundant calculations, making it more efficient than a naive approach. This implementation serves as a practical example of combining recursion, dynamic programming principles, and sorting techniques in algorithm design.
+
+Understanding this code enhances one’s grasp of complex number manipulation and recursive problem-solving techniques. Moreover, it illustrates how to efficiently handle potentially large input ranges with clever use of data structures. This approach not only addresses the immediate problem but also provides foundational knowledge applicable to a variety of algorithmic challenges in competitive programming and software development.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/sort-integers-by-the-power-value/description/)
+
+---
+
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

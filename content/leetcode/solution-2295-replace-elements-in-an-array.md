@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/xiY9ORyGnDk/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/replace-elements-in-an-array/description/)
-
 ---
 **Code:**
 
@@ -44,9 +42,174 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2295.md" >}}
+### Problem Statement
+
+In this problem, we are tasked with modifying a given array of integers by applying a sequence of operations. Each operation consists of replacing a specific number in the array with another number. The challenge is to apply these operations efficiently and return the final modified array after all operations have been applied.
+
+- We are given an integer array `nums` and a list of operations `ops`.
+- Each operation `ops[i]` is represented as a pair `[a, b]`, meaning that all occurrences of `a` in the array should be replaced with `b`.
+- We need to perform all operations and return the resulting array.
+
+### Approach
+
+The solution relies on efficient lookups and updates, which are key to handling multiple operations without repeatedly searching through the array.
+
+#### Key Ideas:
+
+1. **Use a Map for Fast Lookups**:
+   - Instead of searching through the array every time we need to find the index of a value `a`, we use a map `mp` to store the indices of the values.
+   - The map is used to quickly locate where each number is in the array so we can replace it efficiently.
+
+2. **Efficient Updates**:
+   - When an operation `[a, b]` is encountered, we find the index of `a` in the array using the map.
+   - We then replace `a` with `b` and update the map so that `b` points to the same index that `a` had in the array. Additionally, we remove `a` from the map since it's no longer relevant.
+
+3. **Final Array**:
+   - After applying all operations, the `nums` array will be updated accordingly. We simply return the updated array.
+
+### Code Breakdown (Step by Step)
+
+The following C++ code implements this approach:
+
+```cpp
+class Solution {
+public:
+    vector<int> arrayChange(vector<int>& nums, vector<vector<int>>& ops) {
+        
+        map<int, int> mp;  // Map to store the value and its index in nums
+        
+        int n = nums.size();
+        
+        // Initialize the map with the values and their corresponding indices in nums
+        for(int i = 0; i < n; i++) {
+            mp[nums[i]] = i;  // Map the value to its index
+        }
+        
+        // Process each operation in ops
+        for(auto it: ops) {
+            int idx = mp[it[0]];  // Get the index of the number to be replaced
+            mp.erase(it[0]);  // Remove the old value from the map
+            nums[idx] = it[1];  // Replace the number at the index with the new value
+            mp[it[1]] = idx;  // Add the new value to the map, pointing to the same index
+        }
+        
+        // Return the updated array
+        return nums;
+    }
+};
+```
+
+#### Detailed Explanation:
+
+1. **Map Initialization**:
+   - The map `mp` is initialized to store the value of each element in `nums` as the key and the corresponding index in the array as the value. This step ensures that we can look up any value in constant time.
+
+   ```cpp
+   map<int, int> mp;  // Map to store the value and its index
+   int n = nums.size();
+   for(int i = 0; i < n; i++) {
+       mp[nums[i]] = i;  // Initialize map with the values and their indices
+   }
+   ```
+
+2. **Processing Operations**:
+   - For each operation `[a, b]` in `ops`, we perform the following steps:
+     - Find the index of `a` in the `nums` array using `mp[it[0]]`.
+     - Erase `a` from the map because it is no longer relevant after the replacement.
+     - Update the array by replacing `a` with `b` at the found index.
+     - Add `b` to the map, associating it with the index where `a` was previously located.
+     
+   ```cpp
+   for(auto it: ops) {
+       int idx = mp[it[0]];  // Find the index of a in nums
+       mp.erase(it[0]);  // Remove a from the map
+       nums[idx] = it[1];  // Replace a with b in the array
+       mp[it[1]] = idx;  // Add b to the map with the same index
+   }
+   ```
+
+3. **Returning the Result**:
+   - Once all operations are applied, the modified `nums` array is returned.
+
+   ```cpp
+   return nums;  // Return the updated array
+   ```
+
+### Example Walkthrough
+
+#### Example 1:
+**Input**:
+```cpp
+vector<int> nums = {1, 2, 3, 4};
+vector<vector<int>> ops = {{1, 10}, {3, 30}, {2, 20}};
+```
+
+**Steps**:
+
+1. Initial `nums = {1, 2, 3, 4}`.
+2. Initialize the map: `mp = {1: 0, 2: 1, 3: 2, 4: 3}`.
+3. Process the operation `[1, 10]`:
+   - Replace `1` at index 0 with `10`, update `mp` to `{2: 1, 3: 2, 4: 3, 10: 0}`.
+   - Updated `nums = {10, 2, 3, 4}`.
+4. Process the operation `[3, 30]`:
+   - Replace `3` at index 2 with `30`, update `mp` to `{2: 1, 4: 3, 10: 0, 30: 2}`.
+   - Updated `nums = {10, 2, 30, 4}`.
+5. Process the operation `[2, 20]`:
+   - Replace `2` at index 1 with `20`, update `mp` to `{4: 3, 10: 0, 30: 2, 20: 1}`.
+   - Final `nums = {10, 20, 30, 4}`.
+
+**Output**:
+```cpp
+{10, 20, 30, 4}
+```
+
+#### Example 2:
+**Input**:
+```cpp
+vector<int> nums = {5, 6, 7};
+vector<vector<int>> ops = {{5, 15}, {7, 17}};
+```
+
+**Steps**:
+
+1. Initial `nums = {5, 6, 7}`.
+2. Initialize the map: `mp = {5: 0, 6: 1, 7: 2}`.
+3. Process the operation `[5, 15]`:
+   - Replace `5` at index 0 with `15`, update `mp` to `{6: 1, 7: 2, 15: 0}`.
+   - Updated `nums = {15, 6, 7}`.
+4. Process the operation `[7, 17]`:
+   - Replace `7` at index 2 with `17`, update `mp` to `{6: 1, 15: 0, 17: 2}`.
+   - Final `nums = {15, 6, 17}`.
+
+**Output**:
+```cpp
+{15, 6, 17}
+```
+
+### Time Complexity
+
+- **Building the map**: This takes `O(n)`, where `n` is the size of `nums`.
+- **Processing each operation**: For each operation, we perform constant-time operations (lookups, erases, and insertions into the map) — each operation takes `O(log n)` time due to the underlying balanced binary search tree (BST) used in `map`. 
+  - If there are `m` operations, the total time for processing all operations is `O(m log n)`.
+  
+Thus, the overall time complexity is **O(n + m log n)**, where `n` is the size of the array and `m` is the number of operations.
+
+### Space Complexity
+
+- **Space for the map**: The map stores up to `n` unique values, so the space complexity is **O(n)**.
+- **Space for the array**: The `nums` array takes **O(n)** space.
+
+Thus, the overall space complexity is **O(n)**.
+
+### Conclusion
+
+The provided solution efficiently handles the task of applying multiple operations on an array by utilizing a map for fast lookups and updates. This approach ensures that each operation is performed in logarithmic time, making the solution suitable for large arrays and numerous operations. The time complexity of **O(n + m log n)** and space complexity of **O(n)** make the solution scalable and optimal for the given problem.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/replace-elements-in-an-array/description/)
+
 ---
 {{< youtube xiY9ORyGnDk >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2299: Strong Password Checker II](https://grid47.xyz/leetcode/solution-2299-strong-password-checker-ii/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

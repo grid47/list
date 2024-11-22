@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/BWj2qT3aTrA/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/length-of-longest-fibonacci-subsequence/description/)
-
 ---
 **Code:**
 
@@ -43,9 +41,112 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/873.md" >}}
+### Problem Statement
+
+The problem asks us to find the length of the longest Fibonacci subsequence in a given array of integers. A **Fibonacci subsequence** is defined as a subsequence of the array where the first two elements form a starting pair, and each subsequent element is the sum of the previous two elements in the subsequence. Specifically, given an array `arr`, we need to return the length of the longest subsequence where `arr[i] = arr[j] + arr[k]` for some `i > j > k`.
+
+A Fibonacci subsequence can have at least two elements, and we need to find the maximum length of such subsequences.
+
+### Example:
+- **Input**: `arr = [1,2,3,4,5,6,7,8]`
+- **Output**: `5`
+- **Explanation**: The longest Fibonacci subsequence is `[1, 2, 3, 5, 8]`, which has a length of 5.
+
+- **Input**: `arr = [1,3,7,11,12,14,18]`
+- **Output**: `3`
+- **Explanation**: The longest Fibonacci subsequence is `[3, 7, 11]`, which has a length of 3.
+
+### Approach
+
+To solve the problem efficiently, we can use a **dynamic programming** approach with a hash set for fast lookups. The key insight is that, for each pair of numbers in the array, we check whether their sum exists in the array (which would form a valid Fibonacci subsequence). We then keep track of the length of the subsequences dynamically as we progress through the array.
+
+1. **Use a Hash Set for Fast Lookups**: First, we convert the array into an unordered set. This allows us to check whether any number is present in the array in constant time (`O(1)`).
+   
+2. **Iterate Over Pairs of Numbers**: We iterate over all pairs `(i, j)` such that `i < j`. For each pair, the two numbers `arr[i]` and `arr[j]` will form the first two elements of a potential Fibonacci subsequence.
+
+3. **Find the Subsequent Elements**: After selecting the first two elements `a = arr[i]` and `b = arr[j]`, we attempt to extend the subsequence by checking if `a + b` exists in the array. If it does, we extend the sequence by moving the pair `(a, b)` to `(b, a + b)`, and continue checking for the next Fibonacci number.
+
+4. **Store and Update the Maximum Length**: For each pair, we track the length of the Fibonacci subsequence. If the length is greater than the previous longest, we update our result.
+
+5. **Handle Edge Cases**: The minimum valid length of a Fibonacci subsequence is 2, so if no subsequence of length greater than 2 is found, the result should be 0.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Create a Hash Set for Fast Lookups
+We begin by converting the input array into a hash set (`unordered_set`) to enable fast lookups. This allows us to check if a number exists in the array in constant time.
+
+```cpp
+unordered_set<int> s(arr.begin(), arr.end());
+int res = 2, n = arr.size();
+```
+
+- The set `s` contains all the elements in the array, making it easy to check if `a + b` exists in the array.
+
+#### Step 2: Iterate Over All Pairs
+We then iterate over all pairs of elements `(i, j)` such that `i < j` using two nested loops. For each pair, we treat `arr[i]` as the first element (`a`) and `arr[j]` as the second element (`b`) of the Fibonacci subsequence.
+
+```cpp
+for(int i = 0; i < n; i++) {
+    for(int j = i + 1; j < n; j++) {
+        int a = arr[i], b = arr[j], l = 2;
+```
+
+- `a` is initialized as `arr[i]`, and `b` is initialized as `arr[j]`.
+- `l` tracks the length of the Fibonacci subsequence starting with `a` and `b`. Initially, the length is `2` since the pair `(a, b)` already forms the first two elements of the sequence.
+
+#### Step 3: Extend the Fibonacci Subsequence
+Next, we check if the sum of `a` and `b` exists in the hash set. If it does, we continue extending the Fibonacci subsequence. We update `a` and `b` to be the last two numbers in the subsequence (`b` and `a + b`), and increment the length `l`.
+
+```cpp
+while(s.count(a + b)) {
+    b = a + b;
+    a = b - a;
+    l++;
+}
+```
+
+- `s.count(a + b)` checks if `a + b` exists in the set `s`. If it does, the subsequence is extended by adding the sum `a + b`.
+- We update `a` and `b` to the next two numbers in the Fibonacci sequence.
+- We increment the length `l` of the subsequence.
+
+#### Step 4: Update the Maximum Length
+For each pair `(i, j)`, after attempting to extend the Fibonacci subsequence, we check if the length `l` is greater than the current maximum length `res`. If it is, we update `res`.
+
+```cpp
+res = max(res, l);
+```
+
+- This ensures that we always track the longest Fibonacci subsequence found during the iteration.
+
+#### Step 5: Return the Result
+Finally, if the result is greater than 2 (the minimum valid Fibonacci subsequence length), we return `res`. Otherwise, we return 0, indicating that no Fibonacci subsequence of length greater than 2 was found.
+
+```cpp
+return res > 2 ? res : 0;
+```
+
+- If `res` is greater than 2, it means a valid Fibonacci subsequence has been found, and we return its length.
+- If no valid subsequence has been found (i.e., `res` is still 2), we return 0.
+
+### Complexity
+
+#### Time Complexity:
+- **Outer Loops**: The outer loops iterate over all pairs `(i, j)` in the array, which takes `O(n^2)` time, where `n` is the size of the array.
+- **While Loop**: The while loop inside the inner loop checks for the existence of `a + b` in the hash set. In the worst case, it could iterate over the entire sequence, but each Fibonacci number grows exponentially, so the number of iterations will be limited by the size of the sequence.
+- **Overall Time Complexity**: The time complexity is dominated by the nested loops, so the overall time complexity is `O(n^2)`.
+
+#### Space Complexity:
+- The space complexity is `O(n)`, where `n` is the size of the array. This is due to the space required to store the hash set `s` that contains all elements of the array.
+
+### Conclusion
+
+This approach efficiently finds the longest Fibonacci subsequence by leveraging a hash set for fast lookups and using a greedy method to extend subsequences. By iterating over all pairs of elements and dynamically extending the subsequences, we can identify the longest valid Fibonacci subsequence in `O(n^2)` time. This solution is suitable for handling moderately large input sizes and provides a clear and efficient way to solve the problem.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/length-of-longest-fibonacci-subsequence/description/)
+
 ---
 {{< youtube BWj2qT3aTrA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #875: Koko Eating Bananas](https://grid47.xyz/leetcode/solution-875-koko-eating-bananas/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

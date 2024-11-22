@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/4hb3bZS1o1o/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/total-cost-to-hire-k-workers/description/)
-
 ---
 **Code:**
 
@@ -75,9 +73,139 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2462.md" >}}
+### Problem Statement:
+In this problem, we are given an array `costs` of integers representing the cost of hiring workers, an integer `k` representing the number of workers to hire, and an integer `cand` representing the number of candidates. The task is to hire `k` workers at the minimum total cost. The workers available for hiring are the first `cand` candidates from the start and the last `cand` candidates from the end of the `costs` array.
+
+We need to efficiently select `k` workers such that their total cost is minimized.
+
+### Approach:
+The problem boils down to selecting `k` workers from the `cand` number of candidates at the beginning and end of the array. Since we need to minimize the total cost, we can use a **min-heap** (priority queue) to always select the worker with the lowest cost. The idea is to maintain a window of candidates on the left and right and select workers from those windows in order to minimize the hiring cost. Here's how we approach the solution:
+
+1. **Two Candidate Pools**:
+   - The workers we can select are either from the first `cand` workers or from the last `cand` workers.
+   - If there are more than `cand` workers, the solution needs to balance between selecting from the left and right ends while minimizing the total cost.
+
+2. **Use of a Min-Heap (Priority Queue)**:
+   - A **min-heap** will allow us to always pick the worker with the lowest cost in constant time, while adding and removing elements in logarithmic time.
+
+3. **Maintaining the Left and Right Windows**:
+   - First, the heap will be initialized with workers from both ends (`[0, cand-1]` and `[n-cand, n-1]`).
+   - We need to consider workers between these two windows and add them to the heap as we process the workers.
+
+4. **Cost Calculation**:
+   - At each step, the worker with the lowest cost is selected from the heap, and the cost is added to the total cost.
+   - After selecting a worker, we expand the window by moving inward (if possible) and add the next potential worker to the heap.
+
+### Code Breakdown (Step by Step):
+
+1. **Function Definition**:
+   ```cpp
+   long long totalCost(vector<int>& costs, int k, int cand) {
+   ```
+   The function `totalCost` accepts:
+   - `costs`: The array representing the cost of hiring each worker.
+   - `k`: The number of workers to hire.
+   - `cand`: The number of candidates to choose from at both ends of the array.
+
+   It returns a `long long` value representing the minimum total cost to hire `k` workers.
+
+2. **Initialization**:
+   ```cpp
+   long long cost = 0;
+   int n = costs.size();
+   int l = cand - 1, r = n - cand; // inclusive
+   priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;
+   ```
+   - `cost`: Stores the accumulated cost of the hired workers.
+   - `n`: The number of workers available.
+   - `l` and `r`: Variables represent the current window for the left and right candidate pools.
+   - `pq`: A priority queue (min-heap) that stores pairs of `{cost, index}` to allow easy retrieval of the lowest cost worker.
+
+3. **When `l >= r` (All Candidates are from One Side)**:
+   ```cpp
+   if(l >= r) {
+       for(int i = 0; i < n; i++)
+           pq.push({costs[i], i});
+       
+       while(k--) {
+           cost += pq.top()[0];
+           pq.pop();
+       }
+       return cost;
+   }
+   ```
+   - If there is no overlap between the left and right candidate pools (i.e., all candidates come from one side), we simply add all workers to the priority queue and select the `k` workers with the lowest cost.
+
+4. **Initializing the Min-Heap with Left and Right Pools**:
+   ```cpp
+   int i = 0;
+   while(i <= l) {
+       pq.push({costs[i], i});
+       i++;
+   }
+   
+   i = n - 1;
+   while(i >= r) {
+       pq.push({costs[i], i});
+       i--;
+   }
+   ```
+   - This part of the code initializes the priority queue with workers from both ends:
+     - The first loop adds workers from the left side (first `cand` workers).
+     - The second loop adds workers from the right side (last `cand` workers).
+
+5. **Selecting Workers**:
+   ```cpp
+   while(k--) {
+       auto it = pq.top();
+       pq.pop();
+       cost += it[0];
+   ```
+   - We now enter the main loop where we select `k` workers:
+     - We always select the worker with the lowest cost from the top of the priority queue.
+     - The cost of that worker is added to the total `cost`, and the worker is removed from the heap.
+
+6. **Expanding the Candidate Windows**:
+   ```cpp
+   if(it[1] <= l && l < r - 1) {
+       l++;
+       pq.push({costs[l], l});
+   } else if(it[1] >= r && l < r - 1) {
+       r--;
+       pq.push({costs[r], r});
+   }
+   ```
+   - After selecting a worker, we check if we can expand the candidate window:
+     - If the selected worker is from the left side and we haven't exhausted the left window, we increment `l` to add the next worker from the left.
+     - If the selected worker is from the right side and we haven't exhausted the right window, we decrement `r` to add the next worker from the right.
+
+7. **Returning the Total Cost**:
+   ```cpp
+   return cost;
+   }
+   ```
+   - After selecting `k` workers, the function returns the total accumulated cost.
+
+### Complexity:
+
+1. **Time Complexity**:
+   - Building the priority queue initially takes \( O(n \log n) \) since each worker is pushed into the heap.
+   - In the main loop, each operation (insertion and removal) on the heap takes \( O(\log n) \), and since we perform this operation `k` times, the total time complexity for selecting the workers is \( O(k \log n) \).
+   - Thus, the overall time complexity is \( O(n \log n + k \log n) \), which simplifies to \( O(n \log n) \) since \( k \leq n \).
+
+2. **Space Complexity**:
+   - The space complexity is determined by the priority queue, which can store up to `n` workers at any point in time.
+   - Therefore, the space complexity is \( O(n) \).
+
+### Conclusion:
+
+The `totalCost` function efficiently selects the `k` workers with the minimum total cost by utilizing a priority queue to always select the worker with the lowest cost from the available candidate pools. By managing two candidate pools (left and right), the algorithm ensures that workers are selected in the optimal manner, while maintaining the constraint on the number of workers to hire. The solution has a time complexity of \( O(n \log n) \), making it suitable for large input sizes, and the space complexity is \( O(n) \), which is optimal for this problem.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/total-cost-to-hire-k-workers/description/)
+
 ---
 {{< youtube 4hb3bZS1o1o >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2465: Number of Distinct Averages](https://grid47.xyz/leetcode/solution-2465-number-of-distinct-averages/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

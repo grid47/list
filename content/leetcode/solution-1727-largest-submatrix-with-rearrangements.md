@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/NYyIVuSCfOA/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/largest-submatrix-with-rearrangements/description/)
-
 ---
 **Code:**
 
@@ -53,9 +51,109 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1727.md" >}}
+### Problem Statement
+
+The task is to find the area of the largest rectangle containing only 1's in a binary matrix. Each cell in the matrix is either 0 or 1, where 1 represents part of a rectangle. The goal is to identify the dimensions of the largest contiguous rectangle made entirely of 1's and return its area.
+
+### Approach
+
+To solve this problem efficiently, we can utilize a method that transforms the problem into a histogram problem. Here's the step-by-step approach:
+
+1. **Convert to Histogram Heights**: For each column in the matrix, maintain a count of consecutive 1's above each cell. This transforms each row into a representation of histogram heights.
+
+2. **Sort Rows**: For each row, sort the histogram heights in descending order. This allows us to easily calculate the maximum rectangle area that can be formed using those heights.
+
+3. **Calculate Area**: For each height in the sorted histogram, calculate the area of rectangles that can be formed using that height and update the maximum area found.
+
+### Code Breakdown (Step by Step)
+
+The implementation follows these steps in a structured manner:
+
+1. **Class Definition**: The solution is encapsulated in a class named `Solution`.
+
+   ```cpp
+   class Solution {
+   ```
+
+2. **Public Method**: The method `largestSubmatrix` takes a 2D vector `mtx` as input and returns an integer representing the area of the largest rectangle.
+
+   ```cpp
+   public:
+       int largestSubmatrix(vector<vector<int>>& mtx) {
+   ```
+
+3. **Matrix Dimensions**: Extract the dimensions of the matrix, `n` for columns and `m` for rows.
+
+   ```cpp
+   int n = mtx[0].size(), m = mtx.size();
+   ```
+
+4. **Histogram Initialization**: Create a 2D vector `one` to store the heights of the histogram for each column, initialized to zero.
+
+   ```cpp
+   vector<vector<int>> one(m, vector<int>(n, 0));
+   ```
+
+5. **Count Consecutive 1's**: Iterate over each column to populate the `one` matrix with the counts of consecutive 1's.
+
+   ```cpp
+   for(int i = 0; i < n; i++) {
+       int cnt = 0;
+       for(int j = 0; j < m; j++) {
+           if (mtx[j][i] == 1) { cnt++; } 
+           else { cnt = 0; }
+           one[j][i] = cnt;
+       }
+   }
+   ```
+
+   - In this nested loop, for each column `i`, we maintain a counter `cnt`. If the current cell is 1, we increment `cnt`, and if it's 0, we reset `cnt` to 0. This way, `one[j][i]` keeps track of the height of consecutive 1's up to row `j` in column `i`.
+
+6. **Sort Rows of Heights**: After populating the heights, sort each row of the `one` matrix in descending order.
+
+   ```cpp
+   for(int i = 0; i < m; i++)
+       sort(one[i].rbegin(), one[i].rend());
+   ```
+
+   - Sorting helps us to easily determine how many rectangles can be formed with the heights available in the histogram.
+
+7. **Calculate Maximum Area**: Iterate through the sorted heights and calculate the maximum area for each height.
+
+   ```cpp
+   for(int i = 0; i < m; i++) {
+       for(int j = 0; j < n; j++) {
+           res = max(res, one[i][j] * (j + 1));
+       }
+   }
+   ```
+
+   - For each height `one[i][j]`, the maximum rectangle that can be formed is `one[i][j] * (j + 1)`, where `(j + 1)` represents the width. The outer loop iterates through the rows, while the inner loop iterates through the sorted heights in that row.
+
+8. **Return Result**: Finally, return the result, which contains the area of the largest rectangle found.
+
+   ```cpp
+   return res;
+   }
+   ```
+
+### Complexity
+
+- **Time Complexity**: The overall time complexity of this algorithm is \(O(m \cdot n \cdot \log n)\). This comes from iterating through all elements to compute the histogram heights (\(O(m \cdot n)\)), and sorting each row of heights (\(O(n \cdot \log n)\)).
+
+- **Space Complexity**: The space complexity is \(O(m \cdot n)\) due to the additional storage required for the `one` matrix that maintains the histogram heights.
+
+### Conclusion
+
+In conclusion, the provided solution efficiently calculates the area of the largest rectangle of 1's in a binary matrix by transforming the problem into a histogram representation. By keeping track of the heights of 1's in each column and sorting these heights, we can quickly calculate the potential maximum areas for rectangles.
+
+This method ensures that we consider all possible rectangles while optimizing the search using sorting, leading to a clear and efficient solution. The implementation is straightforward and follows a logical flow that leverages fundamental data structures, making it an excellent example of applying combinatorial techniques to solve a geometric problem in a matrix. Overall, this solution is effective for a variety of matrix sizes typically encountered in algorithm challenges.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/largest-submatrix-with-rearrangements/description/)
+
 ---
 {{< youtube NYyIVuSCfOA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1732: Find the Highest Altitude](https://grid47.xyz/leetcode/solution-1732-find-the-highest-altitude/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

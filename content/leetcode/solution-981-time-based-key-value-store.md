@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/eVi4gDimCoo/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/time-based-key-value-store/description/)
-
 ---
 **Code:**
 
@@ -60,9 +58,116 @@ public:
  * string param_2 = obj->get(key,timestamp);
  */
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/981.md" >}}
+### Problem Statement
+
+The problem asks to implement a **TimeMap** class that supports two operations:
+
+1. **`set(key, value, timestamp)`**: This operation stores a key-value pair along with a timestamp. It should allow storing multiple values for the same key at different timestamps.
+
+2. **`get(key, timestamp)`**: This operation retrieves the most recent value stored for the given key at or before the given timestamp. If no such value exists, it should return an empty string.
+
+This problem tests the ability to store key-value pairs with time-based indexing and efficiently retrieve the most recent value for a given key at a specific timestamp.
+
+### Approach
+
+To solve the problem, we need to efficiently store and retrieve key-value pairs with respect to their timestamps. The idea is to utilize a **map** (or dictionary) to store the keys, where each key maps to a vector of **timestamp-value pairs**. We will then use binary search to efficiently retrieve the most recent value for a key at or before the requested timestamp.
+
+#### Data Structures Used:
+- **map<string, vector<pair<int, string>>>**:
+  - A map is used to store keys, where each key is mapped to a vector of pairs. Each pair consists of a timestamp and a value.
+  - The vector will store the timestamps in increasing order, ensuring that we can efficiently retrieve the most recent value using binary search.
+  
+- **Binary Search**:
+  - For the `get()` operation, we will use binary search on the vector associated with a key to find the most recent timestamp that is less than or equal to the provided timestamp. This allows for a fast retrieval operation.
+
+#### Steps for Each Operation:
+1. **`set(key, value, timestamp)`**:
+   - For each `set` call, we store the given value at the given timestamp. Since the timestamps are stored in increasing order, we append the new pair `(timestamp, value)` to the vector corresponding to the key.
+   - This operation is done in **O(log n)** due to the use of a map for storing key-value pairs.
+
+2. **`get(key, timestamp)`**:
+   - For each `get` call, we perform binary search on the vector of timestamp-value pairs associated with the given key. The binary search helps find the most recent timestamp that is less than or equal to the requested timestamp. 
+   - The binary search ensures that the `get()` operation runs in **O(log n)** time.
+
+### Code Breakdown (Step by Step)
+
+#### 1. **Class Definition**:
+```cpp
+class TimeMap {
+public:
+    map<string, vector<pair<int, string>>> mp;
+    TimeMap() {
+        
+    }
+```
+- The `TimeMap` class has a member variable `mp`, which is a map that stores the key-value pairs. Each key (a string) maps to a vector of pairs, where each pair consists of a timestamp (an integer) and a value (a string).
+
+#### 2. **set Method**:
+```cpp
+    void set(string key, string value, int timestamp) {
+        mp[key].push_back(make_pair(timestamp, value));
+    }
+```
+- The `set` method stores the key-value pair along with the timestamp in the map `mp`.
+- We use `push_back` to append a pair `(timestamp, value)` to the vector associated with the key.
+- This ensures that we can store multiple values for the same key at different timestamps.
+
+#### 3. **get Method**:
+```cpp
+    string get(string key, int ts) {
+        if(!mp.count(key)) return "";
+```
+- The `get` method first checks if the key exists in the map. If the key is not found, it returns an empty string (`""`).
+
+```cpp
+        int l = 0, r = mp[key].size() - 1;
+        while(l <= r) {
+            int m = l + (r - l) / 2;
+```
+- If the key exists, we perform a binary search on the vector of pairs corresponding to the key. 
+- We initialize two pointers `l` (left) and `r` (right) to define the search range, which spans the entire vector.
+
+```cpp
+            if(ts > mp[key][m].first) {
+                if(m == r || ts < mp[key][m + 1].first)
+                    return mp[key][m].second;
+                l = m + 1;
+            } else if(ts < mp[key][m].first)
+                r = m - 1;
+            else return mp[key][m].second;
+```
+- In the binary search loop:
+  - If the current timestamp (`ts`) is greater than the timestamp of the midpoint (`mp[key][m].first`), this means we need to search in the right half of the vector, so we move the left pointer to `m + 1`.
+  - If the current timestamp is less than the midpoint timestamp, we search the left half, adjusting the right pointer to `m - 1`.
+  - If we find an exact match for the timestamp (`ts == mp[key][m].first`), we return the corresponding value (`mp[key][m].second`).
+  - If `ts > mp[key][m].first`, we continue searching for a closer match. If the next timestamp is greater than `ts`, then we know the current timestamp is the most recent timestamp less than or equal to `ts`, and we return its value.
+
+```cpp
+        return "";
+    }
+```
+- If no match is found, the function returns an empty string.
+
+### Complexity
+
+- **Time Complexity**:
+  - **`set` operation**: O(log n) — Inserting a key-value pair into the map takes logarithmic time, and each key-value pair insertion into the vector is an O(1) operation.
+  - **`get` operation**: O(log n) — The binary search on the vector associated with each key takes logarithmic time.
+  
+  Therefore, both operations (`set` and `get`) have a time complexity of O(log n), where `n` is the number of elements stored for a given key.
+
+- **Space Complexity**:
+  - The space complexity of the solution is **O(m)**, where `m` is the total number of key-value pairs stored across all keys. The map stores the key-value pairs along with their timestamps, and the space required is proportional to the number of pairs.
+
+### Conclusion
+
+The `TimeMap` class efficiently handles the operations `set(key, value, timestamp)` and `get(key, timestamp)` using a map and binary search. The use of binary search ensures that the `get` operation is efficient, even with a large number of timestamps stored for a given key. This solution is optimal for the problem as it supports both operations in **O(log n)** time, where `n` is the number of timestamps stored for a given key, making it well-suited for real-time applications that require time-based lookups.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/time-based-key-value-store/description/)
+
 ---
 {{< youtube eVi4gDimCoo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #983: Minimum Cost For Tickets](https://grid47.xyz/leetcode/solution-983-minimum-cost-for-tickets/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

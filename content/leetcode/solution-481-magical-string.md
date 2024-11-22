@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/-iFDu2kaCpY/maxresdefault.webp"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/magical-string/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/481.webp" 
     alt="A sequence where the magical string gradually forms, with each step softly glowing as the pattern emerges."
@@ -43,9 +41,68 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/481.md" >}}
+### Problem Statement
+
+The task is to generate a special sequence known as the "magical string" for a given integer `n`. The magical string is defined as follows:
+1. It begins with "122".
+2. The sequence continues by appending groups of '1's and '2's based on the values in the sequence itself. For example, if the sequence reaches a position with the value `1`, it appends a single character (`1` or `2`); if it reaches a position with the value `2`, it appends two characters.
+3. The sequence toggles between appending '1's and '2's to create a unique pattern.
+
+The goal is to generate the first `n` characters of the magical string and count the number of '1's within this range.
+
+### Approach
+
+To solve this problem efficiently, we use a dynamic approach with a few critical steps:
+
+1. **Initialize the Magical String**: Begin with a string `s` initialized as "122", the base pattern.
+2. **Pointer and Toggle Mechanism**: Maintain a pointer `i` that starts at position 2 (since the first two values are fixed). This pointer helps determine how many characters should be added based on the value at each position in `s`. The toggle mechanism is handled by alternating between '1' and '2' using a bitwise XOR operation.
+3. **Dynamic Construction**: Using a while loop, extend the magical string until it reaches the required length `n`. For each step, we:
+   - Append a certain number of characters (`1` or `2`) based on the value at `s[i]`. 
+   - If the value is `1`, we add a single character (`1` or `2`), and if it's `2`, we add two characters of the alternating value.
+4. **Counting '1's**: After constructing enough of the sequence, we count the number of '1's within the first `n` characters.
+
+This approach allows the magical string to be generated in a memory-efficient manner, without predefining all elements, by dynamically growing the string as needed.
+
+### Code Breakdown (Step by Step)
+
+The solution code provided accomplishes these steps with simplicity:
+
+1. **Initialization**:
+   ```cpp
+   string s = "122";
+   int i = 2;
+   ```
+   Here, we initialize `s` with the starting sequence "122" and set `i` to 2. The value at `s[i]` will be used to control the number of characters appended in each step.
+
+2. **Growing the Magical String**:
+   ```cpp
+   while(s.size() < n)
+       s += string(s[i++] - '0', s.back() ^ 3);
+   ```
+   - **Loop Condition**: The `while` loop runs until `s` contains at least `n` characters.
+   - **Appending Characters**: Inside the loop, `s[i++] - '0'` calculates the integer value at position `i`. The expression `s.back() ^ 3` toggles the character to be appended. This leverages the bitwise XOR operation, where `s.back()` gives the last character in `s` (either '1' or '2'), and XORing it with 3 toggles it ('1' to '2' or '2' to '1').
+
+3. **Counting '1's**:
+   ```cpp
+   return count(s.begin(), s.begin() + n, '1');
+   ```
+   After constructing the string, we use `count` to determine the number of '1's within the first `n` characters.
+
+### Complexity
+
+The time complexity of this algorithm is approximately O(n), as we are dynamically constructing and growing the string to contain the first `n` characters. This approach ensures minimal operations by leveraging prefix addition, which results in a linear time complexity for appending characters.
+
+The space complexity is also O(n) since we are storing the first `n` characters in the string `s`. This space usage is necessary to achieve the desired solution within the specified constraints.
+
+### Conclusion
+
+In summary, this solution provides an efficient and elegant way to generate and analyze the magical string up to `n` characters. By using pointer-based dynamic construction and bitwise operations to toggle characters, we minimize both time and space complexity. The use of the magical string generation technique in this code demonstrates a novel approach to string manipulation and sequence construction, making it well-suited for problems involving dynamic pattern generation.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/magical-string/description/)
+
 ---
 {{< youtube -iFDu2kaCpY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #486: Predict the Winner](https://grid47.xyz/leetcode/solution-486-predict-the-winner/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

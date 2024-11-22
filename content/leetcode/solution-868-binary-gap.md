@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/I5pfHLmrBrA/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/binary-gap/description/)
-
 ---
 **Code:**
 
@@ -38,9 +36,104 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/868.md" >}}
+### Problem Statement
+
+The problem asks to find the **maximum distance** between two consecutive `1` bits in the binary representation of a given number `n`. The binary gap is defined as the number of positions between two consecutive `1` bits, and the goal is to return the largest such gap in the binary representation of `n`. If there are no two consecutive `1` bits, the result should be `0`.
+
+#### Example:
+
+- **Input**: `n = 22`
+- **Binary Representation of `n`**: `10110`
+- **Output**: `2`
+- **Explanation**: The binary representation of `22` is `10110`, and the maximum gap between two consecutive `1` bits is `2` (between positions 2 and 4).
+
+### Problem Explanation
+
+We are given an integer `n`, and we need to compute the largest binary gap, which is the maximum distance between two consecutive `1` bits in its binary representation. The task is to:
+1. Convert the number into its binary form.
+2. Track the maximum distance between any two consecutive `1` bits in the binary representation.
+
+For example:
+- `n = 5` has a binary representation of `101`. The largest gap between consecutive `1`s is `2`.
+- `n = 8` has a binary representation of `1000`. There are no consecutive `1`s, so the result is `0`.
+
+### Approach
+
+The strategy to solve this problem involves the following steps:
+1. **Initialize** a variable to store the result (`res`) and a variable (`d`) to track the current distance between two consecutive `1`s.
+2. **Loop through each bit** of the number `n`. For each bit:
+   - **Check if the bit is `1`**: If it's `1`, calculate the distance from the previous `1` bit and update the result.
+   - **Reset the distance** after a `1` is encountered.
+3. **Shift the number** to the right to check the next bit. Continue this process until all bits have been processed.
+4. **Return the result**.
+
+By using bitwise operations (shifting and modulo), the solution efficiently processes the number without needing to explicitly convert it to a binary string.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Initialize the Result and Distance
+
+```cpp
+int res = 0;
+```
+- The variable `res` will hold the largest binary gap encountered. We initialize it to `0`.
+
+```cpp
+for (int d = -32; n; n >>= 1, d++)
+```
+- The `for` loop iterates over the bits of the number `n`. The variable `d` is initialized to `-32` (since the number of bits in a 32-bit integer is 32) and is incremented after each iteration to represent the position of the current bit. The condition `n` ensures the loop continues until all bits of `n` have been processed.
+
+- The `n >>= 1` operation performs a right shift on `n`, which moves each bit of the number one position to the right, effectively checking the next bit.
+
+#### Step 2: Check if the Current Bit is `1`
+
+```cpp
+if (n % 2) 
+{
+    res = max(res, d);
+    d = 0;
+}
+```
+- The condition `n % 2` checks if the least significant bit of `n` is `1`. If it is:
+  - We update the result `res` to the maximum of the current result and the distance `d`. This ensures that we keep track of the largest gap between consecutive `1` bits.
+  - After encountering a `1`, we reset the distance `d` to `0`, as the next gap will start from this `1` bit.
+
+#### Step 3: Return the Result
+
+```cpp
+return res;
+```
+- After the loop completes and all bits of `n` have been processed, we return the value of `res`, which represents the largest distance between consecutive `1` bits.
+
+### Complexity
+
+#### Time Complexity:
+The time complexity of the solution is `O(log n)`:
+- The number `n` has a logarithmic number of bits (specifically, at most `log(n)` bits).
+- The loop iterates over each bit of the number, performing constant time operations inside the loop.
+- Therefore, the overall time complexity is proportional to the number of bits in `n`, which is `O(log n)`.
+
+#### Space Complexity:
+The space complexity of this solution is `O(1)`:
+- We only use a few integer variables (`res`, `d`) and do not allocate additional memory for arrays or data structures that grow with the size of the input.
+- Thus, the space complexity is constant, i.e., `O(1)`.
+
+### Conclusion
+
+This solution efficiently computes the largest binary gap between consecutive `1` bits in the binary representation of a given number `n`. By using bitwise operations such as right shifting (`n >>= 1`) and modulo (`n % 2`), we can process the number bit by bit without explicitly converting it to a binary string. The approach has an optimal time complexity of `O(log n)` and constant space complexity `O(1)`, making it highly efficient for large inputs.
+
+Key points:
+- The algorithm iterates over the bits of the integer `n`, calculating the distance between consecutive `1` bits.
+- By using bitwise operations, the solution avoids the overhead of converting the number to a string or array, leading to a more efficient implementation.
+- The time and space complexities ensure that this solution scales well with large inputs, making it suitable for a variety of scenarios where binary representation analysis is needed.
+
+This code is an example of how bitwise manipulation can be leveraged to solve problems involving binary numbers efficiently.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/binary-gap/description/)
+
 ---
 {{< youtube I5pfHLmrBrA >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #869: Reordered Power of 2](https://grid47.xyz/leetcode/solution-869-reordered-power-of-2/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

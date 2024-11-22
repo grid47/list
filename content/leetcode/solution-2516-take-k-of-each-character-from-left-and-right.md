@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi_webp/QI4kCksMru0/maxresdefault.webp"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/take-k-of-each-character-from-left-and-right/description/)
-
 ---
 **Code:**
 
@@ -47,9 +45,141 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/2516.md" >}}
+### Problem Statement
+
+The problem asks to find the minimum length of a substring that can be taken from a given string `s` such that in the substring, each of the characters 'a', 'b', and 'c' appears at least `k` times. If no such substring exists, return `-1`. If there are multiple such substrings, return the length of the shortest one.
+
+### Approach
+
+To solve this problem efficiently, we need to use a sliding window technique combined with frequency counting. The sliding window approach is particularly useful for problems that involve substrings or subarrays with specific conditions, like counting characters or ensuring certain properties hold over a range of indices.
+
+### Step-by-Step Explanation
+
+We will employ the following steps to solve the problem:
+
+1. **Initial Frequency Count**: 
+   - We begin by counting the frequency of each character in the entire string `s`. If any of the characters 'a', 'b', or 'c' appear less than `k` times in the string, it is impossible to form a valid substring, so we immediately return `-1`.
+
+2. **Sliding Window**: 
+   - We will maintain a sliding window with two pointers (`i` and `j`) and try to expand the window by incrementing the right pointer (`i`) while ensuring that the frequency of characters 'a', 'b', and 'c' inside the window is at least `k`. 
+   - If the frequency of any character falls below `k` within the window, we increment the left pointer (`j`) to reduce the window size and restore the condition that each of 'a', 'b', and 'c' should appear at least `k` times.
+
+3. **Maximize Window Size**:
+   - For each window, we calculate its size (i.e., the number of characters inside the window) and track the largest window size that satisfies the condition. This is done by keeping track of `mx`, which stores the maximum valid window size found so far.
+
+4. **Calculate Result**:
+   - After iterating over all possible windows, the result is determined by subtracting the maximum valid window size from the length of the string `s`. The intuition is that the characters outside this maximum valid window must be removed to satisfy the condition.
+
+### Code Breakdown
+
+#### Step 1: Initialize Frequency Count for 'a', 'b', and 'c'
+```cpp
+map<char, int> mp;
+for(int i = 0; i < s.size(); i++) 
+    mp[s[i]]++;
+```
+- We use a `map` to count the frequency of each character in the string `s`. 
+- This will help us check if any of the characters 'a', 'b', or 'c' appear fewer than `k` times. If any of them do, we can immediately return `-1`, as it's impossible to find a valid substring.
+
+#### Step 2: Check if it is Possible to Form a Valid Substring
+```cpp
+if(mp['a'] < k || mp['b'] < k || mp['c'] < k) 
+    return -1;
+```
+- If the string doesn't have enough of 'a', 'b', or 'c', we return `-1` because no valid substring can be formed.
+
+#### Step 3: Sliding Window with Two Pointers
+```cpp
+int j = 0, mx = 0;
+for(int i = 0; i < s.size(); i++) {
+    // select max window which does not decrements frq below k;
+    mp[s[i]]--;
+    while(j <= i && mp[s[i]] < k) {
+        mp[s[j]]++;
+        j++;
+    }
+    mx = max(mx, i - j + 1);
+}
+```
+- We start with two pointers: `i` and `j`, where `i` represents the end of the current window and `j` represents the start.
+- For each character at index `i`, we decrease its frequency in the `map` to represent that it is part of the current window.
+- Then, we check whether the frequency of any character ('a', 'b', or 'c') in the window falls below `k`. If so, we increment the `j` pointer to shrink the window and restore the condition that the frequency of each character should be at least `k`.
+- We also keep track of the size of the largest valid window found so far (`mx`).
+
+#### Step 4: Return the Result
+```cpp
+return s.size() - mx;
+```
+- Once we have found the largest valid window that satisfies the condition, the result is the difference between the total length of the string `s` and the largest window size. This gives us the minimum number of characters that need to be removed from the string to satisfy the condition.
+
+### Example Walkthrough
+
+#### Example 1:
+**Input**:
+```cpp
+string s = "aaabbbccc", k = 2;
+```
+- Initial frequency count:
+  - `a`: 3, `b`: 3, `c`: 3.
+- All characters appear more than `k = 2` times.
+- Now, we slide the window over the string to find the shortest substring that can be removed:
+  - In the first pass, the entire string is valid, as it contains at least `k` of each character. The maximum window size is 9.
+  - Therefore, the result is `9 - 9 = 0`.
+
+**Output**:
+```cpp
+0
+```
+
+#### Example 2:
+**Input**:
+```cpp
+string s = "aabbcc", k = 2;
+```
+- Initial frequency count:
+  - `a`: 2, `b`: 2, `c`: 2.
+- All characters appear exactly `k = 2` times.
+- In this case, the entire string is valid, so the result is `6 - 6 = 0`.
+
+**Output**:
+```cpp
+0
+```
+
+#### Example 3:
+**Input**:
+```cpp
+string s = "aabbbccc", k = 3;
+```
+- Initial frequency count:
+  - `a`: 2, `b`: 3, `c`: 3.
+- The character 'a' appears only 2 times, which is less than `k = 3`. Hence, the answer is `-1` because we cannot form a valid substring where each character appears at least `k` times.
+
+**Output**:
+```cpp
+-1
+```
+
+### Complexity Analysis
+
+#### Time Complexity:
+- **Initial Frequency Count**: We iterate over the string `s` to calculate the frequency of each character, which takes \(O(n)\), where `n` is the length of the string.
+- **Sliding Window**: We move both pointers (`i` and `j`) over the string, and for each index `i`, we potentially move `j` forward to restore the validity of the window. The total time complexity of this part is also \(O(n)\).
+- **Overall Time Complexity**: The time complexity is \(O(n)\), where `n` is the length of the string.
+
+#### Space Complexity:
+- We use a `map` to store the frequency of characters in the string. Since there are only three characters of interest ('a', 'b', and 'c'), the space complexity is \(O(1)\), as the size of the map is constant.
+- **Overall Space Complexity**: The space complexity is \(O(1)\), since the space used does not scale with the input size.
+
+### Conclusion
+
+The sliding window technique is highly effective for problems involving substrings with specific conditions. This solution efficiently finds the minimum number of characters that must be removed to satisfy the condition using \(O(n)\) time and \(O(1)\) space. The approach scales well even for large input sizes, ensuring that the solution is both time-efficient and space-efficient.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/take-k-of-each-character-from-left-and-right/description/)
+
 ---
 {{< youtube QI4kCksMru0 >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #2517: Maximum Tastiness of Candy Basket](https://grid47.xyz/leetcode/solution-2517-maximum-tastiness-of-candy-basket/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

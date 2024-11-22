@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/5xvMeI0R6uY/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/convex-polygon/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/469.webp" 
     alt="A series of points forming a convex polygon, with the final shape softly glowing once completed."
@@ -45,9 +43,80 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/469.md" >}}
+### Problem Statement
+
+The problem asks you to implement a function `rand10()` that generates a random integer in the range 1 to 10 using another function `rand7()` which generates a random integer in the range 1 to 7. You are not allowed to use additional data structures or libraries and should focus on transforming the behavior of `rand7()` to produce the desired output.
+
+### Approach
+
+The key idea here is to use the randomness provided by `rand7()` to simulate a uniform distribution over a range of numbers that can be mapped into the range 1 to 10. Since `rand7()` produces values between 1 and 7, we will need to use combinations of multiple `rand7()` calls to create a range that includes 1 to 10 with equal probability.
+
+The approach revolves around the following steps:
+
+1. **Generate a number in a larger range**: Using two calls to `rand7()`, we can generate a number that is in a larger range. Specifically, by combining two `rand7()` calls, we can produce a range of numbers from 0 to 48 (since `7 * 7 = 49` and the index starts at 0).
+  
+2. **Rejection Sampling**: We generate numbers from the combined range (0 to 48) and only use those numbers that fall within the desired range (1 to 10). If the number falls outside the range (i.e., between 40 and 48), we discard it and regenerate until we get a valid number.
+
+3. **Mapping to 1-10**: Once we have a valid number between 0 and 39, we can map it directly to a number between 1 and 10 using modulo arithmetic.
+
+This approach ensures that each number in the range 1 to 10 is generated with equal probability.
+
+### Code Breakdown (Step by Step)
+
+#### Step 1: Define the Result and Loop Condition
+
+```cpp
+int result = 40;
+while(result >= 40) {
+    result = (7 * (rand7() - 1)) + (rand7() - 1);
+}
+```
+
+- First, we initialize a variable `result` with a value of 40. The purpose of this is to ensure that we only continue generating random numbers while the result is greater than or equal to 40. The goal here is to generate numbers in the range from 0 to 48 using two `rand7()` calls, and then discard any values that fall between 40 and 48 to ensure uniform distribution.
+- We then enter a `while` loop that runs until the `result` is less than 40. The `rand7()` function is called twice:
+  - `rand7() - 1` produces a number between 0 and 6.
+  - `7 * (rand7() - 1)` scales the result of the first `rand7()` call by 7, giving a range of numbers between 0 and 42.
+  - Adding another `(rand7() - 1)` shifts the range to produce numbers between 0 and 48.
+
+#### Step 2: Check if the Result Falls Within the Desired Range
+
+The check `if (result >= 40)` ensures that we reject any values that are greater than or equal to 40. These values are not evenly divisible by 10, and therefore, they would create bias if included in the final distribution.
+
+#### Step 3: Map the Result to the Desired Range (1-10)
+
+```cpp
+return result % 10 + 1;
+```
+
+- Once we have a valid result that falls within the range 0 to 39, we use the modulo operator to map the result to the range 1 to 10. This is achieved by performing `result % 10`, which gives a remainder between 0 and 9, and then adding 1 to shift the range to 1 to 10.
+
+#### Step 4: Return the Final Result
+
+Finally, the computed result is returned as the output of the `rand10()` function.
+
+### Complexity
+
+#### Time Complexity:
+
+The time complexity of the solution depends on how often the `while` loop executes. Each iteration of the loop generates a number in the range from 0 to 48 using two calls to `rand7()`. Since the number of valid results is 40 out of 49 possible outcomes, the probability of getting a valid result is `40/49`.
+
+Therefore, the expected number of iterations before a valid number is generated is approximately `49/40`, which is just over 1.22 iterations. Since each iteration involves two calls to `rand7()`, the overall time complexity is constant on average, i.e., **O(1)**.
+
+#### Space Complexity:
+
+The space complexity is **O(1)** because the function only uses a fixed amount of space, regardless of the input size. The variables `result` and the temporary variables used in `rand7()` calls do not grow with the size of the problem.
+
+### Conclusion
+
+This solution effectively transforms the random outputs of `rand7()` into a uniform distribution of numbers in the range 1 to 10 by leveraging the technique of **rejection sampling** and **modulo arithmetic**. It ensures that each number in the desired range has an equal probability of being chosen, without introducing any bias. 
+
+By using two calls to `rand7()` and rejecting any values that don't fall within the valid range, this method efficiently produces the desired output with constant time and space complexity. This is an elegant and optimal solution to the problem, with minimal overhead and maximum efficiency.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/convex-polygon/description/)
+
 ---
 {{< youtube 5xvMeI0R6uY >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #474: Ones and Zeroes](https://grid47.xyz/leetcode/solution-474-ones-and-zeroes/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

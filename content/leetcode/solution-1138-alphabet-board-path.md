@@ -18,8 +18,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/rk-aB4rEOyU/maxresdefault.jpg"
 
 
 
-[`Problem Link`](https://leetcode.com/problems/alphabet-board-path/description/)
-
 ---
 **Code:**
 
@@ -41,9 +39,109 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/1138.md" >}}
+
+### Problem Statement
+The problem involves navigating through a 5x5 grid representing the English alphabet, arranged in the following manner:
+
+```
+a b c d e
+f g h i j
+k l m n o
+p q r s t
+u v w x y
+z
+```
+
+The task is to find a sequence of moves that spell out a given target string, `target`. The allowed moves are:
+- **U** (up)
+- **D** (down)
+- **L** (left)
+- **R** (right)
+
+The string must be constructed by moving from one character to the next, starting at the top left corner (position `(0, 0)` which corresponds to character 'a'). After reaching each character, the algorithm must record the path taken using the specified directional commands and append an exclamation mark (`!`) after each character.
+
+### Approach
+To solve this problem, the algorithm:
+1. Initializes the starting position at the top left corner of the board.
+2. Iterates through each character of the target string to determine the necessary moves to reach that character from the current position.
+3. Computes the required vertical and horizontal moves and appends the respective directions to the result string.
+4. Updates the current position after each character.
+
+The algorithm efficiently computes the path using simple arithmetic to derive the coordinates of each character based on its position in the alphabet.
+
+### Code Breakdown (Step by Step)
+Here’s a detailed breakdown of the code:
+
+```cpp
+class Solution {
+public:
+    string alphabetBoardPath(string target) {
+```
+- **Line 1-2**: A class named `Solution` is defined, with a public member function `alphabetBoardPath` that takes a string `target` as input. This function is responsible for generating the path to spell out the target string.
+
+```cpp
+        string res;
+        int x = 0, y = 0;
+```
+- **Line 3-4**: 
+  - `res`: A string variable initialized to store the resultant path.
+  - `x` and `y`: Two integer variables initialized to `0`, representing the current position on the board, starting at `(0, 0)`.
+
+```cpp
+        for(auto ch: target) {
+```
+- **Line 5**: A for loop iterates over each character (`ch`) in the target string.
+
+```cpp
+            int x1 = (ch - 'a') % 5, y1 = (ch - 'a') / 5;
+```
+- **Line 6**: 
+  - `x1` is calculated as the column index of the character on the board by taking the modulo of the character's position in the alphabet (`ch - 'a'`) with 5.
+  - `y1` is calculated as the row index by performing integer division of the character's position by 5.
+
+```cpp
+            res +=  string(max(0, y - y1), 'U') +
+                    string(max(0, x1 - x), 'R') +
+                    string(max(0, x - x1), 'L') +
+                    string(max(0, y1 - y), 'D') + '!';
+```
+- **Line 7**: This line constructs the path to the next character:
+  - `string(max(0, y - y1), 'U')`: Adds 'U' for each unit moved up if `y` (current row) is greater than `y1` (target row).
+  - `string(max(0, x1 - x), 'R')`: Adds 'R' for each unit moved right if `x1` (target column) is greater than `x` (current column).
+  - `string(max(0, x - x1), 'L')`: Adds 'L' for each unit moved left if `x` (current column) is greater than `x1`.
+  - `string(max(0, y1 - y), 'D')`: Adds 'D' for each unit moved down if `y1` (target row) is greater than `y` (current row).
+  - The exclamation mark `!` is appended after reaching the character.
+
+```cpp
+            x = x1, y = y1;
+```
+- **Line 8**: Updates the current position to the new coordinates `(x1, y1)` after reaching the character.
+
+```cpp
+        }
+```
+- **Line 9**: This closes the for loop.
+
+```cpp
+        return res;
+    }
+};
+```
+- **Line 10-11**: The function returns the complete path string stored in `res`, and the class definition is closed.
+
+### Complexity
+- **Time Complexity**: The time complexity of this algorithm is \( O(m) \), where \( m \) is the length of the target string. Each character requires a constant amount of work to calculate moves and update the result.
+- **Space Complexity**: The space complexity is \( O(m) \) as well, due to the storage of the resultant string that can potentially be proportional to the number of characters in the target string.
+
+### Conclusion
+The provided C++ solution effectively computes the path to spell out a target string on a 5x5 alphabet board. By efficiently calculating the necessary movements based on the current and target positions, the algorithm ensures that the resulting path is generated with optimal time and space complexity. This approach is both intuitive and efficient, making it suitable for similar grid-based pathfinding problems.
+
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/alphabet-board-path/description/)
+
 ---
 {{< youtube rk-aB4rEOyU >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #1139: Largest 1-Bordered Square](https://grid47.xyz/leetcode/solution-1139-largest-1-bordered-square/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |

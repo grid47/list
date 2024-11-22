@@ -17,8 +17,6 @@ youtube_thumbnail="https://i.ytimg.com/vi/s7AvT7cGdSo/maxresdefault.jpg"
 +++
 
 
-
-[`Problem Link`](https://leetcode.com/problems/permutations/description/)
 {{< rmtimg 
     src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/46.webp" 
     alt="A sequence of shimmering, rotating orbs, rearranging gently in endless variations."
@@ -59,9 +57,132 @@ public:
     }
 };
 {{< /highlight >}}
+---
 
-{{< ghcode "https://raw.githubusercontent.com/grid47/list/refs/heads/main/exp/46.md" >}}
+### 🔄 **Unique Permutations of Integers**
+
+The problem asks to generate all unique permutations of a list of integers, `nums`. The challenge is to handle potential duplicates in the input array and ensure that only distinct permutations are returned.
+
+---
+
+### 🚀 **Approach**
+
+To solve this, we'll use **backtracking** with a **map** to avoid duplicate permutations. Backtracking is a technique that explores all possible combinations recursively, and here, it will help generate all permutations. We will also keep track of which elements have been used in the current permutation to avoid repetitions.
+
+1. **Backtracking**: We recursively build permutations by exploring each element, adding it to the current permutation until the permutation reaches the length of the original array.
+2. **Avoiding Duplicates**: We use a `map` (or a similar structure) to ensure that each element is used only once in the current permutation, which prevents duplicates.
+3. **Base Case**: Once the current permutation reaches the length of the input array, we add it to the result list.
+4. **Recursive Case**: For each element, if it hasn’t been used yet, we include it in the current permutation, recurse, and backtrack once done.
+
+---
+
+### 🖥️ **Code Breakdown (Step-by-Step)**
+
+#### Step 1: `permute` Function
+
+```cpp
+vector<vector<int>> permute(vector<int>& nums) {
+    map<int, bool> mp;
+    vector<vector<int>> ans;
+    vector<int> tmp;
+    bt(ans, tmp, nums, 0, mp);
+    return ans;
+}
+```
+
+- **Input**: `nums` is the vector of integers to generate permutations from.
+- **Variables**:
+  - `mp`: A `map` to track whether an element is used in the current permutation.
+  - `ans`: A vector to store the result list of unique permutations.
+  - `tmp`: A temporary vector used to build the current permutation.
+- **Return**: The function calls the backtracking helper `bt` to start generating permutations. Once complete, the list `ans` with unique permutations is returned.
+
+#### Step 2: `bt` (Backtracking) Function
+
+```cpp
+void bt(vector<vector<int>> &ans, vector<int> &tmp, vector<int> &nums, int idx, map<int, bool> &mp) {
+    if(idx == nums.size()) {
+        ans.push_back(tmp);
+        return;
+    }
+    
+    for(int i = 0; i < nums.size(); i++) {
+        if(mp.count(nums[i])) continue;  // Skip if element is already used
+        
+        mp[nums[i]] = true;  // Mark element as used
+        tmp.push_back(nums[i]);  // Add to current permutation
+        bt(ans, tmp, nums, idx + 1, mp);  // Recurse to build next element
+        
+        tmp.pop_back();  // Backtrack: Remove last element
+        mp.erase(nums[i]);  // Mark element as unused
+    }
+}
+```
+
+- **Base Case**: When the current index `idx` matches the size of `nums`, the temporary permutation `tmp` is complete. We then add it to `ans` and return.
+  
+  ```cpp
+  if(idx == nums.size()) {
+      ans.push_back(tmp);
+      return;
+  }
+  ```
+
+- **Loop through `nums`**: For each element in `nums`, if it has already been used (i.e., found in the `map`), we skip it to avoid duplicate permutations.
+  
+  ```cpp
+  for(int i = 0; i < nums.size(); i++) {
+      if(mp.count(nums[i])) continue;
+  }
+  ```
+
+- **Adding Elements**: If an element has not been used yet, it is added to `tmp`, and the function recursively calls itself to generate the next element of the permutation.
+  
+  ```cpp
+  mp[nums[i]] = true;
+  tmp.push_back(nums[i]);
+  bt(ans, tmp, nums, idx + 1, mp);
+  ```
+
+- **Backtracking**: After the recursion call, the element is removed from `tmp` and marked as unused in the `map`. This allows us to explore other possibilities.
+  
+  ```cpp
+  tmp.pop_back();
+  mp.erase(nums[i]);
+  ```
+
+#### Step 3: Recursion Termination
+
+Once the recursion explores all elements and permutations, the base case is reached, and the result `ans` contains all unique permutations.
+
+### 🧮 **Complexity Analysis**
+
+#### Time Complexity
+
+- The number of unique permutations of an array of length `n` is `n!`. Since we generate each permutation and process each of its `n` elements, the time complexity is:
+  - **Time Complexity:** `O(n * n!)`, where `n` is the length of the input array `nums`.
+
+#### Space Complexity
+
+- **Result Storage**: The result list `ans` stores `n!` permutations, and each permutation has `n` elements, contributing `O(n * n!)` space complexity.
+- **Recursion Stack**: The maximum depth of the recursion tree is `n`, with each call using `O(n)` space for the temporary vector `tmp` and the `map` to track used elements. Thus, the space complexity due to recursion is `O(n)`.
+  
+- **Total Space Complexity:** `O(n * n!)` for storing the result, plus `O(n)` for the recursion stack.
+
+---
+
+### 🏁 **Conclusion**
+
+This solution uses **backtracking** to efficiently generate all unique permutations of a list of integers while avoiding duplicates. By maintaining a map to track used elements, we ensure that we don’t generate repeated permutations.
+
+- **Time Complexity:** `O(n * n!)`
+- **Space Complexity:** `O(n * n!)`
+
+This approach is optimal for generating permutations and is suitable for relatively small to moderate-sized input arrays. The backtracking technique ensures all possibilities are explored while maintaining distinct permutations.
+
+[`Link to LeetCode Lab`](https://leetcode.com/problems/permutations/description/)
+
 ---
 {{< youtube s7AvT7cGdSo >}}
-| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) / Next : [LeetCode #47: Permutations II](https://grid47.xyz/leetcode/solution-47-permutations-ii/) |
+| [LeetCode Solutions Library](https://grid47.xyz/leetcode/) / [DSA Sheets](https://grid47.xyz/sheets/) / [Course Catalog](https://grid47.xyz/courses/) |
 | --- |
