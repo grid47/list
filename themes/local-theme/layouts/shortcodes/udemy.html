@@ -1,0 +1,211 @@
+<!-- layouts/shortcodes/course-card.html -->
+<a href="{{ .Get "url" }}" class="card-link">
+    <div class="elegant-course-card">
+      <div class="card-grid">
+        <div class="course-thumbnail">
+          {{ with .Get "image" }}
+            <img src="{{ . }}" alt="{{ $.Get "title" }}" loading="lazy">
+          {{ end }}
+        </div>
+        <div class="course-info">
+          <h3 class="title">{{ .Get "title" }}</h3>
+          <p class="description">{{ .Get "description" }}</p>
+          <div class="instructor">{{ .Get "instructor" }}</div>
+          <div class="metrics">
+            <div class="rating-group">
+              <span class="rating">{{ .Get "rating" }}</span>
+              <div class="stars">
+                {{ $rating := float (.Get "rating") }}
+                {{ range $i := (seq 5) }}
+                  <span class="star {{ if le $i $rating }}filled{{ end }}">★</span>
+                {{ end }}
+              </div>
+              <span class="reviews">({{ .Get "reviews" }})</span>
+            </div>
+            <div class="course-meta">
+              <span>{{ .Get "duration" }}</span>
+              <span>{{ .Get "lectures" }} lectures</span>
+              <span>{{ .Get "level" }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </a>
+  
+  <style>
+  :root {
+    --base-size: 16px;
+    --scale-ratio: 1.25;
+    --space-unit: 1rem;
+  }
+  
+  .card-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    max-width: 1200px;
+    margin: 2rem auto;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .card-link:hover {
+    transform: translateY(-2px);
+  }
+  
+  .card-link:focus {
+    outline: none;
+  }
+  
+  .card-link:focus .elegant-course-card {
+    outline: 3px solid #2d7ae5;
+    outline-offset: 2px;
+  }
+  
+  .elegant-course-card {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell, sans-serif;
+    font-size: var(--base-size);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    transition: box-shadow 0.2s ease-in-out;
+  }
+  
+  .card-link:hover .elegant-course-card {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  }
+  
+  .card-grid {
+    display: grid;
+    grid-template-columns: 320px 1fr;
+    min-height: 200px;
+  }
+  
+  .course-thumbnail {
+    position: relative;
+    overflow: hidden;
+    background: #1c1d1f;
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .course-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    transition: transform 0.3s ease;
+  }
+  
+  .card-link:hover .course-thumbnail img {
+    transform: scale(1.05);
+  }
+  
+  .course-info {
+    padding: calc(var(--space-unit) * 1.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  .title {
+    font-size: calc(var(--base-size) * var(--scale-ratio) * 1.2);
+    font-weight: 600;
+    color: #1c1d1f;
+    margin: 0 0 calc(var(--space-unit) * 0.8);
+    line-height: 1.2;
+  }
+  
+  .card-link:hover .title {
+    color: #2d7ae5;
+  }
+  
+  .description {
+    font-size: calc(var(--base-size) * 1.1);
+    color: #4a4a4a;
+    margin-bottom: calc(var(--space-unit) * 0.8);
+    line-height: 1.4;
+  }
+  
+  .instructor {
+    font-size: var(--base-size);
+    color: #666;
+    margin-bottom: calc(var(--space-unit) * 0.8);
+  }
+  
+  .metrics {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--space-unit) * 0.5);
+  }
+  
+  .rating-group {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--space-unit) * 0.5);
+  }
+  
+  .rating {
+    font-size: calc(var(--base-size) * 1.1);
+    font-weight: 700;
+    color: #b4690e;
+  }
+  
+  .stars {
+    display: flex;
+    gap: 0.2rem;
+    font-size: calc(var(--base-size) * 1.1);
+  }
+  
+  .star {
+    color: #dcdddd;
+  }
+  
+  .star.filled {
+    color: #eb8a2f;
+  }
+  
+  .reviews {
+    color: #6a6f73;
+    font-size: var(--base-size);
+  }
+  
+  .course-meta {
+    display: flex;
+    gap: calc(var(--space-unit) * 0.8);
+    font-size: var(--base-size);
+    color: #6a6f73;
+  }
+  
+  .course-meta span:not(:last-child)::after {
+    content: "•";
+    position: relative;
+    left: calc(var(--space-unit) * 0.4);
+  }
+  
+  @media (max-width: 768px) {
+    .card-grid {
+      grid-template-columns: 1fr;
+    }
+    
+    .course-thumbnail {
+      min-height: 200px;
+    }
+    
+    .course-info {
+      padding: var(--space-unit);
+    }
+    
+    .title {
+      font-size: calc(var(--base-size) * var(--scale-ratio));
+    }
+    
+    .description {
+      font-size: var(--base-size);
+    }
+  }
+  </style>
+  
