@@ -14,6 +14,7 @@ img_src = "https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/
 youtube = "Yyyi12oaK94"
 youtube_upload_date="2022-08-08"
 youtube_thumbnail="https://i.ytimg.com/vi_webp/Yyyi12oaK94/maxresdefault.webp"
+comments = true
 +++
 
 
