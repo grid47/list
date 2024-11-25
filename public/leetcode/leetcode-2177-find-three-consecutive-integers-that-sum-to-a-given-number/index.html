@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 2177: Find Three Consecutive Integers That Sum to a Given Number | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 2177: Find Three Consecutive Integers That Sum to a Given Number">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 2177: Find Three Consecutive Integers That Sum to a Given Number in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-2177-find-three-consecutive-integers-that-sum-to-a-given-number/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 2177: Find Three Consecutive Integers That Sum to a Given Number">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 2177: Find Three Consecutive Integers That Sum to a Given Number in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-04-03T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Math">
+    <meta property="article:tag" content="Simulation">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 2177: Find Three Consecutive Integers That Sum to a Given Number</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode603s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> sumOfThree(<span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> num) {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> ans;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(num <span style="color:#666">%</span><span style="color:#666">3</span> <span style="color:#666">!=</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> {num <span style="color:#666">/</span> <span style="color:#666">3</span> <span style="color:#666">-</span> <span style="color:#666">1</span>, num<span style="color:#666">/</span> <span style="color:#666">3</span>, num<span style="color:#666">/</span><span style="color:#666">3</span> <span style="color:#666">+</span> <span style="color:#666">1</span>};
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>Given a positive integer <code>num</code>, the task is to find three consecutive integers whose sum is equal to <code>num</code>. Specifically, we are looking for three integers <code>x-1</code>, <code>x</code>, and <code>x+1</code> such that:</p>
+<p>[
+(x-1) + x + (x+1) = num
+]</p>
+<p>If such a triplet of consecutive integers exists, return them as a vector of integers <code>[x-1, x, x+1]</code>. If no such triplet exists, return an empty vector.</p>
+<h3 id="approach">Approach</h3>
+<p>The solution relies on a simple mathematical observation: for three consecutive integers to sum up to a given number <code>num</code>, the number <code>num</code> must be divisible by 3. If <code>num % 3 != 0</code>, it is impossible to divide <code>num</code> into three equal parts and hence, we return an empty vector. Otherwise, we calculate the three consecutive integers by dividing <code>num</code> by 3 and adjusting for the three integers:</p>
+<ol>
+<li>The integer <code>x</code> can be found by dividing <code>num</code> by 3 (<code>num / 3</code>).</li>
+<li>The three consecutive integers are: <code>x-1</code>, <code>x</code>, and <code>x+1</code>.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<ol>
+<li>
+<p><strong>Function Declaration</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> sumOfThree(<span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> num) {
+</span></span></code></pre></div><ul>
+<li>The function <code>sumOfThree</code> is defined to return a vector of <code>long long</code> integers, and it takes a <code>long long</code> number <code>num</code> as input.</li>
+</ul>
+</li>
+<li>
+<p><strong>Check Divisibility by 3</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(num <span style="color:#666">%</span> <span style="color:#666">3</span> <span style="color:#666">!=</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>Before proceeding with calculations, the first check ensures that <code>num</code> is divisible by 3 (<code>num % 3 != 0</code>).</li>
+<li>If <code>num</code> is not divisible by 3, there is no valid triplet of consecutive integers, so an empty vector <code>ans</code> is returned.</li>
+</ul>
+</li>
+<li>
+<p><strong>Calculate the Consecutive Integers</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> {num <span style="color:#666">/</span> <span style="color:#666">3</span> <span style="color:#666">-</span> <span style="color:#666">1</span>, num <span style="color:#666">/</span> <span style="color:#666">3</span>, num <span style="color:#666">/</span> <span style="color:#666">3</span> <span style="color:#666">+</span> <span style="color:#666">1</span>};
+</span></span></code></pre></div><ul>
+<li>If <code>num</code> is divisible by 3, the triplet is calculated.</li>
+<li>First, <code>num / 3</code> gives the middle value <code>x</code> of the three consecutive integers.</li>
+<li>The three consecutive integers are <code>x-1</code>, <code>x</code>, and <code>x+1</code>. These are returned as a vector: <code>{num / 3 - 1, num / 3, num / 3 + 1}</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>The vector containing the three consecutive integers is returned if <code>num</code> is divisible by 3. Otherwise, an empty vector is returned.</li>
+</ul>
+</li>
+</ol>
+<h3 id="example-walkthrough">Example Walkthrough</h3>
+<h4 id="example-1-num--9">Example 1: <code>num = 9</code></h4>
+<ul>
+<li><strong>Step 1</strong>: Check if <code>num % 3 == 0</code>. Since <code>9 % 3 == 0</code>, we proceed.</li>
+<li><strong>Step 2</strong>: Calculate <code>x = 9 / 3 = 3</code>.</li>
+<li><strong>Step 3</strong>: The three consecutive integers are: <code>x-1 = 2</code>, <code>x = 3</code>, and <code>x+1 = 4</code>.</li>
+<li><strong>Step 4</strong>: Return the result as <code>{2, 3, 4}</code>.</li>
+</ul>
+<h4 id="example-2-num--10">Example 2: <code>num = 10</code></h4>
+<ul>
+<li><strong>Step 1</strong>: Check if <code>num % 3 == 0</code>. Since <code>10 % 3 != 0</code>, we return an empty vector <code>[]</code>.</li>
+</ul>
+<h4 id="example-3-num--15">Example 3: <code>num = 15</code></h4>
+<ul>
+<li><strong>Step 1</strong>: Check if <code>num % 3 == 0</code>. Since <code>15 % 3 == 0</code>, we proceed.</li>
+<li><strong>Step 2</strong>: Calculate <code>x = 15 / 3 = 5</code>.</li>
+<li><strong>Step 3</strong>: The three consecutive integers are: <code>x-1 = 4</code>, <code>x = 5</code>, and <code>x+1 = 6</code>.</li>
+<li><strong>Step 4</strong>: Return the result as <code>{4, 5, 6}</code>.</li>
+</ul>
+<h3 id="time-complexity">Time Complexity</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity is <strong>O(1)</strong>. This solution involves a constant number of arithmetic operations and conditional checks, making it a constant-time solution regardless of the input value of <code>num</code>.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is <strong>O(1)</strong> as well. The solution only uses a fixed amount of space to store the result, which is a vector of three integers. No additional space is used that scales with the input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>The problem of finding three consecutive integers whose sum equals a given number <code>num</code> is solved efficiently in constant time and space. The approach leverages the divisibility of <code>num</code> by 3 to quickly determine whether a valid triplet exists. If <code>num</code> is divisible by 3, the solution computes the three consecutive integers using basic arithmetic. If not, it returns an empty vector to indicate that no such triplet exists. The algorithm’s simplicity and efficiency make it well-suited for handling a wide range of inputs.</p>
+<p><a href="https://leetcode.com/problems/find-three-consecutive-integers-that-sum-to-a-given-number/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/DMBWjfh33wY?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

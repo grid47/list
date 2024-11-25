@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 769: Max Chunks To Make Sorted | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 769: Max Chunks To Make Sorted">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 769: Max Chunks To Make Sorted in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-769-max-chunks-to-make-sorted/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 769: Max Chunks To Make Sorted">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 769: Max Chunks To Make Sorted in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-08-22T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Stack">
+    <meta property="article:tag" content="Greedy">
+    <meta property="article:tag" content="Sorting">
+    <meta property="article:tag" content="Monotonic Stack">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 769: Max Chunks To Make Sorted</h1> 
+            </div>
+			<div class="article-post">
+				<h2 id="hahahugoshortcode1296s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+    <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/769.webp" 
+           alt="A sequence where chunks are sorted, with each sorted chunk glowing softly as the process completes." 
+           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    
+      <figcaption style="font-size: 0.8em; font-weight: 300; color:#555; margin-top: 4px; line-height: 1.2;">
+        Solution to LeetCode 769: Max Chunks To Make Sorted Problem
+      </figcaption>
+    
+  </figure>
+  </h2>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode1296s1hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> maxChunksToSorted(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> arr.size();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, mx <span style="color:#666">=</span> arr[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            mx <span style="color:#666">=</span> max(mx, arr[i]);
+</span></span><span style="display:flex;"><span>            res <span style="color:#666">+=</span> (mx <span style="color:#666">==</span> i);
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem requires us to determine the maximum number of chunks (subarrays) that we can split the given array into such that, when each chunk is sorted independently, the entire array becomes sorted. In other words, we need to find out how many partitions we can make in the array where each partition can be independently sorted to contribute to a globally sorted array.</p>
+<p><strong>Example 1:</strong></p>
+<ul>
+<li>
+<p>Input: <code>[4, 3, 2, 1, 0]</code></p>
+</li>
+<li>
+<p>Output: <code>1</code></p>
+<p>Here, the entire array is in reverse order, so only one chunk is needed to sort the entire array.</p>
+</li>
+</ul>
+<p><strong>Example 2:</strong></p>
+<ul>
+<li>
+<p>Input: <code>[1, 0, 2, 3, 4]</code></p>
+</li>
+<li>
+<p>Output: <code>4</code></p>
+<p>The array can be split into four chunks: <code>[1]</code>, <code>[0]</code>, <code>[2, 3, 4]</code>. Sorting each of these chunks independently results in the sorted array <code>[0, 1, 2, 3, 4]</code>.</p>
+</li>
+</ul>
+<h3 id="approach">Approach</h3>
+<p>This problem is a variation of partitioning the array based on certain conditions. The main idea is to determine the number of chunks by tracking the largest value encountered up to each index in the array. If at any index, the largest value encountered is equal to the current index, it indicates that we can form a valid partition up to that index.</p>
+<p>We use the following approach:</p>
+<ol>
+<li>
+<p><strong>Track Maximum Value Up to Each Index</strong>: As we iterate through the array, we keep track of the maximum value encountered so far. The logic is simple: for each index <code>i</code>, if the maximum value encountered up to <code>i</code> is equal to <code>i</code>, this means that we can partition the array up to this index and sort each partition independently.</p>
+</li>
+<li>
+<p><strong>Count the Valid Partitions</strong>: Each time the condition <code>mx == i</code> (where <code>mx</code> is the maximum value encountered so far) is met, it means we have found a valid partition where all elements up to index <code>i</code> can be sorted into a chunk. We increment the chunk count every time this condition holds true.</p>
+</li>
+<li>
+<p><strong>Return the Number of Chunks</strong>: After iterating through the entire array, the final count of partitions will be the number of chunks.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<h4 id="step-1-initialize-variables">Step 1: Initialize Variables</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> arr.size();
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, mx <span style="color:#666">=</span> arr[<span style="color:#666">0</span>];
+</span></span></code></pre></div><ul>
+<li>We first initialize the length of the array <code>n</code> and the result variable <code>res</code> to zero, which will keep track of the number of valid chunks.</li>
+<li>We also initialize <code>mx</code>, which tracks the maximum value encountered so far in the array. It is initially set to the first element of the array <code>arr[0]</code>.</li>
+</ul>
+<h4 id="step-2-iterate-over-the-array">Step 2: Iterate Over the Array</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    mx <span style="color:#666">=</span> max(mx, arr[i]);
+</span></span><span style="display:flex;"><span>    res <span style="color:#666">+=</span> (mx <span style="color:#666">==</span> i);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We loop through each element of the array using the index <code>i</code>.</li>
+<li>At each step, we update <code>mx</code> to be the maximum value between the current maximum (<code>mx</code>) and the current element <code>arr[i]</code>. This ensures that <code>mx</code> always holds the largest value encountered up to index <code>i</code>.</li>
+<li>Then, we check if <code>mx == i</code>. This condition means that the maximum value encountered up to index <code>i</code> is exactly <code>i</code>. In this case, we know that all elements up to this index can be sorted independently in a valid chunk. If the condition holds true, we increment the chunk count <code>res</code> by 1.</li>
+</ul>
+<h4 id="step-3-return-the-result">Step 3: Return the Result</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After the loop finishes, we return the value of <code>res</code>, which represents the maximum number of chunks that the array can be split into such that each chunk can be sorted independently to form a globally sorted array.</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<h4 id="time-complexity">Time Complexity:</h4>
+<ul>
+<li><strong>O(n)</strong>: The time complexity of this solution is linear because we only iterate through the array once. The <code>max()</code> function takes constant time for each element, and we are only updating the value of <code>mx</code> and checking the condition <code>mx == i</code> at each step. Therefore, the time complexity is <strong>O(n)</strong>, where <code>n</code> is the length of the array.</li>
+</ul>
+<h4 id="space-complexity">Space Complexity:</h4>
+<ul>
+<li><strong>O(1)</strong>: The space complexity is constant because we are only using a few integer variables (<code>mx</code>, <code>res</code>, and <code>n</code>) to store intermediate results. We do not use any extra data structures that grow with the size of the input array. Therefore, the space complexity is <strong>O(1)</strong>.</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>This solution efficiently solves the problem of determining the maximum number of chunks into which an array can be split and still result in a globally sorted array when each chunk is sorted independently. The approach relies on tracking the maximum value encountered up to each index in the array and counting the number of times this maximum value matches the index itself, indicating a valid partition.</p>
+<h4 id="key-observations">Key Observations:</h4>
+<ul>
+<li>The array can be partitioned whenever the maximum value up to that index is equal to the index.</li>
+<li>The time complexity is <strong>O(n)</strong>, making the solution efficient for large arrays.</li>
+</ul>
+<h4 id="time-complexity-1">Time Complexity:</h4>
+<ul>
+<li><strong>O(n)</strong> because we iterate through the array once.</li>
+</ul>
+<h4 id="space-complexity-1">Space Complexity:</h4>
+<ul>
+<li><strong>O(1)</strong> due to the use of a few integer variables.</li>
+</ul>
+<p>This approach is optimal in terms of both time and space, making it suitable for handling large inputs efficiently.</p>
+<p><a href="https://leetcode.com/problems/max-chunks-to-make-sorted/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/b3Mf8c7hKjk?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

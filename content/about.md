@@ -4,6 +4,7 @@ description = "Exploring ideas and technology"
 date = "2024-10-23"
 aliases = ["about-me", "about-blog", "contact"]
 author = "Yasir"
+type = "main"
 +++
 
 {{< rmtimg 

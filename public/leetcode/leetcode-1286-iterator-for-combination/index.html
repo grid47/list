@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 1286: Iterator for Combination | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 1286: Iterator for Combination">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1286: Iterator for Combination in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-1286-iterator-for-combination/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 1286: Iterator for Combination">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1286: Iterator for Combination in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-07-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="String">
+    <meta property="article:tag" content="Backtracking">
+    <meta property="article:tag" content="Design">
+    <meta property="article:tag" content="Iterator">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 1286: Iterator for Combination</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode134s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">CombinationIterator</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    string str;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> len;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> ans;
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">bt</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, string <span style="color:#666">&amp;</span>tmp) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(tmp.size() <span style="color:#666">==</span> len) {
+</span></span><span style="display:flex;"><span>            ans.push_back(tmp);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> str.size()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> idx; i <span style="color:#666">&lt;</span> str.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            tmp <span style="color:#666">+=</span> str[i];
+</span></span><span style="display:flex;"><span>            bt(i <span style="color:#666">+</span> <span style="color:#666">1</span>, tmp);
+</span></span><span style="display:flex;"><span>            tmp.pop_back();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> idx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    CombinationIterator(string chars, <span style="color:#0b0;font-weight:bold">int</span> len) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>len <span style="color:#666">=</span> len;
+</span></span><span style="display:flex;"><span>        sort(chars.begin(), chars.end());
+</span></span><span style="display:flex;"><span>        str <span style="color:#666">=</span> chars;
+</span></span><span style="display:flex;"><span>        string tmp <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>        bt(<span style="color:#666">0</span>, tmp);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    string <span style="color:#00a000">next</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans[idx<span style="color:#666">++</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">hasNext</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">&lt;</span> ans.size()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your CombinationIterator object will be instantiated and called as such:
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * CombinationIterator* obj = new CombinationIterator(characters, combinationLength);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * string param_1 = obj-&gt;next();
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * bool param_2 = obj-&gt;hasNext();
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> */</span></span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The task is to create a class called <code>CombinationIterator</code> that generates all possible combinations of a given length from a set of characters. The combinations should be generated in lexicographical order, and the iterator should provide two primary functionalities:</p>
+<ol>
+<li>Retrieve the next combination with the <code>next()</code> method.</li>
+<li>Check if there are more combinations available with the <code>hasNext()</code> method.</li>
+</ol>
+<p>For example, given the characters &ldquo;abc&rdquo; and a combination length of <code>2</code>, the combinations in lexicographical order would be: &ldquo;ab&rdquo;, &ldquo;ac&rdquo;, &ldquo;bc&rdquo;.</p>
+<h3 id="approach">Approach</h3>
+<p>To achieve this, we can utilize a backtracking algorithm to generate all combinations of the specified length. Here&rsquo;s how the approach works:</p>
+<ol>
+<li><strong>Sorting the Input</strong>: We first sort the input string of characters to ensure the combinations are generated in lexicographical order.</li>
+<li><strong>Backtracking Function</strong>: We define a recursive backtracking function that constructs combinations by exploring each character&rsquo;s inclusion or exclusion in the current combination.</li>
+<li><strong>Storage of Combinations</strong>: All valid combinations are stored in a vector.</li>
+<li><strong>Iterator Functionality</strong>: The iterator provides methods to retrieve combinations and check for remaining combinations.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">CombinationIterator</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    string str;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> len;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> ans;
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span></code></pre></div><ul>
+<li><strong>Lines 1-5</strong>: The class <code>CombinationIterator</code> is defined, with member variables:
+<ul>
+<li><code>str</code>: The input string of characters.</li>
+<li><code>len</code>: The desired length of combinations.</li>
+<li><code>ans</code>: A vector to hold all valid combinations.</li>
+<li><code>mp</code>: (not used in the final code but declared here, possibly for future enhancements).</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">bt</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, string <span style="color:#666">&amp;</span>tmp) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(tmp.size() <span style="color:#666">==</span> len) {
+</span></span><span style="display:flex;"><span>            ans.push_back(tmp);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> str.size()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li><strong>Lines 6-13</strong>: The backtracking function <code>bt</code> is defined:
+<ul>
+<li>It takes the current index <code>idx</code> and a reference to the temporary string <code>tmp</code> that holds the current combination.</li>
+<li>If the size of <code>tmp</code> equals the desired length <code>len</code>, the combination is complete and added to <code>ans</code>.</li>
+<li>If <code>idx</code> reaches the size of <code>str</code>, it returns to backtrack.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> idx; i <span style="color:#666">&lt;</span> str.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            tmp <span style="color:#666">+=</span> str[i];
+</span></span><span style="display:flex;"><span>            bt(i <span style="color:#666">+</span> <span style="color:#666">1</span>, tmp);
+</span></span><span style="display:flex;"><span>            tmp.pop_back();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li><strong>Lines 14-20</strong>: The loop iterates through the characters starting from <code>idx</code>:
+<ul>
+<li>Each character at index <code>i</code> is added to <code>tmp</code>.</li>
+<li>The function calls itself recursively with the next index (<code>i + 1</code>), effectively exploring the next level of combinations.</li>
+<li>After the recursive call, the last character is removed from <code>tmp</code> (backtracking) to explore other combinations.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> idx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    CombinationIterator(string chars, <span style="color:#0b0;font-weight:bold">int</span> len) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>len <span style="color:#666">=</span> len;
+</span></span><span style="display:flex;"><span>        sort(chars.begin(), chars.end());
+</span></span><span style="display:flex;"><span>        str <span style="color:#666">=</span> chars;
+</span></span><span style="display:flex;"><span>        string tmp <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>        bt(<span style="color:#666">0</span>, tmp);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li><strong>Lines 21-29</strong>: The constructor initializes the iterator:
+<ul>
+<li>It sets <code>len</code> and sorts <code>chars</code> to ensure lexicographical order.</li>
+<li>The sorted characters are stored in <code>str</code>.</li>
+<li>An empty string <code>tmp</code> is initialized, and the backtracking function is called starting from index <code>0</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string <span style="color:#00a000">next</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans[idx<span style="color:#666">++</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li><strong>Lines 30-32</strong>: The <code>next</code> method returns the next combination:
+<ul>
+<li>It returns the combination at the current index <code>idx</code> and then increments <code>idx</code> for the next call.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">hasNext</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">&lt;</span> ans.size()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li><strong>Lines 33-37</strong>: The <code>hasNext</code> method checks for remaining combinations:
+<ul>
+<li>It returns <code>true</code> if there are more combinations left (i.e., <code>idx</code> is less than the size of <code>ans</code>); otherwise, it returns <code>false</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity-analysis">Complexity Analysis</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The overall time complexity for generating combinations is (O(\binom{n}{k})), where (n) is the number of characters and (k) is the combination length. This is because we are generating all possible combinations of length (k).</li>
+<li>Each combination generation can take linear time, hence leading to a total time complexity of (O(k \cdot \binom{n}{k})) when considering storage in <code>ans</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(k \cdot \binom{n}{k})) due to storing all the combinations in the <code>ans</code> vector.</li>
+<li>Additionally, space is used for the <code>tmp</code> string during recursion, but this is limited to the size of <code>k</code>, so it can be considered constant with respect to the number of combinations.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">Conclusion</h3>
+<p>The <code>CombinationIterator</code> class effectively generates combinations of a specified length from a set of characters using a backtracking approach. The combination generation ensures that the results are in lexicographical order, and the iterator provides an easy interface for retrieving the next combination and checking for remaining combinations. This implementation is efficient for the problem at hand and demonstrates the power of recursion and backtracking in generating combinatorial structures.</p>
+<p>By understanding this class, developers can learn how to implement combination generation and iterator patterns in C++, which can be applied to a variety of problems in algorithm design and competitive programming.</p>
+<p><a href="https://leetcode.com/problems/iterator-for-combination/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/LzYlG_p1-zs?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

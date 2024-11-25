@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 2873: Maximum Value of an Ordered Triplet I | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 2873: Maximum Value of an Ordered Triplet I">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 2873: Maximum Value of an Ordered Triplet I in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-2873-maximum-value-of-an-ordered-triplet-i/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 2873: Maximum Value of an Ordered Triplet I">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 2873: Maximum Value of an Ordered Triplet I in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-01-24T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 2873: Maximum Value of an Ordered Triplet I</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode993s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> maximumTripletValue(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, mxa <span style="color:#666">=</span> <span style="color:#666">0</span>, mxab <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">long</span> <span style="color:#a0a000">a</span>: nums) {
+</span></span><span style="display:flex;"><span>            res <span style="color:#666">=</span> max(res, mxab <span style="color:#666">*</span> a);
+</span></span><span style="display:flex;"><span>            mxab <span style="color:#666">=</span> max(mxab, mxa <span style="color:#666">-</span> a);
+</span></span><span style="display:flex;"><span>            mxa <span style="color:#666">=</span> max(mxa, a);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem requires us to find the maximum value of the triplet <code>(a, b, c)</code> such that <code>a &lt; b &lt; c</code> in the array <code>nums</code>. We need to calculate the value of the triplet using the formula:</p>
+<p>[ \text{triplet value} = (b - a) \times (c - b) ]</p>
+<p>Where <code>a</code>, <code>b</code>, and <code>c</code> are elements from the array <code>nums</code> such that their indices satisfy the condition <code>i &lt; j &lt; k</code>. In other words, the triplet is formed by choosing any three elements in the array and calculating their respective differences, multiplying them, and returning the maximum possible value.</p>
+<p>The goal is to efficiently compute this maximum triplet value without explicitly checking every possible triplet. This requires an optimized approach rather than brute-forcing through all triplet combinations.</p>
+<h3 id="approach">Approach</h3>
+<p>This problem can be solved in <strong>O(n)</strong> time using a greedy approach. The key observation is that we need to maximize the value of the triplet using the formula <code>(b - a) * (c - b)</code>. By maintaining some intermediate variables, we can efficiently track the maximum values without needing to check every triplet combination.</p>
+<p>Here&rsquo;s how the approach works:</p>
+<ol>
+<li>
+<p><strong>Track Maximum Values</strong>: As we iterate through the array, we maintain three variables:</p>
+<ul>
+<li><code>mxa</code>: The maximum value seen so far in the array. This will be used to compute the difference <code>(b - a)</code>.</li>
+<li><code>mxab</code>: The maximum value of <code>(mxa - nums[i])</code>. This will be used to compute the difference <code>(c - b)</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Update the Result</strong>: For each element <code>a</code> (which will serve as <code>c</code> in the triplet), compute the product <code>mxab * a</code>. This product represents the value of the triplet formed by the current element <code>a</code> (acting as <code>c</code>) and the previous maximum values <code>mxa</code> and <code>mxab</code>. Track the maximum of these products.</p>
+</li>
+<li>
+<p><strong>Greedy Updating</strong>: Update <code>mxab</code> and <code>mxa</code> as we go through the array:</p>
+<ul>
+<li>Update <code>mxab</code> by considering the difference between <code>mxa</code> and the current element <code>a</code> (<code>mxab = max(mxab, mxa - a)</code>).</li>
+<li>Update <code>mxa</code> to store the maximum of itself and the current element <code>a</code> (<code>mxa = max(mxa, a)</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>: After iterating through the array, the maximum product computed during the loop is the answer.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<h4 id="step-1-initialize-variables">Step 1: Initialize Variables</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>, mxa <span style="color:#666">=</span> <span style="color:#666">0</span>, mxab <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div><ul>
+<li><code>res</code>: This variable will store the maximum triplet value that we encounter during the iteration. It starts as 0 because initially no triplet has been considered.</li>
+<li><code>mxa</code>: This stores the maximum value seen so far in the array as we iterate. Initially, it is set to 0.</li>
+<li><code>mxab</code>: This stores the maximum value of <code>(mxa - nums[i])</code> for each element <code>nums[i]</code> we encounter. It will help in computing the second difference <code>(c - b)</code> in the triplet formula.</li>
+</ul>
+<h4 id="step-2-iterate-over-the-array">Step 2: Iterate Over the Array</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">long</span> <span style="color:#a0a000">a</span>: nums) {
+</span></span><span style="display:flex;"><span>    res <span style="color:#666">=</span> max(res, mxab <span style="color:#666">*</span> a);
+</span></span><span style="display:flex;"><span>    mxab <span style="color:#666">=</span> max(mxab, mxa <span style="color:#666">-</span> a);
+</span></span><span style="display:flex;"><span>    mxa <span style="color:#666">=</span> max(mxa, a);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p>The loop <code>for(long a: nums)</code> iterates over each element <code>a</code> in the <code>nums</code> array.</p>
+</li>
+<li>
+<p><strong>Calculate the Maximum Triplet Value</strong>:</p>
+<ul>
+<li><code>res = max(res, mxab * a);</code>: This updates the result by computing the product of <code>mxab</code> (the maximum value of <code>(mxa - nums[i])</code> encountered so far) and the current element <code>a</code>. This product represents the potential triplet value <code>(b - a) * (c - b)</code> where <code>a</code> acts as <code>c</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Update <code>mxab</code></strong>:</p>
+<ul>
+<li><code>mxab = max(mxab, mxa - a);</code>: This updates <code>mxab</code> to be the maximum of its current value and the difference between <code>mxa</code> and the current element <code>a</code>. This difference represents the potential value of <code>(c - b)</code> when <code>b</code> is chosen as <code>a</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Update <code>mxa</code></strong>:</p>
+<ul>
+<li><code>mxa = max(mxa, a);</code>: This updates <code>mxa</code> to be the maximum of its current value and the current element <code>a</code>. This will help in computing the difference <code>(b - a)</code> when <code>a</code> is chosen as <code>b</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-return-the-result">Step 3: Return the Result</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After iterating through the entire array, <code>res</code> contains the maximum value of <code>(b - a) * (c - b)</code> for all valid triplets. This value is returned as the final result.</li>
+</ul>
+<h3 id="example-walkthrough">Example Walkthrough</h3>
+<h4 id="example-1-nums--1-2-3">Example 1: <code>nums = [1, 2, 3]</code></h4>
+<ol>
+<li>
+<p><strong>Initialize</strong>:</p>
+<ul>
+<li><code>res = 0</code>, <code>mxa = 0</code>, <code>mxab = 0</code></li>
+</ul>
+</li>
+<li>
+<p><strong>First Iteration (a = 1)</strong>:</p>
+<ul>
+<li><code>res = max(0, 0 * 1) = 0</code></li>
+<li><code>mxab = max(0, 0 - 1) = 0</code></li>
+<li><code>mxa = max(0, 1) = 1</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Second Iteration (a = 2)</strong>:</p>
+<ul>
+<li><code>res = max(0, 0 * 2) = 0</code></li>
+<li><code>mxab = max(0, 1 - 2) = -1</code></li>
+<li><code>mxa = max(1, 2) = 2</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Third Iteration (a = 3)</strong>:</p>
+<ul>
+<li><code>res = max(0, -1 * 3) = 0</code></li>
+<li><code>mxab = max(-1, 2 - 3) = -1</code></li>
+<li><code>mxa = max(2, 3) = 3</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Final Result</strong>:</p>
+<ul>
+<li><code>res = 0</code></li>
+</ul>
+</li>
+</ol>
+<p><strong>Output:</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#666">0</span>
+</span></span></code></pre></div><h4 id="example-2-nums--4-3-2-1">Example 2: <code>nums = [4, 3, 2, 1]</code></h4>
+<ol>
+<li>
+<p><strong>Initialize</strong>:</p>
+<ul>
+<li><code>res = 0</code>, <code>mxa = 0</code>, <code>mxab = 0</code></li>
+</ul>
+</li>
+<li>
+<p><strong>First Iteration (a = 4)</strong>:</p>
+<ul>
+<li><code>res = max(0, 0 * 4) = 0</code></li>
+<li><code>mxab = max(0, 0 - 4) = 0</code></li>
+<li><code>mxa = max(0, 4) = 4</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Second Iteration (a = 3)</strong>:</p>
+<ul>
+<li><code>res = max(0, 0 * 3) = 0</code></li>
+<li><code>mxab = max(0, 4 - 3) = 1</code></li>
+<li><code>mxa = max(4, 3) = 4</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Third Iteration (a = 2)</strong>:</p>
+<ul>
+<li><code>res = max(0, 1 * 2) = 2</code></li>
+<li><code>mxab = max(1, 4 - 2) = 2</code></li>
+<li><code>mxa = max(4, 2) = 4</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Fourth Iteration (a = 1)</strong>:</p>
+<ul>
+<li><code>res = max(2, 2 * 1) = 2</code></li>
+<li><code>mxab = max(2, 4 - 1) = 3</code></li>
+<li><code>mxa = max(4, 1) = 4</code></li>
+</ul>
+</li>
+<li>
+<p><strong>Final Result</strong>:</p>
+<ul>
+<li><code>res = 2</code></li>
+</ul>
+</li>
+</ol>
+<p><strong>Output:</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#666">2</span>
+</span></span></code></pre></div><h3 id="time-complexity">Time Complexity</h3>
+<p>The time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the length of the array <code>nums</code>. The algorithm processes each element of the array exactly once, performing constant-time operations for each element.</p>
+<h3 id="space-complexity">Space Complexity</h3>
+<p>The space complexity is <strong>O(1)</strong> because we are using only a constant amount of extra space (just a few variables to store intermediate values).</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>This solution is efficient with a linear time complexity of <strong>O(n)</strong> and constant space complexity <strong>O(1)</strong>. It optimizes the triplet value calculation by using intermediate variables (<code>mxa</code> and <code>mxab</code>) to avoid explicitly checking every triplet. The greedy approach ensures that we always track the most promising values to maximize the triplet product, making the algorithm optimal for large inputs.</p>
+<p><a href="https://leetcode.com/problems/maximum-value-of-an-ordered-triplet-i/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/U0abRgobTKg?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

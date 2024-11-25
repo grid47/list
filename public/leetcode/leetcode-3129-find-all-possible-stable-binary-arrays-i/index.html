@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 3129: Find All Possible Stable Binary Arrays I | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 3129: Find All Possible Stable Binary Arrays I">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 3129: Find All Possible Stable Binary Arrays I in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-3129-find-all-possible-stable-binary-arrays-i/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 3129: Find All Possible Stable Binary Arrays I">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 3129: Find All Possible Stable Binary Arrays I in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2023-12-30T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Dynamic Programming">
+    <meta property="article:tag" content="Prefix Sum">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 3129: Find All Possible Stable Binary Arrays I</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode1061s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;&gt;</span> mem;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> limit, mod <span style="color:#666">=</span> <span style="color:#666">1000000007</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> z, <span style="color:#0b0;font-weight:bold">int</span> o, <span style="color:#0b0;font-weight:bold">int</span> p, <span style="color:#0b0;font-weight:bold">int</span> lmt, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;&gt;</span> <span style="color:#666">&amp;</span>mem) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(z <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> o <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mem[p][o][lmt][z] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> mem[p][o][lmt][z];
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(p <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(z <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> lmt <span style="color:#666">&lt;</span> limit)    ans <span style="color:#666">+=</span> dp(z <span style="color:#666">-</span> <span style="color:#666">1</span>, o, <span style="color:#666">0</span>, lmt <span style="color:#666">+</span> <span style="color:#666">1</span>, mem) <span style="color:#666">%</span> mod;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(o <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)                   ans <span style="color:#666">+=</span> dp(z, o <span style="color:#666">-</span> <span style="color:#666">1</span>, <span style="color:#666">1</span>, <span style="color:#666">1</span>, mem)<span style="color:#666">%</span> mod;
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(o <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> lmt <span style="color:#666">&lt;</span> limit)    ans <span style="color:#666">+=</span> dp(z, o <span style="color:#666">-</span> <span style="color:#666">1</span>, <span style="color:#666">1</span>, lmt <span style="color:#666">+</span> <span style="color:#666">1</span>, mem)<span style="color:#666">%</span> mod;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(z <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)                   ans <span style="color:#666">+=</span> dp(z <span style="color:#666">-</span> <span style="color:#666">1</span>, o, <span style="color:#666">0</span>, <span style="color:#666">1</span>, mem)<span style="color:#666">%</span> mod;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> mem[p][o][lmt][z] <span style="color:#666">=</span> ans <span style="color:#666">%</span> mod;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numberOfStableArrays</span>(<span style="color:#0b0;font-weight:bold">int</span> zero, <span style="color:#0b0;font-weight:bold">int</span> one, <span style="color:#0b0;font-weight:bold">int</span> limit) {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;&gt;</span> mem(<span style="color:#666">2</span>, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;</span>(one <span style="color:#666">+</span> <span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span>(limit <span style="color:#666">+</span> <span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(zero <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">-</span><span style="color:#666">1</span>))));
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>limit <span style="color:#666">=</span> limit;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> res  <span style="color:#666">=</span> (dp(zero <span style="color:#666">-</span> <span style="color:#666">1</span>, one, <span style="color:#666">0</span>, <span style="color:#666">1</span>, mem) <span style="color:#666">+</span>
+</span></span><span style="display:flex;"><span>                     dp(zero, one <span style="color:#666">-</span> <span style="color:#666">1</span>, <span style="color:#666">1</span>, <span style="color:#666">1</span>, mem)) <span style="color:#666">%</span> mod;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem requires us to count the number of <strong>stable arrays</strong> that can be formed from a given number of <code>0</code>s and <code>1</code>s. A <strong>stable array</strong> is defined by a specific set of rules:</p>
+<ol>
+<li>The number of <code>1</code>s and <code>0</code>s in the array is given as input.</li>
+<li>There is a constraint on the maximum number of consecutive <code>0</code>s (<code>limit</code>) that can be in the array.</li>
+<li>The array must alternate between <code>1</code>s and <code>0</code>s, and if <code>0</code>s appear consecutively, the number must not exceed the specified <code>limit</code>.</li>
+</ol>
+<p>The task is to count how many such stable arrays can be formed while adhering to the given constraints.</p>
+<h3 id="approach">Approach</h3>
+<p>To solve this problem, we can use a <strong>dynamic programming (DP)</strong> approach with memoization. The key idea is to break the problem down into smaller subproblems and use previously computed results to build up the solution for the larger problem.</p>
+<ol>
+<li>
+<p><strong>Dynamic Programming Representation</strong>: We define a 4-dimensional DP array <code>mem</code> to store the results of subproblems. The state of the DP can be defined as:</p>
+<ul>
+<li><code>z</code>: The number of <code>0</code>s left to place in the array.</li>
+<li><code>o</code>: The number of <code>1</code>s left to place in the array.</li>
+<li><code>p</code>: A binary value (0 or 1) representing whether the last element placed was <code>0</code> or <code>1</code>.</li>
+<li><code>lmt</code>: The current count of consecutive <code>0</code>s placed in the array.</li>
+</ul>
+<p>The value of the DP state represents the number of ways to form a valid stable array with these parameters.</p>
+</li>
+<li>
+<p><strong>Recursion</strong>: The recursive function <code>dp(z, o, p, lmt, mem)</code> computes the number of valid stable arrays that can be formed by placing the remaining <code>z</code> <code>0</code>s and <code>o</code> <code>1</code>s under the condition that the last placed element was <code>p</code> (either <code>0</code> or <code>1</code>) and <code>lmt</code> is the current number of consecutive <code>0</code>s.</p>
+<p>The function computes:</p>
+<ul>
+<li>If the last placed element was <code>0</code>, then we can place a <code>0</code> again if the number of consecutive <code>0</code>s (<code>lmt</code>) is less than the <code>limit</code>, or we can place a <code>1</code> if any <code>0</code> is already placed.</li>
+<li>If the last placed element was <code>1</code>, then we can place a <code>0</code> or a <code>1</code>, with the appropriate constraints.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Case</strong>: When <code>z == 0</code> and <code>o == 0</code>, this means all <code>0</code>s and <code>1</code>s have been placed in the array, and the array is valid. Hence, we return <code>1</code>.</p>
+</li>
+<li>
+<p><strong>Memoization</strong>: We store the results of subproblems in the <code>mem</code> array to avoid redundant calculations and improve efficiency.</p>
+</li>
+<li>
+<p><strong>Final Calculation</strong>: The result is obtained by calling the <code>dp</code> function for the initial state with <code>zero - 1</code> <code>0</code>s, <code>one</code> <code>1</code>s, and the first element being a <code>0</code> or <code>1</code>.</p>
+</li>
+</ol>
+<h3 id="code-breakdown">Code Breakdown</h3>
+<h4 id="step-1-initialize-dp-array">Step 1: Initialize DP Array</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;&gt;</span> mem(<span style="color:#666">2</span>, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;</span>(one <span style="color:#666">+</span> <span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span>(limit <span style="color:#666">+</span> <span style="color:#666">1</span>, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(zero <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">-</span><span style="color:#666">1</span>))));
+</span></span></code></pre></div><ul>
+<li>Here, we initialize a 4-dimensional vector <code>mem</code> to store the memoized results. The dimensions are:
+<ul>
+<li><code>2</code>: This corresponds to the binary state <code>p</code>, which can either be <code>0</code> (last element placed was <code>0</code>) or <code>1</code> (last element placed was <code>1</code>).</li>
+<li><code>one + 1</code>: The number of <code>1</code>s left to place.</li>
+<li><code>limit + 1</code>: The number of consecutive <code>0</code>s that can be placed.</li>
+<li><code>zero + 1</code>: The number of <code>0</code>s left to place.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-2-define-recursive-dp-function">Step 2: Define Recursive DP Function</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> z, <span style="color:#0b0;font-weight:bold">int</span> o, <span style="color:#0b0;font-weight:bold">int</span> p, <span style="color:#0b0;font-weight:bold">int</span> lmt, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;&gt;</span> <span style="color:#666">&amp;</span>mem) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(z <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> o <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(mem[p][o][lmt][z] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> mem[p][o][lmt][z];
+</span></span></code></pre></div><ul>
+<li>We first check if the number of <code>0</code>s and <code>1</code>s left to place is zero. If it is, we return <code>1</code> because we have successfully placed all elements.</li>
+<li>If the result for the current state <code>(z, o, p, lmt)</code> has already been computed (i.e., <code>mem[p][o][lmt][z] != -1</code>), we return the previously computed value to avoid redundant calculations.</li>
+</ul>
+<h4 id="step-3-recursive-transitions">Step 3: Recursive Transitions</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(p <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(z <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> lmt <span style="color:#666">&lt;</span> limit)    ans <span style="color:#666">+=</span> dp(z <span style="color:#666">-</span> <span style="color:#666">1</span>, o, <span style="color:#666">0</span>, lmt <span style="color:#666">+</span> <span style="color:#666">1</span>, mem) <span style="color:#666">%</span> mod;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(o <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)                   ans <span style="color:#666">+=</span> dp(z, o <span style="color:#666">-</span> <span style="color:#666">1</span>, <span style="color:#666">1</span>, <span style="color:#666">1</span>, mem)<span style="color:#666">%</span> mod;
+</span></span><span style="display:flex;"><span>} <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(o <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> lmt <span style="color:#666">&lt;</span> limit)    ans <span style="color:#666">+=</span> dp(z, o <span style="color:#666">-</span> <span style="color:#666">1</span>, <span style="color:#666">1</span>, lmt <span style="color:#666">+</span> <span style="color:#666">1</span>, mem)<span style="color:#666">%</span> mod;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(z <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)                   ans <span style="color:#666">+=</span> dp(z <span style="color:#666">-</span> <span style="color:#666">1</span>, o, <span style="color:#666">0</span>, <span style="color:#666">1</span>, mem)<span style="color:#666">%</span> mod;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p>If the last element placed was a <code>0</code> (<code>p == 0</code>), we have two choices:</p>
+<ul>
+<li>We can place another <code>0</code> if there are remaining <code>0</code>s and the number of consecutive <code>0</code>s (<code>lmt</code>) is less than the <code>limit</code>.</li>
+<li>We can place a <code>1</code> if there are remaining <code>1</code>s.</li>
+</ul>
+</li>
+<li>
+<p>If the last element placed was a <code>1</code> (<code>p == 1</code>), we again have two choices:</p>
+<ul>
+<li>We can place another <code>1</code> if there are remaining <code>1</code>s.</li>
+<li>We can place a <code>0</code> if there are remaining <code>0</code>s.</li>
+</ul>
+</li>
+</ul>
+<p>Each transition is recursive, and we accumulate the results in <code>ans</code>.</p>
+<h4 id="step-4-store-and-return-result">Step 4: Store and Return Result</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> mem[p][o][lmt][z] <span style="color:#666">=</span> ans <span style="color:#666">%</span> mod;
+</span></span></code></pre></div><ul>
+<li>After calculating the number of valid arrays for the current state <code>(z, o, p, lmt)</code>, we store the result in the <code>mem</code> array to be used later.</li>
+</ul>
+<h4 id="step-5-final-calculation-in-numberofstablearrays">Step 5: Final Calculation in <code>numberOfStableArrays</code></h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> res  <span style="color:#666">=</span> (dp(zero <span style="color:#666">-</span> <span style="color:#666">1</span>, one, <span style="color:#666">0</span>, <span style="color:#666">1</span>, mem) <span style="color:#666">+</span>
+</span></span><span style="display:flex;"><span>             dp(zero, one <span style="color:#666">-</span> <span style="color:#666">1</span>, <span style="color:#666">1</span>, <span style="color:#666">1</span>, mem)) <span style="color:#666">%</span> mod;
+</span></span></code></pre></div><ul>
+<li>Finally, we calculate the result by calling the <code>dp</code> function for the initial state with one less <code>0</code> and <code>1</code> and the first element being either <code>0</code> or <code>1</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div><ul>
+<li>The result is returned, which is the number of stable arrays modulo <code>1000000007</code>.</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<h4 id="time-complexity">Time Complexity:</h4>
+<ul>
+<li>The time complexity is <strong>O(zero * one * limit)</strong>. This is because, for each state <code>(z, o, p, lmt)</code>, we perform a constant amount of work (either transitioning to another state or returning the result). The number of states is bounded by the product of the number of <code>0</code>s, the number of <code>1</code>s, and the limit on consecutive <code>0</code>s.</li>
+</ul>
+<h4 id="space-complexity">Space Complexity:</h4>
+<ul>
+<li>The space complexity is <strong>O(zero * one * limit)</strong>, primarily due to the storage of the <code>mem</code> array.</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>This approach leverages dynamic programming with memoization to efficiently calculate the number of stable arrays that can be formed given the constraints. By breaking down the problem into smaller subproblems and using memoization to store intermediate results, the solution avoids redundant calculations and ensures optimal performance. The use of recursion allows us to explore all possible valid sequences of <code>0</code>s and <code>1</code>s while adhering to the limit on consecutive <code>0</code>s, providing an elegant and efficient solution to the problem.</p>
+<p><a href="https://leetcode.com/problems/find-all-possible-stable-binary-arrays-i/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/PVsRUVGHVCY?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

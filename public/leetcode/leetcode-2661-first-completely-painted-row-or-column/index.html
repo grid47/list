@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 2661: First Completely Painted Row or Column | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 2661: First Completely Painted Row or Column">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 2661: First Completely Painted Row or Column in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-2661-first-completely-painted-row-or-column/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 2661: First Completely Painted Row or Column">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 2661: First Completely Painted Row or Column in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-02-14T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Hash Table">
+    <meta property="article:tag" content="Matrix">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 2661: First Completely Painted Row or Column</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode892s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> firstCompleteIndex(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mat) {
+</span></span><span style="display:flex;"><span>        unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> r, c, mtx;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> mat.size(), n <span style="color:#666">=</span> mat[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            mtx[mat[i][j]] <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">long</span>) i <span style="color:#666">*</span> <span style="color:#666">100000</span> <span style="color:#666">+</span> j;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> arr.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">long</span> k <span style="color:#666">=</span> mtx[arr[i]];
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">long</span> x <span style="color:#666">=</span> k <span style="color:#666">/</span> <span style="color:#666">100000</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">long</span> y <span style="color:#666">=</span> k <span style="color:#666">%</span> <span style="color:#666">100000</span>;
+</span></span><span style="display:flex;"><span>            r[x]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(r[x] <span style="color:#666">==</span> n) <span style="color:#a2f;font-weight:bold">return</span> i;
+</span></span><span style="display:flex;"><span>            c[y]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(c[y] <span style="color:#666">==</span> m) <span style="color:#a2f;font-weight:bold">return</span> i;
+</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">// cout &lt;&lt; x &lt;&lt; &#34; &#34;&lt;&lt; y &lt;&lt; &#34; &#34; &lt;&lt; r[x] &lt;&lt; &#34; &#34; &lt;&lt; c[y] &lt;&lt; &#34; &#34; &lt;&lt; m &lt;&lt; &#34; &#34; &lt;&lt; n &lt;&lt; &#34;\n&#34;;            
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#080;font-style:italic">// if(i == 2) break;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem asks us to find the first index in a given array <code>arr</code> such that all elements in the corresponding row or column of a matrix <code>mat</code> are present in the array <code>arr</code>. More specifically, the task is to determine the first element in <code>arr</code> that, when processed, causes one of the rows or one of the columns in <code>mat</code> to be completely covered with elements from <code>arr</code>. If no such index exists, return <code>-1</code>.</p>
+<h3 id="approach">Approach</h3>
+<p>The approach can be broken down into several key steps:</p>
+<ol>
+<li><strong>Mapping the Matrix</strong>: We start by creating a map that associates each value in the matrix <code>mat</code> with its corresponding position (row, column).</li>
+<li><strong>Tracking the Row and Column Counts</strong>: We use two hash maps <code>r</code> and <code>c</code> to keep track of how many times each row and column has been &ldquo;covered&rdquo; by the elements seen so far in <code>arr</code>.</li>
+<li><strong>Simulating the Process</strong>: We then iterate over the array <code>arr</code> and for each element:
+<ul>
+<li>Find the corresponding position in the matrix.</li>
+<li>Update the counts for the row and column where that element is located.</li>
+<li>If any row or column becomes fully covered, we immediately return the current index.</li>
+</ul>
+</li>
+<li><strong>Returning the Result</strong>: If we finish processing all elements of <code>arr</code> without finding a fully covered row or column, we return <code>-1</code>.</li>
+</ol>
+<p>This approach ensures that we process each element of <code>arr</code> only once, making the solution efficient.</p>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">firstCompleteIndex</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> arr, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> mat) {
+</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">long</span><span style="color:#666">&gt;</span> r, c, mtx;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> mat.size(), n <span style="color:#666">=</span> mat[<span style="color:#666">0</span>].size();
+</span></span></code></pre></div><ul>
+<li><strong>Line 1-3</strong>: We define the function <code>firstCompleteIndex</code> which takes the array <code>arr</code> and matrix <code>mat</code> as inputs.</li>
+<li><strong>Line 2</strong>: Three unordered maps are initialized:
+<ul>
+<li><code>r</code>: Tracks how many elements of each row are present in <code>arr</code>.</li>
+<li><code>c</code>: Tracks how many elements of each column are present in <code>arr</code>.</li>
+<li><code>mtx</code>: Maps each matrix element to its position in the matrix (using a long integer where the first part represents the row and the second part represents the column).</li>
+</ul>
+</li>
+<li><strong>Line 3</strong>: We extract the number of rows (<code>m</code>) and columns (<code>n</code>) from the matrix.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            mtx[mat[i][j]] <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">long</span>) i <span style="color:#666">*</span> <span style="color:#666">100000</span> <span style="color:#666">+</span> j;
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li><strong>Line 4-6</strong>: In this nested loop, we iterate over each element of the matrix <code>mat</code> and populate the map <code>mtx</code>. The key is the matrix element, and the value is a long integer that encodes both its row and column by multiplying the row index by 100000 and adding the column index.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> arr.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> k <span style="color:#666">=</span> mtx[arr[i]];
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> x <span style="color:#666">=</span> k <span style="color:#666">/</span> <span style="color:#666">100000</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> y <span style="color:#666">=</span> k <span style="color:#666">%</span> <span style="color:#666">100000</span>;
+</span></span><span style="display:flex;"><span>        r[x]<span style="color:#666">++</span>;
+</span></span></code></pre></div><ul>
+<li><strong>Line 7-9</strong>: We start processing the elements of <code>arr</code>. For each element:
+<ul>
+<li><code>k = mtx[arr[i]]</code>: We retrieve the position of the current element in the matrix from the map <code>mtx</code>.</li>
+<li><code>x = k / 100000</code>: This extracts the row index of the matrix element.</li>
+<li><code>y = k % 100000</code>: This extracts the column index of the matrix element.</li>
+<li><code>r[x]++</code>: We increment the count of how many elements in row <code>x</code> have been seen so far.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(r[x] <span style="color:#666">==</span> n) <span style="color:#a2f;font-weight:bold">return</span> i;
+</span></span></code></pre></div><ul>
+<li><strong>Line 10</strong>: If the count of elements in row <code>x</code> has reached the total number of columns <code>n</code>, this means that the entire row has been covered, and we immediately return the current index <code>i</code> from <code>arr</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        c[y]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(c[y] <span style="color:#666">==</span> m) <span style="color:#a2f;font-weight:bold">return</span> i;
+</span></span></code></pre></div><ul>
+<li><strong>Line 11-12</strong>: We perform the same check for columns:
+<ul>
+<li><code>c[y]++</code>: We increment the count of how many elements in column <code>y</code> have been seen so far.</li>
+<li><code>if(c[y] == m) return i;</code>: If the count of elements in column <code>y</code> has reached the total number of rows <code>m</code>, the entire column has been covered, and we return the current index <code>i</code> from <code>arr</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Line 13-14</strong>: If no row or column becomes fully covered after processing all elements in <code>arr</code>, we return <code>-1</code> to indicate that no such index exists.</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<h4 id="time-complexity">Time Complexity:</h4>
+<ul>
+<li>Constructing the <code>mtx</code> map takes <strong>O(m * n)</strong> time, where <code>m</code> is the number of rows and <code>n</code> is the number of columns in the matrix.</li>
+<li>Processing the array <code>arr</code> takes <strong>O(k)</strong> time, where <code>k</code> is the size of the array. For each element, we perform constant-time operations (lookup in the map and updates to the row and column counts).</li>
+<li>Therefore, the overall time complexity is <strong>O(m * n + k)</strong>, where <code>m * n</code> is the time spent building the <code>mtx</code> map and <code>k</code> is the time spent processing <code>arr</code>.</li>
+</ul>
+<h4 id="space-complexity">Space Complexity:</h4>
+<ul>
+<li>The space complexity is dominated by the space used for the map <code>mtx</code>, which stores at most <code>m * n</code> entries, each mapping a matrix element to its position. Therefore, the space complexity is <strong>O(m * n)</strong>.</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>This solution efficiently tracks how many elements from each row and column of the matrix are covered by the elements of <code>arr</code>. By using hash maps to keep track of row and column counts, we can quickly determine whether any row or column becomes fully covered as we process the elements in <code>arr</code>. The solution has a time complexity of <strong>O(m * n + k)</strong> and space complexity of <strong>O(m * n)</strong>, making it efficient for large matrices and arrays. The use of long integers to encode matrix positions in a single map is an innovative way to handle matrix lookups and avoids the need for complex nested structures.</p>
+<p><a href="https://leetcode.com/problems/first-completely-painted-row-or-column/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/-XgxrCAuu68?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

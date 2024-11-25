@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 2572: Count the Number of Square-Free Subsets | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 2572: Count the Number of Square-Free Subsets">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 2572: Count the Number of Square-Free Subsets in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-2572-count-the-number-of-square-free-subsets/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 2572: Count the Number of Square-Free Subsets">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 2572: Count the Number of Square-Free Subsets in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-02-23T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Math">
+    <meta property="article:tag" content="Dynamic Programming">
+    <meta property="article:tag" content="Bit Manipulation">
+    <meta property="article:tag" content="Bitmask">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 2572: Count the Number of Square-Free Subsets</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode845s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mod <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">int</span>) <span style="color:#666">1e9</span> <span style="color:#666">+</span> <span style="color:#666">7</span>, n;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> nums, prime;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> memo[<span style="color:#666">1001</span>][<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> <span style="color:#666">11</span>];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">getMask</span>(<span style="color:#0b0;font-weight:bold">int</span> num) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mask <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> prime.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(num <span style="color:#666">%</span> prime[i] <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>                cnt<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>                num <span style="color:#666">/=</span> prime[i];
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(cnt <span style="color:#666">&gt;</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(cnt <span style="color:#666">==</span> <span style="color:#666">1</span>) {
+</span></span><span style="display:flex;"><span>                mask <span style="color:#666">|=</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> (i <span style="color:#666">+</span> <span style="color:#666">1</span>));                
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> mask;
+</span></span><span style="display:flex;"><span>    }    
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> mask) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> n) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(memo[idx][mask] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[idx][mask];        
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, mask);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> nmask <span style="color:#666">=</span> getMask(nums[idx]);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>((nmask <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#666">&amp;&amp;</span> ((nmask <span style="color:#666">&amp;</span> mask) <span style="color:#666">==</span> <span style="color:#666">0</span>)) {
+</span></span><span style="display:flex;"><span>            ans <span style="color:#666">=</span> (ans <span style="color:#666">+</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, nmask <span style="color:#666">|</span> mask)) <span style="color:#666">%</span> mod;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> memo[idx][mask] <span style="color:#666">=</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">squareFreeSubsets</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>        n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>nums <span style="color:#666">=</span> nums;
+</span></span><span style="display:flex;"><span>        prime <span style="color:#666">=</span> { <span style="color:#666">2</span>, <span style="color:#666">3</span>, <span style="color:#666">5</span>, <span style="color:#666">7</span>, <span style="color:#666">11</span>, <span style="color:#666">13</span>, <span style="color:#666">17</span>, <span style="color:#666">19</span>, <span style="color:#666">23</span>, <span style="color:#666">29</span> };
+</span></span><span style="display:flex;"><span>        memset(memo, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#a2f;font-weight:bold">sizeof</span> memo);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> (dp(<span style="color:#666">0</span>, <span style="color:#666">0</span>) <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">+</span> mod) <span style="color:#666">%</span> mod;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The task is to find the number of square-free subsets of a given list of integers <code>nums</code>. A <strong>square-free subset</strong> is one where no element is divisible by any perfect square greater than <code>1</code> (i.e., no element has a square of a prime factor in its prime factorization).</p>
+<h3 id="approach">Approach</h3>
+<ol>
+<li>
+<p><strong>Prime Factorization &amp; Square-Free Concept</strong>:</p>
+<ul>
+<li>A <strong>square-free number</strong> is a number whose prime factorization contains no prime raised to a power greater than or equal to 2. For example, <code>6</code> is square-free because its prime factorization is <code>2 * 3</code>, but <code>12</code> is not because <code>12 = 2^2 * 3</code>.</li>
+<li>To check if a number is square-free, we need to verify if any of its prime factors appear more than once.</li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamic Programming with Bitmasking</strong>:</p>
+<ul>
+<li>The idea is to use dynamic programming (DP) to count subsets that satisfy the square-free condition. We use bitmasking to represent subsets of prime factors efficiently.</li>
+<li>Since we are only concerned with the primes <code>2, 3, 5, 7, 11, 13, 17, 19, 23, 29</code> (a fixed set of primes), we represent any number&rsquo;s prime factorization as a bitmask of size 10.</li>
+<li>Each bit of the mask represents whether a specific prime divides the number. For instance, if a number is divisible by <code>2</code> and <code>3</code>, its corresponding mask will have the first and second bits set.</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization</strong>:</p>
+<ul>
+<li>To avoid recomputing results for the same state multiple times, we use memoization. The state is represented by the current index in the array (<code>idx</code>) and the bitmask (<code>mask</code>) representing which primes have been included so far.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive Function</strong>:</p>
+<ul>
+<li>The recursive function <code>dp(idx, mask)</code> explores all subsets starting from index <code>idx</code> and keeps track of the primes that are already part of the subset using the bitmask <code>mask</code>.</li>
+<li>If the current number’s prime factors conflict with the current <code>mask</code> (i.e., it shares any common prime factor), it is excluded from the subset. Otherwise, we explore both possibilities: including or excluding the current number.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Case</strong>:</p>
+<ul>
+<li>When the recursion reaches the end of the array (<code>idx == n</code>), return <code>1</code> to indicate that we&rsquo;ve found a valid subset.</li>
+</ul>
+</li>
+<li>
+<p><strong>Modular Arithmetic</strong>:</p>
+<ul>
+<li>Since the result could be large, all calculations are done modulo <code>10^9 + 7</code> to prevent overflow and keep the numbers manageable.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<ol>
+<li>
+<p><strong>Prime Initialization and Mask Computation</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>prime <span style="color:#666">=</span> {<span style="color:#666">2</span>, <span style="color:#666">3</span>, <span style="color:#666">5</span>, <span style="color:#666">7</span>, <span style="color:#666">11</span>, <span style="color:#666">13</span>, <span style="color:#666">17</span>, <span style="color:#666">19</span>, <span style="color:#666">23</span>, <span style="color:#666">29</span>};
+</span></span></code></pre></div><ul>
+<li>We initialize a list of the first 10 primes to handle the prime factorization of numbers up to a certain limit. These primes are used to build the bitmask for each number.</li>
+</ul>
+</li>
+<li>
+<p><strong>Function to Get the Bitmask</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">getMask</span>(<span style="color:#0b0;font-weight:bold">int</span> num) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mask <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i<span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> prime.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(num <span style="color:#666">%</span> prime[i] <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>            cnt<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            num <span style="color:#666">/=</span> prime[i];
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cnt <span style="color:#666">&gt;</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cnt <span style="color:#666">==</span> <span style="color:#666">1</span>) {
+</span></span><span style="display:flex;"><span>            mask <span style="color:#666">|=</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> (i <span style="color:#666">+</span> <span style="color:#666">1</span>));                
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> mask;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This function calculates the bitmask representation of a number. For each prime, we divide <code>num</code> by the prime until it&rsquo;s no longer divisible.</li>
+<li>If any prime appears more than once in the factorization, the number is not square-free, and the function returns <code>-1</code>.</li>
+<li>Otherwise, it sets the corresponding bit in the mask to <code>1</code> if that prime divides the number.</li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamic Programming with Memoization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> mask) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> n) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[idx][mask] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[idx][mask];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, mask);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> nmask <span style="color:#666">=</span> getMask(nums[idx]);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>((nmask <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#666">&amp;&amp;</span> ((nmask <span style="color:#666">&amp;</span> mask) <span style="color:#666">==</span> <span style="color:#666">0</span>)) {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> (ans <span style="color:#666">+</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, nmask <span style="color:#666">|</span> mask)) <span style="color:#666">%</span> mod;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[idx][mask] <span style="color:#666">=</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>dp(idx, mask)</code> is the recursive function that counts the number of square-free subsets.</li>
+<li>We first check if the result for the current state is already computed using the <code>memo</code> table.</li>
+<li>If not, we compute it:
+<ul>
+<li>First, we count the subsets that exclude the current number: <code>dp(idx + 1, mask)</code>.</li>
+<li>Then, we calculate the mask of the current number using <code>getMask(nums[idx])</code>. If the number is square-free (i.e., <code>nmask != -1</code>), and its prime factors do not conflict with the primes already in the subset (<code>(nmask &amp; mask) == 0</code>), we add the number to the subset.</li>
+</ul>
+</li>
+<li>Finally, the result is stored in the <code>memo</code> table to avoid redundant calculations.</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Function</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">squareFreeSubsets</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>nums <span style="color:#666">=</span> nums;
+</span></span><span style="display:flex;"><span>    memset(memo, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#a2f;font-weight:bold">sizeof</span> memo);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> (dp(<span style="color:#666">0</span>, <span style="color:#666">0</span>) <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">+</span> mod) <span style="color:#666">%</span> mod;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>squareFreeSubsets(nums)</code> initializes the DP process by calling <code>dp(0, 0)</code>, starting with index <code>0</code> and an empty bitmask (<code>0</code>).</li>
+<li>The final result is returned after subtracting <code>1</code> to exclude the empty subset, ensuring the result is always positive by using modulo arithmetic.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">Complexity Analysis</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The dynamic programming approach explores each possible subset using a bitmask. The number of possible masks is (2^{10} = 1024), as there are 10 primes. The number of states is (n \times 1024), where <code>n</code> is the size of <code>nums</code>.</li>
+<li>Thus, the time complexity is (O(n \times 1024)), which simplifies to (O(n)), where <code>n</code> is the size of the input array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is dominated by the <code>memo</code> table, which has a size of (n \times 1024), leading to a space complexity of (O(n \times 1024)), or (O(n)).</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>This solution efficiently counts the number of square-free subsets of the given list of integers by using dynamic programming with bitmasking. The use of memoization ensures that overlapping subproblems are avoided, significantly improving performance. By leveraging modular arithmetic, the solution ensures that the results remain manageable even for large inputs. This approach is both time-efficient and space-efficient for the problem at hand.</p>
+<p><a href="https://leetcode.com/problems/count-the-number-of-square-free-subsets/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/rT4w58kX818?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

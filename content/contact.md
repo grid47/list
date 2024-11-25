@@ -1,6 +1,7 @@
 +++
 title = "Contact"
 slug = "contact"
+type = "main"
 +++
 
 Follow me, @grid47.

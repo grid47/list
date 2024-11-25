@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 417: Pacific Atlantic Water Flow | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 417: Pacific Atlantic Water Flow">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 417: Pacific Atlantic Water Flow in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-417-pacific-atlantic-water-flow/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 417: Pacific Atlantic Water Flow">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 417: Pacific Atlantic Water Flow in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-09-26T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Depth-First Search">
+    <meta property="article:tag" content="Breadth-First Search">
+    <meta property="article:tag" content="Matrix">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 417: Pacific Atlantic Water Flow</h1> 
+            </div>
+			<div class="article-post">
+				<h2 id="hahahugoshortcode1126s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+    <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/417.webp" 
+           alt="A map with water flowing from both Pacific and Atlantic oceans, gently meeting at highlighted points." 
+           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    
+      <figcaption style="font-size: 0.8em; font-weight: 300; color:#555; margin-top: 4px; line-height: 1.2;">
+        Solution to LeetCode 417: Pacific Atlantic Water Flow Problem
+      </figcaption>
+    
+  </figure>
+  </h2>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode1126s1hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> pacificAtlantic(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> heights) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> heights.size(), n <span style="color:#666">=</span> heights[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;&gt;</span> pac(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span>(n, <span style="color:#a2f">false</span>));
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;&gt;</span> atl(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span>(n, <span style="color:#a2f">false</span>));
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            dfs(heights, pac, <span style="color:#666">0</span>, j);
+</span></span><span style="display:flex;"><span>            dfs(heights, atl, m <span style="color:#666">-</span><span style="color:#666">1</span>, j);            
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> m; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            dfs(heights, pac, j, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>            dfs(heights, atl, j, n <span style="color:#666">-</span> <span style="color:#666">1</span>);            
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(pac[i][j] <span style="color:#666">&amp;&amp;</span> atl[i][j])
+</span></span><span style="display:flex;"><span>                ans.push_back({i, j});
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> h, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>vis, <span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        vis[i][j] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>vis[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j] <span style="color:#666">&amp;&amp;</span> h[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j] <span style="color:#666">&gt;=</span> h[i][j])
+</span></span><span style="display:flex;"><span>            dfs(h, vis, i <span style="color:#666">-</span> <span style="color:#666">1</span>, j);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(j <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>vis[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&amp;&amp;</span> h[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&gt;=</span> h[i][j])
+</span></span><span style="display:flex;"><span>            dfs(h, vis, i, j <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> h.size() <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>vis[i <span style="color:#666">+</span> <span style="color:#666">1</span>][j] <span style="color:#666">&amp;&amp;</span> h[i <span style="color:#666">+</span> <span style="color:#666">1</span>][j] <span style="color:#666">&gt;=</span> h[i][j])
+</span></span><span style="display:flex;"><span>            dfs(h, vis, i <span style="color:#666">+</span> <span style="color:#666">1</span>, j);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(j <span style="color:#666">&lt;</span> h[<span style="color:#666">0</span>].size() <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>vis[i][j <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">&amp;&amp;</span> h[i][j <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">&gt;=</span> h[i][j])
+</span></span><span style="display:flex;"><span>            dfs(h, vis, i, j <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem asks us to find all the coordinates in a given matrix of heights where water can flow to both the Pacific and Atlantic oceans. The matrix represents an elevation map where each cell contains the height of that point. Water can flow from a cell to its neighboring cell if the height of the neighboring cell is greater than or equal to the current cell&rsquo;s height. The task is to return all the coordinates where water can flow to both oceans. The Pacific Ocean touches the left and top borders, while the Atlantic Ocean touches the right and bottom borders.</p>
+<h3 id="approach">Approach</h3>
+<p>The approach to solving this problem uses depth-first search (DFS) and two separate DFS traversals: one for the Pacific Ocean and one for the Atlantic Ocean. The idea is to track which cells can flow into each ocean by starting from the borders corresponding to each ocean and using DFS to propagate possible water flows.</p>
+<p>Here’s the step-by-step approach:</p>
+<ol>
+<li>
+<p><strong>Initial Setup</strong>:</p>
+<ul>
+<li>We have a grid <code>heights</code> with dimensions <code>m x n</code> representing the elevation of different cells.</li>
+<li>We need to determine for each cell whether water can flow to the Pacific and/or Atlantic oceans.</li>
+</ul>
+</li>
+<li>
+<p><strong>Water Flow Direction</strong>:</p>
+<ul>
+<li>Water can only flow to neighboring cells (up, down, left, or right) if the neighboring cell&rsquo;s height is greater than or equal to the current cell&rsquo;s height.</li>
+<li>We will start from the borders of the matrix: the top and left borders for the Pacific Ocean, and the bottom and right borders for the Atlantic Ocean.</li>
+</ul>
+</li>
+<li>
+<p><strong>DFS Traversal</strong>:</p>
+<ul>
+<li>We will use DFS to propagate possible water flows from the borders to the inner cells, marking cells that can flow to the corresponding ocean.</li>
+<li>The DFS is initiated from all cells along the Pacific and Atlantic borders.</li>
+</ul>
+</li>
+<li>
+<p><strong>Result Calculation</strong>:</p>
+<ul>
+<li>After running the DFS for both oceans, the final answer will consist of the coordinates of cells that can flow to both the Pacific and Atlantic oceans. These are the cells where both the corresponding matrices (one for Pacific and one for Atlantic) are marked <code>true</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The DFS runs in <code>O(m * n)</code> time for each ocean, where <code>m</code> and <code>n</code> are the number of rows and columns in the matrix. Since we perform two DFS traversals, the time complexity is <code>O(2 * m * n)</code> or simply <code>O(m * n)</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<h4 id="step-1-initializing-helper-data-structures">Step 1: Initializing Helper Data Structures</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> heights.size(), n <span style="color:#666">=</span> heights[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;&gt;</span> pac(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span>(n, <span style="color:#a2f">false</span>));
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;&gt;</span> atl(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span>(n, <span style="color:#a2f">false</span>));
+</span></span></code></pre></div><ul>
+<li>We calculate the dimensions <code>m</code> and <code>n</code> of the matrix <code>heights</code>.</li>
+<li>We initialize two 2D boolean matrices, <code>pac</code> and <code>atl</code>, each of size <code>m x n</code>. These matrices will be used to track which cells can flow to the Pacific Ocean (<code>pac</code>) and the Atlantic Ocean (<code>atl</code>). All cells are initially marked as <code>false</code>.</li>
+</ul>
+<h4 id="step-2-dfs-for-pacific-and-atlantic-ocean">Step 2: DFS for Pacific and Atlantic Ocean</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    dfs(heights, pac, <span style="color:#666">0</span>, j);
+</span></span><span style="display:flex;"><span>    dfs(heights, atl, m <span style="color:#666">-</span><span style="color:#666">1</span>, j);            
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> m; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    dfs(heights, pac, j, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    dfs(heights, atl, j, n <span style="color:#666">-</span> <span style="color:#666">1</span>);            
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The outer loops iterate through the borders of the matrix. The Pacific Ocean touches the top row (<code>0, j</code>) and the left column (<code>j, 0</code>), so we initiate DFS from these cells to propagate possible water flow.</li>
+<li>Similarly, the Atlantic Ocean touches the bottom row (<code>m - 1, j</code>) and the right column (<code>j, n - 1</code>), so we initiate DFS from these cells for the Atlantic Ocean.</li>
+</ul>
+<h4 id="step-3-dfs-function-for-propagating-water-flow">Step 3: DFS Function for Propagating Water Flow</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dfs</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> h, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>vis, <span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
+</span></span><span style="display:flex;"><span>    vis[i][j] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>vis[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j] <span style="color:#666">&amp;&amp;</span> h[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j] <span style="color:#666">&gt;=</span> h[i][j])
+</span></span><span style="display:flex;"><span>        dfs(h, vis, i <span style="color:#666">-</span> <span style="color:#666">1</span>, j);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(j <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>vis[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&amp;&amp;</span> h[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&gt;=</span> h[i][j])
+</span></span><span style="display:flex;"><span>        dfs(h, vis, i, j <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> h.size() <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>vis[i <span style="color:#666">+</span> <span style="color:#666">1</span>][j] <span style="color:#666">&amp;&amp;</span> h[i <span style="color:#666">+</span> <span style="color:#666">1</span>][j] <span style="color:#666">&gt;=</span> h[i][j])
+</span></span><span style="display:flex;"><span>        dfs(h, vis, i <span style="color:#666">+</span> <span style="color:#666">1</span>, j);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(j <span style="color:#666">&lt;</span> h[<span style="color:#666">0</span>].size() <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>vis[i][j <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">&amp;&amp;</span> h[i][j <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">&gt;=</span> h[i][j])
+</span></span><span style="display:flex;"><span>        dfs(h, vis, i, j <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The DFS function is called for each cell. The <code>vis</code> matrix tracks the visited cells for the given ocean (<code>pac</code> or <code>atl</code>).</li>
+<li>At each cell <code>(i, j)</code>, we mark it as visited (<code>vis[i][j] = true</code>).</li>
+<li>The DFS continues to neighboring cells in the up, down, left, and right directions if the neighboring cell has a greater or equal height (<code>h[i - 1][j] &gt;= h[i][j]</code> for up, and similarly for other directions).</li>
+<li>This recursive propagation ensures that all cells that can flow to the respective ocean (Pacific or Atlantic) are marked.</li>
+</ul>
+<h4 id="step-4-collecting-the-result">Step 4: Collecting the Result</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(pac[i][j] <span style="color:#666">&amp;&amp;</span> atl[i][j])
+</span></span><span style="display:flex;"><span>            ans.push_back({i, j});
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>After both DFS traversals are complete, we iterate through the matrix.</li>
+<li>For each cell <code>(i, j)</code>, if the cell can flow to both the Pacific (<code>pac[i][j] == true</code>) and Atlantic oceans (<code>atl[i][j] == true</code>), we add the cell coordinates to the result vector <code>ans</code>.</li>
+<li>Finally, we return the result vector <code>ans</code>, which contains all the coordinates where water can flow to both oceans.</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<h4 id="time-complexity">Time Complexity:</h4>
+<ul>
+<li><strong>DFS Complexity</strong>: For each DFS traversal, we visit every cell once, making the time complexity for one DFS <code>O(m * n)</code>, where <code>m</code> and <code>n</code> are the number of rows and columns of the matrix.</li>
+<li><strong>Overall Complexity</strong>: Since we perform two DFS traversals (one for the Pacific Ocean and one for the Atlantic Ocean), the overall time complexity is <code>O(2 * m * n)</code> or simply <code>O(m * n)</code>.</li>
+</ul>
+<h4 id="space-complexity">Space Complexity:</h4>
+<ul>
+<li>We use two 2D matrices (<code>pac</code> and <code>atl</code>) to track whether each cell can reach the respective ocean. Each matrix takes <code>O(m * n)</code> space.</li>
+<li>The recursion stack for DFS can also take up to <code>O(m * n)</code> space in the worst case.</li>
+<li>Thus, the overall space complexity is <code>O(m * n)</code>.</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>The solution effectively solves the problem of finding cells where water can flow to both the Pacific and Atlantic oceans by using depth-first search (DFS). The approach involves marking cells that can reach each ocean, and then collecting the coordinates where both oceans can be reached. The time and space complexity of the solution are both optimal for this problem, making it efficient even for larger matrices.</p>
+<p><a href="https://leetcode.com/problems/pacific-atlantic-water-flow/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/1HDq998kmio?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

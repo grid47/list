@@ -1,6 +1,7 @@
 +++
 title = "Course"
 slug = "courses"
+type = "main"
 +++
 
 

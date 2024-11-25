@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 831: Masking Personal Information | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 831: Masking Personal Information">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 831: Masking Personal Information in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-831-masking-personal-information/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 831: Masking Personal Information">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 831: Masking Personal Information in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-08-15T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="String">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 831: Masking Personal Information</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode1334s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> country <span style="color:#666">=</span> {<span style="color:#b44">&#34;&#34;</span>, <span style="color:#b44">&#34;+*-&#34;</span>, <span style="color:#b44">&#34;+**-&#34;</span>, <span style="color:#b44">&#34;+***-&#34;</span>};
+</span></span><span style="display:flex;"><span>    string <span style="color:#00a000">maskPII</span>(string s) {
+</span></span><span style="display:flex;"><span>        string res;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> at <span style="color:#666">=</span> s.find(<span style="color:#b44">&#39;@&#39;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(at <span style="color:#666">!=</span> string<span style="color:#666">::</span>npos) {
+</span></span><span style="display:flex;"><span>            transform(s.begin(), s.end(), s.begin(), <span style="color:#666">::</span>tolower);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> s.substr(<span style="color:#666">0</span>, <span style="color:#666">1</span>) <span style="color:#666">+</span> <span style="color:#b44">&#34;*****&#34;</span> <span style="color:#666">+</span> s.substr(at <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        s <span style="color:#666">=</span> regex_replace(s, regex(<span style="color:#b44">&#34;[^0-9]&#34;</span>), <span style="color:#b44">&#34;&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> country[s.size() <span style="color:#666">-</span> <span style="color:#666">10</span>]  <span style="color:#666">+</span> <span style="color:#b44">&#34;***-***-&#34;</span> <span style="color:#666">+</span> s.substr(s.size() <span style="color:#666">-</span> <span style="color:#666">4</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>In this problem, you are asked to mask personal information from a given string <code>s</code> which represents either a phone number or an email address. The task involves transforming the input string into a masked format while maintaining privacy.</p>
+<ul>
+<li>If the string represents an <strong>email address</strong>, mask the local part (before the <code>@</code>) with asterisks, leaving only the first letter of the local part visible, followed by five asterisks, and the domain part (after the <code>@</code>) remains unchanged.</li>
+<li>If the string represents a <strong>phone number</strong>, mask all but the last four digits. Additionally, format the number in a standard format based on the country code (if present).</li>
+</ul>
+<h3 id="approach">Approach</h3>
+<p>We need to process two types of strings: email addresses and phone numbers. We will identify which type the string belongs to based on the presence of an <code>@</code> symbol and perform the necessary transformations accordingly.</p>
+<ol>
+<li>
+<p><strong>For Email Addresses</strong>:</p>
+<ul>
+<li>Convert all letters to lowercase.</li>
+<li>Mask the local part (before <code>@</code>) by displaying the first letter, followed by five asterisks (<code>*****</code>).</li>
+<li>The domain part (after <code>@</code>) remains unchanged.</li>
+</ul>
+</li>
+<li>
+<p><strong>For Phone Numbers</strong>:</p>
+<ul>
+<li>First, remove all non-numeric characters.</li>
+<li>Mask the first part of the phone number with <code>***-***-</code>, leaving the last four digits visible.</li>
+<li>Use different country formats based on the length of the phone number (10 digits for a local number, 11 or 12 digits for international numbers).</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<p>Let&rsquo;s walk through the code step by step:</p>
+<h4 id="step-1-defining-the-country-format">Step 1: Defining the Country Format</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> country <span style="color:#666">=</span> {<span style="color:#b44">&#34;&#34;</span>, <span style="color:#b44">&#34;+*-&#34;</span>, <span style="color:#b44">&#34;+**-&#34;</span>, <span style="color:#b44">&#34;+***-&#34;</span>};
+</span></span></code></pre></div><ul>
+<li>This array <code>country</code> contains different country code formats. The first entry is an empty string, as we don&rsquo;t need any country code for a standard 10-digit number.</li>
+<li>The second entry is for a 11-digit phone number, prefixed with a <code>+</code> followed by one asterisk (<code>*</code>), for example: <code>+*-</code>.</li>
+<li>The third and fourth entries correspond to a 12-digit phone number format.</li>
+</ul>
+<h4 id="step-2-handling-the-email-address">Step 2: Handling the Email Address</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> at <span style="color:#666">=</span> s.find(<span style="color:#b44">&#39;@&#39;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(at <span style="color:#666">!=</span> string<span style="color:#666">::</span>npos) {
+</span></span><span style="display:flex;"><span>    transform(s.begin(), s.end(), s.begin(), <span style="color:#666">::</span>tolower);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> s.substr(<span style="color:#666">0</span>, <span style="color:#666">1</span>) <span style="color:#666">+</span> <span style="color:#b44">&#34;*****&#34;</span> <span style="color:#666">+</span> s.substr(at <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We first check if the string contains the <code>@</code> symbol, which identifies it as an email address.</li>
+<li>If the email is valid, we convert the entire string to lowercase using <code>transform()</code>. This ensures that the email address is standardized regardless of the case of the input.</li>
+<li>The local part of the email is masked by taking the first character (<code>s.substr(0, 1)</code>) and replacing the rest with <code>*****</code> (five asterisks).</li>
+<li>We then append the domain part of the email (the portion after <code>@</code>) using <code>s.substr(at - 1)</code> to keep everything after <code>@</code> intact.</li>
+</ul>
+<h4 id="step-3-handling-the-phone-number">Step 3: Handling the Phone Number</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>s <span style="color:#666">=</span> regex_replace(s, regex(<span style="color:#b44">&#34;[^0-9]&#34;</span>), <span style="color:#b44">&#34;&#34;</span>);
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> country[s.size() <span style="color:#666">-</span> <span style="color:#666">10</span>]  <span style="color:#666">+</span> <span style="color:#b44">&#34;***-***-&#34;</span> <span style="color:#666">+</span> s.substr(s.size() <span style="color:#666">-</span> <span style="color:#666">4</span>);
+</span></span></code></pre></div><ul>
+<li>If the string is not an email address, we assume it is a phone number.</li>
+<li>First, we remove all non-numeric characters using <code>regex_replace()</code>. This cleans up the string, leaving only the digits.</li>
+<li>We then determine the appropriate country format by calculating the length of the string. The phone number should contain at least 10 digits, and we adjust the format based on the number of digits:
+<ul>
+<li>For a 10-digit number, no country code is added.</li>
+<li>For longer numbers (11 or 12 digits), we append the corresponding country code format from the <code>country</code> array.</li>
+</ul>
+</li>
+<li>Finally, we format the phone number in the standard format <code>***-***-xxxx</code>, where <code>xxxx</code> are the last four digits of the phone number.</li>
+</ul>
+<h3 id="complexity-analysis">Complexity Analysis</h3>
+<h4 id="time-complexity">Time Complexity</h4>
+<ul>
+<li>
+<p><strong>For Email Address</strong>:</p>
+<ul>
+<li>The time complexity for processing an email address is <strong>O(n)</strong>, where <code>n</code> is the length of the string. This comes from the need to traverse the string to convert it to lowercase and apply the substring operations.</li>
+</ul>
+</li>
+<li>
+<p><strong>For Phone Number</strong>:</p>
+<ul>
+<li>Removing non-numeric characters using <code>regex_replace()</code> takes <strong>O(n)</strong> time, where <code>n</code> is the number of characters in the input string.</li>
+<li>After that, we perform simple operations like calculating the size of the string and appending parts of the string, all of which take constant time.</li>
+</ul>
+</li>
+</ul>
+<p>Thus, the overall time complexity is <strong>O(n)</strong>, where <code>n</code> is the length of the input string.</p>
+<h4 id="space-complexity">Space Complexity</h4>
+<ul>
+<li>The space complexity is <strong>O(n)</strong> because we use extra space for storing the transformed string (either the masked email or the cleaned phone number).</li>
+</ul>
+<h3 id="example-walkthrough">Example Walkthrough</h3>
+<h4 id="input-1-email-address">Input 1: Email Address</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string s <span style="color:#666">=</span> <span style="color:#b44">&#34;JohnDoe@example.com&#34;</span>;
+</span></span></code></pre></div><ol>
+<li>The <code>@</code> symbol is found, so we process it as an email.</li>
+<li>The entire string is converted to lowercase: <code>&quot;johndoe@example.com&quot;</code>.</li>
+<li>The local part is masked: <code>&quot;j*****&quot;</code>.</li>
+<li>The domain part is appended: <code>&quot;j*****@example.com&quot;</code>.</li>
+</ol>
+<p><strong>Output</strong>: <code>&quot;j*****@example.com&quot;</code></p>
+<h4 id="input-2-phone-number">Input 2: Phone Number</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string s <span style="color:#666">=</span> <span style="color:#b44">&#34;+1 (234) 567-8901&#34;</span>;
+</span></span></code></pre></div><ol>
+<li>We remove all non-numeric characters, leaving <code>&quot;12345678901&quot;</code>.</li>
+<li>The string has 11 digits, so we use the country format <code>+*-</code> for international numbers.</li>
+<li>The phone number is formatted as <code>+*-***-***-8901</code>.</li>
+</ol>
+<p><strong>Output</strong>: <code>&quot;+*-***-***-8901&quot;</code></p>
+<h4 id="input-3-local-phone-number">Input 3: Local Phone Number</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string s <span style="color:#666">=</span> <span style="color:#b44">&#34;123-456-7890&#34;</span>;
+</span></span></code></pre></div><ol>
+<li>We remove all non-numeric characters, leaving <code>&quot;1234567890&quot;</code>.</li>
+<li>The string has 10 digits, so no country code is added.</li>
+<li>The phone number is formatted as <code>***-***-7890</code>.</li>
+</ol>
+<p><strong>Output</strong>: <code>&quot;***-***-7890&quot;</code></p>
+<h3 id="conclusion">Conclusion</h3>
+<p>This solution provides an efficient way to mask personal information in strings, whether it be email addresses or phone numbers. By using regular expressions and string manipulation, we can clean the input and apply the necessary transformations. The approach ensures that sensitive information is protected while still allowing the essential parts of the email address or phone number to be visible. This solution operates in linear time, making it well-suited for large inputs.</p>
+<p><a href="https://leetcode.com/problems/masking-personal-information/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/gBPqkLohQvg?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

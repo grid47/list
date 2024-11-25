@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 981: Time Based Key-Value Store | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 981: Time Based Key-Value Store">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 981: Time Based Key-Value Store in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-981-time-based-key-value-store/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 981: Time Based Key-Value Store">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 981: Time Based Key-Value Store in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-07-31T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Hash Table">
+    <meta property="article:tag" content="String">
+    <meta property="article:tag" content="Binary Search">
+    <meta property="article:tag" content="Design">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 981: Time Based Key-Value Store</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode1431s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">TimeMap</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span>string, vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, string<span style="color:#666">&gt;&gt;&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    TimeMap() {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">set</span>(string key, string value, <span style="color:#0b0;font-weight:bold">int</span> timestamp) {
+</span></span><span style="display:flex;"><span>        mp[key].push_back(make_pair(timestamp, value));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    string <span style="color:#00a000">get</span>(string key, <span style="color:#0b0;font-weight:bold">int</span> ts) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>mp.count(key)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// vector&lt;pair&lt;int, string&gt;&gt; v = &amp;mp[key];
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">0</span>, r <span style="color:#666">=</span> mp[key].size() <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;=</span> r) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(ts <span style="color:#666">&gt;</span> mp[key][m].first) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(m <span style="color:#666">==</span> r <span style="color:#666">||</span> ts <span style="color:#666">&lt;</span> mp[key][m <span style="color:#666">+</span> <span style="color:#666">1</span>].first)
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">return</span> mp[key][m].second;
+</span></span><span style="display:flex;"><span>                l <span style="color:#666">=</span> m <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(ts <span style="color:#666">&lt;</span> mp[key][m].first)
+</span></span><span style="display:flex;"><span>                r <span style="color:#666">=</span> m <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> mp[key][m].second;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your TimeMap object will be instantiated and called as such:
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * TimeMap* obj = new TimeMap();
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * obj-&gt;set(key,value,timestamp);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * string param_2 = obj-&gt;get(key,timestamp);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> */</span></span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem asks to implement a <strong>TimeMap</strong> class that supports two operations:</p>
+<ol>
+<li>
+<p><strong><code>set(key, value, timestamp)</code></strong>: This operation stores a key-value pair along with a timestamp. It should allow storing multiple values for the same key at different timestamps.</p>
+</li>
+<li>
+<p><strong><code>get(key, timestamp)</code></strong>: This operation retrieves the most recent value stored for the given key at or before the given timestamp. If no such value exists, it should return an empty string.</p>
+</li>
+</ol>
+<p>This problem tests the ability to store key-value pairs with time-based indexing and efficiently retrieve the most recent value for a given key at a specific timestamp.</p>
+<h3 id="approach">Approach</h3>
+<p>To solve the problem, we need to efficiently store and retrieve key-value pairs with respect to their timestamps. The idea is to utilize a <strong>map</strong> (or dictionary) to store the keys, where each key maps to a vector of <strong>timestamp-value pairs</strong>. We will then use binary search to efficiently retrieve the most recent value for a key at or before the requested timestamp.</p>
+<h4 id="data-structures-used">Data Structures Used:</h4>
+<ul>
+<li>
+<p><strong>map&lt;string, vector&lt;pair&lt;int, string&raquo;&gt;</strong>:</p>
+<ul>
+<li>A map is used to store keys, where each key is mapped to a vector of pairs. Each pair consists of a timestamp and a value.</li>
+<li>The vector will store the timestamps in increasing order, ensuring that we can efficiently retrieve the most recent value using binary search.</li>
+</ul>
+</li>
+<li>
+<p><strong>Binary Search</strong>:</p>
+<ul>
+<li>For the <code>get()</code> operation, we will use binary search on the vector associated with a key to find the most recent timestamp that is less than or equal to the provided timestamp. This allows for a fast retrieval operation.</li>
+</ul>
+</li>
+</ul>
+<h4 id="steps-for-each-operation">Steps for Each Operation:</h4>
+<ol>
+<li>
+<p><strong><code>set(key, value, timestamp)</code></strong>:</p>
+<ul>
+<li>For each <code>set</code> call, we store the given value at the given timestamp. Since the timestamps are stored in increasing order, we append the new pair <code>(timestamp, value)</code> to the vector corresponding to the key.</li>
+<li>This operation is done in <strong>O(log n)</strong> due to the use of a map for storing key-value pairs.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>get(key, timestamp)</code></strong>:</p>
+<ul>
+<li>For each <code>get</code> call, we perform binary search on the vector of timestamp-value pairs associated with the given key. The binary search helps find the most recent timestamp that is less than or equal to the requested timestamp.</li>
+<li>The binary search ensures that the <code>get()</code> operation runs in <strong>O(log n)</strong> time.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<h4 id="1-class-definition">1. <strong>Class Definition</strong>:</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">TimeMap</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span>string, vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, string<span style="color:#666">&gt;&gt;&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    TimeMap() {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The <code>TimeMap</code> class has a member variable <code>mp</code>, which is a map that stores the key-value pairs. Each key (a string) maps to a vector of pairs, where each pair consists of a timestamp (an integer) and a value (a string).</li>
+</ul>
+<h4 id="2-set-method">2. <strong>set Method</strong>:</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">set</span>(string key, string value, <span style="color:#0b0;font-weight:bold">int</span> timestamp) {
+</span></span><span style="display:flex;"><span>        mp[key].push_back(make_pair(timestamp, value));
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The <code>set</code> method stores the key-value pair along with the timestamp in the map <code>mp</code>.</li>
+<li>We use <code>push_back</code> to append a pair <code>(timestamp, value)</code> to the vector associated with the key.</li>
+<li>This ensures that we can store multiple values for the same key at different timestamps.</li>
+</ul>
+<h4 id="3-get-method">3. <strong>get Method</strong>:</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string <span style="color:#00a000">get</span>(string key, <span style="color:#0b0;font-weight:bold">int</span> ts) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>mp.count(key)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span></code></pre></div><ul>
+<li>The <code>get</code> method first checks if the key exists in the map. If the key is not found, it returns an empty string (<code>&quot;&quot;</code>).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">0</span>, r <span style="color:#666">=</span> mp[key].size() <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(l <span style="color:#666">&lt;=</span> r) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> l <span style="color:#666">+</span> (r <span style="color:#666">-</span> l) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span></code></pre></div><ul>
+<li>If the key exists, we perform a binary search on the vector of pairs corresponding to the key.</li>
+<li>We initialize two pointers <code>l</code> (left) and <code>r</code> (right) to define the search range, which spans the entire vector.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(ts <span style="color:#666">&gt;</span> mp[key][m].first) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(m <span style="color:#666">==</span> r <span style="color:#666">||</span> ts <span style="color:#666">&lt;</span> mp[key][m <span style="color:#666">+</span> <span style="color:#666">1</span>].first)
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">return</span> mp[key][m].second;
+</span></span><span style="display:flex;"><span>                l <span style="color:#666">=</span> m <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(ts <span style="color:#666">&lt;</span> mp[key][m].first)
+</span></span><span style="display:flex;"><span>                r <span style="color:#666">=</span> m <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> mp[key][m].second;
+</span></span></code></pre></div><ul>
+<li>In the binary search loop:
+<ul>
+<li>If the current timestamp (<code>ts</code>) is greater than the timestamp of the midpoint (<code>mp[key][m].first</code>), this means we need to search in the right half of the vector, so we move the left pointer to <code>m + 1</code>.</li>
+<li>If the current timestamp is less than the midpoint timestamp, we search the left half, adjusting the right pointer to <code>m - 1</code>.</li>
+<li>If we find an exact match for the timestamp (<code>ts == mp[key][m].first</code>), we return the corresponding value (<code>mp[key][m].second</code>).</li>
+<li>If <code>ts &gt; mp[key][m].first</code>, we continue searching for a closer match. If the next timestamp is greater than <code>ts</code>, then we know the current timestamp is the most recent timestamp less than or equal to <code>ts</code>, and we return its value.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>If no match is found, the function returns an empty string.</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><strong><code>set</code> operation</strong>: O(log n) — Inserting a key-value pair into the map takes logarithmic time, and each key-value pair insertion into the vector is an O(1) operation.</li>
+<li><strong><code>get</code> operation</strong>: O(log n) — The binary search on the vector associated with each key takes logarithmic time.</li>
+</ul>
+<p>Therefore, both operations (<code>set</code> and <code>get</code>) have a time complexity of O(log n), where <code>n</code> is the number of elements stored for a given key.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity of the solution is <strong>O(m)</strong>, where <code>m</code> is the total number of key-value pairs stored across all keys. The map stores the key-value pairs along with their timestamps, and the space required is proportional to the number of pairs.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>The <code>TimeMap</code> class efficiently handles the operations <code>set(key, value, timestamp)</code> and <code>get(key, timestamp)</code> using a map and binary search. The use of binary search ensures that the <code>get</code> operation is efficient, even with a large number of timestamps stored for a given key. This solution is optimal for the problem as it supports both operations in <strong>O(log n)</strong> time, where <code>n</code> is the number of timestamps stored for a given key, making it well-suited for real-time applications that require time-based lookups.</p>
+<p><a href="https://leetcode.com/problems/time-based-key-value-store/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/eVi4gDimCoo?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

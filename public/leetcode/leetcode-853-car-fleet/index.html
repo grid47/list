@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 853: Car Fleet | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 853: Car Fleet">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 853: Car Fleet in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-853-car-fleet/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 853: Car Fleet">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 853: Car Fleet in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-08-13T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Stack">
+    <meta property="article:tag" content="Sorting">
+    <meta property="article:tag" content="Monotonic Stack">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 853: Car Fleet</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode1349s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> carFleet(<span style="color:#0b0;font-weight:bold">int</span> target, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> pos, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> v) {
+</span></span><span style="display:flex;"><span>        map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;</span> t;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> pos.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            t[<span style="color:#666">-</span>pos[i]] <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">double</span>) (target<span style="color:#666">-</span>pos[i]) <span style="color:#666">/</span> v[i];
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> fleet <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">double</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: t) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(it.second <span style="color:#666">&gt;</span> cur) fleet<span style="color:#666">++</span>, cur <span style="color:#666">=</span> it.second;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> fleet;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>In this problem, we are tasked with simulating car fleets traveling towards a target. Each car is at a certain position on a 1D line and is traveling at a constant speed. We need to determine how many fleets will reach the target, where a fleet is a group of cars that arrive at the target simultaneously.</p>
+<p>A fleet is formed when multiple cars are close enough to each other such that the lead car’s speed determines the speed of the whole group. If a faster car catches up to a slower car, they form a fleet, and both will reach the target at the same time.</p>
+<h4 id="input">Input:</h4>
+<ul>
+<li>An integer <code>target</code> represents the target point on the 1D axis.</li>
+<li>A vector <code>pos</code> of integers, where each value represents the position of a car.</li>
+<li>A vector <code>v</code> of integers, where each value represents the speed of the corresponding car in the <code>pos</code> vector.</li>
+</ul>
+<h4 id="output">Output:</h4>
+<ul>
+<li>The number of car fleets that will reach the target.</li>
+</ul>
+<p><strong>Example:</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a0a000">Input</span>: target <span style="color:#666">=</span> <span style="color:#666">12</span>, pos <span style="color:#666">=</span> [<span style="color:#666">10</span>, <span style="color:#666">8</span>, <span style="color:#666">0</span>, <span style="color:#666">5</span>, <span style="color:#666">3</span>], v <span style="color:#666">=</span> [<span style="color:#666">2</span>, <span style="color:#666">4</span>, <span style="color:#666">1</span>, <span style="color:#666">1</span>, <span style="color:#666">3</span>]
+</span></span><span style="display:flex;"><span><span style="color:#a0a000">Output</span>: <span style="color:#666">3</span>
+</span></span></code></pre></div><h3 id="approach">Approach</h3>
+<p>To solve this problem efficiently, we can use a greedy approach combined with sorting. The key insight is that the slower cars will eventually &ldquo;catch up&rdquo; to the faster ones if they start behind and are not too far apart.</p>
+<ol>
+<li>
+<p><strong>Understanding the Fleet Formation</strong>:</p>
+<ul>
+<li>Cars that start behind and travel faster can eventually catch up to cars in front, forming a fleet.</li>
+<li>A fleet is formed when a slower car catches up with a faster car. Once a fleet forms, all cars in that fleet move as one, and they will reach the target at the same time.</li>
+</ul>
+</li>
+<li>
+<p><strong>Plan</strong>:</p>
+<ul>
+<li>We will first calculate the time it takes for each car to reach the target.</li>
+<li>The time to reach the target for each car is calculated as:
+[
+\text{time} = \frac{\text{target} - \text{position}}{\text{velocity}}
+]</li>
+<li>Sort the cars by their position in descending order (from the furthest car to the nearest car).</li>
+<li>Then, we will simulate the formation of fleets by iterating over the cars. For each car, if it takes longer to reach the target than the car ahead of it, it will form a new fleet. Otherwise, it will join the fleet of the car ahead.</li>
+</ul>
+</li>
+<li>
+<p><strong>Efficiency</strong>:</p>
+<ul>
+<li>Sorting the cars by their position ensures that we process them from the car that is farthest away from the target to the one closest.</li>
+<li>We track the lead car’s time for each fleet, and if a car behind has a longer or equal time, it joins the fleet.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<h4 id="step-1-store-time-to-reach-target">Step 1: Store Time to Reach Target</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;</span> t;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> pos.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    t[<span style="color:#666">-</span>pos[i]] <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">double</span>) (target <span style="color:#666">-</span> pos[i]) <span style="color:#666">/</span> v[i];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We create a <code>map</code> <code>t</code> to store the time it takes for each car to reach the target. The key of the map is the negative of the car&rsquo;s position (<code>-pos[i]</code>) to ensure cars are processed in descending order of their position (furthest first).</li>
+<li>The value in the map is the time it will take for the car at position <code>pos[i]</code> to reach the target, which is calculated using the formula:
+[
+\text{time} = \frac{\text{target} - \text{position}}{\text{velocity}}
+]</li>
+</ul>
+<h4 id="step-2-process-cars-to-form-fleets">Step 2: Process Cars to Form Fleets</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> fleet <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">double</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: t) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (it.second <span style="color:#666">&gt;</span> cur) fleet<span style="color:#666">++</span>, cur <span style="color:#666">=</span> it.second;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We initialize <code>fleet</code> to 0 to count the number of fleets, and <code>cur</code> to 0 to keep track of the current lead car’s time.</li>
+<li>We iterate over the <code>map</code> to process each car starting from the furthest car:
+<ul>
+<li>If the current car’s time (<code>it.second</code>) is greater than the time of the car ahead (<code>cur</code>), it means this car cannot catch up to the car ahead, so it forms a new fleet. We increment the fleet count and update <code>cur</code> to the current car&rsquo;s time.</li>
+<li>If the current car’s time is less than or equal to <code>cur</code>, it means this car will catch up with the car ahead, so it does not form a new fleet, and it joins the existing fleet.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-3-return-result">Step 3: Return Result</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> fleet;
+</span></span></code></pre></div><ul>
+<li>Finally, we return the total number of fleets.</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<h4 id="time-complexity">Time Complexity:</h4>
+<ul>
+<li>Sorting the cars by position takes <strong>O(n log n)</strong>, where <code>n</code> is the number of cars (i.e., the size of the <code>pos</code> vector).</li>
+<li>Iterating over the cars and processing them takes <strong>O(n)</strong> time.</li>
+<li>Therefore, the overall time complexity is <strong>O(n log n)</strong> due to the sorting step.</li>
+</ul>
+<h4 id="space-complexity">Space Complexity:</h4>
+<ul>
+<li>The space complexity is <strong>O(n)</strong> due to the storage of the <code>map</code> which holds the time for each car.</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>This solution efficiently solves the problem by leveraging the properties of sorting and greedy algorithms. By calculating the time to reach the target for each car and processing them from the furthest car to the nearest, we can easily determine the number of fleets that will reach the target. The use of sorting and a greedy approach ensures that we achieve the solution in <strong>O(n log n)</strong> time, making it suitable for large inputs.</p>
+<p>Key points:</p>
+<ul>
+<li><strong>Sorting</strong> helps us process the cars from the farthest to the nearest.</li>
+<li><strong>Greedy approach</strong> ensures that we minimize the number of fleets by merging cars that can catch up with each other.</li>
+<li>The solution is efficient both in terms of time and space, making it a robust solution for the problem.</li>
+</ul>
+<p>This method is a great example of applying a greedy approach to a real-world problem involving cars moving toward a target, and it showcases how sorting and optimal traversal can solve such problems efficiently.</p>
+<p><a href="https://leetcode.com/problems/car-fleet/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/Pr6T-3yB9RM?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

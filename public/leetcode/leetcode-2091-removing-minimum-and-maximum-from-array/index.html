@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 2091: Removing Minimum and Maximum From Array | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 2091: Removing Minimum and Maximum From Array">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 2091: Removing Minimum and Maximum From Array in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-2091-removing-minimum-and-maximum-from-array/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 2091: Removing Minimum and Maximum From Array">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 2091: Removing Minimum and Maximum From Array in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-04-11T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Greedy">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 2091: Removing Minimum and Maximum From Array</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode554s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> minimumDeletions(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> xi <span style="color:#666">=</span> <span style="color:#666">0</span>, ni <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(nums[xi] <span style="color:#666">&lt;</span> nums[i])
+</span></span><span style="display:flex;"><span>                xi <span style="color:#666">=</span> i;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(nums[ni] <span style="color:#666">&gt;</span> nums[i])
+</span></span><span style="display:flex;"><span>                ni <span style="color:#666">=</span> i;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(xi <span style="color:#666">==</span> ni) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> (xi <span style="color:#666">&lt;</span> ni)<span style="color:#666">?</span> <span style="color:#a0a000">ni</span>: xi;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mn <span style="color:#666">=</span> (xi <span style="color:#666">&lt;</span> ni)<span style="color:#666">?</span> <span style="color:#a0a000">xi</span>: ni;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> (mx <span style="color:#666">-</span> <span style="color:#666">0</span> <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> min(ans, (n <span style="color:#666">-</span> mn));
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> min(ans, (n <span style="color:#666">-</span> mx) <span style="color:#666">+</span> (mn <span style="color:#666">-</span> <span style="color:#666">0</span> <span style="color:#666">+</span> <span style="color:#666">1</span>));
+</span></span><span style="display:flex;"><span>                
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem involves finding the minimum number of deletions required to ensure that all remaining elements in a vector <code>nums</code> are either all less than or equal to the minimum element or all greater than or equal to the maximum element. The goal is to achieve this with the least number of deletions while maintaining the order of the remaining elements. This problem can be approached by identifying the positions of the maximum and minimum elements in the array, and then determining the optimal deletions needed based on their positions.</p>
+<h3 id="approach">Approach</h3>
+<p>To solve the problem effectively, we can break down the process into a few logical steps:</p>
+<ol>
+<li>
+<p><strong>Identify Maximum and Minimum</strong>: First, we need to traverse the input array to find the indices of both the maximum and minimum elements. This allows us to know where these critical values lie in the array.</p>
+</li>
+<li>
+<p><strong>Calculate Potential Deletions</strong>: Once we have the indices of the maximum and minimum elements, we can calculate the number of deletions required for three scenarios:</p>
+<ul>
+<li>Deleting all elements from the start of the array up to (and including) the minimum index.</li>
+<li>Deleting all elements from the maximum index to the end of the array.</li>
+<li>Deleting elements from both ends, leaving the segment between the minimum and maximum.</li>
+</ul>
+</li>
+<li>
+<p><strong>Find the Minimum</strong>: The final step involves comparing the deletion counts from the three scenarios and selecting the minimum value, which represents the optimal number of deletions needed.</p>
+</li>
+</ol>
+<p>This approach ensures that we efficiently determine the minimum deletions required without needing to examine every possible combination of deletions, which would be computationally expensive.</p>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<p>Let&rsquo;s break down the code provided to understand how the solution implements this approach:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> xi <span style="color:#666">=</span> <span style="color:#666">0</span>, ni <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span></code></pre></div><p>Here, we initialize two indices <code>xi</code> and <code>ni</code> to track the positions of the maximum and minimum elements, respectively. We also get the size of the input array <code>n</code>.</p>
+</li>
+<li>
+<p><strong>Finding Maximum and Minimum Indices</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(nums[xi] <span style="color:#666">&lt;</span> nums[i])
+</span></span><span style="display:flex;"><span>        xi <span style="color:#666">=</span> i;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(nums[ni] <span style="color:#666">&gt;</span> nums[i])
+</span></span><span style="display:flex;"><span>        ni <span style="color:#666">=</span> i;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>In this loop, we iterate over the array to find the indices of the maximum (<code>xi</code>) and minimum (<code>ni</code>) elements. If the current element is greater than the element at <code>xi</code>, we update <code>xi</code>. Similarly, if the current element is less than the element at <code>ni</code>, we update <code>ni</code>.</p>
+</li>
+<li>
+<p><strong>Handling Edge Case</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(xi <span style="color:#666">==</span> ni) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div><p>If the maximum and minimum indices are the same, it indicates that the array consists of a single unique element. In this case, only one deletion is necessary to achieve the condition, hence we return <code>1</code>.</p>
+</li>
+<li>
+<p><strong>Calculating Indices</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> (xi <span style="color:#666">&lt;</span> ni) <span style="color:#666">?</span> <span style="color:#a0a000">ni</span> : xi;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mn <span style="color:#666">=</span> (xi <span style="color:#666">&lt;</span> ni) <span style="color:#666">?</span> <span style="color:#a0a000">xi</span> : ni;
+</span></span></code></pre></div><p>Here, we determine which index corresponds to the maximum and which corresponds to the minimum, ensuring that <code>mx</code> always holds the larger index and <code>mn</code> the smaller.</p>
+</li>
+<li>
+<p><strong>Calculating Deletions for Each Scenario</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> (mx <span style="color:#666">-</span> <span style="color:#666">0</span> <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>ans <span style="color:#666">=</span> min(ans, (n <span style="color:#666">-</span> mn));
+</span></span><span style="display:flex;"><span>ans <span style="color:#666">=</span> min(ans, (n <span style="color:#666">-</span> mx) <span style="color:#666">+</span> (mn <span style="color:#666">-</span> <span style="color:#666">0</span> <span style="color:#666">+</span> <span style="color:#666">1</span>));
+</span></span></code></pre></div><ul>
+<li>The first calculation <code>(mx - 0 + 1)</code> accounts for the deletions needed from the start of the array up to the maximum index.</li>
+<li>The second calculation <code>(n - mn)</code> considers deletions needed from the minimum index to the end of the array.</li>
+<li>The final calculation <code>(n - mx) + (mn - 0 + 1)</code> sums the deletions needed from both ends while preserving the middle section between the maximum and minimum elements.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div><p>Finally, we return the minimum number of deletions calculated from the three scenarios.</p>
+</li>
+</ol>
+<h3 id="complexity">Complexity</h3>
+<p>The time complexity of this algorithm is O(n), where <code>n</code> is the length of the input array. This is because we only need a single pass to identify the maximum and minimum values and their indices, followed by constant-time calculations for the deletion scenarios. The space complexity is O(1) as we are only using a fixed amount of extra space for the indices and the answer, regardless of the input size. This efficiency makes the algorithm well-suited for large input arrays.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>In conclusion, the solution effectively finds the minimum deletions required to meet the specified condition by leveraging the positions of the maximum and minimum elements in the input array. By considering only the necessary scenarios and utilizing simple arithmetic operations, the algorithm achieves optimal time complexity. This approach is not only efficient but also straightforward, making it easy to understand and implement. Such solutions are critical in competitive programming and technical interviews, where both correctness and efficiency are paramount.</p>
+<p><a href="https://leetcode.com/problems/removing-minimum-and-maximum-from-array/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/OsaRrf_jDn4?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

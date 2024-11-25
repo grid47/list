@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 402: Remove K Digits | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 402: Remove K Digits">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 402: Remove K Digits in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-402-remove-k-digits/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 402: Remove K Digits">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 402: Remove K Digits in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-09-27T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="String">
+    <meta property="article:tag" content="Stack">
+    <meta property="article:tag" content="Greedy">
+    <meta property="article:tag" content="Monotonic Stack">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 402: Remove K Digits</h1> 
+            </div>
+			<div class="article-post">
+				<h2 id="hahahugoshortcode1121s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+    <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/402.webp" 
+           alt="A string of digits where each one is gently erased one by one, leaving the smallest number behind, glowing softly." 
+           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    
+      <figcaption style="font-size: 0.8em; font-weight: 300; color:#555; margin-top: 4px; line-height: 1.2;">
+        Solution to LeetCode 402: Remove K Digits Problem
+      </figcaption>
+    
+  </figure>
+  </h2>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode1121s1hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    string removeKdigits(string num, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>        string ans <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> num.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(num.size() <span style="color:#666">&lt;=</span> k) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#34;0&#34;</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span> : num) {
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>ans.empty() <span style="color:#666">&amp;&amp;</span> (ans.back() <span style="color:#666">&gt;</span> c) <span style="color:#666">&amp;&amp;</span> k) {
+</span></span><span style="display:flex;"><span>                ans.pop_back();
+</span></span><span style="display:flex;"><span>                k<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>ans.empty() <span style="color:#666">||</span> c <span style="color:#666">!=</span> <span style="color:#b44">&#39;0&#39;</span>) {
+</span></span><span style="display:flex;"><span>                ans.push_back(c);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>ans.empty() <span style="color:#666">&amp;&amp;</span> k<span style="color:#666">--</span>)
+</span></span><span style="display:flex;"><span>            ans.pop_back();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (ans.empty()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#34;0&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span> (<span style="color:#666">!</span>ans.empty()) {
+</span></span><span style="display:flex;"><span>            num[n <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> ans.back();
+</span></span><span style="display:flex;"><span>            ans.pop_back(), n<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> num.substr(n);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem requires removing <code>k</code> digits from a given string <code>num</code> (representing a non-negative integer) to create the smallest possible number. The number must not have leading zeros, and if removing <code>k</code> digits results in an empty string, the result should be &ldquo;0&rdquo;. The task is to return this smallest number after the removal.</p>
+<h3 id="approach">Approach</h3>
+<p>To solve this problem, we need to efficiently remove <code>k</code> digits to minimize the number. A greedy approach is best suited for this task. Here&rsquo;s a step-by-step breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>Iterate through the digits</strong>:
+We want to traverse the digits of the string <code>num</code> one by one and decide whether to include each digit in the final answer or remove it. The goal is to always keep the smallest possible digits in the answer by removing larger digits when needed.</p>
+</li>
+<li>
+<p><strong>Use a stack for digits</strong>:
+To efficiently determine which digits to keep, we can use a stack (represented by the string <code>ans</code> here). The stack will hold the digits in the current order, but we will pop larger digits from it when we encounter a smaller digit, since the smaller digit can potentially lead to a smaller number.</p>
+</li>
+<li>
+<p><strong>Ensure k digits are removed</strong>:
+We will perform this removal while ensuring exactly <code>k</code> digits are removed. After processing all the digits, if there are still any remaining digits to be removed (i.e., if <code>k &gt; 0</code>), we can simply remove digits from the end of the stack.</p>
+</li>
+<li>
+<p><strong>Handle leading zeros</strong>:
+The problem explicitly asks for no leading zeros in the final result. To address this, we only push non-zero digits to the stack, unless the stack is empty.</p>
+</li>
+<li>
+<p><strong>Return the result</strong>:
+After processing all digits, if the stack is empty (i.e., all digits were removed), we return &ldquo;0&rdquo;. Otherwise, the remaining digits in the stack represent the smallest possible number. The string is then formatted by trimming any remaining leading zeros.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<h4 id="step-1-handle-edge-case">Step 1: Handle Edge Case</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(num.size() <span style="color:#666">&lt;=</span> k) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#34;0&#34;</span>;
+</span></span></code></pre></div><ul>
+<li>If the length of the input string <code>num</code> is less than or equal to <code>k</code>, this means we would remove all digits, so the result should be &ldquo;0&rdquo;.</li>
+</ul>
+<h4 id="step-2-initialize-variables">Step 2: Initialize Variables</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string ans <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> num.size();
+</span></span></code></pre></div><ul>
+<li><code>ans</code> is a string used as a stack to hold the digits of the final answer.</li>
+<li><code>n</code> stores the size of the input string <code>num</code>.</li>
+</ul>
+<h4 id="step-3-traverse-the-digits-and-build-the-answer">Step 3: Traverse the Digits and Build the Answer</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span> : num) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>ans.empty() <span style="color:#666">&amp;&amp;</span> (ans.back() <span style="color:#666">&gt;</span> c) <span style="color:#666">&amp;&amp;</span> k) {
+</span></span><span style="display:flex;"><span>        ans.pop_back();
+</span></span><span style="display:flex;"><span>        k<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>ans.empty() <span style="color:#666">||</span> c <span style="color:#666">!=</span> <span style="color:#b44">&#39;0&#39;</span>) {
+</span></span><span style="display:flex;"><span>        ans.push_back(c);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Main loop</strong>: We iterate over each digit <code>c</code> in the string <code>num</code>.</li>
+<li><strong>Greedy removal</strong>: The <code>while</code> loop checks if the last digit in the stack is larger than the current digit (<code>ans.back() &gt; c</code>) and if we still have digits left to remove (<code>k</code>). If both conditions are true, we remove the last digit from the stack and decrement <code>k</code> by 1.</li>
+<li><strong>Avoid leading zeros</strong>: We only push the current digit <code>c</code> to the stack if it’s not leading zeros (<code>c != '0'</code>), except when the stack is empty, in which case leading zeros can be safely ignored.</li>
+</ul>
+<h4 id="step-4-remove-extra-digits-if-necessary">Step 4: Remove Extra Digits (If Necessary)</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>ans.empty() <span style="color:#666">&amp;&amp;</span> k<span style="color:#666">--</span>)
+</span></span><span style="display:flex;"><span>    ans.pop_back();
+</span></span></code></pre></div><ul>
+<li>After iterating through all the digits in <code>num</code>, if there are still digits left to remove (<code>k &gt; 0</code>), we continue removing digits from the end of the stack.</li>
+</ul>
+<h4 id="step-5-handle-the-case-of-an-empty-stack">Step 5: Handle the Case of an Empty Stack</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (ans.empty()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#b44">&#34;0&#34;</span>;
+</span></span></code></pre></div><ul>
+<li>If the stack is empty (i.e., we have removed all digits), we return &ldquo;0&rdquo; because the final number is zero.</li>
+</ul>
+<h4 id="step-6-construct-the-final-answer">Step 6: Construct the Final Answer</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span> (<span style="color:#666">!</span>ans.empty()) {
+</span></span><span style="display:flex;"><span>    num[n <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> ans.back();
+</span></span><span style="display:flex;"><span>    ans.pop_back(), n<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We then construct the final result by filling the string <code>num</code> with the digits from the stack <code>ans</code> in reverse order. This step is used to convert the stack to a string representation of the smallest possible number.</li>
+</ul>
+<h4 id="step-7-return-the-final-answer">Step 7: Return the Final Answer</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> num.substr(n);
+</span></span></code></pre></div><ul>
+<li>Finally, we return the substring of <code>num</code> starting from index <code>n</code> to remove any unused portion of the string, ensuring the result is correctly formatted.</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<h4 id="time-complexity">Time Complexity:</h4>
+<ul>
+<li>The algorithm processes each digit in the input string exactly once. Each digit is pushed to or popped from the stack at most once, leading to a total time complexity of <strong>O(n)</strong>, where <code>n</code> is the length of the input string <code>num</code>.</li>
+</ul>
+<h4 id="space-complexity">Space Complexity:</h4>
+<ul>
+<li>The space complexity is determined by the storage required for the stack (<code>ans</code>), which can hold up to <code>n</code> digits in the worst case. Therefore, the space complexity is <strong>O(n)</strong>.</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>The provided solution effectively solves the problem of removing <code>k</code> digits to form the smallest possible number using a greedy approach with a stack. The algorithm efficiently removes digits and ensures the smallest number by always keeping the smallest available digits. It also handles edge cases like leading zeros and situations where <code>k</code> is greater than or equal to the length of the number.</p>
+<p>This approach has a time complexity of <strong>O(n)</strong>, making it efficient for even large inputs. The use of a stack allows the algorithm to perform the necessary operations efficiently, ensuring that we can easily construct the desired smallest number.</p>
+<p>In summary, the solution is both time-efficient and space-efficient, handling all possible edge cases and providing the correct result in optimal time.</p>
+<p><a href="https://leetcode.com/problems/remove-k-digits/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/cFabMOnJaq0?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 2166: Design Bitset | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 2166: Design Bitset">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 2166: Design Bitset in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-2166-design-bitset/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 2166: Design Bitset">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 2166: Design Bitset in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-04-04T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Hash Table">
+    <meta property="article:tag" content="String">
+    <meta property="article:tag" content="Design">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 2166: Design Bitset</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode597s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Bitset</span> {
+</span></span><span style="display:flex;"><span>    string s, flipp;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ones <span style="color:#666">=</span> <span style="color:#666">0</span>, size <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    Bitset(<span style="color:#0b0;font-weight:bold">int</span> size) {
+</span></span><span style="display:flex;"><span>        s <span style="color:#666">=</span> string(size, <span style="color:#b44">&#39;0&#39;</span>);
+</span></span><span style="display:flex;"><span>        flipp <span style="color:#666">=</span> string(size, <span style="color:#b44">&#39;1&#39;</span>);
+</span></span><span style="display:flex;"><span>        ones <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>size <span style="color:#666">=</span> size;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">fix</span>(<span style="color:#0b0;font-weight:bold">int</span> idx) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s[idx] <span style="color:#666">==</span> <span style="color:#b44">&#39;0&#39;</span>) ones<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        s[idx] <span style="color:#666">=</span> <span style="color:#b44">&#39;1&#39;</span>;
+</span></span><span style="display:flex;"><span>        flipp[idx] <span style="color:#666">=</span> <span style="color:#b44">&#39;0&#39;</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">unfix</span>(<span style="color:#0b0;font-weight:bold">int</span> idx) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s[idx] <span style="color:#666">==</span> <span style="color:#b44">&#39;1&#39;</span>) ones<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>        s[idx] <span style="color:#666">=</span> <span style="color:#b44">&#39;0&#39;</span>;
+</span></span><span style="display:flex;"><span>        flipp[idx] <span style="color:#666">=</span> <span style="color:#b44">&#39;1&#39;</span>;        
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">flip</span>() {
+</span></span><span style="display:flex;"><span>        ones <span style="color:#666">=</span> size <span style="color:#666">-</span> ones;
+</span></span><span style="display:flex;"><span>        s.swap(flipp);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">all</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ones <span style="color:#666">==</span> size;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">one</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ones <span style="color:#666">&gt;</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">count</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ones;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    string <span style="color:#00a000">toString</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> s;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your Bitset object will be instantiated and called as such:
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Bitset* obj = new Bitset(size);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * obj-&gt;fix(idx);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * obj-&gt;unfix(idx);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * obj-&gt;flip();
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * bool param_4 = obj-&gt;all();
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * bool param_5 = obj-&gt;one();
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * int param_6 = obj-&gt;count();
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * string param_7 = obj-&gt;toString();
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> */</span></span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The task is to design and implement a <code>Bitset</code> class that supports a series of operations on a binary set of a fixed size. Each element in the <code>Bitset</code> can either be a &lsquo;0&rsquo; or &lsquo;1&rsquo;. The class should provide methods to fix specific bits, unfix them, flip all bits, check if all or any bits are set, count the number of set bits, and return the string representation of the bitset.</p>
+<h3 id="approach">Approach</h3>
+<p>The <code>Bitset</code> class uses two main string representations to manage bit states:</p>
+<ol>
+<li><strong><code>s</code></strong>: The actual string representing the current state of the bits.</li>
+<li><strong><code>flipp</code></strong>: An auxiliary string that represents the flipped version of <code>s</code>.</li>
+</ol>
+<h3 id="implementation-details">Implementation Details</h3>
+<ol>
+<li>
+<p><strong>Constructor <code>Bitset(int size)</code></strong>:</p>
+<ul>
+<li>Initializes <code>s</code> as a string of &lsquo;0&rsquo;s representing the bitset.</li>
+<li>Initializes <code>flipp</code> as a string of &lsquo;1&rsquo;s, which is the complement of <code>s</code>.</li>
+<li>Initializes <code>ones</code> to track the number of bits currently set to &lsquo;1&rsquo;.</li>
+<li>Stores <code>size</code> as the total number of bits in the bitset.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>void fix(int idx)</code></strong>:</p>
+<ul>
+<li>Sets the bit at index <code>idx</code> to &lsquo;1&rsquo;.</li>
+<li>Increments <code>ones</code> only if the bit at <code>idx</code> was originally &lsquo;0&rsquo;.</li>
+<li>Updates <code>flipp</code> by setting the bit at <code>idx</code> to &lsquo;0&rsquo;.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>void unfix(int idx)</code></strong>:</p>
+<ul>
+<li>Sets the bit at index <code>idx</code> to &lsquo;0&rsquo;.</li>
+<li>Decrements <code>ones</code> only if the bit at <code>idx</code> was originally &lsquo;1&rsquo;.</li>
+<li>Updates <code>flipp</code> by setting the bit at <code>idx</code> to &lsquo;1&rsquo;.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>void flip()</code></strong>:</p>
+<ul>
+<li>Swaps <code>s</code> with <code>flipp</code> to invert the bitset.</li>
+<li>Updates the count of <code>ones</code> to <code>size - ones</code>, as all &lsquo;1&rsquo;s become &lsquo;0&rsquo;s and vice versa.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>bool all()</code></strong>:</p>
+<ul>
+<li>Returns <code>true</code> if all bits are set to &lsquo;1&rsquo;, i.e., <code>ones == size</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>bool one()</code></strong>:</p>
+<ul>
+<li>Returns <code>true</code> if at least one bit is set to &lsquo;1&rsquo;, i.e., <code>ones &gt; 0</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>int count()</code></strong>:</p>
+<ul>
+<li>Returns the number of bits currently set to &lsquo;1&rsquo;, tracked by <code>ones</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>string toString()</code></strong>:</p>
+<ul>
+<li>Returns the string representation <code>s</code> of the current state of the bitset.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li><code>s</code> is initialized to a string of &lsquo;0&rsquo;s (e.g., &ldquo;000&hellip;0&rdquo;).</li>
+<li><code>flipp</code> is initialized to a string of &lsquo;1&rsquo;s (e.g., &ldquo;111&hellip;1&rdquo;).</li>
+<li><code>ones</code> is initialized to <code>0</code>, indicating no &lsquo;1&rsquo;s at the start.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>fix(int idx)</code></strong>:</p>
+<ul>
+<li>Checks if <code>s[idx]</code> is &lsquo;0&rsquo; to ensure <code>ones</code> is only incremented when a change occurs.</li>
+<li>Changes <code>s[idx]</code> to &lsquo;1&rsquo; and <code>flipp[idx]</code> to &lsquo;0&rsquo;.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>unfix(int idx)</code></strong>:</p>
+<ul>
+<li>Checks if <code>s[idx]</code> is &lsquo;1&rsquo; to ensure <code>ones</code> is only decremented when a change occurs.</li>
+<li>Changes <code>s[idx]</code> to &lsquo;0&rsquo; and <code>flipp[idx]</code> to &lsquo;1&rsquo;.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>flip()</code></strong>:</p>
+<ul>
+<li>Swaps <code>s</code> and <code>flipp</code> using the <code>swap()</code> function.</li>
+<li>Updates <code>ones</code> to <code>size - ones</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>all()</code></strong>:</p>
+<ul>
+<li>Returns <code>true</code> if <code>ones == size</code>, indicating all bits are &lsquo;1&rsquo;.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>one()</code></strong>:</p>
+<ul>
+<li>Returns <code>true</code> if <code>ones &gt; 0</code>, indicating at least one bit is &lsquo;1&rsquo;.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>count()</code></strong>:</p>
+<ul>
+<li>Directly returns the value of <code>ones</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>toString()</code></strong>:</p>
+<ul>
+<li>Returns the current bitset representation <code>s</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">Complexity</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>Constructor <code>Bitset(int size)</code>: O(n), where <code>n</code> is the size of the bitset.</li>
+<li><code>fix(int idx)</code>, <code>unfix(int idx)</code>: O(1), as only a single bit is updated.</li>
+<li><code>flip()</code>: O(1), due to swapping and basic arithmetic.</li>
+<li><code>all()</code>, <code>one()</code>, <code>count()</code>, <code>toString()</code>: O(1).</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>O(n), where <code>n</code> is the size of the bitset, used by the <code>s</code> and <code>flipp</code> strings.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>The <code>Bitset</code> class provides a clear and efficient way to manage and manipulate bits. It includes methods to set, reset, flip, count, and check the state of the bits, all in O(1) time. This design is optimal for scenarios requiring frequent bit manipulations with minimal overhead, making it suitable for applications in simulations, binary operations, and problem-solving environments where bit-level control is necessary.</p>
+<p><a href="https://leetcode.com/problems/design-bitset/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/FWv-b_VITvA?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

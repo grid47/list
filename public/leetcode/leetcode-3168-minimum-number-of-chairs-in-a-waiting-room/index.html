@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 3168: Minimum Number of Chairs in a Waiting Room | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 3168: Minimum Number of Chairs in a Waiting Room">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 3168: Minimum Number of Chairs in a Waiting Room in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-3168-minimum-number-of-chairs-in-a-waiting-room/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 3168: Minimum Number of Chairs in a Waiting Room">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 3168: Minimum Number of Chairs in a Waiting Room in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2023-12-26T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="String">
+    <meta property="article:tag" content="Simulation">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 3168: Minimum Number of Chairs in a Waiting Room</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode1069s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> minimumChairs(string s) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">0</span>, cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: s) {
+</span></span><span style="display:flex;"><span>            cnt <span style="color:#666">+=</span> (x <span style="color:#666">==</span> <span style="color:#b44">&#39;E&#39;</span><span style="color:#666">?</span> <span style="color:#666">1</span><span style="color:#666">:</span> <span style="color:#666">-</span><span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>            mx <span style="color:#666">=</span> max(mx, cnt);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> mx;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem asks to determine the minimum number of chairs needed in a room where people enter and exit at specific times, represented by a string <code>s</code>. Each character in the string represents an event: &lsquo;E&rsquo; for entering the room and &lsquo;X&rsquo; for exiting. The goal is to find out how many chairs are needed to accommodate the maximum number of people in the room at any given time.</p>
+<h3 id="approach">Approach</h3>
+<p>To solve this problem, the approach revolves around simulating the entry and exit of people based on the sequence of events. The core idea is to track the number of people currently in the room, and at each step, update this number when a person enters or exits. By tracking the maximum number of people in the room at any given time, we can determine the minimum number of chairs required.</p>
+<p>The sequence of events (<code>s</code>) tells us when people enter (&lsquo;E&rsquo;) and when they exit (&lsquo;X&rsquo;). We will maintain a count of how many people are in the room at each point. The maximum count during the simulation will indicate the peak number of people present in the room simultaneously, and this is the answer we are looking for.</p>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li>We initialize two variables:
+<ul>
+<li><code>mx</code>: This variable will store the maximum number of people in the room at any point.</li>
+<li><code>cnt</code>: This variable tracks the current number of people in the room as we process the events in the string <code>s</code>.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mx <span style="color:#666">=</span> <span style="color:#666">0</span>, cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Iterating Over the String</strong>:</p>
+<ul>
+<li>We loop through each character of the string <code>s</code> using a <code>for</code> loop.</li>
+<li>For each character:
+<ul>
+<li>If the character is <code>'E'</code>, a person enters the room, so we increment the <code>cnt</code> variable by 1.</li>
+<li>If the character is <code>'X'</code>, a person exits the room, so we decrement the <code>cnt</code> variable by 1.</li>
+</ul>
+</li>
+<li>After updating <code>cnt</code>, we check whether it is greater than <code>mx</code>. If so, we update <code>mx</code> to be the new value of <code>cnt</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: s) {
+</span></span><span style="display:flex;"><span>    cnt <span style="color:#666">+=</span> (x <span style="color:#666">==</span> <span style="color:#b44">&#39;E&#39;</span> <span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">:</span> <span style="color:#666">-</span><span style="color:#666">1</span>);  <span style="color:#080;font-style:italic">// Increment for &#39;E&#39;, Decrement for &#39;X&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    mx <span style="color:#666">=</span> max(mx, cnt);  <span style="color:#080;font-style:italic">// Update mx with the maximum number of people at any point
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>After processing all the events in the string, <code>mx</code> will hold the maximum number of people that were in the room at any time, which corresponds to the minimum number of chairs required. We then return the value of <code>mx</code> as the result.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> mx;
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="example-walkthrough">Example Walkthrough</h3>
+<p>Let’s walk through an example of how this function works:</p>
+<h4 id="input">Input:</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string s <span style="color:#666">=</span> <span style="color:#b44">&#34;EEXEXEEX&#34;</span>;
+</span></span></code></pre></div><h4 id="process">Process:</h4>
+<ol>
+<li>
+<p><strong>Initialization</strong>:</p>
+<ul>
+<li><code>mx = 0</code>, <code>cnt = 0</code> (no one in the room initially).</li>
+</ul>
+</li>
+<li>
+<p><strong>First Event (<code>E</code>)</strong>:</p>
+<ul>
+<li>A person enters the room, so <code>cnt = 1</code>.</li>
+<li>We update <code>mx = max(0, 1)</code> → <code>mx = 1</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Second Event (<code>E</code>)</strong>:</p>
+<ul>
+<li>Another person enters the room, so <code>cnt = 2</code>.</li>
+<li>We update <code>mx = max(1, 2)</code> → <code>mx = 2</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Third Event (<code>X</code>)</strong>:</p>
+<ul>
+<li>A person exits the room, so <code>cnt = 1</code>.</li>
+<li>We update <code>mx = max(2, 1)</code> → <code>mx = 2</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Fourth Event (<code>E</code>)</strong>:</p>
+<ul>
+<li>A person enters the room, so <code>cnt = 2</code>.</li>
+<li>We update <code>mx = max(2, 2)</code> → <code>mx = 2</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Fifth Event (<code>X</code>)</strong>:</p>
+<ul>
+<li>A person exits the room, so <code>cnt = 1</code>.</li>
+<li>We update <code>mx = max(2, 1)</code> → <code>mx = 2</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sixth Event (<code>E</code>)</strong>:</p>
+<ul>
+<li>A person enters the room, so <code>cnt = 2</code>.</li>
+<li>We update <code>mx = max(2, 2)</code> → <code>mx = 2</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Seventh Event (<code>E</code>)</strong>:</p>
+<ul>
+<li>Another person enters the room, so <code>cnt = 3</code>.</li>
+<li>We update <code>mx = max(2, 3)</code> → <code>mx = 3</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Eighth Event (<code>X</code>)</strong>:</p>
+<ul>
+<li>A person exits the room, so <code>cnt = 2</code>.</li>
+<li>We update <code>mx = max(3, 2)</code> → <code>mx = 3</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Result</strong>:</p>
+</li>
+</ol>
+<ul>
+<li>After processing all events, the maximum number of people in the room at any time was <code>3</code>. Therefore, the minimum number of chairs required is <code>3</code>.</li>
+</ul>
+<h4 id="output">Output:</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#666">3</span>
+</span></span></code></pre></div><h3 id="complexity">Complexity</h3>
+<h4 id="time-complexity">Time Complexity:</h4>
+<ul>
+<li><strong>O(n)</strong>: The time complexity is <strong>O(n)</strong>, where <code>n</code> is the length of the input string <code>s</code>. This is because we only need to iterate through the string once to process each event (either an entry or an exit). Each event takes constant time, so the total time complexity is linear with respect to the length of the string.</li>
+</ul>
+<h4 id="space-complexity">Space Complexity:</h4>
+<ul>
+<li><strong>O(1)</strong>: The space complexity is <strong>O(1)</strong> because we only use a few variables (<code>mx</code>, <code>cnt</code>), regardless of the size of the input string <code>s</code>. We do not need any additional data structures that depend on the input size, so the space usage is constant.</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>This solution efficiently calculates the minimum number of chairs needed by simulating the entry and exit of people in a room. It tracks the number of people in the room at any given time and finds the maximum number, which corresponds to the minimum number of chairs required. The algorithm runs in linear time, making it efficient and scalable for large input sizes. The space complexity is constant, which makes this solution optimal in terms of space usage as well.</p>
+<p><a href="https://leetcode.com/problems/minimum-number-of-chairs-in-a-waiting-room/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/-VAEXKFWfXo?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

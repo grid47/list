@@ -1,6 +1,7 @@
 +++
 title = "Terms"
 slug = "terms"
+type = "main"
 +++
 
 TERMS OF SERVICE

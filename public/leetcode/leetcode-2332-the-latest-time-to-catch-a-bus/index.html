@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 2332: The Latest Time to Catch a Bus | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 2332: The Latest Time to Catch a Bus">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 2332: The Latest Time to Catch a Bus in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-2332-the-latest-time-to-catch-a-bus/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 2332: The Latest Time to Catch a Bus">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 2332: The Latest Time to Catch a Bus in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-03-18T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Two Pointers">
+    <meta property="article:tag" content="Binary Search">
+    <meta property="article:tag" content="Sorting">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 2332: The Latest Time to Catch a Bus</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode691s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> latestTimeCatchTheBus(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> buses, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> passengers, <span style="color:#0b0;font-weight:bold">int</span> capacity) {
+</span></span><span style="display:flex;"><span>        sort(buses.begin(), buses.end());
+</span></span><span style="display:flex;"><span>        sort(passengers.begin(), passengers.end());
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> buses.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> passengers.size();
+</span></span><span style="display:flex;"><span>        queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q;
+</span></span><span style="display:flex;"><span>        set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> st;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">a</span>: passengers) {
+</span></span><span style="display:flex;"><span>            q.push(a);
+</span></span><span style="display:flex;"><span>            st.insert(a);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> curbus <span style="color:#666">=</span> buses[i];
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> count <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> x ;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty() <span style="color:#666">&amp;&amp;</span> count <span style="color:#666">&lt;</span> capacity <span style="color:#666">&amp;&amp;</span> q.front() <span style="color:#666">&lt;=</span> curbus) {
+</span></span><span style="display:flex;"><span>                x <span style="color:#666">=</span> q.front();
+</span></span><span style="display:flex;"><span>                q.pop();
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(st.find(x <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">==</span> st.end()) ans <span style="color:#666">=</span> x <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>                count<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(count <span style="color:#666">&lt;</span> capacity) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">while</span>(st.find(curbus) <span style="color:#666">!=</span> st.end())
+</span></span><span style="display:flex;"><span>                 curbus<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>                ans <span style="color:#666">=</span> max(ans, curbus);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem asks us to determine the latest possible time a passenger can catch the bus, given a set of buses and passengers with specific conditions:</p>
+<ul>
+<li>Each bus has a specific arrival time, and each passenger has a specific arrival time at the bus stop.</li>
+<li>The bus can carry a maximum of <code>capacity</code> passengers.</li>
+<li>We need to find the latest time a passenger can board the bus and still be able to catch it, considering the constraints that the buses depart when they reach capacity or the bus stop time arrives.</li>
+</ul>
+<h3 id="approach">Approach</h3>
+<p>To solve this problem, we need to simulate the boarding process for each bus and keep track of the passengers who can catch the bus. The approach involves iterating through each bus’s arrival time and matching the passengers accordingly. We maintain a set of passengers who have already been assigned to buses and a queue of passengers waiting for the next available bus.</p>
+<p>The key idea is to:</p>
+<ol>
+<li><strong>Sort the buses and passengers</strong>: By sorting the buses and passengers in ascending order, we can efficiently match passengers to buses.</li>
+<li><strong>Simulate bus boarding</strong>: For each bus, we assign passengers to the bus until it reaches its full capacity.</li>
+<li><strong>Track the latest time a passenger can catch a bus</strong>: If a passenger is unable to board a bus at the expected time, we track the latest possible time they can still board the bus (i.e., just before the bus departs).</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<p>Let’s go through the code line-by-line to understand how the solution works:</p>
+<h4 id="step-1-sorting-the-buses-and-passengers">Step 1: Sorting the Buses and Passengers</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>sort(buses.begin(), buses.end());
+</span></span><span style="display:flex;"><span>sort(passengers.begin(), passengers.end());
+</span></span></code></pre></div><ul>
+<li>The <code>buses</code> and <code>passengers</code> vectors are sorted in ascending order. Sorting helps us efficiently match passengers to buses as we can consider the buses and passengers in the order they arrive.</li>
+</ul>
+<h4 id="step-2-initializing-data-structures">Step 2: Initializing Data Structures</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> buses.size();
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> passengers.size();
+</span></span><span style="display:flex;"><span>queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q;
+</span></span><span style="display:flex;"><span>set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> st;
+</span></span></code></pre></div><ul>
+<li><code>n</code> and <code>m</code> store the number of buses and passengers, respectively.</li>
+<li><code>q</code> is a queue that holds passengers waiting for a bus.</li>
+<li><code>st</code> is a set that tracks the passengers who have already been assigned to buses.</li>
+</ul>
+<h4 id="step-3-filling-the-queue-with-passengers">Step 3: Filling the Queue with Passengers</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">a</span>: passengers) {
+</span></span><span style="display:flex;"><span>    q.push(a);
+</span></span><span style="display:flex;"><span>    st.insert(a);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We iterate over each passenger and add them to the queue <code>q</code> and the set <code>st</code>. This allows us to efficiently check if a passenger has already been assigned to a bus.</li>
+</ul>
+<h4 id="step-4-simulating-the-boarding-process">Step 4: Simulating the Boarding Process</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> curbus <span style="color:#666">=</span> buses[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> count <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> x;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty() <span style="color:#666">&amp;&amp;</span> count <span style="color:#666">&lt;</span> capacity <span style="color:#666">&amp;&amp;</span> q.front() <span style="color:#666">&lt;=</span> curbus) {
+</span></span><span style="display:flex;"><span>        x <span style="color:#666">=</span> q.front();
+</span></span><span style="display:flex;"><span>        q.pop();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(st.find(x <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">==</span> st.end()) ans <span style="color:#666">=</span> x <span style="color:#666">-</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        count<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li><code>ans</code> stores the latest time a passenger can board a bus.</li>
+<li>We iterate over each bus, starting with the first one (<code>i = 0</code>) and consider passengers boarding the bus.</li>
+<li>For each bus, we keep track of how many passengers can board using the <code>count</code> variable.</li>
+<li>We check if the passenger at the front of the queue can board the bus (<code>q.front() &lt;= curbus</code>). If so, the passenger boards the bus, and we increment <code>count</code>.</li>
+<li>If the passenger hasn&rsquo;t boarded the bus (<code>x - 1</code>), we update <code>ans</code> to reflect the latest time the passenger can board the bus.</li>
+</ul>
+<h4 id="step-5-handling-the-case-where-the-bus-has-empty-space">Step 5: Handling the Case Where the Bus Has Empty Space</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(count <span style="color:#666">&lt;</span> capacity) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(st.find(curbus) <span style="color:#666">!=</span> st.end())
+</span></span><span style="display:flex;"><span>        curbus<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>    ans <span style="color:#666">=</span> max(ans, curbus);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>After checking all passengers for the current bus, we check if the bus still has empty space (<code>count &lt; capacity</code>).</li>
+<li>If there is room, we keep reducing the bus’s current time (<code>curbus--</code>) until we find a time that hasn&rsquo;t been taken by another passenger, ensuring the passenger boards just before the bus departs.</li>
+</ul>
+<h4 id="step-6-final-return">Step 6: Final Return</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>After iterating through all the buses, the <code>ans</code> variable holds the latest time a passenger can board a bus. This value is returned as the final result.</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<h4 id="time-complexity">Time Complexity:</h4>
+<ul>
+<li>Sorting the buses and passengers takes <code>O(n log n + m log m)</code>, where <code>n</code> is the number of buses and <code>m</code> is the number of passengers.</li>
+<li>The while loop processes each passenger once, making the inner loop’s time complexity <code>O(m)</code>.</li>
+<li>Therefore, the total time complexity is <strong>O(n log n + m log m + m)</strong>.</li>
+</ul>
+<h4 id="space-complexity">Space Complexity:</h4>
+<ul>
+<li>The queue <code>q</code> and the set <code>st</code> both store the passengers, so the space complexity is <strong>O(m)</strong>, where <code>m</code> is the number of passengers.</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>This solution efficiently determines the latest time a passenger can catch the bus by:</p>
+<ol>
+<li>Sorting the buses and passengers to easily assign passengers to buses.</li>
+<li>Simulating the boarding process for each bus.</li>
+<li>Ensuring that the last possible time a passenger can board is tracked correctly using the <code>ans</code> variable.</li>
+</ol>
+<p>The approach ensures that the solution handles both the capacity constraint and the timing constraints effectively. It works in <strong>O(n log n + m log m)</strong> time, making it efficient for large inputs.</p>
+<p>This solution is optimal and should perform well even with larger inputs, as it leverages sorting and greedy algorithms to efficiently match passengers to buses while ensuring that the latest possible time a passenger can board is computed correctly.</p>
+<p><a href="https://leetcode.com/problems/the-latest-time-to-catch-a-bus/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/TAbfqi-5Zm0?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

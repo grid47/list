@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 900: RLE Iterator | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 900: RLE Iterator">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 900: RLE Iterator in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-900-rle-iterator/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 900: RLE Iterator">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 900: RLE Iterator in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-08-09T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Design">
+    <meta property="article:tag" content="Counting">
+    <meta property="article:tag" content="Iterator">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 900: RLE Iterator</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode1381s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">RLEIterator</span> {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> arr;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> idx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    RLEIterator(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> encoding) {
+</span></span><span style="display:flex;"><span>        arr <span style="color:#666">=</span> encoding;
+</span></span><span style="display:flex;"><span>        idx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">next</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(idx <span style="color:#666">&lt;</span> arr.size()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">&gt;</span> arr[idx]) {
+</span></span><span style="display:flex;"><span>                n <span style="color:#666">-=</span> arr[idx];
+</span></span><span style="display:flex;"><span>                idx <span style="color:#666">+=</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                arr[idx] <span style="color:#666">-=</span> n;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">return</span> arr[idx <span style="color:#666">+</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your RLEIterator object will be instantiated and called as such:
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * RLEIterator* obj = new RLEIterator(encoding);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * int param_1 = obj-&gt;next(n);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> */</span></span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem requires implementing an <strong>RLEIterator</strong> class that simulates a run-length encoded (RLE) iterator. The class should be initialized with an array representing the run-length encoding of some sequence. The <code>next(n)</code> method should return the next value in the sequence after consuming <code>n</code> elements, based on the encoding provided.</p>
+<p><strong>Run-Length Encoding (RLE)</strong> is a compression technique that represents consecutive repeated elements as a single value and its count. For example, the sequence <code>[1, 1, 2, 2, 2, 3]</code> can be encoded as <code>[2, 1, 3, 2, 1, 3]</code> meaning &ldquo;two 1&rsquo;s, three 2&rsquo;s, and one 3.&rdquo;</p>
+<p>In this problem, the iterator should retrieve the value corresponding to the next <code>n</code> elements by simulating the consumption of encoded sequences. If there are not enough elements left, the method should return <code>-1</code> to indicate the end of the sequence.</p>
+<h3 id="approach">Approach</h3>
+<ol>
+<li>
+<p><strong>Understanding RLE</strong>: The encoding format consists of pairs <code>[count, value]</code>, where:</p>
+<ul>
+<li><code>count</code> is the number of occurrences of <code>value</code>.</li>
+<li>The sequence is represented as a list of such pairs: <code>[count_1, value_1, count_2, value_2, ..., count_k, value_k]</code>.</li>
+</ul>
+<p>For example, encoding <code>[2, 1, 3, 2, 1, 3]</code> represents the sequence: <code>1, 1, 2, 2, 2, 3</code>.</p>
+</li>
+<li>
+<p><strong>Problem Requirements</strong>: The task requires:</p>
+<ul>
+<li><code>RLEIterator</code> class to be initialized with the encoded sequence.</li>
+<li><code>next(n)</code> method to return the value corresponding to the <code>n</code>-th element of the sequence, consuming the elements as you go.</li>
+<li>If there are fewer elements left than required, return <code>-1</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Design</strong>:</p>
+<ul>
+<li>We will maintain an index (<code>idx</code>) to track our position in the encoded array.</li>
+<li>The <code>next(n)</code> method will process each pair <code>[count, value]</code> in the encoding, decrementing the count and moving to the next pair when necessary.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<h4 id="class-constructor"><strong>Class Constructor</strong></h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>RLEIterator(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> encoding) {
+</span></span><span style="display:flex;"><span>    arr <span style="color:#666">=</span> encoding;
+</span></span><span style="display:flex;"><span>    idx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Initialization</strong>: The constructor takes a reference to a vector of integers (<code>encoding</code>) that represents the RLE-encoded sequence. It initializes the member variable <code>arr</code> with this encoding and sets the index (<code>idx</code>) to 0, indicating the current position in the sequence.</li>
+</ul>
+<h4 id="next-method"><strong>Next Method</strong></h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">next</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(idx <span style="color:#666">&lt;</span> arr.size()) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">&gt;</span> arr[idx]) {
+</span></span><span style="display:flex;"><span>            n <span style="color:#666">-=</span> arr[idx];
+</span></span><span style="display:flex;"><span>            idx <span style="color:#666">+=</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>            arr[idx] <span style="color:#666">-=</span> n;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> arr[idx <span style="color:#666">+</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Iterate Over Encoded Pairs</strong>: The <code>next(n)</code> method is designed to retrieve the next <code>n</code> elements from the sequence based on the run-length encoding.</p>
+<ol>
+<li>
+<p><strong>While Loop</strong>:</p>
+<ul>
+<li>The loop continues until all elements in the encoding array have been processed (<code>idx &lt; arr.size()</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Check If <code>n</code> Is Greater Than Current Run Length</strong>:</p>
+<ul>
+<li>If the required number of elements <code>n</code> is greater than the current count (<code>arr[idx]</code>), it means we need to skip over this entire run.</li>
+<li>We subtract the current run length from <code>n</code>, and then move the index forward by 2 (as each pair consists of a <code>count</code> and a <code>value</code>).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(n <span style="color:#666">&gt;</span> arr[idx]) {
+</span></span><span style="display:flex;"><span>    n <span style="color:#666">-=</span> arr[idx];
+</span></span><span style="display:flex;"><span>    idx <span style="color:#666">+=</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Consume Elements</strong>:</p>
+<ul>
+<li>If <code>n</code> is less than or equal to the current count, we decrement the <code>count</code> by <code>n</code>, and return the <code>value</code> of the current pair (<code>arr[idx + 1]</code>).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>    arr[idx] <span style="color:#666">-=</span> n;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> arr[idx <span style="color:#666">+</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Return -1 If Out of Bounds</strong>:</p>
+<ul>
+<li>If the loop exits because there are no more elements to process (i.e., <code>idx</code> exceeds <code>arr.size()</code>), it means there are not enough elements left, and we return <code>-1</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span></code></pre></div></li>
+</ol>
+</li>
+</ul>
+<h4 id="example-usage"><strong>Example Usage</strong></h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>RLEIterator<span style="color:#666">*</span> obj <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> RLEIterator(encoding);
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> param_1 <span style="color:#666">=</span> obj<span style="color:#666">-&gt;</span>next(n);
+</span></span></code></pre></div><ul>
+<li>The object <code>obj</code> is created by passing the encoded array <code>encoding</code> to the constructor.</li>
+<li>The <code>next(n)</code> function is called with an integer <code>n</code>, which will return the value at the <code>n</code>-th position in the sequence based on the RLE encoding.</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<h4 id="time-complexity"><strong>Time Complexity</strong></h4>
+<ul>
+<li>
+<p>The time complexity of the <code>next(n)</code> function is <strong>O(n)</strong> in the worst case, where <code>n</code> represents the number of calls or the number of elements that need to be consumed from the sequence. In the worst case, we may need to traverse through multiple pairs in the encoding list to retrieve the required number of elements.</p>
+</li>
+<li>
+<p>Each call to <code>next(n)</code> only processes a part of the sequence, and the iterator progresses in constant steps, moving through the encoded sequence in a linear manner. Thus, the overall time complexity is dependent on how many elements are remaining to be processed.</p>
+</li>
+</ul>
+<h4 id="space-complexity"><strong>Space Complexity</strong></h4>
+<ul>
+<li>
+<p>The space complexity of the algorithm is <strong>O(m)</strong>, where <code>m</code> is the size of the encoding array, because the space used is directly proportional to the length of the input encoding.</p>
+</li>
+<li>
+<p>There are no additional data structures that grow with the input size. The class only maintains the index (<code>idx</code>) and the encoding array (<code>arr</code>), both of which are proportional to the input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>This solution efficiently implements an <strong>RLEIterator</strong> that simulates iterating over a run-length encoded sequence. The <code>next(n)</code> method dynamically processes each run of the sequence by reducing the count of remaining elements and returns the corresponding value when necessary.</p>
+<p>The code is optimized for linear time traversal of the encoded sequence, making it suitable for handling large datasets. The complexity is proportional to the size of the input encoding, with each call to <code>next(n)</code> efficiently processing the sequence in a straightforward manner.</p>
+<p>This approach offers a clean and effective way to work with run-length encoded sequences, providing constant-time operations for each retrieval when necessary, while minimizing unnecessary recomputations.</p>
+<p><a href="https://leetcode.com/problems/rle-iterator/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/69UElCwk6B4?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

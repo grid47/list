@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 1139: Largest 1-Bordered Square | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 1139: Largest 1-Bordered Square">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1139: Largest 1-Bordered Square in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-1139-largest-1-bordered-square/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 1139: Largest 1-Bordered Square">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1139: Largest 1-Bordered Square in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-07-16T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Dynamic Programming">
+    <meta property="article:tag" content="Matrix">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 1139: Largest 1-Bordered Square</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode86s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> largest1BorderedSquare(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> top(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">0</span>)), left(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">0</span>));
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>                top[i][j] <span style="color:#666">=</span> i <span style="color:#666">&gt;</span> <span style="color:#666">0</span><span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">+</span> top[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j]<span style="color:#666">:</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>                left[i][j] <span style="color:#666">=</span> j <span style="color:#666">&gt;</span> <span style="color:#666">0</span><span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">+</span> left[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>]<span style="color:#666">:</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> min(m, n); l <span style="color:#666">&gt;=</span> <span style="color:#666">1</span>; l<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m <span style="color:#666">-</span> l <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n <span style="color:#666">-</span> l <span style="color:#666">+</span> <span style="color:#666">1</span>; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(top[i <span style="color:#666">+</span> l <span style="color:#666">-</span> <span style="color:#666">1</span>][j] <span style="color:#666">&gt;=</span> l <span style="color:#666">&amp;&amp;</span>
+</span></span><span style="display:flex;"><span>                   top[i <span style="color:#666">+</span> l <span style="color:#666">-</span> <span style="color:#666">1</span>][j <span style="color:#666">+</span> l <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&gt;=</span> l <span style="color:#666">&amp;&amp;</span>
+</span></span><span style="display:flex;"><span>                  left[i][j <span style="color:#666">+</span> l <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&gt;=</span> l <span style="color:#666">&amp;&amp;</span>
+</span></span><span style="display:flex;"><span>                  left[i <span style="color:#666">+</span> l <span style="color:#666">-</span> <span style="color:#666">1</span>][j <span style="color:#666">+</span> l <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&gt;=</span> l)
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">return</span> l <span style="color:#666">*</span> l;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem is to find the largest square sub-grid in a binary matrix (grid) that is fully bordered by 1s. A square is defined as having all four sides formed by 1s, meaning it must have a solid border around it. The function should return the area of the largest such square, which is calculated as the side length squared.</p>
+<h3 id="approach">Approach</h3>
+<p>To efficiently determine the largest bordered square, the algorithm uses dynamic programming (DP) to precompute the number of consecutive 1s in the top and left directions for each cell in the grid. By maintaining these counts, the algorithm can quickly verify whether a square of a given size can be formed with the required borders:</p>
+<ol>
+<li>
+<p><strong>Dynamic Programming Tables</strong>: Two tables are created:</p>
+<ul>
+<li><code>top[i][j]</code>: Stores the number of consecutive 1s from the top to the cell <code>(i, j)</code>.</li>
+<li><code>left[i][j]</code>: Stores the number of consecutive 1s from the left to the cell <code>(i, j)</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Filling the Tables</strong>: The tables are filled in a single pass over the grid, allowing for efficient computation of these values.</p>
+</li>
+<li>
+<p><strong>Finding the Largest Square</strong>: The algorithm then iterates over possible square sizes, starting from the largest possible size down to 1. For each size, it checks if there exists a top-left corner such that a square of that size can be formed with the required border. The first valid square found will be the largest due to the order of iteration.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<p>Here’s a detailed breakdown of the code:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> largest1BorderedSquare(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
+</span></span></code></pre></div><ul>
+<li><strong>Line 1-2</strong>: A class named <code>Solution</code> is defined, with a public member function <code>largest1BorderedSquare</code> that takes a 2D vector <code>grid</code> as input. This function calculates the area of the largest square bordered by 1s.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
+</span></span></code></pre></div><ul>
+<li><strong>Line 3</strong>: The variables <code>m</code> and <code>n</code> are initialized to the number of rows and columns in the grid, respectively.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> top(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">0</span>)), left(m, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">0</span>));
+</span></span></code></pre></div><ul>
+<li><strong>Line 4</strong>: Two 2D vectors, <code>top</code> and <code>left</code>, are created and initialized to 0. These will store the number of consecutive 1s encountered from the top and left sides for each cell.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(grid[i][j] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>                top[i][j] <span style="color:#666">=</span> i <span style="color:#666">&gt;</span> <span style="color:#666">0</span><span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">+</span> top[i <span style="color:#666">-</span> <span style="color:#666">1</span>][j]<span style="color:#666">:</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>                left[i][j] <span style="color:#666">=</span> j <span style="color:#666">&gt;</span> <span style="color:#666">0</span><span style="color:#666">?</span> <span style="color:#666">1</span> <span style="color:#666">+</span> left[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>]<span style="color:#666">:</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span></code></pre></div><ul>
+<li><strong>Lines 5-10</strong>: This nested loop fills the <code>top</code> and <code>left</code> tables:
+<ul>
+<li>For each cell in the grid, if the cell contains a 1, it updates the <code>top</code> table with the count of consecutive 1s from the top.</li>
+<li>It does the same for the <code>left</code> table, updating it with the count of consecutive 1s from the left.</li>
+<li>The conditions ensure that we are not accessing out-of-bounds indices.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> min(m, n); l <span style="color:#666">&gt;=</span> <span style="color:#666">1</span>; l<span style="color:#666">--</span>) {
+</span></span></code></pre></div><ul>
+<li><strong>Line 11</strong>: This for loop starts at the minimum of the grid&rsquo;s dimensions (either rows or columns) and decrements down to 1. This means we are checking the largest possible square first.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m <span style="color:#666">-</span> l <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> n <span style="color:#666">-</span> l <span style="color:#666">+</span> <span style="color:#666">1</span>; j<span style="color:#666">++</span>)
+</span></span></code></pre></div><ul>
+<li><strong>Lines 12-14</strong>: These nested loops iterate over all potential top-left corners <code>(i, j)</code> for squares of size <code>l</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(top[i <span style="color:#666">+</span> l <span style="color:#666">-</span> <span style="color:#666">1</span>][j] <span style="color:#666">&gt;=</span> l <span style="color:#666">&amp;&amp;</span>
+</span></span><span style="display:flex;"><span>                   top[i <span style="color:#666">+</span> l <span style="color:#666">-</span> <span style="color:#666">1</span>][j <span style="color:#666">+</span> l <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&gt;=</span> l <span style="color:#666">&amp;&amp;</span>
+</span></span><span style="display:flex;"><span>                  left[i][j <span style="color:#666">+</span> l <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&gt;=</span> l <span style="color:#666">&amp;&amp;</span>
+</span></span><span style="display:flex;"><span>                  left[i <span style="color:#666">+</span> l <span style="color:#666">-</span> <span style="color:#666">1</span>][j <span style="color:#666">+</span> l <span style="color:#666">-</span> <span style="color:#666">1</span>] <span style="color:#666">&gt;=</span> l)
+</span></span></code></pre></div><ul>
+<li><strong>Lines 15-19</strong>: This conditional checks if a square of size <code>l</code> can be formed with 1s as borders:
+<ul>
+<li>It verifies that the bottom side (from top table) and right side (from left table) of the square meet the required length <code>l</code>.</li>
+<li>If all conditions are satisfied, a valid bordered square exists.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">return</span> l <span style="color:#666">*</span> l;
+</span></span></code></pre></div><ul>
+<li><strong>Line 20</strong>: If a valid square is found, the area (which is ( l \times l )) is returned immediately, ensuring that this is the largest square found due to the order of iteration.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li><strong>Lines 21-22</strong>: If no bordered square is found, the function returns 0, and the class definition is closed.</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<ul>
+<li><strong>Time Complexity</strong>: The time complexity of this algorithm is ( O(m \times n) ), as it involves a single pass through the grid to fill the <code>top</code> and <code>left</code> tables, followed by a nested iteration over potential squares.</li>
+<li><strong>Space Complexity</strong>: The space complexity is also ( O(m \times n) ) due to the additional storage for the <code>top</code> and <code>left</code> tables.</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>The provided C++ solution efficiently determines the area of the largest square bordered by 1s in a binary grid using dynamic programming. By precomputing the number of consecutive 1s from the top and left sides of each cell, the algorithm can quickly verify potential square borders. This method ensures that the solution is optimal for larger grids and maintains clarity in implementation, making it suitable for algorithmic challenges involving matrix manipulations.</p>
+<p><a href="https://leetcode.com/problems/largest-1-bordered-square/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

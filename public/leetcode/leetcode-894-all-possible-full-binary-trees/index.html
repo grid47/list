@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 894: All Possible Full Binary Trees | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 894: All Possible Full Binary Trees">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 894: All Possible Full Binary Trees in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-894-all-possible-full-binary-trees/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 894: All Possible Full Binary Trees">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 894: All Possible Full Binary Trees in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-08-09T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Dynamic Programming">
+    <meta property="article:tag" content="Tree">
+    <meta property="article:tag" content="Recursion">
+    <meta property="article:tag" content="Memoization">
+    <meta property="article:tag" content="Binary Tree">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 894: All Possible Full Binary Trees</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode1376s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Definition for a binary tree node.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * struct TreeNode {
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     int val;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode *left;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode *right;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * };
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> allPossibleFBT(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;&gt;</span> dp(n <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        dp[<span style="color:#666">1</span>].push_back(<span style="color:#a2f;font-weight:bold">new</span> TreeNode(<span style="color:#666">0</span>));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">3</span>; i <span style="color:#666">&lt;=</span> n; i <span style="color:#666">+=</span> <span style="color:#666">2</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">1</span>; l <span style="color:#666">&lt;</span> i; l <span style="color:#666">+=</span> <span style="color:#666">2</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#080;font-style:italic">// cout &lt;&lt; l;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: dp[l])
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it2</span>: dp[i <span style="color:#666">-</span> l <span style="color:#666">-</span> <span style="color:#666">1</span>]) {
+</span></span><span style="display:flex;"><span>                    TreeNode<span style="color:#666">*</span> node <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TreeNode(<span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>                    node<span style="color:#666">-&gt;</span>left <span style="color:#666">=</span> it;
+</span></span><span style="display:flex;"><span>                    node<span style="color:#666">-&gt;</span>right <span style="color:#666">=</span> it2;
+</span></span><span style="display:flex;"><span>                    dp[i].push_back(node);
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> dp[n];        
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem asks us to generate all <strong>possible full binary trees (FBT)</strong> with <code>n</code> nodes, where <code>n</code> is an odd number. A full binary tree is defined as a binary tree where every node has either <strong>two children</strong> (both left and right) or <strong>no children</strong> (i.e., it is a leaf node). For this problem, we need to return a list of all distinct full binary trees that can be constructed with exactly <code>n</code> nodes.</p>
+<p>A full binary tree must always have an odd number of nodes, and every non-leaf node must have exactly two children. We are tasked with finding all possible full binary trees with <code>n</code> nodes.</p>
+<h3 id="approach">Approach</h3>
+<p>The approach to solve this problem involves utilizing <strong>dynamic programming (DP)</strong>. We will iteratively build the full binary trees for smaller numbers of nodes and use these to construct larger trees.</p>
+<h4 id="key-insights">Key Insights:</h4>
+<ol>
+<li>
+<p><strong>Base Case</strong>: The simplest full binary tree is a tree with just one node, i.e., a single root node with no children. This is the only configuration for <code>n = 1</code>, and we initialize this base case with a tree containing only the root node.</p>
+</li>
+<li>
+<p><strong>Recursive Construction</strong>: For any odd number <code>n</code>, a full binary tree can be constructed by combining two smaller full binary trees:</p>
+<ul>
+<li>The left subtree will have <code>l</code> nodes, and the right subtree will have <code>n - l - 1</code> nodes. Both <code>l</code> and <code>n - l - 1</code> must be odd numbers since a full binary tree with an even number of nodes is not possible.</li>
+<li>For each combination of left and right subtrees, we create a new root node, with the left and right subtrees as its children.</li>
+</ul>
+</li>
+<li>
+<p><strong>Dynamic Programming Array (<code>dp</code>)</strong>:</p>
+<ul>
+<li>We maintain a DP array <code>dp[i]</code> where <code>dp[i]</code> holds a list of all possible full binary trees with <code>i</code> nodes.</li>
+<li>For each odd number <code>i</code> (starting from 3 and incrementing by 2), we generate all full binary trees by combining smaller trees from previously computed values in <code>dp</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Combinations of Subtrees</strong>:</p>
+<ul>
+<li>For each number <code>l</code> of nodes in the left subtree, the right subtree will contain <code>n - l - 1</code> nodes. We combine every tree in <code>dp[l]</code> with every tree in <code>dp[n - l - 1]</code> and create a new tree with these two subtrees as children of a new root node.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Final Result</strong>: After filling the DP array, the result for <code>n</code> nodes will be stored in <code>dp[n]</code>.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<ol>
+<li>
+<p><strong>Initialize DP Array</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;&gt;</span> dp(n <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>dp[<span style="color:#666">1</span>].push_back(<span style="color:#a2f;font-weight:bold">new</span> TreeNode(<span style="color:#666">0</span>));  <span style="color:#080;font-style:italic">// Base case: only one node in the tree.
+</span></span></span></code></pre></div><ul>
+<li>We create a DP array <code>dp</code> with <code>n + 1</code> elements, where each element is a vector of <code>TreeNode*</code>. The first element, <code>dp[1]</code>, contains one tree with just a single node.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterating Over Odd Numbers (i)</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">3</span>; i <span style="color:#666">&lt;=</span> n; i <span style="color:#666">+=</span> <span style="color:#666">2</span>) {
+</span></span></code></pre></div><ul>
+<li>The outer loop starts from <code>i = 3</code> and increments by 2, considering only odd values of <code>i</code>. We build full binary trees for each odd <code>i</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Generating Combinations of Left and Right Subtrees</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> <span style="color:#666">1</span>; l <span style="color:#666">&lt;</span> i; l <span style="color:#666">+=</span> <span style="color:#666">2</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span> : dp[l]) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it2</span> : dp[i <span style="color:#666">-</span> l <span style="color:#666">-</span> <span style="color:#666">1</span>]) {
+</span></span><span style="display:flex;"><span>            TreeNode<span style="color:#666">*</span> node <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> TreeNode(<span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>            node<span style="color:#666">-&gt;</span>left <span style="color:#666">=</span> it;
+</span></span><span style="display:flex;"><span>            node<span style="color:#666">-&gt;</span>right <span style="color:#666">=</span> it2;
+</span></span><span style="display:flex;"><span>            dp[i].push_back(node);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>For each value of <code>l</code>, we consider all pairs of left and right subtrees. The left subtree has <code>l</code> nodes, and the right subtree has <code>i - l - 1</code> nodes.</li>
+<li>We then create a new root node, assign the left and right subtrees to it, and push this new tree into <code>dp[i]</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> dp[n];
+</span></span></code></pre></div><ul>
+<li>Finally, we return the list of all possible full binary trees for <code>n</code> nodes, which is stored in <code>dp[n]</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">Complexity</h3>
+<h4 id="time-complexity">Time Complexity:</h4>
+<ul>
+<li><strong>Outer Loop</strong>: The outer loop runs from <code>i = 3</code> to <code>i = n</code>, and it iterates with a step size of 2, which means it runs approximately <code>n/2</code> times.</li>
+<li><strong>Inner Loops</strong>: For each value of <code>i</code>, the inner loops iterate over all combinations of <code>l</code> (where <code>l</code> is odd and less than <code>i</code>). For each pair of <code>l</code> and <code>n - l - 1</code>, we combine all trees from <code>dp[l]</code> and <code>dp[n - l - 1]</code>. The number of trees in <code>dp[l]</code> and <code>dp[n - l - 1]</code> grows exponentially with <code>l</code> and <code>n</code>.
+<ul>
+<li>The total number of operations in the worst case is roughly the <strong>number of possible full binary trees</strong> up to <code>n</code>, which follows the structure of <strong>Catalan numbers</strong>. The Catalan number for <code>n</code> is approximately <code>O(4^n / n^(3/2))</code>.</li>
+<li>Therefore, the time complexity of this approach is <strong>O(4^n / n^(3/2))</strong>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">Space Complexity:</h4>
+<ul>
+<li>The space complexity is dominated by the storage of the trees in <code>dp[i]</code>. Since each tree is represented as a <code>TreeNode</code> object and there are at most <strong>Catalan number</strong> of trees for each <code>i</code>, the space complexity is <strong>O(4^n / n^(3/2))</strong>, similar to the time complexity.</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>This solution efficiently computes all possible full binary trees for a given number <code>n</code> using dynamic programming. By constructing trees recursively from smaller subproblems, the solution avoids the inefficiencies of brute force tree generation. Although the time and space complexities grow exponentially with <code>n</code>, the algorithm leverages the properties of full binary trees and dynamic programming to handle the problem in a more optimized way compared to generating every tree individually. The approach works efficiently for smaller values of <code>n</code> and provides a clear and methodical way to generate all full binary trees.</p>
+<p><a href="https://leetcode.com/problems/all-possible-full-binary-trees/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/nZtrZPTTCAo?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

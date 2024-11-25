@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 427: Construct Quad Tree | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 427: Construct Quad Tree">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 427: Construct Quad Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-427-construct-quad-tree/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 427: Construct Quad Tree">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 427: Construct Quad Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-09-25T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Divide and Conquer">
+    <meta property="article:tag" content="Tree">
+    <meta property="article:tag" content="Matrix">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 427: Construct Quad Tree</h1> 
+            </div>
+			<div class="article-post">
+				<h2 id="hahahugoshortcode1131s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+    <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/427.webp" 
+           alt="A grid where sections gently form a quad tree, each section glowing as it is constructed." 
+           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    
+      <figcaption style="font-size: 0.8em; font-weight: 300; color:#555; margin-top: 4px; line-height: 1.2;">
+        Solution to LeetCode 427: Construct Quad Tree Problem
+      </figcaption>
+    
+  </figure>
+  </h2>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode1131s1hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#080;font-style:italic">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">// Definition for a QuadTree node.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">class Node {
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">public:
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    bool val;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    bool isLeaf;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    Node* topLeft;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    Node* topRight;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    Node* bottomLeft;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    Node* bottomRight;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    Node() {
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        val = false;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        isLeaf = false;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        topLeft = NULL;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        topRight = NULL;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        bottomLeft = NULL;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        bottomRight = NULL;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    }
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    Node(bool _val, bool _isLeaf) {
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        val = _val;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        isLeaf = _isLeaf;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        topLeft = NULL;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        topRight = NULL;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        bottomLeft = NULL;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        bottomRight = NULL;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    }
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    Node(bool _val, bool _isLeaf, Node* _topLeft, Node* _topRight, Node* _bottomLeft, Node* _bottomRight) {
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        val = _val;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        isLeaf = _isLeaf;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        topLeft = _topLeft;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        topRight = _topRight;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        bottomLeft = _bottomLeft;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">        bottomRight = _bottomRight;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">    }
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">};
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">*/</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    Node<span style="color:#666">*</span> construct(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">helper</span>(grid, <span style="color:#666">0</span>, <span style="color:#666">0</span>, grid.size());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Node<span style="color:#666">*</span> <span style="color:#00a000">helper</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> <span style="color:#666">&amp;</span>grid, <span style="color:#0b0;font-weight:bold">int</span> x, <span style="color:#0b0;font-weight:bold">int</span> y, <span style="color:#0b0;font-weight:bold">int</span> sz) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(sz <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f;font-weight:bold">new</span> Node(grid[x][y] <span style="color:#666">!=</span> <span style="color:#666">0</span>, <span style="color:#a2f">true</span>, <span style="color:#a2f">NULL</span>, <span style="color:#a2f">NULL</span>, <span style="color:#a2f">NULL</span>, <span style="color:#a2f">NULL</span>);
+</span></span><span style="display:flex;"><span>        Node<span style="color:#666">*</span> res <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> Node();
+</span></span><span style="display:flex;"><span>        Node<span style="color:#666">*</span> topRight    <span style="color:#666">=</span> helper(grid, x , y<span style="color:#666">+</span>sz<span style="color:#666">/</span><span style="color:#666">2</span>, sz <span style="color:#666">/</span> <span style="color:#666">2</span>);
+</span></span><span style="display:flex;"><span>        Node<span style="color:#666">*</span> topLeft     <span style="color:#666">=</span> helper(grid, x , y, sz <span style="color:#666">/</span> <span style="color:#666">2</span>);
+</span></span><span style="display:flex;"><span>        Node<span style="color:#666">*</span> bottomRight <span style="color:#666">=</span> helper(grid, x <span style="color:#666">+</span>sz<span style="color:#666">/</span><span style="color:#666">2</span>, y<span style="color:#666">+</span>sz<span style="color:#666">/</span><span style="color:#666">2</span>, sz <span style="color:#666">/</span> <span style="color:#666">2</span>);
+</span></span><span style="display:flex;"><span>        Node<span style="color:#666">*</span> bottomLeft  <span style="color:#666">=</span> helper(grid, x <span style="color:#666">+</span>sz<span style="color:#666">/</span><span style="color:#666">2</span>, y, sz <span style="color:#666">/</span> <span style="color:#666">2</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(topRight<span style="color:#666">-&gt;</span>isLeaf <span style="color:#666">&amp;&amp;</span> topLeft<span style="color:#666">-&gt;</span>isLeaf <span style="color:#666">&amp;&amp;</span> bottomRight<span style="color:#666">-&gt;</span>isLeaf <span style="color:#666">&amp;&amp;</span> bottomLeft<span style="color:#666">-&gt;</span>isLeaf <span style="color:#666">&amp;&amp;</span> 
+</span></span><span style="display:flex;"><span>        topLeft<span style="color:#666">-&gt;</span>val <span style="color:#666">==</span> topRight<span style="color:#666">-&gt;</span>val <span style="color:#666">&amp;&amp;</span> topRight<span style="color:#666">-&gt;</span>val <span style="color:#666">==</span> bottomRight<span style="color:#666">-&gt;</span>val <span style="color:#666">&amp;&amp;</span> bottomRight<span style="color:#666">-&gt;</span>val <span style="color:#666">==</span> bottomLeft<span style="color:#666">-&gt;</span>val) {
+</span></span><span style="display:flex;"><span>            res<span style="color:#666">-&gt;</span>val <span style="color:#666">=</span> topLeft<span style="color:#666">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>            res<span style="color:#666">-&gt;</span> isLeaf <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>             res<span style="color:#666">-&gt;</span>topRight    <span style="color:#666">=</span> topRight;   
+</span></span><span style="display:flex;"><span>             res<span style="color:#666">-&gt;</span>topLeft     <span style="color:#666">=</span> topLeft;   
+</span></span><span style="display:flex;"><span>             res<span style="color:#666">-&gt;</span>bottomRight <span style="color:#666">=</span> bottomRight;   
+</span></span><span style="display:flex;"><span>             res<span style="color:#666">-&gt;</span>bottomLeft  <span style="color:#666">=</span> bottomLeft;       
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem is to construct a QuadTree from a given 2D grid of binary values (0s and 1s). A QuadTree is a tree data structure where each node represents a 4-way partition of the 2D grid, subdividing it into quadrants. Each internal node has four children: top-left, top-right, bottom-left, and bottom-right. A leaf node represents a single square in the grid and holds a value (either 0 or 1). The goal is to create a QuadTree from the grid where the leaves represent uniform values and internal nodes group similar values.</p>
+<h3 id="approach">Approach</h3>
+<p>To solve this problem, the approach is based on recursive subdivision of the grid. The key idea is:</p>
+<ol>
+<li><strong>Subdivide the grid</strong>: At each step, divide the grid into 4 smaller quadrants (top-left, top-right, bottom-left, bottom-right).</li>
+<li><strong>Leaf node check</strong>: If all values in a quadrant are the same (either all 0s or all 1s), the corresponding node becomes a leaf node.</li>
+<li><strong>Internal node creation</strong>: If a quadrant has mixed values, it requires further subdivision until leaf nodes are formed.</li>
+<li><strong>Optimization</strong>: If all four sub-quadrants are identical, we can represent them with a single leaf node.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<h4 id="step-1-main-function--construct">Step 1: Main Function – <code>construct</code></h4>
+<p>The <code>construct</code> function is the main entry point for the solution. It takes a 2D grid as input and returns the root node of the constructed QuadTree.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Node<span style="color:#666">*</span> <span style="color:#00a000">construct</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> helper(grid, <span style="color:#666">0</span>, <span style="color:#666">0</span>, grid.size());
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This function simply invokes the recursive helper function <code>helper</code>, starting with the full grid (from index <code>(0, 0)</code> to <code>grid.size()</code>) to begin constructing the QuadTree.</p>
+<h4 id="step-2-recursive-helper-function--helper">Step 2: Recursive Helper Function – <code>helper</code></h4>
+<p>The helper function is a recursive function that performs the core logic of subdividing the grid and creating nodes for the QuadTree. It works as follows:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Node<span style="color:#666">*</span> <span style="color:#00a000">helper</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid, <span style="color:#0b0;font-weight:bold">int</span> x, <span style="color:#0b0;font-weight:bold">int</span> y, <span style="color:#0b0;font-weight:bold">int</span> sz) {
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Base case: If the grid is of size 1x1, create a leaf node.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">if</span> (sz <span style="color:#666">==</span> <span style="color:#666">1</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f;font-weight:bold">new</span> Node(grid[x][y] <span style="color:#666">!=</span> <span style="color:#666">0</span>, <span style="color:#a2f">true</span>, <span style="color:#a2f">NULL</span>, <span style="color:#a2f">NULL</span>, <span style="color:#a2f">NULL</span>, <span style="color:#a2f">NULL</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li><strong>Base Case</strong>: When the size of the current sub-grid is 1x1, it is directly converted into a leaf node. The <code>Node</code> constructor is invoked with the value from the grid (<code>grid[x][y]</code>), and the <code>isLeaf</code> flag is set to <code>true</code>. If the value is <code>0</code>, the <code>val</code> is set to <code>false</code>, otherwise it is <code>true</code>.</li>
+</ul>
+<h4 id="step-3-recursive-subdivision-and-node-creation">Step 3: Recursive Subdivision and Node Creation</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Node<span style="color:#666">*</span> res <span style="color:#666">=</span> <span style="color:#a2f;font-weight:bold">new</span> Node();
+</span></span><span style="display:flex;"><span>Node<span style="color:#666">*</span> topRight <span style="color:#666">=</span> helper(grid, x , y <span style="color:#666">+</span> sz <span style="color:#666">/</span> <span style="color:#666">2</span>, sz <span style="color:#666">/</span> <span style="color:#666">2</span>);
+</span></span><span style="display:flex;"><span>Node<span style="color:#666">*</span> topLeft <span style="color:#666">=</span> helper(grid, x , y, sz <span style="color:#666">/</span> <span style="color:#666">2</span>);
+</span></span><span style="display:flex;"><span>Node<span style="color:#666">*</span> bottomRight <span style="color:#666">=</span> helper(grid, x <span style="color:#666">+</span> sz <span style="color:#666">/</span> <span style="color:#666">2</span>, y <span style="color:#666">+</span> sz <span style="color:#666">/</span> <span style="color:#666">2</span>, sz <span style="color:#666">/</span> <span style="color:#666">2</span>);
+</span></span><span style="display:flex;"><span>Node<span style="color:#666">*</span> bottomLeft <span style="color:#666">=</span> helper(grid, x <span style="color:#666">+</span> sz <span style="color:#666">/</span> <span style="color:#666">2</span>, y, sz <span style="color:#666">/</span> <span style="color:#666">2</span>);
+</span></span></code></pre></div><ul>
+<li>For grids larger than <code>1x1</code>, the current grid is divided into four smaller quadrants:
+<ul>
+<li><strong>Top-left</strong>: From <code>(x, y)</code> to <code>(x + sz/2, y + sz/2)</code></li>
+<li><strong>Top-right</strong>: From <code>(x, y + sz/2)</code> to <code>(x + sz/2, y + sz)</code></li>
+<li><strong>Bottom-left</strong>: From <code>(x + sz/2, y)</code> to <code>(x + sz, y + sz/2)</code></li>
+<li><strong>Bottom-right</strong>: From <code>(x + sz/2, y + sz/2)</code> to <code>(x + sz, y + sz)</code></li>
+</ul>
+</li>
+</ul>
+<p>Each of these quadrants is recursively processed using the <code>helper</code> function.</p>
+<h4 id="step-4-merging-the-results">Step 4: Merging the Results</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (topRight<span style="color:#666">-&gt;</span>isLeaf <span style="color:#666">&amp;&amp;</span> topLeft<span style="color:#666">-&gt;</span>isLeaf <span style="color:#666">&amp;&amp;</span> bottomRight<span style="color:#666">-&gt;</span>isLeaf <span style="color:#666">&amp;&amp;</span> bottomLeft<span style="color:#666">-&gt;</span>isLeaf <span style="color:#666">&amp;&amp;</span> 
+</span></span><span style="display:flex;"><span>    topLeft<span style="color:#666">-&gt;</span>val <span style="color:#666">==</span> topRight<span style="color:#666">-&gt;</span>val <span style="color:#666">&amp;&amp;</span> topRight<span style="color:#666">-&gt;</span>val <span style="color:#666">==</span> bottomRight<span style="color:#666">-&gt;</span>val <span style="color:#666">&amp;&amp;</span> bottomRight<span style="color:#666">-&gt;</span>val <span style="color:#666">==</span> bottomLeft<span style="color:#666">-&gt;</span>val) {
+</span></span><span style="display:flex;"><span>    res<span style="color:#666">-&gt;</span>val <span style="color:#666">=</span> topLeft<span style="color:#666">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>    res<span style="color:#666">-&gt;</span>isLeaf <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>} <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>    res<span style="color:#666">-&gt;</span>topRight <span style="color:#666">=</span> topRight;
+</span></span><span style="display:flex;"><span>    res<span style="color:#666">-&gt;</span>topLeft <span style="color:#666">=</span> topLeft;
+</span></span><span style="display:flex;"><span>    res<span style="color:#666">-&gt;</span>bottomRight <span style="color:#666">=</span> bottomRight;
+</span></span><span style="display:flex;"><span>    res<span style="color:#666">-&gt;</span>bottomLeft <span style="color:#666">=</span> bottomLeft;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Merge Quadrants</strong>: After recursively dividing the grid into quadrants, the next step is to check if all four quadrants are identical and can be merged into a single leaf node. This check is performed using the following conditions:</p>
+<ul>
+<li>If all four quadrants are leaf nodes (<code>isLeaf == true</code>).</li>
+<li>If the values of all four leaf nodes are the same.</li>
+</ul>
+<p>If these conditions are met, the current node (<code>res</code>) becomes a leaf node with the value of the shared quadrants. Otherwise, the current node is an internal node with four children (top-left, top-right, bottom-left, and bottom-right).</p>
+</li>
+</ul>
+<h4 id="step-5-return-the-constructed-node">Step 5: Return the Constructed Node</h4>
+<p>Finally, after checking and possibly merging the quadrants, the constructed node is returned:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div><p>This node represents the current grid or sub-grid, and the recursive calls continue until the entire grid is processed.</p>
+<h3 id="complexity">Complexity</h3>
+<h4 id="time-complexity">Time Complexity:</h4>
+<ul>
+<li>The time complexity of this solution is <code>O(n)</code>, where <code>n</code> is the total number of cells in the grid. The recursive approach ensures that every cell is processed once, with each recursive step handling a smaller grid.</li>
+</ul>
+<h4 id="space-complexity">Space Complexity:</h4>
+<ul>
+<li>The space complexity is <code>O(n)</code> due to the space used for the recursive call stack and the additional space required for storing the grid itself. In the worst case, the recursion depth is proportional to the number of grid cells.</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>This solution efficiently constructs a QuadTree from a 2D binary grid using recursive subdivision. By leveraging the properties of leaf nodes and internal nodes, it reduces unnecessary subdivisions when all quadrants contain the same value. The approach ensures that the QuadTree is constructed optimally with a time complexity of <code>O(n)</code> and a space complexity of <code>O(n)</code>. This method provides a clean and efficient solution for handling QuadTree construction problems in a binary grid.</p>
+<p><a href="https://leetcode.com/problems/construct-quad-tree/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/UQ-1sBMV0v4?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

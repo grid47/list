@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 508: Most Frequent Subtree Sum | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 508: Most Frequent Subtree Sum">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 508: Most Frequent Subtree Sum in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-508-most-frequent-subtree-sum/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 508: Most Frequent Subtree Sum">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 508: Most Frequent Subtree Sum in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-09-17T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Hash Table">
+    <meta property="article:tag" content="Tree">
+    <meta property="article:tag" content="Depth-First Search">
+    <meta property="article:tag" content="Binary Tree">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 508: Most Frequent Subtree Sum</h1> 
+            </div>
+			<div class="article-post">
+				<h2 id="hahahugoshortcode1169s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+    <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/508.webp" 
+           alt="A tree with sums at each subtree, and the most frequent subtree sum glowing brightly as it is discovered." 
+           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    
+      <figcaption style="font-size: 0.8em; font-weight: 300; color:#555; margin-top: 4px; line-height: 1.2;">
+        Solution to LeetCode 508: Most Frequent Subtree Sum Problem
+      </figcaption>
+    
+  </figure>
+  </h2>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode1169s1hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mx;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> findFrequentTreeSum(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans;
+</span></span><span style="display:flex;"><span>        map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        mx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        dfs(root, mp, ans);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dfs</span>(TreeNode<span style="color:#666">*</span> root, map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> mp, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> ans) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> res;
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (root<span style="color:#666">-&gt;</span>left  <span style="color:#666">==</span> <span style="color:#a2f">NULL</span> <span style="color:#666">&amp;&amp;</span> 
+</span></span><span style="display:flex;"><span>            root<span style="color:#666">-&gt;</span>right <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>)
+</span></span><span style="display:flex;"><span>             { res <span style="color:#666">=</span> root<span style="color:#666">-&gt;</span>val; }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> dfs(root<span style="color:#666">-&gt;</span>left , mp, ans);
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> r <span style="color:#666">=</span> dfs(root<span style="color:#666">-&gt;</span>right, mp, ans);
+</span></span><span style="display:flex;"><span>            res <span style="color:#666">=</span> l <span style="color:#666">+</span> r <span style="color:#666">+</span> root<span style="color:#666">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        mp[res] <span style="color:#666">+=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mx <span style="color:#666">&lt;</span> mp[res]) {
+</span></span><span style="display:flex;"><span>            ans.clear();
+</span></span><span style="display:flex;"><span>            ans.push_back(res);
+</span></span><span style="display:flex;"><span>            mx <span style="color:#666">=</span> mp[res];
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(mx <span style="color:#666">==</span> mp[res]) {
+</span></span><span style="display:flex;"><span>            ans.push_back(res);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>In this problem, you are given the root of a binary tree. Each node in the tree has an integer value. The task is to find the most frequent subtree sums in the binary tree, where a subtree sum is the sum of all node values in a particular subtree (including the root node of that subtree). If multiple subtree sums have the same frequency, return all of them.</p>
+<p>Your task is to return a list of the most frequent subtree sums in the binary tree.</p>
+<h3 id="approach">Approach</h3>
+<p>To solve this problem efficiently, we use a <strong>Depth First Search (DFS)</strong> to traverse the binary tree. For each node, we calculate the sum of its subtree, which includes the node itself and the sums of its left and right children. We can store these sums in a <strong>map</strong> (or dictionary) to track their frequencies.</p>
+<p>The steps in the solution are as follows:</p>
+<ol>
+<li>
+<p><strong>DFS Traversal</strong>: Starting from the root, recursively calculate the sum of the subtree for each node.</p>
+<ul>
+<li>The sum of a leaf node is just the node&rsquo;s value.</li>
+<li>For non-leaf nodes, the sum is the node&rsquo;s value plus the sums of its left and right subtrees.</li>
+</ul>
+</li>
+<li>
+<p><strong>Tracking Frequencies</strong>: We store the calculated sums in a <code>map</code> where the key is the sum, and the value is its frequency (i.e., how many times the sum has occurred).</p>
+<ul>
+<li>After calculating the sum for each node&rsquo;s subtree, we update the frequency of that sum in the map.</li>
+</ul>
+</li>
+<li>
+<p><strong>Finding Maximum Frequency</strong>: As we update the map, we also keep track of the maximum frequency encountered so far. This allows us to identify the most frequent subtree sums.</p>
+</li>
+<li>
+<p><strong>Handling Multiple Results</strong>: If multiple sums have the same frequency, we need to return all such sums. To do this, we maintain a list (<code>ans</code>) to store all the sums with the highest frequency.</p>
+</li>
+<li>
+<p><strong>Return Result</strong>: Finally, the result is the list of the most frequent subtree sums.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<p>Let&rsquo;s break down the provided code and understand each part of it:</p>
+<h4 id="1-initialization-and-setup">1. Initialization and Setup</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mx;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> findFrequentTreeSum(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans;
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    mx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    dfs(root, mp, ans);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>mx</code>: This is an integer variable that stores the maximum frequency of any subtree sum.</li>
+<li><code>findFrequentTreeSum</code>: This is the main function that initializes a <code>map&lt;int, int&gt;</code> to store the frequency of subtree sums and a <code>vector&lt;int&gt;</code> to store the most frequent subtree sums.</li>
+<li>Inside <code>findFrequentTreeSum</code>, we call the <code>dfs</code> function to traverse the tree and calculate the subtree sums. After the DFS traversal, we return the <code>ans</code> vector, which contains the most frequent subtree sums.</li>
+</ul>
+<h4 id="2-depth-first-search-dfs">2. Depth First Search (DFS)</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dfs</span>(TreeNode<span style="color:#666">*</span> root, map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> mp, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> ans) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (root <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (root<span style="color:#666">-&gt;</span>left <span style="color:#666">==</span> <span style="color:#a2f">NULL</span> <span style="color:#666">&amp;&amp;</span> root<span style="color:#666">-&gt;</span>right <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) {
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> root<span style="color:#666">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> dfs(root<span style="color:#666">-&gt;</span>left, mp, ans);
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> r <span style="color:#666">=</span> dfs(root<span style="color:#666">-&gt;</span>right, mp, ans);
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">=</span> l <span style="color:#666">+</span> r <span style="color:#666">+</span> root<span style="color:#666">-&gt;</span>val;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    mp[res] <span style="color:#666">+=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (mx <span style="color:#666">&lt;</span> mp[res]) {
+</span></span><span style="display:flex;"><span>        ans.clear();
+</span></span><span style="display:flex;"><span>        ans.push_back(res);
+</span></span><span style="display:flex;"><span>        mx <span style="color:#666">=</span> mp[res];
+</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (mx <span style="color:#666">==</span> mp[res]) {
+</span></span><span style="display:flex;"><span>        ans.push_back(res);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Base Case</strong>: The DFS function starts by checking if the current node (<code>root</code>) is <code>NULL</code>. If it is <code>NULL</code>, it returns <code>0</code>, indicating that an empty node contributes no value to the sum.</p>
+</li>
+<li>
+<p><strong>Leaf Node Case</strong>: If the node is a leaf (both left and right children are <code>NULL</code>), the sum for this node is just its value (<code>res = root-&gt;val</code>).</p>
+</li>
+<li>
+<p><strong>Non-Leaf Node Case</strong>: For non-leaf nodes, the function recursively calculates the sum of the left subtree (<code>l</code>) and the sum of the right subtree (<code>r</code>). The sum for the current node&rsquo;s subtree is the sum of these left and right sums plus the current node&rsquo;s value (<code>res = l + r + root-&gt;val</code>).</p>
+</li>
+<li>
+<p><strong>Updating Frequency</strong>: The subtree sum (<code>res</code>) is added to the map (<code>mp</code>), and its frequency is incremented by 1 (<code>mp[res] += 1</code>).</p>
+</li>
+<li>
+<p><strong>Tracking Maximum Frequency</strong>:</p>
+<ul>
+<li>If the current frequency of <code>res</code> is greater than the current maximum frequency (<code>mx</code>), we clear the <code>ans</code> vector and add the current sum <code>res</code> to <code>ans</code>. We also update <code>mx</code> to the new maximum frequency.</li>
+<li>If the current frequency of <code>res</code> is equal to <code>mx</code>, we simply add the current sum <code>res</code> to <code>ans</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Returning Subtree Sum</strong>: Finally, the function returns the sum of the current node&rsquo;s subtree (<code>res</code>).</p>
+</li>
+</ul>
+<h4 id="3-treenode-definition">3. TreeNode Definition</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">struct</span> <span style="color:#00f">TreeNode</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> val;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#666">*</span>left;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#666">*</span>right;
+</span></span><span style="display:flex;"><span>    TreeNode() <span style="color:#666">:</span> val(<span style="color:#666">0</span>), left(<span style="color:#a2f;font-weight:bold">nullptr</span>), right(<span style="color:#a2f;font-weight:bold">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#0b0;font-weight:bold">int</span> x) <span style="color:#666">:</span> val(x), left(<span style="color:#a2f;font-weight:bold">nullptr</span>), right(<span style="color:#a2f;font-weight:bold">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#0b0;font-weight:bold">int</span> x, TreeNode <span style="color:#666">*</span>left, TreeNode <span style="color:#666">*</span>right) <span style="color:#666">:</span> val(x), left(left), right(right) {}
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>This is the definition of a binary tree node. Each <code>TreeNode</code> contains:</p>
+<ul>
+<li><code>val</code>: The value of the node.</li>
+<li><code>left</code>: A pointer to the left child node.</li>
+<li><code>right</code>: A pointer to the right child node.</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<h4 id="time-complexity">Time Complexity:</h4>
+<ul>
+<li><strong>DFS Traversal</strong>: The DFS function visits each node once, so the time complexity of the traversal is <code>O(n)</code>, where <code>n</code> is the number of nodes in the tree.</li>
+<li><strong>Map Operations</strong>: For each node, we perform an insert and lookup operation in the map, which takes <code>O(log k)</code>, where <code>k</code> is the number of unique subtree sums. However, since the number of unique subtree sums is at most <code>n</code>, we can treat this as <code>O(log n)</code> for each node.</li>
+</ul>
+<p>Thus, the overall time complexity is <code>O(n log n)</code>.</p>
+<h4 id="space-complexity">Space Complexity:</h4>
+<ul>
+<li>The space complexity is determined by the storage of the map <code>mp</code> and the recursive call stack.</li>
+<li>The map <code>mp</code> stores at most <code>n</code> subtree sums, so it requires <code>O(n)</code> space.</li>
+<li>The recursive call stack for DFS also requires <code>O(n)</code> space in the worst case (i.e., if the tree is a straight line).</li>
+</ul>
+<p>Thus, the overall space complexity is <code>O(n)</code>.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>This solution efficiently solves the problem by leveraging a DFS traversal to calculate subtree sums and using a map to track the frequency of each sum. By maintaining the maximum frequency during the traversal, we can easily identify the most frequent subtree sums. The solution has optimal time and space complexity for the given problem, making it suitable for large binary trees.</p>
+<p><a href="https://leetcode.com/problems/most-frequent-subtree-sum/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/CvmRmzBQhu8?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

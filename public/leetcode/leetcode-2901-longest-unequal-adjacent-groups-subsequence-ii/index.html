@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 2901: Longest Unequal Adjacent Groups Subsequence II | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 2901: Longest Unequal Adjacent Groups Subsequence II">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 2901: Longest Unequal Adjacent Groups Subsequence II in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-2901-longest-unequal-adjacent-groups-subsequence-ii/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 2901: Longest Unequal Adjacent Groups Subsequence II">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 2901: Longest Unequal Adjacent Groups Subsequence II in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-01-21T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="String">
+    <meta property="article:tag" content="Dynamic Programming">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 2901: Longest Unequal Adjacent Groups Subsequence II</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode1001s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> getWordsInLongestSubsequence(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> words, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> groups) {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> dp(n);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) dp[i].push_back(i);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> longest_length <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> i; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span> (groups[i] <span style="color:#666">==</span> groups[j]) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span> (words[i].size() <span style="color:#666">!=</span> words[j].size()) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span> (getHammingDistance(words[i], words[j]) <span style="color:#666">!=</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span> ((dp[j].size() <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">&gt;</span> dp[i].size()) {
+</span></span><span style="display:flex;"><span>                    dp[i] <span style="color:#666">=</span> dp[j];
+</span></span><span style="display:flex;"><span>                    dp[i].push_back(i);
+</span></span><span style="display:flex;"><span>                    longest_length <span style="color:#666">=</span> max(longest_length, <span style="color:#0b0;font-weight:bold">int</span>(dp[i].size()));
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> result;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (dp[i].size() <span style="color:#666">==</span> longest_length) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">const</span> <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&amp;</span> <span style="color:#a0a000">x</span> : dp[i]) result.push_back(words[x]);
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> result;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">private</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> getHammingDistance(<span style="color:#a2f;font-weight:bold">const</span> string<span style="color:#666">&amp;</span> s, <span style="color:#a2f;font-weight:bold">const</span> string<span style="color:#666">&amp;</span> t) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> dist <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> k <span style="color:#666">=</span> s.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> k; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (s[i] <span style="color:#666">!=</span> t[i]) dist<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> dist;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The task is to find the longest subsequence of words from a given list where each word is part of a unique group and differs from the previous word by exactly one character (i.e., Hamming Distance = 1). Given the constraints, the solution should efficiently compute and return this longest subsequence of words.</p>
+<h3 id="approach">Approach</h3>
+<p>To tackle this problem, the algorithm employs dynamic programming (DP) to store subsequences as it iterates through each word in the list. Here’s the approach in detail:</p>
+<ol>
+<li>
+<p><strong>Initialize DP Table</strong>:</p>
+<ul>
+<li>We set up a DP table (<code>dp</code>) where each entry <code>dp[i]</code> will hold the longest subsequence ending at the <code>i</code>-th word.</li>
+<li>Initially, each <code>dp[i]</code> entry contains only the index <code>i</code>, indicating each word as a subsequence of itself.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate Through Words</strong>:</p>
+<ul>
+<li>We iterate over each word <code>i</code> from <code>1</code> to <code>n - 1</code> (where <code>n</code> is the total number of words) and check every previous word <code>j</code> (from <code>0</code> to <code>i - 1</code>).</li>
+<li>The goal here is to check if the word at index <code>i</code> can extend the subsequence ending at <code>j</code> by meeting the following conditions:
+<ul>
+<li><strong>Different Groups</strong>: The two words should belong to different groups (checked using the <code>groups</code> array).</li>
+<li><strong>Equal Lengths</strong>: The words should have the same length to compare each character.</li>
+<li><strong>Hamming Distance of 1</strong>: The words must differ by exactly one character.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Update DP and Track Longest Subsequence</strong>:</p>
+<ul>
+<li>If the above conditions are satisfied, we check if the subsequence ending at <code>j</code> can be extended to form a longer subsequence ending at <code>i</code>.</li>
+<li>If yes, we update <code>dp[i]</code> by copying the subsequence from <code>dp[j]</code> and appending <code>i</code> to it.</li>
+<li>We also update <code>longest_length</code> to track the maximum length of subsequences encountered so far.</li>
+</ul>
+</li>
+<li>
+<p><strong>Retrieve Result</strong>:</p>
+<ul>
+<li>Finally, we look for the subsequence in <code>dp</code> that has the length equal to <code>longest_length</code>.</li>
+<li>We gather the words corresponding to the indices in this subsequence and return them as the result.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<h4 id="step-1-initialize-dp-table">Step 1: Initialize DP Table</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> dp(n);
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) dp[i].push_back(i);
+</span></span></code></pre></div><ul>
+<li>Here, we initialize <code>dp</code>, a vector of vectors, where each <code>dp[i]</code> is initialized to hold the index <code>i</code>, representing that each word is initially considered as a single-element subsequence.</li>
+</ul>
+<h4 id="step-2-iterate-through-words-and-build-subsequences">Step 2: Iterate Through Words and Build Subsequences</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> longest_length <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> i; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (groups[i] <span style="color:#666">==</span> groups[j]) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (words[i].size() <span style="color:#666">!=</span> words[j].size()) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (getHammingDistance(words[i], words[j]) <span style="color:#666">!=</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span></code></pre></div><ul>
+<li>For each word <code>i</code>, we look at each previous word <code>j</code>.</li>
+<li>We skip <code>j</code> if <code>groups[i]</code> equals <code>groups[j]</code> (same group), or if the word lengths don’t match, or if the Hamming Distance is not exactly <code>1</code>.</li>
+</ul>
+<h4 id="step-3-update-dp-array-if-conditions-are-met">Step 3: Update DP Array if Conditions are Met</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> ((dp[j].size() <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">&gt;</span> dp[i].size()) {
+</span></span><span style="display:flex;"><span>    dp[i] <span style="color:#666">=</span> dp[j];
+</span></span><span style="display:flex;"><span>    dp[i].push_back(i);
+</span></span><span style="display:flex;"><span>    longest_length <span style="color:#666">=</span> max(longest_length, <span style="color:#0b0;font-weight:bold">int</span>(dp[i].size()));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If extending the subsequence ending at <code>j</code> creates a longer subsequence ending at <code>i</code>, we update <code>dp[i]</code> and record the <code>longest_length</code>.</li>
+</ul>
+<h4 id="step-4-retrieve-and-return-result">Step 4: Retrieve and Return Result</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> result;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (dp[i].size() <span style="color:#666">==</span> longest_length) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">const</span> <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&amp;</span> <span style="color:#a0a000">x</span> : dp[i]) result.push_back(words[x]);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> result;
+</span></span></code></pre></div><ul>
+<li>After iterating, we check each entry in <code>dp</code> to find a subsequence that matches <code>longest_length</code>.</li>
+<li>We then collect the words in this subsequence and return them.</li>
+</ul>
+<h4 id="helper-function-compute-hamming-distance">Helper Function: Compute Hamming Distance</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">getHammingDistance</span>(<span style="color:#a2f;font-weight:bold">const</span> string<span style="color:#666">&amp;</span> s, <span style="color:#a2f;font-weight:bold">const</span> string<span style="color:#666">&amp;</span> t) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> dist <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> k <span style="color:#666">=</span> s.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> k; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (s[i] <span style="color:#666">!=</span> t[i]) dist<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dist;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This helper function calculates the Hamming Distance between two strings by comparing each character.</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<h4 id="time-complexity">Time Complexity</h4>
+<ul>
+<li><strong>Main Iteration</strong>: The nested loop that compares each pair of words has a time complexity of <code>O(n^2)</code>.</li>
+<li><strong>Hamming Distance Calculation</strong>: Each call to <code>getHammingDistance</code> takes <code>O(L)</code>, where <code>L</code> is the length of each word. Given <code>n</code> words, the worst case is <code>O(n^2 * L)</code>.</li>
+</ul>
+<h4 id="space-complexity">Space Complexity</h4>
+<ul>
+<li><strong>DP Array</strong>: The <code>dp</code> array uses <code>O(n^2)</code> space, where each <code>dp[i]</code> stores the longest subsequence of word indices ending at <code>i</code>.</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>This solution provides an efficient approach to finding the longest subsequence of words with a Hamming Distance of 1 and different group affiliations. The DP technique optimizes the subsequence formation by checking only necessary conditions and updating the longest subsequence dynamically. This allows the algorithm to perform efficiently, even with larger inputs, while ensuring that the constraints of unique groups and minimal character differences are met.</p>
+<p><a href="https://leetcode.com/problems/longest-unequal-adjacent-groups-subsequence-ii/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/DJaTr0BnG1Q?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

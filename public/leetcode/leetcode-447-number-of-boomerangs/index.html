@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 447: Number of Boomerangs | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 447: Number of Boomerangs">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 447: Number of Boomerangs in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-447-number-of-boomerangs/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 447: Number of Boomerangs">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 447: Number of Boomerangs in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-09-23T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Hash Table">
+    <meta property="article:tag" content="Math">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 447: Number of Boomerangs</h1> 
+            </div>
+			<div class="article-post">
+				<h2 id="hahahugoshortcode1142s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+    <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/447.webp" 
+           alt="A series of points where boomerangs are formed, glowing as each boomerang path is traced." 
+           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    
+      <figcaption style="font-size: 0.8em; font-weight: 300; color:#555; margin-top: 4px; line-height: 1.2;">
+        Solution to LeetCode 447: Number of Boomerangs Problem
+      </figcaption>
+    
+  </figure>
+  </h2>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode1142s1hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> numberOfBoomerangs(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> points) {
+</span></span><span style="display:flex;"><span>        map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> points.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> points.size(); j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> d <span style="color:#666">=</span> getDist(points[i], points[j]);
+</span></span><span style="display:flex;"><span>                mp[d]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> [_, val]<span style="color:#666">:</span> mp)
+</span></span><span style="display:flex;"><span>            res <span style="color:#666">+=</span> val <span style="color:#666">*</span> (val <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>            mp.clear();
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">getDist</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> a, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> b) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> a[<span style="color:#666">0</span>] <span style="color:#666">-</span> b[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> y <span style="color:#666">=</span> a[<span style="color:#666">1</span>] <span style="color:#666">-</span> b[<span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> x <span style="color:#666">*</span> x <span style="color:#666">+</span> y <span style="color:#666">*</span> y;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem asks us to find the number of <strong>boomerangs</strong> in a given set of 2D points. A <strong>boomerang</strong> is defined as a set of three points <code>(i, j, k)</code> such that:</p>
+<ul>
+<li>The distance between points <code>i</code> and <code>j</code> is equal to the distance between points <code>i</code> and <code>k</code>.</li>
+<li>The points are distinct, and all points must be different.</li>
+</ul>
+<p>The task is to count how many such sets of three points (boomerangs) exist in the given list of points.</p>
+<h3 id="approach">Approach</h3>
+<p>To solve the problem, we can break it down into the following steps:</p>
+<ol>
+<li>
+<p><strong>Understanding the Problem</strong>:</p>
+<ul>
+<li>We need to identify sets of three points that form boomerangs. The key insight is that for each point <code>i</code>, we can calculate the distance from <code>i</code> to all other points <code>j</code> and <code>k</code>. If two other points have the same distance from <code>i</code>, they form a boomerang with <code>i</code>.</li>
+<li>To efficiently calculate the distance between points, we use the squared distance formula: <code>d = (x2 - x1)² + (y2 - y1)²</code>. Using squared distance avoids unnecessary floating-point precision errors and makes comparisons straightforward.</li>
+</ul>
+</li>
+<li>
+<p><strong>Plan</strong>:</p>
+<ul>
+<li><strong>For each point <code>i</code></strong>:
+<ul>
+<li>Calculate the distance between <code>i</code> and every other point <code>j</code>.</li>
+<li>Store these distances in a map (or hash map) where the key is the distance, and the value is the count of how many points are at that distance from <code>i</code>.</li>
+<li>For each unique distance, if there are <code>n</code> points at that distance, then the number of ways to choose two points from these <code>n</code> points (which form a boomerang with <code>i</code>) is <code>n * (n - 1)</code>, because we choose two distinct points out of <code>n</code> and each pair can form a distinct boomerang.</li>
+<li>Accumulate the boomerang count.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Efficiency Consideration</strong>:</p>
+<ul>
+<li>The approach essentially compares all pairs of points for each point in the list, which gives a time complexity of <code>O(n^2)</code> where <code>n</code> is the number of points. This is feasible because the solution uses a hash map to efficiently count distances.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<h4 id="step-1-helper-function-to-calculate-distance">Step 1: Helper Function to Calculate Distance</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">getDist</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> a, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> b) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> a[<span style="color:#666">0</span>] <span style="color:#666">-</span> b[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> y <span style="color:#666">=</span> a[<span style="color:#666">1</span>] <span style="color:#666">-</span> b[<span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> x <span style="color:#666">*</span> x <span style="color:#666">+</span> y <span style="color:#666">*</span> y;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The function <code>getDist</code> computes the squared distance between two points <code>a</code> and <code>b</code>. The formula used is <code>(x2 - x1)² + (y2 - y1)²</code> where <code>a[0]</code> and <code>a[1]</code> are the coordinates of point <code>a</code>, and <code>b[0]</code> and <code>b[1]</code> are the coordinates of point <code>b</code>.</li>
+<li>The squared distance is used to avoid floating-point calculations and maintain precision when comparing distances.</li>
+</ul>
+<h4 id="step-2-main-logic-for-counting-boomerangs">Step 2: Main Logic for Counting Boomerangs</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mp;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> points.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> points.size(); j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> d <span style="color:#666">=</span> getDist(points[i], points[j]);
+</span></span><span style="display:flex;"><span>        mp[d]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> [_, val]<span style="color:#666">:</span> mp)
+</span></span><span style="display:flex;"><span>        res <span style="color:#666">+=</span> val <span style="color:#666">*</span> (val <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    mp.clear();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><code>mp</code> is a map that stores the frequency of distances from a given point <code>i</code> to all other points.</li>
+<li>We iterate through each point <code>i</code>. For each point <code>i</code>, we calculate the distance <code>d</code> between <code>i</code> and every other point <code>j</code>, and increment the count of that distance in <code>mp</code>.</li>
+<li>After calculating all distances from point <code>i</code> to every other point, we calculate how many boomerangs can be formed. If there are <code>val</code> points at the same distance from <code>i</code>, the number of ways to form boomerangs is <code>val * (val - 1)</code> (choosing two distinct points from <code>val</code>).</li>
+<li>Finally, we clear the map <code>mp</code> to prepare for the next point <code>i</code>.</li>
+</ul>
+<h4 id="step-3-return-the-result">Step 3: Return the Result</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div><ul>
+<li>The variable <code>res</code> holds the total number of boomerangs found. Once all points have been processed, we return the final count.</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<h4 id="time-complexity">Time Complexity:</h4>
+<ul>
+<li><strong>Outer Loops</strong>: We have two nested loops: the outer loop iterates over each point (<code>O(n)</code>), and the inner loop iterates over all points for distance calculation (<code>O(n)</code>).</li>
+<li><strong>Distance Calculation</strong>: For each pair of points <code>(i, j)</code>, we calculate the squared distance, which is an <code>O(1)</code> operation.</li>
+<li><strong>Total Time Complexity</strong>: The overall time complexity of the algorithm is <code>O(n^2)</code> where <code>n</code> is the number of points. This is because for each point, we compute distances to every other point.</li>
+</ul>
+<h4 id="space-complexity">Space Complexity:</h4>
+<ul>
+<li><strong>Map Storage</strong>: The space complexity is determined by the map <code>mp</code>, which stores the frequencies of distances. In the worst case, there can be <code>O(n)</code> distinct distances, so the space complexity is <code>O(n)</code>.</li>
+<li><strong>Total Space Complexity</strong>: The overall space complexity is <code>O(n)</code> for the map storage.</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>The solution effectively counts the number of boomerangs in a given set of points by calculating the squared distances between every pair of points and utilizing a map to count how many points lie at each distance. By iterating over each point and counting the possible boomerangs formed by pairs of points at the same distance, we achieve an optimal solution with a time complexity of <code>O(n^2)</code>.</p>
+<p>This approach is efficient enough for moderate-sized input datasets and provides a clear and concise method for solving the problem using simple geometric insights and hash-based counting.</p>
+<p><a href="https://leetcode.com/problems/number-of-boomerangs/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/QPsEA1Ls3jQ?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

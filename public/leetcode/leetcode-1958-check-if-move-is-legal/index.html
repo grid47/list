@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 1958: Check if Move is Legal | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 1958: Check if Move is Legal">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1958: Check if Move is Legal in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-1958-check-if-move-is-legal/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 1958: Check if Move is Legal">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1958: Check if Move is Legal in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-04-25T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Matrix">
+    <meta property="article:tag" content="Enumeration">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 1958: Check if Move is Legal</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode474s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> checkMove(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&amp;</span> board, <span style="color:#0b0;font-weight:bold">int</span> rMove, <span style="color:#0b0;font-weight:bold">int</span> cMove, <span style="color:#0b0;font-weight:bold">char</span> cur) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> board.size(), n <span style="color:#666">=</span> board[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> dir[] <span style="color:#666">=</span> {<span style="color:#666">0</span>, <span style="color:#666">1</span>, <span style="color:#666">0</span>, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#666">0</span>, <span style="color:#666">1</span>, <span style="color:#666">1</span>, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#666">1</span>};
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> d <span style="color:#666">=</span> <span style="color:#666">0</span>; d <span style="color:#666">&lt;</span> <span style="color:#666">9</span>; d<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> <span style="color:#666">1</span>; ; x<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> rMove <span style="color:#666">+</span> x <span style="color:#666">*</span> dir[d], j <span style="color:#666">=</span> cMove <span style="color:#666">+</span> x <span style="color:#666">*</span> dir[d <span style="color:#666">+</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> j <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> i <span style="color:#666">==</span> <span style="color:#666">8</span> <span style="color:#666">||</span> j <span style="color:#666">==</span> <span style="color:#666">8</span><span style="color:#666">||</span> board[i][j] <span style="color:#666">==</span> <span style="color:#b44">&#39;.&#39;</span>)
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(board[i][j] <span style="color:#666">==</span> cur) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&gt;</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>                    
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;        
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>In this problem, we are tasked with determining whether a player&rsquo;s move in a game (such as Tic-Tac-Toe) results in a win condition. Given a 2D board representing the game state, the player&rsquo;s current move coordinates, and the player&rsquo;s symbol, the objective is to check if the move creates a sequence of three or more of the same symbol in any direction: horizontally, vertically, or diagonally. The board contains characters that represent empty spaces and the players&rsquo; symbols.</p>
+<h3 id="approach">Approach</h3>
+<p>To solve this problem, we can utilize a direction-based approach to check for sequences of the current player&rsquo;s symbol extending from the last move made. We will evaluate all eight possible directions from the move location: up, down, left, right, and the four diagonal directions. The algorithm will check how far the current player&rsquo;s symbol extends in each direction. If we find a sequence of three or more symbols, we will return true, indicating a win condition.</p>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<p>Here’s a detailed breakdown of the provided code:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span></code></pre></div><p>This line defines the <code>Solution</code> class, and the <code>public</code> access specifier allows the methods within the class to be accessible from outside the class.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">checkMove</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&amp;</span> board, <span style="color:#0b0;font-weight:bold">int</span> rMove, <span style="color:#0b0;font-weight:bold">int</span> cMove, <span style="color:#0b0;font-weight:bold">char</span> cur) {
+</span></span></code></pre></div><p>The <code>checkMove</code> method takes four parameters: a reference to a 2D vector <code>board</code> representing the game state, two integers <code>rMove</code> and <code>cMove</code> representing the row and column of the player&rsquo;s move, and a character <code>cur</code> representing the current player&rsquo;s symbol.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> board.size(), n <span style="color:#666">=</span> board[<span style="color:#666">0</span>].size();
+</span></span></code></pre></div><p>We initialize two integers, <code>m</code> and <code>n</code>, to hold the dimensions of the board. <code>m</code> is the number of rows, and <code>n</code> is the number of columns.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> dir[] <span style="color:#666">=</span> {<span style="color:#666">0</span>, <span style="color:#666">1</span>, <span style="color:#666">0</span>, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#666">0</span>, <span style="color:#666">1</span>, <span style="color:#666">1</span>, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#666">1</span>};
+</span></span></code></pre></div><p>We define an array <code>dir</code> that contains the changes in row and column indices for each of the eight possible directions: up, down, left, right, and the four diagonals. The array is structured so that the first half represents row changes and the second half represents column changes.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> d <span style="color:#666">=</span> <span style="color:#666">0</span>; d <span style="color:#666">&lt;</span> <span style="color:#666">9</span>; d<span style="color:#666">++</span>) {
+</span></span></code></pre></div><p>This outer loop iterates over the directions defined in the <code>dir</code> array. The loop variable <code>d</code> indicates the current direction we are checking.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> x <span style="color:#666">=</span> <span style="color:#666">1</span>; ; x<span style="color:#666">++</span>) {
+</span></span></code></pre></div><p>This inner loop will incrementally check each step in the current direction. The loop variable <code>x</code> represents the number of steps taken in the current direction.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> rMove <span style="color:#666">+</span> x <span style="color:#666">*</span> dir[d], j <span style="color:#666">=</span> cMove <span style="color:#666">+</span> x <span style="color:#666">*</span> dir[d <span style="color:#666">+</span> <span style="color:#666">1</span>];
+</span></span></code></pre></div><p>We calculate the new indices <code>i</code> and <code>j</code> for the current step based on the player&rsquo;s last move and the direction we are currently checking.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> j <span style="color:#666">&lt;</span> <span style="color:#666">0</span> <span style="color:#666">||</span> i <span style="color:#666">==</span> <span style="color:#666">8</span> <span style="color:#666">||</span> j <span style="color:#666">==</span> <span style="color:#666">8</span> <span style="color:#666">||</span> board[i][j] <span style="color:#666">==</span> <span style="color:#b44">&#39;.&#39;</span>)
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span></code></pre></div><p>This line checks if the new indices are out of bounds or if we encounter an empty space (represented by <code>.</code>). If any of these conditions are true, we break out of the inner loop since we cannot form a valid sequence in this direction.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(board[i][j] <span style="color:#666">==</span> cur) {
+</span></span></code></pre></div><p>We check if the character at the current indices <code>i</code> and <code>j</code> matches the current player&rsquo;s symbol.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">&gt;</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span></code></pre></div><p>If the symbol matches and we have moved more than one step in this direction (i.e., <code>x &gt; 1</code>), it means we have found a sequence of at least three consecutive symbols (the current move and at least two more in the same direction). In this case, we return <code>true</code>, indicating a win condition.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span></code></pre></div><p>If the condition is not met (i.e., <code>x</code> is not greater than 1), we break out of the inner loop to check other directions.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><p>The loops conclude here, and if no sequences of three or more symbols were found in any direction, we proceed to return false.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;        
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>Finally, if no winning condition is met, we return <code>false</code>, indicating that the current move did not result in a win.</p>
+<h3 id="complexity">Complexity</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity is ( O(1) ) for the checking operation since we have a constant number of directions (8) and we are checking each direction only until we reach either a limit or a match.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(1) ) as we are not using any additional data structures that grow with the input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>The <code>checkMove</code> function efficiently determines whether the current player&rsquo;s move results in a win by checking all possible directions for sequences of identical symbols. By utilizing a straightforward approach and examining each direction in a controlled manner, we can quickly conclude the status of the game after a move is made. This method ensures that we account for the rules of the game and the potential winning scenarios.</p>
+<h3 id="key-features">Key Features</h3>
+<ol>
+<li>
+<p><strong>Direction-Based Checking</strong>: The function systematically checks all possible winning directions, ensuring comprehensive coverage of potential win conditions.</p>
+</li>
+<li>
+<p><strong>Early Exit</strong>: The function is designed to return as soon as a winning sequence is found, which enhances performance by avoiding unnecessary computations.</p>
+</li>
+<li>
+<p><strong>Simplicity</strong>: The logic is easy to follow and implement, making the solution maintainable and understandable.</p>
+</li>
+</ol>
+<h3 id="use-cases">Use Cases</h3>
+<p>This function is applicable in various game scenarios where determining the outcome of a move is necessary. Examples include:</p>
+<ul>
+<li><strong>Tic-Tac-Toe</strong>: Checking if a player has won after making a move.</li>
+<li><strong>Connect Four</strong>: Evaluating win conditions after dropping a piece in a column.</li>
+<li><strong>General Board Games</strong>: Any situation where consecutive symbols need to be checked for winning conditions.</li>
+</ul>
+<h3 id="example-usage">Example Usage</h3>
+<p>To demonstrate how the function can be utilized, consider the following example:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>Solution sol;
+</span></span><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span> board <span style="color:#666">=</span> {
+</span></span><span style="display:flex;"><span>    {<span style="color:#b44">&#39;X&#39;</span>, <span style="color:#b44">&#39;O&#39;</span>, <span style="color:#b44">&#39;X&#39;</span>, <span style="color:#b44">&#39;O&#39;</span>, <span style="color:#b44">&#39;X&#39;</span>, <span style="color:#b44">&#39;O&#39;</span>, <span style="color:#b44">&#39;X&#39;</span>},
+</span></span><span style="display:flex;"><span>    {<span style="color:#b44">&#39;.&#39;</span>, <span style="color:#b44">&#39;.&#39;</span>, <span style="color:#b44">&#39;.&#39;</span>, <span style="color:#b44">&#39;.&#39;</span>, <span style="color:#b44">&#39;.&#39;</span>, <span style="color:#b44">&#39;.&#39;</span>, <span style="color:#b44">&#39;.&#39;</span>},
+</span></span><span style="display:flex;"><span>    {<span style="color:#b44">&#39;X&#39;</span>, <span style="color:#b44">&#39;X&#39;</span>, <span style="color:#b44">&#39;X&#39;</span>, <span style="color:#b44">&#39;.&#39;</span>, <span style="color:#b44">&#39;.&#39;</span>, <span style="color:#b44">&#39;O&#39;</span>, <span style="color:#b44">&#39;.&#39;</span>},
+</span></span><span style="display:flex;"><span>    {<span style="color:#b44">&#39;O&#39;</span>, <span style="color:#b44">&#39;X&#39;</span>, <span style="color:#b44">&#39;.&#39;</span>, <span style="color:#b44">&#39;O&#39;</span>, <span style="color:#b44">&#39;X&#39;</span>, <span style="color:#b44">&#39;O&#39;</span>, <span style="color:#b44">&#39;.&#39;</span>},
+</span></span><span style="display:flex;"><span>    {<span style="color:#b44">&#39;.&#39;</span>, <span style="color:#b44">&#39;.&#39;</span>, <span style="color:#b44">&#39;X&#39;</span>, <span style="color:#b44">&#39;O&#39;</span>, <span style="color:#b44">&#39;X&#39;</span>, <span style="color:#b44">&#39;.&#39;</span>},
+</span></span><span style="display:flex;"><span>    {<span style="color:#b44">&#39;.&#39;</span>, <span style="color:#b44">&#39;.&#39;</span>, <span style="color:#b44">&#39;.&#39;</span>, <span style="color:#b44">&#39;.&#39;</span>, <span style="color:#b44">&#39;.&#39;</span>, <span style="color:#b44">&#39;.&#39;</span>, <span style="color:#b44">&#39;.&#39;</span>},
+</span></span><span style="display:flex;"><span>    {<span style="color:#b44">&#39;.&#39;</span>, <span style="color:#b44">&#39;.&#39;</span>, <span style="color:#b44">&#39;.&#39;</span>, <span style="color:#b44">&#39;.&#39;</span>, <span style="color:#b44">&#39;.&#39;</span>, <span style="color:#b44">&#39;.&#39;</span>, <span style="color:#b44">&#39;.&#39;</span>},
+</span></span><span style="display:flex;"><span>    {<span style="color:#b44">&#39;O&#39;</span>, <span style="color:#b44">&#39;O&#39;</span>, <span style="color:#b44">&#39;X&#39;</span>, <span style="color:#b44">&#39;.&#39;</span>, <span style="color:#b44">&#39;.&#39;</span>, <span style="color:#b44">&#39;.&#39;</span>, <span style="color:#b44">&#39;.&#39;</span>},
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> result <span style="color:#666">=</span> sol.checkMove(board, <span style="color:#666">2</span>, <span style="color:#666">3</span>, <span style="color:#b44">&#39;X&#39;</span>); <span style="color:#080;font-style:italic">// Example move for player &#39;X&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>cout <span style="color:#666">&lt;&lt;</span> (result <span style="color:#666">?</span> <span style="color:#b44">&#34;Win&#34;</span> <span style="color:#666">:</span> <span style="color:#b44">&#34;No Win&#34;</span>); <span style="color:#080;font-style:italic">// Output: Win
+</span></span></span></code></pre></div><p>In this example, the function checks if placing &lsquo;X&rsquo; at the specified location results in a winning condition. By employing this function, developers can efficiently manage game logic and provide feedback on players&rsquo; moves in real-time.</p>
+<p><a href="https://leetcode.com/problems/check-if-move-is-legal/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/KxK33AcQZpQ?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

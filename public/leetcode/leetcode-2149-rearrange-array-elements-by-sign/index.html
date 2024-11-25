@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 2149: Rearrange Array Elements by Sign | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 2149: Rearrange Array Elements by Sign">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 2149: Rearrange Array Elements by Sign in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-2149-rearrange-array-elements-by-sign/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 2149: Rearrange Array Elements by Sign">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 2149: Rearrange Array Elements by Sign in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-04-06T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Two Pointers">
+    <meta property="article:tag" content="Simulation">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 2149: Rearrange Array Elements by Sign</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode588s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> rearrangeArray(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans(nums.size(), <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> idxpos <span style="color:#666">=</span> <span style="color:#666">0</span>, idxneg <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">num</span>: nums) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(num <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>                ans[idxpos] <span style="color:#666">=</span> num;
+</span></span><span style="display:flex;"><span>                idxpos <span style="color:#666">+=</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(num <span style="color:#666">&lt;</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>                ans[idxneg] <span style="color:#666">=</span> num;
+</span></span><span style="display:flex;"><span>                idxneg <span style="color:#666">+=</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem at hand involves rearranging the elements of an array such that positive and negative integers are placed alternately. The rearranged array must maintain the relative order of the positive and negative numbers, meaning that within their respective categories, the order of numbers should be preserved. The key challenge here is to ensure that no two positive or negative numbers appear consecutively. If this is not possible, we return an array where positive and negative integers are still rearranged, but the ordering constraint may not hold.</p>
+<h3 id="approach">Approach</h3>
+<p>To solve this problem efficiently, we can use a two-pointer approach that helps us place positive and negative integers alternately. Here&rsquo;s a breakdown of the approach:</p>
+<ol>
+<li>
+<p><strong>Create a Result Array</strong>: Start by creating a new array <code>ans</code> of the same size as the input array, initialized to zeros. This will be used to store the rearranged elements.</p>
+</li>
+<li>
+<p><strong>Initialize Two Indices</strong>: We use two indices, <code>idxpos</code> and <code>idxneg</code>. The index <code>idxpos</code> will be used to place the positive integers starting from the first position (0, 2, 4, etc.), and the index <code>idxneg</code> will be used to place the negative integers starting from position 1 (1, 3, 5, etc.).</p>
+</li>
+<li>
+<p><strong>Iterate through the Input Array</strong>: We loop through the original array <code>nums</code>. For each element:</p>
+<ul>
+<li>If the element is positive, place it in the <code>ans</code> array at the index <code>idxpos</code> and increment <code>idxpos</code> by 2 (to skip to the next available position for positive integers).</li>
+<li>If the element is negative, place it in the <code>ans</code> array at the index <code>idxneg</code> and increment <code>idxneg</code> by 2 (to skip to the next available position for negative integers).</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result Array</strong>: After iterating through all the elements, return the rearranged array <code>ans</code>.</p>
+</li>
+</ol>
+<p>This approach ensures that positive and negative integers are alternated while preserving their relative order. The two-pointer technique allows for a single pass through the input array, making the solution efficient in terms of both time and space.</p>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<p>The following is a detailed explanation of how the code works step-by-step:</p>
+<ol>
+<li>
+<p><strong>Initialize the Result Array</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> ans(nums.size(), <span style="color:#666">0</span>);
+</span></span></code></pre></div><p>Here, we create an array <code>ans</code> with the same size as <code>nums</code> and initialize all elements to 0. This array will store the final rearranged elements.</p>
+</li>
+<li>
+<p><strong>Set Initial Indices for Positive and Negative Numbers</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> idxpos <span style="color:#666">=</span> <span style="color:#666">0</span>, idxneg <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span></code></pre></div><p>We initialize two indices: <code>idxpos</code> starts at 0 (the first position for positive numbers), and <code>idxneg</code> starts at 1 (the first position for negative numbers).</p>
+</li>
+<li>
+<p><strong>Iterate Through the Input Array</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">num</span>: nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(num <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>        ans[idxpos] <span style="color:#666">=</span> num;
+</span></span><span style="display:flex;"><span>        idxpos <span style="color:#666">+=</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(num <span style="color:#666">&lt;</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>        ans[idxneg] <span style="color:#666">=</span> num;
+</span></span><span style="display:flex;"><span>        idxneg <span style="color:#666">+=</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This loop iterates through each number in the input array <code>nums</code>. For each number:</p>
+<ul>
+<li>If the number is positive (<code>num &gt; 0</code>), it is placed in the <code>ans</code> array at the <code>idxpos</code> position. Then, <code>idxpos</code> is incremented by 2 to move to the next available position for positive numbers.</li>
+<li>If the number is negative (<code>num &lt; 0</code>), it is placed in the <code>ans</code> array at the <code>idxneg</code> position. Then, <code>idxneg</code> is incremented by 2 to move to the next available position for negative numbers.</li>
+</ul>
+<p>The condition <code>num &lt; 0</code> and <code>num &gt; 0</code> ensures that we only place positive and negative integers in their respective slots.</p>
+</li>
+<li>
+<p><strong>Return the Result Array</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div><p>Finally, after processing all the numbers in the input array, the <code>ans</code> array is returned, which now contains the positive and negative numbers alternately arranged.</p>
+</li>
+</ol>
+<h3 id="complexity">Complexity</h3>
+<h4 id="time-complexity">Time Complexity:</h4>
+<p>The time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the length of the input array <code>nums</code>. This is because we iterate through the array only once to rearrange the elements, and the operations inside the loop (checking if a number is positive or negative and placing it in the result array) are constant time operations.</p>
+<h4 id="space-complexity">Space Complexity:</h4>
+<p>The space complexity is also <strong>O(n)</strong>, as we create a new array <code>ans</code> of the same size as the input array to store the rearranged elements. Additionally, no extra data structures or space beyond this are required.</p>
+<p>This solution is optimal in terms of both time and space for this problem.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>In conclusion, the provided solution is an efficient way to rearrange an array such that positive and negative integers alternate while maintaining their relative order. By using the two-pointer approach, we can solve the problem in linear time and space, making it well-suited for larger input sizes. This method guarantees that we adhere to the problem constraints while keeping the implementation simple and easy to understand. The code is both effective and efficient, making it a great choice for solving similar array rearrangement problems.</p>
+<p><a href="https://leetcode.com/problems/rearrange-array-elements-by-sign/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/SoPmcGzz9-E?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

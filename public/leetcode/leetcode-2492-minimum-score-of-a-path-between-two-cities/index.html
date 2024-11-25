@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 2492: Minimum Score of a Path Between Two Cities | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 2492: Minimum Score of a Path Between Two Cities">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 2492: Minimum Score of a Path Between Two Cities in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-2492-minimum-score-of-a-path-between-two-cities/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 2492: Minimum Score of a Path Between Two Cities">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 2492: Minimum Score of a Path Between Two Cities in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-03-02T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Depth-First Search">
+    <meta property="article:tag" content="Breadth-First Search">
+    <meta property="article:tag" content="Union Find">
+    <meta property="article:tag" content="Graph">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 2492: Minimum Score of a Path Between Two Cities</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode794s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">UF</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> par;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mn;    
+</span></span><span style="display:flex;"><span>    UF(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>        par.resize(n <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        mn.resize(n <span style="color:#666">+</span> <span style="color:#666">1</span>);        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            par[i] <span style="color:#666">=</span> i;
+</span></span><span style="display:flex;"><span>            mn[i] <span style="color:#666">=</span> INT_MAX;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">uni</span>(<span style="color:#0b0;font-weight:bold">int</span> x, <span style="color:#0b0;font-weight:bold">int</span> y, <span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> p <span style="color:#666">=</span> find(x);
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> q <span style="color:#666">=</span> find(y);
+</span></span><span style="display:flex;"><span>        mn[p] <span style="color:#666">=</span> min({mn[p], mn[q], n});
+</span></span><span style="display:flex;"><span>        mn[q] <span style="color:#666">=</span> mn[p];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(p <span style="color:#666">==</span> q) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>        par[p] <span style="color:#666">=</span> q;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">find</span>(<span style="color:#0b0;font-weight:bold">int</span> x) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(par[x] <span style="color:#666">==</span> x) <span style="color:#a2f;font-weight:bold">return</span> x;
+</span></span><span style="display:flex;"><span>        mn[x] <span style="color:#666">=</span> mn[find(par[x])];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> par[x] <span style="color:#666">=</span> find(par[x]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">mini</span>(<span style="color:#0b0;font-weight:bold">int</span> x) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> mn[x];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">check</span>(<span style="color:#0b0;font-weight:bold">int</span> x, <span style="color:#0b0;font-weight:bold">int</span> y) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> find(x) <span style="color:#666">==</span> find(y);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> minScore(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> roads) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;</span> grid(n <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: roads) {
+</span></span><span style="display:flex;"><span>            grid[it[<span style="color:#666">0</span>]].push_back({it[<span style="color:#666">1</span>], it[<span style="color:#666">2</span>]});
+</span></span><span style="display:flex;"><span>            grid[it[<span style="color:#666">1</span>]].push_back({it[<span style="color:#666">0</span>], it[<span style="color:#666">2</span>]});
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> vis(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#a2f">false</span>); 
+</span></span><span style="display:flex;"><span>        queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q;
+</span></span><span style="display:flex;"><span>        q.push(<span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        vis[<span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mn <span style="color:#666">=</span> INT_MAX;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> q.front();
+</span></span><span style="display:flex;"><span>                q.pop();
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">x</span>: grid[it]) {
+</span></span><span style="display:flex;"><span>                        mn <span style="color:#666">=</span> min(mn, x[<span style="color:#666">1</span>]);                    
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>vis[x[<span style="color:#666">0</span>]]) {
+</span></span><span style="display:flex;"><span>                        q.push(x[<span style="color:#666">0</span>]);
+</span></span><span style="display:flex;"><span>                        vis[x[<span style="color:#666">0</span>]] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> mn;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem asks us to find the minimum score of a path between two nodes in a graph. The graph is represented by <code>n</code> nodes and a list of roads connecting pairs of nodes. Each road is characterized by its two endpoints and a score. The goal is to calculate the minimum score between node 1 and node <code>n</code>, considering all possible paths between these nodes.</p>
+<h3 id="approach">Approach</h3>
+<p>To solve this problem, we need to find the minimum score along the path from node <code>1</code> to node <code>n</code> across all possible roads. Since the problem involves a graph with weighted edges, we can use a <strong>Breadth-First Search (BFS)</strong> approach to explore the graph starting from node <code>1</code>. As we traverse through the graph, we need to track the minimum score of any edge we encounter.</p>
+<p>The key insight here is that:</p>
+<ol>
+<li>We need to explore the graph from node <code>1</code> and determine the smallest score among all roads that are part of any connected path to node <code>n</code>.</li>
+<li>Since we need to calculate the minimum score between all paths, we should start from node <code>1</code> and traverse to all reachable nodes while tracking the minimum score of the roads.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<h4 id="1-union-find-data-structure-uf">1. <strong>Union-Find Data Structure (UF)</strong></h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">UF</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> par;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> mn;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    UF(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>        par.resize(n <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        mn.resize(n <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">1</span>; i <span style="color:#666">&lt;</span> n <span style="color:#666">+</span> <span style="color:#666">1</span>; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            par[i] <span style="color:#666">=</span> i;
+</span></span><span style="display:flex;"><span>            mn[i] <span style="color:#666">=</span> INT_MAX;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">uni</span>(<span style="color:#0b0;font-weight:bold">int</span> x, <span style="color:#0b0;font-weight:bold">int</span> y, <span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> p <span style="color:#666">=</span> find(x);
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> q <span style="color:#666">=</span> find(y);
+</span></span><span style="display:flex;"><span>        mn[p] <span style="color:#666">=</span> min({mn[p], mn[q], n});
+</span></span><span style="display:flex;"><span>        mn[q] <span style="color:#666">=</span> mn[p];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(p <span style="color:#666">==</span> q) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>        par[p] <span style="color:#666">=</span> q;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">find</span>(<span style="color:#0b0;font-weight:bold">int</span> x) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(par[x] <span style="color:#666">==</span> x) <span style="color:#a2f;font-weight:bold">return</span> x;
+</span></span><span style="display:flex;"><span>        mn[x] <span style="color:#666">=</span> mn[find(par[x])];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> par[x] <span style="color:#666">=</span> find(par[x]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">mini</span>(<span style="color:#0b0;font-weight:bold">int</span> x) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> mn[x];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">check</span>(<span style="color:#0b0;font-weight:bold">int</span> x, <span style="color:#0b0;font-weight:bold">int</span> y) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> find(x) <span style="color:#666">==</span> find(y);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>The <code>UF</code> (Union-Find) class is designed to manage the union and find operations efficiently. It helps to determine if two nodes belong to the same connected component.</li>
+<li><code>par</code> is an array that keeps track of the parent of each node.</li>
+<li><code>mn</code> keeps track of the minimum score within a connected component, initialized to <code>INT_MAX</code> to represent an initially unbounded score.</li>
+<li>The <code>find()</code> function is responsible for finding the representative (or parent) of a node while performing path compression to optimize future queries.</li>
+<li>The <code>uni()</code> function performs the union of two nodes, merging their components and updating the minimum score between them.</li>
+<li>The <code>mini()</code> function returns the minimum score in the connected component of a given node.</li>
+<li>The <code>check()</code> function determines whether two nodes are in the same connected component.</li>
+</ul>
+<h4 id="2-graph-representation-and-bfs">2. <strong>Graph Representation and BFS</strong></h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> minScore(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> roads) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&gt;</span> grid(n <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">it</span>: roads) {
+</span></span><span style="display:flex;"><span>            grid[it[<span style="color:#666">0</span>]].push_back({it[<span style="color:#666">1</span>], it[<span style="color:#666">2</span>]});
+</span></span><span style="display:flex;"><span>            grid[it[<span style="color:#666">1</span>]].push_back({it[<span style="color:#666">0</span>], it[<span style="color:#666">2</span>]});
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li>First, we represent the graph using an adjacency list <code>grid</code>. Each node is connected to other nodes via roads, and each road has a score.</li>
+<li>The input <code>roads</code> consists of pairs of nodes with the score between them. The list is used to fill the adjacency list representation of the graph where each element <code>grid[i]</code> contains a list of pairs <code>[node, score]</code>, representing an edge from node <code>i</code> to another node with the corresponding score.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> vis(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#a2f">false</span>); 
+</span></span><span style="display:flex;"><span>        queue<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> q;
+</span></span><span style="display:flex;"><span>        q.push(<span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        vis[<span style="color:#666">1</span>] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mn <span style="color:#666">=</span> INT_MAX;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> q.front();
+</span></span><span style="display:flex;"><span>                q.pop();
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">x</span>: grid[it]) {
+</span></span><span style="display:flex;"><span>                        mn <span style="color:#666">=</span> min(mn, x[<span style="color:#666">1</span>]);                    
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>vis[x[<span style="color:#666">0</span>]]) {
+</span></span><span style="display:flex;"><span>                        q.push(x[<span style="color:#666">0</span>]);
+</span></span><span style="display:flex;"><span>                        vis[x[<span style="color:#666">0</span>]] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> mn;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>We initialize a <code>visited</code> array <code>vis</code> to track which nodes have been visited. We also initialize a queue <code>q</code> for BFS traversal, starting from node <code>1</code>.</li>
+<li>We perform BFS, exploring the graph from node <code>1</code>. For each node <code>it</code> that is dequeued:
+<ul>
+<li>We check all its neighboring nodes, and for each neighbor <code>x</code>, we update the minimum score <code>mn</code> encountered so far with the road score <code>x[1]</code>.</li>
+<li>If the neighboring node <code>x[0]</code> hasn&rsquo;t been visited yet, we enqueue it for further exploration and mark it as visited.</li>
+</ul>
+</li>
+<li>The BFS continues until all reachable nodes from node <code>1</code> have been visited, and we keep track of the minimum score encountered during the process.</li>
+<li>Once BFS completes, we return the minimum score encountered along any of the paths from node <code>1</code> to node <code>n</code>.</li>
+</ul>
+<h3 id="complexity-analysis">Complexity Analysis</h3>
+<h4 id="time-complexity">Time Complexity:</h4>
+<ul>
+<li><strong>Building the adjacency list</strong>: Constructing the graph takes <strong>O(E)</strong> time, where <code>E</code> is the number of edges (roads).</li>
+<li><strong>BFS Traversal</strong>: The BFS process explores each node and edge at most once, resulting in <strong>O(V + E)</strong> time complexity, where <code>V</code> is the number of nodes and <code>E</code> is the number of edges.</li>
+<li>Therefore, the overall time complexity is <strong>O(V + E)</strong>, which is efficient for graph traversal problems.</li>
+</ul>
+<h4 id="space-complexity">Space Complexity:</h4>
+<ul>
+<li><strong>Adjacency List</strong>: The adjacency list requires <strong>O(E)</strong> space to store all the edges.</li>
+<li><strong>Visited Array</strong>: The <code>visited</code> array requires <strong>O(V)</strong> space.</li>
+<li><strong>Queue</strong>: The queue used for BFS requires <strong>O(V)</strong> space in the worst case.</li>
+<li>Thus, the overall space complexity is <strong>O(V + E)</strong>.</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>The solution leverages <strong>Breadth-First Search (BFS)</strong> to explore the graph starting from node <code>1</code> and determine the minimum score among all paths to other nodes. This is achieved by maintaining a running minimum score as the BFS explores the roads. The approach ensures that we efficiently find the minimum score along the path between node <code>1</code> and any other reachable node.</p>
+<p>The time complexity of <strong>O(V + E)</strong> makes the solution scalable for large graphs, and the space complexity of <strong>O(V + E)</strong> ensures the approach uses an optimal amount of memory for graph traversal.</p>
+<p><a href="https://leetcode.com/problems/minimum-score-of-a-path-between-two-cities/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/7epgOP3ezWM?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

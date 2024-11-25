@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 2471: Minimum Number of Operations to Sort a Binary Tree by Level | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 2471: Minimum Number of Operations to Sort a Binary Tree by Level">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 2471: Minimum Number of Operations to Sort a Binary Tree by Level in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-2471-minimum-number-of-operations-to-sort-a-binary-tree-by-level/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 2471: Minimum Number of Operations to Sort a Binary Tree by Level">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 2471: Minimum Number of Operations to Sort a Binary Tree by Level in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-03-04T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Tree">
+    <meta property="article:tag" content="Breadth-First Search">
+    <meta property="article:tag" content="Binary Tree">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 2471: Minimum Number of Operations to Sort a Binary Tree by Level</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode782s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Definition for a binary tree node.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * struct TreeNode {
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     int val;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode *left;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode *right;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * };
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> minimumOperations(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        queue<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> q;
+</span></span><span style="display:flex;"><span>        q.push(root);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
+</span></span><span style="display:flex;"><span>            vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> arr, idx(sz);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(sz<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> q.front();
+</span></span><span style="display:flex;"><span>                q.pop();
+</span></span><span style="display:flex;"><span>                arr.push_back(it<span style="color:#666">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(it<span style="color:#666">-&gt;</span>left <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) q.push(it<span style="color:#666">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(it<span style="color:#666">-&gt;</span>right<span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) q.push(it<span style="color:#666">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">// cout &lt;&lt; sz &lt;&lt; &#34; &#34;;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            iota(idx.begin(), idx.end(), <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>            sort(idx.begin(), idx.end(), [<span style="color:#666">&amp;</span>](<span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) { <span style="color:#a2f;font-weight:bold">return</span> arr[i] <span style="color:#666">&lt;</span> arr[j]; });
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> idx.size(); i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">for</span>(; idx[i] <span style="color:#666">!=</span> i; cnt<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>                    swap(idx[i], idx[idx[i]]);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> cnt;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement:</h3>
+<p>The problem requires us to find the minimum number of operations needed to sort the values of each level of a binary tree, where at each level, the nodes can be rearranged. In other words, the values of the nodes at each level should be sorted in ascending order using the minimum number of swap operations. Each node’s position can only be changed by swapping the nodes themselves (not the values). The goal is to return the number of operations (swaps) needed to sort the values at each level of the binary tree.</p>
+<h3 id="approach">Approach:</h3>
+<p>To solve this problem, we need to traverse the tree level by level and count how many swap operations are required to sort the node values at each level.</p>
+<h4 id="step-by-step-approach">Step-by-Step Approach:</h4>
+<ol>
+<li>
+<p><strong>Breadth-First Search (BFS) Traversal</strong>: We will perform a BFS traversal to visit each level of the binary tree. BFS is ideal because it processes nodes level by level, which is exactly what we need to sort the nodes at each level.</p>
+</li>
+<li>
+<p><strong>Sorting Each Level</strong>: For each level, we need to extract the node values, and we will then determine how to sort these values using the minimum number of swaps.</p>
+</li>
+<li>
+<p><strong>Counting Swaps</strong>: The key challenge is counting the minimum number of swaps required to sort the values at each level. The number of swaps can be efficiently calculated by determining the number of cycles in the permutation of values. This can be done using the following steps:</p>
+<ul>
+<li>Map the values of the nodes to their sorted order.</li>
+<li>Use a cycle detection approach to count how many swaps are needed to sort the values.</li>
+</ul>
+</li>
+<li>
+<p><strong>Total Swap Count</strong>: We accumulate the swap count for each level and return the total number of swaps.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step):</h3>
+<p>Let’s break down the code to understand its workings in detail:</p>
+<ol>
+<li>
+<p><strong>TreeNode Definition</strong>:
+The problem provides the definition of a binary tree node:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">struct</span> <span style="color:#00f">TreeNode</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> val;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#666">*</span>left;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#666">*</span>right;
+</span></span><span style="display:flex;"><span>    TreeNode() <span style="color:#666">:</span> val(<span style="color:#666">0</span>), left(<span style="color:#a2f;font-weight:bold">nullptr</span>), right(<span style="color:#a2f;font-weight:bold">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#0b0;font-weight:bold">int</span> x) <span style="color:#666">:</span> val(x), left(<span style="color:#a2f;font-weight:bold">nullptr</span>), right(<span style="color:#a2f;font-weight:bold">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#0b0;font-weight:bold">int</span> x, TreeNode <span style="color:#666">*</span>left, TreeNode <span style="color:#666">*</span>right) <span style="color:#666">:</span> val(x), left(left), right(right) {}
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li><code>TreeNode</code> has three properties: <code>val</code> (the value of the node), <code>left</code> (pointer to the left child), and <code>right</code> (pointer to the right child).</li>
+<li>There are three constructors provided for initializing the node, either with a default value or with specific values for <code>val</code>, <code>left</code>, and <code>right</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Minimum Operations Function</strong>:
+The function <code>minimumOperations</code> starts with the root of the tree and calculates the minimum number of swaps needed to sort the nodes at each level of the tree.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">minimumOperations</span>(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    queue<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*&gt;</span> q;
+</span></span><span style="display:flex;"><span>    q.push(root);
+</span></span></code></pre></div><ul>
+<li>The function takes in the root of the binary tree.</li>
+<li><code>cnt</code> is initialized to 0. This variable will store the total number of swaps needed.</li>
+<li>A queue <code>q</code> is used to facilitate BFS traversal of the tree. The root node is added to the queue.</li>
+</ul>
+</li>
+<li>
+<p><strong>Level-wise Traversal</strong>:
+The function proceeds with BFS by processing one level at a time.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">while</span> (<span style="color:#666">!</span>q.empty()) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sz <span style="color:#666">=</span> q.size();
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> arr, idx(sz);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span> (sz<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> q.front();
+</span></span><span style="display:flex;"><span>        q.pop();
+</span></span><span style="display:flex;"><span>        arr.push_back(it<span style="color:#666">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (it<span style="color:#666">-&gt;</span>left <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) q.push(it<span style="color:#666">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (it<span style="color:#666">-&gt;</span>right <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span>) q.push(it<span style="color:#666">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The while loop runs as long as there are nodes in the queue. Each iteration processes one level of the tree.</li>
+<li><code>sz</code> stores the number of nodes at the current level.</li>
+<li>Two vectors are initialized: <code>arr</code> (to store the values of the nodes at the current level) and <code>idx</code> (to store the indices of these nodes).</li>
+<li>For each node at the current level, we pop the node from the queue, add its value to <code>arr</code>, and enqueue its left and right children (if they exist).</li>
+</ul>
+</li>
+<li>
+<p><strong>Sorting and Swap Calculation</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>iota(idx.begin(), idx.end(), <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>sort(idx.begin(), idx.end(), [<span style="color:#666">&amp;</span>](<span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) { <span style="color:#a2f;font-weight:bold">return</span> arr[i] <span style="color:#666">&lt;</span> arr[j]; });
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> idx.size(); i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (; idx[i] <span style="color:#666">!=</span> i; cnt<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        swap(idx[i], idx[idx[i]]);
+</span></span></code></pre></div><ul>
+<li><code>iota(idx.begin(), idx.end(), 0)</code> initializes the <code>idx</code> vector with the indices of the <code>arr</code> vector (i.e., <code>[0, 1, 2, ..., sz-1]</code>).</li>
+<li>We sort the <code>idx</code> vector based on the corresponding values in <code>arr</code> so that the indices of <code>arr</code> are sorted in increasing order of values.</li>
+<li>The outer loop iterates through the <code>idx</code> array, and the inner loop counts the number of swaps needed to place each element in its correct position. The number of swaps needed to sort the values is equivalent to finding the number of cycles in the index mapping, and for each cycle, we perform <code>size - 1</code> swaps.</li>
+<li>The swaps are counted in the variable <code>cnt</code>, and we use the <code>swap</code> function to adjust the indices.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> cnt;
+</span></span></code></pre></div><p>After processing all levels of the tree, the function returns the total number of swaps required.</p>
+</li>
+</ol>
+<h3 id="complexity">Complexity:</h3>
+<p>Let’s analyze the time and space complexity of the solution:</p>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><strong>BFS Traversal</strong>: The BFS traversal visits each node once, so the time complexity for traversing the tree is ( O(n) ), where ( n ) is the number of nodes in the tree.</li>
+<li><strong>Sorting and Swapping</strong>: For each level, we sort the array <code>arr</code> and perform the swap count calculation. Sorting takes ( O(m \log m) ), where ( m ) is the number of nodes at the current level. In the worst case, each level contains at most ( n ) nodes. So, sorting and counting swaps across all levels will take ( O(n \log n) ) time in the worst case.</li>
+</ul>
+<p>Thus, the overall time complexity is ( O(n \log n) ), where ( n ) is the number of nodes in the tree.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is ( O(n) ) due to the storage of the queue for BFS traversal and the arrays used to store the node values and indices at each level.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">Conclusion:</h3>
+<p>This solution efficiently solves the problem of counting the minimum number of swaps required to sort the values at each level of the binary tree. By performing a BFS traversal and sorting the values at each level, we are able to compute the number of swaps using a cycle detection approach. The algorithm runs in ( O(n \log n) ) time and uses ( O(n) ) space, making it suitable for large binary trees with many nodes.</p>
+<p><a href="https://leetcode.com/problems/minimum-number-of-operations-to-sort-a-binary-tree-by-level/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/yi_h_UMHD7s?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 1653: Minimum Deletions to Make String Balanced | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 1653: Minimum Deletions to Make String Balanced">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1653: Minimum Deletions to Make String Balanced in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-1653-minimum-deletions-to-make-string-balanced/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 1653: Minimum Deletions to Make String Balanced">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1653: Minimum Deletions to Make String Balanced in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-05-25T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="String">
+    <meta property="article:tag" content="Dynamic Programming">
+    <meta property="article:tag" content="Stack">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 1653: Minimum Deletions to Make String Balanced</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode314s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> minimumDeletions(string s) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s.size(), bcnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">char</span> a <span style="color:#666">=</span> s[i];
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(a <span style="color:#666">==</span> <span style="color:#b44">&#39;a&#39;</span>) {                
+</span></span><span style="display:flex;"><span>                dp[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> min(dp[i] <span style="color:#666">+</span> <span style="color:#666">1</span>, bcnt);
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                bcnt<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>                dp[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> dp[i];
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> dp[n];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem involves determining the minimum number of deletions required to ensure that all characters in a given string <code>s</code> are of the same type, specifically the character &lsquo;a&rsquo;. In the string, each character is either &lsquo;a&rsquo; or &lsquo;b&rsquo;. The goal is to compute the minimum deletions necessary to convert the string into one consisting entirely of &lsquo;a&rsquo;s.</p>
+<h3 id="approach">Approach</h3>
+<p>To solve this problem, we can utilize a dynamic programming approach. The idea is to maintain a dynamic programming array <code>dp</code>, where <code>dp[i]</code> represents the minimum number of deletions required to make the substring <code>s[0:i]</code> consist only of &lsquo;a&rsquo;s. Additionally, we track the count of &lsquo;b&rsquo;s encountered so far with a variable <code>bcnt</code>.</p>
+<p>The main steps of the approach are as follows:</p>
+<ol>
+<li>
+<p><strong>Initialize Variables</strong>:</p>
+<ul>
+<li><code>n</code> to store the length of the string.</li>
+<li><code>bcnt</code> to keep track of the number of &lsquo;b&rsquo;s encountered so far.</li>
+<li>A dynamic programming array <code>dp</code> initialized with zeros to store intermediate results.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterate Through the String</strong>:</p>
+<ul>
+<li>For each character in the string, update the <code>dp</code> array based on whether the character is &lsquo;a&rsquo; or &lsquo;b&rsquo;:
+<ul>
+<li>If the character is &lsquo;a&rsquo;, it can either be counted as a deletion (incrementing <code>dp[i]</code>) or we can keep the current count of &lsquo;b&rsquo;s.</li>
+<li>If the character is &lsquo;b&rsquo;, we increment the <code>bcnt</code> and carry forward the previous deletion count.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>The value at <code>dp[n]</code> will provide the minimum number of deletions needed to convert the entire string into &lsquo;a&rsquo;s.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<p>Let&rsquo;s break down the provided code:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> minimumDeletions(string s) {
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> and a public method <code>minimumDeletions</code> that takes a string <code>s</code> as input.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s.size(), bcnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp(n <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">0</span>);
+</span></span></code></pre></div><ul>
+<li>We compute the length of the string <code>s</code> and initialize <code>bcnt</code> to zero. The dynamic programming array <code>dp</code> is created with a size of <code>n + 1</code>, initialized to zeros.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">char</span> a <span style="color:#666">=</span> s[i];
+</span></span></code></pre></div><ul>
+<li>We start a loop to iterate over each character of the string <code>s</code>. The variable <code>a</code> holds the current character.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(a <span style="color:#666">==</span> <span style="color:#b44">&#39;a&#39;</span>) {                
+</span></span><span style="display:flex;"><span>                dp[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> min(dp[i] <span style="color:#666">+</span> <span style="color:#666">1</span>, bcnt);
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                bcnt<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>                dp[i <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">=</span> dp[i];
+</span></span><span style="display:flex;"><span>            }
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Condition for &lsquo;a&rsquo;</strong>: If the current character <code>a</code> is &lsquo;a&rsquo;, we update <code>dp[i + 1]</code> to the minimum of either:</p>
+<ul>
+<li><code>dp[i] + 1</code>: Incrementing the deletion count by 1 (deleting the current &lsquo;a&rsquo;).</li>
+<li><code>bcnt</code>: The count of &lsquo;b&rsquo;s encountered so far, representing the deletions required to remove all &lsquo;b&rsquo;s before this point.</li>
+</ul>
+</li>
+<li>
+<p><strong>Condition for &lsquo;b&rsquo;</strong>: If <code>a</code> is &lsquo;b&rsquo;, we increment <code>bcnt</code> and set <code>dp[i + 1]</code> to <code>dp[i]</code>, effectively carrying forward the previous deletion count without adding any new deletions.</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> dp[n];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>After iterating through the string, we return <code>dp[n]</code>, which holds the minimum deletions required to make the entire string consist of &lsquo;a&rsquo;s.</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The algorithm runs in ( O(n) ), where ( n ) is the length of the input string <code>s</code>. This is due to the single loop that iterates through the string once.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is ( O(n) ) because we use a dynamic programming array of size ( n + 1 ) to store intermediate results.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>The <code>minimumDeletions</code> method provides an efficient way to determine the minimum number of deletions needed to transform a string composed of &lsquo;a&rsquo;s and &lsquo;b&rsquo;s into a string of only &lsquo;a&rsquo;s. By using dynamic programming, the solution effectively tracks the count of &lsquo;b&rsquo;s and evaluates the necessary deletions in a single pass through the string.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ol>
+<li><strong>Dynamic Programming</strong>: This solution demonstrates the use of dynamic programming to solve optimization problems by breaking them down into subproblems and reusing results.</li>
+<li><strong>Efficiency</strong>: With a linear time complexity, this algorithm is efficient for long strings, making it suitable for competitive programming and other applications.</li>
+<li><strong>Space Utilization</strong>: The use of a single array to track the minimum deletions reduces the need for complex data structures, making the implementation straightforward.</li>
+</ol>
+<p>This approach can be extended to similar problems involving character transformations and constraints, showcasing the versatility of dynamic programming in solving string manipulation tasks.</p>
+<p><a href="https://leetcode.com/problems/minimum-deletions-to-make-string-balanced/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/WDStNufBUQ8?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

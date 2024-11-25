@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 1405: Longest Happy String | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 1405: Longest Happy String">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1405: Longest Happy String in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-1405-longest-happy-string/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 1405: Longest Happy String">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1405: Longest Happy String in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-06-19T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="String">
+    <meta property="article:tag" content="Greedy">
+    <meta property="article:tag" content="Heap (Priority Queue)">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 1405: Longest Happy String</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode198s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    string longestDiverseString(<span style="color:#0b0;font-weight:bold">int</span> a, <span style="color:#0b0;font-weight:bold">int</span> b, <span style="color:#0b0;font-weight:bold">int</span> c) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        priority_queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span>, less<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&gt;</span> pq;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(a <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)
+</span></span><span style="display:flex;"><span>        pq.push({a, <span style="color:#b44">&#39;a&#39;</span>});
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(b <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)
+</span></span><span style="display:flex;"><span>        pq.push({b, <span style="color:#b44">&#39;b&#39;</span>});
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(c <span style="color:#666">&gt;</span> <span style="color:#666">0</span>)
+</span></span><span style="display:flex;"><span>        pq.push({c, <span style="color:#b44">&#39;c&#39;</span>});
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> pq.top();
+</span></span><span style="display:flex;"><span>            pq.pop();
+</span></span><span style="display:flex;"><span>            res <span style="color:#666">+=</span> string(min(<span style="color:#666">2</span>, it.first), it.second);
+</span></span><span style="display:flex;"><span>            it.first <span style="color:#666">-=</span> min(<span style="color:#666">2</span>, it.first);
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(pq.empty()) <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> it2 <span style="color:#666">=</span> pq.top();
+</span></span><span style="display:flex;"><span>            pq.pop();
+</span></span><span style="display:flex;"><span>            res <span style="color:#666">+=</span> string(min(it.first <span style="color:#666">&gt;</span> it2.first<span style="color:#666">?</span> <span style="color:#666">1</span><span style="color:#666">:</span> <span style="color:#666">2</span>, it2.first), it2.second);
+</span></span><span style="display:flex;"><span>            it2.first <span style="color:#666">-=</span> min(it.first <span style="color:#666">&gt;</span> it2.first<span style="color:#666">?</span> <span style="color:#666">1</span><span style="color:#666">:</span> <span style="color:#666">2</span>, it2.first);
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(it.first <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) pq.push(it);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(it2.first <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) pq.push(it2);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The goal of this problem is to generate the longest possible string using three types of characters (&lsquo;a&rsquo;, &lsquo;b&rsquo;, and &lsquo;c&rsquo;) while adhering to the following constraints:</p>
+<ul>
+<li>No character can appear more than two consecutive times.</li>
+<li>You are given the counts of each character as inputs, specifically <code>a</code> for &lsquo;a&rsquo;, <code>b</code> for &lsquo;b&rsquo;, and <code>c</code> for &lsquo;c&rsquo;.</li>
+</ul>
+<p>For instance, if <code>a = 1</code>, <code>b = 1</code>, and <code>c = 7</code>, a possible valid output could be &ldquo;ccbccacc&rdquo; or any other combination that respects the constraints.</p>
+<h3 id="approach">Approach</h3>
+<p>To tackle this problem, we employ a greedy strategy using a max heap (priority queue). The steps involved in constructing the longest diverse string are as follows:</p>
+<ol>
+<li>
+<p><strong>Initialization of the Max Heap</strong>: We first push the counts of the characters into a priority queue. This allows us to always retrieve the character with the highest remaining count.</p>
+</li>
+<li>
+<p><strong>Building the Result String</strong>:</p>
+<ul>
+<li>In each iteration, we take the character with the highest count and add it to our result string, ensuring that we do not add it more than twice consecutively.</li>
+<li>If the heap is not empty after processing the first character, we take the next character and add it as well, while again adhering to the two-consecutive character rule.</li>
+</ul>
+</li>
+<li>
+<p><strong>Updating Counts</strong>: After using a character, we decrement its count and push it back into the heap if it still has a remaining count.</p>
+</li>
+<li>
+<p><strong>Termination</strong>: The process continues until we have exhausted all characters or cannot add any more without violating the constraints.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<p>Here’s a line-by-line breakdown of the provided C++ code implementing the above logic:</p>
+<ol>
+<li>
+<p><strong>Class Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span></code></pre></div><ul>
+<li>A class named <code>Solution</code> is defined to contain the method <code>longestDiverseString</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Method Signature</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string <span style="color:#00a000">longestDiverseString</span>(<span style="color:#0b0;font-weight:bold">int</span> a, <span style="color:#0b0;font-weight:bold">int</span> b, <span style="color:#0b0;font-weight:bold">int</span> c) {
+</span></span></code></pre></div><ul>
+<li>The method <code>longestDiverseString</code> takes three integers (<code>a</code>, <code>b</code>, and <code>c</code>) as parameters, which represent the counts of characters &lsquo;a&rsquo;, &lsquo;b&rsquo;, and &lsquo;c&rsquo;, respectively.</li>
+</ul>
+</li>
+<li>
+<p><strong>Priority Queue Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        priority_queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;</span>, vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span>, less<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&gt;</span> pq;
+</span></span></code></pre></div><ul>
+<li>We initialize a max heap <code>pq</code> to store pairs of character counts and characters. The heap will always allow us to retrieve the character with the highest remaining count.</li>
+</ul>
+</li>
+<li>
+<p><strong>Filling the Heap</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(a <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) pq.push({a, <span style="color:#b44">&#39;a&#39;</span>});
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(b <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) pq.push({b, <span style="color:#b44">&#39;b&#39;</span>});
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(c <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) pq.push({c, <span style="color:#b44">&#39;c&#39;</span>});
+</span></span></code></pre></div><ul>
+<li>We push each character with a count greater than zero into the priority queue.</li>
+</ul>
+</li>
+<li>
+<p><strong>Result String Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        string res <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span></code></pre></div><ul>
+<li>A string <code>res</code> is initialized to build the final result.</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Loop</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty()) {
+</span></span></code></pre></div><ul>
+<li>The loop continues as long as there are characters available in the heap.</li>
+</ul>
+</li>
+<li>
+<p><strong>Processing the Most Frequent Character</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> pq.top();
+</span></span><span style="display:flex;"><span>            pq.pop();
+</span></span><span style="display:flex;"><span>            res <span style="color:#666">+=</span> string(min(<span style="color:#666">2</span>, it.first), it.second);
+</span></span><span style="display:flex;"><span>            it.first <span style="color:#666">-=</span> min(<span style="color:#666">2</span>, it.first);
+</span></span></code></pre></div><ul>
+<li>We retrieve the character with the highest count, remove it from the heap, and append it to <code>res</code> up to two times. The count is then decremented by the number of characters added.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling the Second Character</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(pq.empty()) <span style="color:#a2f;font-weight:bold">break</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> it2 <span style="color:#666">=</span> pq.top();
+</span></span><span style="display:flex;"><span>            pq.pop();
+</span></span><span style="display:flex;"><span>            res <span style="color:#666">+=</span> string(min(it.first <span style="color:#666">&gt;</span> it2.first<span style="color:#666">?</span> <span style="color:#666">1</span><span style="color:#666">:</span> <span style="color:#666">2</span>, it2.first), it2.second);
+</span></span><span style="display:flex;"><span>            it2.first <span style="color:#666">-=</span> min(it.first <span style="color:#666">&gt;</span> it2.first<span style="color:#666">?</span> <span style="color:#666">1</span><span style="color:#666">:</span> <span style="color:#666">2</span>, it2.first);
+</span></span></code></pre></div><ul>
+<li>If the heap is not empty, we then retrieve the next most frequent character and add it to the result. The number of times it is added is determined based on the remaining count of the first character. If the first character&rsquo;s count is greater than the second, we add only one occurrence of the second character.</li>
+</ul>
+</li>
+<li>
+<p><strong>Re-adding Characters to the Heap</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(it.first <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) pq.push(it);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(it2.first <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) pq.push(it2);
+</span></span></code></pre></div><ul>
+<li>After processing, we check if the remaining counts of the characters are greater than zero and push them back into the heap for further processing.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return Statement</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>       <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>   }
+</span></span></code></pre></div></li>
+</ol>
+<p>};</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-mysql" data-lang="mysql"><span style="display:flex;"><span><span style="color:#bbb"> </span><span style="color:#666">-</span><span style="color:#bbb"> </span>Finally,<span style="color:#bbb"> </span>the<span style="color:#bbb"> </span>constructed<span style="color:#bbb"> </span>string<span style="color:#bbb"> </span><span style="color:#666">`</span>res<span style="color:#666">`</span><span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">is</span><span style="color:#bbb"> </span>returned<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">as</span><span style="color:#bbb"> </span>the<span style="color:#bbb"> </span>output.<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-style:italic">### Complexity
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#666">-</span><span style="color:#bbb"> </span><span style="color:#666">**</span><span style="color:#0b0;font-weight:bold">Time</span><span style="color:#bbb"> </span>Complexity<span style="color:#666">**</span>:<span style="color:#bbb"> 
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#666">-</span><span style="color:#bbb"> </span>The<span style="color:#bbb"> </span><span style="color:#0b0;font-weight:bold">time</span><span style="color:#bbb"> </span>complexity<span style="color:#bbb"> </span>of<span style="color:#bbb"> </span>this<span style="color:#bbb"> </span>solution<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">is</span><span style="color:#bbb"> </span><span style="">\</span>(<span style="color:#bbb"> </span><span style="color:#00a000">O</span>(n<span style="color:#bbb"> </span><span style="">\</span>log<span style="color:#bbb"> </span><span style="color:#666">3</span>)<span style="color:#bbb"> </span><span style="">\</span>),<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">where</span><span style="color:#bbb"> </span><span style="">\</span>(<span style="color:#bbb"> </span>n<span style="color:#bbb"> </span><span style="">\</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">is</span><span style="color:#bbb"> </span>the<span style="color:#bbb"> </span>total<span style="color:#bbb"> </span>number<span style="color:#bbb"> </span>of<span style="color:#bbb"> </span>characters<span style="color:#bbb"> </span>added<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">to</span><span style="color:#bbb"> </span>the<span style="color:#bbb"> </span>result<span style="color:#bbb"> </span>string.<span style="color:#bbb"> </span>Since<span style="color:#bbb"> </span>we<span style="color:#bbb"> </span>are<span style="color:#bbb"> </span>pushing<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">and</span><span style="color:#bbb"> </span>popping<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>a<span style="color:#bbb"> </span>max<span style="color:#bbb"> </span>heap,<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">each</span><span style="color:#bbb"> </span>operation<span style="color:#bbb"> </span>takes<span style="color:#bbb"> </span>logarithmic<span style="color:#bbb"> </span><span style="color:#0b0;font-weight:bold">time</span>,<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">and</span><span style="color:#bbb"> </span>we<span style="color:#bbb"> </span>perform<span style="color:#bbb"> </span>a<span style="color:#bbb"> </span>limited<span style="color:#bbb"> </span>number<span style="color:#bbb"> </span>of<span style="color:#bbb"> </span><span style="color:#00a000">operations</span><span style="color:#bbb"> </span>(due<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">to</span><span style="color:#bbb"> </span>the<span style="color:#bbb"> </span>three<span style="color:#bbb"> </span>characters).<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#666">-</span><span style="color:#bbb"> </span><span style="color:#666">**</span>Space<span style="color:#bbb"> </span>Complexity<span style="color:#666">**</span>:<span style="color:#bbb"> 
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#666">-</span><span style="color:#bbb"> </span>The<span style="color:#bbb"> </span>space<span style="color:#bbb"> </span>complexity<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">is</span><span style="color:#bbb"> </span><span style="">\</span>(<span style="color:#bbb"> </span><span style="color:#00a000">O</span>(<span style="color:#666">1</span>)<span style="color:#bbb"> </span><span style="">\</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">if</span><span style="color:#bbb"> </span>we<span style="color:#bbb"> </span>consider<span style="color:#bbb"> </span>the<span style="color:#bbb"> </span>size<span style="color:#bbb"> </span>of<span style="color:#bbb"> </span>the<span style="color:#bbb"> </span>heap<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">to</span><span style="color:#bbb"> </span>be<span style="color:#bbb"> </span><span style="color:#00a000">constant</span><span style="color:#bbb"> </span>(three<span style="color:#bbb"> </span>characters),<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">or</span><span style="color:#bbb"> </span><span style="">\</span>(<span style="color:#bbb"> </span><span style="color:#00a000">O</span>(n)<span style="color:#bbb"> </span><span style="">\</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">where</span><span style="color:#bbb"> </span><span style="">\</span>(<span style="color:#bbb"> </span>n<span style="color:#bbb"> </span><span style="">\</span>)<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">is</span><span style="color:#bbb"> </span>the<span style="color:#bbb"> </span>number<span style="color:#bbb"> </span>of<span style="color:#bbb"> </span>characters<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">if</span><span style="color:#bbb"> </span>we<span style="color:#bbb"> </span>consider<span style="color:#bbb"> </span>the<span style="color:#bbb"> </span>result<span style="color:#bbb"> </span>string.<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-style:italic">### Conclusion
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>The<span style="color:#bbb"> </span>solution<span style="color:#bbb"> </span>effectively<span style="color:#bbb"> </span>utilizes<span style="color:#bbb"> </span>a<span style="color:#bbb"> </span>greedy<span style="color:#bbb"> </span>approach<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">and</span><span style="color:#bbb"> </span>a<span style="color:#bbb"> </span>priority<span style="color:#bbb"> </span>queue<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">to</span><span style="color:#bbb"> </span>ensure<span style="color:#bbb"> </span>that<span style="color:#bbb"> </span>the<span style="color:#bbb"> </span>longest<span style="color:#bbb"> </span>diverse<span style="color:#bbb"> </span>string<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">is</span><span style="color:#bbb"> </span>generated<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">while</span><span style="color:#bbb"> </span>respecting<span style="color:#bbb"> </span>the<span style="color:#bbb"> </span>constraints<span style="color:#bbb"> </span>of<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">character</span><span style="color:#bbb"> </span>frequency.<span style="color:#bbb"> </span>This<span style="color:#bbb"> </span>algorithm<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">is</span><span style="color:#bbb"> </span>efficient<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">and</span><span style="color:#bbb"> </span>straightforward,<span style="color:#bbb"> </span>making<span style="color:#bbb"> </span>it<span style="color:#bbb"> </span>a<span style="color:#bbb"> </span>great<span style="color:#bbb"> </span>example<span style="color:#bbb"> </span>of<span style="color:#bbb"> </span>combining<span style="color:#bbb"> </span>data<span style="color:#bbb"> </span>structures<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">with</span><span style="color:#bbb"> </span>greedy<span style="color:#bbb"> </span>algorithms<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">to</span><span style="color:#bbb"> </span>solve<span style="color:#bbb"> </span>combinatorial<span style="color:#bbb"> </span>problems.<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#080;font-style:italic">#### Key Takeaways:
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#666">-</span><span style="color:#bbb"> </span><span style="color:#666">**</span>Greedy<span style="color:#bbb"> </span>Strategy<span style="color:#666">**</span>:<span style="color:#bbb"> </span>Utilizing<span style="color:#bbb"> </span>the<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">character</span><span style="color:#bbb"> </span>counts<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">to</span><span style="color:#bbb"> </span>decide<span style="color:#bbb"> </span>the<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">order</span><span style="color:#bbb"> </span>of<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">character</span><span style="color:#bbb"> </span>addition<span style="color:#bbb"> </span>ensures<span style="color:#bbb"> </span>that<span style="color:#bbb"> </span>the<span style="color:#bbb"> </span>solution<span style="color:#bbb"> </span>remains<span style="color:#bbb"> </span>optimal.<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#666">-</span><span style="color:#bbb"> </span><span style="color:#666">**</span>Data<span style="color:#bbb"> </span>Structures<span style="color:#666">**</span>:<span style="color:#bbb"> </span>The<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">use</span><span style="color:#bbb"> </span>of<span style="color:#bbb"> </span>a<span style="color:#bbb"> </span>priority<span style="color:#bbb"> </span>queue<span style="color:#bbb"> </span>simplifies<span style="color:#bbb"> </span>the<span style="color:#bbb"> </span>retrieval<span style="color:#bbb"> </span>of<span style="color:#bbb"> </span>the<span style="color:#bbb"> </span>most<span style="color:#bbb"> </span>frequent<span style="color:#bbb"> </span>characters<span style="color:#bbb"> </span>efficiently.<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#666">-</span><span style="color:#bbb"> </span><span style="color:#666">**</span><span style="color:#a2f;font-weight:bold">Character</span><span style="color:#bbb"> </span>Frequency<span style="color:#bbb"> </span>Management<span style="color:#666">**</span>:<span style="color:#bbb"> </span>The<span style="color:#bbb"> </span>code<span style="color:#bbb"> </span>handles<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">character</span><span style="color:#bbb"> </span>frequency<span style="color:#bbb"> </span>dynamically,<span style="color:#bbb"> </span>allowing<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">for</span><span style="color:#bbb"> </span>a<span style="color:#bbb"> </span>flexible<span style="color:#bbb"> </span>construction<span style="color:#bbb"> </span>of<span style="color:#bbb"> </span>the<span style="color:#bbb"> </span>output<span style="color:#bbb"> </span>string<span style="color:#bbb"> </span>based<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">on</span><span style="color:#bbb"> </span>remaining<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">character</span><span style="color:#bbb"> </span>counts.<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>Overall,<span style="color:#bbb"> </span>this<span style="color:#bbb"> </span>implementation<span style="color:#bbb"> </span>provides<span style="color:#bbb"> </span>an<span style="color:#bbb"> </span>elegant<span style="color:#bbb"> </span>solution<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">to</span><span style="color:#bbb"> </span>the<span style="color:#bbb"> </span>problem,<span style="color:#bbb"> </span>demonstrating<span style="color:#bbb"> </span>the<span style="color:#bbb"> </span>power<span style="color:#bbb"> </span>of<span style="color:#bbb"> </span>combinatorial<span style="color:#bbb"> </span>algorithms<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">in</span><span style="color:#bbb"> </span>generating<span style="color:#bbb"> </span>structured<span style="color:#bbb"> </span>outputs<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">from</span><span style="color:#bbb"> </span>given<span style="color:#bbb"> </span>constraints.<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span>[<span style="color:#666">`</span>Link<span style="color:#bbb"> </span><span style="color:#a2f;font-weight:bold">to</span><span style="color:#bbb"> </span>LeetCode<span style="color:#bbb"> </span>Lab<span style="color:#666">`</span>](https:<span style="color:#666">//</span>leetcode.com<span style="color:#666">/</span>problems<span style="color:#666">/</span>longest<span style="color:#666">-</span>happy<span style="color:#666">-</span>string<span style="color:#666">/</span>description<span style="color:#666">/</span>)<span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#666">-</span><span style="color:#080;font-style:italic">--
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/8u-H6O_XQKE?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span><span style="color:#666">|</span><span style="color:#bbb"> </span>[LeetCode<span style="color:#bbb"> </span>Solutions<span style="color:#bbb"> </span>Library](https:<span style="color:#666">//</span>grid47.xyz<span style="color:#666">/</span>leetcode<span style="color:#666">/</span>)<span style="color:#bbb"> </span><span style="color:#666">/</span><span style="color:#bbb"> </span>[DSA<span style="color:#bbb"> </span>Sheets](https:<span style="color:#666">//</span>grid47.xyz<span style="color:#666">/</span>sheets<span style="color:#666">/</span>)<span style="color:#bbb"> </span><span style="color:#666">/</span><span style="color:#bbb"> </span>[Course<span style="color:#bbb"> </span>Catalog](https:<span style="color:#666">//</span>grid47.xyz<span style="color:#666">/</span>courses<span style="color:#666">/</span>)<span style="color:#bbb"> </span><span style="color:#666">|</span><span style="color:#bbb">
+</span></span></span><span style="display:flex;"><span><span style="color:#bbb"></span><span style="color:#666">|</span><span style="color:#bbb"> </span><span style="color:#666">-</span><span style="color:#080;font-style:italic">-- |
+</span></span></span></code></pre></div>
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

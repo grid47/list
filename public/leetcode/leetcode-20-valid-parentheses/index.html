@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 20: Valid Parentheses | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 20: Valid Parentheses">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 20: Valid Parentheses in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-20-valid-parentheses/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 20: Valid Parentheses">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 20: Valid Parentheses in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-11-05T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="String">
+    <meta property="article:tag" content="Stack">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 20: Valid Parentheses</h1> 
+            </div>
+			<div class="article-post">
+				<h2 id="hahahugoshortcode500s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+    <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/20.webp" 
+           alt="An elegant loop of parentheses, glowing and connected in a balanced, harmonious way." 
+           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    
+      <figcaption style="font-size: 0.8em; font-weight: 300; color:#555; margin-top: 4px; line-height: 1.2;">
+        Solution to LeetCode 20: Valid Parentheses Problem
+      </figcaption>
+    
+  </figure>
+  </h2>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode500s1hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> isValid(string s) {
+</span></span><span style="display:flex;"><span>        stack<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;</span> stk;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: s) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">==</span> <span style="color:#b44">&#39;(&#39;</span> <span style="color:#666">||</span> x <span style="color:#666">==</span> <span style="color:#b44">&#39;{&#39;</span> <span style="color:#666">||</span> x <span style="color:#666">==</span> <span style="color:#b44">&#39;[&#39;</span>) {
+</span></span><span style="display:flex;"><span>                stk.push(x);
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                     <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">==</span> <span style="color:#b44">&#39;)&#39;</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> stk.top() <span style="color:#666">==</span> <span style="color:#b44">&#39;(&#39;</span>) stk.pop();
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(x <span style="color:#666">==</span> <span style="color:#b44">&#39;}&#39;</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> stk.top() <span style="color:#666">==</span> <span style="">&#39;</span>{<span style="">&#39;</span>) stk.pop();
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">==</span> <span style="color:#b44">&#39;]&#39;</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> stk.top() <span style="color:#666">==</span> <span style="color:#b44">&#39;[&#39;</span>) stk.pop();                
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> stk.empty();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="-problem-statement-valid-parentheses">🎯 <strong>Problem Statement: Valid Parentheses</strong></h3>
+<p>Given a string <code>s</code> consisting only of the characters <code>'('</code>, <code>')'</code>, <code>'{'</code>, <code>'}'</code>, <code>'['</code>, and <code>']'</code>, determine if the string is valid. A string is valid if:</p>
+<ol>
+<li>The brackets must close in the correct order. For example, <code>()</code> and <code>[]</code> are valid, but <code>(]</code> and <code>([)]</code> are not.</li>
+<li>Each opening bracket must have a corresponding closing bracket of the same type.</li>
+</ol>
+<h4 id="input">Input:</h4>
+<ul>
+<li>A string <code>s</code> of length <code>n</code> containing only the characters <code>'('</code>, <code>')'</code>, <code>'{'</code>, <code>'}'</code>, <code>'['</code>, and <code>']'</code>.</li>
+</ul>
+<h4 id="output">Output:</h4>
+<ul>
+<li>Return <code>true</code> if the input string is valid, and <code>false</code> if it is not.</li>
+</ul>
+<hr>
+<h3 id="-approach">🧑‍💻 <strong>Approach</strong></h3>
+<p>To determine if the string is valid, we can use a <strong>stack</strong> data structure. The stack will help us track the most recent opening bracket, ensuring that each closing bracket matches the most recent opening bracket.</p>
+<h4 id="steps-to-solve-the-problem"><strong>Steps to Solve the Problem:</strong></h4>
+<ol>
+<li>Initialize an empty stack.</li>
+<li>Traverse through each character of the string:
+<ul>
+<li>If the character is an opening bracket (<code>'('</code>, <code>'{'</code>, <code>'['</code>), push it onto the stack.</li>
+<li>If the character is a closing bracket (<code>')'</code>, <code>'}'</code>, <code>']'</code>), check if the stack is not empty and if the top of the stack matches the corresponding opening bracket. If it does, pop the top of the stack. Otherwise, the string is invalid.</li>
+</ul>
+</li>
+<li>After traversing the string, if the stack is empty, return <code>true</code> (all brackets were properly matched). If the stack is not empty, return <code>false</code> (some opening brackets were unmatched).</li>
+</ol>
+<hr>
+<h3 id="-code-breakdown-step-by-step">🧑‍💻 <strong>Code Breakdown (Step by Step)</strong></h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> isValid(string s) {
+</span></span><span style="display:flex;"><span>        stack<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;</span> stk;  <span style="color:#080;font-style:italic">// Step 1: Initialize an empty stack.
+</span></span></span></code></pre></div><ul>
+<li>We create an empty stack <code>stk</code> that will store characters. This will help track the most recent opening bracket.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">x</span>: s) {  <span style="color:#080;font-style:italic">// Step 2: Iterate over each character in the string.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">==</span> <span style="color:#b44">&#39;(&#39;</span> <span style="color:#666">||</span> x <span style="color:#666">==</span> <span style="color:#b44">&#39;{&#39;</span> <span style="color:#666">||</span> x <span style="color:#666">==</span> <span style="color:#b44">&#39;[&#39;</span>) {  <span style="color:#080;font-style:italic">// Step 3: If the character is an opening bracket.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                stk.push(x);  <span style="color:#080;font-style:italic">// Step 4: Push the opening bracket onto the stack.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span></code></pre></div><ul>
+<li>We loop through each character <code>x</code> in the string <code>s</code>. If the character is an opening bracket (<code>'('</code>, <code>'{'</code>, <code>'['</code>), we push it onto the stack.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#080;font-style:italic">// Step 5-7: Handle closing brackets and match with the top of the stack.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">==</span> <span style="color:#b44">&#39;)&#39;</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> stk.top() <span style="color:#666">==</span> <span style="color:#b44">&#39;(&#39;</span>) stk.pop();  <span style="color:#080;font-style:italic">// &#39;)&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(x <span style="color:#666">==</span> <span style="color:#b44">&#39;}&#39;</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> stk.top() <span style="color:#666">==</span> <span style="">&#39;</span>{<span style="">&#39;</span>) stk.pop();  <span style="color:#080;font-style:italic">// &#39;}&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(x <span style="color:#666">==</span> <span style="color:#b44">&#39;]&#39;</span> <span style="color:#666">&amp;&amp;</span> <span style="color:#666">!</span>stk.empty() <span style="color:#666">&amp;&amp;</span> stk.top() <span style="color:#666">==</span> <span style="color:#b44">&#39;[&#39;</span>) stk.pop();  <span style="color:#080;font-style:italic">// &#39;]&#39;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>                <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;  <span style="color:#080;font-style:italic">// Step 8: Invalid closing bracket.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li>If the character is a closing bracket (<code>')'</code>, <code>'}'</code>, or <code>']'</code>), we check if the stack is not empty and if the top of the stack matches the corresponding opening bracket:
+<ul>
+<li>For <code>')'</code>, check if the top of the stack is <code>'('</code>.</li>
+<li>For <code>'}'</code>, check if the top of the stack is <code>'{'</code>.</li>
+<li>For <code>']'</code>, check if the top of the stack is <code>'['</code>.</li>
+</ul>
+</li>
+<li>If the stack is empty or the top of the stack does not match the closing bracket, return <code>false</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> stk.empty();  <span style="color:#080;font-style:italic">// Step 9: If the stack is empty, return true; otherwise, false.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>After processing all characters, we check if the stack is empty:
+<ul>
+<li>If the stack is empty, it means that all opening brackets have been matched and closed properly, so we return <code>true</code>.</li>
+<li>If the stack is not empty, return <code>false</code>, indicating that there are unmatched opening brackets.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="-time-and-space-complexity">⏱️ <strong>Time and Space Complexity</strong></h3>
+<h4 id="time-complexity">Time Complexity:</h4>
+<ul>
+<li><strong>O(n)</strong>, where <code>n</code> is the length of the string <code>s</code>.</li>
+<li>We iterate through the string once, and each stack operation (push or pop) takes constant time, <code>O(1)</code>.</li>
+</ul>
+<h4 id="space-complexity">Space Complexity:</h4>
+<ul>
+<li><strong>O(n)</strong> in the worst case.</li>
+<li>In the worst case, the string consists entirely of opening brackets (e.g., <code>&quot;(((((&quot;</code>), and the stack could hold up to <code>n</code> elements.</li>
+</ul>
+<hr>
+<h3 id="-conclusion">💡 <strong>Conclusion</strong></h3>
+<p>This solution efficiently checks whether a string of parentheses, braces, and brackets is valid by utilizing a stack. It ensures that:</p>
+<ul>
+<li>Each opening bracket has a corresponding closing bracket of the same type.</li>
+<li>The brackets are properly nested and ordered.</li>
+</ul>
+<p><strong>Key points</strong>:</p>
+<ul>
+<li>Using a stack allows us to track the most recent opening bracket, ensuring it matches the appropriate closing bracket.</li>
+<li>The solution runs in <strong>O(n)</strong> time and uses <strong>O(n)</strong> space, where <code>n</code> is the length of the string.</li>
+</ul>
+<p>This approach is a common and effective solution for problems involving balanced parentheses or similar structure matching problems. Happy coding! 🚀</p>
+<p><a href="https://leetcode.com/problems/valid-parentheses/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/WTzjTskDFMg?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

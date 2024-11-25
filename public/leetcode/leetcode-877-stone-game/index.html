@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 877: Stone Game | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 877: Stone Game">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 877: Stone Game in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-877-stone-game/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 877: Stone Game">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 877: Stone Game in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-08-11T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Math">
+    <meta property="article:tag" content="Dynamic Programming">
+    <meta property="article:tag" content="Game Theory">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 877: Stone Game</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode1368s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> p;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> memo;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> j) <span style="color:#a2f;font-weight:bold">return</span> p[i];
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(memo.count(i) <span style="color:#666">&amp;&amp;</span> memo[i].count(j)) <span style="color:#a2f;font-weight:bold">return</span> memo[i][j];
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> memo[i][j] <span style="color:#666">=</span> max(p[i] <span style="color:#666">-</span> dp(i <span style="color:#666">+</span> <span style="color:#666">1</span>, j), p[j] <span style="color:#666">-</span> dp(i, j <span style="color:#666">-</span> <span style="color:#666">1</span>)) ;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">stoneGame</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> piles) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>p <span style="color:#666">=</span> piles;
+</span></span><span style="display:flex;"><span>        n <span style="color:#666">=</span> piles.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> dp(<span style="color:#666">0</span>, n <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem &ldquo;Stone Game&rdquo; is a two-player game where players take turns removing stones from piles. Given an array representing the number of stones in each pile, the goal is to determine whether the first player can always win, assuming both players play optimally.</p>
+<p>The players take turns removing stones from either the leftmost or the rightmost pile. The winner is determined by the total number of stones they collect. The task is to determine if the first player (starting first) can always win given the array of piles.</p>
+<h3 id="example">Example:</h3>
+<ul>
+<li><strong>Input</strong>: <code>[5, 3, 4, 5]</code></li>
+<li><strong>Output</strong>: <code>true</code> (The first player can always win.)</li>
+</ul>
+<p>In this example, the optimal play would be for the first player to select the pile with 5 stones on the left, leaving the opponent with piles <code>[3, 4, 5]</code>. The first player can then choose the next pile with 5 stones to guarantee a win.</p>
+<h3 id="approach">Approach</h3>
+<p>To solve this problem, we use a <strong>dynamic programming</strong> approach with <strong>memoization</strong> to avoid redundant computations. We will define a function <code>dp(i, j)</code> that computes the maximum difference in score the current player can achieve over the opponent, when considering piles from index <code>i</code> to <code>j</code> (both inclusive). The optimal strategy for the player is to maximize their score while minimizing the opponent&rsquo;s score.</p>
+<h4 id="key-insights">Key Insights:</h4>
+<ol>
+<li><strong>Two Choices</strong>: At any step, the player can pick either the leftmost pile (<code>piles[i]</code>) or the rightmost pile (<code>piles[j]</code>).</li>
+<li><strong>Recursion</strong>: The recurrence is based on the fact that the current player’s score is the maximum of:
+<ul>
+<li>Choosing the leftmost pile and then minimizing the opponent’s score from the remaining piles, or</li>
+<li>Choosing the rightmost pile and then minimizing the opponent’s score from the remaining piles.</li>
+</ul>
+</li>
+<li><strong>Memoization</strong>: We use memoization to store the results of previously computed subproblems (ranges <code>[i, j]</code>) to speed up the solution.</li>
+</ol>
+<h4 id="plan">Plan:</h4>
+<ol>
+<li>Use recursion to compute the optimal score difference.</li>
+<li>Memoize the results to avoid recomputation.</li>
+<li>Return <code>true</code> if the first player&rsquo;s score difference is greater than or equal to zero (i.e., they can win).</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> p;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n;
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>,<span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> memo;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// The dp function computes the maximum score difference.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// Base case: when there&#39;s only one pile left.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">if</span> (i <span style="color:#666">==</span> j) <span style="color:#a2f;font-weight:bold">return</span> p[i];
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// Check if the result has been memoized.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">if</span> (memo.count(i) <span style="color:#666">&amp;&amp;</span> memo[i].count(j)) <span style="color:#a2f;font-weight:bold">return</span> memo[i][j];
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// Recursive step: Player chooses between picking the i-th or j-th pile.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">return</span> memo[i][j] <span style="color:#666">=</span> max(p[i] <span style="color:#666">-</span> dp(i <span style="color:#666">+</span> <span style="color:#666">1</span>, j), p[j] <span style="color:#666">-</span> dp(i, j <span style="color:#666">-</span> <span style="color:#666">1</span>));
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">stoneGame</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> piles) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>p <span style="color:#666">=</span> piles;  <span style="color:#080;font-style:italic">// Store the piles array.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        n <span style="color:#666">=</span> piles.size();  <span style="color:#080;font-style:italic">// Get the size of the piles array.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">return</span> dp(<span style="color:#666">0</span>, n <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>;  <span style="color:#080;font-style:italic">// Check if the first player can win.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h4 id="detailed-breakdown">Detailed Breakdown:</h4>
+<ol>
+<li>
+<p><strong>Class and Variables</strong>:</p>
+<ul>
+<li>We define the class <code>Solution</code> with a public method <code>stoneGame</code> that solves the problem.</li>
+<li>We declare a vector <code>p</code> to store the piles and an integer <code>n</code> to store the number of piles.</li>
+<li>We use a <code>map&lt;int, map&lt;int, int&gt;&gt;</code> called <code>memo</code> to store the results of subproblems. The first <code>int</code> represents the start index of the subproblem, and the second <code>int</code> represents the end index of the subproblem.</li>
+</ul>
+</li>
+<li>
+<p><strong>dp Function</strong>:</p>
+<ul>
+<li>The <code>dp(int i, int j)</code> function computes the maximum score difference (first player’s score minus the opponent’s score) for the subarray of piles from index <code>i</code> to index <code>j</code>.</li>
+<li><strong>Base Case</strong>: When <code>i == j</code>, the subarray contains only one pile, and the current player can only take that pile, returning the value of <code>p[i]</code>.</li>
+<li><strong>Memoization Check</strong>: Before computing the result, we check if the result for the subarray <code>[i, j]</code> has already been computed and stored in the <code>memo</code> map. If it exists, we return the cached result to avoid recomputation.</li>
+<li><strong>Recursive Step</strong>: The recursive step tries both options:
+<ul>
+<li>Pick the pile at index <code>i</code> and subtract the result of the opponent&rsquo;s move from the range <code>[i+1, j]</code>.</li>
+<li>Pick the pile at index <code>j</code> and subtract the result of the opponent&rsquo;s move from the range <code>[i, j-1]</code>.</li>
+<li>The optimal choice is the one that maximizes the current player&rsquo;s score while minimizing the opponent&rsquo;s score.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>stoneGame Function</strong>:</p>
+<ul>
+<li>The <code>stoneGame</code> function is the entry point. It initializes the <code>p</code> vector with the given piles and calls the <code>dp</code> function on the full range of piles <code>[0, n-1]</code>.</li>
+<li>The result of <code>dp(0, n - 1)</code> will be greater than or equal to 0 if the first player can win. If the score difference is non-negative, the first player wins, and we return <code>true</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity-analysis">Complexity Analysis</h3>
+<h4 id="time-complexity">Time Complexity:</h4>
+<ul>
+<li>The time complexity of the solution is <strong>O(n^2)</strong>, where <code>n</code> is the number of piles. This is because for each pair of indices <code>(i, j)</code>, we are computing the result once, and there are <code>O(n^2)</code> such pairs.</li>
+<li>Memoization ensures that we compute the result for each pair only once, avoiding redundant calculations.</li>
+</ul>
+<h4 id="space-complexity">Space Complexity:</h4>
+<ul>
+<li>The space complexity is <strong>O(n^2)</strong> due to the memoization map, which stores the results of all subproblems <code>(i, j)</code>.</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>This solution effectively solves the problem using dynamic programming and memoization to avoid redundant calculations. By recursively calculating the optimal score difference for each subarray, we can determine if the first player can always win. The memoization map ensures that each subproblem is computed only once, improving efficiency.</p>
+<ul>
+<li><strong>Time Complexity</strong>: O(n^2), where <code>n</code> is the number of piles.</li>
+<li><strong>Space Complexity</strong>: O(n^2) for storing the results of subproblems.</li>
+</ul>
+<p>This approach guarantees an optimal solution while minimizing the number of redundant computations.</p>
+<p><a href="https://leetcode.com/problems/stone-game/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/jGmq8d4cIx0?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

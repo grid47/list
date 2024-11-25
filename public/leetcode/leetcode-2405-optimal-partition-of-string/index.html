@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 2405: Optimal Partition of String | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 2405: Optimal Partition of String">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 2405: Optimal Partition of String in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-2405-optimal-partition-of-string/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 2405: Optimal Partition of String">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 2405: Optimal Partition of String in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-03-11T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Hash Table">
+    <meta property="article:tag" content="String">
+    <meta property="article:tag" content="Greedy">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 2405: Optimal Partition of String</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode739s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> checkBit(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#666">&amp;</span>flag, <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#666">&amp;</span>n) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> flag <span style="color:#666">&amp;</span> (<span style="color:#666">1</span><span style="color:#666">&lt;&lt;</span> n);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">setBit</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#666">&amp;</span>flag, <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#666">&amp;</span> n) {
+</span></span><span style="display:flex;"><span>        flag <span style="color:#666">|=</span> (<span style="color:#666">1</span><span style="color:#666">&lt;&lt;</span>n);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">partitionString</span>(string s) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> flag <span style="color:#666">=</span> <span style="color:#666">0</span>, ans <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">c</span>: s) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(checkBit(flag, n)) {
+</span></span><span style="display:flex;"><span>                flag <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>                ans<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            setBit(flag, n);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem asks us to divide the given string <code>s</code> into the minimum number of substrings such that no character is repeated in any substring. In other words, we want to partition the string into parts where each part contains only unique characters. The task is to return the minimum number of such partitions.</p>
+<h3 id="approach">Approach</h3>
+<p>The approach to solve this problem efficiently involves utilizing a <strong>bitmasking</strong> technique, which allows us to track the characters we&rsquo;ve seen in the current partition in an efficient manner.</p>
+<h4 id="key-insights">Key Insights:</h4>
+<ol>
+<li>
+<p><strong>Bitmasking</strong>: Each character of the string can be mapped to a unique bit in an integer (for example, &lsquo;a&rsquo; maps to the least significant bit, &lsquo;b&rsquo; to the second least significant bit, and so on). Using this bitmask representation, we can efficiently check if a character has been seen before in the current partition and add it if it&rsquo;s not already present.</p>
+</li>
+<li>
+<p><strong>Greedy Partitioning</strong>: We can process the string character by character and partition the string as we go. Every time we encounter a character that has already been seen in the current partition, we increment the partition count and start a new partition.</p>
+</li>
+<li>
+<p><strong>Efficiency</strong>: Bitmasking operations like checking a bit and setting a bit are constant time operations, which makes this approach efficient. The overall time complexity is linear with respect to the size of the string.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<h4 id="step-1-helper-functions-to-manage-bitmask">Step 1: Helper Functions to Manage Bitmask</h4>
+<p>The solution makes use of two helper functions: <code>checkBit</code> and <code>setBit</code>.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">checkBit</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#666">&amp;</span>flag, <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#666">&amp;</span>n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> flag <span style="color:#666">&amp;</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> n);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">setBit</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#666">&amp;</span>flag, <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#666">&amp;</span>n) {
+</span></span><span style="display:flex;"><span>    flag <span style="color:#666">|=</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> n);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong><code>checkBit(int &amp;flag, int &amp;n)</code></strong>:</p>
+<ul>
+<li>This function checks if the <code>n</code>-th bit in the <code>flag</code> is set to <code>1</code>. If the bit is set, it indicates that the character corresponding to this bit has already been seen in the current partition.</li>
+<li>It uses the bitwise AND operation <code>&amp;</code> to check if the bit is set: <code>flag &amp; (1 &lt;&lt; n)</code>. This operation shifts <code>1</code> to the <code>n</code>-th position and performs the AND operation with <code>flag</code>. If the result is non-zero, the bit is set, and we return <code>true</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>setBit(int &amp;flag, int &amp;n)</code></strong>:</p>
+<ul>
+<li>This function sets the <code>n</code>-th bit in the <code>flag</code> to <code>1</code>. It uses the bitwise OR operation <code>|= (1 &lt;&lt; n)</code> to set the <code>n</code>-th bit.</li>
+<li>The bitwise OR operation ensures that the corresponding bit in <code>flag</code> is set to <code>1</code> without affecting other bits.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-2-main-logic-in-partitionstring">Step 2: Main Logic in <code>partitionString</code></h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">partitionString</span>(string s) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> flag <span style="color:#666">=</span> <span style="color:#666">0</span>, ans <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">c</span>: s) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> c <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (checkBit(flag, n)) {
+</span></span><span style="display:flex;"><span>            flag <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>            ans<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        setBit(flag, n);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong><code>int flag = 0, ans = 1;</code></strong>:</p>
+<ul>
+<li>The <code>flag</code> variable is used to track which characters have been seen in the current partition. It is initially set to <code>0</code>, meaning no characters have been seen.</li>
+<li>The <code>ans</code> variable tracks the number of partitions. It starts at <code>1</code> because we always have at least one partition.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>for (auto c: s)</code></strong>:</p>
+<ul>
+<li>This loop iterates over every character <code>c</code> in the string <code>s</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>int n = c - 'a';</code></strong>:</p>
+<ul>
+<li>We convert the character <code>c</code> to an integer <code>n</code> representing its position in the alphabet. For example, for the character &lsquo;a&rsquo;, <code>n</code> will be <code>0</code>, for &lsquo;b&rsquo; it will be <code>1</code>, and so on.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>if (checkBit(flag, n)) {</code></strong>:</p>
+<ul>
+<li>This checks if the character corresponding to <code>n</code> has already been seen in the current partition. If it has, it means we need to start a new partition.</li>
+<li>We reset <code>flag</code> to <code>0</code>, which means the new partition doesn&rsquo;t contain any previously encountered characters.</li>
+<li>We increment the partition count <code>ans</code> to reflect the start of a new partition.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>setBit(flag, n);</code></strong>:</p>
+<ul>
+<li>After checking if the character has already been seen in the current partition, we set the corresponding bit for the character <code>n</code> in <code>flag</code>. This marks the character as seen in the current partition.</li>
+</ul>
+</li>
+<li>
+<p><strong><code>return ans;</code></strong>:</p>
+<ul>
+<li>Finally, after processing all characters in the string, we return the value of <code>ans</code>, which represents the minimum number of partitions.</li>
+</ul>
+</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<h4 id="time-complexity">Time Complexity:</h4>
+<ul>
+<li><strong>O(n)</strong>:
+<ul>
+<li>The loop processes each character in the string <code>s</code> exactly once. Each operation inside the loop (checking and setting bits) is constant time due to the efficient bitwise operations. Therefore, the overall time complexity is <strong>O(n)</strong>, where <code>n</code> is the length of the string <code>s</code>.</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">Space Complexity:</h4>
+<ul>
+<li><strong>O(1)</strong>:
+<ul>
+<li>The space complexity is constant because we only use a fixed amount of space regardless of the input size. Specifically, the <code>flag</code> variable uses a fixed amount of space (a 32-bit integer), and there is no need for extra space that grows with the input size.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>This solution provides an efficient way to partition a string into the minimum number of substrings where each substring contains unique characters. By leveraging <strong>bitmasking</strong> for constant-time checks and updates, the solution achieves optimal time complexity of <strong>O(n)</strong>.</p>
+<h4 id="key-points">Key Points:</h4>
+<ul>
+<li><strong>Bitmasking</strong> is a powerful technique to track character occurrences efficiently.</li>
+<li>The solution works by greedily partitioning the string whenever a repeated character is found.</li>
+<li>The overall time complexity is linear with respect to the size of the string, making the solution scalable for large inputs.</li>
+</ul>
+<p>This approach ensures that we solve the problem efficiently while using minimal space, making it ideal for competitive programming or real-world applications where performance is crucial.</p>
+<p><a href="https://leetcode.com/problems/optimal-partition-of-string/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/1Zx7gEznzfI?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

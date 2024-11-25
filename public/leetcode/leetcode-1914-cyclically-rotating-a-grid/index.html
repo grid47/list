@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 1914: Cyclically Rotating a Grid | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 1914: Cyclically Rotating a Grid">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1914: Cyclically Rotating a Grid in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-1914-cyclically-rotating-a-grid/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 1914: Cyclically Rotating a Grid">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1914: Cyclically Rotating a Grid in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-04-29T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Matrix">
+    <meta property="article:tag" content="Simulation">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 1914: Cyclically Rotating a Grid</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode456s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> rotateGrid(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// cout &lt;&lt; m &lt;&lt; &#34; &#34; &lt;&lt; n;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#080;font-style:italic">// k = k % (m * n);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> min(m, n) <span style="color:#666">/</span> <span style="color:#666">2</span>; i<span style="color:#666">++</span>) {            
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> i <span style="color:#666">+</span> <span style="color:#666">0</span>, r <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">-</span> i;
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> t <span style="color:#666">=</span> i <span style="color:#666">+</span> <span style="color:#666">0</span>, b <span style="color:#666">=</span> m <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">-</span> i;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> total <span style="color:#666">=</span> <span style="color:#666">2</span> <span style="color:#666">*</span> (r <span style="color:#666">-</span> l) <span style="color:#666">+</span> <span style="color:#666">2</span> <span style="color:#666">*</span> (b <span style="color:#666">-</span> t);
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> rot <span style="color:#666">=</span> k <span style="color:#666">%</span> total;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(l <span style="color:#666">&lt;</span> r <span style="color:#666">&amp;&amp;</span> t <span style="color:#666">&lt;</span> b) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> rot; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> grid[t][l];
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> p <span style="color:#666">=</span> l; p <span style="color:#666">&lt;</span> r; p<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>                        grid[t][p] <span style="color:#666">=</span> grid[t][p <span style="color:#666">+</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> p <span style="color:#666">=</span> t; p <span style="color:#666">&lt;</span> b; p<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>                        grid[p][r] <span style="color:#666">=</span> grid[p <span style="color:#666">+</span> <span style="color:#666">1</span>][r];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> p <span style="color:#666">=</span> r; p <span style="color:#666">&gt;</span> l; p<span style="color:#666">--</span>)
+</span></span><span style="display:flex;"><span>                        grid[b][p] <span style="color:#666">=</span> grid[b][p<span style="color:#666">-</span><span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> p <span style="color:#666">=</span> b; p <span style="color:#666">&gt;</span> t; p<span style="color:#666">--</span>)
+</span></span><span style="display:flex;"><span>                        grid[p][l] <span style="color:#666">=</span> grid[p<span style="color:#666">-</span><span style="color:#666">1</span>][l];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                    grid[t <span style="color:#666">+</span> <span style="color:#666">1</span>][l] <span style="color:#666">=</span> tmp;
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> grid;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem requires us to rotate a given 2D grid (matrix) by <code>k</code> positions in a circular manner. This rotation must be performed layer by layer, starting from the outermost layer of the grid and moving inward. Each layer of the grid can be thought of as a ring, and the goal is to shift the elements in these rings to the right by <code>k</code> positions.</p>
+<h3 id="approach">Approach</h3>
+<p>To achieve the desired rotation, the algorithm follows these steps:</p>
+<ol>
+<li>
+<p><strong>Layer Identification</strong>: The grid is processed layer by layer, where each layer can be defined by its boundaries (left, right, top, and bottom). The number of layers is determined by the smaller dimension of the grid divided by two.</p>
+</li>
+<li>
+<p><strong>Layer Length Calculation</strong>: For each layer, calculate the number of elements in the layer (total perimeter length) using the formula:
+[
+\text{total} = 2 \times (r - l) + 2 \times (b - t)
+]
+where <code>l</code>, <code>r</code>, <code>t</code>, and <code>b</code> are the left, right, top, and bottom indices of the current layer.</p>
+</li>
+<li>
+<p><strong>Effective Rotations</strong>: The effective number of rotations needed is determined by taking <code>k</code> modulo the perimeter length (<code>total</code>). This accounts for cases where <code>k</code> is larger than the number of elements in the layer.</p>
+</li>
+<li>
+<p><strong>Performing Rotations</strong>: The elements of the layer are rotated in a circular manner. This involves:</p>
+<ul>
+<li>Saving the top left element temporarily.</li>
+<li>Shifting elements in a clockwise direction, i.e., moving elements from the top row to the right column, from the right column to the bottom row, from the bottom row to the left column, and from the left column back to the top row.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Rotated Grid</strong>: After processing all layers, the modified grid is returned.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> rotateGrid(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span></code></pre></div><p>This line defines the <code>rotateGrid</code> function, which takes a 2D vector <code>grid</code> and an integer <code>k</code>.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
+</span></span></code></pre></div><p>Here, we retrieve the dimensions of the grid, with <code>m</code> representing the number of rows and <code>n</code> representing the number of columns.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> min(m, n) <span style="color:#666">/</span> <span style="color:#666">2</span>; i<span style="color:#666">++</span>) {
+</span></span></code></pre></div><p>The loop iterates over each layer of the grid. The number of layers is determined by half the minimum dimension of the grid.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> l <span style="color:#666">=</span> i <span style="color:#666">+</span> <span style="color:#666">0</span>, r <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">-</span> i;
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> t <span style="color:#666">=</span> i <span style="color:#666">+</span> <span style="color:#666">0</span>, b <span style="color:#666">=</span> m <span style="color:#666">-</span> <span style="color:#666">1</span> <span style="color:#666">-</span> i;
+</span></span></code></pre></div><p>We define the boundaries of the current layer:</p>
+<ul>
+<li><code>l</code>: left boundary</li>
+<li><code>r</code>: right boundary</li>
+<li><code>t</code>: top boundary</li>
+<li><code>b</code>: bottom boundary</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> total <span style="color:#666">=</span> <span style="color:#666">2</span> <span style="color:#666">*</span> (r <span style="color:#666">-</span> l) <span style="color:#666">+</span> <span style="color:#666">2</span> <span style="color:#666">*</span> (b <span style="color:#666">-</span> t);
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> rot <span style="color:#666">=</span> k <span style="color:#666">%</span> total;
+</span></span></code></pre></div><p>Calculate the total number of elements in the layer and determine the effective number of rotations needed.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(l <span style="color:#666">&lt;</span> r <span style="color:#666">&amp;&amp;</span> t <span style="color:#666">&lt;</span> b) {
+</span></span></code></pre></div><p>Check if the current layer contains more than one element to ensure that we only rotate valid layers.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>; j <span style="color:#666">&lt;</span> rot; j<span style="color:#666">++</span>) {
+</span></span></code></pre></div><p>This loop performs the rotation <code>rot</code> times.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> grid[t][l];
+</span></span></code></pre></div><p>Store the top left element of the layer temporarily.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> p <span style="color:#666">=</span> l; p <span style="color:#666">&lt;</span> r; p<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>                        grid[t][p] <span style="color:#666">=</span> grid[t][p <span style="color:#666">+</span> <span style="color:#666">1</span>];
+</span></span></code></pre></div><p>Shift elements from the top row to the right by one position.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> p <span style="color:#666">=</span> t; p <span style="color:#666">&lt;</span> b; p<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>                        grid[p][r] <span style="color:#666">=</span> grid[p <span style="color:#666">+</span> <span style="color:#666">1</span>][r];
+</span></span></code></pre></div><p>Shift elements from the right column down by one position.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> p <span style="color:#666">=</span> r; p <span style="color:#666">&gt;</span> l; p<span style="color:#666">--</span>)
+</span></span><span style="display:flex;"><span>                        grid[b][p] <span style="color:#666">=</span> grid[b][p<span style="color:#666">-</span><span style="color:#666">1</span>];
+</span></span></code></pre></div><p>Shift elements from the bottom row to the left by one position.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> p <span style="color:#666">=</span> b; p <span style="color:#666">&gt;</span> t; p<span style="color:#666">--</span>)
+</span></span><span style="display:flex;"><span>                        grid[p][l] <span style="color:#666">=</span> grid[p<span style="color:#666">-</span><span style="color:#666">1</span>][l];
+</span></span></code></pre></div><p>Shift elements from the left column up by one position.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                    grid[t <span style="color:#666">+</span> <span style="color:#666">1</span>][l] <span style="color:#666">=</span> tmp;
+</span></span></code></pre></div><p>Place the temporarily stored element back into the grid.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> grid;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>After all layers have been processed, the modified grid is returned.</p>
+<h3 id="complexity">Complexity</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is O(m * n), where m is the number of rows and n is the number of columns. Each element in the grid is processed once during the rotations.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is O(1), as we are only using a fixed number of variables for computations without any additional data structures that grow with input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>The <code>rotateGrid</code> function efficiently rotates the layers of a grid based on the specified number of positions <code>k</code>. By treating each layer as a separate entity and performing rotations layer by layer, the solution is both straightforward and efficient. This method ensures that the algorithm runs in linear time relative to the number of elements in the grid, making it suitable for large matrices.</p>
+<h3 id="use-cases">Use Cases</h3>
+<ol>
+<li>
+<p><strong>Image Processing</strong>: This algorithm can be applied in image manipulation tasks, such as rotating borders of an image represented as a matrix of pixels.</p>
+</li>
+<li>
+<p><strong>Game Development</strong>: In grid-based games, layer rotations can be used to create interesting visual effects or transformations of the game board.</p>
+</li>
+<li>
+<p><strong>Data Representation</strong>: The concept of rotating layers can also be applied in scenarios where data needs to be rearranged in a structured format, such as matrices used in simulations.</p>
+</li>
+<li>
+<p><strong>Competitive Programming</strong>: The algorithm serves as an example of how to manipulate 2D arrays effectively, making it a great addition to competitive programming skills.</p>
+</li>
+<li>
+<p><strong>Mathematical Puzzles</strong>: Rotating grid layers can be part of larger mathematical puzzles or challenges that involve spatial reasoning and manipulation.</p>
+</li>
+</ol>
+<p>By following this structured approach, developers can efficiently handle tasks related to grid manipulation and optimize their algorithms for performance and clarity. The use of clear variable naming and logical structuring makes the code easy to read and maintain, ensuring long-term usability.</p>
+<p><a href="https://leetcode.com/problems/cyclically-rotating-a-grid/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/3dCs1ZHDNjM?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

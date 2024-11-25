@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 1177: Can Make Palindrome from Substring | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 1177: Can Make Palindrome from Substring">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1177: Can Make Palindrome from Substring in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-1177-can-make-palindrome-from-substring/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 1177: Can Make Palindrome from Substring">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1177: Can Make Palindrome from Substring in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-07-12T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Hash Table">
+    <meta property="article:tag" content="String">
+    <meta property="article:tag" content="Bit Manipulation">
+    <meta property="article:tag" content="Prefix Sum">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 1177: Can Make Palindrome from Substring</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode96s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> canMakePaliQueries(string s, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> q) {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> ans;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> pt(<span style="color:#666">1</span>,<span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mask <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.length(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        pt.push_back(mask <span style="color:#666">^=</span> <span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> (s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>));
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> q.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span>v <span style="color:#666">=</span> q[i];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> __builtin_popcount(pt[v[<span style="color:#666">1</span>]<span style="color:#666">+</span><span style="color:#666">1</span>] <span style="color:#666">^</span> pt[v[<span style="color:#666">0</span>]]);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    ans.push_back(cnt<span style="color:#666">/</span><span style="color:#666">2</span> <span style="color:#666">&lt;=</span> v[<span style="color:#666">2</span>]);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The task is to determine whether a substring of a given string can be rearranged to form a palindrome. For a substring to be rearranged into a palindrome:</p>
+<ol>
+<li>If its length is even, all characters must appear an even number of times.</li>
+<li>If its length is odd, exactly one character can appear an odd number of times (the rest must be even).</li>
+</ol>
+<p>Given a string <code>s</code> and a list of queries, each query specifies a substring defined by two indices and a maximum number of character changes allowed. The goal is to check for each query whether the substring can be rearranged into a palindrome with the allowed changes.</p>
+<h3 id="approach">Approach</h3>
+<p>The solution uses a bit manipulation technique to efficiently track the character counts and determine if the substring can be rearranged into a palindrome. Here&rsquo;s how it works:</p>
+<ol>
+<li><strong>Prefix XOR Mask</strong>: For each character in the string, a bitmask (using integers) keeps track of the parity (even or odd count) of each character&rsquo;s occurrences.</li>
+<li><strong>Processing Queries</strong>: For each query, compute the number of characters with odd counts in the specified substring using the precomputed masks. Determine if this number of odd-count characters can be made even using the allowed changes.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<p>Let&rsquo;s break down the implementation step by step:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> canMakePaliQueries(string s, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> q) {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> ans;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> pt(<span style="color:#666">1</span>,<span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mask <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div><ul>
+<li><strong>Lines 1-4</strong>: The <code>Solution</code> class contains the <code>canMakePaliQueries</code> method. It takes a string <code>s</code> and a 2D vector of queries <code>q</code> as input.</li>
+<li>A vector <code>ans</code> is initialized to store the results of each query.</li>
+<li><code>pt</code> is a vector initialized with one element (0), which will hold the prefix masks for the characters in the string.</li>
+<li>The variable <code>mask</code> is initialized to zero; this will be used to maintain the parity of character counts.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> s.length(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            pt.push_back(mask <span style="color:#666">^=</span> <span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> (s[i] <span style="color:#666">-</span> <span style="color:#b44">&#39;a&#39;</span>));
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li><strong>Lines 6-8</strong>: This loop iterates over each character in the string <code>s</code>.</li>
+<li>For each character, a bit manipulation operation updates the <code>mask</code>. The expression <code>1 &lt;&lt; (s[i] - 'a')</code> creates a bitmask where the bit corresponding to the character is toggled. The XOR operation (<code>^=</code>) toggles the bit, effectively keeping track of the parity of occurrences.</li>
+<li>The updated mask is then pushed into the <code>pt</code> vector, which will be used to quickly determine the odd character counts in any substring.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> q.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#666">&amp;</span>v <span style="color:#666">=</span> q[i];
+</span></span></code></pre></div><ul>
+<li><strong>Lines 10-12</strong>: This loop processes each query from the vector <code>q</code>. The variable <code>v</code> is a reference to the current query, which consists of three elements: the start index, the end index, and the allowed number of changes.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> __builtin_popcount(pt[v[<span style="color:#666">1</span>]<span style="color:#666">+</span><span style="color:#666">1</span>] <span style="color:#666">^</span> pt[v[<span style="color:#666">0</span>]]);
+</span></span></code></pre></div><ul>
+<li><strong>Line 14</strong>: This line computes the number of odd-count characters in the substring defined by the query.</li>
+<li>The expression <code>pt[v[1]+1] ^ pt[v[0]]</code> computes the XOR of the prefix masks at the end and start indices of the substring. This operation yields a mask that represents the character counts in the substring.</li>
+<li>The <code>__builtin_popcount</code> function counts the number of set bits (i.e., odd counts) in the resulting mask, giving the count of characters with odd occurrences.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            ans.push_back(cnt <span style="color:#666">/</span> <span style="color:#666">2</span> <span style="color:#666">&lt;=</span> v[<span style="color:#666">2</span>]);
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li><strong>Line 15</strong>: The final check determines if the number of odd characters divided by two (since each character can be changed to make pairs) is less than or equal to the allowed changes (<code>v[2]</code>). If true, it means the substring can be rearranged into a palindrome under the given constraints.</li>
+<li>The result is pushed into the <code>ans</code> vector.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li><strong>Line 17</strong>: The method returns the vector <code>ans</code>, which contains the results of all queries.</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>Building the prefix mask takes (O(n)), where (n) is the length of the string.</li>
+<li>Each query is processed in (O(1)) due to the prefix masks.</li>
+<li>Therefore, the total time complexity is (O(n + m)), where (m) is the number of queries.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space used for the prefix masks is (O(n)) and the output vector is (O(m)), leading to a total space complexity of (O(n + m)).</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">Conclusion</h3>
+<p>The <code>canMakePaliQueries</code> function effectively determines whether the specified substrings of a given string can be rearranged into palindromes. By utilizing bit manipulation to track character occurrences, the function processes queries efficiently, achieving optimal time complexity. This approach demonstrates a powerful method for solving character frequency problems in strings and showcases how bitwise operations can simplify complex counting tasks. The solution is robust and efficient, making it suitable for large strings and numerous queries, thus addressing the problem requirements effectively.</p>
+<p><a href="https://leetcode.com/problems/can-make-palindrome-from-substring/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/tCr-y-1P2J8?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

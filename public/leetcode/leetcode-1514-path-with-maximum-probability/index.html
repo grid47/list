@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 1514: Path with Maximum Probability | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 1514: Path with Maximum Probability">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1514: Path with Maximum Probability in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-1514-path-with-maximum-probability/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 1514: Path with Maximum Probability">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1514: Path with Maximum Probability in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-06-08T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Graph">
+    <meta property="article:tag" content="Heap (Priority Queue)">
+    <meta property="article:tag" content="Shortest Path">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 1514: Path with Maximum Probability</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode256s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;&gt;&gt;</span> grid;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> vis;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">double</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">double</span> <span style="color:#00a000">maxProbability</span>(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> edges, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;&amp;</span> prob, <span style="color:#0b0;font-weight:bold">int</span> start, <span style="color:#0b0;font-weight:bold">int</span> end) {
+</span></span><span style="display:flex;"><span>        grid.resize(n);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> edges.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            grid[edges[i][<span style="color:#666">1</span>]].push_back({edges[i][<span style="color:#666">0</span>], prob[i]});            
+</span></span><span style="display:flex;"><span>            grid[edges[i][<span style="color:#666">0</span>]].push_back({edges[i][<span style="color:#666">1</span>], prob[i]});
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        priority_queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">double</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> pq;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;</span> mx(n, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        mx[start] <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        vis.resize(n, <span style="color:#a2f">false</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// vis[start] = true;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        pq.push({<span style="color:#666">1.0</span>, start});
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> pq.top();
+</span></span><span style="display:flex;"><span>            pq.pop();
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>vis[it.second]) {
+</span></span><span style="display:flex;"><span>                vis[it.second] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">x</span>: grid[it.second]) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">if</span>(mx[x.first] <span style="color:#666">&lt;</span> it.first <span style="color:#666">*</span> x.second) {
+</span></span><span style="display:flex;"><span>                        mx[x.first] <span style="color:#666">=</span> it.first <span style="color:#666">*</span> x.second;
+</span></span><span style="display:flex;"><span>                        pq.push({it.first <span style="color:#666">*</span> x.second, x.first});
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> mx[end];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem is to find the maximum probability of reaching a destination node in a graph, starting from a source node, given a set of directed edges and their associated probabilities. Each edge connects two nodes and has a probability that represents the likelihood of successfully traversing that edge. The goal is to determine the maximum probability of reaching the target node from the starting node by traversing the edges of the graph.</p>
+<h3 id="approach">Approach</h3>
+<p>To solve this problem, we can use Dijkstra&rsquo;s algorithm, which is typically used to find the shortest paths in a graph. However, instead of minimizing distances, we will maximize probabilities. The algorithm will be modified to account for the probabilities of edge traversal.</p>
+<h4 id="key-steps-in-the-approach">Key Steps in the Approach:</h4>
+<ol>
+<li>
+<p><strong>Graph Representation</strong>: Use an adjacency list to represent the graph, where each node points to a list of pairs. Each pair contains a neighboring node and the probability of reaching that neighbor.</p>
+</li>
+<li>
+<p><strong>Priority Queue</strong>: Utilize a max-heap (priority queue) to always expand the most promising node based on the highest probability encountered so far.</p>
+</li>
+<li>
+<p><strong>Probability Tracking</strong>: Maintain a vector to track the maximum probability of reaching each node, initialized to zero for all nodes except the start node, which is initialized to one.</p>
+</li>
+<li>
+<p><strong>Exploration</strong>: Continuously pop the node with the highest probability from the queue, explore its neighbors, and update their probabilities if a better path (higher probability) is found.</p>
+</li>
+<li>
+<p><strong>Termination</strong>: The process continues until the queue is empty, and the maximum probability to reach the end node is returned.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<p>Here&rsquo;s a detailed explanation of the provided code:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;&gt;&gt;</span> grid;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span><span style="color:#666">&gt;</span> vis;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">double</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> with public members. The <code>grid</code> variable will hold the adjacency list representation of the graph, where each entry contains pairs of neighboring nodes and their associated probabilities. The <code>vis</code> vector is used to track visited nodes during the traversal.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">double</span> <span style="color:#00a000">maxProbability</span>(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> edges, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;&amp;</span> prob, <span style="color:#0b0;font-weight:bold">int</span> start, <span style="color:#0b0;font-weight:bold">int</span> end) {
+</span></span><span style="display:flex;"><span>        grid.resize(n);
+</span></span></code></pre></div><ul>
+<li>The method <code>maxProbability</code> initializes the <code>grid</code> to accommodate <code>n</code> nodes.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> edges.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            grid[edges[i][<span style="color:#666">1</span>]].push_back({edges[i][<span style="color:#666">0</span>], prob[i]});            
+</span></span><span style="display:flex;"><span>            grid[edges[i][<span style="color:#666">0</span>]].push_back({edges[i][<span style="color:#666">1</span>], prob[i]});
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li>This loop populates the adjacency list. For each edge, it adds both directions (since the graph is undirected), connecting the nodes with their corresponding probabilities.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        priority_queue<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">double</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> pq;
+</span></span></code></pre></div><ul>
+<li>We declare a priority queue <code>pq</code> to facilitate the exploration of nodes based on their maximum probability.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">double</span><span style="color:#666">&gt;</span> mx(n, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        mx[start] <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        vis.resize(n, <span style="color:#a2f">false</span>);
+</span></span></code></pre></div><ul>
+<li>We initialize a vector <code>mx</code> to keep track of the maximum probabilities of reaching each node. The starting node&rsquo;s probability is set to 1, indicating that we start from there. The <code>vis</code> vector is resized to manage the visited status of nodes.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        pq.push({<span style="color:#666">1.0</span>, start});
+</span></span></code></pre></div><ul>
+<li>We push the starting node into the priority queue with an initial probability of 1.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>pq.empty()) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> pq.top();
+</span></span><span style="display:flex;"><span>            pq.pop();
+</span></span></code></pre></div><ul>
+<li>The main loop runs as long as there are nodes in the priority queue. We retrieve the node with the highest probability (<code>it</code>).</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>vis[it.second]) {
+</span></span><span style="display:flex;"><span>                vis[it.second] <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span></code></pre></div><ul>
+<li>If the current node has not been visited yet, we mark it as visited.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">x</span>: grid[it.second]) {
+</span></span><span style="display:flex;"><span>                    <span style="color:#a2f;font-weight:bold">if</span>(mx[x.first] <span style="color:#666">&lt;</span> it.first <span style="color:#666">*</span> x.second) {
+</span></span><span style="display:flex;"><span>                        mx[x.first] <span style="color:#666">=</span> it.first <span style="color:#666">*</span> x.second;
+</span></span><span style="display:flex;"><span>                        pq.push({it.first <span style="color:#666">*</span> x.second, x.first});
+</span></span><span style="display:flex;"><span>                    }
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li>We then iterate through each neighbor of the current node. If traversing to the neighbor provides a higher probability than previously recorded, we update that neighbor&rsquo;s probability and push it onto the priority queue for further exploration.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> mx[end];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>Finally, once the queue is empty, we return the maximum probability to reach the end node, which is stored in <code>mx[end]</code>.</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<h4 id="time-complexity">Time Complexity</h4>
+<ul>
+<li>The time complexity of this solution is (O((E + V) \log V)), where (E) is the number of edges and (V) is the number of vertices. Each node is processed at most once, and for each node, the priority queue operations (insert and extract) take logarithmic time.</li>
+</ul>
+<h4 id="space-complexity">Space Complexity</h4>
+<ul>
+<li>The space complexity is (O(V + E)) for storing the adjacency list and the visited status of the nodes.</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>This implementation effectively uses a modified Dijkstra&rsquo;s algorithm to solve the problem of maximizing the probability of reaching a target node in a graph.</p>
+<p><strong>Key Insights</strong>:</p>
+<ul>
+<li><strong>Graph Representation</strong>: The adjacency list provides an efficient way to represent the graph, allowing for quick access to neighbors.</li>
+<li><strong>Priority Queue Usage</strong>: The max-heap allows us to always expand the most promising path first, ensuring that we explore paths with the highest probabilities before others.</li>
+</ul>
+<p>The code is efficient, clear, and adheres to common practices for graph traversal problems, making it an excellent solution for finding the maximum probability path in a graph. This method can be extended to various other problems in graph theory, especially those dealing with probabilities and weights.</p>
+<p><a href="https://leetcode.com/problems/path-with-maximum-probability/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/kPsDTGcrzGM?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

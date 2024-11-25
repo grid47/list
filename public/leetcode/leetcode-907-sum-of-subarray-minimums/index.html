@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 907: Sum of Subarray Minimums | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 907: Sum of Subarray Minimums">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 907: Sum of Subarray Minimums in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-907-sum-of-subarray-minimums/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 907: Sum of Subarray Minimums">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 907: Sum of Subarray Minimums in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-08-08T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Dynamic Programming">
+    <meta property="article:tag" content="Stack">
+    <meta property="article:tag" content="Monotonic Stack">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 907: Sum of Subarray Minimums</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode1384s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sumSubarrayMins(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>        stack<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> stk_p;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> left(n), right(n);
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// prefill, algo may not catch everything
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)  left[i] <span style="color:#666">=</span> i <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) right[i] <span style="color:#666">=</span> n <span style="color:#666">-</span> i;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>stk_p.empty() <span style="color:#666">&amp;&amp;</span> stk_p.top().first <span style="color:#666">&gt;</span> nums[i]) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">auto</span> x <span style="color:#666">=</span> stk_p.top();
+</span></span><span style="display:flex;"><span>                stk_p.pop();
+</span></span><span style="display:flex;"><span>                right[x.second] <span style="color:#666">=</span> i <span style="color:#666">-</span> x.second;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            left[i] <span style="color:#666">=</span> stk_p.empty() <span style="color:#666">?</span> i <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">:</span> i <span style="color:#666">-</span> stk_p.top().second;
+</span></span><span style="display:flex;"><span>            stk_p.push({ nums[i], i });
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mod <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">int</span>) <span style="color:#666">1e9</span> <span style="color:#666">+</span> <span style="color:#666">7</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> (ans <span style="color:#666">+</span> (<span style="color:#0b0;font-weight:bold">long</span>) nums[i] <span style="color:#666">*</span> (<span style="color:#0b0;font-weight:bold">long</span>) left[i] <span style="color:#666">*</span> (<span style="color:#0b0;font-weight:bold">long</span>) right[i]) <span style="color:#666">%</span> mod;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> (<span style="color:#0b0;font-weight:bold">int</span>) ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem asks us to calculate the sum of the minimum values of all <strong>subarrays</strong> of a given array of integers. The array can contain both positive and negative numbers, and we need to compute the sum of the minimum values of all possible subarrays modulo (10^9 + 7).</p>
+<h3 id="approach">Approach</h3>
+<p>To solve this problem efficiently, a brute force approach where we generate all possible subarrays and compute their minimums would be too slow, especially for large arrays. Instead, we can use an efficient approach based on <strong>monotonic stacks</strong> and dynamic programming principles to reduce the time complexity.</p>
+<h4 id="key-insight"><strong>Key Insight:</strong></h4>
+<p>For each element in the array, we need to determine how many subarrays have that element as their <strong>minimum</strong>. This can be achieved by:</p>
+<ol>
+<li>Using a <strong>monotonic stack</strong> to track the <strong>previous smaller element</strong> and the <strong>next smaller element</strong> for each element in the array.</li>
+<li>Using the distances to compute how many subarrays have each element as the minimum.</li>
+<li>Once we have this information, we can easily compute the sum of the minimum values for all subarrays by multiplying each element by the number of subarrays it serves as the minimum in.</li>
+</ol>
+<h4 id="steps"><strong>Steps:</strong></h4>
+<ol>
+<li>
+<p><strong>Calculate <code>left[]</code> and <code>right[]</code> arrays</strong>:</p>
+<ul>
+<li><code>left[i]</code>: The number of subarrays that end at index <code>i</code> where <code>nums[i]</code> is the minimum element.</li>
+<li><code>right[i]</code>: The number of subarrays that start at index <code>i</code> where <code>nums[i]</code> is the minimum element.</li>
+</ul>
+</li>
+<li>
+<p><strong>Use a monotonic stack</strong> to compute <code>left[]</code> and <code>right[]</code>:</p>
+<ul>
+<li>Traverse the array to fill the <code>left[]</code> and <code>right[]</code> arrays using a stack to efficiently find the nearest smaller element on the left and right.</li>
+</ul>
+</li>
+<li>
+<p><strong>Sum the contributions</strong> of each element:</p>
+<ul>
+<li>Once we have the <code>left[]</code> and <code>right[]</code> values, for each element <code>nums[i]</code>, its contribution to the total sum is ( \text{nums[i]} \times \text{left[i]} \times \text{right[i]} ).</li>
+</ul>
+</li>
+<li>
+<p><strong>Take the modulo (10^9 + 7)</strong> to avoid overflow and ensure that the result fits within the problem&rsquo;s constraints.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<h4 id="class-definition"><strong>Class Definition</strong></h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sumSubarrayMins(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>        stack<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> stk_p;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> left(n), right(n);
+</span></span></code></pre></div><ul>
+<li><code>stk_p</code>: A stack used to store pairs of the form <code>(value, index)</code>, which helps in calculating the left and right boundaries for each element.</li>
+<li><code>n</code>: The size of the <code>nums</code> array.</li>
+<li><code>left</code> and <code>right</code>: Arrays that will store the number of subarrays where <code>nums[i]</code> is the minimum for the left and right boundaries, respectively.</li>
+</ul>
+<h4 id="prefill-the-left-and-right-arrays"><strong>Prefill the <code>left[]</code> and <code>right[]</code> Arrays</strong></h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)  left[i] <span style="color:#666">=</span> i <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) right[i] <span style="color:#666">=</span> n <span style="color:#666">-</span> i;
+</span></span></code></pre></div><ul>
+<li>Initially, we prefill the <code>left[]</code> array with <code>i + 1</code>, meaning that each element can at least form a subarray by itself.</li>
+<li>Similarly, we prefill the <code>right[]</code> array with <code>n - i</code>, meaning that each element can at least form a subarray ending at the last element.</li>
+</ul>
+<h4 id="fill-left-and-right-using-the-monotonic-stack"><strong>Fill <code>left[]</code> and <code>right[]</code> Using the Monotonic Stack</strong></h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>stk_p.empty() <span style="color:#666">&amp;&amp;</span> stk_p.top().first <span style="color:#666">&gt;</span> nums[i]) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">auto</span> x <span style="color:#666">=</span> stk_p.top();
+</span></span><span style="display:flex;"><span>                stk_p.pop();
+</span></span><span style="display:flex;"><span>                right[x.second] <span style="color:#666">=</span> i <span style="color:#666">-</span> x.second;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            left[i] <span style="color:#666">=</span> stk_p.empty() <span style="color:#666">?</span> i <span style="color:#666">+</span> <span style="color:#666">1</span> <span style="color:#666">:</span> i <span style="color:#666">-</span> stk_p.top().second;
+</span></span><span style="display:flex;"><span>            stk_p.push({ nums[i], i });
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li>For each element in <code>nums</code> (at index <code>i</code>), we:
+<ul>
+<li><strong>Pop from the stack</strong> while the top element of the stack is greater than the current element (<code>nums[i]</code>). This helps us find the nearest smaller element to the right and calculate the number of subarrays where the element at the popped index is the minimum. We then update <code>right[]</code> for the popped element.</li>
+<li><strong>Update <code>left[i]</code></strong>: If the stack is empty, it means there is no smaller element on the left, and hence <code>left[i]</code> is simply <code>i + 1</code>. If there is a smaller element on the left (represented by the top of the stack), <code>left[i]</code> is calculated as <code>i - stk_p.top().second</code>, which gives the number of subarrays ending at <code>i</code> where <code>nums[i]</code> is the minimum.</li>
+<li>Finally, push the current element <code>(nums[i], i)</code> onto the stack.</li>
+</ul>
+</li>
+</ul>
+<h4 id="sum-the-contributions"><strong>Sum the Contributions</strong></h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mod <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">int</span>) <span style="color:#666">1e9</span> <span style="color:#666">+</span> <span style="color:#666">7</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>            ans <span style="color:#666">=</span> (ans <span style="color:#666">+</span> (<span style="color:#0b0;font-weight:bold">long</span>) nums[i] <span style="color:#666">*</span> (<span style="color:#0b0;font-weight:bold">long</span>) left[i] <span style="color:#666">*</span> (<span style="color:#0b0;font-weight:bold">long</span>) right[i]) <span style="color:#666">%</span> mod;
+</span></span></code></pre></div><ul>
+<li>We compute the total sum by iterating over each element <code>nums[i]</code>:
+<ul>
+<li>The total contribution of <code>nums[i]</code> is its value multiplied by <code>left[i]</code> and <code>right[i]</code>, which represent the number of subarrays where <code>nums[i]</code> is the minimum.</li>
+<li>We take the modulo (10^9 + 7) at each step to avoid overflow and adhere to the problem&rsquo;s constraints.</li>
+</ul>
+</li>
+</ul>
+<h4 id="return-the-result"><strong>Return the Result</strong></h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> (<span style="color:#0b0;font-weight:bold">int</span>) ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>Finally, we return the result as an integer.</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<h4 id="time-complexity"><strong>Time Complexity</strong></h4>
+<ul>
+<li><strong>O(n)</strong>: We iterate through the array once to compute <code>left[]</code> and <code>right[]</code> using the stack, and then iterate through the array again to compute the final sum. The stack operations (push and pop) each take constant time, making the overall time complexity linear with respect to the size of the input array <code>n</code>.</li>
+</ul>
+<h4 id="space-complexity"><strong>Space Complexity</strong></h4>
+<ul>
+<li><strong>O(n)</strong>: The space complexity is dominated by the stack and the arrays <code>left[]</code> and <code>right[]</code>, which both require linear space relative to the size of the input array <code>n</code>.</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>This solution efficiently computes the sum of the minimum values of all subarrays using the monotonic stack technique. By leveraging the stack to track the nearest smaller elements to the left and right, we can compute the number of subarrays where each element serves as the minimum in linear time. This approach is highly efficient and scales well with large input sizes, making it suitable for problems with large arrays. The modulo operation ensures that the result remains within the specified limits, and the use of dynamic programming principles ensures that we avoid a brute force solution that would be too slow.</p>
+<p><a href="https://leetcode.com/problems/sum-of-subarray-minimums/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/aX1F2-DrBkQ?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

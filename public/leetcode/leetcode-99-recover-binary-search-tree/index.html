@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 99: Recover Binary Search Tree | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 99: Recover Binary Search Tree">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 99: Recover Binary Search Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-99-recover-binary-search-tree/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 99: Recover Binary Search Tree">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 99: Recover Binary Search Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-10-28T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Tree">
+    <meta property="article:tag" content="Depth-First Search">
+    <meta property="article:tag" content="Binary Search Tree">
+    <meta property="article:tag" content="Binary Tree">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 99: Recover Binary Search Tree</h1> 
+            </div>
+			<div class="article-post">
+				<h2 id="hahahugoshortcode1436s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+    <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/99.webp" 
+           alt="A tree softly rearranging its nodes, finding its balance and order." 
+           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    
+      <figcaption style="font-size: 0.8em; font-weight: 300; color:#555; margin-top: 4px; line-height: 1.2;">
+        Solution to LeetCode 99: Recover Binary Search Tree Problem
+      </figcaption>
+    
+  </figure>
+  </h2>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode1436s1hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#666">*</span>prv <span style="color:#666">=</span> <span style="color:#a2f">NULL</span>, <span style="color:#666">*</span> fst <span style="color:#666">=</span> <span style="color:#a2f">NULL</span> , <span style="color:#666">*</span>scd <span style="color:#666">=</span> <span style="color:#a2f">NULL</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">inorder</span>(TreeNode<span style="color:#666">*</span> node)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>node) <span style="color:#a2f;font-weight:bold">return</span>;
+</span></span><span style="display:flex;"><span>        inorder(node<span style="color:#666">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (prv <span style="color:#666">&amp;&amp;</span> node<span style="color:#666">-&gt;</span>val <span style="color:#666">&lt;</span> prv<span style="color:#666">-&gt;</span>val) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>fst)  fst <span style="color:#666">=</span> prv;
+</span></span><span style="display:flex;"><span>            scd <span style="color:#666">=</span> node; 
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        prv <span style="color:#666">=</span> node;
+</span></span><span style="display:flex;"><span>        inorder(node<span style="color:#666">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> recoverTree(TreeNode<span style="color:#666">*</span> node) {
+</span></span><span style="display:flex;"><span>        inorder(node);
+</span></span><span style="display:flex;"><span>        swap(fst<span style="color:#666">-&gt;</span>val, scd<span style="color:#666">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="-recover-binary-search-tree-bst">🌳 <strong>Recover Binary Search Tree (BST)</strong></h3>
+<p>The problem asks us to recover a <strong>binary search tree (BST)</strong> where two of its nodes have been swapped by mistake. Given a binary tree with exactly two swapped nodes, the goal is to identify these nodes and swap them back to restore the tree’s validity as a BST.</p>
+<hr>
+<h3 id="-approach">🔑 <strong>Approach:</strong></h3>
+<p>To solve this problem, we need to identify the two nodes that were swapped in the tree and swap them back. The core property of a BST is that during an <strong>in-order traversal</strong>, the node values should be in <strong>strictly increasing order</strong>.</p>
+<h4 id="steps"><strong>Steps:</strong></h4>
+<ol>
+<li><strong>Perform an in-order traversal</strong> of the tree.</li>
+<li>During the traversal, if we find a node whose value is smaller than the previous node’s value, it indicates a violation of the BST property.</li>
+<li>The nodes involved in the violation will be:
+<ul>
+<li>The <strong>first node</strong> that violates the property (<code>fst</code>).</li>
+<li>The <strong>second node</strong> that violates the property (<code>scd</code>).</li>
+</ul>
+</li>
+<li>After identifying the swapped nodes, swap their values to restore the tree.</li>
+</ol>
+<hr>
+<h3 id="-code-breakdown-step-by-step">💻 <strong>Code Breakdown (Step by Step):</strong></h3>
+<h4 id="1-class-definition-and-variable-declaration"><strong>1. Class Definition and Variable Declaration</strong></h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#666">*</span>prv <span style="color:#666">=</span> <span style="color:#a2f">NULL</span>, <span style="color:#666">*</span>fst <span style="color:#666">=</span> <span style="color:#a2f">NULL</span>, <span style="color:#666">*</span>scd <span style="color:#666">=</span> <span style="color:#a2f">NULL</span>;
+</span></span></code></pre></div><ul>
+<li><strong><code>prv</code></strong>: A pointer used to track the previous node during the in-order traversal.</li>
+<li><strong><code>fst</code></strong>: A pointer that will store the first node involved in the swap violation.</li>
+<li><strong><code>scd</code></strong>: A pointer that will store the second node involved in the swap violation.</li>
+</ul>
+<h4 id="2-in-order-traversal-function"><strong>2. In-Order Traversal Function</strong></h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">inorder</span>(TreeNode<span style="color:#666">*</span> node) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>node) <span style="color:#a2f;font-weight:bold">return</span>;
+</span></span><span style="display:flex;"><span>        inorder(node<span style="color:#666">-&gt;</span>left);
+</span></span></code></pre></div><ul>
+<li>The function <code>inorder</code> performs an in-order traversal of the tree starting from the <code>node</code> passed as an argument.</li>
+<li>If the <code>node</code> is <code>NULL</code>, the function returns without doing anything.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (prv <span style="color:#666">&amp;&amp;</span> node<span style="color:#666">-&gt;</span>val <span style="color:#666">&lt;</span> prv<span style="color:#666">-&gt;</span>val) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>fst)  fst <span style="color:#666">=</span> prv;
+</span></span><span style="display:flex;"><span>            scd <span style="color:#666">=</span> node;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        prv <span style="color:#666">=</span> node;
+</span></span><span style="display:flex;"><span>        inorder(node<span style="color:#666">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The <strong>in-order traversal</strong> of the left subtree is done first, and then the value of the current node (<code>node-&gt;val</code>) is compared to the previous node’s value (<code>prv-&gt;val</code>).</li>
+<li>If the current node’s value is less than the previous node’s value (<code>node-&gt;val &lt; prv-&gt;val</code>), this indicates a violation of the BST property.
+<ul>
+<li>The <strong>first violation</strong> occurs when we encounter the first node that is out of order, which is stored in <code>fst</code>.</li>
+<li>The <strong>second violation</strong> node is stored in <code>scd</code>.</li>
+</ul>
+</li>
+<li>The <code>prv</code> pointer is updated to point to the current node (<code>node</code>) to continue the traversal.</li>
+<li>The traversal then proceeds to the right child of the current node (<code>node-&gt;right</code>).</li>
+</ul>
+<h4 id="3-recover-the-tree"><strong>3. Recover the Tree</strong></h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> recoverTree(TreeNode<span style="color:#666">*</span> node) {
+</span></span><span style="display:flex;"><span>        inorder(node);
+</span></span><span style="display:flex;"><span>        swap(fst<span style="color:#666">-&gt;</span>val, scd<span style="color:#666">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>The <code>recoverTree</code> function is the entry point. It takes the root of the tree as an argument (<code>node</code>).</li>
+<li>The function calls the <code>inorder</code> function to identify the swapped nodes.</li>
+<li>After identifying the swapped nodes, the values are swapped back using the <code>swap(fst-&gt;val, scd-&gt;val)</code> statement.</li>
+</ul>
+<hr>
+<h3 id="-time-and-space-complexity">🧠 <strong>Time and Space Complexity:</strong></h3>
+<h4 id="time-complexity"><strong>Time Complexity:</strong></h4>
+<p>The time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the binary tree. This is because we perform a single in-order traversal, visiting each node exactly once.</p>
+<h4 id="space-complexity"><strong>Space Complexity:</strong></h4>
+<p>The space complexity is <strong>O(h)</strong>, where <code>h</code> is the height of the tree. This space is used by the recursion stack during the in-order traversal. In the worst case (unbalanced tree), the height <code>h</code> could be equal to <code>n</code>, so the space complexity would be <strong>O(n)</strong>. However, for a balanced tree, the space complexity would be <strong>O(log n)</strong>.</p>
+<hr>
+<h3 id="-conclusion">🎯 <strong>Conclusion:</strong></h3>
+<p>This solution efficiently solves the problem of recovering a BST with two swapped nodes by performing an <strong>in-order traversal</strong> of the tree. The <strong>in-order traversal</strong> ensures that we can identify the two swapped nodes in a single pass through the tree, making this approach time-efficient with a complexity of <strong>O(n)</strong>.</p>
+<p>The solution uses constant space, aside from the recursion stack, ensuring space efficiency with a worst-case space complexity of <strong>O(h)</strong>. This approach efficiently restores the validity of the binary search tree, ensuring the tree structure is properly recovered.</p>
+<hr>
+<p><strong>Happy coding!</strong> 🌱✨</p>
+<p><a href="https://leetcode.com/problems/recover-binary-search-tree/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/bJBwOMPhe6Y?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 2353: Design a Food Rating System | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 2353: Design a Food Rating System">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 2353: Design a Food Rating System in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-2353-design-a-food-rating-system/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 2353: Design a Food Rating System">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 2353: Design a Food Rating System in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-03-16T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Hash Table">
+    <meta property="article:tag" content="Design">
+    <meta property="article:tag" content="Heap (Priority Queue)">
+    <meta property="article:tag" content="Ordered Set">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 2353: Design a Food Rating System</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode705s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">FoodRatings</span> {
+</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span>string, set<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, string<span style="color:#666">&gt;&gt;&gt;</span> cus_itm;
+</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span>string, string<span style="color:#666">&gt;</span> fd_cus;
+</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span>string, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> fd_rat;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    FoodRatings(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> fd, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> cus, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> rat) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> fd.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            cus_itm[cus[i]].insert(pair(<span style="color:#666">-</span>rat[i], fd[i]));
+</span></span><span style="display:flex;"><span>            fd_cus[fd[i]] <span style="color:#666">=</span> cus[i];
+</span></span><span style="display:flex;"><span>            fd_rat[fd[i]] <span style="color:#666">=</span> rat[i];
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">changeRating</span>(string fd, <span style="color:#0b0;font-weight:bold">int</span> rat) {
+</span></span><span style="display:flex;"><span>        string cus <span style="color:#666">=</span> fd_cus[fd];
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> r <span style="color:#666">=</span> fd_rat[fd];
+</span></span><span style="display:flex;"><span>        cus_itm[cus].erase({<span style="color:#666">-</span>r, fd});
+</span></span><span style="display:flex;"><span>        cus_itm[cus].insert({<span style="color:#666">-</span>rat, fd});
+</span></span><span style="display:flex;"><span>        fd_rat[fd] <span style="color:#666">=</span> rat;
+</span></span><span style="display:flex;"><span> 
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    string <span style="color:#00a000">highestRated</span>(string cus) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> begin(cus_itm[cus])<span style="color:#666">-&gt;</span>second;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Your FoodRatings object will be instantiated and called as such:
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * FoodRatings* obj = new FoodRatings(foods, cuisines, ratings);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * obj-&gt;changeRating(food,newRating);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * string param_2 = obj-&gt;highestRated(cuisine);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> */</span></span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem is to design a system for tracking food ratings based on cuisine type. Given lists of food items, their respective cuisines, and initial ratings, we need to support two main operations:</p>
+<ol>
+<li><strong><code>changeRating</code></strong>: Change the rating of a specific food item and update its position based on the new rating.</li>
+<li><strong><code>highestRated</code></strong>: Retrieve the highest-rated food item for a specified cuisine.</li>
+</ol>
+<h3 id="approach">Approach</h3>
+<p>The solution uses hash maps (<code>unordered_map</code>) and an ordered set (<code>set</code>) to efficiently store and retrieve the ratings for foods by cuisine. The main design involves:</p>
+<ul>
+<li><strong>Mapping cuisines to foods</strong> with ratings using a set, which keeps food items sorted by their ratings.</li>
+<li><strong>Tracking food-cuisine relationships</strong> and <strong>food-rating values</strong> separately with hash maps, enabling efficient updating of ratings.</li>
+<li>Ensuring that food items with equal ratings are sorted lexicographically to satisfy the requirements.</li>
+</ul>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<h4 id="class-definition-and-member-variables">Class Definition and Member Variables</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_map<span style="color:#666">&lt;</span>string, set<span style="color:#666">&lt;</span>pair<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span>, string<span style="color:#666">&gt;&gt;&gt;</span> cus_itm;
+</span></span><span style="display:flex;"><span>unordered_map<span style="color:#666">&lt;</span>string, string<span style="color:#666">&gt;</span> fd_cus;
+</span></span><span style="display:flex;"><span>unordered_map<span style="color:#666">&lt;</span>string, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> fd_rat;
+</span></span></code></pre></div><ul>
+<li><code>cus_itm</code>: Maps each cuisine to a set of foods, sorted by rating in descending order. Each entry in the set is a pair <code>(-rating, food_name)</code> to ensure high ratings appear first.</li>
+<li><code>fd_cus</code>: Maps each food item to its cuisine, allowing quick access to a food’s cuisine.</li>
+<li><code>fd_rat</code>: Maps each food item to its rating, enabling quick lookups and updates.</li>
+</ul>
+<h4 id="constructor">Constructor</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>FoodRatings(vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> fd, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> cus, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> rat) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> fd.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        cus_itm[cus[i]].insert(pair(<span style="color:#666">-</span>rat[i], fd[i]));
+</span></span><span style="display:flex;"><span>        fd_cus[fd[i]] <span style="color:#666">=</span> cus[i];
+</span></span><span style="display:flex;"><span>        fd_rat[fd[i]] <span style="color:#666">=</span> rat[i];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Initializes the <code>FoodRatings</code> object by populating the maps.</li>
+<li>For each food item, the constructor:
+<ul>
+<li>Inserts <code>(-rating, food)</code> into the <code>cus_itm</code> set for the correct cuisine.</li>
+<li>Updates <code>fd_cus</code> and <code>fd_rat</code> with the food’s cuisine and rating.</li>
+</ul>
+</li>
+</ul>
+<h4 id="changerating-method"><code>changeRating</code> Method</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">changeRating</span>(string fd, <span style="color:#0b0;font-weight:bold">int</span> rat) {
+</span></span><span style="display:flex;"><span>    string cus <span style="color:#666">=</span> fd_cus[fd];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> r <span style="color:#666">=</span> fd_rat[fd];
+</span></span><span style="display:flex;"><span>    cus_itm[cus].erase({<span style="color:#666">-</span>r, fd});
+</span></span><span style="display:flex;"><span>    cus_itm[cus].insert({<span style="color:#666">-</span>rat, fd});
+</span></span><span style="display:flex;"><span>    fd_rat[fd] <span style="color:#666">=</span> rat;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Retrieves the current cuisine and rating for the specified food.</li>
+<li>Removes the food with the old rating from <code>cus_itm[cus]</code>, inserts it with the new rating, and updates <code>fd_rat[fd]</code>.</li>
+</ul>
+<h4 id="highestrated-method"><code>highestRated</code> Method</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>string <span style="color:#00a000">highestRated</span>(string cus) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> begin(cus_itm[cus])<span style="color:#666">-&gt;</span>second;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>Retrieves and returns the food with the highest rating for the specified cuisine by accessing the first element in <code>cus_itm[cus]</code>.</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><strong>Constructor</strong>: <strong>O(n log n)</strong>, where <code>n</code> is the number of food items. Each insertion into <code>cus_itm</code> (a set) is <strong>O(log n)</strong>.</li>
+<li><strong>changeRating</strong>: <strong>O(log m)</strong>, where <code>m</code> is the number of foods within a cuisine, due to insertion and deletion in the set.</li>
+<li><strong>highestRated</strong>: <strong>O(1)</strong>, as accessing the highest-rated food item is <strong>O(1)</strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: <strong>O(n)</strong>, where <code>n</code> is the number of foods, for storing the data in the hash maps and sets.</p>
+</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>The <code>FoodRatings</code> class provides an efficient way to manage and retrieve food ratings by cuisine. By leveraging hash maps for quick lookups and an ordered set to keep foods sorted by rating, this solution achieves efficient insertion, updating, and retrieval of the highest-rated foods. This approach is suitable for real-time updates, making it ideal for applications that require frequent rating adjustments.</p>
+<p><a href="https://leetcode.com/problems/design-a-food-rating-system/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/Ikp8SgbgbEo?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 756: Pyramid Transition Matrix | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 756: Pyramid Transition Matrix">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 756: Pyramid Transition Matrix in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-756-pyramid-transition-matrix/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 756: Pyramid Transition Matrix">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 756: Pyramid Transition Matrix in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-08-23T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Bit Manipulation">
+    <meta property="article:tag" content="Depth-First Search">
+    <meta property="article:tag" content="Breadth-First Search">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 756: Pyramid Transition Matrix</h1> 
+            </div>
+			<div class="article-post">
+				<h2 id="hahahugoshortcode1295s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+    <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/756.webp" 
+           alt="A pyramid structure where transitions occur, with the valid transitions glowing softly as they are made." 
+           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    
+      <figcaption style="font-size: 0.8em; font-weight: 300; color:#555; margin-top: 4px; line-height: 1.2;">
+        Solution to LeetCode 756: Pyramid Transition Matrix Problem
+      </figcaption>
+    
+  </figure>
+  </h2>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode1295s1hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    unordered_set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> invalid;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">pyramidTransition</span>(string bottom, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> allowed) {
+</span></span><span style="display:flex;"><span>      invalid.clear();
+</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span>string, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span> m;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span><span style="color:#666">&amp;</span> <span style="color:#a0a000">s</span>:allowed) m[s.substr(<span style="color:#666">0</span>, <span style="color:#666">2</span>)].push_back(s.back());
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> helper(bottom, m, <span style="color:#666">0</span>, <span style="color:#b44">&#34;&#34;</span>);
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">helper</span>(string bottom, unordered_map<span style="color:#666">&lt;</span>string, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&amp;</span> m, <span style="color:#0b0;font-weight:bold">int</span> start, string next){
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(bottom.size() <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(invalid.find(bottom) <span style="color:#666">!=</span> invalid.end()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span>(start <span style="color:#666">==</span> (<span style="color:#0b0;font-weight:bold">int</span>)bottom.size() <span style="color:#666">-</span> <span style="color:#666">1</span>) {
+</span></span><span style="display:flex;"><span>           <span style="color:#0b0;font-weight:bold">bool</span> res <span style="color:#666">=</span> helper(next, m, <span style="color:#666">0</span>, <span style="color:#b44">&#34;&#34;</span>);
+</span></span><span style="display:flex;"><span>           <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>res) { invalid.insert(next); }
+</span></span><span style="display:flex;"><span>           <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>       }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span> : m[bottom.substr(start, <span style="color:#666">2</span>)])
+</span></span><span style="display:flex;"><span>      <span style="color:#a2f;font-weight:bold">if</span>(helper(bottom, m, start<span style="color:#666">+</span><span style="color:#666">1</span>, next<span style="color:#666">+</span>c)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>  }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem involves constructing a pyramid from a bottom row of blocks, where each block can have a certain type, and each block can only be placed on top of a pair of blocks that form a specific allowed transition. You are given a bottom row and a list of allowed transitions, and your task is to determine whether it is possible to form a valid pyramid by placing blocks above the current bottom row using these allowed transitions.</p>
+<p>Each block on the current row can only be stacked with blocks above it that follow one of the allowed transitions, and the next row must be shorter than the previous row. The goal is to check if it&rsquo;s possible to build a pyramid from the given bottom row using the allowed transitions.</p>
+<h3 id="approach">Approach</h3>
+<p>The approach to solve this problem can be broken down into recursive exploration with memoization and pruning to optimize the solution. The key idea is to simulate the pyramid-building process step by step, starting with the bottom row, and recursively attempting to build the next row based on the allowed transitions.</p>
+<p>To solve this, we use:</p>
+<ol>
+<li><strong>Recursive Search</strong>: We attempt to recursively build the pyramid from the bottom row to the top row, where each step attempts to build the next row based on the allowed transitions.</li>
+<li><strong>Memoization</strong>: We memoize the results for substrings of the bottom row that have been computed previously to avoid redundant work.</li>
+<li><strong>State Pruning</strong>: We use an unordered set (<code>invalid</code>) to mark and store configurations of the bottom row that are impossible, thus preventing the exploration of invalid configurations in future recursive calls.</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<h4 id="step-1-initial-setup">Step 1: Initial Setup</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>unordered_set<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> invalid;
+</span></span></code></pre></div><p>Here, we define an unordered set <code>invalid</code> to store configurations of the bottom row that are deemed impossible. This allows us to avoid revisiting invalid states during the recursive calls.</p>
+<h4 id="step-2-main-function-to-start-pyramid-building">Step 2: Main Function to Start Pyramid Building</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">pyramidTransition</span>(string bottom, vector<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;&amp;</span> allowed) {
+</span></span><span style="display:flex;"><span>    invalid.clear();
+</span></span><span style="display:flex;"><span>    unordered_map<span style="color:#666">&lt;</span>string, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;</span> m;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#080;font-style:italic">// Mapping allowed transitions from pairs of blocks to the possible top block
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span><span style="color:#666">&amp;</span> <span style="color:#a0a000">s</span> : allowed) {
+</span></span><span style="display:flex;"><span>        m[s.substr(<span style="color:#666">0</span>, <span style="color:#666">2</span>)].push_back(s.back());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> helper(bottom, m, <span style="color:#666">0</span>, <span style="color:#b44">&#34;&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong><code>unordered_map&lt;string, vector&lt;char&gt;&gt; m;</code></strong>: This map stores the allowed transitions. The key is a string of two adjacent characters (representing a pair of blocks), and the value is a vector of characters representing the allowed blocks that can be placed on top of that pair.</p>
+</li>
+<li>
+<p><strong><code>for (auto&amp; s : allowed)</code></strong>: This loop iterates over the allowed transitions, and for each transition, it adds the allowed top block (last character of the string) to the vector corresponding to the pair of blocks represented by the first two characters of the string.</p>
+</li>
+<li>
+<p><strong><code>return helper(bottom, m, 0, &quot;&quot;);</code></strong>: We start the recursive process by calling the <code>helper</code> function with the current <code>bottom</code> row, the <code>unordered_map</code> of allowed transitions (<code>m</code>), and an empty string <code>next</code> representing the next row to be constructed.</p>
+</li>
+</ul>
+<h4 id="step-3-recursive-helper-function">Step 3: Recursive Helper Function</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">helper</span>(string bottom, unordered_map<span style="color:#666">&lt;</span>string, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">char</span><span style="color:#666">&gt;&gt;&amp;</span> m, <span style="color:#0b0;font-weight:bold">int</span> start, string next) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (bottom.size() <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;  <span style="color:#080;font-style:italic">// If we have reached a single block, the pyramid is complete.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (invalid.find(bottom) <span style="color:#666">!=</span> invalid.end()) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;  <span style="color:#080;font-style:italic">// If the bottom configuration is invalid, stop.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">if</span> (start <span style="color:#666">==</span> (<span style="color:#0b0;font-weight:bold">int</span>)bottom.size() <span style="color:#666">-</span> <span style="color:#666">1</span>) {  <span style="color:#080;font-style:italic">// When we reach the end of the bottom row, attempt to construct the next row.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#0b0;font-weight:bold">bool</span> res <span style="color:#666">=</span> helper(next, m, <span style="color:#666">0</span>, <span style="color:#b44">&#34;&#34;</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (<span style="color:#666">!</span>res) { invalid.insert(next); }  <span style="color:#080;font-style:italic">// Mark the configuration as invalid if it cannot lead to a valid pyramid.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span> : m[bottom.substr(start, <span style="color:#666">2</span>)]) {  <span style="color:#080;font-style:italic">// For the current pair of blocks, explore the allowed transitions.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">if</span> (helper(bottom, m, start <span style="color:#666">+</span> <span style="color:#666">1</span>, next <span style="color:#666">+</span> c)) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;  <span style="color:#080;font-style:italic">// Recursively try adding the next block to the next row.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;  <span style="color:#080;font-style:italic">// Return false if no valid configurations are found.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
+</span></span></code></pre></div><ul>
+<li>
+<p><strong>Base Cases</strong>:</p>
+<ul>
+<li><strong><code>if (bottom.size() == 1)</code></strong>: When the <code>bottom</code> row has only one block left, the pyramid is successfully built, so we return <code>true</code>.</li>
+<li><strong><code>else if (invalid.find(bottom) != invalid.end())</code></strong>: If the current configuration of the <code>bottom</code> row is already known to be invalid (stored in the <code>invalid</code> set), we return <code>false</code> to prevent further exploration of this path.</li>
+<li><strong><code>else if (start == (int)bottom.size() - 1)</code></strong>: If we have reached the last block in the current <code>bottom</code> row, it is time to attempt constructing the next row (i.e., the row above the current one). We do this by calling <code>helper(next, m, 0, &quot;&quot;)</code>, where <code>next</code> is the string representing the next row to be constructed.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive Exploration</strong>:</p>
+<ul>
+<li><strong><code>for (char c : m[bottom.substr(start, 2)])</code></strong>: We iterate over all possible blocks (<code>c</code>) that can be placed on top of the current pair of blocks (<code>bottom.substr(start, 2)</code>) based on the transitions stored in <code>m</code>.</li>
+<li><strong><code>helper(bottom, m, start + 1, next + c)</code></strong>: For each allowed block <code>c</code>, we recursively attempt to place it on the <code>next</code> row. We continue this process for each pair of blocks in the <code>bottom</code> row.</li>
+</ul>
+</li>
+<li>
+<p><strong>Failure Case</strong>:</p>
+<ul>
+<li>If none of the recursive calls succeed, we return <code>false</code>, indicating that it is impossible to build a valid pyramid from the given bottom row.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-4-memoization">Step 4: Memoization</h4>
+<ul>
+<li>If the recursive call returns <code>false</code> for a given configuration of <code>next</code>, we mark that configuration as invalid by inserting it into the <code>invalid</code> set. This ensures that the next time the same configuration is encountered, it will be skipped, improving the efficiency of the algorithm by preventing redundant checks.</li>
+</ul>
+<h4 id="final-result">Final Result</h4>
+<ul>
+<li>If we successfully build a pyramid, the function returns <code>true</code>, otherwise <code>false</code>.</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity is difficult to express in simple terms because of the recursive nature of the solution. However, the function explores possible transitions at each step, and due to memoization, it avoids redundant work. The complexity is roughly proportional to the number of possible pyramid configurations, which is exponential in the worst case, but greatly reduced by pruning invalid states early.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is <strong>O(n)</strong>, where <code>n</code> is the number of blocks in the <code>bottom</code> row, because of the recursion stack and the <code>unordered_set</code> used for memoization.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>The solution leverages a recursive approach with memoization to efficiently check whether it&rsquo;s possible to construct a pyramid from a given bottom row using allowed transitions. By storing invalid configurations and pruning redundant computations, the algorithm ensures optimal performance even for larger inputs. This approach avoids brute-forcing through every possible configuration, making it both time and space efficient for solving the pyramid transition problem.</p>
+<p><a href="https://leetcode.com/problems/pyramid-transition-matrix/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/RMkh4P4h7ek?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

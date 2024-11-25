@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 861: Score After Flipping Matrix | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 861: Score After Flipping Matrix">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 861: Score After Flipping Matrix in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-861-score-after-flipping-matrix/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 861: Score After Flipping Matrix">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 861: Score After Flipping Matrix in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-08-12T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Greedy">
+    <meta property="article:tag" content="Bit Manipulation">
+    <meta property="article:tag" content="Matrix">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 861: Score After Flipping Matrix</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode1356s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> matrixScore(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> grid) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">*</span> m;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>                cur <span style="color:#666">+=</span> grid[i][<span style="color:#666">0</span>] <span style="color:#666">==</span> grid[i][j];
+</span></span><span style="display:flex;"><span>            res <span style="color:#666">+=</span> max(cur, m <span style="color:#666">-</span> cur) <span style="color:#666">*</span> (<span style="color:#666">1</span><span style="color:#666">&lt;&lt;</span>n<span style="color:#666">-</span>j<span style="color:#666">-</span><span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem is about maximizing the score of a binary matrix by flipping the rows and columns. The score of the matrix is calculated as the sum of values represented by each row in the binary matrix, where the leftmost bit has the highest weight (i.e., it contributes the most to the score). The objective is to determine the maximum possible score that can be achieved by flipping rows and columns in the matrix. You can flip the rows or columns as many times as needed to achieve the highest possible score.</p>
+<h3 id="approach">Approach</h3>
+<p>To solve this problem efficiently, we can follow a greedy approach with a focus on the contribution of each bit position in the binary matrix.</p>
+<h4 id="key-observations">Key Observations:</h4>
+<ol>
+<li>
+<p><strong>Flipping Rows</strong>: We can flip the rows such that the leftmost column always contains 1’s. This is because, for a binary matrix, the leftmost column contributes the most to the total score. By flipping the rows to maximize the number of 1&rsquo;s in the leftmost column, we ensure that the total score is as high as possible.</p>
+</li>
+<li>
+<p><strong>Flipping Columns</strong>: After ensuring that the leftmost column is filled with 1’s, we can look at each of the remaining columns one by one. For each column, we can decide whether it is better to leave the column as is or flip it. If flipping a column results in a higher score, we should flip it.</p>
+</li>
+</ol>
+<h4 id="steps">Steps:</h4>
+<ol>
+<li>
+<p><strong>Maximizing the First Column</strong>: We first ensure that the leftmost column contains 1’s. If it has more 0’s than 1’s, we flip the rows so that the first column contains 1’s.</p>
+</li>
+<li>
+<p><strong>Processing the Remaining Columns</strong>: For each subsequent column, we check how many 1’s and 0’s are present. If flipping the column results in a higher score, we perform the flip.</p>
+</li>
+<li>
+<p><strong>Final Score Calculation</strong>: Once the matrix has been adjusted optimally by flipping rows and columns, we calculate the score by converting each row of the matrix into a binary number and summing them up.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<h4 id="step-1-initialize-variables">Step 1: Initialize Variables</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> m <span style="color:#666">=</span> grid.size(), n <span style="color:#666">=</span> grid[<span style="color:#666">0</span>].size();
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">*</span> m;
+</span></span></code></pre></div><ul>
+<li><code>m</code> represents the number of rows in the matrix, and <code>n</code> represents the number of columns.</li>
+<li><code>res</code> is initialized with the value of the first column filled with 1’s. Since the leftmost column contributes the most to the score, we assume it is all 1’s, and each row will contribute <code>2^(n-1)</code> (the value of the first bit) to the score. We multiply this by <code>m</code> to account for all rows.</li>
+</ul>
+<h4 id="step-2-process-each-column">Step 2: Process Each Column</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> m; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        cur <span style="color:#666">+=</span> grid[i][<span style="color:#666">0</span>] <span style="color:#666">==</span> grid[i][j];
+</span></span><span style="display:flex;"><span>    res <span style="color:#666">+=</span> max(cur, m <span style="color:#666">-</span> cur) <span style="color:#666">*</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> n <span style="color:#666">-</span> j <span style="color:#666">-</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>
+<p>For each column (starting from column 1, as column 0 has already been handled), we calculate the number of 1’s that align with the first column. This is done by comparing the value in column <code>j</code> with the value in the first column (<code>grid[i][0] == grid[i][j]</code>).</p>
+</li>
+<li>
+<p><code>cur</code> tracks how many 1’s there are in column <code>j</code> where the corresponding entry in column 0 is also 1. If <code>cur</code> is greater than <code>m - cur</code> (i.e., more 1’s than 0’s), we leave the column as is. Otherwise, we flip it.</p>
+</li>
+<li>
+<p>The contribution to the score from column <code>j</code> is calculated by multiplying <code>max(cur, m - cur)</code> by <code>2^(n-j-1)</code>, which is the weight of the column. The goal is to add the maximum contribution from each column to the total score.</p>
+</li>
+</ul>
+<h4 id="step-3-return-the-final-result">Step 3: Return the Final Result</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div><ul>
+<li>After processing all columns, we return the calculated score <code>res</code>, which represents the maximum score that can be achieved by optimally flipping rows and columns.</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<h4 id="time-complexity">Time Complexity:</h4>
+<ul>
+<li>The time complexity of this solution is <strong>O(m * n)</strong>, where <code>m</code> is the number of rows and <code>n</code> is the number of columns in the matrix. The algorithm iterates over all rows and columns in the matrix to calculate the score.</li>
+</ul>
+<h4 id="space-complexity">Space Complexity:</h4>
+<ul>
+<li>The space complexity is <strong>O(1)</strong>, as we only use a constant amount of extra space for variables (<code>res</code>, <code>cur</code>, etc.). The space used does not depend on the size of the input matrix.</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>This solution efficiently maximizes the score of a binary matrix by performing row and column flips. The greedy approach of first maximizing the first column and then processing each subsequent column ensures that the score is optimized. The algorithm runs in <strong>O(m * n)</strong> time and uses constant extra space, making it both time and space efficient for large matrices.</p>
+<p>The approach provides a clear and optimal solution to the problem and is well-suited for large input sizes, as it ensures that the operations are performed in linear time relative to the size of the matrix.</p>
+<p><a href="https://leetcode.com/problems/score-after-flipping-matrix/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/FbhzRA5den8?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

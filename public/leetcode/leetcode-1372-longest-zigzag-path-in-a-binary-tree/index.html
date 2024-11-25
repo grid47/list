@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 1372: Longest ZigZag Path in a Binary Tree | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 1372: Longest ZigZag Path in a Binary Tree">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1372: Longest ZigZag Path in a Binary Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-1372-longest-zigzag-path-in-a-binary-tree/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 1372: Longest ZigZag Path in a Binary Tree">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1372: Longest ZigZag Path in a Binary Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-06-22T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Dynamic Programming">
+    <meta property="article:tag" content="Tree">
+    <meta property="article:tag" content="Depth-First Search">
+    <meta property="article:tag" content="Binary Tree">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 1372: Longest ZigZag Path in a Binary Tree</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode180s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Definition for a binary tree node.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * struct TreeNode {
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     int val;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode *left;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode *right;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * };
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    map<span style="color:#666">&lt;</span>TreeNode<span style="color:#666">*</span>, map<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">bool</span>, <span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> mp;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">zigzag</span>(TreeNode<span style="color:#666">*</span> root, <span style="color:#0b0;font-weight:bold">bool</span> dir) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>root) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">-</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(mp.count(root) <span style="color:#666">&amp;&amp;</span> mp[root].count(dir)) <span style="color:#a2f;font-weight:bold">return</span> mp[root][dir];
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(dir)
+</span></span><span style="display:flex;"><span>            ans <span style="color:#666">=</span> <span style="color:#666">1</span> <span style="color:#666">+</span> zigzag(root<span style="color:#666">-&gt;</span>left, <span style="color:#666">!</span>dir);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>dir)
+</span></span><span style="display:flex;"><span>            ans <span style="color:#666">=</span> <span style="color:#666">1</span> <span style="color:#666">+</span> zigzag(root<span style="color:#666">-&gt;</span>right, <span style="color:#666">!</span>dir);            
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> mp[root][dir] <span style="color:#666">=</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">longestZigZag</span>(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(<span style="color:#666">!</span>root) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> max(ans, zigzag(root, <span style="color:#666">1</span>));
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> max(ans, zigzag(root, <span style="color:#666">0</span>));        
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(root<span style="color:#666">-&gt;</span>left)
+</span></span><span style="display:flex;"><span>        longestZigZag(root<span style="color:#666">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(root<span style="color:#666">-&gt;</span>right)
+</span></span><span style="display:flex;"><span>        longestZigZag(root<span style="color:#666">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem at hand involves finding the longest ZigZag path in a binary tree. A ZigZag path starts at any node and alternates between left and right children. The objective is to return the length of the longest such path in the tree. The length is defined as the number of edges traversed in this alternating pattern.</p>
+<h3 id="approach">Approach</h3>
+<p>To tackle this problem, we can utilize a depth-first search (DFS) strategy combined with dynamic programming techniques to efficiently compute the lengths of ZigZag paths originating from each node in the binary tree. The solution can be divided into several key components:</p>
+<ol>
+<li>
+<p><strong>Understanding ZigZag Movement</strong>: The ZigZag path is defined such that from any node, we can move left and then right or right and then left. This means at each step, the direction of the traversal will alternate.</p>
+</li>
+<li>
+<p><strong>Recursive Traversal</strong>: We&rsquo;ll employ a recursive function that takes a node and a boolean variable indicating the current direction of the ZigZag movement. The function will return the maximum length of the ZigZag path starting from that node in the given direction.</p>
+</li>
+<li>
+<p><strong>Memoization</strong>: To avoid recalculating the lengths for nodes we&rsquo;ve already processed, we will use a memoization technique. We will store the results of previously computed ZigZag lengths in a map, allowing us to retrieve them in constant time.</p>
+</li>
+<li>
+<p><strong>Two Possible Directions</strong>: From each node, we will consider both possible starting directions (left and right) and compute the maximum ZigZag path length from both. The overall result will be the maximum of these values.</p>
+</li>
+<li>
+<p><strong>Final Computation</strong>: After initiating the recursive process for the root node, we will traverse both left and right children of the tree to ensure that all possible ZigZag paths are considered.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<p>The provided C++ code implements the above approach. Here&rsquo;s a detailed breakdown of the code:</p>
+<ol>
+<li>
+<p><strong>TreeNode Structure</strong>:
+The structure <code>TreeNode</code> defines the binary tree nodes, each having a value, a left child, and a right child. It includes constructors to initialize these values.</p>
+</li>
+<li>
+<p><strong>Solution Class</strong>:
+The <code>Solution</code> class contains two primary methods: <code>zigzag</code> and <code>longestZigZag</code>.</p>
+</li>
+<li>
+<p><strong>Zigzag Method</strong>:</p>
+<ul>
+<li><strong>Parameters</strong>: The method <code>zigzag(TreeNode* root, bool dir)</code> takes a pointer to the current node (<code>root</code>) and a boolean (<code>dir</code>) indicating the direction of traversal.</li>
+<li><strong>Base Case</strong>: If the current node is <code>nullptr</code>, it returns <code>-1</code>, indicating no path can be formed.</li>
+<li><strong>Memoization Check</strong>: The code checks if the ZigZag length for the current node and direction has been computed before. If so, it returns the stored result.</li>
+<li><strong>Recursive Calls</strong>: Depending on the direction:
+<ul>
+<li>If moving left (<code>dir = true</code>), it recursively calls <code>zigzag</code> on the left child, changing the direction to right (<code>!dir</code>).</li>
+<li>If moving right (<code>dir = false</code>), it recursively calls <code>zigzag</code> on the right child, changing the direction to left.</li>
+</ul>
+</li>
+<li><strong>Result Storage</strong>: The result is stored in the map <code>mp</code> for future reference.</li>
+</ul>
+</li>
+<li>
+<p><strong>LongestZigZag Method</strong>:</p>
+<ul>
+<li><strong>Parameters</strong>: The method <code>longestZigZag(TreeNode* root)</code> computes the longest ZigZag path in the binary tree rooted at <code>root</code>.</li>
+<li><strong>Base Case</strong>: It first checks if the <code>root</code> is <code>nullptr</code>, returning <code>0</code> as the length.</li>
+<li><strong>Max Calculation</strong>: It computes the maximum ZigZag lengths starting in both directions from the root and updates the <code>ans</code> variable.</li>
+<li><strong>Recursive Traversal</strong>: It recursively computes the longest ZigZag path for the left and right subtrees of the current node.</li>
+<li><strong>Return Value</strong>: The method returns the overall maximum ZigZag length.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">Complexity</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of the solution is (O(N)), where (N) is the number of nodes in the binary tree. Each node is visited once, and the memoization ensures that we do not recompute ZigZag lengths unnecessarily.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is also (O(N)) due to the storage requirements of the memoization map and the recursive call stack. In the worst case, the depth of the recursion can go up to the height of the tree, which can be (O(N)) for a skewed tree.</p>
+</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>The solution efficiently calculates the longest ZigZag path in a binary tree by employing a combination of depth-first search and memoization techniques. By systematically exploring each node and considering both directions of movement, we ensure that all potential paths are evaluated. The approach not only optimizes performance through memoization but also provides a clear and understandable structure for tackling similar tree traversal problems in the future. This makes it a valuable reference for developers and computer science enthusiasts seeking to enhance their algorithmic problem-solving skills in binary trees.</p>
+<p><a href="https://leetcode.com/problems/longest-zigzag-path-in-a-binary-tree/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/hbzdyIlvBKI?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

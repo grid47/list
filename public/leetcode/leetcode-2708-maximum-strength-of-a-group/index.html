@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 2708: Maximum Strength of a Group | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 2708: Maximum Strength of a Group">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 2708: Maximum Strength of a Group in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-2708-maximum-strength-of-a-group/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 2708: Maximum Strength of a Group">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 2708: Maximum Strength of a Group in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-02-10T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Dynamic Programming">
+    <meta property="article:tag" content="Backtracking">
+    <meta property="article:tag" content="Greedy">
+    <meta property="article:tag" content="Bit Manipulation">
+    <meta property="article:tag" content="Sorting">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 2708: Maximum Strength of a Group</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode909s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> maxStrength(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">bool</span> zero <span style="color:#666">=</span> <span style="color:#a2f">false</span>, allneg <span style="color:#666">=</span> <span style="color:#a2f">true</span>, allzero <span style="color:#666">=</span> <span style="color:#a2f">true</span>, pos <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> ncnt <span style="color:#666">=</span> <span style="color:#666">0</span>, pcnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> ans <span style="color:#666">=</span> <span style="color:#666">1</span>, neg <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mxn <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">10</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>                pcnt<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>                pos <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>                allzero <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>                allneg <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>                ans <span style="color:#666">*=</span> nums[i];
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(nums[i] <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>                zero <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                ncnt<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>                allzero <span style="color:#666">=</span> <span style="color:#a2f">false</span>;                
+</span></span><span style="display:flex;"><span>                mxn<span style="color:#666">=</span> max(mxn, nums[i]);
+</span></span><span style="display:flex;"><span>                neg <span style="color:#666">*=</span> nums[i];
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(allzero) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(ncnt <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> (ncnt <span style="color:#666">%</span><span style="color:#666">2</span>)) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(pcnt <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> ncnt <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> zero<span style="color:#666">?</span> <span style="color:#666">0</span><span style="color:#666">:</span> neg; 
+</span></span><span style="display:flex;"><span>            neg <span style="color:#666">=</span> neg <span style="color:#666">/</span> mxn;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(pcnt <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> neg;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans <span style="color:#666">*</span> neg;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem asks you to find the maximum product of a subset of an array <code>nums</code> where the subset contains at least one number. The subset can include both positive and negative numbers, and it can also include zeros. You need to return the maximum strength, which is defined as the product of the selected subset.</p>
+<h3 id="approach">Approach</h3>
+<p>To solve this problem, we need to carefully consider the impact of positive numbers, negative numbers, and zero on the product of the subset. Here is a breakdown of the key observations:</p>
+<ol>
+<li>
+<p><strong>Handling Positive Numbers</strong>:</p>
+<ul>
+<li>Positive numbers will always increase the product, so we should always include all positive numbers in the product.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling Negative Numbers</strong>:</p>
+<ul>
+<li>Negative numbers, when taken in even quantities, will result in a positive product. However, if there is an odd count of negative numbers, the product will be negative. Therefore, we need to either exclude the smallest negative number (if we have an odd number of them) or include all negative numbers (if we have an even number of them).</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling Zeros</strong>:</p>
+<ul>
+<li>Zeros do not affect the product (i.e., multiplying by zero results in zero), but they can be useful when there are only negative numbers in the array and we cannot form a positive product. In such cases, including a zero might allow us to get a non-negative product.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Strategy</strong>:</p>
+<ul>
+<li>Multiply all positive numbers.</li>
+<li>For negative numbers, if their count is odd, exclude the smallest (least negative) one to make the product positive.</li>
+<li>If the count of negative numbers is even, include all of them.</li>
+<li>If there are zero values, we can use one zero if necessary to avoid a negative product when there are no positive numbers.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<h4 id="1-initializing-variables">1. Initializing Variables</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> zero <span style="color:#666">=</span> <span style="color:#a2f">false</span>, allneg <span style="color:#666">=</span> <span style="color:#a2f">true</span>, allzero <span style="color:#666">=</span> <span style="color:#a2f">true</span>, pos <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> ncnt <span style="color:#666">=</span> <span style="color:#666">0</span>, pcnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> ans <span style="color:#666">=</span> <span style="color:#666">1</span>, neg <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mxn <span style="color:#666">=</span> <span style="color:#666">-</span><span style="color:#666">10</span>;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> nums.size();
+</span></span></code></pre></div><ul>
+<li><strong><code>zero</code></strong>: Tracks whether there&rsquo;s a zero in the array.</li>
+<li><strong><code>allneg</code></strong>: Tracks whether all the numbers are negative (used later to check if there are any positive numbers).</li>
+<li><strong><code>allzero</code></strong>: Tracks whether the array consists only of zeros.</li>
+<li><strong><code>pos</code></strong>: Indicates whether there are any positive numbers in the array.</li>
+<li><strong><code>ncnt</code></strong>: The count of negative numbers.</li>
+<li><strong><code>pcnt</code></strong>: The count of positive numbers.</li>
+<li><strong><code>ans</code></strong>: The variable that will store the final result, initialized to <code>1</code> because we&rsquo;re multiplying numbers.</li>
+<li><strong><code>neg</code></strong>: The product of negative numbers, initialized to <code>1</code>.</li>
+<li><strong><code>mxn</code></strong>: Tracks the maximum negative number (the least negative) to handle cases where we need to exclude it.</li>
+<li><strong><code>n</code></strong>: The size of the input array.</li>
+</ul>
+<h4 id="2-loop-through-the-array">2. Loop through the Array</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(nums[i] <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>        pcnt<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        pos <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>        allzero <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>        allneg <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">*=</span> nums[i];
+</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(nums[i] <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>        zero <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>    } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>        ncnt<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        allzero <span style="color:#666">=</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>        mxn <span style="color:#666">=</span> max(mxn, nums[i]);
+</span></span><span style="display:flex;"><span>        neg <span style="color:#666">*=</span> nums[i];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>This loop iterates over the entire array and performs the following:
+<ul>
+<li>If the number is positive (<code>nums[i] &gt; 0</code>), it increments the <code>pcnt</code> counter, sets the <code>pos</code> flag to true, and includes this number in the product (<code>ans</code>).</li>
+<li>If the number is zero (<code>nums[i] == 0</code>), it sets the <code>zero</code> flag to true.</li>
+<li>If the number is negative (<code>nums[i] &lt; 0</code>), it increments the <code>ncnt</code> counter, updates <code>mxn</code> with the least negative number, and multiplies <code>neg</code> by this number.</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-all-zeros-case">3. All Zeros Case</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(allzero) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div><ul>
+<li>If all numbers in the array are zero, the result is <code>0</code> because no non-zero product can be formed.</li>
+</ul>
+<h4 id="4-handling-negative-numbers">4. Handling Negative Numbers</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(ncnt <span style="color:#666">&gt;</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> (ncnt <span style="color:#666">%</span> <span style="color:#666">2</span>)) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(pcnt <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> ncnt <span style="color:#666">==</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> zero <span style="color:#666">?</span> <span style="color:#666">0</span> <span style="color:#666">:</span> neg; 
+</span></span><span style="display:flex;"><span>    neg <span style="color:#666">=</span> neg <span style="color:#666">/</span> mxn;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If there are negative numbers and their count is odd (<code>ncnt % 2</code>), we must exclude the smallest negative number (i.e., the least negative) to make the product positive.</li>
+<li>If there are no positive numbers and only one negative number, then we return <code>0</code> if there&rsquo;s a zero in the array. Otherwise, the result is just the negative number itself (<code>neg</code>).</li>
+<li>Otherwise, we divide <code>neg</code> by the least negative number (<code>mxn</code>), effectively removing it from the product to make the product positive.</li>
+</ul>
+<h4 id="5-handling-no-positive-numbers">5. Handling No Positive Numbers</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(pcnt <span style="color:#666">==</span> <span style="color:#666">0</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> neg;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>If there are no positive numbers (<code>pcnt == 0</code>), the result is simply the product of negative numbers (<code>neg</code>).</li>
+</ul>
+<h4 id="6-final-calculation">6. Final Calculation</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> ans <span style="color:#666">*</span> neg;
+</span></span></code></pre></div><ul>
+<li>If there are positive numbers, we return the product of positive numbers (<code>ans</code>) multiplied by the product of negative numbers (<code>neg</code>).</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<h4 id="time-complexity">Time Complexity</h4>
+<p>The time complexity of this algorithm is <strong>O(n)</strong>, where <code>n</code> is the size of the input array. We loop through the array once, performing constant time operations for each element, resulting in a linear time complexity.</p>
+<h4 id="space-complexity">Space Complexity</h4>
+<p>The space complexity is <strong>O(1)</strong>, as we only use a constant amount of extra space for the variables, regardless of the size of the input array.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>This solution efficiently computes the maximum product of a subset of the input array by considering the effects of positive and negative numbers on the product. It handles the cases for negative numbers, positive numbers, and zeros by carefully excluding or including elements to maximize the product. The time complexity is linear, making it efficient for large inputs.</p>
+<p><a href="https://leetcode.com/problems/maximum-strength-of-a-group/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/Kqv0-lRVYwM?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 1911: Maximum Alternating Subsequence Sum | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 1911: Maximum Alternating Subsequence Sum">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1911: Maximum Alternating Subsequence Sum in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-1911-maximum-alternating-subsequence-sum/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 1911: Maximum Alternating Subsequence Sum">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1911: Maximum Alternating Subsequence Sum in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-04-29T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Dynamic Programming">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 1911: Maximum Alternating Subsequence Sum</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode454s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> maxAlternatingSum(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> odd <span style="color:#666">=</span> <span style="color:#666">0</span>, even <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">num</span> : nums) {
+</span></span><span style="display:flex;"><span>            even <span style="color:#666">=</span> max(even, odd <span style="color:#666">+</span> num);
+</span></span><span style="display:flex;"><span>            odd <span style="color:#666">=</span> even <span style="color:#666">-</span> num;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> even;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem involves finding the maximum alternating sum of a sequence of integers. An alternating sum is defined as the sum of a subsequence where the elements are added and subtracted in an alternating fashion. For example, given a sequence of numbers, we want to select a subsequence such that when we sum them by alternating between addition and subtraction, the result is maximized.</p>
+<h3 id="approach">Approach</h3>
+<p>To solve this problem efficiently, we can use dynamic programming. The key idea is to maintain two states during the iteration over the numbers: one for the maximum sum when the current number is added to the subsequence (even state) and one for when it is subtracted (odd state). By keeping track of these two states, we can build up our solution iteratively.</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: We start with two variables: <code>odd</code> to keep track of the maximum sum when the last number in the subsequence was subtracted, and <code>even</code> for when the last number was added.</p>
+</li>
+<li>
+<p><strong>Iterating through the numbers</strong>: For each number in the input array, we update the <code>even</code> and <code>odd</code> values based on the maximum possible sums we can achieve with or without including the current number.</p>
+</li>
+<li>
+<p><strong>Final Result</strong>: After processing all numbers, the variable <code>even</code> will contain the maximum alternating sum.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<p>Let&rsquo;s analyze the code to understand its implementation:</p>
+<ol>
+<li>
+<p><strong>Class Definition</strong>: The solution is encapsulated in a class named <code>Solution</code>.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Function Signature</strong>: The method <code>maxAlternatingSum</code> takes a vector of integers <code>nums</code> and returns a long long integer representing the maximum alternating sum.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#00a000">maxAlternatingSum</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span></code></pre></div></li>
+<li>
+<p><strong>State Initialization</strong>: We declare two variables, <code>odd</code> and <code>even</code>, both initialized to 0. These will hold the maximum alternating sums for odd and even indexed selections respectively.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> odd <span style="color:#666">=</span> <span style="color:#666">0</span>, even <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Iterating Through the Input</strong>: We use a range-based for loop to iterate through each number in the <code>nums</code> vector.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">num</span> : nums) {
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Updating the Even State</strong>: We calculate the new value for <code>even</code>. This is the maximum of the current <code>even</code> and the sum of <code>odd + num</code>, where <code>odd</code> represents the maximum sum obtained before adding the current number. This represents adding the current number to the subsequence.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            even <span style="color:#666">=</span> max(even, odd <span style="color:#666">+</span> num);
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Updating the Odd State</strong>: The <code>odd</code> state is updated to reflect the maximum sum where the last number was subtracted. This is done by subtracting the current number from the new <code>even</code> state.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            odd <span style="color:#666">=</span> even <span style="color:#666">-</span> num;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Returning the Result</strong>: After processing all numbers, we return the <code>even</code> variable which holds the maximum alternating sum.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> even;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">Complexity</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is O(n), where n is the number of elements in the input vector <code>nums</code>. We perform a single pass through the vector.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is O(1) because we are using a fixed number of variables to keep track of the state, regardless of the input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>The <code>maxAlternatingSum</code> function provides an efficient solution to the problem of finding the maximum alternating sum of a sequence of integers. By using a dynamic programming approach that tracks two states, we can determine the optimal subsequence sum in linear time. This method minimizes the use of additional space, making it suitable for large inputs.</p>
+<h3 id="use-cases">Use Cases</h3>
+<ol>
+<li>
+<p><strong>Financial Applications</strong>: This algorithm can be applied to scenarios where cash flows alternate between positive and negative values, such as in investment portfolios.</p>
+</li>
+<li>
+<p><strong>Game Theory</strong>: In games that involve alternating gains and losses, this approach can be utilized to strategize optimal moves.</p>
+</li>
+<li>
+<p><strong>Resource Management</strong>: When managing resources over time where there are alternating costs and revenues, this method can help optimize the total benefit.</p>
+</li>
+<li>
+<p><strong>Signal Processing</strong>: In fields where alternating signals are processed, such as audio or telecommunications, optimizing certain metrics can be achieved using this approach.</p>
+</li>
+</ol>
+<p>By implementing the alternating sum calculation in this manner, developers can efficiently handle and analyze sequences of integers, enhancing the performance and responsiveness of applications. The direct approach taken in this solution ensures both clarity and efficiency, making it applicable across a wide range of practical scenarios.</p>
+<p><a href="https://leetcode.com/problems/maximum-alternating-subsequence-sum/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/4v42XOuU1XA?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

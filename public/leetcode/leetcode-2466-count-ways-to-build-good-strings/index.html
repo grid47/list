@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 2466: Count Ways To Build Good Strings | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 2466: Count Ways To Build Good Strings">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 2466: Count Ways To Build Good Strings in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-2466-count-ways-to-build-good-strings/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 2466: Count Ways To Build Good Strings">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 2466: Count Ways To Build Good Strings in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-03-05T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Dynamic Programming">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 2466: Count Ways To Build Good Strings</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode779s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mod <span style="color:#666">=</span> <span style="color:#666">1e9</span> <span style="color:#666">+</span> <span style="color:#666">7</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> countGoodStrings(<span style="color:#0b0;font-weight:bold">int</span> low, <span style="color:#0b0;font-weight:bold">int</span> high, <span style="color:#0b0;font-weight:bold">int</span> zero, <span style="color:#0b0;font-weight:bold">int</span> one) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp(high <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">-</span><span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> low; i <span style="color:#666">&lt;=</span> high; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            ans <span style="color:#666">=</span> (ans <span style="color:#666">+</span> score(i, dp, zero, one)) <span style="color:#666">%</span> mod;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">score</span>(<span style="color:#0b0;font-weight:bold">int</span> target, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>dp, <span style="color:#0b0;font-weight:bold">int</span> zero, <span style="color:#0b0;font-weight:bold">int</span> one) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(target <span style="color:#666">==</span> <span style="color:#666">0</span>)      <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(target <span style="color:#666">&lt;</span> <span style="color:#666">1</span> )      <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(dp[target] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> dp[target];
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> sum <span style="color:#666">=</span> score(target <span style="color:#666">-</span> zero, dp, zero, one) <span style="color:#666">+</span> score(target <span style="color:#666">-</span> one, dp, zero, one);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> dp[target] <span style="color:#666">=</span> sum <span style="color:#666">%</span> mod;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement:</h3>
+<p>The problem asks us to count the number of good strings that can be generated given certain constraints. A good string is defined as a string whose length lies between a given range <code>[low, high]</code> and can be formed by appending either <code>zero</code> number of &lsquo;0&rsquo;s or <code>one</code> number of &lsquo;1&rsquo;s to previously formed strings. The challenge is to count how many such strings can be formed and return the result modulo (10^9 + 7).</p>
+<p>Specifically, the problem gives us:</p>
+<ul>
+<li><code>low</code> and <code>high</code>, which represent the minimum and maximum length of the strings.</li>
+<li><code>zero</code> and <code>one</code>, which are the two possible ways of appending to a string (either <code>zero</code> &lsquo;0&rsquo;s or <code>one</code> &lsquo;1&rsquo;s at each step).
+We need to count the total number of valid strings of lengths between <code>low</code> and <code>high</code>, inclusive.</li>
+</ul>
+<h3 id="approach">Approach:</h3>
+<p>To solve the problem, we can break it down into the following steps:</p>
+<ol>
+<li>
+<p><strong>Dynamic Programming</strong>:
+The problem can be approached using dynamic programming (DP) to efficiently calculate the number of good strings that can be formed for each possible length up to <code>high</code>.</p>
+</li>
+<li>
+<p><strong>Recursive Function</strong>:
+We define a recursive function <code>score(target)</code> that calculates how many good strings can be formed for a given target length <code>target</code>. The function takes advantage of previously computed results (memoization) to avoid redundant calculations.</p>
+</li>
+<li>
+<p><strong>Memoization</strong>:
+To improve efficiency, we store the results of already computed subproblems using a DP table (<code>dp</code>). The DP table is indexed by the string length, and each entry contains the number of good strings that can be formed for that length.</p>
+</li>
+<li>
+<p><strong>Base Cases</strong>:</p>
+<ul>
+<li>For <code>target == 0</code>, we return 1 because there is exactly one valid string of length 0 (the empty string).</li>
+<li>For <code>target &lt; 0</code>, we return 0 because we cannot form a string with a negative length.</li>
+</ul>
+</li>
+<li>
+<p><strong>Transition</strong>:
+To compute the number of good strings for a length <code>target</code>, we consider the last operation:</p>
+<ul>
+<li>If the last operation added <code>zero</code> &lsquo;0&rsquo;s, the number of ways to form the string is <code>score(target - zero)</code>.</li>
+<li>If the last operation added <code>one</code> &lsquo;1&rsquo;s, the number of ways to form the string is <code>score(target - one)</code>.
+Therefore, the total number of ways to form a string of length <code>target</code> is the sum of the two possibilities, i.e., <code>score(target - zero) + score(target - one)</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Modulo Operation</strong>:
+Since the number of strings can become very large, every computation is done modulo (10^9 + 7) to prevent overflow and ensure the result fits within the constraints.</p>
+</li>
+<li>
+<p><strong>Final Computation</strong>:
+Once we have the DP table populated, we compute the total number of good strings of lengths between <code>low</code> and <code>high</code> by summing the results for all lengths from <code>low</code> to <code>high</code>.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step):</h3>
+<h4 id="1-class-definition-and-modulo-constant">1. Class Definition and Modulo Constant:</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mod <span style="color:#666">=</span> <span style="color:#666">1e9</span> <span style="color:#666">+</span> <span style="color:#666">7</span>;
+</span></span></code></pre></div><ul>
+<li><code>mod</code> is the modulo constant (10^9 + 7) which will be used to compute all results modulo this value to avoid overflow.</li>
+</ul>
+<h4 id="2-main-function---countgoodstrings">2. Main Function - <code>countGoodStrings</code>:</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countGoodStrings</span>(<span style="color:#0b0;font-weight:bold">int</span> low, <span style="color:#0b0;font-weight:bold">int</span> high, <span style="color:#0b0;font-weight:bold">int</span> zero, <span style="color:#0b0;font-weight:bold">int</span> one) {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> dp(high <span style="color:#666">+</span> <span style="color:#666">1</span>, <span style="color:#666">-</span><span style="color:#666">1</span>); <span style="color:#080;font-style:italic">// Initialize the DP table with -1 (indicating uncalculated values)
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>; <span style="color:#080;font-style:italic">// Variable to store the final answer
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> low; i <span style="color:#666">&lt;=</span> high; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> (ans <span style="color:#666">+</span> score(i, dp, zero, one)) <span style="color:#666">%</span> mod; <span style="color:#080;font-style:italic">// Sum the results for lengths between low and high
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> ans; <span style="color:#080;font-style:italic">// Return the final result
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
+</span></span></code></pre></div><ul>
+<li><strong>Initialization</strong>: We initialize the DP table <code>dp</code> with size <code>high + 1</code> and set all values to <code>-1</code>, indicating that they have not been computed yet.</li>
+<li><strong>Loop over possible lengths</strong>: We iterate over all lengths from <code>low</code> to <code>high</code> and compute the number of good strings for each length using the <code>score</code> function. The result is added to the total <code>ans</code> and taken modulo (10^9 + 7).</li>
+</ul>
+<h4 id="3-helper-function---score">3. Helper Function - <code>score</code>:</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">score</span>(<span style="color:#0b0;font-weight:bold">int</span> target, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>dp, <span style="color:#0b0;font-weight:bold">int</span> zero, <span style="color:#0b0;font-weight:bold">int</span> one) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(target <span style="color:#666">==</span> <span style="color:#666">0</span>)      <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>; <span style="color:#080;font-style:italic">// Base case: exactly one way to form a string of length 0
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">if</span>(target <span style="color:#666">&lt;</span> <span style="color:#666">1</span> )      <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>; <span style="color:#080;font-style:italic">// If the target is negative, return 0 (no valid string)
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">if</span>(dp[target] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> dp[target]; <span style="color:#080;font-style:italic">// If already calculated, return the stored result
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> sum <span style="color:#666">=</span> score(target <span style="color:#666">-</span> zero, dp, zero, one) <span style="color:#666">+</span> score(target <span style="color:#666">-</span> one, dp, zero, one); <span style="color:#080;font-style:italic">// Recursive call to calculate the number of ways
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp[target] <span style="color:#666">=</span> sum <span style="color:#666">%</span> mod; <span style="color:#080;font-style:italic">// Store the result in dp and return the result modulo mod
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
+</span></span></code></pre></div><ul>
+<li><strong>Base cases</strong>: If <code>target == 0</code>, there is exactly one valid string (the empty string). If <code>target &lt; 0</code>, no valid string can be formed, so return 0.</li>
+<li><strong>Memoization</strong>: If the result for <code>dp[target]</code> is already computed (i.e., not <code>-1</code>), we simply return the value from the DP table.</li>
+<li><strong>Recursive Calculation</strong>: The total number of valid strings of length <code>target</code> is the sum of the results of two subproblems: forming a string by appending <code>zero</code> &lsquo;0&rsquo;s and by appending <code>one</code> &lsquo;1&rsquo;s. The result is taken modulo (10^9 + 7) and stored in <code>dp[target]</code>.</li>
+</ul>
+<h3 id="complexity">Complexity:</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The <code>score</code> function is called recursively, but each subproblem is computed only once due to memoization. Thus, the time complexity is (O(\text{high})), since we are computing the number of good strings for each length from 0 to <code>high</code>.</li>
+<li>The total complexity of the algorithm is (O(\text{high})) because for each length from <code>low</code> to <code>high</code>, we are calculating the result once.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is (O(\text{high})) due to the DP array <code>dp</code> that stores the results for each length from 0 to <code>high</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">Conclusion:</h3>
+<p>The solution efficiently calculates the number of good strings of lengths between <code>low</code> and <code>high</code> using dynamic programming. By leveraging memoization to store previously computed results, the algorithm avoids redundant calculations and ensures optimal performance. The time and space complexity are linear in terms of the maximum string length <code>high</code>, making the solution scalable for large inputs. The modulo operation ensures that the results are within the problem&rsquo;s constraints.</p>
+<p><a href="https://leetcode.com/problems/count-ways-to-build-good-strings/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/t0QkjXhE02g?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

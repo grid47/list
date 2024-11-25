@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 2685: Count the Number of Complete Components | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 2685: Count the Number of Complete Components">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 2685: Count the Number of Complete Components in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-2685-count-the-number-of-complete-components/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 2685: Count the Number of Complete Components">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 2685: Count the Number of Complete Components in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-02-12T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Depth-First Search">
+    <meta property="article:tag" content="Breadth-First Search">
+    <meta property="article:tag" content="Union Find">
+    <meta property="article:tag" content="Graph">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 2685: Count the Number of Complete Components</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode902s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">UF</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> par, edge, rnk;
+</span></span><span style="display:flex;"><span>    UF(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>        par.resize(n, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        iota(par.begin(), par.end(), <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        edge.resize(n, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        rnk.resize(n, <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">join</span>(<span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> p <span style="color:#666">=</span> find(i);
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> q <span style="color:#666">=</span> find(j);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(p <span style="color:#666">!=</span> q) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(rnk[p] <span style="color:#666">&gt;</span> rnk[q]) {
+</span></span><span style="display:flex;"><span>                rnk[p]<span style="color:#666">+=</span>rnk[q];
+</span></span><span style="display:flex;"><span>                par[q] <span style="color:#666">=</span> p;
+</span></span><span style="display:flex;"><span>            } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>                rnk[q]<span style="color:#666">+=</span>rnk[p];
+</span></span><span style="display:flex;"><span>                par[p] <span style="color:#666">=</span> q;         
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> e <span style="color:#666">=</span> edge[p]<span style="color:#666">+</span>edge[q] <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            edge[p] <span style="color:#666">=</span>e; <span style="color:#080;font-style:italic">// dge[q] + 1;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            edge[q] <span style="color:#666">=</span>e; <span style="color:#080;font-style:italic">// dge[p] + 1;            
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        edge[q]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">find</span>(<span style="color:#0b0;font-weight:bold">int</span> p) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(p <span style="color:#666">==</span> par[p]) <span style="color:#a2f;font-weight:bold">return</span> p;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> par[p] <span style="color:#666">=</span> find(par[p]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> countCompleteComponents(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> edges) {
+</span></span><span style="display:flex;"><span>        UF uf <span style="color:#666">=</span> UF(n);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">e</span>: edges) {
+</span></span><span style="display:flex;"><span>            uf.join(e[<span style="color:#666">0</span>], e[<span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> pk;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">// cout &lt;&lt; &#34;edges membercnt edgescal \n&#34;;         
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> par <span style="color:#666">=</span> uf.find(i);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(pk.count(par)) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>            pk.insert(par);
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> uf.edge[par];
+</span></span><span style="display:flex;"><span>            <span style="color:#080;font-style:italic">// cout &lt;&lt; cnt &lt;&lt; &#34; &#34; &lt;&lt; uf.rnk[par] &lt;&lt; &#34; &#34; &lt;&lt; uf.rnk[par] * (uf.rnk[par] - 1) / 2 &lt;&lt; &#34;\n&#34;;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#a2f;font-weight:bold">if</span>(uf.rnk[par] <span style="color:#666">*</span> (uf.rnk[par] <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span> <span style="color:#666">==</span> cnt) res<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem asks us to find the number of &ldquo;complete components&rdquo; in a graph, where a complete component is a connected component where the number of edges is exactly equal to the number of vertices minus one (i.e., the graph is a tree). A tree with <code>k</code> nodes always has <code>k-1</code> edges, so this is the key property for determining whether a component is a tree.</p>
+<p>Given an undirected graph with <code>n</code> vertices and a list of <code>edges</code> that connect pairs of vertices, the task is to count how many connected components in the graph are &ldquo;complete,&rdquo; meaning they form a tree.</p>
+<h3 id="approach">Approach</h3>
+<p>To solve this problem, we use the <strong>Union-Find (Disjoint Set Union)</strong> data structure, which helps efficiently manage and merge connected components in the graph. We extend this data structure to track the number of edges in each component, which is critical for determining whether a component is a tree. The approach can be broken down as follows:</p>
+<ol>
+<li>
+<p><strong>Union-Find Data Structure</strong>: We need to efficiently find the parent of each node and merge two nodes into the same component. The union-find data structure supports two operations:</p>
+<ul>
+<li><strong>Find</strong>: To find the representative (or parent) of a node.</li>
+<li><strong>Union</strong>: To merge two components into one if they are not already connected.</li>
+</ul>
+</li>
+<li>
+<p><strong>Tracking Edges</strong>: Along with the parent, we also track the number of edges in each component, which is updated during the union operations.</p>
+</li>
+<li>
+<p><strong>Checking for Complete Components</strong>: After processing all the edges and merging components, we can check if each component is complete by verifying that the number of edges is exactly equal to the number of nodes in that component minus one.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<h4 id="step-1-union-find-uf-class-definition">Step 1: Union-Find (UF) Class Definition</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">UF</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> par, edge, rnk;
+</span></span><span style="display:flex;"><span>    UF(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>        par.resize(n, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        iota(par.begin(), par.end(), <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        edge.resize(n, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        rnk.resize(n, <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>The <code>UF</code> class represents the Union-Find data structure.</li>
+<li><code>par</code> is a vector that stores the parent of each node. Initially, each node is its own parent.</li>
+<li><code>edge</code> tracks the number of edges in each component.</li>
+<li><code>rnk</code> is used for <strong>union by rank</strong>, which helps optimize the union operation by attaching the smaller tree to the root of the larger tree.</li>
+</ul>
+<h4 id="step-2-the-join-operation-union">Step 2: The <code>join</code> Operation (Union)</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">join</span>(<span style="color:#0b0;font-weight:bold">int</span> i, <span style="color:#0b0;font-weight:bold">int</span> j) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> p <span style="color:#666">=</span> find(i);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> q <span style="color:#666">=</span> find(j);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (p <span style="color:#666">!=</span> q) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (rnk[p] <span style="color:#666">&gt;</span> rnk[q]) {
+</span></span><span style="display:flex;"><span>            rnk[p] <span style="color:#666">+=</span> rnk[q];
+</span></span><span style="display:flex;"><span>            par[q] <span style="color:#666">=</span> p;
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>            rnk[q] <span style="color:#666">+=</span> rnk[p];
+</span></span><span style="display:flex;"><span>            par[p] <span style="color:#666">=</span> q;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> e <span style="color:#666">=</span> edge[p] <span style="color:#666">+</span> edge[q] <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        edge[p] <span style="color:#666">=</span> e;
+</span></span><span style="display:flex;"><span>        edge[q] <span style="color:#666">=</span> e;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    edge[q]<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>join</code> method performs the union of two components <code>i</code> and <code>j</code>. If they are in different components, it merges them.</li>
+<li><strong>Union by rank</strong>: The component with the higher rank becomes the parent of the other component. This helps keep the tree shallow, improving the efficiency of future operations.</li>
+<li>We also update the edge count for the merged components. If the components were already connected, we just increment the edge count of the parent.</li>
+</ul>
+<h4 id="step-3-the-find-operation-find-the-root-of-a-component">Step 3: The <code>find</code> Operation (Find the Root of a Component)</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">find</span>(<span style="color:#0b0;font-weight:bold">int</span> p) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span> (p <span style="color:#666">==</span> par[p]) <span style="color:#a2f;font-weight:bold">return</span> p;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> par[p] <span style="color:#666">=</span> find(par[p]);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>find</code> method uses path compression to find the representative (or root) of a component.</li>
+<li>Path compression ensures that all nodes directly point to the root, optimizing future find operations.</li>
+</ul>
+<h4 id="step-4-the-countcompletecomponents-method">Step 4: The <code>countCompleteComponents</code> Method</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">countCompleteComponents</span>(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> edges) {
+</span></span><span style="display:flex;"><span>    UF uf <span style="color:#666">=</span> UF(n);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#a2f;font-weight:bold">auto</span> <span style="color:#a0a000">e</span> : edges) {
+</span></span><span style="display:flex;"><span>        uf.join(e[<span style="color:#666">0</span>], e[<span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    set<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> pk;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> par <span style="color:#666">=</span> uf.find(i);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (pk.count(par)) <span style="color:#a2f;font-weight:bold">continue</span>;
+</span></span><span style="display:flex;"><span>        pk.insert(par);
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> cnt <span style="color:#666">=</span> uf.edge[par];
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (uf.rnk[par] <span style="color:#666">*</span> (uf.rnk[par] <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span> <span style="color:#666">==</span> cnt) res<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>countCompleteComponents</code> method initializes the Union-Find structure with <code>n</code> vertices.</li>
+<li>For each edge in the input, the <code>join</code> method is called to connect the vertices, updating the components&rsquo; edge counts.</li>
+<li>We then check each component to see if it forms a complete tree:
+<ul>
+<li>A component is complete if the number of edges is equal to the number of vertices minus one. This condition is checked using the formula <code>rnk[par] * (rnk[par] - 1) / 2 == cnt</code>, where <code>rnk[par]</code> is the size of the component and <code>cnt</code> is the number of edges.</li>
+</ul>
+</li>
+<li>If a component satisfies this condition, it is considered a complete component, and we increment the result counter.</li>
+<li>Finally, the method returns the count of complete components.</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<h4 id="time-complexity">Time Complexity</h4>
+<ul>
+<li>The time complexity of the Union-Find operations is nearly constant, thanks to the <strong>union by rank</strong> and <strong>path compression</strong> optimizations. The amortized time complexity for each <code>find</code> and <code>join</code> operation is <strong>O(α(n))</strong>, where α is the <strong>inverse Ackermann function</strong>, which grows very slowly.</li>
+<li>For <code>m</code> edges and <code>n</code> vertices, the overall time complexity is <strong>O(m * α(n))</strong>.</li>
+</ul>
+<h4 id="space-complexity">Space Complexity</h4>
+<ul>
+<li>The space complexity is <strong>O(n)</strong>, as we store the parent (<code>par</code>), edge count (<code>edge</code>), and rank (<code>rnk</code>) arrays, each of size <code>n</code>.</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>This solution efficiently solves the problem using the Union-Find data structure, which allows us to handle the merging and checking of connected components in near constant time. By tracking both the parent and the number of edges in each component, we can easily determine whether a component is a tree (i.e., has exactly <code>n-1</code> edges). The approach is optimized with <strong>union by rank</strong> and <strong>path compression</strong>, ensuring that the solution scales well even for large graphs. The complexity of the solution is manageable and performs well within the problem&rsquo;s constraints.</p>
+<p><a href="https://leetcode.com/problems/count-the-number-of-complete-components/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/J43LjwWYch4?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

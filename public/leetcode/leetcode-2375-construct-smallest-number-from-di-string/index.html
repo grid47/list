@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 2375: Construct Smallest Number From DI String | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 2375: Construct Smallest Number From DI String">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 2375: Construct Smallest Number From DI String in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-2375-construct-smallest-number-from-di-string/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 2375: Construct Smallest Number From DI String">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 2375: Construct Smallest Number From DI String in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-03-14T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="String">
+    <meta property="article:tag" content="Backtracking">
+    <meta property="article:tag" content="Stack">
+    <meta property="article:tag" content="Greedy">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 2375: Construct Smallest Number From DI String</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode720s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    string smallestNumber(string ptn) {
+</span></span><span style="display:flex;"><span>        string res, stk;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> ptn.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;=</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            stk.push_back(i <span style="color:#666">+</span> <span style="color:#b44">&#39;1&#39;</span>);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> n <span style="color:#666">||</span> ptn[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;I&#39;</span>) {
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>stk.empty()) {
+</span></span><span style="display:flex;"><span>                    res.push_back(stk.back());
+</span></span><span style="display:flex;"><span>                    stk.pop_back();
+</span></span><span style="display:flex;"><span>                }
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>In this problem, we are given a string <code>ptn</code> that consists of the characters <code>'I'</code> (representing &ldquo;increase&rdquo;) and <code>'D'</code> (representing &ldquo;decrease&rdquo;). Our goal is to return the smallest number that can be formed by the digits from <code>1</code> to <code>n + 1</code> (where <code>n</code> is the length of <code>ptn</code>), such that the sequence of digits satisfies the given pattern of increasing and decreasing orders.</p>
+<p>For example:</p>
+<ul>
+<li>If <code>ptn = &quot;IDID&quot;</code>, the output should be <code>&quot;13254&quot;</code>.</li>
+<li>If <code>ptn = &quot;III&quot;</code>, the output should be <code>&quot;1234&quot;</code>.</li>
+</ul>
+<p>The approach is to treat the problem as a stack-based problem where we push digits into a stack when the pattern indicates a decrease (<code>'D'</code>) and pop digits from the stack when the pattern indicates an increase (<code>'I'</code>).</p>
+<h3 id="approach">Approach</h3>
+<p>The key observation is that we can use a stack to handle the &ldquo;decreasing&rdquo; segments of the pattern efficiently. Here’s how we can break down the approach:</p>
+<ol>
+<li>
+<p><strong>Initial Setup</strong>:</p>
+<ul>
+<li>The sequence of digits we need to form ranges from <code>1</code> to <code>n + 1</code>, where <code>n</code> is the length of the given pattern string <code>ptn</code>.</li>
+<li>We will iterate through the pattern string and for each index, either push the current digit into the stack or pop it to form the correct number sequence.</li>
+</ul>
+</li>
+<li>
+<p><strong>Stack Logic</strong>:</p>
+<ul>
+<li>When the pattern character is <code>'I'</code> (increase), we know that the current digit should be smaller than the next digit. Therefore, we need to pop the digits from the stack to get the correct order for this increasing segment.</li>
+<li>When the pattern character is <code>'D'</code> (decrease), we push the current digit into the stack because the current digit is larger than the next digit, and we’ll deal with it later when the sequence needs to increase.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling Edge Cases</strong>:</p>
+<ul>
+<li>After processing all characters in the pattern, there may still be numbers left in the stack. These should be popped and added to the result to complete the number sequence.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Result</strong>:</p>
+<ul>
+<li>After going through the pattern and handling all increase and decrease operations, the result is a string representing the smallest number satisfying the given pattern.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<ol>
+<li>
+<p><strong>Class Definition</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    string smallestNumber(string ptn) {
+</span></span></code></pre></div><p>The class <code>Solution</code> contains the method <code>smallestNumber</code> which takes the string <code>ptn</code> as input and returns the smallest number that satisfies the pattern.</p>
+</li>
+<li>
+<p><strong>Variable Initialization</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    string res, stk;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> ptn.size();
+</span></span></code></pre></div><ul>
+<li><code>res</code> will store the final result, which is the smallest number.</li>
+<li><code>stk</code> is a string that simulates a stack. It will be used to temporarily store digits during the processing of decreasing sequences in the pattern.</li>
+<li><code>n</code> is the length of the pattern string.</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Loop</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;=</span> n; i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        stk.push_back(i <span style="color:#666">+</span> <span style="color:#b44">&#39;1&#39;</span>);
+</span></span></code></pre></div><ul>
+<li>The loop iterates from <code>i = 0</code> to <code>i = n</code>. We iterate one extra time to handle the last digit. For each iteration, we push the current number (<code>i + 1</code>) into the stack (<code>stk</code>).</li>
+<li>The number <code>i + '1'</code> is added to the stack because the digits we are using range from <code>1</code> to <code>n + 1</code>. The expression <code>i + '1'</code> converts the integer <code>i + 1</code> to its corresponding character.</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling the <code>'I'</code> Pattern</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(i <span style="color:#666">==</span> n <span style="color:#666">||</span> ptn[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;I&#39;</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>(<span style="color:#666">!</span>stk.empty()) {
+</span></span><span style="display:flex;"><span>                res.push_back(stk.back());
+</span></span><span style="display:flex;"><span>                stk.pop_back();
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><ul>
+<li>If the current character in the pattern is <code>'I'</code> (increase), or if we are at the end of the pattern (<code>i == n</code>), we pop all the elements from the stack and append them to the result string <code>res</code>.</li>
+<li>This ensures that when we encounter an increase, we have the digits in increasing order in the result.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>After processing all the digits and handling the pattern, the result string <code>res</code> is returned, containing the smallest number that satisfies the given pattern.</p>
+</li>
+</ol>
+<h3 id="complexity">Complexity</h3>
+<ol>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The algorithm processes each character of the pattern string exactly once, and for each character, we either push or pop from the stack. Both pushing and popping operations on the stack are constant time operations.</li>
+<li>Therefore, the time complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the length of the pattern string. Since we only iterate through the pattern string once and the stack operations are done in constant time, the overall time complexity is linear.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>We use a stack (implemented as a string <code>stk</code>) to temporarily store digits. The size of this stack is at most <code>n + 1</code>, as we push digits from <code>1</code> to <code>n + 1</code>.</li>
+<li>Therefore, the space complexity of this solution is <strong>O(n)</strong>, where <code>n</code> is the length of the pattern string. The space is required to store the digits temporarily and to hold the result string.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">Conclusion</h3>
+<p>The solution efficiently solves the problem by utilizing a stack to handle the decrease (<code>'D'</code>) segments of the pattern and ensuring that digits are popped in the correct order when the pattern requires an increase (<code>'I'</code>). The algorithm processes the pattern string in linear time and uses constant space for each operation, making it both time and space efficient.</p>
+<p>This approach works efficiently even for larger input sizes due to its <strong>O(n)</strong> time complexity. The logic behind using a stack to manage the ordering of digits based on the increase/decrease pattern is simple and elegant, ensuring that we always form the smallest possible number satisfying the given pattern. The implementation is concise, and the solution handles edge cases like consecutive increasing or decreasing patterns correctly.</p>
+<p>This method provides a fast and scalable solution to this problem, making it an excellent choice for solving such pattern-based number formation problems.</p>
+<p><a href="https://leetcode.com/problems/construct-smallest-number-from-di-string/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/b-vIB0xikOw?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

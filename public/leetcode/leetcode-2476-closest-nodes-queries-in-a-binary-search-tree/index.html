@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 2476: Closest Nodes Queries in a Binary Search Tree | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 2476: Closest Nodes Queries in a Binary Search Tree">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 2476: Closest Nodes Queries in a Binary Search Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-2476-closest-nodes-queries-in-a-binary-search-tree/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 2476: Closest Nodes Queries in a Binary Search Tree">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 2476: Closest Nodes Queries in a Binary Search Tree in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-03-04T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Binary Search">
+    <meta property="article:tag" content="Tree">
+    <meta property="article:tag" content="Depth-First Search">
+    <meta property="article:tag" content="Binary Search Tree">
+    <meta property="article:tag" content="Binary Tree">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 2476: Closest Nodes Queries in a Binary Search Tree</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode784s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Definition for a binary tree node.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * struct TreeNode {
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     int val;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode *left;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode *right;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * };
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> v;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">traverse</span>(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(root <span style="color:#666">!=</span> <span style="color:#a2f;font-weight:bold">nullptr</span>) {
+</span></span><span style="display:flex;"><span>            traverse(root<span style="color:#666">-&gt;</span>left);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(v.empty() <span style="color:#666">||</span> v.back() <span style="color:#666">&lt;</span> root<span style="color:#666">-&gt;</span>val)
+</span></span><span style="display:flex;"><span>                v.push_back(root<span style="color:#666">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>            traverse(root<span style="color:#666">-&gt;</span>right);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> closestNodes(TreeNode<span style="color:#666">*</span> root, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> queries) {
+</span></span><span style="display:flex;"><span>        traverse(root);
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> res;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">q</span>: queries) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> lower_bound(begin(v), end(v), q);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(it <span style="color:#666">!=</span> end(v) <span style="color:#666">&amp;&amp;</span> <span style="color:#666">*</span>it<span style="color:#666">==</span>q)
+</span></span><span style="display:flex;"><span>            res.push_back({q, q});
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span>
+</span></span><span style="display:flex;"><span>            res.push_back({it <span style="color:#666">==</span> begin(v)<span style="color:#666">?</span> <span style="color:#666">-</span><span style="color:#666">1</span><span style="color:#666">:</span> <span style="color:#666">*</span>prev(it), it <span style="color:#666">==</span> end(v)<span style="color:#666">?</span> <span style="color:#666">-</span><span style="color:#666">1</span><span style="color:#666">:</span> <span style="color:#666">*</span>it});
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement:</h3>
+<p>The problem asks us to implement a function <code>closestNodes</code> that, given a binary search tree (BST) and a list of queries, returns the closest nodes to the given queries in the BST. For each query, we need to find two things:</p>
+<ol>
+<li>The largest node in the tree that is smaller than or equal to the query value.</li>
+<li>The smallest node in the tree that is greater than or equal to the query value.</li>
+</ol>
+<p>If there is no such node (either smaller or larger), we should return <code>-1</code> for that respective query.</p>
+<h3 id="approach">Approach:</h3>
+<p>This problem requires efficient traversal of a binary search tree (BST) to answer each query in the most optimized way. A naive approach would involve searching the BST for each query, but that would be inefficient for large trees. Instead, we can exploit the properties of BSTs to perform a faster lookup.</p>
+<h4 id="optimized-plan">Optimized Plan:</h4>
+<ol>
+<li>
+<p><strong>In-order Traversal of the BST</strong>:
+The key observation is that if we perform an <strong>in-order traversal</strong> on a BST, the values are sorted in ascending order. This sorted array will allow us to efficiently find the closest nodes to each query using binary search techniques.</p>
+</li>
+<li>
+<p><strong>Binary Search for Query Answers</strong>:
+Once we have the values of the nodes in a sorted list (from the in-order traversal), we can use <strong>binary search</strong> (specifically <code>lower_bound</code>) to find the closest node greater than or equal to the query value. Additionally, we can check the element just before this to find the closest node smaller than or equal to the query value.</p>
+</li>
+<li>
+<p><strong>Efficient Query Answering</strong>:
+After obtaining the sorted list of node values from the BST, we can answer each query in logarithmic time using binary search. This makes the solution much faster than a brute-force approach.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step):</h3>
+<p>Now, let’s break down the code to understand how it works:</p>
+<ol>
+<li>
+<p><strong>TreeNode Definition</strong>:
+The problem provides the definition of a binary tree node:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">struct</span> <span style="color:#00f">TreeNode</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> val;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#666">*</span>left;
+</span></span><span style="display:flex;"><span>    TreeNode <span style="color:#666">*</span>right;
+</span></span><span style="display:flex;"><span>    TreeNode() <span style="color:#666">:</span> val(<span style="color:#666">0</span>), left(<span style="color:#a2f;font-weight:bold">nullptr</span>), right(<span style="color:#a2f;font-weight:bold">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#0b0;font-weight:bold">int</span> x) <span style="color:#666">:</span> val(x), left(<span style="color:#a2f;font-weight:bold">nullptr</span>), right(<span style="color:#a2f;font-weight:bold">nullptr</span>) {}
+</span></span><span style="display:flex;"><span>    TreeNode(<span style="color:#0b0;font-weight:bold">int</span> x, TreeNode <span style="color:#666">*</span>left, TreeNode <span style="color:#666">*</span>right) <span style="color:#666">:</span> val(x), left(left), right(right) {}
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li><code>TreeNode</code> has three properties: <code>val</code> (the value of the node), <code>left</code> (pointer to the left child), and <code>right</code> (pointer to the right child).</li>
+<li>There are three constructors provided for initializing the node, either with a default value or with specific values for <code>val</code>, <code>left</code>, and <code>right</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>In-order Traversal</strong>:
+The <code>traverse</code> function performs an in-order traversal of the tree to collect all the node values in sorted order:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">traverse</span>(TreeNode<span style="color:#666">*</span> root) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(root <span style="color:#666">!=</span> <span style="color:#a2f;font-weight:bold">nullptr</span>) {
+</span></span><span style="display:flex;"><span>        traverse(root<span style="color:#666">-&gt;</span>left);  <span style="color:#080;font-style:italic">// Traverse left subtree
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">if</span>(v.empty() <span style="color:#666">||</span> v.back() <span style="color:#666">&lt;</span> root<span style="color:#666">-&gt;</span>val)
+</span></span><span style="display:flex;"><span>            v.push_back(root<span style="color:#666">-&gt;</span>val);  <span style="color:#080;font-style:italic">// Add the node value to the list if it&#39;s greater than the last one
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        traverse(root<span style="color:#666">-&gt;</span>right);  <span style="color:#080;font-style:italic">// Traverse right subtree
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The function recursively traverses the tree in in-order (left, root, right).</li>
+<li>Each node&rsquo;s value is added to the vector <code>v</code>, but only if it is greater than the last added value. This ensures that we are collecting the values in strictly increasing order (since a BST&rsquo;s in-order traversal gives values in ascending order).</li>
+</ul>
+</li>
+<li>
+<p><strong>Handling Queries</strong>:
+The main function <code>closestNodes</code> processes the list of queries and uses the sorted vector <code>v</code> to find the closest nodes for each query:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> closestNodes(TreeNode<span style="color:#666">*</span> root, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> queries) {
+</span></span><span style="display:flex;"><span>    traverse(root);  <span style="color:#080;font-style:italic">// Perform in-order traversal to get sorted values
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> res;  <span style="color:#080;font-style:italic">// Initialize result vector to store answers for queries
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">q</span>: queries) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> lower_bound(begin(v), end(v), q);  <span style="color:#080;font-style:italic">// Find the lower bound of the query in the sorted list
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">if</span> (it <span style="color:#666">!=</span> end(v) <span style="color:#666">&amp;&amp;</span> <span style="color:#666">*</span>it <span style="color:#666">==</span> q)  <span style="color:#080;font-style:italic">// If the query value is found exactly in the list
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            res.push_back({q, q});
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span>
+</span></span><span style="display:flex;"><span>            res.push_back({it <span style="color:#666">==</span> begin(v) <span style="color:#666">?</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">:</span> <span style="color:#666">*</span>prev(it), it <span style="color:#666">==</span> end(v) <span style="color:#666">?</span> <span style="color:#666">-</span><span style="color:#666">1</span> <span style="color:#666">:</span> <span style="color:#666">*</span>it});
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// For each query:
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#080;font-style:italic">// - If exact match, both closest values are the query itself
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#080;font-style:italic">// - Otherwise, find the largest smaller value and the smallest larger value
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;  <span style="color:#080;font-style:italic">// Return the result for all queries
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
+</span></span></code></pre></div><ul>
+<li><strong><code>traverse(root)</code></strong>: The function first calls <code>traverse</code> to fill the vector <code>v</code> with the sorted values from the BST.</li>
+<li><strong>Processing each query</strong>: For each query in the <code>queries</code> vector:
+<ul>
+<li>We use <code>lower_bound(begin(v), end(v), q)</code> to find the position in the sorted list where <code>q</code> would be inserted to maintain order. This gives us the smallest element that is greater than or equal to <code>q</code>.</li>
+<li>If the element at the iterator <code>it</code> matches the query (<code>*it == q</code>), both closest nodes are the query itself.</li>
+<li>Otherwise, we return two values:
+<ul>
+<li>The largest number smaller than <code>q</code>, which is found using <code>prev(it)</code> (if <code>it</code> is not at the beginning of the vector).</li>
+<li>The smallest number greater than <code>q</code>, which is found at <code>it</code> (if <code>it</code> is not at the end of the vector).</li>
+</ul>
+</li>
+<li>If no such smaller or larger element exists, we return <code>-1</code>.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:
+The function returns the list of results for all queries:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity">Complexity:</h3>
+<p>Let’s analyze the time and space complexity of this solution:</p>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li><strong>In-order Traversal</strong>: The in-order traversal of the tree takes (O(n)), where (n) is the number of nodes in the tree, as each node is visited exactly once.</li>
+<li><strong>Binary Search for Queries</strong>: For each query, we perform a <code>lower_bound</code> search on the sorted list <code>v</code>, which takes (O(\log n)) time using binary search. If there are (m) queries, the total time for all queries is (O(m \log n)).</li>
+<li><strong>Overall Time Complexity</strong>: The total time complexity is (O(n + m \log n)), where (n) is the number of nodes in the tree and (m) is the number of queries.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li><strong>Sorted List <code>v</code></strong>: The space complexity for storing the sorted list of node values is (O(n)), where (n) is the number of nodes in the tree.</li>
+<li><strong>Result List</strong>: The result list stores the answers for each query, and its size is (O(m)), where (m) is the number of queries.</li>
+<li><strong>Overall Space Complexity</strong>: The total space complexity is (O(n + m)), where (n) is the number of nodes in the tree and (m) is the number of queries.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">Conclusion:</h3>
+<p>This solution efficiently solves the problem of finding the closest nodes for each query in a binary search tree. By performing an in-order traversal to get the sorted list of node values and using binary search to answer each query, we achieve a time complexity of (O(n + m \log n)), which is optimal for large input sizes. The space complexity is (O(n + m)), which is also efficient. This approach is well-suited for handling large BSTs and query lists in competitive programming and real-world applications.</p>
+<p><a href="https://leetcode.com/problems/closest-nodes-queries-in-a-binary-search-tree/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/KFYvX7u-Hs8?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

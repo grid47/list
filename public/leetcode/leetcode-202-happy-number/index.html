@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 202: Happy Number | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 202: Happy Number">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 202: Happy Number in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-202-happy-number/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 202: Happy Number">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 202: Happy Number in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-10-17T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Hash Table">
+    <meta property="article:tag" content="Math">
+    <meta property="article:tag" content="Two Pointers">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 202: Happy Number</h1> 
+            </div>
+			<div class="article-post">
+				<h2 id="hahahugoshortcode515s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+    <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/202.webp" 
+           alt="A glowing number slowly transforming into a smiley face, symbolizing happiness and positivity." 
+           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    
+      <figcaption style="font-size: 0.8em; font-weight: 300; color:#555; margin-top: 4px; line-height: 1.2;">
+        Solution to LeetCode 202: Happy Number Problem
+      </figcaption>
+    
+  </figure>
+  </h2>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode515s1hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sqr(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(n) {
+</span></span><span style="display:flex;"><span>            <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> n <span style="color:#666">%</span> <span style="color:#666">10</span>;
+</span></span><span style="display:flex;"><span>            res <span style="color:#666">+=</span> tmp <span style="color:#666">*</span> tmp;
+</span></span><span style="display:flex;"><span>            n <span style="color:#666">=</span> n <span style="color:#666">/</span> <span style="color:#666">10</span>;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isHappy</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> slow <span style="color:#666">=</span> n;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> fast <span style="color:#666">=</span> n;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">do</span> {
+</span></span><span style="display:flex;"><span>            slow <span style="color:#666">=</span> sqr(slow);
+</span></span><span style="display:flex;"><span>            fast <span style="color:#666">=</span> sqr(sqr(fast));
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">while</span>(slow <span style="color:#666">!=</span> fast);
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> slow <span style="color:#666">==</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="-problem-statement">🚀 Problem Statement</h3>
+<p>We’re tackling the <strong>happy number</strong> problem! A <strong>happy number</strong> follows a unique process:</p>
+<ol>
+<li>Start with any positive integer <code>n</code>.</li>
+<li>Replace <code>n</code> with the sum of the squares of its digits.</li>
+<li>Repeat this until either:
+<ul>
+<li>The number becomes <code>1</code> (indicating it’s a happy number!).</li>
+<li>Or the number falls into a never-ending cycle that doesn’t include <code>1</code> (in which case, it’s not a happy number).</li>
+</ul>
+</li>
+</ol>
+<p>For example:</p>
+<ul>
+<li><strong>Input:</strong> <code>19</code></li>
+<li><strong>Output:</strong> <code>True</code> (because the sequence of squares eventually reaches <code>1</code>).</li>
+</ul>
+<hr>
+<h3 id="-approach">🧠 Approach</h3>
+<p>To solve this problem, we need to determine if summing the squares of the digits of a number <code>n</code> leads to <code>1</code> or falls into a cycle. If we find a cycle, the number is not happy.</p>
+<p>To detect cycles, we’ll use <strong>Floyd&rsquo;s Cycle-Finding Algorithm</strong> (a.k.a. the <strong>tortoise and hare</strong> algorithm). This algorithm uses two pointers:</p>
+<ul>
+<li><strong>Slow pointer</strong> moves one step at a time.</li>
+<li><strong>Fast pointer</strong> moves two steps at a time.</li>
+</ul>
+<p>If the two pointers meet, a cycle is detected. If they meet at <code>1</code>, the number is happy!</p>
+<h4 id="key-steps">Key Steps:</h4>
+<ol>
+<li>Create a helper function <code>sqr(int n)</code> to calculate the sum of the squares of the digits of <code>n</code>.</li>
+<li>Use two pointers (<code>slow</code> and <code>fast</code>) to repeatedly compute the sum of squares and check for a cycle.</li>
+<li>If the two pointers meet at <code>1</code>, the number is happy.</li>
+<li>If they meet at any other value, a cycle exists, and the number is not happy.</li>
+</ol>
+<hr>
+<h3 id="-step-by-step-code-breakdown">🔨 Step-by-Step Code Breakdown</h3>
+<p>Let’s break it down step by step:</p>
+<h4 id="step-1-helper-function-sqrint-n">Step 1: Helper Function <code>sqr(int n)</code></h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">sqr</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(n) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> tmp <span style="color:#666">=</span> n <span style="color:#666">%</span> <span style="color:#666">10</span>;   <span style="color:#080;font-style:italic">// Get the last digit
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        res <span style="color:#666">+=</span> tmp <span style="color:#666">*</span> tmp;    <span style="color:#080;font-style:italic">// Add the square of the digit
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        n <span style="color:#666">=</span> n <span style="color:#666">/</span> <span style="color:#666">10</span>;          <span style="color:#080;font-style:italic">// Remove the last digit
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li><strong>Purpose:</strong> This function computes the sum of the squares of the digits of <code>n</code>.</li>
+<li><strong>How it works:</strong>
+<ul>
+<li>We loop through each digit of <code>n</code>, square it, and add it to the result.</li>
+<li>The last digit is removed after processing with <code>n = n / 10</code>.</li>
+<li>The function returns the sum of the squares.</li>
+</ul>
+</li>
+</ul>
+<h4 id="step-2-main-function-ishappyint-n">Step 2: Main Function <code>isHappy(int n)</code></h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">isHappy</span>(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> slow <span style="color:#666">=</span> n;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> fast <span style="color:#666">=</span> n;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">do</span> {
+</span></span><span style="display:flex;"><span>        slow <span style="color:#666">=</span> sqr(slow);   <span style="color:#080;font-style:italic">// Move slow pointer one step
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        fast <span style="color:#666">=</span> sqr(sqr(fast)); <span style="color:#080;font-style:italic">// Move fast pointer two steps
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    } <span style="color:#a2f;font-weight:bold">while</span>(slow <span style="color:#666">!=</span> fast);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> slow <span style="color:#666">==</span> <span style="color:#666">1</span>;  <span style="color:#080;font-style:italic">// If slow reaches 1, it&#39;s a happy number
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>}
+</span></span></code></pre></div><ul>
+<li><strong>Purpose:</strong> This function checks whether <code>n</code> is a happy number using Floyd’s Cycle-Finding Algorithm.</li>
+<li><strong>How it works:</strong>
+<ul>
+<li>Both the slow and fast pointers start at <code>n</code>.</li>
+<li>The slow pointer moves one step at a time, while the fast pointer moves two steps at a time.</li>
+<li>We keep moving the pointers until they meet. If they meet at <code>1</code>, the number is happy, so we return <code>true</code>.</li>
+<li>If they meet at any other value, a cycle is detected, and we return <code>false</code>.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="-complexity-analysis">📈 Complexity Analysis</h3>
+<h4 id="time-complexity">Time Complexity:</h4>
+<ul>
+<li><strong>O(log n):</strong> The <code>sqr</code> function runs in <strong>O(log n)</strong> because the number of digits in <code>n</code> is proportional to <code>log n</code>. The <code>do-while</code> loop runs until a cycle is detected or the slow pointer reaches <code>1</code>. In the worst case, the number of iterations is proportional to the number of distinct values that can be reached by summing the squares of the digits, which is small and bounded. So, the time complexity is <strong>O(log n)</strong>.</li>
+</ul>
+<h4 id="space-complexity">Space Complexity:</h4>
+<ul>
+<li><strong>O(1):</strong> We only use two pointers (<code>slow</code> and <code>fast</code>), so the space complexity is constant. No additional data structures are required.</li>
+</ul>
+<hr>
+<h3 id="-conclusion">🏁 Conclusion</h3>
+<p>We’ve successfully solved the happy number problem using <strong>Floyd’s Cycle-Finding Algorithm</strong>. This method is:</p>
+<ol>
+<li><strong>Efficient:</strong> The algorithm runs in <strong>O(log n)</strong> time, making it optimal for large inputs.</li>
+<li><strong>Space Optimized:</strong> The space complexity is <strong>O(1)</strong>, which means it uses minimal memory.</li>
+<li><strong>Clever:</strong> By using the tortoise and hare approach, we can efficiently detect cycles without storing all previous values, making this solution both elegant and memory-friendly.</li>
+</ol>
+<h3 id="key-takeaways">Key Takeaways:</h3>
+<ul>
+<li><strong>Cycle detection</strong> ensures we don’t fall into infinite loops.</li>
+<li><strong>Efficiency</strong> is achieved with logarithmic time complexity.</li>
+<li><strong>Space savings</strong> make the solution ideal for memory-constrained environments.</li>
+</ul>
+<p>So, next time you face a number and wonder whether it&rsquo;s happy, you’ve got a smooth, efficient solution ready to go! Keep coding and keep exploring! 🌟</p>
+<p><a href="https://leetcode.com/problems/happy-number/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/4IroNy8fmNA?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

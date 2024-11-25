@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 754: Reach a Number | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 754: Reach a Number">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 754: Reach a Number in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-754-reach-a-number/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 754: Reach a Number">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 754: Reach a Number in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-08-23T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Math">
+    <meta property="article:tag" content="Binary Search">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 754: Reach a Number</h1> 
+            </div>
+			<div class="article-post">
+				<h2 id="hahahugoshortcode1290s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+    <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/754.webp" 
+           alt="A number line where the steps to reach a target number are traced, with each step glowing softly." 
+           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    
+      <figcaption style="font-size: 0.8em; font-weight: 300; color:#555; margin-top: 4px; line-height: 1.2;">
+        Solution to LeetCode 754: Reach a Number Problem
+      </figcaption>
+    
+  </figure>
+  </h2>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode1290s1hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> reachNumber(<span style="color:#0b0;font-weight:bold">int</span> target) {
+</span></span><span style="display:flex;"><span>        target <span style="color:#666">=</span> abs(target);
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> n <span style="color:#666">=</span> ceil((<span style="color:#666">-</span><span style="color:#666">1.0</span> <span style="color:#666">+</span> sqrt(<span style="color:#666">1</span><span style="color:#666">+</span><span style="color:#666">8.0</span><span style="color:#666">*</span>target)) <span style="color:#666">/</span> <span style="color:#666">2</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> sum <span style="color:#666">=</span> n <span style="color:#666">*</span> (n <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span> (sum <span style="color:#666">==</span> target) <span style="color:#a2f;font-weight:bold">return</span> n;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> res <span style="color:#666">=</span> sum <span style="color:#666">-</span> target;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>((res <span style="color:#666">&amp;</span><span style="color:#666">1</span>) <span style="color:#666">==</span> <span style="color:#666">0</span>)   <span style="color:#a2f;font-weight:bold">return</span> n;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span>                <span style="color:#a2f;font-weight:bold">return</span> n <span style="color:#666">+</span> ((n<span style="color:#666">&amp;</span><span style="color:#666">1</span>)<span style="color:#666">?</span> <span style="color:#666">2</span><span style="color:#666">:</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem asks us to find the minimum number of moves required to reach a given target number starting from 0, where in each move, we can either increase or decrease the current number by a step size of 1. The task is to determine the minimum number of moves needed to exactly reach the target, given that each move is either +1 or -1.</p>
+<p>The catch here is that the target can be both positive and negative, and the solution should work efficiently without brute-forcing through each step, especially for large numbers.</p>
+<h3 id="approach">Approach</h3>
+<p>To solve this problem, we can leverage <strong>mathematical insights</strong> rather than iterating step by step. The idea is to recognize that the total distance we cover in <code>n</code> steps is the sum of the first <code>n</code> natural numbers. This sum can be represented as:</p>
+<p>[
+S_n = \frac{n \times (n + 1)}{2}
+]</p>
+<p>Where:</p>
+<ul>
+<li><code>n</code> is the number of moves (steps).</li>
+<li><code>S_n</code> is the total distance covered after <code>n</code> steps.</li>
+</ul>
+<p>Our goal is to find the smallest <code>n</code> such that the sum <code>S_n</code> is either equal to the target or can be adjusted (through +/- operations) to exactly match the target.</p>
+<h3 id="key-observations">Key Observations:</h3>
+<ol>
+<li>
+<p><strong>Sum of First n Numbers</strong>: The total sum of the first <code>n</code> numbers grows quadratically as <code>n</code> increases. This can help us estimate how far we need to go in terms of the number of steps required.</p>
+</li>
+<li>
+<p><strong>Adjusting the sum to match the target</strong>:</p>
+<ul>
+<li>Once we find the sum <code>S_n</code> for some <code>n</code>, we need to check if we can adjust it to match the target.</li>
+<li>If <code>S_n</code> is exactly equal to the target, we have found the solution.</li>
+<li>If <code>S_n</code> is greater than the target, the difference <code>S_n - target</code> must be adjusted. We can achieve this adjustment by flipping the sign of certain steps (i.e., using <code>-1</code> instead of <code>+1</code> for some of the moves). This difference must be even for such an adjustment to be possible.</li>
+</ul>
+</li>
+<li>
+<p><strong>Mathematical Derivation</strong>:</p>
+<ul>
+<li>The formula used to compute <code>n</code> comes from solving for <code>n</code> in the quadratic equation derived from the sum of the first <code>n</code> integers.</li>
+<li>Once we find the nearest <code>n</code>, we compute whether the difference between <code>S_n</code> and the target is even or odd. If the difference is even, no further moves are required; otherwise, we need to adjust the number of moves.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<ol>
+<li>
+<p><strong>Transform Target to Positive</strong>:</p>
+<ul>
+<li>First, we take the absolute value of the target. This simplifies the problem, as the behavior for positive and negative targets is symmetric. We don&rsquo;t need to consider the sign of the target in the subsequent calculations.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>target <span style="color:#666">=</span> abs(target);
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Finding the Minimum n</strong>:</p>
+<ul>
+<li>We calculate the smallest <code>n</code> such that the sum of the first <code>n</code> numbers (<code>S_n</code>) is greater than or equal to the target. This is done by solving the quadratic equation:
+[
+n = \lceil \frac{-1 + \sqrt{1 + 8 \times target}}{2} \rceil
+]</li>
+<li>The expression above is derived from the formula for the sum of the first <code>n</code> natural numbers. Using the <code>sqrt()</code> function ensures we are working with a floating-point approximation to get the smallest <code>n</code> that satisfies the condition.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> n <span style="color:#666">=</span> ceil((<span style="color:#666">-</span><span style="color:#666">1.0</span> <span style="color:#666">+</span> sqrt(<span style="color:#666">1</span> <span style="color:#666">+</span> <span style="color:#666">8.0</span> <span style="color:#666">*</span> target)) <span style="color:#666">/</span> <span style="color:#666">2</span>);
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Calculate Sum of First n Numbers</strong>:</p>
+<ul>
+<li>Once we have <code>n</code>, we calculate the sum of the first <code>n</code> numbers using the formula:
+[
+S_n = \frac{n \times (n + 1)}{2}
+]</li>
+<li>This sum is the total distance we can cover after <code>n</code> steps.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> sum <span style="color:#666">=</span> n <span style="color:#666">*</span> (n <span style="color:#666">+</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Check if Sum Matches Target</strong>:</p>
+<ul>
+<li>If the sum of the first <code>n</code> numbers exactly equals the target, we return <code>n</code> as the result because we’ve found the minimum number of moves needed to reach the target.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (sum <span style="color:#666">==</span> target) <span style="color:#a2f;font-weight:bold">return</span> n;
+</span></span></code></pre></div></li>
+<li>
+<p><strong>Handle Adjustment</strong>:</p>
+<ul>
+<li>If <code>S_n</code> is greater than the target, we calculate the difference <code>res = sum - target</code>.</li>
+<li>If this difference is even (<code>res &amp; 1 == 0</code>), we can achieve the target by adjusting the signs of the moves. In this case, we return <code>n</code>.</li>
+<li>If the difference is odd, we need one additional move to make the difference even, so we return <code>n + 1</code> or <code>n + 2</code> depending on whether <code>n</code> is odd or even:</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">long</span> <span style="color:#0b0;font-weight:bold">long</span> res <span style="color:#666">=</span> sum <span style="color:#666">-</span> target;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> ((res <span style="color:#666">&amp;</span> <span style="color:#666">1</span>) <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> n;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> n <span style="color:#666">+</span> ((n <span style="color:#666">&amp;</span> <span style="color:#666">1</span>) <span style="color:#666">?</span> <span style="color:#666">2</span> <span style="color:#666">:</span> <span style="color:#666">1</span>);
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="complexity-analysis">Complexity Analysis</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity of the algorithm is <strong>O(1)</strong> since the number of operations involved (square root, division, and modulus checks) is constant. This is an optimal approach, as we don&rsquo;t need to perform iterative steps for large target values.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is also <strong>O(1)</strong> because the algorithm uses a constant amount of space to store the variables <code>n</code>, <code>sum</code>, and <code>res</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>This solution efficiently solves the problem by using a mathematical approach rather than brute-forcing through every possible combination of moves. By leveraging the formula for the sum of the first <code>n</code> numbers and solving for the smallest <code>n</code>, we minimize the number of steps needed to reach the target.</p>
+<p>The key insight is that the total distance covered by the first <code>n</code> moves grows quadratically, and the target can be adjusted if the difference between the sum and the target is even. This approach is both time-efficient and space-efficient, with constant time and space complexity.</p>
+<p>This method ensures that even for large targets, the solution is computed quickly without the need for simulating each individual move. The algorithm effectively handles both positive and negative targets, making it robust and adaptable to various input cases.</p>
+<p><a href="https://leetcode.com/problems/reach-a-number/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/K8yXBn4cCQs?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

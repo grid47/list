@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 2904: Shortest and Lexicographically Smallest Beautiful String | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 2904: Shortest and Lexicographically Smallest Beautiful String">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 2904: Shortest and Lexicographically Smallest Beautiful String in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-2904-shortest-and-lexicographically-smallest-beautiful-string/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 2904: Shortest and Lexicographically Smallest Beautiful String">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 2904: Shortest and Lexicographically Smallest Beautiful String in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-01-21T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="String">
+    <meta property="article:tag" content="Sliding Window">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 2904: Shortest and Lexicographically Smallest Beautiful String</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode1003s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    string shortestBeautifulSubstring(string s, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s.size();
+</span></span><span style="display:flex;"><span>        string ans <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>, cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;1&#39;</span>) cnt<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">while</span>( j <span style="color:#666">&lt;</span> n <span style="color:#666">&amp;&amp;</span> cnt <span style="color:#666">==</span> k )
+</span></span><span style="display:flex;"><span>            {
+</span></span><span style="display:flex;"><span>                string tmp <span style="color:#666">=</span> s.substr(j, i <span style="color:#666">-</span> j <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(ans.size()<span style="color:#666">==</span><span style="color:#666">0</span> <span style="color:#666">||</span> tmp.size() <span style="color:#666">&lt;</span> ans.size()) ans <span style="color:#666">=</span> tmp;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(tmp.size() <span style="color:#666">==</span> ans.size()) ans <span style="color:#666">=</span> min(ans, tmp);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(s[j] <span style="color:#666">==</span> <span style="color:#b44">&#39;1&#39;</span>) cnt<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>                j<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;        
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem asks us to find the shortest substring in a given string <code>s</code> that contains exactly <code>k</code> occurrences of the character &lsquo;1&rsquo;. If multiple substrings of the same length are found, the lexicographically smallest one should be returned.</p>
+<h3 id="approach">Approach</h3>
+<p>To solve this problem efficiently, we need to find substrings of the string <code>s</code> that contain exactly <code>k</code> occurrences of the character &lsquo;1&rsquo;. To achieve this, we can use a sliding window approach with two pointers (<code>i</code> and <code>j</code>) and a counter (<code>cnt</code>) to track the number of &lsquo;1&rsquo;s in the current window. We aim to expand the window to include the required number of &lsquo;1&rsquo;s and then contract it to find the smallest possible valid substring.</p>
+<ol>
+<li>
+<p><strong>Sliding Window</strong>: We will iterate over the string using two pointers, <code>i</code> (to expand the window) and <code>j</code> (to contract the window). The goal is to adjust the window to contain exactly <code>k</code> &lsquo;1&rsquo;s at each step.</p>
+</li>
+<li>
+<p><strong>Tracking the &lsquo;1&rsquo;s Count</strong>: As we move the right pointer (<code>i</code>), we increment the counter <code>cnt</code> whenever we encounter a &lsquo;1&rsquo;. When <code>cnt</code> reaches <code>k</code>, we check if the current window is the shortest possible substring that satisfies the condition. If it is, we update the result.</p>
+</li>
+<li>
+<p><strong>Optimizing the Result</strong>: If multiple valid substrings of the same length are found, we will compare them lexicographically to ensure that the smallest one is chosen.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<h4 id="1-initialization">1. Initialization</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n <span style="color:#666">=</span> s.size();
+</span></span><span style="display:flex;"><span>string ans <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">0</span>, cnt <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div><ul>
+<li><code>n</code>: Stores the size of the input string <code>s</code>.</li>
+<li><code>ans</code>: A string variable to store the shortest valid substring.</li>
+<li><code>j</code>: Left pointer of the sliding window, initialized to 0.</li>
+<li><code>cnt</code>: Counter to keep track of the number of &lsquo;1&rsquo;s in the current window.</li>
+</ul>
+<h4 id="2-expanding-the-window">2. Expanding the Window</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(s[i] <span style="color:#666">==</span> <span style="color:#b44">&#39;1&#39;</span>) cnt<span style="color:#666">++</span>;
+</span></span></code></pre></div><ul>
+<li>The outer loop (<code>for(int i = 0; i &lt; n; i++)</code>) iterates through the string with the right pointer <code>i</code>.</li>
+<li>Whenever we encounter a &lsquo;1&rsquo; in the string (<code>if(s[i] == '1')</code>), we increment the counter <code>cnt</code> to keep track of how many &lsquo;1&rsquo;s are in the current window.</li>
+</ul>
+<h4 id="3-contracting-the-window-when-cnt--k">3. Contracting the Window When <code>cnt == k</code></h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">while</span>(j <span style="color:#666">&lt;</span> n <span style="color:#666">&amp;&amp;</span> cnt <span style="color:#666">==</span> k)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        string tmp <span style="color:#666">=</span> s.substr(j, i <span style="color:#666">-</span> j <span style="color:#666">+</span> <span style="color:#666">1</span>);
+</span></span></code></pre></div><ul>
+<li>Once <code>cnt</code> reaches <code>k</code>, we enter the inner <code>while</code> loop, which will contract the window from the left to minimize the substring.</li>
+<li><code>s.substr(j, i - j + 1)</code> extracts the substring starting at index <code>j</code> and ending at index <code>i</code>. This substring contains exactly <code>k</code> &lsquo;1&rsquo;s.</li>
+</ul>
+<h4 id="4-update-the-result">4. Update the Result</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(ans.size() <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> tmp.size() <span style="color:#666">&lt;</span> ans.size()) ans <span style="color:#666">=</span> tmp;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#00a000">if</span>(tmp.size() <span style="color:#666">==</span> ans.size()) ans <span style="color:#666">=</span> min(ans, tmp);
+</span></span></code></pre></div><ul>
+<li>If the <code>ans</code> string is empty or the current substring <code>tmp</code> is smaller than <code>ans</code>, we update <code>ans</code> to the current substring.</li>
+<li>If the lengths of <code>tmp</code> and <code>ans</code> are equal, we choose the lexicographically smaller substring by comparing them using <code>min()</code>.</li>
+</ul>
+<h4 id="5-move-the-left-pointer-j">5. Move the Left Pointer <code>j</code></h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(s[j] <span style="color:#666">==</span> <span style="color:#b44">&#39;1&#39;</span>) cnt<span style="color:#666">--</span>;
+</span></span><span style="display:flex;"><span>        j<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>To try and find a smaller valid substring, we move the left pointer <code>j</code> to the right.</li>
+<li>If the character at position <code>j</code> is &lsquo;1&rsquo;, we decrement the counter <code>cnt</code> since we are removing a &lsquo;1&rsquo; from the window.</li>
+<li>We then increment <code>j</code> to shift the window.</li>
+</ul>
+<h4 id="6-return-the-result">6. Return the Result</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>After the loop finishes, the result <code>ans</code> holds the shortest valid substring that contains exactly <code>k</code> occurrences of &lsquo;1&rsquo;. If no valid substring is found, <code>ans</code> will remain an empty string.</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<h4 id="time-complexity">Time Complexity</h4>
+<ul>
+<li>
+<p><strong>Outer Loop</strong>: The outer loop runs from <code>0</code> to <code>n-1</code>, where <code>n</code> is the size of the string <code>s</code>. Therefore, the outer loop has a time complexity of <code>O(n)</code>.</p>
+</li>
+<li>
+<p><strong>Inner Loop</strong>: The inner loop&rsquo;s condition depends on the counter <code>cnt</code>. For every valid window where <code>cnt == k</code>, we increment <code>j</code> to shrink the window. In the worst case, each index is visited only once by <code>j</code> for each index visited by <code>i</code>. Thus, the time complexity of the inner loop is also <code>O(n)</code> in total.</p>
+</li>
+<li>
+<p><strong>Substring Extraction</strong>: The call to <code>s.substr(j, i - j + 1)</code> extracts a substring of length <code>i - j + 1</code>. In the worst case, this operation is called <code>O(n)</code> times, and each substring extraction takes <code>O(n)</code> time.</p>
+</li>
+</ul>
+<p>Thus, the overall time complexity is dominated by the two nested loops, and the substring extraction, leading to an <strong>O(n^2)</strong> time complexity.</p>
+<h4 id="space-complexity">Space Complexity</h4>
+<ul>
+<li>We are using a constant amount of extra space (apart from the input string) to store variables such as <code>ans</code>, <code>tmp</code>, <code>cnt</code>, and <code>j</code>. The space complexity for these variables is <strong>O(1)</strong>.</li>
+<li>The space required for storing substrings temporarily in the <code>tmp</code> variable can be up to <code>O(n)</code> in the worst case.</li>
+</ul>
+<p>Therefore, the overall space complexity is <strong>O(n)</strong>.</p>
+<h3 id="conclusion">Conclusion</h3>
+<p>The solution efficiently finds the shortest substring containing exactly <code>k</code> &lsquo;1&rsquo;s using a sliding window approach. The use of two pointers (<code>i</code> and <code>j</code>) and a counter (<code>cnt</code>) allows us to expand and contract the window dynamically to find the required substrings. The algorithm guarantees an optimal result by comparing substrings lexicographically when necessary and by minimizing the window size to ensure the shortest valid substring. Although the time complexity is <code>O(n^2)</code> due to the substring extraction, this solution is still feasible for moderately sized strings and provides a clear, concise way to tackle the problem.</p>
+<p><a href="https://leetcode.com/problems/shortest-and-lexicographically-smallest-beautiful-string/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/FhAuoztsceo?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

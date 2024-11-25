@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 2903: Find Indices With Index and Value Difference I | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 2903: Find Indices With Index and Value Difference I">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 2903: Find Indices With Index and Value Difference I in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-2903-find-indices-with-index-and-value-difference-i/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 2903: Find Indices With Index and Value Difference I">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 2903: Find Indices With Index and Value Difference I in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-01-21T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Two Pointers">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 2903: Find Indices With Index and Value Difference I</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode1002s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> findIndices(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums, <span style="color:#0b0;font-weight:bold">int</span> idif, <span style="color:#0b0;font-weight:bold">int</span> vdif) {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mn <span style="color:#666">=</span> <span style="color:#666">0</span>, mx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> idif, j <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); <span style="color:#666">++</span>i, <span style="color:#666">++</span>j) {
+</span></span><span style="display:flex;"><span>            mn <span style="color:#666">=</span> nums[mn] <span style="color:#666">&lt;</span> nums[j] <span style="color:#666">?</span> <span style="color:#a0a000">mn</span> : j;
+</span></span><span style="display:flex;"><span>            mx <span style="color:#666">=</span> nums[mx] <span style="color:#666">&gt;</span> nums[j] <span style="color:#666">?</span> <span style="color:#a0a000">mx</span> : j;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (abs(nums[i] <span style="color:#666">-</span> nums[mn]) <span style="color:#666">&gt;=</span> vdif)
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">return</span> {mn, i};
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (abs(nums[i] <span style="color:#666">-</span> nums[mx]) <span style="color:#666">&gt;=</span> vdif)
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">return</span> {mx, i};
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> {<span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#666">-</span><span style="color:#666">1</span>};        
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem asks us to find two indices in the given array <code>nums</code> such that the absolute difference between the values at those indices is at least <code>vdif</code>, starting from the index <code>idif</code>. If such a pair of indices is found, return the indices. If no such pair exists, return <code>{-1, -1}</code>.</p>
+<h3 id="approach">Approach</h3>
+<p>The solution uses a two-pointer approach, where one pointer (<code>i</code>) iterates through the array starting from the <code>idif</code> index, and another pointer (<code>j</code>) tracks the minimum and maximum values seen up until the current index <code>i</code>. The goal is to identify if the difference between the current element <code>nums[i]</code> and either the minimum or maximum value encountered so far is greater than or equal to <code>vdif</code>. If this condition is met, we return the corresponding pair of indices.</p>
+<ol>
+<li>
+<p><strong>Initial Setup</strong>:</p>
+<ul>
+<li>We initialize two variables <code>mn</code> and <code>mx</code> to track the indices of the minimum and maximum elements as we traverse through the array.</li>
+<li>We also set up the iteration to start from the given index <code>idif</code> and iterate through the array.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterating Through the Array</strong>:</p>
+<ul>
+<li>We iterate through the array from index <code>idif</code> using the variable <code>i</code>, and for each index <code>i</code>, we calculate the minimum and maximum values up to that index using the variables <code>mn</code> and <code>mx</code>.</li>
+<li>We check the absolute difference between the current element <code>nums[i]</code> and the element at index <code>mn</code> (the minimum value) and <code>mx</code> (the maximum value).</li>
+</ul>
+</li>
+<li>
+<p><strong>Checking the Condition</strong>:</p>
+<ul>
+<li>If the absolute difference between <code>nums[i]</code> and <code>nums[mn]</code> is greater than or equal to <code>vdif</code>, we return the pair of indices <code>{mn, i}</code>.</li>
+<li>If the absolute difference between <code>nums[i]</code> and <code>nums[mx]</code> is greater than or equal to <code>vdif</code>, we return the pair <code>{mx, i}</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return No Pair</strong>:</p>
+<ul>
+<li>If the loop completes without finding a pair, the function returns <code>{-1, -1}</code> to indicate that no valid pair exists.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<h4 id="step-1-initial-setup">Step 1: Initial Setup</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mn <span style="color:#666">=</span> <span style="color:#666">0</span>, mx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div><ul>
+<li>The variables <code>mn</code> and <code>mx</code> are initialized to zero. They will hold the indices of the minimum and maximum values encountered so far during the iteration through the array.</li>
+</ul>
+<h4 id="step-2-iteration-and-tracking-minimum-and-maximum-indices">Step 2: Iteration and Tracking Minimum and Maximum Indices</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span> (<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> idif, j <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> nums.size(); <span style="color:#666">++</span>i, <span style="color:#666">++</span>j) {
+</span></span><span style="display:flex;"><span>    mn <span style="color:#666">=</span> nums[mn] <span style="color:#666">&lt;</span> nums[j] <span style="color:#666">?</span> <span style="color:#a0a000">mn</span> : j;
+</span></span><span style="display:flex;"><span>    mx <span style="color:#666">=</span> nums[mx] <span style="color:#666">&gt;</span> nums[j] <span style="color:#666">?</span> <span style="color:#a0a000">mx</span> : j;
+</span></span></code></pre></div><ul>
+<li>The loop starts from <code>idif</code> (the given starting index) and iterates over the rest of the array. The variable <code>i</code> moves from <code>idif</code> to the end of the array (<code>nums.size()</code>).</li>
+<li>The variable <code>mn</code> is updated to track the index of the minimum element between the current value of <code>mn</code> and <code>j</code>. This is done using a ternary conditional (<code>mn = nums[mn] &lt; nums[j] ? mn : j;</code>).</li>
+<li>Similarly, <code>mx</code> is updated to track the index of the maximum element between the current value of <code>mx</code> and <code>j</code>.</li>
+</ul>
+<h4 id="step-3-checking-the-absolute-difference-condition">Step 3: Checking the Absolute Difference Condition</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (abs(nums[i] <span style="color:#666">-</span> nums[mn]) <span style="color:#666">&gt;=</span> vdif)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> {mn, i};
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span> (abs(nums[i] <span style="color:#666">-</span> nums[mx]) <span style="color:#666">&gt;=</span> vdif)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> {mx, i};
+</span></span></code></pre></div><ul>
+<li>For each index <code>i</code>, the code checks whether the absolute difference between <code>nums[i]</code> and the element at index <code>mn</code> (the minimum value up to <code>i</code>) is greater than or equal to <code>vdif</code>. If true, it returns the indices <code>{mn, i}</code>.</li>
+<li>Similarly, it checks whether the absolute difference between <code>nums[i]</code> and <code>nums[mx]</code> (the maximum value up to <code>i</code>) is greater than or equal to <code>vdif</code>. If true, it returns <code>{mx, i}</code>.</li>
+</ul>
+<h4 id="step-4-return-no-pair-found">Step 4: Return No Pair Found</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> {<span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#666">-</span><span style="color:#666">1</span>};
+</span></span></code></pre></div><ul>
+<li>If no such pair is found during the entire iteration, the function returns <code>{-1, -1}</code> to indicate that no valid pair of indices exists.</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<h4 id="time-complexity">Time Complexity:</h4>
+<ul>
+<li>The time complexity is <code>O(n)</code>, where <code>n</code> is the length of the input array <code>nums</code>. The function iterates over the array only once, checking the conditions for each index. Inside the loop, each operation (updating the minimum and maximum indices, checking the conditions, etc.) takes constant time, so the overall complexity is linear in the size of the input.</li>
+</ul>
+<h4 id="space-complexity">Space Complexity:</h4>
+<ul>
+<li>The space complexity is <code>O(1)</code> because the function uses only a constant amount of extra space (just a few integer variables for tracking the minimum and maximum indices).</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>This solution efficiently finds two indices in the given array <code>nums</code> such that the absolute difference between the values at those indices is at least <code>vdif</code>, starting from the index <code>idif</code>. By using a single loop and maintaining the indices of the minimum and maximum values seen so far, the solution avoids unnecessary computations and achieves a linear time complexity. This makes the solution optimal for large arrays, providing a quick way to determine whether such a pair of indices exists.</p>
+<p><a href="https://leetcode.com/problems/find-indices-with-index-and-value-difference-i/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/R731s1mHVWM?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

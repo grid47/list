@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 2536: Increment Submatrices by One | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 2536: Increment Submatrices by One">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 2536: Increment Submatrices by One in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-2536-increment-submatrices-by-one/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 2536: Increment Submatrices by One">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 2536: Increment Submatrices by One in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-02-27T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Matrix">
+    <meta property="article:tag" content="Prefix Sum">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 2536: Increment Submatrices by One</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode820s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> rangeAddQueries(<span style="color:#0b0;font-weight:bold">int</span> n, vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> q) {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans(n, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">0</span>));
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> q.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> q[i];
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> q[i][<span style="color:#666">0</span>]; j <span style="color:#666">&lt;=</span> q[i][<span style="color:#666">2</span>]; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>                ans[j][q[i][<span style="color:#666">1</span>]] <span style="color:#666">+=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>                <span style="color:#a2f;font-weight:bold">if</span>(q[i][<span style="color:#666">3</span>] <span style="color:#666">&lt;</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>)
+</span></span><span style="display:flex;"><span>                    ans[j][q[i][<span style="color:#666">3</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">-=</span><span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>            ans[i][j] <span style="color:#666">+=</span> ans[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem asks to efficiently apply range addition queries to an <code>n x n</code> matrix. Given a set of queries, each specifying a rectangular submatrix (defined by the top-left and bottom-right corners), we are required to increment the elements in that submatrix. The task is to return the matrix after all queries have been applied.</p>
+<p>Each query is of the form:</p>
+<ul>
+<li><code>[row1, col1, row2, col2]</code>, where:
+<ul>
+<li><code>row1</code>, <code>col1</code> is the top-left corner of the submatrix.</li>
+<li><code>row2</code>, <code>col2</code> is the bottom-right corner of the submatrix.</li>
+<li>The query adds <code>1</code> to all elements in the submatrix defined by these corners.</li>
+</ul>
+</li>
+</ul>
+<h3 id="approach">Approach</h3>
+<p>To solve this problem efficiently, we can use the <strong>prefix sum approach</strong>. Instead of updating every element of the submatrix directly for each query, which would be inefficient, we can update a smaller range in the matrix and later accumulate the values.</p>
+<ol>
+<li>
+<p><strong>Difference Array</strong>:</p>
+<ul>
+<li>
+<p>The key idea here is to use a difference array to represent the increments. Instead of applying the increment to every element in the submatrix immediately, we only modify the boundaries of the submatrix.</p>
+</li>
+<li>
+<p>For each query <code>[row1, col1, row2, col2]</code>, we:</p>
+<ul>
+<li>Increment <code>ans[row1][col1]</code> by <code>1</code> to indicate the start of an increment at this position.</li>
+<li>Decrement <code>ans[row1][col2 + 1]</code> by <code>1</code> if <code>col2 + 1 &lt; n</code>, to cancel the increment beyond the end of the column range.</li>
+<li>Increment <code>ans[row2 + 1][col1]</code> by <code>1</code> if <code>row2 + 1 &lt; n</code>, to cancel the increment beyond the end of the row range.</li>
+<li>Decrement <code>ans[row2 + 1][col2 + 1]</code> by <code>1</code> to ensure the area beyond the bottom-right corner is unaffected by the query.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Prefix Sum</strong>:</p>
+<ul>
+<li>After all queries have been applied in the difference matrix, we can compute the prefix sum of rows to obtain the final matrix. This step ensures that each element reflects the correct number of additions.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<h4 id="step-1-initialize-matrix-ans">Step 1: Initialize Matrix <code>ans</code></h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> ans(n, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span>(n, <span style="color:#666">0</span>));
+</span></span></code></pre></div><ul>
+<li>We start by initializing an <code>n x n</code> matrix <code>ans</code> with all elements set to <code>0</code>. This matrix will store the intermediate results of the range additions.</li>
+</ul>
+<h4 id="step-2-processing-each-query">Step 2: Processing Each Query</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> q.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">auto</span> it <span style="color:#666">=</span> q[i];
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> q[i][<span style="color:#666">0</span>]; j <span style="color:#666">&lt;=</span> q[i][<span style="color:#666">2</span>]; j<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>        ans[j][q[i][<span style="color:#666">1</span>]] <span style="color:#666">+=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(q[i][<span style="color:#666">3</span>] <span style="color:#666">&lt;</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>)
+</span></span><span style="display:flex;"><span>            ans[j][q[i][<span style="color:#666">3</span>] <span style="color:#666">+</span> <span style="color:#666">1</span>] <span style="color:#666">-=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>We iterate over each query in <code>q</code>. Each query is a vector with the format <code>[row1, col1, row2, col2]</code>.</li>
+<li>For each query, we loop through the rows from <code>row1</code> to <code>row2</code>. Within this range, we update the first column of the range (<code>col1</code>) by incrementing it by <code>1</code>.</li>
+<li>We also perform a boundary check to ensure that we do not go out of bounds. If <code>col2 + 1</code> is within bounds, we decrement that cell to cancel the increment beyond the end of the column range.</li>
+</ul>
+<h4 id="step-3-compute-prefix-sum-for-columns">Step 3: Compute Prefix Sum for Columns</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> n; i<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> j <span style="color:#666">=</span> <span style="color:#666">1</span>; j <span style="color:#666">&lt;</span> n; j<span style="color:#666">++</span>)
+</span></span><span style="display:flex;"><span>        ans[i][j] <span style="color:#666">+=</span> ans[i][j <span style="color:#666">-</span> <span style="color:#666">1</span>];
+</span></span></code></pre></div><ul>
+<li>After processing all queries, the matrix <code>ans</code> will have partial sums. Now, we need to compute the prefix sum for each row to propagate the effects of the range additions across the columns.</li>
+<li>For each row <code>i</code>, starting from the second column <code>j = 1</code>, we update each <code>ans[i][j]</code> by adding the value of the previous column <code>ans[i][j - 1]</code>. This ensures that each element reflects the cumulative additions up to that point.</li>
+</ul>
+<h4 id="step-4-return-the-final-matrix">Step 4: Return the Final Matrix</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span></code></pre></div><ul>
+<li>Once the prefix sums are computed, the matrix <code>ans</code> contains the final values after all queries have been applied. This matrix is then returned.</li>
+</ul>
+<h3 id="complexity-analysis">Complexity Analysis</h3>
+<h4 id="time-complexity">Time Complexity</h4>
+<ol>
+<li>
+<p><strong>Processing Queries</strong>:</p>
+<ul>
+<li>We iterate over each query in <code>q</code>, and for each query, we loop over the rows from <code>row1</code> to <code>row2</code>. For each row in the range, we perform a constant number of operations (incrementing and decrementing specific elements).</li>
+<li>In the worst case, for each query, we may have to process all <code>n</code> rows (if <code>row1 = 0</code> and <code>row2 = n-1</code>).</li>
+<li>Thus, the time complexity of processing the queries is ( O(q \cdot n) ), where <code>q</code> is the number of queries and <code>n</code> is the size of the matrix.</li>
+</ul>
+</li>
+<li>
+<p><strong>Computing Prefix Sum</strong>:</p>
+<ul>
+<li>After processing all queries, we compute the prefix sum for each row. This step takes ( O(n^2) ) time, as we iterate over all the elements in the <code>n x n</code> matrix to compute the sums.</li>
+</ul>
+</li>
+<li>
+<p><strong>Overall Time Complexity</strong>:</p>
+<ul>
+<li>The total time complexity is ( O(q \cdot n + n^2) ), where <code>q</code> is the number of queries and <code>n</code> is the size of the matrix.</li>
+</ul>
+</li>
+</ol>
+<h4 id="space-complexity">Space Complexity</h4>
+<ol>
+<li>
+<p><strong>Matrix Storage</strong>:</p>
+<ul>
+<li>The matrix <code>ans</code> requires ( O(n^2) ) space, as it stores the values for each cell in the <code>n x n</code> matrix.</li>
+</ul>
+</li>
+<li>
+<p><strong>Query Storage</strong>:</p>
+<ul>
+<li>The input <code>q</code> is a list of queries, and the space required to store this list is ( O(q) ).</li>
+</ul>
+</li>
+<li>
+<p><strong>Overall Space Complexity</strong>:</p>
+<ul>
+<li>The overall space complexity is ( O(n^2) ), as this is the dominant factor due to the storage of the matrix <code>ans</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="conclusion">Conclusion</h3>
+<p>This solution efficiently solves the problem of applying multiple range addition queries to an <code>n x n</code> matrix using the prefix sum technique. The use of the difference array ensures that each query is processed in a time-efficient manner, avoiding the need to iterate over the entire submatrix for each query. By leveraging the prefix sum computation, we efficiently accumulate the results and obtain the final matrix after all queries are applied. The time complexity of ( O(q \cdot n + n^2) ) and the space complexity of ( O(n^2) ) make this approach suitable for handling larger inputs within reasonable time and space limits.</p>
+<p><a href="https://leetcode.com/problems/increment-submatrices-by-one/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/K4SJb0I-_hw?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

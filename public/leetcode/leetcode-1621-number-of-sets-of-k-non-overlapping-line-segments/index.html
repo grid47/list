@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 1621: Number of Sets of K Non-Overlapping Line Segments | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 1621: Number of Sets of K Non-Overlapping Line Segments">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1621: Number of Sets of K Non-Overlapping Line Segments in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-1621-number-of-sets-of-k-non-overlapping-line-segments/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 1621: Number of Sets of K Non-Overlapping Line Segments">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1621: Number of Sets of K Non-Overlapping Line Segments in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-05-28T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Math">
+    <meta property="article:tag" content="Dynamic Programming">
+    <meta property="article:tag" content="Combinatorics">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 1621: Number of Sets of K Non-Overlapping Line Segments</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode302s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mod <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">int</span>) <span style="color:#666">1e9</span> <span style="color:#666">+</span> <span style="color:#666">7</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> memo[<span style="color:#666">1001</span>][<span style="color:#666">1001</span>][<span style="color:#666">2</span>];
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> seg, <span style="color:#0b0;font-weight:bold">bool</span> startHere) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(seg <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> n) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(memo[idx][seg][startHere] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[idx][seg][startHere];
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, seg, startHere); <span style="color:#080;font-style:italic">// will start on next or continue the seg
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">if</span>(startHere) {
+</span></span><span style="display:flex;"><span>            ans <span style="color:#666">=</span> (ans <span style="color:#666">+</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, seg, <span style="color:#a2f">false</span>)) <span style="color:#666">%</span> mod; <span style="color:#080;font-style:italic">// stared new line            
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>            ans <span style="color:#666">=</span> (ans <span style="color:#666">+</span> dp(idx, seg <span style="color:#666">-</span> <span style="color:#666">1</span>, <span style="color:#a2f">true</span>)) <span style="color:#666">%</span> mod; <span style="color:#080;font-style:italic">// end the line here            
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> memo[idx][seg][startHere] <span style="color:#666">=</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numberOfSets</span>(<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>n <span style="color:#666">=</span> n;
+</span></span><span style="display:flex;"><span>        memset(memo, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#a2f;font-weight:bold">sizeof</span>(memo));
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> dp(<span style="color:#666">0</span>, k, <span style="color:#a2f">true</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem is to find the number of ways to partition a sequence of ( n ) elements into exactly ( k ) non-empty contiguous segments. Each segment must contain at least one element, and the segments must be formed by splitting the sequence without altering the order of the elements.</p>
+<h3 id="approach">Approach</h3>
+<p>The solution uses a dynamic programming approach with memoization to efficiently compute the number of valid ways to create these segments. Here are the key components of the approach:</p>
+<ol>
+<li>
+<p><strong>State Representation</strong>: We define a recursive function ( dp(idx, seg, startHere) ) where:</p>
+<ul>
+<li><code>idx</code>: The current index in the sequence.</li>
+<li><code>seg</code>: The remaining number of segments that need to be formed.</li>
+<li><code>startHere</code>: A boolean that indicates whether we are starting a new segment at the current index.</li>
+</ul>
+</li>
+<li>
+<p><strong>Base Cases</strong>:</p>
+<ul>
+<li>If ( seg = 0 ): This means we have successfully formed all required segments, and we return 1 as a valid configuration.</li>
+<li>If ( idx = n ): This means we have reached the end of the sequence without forming enough segments, so we return 0.</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization</strong>: To optimize performance, we use a memoization table <code>memo[idx][seg][startHere]</code> to cache results of subproblems. If a state has been computed before, we can return the cached result instead of recalculating it.</p>
+</li>
+<li>
+<p><strong>Recurrence Relation</strong>:</p>
+<ul>
+<li>We can choose to either continue the current segment or start a new segment:
+<ul>
+<li><strong>Continue the segment</strong>: We move to the next index with the same number of segments.</li>
+<li><strong>Start a new segment</strong>: If we are allowed to start a new segment (i.e., if <code>startHere</code> is true), we can choose to start a new segment at the next index.</li>
+<li><strong>End the current segment</strong>: If we are not starting a new segment (i.e., if <code>startHere</code> is false), we can finish the current segment and decrease the segment count.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Modulo Operation</strong>: Since the number of ways can be very large, we take results modulo ( 10^9 + 7 ).</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<p>Here&rsquo;s a detailed breakdown of the code:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mod <span style="color:#666">=</span> (<span style="color:#0b0;font-weight:bold">int</span>) <span style="color:#666">1e9</span> <span style="color:#666">+</span> <span style="color:#666">7</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> memo[<span style="color:#666">1001</span>][<span style="color:#666">1001</span>][<span style="color:#666">2</span>];
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> which contains the member variables:
+<ul>
+<li><code>n</code>: the total number of elements.</li>
+<li><code>mod</code>: the modulo value.</li>
+<li><code>memo</code>: a 3D array for memoization, initialized to size [1001][1001][2] to cover all potential states.</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> seg, <span style="color:#0b0;font-weight:bold">bool</span> startHere) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(seg <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> n) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div><ul>
+<li>The <code>dp</code> function is defined to take the current index, remaining segments, and a boolean indicating whether we can start a new segment.</li>
+<li>The base cases are checked:
+<ul>
+<li>If <code>seg</code> is zero, return 1 (successful partitioning).</li>
+<li>If <code>idx</code> equals <code>n</code>, return 0 (not enough segments formed).</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(memo[idx][seg][startHere] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[idx][seg][startHere];
+</span></span></code></pre></div><ul>
+<li>Check if the result for the current state has already been computed and stored in <code>memo</code>. If so, return that value.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, seg, startHere); <span style="color:#080;font-style:italic">// will start on next or continue the seg
+</span></span></span></code></pre></div><ul>
+<li>Recursively call <code>dp</code> to continue the current segment by moving to the next index without changing the segment count.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(startHere) {
+</span></span><span style="display:flex;"><span>            ans <span style="color:#666">=</span> (ans <span style="color:#666">+</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, seg, <span style="color:#a2f">false</span>)) <span style="color:#666">%</span> mod; <span style="color:#080;font-style:italic">// stared new line            
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>            ans <span style="color:#666">=</span> (ans <span style="color:#666">+</span> dp(idx, seg <span style="color:#666">-</span> <span style="color:#666">1</span>, <span style="color:#a2f">true</span>)) <span style="color:#666">%</span> mod; <span style="color:#080;font-style:italic">// end the line here            
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        }
+</span></span></code></pre></div><ul>
+<li>If we are allowed to start a new segment (<code>startHere</code> is true), we also explore the possibility of starting a new segment at the next index.</li>
+<li>If we are not starting a new segment (<code>startHere</code> is false), we explore the option of ending the current segment and decreasing the segment count.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> memo[idx][seg][startHere] <span style="color:#666">=</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ul>
+<li>Store the computed value in the memoization table and return it.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numberOfSets</span>(<span style="color:#0b0;font-weight:bold">int</span> n, <span style="color:#0b0;font-weight:bold">int</span> k) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>n <span style="color:#666">=</span> n;
+</span></span><span style="display:flex;"><span>        memset(memo, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#a2f;font-weight:bold">sizeof</span>(memo));
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> dp(<span style="color:#666">0</span>, k, <span style="color:#a2f">true</span>);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>The <code>numberOfSets</code> function initializes the total number of elements, resets the memoization table to -1, and calls the <code>dp</code> function starting from index 0 with <code>k</code> segments and the ability to start a new segment.</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity is ( O(n \times k) ), where ( n ) is the number of elements and ( k ) is the number of segments. This is due to the recursive exploration of states combined with memoization.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is ( O(n \times k) ) for the memoization table. The function also uses a constant amount of additional space for other variables.</p>
+</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>This solution effectively utilizes dynamic programming to solve the problem of counting the number of ways to partition a sequence into segments. By breaking the problem down into smaller subproblems and leveraging memoization, we achieve an efficient and scalable solution.</p>
+<p><strong>Key Takeaways</strong>:</p>
+<ol>
+<li><strong>Dynamic Programming</strong>: This technique is crucial for optimizing problems that involve overlapping subproblems, allowing us to avoid redundant calculations.</li>
+<li><strong>Memoization</strong>: Storing previously computed results significantly enhances performance, particularly in recursive algorithms.</li>
+<li><strong>Modular Arithmetic</strong>: When dealing with potentially large numbers, applying modular arithmetic ensures results remain manageable and within required bounds.</li>
+</ol>
+<p>This approach can be applied to various combinatorial problems involving partitioning and grouping, and understanding the mechanics of state representation and recursive function calls can aid in tackling similar challenges in competitive programming and algorithm design.</p>
+<p><a href="https://leetcode.com/problems/number-of-sets-of-k-non-overlapping-line-segments/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/Zl-atHgL8QY?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 1813: Sentence Similarity III | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 1813: Sentence Similarity III">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1813: Sentence Similarity III in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-1813-sentence-similarity-iii/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 1813: Sentence Similarity III">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1813: Sentence Similarity III in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-05-09T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Two Pointers">
+    <meta property="article:tag" content="String">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 1813: Sentence Similarity III</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode399s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> areSentencesSimilar(string s1, string s2) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        deque<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> a, b;
+</span></span><span style="display:flex;"><span>        string tmp <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span>: s1) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(c <span style="color:#666">==</span> <span style="color:#b44">&#39; &#39;</span>) a.push_back(tmp), tmp <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> tmp <span style="color:#666">+=</span> c;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        a.push_back(tmp), tmp <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span>: s2) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(c <span style="color:#666">==</span> <span style="color:#b44">&#39; &#39;</span>) b.push_back(tmp), tmp <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> tmp <span style="color:#666">+=</span> c;
+</span></span><span style="display:flex;"><span>        }        
+</span></span><span style="display:flex;"><span>        b.push_back(tmp), tmp <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(a.size() <span style="color:#666">!=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> b.size() <span style="color:#666">!=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> (a.front() <span style="color:#666">==</span> b.front())) a.pop_front(), b.pop_front();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(a.size() <span style="color:#666">!=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> b.size() <span style="color:#666">!=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> (a.back() <span style="color:#666">==</span> b.back())) a.pop_back(), b.pop_back();
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(a.size() <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> b.size() <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem at hand is to determine whether two sentences are similar. Two sentences are considered similar if they can be made identical by removing some words from the beginning and/or the end of each sentence.</p>
+<p>For example:</p>
+<ul>
+<li>&ldquo;My name is John&rdquo; and &ldquo;John&rdquo; are similar.</li>
+<li>&ldquo;I love coding&rdquo; and &ldquo;I coding&rdquo; are not similar.</li>
+</ul>
+<p>The input will consist of two strings representing the sentences, and the goal is to evaluate their similarity based on the aforementioned criteria.</p>
+<h3 id="approach">Approach</h3>
+<p>To solve this problem, the following approach can be employed:</p>
+<ol>
+<li>
+<p><strong>Tokenization</strong>: Split both sentences into individual words. This can be accomplished by iterating over each character of the strings and identifying spaces to determine where words start and end.</p>
+</li>
+<li>
+<p><strong>Comparison</strong>: Utilize two pointers (or deques in this case) to compare the words from both sentences. Start from both the front and the back of the word lists and compare the words:</p>
+<ul>
+<li>Remove matching words from the front of both lists until a mismatch is found.</li>
+<li>Remove matching words from the back of both lists similarly.</li>
+</ul>
+</li>
+<li>
+<p><strong>Final Evaluation</strong>: After trimming matching words from both ends, if either of the lists is empty, then the sentences are considered similar. If both lists still contain words, they are not similar.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<p>Here’s a detailed breakdown of the provided code:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span></code></pre></div><ul>
+<li>The <code>Solution</code> class is defined, which will contain the method for solving the problem.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">areSentencesSimilar</span>(string s1, string s2) {
+</span></span></code></pre></div><ul>
+<li>This method, <code>areSentencesSimilar</code>, takes two string parameters <code>s1</code> and <code>s2</code>, representing the sentences to be compared. The method returns a boolean value indicating whether the sentences are similar.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        deque<span style="color:#666">&lt;</span>string<span style="color:#666">&gt;</span> a, b;
+</span></span><span style="display:flex;"><span>        string tmp <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span></code></pre></div><ul>
+<li>Two deques <code>a</code> and <code>b</code> are declared to store the words of each sentence.</li>
+<li>A temporary string <code>tmp</code> is initialized to build words as we parse through the sentences.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span>: s1) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(c <span style="color:#666">==</span> <span style="color:#b44">&#39; &#39;</span>) a.push_back(tmp), tmp <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> tmp <span style="color:#666">+=</span> c;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        a.push_back(tmp), tmp <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span></code></pre></div><ul>
+<li>This loop iterates over each character <code>c</code> in the first sentence <code>s1</code>:
+<ul>
+<li>If the character is a space, the current word stored in <code>tmp</code> is added to the deque <code>a</code>, and <code>tmp</code> is reset for the next word.</li>
+<li>If the character is not a space, it is appended to <code>tmp</code>.</li>
+</ul>
+</li>
+<li>After the loop, the last word is pushed into the deque to ensure no words are missed.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">char</span> <span style="color:#a0a000">c</span>: s2) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(c <span style="color:#666">==</span> <span style="color:#b44">&#39; &#39;</span>) b.push_back(tmp), tmp <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">else</span> tmp <span style="color:#666">+=</span> c;
+</span></span><span style="display:flex;"><span>        }        
+</span></span><span style="display:flex;"><span>        b.push_back(tmp), tmp <span style="color:#666">=</span> <span style="color:#b44">&#34;&#34;</span>;
+</span></span></code></pre></div><ul>
+<li>A similar process is repeated for the second sentence <code>s2</code>, where words are added to the deque <code>b</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(a.size() <span style="color:#666">!=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> b.size() <span style="color:#666">!=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> (a.front() <span style="color:#666">==</span> b.front())) a.pop_front(), b.pop_front();
+</span></span></code></pre></div><ul>
+<li>This loop checks and removes matching words from the front of both deques until a mismatch is found or one of the deques is empty.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(a.size() <span style="color:#666">!=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> b.size() <span style="color:#666">!=</span> <span style="color:#666">0</span> <span style="color:#666">&amp;&amp;</span> (a.back() <span style="color:#666">==</span> b.back())) a.pop_back(), b.pop_back();
+</span></span></code></pre></div><ul>
+<li>A second loop does the same for the back of the deques, removing matching words until a mismatch is found or one of the deques is empty.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(a.size() <span style="color:#666">==</span> <span style="color:#666">0</span> <span style="color:#666">||</span> b.size() <span style="color:#666">==</span> <span style="color:#666">0</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span></code></pre></div><ul>
+<li>After trimming, if either deque is empty, it indicates that one sentence can be made identical to the other by removing words, so the method returns <code>true</code>.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>If neither deque is empty after the trimming process, it means there are remaining words that prevent the sentences from being similar, and the method returns <code>false</code>.</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(n + m)), where (n) is the number of characters in <code>s1</code> and (m) is the number of characters in <code>s2</code>. This is because we need to iterate through both strings to split them into words and then potentially iterate through the words again to compare them.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(n + m)) as well, since we are storing the words from both sentences in deques.</p>
+</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>The <code>areSentencesSimilar</code> method effectively determines whether two sentences are similar by employing a straightforward approach based on word tokenization and comparison from both ends of the sentences. The algorithm&rsquo;s efficiency, combined with its clarity, makes it suitable for evaluating sentence similarity in various applications.</p>
+<p>In summary, this solution illustrates how to manipulate strings and data structures like deques to solve problems involving word comparisons. It also highlights the importance of understanding string parsing and basic data structures in algorithm design. By leveraging these concepts, the solution achieves a clear and efficient method for solving the problem at hand.</p>
+<p><a href="https://leetcode.com/problems/sentence-similarity-iii/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/MMMd7dMv4Ak?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

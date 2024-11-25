@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 390: Elimination Game | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 390: Elimination Game">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 390: Elimination Game in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-390-elimination-game/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 390: Elimination Game">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 390: Elimination Game in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-09-29T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Math">
+    <meta property="article:tag" content="Recursion">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 390: Elimination Game</h1> 
+            </div>
+			<div class="article-post">
+				<h2 id="hahahugoshortcode1111s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+    <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/390.webp" 
+           alt="A series of elements being eliminated one by one, with each eliminated element glowing as it is removed." 
+           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    
+      <figcaption style="font-size: 0.8em; font-weight: 300; color:#555; margin-top: 4px; line-height: 1.2;">
+        Solution to LeetCode 390: Elimination Game Problem
+      </figcaption>
+    
+  </figure>
+  </h2>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode1111s1hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> lastRemaining(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">bool</span> left <span style="color:#666">=</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> rm <span style="color:#666">=</span> n;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> step <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> head <span style="color:#666">=</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">while</span>(rm <span style="color:#666">&gt;</span> <span style="color:#666">1</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(left <span style="color:#666">||</span> rm <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">1</span>) {
+</span></span><span style="display:flex;"><span>                head <span style="color:#666">+=</span> step;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            rm <span style="color:#666">/=</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>            step <span style="color:#666">*=</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>            left <span style="color:#666">=</span> <span style="color:#666">!</span>left;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> head;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="-problem-statement">🚀 Problem Statement</h3>
+<p>The task is to find the <strong>last remaining number</strong> in a sequence after repeatedly eliminating every second number. Starting with an array of integers from 1 to <code>n</code>, we eliminate every other number (either from left to right or right to left) in successive rounds. Our goal is to determine which number remains after all rounds are completed.</p>
+<hr>
+<h3 id="-approach">🧠 Approach</h3>
+<p>This problem can be simplified by recognizing a predictable pattern in the elimination process. Rather than simulating each round, we can use a mathematical approach to find the last number left standing.</p>
+<h4 id="key-observations">Key Observations:</h4>
+<ol>
+<li><strong>Direction alternation</strong>: The elimination direction alternates between left-to-right and right-to-left in successive rounds.</li>
+<li><strong>Halving the sequence</strong>: Each round halves the remaining sequence, as every second number is eliminated.</li>
+<li><strong>Elimination based on parity</strong>: The sequence behaves differently when the number of elements is odd vs. even. In cases where the length is odd, the last element is eliminated first in the left-to-right direction.</li>
+</ol>
+<p>By recognizing these patterns, we can use an efficient iterative approach to calculate the last remaining number without simulating the entire process.</p>
+<hr>
+<h3 id="-step-by-step-code-breakdown">🔨 Step-by-Step Code Breakdown</h3>
+<p>Here’s the code that implements this approach:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> lastRemaining(<span style="color:#0b0;font-weight:bold">int</span> n) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">bool</span> left <span style="color:#666">=</span> <span style="color:#a2f">true</span>;  <span style="color:#080;font-style:italic">// Tracks elimination direction (left-to-right or right-to-left)
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#0b0;font-weight:bold">int</span> rm <span style="color:#666">=</span> n;        <span style="color:#080;font-style:italic">// Number of remaining elements
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#0b0;font-weight:bold">int</span> step <span style="color:#666">=</span> <span style="color:#666">1</span>;      <span style="color:#080;font-style:italic">// The step size (initially 1 for eliminating every second number)
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#0b0;font-weight:bold">int</span> head <span style="color:#666">=</span> <span style="color:#666">1</span>;      <span style="color:#080;font-style:italic">// The first number in the sequence (initially 1)
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// Continue until only one number remains
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">while</span> (rm <span style="color:#666">&gt;</span> <span style="color:#666">1</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span> (left <span style="color:#666">||</span> rm <span style="color:#666">%</span> <span style="color:#666">2</span> <span style="color:#666">==</span> <span style="color:#666">1</span>) {
+</span></span><span style="display:flex;"><span>                head <span style="color:#666">+=</span> step;  <span style="color:#080;font-style:italic">// Update the first remaining number
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            }
+</span></span><span style="display:flex;"><span>            rm <span style="color:#666">/=</span> <span style="color:#666">2</span>;       <span style="color:#080;font-style:italic">// Halve the sequence length
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            step <span style="color:#666">*=</span> <span style="color:#666">2</span>;     <span style="color:#080;font-style:italic">// Double the step size
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            left <span style="color:#666">=</span> <span style="color:#666">!</span>left;  <span style="color:#080;font-style:italic">// Alternate the direction of elimination
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> head;  <span style="color:#080;font-style:italic">// Return the last remaining number
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><h4 id="step-by-step-explanation">Step-by-Step Explanation:</h4>
+<ol>
+<li>
+<p><strong>Initialize Variables</strong>:</p>
+<ul>
+<li><code>left</code>: This flag indicates whether the current round is left-to-right (<code>true</code>) or right-to-left (<code>false</code>).</li>
+<li><code>rm</code>: The number of remaining elements in the sequence, initially set to <code>n</code>.</li>
+<li><code>step</code>: The step size, which starts at 1 (eliminate every second number). It doubles with each round to account for the halving of the sequence.</li>
+<li><code>head</code>: The first number of the sequence, initially 1.</li>
+</ul>
+</li>
+<li>
+<p><strong>Iterative Process</strong>:</p>
+<ul>
+<li>The <code>while</code> loop runs as long as there is more than one element (<code>rm &gt; 1</code>).</li>
+<li>On each iteration:
+<ul>
+<li>If the direction is <code>left</code> or the number of remaining elements is odd, we update the first remaining number (<code>head</code>) by adding the <code>step</code>.</li>
+<li>We then halve the sequence (<code>rm /= 2</code>) and double the step size (<code>step *= 2</code>).</li>
+<li>The direction is toggled (<code>left = !left</code>) for the next round.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Result</strong>:</p>
+<ul>
+<li>When the loop finishes, <code>head</code> contains the last remaining number, which is returned.</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h3 id="-complexity-analysis">📈 Complexity Analysis</h3>
+<h4 id="time-complexity">Time Complexity:</h4>
+<p>The time complexity of this solution is <strong>O(log n)</strong>. The sequence length (<code>rm</code>) is halved in each round, meaning the loop runs approximately <strong>log n</strong> times, where <code>n</code> is the initial size of the sequence.</p>
+<h4 id="space-complexity">Space Complexity:</h4>
+<p>The space complexity is <strong>O(1)</strong> because we are using only a few integer variables (<code>left</code>, <code>rm</code>, <code>step</code>, <code>head</code>) that occupy constant space, regardless of the size of <code>n</code>.</p>
+<hr>
+<h3 id="-conclusion">🏁 Conclusion</h3>
+<p>This approach efficiently computes the <strong>last remaining number</strong> in the sequence after repeatedly eliminating every second number. By leveraging the predictable halving pattern and alternating direction, we can solve the problem in <strong>O(log n)</strong> time, making it suitable for large inputs.</p>
+<h3 id="-key-takeaways">🎯 Key Takeaways:</h3>
+<ul>
+<li><strong>Optimized Iteration</strong>: Instead of simulating the elimination process, we use mathematical observations to reduce the problem to a logarithmic number of steps.</li>
+<li><strong>Constant Space</strong>: The solution only uses a few integer variables, ensuring minimal space usage.</li>
+<li><strong>Logarithmic Time</strong>: The process runs in <strong>O(log n)</strong> time, making it highly efficient for large values of <code>n</code>.</li>
+</ul>
+<p>With this solution, you can confidently handle the problem even with very large inputs. Keep up the great work, and happy coding! 🚀</p>
+<p><a href="https://leetcode.com/problems/elimination-game/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/0U5Lenn_vMo?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

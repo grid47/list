@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 1996: The Number of Weak Characters in the Game | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 1996: The Number of Weak Characters in the Game">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1996: The Number of Weak Characters in the Game in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-1996-the-number-of-weak-characters-in-the-game/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 1996: The Number of Weak Characters in the Game">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1996: The Number of Weak Characters in the Game in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-04-21T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Stack">
+    <meta property="article:tag" content="Greedy">
+    <meta property="article:tag" content="Sorting">
+    <meta property="article:tag" content="Monotonic Stack">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 1996: The Number of Weak Characters in the Game</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode497s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">static</span> <span style="color:#0b0;font-weight:bold">bool</span> comp(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>a, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>b) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(a[<span style="color:#666">0</span>] <span style="color:#666">==</span> b[<span style="color:#666">0</span>]) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> a[<span style="color:#666">1</span>] <span style="color:#666">&gt;</span> b[<span style="color:#666">1</span>];
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> a[<span style="color:#666">0</span>] <span style="color:#666">&lt;</span> b[<span style="color:#666">0</span>];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numberOfWeakCharacters</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> prpt) {
+</span></span><span style="display:flex;"><span>        sort(prpt.begin(), prpt.end(), comp);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mn <span style="color:#666">=</span> INT_MIN;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> prpt.size() <span style="color:#666">-</span> <span style="color:#666">1</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(prpt[i][<span style="color:#666">1</span>] <span style="color:#666">&lt;</span> mn) ans<span style="color:#666">++</span>;
+</span></span><span style="display:flex;"><span>            mn <span style="color:#666">=</span> max(mn, prpt[i][<span style="color:#666">1</span>]);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem involves finding the number of &ldquo;weak characters&rdquo; in a game setting where each character is represented by their attack and defense values. A character is considered weak if there exists another character with both higher attack and higher defense values. Given a list of characters, each represented by a vector containing their attack and defense values, the task is to determine how many characters are weak according to this definition.</p>
+<h3 id="approach">Approach</h3>
+<p>The approach to solving this problem involves sorting the characters based on their attack and defense values and then iterating through the sorted list to count the weak characters. The key steps in the approach are:</p>
+<ol>
+<li>
+<p><strong>Sorting the Characters</strong>: The characters are sorted primarily by their attack value in ascending order. If two characters have the same attack value, the one with a higher defense value comes first. This sorting helps in efficiently identifying the weak characters.</p>
+</li>
+<li>
+<p><strong>Tracking the Maximum Defense</strong>: As we iterate through the sorted characters from right to left, we maintain a variable to track the maximum defense value encountered so far. This helps in determining whether a character is weak compared to those that have already been processed.</p>
+</li>
+<li>
+<p><strong>Counting Weak Characters</strong>: For each character, if its defense value is less than the maximum defense seen so far, it is counted as weak. If not, we update the maximum defense value accordingly.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<p>Let&rsquo;s break down the provided code step by step to understand how the solution works:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">static</span> <span style="color:#0b0;font-weight:bold">bool</span> comp(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>a, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>b) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(a[<span style="color:#666">0</span>] <span style="color:#666">==</span> b[<span style="color:#666">0</span>]) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> a[<span style="color:#666">1</span>] <span style="color:#666">&gt;</span> b[<span style="color:#666">1</span>]; <span style="color:#080;font-style:italic">// Sort by defense in descending order if attack values are equal
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        } <span style="color:#a2f;font-weight:bold">else</span> <span style="color:#a2f;font-weight:bold">return</span> a[<span style="color:#666">0</span>] <span style="color:#666">&lt;</span> b[<span style="color:#666">0</span>]; <span style="color:#080;font-style:italic">// Sort by attack in ascending order
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
+</span></span></code></pre></div><ul>
+<li>We define a class <code>Solution</code> with a static comparison function <code>comp</code> that takes two vectors <code>a</code> and <code>b</code> (representing characters).</li>
+<li>The comparison function sorts characters by their attack value in ascending order. If two characters have the same attack value, it sorts them by their defense value in descending order. This sorting is crucial for efficiently identifying weak characters in the next steps.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">numberOfWeakCharacters</span>(vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;&amp;</span> prpt) {
+</span></span><span style="display:flex;"><span>        sort(prpt.begin(), prpt.end(), comp); <span style="color:#080;font-style:italic">// Sort the characters using the comparison function
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> mn <span style="color:#666">=</span> INT_MIN; <span style="color:#080;font-style:italic">// Initialize the minimum defense seen so far
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#0b0;font-weight:bold">int</span> ans <span style="color:#666">=</span> <span style="color:#666">0</span>; <span style="color:#080;font-style:italic">// Initialize the count of weak characters
+</span></span></span></code></pre></div><ul>
+<li>The <code>numberOfWeakCharacters</code> function takes a vector of vectors <code>prpt</code>, where each inner vector represents a character with attack and defense values.</li>
+<li>We sort the characters using the previously defined <code>comp</code> function.</li>
+<li><code>mn</code> is initialized to <code>INT_MIN</code> to represent the minimum defense value seen so far as we traverse the sorted characters.</li>
+<li><code>ans</code> is initialized to zero to keep track of the number of weak characters.</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> prpt.size() <span style="color:#666">-</span> <span style="color:#666">1</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) { <span style="color:#080;font-style:italic">// Iterate through the sorted characters from right to left
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            <span style="color:#a2f;font-weight:bold">if</span>(prpt[i][<span style="color:#666">1</span>] <span style="color:#666">&lt;</span> mn) ans<span style="color:#666">++</span>; <span style="color:#080;font-style:italic">// If the current character&#39;s defense is less than the max defense, it&#39;s weak
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>            mn <span style="color:#666">=</span> max(mn, prpt[i][<span style="color:#666">1</span>]); <span style="color:#080;font-style:italic">// Update the maximum defense seen so far
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> ans; <span style="color:#080;font-style:italic">// Return the total count of weak characters
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><ul>
+<li>The loop iterates through the sorted list of characters from the last character to the first.</li>
+<li>For each character, if its defense value (<code>prpt[i][1]</code>) is less than <code>mn</code> (the maximum defense seen so far), we increment the <code>ans</code> counter.</li>
+<li>The variable <code>mn</code> is then updated to be the maximum of its current value and the current character&rsquo;s defense value.</li>
+<li>After finishing the iteration, the function returns the total count of weak characters.</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this algorithm is (O(n \log n)), where (n) is the number of characters. This complexity arises from the sorting step, which is the most computationally expensive operation in this approach. The subsequent linear scan through the characters is (O(n)), but this is dominated by the sorting step.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) if we consider only the space used by the algorithm (excluding the input storage). The algorithm does not use any additional data structures that grow with input size, aside from a few variables for counting and tracking maximum values.</p>
+</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>The provided solution effectively counts the number of weak characters in a given list by utilizing sorting and a single pass through the sorted list to track maximum defense values. By sorting the characters based on attack and defense values, the solution efficiently identifies weak characters without needing to compare every character against every other character directly.</p>
+<p>This method demonstrates an efficient way to handle the problem of counting weak characters in a competitive programming or algorithmic context. The approach is clear, concise, and leverages sorting and linear traversal to achieve the desired outcome efficiently.</p>
+<h3 id="example-usage">Example Usage</h3>
+<p>Here’s an example of how to use the <code>Solution</code> class to count the number of weak characters:</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#080">#include</span> <span style="color:#080">&lt;iostream&gt;</span><span style="color:#080">
+</span></span></span><span style="display:flex;"><span><span style="color:#080">#include</span> <span style="color:#080">&lt;vector&gt;</span><span style="color:#080">
+</span></span></span><span style="display:flex;"><span><span style="color:#080"></span><span style="color:#a2f;font-weight:bold">using</span> <span style="color:#a2f;font-weight:bold">namespace</span> std;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">main</span>() {
+</span></span><span style="display:flex;"><span>    Solution sol;
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&gt;</span> characters <span style="color:#666">=</span> {{<span style="color:#666">5</span>, <span style="color:#666">5</span>}, {<span style="color:#666">6</span>, <span style="color:#666">3</span>}, {<span style="color:#666">3</span>, <span style="color:#666">6</span>}}; <span style="color:#080;font-style:italic">// Example input
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#0b0;font-weight:bold">int</span> result <span style="color:#666">=</span> sol.numberOfWeakCharacters(characters);
+</span></span><span style="display:flex;"><span>    cout <span style="color:#666">&lt;&lt;</span> <span style="color:#b44">&#34;Number of weak characters: &#34;</span> <span style="color:#666">&lt;&lt;</span> result <span style="color:#666">&lt;&lt;</span> endl; <span style="color:#080;font-style:italic">// Should print the count of weak characters
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>This example initializes a <code>Solution</code> object and passes a vector of characters to count the weak characters, demonstrating practical usage of the method.</p>
+<p><a href="https://leetcode.com/problems/the-number-of-weak-characters-in-the-game/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/DFqwkF9a6KI?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 1936: Add Minimum Number of Rungs | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 1936: Add Minimum Number of Rungs">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 1936: Add Minimum Number of Rungs in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-1936-add-minimum-number-of-rungs/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 1936: Add Minimum Number of Rungs">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 1936: Add Minimum Number of Rungs in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-04-27T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Greedy">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 1936: Add Minimum Number of Rungs</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode465s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> rec(<span style="color:#0b0;font-weight:bold">int</span> cur, <span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> dist, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>node) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cur <span style="color:#666">+</span> dist <span style="color:#666">&gt;=</span> node[node.size() <span style="color:#666">-</span> <span style="color:#666">1</span>]) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cur <span style="color:#666">+</span> dist <span style="color:#666">&lt;</span> node[idx]) {
+</span></span><span style="display:flex;"><span>            cur <span style="color:#666">+=</span> dist;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span> <span style="color:#666">+</span> rec(cur, idx, dist, node);
+</span></span><span style="display:flex;"><span>            
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>            cur <span style="color:#666">=</span> node[idx];
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">rec</span>(cur, idx <span style="color:#666">+</span> <span style="color:#666">1</span>, dist, node);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">addRungs</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> node, <span style="color:#0b0;font-weight:bold">int</span> dist) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>, idx <span style="color:#666">=</span> <span style="color:#666">0</span>, res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> prv <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> node.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(node[i] <span style="color:#666">-</span> prv <span style="color:#666">&gt;</span> dist) {
+</span></span><span style="display:flex;"><span>                res <span style="color:#666">+=</span> (node[i] <span style="color:#666">-</span> prv <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> dist;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            prv <span style="color:#666">=</span> node[i];
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// while(cur + dist &lt; node[node.size() - 1]) {
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#080;font-style:italic">//     if(cur + dist &lt; node[idx]) {
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#080;font-style:italic">//         cur += dist;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#080;font-style:italic">//         res++;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#080;font-style:italic">//     } else {
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#080;font-style:italic">//         cur = node[idx];
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#080;font-style:italic">//         idx++;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#080;font-style:italic">//     }
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#080;font-style:italic">// }
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res;<span style="color:#080;font-style:italic">//rec(cur, idx, dist, node);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem at hand is to determine the minimum number of rungs needed to be added to a ladder, given the current positions of the existing rungs and the maximum distance one can jump between rungs. The goal is to ensure that one can reach the top of the ladder, which is defined by the position of the last rung.</p>
+<h3 id="approach">Approach</h3>
+<p>To solve this problem, we will take the following approach:</p>
+<ol>
+<li>
+<p><strong>Initialization</strong>: Start from the ground level (position 0) and track the last rung position (previous rung) as we iterate through the given list of rungs.</p>
+</li>
+<li>
+<p><strong>Iterate Through Rungs</strong>: For each rung in the list, calculate the distance from the previous rung (or the ground) to the current rung. If this distance exceeds the maximum allowed jump distance, we will calculate how many additional rungs need to be added.</p>
+</li>
+<li>
+<p><strong>Calculate Additional Rungs</strong>: If the distance to the next rung is greater than the maximum distance allowed, compute the number of additional rungs needed to ensure that the jump to the next rung does not exceed the maximum distance.</p>
+</li>
+<li>
+<p><strong>Return the Result</strong>: Finally, return the total number of additional rungs required.</p>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span></code></pre></div><p>Here we declare a class named <code>Solution</code> that contains the methods necessary to compute the result.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">rec</span>(<span style="color:#0b0;font-weight:bold">int</span> cur, <span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> dist, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>node) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cur <span style="color:#666">+</span> dist <span style="color:#666">&gt;=</span> node[node.size() <span style="color:#666">-</span> <span style="color:#666">1</span>]) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div><p>This function <code>rec</code> is defined to recursively determine the additional rungs needed based on the current position (<code>cur</code>), the index of the current rung (<code>idx</code>), the maximum distance that can be jumped (<code>dist</code>), and the list of rungs (<code>node</code>). The first line checks if the current position plus the jump distance is greater than or equal to the last rung position; if so, no more rungs need to be added, and it returns 0.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(cur <span style="color:#666">+</span> dist <span style="color:#666">&lt;</span> node[idx]) {
+</span></span><span style="display:flex;"><span>            cur <span style="color:#666">+=</span> dist;
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#666">1</span> <span style="color:#666">+</span> rec(cur, idx, dist, node);
+</span></span><span style="display:flex;"><span>        } <span style="color:#a2f;font-weight:bold">else</span> {
+</span></span><span style="display:flex;"><span>            cur <span style="color:#666">=</span> node[idx];
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">rec</span>(cur, idx <span style="color:#666">+</span> <span style="color:#666">1</span>, dist, node);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><p>In this part, we check if the current position plus the distance is less than the position of the current rung. If true, we simulate a jump to the new position and make a recursive call while incrementing the count of additional rungs needed. If the jump would land on or beyond the current rung, we update <code>cur</code> to the position of the current rung and move to the next rung by incrementing <code>idx</code>.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> <span style="color:#00a000">addRungs</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> node, <span style="color:#0b0;font-weight:bold">int</span> dist) {
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> cur <span style="color:#666">=</span> <span style="color:#666">0</span>, idx <span style="color:#666">=</span> <span style="color:#666">0</span>, res <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> prv <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span></code></pre></div><p>In this method <code>addRungs</code>, we initialize several variables: <code>cur</code> is set to 0 (ground level), <code>idx</code> to 0 (index of the current rung), and <code>res</code> to 0 (total additional rungs needed). We also declare <code>prv</code> to track the position of the last rung visited.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>; i <span style="color:#666">&lt;</span> node.size(); i<span style="color:#666">++</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(node[i] <span style="color:#666">-</span> prv <span style="color:#666">&gt;</span> dist) {
+</span></span><span style="display:flex;"><span>                res <span style="color:#666">+=</span> (node[i] <span style="color:#666">-</span> prv <span style="color:#666">-</span> <span style="color:#666">1</span>) <span style="color:#666">/</span> dist;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            prv <span style="color:#666">=</span> node[i];
+</span></span><span style="display:flex;"><span>        }
+</span></span></code></pre></div><p>Here, we iterate through each rung in the <code>node</code> vector. If the distance between the current rung and the last visited rung (<code>prv</code>) exceeds the maximum jump distance (<code>dist</code>), we calculate the number of additional rungs required by the formula <code>(node[i] - prv - 1) / dist</code> and add it to <code>res</code>. We then update <code>prv</code> to the current rung&rsquo;s position.</p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> res; <span style="color:#080;font-style:italic">// rec(cur, idx, dist, node);
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>    }
+</span></span><span style="display:flex;"><span>};
+</span></span></code></pre></div><p>Finally, we return the total number of additional rungs needed (<code>res</code>). The commented-out line shows a recursive approach, but we will not use it in this iteration.</p>
+<h3 id="complexity">Complexity</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>: The time complexity of this solution is (O(n)), where (n) is the number of existing rungs, since we are iterating through the list of rungs once.</p>
+</li>
+<li>
+<p><strong>Space Complexity</strong>: The space complexity is (O(1)) as we are using a fixed amount of space for our variables and not utilizing any additional data structures proportional to the input size.</p>
+</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>The <code>addRungs</code> function efficiently calculates the minimum number of rungs needed to make the ladder accessible according to the specified jump distance. By iterating through the list of rungs and checking the distances, we can determine how many rungs to add without resorting to complex recursive logic, thus maintaining both clarity and efficiency.</p>
+<h3 id="key-features">Key Features</h3>
+<ol>
+<li>
+<p><strong>Efficiency</strong>: The solution is efficient with a linear time complexity, making it suitable for large inputs.</p>
+</li>
+<li>
+<p><strong>Simplicity</strong>: The implementation is straightforward, focusing on the essential logic without unnecessary complexity.</p>
+</li>
+<li>
+<p><strong>Iterative Approach</strong>: The use of an iterative approach rather than recursion simplifies the logic and enhances performance by avoiding potential stack overflow issues with deep recursion.</p>
+</li>
+</ol>
+<h3 id="use-cases">Use Cases</h3>
+<p>This function can be applied in various real-world scenarios, such as:</p>
+<ul>
+<li><strong>Construction Planning</strong>: Determining the number of additional steps needed for staircases or ladders.</li>
+<li><strong>Game Development</strong>: Calculating jump distances in platform games to ensure player accessibility.</li>
+<li><strong>Robotics</strong>: Planning paths for robots that need to traverse uneven terrain or structures.</li>
+</ul>
+<h3 id="implementation-considerations">Implementation Considerations</h3>
+<p>When implementing the function, consider the following:</p>
+<ul>
+<li><strong>Input Validation</strong>: Ensure the input arrays and parameters are valid and within expected ranges.</li>
+<li><strong>Handling Edge Cases</strong>: Test with edge cases, such as when no rungs exist or when all rungs are within jumping distance.</li>
+<li><strong>Performance Testing</strong>: Verify performance under large inputs to ensure the algorithm remains efficient.</li>
+</ul>
+<p>By understanding and applying the concepts in this solution, developers can effectively handle similar problems across various domains, enhancing their programming and algorithmic skills.</p>
+<p><a href="https://leetcode.com/problems/add-minimum-number-of-rungs/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/f_KA5C_13Oc?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

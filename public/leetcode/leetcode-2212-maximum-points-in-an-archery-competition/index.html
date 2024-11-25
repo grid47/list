@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 2212: Maximum Points in an Archery Competition | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 2212: Maximum Points in an Archery Competition">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 2212: Maximum Points in an Archery Competition in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-2212-maximum-points-in-an-archery-competition/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 2212: Maximum Points in an Archery Competition">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 2212: Maximum Points in an Archery Competition in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-03-30T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Backtracking">
+    <meta property="article:tag" content="Bit Manipulation">
+    <meta property="article:tag" content="Enumeration">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 2212: Maximum Points in an Archery Competition</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode623s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> bob, alice;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> n;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> mask;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> ans;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> rm, <span style="color:#0b0;font-weight:bold">int</span> pts, <span style="color:#0b0;font-weight:bold">int</span> msk) {
+</span></span><span style="display:flex;"><span>        <span style="color:#080;font-style:italic">// cout &lt;&lt; idx &lt;&lt; &#34; &#34; &lt;&lt; rm &lt;&lt; &#34; &#34; &lt;&lt; pts &lt;&lt; &#34;\n&#34;;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"></span>        <span style="color:#a2f;font-weight:bold">if</span>((rm <span style="color:#666">&lt;=</span> <span style="color:#666">0</span>) <span style="color:#666">||</span> (idx <span style="color:#666">==</span> n)){
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>(ans <span style="color:#666">&lt;</span> pts) {
+</span></span><span style="display:flex;"><span>                ans <span style="color:#666">=</span> pts;
+</span></span><span style="display:flex;"><span>                mask <span style="color:#666">=</span> msk;
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span>;
+</span></span><span style="display:flex;"><span>        }        
+</span></span><span style="display:flex;"><span>        dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, rm, pts, msk);        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(rm <span style="color:#666">&gt;</span> alice[idx]) {
+</span></span><span style="display:flex;"><span>            msk <span style="color:#666">|=</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> idx);
+</span></span><span style="display:flex;"><span>            dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, rm <span style="color:#666">-</span> alice[idx] <span style="color:#666">-</span> <span style="color:#666">1</span>, pts <span style="color:#666">+</span> idx, msk);            
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> maximumBobPoints(<span style="color:#0b0;font-weight:bold">int</span> net, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> alice) {
+</span></span><span style="display:flex;"><span>        n <span style="color:#666">=</span> alice.size();
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>alice <span style="color:#666">=</span> alice;
+</span></span><span style="display:flex;"><span>        bob.resize(n, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> idx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> pts <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        mask <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        dp(idx, net, pts, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">if</span>((mask <span style="color:#666">&gt;&gt;</span> i) <span style="color:#666">&amp;</span> <span style="color:#666">1</span>) {
+</span></span><span style="display:flex;"><span>                bob[i] <span style="color:#666">=</span> alice[i] <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>                net <span style="color:#666">-=</span> bob[i];
+</span></span><span style="display:flex;"><span>            }
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(net <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) bob[<span style="color:#666">0</span>] <span style="color:#666">+=</span> net;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> bob;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem asks us to determine how Bob can maximize his points, given a certain amount of &ldquo;net&rdquo; resources and a list of points that Alice would have scored in each round. The goal is to allocate the resources to Bob such that he can score as many points as possible, with the constraint that Bob must have fewer resources than Alice for each round. The goal is to return an array representing the number of resources Bob uses in each round in order to achieve the maximum score.</p>
+<h3 id="approach">Approach</h3>
+<p>The solution to this problem involves a <strong>dynamic programming (DP)</strong> approach with a <strong>backtracking</strong> technique to determine the optimal allocation of resources. The process is as follows:</p>
+<ol>
+<li>
+<p><strong>Recursive DP with Backtracking:</strong></p>
+<ul>
+<li>We recursively explore the different ways Bob can allocate resources across the rounds while ensuring that he uses fewer resources than Alice in each round.</li>
+<li>At each step, we either skip the current round or allocate resources to Bob based on the available net resources, updating his score.</li>
+<li>If the conditions are met (i.e., the remaining resources are sufficient and the score increases), we update the best score and the resource allocation.</li>
+</ul>
+</li>
+<li>
+<p><strong>State Variables:</strong></p>
+<ul>
+<li><strong><code>idx</code></strong>: Represents the current round under consideration.</li>
+<li><strong><code>rm</code></strong>: Represents the remaining resources.</li>
+<li><strong><code>pts</code></strong>: Represents the current score Bob has accumulated.</li>
+<li><strong><code>msk</code></strong>: A bitmask that stores which rounds have been selected for resource allocation.</li>
+</ul>
+</li>
+<li>
+<p><strong>Backtracking Logic:</strong></p>
+<ul>
+<li>If we have reached the end of the rounds or there are no remaining resources, we compare the score and store the best one if it’s higher.</li>
+<li>If resources are still available for a round, we consider the possibility of allocating resources to Bob and move on to the next round.</li>
+</ul>
+</li>
+<li>
+<p><strong>Post Processing the Results:</strong></p>
+<ul>
+<li>Once the DP process is complete and we have found the optimal resource allocation for Bob, we reverse-engineer the solution based on the bitmask stored during the DP process.</li>
+</ul>
+</li>
+<li>
+<p><strong>Result Construction:</strong></p>
+<ul>
+<li>The final result is constructed by iterating over the rounds and assigning the correct number of resources to Bob based on the bitmask.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<ol>
+<li>
+<p><strong>Variable Initialization:</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> bob, alice;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> n;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> mask;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> ans;
+</span></span></code></pre></div><ul>
+<li><code>bob</code>: This array will store the number of resources Bob will use in each round to maximize his score.</li>
+<li><code>alice</code>: This array contains the number of resources Alice uses in each round.</li>
+<li><code>n</code>: Stores the total number of rounds.</li>
+<li><code>mask</code>: This bitmask will store which rounds Bob decides to allocate resources to.</li>
+<li><code>ans</code>: Stores the maximum score Bob can achieve.</li>
+</ul>
+</li>
+<li>
+<p><strong>Recursive DP Function:</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">void</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> rm, <span style="color:#0b0;font-weight:bold">int</span> pts, <span style="color:#0b0;font-weight:bold">int</span> msk) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>((rm <span style="color:#666">&lt;=</span> <span style="color:#666">0</span>) <span style="color:#666">||</span> (idx <span style="color:#666">==</span> n)){
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(ans <span style="color:#666">&lt;</span> pts) {
+</span></span><span style="display:flex;"><span>            ans <span style="color:#666">=</span> pts;
+</span></span><span style="display:flex;"><span>            mask <span style="color:#666">=</span> msk;
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>;
+</span></span><span style="display:flex;"><span>    }        
+</span></span><span style="display:flex;"><span>    dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, rm, pts, msk);        
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(rm <span style="color:#666">&gt;</span> alice[idx]) {
+</span></span><span style="display:flex;"><span>        msk <span style="color:#666">|=</span> (<span style="color:#666">1</span> <span style="color:#666">&lt;&lt;</span> idx);
+</span></span><span style="display:flex;"><span>        dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, rm <span style="color:#666">-</span> alice[idx] <span style="color:#666">-</span> <span style="color:#666">1</span>, pts <span style="color:#666">+</span> idx, msk);            
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The base case checks if there are no remaining resources or we have processed all rounds.</li>
+<li>The recursive call <code>dp(idx + 1, rm, pts, msk)</code> explores the case where Bob does not use resources for the current round.</li>
+<li>The second recursive call <code>dp(idx + 1, rm - alice[idx] - 1, pts + idx, msk)</code> explores the case where Bob uses resources for the current round, ensuring that he uses fewer resources than Alice (<code>rm &gt; alice[idx]</code>).</li>
+<li>If the new score (<code>pts + idx</code>) is greater than the current best score, the result is updated.</li>
+</ul>
+</li>
+<li>
+<p><strong>Main Function Logic:</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> maximumBobPoints(<span style="color:#0b0;font-weight:bold">int</span> net, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> alice) {
+</span></span><span style="display:flex;"><span>    n <span style="color:#666">=</span> alice.size();
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>alice <span style="color:#666">=</span> alice;
+</span></span><span style="display:flex;"><span>    bob.resize(n, <span style="color:#666">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> idx <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> pts <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    mask <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    ans <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    dp(idx, net, pts, <span style="color:#666">0</span>);
+</span></span></code></pre></div><ul>
+<li>The main function initializes necessary variables (<code>n</code>, <code>alice</code>, <code>bob</code>, <code>idx</code>, <code>pts</code>, <code>mask</code>, <code>ans</code>).</li>
+<li>It calls the <code>dp</code> function to start the recursive process with the available resources (<code>net</code>), the initial score (<code>pts</code>), and the empty bitmask (<code>0</code>).</li>
+</ul>
+</li>
+<li>
+<p><strong>Constructing the Result:</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> n <span style="color:#666">-</span> <span style="color:#666">1</span>; i <span style="color:#666">&gt;=</span> <span style="color:#666">0</span>; i<span style="color:#666">--</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>((mask <span style="color:#666">&gt;&gt;</span> i) <span style="color:#666">&amp;</span> <span style="color:#666">1</span>) {
+</span></span><span style="display:flex;"><span>        bob[i] <span style="color:#666">=</span> alice[i] <span style="color:#666">+</span> <span style="color:#666">1</span>;
+</span></span><span style="display:flex;"><span>        net <span style="color:#666">-=</span> bob[i];
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">if</span>(net <span style="color:#666">&gt;</span> <span style="color:#666">0</span>) bob[<span style="color:#666">0</span>] <span style="color:#666">+=</span> net;
+</span></span></code></pre></div><ul>
+<li>After the recursive DP process, the bitmask <code>mask</code> indicates which rounds Bob should take resources from.</li>
+<li>For each round, if the bitmask indicates that Bob should take resources, we allocate <code>alice[i] + 1</code> resources to Bob and decrease the remaining net resources (<code>net</code>).</li>
+<li>If any resources are left after assigning to all rounds, they are allocated to the first round.</li>
+</ul>
+</li>
+<li>
+<p><strong>Return the Final Result:</strong></p>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">return</span> bob;
+</span></span></code></pre></div><ul>
+<li>The final result is the <code>bob</code> array, which contains the number of resources Bob will use in each round to achieve the maximum score.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">Complexity</h3>
+<h4 id="time-complexity">Time Complexity:</h4>
+<ul>
+<li><strong>O(n * net)</strong>:
+<ul>
+<li>The DP function explores all possible allocations of resources in each round. In the worst case, it may process each round (<code>n</code> rounds) for each possible amount of remaining resources (<code>net</code> resources). Hence, the time complexity is O(n * net).</li>
+</ul>
+</li>
+</ul>
+<h4 id="space-complexity">Space Complexity:</h4>
+<ul>
+<li><strong>O(n)</strong>:
+<ul>
+<li>The space complexity is primarily determined by the space required to store the <code>bob</code>, <code>alice</code>, and <code>mask</code> arrays, which are all of size <code>n</code>.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>This solution effectively uses dynamic programming with backtracking to solve the problem of maximizing Bob’s score in a resource allocation scenario. By recursively exploring all possible allocations of resources, it ensures that Bob’s score is maximized while respecting the constraints. The solution efficiently handles the problem with a time complexity of O(n * net), making it feasible for moderately large inputs. The space complexity is O(n), ensuring it is memory-efficient for large datasets. This approach demonstrates a solid application of DP and bitmasking for solving optimization problems in a competitive programming context.</p>
+<p><a href="https://leetcode.com/problems/maximum-points-in-an-archery-competition/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/nnwNXfYz2mo?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

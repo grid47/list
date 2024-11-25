@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 416: Partition Equal Subset Sum | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 416: Partition Equal Subset Sum">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 416: Partition Equal Subset Sum in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-416-partition-equal-subset-sum/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 416: Partition Equal Subset Sum">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 416: Partition Equal Subset Sum in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-09-26T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Array">
+    <meta property="article:tag" content="Dynamic Programming">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 416: Partition Equal Subset Sum</h1> 
+            </div>
+			<div class="article-post">
+				<h2 id="hahahugoshortcode1125s0hbhb"><figure class="remote-image" style="text-align:center; margin: 0;">
+    <div style="position: relative; width:900px; max-width:100%; padding-bottom:56.25%; overflow: hidden; border-radius:0px;">
+      <img src="https://raw.githubusercontent.com/grid47/list-images/refs/heads/main/list/416.webp" 
+           alt="A set of numbers with glowing partitions, showing how they can be divided into equal subsets." 
+           style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover;">
+    </div>
+    
+      <figcaption style="font-size: 0.8em; font-weight: 300; color:#555; margin-top: 4px; line-height: 1.2;">
+        Solution to LeetCode 416: Partition Equal Subset Sum Problem
+      </figcaption>
+    
+  </figure>
+  </h2>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode1125s1hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> nums;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> memo[<span style="color:#666">201</span>][<span style="color:#666">10001</span>];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> sum) {
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> nums.size()) <span style="color:#a2f;font-weight:bold">return</span> sum <span style="color:#666">==</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(memo[idx][sum] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[idx][sum];
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">bool</span> res <span style="color:#666">=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, sum);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">&gt;=</span> nums[idx])
+</span></span><span style="display:flex;"><span>            res <span style="color:#666">|=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, sum <span style="color:#666">-</span> nums[idx]);
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> memo[idx][sum] <span style="color:#666">=</span> res;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">canPartition</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>nums <span style="color:#666">=</span> nums;
+</span></span><span style="display:flex;"><span>        <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: nums)
+</span></span><span style="display:flex;"><span>            sum <span style="color:#666">+=</span> x;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">&amp;</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        sum <span style="color:#666">=</span> sum <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        memset(memo, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#a2f;font-weight:bold">sizeof</span>(memo));
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> dp(<span style="color:#666">0</span>, sum);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem asks us to determine if a given array of integers can be partitioned into two subsets such that the sum of the elements in both subsets is the same. This is a classical problem known as the <strong>Partition Problem</strong>.</p>
+<p>Given a list <code>nums</code> of integers, we are required to return <code>true</code> if it is possible to partition the list into two subsets with equal sum, and <code>false</code> otherwise.</p>
+<p>For example:</p>
+<ul>
+<li>
+<p><strong>Input:</strong> <code>nums = [1, 5, 11, 5]</code></p>
+</li>
+<li>
+<p><strong>Output:</strong> <code>true</code></p>
+</li>
+<li>
+<p><strong>Explanation:</strong> The array can be partitioned into two subsets: <code>[1, 5, 5]</code> and <code>[11]</code>, both having a sum of <code>11</code>.</p>
+</li>
+<li>
+<p><strong>Input:</strong> <code>nums = [1, 2, 3, 5]</code></p>
+</li>
+<li>
+<p><strong>Output:</strong> <code>false</code></p>
+</li>
+<li>
+<p><strong>Explanation:</strong> The array cannot be partitioned into two subsets with equal sum.</p>
+</li>
+</ul>
+<h3 id="approach">Approach</h3>
+<p>To solve this problem, we can utilize <strong>dynamic programming (DP)</strong>, which is a typical approach for subset sum problems. The key idea is to reduce the problem to determining if there is a subset of the array that sums up to half of the total sum of the array.</p>
+<ol>
+<li>
+<p><strong>Sum Calculation</strong>:</p>
+<ul>
+<li>If the sum of all elements in the array is odd, it&rsquo;s impossible to split the array into two equal subsets, so we can immediately return <code>false</code>.</li>
+<li>If the sum is even, we aim to find a subset whose sum equals half of the total sum, i.e., <code>sum / 2</code>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Subset Sum Problem</strong>:</p>
+<ul>
+<li>This problem can be reduced to a <strong>0/1 knapsack problem</strong>, where we try to determine if we can form a subset with a specific sum (which is <code>sum / 2</code>).</li>
+<li>We will use dynamic programming to check whether it&rsquo;s possible to achieve this sum.</li>
+</ul>
+</li>
+<li>
+<p><strong>Memoization</strong>:</p>
+<ul>
+<li>To efficiently calculate the solution, we can use a recursive approach with <strong>memoization</strong> to store the results of overlapping subproblems. This avoids recomputing the same results multiple times.</li>
+</ul>
+</li>
+</ol>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<h4 id="step-1-initial-setup">Step 1: Initial Setup</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> nums;
+</span></span><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">int</span> memo[<span style="color:#666">201</span>][<span style="color:#666">10001</span>];
+</span></span></code></pre></div><ul>
+<li>The array <code>nums</code> stores the input numbers.</li>
+<li>The 2D array <code>memo</code> is used to store the results of the subproblems. We initialize <code>memo</code> with <code>-1</code> to indicate that a result has not been computed for a particular subproblem.</li>
+</ul>
+<h4 id="step-2-recursive-function-with-memoization">Step 2: Recursive Function with Memoization</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">dp</span>(<span style="color:#0b0;font-weight:bold">int</span> idx, <span style="color:#0b0;font-weight:bold">int</span> sum) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(idx <span style="color:#666">==</span> nums.size()) <span style="color:#a2f;font-weight:bold">return</span> sum <span style="color:#666">==</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(memo[idx][sum] <span style="color:#666">!=</span> <span style="color:#666">-</span><span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> memo[idx][sum];
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> res <span style="color:#666">=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, sum);
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">&gt;=</span> nums[idx]) res <span style="color:#666">|=</span> dp(idx <span style="color:#666">+</span> <span style="color:#666">1</span>, sum <span style="color:#666">-</span> nums[idx]);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> memo[idx][sum] <span style="color:#666">=</span> res;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The function <code>dp(idx, sum)</code> is a recursive function that checks if a subset with the specified sum can be formed from the first <code>idx</code> elements of the array.</li>
+<li><strong>Base Case</strong>: If we have processed all elements (<code>idx == nums.size()</code>), we return <code>true</code> if the <code>sum</code> is <code>0</code> (meaning we have found a valid subset), and <code>false</code> otherwise.</li>
+<li><strong>Memoization</strong>: If the result for the subproblem <code>dp(idx, sum)</code> has already been computed (i.e., <code>memo[idx][sum] != -1</code>), we simply return the stored result.</li>
+<li><strong>Recursive Case</strong>:
+<ul>
+<li>We first try to exclude the current element <code>nums[idx]</code> and check if we can achieve the target sum from the remaining elements: <code>dp(idx + 1, sum)</code>.</li>
+<li>If the current element can be included (i.e., <code>sum &gt;= nums[idx]</code>), we also try including it and check if we can achieve the remaining sum <code>sum - nums[idx]</code> from the rest of the elements.</li>
+</ul>
+</li>
+<li>Finally, the result is stored in <code>memo[idx][sum]</code> to avoid redundant calculations in future calls.</li>
+</ul>
+<h4 id="step-3-checking-for-partition">Step 3: Checking for Partition</h4>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">canPartition</span>(vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> nums) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">this</span><span style="color:#666">-&gt;</span>nums <span style="color:#666">=</span> nums;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> sum <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">for</span>(<span style="color:#0b0;font-weight:bold">int</span> <span style="color:#a0a000">x</span>: nums) sum <span style="color:#666">+=</span> x;
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">if</span>(sum <span style="color:#666">&amp;</span> <span style="color:#666">1</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>    sum <span style="color:#666">=</span> sum <span style="color:#666">/</span> <span style="color:#666">2</span>;
+</span></span><span style="display:flex;"><span>    memset(memo, <span style="color:#666">-</span><span style="color:#666">1</span>, <span style="color:#a2f;font-weight:bold">sizeof</span>(memo));
+</span></span><span style="display:flex;"><span>    <span style="color:#a2f;font-weight:bold">return</span> dp(<span style="color:#666">0</span>, sum);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><ul>
+<li>The <code>canPartition</code> function is the main entry point of the solution.</li>
+<li>First, we calculate the total sum of the elements in the array.</li>
+<li>If the sum is odd (<code>sum &amp; 1</code>), we return <code>false</code> immediately because it’s not possible to split the array into two subsets with equal sum.</li>
+<li>We then set <code>sum = sum / 2</code>, which is the target sum for the subset we need to find.</li>
+<li>We initialize the <code>memo</code> array with <code>-1</code> using <code>memset</code> to reset it before starting the DP calculations.</li>
+<li>Finally, we call the <code>dp</code> function with the initial index <code>0</code> and the target sum.</li>
+</ul>
+<h3 id="complexity">Complexity</h3>
+<h4 id="time-complexity">Time Complexity:</h4>
+<ul>
+<li><strong>Time Complexity of <code>dp</code></strong>: The function <code>dp(idx, sum)</code> is called with <code>idx</code> from <code>0</code> to <code>nums.size()</code> and <code>sum</code> from <code>0</code> to <code>sum / 2</code>. Hence, the number of unique subproblems is proportional to <code>n * (sum / 2)</code>, where <code>n</code> is the size of the array.</li>
+<li>Since each subproblem is solved at most once due to memoization, the overall time complexity is <strong>O(n * sum)</strong>, where <code>n</code> is the number of elements and <code>sum</code> is half of the total sum.</li>
+</ul>
+<h4 id="space-complexity">Space Complexity:</h4>
+<ul>
+<li><strong>Space Complexity</strong>: The space complexity is dominated by the memoization array, which is a 2D array with dimensions <code>[n][sum / 2]</code>. Thus, the space complexity is <strong>O(n * sum)</strong>, where <code>n</code> is the number of elements and <code>sum</code> is half of the total sum.</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>The solution to the <strong>Partition Problem</strong> efficiently uses <strong>dynamic programming</strong> with <strong>memoization</strong> to determine if a subset with sum equal to half of the total sum can be found in the array. This approach ensures that we only solve each subproblem once, improving performance compared to a naive recursive approach. With a time complexity of <strong>O(n * sum)</strong> and a space complexity of <strong>O(n * sum)</strong>, this solution is both time-efficient and space-efficient, making it suitable for large inputs. The use of memoization significantly reduces redundant calculations, allowing the algorithm to solve the problem optimally.</p>
+<p><a href="https://leetcode.com/problems/partition-equal-subset-sum/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/ZFuagJEpeEU?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>

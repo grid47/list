@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en-us"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="generator" content="Hugo 0.136.4">
+	
+	<link rel="icon" href="/images/logo.png">
+	
+	<title>Leetcode 971: Flip Binary Tree To Match Preorder Traversal | grid47</title>
+	
+	
+
+	
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Leetcode 971: Flip Binary Tree To Match Preorder Traversal">
+  <meta name="twitter:description" content="In-depth solution and explanation for Leetcode 971: Flip Binary Tree To Match Preorder Traversal in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+
+	<meta property="og:url" content="http://localhost:1313/leetcode/leetcode-971-flip-binary-tree-to-match-preorder-traversal/">
+  <meta property="og:site_name" content="grid47">
+  <meta property="og:title" content="Leetcode 971: Flip Binary Tree To Match Preorder Traversal">
+  <meta property="og:description" content="In-depth solution and explanation for Leetcode 971: Flip Binary Tree To Match Preorder Traversal in C&#43;&#43;. Includes clear intuition, step-by-step example walkthrough, and detailed complexity analysis.">
+  <meta property="og:locale" content="en_us">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="leetcode">
+    <meta property="article:published_time" content="2024-08-01T00:00:00+00:00">
+    <meta property="article:modified_time" content="2024-11-06T00:00:00+00:00">
+    <meta property="article:tag" content="Tree">
+    <meta property="article:tag" content="Depth-First Search">
+    <meta property="article:tag" content="Binary Tree">
+
+
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
+	<link href="https://fonts.googleapis.com/css?family=Righteous%7CMerriweather:300,300i,400,400i,700,700i" rel="stylesheet">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/medium.ced6b291f6520a092efe4c87ca4fc7047e1c3174b10653f78e13ca06f0bb6abf.css" integrity="sha256-ztaykfZSCgku/kyHyk/HBH4cMXSxBlP3jhPKBvC7ar8=">
+
+	
+	<link rel="stylesheet" href="http://localhost:1313/css/additional.8819b6defcdc6d21280f9b402b00df87ca779135901de6c22e708c62e20184b9.css" integrity="sha256-iBm23vzcbSEoD5tAKwDfh8p3kTWQHebCLnCMYuIBhLk=">
+
+	
+	
+	<link rel="stylesheet" href="/css/head.css" integrity="" crossorigin="anonymous" media="screen">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-white fixed-top mediumnavigation nav-down">
+    <div class="container pr-0">
+        
+        <a class="navbar-brand" href="http://localhost:1313//">
+
+            
+            <img src="/images/logo.png" alt="logo">
+            
+        </a>
+        
+
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarMediumish" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        
+        <div class="collapse navbar-collapse" id="navbarMediumish">
+            
+            <ul class="navbar-nav ml-auto">
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/about/">About</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/leetcode/">LeetCode</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/terms/">Terms &amp; Policy</a>
+                </li>
+                 
+                <li class="nav-item ">
+                    <a class="nav-link" href="/contact/">Contact</a>
+                </li>
+                
+            </ul>
+        </div>
+        
+    </div>
+</nav>
+
+
+        <div class="site-content">   
+            <div class="container">
+<div class="main-content">
+
+<div class="container">
+	<div class="row">
+        <div class="col-md-1"></div>
+		<div class="col-md-10">
+			<div class="mainheading">
+				<h1 class="posttitle">Leetcode 971: Flip Binary Tree To Match Preorder Traversal</h1> 
+            </div>
+			<div class="article-post">
+				<hr>
+<p><strong>Code:</strong></p>
+<h2 id="hahahugoshortcode1424s0hbhb"><div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#080;font-style:italic">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * Definition for a binary tree node.
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * struct TreeNode {
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     int val;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode *left;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode *right;
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode() : val(0), left(nullptr), right(nullptr) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> * };
+</span></span></span><span style="display:flex;"><span><span style="color:#080;font-style:italic"> */</span>
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> flipMatchVoyage(TreeNode<span style="color:#666">*</span> root, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> voyage) {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> fail <span style="color:#666">=</span> {<span style="color:#666">-</span><span style="color:#666">1</span>};
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">dfs</span>(root, voyage)<span style="color:#666">?</span> <span style="color:#a0a000">res</span>: fail;
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">dfs</span>(TreeNode<span style="color:#666">*</span> node, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>voyage) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(node <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>val <span style="color:#666">!=</span> voyage[i<span style="color:#666">++</span>]) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>left <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span> <span style="color:#666">&amp;&amp;</span> node<span style="color:#666">-&gt;</span>left<span style="color:#666">-&gt;</span>val <span style="color:#666">!=</span> voyage[i]) {
+</span></span><span style="display:flex;"><span>            res.push_back(node<span style="color:#666">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span>  dfs(node<span style="color:#666">-&gt;</span>right, voyage) <span style="color:#666">&amp;&amp;</span> dfs(node<span style="color:#666">-&gt;</span>left, voyage);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span>  dfs(node<span style="color:#666">-&gt;</span>left, voyage) <span style="color:#666">&amp;&amp;</span> dfs(node<span style="color:#666">-&gt;</span>right, voyage);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div></h2>
+<h3 id="problem-statement">Problem Statement</h3>
+<p>The problem asks us to determine whether we can flip some of the nodes of a binary tree so that the tree’s preorder traversal matches a given voyage array. If it is possible, the task is to return the list of nodes that need to be flipped to achieve this. If it is not possible, we need to return <code>[-1]</code>. The tree is represented as a binary tree, and the voyage is an array of integers representing the desired preorder traversal of the tree. The flip operation allows us to swap the left and right child nodes of any tree node.</p>
+<h3 id="approach">Approach</h3>
+<p>The solution to this problem involves a depth-first search (DFS) approach to traverse the binary tree and check whether we can match the preorder traversal <code>voyage</code> while keeping track of the nodes that need to be flipped to achieve the desired traversal. The steps to approach this problem are as follows:</p>
+<ol>
+<li><strong>Start from the root of the tree</strong>: We initiate a DFS traversal starting from the root of the binary tree.</li>
+<li><strong>Matching node values with the voyage</strong>: During the DFS, at each node, we check if the current node’s value matches the value in the <code>voyage</code> array. If the value matches, we proceed to the next node in the <code>voyage</code>. If not, we return <code>false</code>.</li>
+<li><strong>Identifying a required flip</strong>: If the left child node exists and its value does not match the next value in the <code>voyage</code>, we recognize that a flip is needed. We then swap the left and right children for the current node, record the node as flipped in the result list, and continue the DFS.</li>
+<li><strong>Return the result</strong>: Once the traversal is complete, we check if we successfully matched the entire <code>voyage</code>. If so, we return the list of flipped nodes. If any mismatch occurs during the traversal, we return <code>[-1]</code>.</li>
+</ol>
+<p>The problem is solved in a recursive manner by using the DFS technique, making use of an auxiliary variable <code>i</code> to keep track of the current position in the <code>voyage</code>.</p>
+<h3 id="code-breakdown-step-by-step">Code Breakdown (Step by Step)</h3>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">class</span> <span style="color:#00f">Solution</span> {
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> res;
+</span></span><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">int</span> i <span style="color:#666">=</span> <span style="color:#666">0</span>;
+</span></span><span style="display:flex;"><span><span style="color:#a2f;font-weight:bold">public</span><span style="color:#666">:</span>
+</span></span><span style="display:flex;"><span>    vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> flipMatchVoyage(TreeNode<span style="color:#666">*</span> root, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;&amp;</span> voyage) {
+</span></span><span style="display:flex;"><span>        vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> fail <span style="color:#666">=</span> {<span style="color:#666">-</span><span style="color:#666">1</span>};
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">dfs</span>(root, voyage) <span style="color:#666">?</span> <span style="color:#a0a000">res</span> : fail;
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ol>
+<li><strong>Function Declaration</strong>:
+<ul>
+<li>The function <code>flipMatchVoyage</code> is declared with two arguments: <code>root</code> (the root node of the binary tree) and <code>voyage</code> (the array representing the desired preorder traversal).</li>
+<li>We initialize an empty vector <code>res</code> to store the flipped nodes. We also initialize <code>i = 0</code>, which will serve as an index to track the current position in the <code>voyage</code>.</li>
+<li>If the DFS traversal returns <code>true</code>, meaning the <code>voyage</code> is successfully matched with the tree’s preorder traversal, the function returns the <code>res</code> vector containing the flipped nodes. If not, it returns <code>[-1]</code>, indicating that it is not possible to achieve the desired traversal.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>    <span style="color:#0b0;font-weight:bold">bool</span> <span style="color:#00a000">dfs</span>(TreeNode<span style="color:#666">*</span> node, vector<span style="color:#666">&lt;</span><span style="color:#0b0;font-weight:bold">int</span><span style="color:#666">&gt;</span> <span style="color:#666">&amp;</span>voyage) {
+</span></span><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(node <span style="color:#666">==</span> <span style="color:#a2f">NULL</span>) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">true</span>;
+</span></span></code></pre></div><ol start="2">
+<li><strong>DFS Traversal</strong>:
+<ul>
+<li>The DFS function is defined to traverse the binary tree.</li>
+<li>The base case checks if the current node is <code>NULL</code>. If it is, it returns <code>true</code> since there is nothing to flip or match at a <code>NULL</code> node.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>val <span style="color:#666">!=</span> voyage[i<span style="color:#666">++</span>]) <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#a2f">false</span>;
+</span></span></code></pre></div><ol start="3">
+<li><strong>Matching Node Value with Voyage</strong>:
+<ul>
+<li>For each node in the tree, we compare its value (<code>node-&gt;val</code>) with the value in the <code>voyage</code> at index <code>i</code>.</li>
+<li>If the value does not match, we return <code>false</code>, as this means the tree cannot match the desired preorder traversal.</li>
+<li>We also increment <code>i</code> after the comparison to move to the next index in the <code>voyage</code>.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">if</span>(node<span style="color:#666">-&gt;</span>left <span style="color:#666">!=</span> <span style="color:#a2f">NULL</span> <span style="color:#666">&amp;&amp;</span> node<span style="color:#666">-&gt;</span>left<span style="color:#666">-&gt;</span>val <span style="color:#666">!=</span> voyage[i]) {
+</span></span></code></pre></div><ol start="4">
+<li><strong>Check for Flip Requirement</strong>:
+<ul>
+<li>If the left child of the current node exists (<code>node-&gt;left != NULL</code>), we check whether the left child’s value matches the next value in the <code>voyage</code> at index <code>i</code>. If it does not match, we need to flip the left and right children to continue matching the <code>voyage</code>.</li>
+<li>If a flip is required, we enter the block of code that swaps the left and right children and adds the current node’s value to the <code>res</code> vector.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>            res.push_back(node<span style="color:#666">-&gt;</span>val);
+</span></span><span style="display:flex;"><span>            <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">dfs</span>(node<span style="color:#666">-&gt;</span>right, voyage) <span style="color:#666">&amp;&amp;</span> dfs(node<span style="color:#666">-&gt;</span>left, voyage);
+</span></span></code></pre></div><ol start="5">
+<li><strong>Flip the Node</strong>:
+<ul>
+<li>We push the current node’s value into the result vector <code>res</code>, indicating that this node needs to be flipped.</li>
+<li>After the flip, we recursively call <code>dfs</code> on the right child first (<code>node-&gt;right</code>), followed by the left child (<code>node-&gt;left</code>). This ensures that we are flipping the children nodes and then continuing the DFS traversal for both sides.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>        <span style="color:#a2f;font-weight:bold">return</span> <span style="color:#00a000">dfs</span>(node<span style="color:#666">-&gt;</span>left, voyage) <span style="color:#666">&amp;&amp;</span> dfs(node<span style="color:#666">-&gt;</span>right, voyage);
+</span></span><span style="display:flex;"><span>    }
+</span></span></code></pre></div><ol start="6">
+<li><strong>Recursive DFS Without Flip</strong>:
+<ul>
+<li>If no flip is needed (i.e., the left child’s value matches the next value in the <code>voyage</code>), we recursively call <code>dfs</code> on the left child (<code>node-&gt;left</code>) first, and then the right child (<code>node-&gt;right</code>). This is the standard preorder traversal (left, right).</li>
+</ul>
+</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="background-color:#f8f8f8;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-cpp" data-lang="cpp"><span style="display:flex;"><span>};
+</span></span></code></pre></div><ol start="7">
+<li><strong>End of Function</strong>:
+<ul>
+<li>The DFS function ends, and control is returned to the main function <code>flipMatchVoyage</code>.</li>
+</ul>
+</li>
+</ol>
+<h3 id="complexity">Complexity</h3>
+<ul>
+<li>
+<p><strong>Time Complexity</strong>:</p>
+<ul>
+<li>The time complexity of this algorithm is <strong>O(n)</strong>, where <code>n</code> is the number of nodes in the binary tree. In the worst case, the algorithm performs a DFS traversal of all the nodes in the tree, visiting each node once. Each comparison and operation inside the DFS function takes constant time.</li>
+</ul>
+</li>
+<li>
+<p><strong>Space Complexity</strong>:</p>
+<ul>
+<li>The space complexity is <strong>O(h)</strong>, where <code>h</code> is the height of the tree. This is because the recursive DFS function uses a call stack that can grow up to the height of the tree in the worst case. The additional space used by the result vector <code>res</code> is proportional to the number of flipped nodes, but this is at most <code>n</code>, where <code>n</code> is the number of nodes.</li>
+</ul>
+</li>
+</ul>
+<h3 id="conclusion">Conclusion</h3>
+<p>This solution effectively solves the problem by performing a depth-first search (DFS) on the binary tree while keeping track of the nodes that need to be flipped in order to match the desired preorder traversal given in the <code>voyage</code>. The approach ensures that only the necessary nodes are flipped, and it efficiently checks whether the tree’s preorder traversal can be transformed to match the <code>voyage</code>. The solution uses recursion, a common technique for tree traversal problems, and ensures the result is returned in the form of a vector containing the flipped nodes. If the transformation is not possible, it correctly returns <code>[-1]</code>.</p>
+<p><a href="https://leetcode.com/problems/flip-binary-tree-to-match-preorder-traversal/description/"><code>Link to LeetCode Lab</code></a></p>
+<hr>
+
+
+    
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+      <iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="allowfullscreen" loading="eager" referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube.com/embed/6L25Q-42OXA?autoplay=0&controls=1&end=0&loop=0&mute=0&start=0" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border:0;" title="YouTube video"
+      ></iframe>
+    </div>
+
+<table>
+  <thead>
+      <tr>
+          <th><a href="https://grid47.xyz/leetcode/">LeetCode Solutions Library</a> / <a href="https://grid47.xyz/sheets/">DSA Sheets</a> / <a href="https://grid47.xyz/courses/">Course Catalog</a></th>
+      </tr>
+  </thead>
+  <tbody>
+  </tbody>
+</table>
+
+			</div>
+		</div>
+        <div class="col-md-1"></div>
+	</div>
+</div>
+
+</div>
+
+
+            </div>
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 text-center text-lg-left">
+                &copy; Copyright www.grid47.com - All rights reserved
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+
+        </div>
+
+
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
+
+<script src="http://localhost:1313/js/mediumish.84218587c174fd40bce82544b98851670f0b124a7324b349c54a4065e2b32ffc.js" integrity="sha256-hCGFh8F0/UC86CVEuYhRZw8LEkpzJLNJxUpAZeKzL/w="></script>
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-1LN7R4LHR1"></script>
+      <script>
+        var doNotTrack = false;
+        if ( false ) {
+          var dnt = (navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack);
+          var doNotTrack = (dnt == "1" || dnt == "yes");
+        }
+        if (!doNotTrack) {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-1LN7R4LHR1');
+        }
+      </script>
+    </body>
+</html>
