@@ -1,0 +1,93 @@
+<!-- layouts/partials/json-ld.html -->
+{{ if .IsPage }}
+<!-- layouts/partials/json-ld.html -->
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "TechArticle",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "{{ .Permalink }}"
+    },
+    "headline": "{{ .Title }}",
+    "description": "{{ .Description }}",
+    "image": {
+      "@type": "ImageObject",
+      "url": "{{ with .Params.img_src }}{{ . }}{{ end }}"
+    },
+    "datePublished": "{{ .Date.Format "2006-01-02T15:04:05-07:00" }}",
+    "dateModified": "{{ .Lastmod.Format "2006-01-02T15:04:05-07:00" }}",
+    "author": {
+      "@type": "Person",
+      "name": "{{ with index .Params.authors 0 }}{{ lower . }}{{ else }}{{ index .Params.authors 0 }}{{ end }}"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "grid47",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "{{ .Site.BaseURL }}/images/logo.png"
+      }
+    },
+    "articleSection": "LeetCode Solutions",
+    "about": {
+      "@type": "SoftwareSourceCode",
+      "programmingLanguage": "C++",
+      "codeSampleType": "Code Solution",
+      "runtimePlatform": "LeetCode",
+      "targetProduct": {
+        "@type": "SoftwareApplication",
+        "name": "LeetCode",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Cross-platform",  // Assuming LeetCode is cross-platform
+        "offers": {
+          "@type": "Offer",
+          "priceCurrency": "USD",
+          "price": "0.00",  // Assuming free, update if paid
+          "url": "https://www.leetcode.com"  // Link to the LeetCode platform
+        }
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.5",
+        "reviewCount": "2000",
+        "itemReviewed": {
+          "@type": "SoftwareApplication",
+          "name": "LeetCode",
+          "applicationCategory": "DeveloperApplication",
+          "operatingSystem": "Cross-platform",  // Assuming LeetCode is cross-platform
+          "offers": {
+            "@type": "Offer",
+            "priceCurrency": "USD",
+            "price": "0.00",  // Assuming free, update if paid
+            "url": "https://www.leetcode.com"  // Link to the LeetCode platform
+          }          
+        }
+      }
+    },    
+    "educationalLevel": "{{ index .Params.categories 0 }}",
+    "teaches": {{ .Params.tags | jsonify }},
+    "hasPart": [],
+    "isPartOf": {
+      "@type": "Series",
+      "name": "{{ index .Params.series 0 }}",
+      "url": "{{ .Site.BaseURL }}series/{{ index .Params.series 0 | urlize }}"
+    },
+    {{ with .Params.youtube }}
+    "video": {
+      "@type": "VideoObject",
+      "name": "Video explanation for {{ $.Title }}",
+      "embedUrl": "https://www.youtube.com/watch?v={{ . }}",
+      "uploadDate": "{{ $.Params.youtube_upload_date }}",
+      "thumbnailUrl": "{{ $.Params.youtube_thumbnail }}"
+    },
+    {{ end }}
+    "keywords": {{ .Params.tags | jsonify }},
+    "pagination": {
+      "@type": "DataFeed",
+      "nextItem": {{ with .PrevInSection }}"{{ .Permalink }}"{{ else }}null{{ end }},
+      "previousItem": {{ with .NextInSection }}"{{ .Permalink }}"{{ else }}null{{ end }}
+    }
+  }
+  </script>  
+{{ end }}
